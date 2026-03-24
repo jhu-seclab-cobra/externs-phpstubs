@@ -1,6 +1,5 @@
 package edu.jhu.cobra.externs.phpstubs
 
-import edu.jhu.cobra.commons.value.IValue
 import edu.jhu.cobra.commons.value.ListVal
 import edu.jhu.cobra.commons.value.StrVal
 import java.io.DataInputStream
@@ -36,6 +35,18 @@ object PhpStubs {
     )
 
     private val SCALAR_TYPE_NAMES = setOf("int", "float", "string", "bool", "array")
+
+    private val KEYWORD_RECORDS: Map<String, StubRecord> = KEYWORD_FUNC_NAMES.associateWith { name ->
+        StubRecord(name = name, extension = "keyword", value = ListVal(StrVal("keyword")))
+    }
+
+    private val SYNTHETIC_CLASS_RECORDS: Map<String, StubRecord> = buildMap {
+        for (name in SCALAR_TYPE_NAMES) {
+            put(name, StubRecord(name = name, extension = "Scalar", value = ListVal(StrVal("Scalar"))))
+        }
+        put("exit", StubRecord(name = "exit", extension = "Core", value = ListVal(StrVal("Core"))))
+        put("resource", StubRecord(name = "resource", extension = "legacy", value = ListVal(StrVal("legacy"))))
+    }
 
     /**
      * Lazily loaded stub data. Thread-safe initialization via synchronized lazy delegate.
@@ -139,12 +150,7 @@ object PhpStubs {
      */
     fun searchFunc(name: String): StubRecord? {
         val key = name.normalize()
-        return data.functions.get(key)
-            ?: if (key in KEYWORD_FUNC_NAMES) StubRecord(
-                name = key,
-                extension = "keyword",
-                value = ListVal(StrVal("keyword")),
-            ) else null
+        return data.functions.get(key) ?: KEYWORD_RECORDS[key]
     }
 
     /**
@@ -154,12 +160,7 @@ object PhpStubs {
      */
     fun searchClass(name: String): StubRecord? {
         val key = name.normalize()
-        return data.classes.get(key) ?: when (key) {
-            in SCALAR_TYPE_NAMES -> StubRecord(name = key, extension = "Scalar", value = ListVal(StrVal("Scalar")))
-            "exit" -> StubRecord(name = key, extension = "Core", value = ListVal(StrVal("Core")))
-            "resource" -> StubRecord(name = key, extension = "legacy", value = ListVal(StrVal("legacy")))
-            else -> null
-        }
+        return data.classes.get(key) ?: SYNTHETIC_CLASS_RECORDS[key]
     }
 
     /**
