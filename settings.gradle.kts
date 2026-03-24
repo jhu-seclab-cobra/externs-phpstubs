@@ -15,6 +15,5 @@ if (gradle.parent == null) {
     }
 }
 
-// Unique module identifier to avoid composite build name collisions (gradle/gradle#847)
 include("jhu-seclab-cobra-externs-phpstubs")
-project(":jhu-seclab-cobra-externs-phpstubs").projectDir = file("lib")
+project(":jhu-seclab-cobra-externs-phpstubs").projectDir = file("externs-phpstubs")
