@@ -1,0 +1,60 @@
+# === Java/Kotlin/Gradle Build Artifacts ===
+*.class
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+build/
+out/
+.gradle/
+.kotlin/
+
+# === IDE/Editor Files ===
+.idea/
+.vscode/
+.cursor/
+.claude/
+*.iml
+*.ipr
+*.iws
+
+# === OS/System Files ===
+# macOS
+.DS_Store
+**/.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# === Logs & Temp ===
+*.log
+.mtj.tmp/
+hs_err_pid*
+replay_pid*
+
+# === Misc ===
+# Ignore generated reports, test results, and coverage
+reports/
+test-results/
+kover/
+
+# === Exclude all build/libs from version control ===
+**/libs/
+
+# === Ignore user-specific files ===
+*.swp
+*.swo
+*~
+
+# === Ignore any other unwanted files ===
+cobra.log
+# (add more patterns as needed)
+!.gitmodules
+**/.gradle/
