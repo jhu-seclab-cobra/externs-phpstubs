@@ -101,8 +101,8 @@ Dataset: 22,477 total keys (5,021 functions + 1,538 classes + 9,872 methods + 6,
 ## Benchmark Infrastructure
 
 - Test class: `PhpStubsPerformanceTest` (tagged `@Tag("performance")`)
-- Run: `./gradlew performanceTest`
-- Excluded from normal `./gradlew test` via `excludeTags("performance")`
+- Run: `./gradlew test -Pperformance`
+- Default `./gradlew test` excludes performance tests
 - Operations per run: 100,000
 - Warmup: 5 runs, Measurement: 7 runs (median reported)
-- JVM flags: `-Xmx2g -Xms1g`
+- JVM flags (performance mode only): `-Xmx2g -Xms1g`
