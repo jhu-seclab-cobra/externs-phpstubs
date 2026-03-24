@@ -1,0 +1,9 @@
+[versions]
+kotlin = "2.2.21"
+kover = "0.9.1"
+javaSource = "21"
+javaTarget = "21"
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlinx-kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
