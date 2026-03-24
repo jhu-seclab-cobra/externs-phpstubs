@@ -28,17 +28,15 @@ kotlin {
 
 tasks.test {
     useJUnitPlatform {
-        excludeTags("performance")
+        if (!project.hasProperty("performance")) {
+            excludeTags("performance")
+        }
     }
-}
-
-tasks.register<Test>("performanceTest") {
-    useJUnitPlatform {
-        includeTags("performance")
-    }
-    jvmArgs("-Xmx2g", "-Xms1g")
-    testLogging {
-        showStandardStreams = true
+    if (project.hasProperty("performance")) {
+        jvmArgs("-Xmx2g", "-Xms1g")
+        testLogging {
+            showStandardStreams = true
+        }
     }
 }
 
