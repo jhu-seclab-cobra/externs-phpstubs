@@ -135,8 +135,7 @@ object PhpStubs {
         if (className != null) {
             return data.methods.contains("${className.normalize()}::${methodName.normalize()}")
         }
-        val suffix = "::${methodName.normalize()}"
-        return data.methods.keys.any { it.endsWith(suffix) }
+        return data.methods.containsBySuffix(methodName.normalize())
     }
 
     /**
@@ -178,8 +177,7 @@ object PhpStubs {
             val fullName = "${className.normalize()}::${methodName.normalize()}"
             return data.methods.get(fullName)?.let { fullName to it }
         }
-        val suffix = "::${methodName.normalize()}"
-        val matchKey = data.methods.keys.firstOrNull { it.endsWith(suffix) } ?: return null
+        val matchKey = data.methods.findKeyBySuffix(methodName.normalize()) ?: return null
         return data.methods.get(matchKey)?.let { matchKey to it }
     }
 
@@ -198,8 +196,7 @@ object PhpStubs {
         if (className != null) {
             return data.constants.get("${className.normalize()}::${constName.normalize()}")
         }
-        val suffix = "::${constName.normalize()}"
-        val matchKey = data.constants.keys.firstOrNull { it.endsWith(suffix) } ?: return null
+        val matchKey = data.constants.findKeyBySuffix(constName.normalize()) ?: return null
         return data.constants.get(matchKey)
     }
 

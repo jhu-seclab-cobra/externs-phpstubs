@@ -26,6 +26,21 @@ class StubSection internal constructor(
     private val cache = ConcurrentHashMap<String, StubRecord>()
 
     /**
+     * Reverse index: suffix after "::" → list of full keys containing that suffix.
+     * Built lazily on first suffix lookup; immutable after construction.
+     */
+    private val suffixIndex: Map<String, List<String>> by lazy {
+        val index = HashMap<String, MutableList<String>>()
+        for (key in keys) {
+            val sep = key.indexOf("::")
+            if (sep < 0) continue
+            val suffix = key.substring(sep + 2)
+            index.getOrPut(suffix) { ArrayList(4) }.add(key)
+        }
+        index
+    }
+
+    /**
      * O(1) existence check. No allocation, no synchronization.
      */
     fun contains(key: String): Boolean = key in keys
@@ -45,6 +60,16 @@ class StubSection internal constructor(
             StubRecord(name = k, extension = extractExtension(value), value = value)
         }
     }
+
+    /**
+     * O(1) check for keys matching "::suffix" pattern using the reverse index.
+     */
+    fun containsBySuffix(suffix: String): Boolean = suffixIndex.containsKey(suffix)
+
+    /**
+     * Returns the first full key matching "::suffix" via the reverse index, or null.
+     */
+    fun findKeyBySuffix(suffix: String): String? = suffixIndex[suffix]?.firstOrNull()
 
     /**
      * Returns all entries, deserializing any that haven't been accessed yet.
