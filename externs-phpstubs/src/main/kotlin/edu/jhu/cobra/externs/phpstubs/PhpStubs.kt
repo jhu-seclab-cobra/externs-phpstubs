@@ -83,7 +83,15 @@ object PhpStubs {
         return StubSection(keys.toSet(), rawData.toMap())
     }
 
-    private fun String.normalize(): String = lowercase().removePrefix("/")
+    private fun String.normalize(): String {
+        val stripped = if (startsWith('/')) substring(1) else this
+        // Fast path: if already all-lowercase ASCII, return without allocation
+        var allLower = true
+        for (c in stripped) {
+            if (c in 'A'..'Z') { allLower = false; break }
+        }
+        return if (allLower) stripped else stripped.lowercase()
+    }
 
     // -- Existence checks (Tier 1 — hot path, zero allocation) --
 
