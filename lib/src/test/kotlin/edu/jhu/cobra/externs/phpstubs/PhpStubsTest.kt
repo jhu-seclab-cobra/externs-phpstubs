@@ -1,5 +1,6 @@
 package edu.jhu.cobra.externs.phpstubs
 
+import edu.jhu.cobra.commons.value.ListVal
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -37,18 +38,20 @@ class PhpStubsTest {
     }
 
     @Test
-    fun `searchFunc should return record for known function`() {
+    fun `searchFunc should return record with IValue for known function`() {
         val record = PhpStubs.searchFunc("strlen")
         assertNotNull(record)
         assertEquals("strlen", record.name)
         assertTrue(record.extension.isNotEmpty())
+        assertNotNull(record.value)
     }
 
     @Test
-    fun `searchFunc should return keyword record for keyword function`() {
+    fun `searchFunc should return keyword record with ListVal`() {
         val record = PhpStubs.searchFunc("echo")
         assertNotNull(record)
         assertEquals("keyword", record.extension)
+        assertTrue(record.value is ListVal)
     }
 
     @Test
@@ -70,28 +73,36 @@ class PhpStubsTest {
     }
 
     @Test
-    fun `searchClass should return scalar record`() {
+    fun `searchClass should return scalar record with IValue`() {
         val record = PhpStubs.searchClass("int")
         assertNotNull(record)
         assertEquals("Scalar", record.extension)
+        assertTrue(record.value is ListVal)
     }
 
     @Test
     fun `containsMethod should find method with class name`() {
-        // Most PHP classes have __construct
         assertTrue(PhpStubs.containsMethod("query", "mysqli"))
     }
 
     @Test
-    fun `searchMethod should return pair with full name`() {
+    fun `searchMethod should return pair with full name and IValue`() {
         val result = PhpStubs.searchMethod("query", "mysqli")
         assertNotNull(result)
         assertEquals("mysqli::query", result.first)
+        assertNotNull(result.second.value)
     }
 
     @Test
     fun `containsConst should return true for known constant`() {
         assertTrue(PhpStubs.containsConst("PHP_EOL") || PhpStubs.containsConst("php_eol"))
+    }
+
+    @Test
+    fun `searchGlobalConst should return record with IValue`() {
+        val record = PhpStubs.searchGlobalConst("php_eol")
+        assertNotNull(record)
+        assertNotNull(record.value)
     }
 
     @Test
@@ -124,17 +135,5 @@ class PhpStubsTest {
         assertTrue("echo" in keywords)
         assertTrue("isset" in keywords)
         assertTrue("require" in keywords)
-    }
-
-    @Test
-    fun `getFuncRawData should return non-null bytes for known function`() {
-        val bytes = PhpStubs.getFuncRawData("strlen")
-        assertNotNull(bytes)
-        assertTrue(bytes.isNotEmpty())
-    }
-
-    @Test
-    fun `getFuncRawData should return null for unknown function`() {
-        assertNull(PhpStubs.getFuncRawData("nonexistent_xyz_func"))
     }
 }

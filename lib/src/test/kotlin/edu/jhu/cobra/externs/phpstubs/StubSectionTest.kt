@@ -1,5 +1,9 @@
 package edu.jhu.cobra.externs.phpstubs
 
+import edu.jhu.cobra.commons.value.ListVal
+import edu.jhu.cobra.commons.value.MapVal
+import edu.jhu.cobra.commons.value.StrVal
+import edu.jhu.cobra.commons.value.serializer.DftByteArraySerializerImpl
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -9,6 +13,9 @@ import kotlin.test.assertTrue
 
 class StubSectionTest {
 
+    private fun serialize(value: edu.jhu.cobra.commons.value.IValue): ByteArray =
+        DftByteArraySerializerImpl.serialize(value)
+
     @Test
     fun `EMPTY section contains nothing`() {
         assertFalse(StubSection.EMPTY.contains("anything"))
@@ -17,39 +24,52 @@ class StubSectionTest {
 
     @Test
     fun `contains returns true for existing key`() {
-        val section = StubSection(setOf("strlen"), mapOf("strlen" to byteArrayOf(0x01, 0x73, 0x74, 0x64))) // STR "std"
+        val bytes = serialize(ListVal(StrVal("standard")))
+        val section = StubSection(setOf("strlen"), mapOf("strlen" to bytes))
         assertTrue(section.contains("strlen"))
     }
 
     @Test
     fun `contains returns false for missing key`() {
-        val section = StubSection(setOf("strlen"), mapOf("strlen" to byteArrayOf()))
+        val bytes = serialize(ListVal(StrVal("standard")))
+        val section = StubSection(setOf("strlen"), mapOf("strlen" to bytes))
         assertFalse(section.contains("unknown"))
     }
 
     @Test
-    fun `get returns StubRecord with extracted extension for ListVal bytes`() {
-        // Simulate a serialized ListVal("standard"):
-        // 0x0C = LIST tag, then 4-byte element size (9), then 0x01 = STR tag, then "standard"
-        val strBytes = "standard".toByteArray(Charsets.UTF_8)
-        val elementSize = 1 + strBytes.size // STR tag + string bytes
-        val bytes = byteArrayOf(
-            0x0C, // LIST type
-            (elementSize shr 24).toByte(), (elementSize shr 16).toByte(),
-            (elementSize shr 8).toByte(), elementSize.toByte(),
-            0x01, // STR type
-        ) + strBytes
-
+    fun `get returns StubRecord with extension from ListVal`() {
+        val bytes = serialize(ListVal(StrVal("standard")))
         val section = StubSection(setOf("strlen"), mapOf("strlen" to bytes))
         val record = section.get("strlen")
         assertNotNull(record)
         assertEquals("strlen", record.name)
         assertEquals("standard", record.extension)
+        assertTrue(record.value is ListVal)
+    }
+
+    @Test
+    fun `get returns StubRecord with extension from StrVal`() {
+        val bytes = serialize(StrVal("pdo"))
+        val section = StubSection(setOf("define"), mapOf("define" to bytes))
+        val record = section.get("define")
+        assertNotNull(record)
+        assertEquals("pdo", record.extension)
+        assertTrue(record.value is StrVal)
+    }
+
+    @Test
+    fun `get returns unknown extension for MapVal`() {
+        val mapVal = MapVal(hashMapOf("key" to StrVal("val")))
+        val bytes = serialize(mapVal)
+        val section = StubSection(setOf("some_const"), mapOf("some_const" to bytes))
+        val record = section.get("some_const")
+        assertNotNull(record)
+        assertEquals("unknown", record.extension)
     }
 
     @Test
     fun `get caches result and returns same instance`() {
-        val bytes = byteArrayOf(0x01) + "Core".toByteArray(Charsets.UTF_8)
+        val bytes = serialize(ListVal(StrVal("Core")))
         val section = StubSection(setOf("define"), mapOf("define" to bytes))
         val first = section.get("define")
         val second = section.get("define")
@@ -58,23 +78,25 @@ class StubSectionTest {
 
     @Test
     fun `get returns null for missing key`() {
-        val section = StubSection(setOf("strlen"), mapOf("strlen" to byteArrayOf()))
+        val bytes = serialize(StrVal("std"))
+        val section = StubSection(setOf("strlen"), mapOf("strlen" to bytes))
         assertNull(section.get("unknown"))
     }
 
     @Test
-    fun `extractExtension handles STR type directly`() {
-        val bytes = byteArrayOf(0x01) + "pdo".toByteArray(Charsets.UTF_8)
-        assertEquals("pdo", StubSection.extractExtension(bytes))
+    fun `extractExtension handles ListVal`() {
+        val value = ListVal(StrVal("standard"), StrVal("extra"))
+        assertEquals("standard", StubSection.extractExtension(value))
     }
 
     @Test
-    fun `extractExtension returns unknown for empty bytes`() {
-        assertEquals("unknown", StubSection.extractExtension(byteArrayOf()))
+    fun `extractExtension handles StrVal`() {
+        assertEquals("pdo", StubSection.extractExtension(StrVal("pdo")))
     }
 
     @Test
-    fun `extractExtension returns unknown for unrecognized type`() {
-        assertEquals("unknown", StubSection.extractExtension(byteArrayOf(0x7F)))
+    fun `extractExtension returns unknown for other types`() {
+        val mapVal = MapVal(hashMapOf("k" to StrVal("v")))
+        assertEquals("unknown", StubSection.extractExtension(mapVal))
     }
 }

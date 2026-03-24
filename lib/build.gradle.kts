@@ -8,25 +8,24 @@ plugins {
 group = "edu.jhu.cobra"
 version = "0.1.0"
 
-val sourceJavaVersion = JavaVersion.toVersion(libs.versions.javaSource.get())
-val targetJavaVersion = JavaVersion.toVersion(libs.versions.javaTarget.get())
+val jvmVersion = libs.versions.javaTarget.get().toInt()
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
+    api(libs.cobra.commons.value)
     testImplementation(kotlin("test"))
 }
 
 kotlin {
-    jvmToolchain { languageVersion.set(JavaLanguageVersion.of(sourceJavaVersion.majorVersion)) }
-    compilerOptions { jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.fromTarget(targetJavaVersion.toString()) }
+    jvmToolchain {
+        languageVersion.set(JavaLanguageVersion.of(jvmVersion))
+    }
 }
 
 java {
-    sourceCompatibility = sourceJavaVersion
-    targetCompatibility = targetJavaVersion
     withSourcesJar()
     withJavadocJar()
 }
