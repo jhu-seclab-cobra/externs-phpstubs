@@ -1,5 +1,9 @@
 package edu.jhu.cobra.externs.phpstubs
 
+import edu.jhu.cobra.commons.value.IValue
+import edu.jhu.cobra.commons.value.ListVal
+import edu.jhu.cobra.commons.value.StrVal
+import edu.jhu.cobra.commons.value.serializer.DftByteArraySerializerImpl
 import java.util.concurrent.ConcurrentHashMap
 
 /**
@@ -13,11 +17,11 @@ import java.util.concurrent.ConcurrentHashMap
  * without any locking on the hot path.
  *
  * @property keys Immutable set of all normalized keys in this section.
- * @property rawData Immutable map of key → serialized value bytes (from [DftByteArraySerializerImpl]).
+ * @property rawData Immutable map of key to serialized value bytes.
  */
 class StubSection internal constructor(
     val keys: Set<String>,
-    val rawData: Map<String, ByteArray>,
+    internal val rawData: Map<String, ByteArray>,
 ) {
     private val cache = ConcurrentHashMap<String, StubRecord>()
 
@@ -36,7 +40,9 @@ class StubSection internal constructor(
     fun get(key: String): StubRecord? {
         if (key !in keys) return null
         return cache.computeIfAbsent(key) { k ->
-            StubRecord(name = k, extension = extractExtension(rawData[k]!!))
+            val bytes = rawData[k]!!
+            val value = DftByteArraySerializerImpl.deserialize(bytes)
+            StubRecord(name = k, extension = extractExtension(value), value = value)
         }
     }
 
@@ -52,31 +58,14 @@ class StubSection internal constructor(
         val EMPTY = StubSection(emptySet(), emptyMap())
 
         /**
-         * Extracts the extension name from the first element of a serialized ListVal.
-         * ListVal format: [0x0C (LIST type)] [4-byte element size] [0x01 (STR type)] [UTF-8 bytes...]
-         *
-         * For non-ListVal formats (e.g., MapVal for constants), falls back to "unknown".
+         * Extracts the extension name from a deserialized [IValue].
+         * For [ListVal], the first element is the extension name string.
+         * For [StrVal], the string itself is the extension name.
          */
-        internal fun extractExtension(bytes: ByteArray): String {
-            if (bytes.isEmpty()) return "unknown"
-            return when (bytes[0]) {
-                0x0C.toByte() -> { // LIST type tag
-                    if (bytes.size < 6) return "unknown"
-                    // Skip LIST tag (1) + element size (4) + STR tag (1) = offset 6
-                    val strStart = 6
-                    val elementSize = ((bytes[1].toInt() and 0xFF) shl 24) or
-                        ((bytes[2].toInt() and 0xFF) shl 16) or
-                        ((bytes[3].toInt() and 0xFF) shl 8) or
-                        (bytes[4].toInt() and 0xFF)
-                    val strLen = elementSize - 1 // minus STR type tag
-                    if (strStart + strLen > bytes.size) return "unknown"
-                    String(bytes, strStart, strLen, Charsets.UTF_8)
-                }
-                0x01.toByte() -> { // STR type tag (direct string)
-                    String(bytes, 1, bytes.size - 1, Charsets.UTF_8)
-                }
-                else -> "unknown"
-            }
+        internal fun extractExtension(value: IValue): String = when (value) {
+            is ListVal -> (value.core.firstOrNull() as? StrVal)?.core ?: "unknown"
+            is StrVal -> value.core
+            else -> "unknown"
         }
     }
 }

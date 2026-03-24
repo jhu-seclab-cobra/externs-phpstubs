@@ -1,5 +1,8 @@
 package edu.jhu.cobra.externs.phpstubs
 
+import edu.jhu.cobra.commons.value.IValue
+import edu.jhu.cobra.commons.value.ListVal
+import edu.jhu.cobra.commons.value.StrVal
 import java.io.DataInputStream
 import java.io.InputStream
 
@@ -9,15 +12,16 @@ import java.io.InputStream
  * Implements a **two-tier loading** strategy for optimal performance on high-frequency lookups:
  * - **Tier 1**: Immutable [Set]s of normalized keys, loaded eagerly on first access (~1 MB for 22K entries).
  *   Existence checks ([containsFunc], etc.) hit only this tier — O(1), zero allocation, zero synchronization.
- * - **Tier 2**: Raw serialized bytes stored in immutable [Map]s. Full [StubRecord] objects are deserialized
- *   lazily on first value access and cached in a lock-free [ConcurrentHashMap].
+ * - **Tier 2**: Raw serialized bytes stored in immutable [Map]s. Full [StubRecord] objects (including
+ *   deserialized [IValue]) are constructed lazily on first value access and cached in a lock-free
+ *   [java.util.concurrent.ConcurrentHashMap].
  *
  * **Thread safety**: All base data structures are immutable after the one-time [lazy] initialization.
  * The lazy delegate uses [LazyThreadSafetyMode.SYNCHRONIZED] so concurrent first-access is safe.
- * Subsequent reads are lock-free. The per-entry deserialization cache uses [ConcurrentHashMap.computeIfAbsent],
- * which is lock-free for existing keys.
+ * Subsequent reads are lock-free. The per-entry deserialization cache uses
+ * [java.util.concurrent.ConcurrentHashMap.computeIfAbsent], which is lock-free for existing keys.
  *
- * **No MapDB dependency**: reads a custom binary format (`.bin`) produced by the converter tool.
+ * **Dependencies**: Requires `commons-value` for [IValue] deserialization. No MapDB dependency.
  */
 object PhpStubs {
 
@@ -128,7 +132,11 @@ object PhpStubs {
     fun searchFunc(name: String): StubRecord? {
         val key = name.normalize()
         return data.functions.get(key)
-            ?: if (key in KEYWORD_FUNC_NAMES) StubRecord(name = key, extension = "keyword") else null
+            ?: if (key in KEYWORD_FUNC_NAMES) StubRecord(
+                name = key,
+                extension = "keyword",
+                value = ListVal(StrVal("keyword")),
+            ) else null
     }
 
     /**
@@ -139,9 +147,9 @@ object PhpStubs {
     fun searchClass(name: String): StubRecord? {
         val key = name.normalize()
         return data.classes.get(key) ?: when (key) {
-            in SCALAR_TYPE_NAMES -> StubRecord(name = key, extension = "Scalar")
-            "exit" -> StubRecord(name = key, extension = "Core")
-            "resource" -> StubRecord(name = key, extension = "legacy")
+            in SCALAR_TYPE_NAMES -> StubRecord(name = key, extension = "Scalar", value = ListVal(StrVal("Scalar")))
+            "exit" -> StubRecord(name = key, extension = "Core", value = ListVal(StrVal("Core")))
+            "resource" -> StubRecord(name = key, extension = "legacy", value = ListVal(StrVal("legacy")))
             else -> null
         }
     }
@@ -191,34 +199,6 @@ object PhpStubs {
     fun getAllConstNames(): Set<String> = data.constants.keys
     fun getKeywordFuncNames(): Set<String> = KEYWORD_FUNC_NAMES
     fun getScalarTypeNames(): Set<String> = SCALAR_TYPE_NAMES
-
-    /**
-     * Returns the raw serialized bytes for a function entry, for consumers that need
-     * to deserialize the original IValue themselves (e.g., via DftByteArraySerializerImpl).
-     */
-    fun getFuncRawData(name: String): ByteArray? = data.functions.rawData[name.normalize()]
-
-    /**
-     * Returns the raw serialized bytes for a class entry.
-     */
-    fun getClassRawData(name: String): ByteArray? = data.classes.rawData[name.normalize()]
-
-    /**
-     * Returns the raw serialized bytes for a method entry.
-     */
-    fun getMethodRawData(name: String, className: String? = null): ByteArray? {
-        if (className != null) {
-            return data.methods.rawData["${className.normalize()}::${name.normalize()}"]
-        }
-        val suffix = "::${name.normalize()}"
-        val matchKey = data.methods.rawData.keys.firstOrNull { it.endsWith(suffix) }
-        return matchKey?.let { data.methods.rawData[it] }
-    }
-
-    /**
-     * Returns the raw serialized bytes for a constant entry.
-     */
-    fun getConstRawData(name: String): ByteArray? = data.constants.rawData[name.normalize()]
 }
 
 /**

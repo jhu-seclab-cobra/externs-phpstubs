@@ -3,6 +3,10 @@ kotlin = "2.2.21"
 kover = "0.9.1"
 javaSource = "21"
 javaTarget = "21"
+cobra-commons-value = "0.1.0"
+
+[libraries]
+cobra-commons-value = { module = "com.github.jhu-seclab-cobra:commons-value", version.ref = "cobra-commons-value" }
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
