@@ -10,7 +10,7 @@ if (gradle.parent == null) {
     includeBuild("extern/commons-value") {
         name = "commons-value"
         dependencySubstitution {
-            substitute(module("com.github.jhu-seclab-cobra:commons-value")).using(project(":jhu-seclab-cobra-commons-value"))
+            substitute(module("com.github.jhu-seclab-cobra:commons-value")).using(project(":lib"))
         }
     }
 }
