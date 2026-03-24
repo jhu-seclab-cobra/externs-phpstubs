@@ -91,7 +91,10 @@ object PhpStubs {
             keys.add(key)
             rawData[key] = valueBytes
         }
-        return StubSection(keys.toSet(), rawData.toMap())
+        return StubSection(
+            java.util.Collections.unmodifiableSet(keys),
+            java.util.Collections.unmodifiableMap(rawData),
+        )
     }
 
     private fun String.normalize(): String {
