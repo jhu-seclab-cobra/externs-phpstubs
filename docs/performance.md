@@ -1,6 +1,6 @@
 # externs-phpstubs Performance
 
-## Current Baseline (post-optimization)
+## Current Baseline
 
 Measured on: 2026-03-24 | JVM: JDK 21 | JVM flags: `-Xmx2g -Xms1g`
 Benchmark: `./gradlew test -Pperformance` | Warmup: 5 runs | Measurement: 7 runs (median)
@@ -38,74 +38,36 @@ Dataset: 22,477 total keys (5,021 functions + 1,538 classes + 9,872 methods + 6,
 | Heap after full load | 15.71 MB |
 | Total keys | 22,477 |
 
-## Before vs After Comparison
-
-Pre-optimization baseline measured at commit `3eecd2a` (2 independent runs, median of each).
-
-### Hot Path
-
-| Operation | Before (ns/op) | After (ns/op) | Change |
-|-----------|---------------|--------------|--------|
-| containsFunc — known | 17.0 | 19.2 | +13% (noise) |
-| containsFunc — unknown | 14.0 | 14.7 | +5% (noise) |
-| containsFunc — keywords | 18.7 | 16.2 | -13% |
-| containsFunc — uppercase | 30.0 | 25.6 | -15% |
-| containsFunc — slash prefix | 28.9 | 28.1 | -3% (noise) |
-| containsClass — known | 14.9 | 18.7 | +26% (noise/JIT) |
-| containsClass — scalar types | 11.5 | 12.1 | +5% (noise) |
-| containsMethod — with class | 44.5 | 46.6 | +5% (noise) |
-| **containsMethod — suffix only** | **5803.2** | **19.6** | **-99.7% (296x faster)** |
-| containsConst | 13.3 | 16.5 | +24% (noise/JIT) |
-
-### Cold Path
-
-| Operation | Before (ns/op) | After (ns/op) | Change |
-|-----------|---------------|--------------|--------|
-| searchFunc — known | 25.3 | 23.0 | -9% |
-| **searchFunc — keywords** | **52.4** | **15.8** | **-70% (3.3x faster)** |
-| searchClass — scalar types | 15.9 | 16.1 | +1% (noise) |
-| searchMethod — with class | 52.8 | 61.3 | +16% (noise/JIT) |
-| **searchMethod — suffix only** | **5915.5** | **36.7** | **-99.4% (161x faster)** |
-
-### Summary
-
-| Optimization | Measured Impact |
-|-------------|----------------|
-| **P1-2: Reverse suffix index** | **containsMethod suffix: 296x faster, searchMethod suffix: 161x faster** |
-| **P1-3: Cached synthetic records** | **searchFunc keywords: 3.3x faster** |
-| P1-1: normalize() fast-path | containsFunc uppercase: -15%, other paths within noise |
-| P1-4: Unmodifiable wrappers | No runtime impact (init-time only, not benchmarked) |
-
 ## Key Improvements
 
 | ID | Title | Target | Measured Impact | Status |
 |----|-------|--------|----------------|--------|
 | P1-1 | Fast-path `normalize()` | Hot-path allocation | -15% on uppercase input | KEEP |
-| P1-2 | Reverse suffix index | O(n) → O(1) suffix lookup | **296x faster** (5803 → 19.6 ns/op) | KEEP |
-| P1-3 | Cache synthetic records | Cold-path allocation | **3.3x faster** (52.4 → 15.8 ns/op) | KEEP |
+| P1-2 | Reverse suffix index | O(n) suffix lookup | **296x faster** (5803 -> 19.6 ns/op) | KEEP |
+| P1-3 | Cache synthetic records | Cold-path allocation | **3.3x faster** (52.4 -> 15.8 ns/op) | KEEP |
 | P1-4 | Unmodifiable wrappers | Load-time memory | Init-time only, not measurable at runtime | KEEP |
 
 ## Completed Optimizations
 
-### P1-1: Fast-path `normalize()` to avoid hot-path allocations
+### P1-1: Fast-path `normalize()` to avoid hot-path allocations — KEEP
 - **File**: `PhpStubs.kt`
 - **Change**: Check for leading `/` before `substring`; skip `lowercase()` when input is already all-lowercase ASCII.
-- **Impact**: -15% on uppercase input path. Common lowercase path within noise margin.
+- **Measured**: -15% on uppercase input path (30.0 -> 25.6 ns/op). Common lowercase path within noise margin.
 
-### P1-2: Reverse suffix index for O(1) method/constant lookup
+### P1-2: Reverse suffix index for O(1) method/constant lookup — KEEP
 - **File**: `StubSection.kt`, `PhpStubs.kt`
-- **Change**: Added lazily-built `suffixIndex` map in `StubSection` (suffix after `::` → full keys). Replaced `keys.any { it.endsWith(suffix) }` and `keys.firstOrNull { it.endsWith(suffix) }` with `HashMap.containsKey`/`HashMap.get`.
-- **Impact**: `containsMethod(name, null)` from 5803 → 19.6 ns/op (**296x**). `searchMethod(name, null)` from 5916 → 36.7 ns/op (**161x**).
+- **Change**: Added lazily-built `suffixIndex` map in `StubSection` (suffix after `::` -> full keys). Replaced `keys.any { it.endsWith(suffix) }` and `keys.firstOrNull { it.endsWith(suffix) }` with `HashMap.containsKey`/`HashMap.get`.
+- **Measured**: `containsMethod(name, null)` from 5803 -> 19.6 ns/op (**296x**). `searchMethod(name, null)` from 5916 -> 36.7 ns/op (**161x**).
 
-### P1-3: Cache synthetic keyword/scalar StubRecord instances
+### P1-3: Cache synthetic keyword/scalar StubRecord instances — KEEP
 - **File**: `PhpStubs.kt`
 - **Change**: Pre-built `KEYWORD_RECORDS` and `SYNTHETIC_CLASS_RECORDS` maps. `searchFunc`/`searchClass` return cached instances.
-- **Impact**: `searchFunc(keyword)` from 52.4 → 15.8 ns/op (**3.3x**). Eliminates per-call allocation of StubRecord + ListVal + StrVal.
+- **Measured**: `searchFunc(keyword)` from 52.4 -> 15.8 ns/op (**3.3x**). Eliminates per-call allocation.
 
-### P1-4: Unmodifiable wrappers instead of defensive copies
+### P1-4: Unmodifiable wrappers instead of defensive copies — KEEP
 - **File**: `PhpStubs.kt`
-- **Change**: `readSection()` wraps `LinkedHashSet`/`HashMap` with `Collections.unmodifiableSet/Map` instead of `toSet()`/`toMap()` which copy all entries.
-- **Impact**: Reduces init-time memory spike and avoids ~22K entry duplication per section (4 sections). Not measurable at query time.
+- **Change**: `readSection()` wraps `LinkedHashSet`/`HashMap` with `Collections.unmodifiableSet/Map` instead of `toSet()`/`toMap()`.
+- **Measured**: Reduces init-time memory spike. Not measurable at query time.
 
 ## Evaluated & Rejected
 
@@ -119,27 +81,19 @@ Pre-optimization baseline measured at commit `3eecd2a` (2 independent runs, medi
 
 ## Remaining Known Bottlenecks
 
-- `containsMethod — with class` (46.6 ns/op) is 2.4x slower than simple `containsFunc` (19.2 ns/op) due to double `normalize()` + string concatenation for the composite key.
-- `searchMethod — with class` (61.3 ns/op) is the slowest operation — combines double normalize + concat + ConcurrentHashMap lookup.
-- Deserialization via `DftByteArraySerializerImpl.deserialize()` is the dominant cost on cold-path lookups. Optimization depends on commons-value internals.
+- `containsMethod — with class` (46.6 ns/op) is 2.4x slower than `containsFunc` (19.2 ns/op) due to double `normalize()` + string concatenation for the composite key.
+- `searchMethod — with class` (61.3 ns/op) is the slowest operation — double normalize + concat + ConcurrentHashMap lookup.
+- Deserialization via `DftByteArraySerializerImpl.deserialize()` dominates cold-path cost. Optimization depends on commons-value internals.
 - `getAll()` forces eager deserialization of entire sections.
 
 ## Key Insights
 
-1. This is a read-only lookup library — all data is immutable after load. Optimization focus is on allocation reduction and algorithmic complexity for lookups.
-2. Two-tier architecture already avoids deserialization on hot path; main gains come from reducing String allocations in normalize/lookup.
+1. Read-only lookup library — all data immutable after load. Optimization focus: allocation reduction and algorithmic complexity.
+2. Two-tier architecture avoids deserialization on hot path; main gains from reducing String allocations in normalize/lookup.
 3. Kotlin string templates (`"$a::$b"`) compile to `StringBuilder` — manual StringBuilder offers no benefit.
-4. `Collections.unmodifiableSet/Map` is cheaper than `toSet()`/`toMap()` for preventing mutation of internal collections, as it wraps without copying.
-5. The `normalize()` fast-path shows measurable benefit only on uppercase input (-15%). The common lowercase path is within noise margin — the JIT likely already optimizes `String.lowercase()` for ASCII-only strings.
-6. Cached synthetic records (P1-3) make keyword/scalar retrieval (16 ns/op) faster than index-based retrieval (23 ns/op) by skipping ConcurrentHashMap lookup entirely.
-7. Suffix-only method lookup (20 ns/op) is now faster than with-class lookup (47 ns/op) thanks to the reverse index (P1-2) — the reverse index avoids double normalize + concat.
-8. Cross-test JIT contamination causes 5-25% variance in unrelated operations between runs. Only changes >30% or algorithmic improvements (like P1-2) are reliably attributable.
-
-## Benchmark Infrastructure
-
-- Test class: `PhpStubsPerformanceTest` (tagged `@Tag("performance")`)
-- Run: `./gradlew test -Pperformance`
-- Default `./gradlew test` excludes performance tests
-- Operations per run: 100,000
-- Warmup: 5 runs, Measurement: 7 runs (median reported)
-- JVM flags (performance mode only): `-Xmx2g -Xms1g`
+4. `Collections.unmodifiableSet/Map` wraps without copying, cheaper than `toSet()`/`toMap()`.
+5. `normalize()` fast-path benefits uppercase input only (-15%). JIT optimizes `String.lowercase()` for ASCII.
+6. Cached synthetic records (16 ns/op) faster than index-based retrieval (23 ns/op) — skips ConcurrentHashMap lookup.
+7. Suffix-only method lookup (20 ns/op) faster than with-class lookup (47 ns/op) thanks to reverse index (P1-2).
+8. Cross-test JIT contamination causes 5-25% variance. Only changes >30% or algorithmic improvements are reliably attributable.
+9. Performance test class: `PhpStubsPerformanceTest` (`@Tag("performance")`). Run: `./gradlew test -Pperformance`. Default `./gradlew test` excludes performance tests. Ops/run: 100K, warmup: 5, measurement: 7 (median).

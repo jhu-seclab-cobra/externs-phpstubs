@@ -11,7 +11,7 @@ This library provides a read-only registry of PHP built-in entity metadata, cons
 **Data Flow**
 - **Inputs:** Pre-compiled binary index (`builtin.bin`) derived from JetBrains PhpStorm stubs
 - **Outputs:** Existence checks (boolean), stub records (name + extension), raw serialized bytes (for IValue reconstruction)
-- **Connections:** `builtin.bin` (bundled resource) → PhpStubs registry → Consumer modules
+- **Connections:** `builtin.bin` (bundled resource) → [PhpStubs registry] → [Consumer modules]
 
 **Scope Boundaries**
 - **Owned:** Binary index loading, two-tier caching, existence checks, record retrieval, keyword/scalar type classification, raw data access for IValue reconstruction

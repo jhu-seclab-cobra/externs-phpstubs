@@ -1,30 +1,15 @@
 # COBRA.EXTERNS.PHPSTUBS
 
+> Named for the PHP stub definitions it indexes — built-in function, class, method, and constant metadata.
+
+Read-only Kotlin registry for PHP built-in stubs, backed by a compact binary index (~1 MB) with O(1) existence checks and lazy record retrieval.
+
 [![](https://jitpack.io/v/jhu-seclab-cobra/externs-phpstubs.svg)](https://jitpack.io/#jhu-seclab-cobra/externs-phpstubs)
 [![license](https://img.shields.io/github/license/jhu-seclab-cobra/externs-phpstubs)](./LICENSE)
 
-A Kotlin library that provides a read-only registry for PHP built-in function, class, method, and constant stubs. Backed by a compact binary index (~1 MB), it supports O(1) existence checks and lazy record retrieval.
+## Install
 
-## Coverage
-
-| Category  | Count  | Examples                                    |
-|-----------|--------|---------------------------------------------|
-| Functions | ~5,000 | `strlen`, `array_map`, `echo`, `isset`      |
-| Classes   | ~1,500 | `Exception`, `PDO`, `int`, `bool`           |
-| Methods   | ~9,800 | `PDO::query`, `SplStack::push`              |
-| Constants | ~6,000 | `PHP_EOL`, `SORT_ASC`, `PDO::FETCH_ASSOC`   |
-
-Includes 14 keyword functions (`echo`, `isset`, `require`, `include`, etc.) and 5 scalar types (`int`, `float`, `string`, `bool`, `array`) as synthetic entries.
-
-**Not covered**: user-defined functions/classes, PECL-only extensions not bundled with PHP, runtime-generated constants.
-
-## Requirements
-
-- Java 21+
-
-## Installation
-
-Add JitPack repository and the dependency to `build.gradle.kts`:
+Requires Java 21+. Add JitPack repository and the dependency to `build.gradle.kts`:
 
 ```kotlin
 repositories {
@@ -38,53 +23,50 @@ dependencies {
 
 ## Usage
 
-### Kotlin
-
 ```kotlin
 import edu.jhu.cobra.externs.phpstubs.PhpStubs
 
-// Existence checks — O(1), zero allocation
-PhpStubs.containsFunc("strlen")                   // true
-PhpStubs.containsClass("Exception")               // true
-PhpStubs.containsMethod("query", "mysqli")         // true
-PhpStubs.containsConst("PHP_EOL")                  // true
+// Existence checks — O(1)
+PhpStubs.containsFunc("strlen")         // true
+PhpStubs.containsClass("Exception")     // true
+PhpStubs.containsMethod("query", "mysqli") // true
+PhpStubs.containsConst("PHP_EOL")       // true
 
-// Record retrieval — lazy deserialization, cached after first access
+// Record retrieval — lazy, cached after first access
 val func = PhpStubs.searchFunc("strlen")
-println("${func?.name} from ${func?.extension}")   // strlen from standard
-
-val method = PhpStubs.searchMethod("query", "mysqli")
-println(method?.first)                              // mysqli::query
-
-// Bulk access
-val allFunctions = PhpStubs.getAllFuncNames()       // Set<String>
-val allClasses   = PhpStubs.getAllClassNames()
-val allMethods   = PhpStubs.getAllMethodNames()
-val allConstants  = PhpStubs.getAllConstNames()
+println("${func?.name} from ${func?.extension}") // strlen from standard
 ```
 
-### Java
+All lookups normalize input: lowercase and strip leading `/`. `"Strlen"`, `"/strlen"`, `"STRLEN"` are equivalent.
 
-```java
-import edu.jhu.cobra.externs.phpstubs.PhpStubs;
-import edu.jhu.cobra.externs.phpstubs.StubRecord;
+## API
 
-boolean hasFunc = PhpStubs.INSTANCE.containsFunc("strlen");
+**`PhpStubs`** (singleton) — query entry point for all sections.
 
-StubRecord func = PhpStubs.INSTANCE.searchFunc("strlen");
-System.out.println(func.getName() + " from " + func.getExtension());
-```
+| Method | Return | Description |
+|--------|--------|-------------|
+| `containsFunc/Class/Method/Const(name)` | `Boolean` | O(1) existence check |
+| `searchFunc/Class(name)` | `StubRecord?` | Lazy record retrieval |
+| `searchMethod(name, className?)` | `Pair<String, StubRecord>?` | Method lookup, suffix scan if no class |
+| `searchGlobalConst/ClassConst(name, className?)` | `StubRecord?` | Constant lookup |
+| `getAllFuncNames/ClassNames/MethodNames/ConstNames()` | `Set<String>` | All keys in section |
+| `getKeywordFuncNames()` | `Set<String>` | Hardcoded keyword functions |
+| `getScalarTypeNames()` | `Set<String>` | Hardcoded scalar types |
 
-### Name Normalization
+**`StubRecord(name: String, extension: String)`** — stub metadata.
 
-All lookups automatically lowercase the input and strip a leading `/`. These are equivalent:
+**Exceptions**: `StubIndexNotFoundException`, `StubIndexInvalidException`.
 
-```kotlin
-PhpStubs.containsFunc("Strlen")
-PhpStubs.containsFunc("/strlen")
-PhpStubs.containsFunc("STRLEN")
-```
+## Documentation
+
+- [Concepts & Terminology](docs/idea.md) — problem context, two-tier architecture, core concepts, scenarios
+- [Design](docs/design.md) — class/type specifications, function signatures, exceptions, validation rules
+- [Implementation Notes](docs/impl.md) — external dependencies and developer instructions
+
+## For Agents
+
+Agent-consumable documentation index at `docs/llms.txt` (llmstxt.org format).
 
 ## License
 
-[GNU 2.0](./LICENSE)
+GPL-2.0-only
