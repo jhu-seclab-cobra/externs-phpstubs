@@ -1,0 +1,119 @@
+# externs-phpstubs
+
+> Read-only Kotlin registry for PHP built-in function, class, method, and constant stubs with O(1) existence checks.
+
+`PhpStubs` is the singleton entry point. Hot-path `contains*` methods check existence without deserialization. Cold-path `search*` methods return `StubRecord` instances with lazy caching. All input names are normalized (lowercase, strip leading `/`).
+
+## Instructions for Agents
+
+- Use `PhpStubs.containsFunc/Class/Method/Const(name)` for existence checks on the hot path.
+- Use `PhpStubs.searchFunc/Class(name)` for `StubRecord` retrieval on the cold path.
+- Pass method names with optional `className` parameter: `searchMethod("query", "mysqli")`.
+- Omit `className` for suffix-only lookup: `containsMethod("query")` scans all classes.
+- Access `StubRecord.name` and `StubRecord.extension` for metadata.
+- Use `getFuncRawData(name)` to get raw bytes for `IValue` reconstruction with `DftByteArraySerializerImpl`.
+- Never instantiate `PhpStubs` — it is an `object` (singleton).
+- Never assume case-sensitive matching. All lookups normalize to lowercase.
+
+## API Reference
+
+- [Stubs API](llms/stubs.md): `PhpStubs`, `StubRecord`, `StubSection`, exceptions, thread-safety model.
+
+---
+
+# Referenced Documents
+
+## Source: llms/stubs.md
+
+# Stubs API
+
+> PHP built-in entity registry with two-tier lookup: O(1) existence checks and lazy record retrieval.
+
+## Quick Start
+
+```kotlin
+import edu.jhu.cobra.externs.phpstubs.PhpStubs
+
+val isBuiltin = PhpStubs.containsFunc("strlen")
+val record = PhpStubs.searchFunc("strlen")
+println("${record?.name} from ${record?.extension}")
+```
+
+## API
+
+### PhpStubs (singleton)
+
+**Hot-path existence checks:**
+
+**`containsFunc(name: String): Boolean`** — Check function existence. Includes keyword functions (`echo`, `isset`, etc.).
+
+**`containsClass(name: String): Boolean`** — Check class existence. Includes scalar types (`int`, `float`, etc.) and `exit`/`resource`.
+
+**`containsMethod(methodName: String, className: String? = null): Boolean`** — Check method existence. Suffix scan if `className` is `null`.
+
+**`containsConst(name: String): Boolean`** — Check constant existence.
+
+**Cold-path record retrieval:**
+
+**`searchFunc(name: String): StubRecord?`** — Retrieve function record. Returns synthetic record for keywords.
+
+**`searchClass(name: String): StubRecord?`** — Retrieve class record. Returns synthetic record for scalar types.
+
+**`searchMethod(methodName: String, className: String? = null): Pair<String, StubRecord>?`** — Retrieve method record with fully-qualified key. Suffix scan if `className` is `null`.
+
+**`searchGlobalConst(name: String): StubRecord?`** — Retrieve global constant record.
+
+**`searchClassConst(constName: String, className: String? = null): StubRecord?`** — Retrieve class constant record. Suffix scan if `className` is `null`.
+
+**Bulk access:**
+
+**`getAllFuncNames(): Set<String>`** — All function keys.
+
+**`getAllClassNames(): Set<String>`** — All class keys.
+
+**`getAllMethodNames(): Set<String>`** — All method keys.
+
+**`getAllConstNames(): Set<String>`** — All constant keys.
+
+**`getKeywordFuncNames(): Set<String>`** — Hardcoded keyword function names (`echo`, `isset`, `require`, etc.).
+
+**`getScalarTypeNames(): Set<String>`** — Hardcoded scalar type names (`int`, `float`, `string`, `bool`, `array`).
+
+**Raw data access:**
+
+**`getFuncRawData(name: String): ByteArray?`** — Raw serialized bytes for consumer-side `IValue` reconstruction.
+
+**`getClassRawData(name: String): ByteArray?`** — Raw bytes for class entry.
+
+**`getMethodRawData(name: String, className: String? = null): ByteArray?`** — Raw bytes for method entry.
+
+**`getConstRawData(name: String): ByteArray?`** — Raw bytes for constant entry.
+
+### StubRecord
+
+**`StubRecord(name: String, extension: String)`** — Stub metadata. `name`: normalized entity name. `extension`: PHP extension name (e.g., `"standard"`, `"Core"`, `"keyword"`, `"Scalar"`).
+
+### StubSection
+
+**`contains(key: String): Boolean`** — O(1) set membership. Immutable key set.
+
+**`get(key: String): StubRecord?`** — Lazy deserialization with `ConcurrentHashMap` cache.
+
+**`getAll(): Map<String, StubRecord>`** — Materialize all entries.
+
+### Exceptions
+
+**`StubIndexNotFoundException`** — Stub index resource not found on classpath.
+
+**`StubIndexInvalidException`** — Binary format validation fails (wrong magic or version).
+
+## Gotchas
+
+- All input names normalized: `lowercase()` then `removePrefix("/")`. `"Strlen"`, `"/strlen"`, `"STRLEN"` are equivalent.
+- `containsMethod("query")` without `className` uses a reverse suffix index. `containsMethod("query", "mysqli")` builds a composite `"mysqli::query"` key.
+- Keyword functions (`echo`, `isset`, etc.) and scalar types (`int`, `float`, etc.) are hardcoded, not in the binary index. `searchFunc("echo")` returns `StubRecord(name="echo", extension="keyword")`.
+- `getFuncRawData()` returns bytes for `DftByteArraySerializerImpl.deserialize()`. The library does not depend on `commons-value` at runtime — consumers bring their own deserializer.
+- Thread-safe: immutable data after lazy init (`LazyThreadSafetyMode.SYNCHRONIZED`). All post-init reads are lock-free.
+- `getAll()` forces eager deserialization of the entire section.
+
+---
