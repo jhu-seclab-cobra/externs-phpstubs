@@ -1,4 +1,0 @@
-[submodule "extern/commons-value"]
-	path = extern/commons-value
-	url = https://github.com/COBRA-Static-Analysis/commons-value.git
-	update = none
