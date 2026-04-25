@@ -15,7 +15,7 @@ repositories {
 }
 
 dependencies {
-    api(libs.cobra.commons.value)
+    implementation("org.yaml:snakeyaml:2.2")
     testImplementation(kotlin("test"))
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.2")
 }
@@ -36,6 +36,34 @@ tasks.test {
         jvmArgs("-Xmx2g", "-Xms1g")
         testLogging {
             showStandardStreams = true
+        }
+    }
+}
+
+tasks.processResources {
+    doLast {
+        val stubsDir = destinationDir.resolve("stubs")
+        if (stubsDir.isDirectory) {
+            val yamlFiles = stubsDir.walkTopDown()
+                .filter { it.extension == "yaml" }
+                .map { it.relativeTo(stubsDir).path }
+                .sorted()
+                .toList()
+            stubsDir.resolve("index.txt").writeText(yamlFiles.joinToString("\n") + "\n")
+        }
+    }
+}
+
+tasks.processTestResources {
+    doLast {
+        val stubsDir = destinationDir.resolve("stubs-test")
+        if (stubsDir.isDirectory) {
+            val yamlFiles = stubsDir.walkTopDown()
+                .filter { it.extension == "yaml" }
+                .map { it.relativeTo(stubsDir).path }
+                .sorted()
+                .toList()
+            stubsDir.resolve("index.txt").writeText(yamlFiles.joinToString("\n") + "\n")
         }
     }
 }
