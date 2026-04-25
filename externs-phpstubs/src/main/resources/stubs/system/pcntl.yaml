@@ -1,0 +1,154 @@
+- tag: function
+  name: pcntl_alarm
+  params:
+    - { name: seconds, type: int }
+  return: int
+
+- tag: function
+  name: pcntl_async_signals
+  params:
+    - { name: enable, type: bool, optional: true }
+  return: bool
+
+- tag: function
+  name: pcntl_errno
+  return: int
+
+- tag: function
+  name: pcntl_exec
+  params:
+    - { name: path, type: string }
+    - { name: args, type: array, optional: true }
+    - { name: env_vars, type: array, optional: true }
+  return: bool
+
+- tag: function
+  name: pcntl_fork
+  return: int
+
+- tag: function
+  name: pcntl_get_last_error
+  return: int
+
+- tag: function
+  name: pcntl_getpriority
+  params:
+    - { name: process_id, type: int, optional: true }
+    - { name: mode, type: int, optional: true }
+  return: int
+
+- tag: function
+  name: pcntl_setpriority
+  params:
+    - { name: priority, type: int }
+    - { name: process_id, type: int, optional: true }
+    - { name: mode, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: pcntl_signal
+  params:
+    - { name: signal, type: int }
+    - { name: handler, type: mixed }
+    - { name: restart_syscalls, type: bool, optional: true }
+  return: bool
+
+- tag: function
+  name: pcntl_signal_dispatch
+  return: bool
+
+- tag: function
+  name: pcntl_signal_get_handler
+  params:
+    - { name: signal, type: int }
+  return: int
+
+- tag: function
+  name: pcntl_sigprocmask
+  params:
+    - { name: mode, type: int }
+    - { name: signals, type: array }
+    - { name: old_signals, type: array, optional: true }
+  return: bool
+
+- tag: function
+  name: pcntl_sigtimedwait
+  params:
+    - { name: signals, type: array }
+    - { name: info, type: array, optional: true }
+    - { name: seconds, type: int, optional: true }
+    - { name: nanoseconds, type: int, optional: true }
+  return: int
+
+- tag: function
+  name: pcntl_sigwaitinfo
+  params:
+    - { name: signals, type: array }
+    - { name: info, type: array, optional: true }
+  return: int
+
+- tag: function
+  name: pcntl_strerror
+  params:
+    - { name: error_code, type: int }
+  return: string
+
+- tag: function
+  name: pcntl_unshare
+  params:
+    - { name: flags, type: int }
+  return: bool
+
+- tag: function
+  name: pcntl_wait
+  params:
+    - { name: status, type: int }
+    - { name: flags, type: int, optional: true }
+    - { name: resource_usage, type: array, optional: true }
+  return: int
+
+- tag: function
+  name: pcntl_waitpid
+  params:
+    - { name: process_id, type: int }
+    - { name: status, type: int }
+    - { name: flags, type: int, optional: true }
+    - { name: resource_usage, type: array, optional: true }
+  return: int
+
+- tag: function
+  name: pcntl_wexitstatus
+  params:
+    - { name: status, type: int }
+  return: int
+
+- tag: function
+  name: pcntl_wifexited
+  params:
+    - { name: status, type: int }
+  return: bool
+
+- tag: function
+  name: pcntl_wifsignaled
+  params:
+    - { name: status, type: int }
+  return: bool
+
+- tag: function
+  name: pcntl_wifstopped
+  params:
+    - { name: status, type: int }
+  return: bool
+
+- tag: function
+  name: pcntl_wstopsig
+  params:
+    - { name: status, type: int }
+  return: int
+
+- tag: function
+  name: pcntl_wtermsig
+  params:
+    - { name: status, type: int }
+  return: int
+

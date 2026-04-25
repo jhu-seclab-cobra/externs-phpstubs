@@ -1,0 +1,820 @@
+- tag: function
+  name: pg_affected_rows
+  params:
+    - { name: result, type: resource }
+  return: int
+
+- tag: function
+  name: pg_cancel_query
+  params:
+    - { name: connection, type: resource }
+  return: bool
+
+- tag: function
+  name: pg_client_encoding
+  params:
+    - { name: connection, type: resource, optional: true }
+  return: string
+
+- tag: function
+  name: pg_clientencoding
+  params:
+    - { name: connection, type: mixed, optional: true }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: pg_close
+  params:
+    - { name: connection, type: resource, optional: true }
+  return: bool
+
+- tag: function
+  name: pg_cmdtuples
+  params:
+    - { name: result, type: mixed }
+  return: int
+
+- tag: function
+  name: pg_connect
+  params:
+    - { name: connection_string, type: string }
+    - { name: flags, type: int, optional: true }
+  return: resource
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: pg_connect_poll
+  params:
+    - { name: connection, type: resource }
+  return: int
+
+- tag: function
+  name: pg_connection_busy
+  params:
+    - { name: connection, type: resource }
+  return: bool
+
+- tag: function
+  name: pg_connection_reset
+  params:
+    - { name: connection, type: resource }
+  return: bool
+
+- tag: function
+  name: pg_connection_status
+  params:
+    - { name: connection, type: resource }
+  return: int
+
+- tag: function
+  name: pg_consume_input
+  params:
+    - { name: connection, type: resource }
+  return: bool
+
+- tag: function
+  name: pg_convert
+  params:
+    - { name: connection, type: resource }
+    - { name: table_name, type: string }
+    - { name: values, type: array }
+    - { name: flags, type: int, optional: true }
+  return: array
+  flowsToReturn: [2]
+
+- tag: function
+  name: pg_copy_from
+  params:
+    - { name: connection, type: resource }
+    - { name: table_name, type: string }
+    - { name: rows, type: array }
+    - { name: separator, type: string, optional: true }
+    - { name: null_as, type: string, optional: true }
+  return: bool
+
+- tag: function
+  name: pg_copy_to
+  params:
+    - { name: connection, type: resource }
+    - { name: table_name, type: string }
+    - { name: separator, type: string, optional: true }
+    - { name: null_as, type: string, optional: true }
+  return: array
+
+- tag: function
+  name: pg_dbname
+  params:
+    - { name: connection, type: resource, optional: true }
+  return: string
+
+- tag: function
+  name: pg_delete
+  params:
+    - { name: connection, type: resource }
+    - { name: table_name, type: string }
+    - { name: conditions, type: array }
+    - { name: flags, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: pg_end_copy
+  params:
+    - { name: connection, type: resource, optional: true }
+  return: bool
+
+- tag: function
+  name: pg_errormessage
+  params:
+    - { name: connection, type: mixed, optional: true }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: pg_escape_bytea
+  params:
+    - { name: connection, type: resource }
+    - { name: string, type: string, optional: true }
+  return: string
+  flowsToReturn: [1]
+
+- tag: function
+  name: pg_escape_identifier
+  params:
+    - { name: connection, type: resource }
+    - { name: string, type: string, optional: true }
+  return: string
+
+- tag: function
+  name: pg_escape_literal
+  params:
+    - { name: connection, type: resource }
+    - { name: string, type: string, optional: true }
+  return: string
+
+- tag: function
+  name: pg_escape_string
+  params:
+    - { name: connection, type: resource }
+    - { name: string, type: string, optional: true }
+  return: string
+
+- tag: function
+  name: pg_exec
+  params:
+    - { name: connection, type: resource }
+    - { name: query, type: string, optional: true }
+  return: resource
+
+- tag: function
+  name: pg_execute
+  params:
+    - { name: connection, type: resource }
+    - { name: statement_name, type: string }
+    - { name: params, type: array, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: pg_fetch_all
+  params:
+    - { name: result, type: resource }
+    - { name: mode, type: int, optional: true }
+  return: array
+
+- tag: function
+  name: pg_fetch_all_columns
+  params:
+    - { name: result, type: resource }
+    - { name: field, type: int, optional: true }
+  return: array
+
+- tag: function
+  name: pg_fetch_array
+  params:
+    - { name: result, type: resource }
+    - { name: row, type: int, optional: true }
+    - { name: mode, type: int, optional: true }
+  return: array
+
+- tag: function
+  name: pg_fetch_assoc
+  params:
+    - { name: result, type: resource }
+    - { name: row, type: int, optional: true }
+  return: array
+
+- tag: function
+  name: pg_fetch_object
+  params:
+    - { name: result, type: resource }
+    - { name: row, type: int, optional: true }
+    - { name: class, type: string, optional: true }
+    - { name: constructor_args, type: array, optional: true }
+  return: object
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: pg_fetch_result
+  params:
+    - { name: result, type: resource }
+    - { name: row, type: int }
+    - { name: field, type: int, optional: true }
+  return: string
+
+- tag: function
+  name: pg_fetch_row
+  params:
+    - { name: result, type: resource }
+    - { name: row, type: int, optional: true }
+    - { name: mode, type: int, optional: true }
+  return: array
+
+- tag: function
+  name: pg_field_is_null
+  params:
+    - { name: result, type: resource }
+    - { name: row, type: int }
+    - { name: field, type: int, optional: true }
+  return: int
+
+- tag: function
+  name: pg_field_name
+  params:
+    - { name: result, type: resource }
+    - { name: field, type: int }
+  return: string
+
+- tag: function
+  name: pg_field_num
+  params:
+    - { name: result, type: resource }
+    - { name: field, type: string }
+  return: int
+
+- tag: function
+  name: pg_field_prtlen
+  params:
+    - { name: result, type: resource }
+    - { name: row, type: int }
+    - { name: field, type: int, optional: true }
+  return: int
+
+- tag: function
+  name: pg_field_size
+  params:
+    - { name: result, type: resource }
+    - { name: field, type: int }
+  return: int
+
+- tag: function
+  name: pg_field_table
+  params:
+    - { name: result, type: resource }
+    - { name: field, type: int }
+    - { name: oid_only, type: bool, optional: true }
+  return: int
+
+- tag: function
+  name: pg_field_type
+  params:
+    - { name: result, type: resource }
+    - { name: field, type: int }
+  return: string
+
+- tag: function
+  name: pg_field_type_oid
+  params:
+    - { name: result, type: resource }
+    - { name: field, type: int }
+  return: int
+
+- tag: function
+  name: pg_fieldisnull
+  params:
+    - { name: result, type: mixed }
+    - { name: row, type: mixed }
+    - { name: field, type: int, optional: true }
+  return: int
+
+- tag: function
+  name: pg_fieldname
+  params:
+    - { name: result, type: mixed }
+    - { name: field, type: int }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: pg_fieldnum
+  params:
+    - { name: result, type: mixed }
+    - { name: field, type: string }
+  return: int
+
+- tag: function
+  name: pg_fieldprtlen
+  params:
+    - { name: result, type: mixed }
+    - { name: row, type: mixed }
+    - { name: field, type: int, optional: true }
+  return: int
+
+- tag: function
+  name: pg_fieldsize
+  params:
+    - { name: result, type: mixed }
+    - { name: field, type: int }
+  return: int
+
+- tag: function
+  name: pg_fieldtype
+  params:
+    - { name: result, type: mixed }
+    - { name: field, type: int }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: pg_flush
+  params:
+    - { name: connection, type: resource }
+  return: bool
+
+- tag: function
+  name: pg_free_result
+  params:
+    - { name: result, type: resource }
+  return: bool
+
+- tag: function
+  name: pg_freeresult
+  params:
+    - { name: result, type: mixed }
+  return: bool
+
+- tag: function
+  name: pg_get_notify
+  params:
+    - { name: connection, type: resource }
+    - { name: mode, type: int, optional: true }
+  return: array
+
+- tag: function
+  name: pg_get_pid
+  params:
+    - { name: connection, type: resource }
+  return: int
+
+- tag: function
+  name: pg_get_result
+  params:
+    - { name: connection, type: resource }
+  return: resource
+  flowsToReturn: [0]
+
+- tag: function
+  name: pg_getlastoid
+  params:
+    - { name: result, type: mixed }
+  return: int
+
+- tag: function
+  name: pg_host
+  params:
+    - { name: connection, type: resource, optional: true }
+  return: string
+
+- tag: function
+  name: pg_insert
+  params:
+    - { name: connection, type: resource }
+    - { name: table_name, type: string }
+    - { name: values, type: array }
+    - { name: flags, type: int, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: pg_last_error
+  params:
+    - { name: connection, type: resource, optional: true }
+  return: string
+
+- tag: function
+  name: pg_last_notice
+  params:
+    - { name: connection, type: resource }
+    - { name: mode, type: int, optional: true }
+  return: array
+
+- tag: function
+  name: pg_last_oid
+  params:
+    - { name: result, type: resource }
+  return: int
+
+- tag: function
+  name: pg_lo_close
+  params:
+    - { name: lob, type: resource }
+  return: bool
+
+- tag: function
+  name: pg_lo_create
+  params:
+    - { name: connection, type: resource, optional: true }
+    - { name: oid, type: int, optional: true }
+  return: int
+
+- tag: function
+  name: pg_lo_export
+  params:
+    - { name: connection, type: resource }
+    - { name: oid, type: int, optional: true }
+    - { name: filename, type: string, optional: true }
+  return: bool
+
+- tag: function
+  name: pg_lo_import
+  params:
+    - { name: connection, type: resource }
+    - { name: filename, type: string, optional: true }
+    - { name: oid, type: int, optional: true }
+  return: int
+
+- tag: function
+  name: pg_lo_open
+  params:
+    - { name: connection, type: resource }
+    - { name: oid, type: int, optional: true }
+    - { name: mode, type: string, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: pg_lo_read
+  params:
+    - { name: lob, type: resource }
+    - { name: length, type: int, optional: true }
+  return: string
+
+- tag: function
+  name: pg_lo_read_all
+  params:
+    - { name: lob, type: resource }
+  return: int
+
+- tag: function
+  name: pg_lo_seek
+  params:
+    - { name: lob, type: resource }
+    - { name: offset, type: int }
+    - { name: whence, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: pg_lo_tell
+  params:
+    - { name: lob, type: resource }
+  return: int
+
+- tag: function
+  name: pg_lo_truncate
+  params:
+    - { name: lob, type: resource }
+    - { name: size, type: int }
+  return: bool
+
+- tag: function
+  name: pg_lo_unlink
+  params:
+    - { name: connection, type: resource }
+    - { name: oid, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: pg_lo_write
+  params:
+    - { name: lob, type: resource }
+    - { name: data, type: string }
+    - { name: length, type: int, optional: true }
+  return: int
+
+- tag: function
+  name: pg_loclose
+  params:
+    - { name: lob, type: mixed }
+  return: bool
+
+- tag: function
+  name: pg_locreate
+  params:
+    - { name: connection, type: mixed, optional: true }
+    - { name: oid, type: mixed, optional: true }
+  return: int
+
+- tag: function
+  name: pg_loexport
+  params:
+    - { name: connection, type: mixed }
+    - { name: oid, type: mixed, optional: true }
+    - { name: filename, type: mixed, optional: true }
+  return: bool
+
+- tag: function
+  name: pg_loimport
+  params:
+    - { name: connection, type: mixed }
+    - { name: filename, type: mixed, optional: true }
+    - { name: oid, type: mixed, optional: true }
+  return: int
+
+- tag: function
+  name: pg_loopen
+  params:
+    - { name: connection, type: mixed }
+    - { name: oid, type: mixed, optional: true }
+    - { name: mode, type: string, optional: true }
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: pg_loread
+  params:
+    - { name: lob, type: mixed }
+    - { name: length, type: int, optional: true }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: pg_loreadall
+  params:
+    - { name: lob, type: mixed }
+  return: int
+
+- tag: function
+  name: pg_lounlink
+  params:
+    - { name: connection, type: mixed }
+    - { name: oid, type: mixed, optional: true }
+  return: bool
+
+- tag: function
+  name: pg_lowrite
+  params:
+    - { name: lob, type: mixed }
+    - { name: data, type: string }
+    - { name: length, type: int, optional: true }
+  return: int
+
+- tag: function
+  name: pg_meta_data
+  params:
+    - { name: connection, type: resource }
+    - { name: table_name, type: string }
+    - { name: extended, type: bool, optional: true }
+  return: array
+
+- tag: function
+  name: pg_num_fields
+  params:
+    - { name: result, type: resource }
+  return: int
+
+- tag: function
+  name: pg_num_rows
+  params:
+    - { name: result, type: resource }
+  return: int
+
+- tag: function
+  name: pg_numfields
+  params:
+    - { name: result, type: mixed }
+  return: int
+
+- tag: function
+  name: pg_numrows
+  params:
+    - { name: result, type: mixed }
+  return: int
+
+- tag: function
+  name: pg_options
+  params:
+    - { name: connection, type: resource, optional: true }
+  return: string
+
+- tag: function
+  name: pg_parameter_status
+  params:
+    - { name: connection, type: resource }
+    - { name: name, type: string, optional: true }
+  return: string
+  flowsToReturn: [1]
+
+- tag: function
+  name: pg_pconnect
+  params:
+    - { name: connection_string, type: string }
+    - { name: flags, type: int, optional: true }
+  return: resource
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: pg_ping
+  params:
+    - { name: connection, type: resource, optional: true }
+  return: bool
+
+- tag: function
+  name: pg_port
+  params:
+    - { name: connection, type: resource, optional: true }
+  return: string
+
+- tag: function
+  name: pg_prepare
+  params:
+    - { name: connection, type: resource }
+    - { name: statement_name, type: string }
+    - { name: query, type: string, optional: true }
+  return: resource
+
+- tag: function
+  name: pg_put_line
+  params:
+    - { name: connection, type: resource }
+    - { name: query, type: string, optional: true }
+  return: bool
+
+- tag: function
+  name: pg_query
+  params:
+    - { name: connection, type: resource }
+    - { name: query, type: string, optional: true }
+  return: resource
+
+- tag: function
+  name: pg_query_params
+  params:
+    - { name: connection, type: resource }
+    - { name: query, type: string }
+    - { name: params, type: array, optional: true }
+  return: resource
+
+- tag: function
+  name: pg_result
+  params:
+    - { name: result, type: mixed }
+    - { name: row, type: mixed }
+    - { name: field, type: int, optional: true }
+  return: string
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: pg_result_error
+  params:
+    - { name: result, type: resource }
+  return: string
+
+- tag: function
+  name: pg_result_error_field
+  params:
+    - { name: result, type: resource }
+    - { name: field_code, type: int }
+  return: string
+
+- tag: function
+  name: pg_result_seek
+  params:
+    - { name: result, type: resource }
+    - { name: row, type: int }
+  return: bool
+
+- tag: function
+  name: pg_result_status
+  params:
+    - { name: result, type: resource }
+    - { name: mode, type: int, optional: true }
+  return: int
+
+- tag: function
+  name: pg_select
+  params:
+    - { name: connection, type: resource }
+    - { name: table_name, type: string }
+    - { name: conditions, type: array }
+    - { name: flags, type: int, optional: true }
+    - { name: mode, type: int, optional: true }
+  return: array
+  flowsToReturn: [2]
+
+- tag: function
+  name: pg_send_execute
+  params:
+    - { name: connection, type: resource }
+    - { name: statement_name, type: string }
+    - { name: params, type: array }
+  return: bool
+
+- tag: function
+  name: pg_send_prepare
+  params:
+    - { name: connection, type: resource }
+    - { name: statement_name, type: string }
+    - { name: query, type: string }
+  return: bool
+
+- tag: function
+  name: pg_send_query
+  params:
+    - { name: connection, type: resource }
+    - { name: query, type: string }
+  return: bool
+
+- tag: function
+  name: pg_send_query_params
+  params:
+    - { name: connection, type: resource }
+    - { name: query, type: string }
+    - { name: params, type: array }
+  return: bool
+
+- tag: function
+  name: pg_set_client_encoding
+  params:
+    - { name: connection, type: resource }
+    - { name: encoding, type: string, optional: true }
+  return: int
+
+- tag: function
+  name: pg_set_error_verbosity
+  params:
+    - { name: connection, type: resource }
+    - { name: verbosity, type: int, optional: true }
+  return: int
+
+- tag: function
+  name: pg_setclientencoding
+  params:
+    - { name: connection, type: mixed }
+    - { name: encoding, type: string, optional: true }
+  return: int
+
+- tag: function
+  name: pg_socket
+  params:
+    - { name: connection, type: resource }
+  return: resource
+  flowsToReturn: [0]
+
+- tag: function
+  name: pg_trace
+  params:
+    - { name: filename, type: string }
+    - { name: mode, type: string, optional: true }
+    - { name: connection, type: resource, optional: true }
+  return: bool
+
+- tag: function
+  name: pg_transaction_status
+  params:
+    - { name: connection, type: resource }
+  return: int
+
+- tag: function
+  name: pg_tty
+  params:
+    - { name: connection, type: resource, optional: true }
+  return: string
+
+- tag: function
+  name: pg_unescape_bytea
+  params:
+    - { name: string, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: pg_untrace
+  params:
+    - { name: connection, type: resource, optional: true }
+  return: bool
+
+- tag: function
+  name: pg_update
+  params:
+    - { name: connection, type: resource }
+    - { name: table_name, type: string }
+    - { name: values, type: array }
+    - { name: conditions, type: array }
+    - { name: flags, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: pg_version
+  params:
+    - { name: connection, type: resource, optional: true }
+  return: array
+

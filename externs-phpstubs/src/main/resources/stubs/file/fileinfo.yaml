@@ -1,0 +1,47 @@
+- tag: function
+  name: finfo_buffer
+  params:
+    - { name: finfo, type: resource }
+    - { name: string, type: string }
+    - { name: flags, type: int, optional: true }
+    - { name: context, type: resource, optional: true }
+  return: string
+  flowsToReturn: [1]
+
+- tag: function
+  name: finfo_close
+  params:
+    - { name: finfo, type: resource }
+  return: bool
+
+- tag: function
+  name: finfo_file
+  params:
+    - { name: finfo, type: resource }
+    - { name: filename, type: string }
+    - { name: flags, type: int, optional: true }
+    - { name: context, type: resource, optional: true }
+  return: string
+  flowsToReturn: [1]
+
+- tag: function
+  name: finfo_open
+  params:
+    - { name: flags, type: int, optional: true }
+    - { name: magic_database, type: string, optional: true }
+  return: resource
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: finfo_set_flags
+  params:
+    - { name: finfo, type: resource }
+    - { name: flags, type: int }
+  return: bool
+
+- tag: function
+  name: mime_content_type
+  params:
+    - { name: filename, type: resource }
+  return: string
+

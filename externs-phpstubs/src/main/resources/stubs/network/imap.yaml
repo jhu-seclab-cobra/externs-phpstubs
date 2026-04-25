@@ -1,0 +1,579 @@
+- tag: function
+  name: imap_8bit
+  params:
+    - { name: string, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: imap_alerts
+  return: array
+
+- tag: function
+  name: imap_append
+  params:
+    - { name: imap, type: resource }
+    - { name: folder, type: string }
+    - { name: message, type: string }
+    - { name: options, type: string, optional: true }
+    - { name: internal_date, type: string, optional: true }
+  return: bool
+
+- tag: function
+  name: imap_base64
+  params:
+    - { name: string, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: imap_binary
+  params:
+    - { name: string, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: imap_body
+  params:
+    - { name: imap, type: resource }
+    - { name: message_num, type: int }
+    - { name: flags, type: int, optional: true }
+  return: string
+
+- tag: function
+  name: imap_bodystruct
+  params:
+    - { name: imap, type: resource }
+    - { name: message_num, type: int }
+    - { name: section, type: string }
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: imap_check
+  params:
+    - { name: imap, type: resource }
+  flowsToReturn: [0]
+
+- tag: function
+  name: imap_clearflag_full
+  params:
+    - { name: imap, type: resource }
+    - { name: sequence, type: string }
+    - { name: flag, type: string }
+    - { name: options, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: imap_close
+  params:
+    - { name: imap, type: resource }
+    - { name: flags, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: imap_create
+  params:
+    - { name: imap, type: resource }
+    - { name: mailbox, type: string }
+  return: bool
+
+- tag: function
+  name: imap_createmailbox
+  params:
+    - { name: imap, type: resource }
+    - { name: mailbox, type: string }
+  return: bool
+
+- tag: function
+  name: imap_delete
+  params:
+    - { name: imap, type: resource }
+    - { name: message_nums, type: string }
+    - { name: flags, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: imap_deletemailbox
+  params:
+    - { name: imap, type: resource }
+    - { name: mailbox, type: string }
+  return: bool
+
+- tag: function
+  name: imap_errors
+  return: array
+
+- tag: function
+  name: imap_expunge
+  params:
+    - { name: imap, type: resource }
+  return: bool
+
+- tag: function
+  name: imap_fetch_overview
+  params:
+    - { name: imap, type: resource }
+    - { name: sequence, type: string }
+    - { name: flags, type: int, optional: true }
+  return: array
+
+- tag: function
+  name: imap_fetchbody
+  params:
+    - { name: imap, type: resource }
+    - { name: message_num, type: int }
+    - { name: section, type: string }
+    - { name: flags, type: int, optional: true }
+  return: string
+  flowsToReturn: [2]
+
+- tag: function
+  name: imap_fetchheader
+  params:
+    - { name: imap, type: resource }
+    - { name: message_num, type: int }
+    - { name: flags, type: int, optional: true }
+  return: string
+
+- tag: function
+  name: imap_fetchmime
+  params:
+    - { name: imap, type: resource }
+    - { name: message_num, type: int }
+    - { name: section, type: string }
+    - { name: flags, type: int, optional: true }
+  return: string
+  flowsToReturn: [2]
+
+- tag: function
+  name: imap_fetchstructure
+  params:
+    - { name: imap, type: resource }
+    - { name: message_num, type: int }
+    - { name: flags, type: int, optional: true }
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: imap_fetchtext
+  params:
+    - { name: imap, type: resource }
+    - { name: message_num, type: int }
+    - { name: flags, type: int, optional: true }
+  return: string
+
+- tag: function
+  name: imap_gc
+  params:
+    - { name: imap, type: resource }
+    - { name: flags, type: int }
+  return: bool
+
+- tag: function
+  name: imap_get_quota
+  params:
+    - { name: imap, type: resource }
+    - { name: quota_root, type: string }
+  return: array
+
+- tag: function
+  name: imap_get_quotaroot
+  params:
+    - { name: imap, type: resource }
+    - { name: mailbox, type: string }
+  return: array
+
+- tag: function
+  name: imap_getacl
+  params:
+    - { name: imap, type: resource }
+    - { name: mailbox, type: string }
+  return: array
+
+- tag: function
+  name: imap_getmailboxes
+  params:
+    - { name: imap, type: resource }
+    - { name: reference, type: string }
+    - { name: pattern, type: string }
+  return: array
+
+- tag: function
+  name: imap_getsubscribed
+  params:
+    - { name: imap, type: resource }
+    - { name: reference, type: string }
+    - { name: pattern, type: string }
+  return: array
+
+- tag: function
+  name: imap_header
+  params:
+    - { name: stream_id, type: resource }
+    - { name: msg_no, type: int }
+    - { name: from_length, type: int, optional: true }
+    - { name: subject_length, type: int, optional: true }
+    - { name: default_host, type: string, optional: true }
+  flowsToReturn: [0, 1, 2, 3, 4]
+
+- tag: function
+  name: imap_headerinfo
+  params:
+    - { name: imap, type: resource }
+    - { name: message_num, type: int }
+    - { name: from_length, type: int, optional: true }
+    - { name: subject_length, type: int, optional: true }
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: imap_headers
+  params:
+    - { name: imap, type: resource }
+  return: array
+
+- tag: function
+  name: imap_last_error
+  return: string
+
+- tag: function
+  name: imap_list
+  params:
+    - { name: imap, type: resource }
+    - { name: reference, type: string }
+    - { name: pattern, type: string }
+  return: array
+
+- tag: function
+  name: imap_listmailbox
+  params:
+    - { name: imap, type: resource }
+    - { name: reference, type: string }
+    - { name: pattern, type: string }
+  return: array
+
+- tag: function
+  name: imap_listscan
+  params:
+    - { name: imap, type: resource }
+    - { name: reference, type: string }
+    - { name: pattern, type: string }
+    - { name: content, type: string }
+  return: array
+
+- tag: function
+  name: imap_listsubscribed
+  params:
+    - { name: imap, type: resource }
+    - { name: reference, type: string }
+    - { name: pattern, type: string }
+  return: array
+
+- tag: function
+  name: imap_lsub
+  params:
+    - { name: imap, type: resource }
+    - { name: reference, type: string }
+    - { name: pattern, type: string }
+  return: array
+
+- tag: function
+  name: imap_mail
+  params:
+    - { name: to, type: string }
+    - { name: subject, type: string }
+    - { name: message, type: string }
+    - { name: additional_headers, type: string, optional: true }
+    - { name: cc, type: string, optional: true }
+    - { name: bcc, type: string, optional: true }
+    - { name: return_path, type: string, optional: true }
+  return: bool
+
+- tag: function
+  name: imap_mail_compose
+  params:
+    - { name: envelope, type: array }
+    - { name: bodies, type: array }
+  return: string
+
+- tag: function
+  name: imap_mail_copy
+  params:
+    - { name: imap, type: resource }
+    - { name: message_nums, type: string }
+    - { name: mailbox, type: string }
+    - { name: flags, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: imap_mail_move
+  params:
+    - { name: imap, type: resource }
+    - { name: message_nums, type: string }
+    - { name: mailbox, type: string }
+    - { name: flags, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: imap_mailboxmsginfo
+  params:
+    - { name: imap, type: resource }
+  flowsToReturn: [0]
+
+- tag: function
+  name: imap_mime_header_decode
+  params:
+    - { name: string, type: string }
+  return: array
+
+- tag: function
+  name: imap_msgno
+  params:
+    - { name: imap, type: resource }
+    - { name: message_uid, type: int }
+  return: int
+
+- tag: function
+  name: imap_mutf7_to_utf8
+  params:
+    - { name: string, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: imap_num_msg
+  params:
+    - { name: imap, type: resource }
+  return: int
+
+- tag: function
+  name: imap_num_recent
+  params:
+    - { name: imap, type: resource }
+  return: int
+
+- tag: function
+  name: imap_open
+  params:
+    - { name: mailbox, type: string }
+    - { name: user, type: string }
+    - { name: password, type: string }
+    - { name: flags, type: int, optional: true }
+    - { name: retries, type: int, optional: true }
+    - { name: options, type: array, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3, 4, 5]
+
+- tag: function
+  name: imap_ping
+  params:
+    - { name: imap, type: resource }
+  return: bool
+
+- tag: function
+  name: imap_qprint
+  params:
+    - { name: string, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: imap_rename
+  params:
+    - { name: imap, type: resource }
+    - { name: from, type: string }
+    - { name: to, type: string }
+  return: bool
+
+- tag: function
+  name: imap_renamemailbox
+  params:
+    - { name: imap, type: resource }
+    - { name: from, type: string }
+    - { name: to, type: string }
+  return: bool
+
+- tag: function
+  name: imap_reopen
+  params:
+    - { name: imap, type: resource }
+    - { name: mailbox, type: string }
+    - { name: flags, type: int, optional: true }
+    - { name: retries, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: imap_rfc822_parse_adrlist
+  params:
+    - { name: string, type: string }
+    - { name: default_hostname, type: string }
+  return: array
+
+- tag: function
+  name: imap_rfc822_parse_headers
+  params:
+    - { name: headers, type: string }
+    - { name: default_hostname, type: string, optional: true }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: imap_rfc822_write_address
+  params:
+    - { name: mailbox, type: string }
+    - { name: hostname, type: string }
+    - { name: personal, type: string }
+  return: string
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: imap_savebody
+  params:
+    - { name: imap, type: resource }
+    - { name: file, type: resource }
+    - { name: message_num, type: int }
+    - { name: section, type: string, optional: true }
+    - { name: flags, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: imap_scan
+  params:
+    - { name: imap, type: resource }
+    - { name: reference, type: string }
+    - { name: pattern, type: string }
+    - { name: content, type: string }
+  return: array
+
+- tag: function
+  name: imap_scanmailbox
+  params:
+    - { name: imap, type: resource }
+    - { name: reference, type: string }
+    - { name: pattern, type: string }
+    - { name: content, type: string }
+  return: array
+
+- tag: function
+  name: imap_search
+  params:
+    - { name: imap, type: resource }
+    - { name: criteria, type: string }
+    - { name: flags, type: int, optional: true }
+    - { name: charset, type: string, optional: true }
+  return: array
+
+- tag: function
+  name: imap_set_quota
+  params:
+    - { name: imap, type: resource }
+    - { name: quota_root, type: string }
+    - { name: mailbox_size, type: int }
+  return: bool
+
+- tag: function
+  name: imap_setacl
+  params:
+    - { name: imap, type: resource }
+    - { name: mailbox, type: string }
+    - { name: user_id, type: string }
+    - { name: rights, type: string }
+  return: bool
+
+- tag: function
+  name: imap_setflag_full
+  params:
+    - { name: imap, type: resource }
+    - { name: sequence, type: string }
+    - { name: flag, type: string }
+    - { name: options, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: imap_sort
+  params:
+    - { name: imap, type: resource }
+    - { name: criteria, type: int }
+    - { name: reverse, type: bool }
+    - { name: flags, type: int, optional: true }
+    - { name: search_criteria, type: string, optional: true }
+    - { name: charset, type: string, optional: true }
+  return: array
+
+- tag: function
+  name: imap_status
+  params:
+    - { name: imap, type: resource }
+    - { name: mailbox, type: string }
+    - { name: flags, type: int }
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: imap_subscribe
+  params:
+    - { name: imap, type: resource }
+    - { name: mailbox, type: string }
+  return: bool
+
+- tag: function
+  name: imap_thread
+  params:
+    - { name: imap, type: resource }
+    - { name: flags, type: int, optional: true }
+  return: array
+
+- tag: function
+  name: imap_timeout
+  params:
+    - { name: timeout_type, type: int }
+    - { name: timeout, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: imap_uid
+  params:
+    - { name: imap, type: resource }
+    - { name: message_num, type: int }
+  return: int
+
+- tag: function
+  name: imap_undelete
+  params:
+    - { name: imap, type: resource }
+    - { name: message_nums, type: string }
+    - { name: flags, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: imap_unsubscribe
+  params:
+    - { name: imap, type: resource }
+    - { name: mailbox, type: string }
+  return: bool
+
+- tag: function
+  name: imap_utf7_decode
+  params:
+    - { name: string, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: imap_utf7_encode
+  params:
+    - { name: string, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: imap_utf8
+  params:
+    - { name: mime_encoded_text, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: imap_utf8_to_mutf7
+  params:
+    - { name: string, type: string }
+  return: string
+  flowsToReturn: [0]
+

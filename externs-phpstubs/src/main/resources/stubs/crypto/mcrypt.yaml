@@ -1,0 +1,265 @@
+- tag: function
+  name: mcrypt_cbc
+  params:
+    - { name: cipher, type: int }
+    - { name: key, type: string }
+    - { name: data, type: string }
+    - { name: mode, type: int }
+    - { name: iv, type: string, optional: true }
+  return: string
+  flowsToReturn: [1, 2, 4]
+
+- tag: function
+  name: mcrypt_cfb
+  params:
+    - { name: cipher, type: int }
+    - { name: key, type: string }
+    - { name: data, type: string }
+    - { name: mode, type: int }
+    - { name: iv, type: string, optional: true }
+  return: string
+  flowsToReturn: [1, 2, 4]
+
+- tag: function
+  name: mcrypt_create_iv
+  params:
+    - { name: size, type: int }
+    - { name: source, type: int, optional: true }
+  return: string
+
+- tag: function
+  name: mcrypt_decrypt
+  params:
+    - { name: cipher, type: string }
+    - { name: key, type: string }
+    - { name: data, type: string }
+    - { name: mode, type: string }
+    - { name: iv, type: string, optional: true }
+  return: string
+  flowsToReturn: [0, 1, 2, 3, 4]
+
+- tag: function
+  name: mcrypt_ecb
+  params:
+    - { name: cipher, type: int }
+    - { name: key, type: string }
+    - { name: data, type: string }
+    - { name: mode, type: int }
+    - { name: iv, type: string, optional: true }
+  return: string
+  flowsToReturn: [1, 2, 4]
+
+- tag: function
+  name: mcrypt_enc_get_algorithms_name
+  params:
+    - { name: td, type: resource }
+  return: string
+
+- tag: function
+  name: mcrypt_enc_get_block_size
+  params:
+    - { name: td, type: resource }
+  return: int
+
+- tag: function
+  name: mcrypt_enc_get_iv_size
+  params:
+    - { name: td, type: resource }
+  return: int
+
+- tag: function
+  name: mcrypt_enc_get_key_size
+  params:
+    - { name: td, type: resource }
+  return: int
+
+- tag: function
+  name: mcrypt_enc_get_modes_name
+  params:
+    - { name: td, type: resource }
+  return: string
+
+- tag: function
+  name: mcrypt_enc_get_supported_key_sizes
+  params:
+    - { name: td, type: resource }
+  return: array
+
+- tag: function
+  name: mcrypt_enc_is_block_algorithm
+  params:
+    - { name: td, type: resource }
+  return: bool
+
+- tag: function
+  name: mcrypt_enc_is_block_algorithm_mode
+  params:
+    - { name: td, type: resource }
+  return: bool
+
+- tag: function
+  name: mcrypt_enc_is_block_mode
+  params:
+    - { name: td, type: resource }
+  return: bool
+
+- tag: function
+  name: mcrypt_enc_self_test
+  params:
+    - { name: td, type: resource }
+  return: int
+
+- tag: function
+  name: mcrypt_encrypt
+  params:
+    - { name: cipher, type: string }
+    - { name: key, type: string }
+    - { name: data, type: string }
+    - { name: mode, type: string }
+    - { name: iv, type: string, optional: true }
+  return: string
+  flowsToReturn: [0, 1, 2, 3, 4]
+
+- tag: function
+  name: mcrypt_generic
+  params:
+    - { name: td, type: resource }
+    - { name: data, type: string }
+  return: string
+  flowsToReturn: [1]
+
+- tag: function
+  name: mcrypt_generic_deinit
+  params:
+    - { name: td, type: resource }
+  return: bool
+
+- tag: function
+  name: mcrypt_generic_end
+  params:
+    - { name: td, type: resource }
+  return: bool
+
+- tag: function
+  name: mcrypt_generic_init
+  params:
+    - { name: td, type: resource }
+    - { name: key, type: string }
+    - { name: iv, type: string }
+  return: int
+
+- tag: function
+  name: mcrypt_get_block_size
+  params:
+    - { name: cipher, type: int }
+    - { name: module, type: string }
+  return: int
+
+- tag: function
+  name: mcrypt_get_cipher_name
+  params:
+    - { name: cipher, type: int }
+  return: string
+
+- tag: function
+  name: mcrypt_get_iv_size
+  params:
+    - { name: cipher, type: int }
+    - { name: module, type: string }
+  return: int
+
+- tag: function
+  name: mcrypt_get_key_size
+  params:
+    - { name: cipher, type: int }
+    - { name: module, type: string }
+  return: int
+
+- tag: function
+  name: mcrypt_list_algorithms
+  params:
+    - { name: lib_dir, type: string, optional: true }
+  return: array
+
+- tag: function
+  name: mcrypt_list_modes
+  params:
+    - { name: lib_dir, type: string, optional: true }
+  return: array
+
+- tag: function
+  name: mcrypt_module_close
+  params:
+    - { name: td, type: resource }
+  return: bool
+
+- tag: function
+  name: mcrypt_module_get_algo_block_size
+  params:
+    - { name: algorithm, type: string }
+    - { name: lib_dir, type: string, optional: true }
+  return: int
+
+- tag: function
+  name: mcrypt_module_get_algo_key_size
+  params:
+    - { name: algorithm, type: string }
+    - { name: lib_dir, type: string, optional: true }
+  return: int
+
+- tag: function
+  name: mcrypt_module_get_supported_key_sizes
+  params:
+    - { name: algorithm, type: string }
+    - { name: lib_dir, type: string, optional: true }
+  return: array
+
+- tag: function
+  name: mcrypt_module_is_block_algorithm
+  params:
+    - { name: algorithm, type: string }
+    - { name: lib_dir, type: string, optional: true }
+  return: bool
+
+- tag: function
+  name: mcrypt_module_is_block_algorithm_mode
+  params:
+    - { name: mode, type: string }
+    - { name: lib_dir, type: string, optional: true }
+  return: bool
+
+- tag: function
+  name: mcrypt_module_is_block_mode
+  params:
+    - { name: mode, type: string }
+    - { name: lib_dir, type: string, optional: true }
+  return: bool
+
+- tag: function
+  name: mcrypt_module_open
+  params:
+    - { name: cipher, type: string }
+    - { name: cipher_directory, type: string }
+    - { name: mode, type: string }
+    - { name: mode_directory, type: string }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: mcrypt_module_self_test
+  params:
+    - { name: algorithm, type: string }
+    - { name: lib_dir, type: string, optional: true }
+  return: bool
+
+- tag: function
+  name: mcrypt_ofb
+  params:
+    - { name: cipher, type: int }
+    - { name: key, type: string }
+    - { name: data, type: string }
+    - { name: mode, type: int }
+    - { name: iv, type: string, optional: true }
+  return: string
+  flowsToReturn: [1, 2, 4]
+

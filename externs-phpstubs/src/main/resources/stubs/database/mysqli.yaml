@@ -1,0 +1,800 @@
+- tag: function
+  name: mysqli_affected_rows
+  params:
+    - { name: mysql, type: mixed }
+  return: int
+
+- tag: function
+  name: mysqli_autocommit
+  params:
+    - { name: mysql, type: mixed }
+    - { name: enable, type: bool }
+  return: bool
+
+- tag: function
+  name: mysqli_begin_transaction
+  params:
+    - { name: mysql, type: mixed }
+    - { name: flags, type: int, optional: true }
+    - { name: name, type: string, optional: true }
+  return: bool
+
+- tag: function
+  name: mysqli_change_user
+  params:
+    - { name: mysql, type: mixed }
+    - { name: username, type: string }
+    - { name: password, type: string }
+    - { name: database, type: string }
+  return: bool
+
+- tag: function
+  name: mysqli_character_set_name
+  params:
+    - { name: mysql, type: mixed }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: mysqli_close
+  params:
+    - { name: mysql, type: mixed }
+  return: bool
+
+- tag: function
+  name: mysqli_commit
+  params:
+    - { name: mysql, type: mixed }
+    - { name: flags, type: int, optional: true }
+    - { name: name, type: string, optional: true }
+  return: bool
+
+- tag: function
+  name: mysqli_connect
+  params:
+    - { name: hostname, type: string, optional: true }
+    - { name: username, type: string, optional: true }
+    - { name: password, type: string, optional: true }
+    - { name: database, type: string, optional: true }
+    - { name: port, type: int, optional: true }
+    - { name: socket, type: string, optional: true }
+  flowsToReturn: [0, 1, 2, 3, 4, 5]
+
+- tag: function
+  name: mysqli_connect_errno
+  return: int
+
+- tag: function
+  name: mysqli_connect_error
+  return: string
+
+- tag: function
+  name: mysqli_data_seek
+  params:
+    - { name: result, type: mixed }
+    - { name: offset, type: int }
+  return: bool
+
+- tag: function
+  name: mysqli_debug
+  params:
+    - { name: options, type: string }
+  return: bool
+
+- tag: function
+  name: mysqli_disable_reads_from_master
+  params:
+    - { name: link, type: mixed }
+  return: bool
+
+- tag: function
+  name: mysqli_disable_rpl_parse
+  params:
+    - { name: link, type: mixed }
+  return: bool
+
+- tag: function
+  name: mysqli_dump_debug_info
+  params:
+    - { name: mysql, type: mixed }
+  return: bool
+
+- tag: function
+  name: mysqli_embedded_server_end
+  return: void
+
+- tag: function
+  name: mysqli_embedded_server_start
+  params:
+    - { name: start, type: int }
+    - { name: arguments, type: array }
+    - { name: groups, type: array }
+  return: bool
+
+- tag: function
+  name: mysqli_enable_reads_from_master
+  params:
+    - { name: link, type: mixed }
+  return: bool
+
+- tag: function
+  name: mysqli_enable_rpl_parse
+  params:
+    - { name: link, type: mixed }
+  return: bool
+
+- tag: function
+  name: mysqli_errno
+  params:
+    - { name: mysql, type: mixed }
+  return: int
+
+- tag: function
+  name: mysqli_error
+  params:
+    - { name: mysql, type: mixed }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: mysqli_error_list
+  params:
+    - { name: mysql, type: mixed }
+  return: array
+  flowsToReturn: [0]
+
+- tag: function
+  name: mysqli_escape_string
+  params:
+    - { name: mysql, type: mixed }
+    - { name: string, type: string }
+  return: string
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: mysqli_execute
+  params:
+    - { name: statement, type: mixed }
+  return: bool
+
+- tag: function
+  name: mysqli_fetch_all
+  params:
+    - { name: result, type: mixed }
+    - { name: mode, type: mixed, optional: true }
+  return: array
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: mysqli_fetch_array
+  params:
+    - { name: result, type: mixed }
+    - { name: mode, type: mixed, optional: true }
+  return: array
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: mysqli_fetch_assoc
+  params:
+    - { name: result, type: mixed }
+  return: array
+  flowsToReturn: [0]
+
+- tag: function
+  name: mysqli_fetch_field
+  params:
+    - { name: result, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: mysqli_fetch_field_direct
+  params:
+    - { name: result, type: mixed }
+    - { name: index, type: int }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: mysqli_fetch_fields
+  params:
+    - { name: result, type: mixed }
+  return: array
+  flowsToReturn: [0]
+
+- tag: function
+  name: mysqli_fetch_lengths
+  params:
+    - { name: result, type: mixed }
+  return: array
+  flowsToReturn: [0]
+
+- tag: function
+  name: mysqli_fetch_object
+  params:
+    - { name: result, type: mixed }
+    - { name: class, type: string, optional: true }
+    - { name: constructor_args, type: array, optional: true }
+  return: object
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: mysqli_fetch_row
+  params:
+    - { name: result, type: mixed }
+  return: array
+  flowsToReturn: [0]
+
+- tag: function
+  name: mysqli_field_count
+  params:
+    - { name: mysql, type: mixed }
+  return: int
+
+- tag: function
+  name: mysqli_field_seek
+  params:
+    - { name: result, type: mixed }
+    - { name: index, type: int }
+  return: bool
+
+- tag: function
+  name: mysqli_field_tell
+  params:
+    - { name: result, type: mixed }
+  return: int
+
+- tag: function
+  name: mysqli_free_result
+  params:
+    - { name: result, type: mixed }
+  return: void
+
+- tag: function
+  name: mysqli_get_cache_stats
+  return: array
+
+- tag: function
+  name: mysqli_get_charset
+  params:
+    - { name: mysql, type: mixed }
+  return: object
+  flowsToReturn: [0]
+
+- tag: function
+  name: mysqli_get_client_info
+  params:
+    - { name: mysql, type: mixed, optional: true }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: mysqli_get_client_stats
+  return: array
+
+- tag: function
+  name: mysqli_get_client_version
+  return: int
+
+- tag: function
+  name: mysqli_get_connection_stats
+  params:
+    - { name: mysql, type: mixed }
+  return: array
+  flowsToReturn: [0]
+
+- tag: function
+  name: mysqli_get_host_info
+  params:
+    - { name: mysql, type: mixed }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: mysqli_get_links_stats
+  return: array
+
+- tag: function
+  name: mysqli_get_proto_info
+  params:
+    - { name: mysql, type: mixed }
+  return: int
+
+- tag: function
+  name: mysqli_get_server_info
+  params:
+    - { name: mysql, type: mixed }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: mysqli_get_server_version
+  params:
+    - { name: mysql, type: mixed }
+  return: int
+
+- tag: function
+  name: mysqli_get_warnings
+  params:
+    - { name: mysql, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: mysqli_info
+  params:
+    - { name: mysql, type: mixed }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: mysqli_init
+
+- tag: function
+  name: mysqli_insert_id
+  params:
+    - { name: mysql, type: mixed }
+  return: int
+
+- tag: function
+  name: mysqli_kill
+  params:
+    - { name: mysql, type: mixed }
+    - { name: process_id, type: int }
+  return: bool
+
+- tag: function
+  name: mysqli_link_construct
+  return: object
+
+- tag: function
+  name: mysqli_master_query
+  params:
+    - { name: link, type: mixed }
+    - { name: query, type: string }
+  return: bool
+
+- tag: function
+  name: mysqli_more_results
+  params:
+    - { name: mysql, type: mixed }
+  return: bool
+
+- tag: function
+  name: mysqli_multi_query
+  params:
+    - { name: mysql, type: mixed }
+    - { name: query, type: string }
+  return: bool
+
+- tag: function
+  name: mysqli_next_result
+  params:
+    - { name: mysql, type: mixed }
+  return: bool
+
+- tag: function
+  name: mysqli_num_fields
+  params:
+    - { name: result, type: mixed }
+  return: int
+
+- tag: function
+  name: mysqli_num_rows
+  params:
+    - { name: result, type: mixed }
+  return: int
+
+- tag: function
+  name: mysqli_options
+  params:
+    - { name: mysql, type: mixed }
+    - { name: option, type: int }
+    - { name: value, type: int }
+  return: bool
+
+- tag: function
+  name: mysqli_ping
+  params:
+    - { name: mysql, type: mixed }
+  return: bool
+
+- tag: function
+  name: mysqli_poll
+  params:
+    - { name: read, type: array }
+    - { name: error, type: array }
+    - { name: reject, type: array }
+    - { name: seconds, type: int }
+    - { name: microseconds, type: int, optional: true }
+  return: int
+
+- tag: function
+  name: mysqli_prepare
+  params:
+    - { name: mysql, type: mixed }
+    - { name: query, type: string }
+
+- tag: function
+  name: mysqli_query
+  params:
+    - { name: mysql, type: mixed }
+    - { name: query, type: string }
+    - { name: result_mode, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: mysqli_real_connect
+  params:
+    - { name: mysql, type: mixed }
+    - { name: hostname, type: string, optional: true }
+    - { name: username, type: string, optional: true }
+    - { name: password, type: string, optional: true }
+    - { name: database, type: string, optional: true }
+    - { name: port, type: int, optional: true }
+    - { name: socket, type: string, optional: true }
+    - { name: flags, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: mysqli_real_escape_string
+  params:
+    - { name: mysql, type: mixed }
+    - { name: string, type: string }
+  return: string
+
+- tag: function
+  name: mysqli_real_query
+  params:
+    - { name: mysql, type: mixed }
+    - { name: query, type: string }
+  return: bool
+
+- tag: function
+  name: mysqli_reap_async_query
+  params:
+    - { name: mysql, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: mysqli_refresh
+  params:
+    - { name: mysql, type: mixed }
+    - { name: flags, type: int }
+  return: bool
+
+- tag: function
+  name: mysqli_release_savepoint
+  params:
+    - { name: mysql, type: mixed }
+    - { name: name, type: string }
+  return: bool
+
+- tag: function
+  name: mysqli_report
+  params:
+    - { name: flags, type: int }
+  return: bool
+
+- tag: function
+  name: mysqli_rollback
+  params:
+    - { name: mysql, type: mixed }
+    - { name: flags, type: int, optional: true }
+    - { name: name, type: string, optional: true }
+  return: bool
+
+- tag: function
+  name: mysqli_rpl_parse_enabled
+  params:
+    - { name: link, type: mixed }
+  return: int
+
+- tag: function
+  name: mysqli_rpl_probe
+  params:
+    - { name: link, type: mixed }
+  return: bool
+
+- tag: function
+  name: mysqli_rpl_query_type
+  params:
+    - { name: link, type: mixed }
+    - { name: query, type: string }
+  return: int
+
+- tag: function
+  name: mysqli_savepoint
+  params:
+    - { name: mysql, type: mixed }
+    - { name: name, type: string }
+  return: bool
+
+- tag: function
+  name: mysqli_savepoint_libmysql
+  return: bool
+
+- tag: function
+  name: mysqli_select_db
+  params:
+    - { name: mysql, type: mixed }
+    - { name: database, type: string }
+  return: bool
+
+- tag: function
+  name: mysqli_send_query
+  params:
+    - { name: link, type: mixed }
+    - { name: query, type: string }
+  return: bool
+
+- tag: function
+  name: mysqli_set_charset
+  params:
+    - { name: mysql, type: mixed }
+    - { name: charset, type: string }
+  return: bool
+
+- tag: function
+  name: mysqli_set_local_infile_default
+  params:
+    - { name: link, type: mixed }
+  return: void
+
+- tag: function
+  name: mysqli_set_local_infile_handler
+  params:
+    - { name: link, type: mixed }
+    - { name: read_func, type: callable }
+  return: bool
+
+- tag: function
+  name: mysqli_set_opt
+  params:
+    - { name: mysql, type: mixed }
+    - { name: option, type: int }
+    - { name: value, type: int }
+  return: bool
+
+- tag: function
+  name: mysqli_slave_query
+  params:
+    - { name: link, type: mixed }
+    - { name: query, type: string }
+  return: bool
+
+- tag: function
+  name: mysqli_sqlstate
+  params:
+    - { name: mysql, type: mixed }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: mysqli_ssl_set
+  params:
+    - { name: mysql, type: mixed }
+    - { name: key, type: string }
+    - { name: certificate, type: string }
+    - { name: ca_certificate, type: string }
+    - { name: ca_path, type: string }
+    - { name: cipher_algos, type: string }
+  return: bool
+
+- tag: function
+  name: mysqli_stat
+  params:
+    - { name: mysql, type: mixed }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: mysqli_stmt_affected_rows
+  params:
+    - { name: statement, type: mixed }
+  return: int
+
+- tag: function
+  name: mysqli_stmt_attr_get
+  params:
+    - { name: statement, type: mixed }
+    - { name: attribute, type: int }
+  return: int
+
+- tag: function
+  name: mysqli_stmt_attr_set
+  params:
+    - { name: statement, type: mixed }
+    - { name: attribute, type: int }
+    - { name: value, type: int }
+  return: bool
+
+- tag: function
+  name: mysqli_stmt_bind_param
+  params:
+    - { name: statement, type: mixed }
+    - { name: types, type: string }
+    - { name: var, type: mixed }
+    - { name: vars, type: mixed, optional: true }
+  return: bool
+
+- tag: function
+  name: mysqli_stmt_bind_result
+  params:
+    - { name: statement, type: mixed }
+    - { name: var1, type: mixed }
+    - { name: vars, type: mixed, optional: true }
+  return: bool
+
+- tag: function
+  name: mysqli_stmt_close
+  params:
+    - { name: statement, type: mixed }
+  return: bool
+
+- tag: function
+  name: mysqli_stmt_data_seek
+  params:
+    - { name: statement, type: mixed }
+    - { name: offset, type: int }
+  return: void
+
+- tag: function
+  name: mysqli_stmt_errno
+  params:
+    - { name: statement, type: mixed }
+  return: int
+
+- tag: function
+  name: mysqli_stmt_error
+  params:
+    - { name: statement, type: mixed }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: mysqli_stmt_error_list
+  params:
+    - { name: statement, type: mixed }
+  return: array
+  flowsToReturn: [0]
+
+- tag: function
+  name: mysqli_stmt_execute
+  params:
+    - { name: statement, type: mixed }
+  return: bool
+
+- tag: function
+  name: mysqli_stmt_fetch
+  params:
+    - { name: statement, type: mixed }
+  return: bool
+
+- tag: function
+  name: mysqli_stmt_field_count
+  params:
+    - { name: statement, type: mixed }
+  return: int
+
+- tag: function
+  name: mysqli_stmt_free_result
+  params:
+    - { name: statement, type: mixed }
+  return: void
+
+- tag: function
+  name: mysqli_stmt_get_result
+  params:
+    - { name: statement, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: mysqli_stmt_get_warnings
+  params:
+    - { name: statement, type: mixed }
+  return: object
+  flowsToReturn: [0]
+
+- tag: function
+  name: mysqli_stmt_init
+  params:
+    - { name: mysql, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: mysqli_stmt_insert_id
+  params:
+    - { name: statement, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: mysqli_stmt_more_results
+  params:
+    - { name: statement, type: mixed }
+  return: bool
+
+- tag: function
+  name: mysqli_stmt_next_result
+  params:
+    - { name: statement, type: mixed }
+  return: bool
+
+- tag: function
+  name: mysqli_stmt_num_rows
+  params:
+    - { name: statement, type: mixed }
+  return: int
+
+- tag: function
+  name: mysqli_stmt_param_count
+  params:
+    - { name: statement, type: mixed }
+  return: int
+
+- tag: function
+  name: mysqli_stmt_prepare
+  params:
+    - { name: statement, type: mixed }
+    - { name: query, type: string }
+  return: bool
+
+- tag: function
+  name: mysqli_stmt_reset
+  params:
+    - { name: statement, type: mixed }
+  return: bool
+
+- tag: function
+  name: mysqli_stmt_result_metadata
+  params:
+    - { name: statement, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: mysqli_stmt_send_long_data
+  params:
+    - { name: statement, type: mixed }
+    - { name: param_num, type: int }
+    - { name: data, type: string }
+  return: bool
+
+- tag: function
+  name: mysqli_stmt_sqlstate
+  params:
+    - { name: statement, type: mixed }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: mysqli_stmt_store_result
+  params:
+    - { name: statement, type: mixed }
+  return: bool
+
+- tag: function
+  name: mysqli_store_result
+  params:
+    - { name: mysql, type: mixed }
+    - { name: mode, type: int, optional: true }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: mysqli_thread_id
+  params:
+    - { name: mysql, type: mixed }
+  return: int
+
+- tag: function
+  name: mysqli_thread_safe
+  return: bool
+
+- tag: function
+  name: mysqli_use_result
+  params:
+    - { name: mysql, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: mysqli_warning_count
+  params:
+    - { name: mysql, type: mixed }
+  return: int
+

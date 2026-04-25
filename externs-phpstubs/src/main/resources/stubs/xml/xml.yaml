@@ -1,0 +1,152 @@
+- tag: function
+  name: xml_error_string
+  params:
+    - { name: error_code, type: int }
+  return: string
+
+- tag: function
+  name: xml_get_current_byte_index
+  params:
+    - { name: parser, type: mixed }
+  return: int
+
+- tag: function
+  name: xml_get_current_column_number
+  params:
+    - { name: parser, type: mixed }
+  return: int
+
+- tag: function
+  name: xml_get_current_line_number
+  params:
+    - { name: parser, type: mixed }
+  return: int
+
+- tag: function
+  name: xml_get_error_code
+  params:
+    - { name: parser, type: mixed }
+  return: int
+
+- tag: function
+  name: xml_parse
+  params:
+    - { name: parser, type: mixed }
+    - { name: data, type: string }
+    - { name: is_final, type: bool, optional: true }
+  return: int
+
+- tag: function
+  name: xml_parse_into_struct
+  params:
+    - { name: parser, type: mixed }
+    - { name: data, type: string }
+    - { name: values, type: array }
+    - { name: index, type: array, optional: true }
+  return: int
+
+- tag: function
+  name: xml_parser_create
+  params:
+    - { name: encoding, type: string, optional: true }
+  flowsToReturn: [0]
+
+- tag: function
+  name: xml_parser_create_ns
+  params:
+    - { name: encoding, type: string, optional: true }
+    - { name: separator, type: string, optional: true }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: xml_parser_free
+  params:
+    - { name: parser, type: mixed }
+  return: bool
+
+- tag: function
+  name: xml_parser_get_option
+  params:
+    - { name: parser, type: mixed }
+    - { name: option, type: int }
+  return: int
+
+- tag: function
+  name: xml_parser_set_option
+  params:
+    - { name: parser, type: mixed }
+    - { name: option, type: int }
+    - { name: value, type: mixed }
+  return: bool
+
+- tag: function
+  name: xml_set_character_data_handler
+  params:
+    - { name: parser, type: mixed }
+    - { name: handler, type: callable }
+  return: bool
+
+- tag: function
+  name: xml_set_default_handler
+  params:
+    - { name: parser, type: mixed }
+    - { name: handler, type: callable }
+  return: bool
+
+- tag: function
+  name: xml_set_element_handler
+  params:
+    - { name: parser, type: mixed }
+    - { name: start_handler, type: callable }
+    - { name: end_handler, type: callable }
+  return: bool
+
+- tag: function
+  name: xml_set_end_namespace_decl_handler
+  params:
+    - { name: parser, type: mixed }
+    - { name: handler, type: callable }
+  return: bool
+
+- tag: function
+  name: xml_set_external_entity_ref_handler
+  params:
+    - { name: parser, type: mixed }
+    - { name: handler, type: callable }
+  return: bool
+
+- tag: function
+  name: xml_set_notation_decl_handler
+  params:
+    - { name: parser, type: mixed }
+    - { name: handler, type: callable }
+  return: bool
+
+- tag: function
+  name: xml_set_object
+  params:
+    - { name: parser, type: mixed }
+    - { name: object, type: object }
+  return: bool
+
+- tag: function
+  name: xml_set_processing_instruction_handler
+  params:
+    - { name: parser, type: mixed }
+    - { name: handler, type: callable }
+  return: bool
+
+- tag: function
+  name: xml_set_start_namespace_decl_handler
+  params:
+    - { name: parser, type: mixed }
+    - { name: handler, type: callable }
+  return: bool
+
+- tag: function
+  name: xml_set_unparsed_entity_decl_handler
+  params:
+    - { name: parser, type: mixed }
+    - { name: handler, type: callable }
+  return: bool
+

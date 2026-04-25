@@ -1,0 +1,68 @@
+- tag: function
+  name: yp_all
+  params:
+    - { name: domain, type: string }
+    - { name: map, type: string }
+    - { name: callback, type: string }
+  return: void
+
+- tag: function
+  name: yp_cat
+  params:
+    - { name: domain, type: string }
+    - { name: map, type: string }
+  return: array
+
+- tag: function
+  name: yp_err_string
+  params:
+    - { name: errorcode, type: int }
+  return: string
+
+- tag: function
+  name: yp_errno
+  return: int
+
+- tag: function
+  name: yp_first
+  params:
+    - { name: domain, type: string }
+    - { name: map, type: string }
+  return: array
+
+- tag: function
+  name: yp_get_default_domain
+  return: string
+
+- tag: function
+  name: yp_master
+  params:
+    - { name: domain, type: string }
+    - { name: map, type: string }
+  return: string
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: yp_match
+  params:
+    - { name: domain, type: string }
+    - { name: map, type: string }
+    - { name: key, type: string }
+  return: string
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: yp_next
+  params:
+    - { name: domain, type: string }
+    - { name: map, type: string }
+    - { name: key, type: string }
+  return: array
+
+- tag: function
+  name: yp_order
+  params:
+    - { name: domain, type: string }
+    - { name: map, type: string }
+  return: int
+

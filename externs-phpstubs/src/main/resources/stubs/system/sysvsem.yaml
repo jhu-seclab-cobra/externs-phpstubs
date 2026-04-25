@@ -1,0 +1,28 @@
+- tag: function
+  name: sem_acquire
+  params:
+    - { name: semaphore, type: mixed }
+    - { name: non_blocking, type: bool, optional: true }
+  return: bool
+
+- tag: function
+  name: sem_get
+  params:
+    - { name: key, type: int }
+    - { name: max_acquire, type: int, optional: true }
+    - { name: permissions, type: int, optional: true }
+    - { name: auto_release, type: bool, optional: true }
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: sem_release
+  params:
+    - { name: semaphore, type: mixed }
+  return: bool
+
+- tag: function
+  name: sem_remove
+  params:
+    - { name: semaphore, type: mixed }
+  return: bool
+

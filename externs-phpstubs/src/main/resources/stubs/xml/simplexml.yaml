@@ -1,0 +1,27 @@
+- tag: function
+  name: simplexml_import_dom
+  params:
+    - { name: node, type: mixed }
+    - { name: class_name, type: string, optional: true }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: simplexml_load_file
+  params:
+    - { name: filename, type: string }
+    - { name: class_name, type: string, optional: true }
+    - { name: options, type: int, optional: true }
+    - { name: namespace_or_prefix, type: string, optional: true }
+    - { name: is_prefix, type: bool, optional: true }
+  flowsToReturn: [0, 1, 2, 3, 4]
+
+- tag: function
+  name: simplexml_load_string
+  params:
+    - { name: data, type: string }
+    - { name: class_name, type: string, optional: true }
+    - { name: options, type: int, optional: true }
+    - { name: namespace_or_prefix, type: string, optional: true }
+    - { name: is_prefix, type: bool, optional: true }
+  flowsToReturn: [0, 1, 2, 3, 4]
+

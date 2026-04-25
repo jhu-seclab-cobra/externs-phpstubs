@@ -1,0 +1,3428 @@
+- tag: function
+  name: event_timer_set
+  params:
+    - { name: event, type: resource }
+    - { name: callback, type: callable }
+    - { name: arg, type: mixed, optional: true }
+  return: bool
+
+- tag: function
+  name: exec
+  params:
+    - { name: command, type: string }
+    - { name: output, type: array, optional: true }
+    - { name: result_code, type: int, optional: true }
+  return: string
+
+- tag: function
+  name: exp
+  params:
+    - { name: num, type: float }
+  return: float
+
+- tag: function
+  name: expect_expectl
+  params:
+    - { name: expect, type: resource }
+    - { name: cases, type: array }
+    - { name: match, type: array, optional: true }
+  return: int
+
+- tag: function
+  name: expect_popen
+  params:
+    - { name: command, type: string }
+  return: resource
+  flowsToReturn: [0]
+
+- tag: function
+  name: explode
+  params:
+    - { name: separator, type: string }
+    - { name: string, type: string }
+    - { name: limit, type: int, optional: true }
+  return: array
+  flowsToReturn: [1]
+
+- tag: function
+  name: expm1
+  params:
+    - { name: num, type: float }
+  return: float
+
+- tag: function
+  name: extension_loaded
+  params:
+    - { name: extension, type: string }
+  return: bool
+
+- tag: function
+  name: extract
+  params:
+    - { name: array, type: array }
+    - { name: flags, type: int, optional: true }
+    - { name: prefix, type: string, optional: true }
+  return: int
+
+- tag: function
+  name: fam_cancel_monitor
+  params:
+    - { name: fam, type: resource }
+    - { name: fam_monitor, type: resource }
+  return: bool
+
+- tag: function
+  name: fam_close
+  params:
+    - { name: fam, type: resource }
+  return: void
+
+- tag: function
+  name: fam_monitor_collection
+  params:
+    - { name: fam, type: resource }
+    - { name: dirname, type: string }
+    - { name: depth, type: int }
+    - { name: mask, type: string }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: fam_monitor_directory
+  params:
+    - { name: fam, type: resource }
+    - { name: dirname, type: string }
+  return: resource
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: fam_monitor_file
+  params:
+    - { name: fam, type: resource }
+    - { name: filename, type: string }
+  return: resource
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: fam_next_event
+  params:
+    - { name: fam, type: resource }
+  return: array
+
+- tag: function
+  name: fam_open
+  params:
+    - { name: appname, type: string, optional: true }
+  return: resource
+  flowsToReturn: [0]
+
+- tag: function
+  name: fam_pending
+  params:
+    - { name: fam, type: resource }
+  return: int
+
+- tag: function
+  name: fam_resume_monitor
+  params:
+    - { name: fam, type: resource }
+    - { name: fam_monitor, type: resource }
+  return: bool
+
+- tag: function
+  name: fam_suspend_monitor
+  params:
+    - { name: fam, type: resource }
+    - { name: fam_monitor, type: resource }
+  return: bool
+
+- tag: function
+  name: fann_cascadetrain_on_data
+  params:
+    - { name: ann, type: resource }
+    - { name: data, type: resource }
+    - { name: max_neurons, type: int }
+    - { name: neurons_between_reports, type: int }
+    - { name: desired_error, type: float }
+  return: bool
+
+- tag: function
+  name: fann_cascadetrain_on_file
+  params:
+    - { name: ann, type: resource }
+    - { name: filename, type: string }
+    - { name: max_neurons, type: int }
+    - { name: neurons_between_reports, type: int }
+    - { name: desired_error, type: float }
+  return: bool
+
+- tag: function
+  name: fann_clear_scaling_params
+  params:
+    - { name: ann, type: resource }
+  return: bool
+
+- tag: function
+  name: fann_copy
+  params:
+    - { name: ann, type: resource }
+  return: resource
+  flowsToReturn: [0]
+
+- tag: function
+  name: fann_create_from_file
+  params:
+    - { name: configuration_file, type: string }
+  return: resource
+  flowsToReturn: [0]
+
+- tag: function
+  name: fann_create_shortcut
+  params:
+    - { name: num_layers, type: int }
+    - { name: num_neurons1, type: int }
+    - { name: num_neurons2, type: int }
+    - { name: args, type: int, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: fann_create_shortcut_array
+  params:
+    - { name: num_layers, type: int }
+    - { name: layers, type: array }
+  return: resource
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: fann_create_sparse
+  params:
+    - { name: connection_rate, type: float }
+    - { name: num_layers, type: int }
+    - { name: num_neurons1, type: int }
+    - { name: num_neurons2, type: int }
+    - { name: args, type: int, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3, 4]
+
+- tag: function
+  name: fann_create_sparse_array
+  params:
+    - { name: connection_rate, type: float }
+    - { name: num_layers, type: int }
+    - { name: layers, type: array }
+  return: resource
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: fann_create_standard
+  params:
+    - { name: num_layers, type: int }
+    - { name: num_neurons1, type: int }
+    - { name: num_neurons2, type: int }
+    - { name: args, type: int, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: fann_create_standard_array
+  params:
+    - { name: num_layers, type: int }
+    - { name: layers, type: array }
+  return: resource
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: fann_create_train
+  params:
+    - { name: num_data, type: int }
+    - { name: num_input, type: int }
+    - { name: num_output, type: int }
+  return: resource
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: fann_create_train_from_callback
+  params:
+    - { name: num_data, type: int }
+    - { name: num_input, type: int }
+    - { name: num_output, type: int }
+    - { name: user_function, type: callable }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: fann_descale_input
+  params:
+    - { name: ann, type: resource }
+    - { name: input_vector, type: array }
+  return: bool
+
+- tag: function
+  name: fann_descale_output
+  params:
+    - { name: ann, type: resource }
+    - { name: output_vector, type: array }
+  return: bool
+
+- tag: function
+  name: fann_descale_train
+  params:
+    - { name: ann, type: resource }
+    - { name: train_data, type: resource }
+  return: bool
+
+- tag: function
+  name: fann_destroy
+  params:
+    - { name: ann, type: resource }
+  return: bool
+
+- tag: function
+  name: fann_destroy_train
+  params:
+    - { name: train_data, type: resource }
+  return: bool
+
+- tag: function
+  name: fann_duplicate_train_data
+  params:
+    - { name: data, type: resource }
+  return: resource
+  flowsToReturn: [0]
+
+- tag: function
+  name: fann_get_activation_function
+  params:
+    - { name: ann, type: resource }
+    - { name: layer, type: int }
+    - { name: neuron, type: int }
+  return: int
+
+- tag: function
+  name: fann_get_activation_steepness
+  params:
+    - { name: ann, type: resource }
+    - { name: layer, type: int }
+    - { name: neuron, type: int }
+  return: float
+
+- tag: function
+  name: fann_get_bias_array
+  params:
+    - { name: ann, type: resource }
+  return: array
+
+- tag: function
+  name: fann_get_bit_fail
+  params:
+    - { name: ann, type: resource }
+  return: int
+
+- tag: function
+  name: fann_get_bit_fail_limit
+  params:
+    - { name: ann, type: resource }
+  return: float
+
+- tag: function
+  name: fann_get_cascade_activation_functions
+  params:
+    - { name: ann, type: resource }
+  return: array
+
+- tag: function
+  name: fann_get_cascade_activation_functions_count
+  params:
+    - { name: ann, type: resource }
+  return: int
+
+- tag: function
+  name: fann_get_cascade_activation_steepnesses
+  params:
+    - { name: ann, type: resource }
+  return: array
+
+- tag: function
+  name: fann_get_cascade_activation_steepnesses_count
+  params:
+    - { name: ann, type: resource }
+  return: int
+
+- tag: function
+  name: fann_get_cascade_candidate_change_fraction
+  params:
+    - { name: ann, type: resource }
+  return: float
+
+- tag: function
+  name: fann_get_cascade_candidate_limit
+  params:
+    - { name: ann, type: resource }
+  return: float
+
+- tag: function
+  name: fann_get_cascade_candidate_stagnation_epochs
+  params:
+    - { name: ann, type: resource }
+  return: float
+
+- tag: function
+  name: fann_get_cascade_max_cand_epochs
+  params:
+    - { name: ann, type: resource }
+  return: int
+
+- tag: function
+  name: fann_get_cascade_max_out_epochs
+  params:
+    - { name: ann, type: resource }
+  return: int
+
+- tag: function
+  name: fann_get_cascade_min_cand_epochs
+  params:
+    - { name: ann, type: resource }
+  return: int
+
+- tag: function
+  name: fann_get_cascade_min_out_epochs
+  params:
+    - { name: ann, type: resource }
+  return: int
+
+- tag: function
+  name: fann_get_cascade_num_candidate_groups
+  params:
+    - { name: ann, type: resource }
+  return: int
+
+- tag: function
+  name: fann_get_cascade_num_candidates
+  params:
+    - { name: ann, type: resource }
+  return: int
+
+- tag: function
+  name: fann_get_cascade_output_change_fraction
+  params:
+    - { name: ann, type: resource }
+  return: float
+
+- tag: function
+  name: fann_get_cascade_output_stagnation_epochs
+  params:
+    - { name: ann, type: resource }
+  return: int
+
+- tag: function
+  name: fann_get_cascade_weight_multiplier
+  params:
+    - { name: ann, type: resource }
+  return: float
+
+- tag: function
+  name: fann_get_connection_array
+  params:
+    - { name: ann, type: resource }
+  return: array
+
+- tag: function
+  name: fann_get_connection_rate
+  params:
+    - { name: ann, type: resource }
+  return: float
+
+- tag: function
+  name: fann_get_errno
+  params:
+    - { name: errdat, type: resource }
+  return: int
+
+- tag: function
+  name: fann_get_errstr
+  params:
+    - { name: errdat, type: resource }
+  return: string
+
+- tag: function
+  name: fann_get_layer_array
+  params:
+    - { name: ann, type: resource }
+  return: array
+
+- tag: function
+  name: fann_get_learning_momentum
+  params:
+    - { name: ann, type: resource }
+  return: float
+
+- tag: function
+  name: fann_get_learning_rate
+  params:
+    - { name: ann, type: resource }
+  return: float
+
+- tag: function
+  name: fann_get_mse
+  params:
+    - { name: ann, type: resource }
+  return: float
+
+- tag: function
+  name: fann_get_network_type
+  params:
+    - { name: ann, type: resource }
+  return: int
+
+- tag: function
+  name: fann_get_num_input
+  params:
+    - { name: ann, type: resource }
+  return: int
+
+- tag: function
+  name: fann_get_num_layers
+  params:
+    - { name: ann, type: resource }
+  return: int
+
+- tag: function
+  name: fann_get_num_output
+  params:
+    - { name: ann, type: resource }
+  return: int
+
+- tag: function
+  name: fann_get_quickprop_decay
+  params:
+    - { name: ann, type: resource }
+  return: float
+
+- tag: function
+  name: fann_get_quickprop_mu
+  params:
+    - { name: ann, type: resource }
+  return: float
+
+- tag: function
+  name: fann_get_rprop_decrease_factor
+  params:
+    - { name: ann, type: resource }
+  return: float
+
+- tag: function
+  name: fann_get_rprop_delta_max
+  params:
+    - { name: ann, type: resource }
+  return: float
+
+- tag: function
+  name: fann_get_rprop_delta_min
+  params:
+    - { name: ann, type: resource }
+  return: float
+
+- tag: function
+  name: fann_get_rprop_delta_zero
+  params:
+    - { name: ann, type: resource }
+  return: float
+
+- tag: function
+  name: fann_get_rprop_increase_factor
+  params:
+    - { name: ann, type: resource }
+  return: float
+
+- tag: function
+  name: fann_get_sarprop_step_error_shift
+  params:
+    - { name: ann, type: resource }
+  return: float
+
+- tag: function
+  name: fann_get_sarprop_step_error_threshold_factor
+  params:
+    - { name: ann, type: resource }
+  return: float
+
+- tag: function
+  name: fann_get_sarprop_temperature
+  params:
+    - { name: ann, type: resource }
+  return: float
+
+- tag: function
+  name: fann_get_sarprop_weight_decay_shift
+  params:
+    - { name: ann, type: resource }
+  return: float
+
+- tag: function
+  name: fann_get_total_connections
+  params:
+    - { name: ann, type: resource }
+  return: int
+
+- tag: function
+  name: fann_get_total_neurons
+  params:
+    - { name: ann, type: resource }
+  return: int
+
+- tag: function
+  name: fann_get_train_error_function
+  params:
+    - { name: ann, type: resource }
+  return: int
+
+- tag: function
+  name: fann_get_train_stop_function
+  params:
+    - { name: ann, type: resource }
+  return: int
+
+- tag: function
+  name: fann_get_training_algorithm
+  params:
+    - { name: ann, type: resource }
+  return: int
+
+- tag: function
+  name: fann_init_weights
+  params:
+    - { name: ann, type: resource }
+    - { name: train_data, type: resource }
+  return: bool
+
+- tag: function
+  name: fann_length_train_data
+  params:
+    - { name: data, type: resource }
+  return: int
+
+- tag: function
+  name: fann_merge_train_data
+  params:
+    - { name: data1, type: resource }
+    - { name: data2, type: resource }
+  return: resource
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: fann_num_input_train_data
+  params:
+    - { name: data, type: resource }
+  return: int
+
+- tag: function
+  name: fann_num_output_train_data
+  params:
+    - { name: data, type: resource }
+  return: int
+
+- tag: function
+  name: fann_print_error
+  params:
+    - { name: errdat, type: string }
+  return: void
+
+- tag: function
+  name: fann_randomize_weights
+  params:
+    - { name: ann, type: resource }
+    - { name: min_weight, type: float }
+    - { name: max_weight, type: float }
+  return: bool
+
+- tag: function
+  name: fann_read_train_from_file
+  params:
+    - { name: filename, type: string }
+  return: resource
+  flowsToReturn: [0]
+
+- tag: function
+  name: fann_reset_errno
+  params:
+    - { name: errdat, type: resource }
+  return: void
+
+- tag: function
+  name: fann_reset_errstr
+  params:
+    - { name: errdat, type: resource }
+  return: void
+
+- tag: function
+  name: fann_reset_mse
+  params:
+    - { name: ann, type: string }
+  return: bool
+
+- tag: function
+  name: fann_run
+  params:
+    - { name: ann, type: resource }
+    - { name: input, type: array }
+  return: array
+  flowsToReturn: [1]
+
+- tag: function
+  name: fann_save
+  params:
+    - { name: ann, type: resource }
+    - { name: configuration_file, type: string }
+  return: bool
+
+- tag: function
+  name: fann_save_train
+  params:
+    - { name: data, type: resource }
+    - { name: file_name, type: string }
+  return: bool
+
+- tag: function
+  name: fann_scale_input
+  params:
+    - { name: ann, type: resource }
+    - { name: input_vector, type: array }
+  return: bool
+
+- tag: function
+  name: fann_scale_input_train_data
+  params:
+    - { name: train_data, type: resource }
+    - { name: new_min, type: float }
+    - { name: new_max, type: float }
+  return: bool
+
+- tag: function
+  name: fann_scale_output
+  params:
+    - { name: ann, type: resource }
+    - { name: output_vector, type: array }
+  return: bool
+
+- tag: function
+  name: fann_scale_output_train_data
+  params:
+    - { name: train_data, type: resource }
+    - { name: new_min, type: float }
+    - { name: new_max, type: float }
+  return: bool
+
+- tag: function
+  name: fann_scale_train
+  params:
+    - { name: ann, type: resource }
+    - { name: train_data, type: resource }
+  return: bool
+
+- tag: function
+  name: fann_scale_train_data
+  params:
+    - { name: train_data, type: resource }
+    - { name: new_min, type: float }
+    - { name: new_max, type: float }
+  return: bool
+
+- tag: function
+  name: fann_set_activation_function
+  params:
+    - { name: ann, type: resource }
+    - { name: activation_function, type: int }
+    - { name: layer, type: int }
+    - { name: neuron, type: int }
+  return: bool
+
+- tag: function
+  name: fann_set_activation_function_hidden
+  params:
+    - { name: ann, type: resource }
+    - { name: activation_function, type: int }
+  return: bool
+
+- tag: function
+  name: fann_set_activation_function_layer
+  params:
+    - { name: ann, type: resource }
+    - { name: activation_function, type: int }
+    - { name: layer, type: int }
+  return: bool
+
+- tag: function
+  name: fann_set_activation_function_output
+  params:
+    - { name: ann, type: resource }
+    - { name: activation_function, type: int }
+  return: bool
+
+- tag: function
+  name: fann_set_activation_steepness
+  params:
+    - { name: ann, type: resource }
+    - { name: activation_steepness, type: float }
+    - { name: layer, type: int }
+    - { name: neuron, type: int }
+  return: bool
+
+- tag: function
+  name: fann_set_activation_steepness_hidden
+  params:
+    - { name: ann, type: resource }
+    - { name: activation_steepness, type: float }
+  return: bool
+
+- tag: function
+  name: fann_set_activation_steepness_layer
+  params:
+    - { name: ann, type: resource }
+    - { name: activation_steepness, type: float }
+    - { name: layer, type: int }
+  return: bool
+
+- tag: function
+  name: fann_set_activation_steepness_output
+  params:
+    - { name: ann, type: resource }
+    - { name: activation_steepness, type: float }
+  return: bool
+
+- tag: function
+  name: fann_set_bit_fail_limit
+  params:
+    - { name: ann, type: resource }
+    - { name: bit_fail_limit, type: float }
+  return: bool
+
+- tag: function
+  name: fann_set_callback
+  params:
+    - { name: ann, type: resource }
+    - { name: callback, type: callable }
+  return: bool
+
+- tag: function
+  name: fann_set_cascade_activation_functions
+  params:
+    - { name: ann, type: resource }
+    - { name: cascade_activation_functions, type: array }
+  return: bool
+
+- tag: function
+  name: fann_set_cascade_activation_steepnesses
+  params:
+    - { name: ann, type: resource }
+    - { name: cascade_activation_steepnesses_count, type: array }
+  return: bool
+
+- tag: function
+  name: fann_set_cascade_candidate_change_fraction
+  params:
+    - { name: ann, type: resource }
+    - { name: cascade_candidate_change_fraction, type: float }
+  return: bool
+
+- tag: function
+  name: fann_set_cascade_candidate_limit
+  params:
+    - { name: ann, type: resource }
+    - { name: cascade_candidate_limit, type: float }
+  return: bool
+
+- tag: function
+  name: fann_set_cascade_candidate_stagnation_epochs
+  params:
+    - { name: ann, type: resource }
+    - { name: cascade_candidate_stagnation_epochs, type: int }
+  return: bool
+
+- tag: function
+  name: fann_set_cascade_max_cand_epochs
+  params:
+    - { name: ann, type: resource }
+    - { name: cascade_max_cand_epochs, type: int }
+  return: bool
+
+- tag: function
+  name: fann_set_cascade_max_out_epochs
+  params:
+    - { name: ann, type: resource }
+    - { name: cascade_max_out_epochs, type: int }
+  return: bool
+
+- tag: function
+  name: fann_set_cascade_min_cand_epochs
+  params:
+    - { name: ann, type: resource }
+    - { name: cascade_min_cand_epochs, type: int }
+  return: bool
+
+- tag: function
+  name: fann_set_cascade_min_out_epochs
+  params:
+    - { name: ann, type: resource }
+    - { name: cascade_min_out_epochs, type: int }
+  return: bool
+
+- tag: function
+  name: fann_set_cascade_num_candidate_groups
+  params:
+    - { name: ann, type: resource }
+    - { name: cascade_num_candidate_groups, type: int }
+  return: bool
+
+- tag: function
+  name: fann_set_cascade_output_change_fraction
+  params:
+    - { name: ann, type: resource }
+    - { name: cascade_output_change_fraction, type: float }
+  return: bool
+
+- tag: function
+  name: fann_set_cascade_output_stagnation_epochs
+  params:
+    - { name: ann, type: resource }
+    - { name: cascade_output_stagnation_epochs, type: int }
+  return: bool
+
+- tag: function
+  name: fann_set_cascade_weight_multiplier
+  params:
+    - { name: ann, type: resource }
+    - { name: cascade_weight_multiplier, type: float }
+  return: bool
+
+- tag: function
+  name: fann_set_error_log
+  params:
+    - { name: errdat, type: resource }
+    - { name: log_file, type: string }
+  return: void
+
+- tag: function
+  name: fann_set_input_scaling_params
+  params:
+    - { name: ann, type: resource }
+    - { name: train_data, type: resource }
+    - { name: new_input_min, type: float }
+    - { name: new_input_max, type: float }
+  return: bool
+
+- tag: function
+  name: fann_set_learning_momentum
+  params:
+    - { name: ann, type: resource }
+    - { name: learning_momentum, type: float }
+  return: bool
+
+- tag: function
+  name: fann_set_learning_rate
+  params:
+    - { name: ann, type: resource }
+    - { name: learning_rate, type: float }
+  return: bool
+
+- tag: function
+  name: fann_set_output_scaling_params
+  params:
+    - { name: ann, type: resource }
+    - { name: train_data, type: resource }
+    - { name: new_output_min, type: float }
+    - { name: new_output_max, type: float }
+  return: bool
+
+- tag: function
+  name: fann_set_quickprop_decay
+  params:
+    - { name: ann, type: resource }
+    - { name: quickprop_decay, type: float }
+  return: bool
+
+- tag: function
+  name: fann_set_quickprop_mu
+  params:
+    - { name: ann, type: resource }
+    - { name: quickprop_mu, type: float }
+  return: bool
+
+- tag: function
+  name: fann_set_rprop_decrease_factor
+  params:
+    - { name: ann, type: resource }
+    - { name: rprop_decrease_factor, type: float }
+  return: bool
+
+- tag: function
+  name: fann_set_rprop_delta_max
+  params:
+    - { name: ann, type: resource }
+    - { name: rprop_delta_max, type: float }
+  return: bool
+
+- tag: function
+  name: fann_set_rprop_delta_min
+  params:
+    - { name: ann, type: resource }
+    - { name: rprop_delta_min, type: float }
+  return: bool
+
+- tag: function
+  name: fann_set_rprop_delta_zero
+  params:
+    - { name: ann, type: resource }
+    - { name: rprop_delta_zero, type: float }
+  return: bool
+
+- tag: function
+  name: fann_set_rprop_increase_factor
+  params:
+    - { name: ann, type: resource }
+    - { name: rprop_increase_factor, type: float }
+  return: bool
+
+- tag: function
+  name: fann_set_sarprop_step_error_shift
+  params:
+    - { name: ann, type: resource }
+    - { name: sarprop_step_error_shift, type: float }
+  return: bool
+
+- tag: function
+  name: fann_set_sarprop_step_error_threshold_factor
+  params:
+    - { name: ann, type: resource }
+    - { name: sarprop_step_error_threshold_factor, type: float }
+  return: bool
+
+- tag: function
+  name: fann_set_sarprop_temperature
+  params:
+    - { name: ann, type: resource }
+    - { name: sarprop_temperature, type: float }
+  return: bool
+
+- tag: function
+  name: fann_set_sarprop_weight_decay_shift
+  params:
+    - { name: ann, type: resource }
+    - { name: sarprop_weight_decay_shift, type: float }
+  return: bool
+
+- tag: function
+  name: fann_set_scaling_params
+  params:
+    - { name: ann, type: resource }
+    - { name: train_data, type: resource }
+    - { name: new_input_min, type: float }
+    - { name: new_input_max, type: float }
+    - { name: new_output_min, type: float }
+    - { name: new_output_max, type: float }
+  return: bool
+
+- tag: function
+  name: fann_set_train_error_function
+  params:
+    - { name: ann, type: resource }
+    - { name: error_function, type: int }
+  return: bool
+
+- tag: function
+  name: fann_set_train_stop_function
+  params:
+    - { name: ann, type: resource }
+    - { name: stop_function, type: int }
+  return: bool
+
+- tag: function
+  name: fann_set_training_algorithm
+  params:
+    - { name: ann, type: resource }
+    - { name: training_algorithm, type: int }
+  return: bool
+
+- tag: function
+  name: fann_set_weight
+  params:
+    - { name: ann, type: resource }
+    - { name: from_neuron, type: int }
+    - { name: to_neuron, type: int }
+    - { name: weight, type: float }
+  return: bool
+
+- tag: function
+  name: fann_set_weight_array
+  params:
+    - { name: ann, type: resource }
+    - { name: connections, type: array }
+  return: bool
+
+- tag: function
+  name: fann_shuffle_train_data
+  params:
+    - { name: train_data, type: resource }
+  return: bool
+
+- tag: function
+  name: fann_subset_train_data
+  params:
+    - { name: data, type: resource }
+    - { name: pos, type: int }
+    - { name: length, type: int }
+  return: resource
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: fann_test
+  params:
+    - { name: ann, type: resource }
+    - { name: input, type: array }
+    - { name: desired_output, type: array }
+  return: bool
+
+- tag: function
+  name: fann_test_data
+  params:
+    - { name: ann, type: resource }
+    - { name: data, type: resource }
+  return: float
+
+- tag: function
+  name: fann_train
+  params:
+    - { name: ann, type: resource }
+    - { name: input, type: array }
+    - { name: desired_output, type: array }
+  return: bool
+
+- tag: function
+  name: fann_train_epoch
+  params:
+    - { name: ann, type: resource }
+    - { name: data, type: resource }
+  return: float
+
+- tag: function
+  name: fann_train_on_data
+  params:
+    - { name: ann, type: resource }
+    - { name: data, type: resource }
+    - { name: max_epochs, type: int }
+    - { name: epochs_between_reports, type: int }
+    - { name: desired_error, type: float }
+  return: bool
+
+- tag: function
+  name: fann_train_on_file
+  params:
+    - { name: ann, type: resource }
+    - { name: filename, type: string }
+    - { name: max_epochs, type: int }
+    - { name: epochs_between_reports, type: int }
+    - { name: desired_error, type: float }
+  return: bool
+
+- tag: function
+  name: fastcgi_finish_request
+  return: bool
+
+- tag: function
+  name: fbsql_affected_rows
+  params:
+    - { name: link_identifier, type: resource, optional: true }
+  return: int
+
+- tag: function
+  name: fbsql_autocommit
+  params:
+    - { name: link_identifier, type: resource }
+    - { name: onoff, type: bool, optional: true }
+  return: bool
+
+- tag: function
+  name: fbsql_blob_size
+  params:
+    - { name: blob_handle, type: string }
+    - { name: link_identifier, type: resource, optional: true }
+  return: int
+
+- tag: function
+  name: fbsql_change_user
+  params:
+    - { name: user, type: string }
+    - { name: password, type: string }
+    - { name: database, type: string, optional: true }
+    - { name: link_identifier, type: resource, optional: true }
+  return: bool
+
+- tag: function
+  name: fbsql_clob_size
+  params:
+    - { name: clob_handle, type: string }
+    - { name: link_identifier, type: resource, optional: true }
+  return: int
+
+- tag: function
+  name: fbsql_close
+  params:
+    - { name: link_identifier, type: resource, optional: true }
+  return: bool
+
+- tag: function
+  name: fbsql_commit
+  params:
+    - { name: link_identifier, type: resource, optional: true }
+  return: bool
+
+- tag: function
+  name: fbsql_connect
+  params:
+    - { name: hostname, type: string, optional: true }
+    - { name: username, type: string, optional: true }
+    - { name: password, type: string, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: fbsql_create_blob
+  params:
+    - { name: blob_data, type: string }
+    - { name: link_identifier, type: resource, optional: true }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: fbsql_create_clob
+  params:
+    - { name: clob_data, type: string }
+    - { name: link_identifier, type: resource, optional: true }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: fbsql_create_db
+  params:
+    - { name: database_name, type: string }
+    - { name: link_identifier, type: resource, optional: true }
+    - { name: database_options, type: string, optional: true }
+  return: bool
+
+- tag: function
+  name: fbsql_data_seek
+  params:
+    - { name: result, type: resource }
+    - { name: row_number, type: int }
+  return: bool
+
+- tag: function
+  name: fbsql_database
+  params:
+    - { name: link_identifier, type: resource }
+    - { name: database, type: string, optional: true }
+  return: string
+  flowsToReturn: [1]
+
+- tag: function
+  name: fbsql_database_password
+  params:
+    - { name: link_identifier, type: resource }
+    - { name: database_password, type: string, optional: true }
+  return: string
+  flowsToReturn: [1]
+
+- tag: function
+  name: fbsql_db_query
+  params:
+    - { name: database, type: string }
+    - { name: query, type: string }
+    - { name: link_identifier, type: resource, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: fbsql_db_status
+  params:
+    - { name: database_name, type: string }
+    - { name: link_identifier, type: resource, optional: true }
+  return: int
+
+- tag: function
+  name: fbsql_drop_db
+  params:
+    - { name: database_name, type: string }
+    - { name: link_identifier, type: resource, optional: true }
+  return: bool
+
+- tag: function
+  name: fbsql_errno
+  params:
+    - { name: link_identifier, type: resource, optional: true }
+  return: int
+
+- tag: function
+  name: fbsql_error
+  params:
+    - { name: link_identifier, type: resource, optional: true }
+  return: string
+
+- tag: function
+  name: fbsql_fetch_array
+  params:
+    - { name: result, type: resource }
+    - { name: result_type, type: int, optional: true }
+  return: array
+
+- tag: function
+  name: fbsql_fetch_assoc
+  params:
+    - { name: result, type: resource }
+  return: array
+
+- tag: function
+  name: fbsql_fetch_field
+  params:
+    - { name: result, type: resource }
+    - { name: field_offset, type: int, optional: true }
+  return: object
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: fbsql_fetch_lengths
+  params:
+    - { name: result, type: resource }
+  return: array
+
+- tag: function
+  name: fbsql_fetch_object
+  params:
+    - { name: result, type: resource }
+  return: object
+  flowsToReturn: [0]
+
+- tag: function
+  name: fbsql_fetch_row
+  params:
+    - { name: result, type: resource }
+  return: array
+
+- tag: function
+  name: fbsql_field_flags
+  params:
+    - { name: result, type: resource }
+    - { name: field_offset, type: int, optional: true }
+  return: string
+
+- tag: function
+  name: fbsql_field_len
+  params:
+    - { name: result, type: resource }
+    - { name: field_offset, type: int, optional: true }
+  return: int
+
+- tag: function
+  name: fbsql_field_name
+  params:
+    - { name: result, type: resource }
+    - { name: field_index, type: int, optional: true }
+  return: string
+
+- tag: function
+  name: fbsql_field_seek
+  params:
+    - { name: result, type: resource }
+    - { name: field_offset, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: fbsql_field_table
+  params:
+    - { name: result, type: resource }
+    - { name: field_offset, type: int, optional: true }
+  return: string
+
+- tag: function
+  name: fbsql_field_type
+  params:
+    - { name: result, type: resource }
+    - { name: field_offset, type: int, optional: true }
+  return: string
+
+- tag: function
+  name: fbsql_free_result
+  params:
+    - { name: result, type: resource }
+  return: bool
+
+- tag: function
+  name: fbsql_get_autostart_info
+  params:
+    - { name: link_identifier, type: resource, optional: true }
+  return: array
+
+- tag: function
+  name: fbsql_hostname
+  params:
+    - { name: link_identifier, type: resource }
+    - { name: host_name, type: string, optional: true }
+  return: string
+  flowsToReturn: [1]
+
+- tag: function
+  name: fbsql_insert_id
+  params:
+    - { name: link_identifier, type: resource, optional: true }
+  return: int
+
+- tag: function
+  name: fbsql_list_dbs
+  params:
+    - { name: link_identifier, type: resource, optional: true }
+  return: resource
+  flowsToReturn: [0]
+
+- tag: function
+  name: fbsql_list_fields
+  params:
+    - { name: database_name, type: string }
+    - { name: table_name, type: string }
+    - { name: link_identifier, type: resource, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: fbsql_list_tables
+  params:
+    - { name: database, type: string }
+    - { name: link_identifier, type: resource, optional: true }
+  return: resource
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: fbsql_next_result
+  params:
+    - { name: result, type: resource }
+  return: bool
+
+- tag: function
+  name: fbsql_num_fields
+  params:
+    - { name: result, type: resource }
+  return: int
+
+- tag: function
+  name: fbsql_num_rows
+  params:
+    - { name: result, type: resource }
+  return: int
+
+- tag: function
+  name: fbsql_password
+  params:
+    - { name: link_identifier, type: resource }
+    - { name: password, type: string, optional: true }
+  return: string
+  flowsToReturn: [1]
+
+- tag: function
+  name: fbsql_pconnect
+  params:
+    - { name: hostname, type: string, optional: true }
+    - { name: username, type: string, optional: true }
+    - { name: password, type: string, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: fbsql_query
+  params:
+    - { name: query, type: string }
+    - { name: link_identifier, type: resource, optional: true }
+    - { name: batch_size, type: int, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: fbsql_read_blob
+  params:
+    - { name: blob_handle, type: string }
+    - { name: link_identifier, type: resource, optional: true }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: fbsql_read_clob
+  params:
+    - { name: clob_handle, type: string }
+    - { name: link_identifier, type: resource, optional: true }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: fbsql_result
+  params:
+    - { name: result, type: resource }
+    - { name: row, type: int, optional: true }
+    - { name: field, type: mixed, optional: true }
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: fbsql_rollback
+  params:
+    - { name: link_identifier, type: resource, optional: true }
+  return: bool
+
+- tag: function
+  name: fbsql_rows_fetched
+  params:
+    - { name: result, type: resource }
+  return: int
+
+- tag: function
+  name: fbsql_select_db
+  params:
+    - { name: database_name, type: string, optional: true }
+    - { name: link_identifier, type: resource, optional: true }
+  return: bool
+
+- tag: function
+  name: fbsql_set_characterset
+  params:
+    - { name: link_identifier, type: resource }
+    - { name: characterset, type: int }
+    - { name: in_out_both, type: int, optional: true }
+  return: void
+
+- tag: function
+  name: fbsql_set_lob_mode
+  params:
+    - { name: result, type: resource }
+    - { name: lob_mode, type: int }
+  return: bool
+
+- tag: function
+  name: fbsql_set_password
+  params:
+    - { name: link_identifier, type: resource }
+    - { name: user, type: string }
+    - { name: password, type: string }
+    - { name: old_password, type: string }
+  return: bool
+
+- tag: function
+  name: fbsql_set_transaction
+  params:
+    - { name: link_identifier, type: resource }
+    - { name: locking, type: int }
+    - { name: isolation, type: int }
+  return: void
+
+- tag: function
+  name: fbsql_start_db
+  params:
+    - { name: database_name, type: string }
+    - { name: link_identifier, type: resource, optional: true }
+    - { name: database_options, type: string, optional: true }
+  return: bool
+
+- tag: function
+  name: fbsql_stop_db
+  params:
+    - { name: database_name, type: string }
+    - { name: link_identifier, type: resource, optional: true }
+  return: bool
+
+- tag: function
+  name: fbsql_table_name
+  params:
+    - { name: result, type: resource }
+    - { name: index, type: int }
+  return: string
+
+- tag: function
+  name: fbsql_username
+  params:
+    - { name: link_identifier, type: resource }
+    - { name: username, type: string, optional: true }
+  return: string
+  flowsToReturn: [1]
+
+- tag: function
+  name: fbsql_warnings
+  params:
+    - { name: onoff, type: bool, optional: true }
+  return: bool
+
+- tag: function
+  name: fdf_add_doc_javascript
+  params:
+    - { name: fdf_document, type: resource }
+    - { name: script_name, type: string }
+    - { name: script_code, type: string }
+  return: bool
+
+- tag: function
+  name: fdf_add_template
+  params:
+    - { name: fdf_document, type: resource }
+    - { name: newpage, type: int }
+    - { name: filename, type: string }
+    - { name: template, type: string }
+    - { name: rename, type: int }
+  return: bool
+
+- tag: function
+  name: fdf_close
+  params:
+    - { name: fdf_document, type: resource }
+  return: void
+
+- tag: function
+  name: fdf_create
+  return: resource
+
+- tag: function
+  name: fdf_enum_values
+  params:
+    - { name: fdf_document, type: resource }
+    - { name: function, type: callable }
+    - { name: userdata, type: mixed, optional: true }
+  return: bool
+
+- tag: function
+  name: fdf_errno
+  return: int
+
+- tag: function
+  name: fdf_error
+  params:
+    - { name: error_code, type: int, optional: true }
+  return: string
+
+- tag: function
+  name: fdf_get_ap
+  params:
+    - { name: fdf_document, type: resource }
+    - { name: field, type: string }
+    - { name: face, type: int }
+    - { name: filename, type: string }
+  return: bool
+
+- tag: function
+  name: fdf_get_attachment
+  params:
+    - { name: fdf_document, type: resource }
+    - { name: fieldname, type: string }
+    - { name: savepath, type: string }
+  return: array
+
+- tag: function
+  name: fdf_get_encoding
+  params:
+    - { name: fdf_document, type: resource }
+  return: string
+
+- tag: function
+  name: fdf_get_file
+  params:
+    - { name: fdf_document, type: resource }
+  return: string
+
+- tag: function
+  name: fdf_get_flags
+  params:
+    - { name: fdf_document, type: resource }
+    - { name: fieldname, type: string }
+    - { name: whichflags, type: int }
+  return: int
+
+- tag: function
+  name: fdf_get_opt
+  params:
+    - { name: fdf_document, type: resource }
+    - { name: fieldname, type: string }
+    - { name: element, type: int, optional: true }
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: fdf_get_status
+  params:
+    - { name: fdf_document, type: resource }
+  return: string
+
+- tag: function
+  name: fdf_get_value
+  params:
+    - { name: fdf_document, type: resource }
+    - { name: fieldname, type: string }
+    - { name: which, type: int, optional: true }
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: fdf_get_version
+  params:
+    - { name: fdf_document, type: resource, optional: true }
+  return: string
+
+- tag: function
+  name: fdf_header
+  return: void
+
+- tag: function
+  name: fdf_next_field_name
+  params:
+    - { name: fdf_document, type: resource }
+    - { name: fieldname, type: string, optional: true }
+  return: string
+  flowsToReturn: [1]
+
+- tag: function
+  name: fdf_open
+  params:
+    - { name: filename, type: string }
+  return: resource
+  flowsToReturn: [0]
+
+- tag: function
+  name: fdf_open_string
+  params:
+    - { name: fdf_data, type: string }
+  return: resource
+  flowsToReturn: [0]
+
+- tag: function
+  name: fdf_remove_item
+  params:
+    - { name: fdf_document, type: resource }
+    - { name: fieldname, type: string }
+    - { name: item, type: int }
+  return: bool
+
+- tag: function
+  name: fdf_save
+  params:
+    - { name: fdf_document, type: resource }
+    - { name: filename, type: string, optional: true }
+  return: bool
+
+- tag: function
+  name: fdf_save_string
+  params:
+    - { name: fdf_document, type: resource }
+  return: string
+
+- tag: function
+  name: fdf_set_ap
+  params:
+    - { name: fdf_document, type: resource }
+    - { name: field_name, type: string }
+    - { name: face, type: int }
+    - { name: filename, type: string }
+    - { name: page_number, type: int }
+  return: bool
+
+- tag: function
+  name: fdf_set_encoding
+  params:
+    - { name: fdf_document, type: resource }
+    - { name: encoding, type: string }
+  return: bool
+
+- tag: function
+  name: fdf_set_file
+  params:
+    - { name: fdf_document, type: resource }
+    - { name: url, type: string }
+    - { name: target_frame, type: string, optional: true }
+  return: bool
+
+- tag: function
+  name: fdf_set_flags
+  params:
+    - { name: fdf_document, type: resource }
+    - { name: fieldname, type: string }
+    - { name: whichflags, type: int }
+    - { name: newflags, type: int }
+  return: bool
+
+- tag: function
+  name: fdf_set_javascript_action
+  params:
+    - { name: fdf_document, type: resource }
+    - { name: fieldname, type: string }
+    - { name: trigger, type: int }
+    - { name: script, type: string }
+  return: bool
+
+- tag: function
+  name: fdf_set_on_import_javascript
+  params:
+    - { name: fdf_document, type: resource }
+    - { name: script, type: string }
+    - { name: before_data_import, type: bool }
+  return: bool
+
+- tag: function
+  name: fdf_set_opt
+  params:
+    - { name: fdf_document, type: resource }
+    - { name: fieldname, type: string }
+    - { name: element, type: int }
+    - { name: string1, type: string }
+    - { name: string2, type: string }
+  return: bool
+
+- tag: function
+  name: fdf_set_status
+  params:
+    - { name: fdf_document, type: resource }
+    - { name: status, type: string }
+  return: bool
+
+- tag: function
+  name: fdf_set_submit_form_action
+  params:
+    - { name: fdf_document, type: resource }
+    - { name: fieldname, type: string }
+    - { name: trigger, type: int }
+    - { name: script, type: string }
+    - { name: flags, type: int }
+  return: bool
+
+- tag: function
+  name: fdf_set_target_frame
+  params:
+    - { name: fdf_document, type: resource }
+    - { name: frame_name, type: string }
+  return: bool
+
+- tag: function
+  name: fdf_set_value
+  params:
+    - { name: fdf_document, type: resource }
+    - { name: fieldname, type: string }
+    - { name: value, type: mixed }
+    - { name: isname, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: fdf_set_version
+  params:
+    - { name: fdf_document, type: resource }
+    - { name: version, type: string }
+  return: bool
+
+- tag: function
+  name: fdiv
+  params:
+    - { name: num1, type: float }
+    - { name: num2, type: float }
+  return: float
+
+- tag: function
+  name: floatval
+  params:
+    - { name: value, type: mixed }
+  return: float
+
+- tag: function
+  name: floor
+  params:
+    - { name: num, type: float }
+  return: float
+
+- tag: function
+  name: flush
+  return: void
+
+- tag: function
+  name: fmod
+  params:
+    - { name: num1, type: float }
+    - { name: num2, type: float }
+  return: float
+
+- tag: function
+  name: fnmatch
+  params:
+    - { name: pattern, type: string }
+    - { name: filename, type: string }
+    - { name: flags, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: forward_static_call
+  params:
+    - { name: callback, type: callable }
+    - { name: args, type: mixed, optional: true }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: forward_static_call_array
+  params:
+    - { name: callback, type: callable }
+    - { name: args, type: array }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: fpm_get_status
+  return: array
+
+- tag: function
+  name: fprintf
+  params:
+    - { name: stream, type: resource }
+    - { name: format, type: string }
+    - { name: values, type: float, optional: true }
+  return: int
+
+- tag: function
+  name: fputs
+  params:
+    - { name: stream, type: resource }
+    - { name: data, type: string }
+    - { name: length, type: int, optional: true }
+  return: int
+
+- tag: function
+  name: frenchtojd
+  params:
+    - { name: month, type: int }
+    - { name: day, type: int }
+    - { name: year, type: int }
+  return: int
+
+- tag: function
+  name: fribidi_log2vis
+  params:
+    - { name: string, type: string }
+    - { name: direction, type: string }
+    - { name: charset, type: int }
+  return: string
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: fscanf
+  params:
+    - { name: stream, type: resource }
+    - { name: format, type: string }
+    - { name: vars, type: mixed, optional: true }
+  return: array
+  flowsToReturn: [2]
+
+- tag: function
+  name: fsockopen
+  params:
+    - { name: hostname, type: string }
+    - { name: port, type: int, optional: true }
+    - { name: error_code, type: int, optional: true }
+    - { name: error_message, type: string, optional: true }
+    - { name: timeout, type: float, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3, 4]
+
+- tag: function
+  name: ftok
+  params:
+    - { name: filename, type: string }
+    - { name: project_id, type: string }
+  return: int
+
+- tag: function
+  name: func_get_arg
+  params:
+    - { name: position, type: int }
+  flowsToReturn: [0]
+
+- tag: function
+  name: func_get_args
+  return: array
+
+- tag: function
+  name: func_num_args
+  return: int
+
+- tag: function
+  name: function_exists
+  params:
+    - { name: function, type: string }
+  return: bool
+
+- tag: function
+  name: gc_collect_cycles
+  return: int
+
+- tag: function
+  name: gc_disable
+  return: void
+
+- tag: function
+  name: gc_enable
+  return: void
+
+- tag: function
+  name: gc_enabled
+  return: bool
+
+- tag: function
+  name: gc_mem_caches
+  return: int
+
+- tag: function
+  name: gc_status
+  return: array
+
+- tag: function
+  name: gd_info
+  return: array
+
+- tag: function
+  name: gearman_bugreport
+
+- tag: function
+  name: gearman_client_add_options
+  params:
+    - { name: client_object, type: mixed }
+    - { name: option, type: mixed }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: gearman_client_add_server
+  params:
+    - { name: client_object, type: mixed }
+    - { name: host, type: mixed }
+    - { name: port, type: mixed }
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: gearman_client_add_servers
+  params:
+    - { name: client_object, type: mixed }
+    - { name: servers, type: mixed }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: gearman_client_add_task
+  params:
+    - { name: client_object, type: mixed }
+    - { name: function_name, type: mixed }
+    - { name: workload, type: mixed }
+    - { name: context, type: mixed }
+    - { name: unique, type: mixed }
+  flowsToReturn: [0, 1, 2, 3, 4]
+
+- tag: function
+  name: gearman_client_add_task_background
+  params:
+    - { name: client_object, type: mixed }
+    - { name: function_name, type: mixed }
+    - { name: workload, type: mixed }
+    - { name: context, type: mixed }
+    - { name: unique, type: mixed }
+  flowsToReturn: [0, 1, 2, 3, 4]
+
+- tag: function
+  name: gearman_client_add_task_high
+  params:
+    - { name: client_object, type: mixed }
+    - { name: function_name, type: mixed }
+    - { name: workload, type: mixed }
+    - { name: context, type: mixed }
+    - { name: unique, type: mixed }
+  flowsToReturn: [0, 1, 2, 3, 4]
+
+- tag: function
+  name: gearman_client_add_task_high_background
+  params:
+    - { name: client_object, type: mixed }
+    - { name: function_name, type: mixed }
+    - { name: workload, type: mixed }
+    - { name: context, type: mixed }
+    - { name: unique, type: mixed }
+  flowsToReturn: [0, 1, 2, 3, 4]
+
+- tag: function
+  name: gearman_client_add_task_low
+  params:
+    - { name: client_object, type: mixed }
+    - { name: function_name, type: mixed }
+    - { name: workload, type: mixed }
+    - { name: context, type: mixed }
+    - { name: unique, type: mixed }
+  flowsToReturn: [0, 1, 2, 3, 4]
+
+- tag: function
+  name: gearman_client_add_task_low_background
+  params:
+    - { name: client_object, type: mixed }
+    - { name: function_name, type: mixed }
+    - { name: workload, type: mixed }
+    - { name: context, type: mixed }
+    - { name: unique, type: mixed }
+  flowsToReturn: [0, 1, 2, 3, 4]
+
+- tag: function
+  name: gearman_client_add_task_status
+  params:
+    - { name: client_object, type: mixed }
+    - { name: job_handle, type: mixed }
+    - { name: context, type: mixed }
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: gearman_client_clear_fn
+  params:
+    - { name: client_object, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: gearman_client_clone
+  params:
+    - { name: client_object, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: gearman_client_context
+  params:
+    - { name: client_object, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: gearman_client_create
+  params:
+    - { name: client_object, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: gearman_client_do
+  params:
+    - { name: client_object, type: mixed }
+    - { name: function_name, type: mixed }
+    - { name: workload, type: mixed }
+    - { name: unique, type: mixed }
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: gearman_client_do_background
+  params:
+    - { name: client_object, type: mixed }
+    - { name: function_name, type: mixed }
+    - { name: workload, type: mixed }
+    - { name: unique, type: mixed }
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: gearman_client_do_high
+  params:
+    - { name: client_object, type: mixed }
+    - { name: function_name, type: mixed }
+    - { name: workload, type: mixed }
+    - { name: unique, type: mixed }
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: gearman_client_do_high_background
+  params:
+    - { name: client_object, type: mixed }
+    - { name: function_name, type: mixed }
+    - { name: workload, type: mixed }
+    - { name: unique, type: mixed }
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: gearman_client_do_job_handle
+  params:
+    - { name: client_object, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: gearman_client_do_low
+  params:
+    - { name: client_object, type: mixed }
+    - { name: function_name, type: mixed }
+    - { name: workload, type: mixed }
+    - { name: unique, type: mixed }
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: gearman_client_do_low_background
+  params:
+    - { name: client_object, type: mixed }
+    - { name: function_name, type: mixed }
+    - { name: workload, type: mixed }
+    - { name: unique, type: mixed }
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: gearman_client_do_normal
+  params:
+    - { name: client_object, type: mixed }
+    - { name: function_name, type: string }
+    - { name: workload, type: string }
+    - { name: unique, type: string }
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: gearman_client_do_status
+  params:
+    - { name: client_object, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: gearman_client_echo
+  params:
+    - { name: client_object, type: mixed }
+    - { name: workload, type: mixed }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: gearman_client_errno
+  params:
+    - { name: client_object, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: gearman_client_error
+  params:
+    - { name: client_object, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: gearman_client_job_status
+  params:
+    - { name: client_object, type: mixed }
+    - { name: job_handle, type: mixed }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: gearman_client_options
+  params:
+    - { name: client_object, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: gearman_client_remove_options
+  params:
+    - { name: client_object, type: mixed }
+    - { name: option, type: mixed }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: gearman_client_return_code
+  params:
+    - { name: client_object, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: gearman_client_run_tasks
+  params:
+    - { name: data, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: gearman_client_set_complete_fn
+  params:
+    - { name: client_object, type: mixed }
+    - { name: callback, type: mixed }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: gearman_client_set_context
+  params:
+    - { name: client_object, type: mixed }
+    - { name: context, type: mixed }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: gearman_client_set_created_fn
+  params:
+    - { name: client_object, type: mixed }
+    - { name: callback, type: mixed }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: gearman_client_set_data_fn
+  params:
+    - { name: client_object, type: mixed }
+    - { name: callback, type: mixed }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: gearman_client_set_exception_fn
+  params:
+    - { name: client_object, type: mixed }
+    - { name: callback, type: mixed }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: gearman_client_set_fail_fn
+  params:
+    - { name: client_object, type: mixed }
+    - { name: callback, type: mixed }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: gearman_client_set_options
+  params:
+    - { name: client_object, type: mixed }
+    - { name: option, type: mixed }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: gearman_client_set_status_fn
+  params:
+    - { name: client_object, type: mixed }
+    - { name: callback, type: mixed }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: gearman_client_set_timeout
+  params:
+    - { name: client_object, type: mixed }
+    - { name: timeout, type: mixed }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: gearman_client_set_warning_fn
+  params:
+    - { name: client_object, type: mixed }
+    - { name: callback, type: mixed }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: gearman_client_set_workload_fn
+  params:
+    - { name: client_object, type: mixed }
+    - { name: callback, type: mixed }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: gearman_client_timeout
+  params:
+    - { name: client_object, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: gearman_client_wait
+  params:
+    - { name: client_object, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: gearman_job_function_name
+  params:
+    - { name: job_object, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: gearman_job_handle
+  return: string
+
+- tag: function
+  name: gearman_job_return_code
+  params:
+    - { name: job_object, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: gearman_job_send_complete
+  params:
+    - { name: job_object, type: mixed }
+    - { name: result, type: mixed }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: gearman_job_send_data
+  params:
+    - { name: job_object, type: mixed }
+    - { name: data, type: mixed }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: gearman_job_send_exception
+  params:
+    - { name: job_object, type: mixed }
+    - { name: exception, type: mixed }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: gearman_job_send_fail
+  params:
+    - { name: job_object, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: gearman_job_send_status
+  params:
+    - { name: job_object, type: mixed }
+    - { name: numerator, type: mixed }
+    - { name: denominator, type: mixed }
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: gearman_job_send_warning
+  params:
+    - { name: job_object, type: mixed }
+    - { name: warning, type: mixed }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: gearman_job_status
+  params:
+    - { name: job_handle, type: string }
+  return: array
+
+- tag: function
+  name: gearman_job_unique
+  params:
+    - { name: job_object, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: gearman_job_workload
+  params:
+    - { name: job_object, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: gearman_job_workload_size
+  params:
+    - { name: job_object, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: gearman_task_data
+  params:
+    - { name: task_object, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: gearman_task_data_size
+  params:
+    - { name: task_object, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: gearman_task_denominator
+  params:
+    - { name: task_object, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: gearman_task_function_name
+  params:
+    - { name: task_object, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: gearman_task_is_known
+  params:
+    - { name: task_object, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: gearman_task_is_running
+  params:
+    - { name: task_object, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: gearman_task_job_handle
+  params:
+    - { name: task_object, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: gearman_task_numerator
+  params:
+    - { name: task_object, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: gearman_task_recv_data
+  params:
+    - { name: task_object, type: mixed }
+    - { name: data_len, type: mixed }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: gearman_task_return_code
+  params:
+    - { name: task_object, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: gearman_task_send_workload
+  params:
+    - { name: task_object, type: mixed }
+    - { name: data, type: mixed }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: gearman_task_unique
+  params:
+    - { name: task_object, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: gearman_verbose_name
+  params:
+    - { name: verbose, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: gearman_version
+
+- tag: function
+  name: gearman_worker_add_function
+  params:
+    - { name: worker_object, type: mixed }
+    - { name: function_name, type: mixed }
+    - { name: function, type: mixed }
+    - { name: data, type: mixed }
+    - { name: timeout, type: mixed }
+  flowsToReturn: [0, 1, 2, 3, 4]
+
+- tag: function
+  name: gearman_worker_add_options
+  params:
+    - { name: worker_object, type: mixed }
+    - { name: option, type: mixed }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: gearman_worker_add_server
+  params:
+    - { name: worker_object, type: mixed }
+    - { name: host, type: mixed }
+    - { name: port, type: mixed }
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: gearman_worker_add_servers
+  params:
+    - { name: worker_object, type: mixed }
+    - { name: servers, type: mixed }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: gearman_worker_clone
+  params:
+    - { name: worker_object, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: gearman_worker_create
+
+- tag: function
+  name: gearman_worker_echo
+  params:
+    - { name: worker_object, type: mixed }
+    - { name: workload, type: mixed }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: gearman_worker_errno
+  params:
+    - { name: worker_object, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: gearman_worker_error
+  params:
+    - { name: worker_object, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: gearman_worker_grab_job
+  params:
+    - { name: worker_object, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: gearman_worker_options
+  params:
+    - { name: worker_object, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: gearman_worker_register
+  params:
+    - { name: worker_object, type: mixed }
+    - { name: function_name, type: mixed }
+    - { name: timeout, type: mixed }
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: gearman_worker_remove_options
+  params:
+    - { name: worker_object, type: mixed }
+    - { name: option, type: mixed }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: gearman_worker_return_code
+  params:
+    - { name: worker_object, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: gearman_worker_set_options
+  params:
+    - { name: worker_object, type: mixed }
+    - { name: option, type: mixed }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: gearman_worker_set_timeout
+  params:
+    - { name: worker_object, type: mixed }
+    - { name: timeout, type: mixed }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: gearman_worker_timeout
+  params:
+    - { name: worker_object, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: gearman_worker_unregister
+  params:
+    - { name: worker_object, type: mixed }
+    - { name: function_name, type: mixed }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: gearman_worker_unregister_all
+  params:
+    - { name: worker_object, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: gearman_worker_wait
+  params:
+    - { name: worker_object, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: gearman_worker_work
+  params:
+    - { name: worker_object, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: geoip_asnum_by_name
+  params:
+    - { name: hostname, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: geoip_continent_code_by_name
+  params:
+    - { name: hostname, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: geoip_country_code3_by_name
+  params:
+    - { name: hostname, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: geoip_country_code_by_name
+  params:
+    - { name: hostname, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: geoip_country_name_by_name
+  params:
+    - { name: hostname, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: geoip_database_info
+  params:
+    - { name: database, type: int, optional: true }
+  return: string
+
+- tag: function
+  name: geoip_db_avail
+  params:
+    - { name: database, type: int }
+  return: bool
+
+- tag: function
+  name: geoip_db_filename
+  params:
+    - { name: database, type: int }
+  return: string
+
+- tag: function
+  name: geoip_db_get_all_info
+  return: array
+
+- tag: function
+  name: geoip_domain_by_name
+  params:
+    - { name: hostname, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: geoip_id_by_name
+  params:
+    - { name: hostname, type: string }
+  return: int
+
+- tag: function
+  name: geoip_isp_by_name
+  params:
+    - { name: hostname, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: geoip_netspeedcell_by_name
+  params:
+    - { name: hostname, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: geoip_org_by_name
+  params:
+    - { name: hostname, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: geoip_record_by_name
+  params:
+    - { name: hostname, type: string }
+  return: array
+
+- tag: function
+  name: geoip_region_by_name
+  params:
+    - { name: hostname, type: string }
+  return: array
+
+- tag: function
+  name: geoip_region_name_by_code
+  params:
+    - { name: country_code, type: string }
+    - { name: region_code, type: string }
+  return: string
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: geoip_setup_custom_directory
+  params:
+    - { name: path, type: string }
+  return: void
+
+- tag: function
+  name: geoip_time_zone_by_country_and_region
+  params:
+    - { name: country_code, type: string }
+    - { name: region_code, type: string, optional: true }
+  return: string
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: geoslinemerge
+  params:
+    - { name: geom, type: mixed }
+  return: array
+  flowsToReturn: [0]
+
+- tag: function
+  name: geospolygonize
+  params:
+    - { name: geom, type: mixed }
+  return: array
+  flowsToReturn: [0]
+
+- tag: function
+  name: geosrelatematch
+  params:
+    - { name: matrix, type: string }
+    - { name: pattern, type: string }
+  return: bool
+
+- tag: function
+  name: geossharedpaths
+  params:
+    - { name: geom1, type: mixed }
+    - { name: geom2, type: mixed }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: geosversion
+  return: string
+
+- tag: function
+  name: get_browser
+  params:
+    - { name: user_agent, type: string, optional: true }
+    - { name: return_array, type: bool, optional: true }
+  return: array
+
+- tag: function
+  name: get_call_stack
+
+- tag: function
+  name: get_called_class
+  return: string
+
+- tag: function
+  name: get_cfg_var
+  params:
+    - { name: option, type: string }
+  return: array
+
+- tag: function
+  name: get_class
+  params:
+    - { name: object, type: object, optional: true }
+  return: string
+
+- tag: function
+  name: get_class_methods
+  params:
+    - { name: object_or_class, type: string }
+  return: array
+
+- tag: function
+  name: get_class_vars
+  params:
+    - { name: class, type: string }
+  return: array
+
+- tag: function
+  name: get_current_user
+  return: string
+
+- tag: function
+  name: get_debug_type
+  params:
+    - { name: value, type: mixed }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: get_declared_classes
+  return: array
+
+- tag: function
+  name: get_declared_interfaces
+  return: array
+
+- tag: function
+  name: get_declared_traits
+  return: array
+
+- tag: function
+  name: get_defined_constants
+  params:
+    - { name: categorize, type: bool, optional: true }
+  return: array
+
+- tag: function
+  name: get_defined_functions
+  params:
+    - { name: exclude_disabled, type: bool, optional: true }
+  return: array
+
+- tag: function
+  name: get_defined_vars
+  return: array
+
+- tag: function
+  name: get_extension_funcs
+  params:
+    - { name: extension, type: string }
+  return: array
+
+- tag: function
+  name: get_headers
+  params:
+    - { name: url, type: string }
+    - { name: associative, type: bool, optional: true }
+    - { name: context, type: resource, optional: true }
+  return: array
+
+- tag: function
+  name: get_html_translation_table
+  params:
+    - { name: table, type: int, optional: true }
+    - { name: flags, type: int, optional: true }
+    - { name: encoding, type: string, optional: true }
+  return: array
+
+- tag: function
+  name: get_include_path
+  return: string
+
+- tag: function
+  name: get_included_files
+  return: array
+
+- tag: function
+  name: get_loaded_extensions
+  params:
+    - { name: zend_extensions, type: bool, optional: true }
+  return: array
+
+- tag: function
+  name: get_mangled_object_vars
+  params:
+    - { name: object, type: object }
+  return: array
+
+- tag: function
+  name: get_meta_tags
+  params:
+    - { name: filename, type: string }
+    - { name: use_include_path, type: bool, optional: true }
+  return: array
+
+- tag: function
+  name: get_object_vars
+  params:
+    - { name: object, type: object }
+  return: array
+
+- tag: function
+  name: get_parent_class
+  params:
+    - { name: object_or_class, type: string, optional: true }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: get_required_files
+  return: array
+
+- tag: function
+  name: get_resource_id
+  params:
+    - { name: resource, type: resource }
+  return: int
+
+- tag: function
+  name: get_resource_type
+  params:
+    - { name: resource, type: resource }
+  return: string
+
+- tag: function
+  name: get_resources
+  params:
+    - { name: type, type: string, optional: true }
+  return: array
+
+- tag: function
+  name: getallheaders
+  return: array
+
+- tag: function
+  name: getcwd
+  return: string
+
+- tag: function
+  name: getenv
+  params:
+    - { name: name, type: string, optional: true }
+    - { name: local_only, type: bool, optional: true }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: gethostbyaddr
+  params:
+    - { name: ip, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: gethostbyname
+  params:
+    - { name: hostname, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: gethostbynamel
+  params:
+    - { name: hostname, type: string }
+  return: array
+
+- tag: function
+  name: gethostname
+  return: string
+
+- tag: function
+  name: getimagesize
+  params:
+    - { name: filename, type: string }
+    - { name: image_info, type: array, optional: true }
+  return: array
+
+- tag: function
+  name: getimagesizefromstring
+  params:
+    - { name: string, type: string }
+    - { name: image_info, type: array, optional: true }
+  return: array
+  flowsToReturn: [1]
+
+- tag: function
+  name: getlastmod
+  return: int
+
+- tag: function
+  name: getmxrr
+  params:
+    - { name: hostname, type: string }
+    - { name: hosts, type: array }
+    - { name: weights, type: array, optional: true }
+  return: bool
+
+- tag: function
+  name: getmygid
+  return: int
+
+- tag: function
+  name: getmyinode
+  return: int
+
+- tag: function
+  name: getmypid
+  return: int
+
+- tag: function
+  name: getmyuid
+  return: int
+
+- tag: function
+  name: getopt
+  params:
+    - { name: short_options, type: string }
+    - { name: long_options, type: array, optional: true }
+    - { name: rest_index, type: int, optional: true }
+  return: array
+  flowsToReturn: [1]
+
+- tag: function
+  name: getprotobyname
+  params:
+    - { name: protocol, type: string }
+  return: int
+
+- tag: function
+  name: getprotobynumber
+  params:
+    - { name: protocol, type: int }
+  return: string
+
+- tag: function
+  name: getrandmax
+  return: int
+
+- tag: function
+  name: getrusage
+  params:
+    - { name: mode, type: int, optional: true }
+  return: array
+
+- tag: function
+  name: getservbyname
+  params:
+    - { name: service, type: string }
+    - { name: protocol, type: string }
+  return: int
+
+- tag: function
+  name: getservbyport
+  params:
+    - { name: port, type: int }
+    - { name: protocol, type: string }
+  return: string
+  flowsToReturn: [1]
+
+- tag: function
+  name: gettimeofday
+  params:
+    - { name: as_float, type: bool, optional: true }
+  return: array
+
+- tag: function
+  name: gettype
+  params:
+    - { name: value, type: mixed }
+  return: string
+
+- tag: function
+  name: gmstrftime
+  params:
+    - { name: format, type: string }
+    - { name: timestamp, type: int, optional: true }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: gnupg_adddecryptkey
+  params:
+    - { name: identifier, type: resource }
+    - { name: fingerprint, type: string }
+    - { name: passphrase, type: string }
+  return: bool
+
+- tag: function
+  name: gnupg_addencryptkey
+  params:
+    - { name: identifier, type: resource }
+    - { name: fingerprint, type: string }
+  return: bool
+
+- tag: function
+  name: gnupg_addsignkey
+  params:
+    - { name: identifier, type: resource }
+    - { name: fingerprint, type: string }
+    - { name: passphrase, type: string, optional: true }
+  return: bool
+
+- tag: function
+  name: gnupg_cleardecryptkeys
+  params:
+    - { name: identifier, type: resource }
+  return: bool
+
+- tag: function
+  name: gnupg_clearencryptkeys
+  params:
+    - { name: identifier, type: resource }
+  return: bool
+
+- tag: function
+  name: gnupg_clearsignkeys
+  params:
+    - { name: identifier, type: resource }
+  return: bool
+
+- tag: function
+  name: gnupg_decrypt
+  params:
+    - { name: identifier, type: resource }
+    - { name: text, type: string }
+  return: string
+  flowsToReturn: [1]
+
+- tag: function
+  name: gnupg_decryptverify
+  params:
+    - { name: identifier, type: resource }
+    - { name: text, type: string }
+    - { name: plaintext, type: string }
+  return: array
+
+- tag: function
+  name: gnupg_encrypt
+  params:
+    - { name: identifier, type: resource }
+    - { name: plaintext, type: string }
+  return: string
+  flowsToReturn: [1]
+
+- tag: function
+  name: gnupg_encryptsign
+  params:
+    - { name: identifier, type: resource }
+    - { name: plaintext, type: string }
+  return: string
+  flowsToReturn: [1]
+
+- tag: function
+  name: gnupg_export
+  params:
+    - { name: identifier, type: resource }
+    - { name: fingerprint, type: string }
+  return: string
+  flowsToReturn: [1]
+
+- tag: function
+  name: gnupg_geterror
+  params:
+    - { name: identifier, type: resource }
+  return: string
+
+- tag: function
+  name: gnupg_getprotocol
+  params:
+    - { name: identifier, type: resource }
+  return: int
+
+- tag: function
+  name: gnupg_import
+  params:
+    - { name: identifier, type: resource }
+    - { name: keydata, type: string }
+  return: array
+
+- tag: function
+  name: gnupg_init
+  return: resource
+
+- tag: function
+  name: gnupg_keyinfo
+  params:
+    - { name: identifier, type: resource }
+    - { name: pattern, type: string }
+  return: array
+
+- tag: function
+  name: gnupg_setarmor
+  params:
+    - { name: identifier, type: resource }
+    - { name: armor, type: int }
+  return: bool
+
+- tag: function
+  name: gnupg_seterrormode
+  params:
+    - { name: identifier, type: resource }
+    - { name: errormode, type: int }
+  return: void
+
+- tag: function
+  name: gnupg_setsignmode
+  params:
+    - { name: identifier, type: resource }
+    - { name: signmode, type: int }
+  return: bool
+
+- tag: function
+  name: gnupg_sign
+  params:
+    - { name: identifier, type: resource }
+    - { name: plaintext, type: string }
+  return: string
+  flowsToReturn: [1]
+
+- tag: function
+  name: gnupg_verify
+  params:
+    - { name: identifier, type: resource }
+    - { name: signed_text, type: string }
+    - { name: signature, type: string }
+    - { name: plaintext, type: string, optional: true }
+  return: array
+
+- tag: function
+  name: go
+  params:
+    - { name: func, type: callable }
+  return: int
+
+- tag: function
+  name: gopher_parsedir
+  params:
+    - { name: dirent, type: string }
+  return: array
+
+- tag: function
+  name: grapheme_extract
+  params:
+    - { name: haystack, type: string }
+    - { name: size, type: int }
+    - { name: type, type: int, optional: true }
+    - { name: offset, type: int, optional: true }
+    - { name: next, type: int, optional: true }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: grapheme_stripos
+  params:
+    - { name: haystack, type: string }
+    - { name: needle, type: string }
+    - { name: offset, type: int, optional: true }
+  return: int
+
+- tag: function
+  name: grapheme_stristr
+  params:
+    - { name: haystack, type: string }
+    - { name: needle, type: string }
+    - { name: beforeNeedle, type: bool, optional: true }
+  return: string
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: grapheme_strlen
+  params:
+    - { name: string, type: string }
+  return: int
+
+- tag: function
+  name: grapheme_strpos
+  params:
+    - { name: haystack, type: string }
+    - { name: needle, type: string }
+    - { name: offset, type: int, optional: true }
+  return: int
+
+- tag: function
+  name: grapheme_strripos
+  params:
+    - { name: haystack, type: string }
+    - { name: needle, type: string }
+    - { name: offset, type: int, optional: true }
+  return: int
+
+- tag: function
+  name: grapheme_strrpos
+  params:
+    - { name: haystack, type: string }
+    - { name: needle, type: string }
+    - { name: offset, type: int, optional: true }
+  return: int
+
+- tag: function
+  name: grapheme_strstr
+  params:
+    - { name: haystack, type: string }
+    - { name: needle, type: string }
+    - { name: beforeNeedle, type: bool, optional: true }
+  return: string
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: grapheme_substr
+  params:
+    - { name: string, type: string }
+    - { name: offset, type: int }
+    - { name: length, type: int, optional: true }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: gregoriantojd
+  params:
+    - { name: month, type: int }
+    - { name: day, type: int }
+    - { name: year, type: int }
+  return: int
+
+- tag: function
+  name: gupnp_context_get_host_ip
+  params:
+    - { name: context, type: resource }
+  return: string
+
+- tag: function
+  name: gupnp_context_get_port
+  params:
+    - { name: context, type: resource }
+  return: int
+
+- tag: function
+  name: gupnp_context_get_subscription_timeout
+  params:
+    - { name: context, type: resource }
+  return: int
+
+- tag: function
+  name: gupnp_context_host_path
+  params:
+    - { name: context, type: resource }
+    - { name: local_path, type: string }
+    - { name: server_path, type: string }
+  return: bool
+
+- tag: function
+  name: gupnp_context_new
+  params:
+    - { name: host_ip, type: string, optional: true }
+    - { name: port, type: int, optional: true }
+  return: resource
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: gupnp_context_set_subscription_timeout
+  params:
+    - { name: context, type: resource }
+    - { name: timeout, type: int }
+  return: void
+
+- tag: function
+  name: gupnp_context_timeout_add
+  params:
+    - { name: context, type: resource }
+    - { name: timeout, type: int }
+    - { name: callback, type: mixed }
+    - { name: arg, type: mixed, optional: true }
+  return: bool
+
+- tag: function
+  name: gupnp_context_unhost_path
+  params:
+    - { name: context, type: resource }
+    - { name: server_path, type: string }
+  return: bool
+
+- tag: function
+  name: gupnp_control_point_browse_start
+  params:
+    - { name: cpoint, type: resource }
+  return: bool
+
+- tag: function
+  name: gupnp_control_point_browse_stop
+  params:
+    - { name: cpoint, type: resource }
+  return: bool
+
+- tag: function
+  name: gupnp_control_point_callback_set
+  params:
+    - { name: cpoint, type: resource }
+    - { name: signal, type: int }
+    - { name: callback, type: mixed }
+    - { name: arg, type: mixed, optional: true }
+  return: bool
+
+- tag: function
+  name: gupnp_control_point_new
+  params:
+    - { name: context, type: resource }
+    - { name: target, type: string }
+  return: resource
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: gupnp_device_action_callback_set
+  params:
+    - { name: root_device, type: resource }
+    - { name: signal, type: int }
+    - { name: action_name, type: string }
+    - { name: callback, type: mixed }
+    - { name: arg, type: mixed, optional: true }
+  return: bool
+
+- tag: function
+  name: gupnp_device_info_get
+  params:
+    - { name: root_device, type: resource }
+  return: array
+

@@ -1,0 +1,450 @@
+- tag: function
+  name: basename
+  params:
+    - { name: path, type: string }
+    - { name: suffix, type: string, optional: true }
+  return: string
+
+- tag: function
+  name: chgrp
+  params:
+    - { name: filename, type: string }
+    - { name: group, type: int }
+  return: bool
+
+- tag: function
+  name: chmod
+  params:
+    - { name: filename, type: string }
+    - { name: permissions, type: int }
+  return: bool
+
+- tag: function
+  name: chown
+  params:
+    - { name: filename, type: string }
+    - { name: user, type: int }
+  return: bool
+
+- tag: function
+  name: copy
+  params:
+    - { name: from, type: string }
+    - { name: to, type: string }
+    - { name: context, type: resource, optional: true }
+  return: bool
+
+- tag: function
+  name: dirname
+  params:
+    - { name: path, type: string }
+    - { name: levels, type: int, optional: true }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: fclose
+  params:
+    - { name: stream, type: resource }
+  return: bool
+
+- tag: function
+  name: feof
+  params:
+    - { name: stream, type: resource }
+  return: bool
+
+- tag: function
+  name: fflush
+  params:
+    - { name: stream, type: resource }
+  return: bool
+
+- tag: function
+  name: fgetc
+  params:
+    - { name: stream, type: resource }
+  return: string
+
+- tag: function
+  name: fgetcsv
+  params:
+    - { name: stream, type: resource }
+    - { name: length, type: int, optional: true }
+    - { name: separator, type: string, optional: true }
+    - { name: enclosure, type: string, optional: true }
+    - { name: escape, type: string, optional: true }
+  return: array
+
+- tag: function
+  name: fgets
+  params:
+    - { name: stream, type: resource }
+    - { name: length, type: int, optional: true }
+  return: string
+
+- tag: function
+  name: file
+  params:
+    - { name: filename, type: string }
+    - { name: flags, type: int, optional: true }
+    - { name: context, type: resource, optional: true }
+  return: array
+
+- tag: function
+  name: file_exists
+  params:
+    - { name: filename, type: string }
+  return: bool
+
+- tag: function
+  name: file_get_contents
+  params:
+    - { name: filename, type: string }
+    - { name: use_include_path, type: bool, optional: true }
+    - { name: context, type: resource, optional: true }
+    - { name: offset, type: int, optional: true }
+    - { name: length, type: int, optional: true }
+  return: string
+
+- tag: function
+  name: file_put_contents
+  params:
+    - { name: filename, type: string }
+    - { name: data, type: array }
+    - { name: flags, type: int, optional: true }
+    - { name: context, type: resource, optional: true }
+  return: int
+
+- tag: function
+  name: fileatime
+  params:
+    - { name: filename, type: string }
+  return: int
+
+- tag: function
+  name: filectime
+  params:
+    - { name: filename, type: string }
+  return: int
+
+- tag: function
+  name: filegroup
+  params:
+    - { name: filename, type: string }
+  return: int
+
+- tag: function
+  name: fileinode
+  params:
+    - { name: filename, type: string }
+  return: int
+
+- tag: function
+  name: filemtime
+  params:
+    - { name: filename, type: string }
+  return: int
+
+- tag: function
+  name: fileowner
+  params:
+    - { name: filename, type: string }
+  return: int
+
+- tag: function
+  name: fileperms
+  params:
+    - { name: filename, type: string }
+  return: int
+
+- tag: function
+  name: filepro
+  params:
+    - { name: directory, type: string }
+  return: bool
+
+- tag: function
+  name: filepro_fieldcount
+  return: int
+
+- tag: function
+  name: filepro_fieldname
+  params:
+    - { name: field_number, type: int }
+  return: string
+
+- tag: function
+  name: filepro_fieldtype
+  params:
+    - { name: field_number, type: int }
+  return: string
+
+- tag: function
+  name: filepro_fieldwidth
+  params:
+    - { name: field_number, type: int }
+  return: int
+
+- tag: function
+  name: filepro_retrieve
+  params:
+    - { name: row_number, type: int }
+    - { name: field_number, type: int }
+  return: string
+
+- tag: function
+  name: filepro_rowcount
+  return: int
+
+- tag: function
+  name: filesize
+  params:
+    - { name: filename, type: string }
+  return: int
+
+- tag: function
+  name: filetype
+  params:
+    - { name: filename, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: flock
+  params:
+    - { name: stream, type: resource }
+    - { name: operation, type: int }
+    - { name: would_block, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: fopen
+  params:
+    - { name: filename, type: string }
+    - { name: mode, type: string }
+    - { name: use_include_path, type: bool, optional: true }
+    - { name: context, type: resource, optional: true }
+  return: resource
+
+- tag: function
+  name: fpassthru
+  params:
+    - { name: stream, type: resource }
+  return: int
+
+- tag: function
+  name: fputcsv
+  params:
+    - { name: stream, type: resource }
+    - { name: fields, type: array }
+    - { name: separator, type: string, optional: true }
+    - { name: enclosure, type: string, optional: true }
+    - { name: escape, type: string, optional: true }
+  return: int
+
+- tag: function
+  name: fread
+  params:
+    - { name: stream, type: resource }
+    - { name: length, type: int }
+  return: string
+
+- tag: function
+  name: fseek
+  params:
+    - { name: stream, type: resource }
+    - { name: offset, type: int }
+    - { name: whence, type: int, optional: true }
+  return: int
+
+- tag: function
+  name: fstat
+  params:
+    - { name: stream, type: resource }
+  return: array
+
+- tag: function
+  name: ftell
+  params:
+    - { name: stream, type: resource }
+  return: int
+
+- tag: function
+  name: ftruncate
+  params:
+    - { name: stream, type: resource }
+    - { name: size, type: int }
+  return: bool
+
+- tag: function
+  name: fwrite
+  params:
+    - { name: stream, type: resource }
+    - { name: data, type: string }
+    - { name: length, type: int, optional: true }
+  return: int
+
+- tag: function
+  name: glob
+  params:
+    - { name: pattern, type: string }
+    - { name: flags, type: int, optional: true }
+  return: array
+
+- tag: function
+  name: is_dir
+  params:
+    - { name: filename, type: string }
+  return: bool
+
+- tag: function
+  name: is_executable
+  params:
+    - { name: filename, type: string }
+  return: bool
+
+- tag: function
+  name: is_file
+  params:
+    - { name: filename, type: string }
+  return: bool
+
+- tag: function
+  name: is_link
+  params:
+    - { name: filename, type: string }
+  return: bool
+
+- tag: function
+  name: is_readable
+  params:
+    - { name: filename, type: string }
+  return: bool
+
+- tag: function
+  name: is_uploaded_file
+  params:
+    - { name: filename, type: string }
+  return: bool
+
+- tag: function
+  name: is_writable
+  params:
+    - { name: filename, type: string }
+  return: bool
+
+- tag: function
+  name: is_writeable
+  params:
+    - { name: filename, type: string }
+  return: bool
+
+- tag: function
+  name: mkdir
+  params:
+    - { name: directory, type: string }
+    - { name: permissions, type: int, optional: true }
+    - { name: recursive, type: bool, optional: true }
+    - { name: context, type: resource, optional: true }
+  return: bool
+
+- tag: function
+  name: move_uploaded_file
+  params:
+    - { name: from, type: string }
+    - { name: to, type: string }
+  return: bool
+
+- tag: function
+  name: opendir
+  params:
+    - { name: directory, type: string }
+    - { name: context, type: resource, optional: true }
+  return: resource
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: pathinfo
+  params:
+    - { name: path, type: string }
+    - { name: flags, type: int, optional: true }
+  return: array
+
+- tag: function
+  name: readfile
+  params:
+    - { name: filename, type: string }
+    - { name: use_include_path, type: bool, optional: true }
+    - { name: context, type: resource, optional: true }
+  return: int
+
+- tag: function
+  name: readlink
+  params:
+    - { name: path, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: realpath
+  params:
+    - { name: path, type: string }
+  return: string
+
+- tag: function
+  name: realpath_cache_get
+  return: array
+
+- tag: function
+  name: realpath_cache_size
+  return: int
+
+- tag: function
+  name: rename
+  params:
+    - { name: from, type: string }
+    - { name: to, type: string }
+    - { name: context, type: resource, optional: true }
+  return: bool
+
+- tag: function
+  name: rename_function
+  params:
+    - { name: original_name, type: string }
+    - { name: new_name, type: string }
+  return: bool
+
+- tag: function
+  name: rmdir
+  params:
+    - { name: directory, type: string }
+    - { name: context, type: resource, optional: true }
+  return: bool
+
+- tag: function
+  name: scandir
+  params:
+    - { name: directory, type: string }
+    - { name: sorting_order, type: int, optional: true }
+    - { name: context, type: resource, optional: true }
+  return: array
+
+- tag: function
+  name: tempnam
+  params:
+    - { name: directory, type: string }
+    - { name: prefix, type: string }
+  return: string
+
+- tag: function
+  name: tmpfile
+  return: resource
+
+- tag: function
+  name: unlink
+  params:
+    - { name: filename, type: string }
+    - { name: context, type: resource, optional: true }
+  return: bool
+

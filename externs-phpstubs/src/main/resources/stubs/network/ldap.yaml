@@ -1,0 +1,486 @@
+- tag: function
+  name: ldap_8859_to_t61
+  params:
+    - { name: value, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: ldap_add
+  params:
+    - { name: ldap, type: resource }
+    - { name: dn, type: string }
+    - { name: entry, type: array }
+    - { name: controls, type: array, optional: true }
+  return: bool
+
+- tag: function
+  name: ldap_add_ext
+  params:
+    - { name: ldap, type: resource }
+    - { name: dn, type: string }
+    - { name: entry, type: array }
+    - { name: controls, type: array, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: ldap_bind
+  params:
+    - { name: ldap, type: resource }
+    - { name: dn, type: string, optional: true }
+    - { name: password, type: string, optional: true }
+  return: bool
+
+- tag: function
+  name: ldap_bind_ext
+  params:
+    - { name: ldap, type: resource }
+    - { name: dn, type: string, optional: true }
+    - { name: password, type: string, optional: true }
+    - { name: controls, type: array, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: ldap_close
+  params:
+    - { name: ldap, type: resource }
+  return: bool
+
+- tag: function
+  name: ldap_compare
+  params:
+    - { name: ldap, type: resource }
+    - { name: dn, type: string }
+    - { name: attribute, type: string }
+    - { name: value, type: string }
+    - { name: controls, type: array, optional: true }
+  return: bool
+
+- tag: function
+  name: ldap_connect
+  params:
+    - { name: uri, type: string, optional: true }
+    - { name: port, type: int, optional: true }
+    - { name: wallet, type: string, optional: true }
+    - { name: password, type: string, optional: true }
+    - { name: auth_mode, type: int, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3, 4]
+
+- tag: function
+  name: ldap_count_entries
+  params:
+    - { name: ldap, type: resource }
+    - { name: result, type: resource }
+  return: int
+
+- tag: function
+  name: ldap_delete
+  params:
+    - { name: ldap, type: resource }
+    - { name: dn, type: string }
+    - { name: controls, type: array, optional: true }
+  return: bool
+
+- tag: function
+  name: ldap_delete_ext
+  params:
+    - { name: ldap, type: resource }
+    - { name: dn, type: string }
+    - { name: controls, type: array, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: ldap_dn2ufn
+  params:
+    - { name: dn, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: ldap_err2str
+  params:
+    - { name: errno, type: int }
+  return: string
+
+- tag: function
+  name: ldap_errno
+  params:
+    - { name: ldap, type: resource }
+  return: int
+
+- tag: function
+  name: ldap_error
+  params:
+    - { name: ldap, type: resource }
+  return: string
+
+- tag: function
+  name: ldap_escape
+  params:
+    - { name: value, type: string }
+    - { name: ignore, type: string, optional: true }
+    - { name: flags, type: int, optional: true }
+  return: string
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: ldap_exop
+  params:
+    - { name: ldap, type: resource }
+    - { name: request_oid, type: string }
+    - { name: request_data, type: string, optional: true }
+    - { name: controls, type: array, optional: true }
+    - { name: response_data, type: string, optional: true }
+    - { name: response_oid, type: string, optional: true }
+  return: bool
+
+- tag: function
+  name: ldap_exop_passwd
+  params:
+    - { name: ldap, type: resource }
+    - { name: user, type: string, optional: true }
+    - { name: old_password, type: string, optional: true }
+    - { name: new_password, type: string, optional: true }
+    - { name: controls, type: array, optional: true }
+  return: bool
+
+- tag: function
+  name: ldap_exop_refresh
+  params:
+    - { name: ldap, type: resource }
+    - { name: dn, type: string }
+    - { name: ttl, type: int }
+  return: int
+
+- tag: function
+  name: ldap_exop_whoami
+  params:
+    - { name: ldap, type: resource }
+  return: string
+
+- tag: function
+  name: ldap_explode_dn
+  params:
+    - { name: dn, type: string }
+    - { name: with_attrib, type: int }
+  return: array
+
+- tag: function
+  name: ldap_first_attribute
+  params:
+    - { name: ldap, type: resource }
+    - { name: entry, type: resource }
+  return: string
+
+- tag: function
+  name: ldap_first_entry
+  params:
+    - { name: ldap, type: resource }
+    - { name: result, type: resource }
+  return: resource
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: ldap_first_reference
+  params:
+    - { name: ldap, type: resource }
+    - { name: result, type: resource }
+  return: resource
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: ldap_free_result
+  params:
+    - { name: ldap, type: resource }
+  return: bool
+
+- tag: function
+  name: ldap_get_attributes
+  params:
+    - { name: ldap, type: resource }
+    - { name: entry, type: resource }
+  return: array
+
+- tag: function
+  name: ldap_get_dn
+  params:
+    - { name: ldap, type: resource }
+    - { name: entry, type: resource }
+  return: string
+
+- tag: function
+  name: ldap_get_entries
+  params:
+    - { name: ldap, type: resource }
+    - { name: result, type: resource }
+  return: array
+
+- tag: function
+  name: ldap_get_option
+  params:
+    - { name: ldap, type: resource }
+    - { name: option, type: int }
+    - { name: value, type: array, optional: true }
+  return: bool
+
+- tag: function
+  name: ldap_get_values
+  params:
+    - { name: ldap, type: resource }
+    - { name: entry, type: resource }
+    - { name: attribute, type: string }
+  return: array
+
+- tag: function
+  name: ldap_get_values_len
+  params:
+    - { name: ldap, type: resource }
+    - { name: entry, type: resource }
+    - { name: attribute, type: string }
+  return: array
+
+- tag: function
+  name: ldap_list
+  params:
+    - { name: ldap, type: array }
+    - { name: base, type: array }
+    - { name: filter, type: array }
+    - { name: attributes, type: array, optional: true }
+    - { name: attributes_only, type: int, optional: true }
+    - { name: sizelimit, type: int, optional: true }
+    - { name: timelimit, type: int, optional: true }
+    - { name: deref, type: int, optional: true }
+    - { name: controls, type: array, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+
+- tag: function
+  name: ldap_mod_add
+  params:
+    - { name: ldap, type: resource }
+    - { name: dn, type: string }
+    - { name: entry, type: array }
+    - { name: controls, type: array, optional: true }
+  return: bool
+
+- tag: function
+  name: ldap_mod_add_ext
+  params:
+    - { name: ldap, type: resource }
+    - { name: dn, type: string }
+    - { name: entry, type: array }
+    - { name: controls, type: array, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: ldap_mod_del
+  params:
+    - { name: ldap, type: resource }
+    - { name: dn, type: string }
+    - { name: entry, type: array }
+    - { name: controls, type: array, optional: true }
+  return: bool
+
+- tag: function
+  name: ldap_mod_del_ext
+  params:
+    - { name: ldap, type: resource }
+    - { name: dn, type: string }
+    - { name: entry, type: array }
+    - { name: controls, type: array, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: ldap_mod_replace
+  params:
+    - { name: ldap, type: resource }
+    - { name: dn, type: string }
+    - { name: entry, type: array }
+    - { name: controls, type: array, optional: true }
+  return: bool
+
+- tag: function
+  name: ldap_mod_replace_ext
+  params:
+    - { name: ldap, type: resource }
+    - { name: dn, type: string }
+    - { name: entry, type: array }
+    - { name: controls, type: array, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: ldap_modify
+  params:
+    - { name: ldap, type: resource }
+    - { name: dn, type: string }
+    - { name: entry, type: array }
+    - { name: controls, type: array, optional: true }
+  return: bool
+
+- tag: function
+  name: ldap_modify_batch
+  params:
+    - { name: ldap, type: resource }
+    - { name: dn, type: string }
+    - { name: modifications_info, type: array }
+    - { name: controls, type: array, optional: true }
+  return: bool
+
+- tag: function
+  name: ldap_next_attribute
+  params:
+    - { name: ldap, type: resource }
+    - { name: entry, type: resource }
+  return: string
+
+- tag: function
+  name: ldap_next_entry
+  params:
+    - { name: ldap, type: resource }
+    - { name: entry, type: resource }
+  return: resource
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: ldap_next_reference
+  params:
+    - { name: ldap, type: resource }
+    - { name: entry, type: resource }
+  return: resource
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: ldap_parse_exop
+  params:
+    - { name: ldap, type: resource }
+    - { name: result, type: resource }
+    - { name: response_data, type: string, optional: true }
+    - { name: response_oid, type: string, optional: true }
+  return: bool
+
+- tag: function
+  name: ldap_parse_reference
+  params:
+    - { name: ldap, type: resource }
+    - { name: entry, type: resource }
+    - { name: referrals, type: array }
+  return: bool
+
+- tag: function
+  name: ldap_parse_result
+  params:
+    - { name: ldap, type: resource }
+    - { name: result, type: resource }
+    - { name: error_code, type: int }
+    - { name: matched_dn, type: string, optional: true }
+    - { name: error_message, type: string, optional: true }
+    - { name: referrals, type: array, optional: true }
+    - { name: controls, type: array, optional: true }
+  return: bool
+
+- tag: function
+  name: ldap_read
+  params:
+    - { name: ldap, type: array }
+    - { name: base, type: array }
+    - { name: filter, type: array }
+    - { name: attributes, type: array, optional: true }
+    - { name: attributes_only, type: int, optional: true }
+    - { name: sizelimit, type: int, optional: true }
+    - { name: timelimit, type: int, optional: true }
+    - { name: deref, type: int, optional: true }
+    - { name: controls, type: array, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+
+- tag: function
+  name: ldap_rename
+  params:
+    - { name: ldap, type: resource }
+    - { name: dn, type: string }
+    - { name: new_rdn, type: string }
+    - { name: new_parent, type: string }
+    - { name: delete_old_rdn, type: bool }
+    - { name: controls, type: array, optional: true }
+  return: bool
+
+- tag: function
+  name: ldap_rename_ext
+  params:
+    - { name: ldap, type: resource }
+    - { name: dn, type: string }
+    - { name: new_rdn, type: string }
+    - { name: new_parent, type: string }
+    - { name: delete_old_rdn, type: bool }
+    - { name: controls, type: array, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3, 4, 5]
+
+- tag: function
+  name: ldap_sasl_bind
+  params:
+    - { name: ldap, type: resource }
+    - { name: dn, type: string, optional: true }
+    - { name: password, type: string, optional: true }
+    - { name: mech, type: string, optional: true }
+    - { name: realm, type: string, optional: true }
+    - { name: authc_id, type: string, optional: true }
+    - { name: authz_id, type: string, optional: true }
+    - { name: props, type: string, optional: true }
+  return: bool
+
+- tag: function
+  name: ldap_search
+  params:
+    - { name: ldap, type: array }
+    - { name: base, type: array }
+    - { name: filter, type: array }
+    - { name: attributes, type: array, optional: true }
+    - { name: attributes_only, type: int, optional: true }
+    - { name: sizelimit, type: int, optional: true }
+    - { name: timelimit, type: int, optional: true }
+    - { name: deref, type: int, optional: true }
+    - { name: controls, type: array, optional: true }
+  return: array
+
+- tag: function
+  name: ldap_set_option
+  params:
+    - { name: ldap, type: resource }
+    - { name: option, type: int }
+    - { name: value, type: mixed }
+  return: bool
+
+- tag: function
+  name: ldap_set_rebind_proc
+  params:
+    - { name: ldap, type: resource }
+    - { name: callback, type: callable }
+  return: bool
+
+- tag: function
+  name: ldap_start_tls
+  params:
+    - { name: ldap, type: resource }
+  return: bool
+
+- tag: function
+  name: ldap_t61_to_8859
+  params:
+    - { name: value, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: ldap_unbind
+  params:
+    - { name: ldap, type: resource }
+  return: bool
+

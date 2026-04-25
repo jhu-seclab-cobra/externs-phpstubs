@@ -1,0 +1,904 @@
+- tag: function
+  name: image_type_to_extension
+  params:
+    - { name: image_type, type: int }
+    - { name: include_dot, type: bool, optional: true }
+  return: string
+
+- tag: function
+  name: image_type_to_mime_type
+  params:
+    - { name: image_type, type: int }
+  return: string
+
+- tag: function
+  name: imageaffine
+  params:
+    - { name: image, type: mixed }
+    - { name: affine, type: array }
+    - { name: clip, type: array, optional: true }
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: imageaffinematrixconcat
+  params:
+    - { name: matrix1, type: array }
+    - { name: matrix2, type: array }
+  return: array
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: imageaffinematrixget
+  params:
+    - { name: type, type: int }
+    - { name: options, type: array }
+  return: array
+  flowsToReturn: [1]
+
+- tag: function
+  name: imagealphablending
+  params:
+    - { name: image, type: mixed }
+    - { name: enable, type: bool }
+  return: bool
+
+- tag: function
+  name: imageantialias
+  params:
+    - { name: image, type: mixed }
+    - { name: enable, type: bool }
+  return: bool
+
+- tag: function
+  name: imagearc
+  params:
+    - { name: image, type: mixed }
+    - { name: center_x, type: int }
+    - { name: center_y, type: int }
+    - { name: width, type: int }
+    - { name: height, type: int }
+    - { name: start_angle, type: int }
+    - { name: end_angle, type: int }
+    - { name: color, type: int }
+  return: bool
+
+- tag: function
+  name: imagebmp
+  params:
+    - { name: image, type: mixed }
+    - { name: file, type: resource, optional: true }
+    - { name: compressed, type: bool, optional: true }
+  return: bool
+
+- tag: function
+  name: imagechar
+  params:
+    - { name: image, type: mixed }
+    - { name: font, type: int }
+    - { name: x, type: int }
+    - { name: y, type: int }
+    - { name: char, type: string }
+    - { name: color, type: int }
+  return: bool
+
+- tag: function
+  name: imagecharup
+  params:
+    - { name: image, type: mixed }
+    - { name: font, type: int }
+    - { name: x, type: int }
+    - { name: y, type: int }
+    - { name: char, type: string }
+    - { name: color, type: int }
+  return: bool
+
+- tag: function
+  name: imagecolorallocate
+  params:
+    - { name: image, type: mixed }
+    - { name: red, type: int }
+    - { name: green, type: int }
+    - { name: blue, type: int }
+  return: int
+
+- tag: function
+  name: imagecolorallocatealpha
+  params:
+    - { name: image, type: mixed }
+    - { name: red, type: int }
+    - { name: green, type: int }
+    - { name: blue, type: int }
+    - { name: alpha, type: int }
+  return: int
+
+- tag: function
+  name: imagecolorat
+  params:
+    - { name: image, type: mixed }
+    - { name: x, type: int }
+    - { name: y, type: int }
+  return: int
+
+- tag: function
+  name: imagecolorclosest
+  params:
+    - { name: image, type: mixed }
+    - { name: red, type: int }
+    - { name: green, type: int }
+    - { name: blue, type: int }
+  return: int
+
+- tag: function
+  name: imagecolorclosestalpha
+  params:
+    - { name: image, type: mixed }
+    - { name: red, type: int }
+    - { name: green, type: int }
+    - { name: blue, type: int }
+    - { name: alpha, type: int }
+  return: int
+
+- tag: function
+  name: imagecolorclosesthwb
+  params:
+    - { name: image, type: mixed }
+    - { name: red, type: int }
+    - { name: green, type: int }
+    - { name: blue, type: int }
+  return: int
+
+- tag: function
+  name: imagecolordeallocate
+  params:
+    - { name: image, type: mixed }
+    - { name: color, type: int }
+  return: bool
+
+- tag: function
+  name: imagecolorexact
+  params:
+    - { name: image, type: mixed }
+    - { name: red, type: int }
+    - { name: green, type: int }
+    - { name: blue, type: int }
+  return: int
+
+- tag: function
+  name: imagecolorexactalpha
+  params:
+    - { name: image, type: mixed }
+    - { name: red, type: int }
+    - { name: green, type: int }
+    - { name: blue, type: int }
+    - { name: alpha, type: int }
+  return: int
+
+- tag: function
+  name: imagecolormatch
+  params:
+    - { name: image1, type: mixed }
+    - { name: image2, type: mixed }
+  return: bool
+
+- tag: function
+  name: imagecolorresolve
+  params:
+    - { name: image, type: mixed }
+    - { name: red, type: int }
+    - { name: green, type: int }
+    - { name: blue, type: int }
+  return: int
+
+- tag: function
+  name: imagecolorresolvealpha
+  params:
+    - { name: image, type: mixed }
+    - { name: red, type: int }
+    - { name: green, type: int }
+    - { name: blue, type: int }
+    - { name: alpha, type: int }
+  return: int
+
+- tag: function
+  name: imagecolorset
+  params:
+    - { name: image, type: mixed }
+    - { name: color, type: int }
+    - { name: red, type: int }
+    - { name: green, type: int }
+    - { name: blue, type: int }
+    - { name: alpha, type: int, optional: true }
+  return: None
+
+- tag: function
+  name: imagecolorsforindex
+  params:
+    - { name: image, type: mixed }
+    - { name: color, type: int }
+  return: array
+  flowsToReturn: [0]
+
+- tag: function
+  name: imagecolorstotal
+  params:
+    - { name: image, type: mixed }
+  return: int
+
+- tag: function
+  name: imagecolortransparent
+  params:
+    - { name: image, type: mixed }
+    - { name: color, type: int, optional: true }
+  return: int
+
+- tag: function
+  name: imageconvolution
+  params:
+    - { name: image, type: mixed }
+    - { name: matrix, type: array }
+    - { name: divisor, type: float }
+    - { name: offset, type: float }
+  return: bool
+
+- tag: function
+  name: imagecopy
+  params:
+    - { name: dst_image, type: mixed }
+    - { name: src_image, type: mixed }
+    - { name: dst_x, type: int }
+    - { name: dst_y, type: int }
+    - { name: src_x, type: int }
+    - { name: src_y, type: int }
+    - { name: src_width, type: int }
+    - { name: src_height, type: int }
+  return: bool
+
+- tag: function
+  name: imagecopymerge
+  params:
+    - { name: dst_image, type: mixed }
+    - { name: src_image, type: mixed }
+    - { name: dst_x, type: int }
+    - { name: dst_y, type: int }
+    - { name: src_x, type: int }
+    - { name: src_y, type: int }
+    - { name: src_width, type: int }
+    - { name: src_height, type: int }
+    - { name: pct, type: int }
+  return: bool
+
+- tag: function
+  name: imagecopymergegray
+  params:
+    - { name: dst_image, type: mixed }
+    - { name: src_image, type: mixed }
+    - { name: dst_x, type: int }
+    - { name: dst_y, type: int }
+    - { name: src_x, type: int }
+    - { name: src_y, type: int }
+    - { name: src_width, type: int }
+    - { name: src_height, type: int }
+    - { name: pct, type: int }
+  return: bool
+
+- tag: function
+  name: imagecopyresampled
+  params:
+    - { name: dst_image, type: mixed }
+    - { name: src_image, type: mixed }
+    - { name: dst_x, type: int }
+    - { name: dst_y, type: int }
+    - { name: src_x, type: int }
+    - { name: src_y, type: int }
+    - { name: dst_width, type: int }
+    - { name: dst_height, type: int }
+    - { name: src_width, type: int }
+    - { name: src_height, type: int }
+  return: bool
+
+- tag: function
+  name: imagecopyresized
+  params:
+    - { name: dst_image, type: mixed }
+    - { name: src_image, type: mixed }
+    - { name: dst_x, type: int }
+    - { name: dst_y, type: int }
+    - { name: src_x, type: int }
+    - { name: src_y, type: int }
+    - { name: dst_width, type: int }
+    - { name: dst_height, type: int }
+    - { name: src_width, type: int }
+    - { name: src_height, type: int }
+  return: bool
+
+- tag: function
+  name: imagecreate
+  params:
+    - { name: width, type: int }
+    - { name: height, type: int }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: imagecreatefrombmp
+  params:
+    - { name: filename, type: string }
+  flowsToReturn: [0]
+
+- tag: function
+  name: imagecreatefromgd
+  params:
+    - { name: filename, type: string }
+  flowsToReturn: [0]
+
+- tag: function
+  name: imagecreatefromgd2
+  params:
+    - { name: filename, type: string }
+  flowsToReturn: [0]
+
+- tag: function
+  name: imagecreatefromgd2part
+  params:
+    - { name: filename, type: string }
+    - { name: x, type: int }
+    - { name: y, type: int }
+    - { name: width, type: int }
+    - { name: height, type: int }
+  flowsToReturn: [0, 1, 2, 3, 4]
+
+- tag: function
+  name: imagecreatefromgif
+  params:
+    - { name: filename, type: string }
+  flowsToReturn: [0]
+
+- tag: function
+  name: imagecreatefromjpeg
+  params:
+    - { name: filename, type: string }
+  flowsToReturn: [0]
+
+- tag: function
+  name: imagecreatefrompng
+  params:
+    - { name: filename, type: string }
+  flowsToReturn: [0]
+
+- tag: function
+  name: imagecreatefromstring
+  params:
+    - { name: data, type: string }
+  flowsToReturn: [0]
+
+- tag: function
+  name: imagecreatefromtga
+  params:
+    - { name: filename, type: string }
+  flowsToReturn: [0]
+
+- tag: function
+  name: imagecreatefromwbmp
+  params:
+    - { name: filename, type: string }
+  flowsToReturn: [0]
+
+- tag: function
+  name: imagecreatefromwebp
+  params:
+    - { name: filename, type: string }
+  flowsToReturn: [0]
+
+- tag: function
+  name: imagecreatefromxbm
+  params:
+    - { name: filename, type: string }
+  flowsToReturn: [0]
+
+- tag: function
+  name: imagecreatefromxpm
+  params:
+    - { name: filename, type: string }
+  flowsToReturn: [0]
+
+- tag: function
+  name: imagecreatetruecolor
+  params:
+    - { name: width, type: int }
+    - { name: height, type: int }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: imagecrop
+  params:
+    - { name: image, type: mixed }
+    - { name: rectangle, type: array }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: imagecropauto
+  params:
+    - { name: image, type: mixed }
+    - { name: mode, type: int, optional: true }
+    - { name: threshold, type: float, optional: true }
+    - { name: color, type: int, optional: true }
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: imagedashedline
+  params:
+    - { name: image, type: mixed }
+    - { name: x1, type: int }
+    - { name: y1, type: int }
+    - { name: x2, type: int }
+    - { name: y2, type: int }
+    - { name: color, type: int }
+  return: bool
+
+- tag: function
+  name: imagedestroy
+  params:
+    - { name: image, type: mixed }
+  return: bool
+
+- tag: function
+  name: imageellipse
+  params:
+    - { name: image, type: mixed }
+    - { name: center_x, type: int }
+    - { name: center_y, type: int }
+    - { name: width, type: int }
+    - { name: height, type: int }
+    - { name: color, type: int }
+  return: bool
+
+- tag: function
+  name: imagefill
+  params:
+    - { name: image, type: mixed }
+    - { name: x, type: int }
+    - { name: y, type: int }
+    - { name: color, type: int }
+  return: bool
+
+- tag: function
+  name: imagefilledarc
+  params:
+    - { name: image, type: mixed }
+    - { name: center_x, type: int }
+    - { name: center_y, type: int }
+    - { name: width, type: int }
+    - { name: height, type: int }
+    - { name: start_angle, type: int }
+    - { name: end_angle, type: int }
+    - { name: color, type: int }
+    - { name: style, type: int }
+  return: bool
+
+- tag: function
+  name: imagefilledellipse
+  params:
+    - { name: image, type: mixed }
+    - { name: center_x, type: int }
+    - { name: center_y, type: int }
+    - { name: width, type: int }
+    - { name: height, type: int }
+    - { name: color, type: int }
+  return: bool
+
+- tag: function
+  name: imagefilledpolygon
+  params:
+    - { name: image, type: mixed }
+    - { name: points, type: array }
+    - { name: num_points_or_color, type: int }
+    - { name: color, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: imagefilledrectangle
+  params:
+    - { name: image, type: mixed }
+    - { name: x1, type: int }
+    - { name: y1, type: int }
+    - { name: x2, type: int }
+    - { name: y2, type: int }
+    - { name: color, type: int }
+  return: bool
+
+- tag: function
+  name: imagefilltoborder
+  params:
+    - { name: image, type: mixed }
+    - { name: x, type: int }
+    - { name: y, type: int }
+    - { name: border_color, type: int }
+    - { name: color, type: int }
+  return: bool
+
+- tag: function
+  name: imagefilter
+  params:
+    - { name: image, type: mixed }
+    - { name: filter, type: int }
+    - { name: args, type: array, optional: true }
+  return: bool
+
+- tag: function
+  name: imageflip
+  params:
+    - { name: image, type: mixed }
+    - { name: mode, type: int }
+  return: bool
+
+- tag: function
+  name: imagefontheight
+  params:
+    - { name: font, type: int }
+  return: int
+
+- tag: function
+  name: imagefontwidth
+  params:
+    - { name: font, type: int }
+  return: int
+
+- tag: function
+  name: imageftbbox
+  params:
+    - { name: size, type: float }
+    - { name: angle, type: float }
+    - { name: font_filename, type: string }
+    - { name: string, type: string }
+    - { name: options, type: array, optional: true }
+  return: array
+  flowsToReturn: [4]
+
+- tag: function
+  name: imagefttext
+  params:
+    - { name: image, type: mixed }
+    - { name: size, type: float }
+    - { name: angle, type: float }
+    - { name: x, type: int }
+    - { name: y, type: int }
+    - { name: color, type: int }
+    - { name: font_filename, type: string }
+    - { name: text, type: string }
+    - { name: options, type: array, optional: true }
+  return: array
+  flowsToReturn: [0, 8]
+
+- tag: function
+  name: imagegammacorrect
+  params:
+    - { name: image, type: mixed }
+    - { name: input_gamma, type: float }
+    - { name: output_gamma, type: float }
+  return: bool
+
+- tag: function
+  name: imagegd
+  params:
+    - { name: image, type: mixed }
+    - { name: file, type: string, optional: true }
+  return: bool
+
+- tag: function
+  name: imagegd2
+  params:
+    - { name: image, type: mixed }
+    - { name: file, type: string, optional: true }
+    - { name: chunk_size, type: int, optional: true }
+    - { name: mode, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: imagegetclip
+  params:
+    - { name: image, type: mixed }
+  return: array
+  flowsToReturn: [0]
+
+- tag: function
+  name: imagegetinterpolation
+  params:
+    - { name: image, type: mixed }
+  return: int
+
+- tag: function
+  name: imagegif
+  params:
+    - { name: image, type: mixed }
+    - { name: file, type: resource, optional: true }
+  return: bool
+
+- tag: function
+  name: imagegrabscreen
+
+- tag: function
+  name: imagegrabwindow
+  params:
+    - { name: handle, type: int }
+    - { name: client_area, type: int, optional: true }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: imageinterlace
+  params:
+    - { name: image, type: mixed }
+    - { name: enable, type: bool, optional: true }
+  return: bool
+
+- tag: function
+  name: imageistruecolor
+  params:
+    - { name: image, type: mixed }
+  return: bool
+
+- tag: function
+  name: imagejpeg
+  params:
+    - { name: image, type: mixed }
+    - { name: file, type: resource, optional: true }
+    - { name: quality, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: imagelayereffect
+  params:
+    - { name: image, type: mixed }
+    - { name: effect, type: int }
+  return: bool
+
+- tag: function
+  name: imageline
+  params:
+    - { name: image, type: mixed }
+    - { name: x1, type: int }
+    - { name: y1, type: int }
+    - { name: x2, type: int }
+    - { name: y2, type: int }
+    - { name: color, type: int }
+  return: bool
+
+- tag: function
+  name: imageloadfont
+  params:
+    - { name: filename, type: string }
+  return: int
+
+- tag: function
+  name: imageopenpolygon
+  params:
+    - { name: image, type: mixed }
+    - { name: points, type: array }
+    - { name: num_points_or_color, type: int }
+    - { name: color, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: imagepalettecopy
+  params:
+    - { name: dst, type: mixed }
+    - { name: src, type: mixed }
+  return: void
+
+- tag: function
+  name: imagepalettetotruecolor
+  params:
+    - { name: image, type: mixed }
+  return: bool
+
+- tag: function
+  name: imagepng
+  params:
+    - { name: image, type: mixed }
+    - { name: file, type: resource, optional: true }
+    - { name: quality, type: int, optional: true }
+    - { name: filters, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: imagepolygon
+  params:
+    - { name: image, type: mixed }
+    - { name: points, type: array }
+    - { name: num_points_or_color, type: int }
+    - { name: color, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: imagerectangle
+  params:
+    - { name: image, type: mixed }
+    - { name: x1, type: int }
+    - { name: y1, type: int }
+    - { name: x2, type: int }
+    - { name: y2, type: int }
+    - { name: color, type: int }
+  return: bool
+
+- tag: function
+  name: imageresolution
+  params:
+    - { name: image, type: mixed }
+    - { name: resolution_x, type: int, optional: true }
+    - { name: resolution_y, type: int, optional: true }
+  return: array
+  flowsToReturn: [0]
+
+- tag: function
+  name: imagerotate
+  params:
+    - { name: image, type: mixed }
+    - { name: angle, type: float }
+    - { name: background_color, type: int }
+    - { name: ignore_transparent, type: bool, optional: true }
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: imagesavealpha
+  params:
+    - { name: image, type: mixed }
+    - { name: enable, type: bool }
+  return: bool
+
+- tag: function
+  name: imagescale
+  params:
+    - { name: image, type: mixed }
+    - { name: width, type: int }
+    - { name: height, type: int, optional: true }
+    - { name: mode, type: int, optional: true }
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: imagesetbrush
+  params:
+    - { name: image, type: mixed }
+    - { name: brush, type: mixed }
+  return: bool
+
+- tag: function
+  name: imagesetclip
+  params:
+    - { name: image, type: mixed }
+    - { name: x1, type: int }
+    - { name: y1, type: int }
+    - { name: x2, type: int }
+    - { name: y2, type: int }
+  return: bool
+
+- tag: function
+  name: imagesetinterpolation
+  params:
+    - { name: image, type: mixed }
+    - { name: method, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: imagesetpixel
+  params:
+    - { name: image, type: mixed }
+    - { name: x, type: int }
+    - { name: y, type: int }
+    - { name: color, type: int }
+  return: bool
+
+- tag: function
+  name: imagesetstyle
+  params:
+    - { name: image, type: mixed }
+    - { name: style, type: array }
+  return: bool
+
+- tag: function
+  name: imagesetthickness
+  params:
+    - { name: image, type: mixed }
+    - { name: thickness, type: int }
+  return: bool
+
+- tag: function
+  name: imagesettile
+  params:
+    - { name: image, type: mixed }
+    - { name: tile, type: mixed }
+  return: bool
+
+- tag: function
+  name: imagestring
+  params:
+    - { name: image, type: mixed }
+    - { name: font, type: int }
+    - { name: x, type: int }
+    - { name: y, type: int }
+    - { name: string, type: string }
+    - { name: color, type: int }
+  return: bool
+
+- tag: function
+  name: imagestringup
+  params:
+    - { name: image, type: mixed }
+    - { name: font, type: int }
+    - { name: x, type: int }
+    - { name: y, type: int }
+    - { name: string, type: string }
+    - { name: color, type: int }
+  return: bool
+
+- tag: function
+  name: imagesx
+  params:
+    - { name: image, type: mixed }
+  return: int
+
+- tag: function
+  name: imagesy
+  params:
+    - { name: image, type: mixed }
+  return: int
+
+- tag: function
+  name: imagetruecolortopalette
+  params:
+    - { name: image, type: mixed }
+    - { name: dither, type: bool }
+    - { name: num_colors, type: int }
+  return: bool
+
+- tag: function
+  name: imagettfbbox
+  params:
+    - { name: size, type: float }
+    - { name: angle, type: float }
+    - { name: font_filename, type: string }
+    - { name: string, type: string }
+    - { name: options, type: array, optional: true }
+  return: array
+  flowsToReturn: [4]
+
+- tag: function
+  name: imagettftext
+  params:
+    - { name: image, type: mixed }
+    - { name: size, type: float }
+    - { name: angle, type: float }
+    - { name: x, type: int }
+    - { name: y, type: int }
+    - { name: color, type: int }
+    - { name: font_filename, type: string }
+    - { name: text, type: string }
+    - { name: options, type: array, optional: true }
+  return: array
+  flowsToReturn: [0, 8]
+
+- tag: function
+  name: imagetypes
+  return: int
+
+- tag: function
+  name: imagewbmp
+  params:
+    - { name: image, type: mixed }
+    - { name: file, type: resource, optional: true }
+    - { name: foreground_color, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: imagewebp
+  params:
+    - { name: image, type: mixed }
+    - { name: file, type: resource, optional: true }
+    - { name: quality, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: imagexbm
+  params:
+    - { name: image, type: mixed }
+    - { name: filename, type: string }
+    - { name: foreground_color, type: int, optional: true }
+  return: bool
+

@@ -1,0 +1,20 @@
+- tag: function
+  name: intl_error_name
+  params:
+    - { name: errorCode, type: int }
+  return: string
+
+- tag: function
+  name: intl_get_error_code
+  return: int
+
+- tag: function
+  name: intl_get_error_message
+  return: string
+
+- tag: function
+  name: intl_is_failure
+  params:
+    - { name: errorCode, type: int }
+  return: bool
+

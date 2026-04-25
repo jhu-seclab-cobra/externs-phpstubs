@@ -1,0 +1,3569 @@
+- tag: function
+  name: _
+  params:
+    - { name: message, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: __halt_compiler
+  return: void
+
+- tag: function
+  name: _array
+  params:
+    - { name: array, type: array, optional: true }
+  flowsToReturn: [0]
+
+- tag: function
+  name: _mbstring
+  params:
+    - { name: string, type: string, optional: true }
+  flowsToReturn: [0]
+
+- tag: function
+  name: _string
+  params:
+    - { name: string, type: string, optional: true }
+  flowsToReturn: [0]
+
+- tag: function
+  name: abs
+  params:
+    - { name: num, type: int }
+  return: int
+
+- tag: function
+  name: accelerator_get_configuration
+  return: array
+
+- tag: function
+  name: accelerator_get_scripts
+  return: array
+
+- tag: function
+  name: accelerator_get_status
+  params:
+    - { name: fetch_scripts, type: bool }
+  return: array
+
+- tag: function
+  name: accelerator_reset
+
+- tag: function
+  name: accelerator_set_status
+  params:
+    - { name: status, type: bool }
+  return: void
+
+- tag: function
+  name: acos
+  params:
+    - { name: num, type: float }
+  return: float
+
+- tag: function
+  name: acosh
+  params:
+    - { name: num, type: float }
+  return: float
+
+- tag: function
+  name: addcslashes
+  params:
+    - { name: string, type: string }
+    - { name: characters, type: string }
+  return: string
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: addslashes
+  params:
+    - { name: string, type: string }
+  return: string
+
+- tag: function
+  name: apache_child_terminate
+  return: bool
+
+- tag: function
+  name: apache_get_modules
+  return: array
+
+- tag: function
+  name: apache_get_version
+  return: string
+
+- tag: function
+  name: apache_getenv
+  params:
+    - { name: variable, type: string }
+    - { name: walk_to_top, type: bool, optional: true }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: apache_lookup_uri
+  params:
+    - { name: filename, type: string }
+  return: object
+  flowsToReturn: [0]
+
+- tag: function
+  name: apache_note
+  params:
+    - { name: note_name, type: string }
+    - { name: note_value, type: string, optional: true }
+  return: string
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: apache_request_headers
+  return: array
+
+- tag: function
+  name: apache_reset_timeout
+  return: bool
+
+- tag: function
+  name: apache_response_headers
+  return: array
+
+- tag: function
+  name: apache_setenv
+  params:
+    - { name: variable, type: string }
+    - { name: value, type: string }
+    - { name: walk_to_top, type: bool, optional: true }
+  return: bool
+
+- tag: function
+  name: apd_breakpoint
+  params:
+    - { name: debug_level, type: int }
+  return: bool
+
+- tag: function
+  name: apd_callstack
+  return: array
+
+- tag: function
+  name: apd_clunk
+  params:
+    - { name: warning, type: string }
+    - { name: delimiter, type: string, optional: true }
+  return: void
+
+- tag: function
+  name: apd_continue
+  params:
+    - { name: debug_level, type: int }
+  return: bool
+
+- tag: function
+  name: apd_croak
+  params:
+    - { name: warning, type: string }
+    - { name: delimiter, type: string, optional: true }
+  return: void
+
+- tag: function
+  name: apd_dump_function_table
+  return: void
+
+- tag: function
+  name: apd_dump_persistent_resources
+  return: array
+
+- tag: function
+  name: apd_dump_regular_resources
+  return: array
+
+- tag: function
+  name: apd_echo
+  params:
+    - { name: output, type: string }
+  return: bool
+
+- tag: function
+  name: apd_get_active_symbols
+  return: array
+
+- tag: function
+  name: apd_set_pprof_trace
+  params:
+    - { name: dump_directory, type: string, optional: true }
+    - { name: fragment, type: string, optional: true }
+  return: string
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: apd_set_session
+  params:
+    - { name: debug_level, type: int }
+  return: void
+
+- tag: function
+  name: apd_set_session_trace
+  params:
+    - { name: debug_level, type: int }
+    - { name: dump_directory, type: string, optional: true }
+  return: void
+
+- tag: function
+  name: apd_set_session_trace_socket
+  params:
+    - { name: tcp_server, type: string }
+    - { name: socket_type, type: int }
+    - { name: port, type: int }
+    - { name: debug_level, type: int }
+  return: bool
+
+- tag: function
+  name: array_change_key_case
+  params:
+    - { name: array, type: array }
+    - { name: case, type: int, optional: true }
+  return: array
+  flowsToReturn: [0]
+
+- tag: function
+  name: array_chunk
+  params:
+    - { name: array, type: array }
+    - { name: length, type: int }
+    - { name: preserve_keys, type: bool, optional: true }
+  return: array
+  flowsToReturn: [0]
+
+- tag: function
+  name: array_column
+  params:
+    - { name: array, type: array }
+    - { name: column_key, type: int }
+    - { name: index_key, type: int, optional: true }
+  return: array
+  flowsToReturn: [0]
+
+- tag: function
+  name: array_combine
+  params:
+    - { name: keys, type: array }
+    - { name: values, type: array }
+  return: array
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: array_count_values
+  params:
+    - { name: array, type: array }
+  return: array
+
+- tag: function
+  name: array_diff
+  params:
+    - { name: array, type: array }
+    - { name: arrays, type: array, optional: true }
+  return: array
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: array_diff_assoc
+  params:
+    - { name: array, type: array }
+    - { name: arrays, type: array, optional: true }
+  return: array
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: array_diff_key
+  params:
+    - { name: array, type: array }
+    - { name: arrays, type: array, optional: true }
+  return: array
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: array_diff_uassoc
+  params:
+    - { name: array, type: array }
+    - { name: rest, type: array, optional: true }
+  return: array
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: array_diff_ukey
+  params:
+    - { name: array, type: array }
+    - { name: rest, type: array, optional: true }
+  return: array
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: array_fill
+  params:
+    - { name: start_index, type: int }
+    - { name: count, type: int }
+    - { name: value, type: mixed }
+  return: array
+  flowsToReturn: [2]
+
+- tag: function
+  name: array_fill_keys
+  params:
+    - { name: keys, type: array }
+    - { name: value, type: mixed }
+  return: array
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: array_filter
+  params:
+    - { name: array, type: array }
+    - { name: callback, type: mixed, optional: true }
+    - { name: mode, type: int, optional: true }
+  return: array
+  flowsToReturn: [0]
+
+- tag: function
+  name: array_flip
+  params:
+    - { name: array, type: array }
+  return: array
+  flowsToReturn: [0]
+
+- tag: function
+  name: array_intersect
+  params:
+    - { name: array, type: array }
+    - { name: arrays, type: array, optional: true }
+  return: array
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: array_intersect_assoc
+  params:
+    - { name: array, type: array }
+    - { name: arrays, type: array, optional: true }
+  return: array
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: array_intersect_key
+  params:
+    - { name: array, type: array }
+    - { name: arrays, type: array, optional: true }
+  return: array
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: array_intersect_uassoc
+  params:
+    - { name: array, type: array }
+    - { name: rest, type: array, optional: true }
+  return: array
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: array_intersect_ukey
+  params:
+    - { name: array, type: array }
+    - { name: rest, type: array, optional: true }
+  return: array
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: array_key_exists
+  params:
+    - { name: key, type: int }
+    - { name: array, type: array }
+  return: bool
+
+- tag: function
+  name: array_key_first
+  params:
+    - { name: array, type: array }
+  return: int
+
+- tag: function
+  name: array_key_last
+  params:
+    - { name: array, type: array }
+  return: int
+
+- tag: function
+  name: array_keys
+  params:
+    - { name: array, type: array }
+    - { name: filter_value, type: mixed, optional: true }
+    - { name: strict, type: bool, optional: true }
+  return: array
+  flowsToReturn: [0]
+
+- tag: function
+  name: array_map
+  params:
+    - { name: callback, type: callable }
+    - { name: array, type: array }
+    - { name: arrays, type: array, optional: true }
+  return: array
+  flowsToReturn: [1]
+
+- tag: function
+  name: array_merge
+  params:
+    - { name: arrays, type: array, optional: true }
+  return: array
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: array_merge_recursive
+  params:
+    - { name: arrays, type: array, optional: true }
+  return: array
+  flowsToReturn: [0]
+
+- tag: function
+  name: array_multisort
+  params:
+    - { name: array, type: array }
+    - { name: rest, type: array, optional: true }
+  return: bool
+
+- tag: function
+  name: array_pad
+  params:
+    - { name: array, type: array }
+    - { name: length, type: int }
+    - { name: value, type: mixed }
+  return: array
+  flowsToReturn: [0, 2]
+
+- tag: function
+  name: array_pop
+  params:
+    - { name: array, type: array }
+  flowsToReturn: [0]
+
+- tag: function
+  name: array_product
+  params:
+    - { name: array, type: array }
+  return: float
+
+- tag: function
+  name: array_push
+  params:
+    - { name: array, type: array }
+    - { name: values, type: mixed, optional: true }
+  return: int
+
+- tag: function
+  name: array_rand
+  params:
+    - { name: array, type: array }
+    - { name: num, type: int, optional: true }
+  return: array
+  flowsToReturn: [0]
+
+- tag: function
+  name: array_reduce
+  params:
+    - { name: array, type: array }
+    - { name: callback, type: mixed }
+    - { name: initial, type: mixed, optional: true }
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: array_replace
+  params:
+    - { name: array, type: array }
+    - { name: replacements, type: array, optional: true }
+  return: array
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: array_replace_recursive
+  params:
+    - { name: array, type: array }
+    - { name: replacements, type: array, optional: true }
+  return: array
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: array_reverse
+  params:
+    - { name: array, type: array }
+    - { name: preserve_keys, type: bool, optional: true }
+  return: array
+  flowsToReturn: [0]
+
+- tag: function
+  name: array_search
+  params:
+    - { name: needle, type: mixed }
+    - { name: haystack, type: array }
+    - { name: strict, type: bool, optional: true }
+  return: int
+
+- tag: function
+  name: array_shift
+  params:
+    - { name: array, type: array }
+  flowsToReturn: [0]
+
+- tag: function
+  name: array_slice
+  params:
+    - { name: array, type: array }
+    - { name: offset, type: int }
+    - { name: length, type: int, optional: true }
+    - { name: preserve_keys, type: bool, optional: true }
+  return: array
+  flowsToReturn: [0]
+
+- tag: function
+  name: array_splice
+  params:
+    - { name: array, type: array }
+    - { name: offset, type: int }
+    - { name: length, type: int, optional: true }
+    - { name: replacement, type: array, optional: true }
+  return: array
+  flowsToReturn: [0, 3]
+
+- tag: function
+  name: array_sum
+  params:
+    - { name: array, type: array }
+  return: float
+
+- tag: function
+  name: array_udiff
+  params:
+    - { name: array, type: array }
+    - { name: rest, type: array, optional: true }
+  return: array
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: array_udiff_assoc
+  params:
+    - { name: array, type: array }
+    - { name: rest, type: array, optional: true }
+  return: array
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: array_udiff_uassoc
+  params:
+    - { name: array, type: array }
+    - { name: arr2, type: array }
+    - { name: value_compare_func, type: mixed }
+    - { name: key_compare_func, type: mixed }
+  return: array
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: array_uintersect
+  params:
+    - { name: array, type: array }
+    - { name: rest, type: array, optional: true }
+  return: array
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: array_uintersect_assoc
+  params:
+    - { name: array, type: array }
+    - { name: rest, type: array, optional: true }
+  return: array
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: array_uintersect_uassoc
+  params:
+    - { name: array, type: array }
+    - { name: arr2, type: array }
+    - { name: value_compare_func, type: mixed }
+    - { name: key_compare_func, type: mixed }
+  return: array
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: array_unique
+  params:
+    - { name: array, type: array }
+    - { name: flags, type: int, optional: true }
+  return: array
+  flowsToReturn: [0]
+
+- tag: function
+  name: array_unshift
+  params:
+    - { name: array, type: array }
+    - { name: values, type: mixed, optional: true }
+  return: int
+
+- tag: function
+  name: array_values
+  params:
+    - { name: array, type: array }
+  return: array
+  flowsToReturn: [0]
+
+- tag: function
+  name: array_walk
+  params:
+    - { name: array, type: array }
+    - { name: callback, type: callable }
+    - { name: arg, type: mixed, optional: true }
+  return: bool
+
+- tag: function
+  name: array_walk_recursive
+  params:
+    - { name: array, type: array }
+    - { name: callback, type: callable }
+    - { name: arg, type: mixed, optional: true }
+  return: bool
+
+- tag: function
+  name: arsort
+  params:
+    - { name: array, type: array }
+    - { name: flags, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: asin
+  params:
+    - { name: num, type: float }
+  return: float
+
+- tag: function
+  name: asinh
+  params:
+    - { name: num, type: float }
+  return: float
+
+- tag: function
+  name: asort
+  params:
+    - { name: array, type: array }
+    - { name: flags, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: assert
+  params:
+    - { name: assertion, type: bool }
+    - { name: description, type: mixed, optional: true }
+  return: bool
+
+- tag: function
+  name: assert_options
+  params:
+    - { name: option, type: int }
+    - { name: value, type: mixed, optional: true }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: ast\\get_kind_name
+  params:
+    - { name: kind, type: int }
+  return: string
+
+- tag: function
+  name: ast\\get_metadata
+  return: array
+
+- tag: function
+  name: ast\\get_supported_versions
+  params:
+    - { name: exclude_deprecated, type: bool, optional: true }
+  return: array
+
+- tag: function
+  name: ast\\kind_uses_flags
+  params:
+    - { name: kind, type: int }
+  return: bool
+
+- tag: function
+  name: ast\\parse_code
+  params:
+    - { name: code, type: string }
+    - { name: version, type: int }
+    - { name: filename, type: string, optional: true }
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: ast\\parse_file
+  params:
+    - { name: filename, type: string }
+    - { name: version, type: int }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: atan
+  params:
+    - { name: num, type: float }
+  return: float
+
+- tag: function
+  name: atan2
+  params:
+    - { name: y, type: float }
+    - { name: x, type: float }
+  return: float
+
+- tag: function
+  name: atanh
+  params:
+    - { name: num, type: float }
+  return: float
+
+- tag: function
+  name: base64_decode
+  params:
+    - { name: string, type: string }
+    - { name: strict, type: bool, optional: true }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: base64_encode
+  params:
+    - { name: string, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: base_convert
+  params:
+    - { name: num, type: string }
+    - { name: from_base, type: int }
+    - { name: to_base, type: int }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: bbcode_add_element
+  params:
+    - { name: bbcode_container, type: resource }
+    - { name: tag_name, type: string }
+    - { name: tag_rules, type: array }
+  return: bool
+
+- tag: function
+  name: bbcode_add_smiley
+  params:
+    - { name: bbcode_container, type: resource }
+    - { name: smiley, type: string }
+    - { name: replace_by, type: string }
+  return: bool
+
+- tag: function
+  name: bbcode_create
+  params:
+    - { name: bbcode_initial_tags, type: array, optional: true }
+  return: resource
+  flowsToReturn: [0]
+
+- tag: function
+  name: bbcode_destroy
+  params:
+    - { name: bbcode_container, type: resource }
+  return: bool
+
+- tag: function
+  name: bbcode_parse
+  params:
+    - { name: bbcode_container, type: resource }
+    - { name: to_parse, type: string }
+  return: string
+  flowsToReturn: [1]
+
+- tag: function
+  name: bbcode_set_arg_parser
+  params:
+    - { name: bbcode_container, type: resource }
+    - { name: bbcode_arg_parser, type: resource }
+  return: bool
+
+- tag: function
+  name: bbcode_set_flags
+  params:
+    - { name: bbcode_container, type: resource }
+    - { name: flags, type: int }
+    - { name: mode, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: bcompiler_load
+  params:
+    - { name: filename, type: string }
+  return: bool
+
+- tag: function
+  name: bcompiler_load_exe
+  params:
+    - { name: filename, type: string }
+  return: bool
+
+- tag: function
+  name: bcompiler_parse_class
+  params:
+    - { name: class, type: string }
+    - { name: callback, type: string }
+  return: bool
+
+- tag: function
+  name: bcompiler_read
+  params:
+    - { name: filehandle, type: resource }
+  return: bool
+
+- tag: function
+  name: bcompiler_write_class
+  params:
+    - { name: filehandle, type: resource }
+    - { name: classname, type: string }
+    - { name: extends, type: string, optional: true }
+  return: bool
+
+- tag: function
+  name: bcompiler_write_constant
+  params:
+    - { name: filehandle, type: resource }
+    - { name: constantname, type: string }
+  return: bool
+
+- tag: function
+  name: bcompiler_write_exe_footer
+  params:
+    - { name: filehandle, type: resource }
+    - { name: startpos, type: int }
+  return: bool
+
+- tag: function
+  name: bcompiler_write_file
+  params:
+    - { name: filehandle, type: resource }
+    - { name: filename, type: string }
+  return: bool
+
+- tag: function
+  name: bcompiler_write_footer
+  params:
+    - { name: filehandle, type: resource }
+  return: bool
+
+- tag: function
+  name: bcompiler_write_function
+  params:
+    - { name: filehandle, type: resource }
+    - { name: functionname, type: string }
+  return: bool
+
+- tag: function
+  name: bcompiler_write_functions_from_file
+  params:
+    - { name: filehandle, type: resource }
+    - { name: filename, type: string }
+  return: bool
+
+- tag: function
+  name: bcompiler_write_header
+  params:
+    - { name: filehandle, type: resource }
+    - { name: write_ver, type: string, optional: true }
+  return: bool
+
+- tag: function
+  name: bcompiler_write_included_filename
+  params:
+    - { name: filehandle, type: resource }
+    - { name: filename, type: string }
+  return: bool
+
+- tag: function
+  name: bin2hex
+  params:
+    - { name: string, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: bind_textdomain_codeset
+  params:
+    - { name: domain, type: string }
+    - { name: codeset, type: string }
+  return: string
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: bindec
+  params:
+    - { name: binary_string, type: string }
+  return: float
+
+- tag: function
+  name: birdstep_autocommit
+  params:
+    - { name: index, type: int }
+  return: bool
+
+- tag: function
+  name: birdstep_close
+  params:
+    - { name: id, type: int }
+  return: bool
+
+- tag: function
+  name: birdstep_commit
+  params:
+    - { name: index, type: int }
+  return: bool
+
+- tag: function
+  name: birdstep_connect
+  params:
+    - { name: server, type: string }
+    - { name: user, type: string }
+    - { name: pass, type: string }
+  return: int
+
+- tag: function
+  name: birdstep_exec
+  params:
+    - { name: index, type: int }
+    - { name: exec_str, type: string }
+  return: int
+
+- tag: function
+  name: birdstep_fetch
+  params:
+    - { name: index, type: int }
+  return: bool
+
+- tag: function
+  name: birdstep_fieldname
+  params:
+    - { name: index, type: int }
+    - { name: col, type: int }
+  return: string
+
+- tag: function
+  name: birdstep_fieldnum
+  params:
+    - { name: index, type: int }
+  return: int
+
+- tag: function
+  name: birdstep_freeresult
+  params:
+    - { name: index, type: int }
+  return: bool
+
+- tag: function
+  name: birdstep_off_autocommit
+  params:
+    - { name: index, type: int }
+  return: bool
+
+- tag: function
+  name: birdstep_result
+  params:
+    - { name: index, type: int }
+    - { name: col, type: mixed }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: birdstep_rollback
+  params:
+    - { name: index, type: int }
+  return: bool
+
+- tag: function
+  name: blenc_encrypt
+  params:
+    - { name: plaintext, type: string }
+    - { name: encodedfile, type: string }
+    - { name: encryption_key, type: string, optional: true }
+  return: string
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: boolval
+  params:
+    - { name: value, type: mixed }
+  return: bool
+
+- tag: function
+  name: bson_decode
+  params:
+    - { name: bson, type: string }
+  return: array
+
+- tag: function
+  name: bson_encode
+  params:
+    - { name: anything, type: mixed }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: cal_days_in_month
+  params:
+    - { name: calendar, type: int }
+    - { name: month, type: int }
+    - { name: year, type: int }
+  return: int
+
+- tag: function
+  name: cal_from_jd
+  params:
+    - { name: julian_day, type: int }
+    - { name: calendar, type: int }
+  return: array
+
+- tag: function
+  name: cal_info
+  params:
+    - { name: calendar, type: int, optional: true }
+  return: array
+
+- tag: function
+  name: cal_to_jd
+  params:
+    - { name: calendar, type: int }
+    - { name: month, type: int }
+    - { name: day, type: int }
+    - { name: year, type: int }
+  return: int
+
+- tag: function
+  name: calcul_hmac
+  params:
+    - { name: clent, type: string }
+    - { name: siretcode, type: string }
+    - { name: price, type: string }
+    - { name: reference, type: string }
+    - { name: validity, type: string }
+    - { name: taxation, type: string }
+    - { name: devise, type: string }
+    - { name: language, type: string }
+  return: string
+  flowsToReturn: [0, 1, 2, 3, 4, 5, 6, 7]
+
+- tag: function
+  name: calculhmac
+  params:
+    - { name: clent, type: string }
+    - { name: data, type: string }
+  return: string
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: call_user_func
+  params:
+    - { name: callback, type: callable }
+    - { name: args, type: mixed, optional: true }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: call_user_func_array
+  params:
+    - { name: callback, type: callable }
+    - { name: args, type: array }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: call_user_method
+  params:
+    - { name: method_name, type: string }
+    - { name: object, type: object }
+    - { name: parameter, type: mixed, optional: true }
+    - { name: args, type: mixed, optional: true }
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: call_user_method_array
+  params:
+    - { name: method_name, type: string }
+    - { name: object, type: object }
+    - { name: params, type: array }
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: ceil
+  params:
+    - { name: num, type: float }
+  return: float
+
+- tag: function
+  name: chdb_create
+  params:
+    - { name: pathname, type: string }
+    - { name: data, type: array }
+  return: bool
+
+- tag: function
+  name: chdir
+  params:
+    - { name: directory, type: string }
+  return: bool
+
+- tag: function
+  name: checkdnsrr
+  params:
+    - { name: hostname, type: string }
+    - { name: type, type: string, optional: true }
+  return: bool
+
+- tag: function
+  name: chop
+  params:
+    - { name: string, type: string }
+    - { name: characters, type: string, optional: true }
+  return: string
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: chr
+  params:
+    - { name: codepoint, type: int }
+  return: string
+
+- tag: function
+  name: chroot
+  params:
+    - { name: directory, type: string }
+  return: bool
+
+- tag: function
+  name: chunk_split
+  params:
+    - { name: string, type: string }
+    - { name: length, type: int, optional: true }
+    - { name: separator, type: string, optional: true }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: class_alias
+  params:
+    - { name: class, type: string }
+    - { name: alias, type: string }
+    - { name: autoload, type: bool, optional: true }
+  return: bool
+
+- tag: function
+  name: class_exists
+  params:
+    - { name: class, type: string }
+    - { name: autoload, type: bool, optional: true }
+  return: bool
+
+- tag: function
+  name: class_implements
+  params:
+    - { name: object_or_class, type: object }
+    - { name: autoload, type: bool, optional: true }
+  return: array
+
+- tag: function
+  name: class_parents
+  params:
+    - { name: object_or_class, type: object }
+    - { name: autoload, type: bool, optional: true }
+  return: array
+
+- tag: function
+  name: class_uses
+  params:
+    - { name: object_or_class, type: object }
+    - { name: autoload, type: bool, optional: true }
+  return: array
+
+- tag: function
+  name: classkit_import
+  params:
+    - { name: filename, type: string }
+  return: array
+
+- tag: function
+  name: classkit_method_add
+  params:
+    - { name: classname, type: string }
+    - { name: methodname, type: string }
+    - { name: args, type: string }
+    - { name: code, type: string }
+    - { name: flags, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: classkit_method_copy
+  params:
+    - { name: dclass, type: string }
+    - { name: dmethod, type: string }
+    - { name: sclass, type: string }
+    - { name: smethod, type: string, optional: true }
+  return: bool
+
+- tag: function
+  name: classkit_method_redefine
+  params:
+    - { name: classname, type: string }
+    - { name: methodname, type: string }
+    - { name: args, type: string }
+    - { name: code, type: string }
+    - { name: flags, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: classkit_method_remove
+  params:
+    - { name: classname, type: string }
+    - { name: methodname, type: string }
+  return: bool
+
+- tag: function
+  name: classkit_method_rename
+  params:
+    - { name: classname, type: string }
+    - { name: methodname, type: string }
+    - { name: newname, type: string }
+  return: bool
+
+- tag: function
+  name: clearstatcache
+  params:
+    - { name: clear_realpath_cache, type: bool, optional: true }
+    - { name: filename, type: string, optional: true }
+  return: void
+
+- tag: function
+  name: cli_get_process_title
+  return: string
+
+- tag: function
+  name: cli_set_process_title
+  params:
+    - { name: title, type: string }
+  return: bool
+
+- tag: function
+  name: closedir
+  params:
+    - { name: dir_handle, type: resource, optional: true }
+  return: void
+
+- tag: function
+  name: closelog
+  return: bool
+
+- tag: function
+  name: co\\defer
+  params:
+    - { name: fn, type: callable }
+  flowsToReturn: [0]
+
+- tag: function
+  name: co\\go
+  params:
+    - { name: fn, type: callable }
+    - { name: args, type: mixed, optional: true }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: co\\run
+  params:
+    - { name: fn, type: callable }
+    - { name: args, type: mixed, optional: true }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: collator_asort
+  params:
+    - { name: object, type: mixed }
+    - { name: array, type: array }
+    - { name: flags, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: collator_compare
+  params:
+    - { name: object, type: mixed }
+    - { name: string1, type: string }
+    - { name: string2, type: string }
+  return: int
+
+- tag: function
+  name: collator_create
+  params:
+    - { name: locale, type: string }
+  flowsToReturn: [0]
+
+- tag: function
+  name: collator_get_attribute
+  params:
+    - { name: object, type: mixed }
+    - { name: attribute, type: int }
+  return: int
+
+- tag: function
+  name: collator_get_error_code
+  params:
+    - { name: object, type: mixed }
+  return: int
+
+- tag: function
+  name: collator_get_error_message
+  params:
+    - { name: object, type: mixed }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: collator_get_locale
+  params:
+    - { name: object, type: mixed }
+    - { name: type, type: int }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: collator_get_sort_key
+  params:
+    - { name: object, type: mixed }
+    - { name: string, type: string }
+  return: string
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: collator_get_strength
+  params:
+    - { name: object, type: mixed }
+  return: int
+
+- tag: function
+  name: collator_set_attribute
+  params:
+    - { name: object, type: mixed }
+    - { name: attribute, type: int }
+    - { name: value, type: int }
+  return: bool
+
+- tag: function
+  name: collator_set_strength
+  params:
+    - { name: object, type: mixed }
+    - { name: strength, type: int }
+  return: bool
+
+- tag: function
+  name: collator_sort
+  params:
+    - { name: object, type: mixed }
+    - { name: array, type: array }
+    - { name: flags, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: collator_sort_with_sort_keys
+  params:
+    - { name: object, type: mixed }
+    - { name: array, type: array }
+  return: bool
+
+- tag: function
+  name: com_addref
+
+- tag: function
+  name: com_create_guid
+  return: string
+
+- tag: function
+  name: com_event_sink
+  params:
+    - { name: variant, type: mixed }
+    - { name: sink_object, type: object }
+    - { name: sink_interface, type: mixed, optional: true }
+  return: bool
+
+- tag: function
+  name: com_get_active_object
+  params:
+    - { name: prog_id, type: string }
+    - { name: codepage, type: int, optional: true }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: com_isenum
+  params:
+    - { name: com_module, type: mixed }
+  return: bool
+
+- tag: function
+  name: com_load_typelib
+  params:
+    - { name: typelib_name, type: string }
+    - { name: case_insensitive, type: bool, optional: true }
+  return: bool
+
+- tag: function
+  name: com_message_pump
+  params:
+    - { name: timeout_milliseconds, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: com_print_typeinfo
+  params:
+    - { name: variant, type: object }
+    - { name: dispatch_interface, type: string, optional: true }
+    - { name: display_sink, type: bool, optional: true }
+  return: bool
+
+- tag: function
+  name: commonmark\\parse
+  params:
+    - { name: content, type: string }
+    - { name: options, type: int, optional: true }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: commonmark\\render
+  params:
+    - { name: node, type: mixed }
+    - { name: options, type: int, optional: true }
+    - { name: width, type: int, optional: true }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: commonmark\\render\\html
+  params:
+    - { name: node, type: mixed }
+    - { name: options, type: int, optional: true }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: commonmark\\render\\latex
+  params:
+    - { name: node, type: mixed }
+    - { name: options, type: int, optional: true }
+    - { name: width, type: int, optional: true }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: commonmark\\render\\man
+  params:
+    - { name: node, type: mixed }
+    - { name: options, type: int, optional: true }
+    - { name: width, type: int, optional: true }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: commonmark\\render\\xml
+  params:
+    - { name: node, type: mixed }
+    - { name: options, type: int, optional: true }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: compact
+  params:
+    - { name: var_name, type: array }
+    - { name: var_names, type: array, optional: true }
+  return: array
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: componere\\cast
+  params:
+    - { name: arg1, type: string }
+    - { name: object, type: object }
+  return: object
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: componere\\cast_by_ref
+  params:
+    - { name: arg1, type: string }
+    - { name: object, type: object }
+  return: object
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: confirm_pdo_ibm_compiled
+
+- tag: function
+  name: connection_aborted
+  return: int
+
+- tag: function
+  name: connection_status
+  return: int
+
+- tag: function
+  name: connection_timeout
+  return: int
+
+- tag: function
+  name: constant
+  params:
+    - { name: name, type: string }
+  flowsToReturn: [0]
+
+- tag: function
+  name: convert_uudecode
+  params:
+    - { name: string, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: convert_uuencode
+  params:
+    - { name: string, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: cos
+  params:
+    - { name: num, type: float }
+  return: float
+
+- tag: function
+  name: cosh
+  params:
+    - { name: num, type: float }
+  return: float
+
+- tag: function
+  name: couchbase\\basicdecoderv1
+  params:
+    - { name: bytes, type: string }
+    - { name: flags, type: int }
+    - { name: datatype, type: int }
+    - { name: options, type: array }
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: couchbase\\basicencoderv1
+  params:
+    - { name: value, type: mixed }
+    - { name: options, type: array }
+  return: array
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: couchbase\\defaultdecoder
+  params:
+    - { name: bytes, type: string }
+    - { name: flags, type: int }
+    - { name: datatype, type: int }
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: couchbase\\defaultencoder
+  params:
+    - { name: value, type: mixed }
+  return: array
+  flowsToReturn: [0]
+
+- tag: function
+  name: couchbase\\fastlzcompress
+  params:
+    - { name: data, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: couchbase\\fastlzdecompress
+  params:
+    - { name: data, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: couchbase\\passthrudecoder
+  params:
+    - { name: bytes, type: string }
+    - { name: flags, type: int }
+    - { name: datatype, type: int }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: couchbase\\passthruencoder
+  params:
+    - { name: value, type: string }
+  return: array
+
+- tag: function
+  name: couchbase\\zlibcompress
+  params:
+    - { name: data, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: couchbase\\zlibdecompress
+  params:
+    - { name: data, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: count
+  params:
+    - { name: value, type: mixed }
+    - { name: mode, type: int, optional: true }
+  return: int
+
+- tag: function
+  name: count_chars
+  params:
+    - { name: string, type: string }
+    - { name: mode, type: mixed, optional: true }
+  return: array
+  flowsToReturn: [1]
+
+- tag: function
+  name: crack_check
+  params:
+    - { name: dictionary, type: mixed }
+    - { name: password, type: string }
+  return: bool
+
+- tag: function
+  name: crack_closedict
+  params:
+    - { name: dictionary, type: resource, optional: true }
+  return: bool
+
+- tag: function
+  name: crack_getlastmessage
+  return: string
+
+- tag: function
+  name: crack_opendict
+  params:
+    - { name: dictionary, type: string }
+  return: resource
+  flowsToReturn: [0]
+
+- tag: function
+  name: crash
+
+- tag: function
+  name: crc32
+  params:
+    - { name: string, type: string }
+  return: int
+
+- tag: function
+  name: crypt
+  params:
+    - { name: string, type: string }
+    - { name: salt, type: string }
+  return: string
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: current
+  params:
+    - { name: array, type: array }
+  flowsToReturn: [0]
+
+- tag: function
+  name: cyrus_authenticate
+  params:
+    - { name: connection, type: resource }
+    - { name: mechlist, type: string, optional: true }
+    - { name: service, type: string, optional: true }
+    - { name: user, type: string, optional: true }
+    - { name: minssf, type: int, optional: true }
+    - { name: maxssf, type: int, optional: true }
+    - { name: authname, type: string, optional: true }
+    - { name: password, type: string, optional: true }
+  return: void
+
+- tag: function
+  name: cyrus_bind
+  params:
+    - { name: connection, type: resource }
+    - { name: callbacks, type: array }
+  return: bool
+
+- tag: function
+  name: cyrus_close
+  params:
+    - { name: connection, type: resource }
+  return: bool
+
+- tag: function
+  name: cyrus_connect
+  params:
+    - { name: host, type: string, optional: true }
+    - { name: port, type: string, optional: true }
+    - { name: flags, type: int, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: cyrus_query
+  params:
+    - { name: connection, type: resource }
+    - { name: query, type: string }
+  return: array
+
+- tag: function
+  name: cyrus_unbind
+  params:
+    - { name: connection, type: resource }
+    - { name: trigger_name, type: string }
+  return: bool
+
+- tag: function
+  name: dbase_add_record
+  params:
+    - { name: dbase_identifier, type: resource }
+    - { name: record, type: array }
+  return: bool
+
+- tag: function
+  name: dbase_close
+  params:
+    - { name: dbase_identifier, type: resource }
+  return: bool
+
+- tag: function
+  name: dbase_create
+  params:
+    - { name: filename, type: string }
+    - { name: fields, type: array }
+  return: resource
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: dbase_delete_record
+  params:
+    - { name: dbase_identifier, type: resource }
+    - { name: record_number, type: int }
+  return: bool
+
+- tag: function
+  name: dbase_get_header_info
+  params:
+    - { name: dbase_identifier, type: resource }
+  return: array
+
+- tag: function
+  name: dbase_get_record
+  params:
+    - { name: dbase_identifier, type: resource }
+    - { name: record_number, type: int }
+  return: array
+
+- tag: function
+  name: dbase_get_record_with_names
+  params:
+    - { name: dbase_identifier, type: resource }
+    - { name: record_number, type: int }
+  return: array
+
+- tag: function
+  name: dbase_numfields
+  params:
+    - { name: dbase_identifier, type: resource }
+  return: int
+
+- tag: function
+  name: dbase_numrecords
+  params:
+    - { name: dbase_identifier, type: resource }
+  return: int
+
+- tag: function
+  name: dbase_open
+  params:
+    - { name: filename, type: string }
+    - { name: mode, type: int }
+  return: resource
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: dbase_pack
+  params:
+    - { name: dbase_identifier, type: resource }
+  return: bool
+
+- tag: function
+  name: dbase_replace_record
+  params:
+    - { name: dbase_identifier, type: resource }
+    - { name: record, type: array }
+    - { name: record_number, type: int }
+  return: bool
+
+- tag: function
+  name: dbplus_add
+  params:
+    - { name: relation, type: resource }
+    - { name: tuple, type: array }
+  return: int
+
+- tag: function
+  name: dbplus_aql
+  params:
+    - { name: query, type: string }
+    - { name: server, type: string, optional: true }
+    - { name: dbpath, type: string, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: dbplus_chdir
+  params:
+    - { name: newdir, type: string, optional: true }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: dbplus_close
+  params:
+    - { name: relation, type: resource }
+  flowsToReturn: [0]
+
+- tag: function
+  name: dbplus_curr
+  params:
+    - { name: relation, type: resource }
+    - { name: tuple, type: array }
+  return: int
+
+- tag: function
+  name: dbplus_errcode
+  params:
+    - { name: errno, type: int, optional: true }
+  return: string
+
+- tag: function
+  name: dbplus_errno
+  return: int
+
+- tag: function
+  name: dbplus_find
+  params:
+    - { name: relation, type: resource }
+    - { name: constraints, type: array }
+    - { name: tuple, type: mixed }
+  return: int
+
+- tag: function
+  name: dbplus_first
+  params:
+    - { name: relation, type: resource }
+    - { name: tuple, type: array }
+  return: int
+
+- tag: function
+  name: dbplus_flush
+  params:
+    - { name: relation, type: resource }
+  return: int
+
+- tag: function
+  name: dbplus_freealllocks
+  return: int
+
+- tag: function
+  name: dbplus_freelock
+  params:
+    - { name: relation, type: resource }
+    - { name: tuple, type: string }
+  return: int
+
+- tag: function
+  name: dbplus_freerlocks
+  params:
+    - { name: relation, type: resource }
+  return: int
+
+- tag: function
+  name: dbplus_getlock
+  params:
+    - { name: relation, type: resource }
+    - { name: tuple, type: string }
+  return: int
+
+- tag: function
+  name: dbplus_getunique
+  params:
+    - { name: relation, type: resource }
+    - { name: uniqueid, type: int }
+  return: int
+
+- tag: function
+  name: dbplus_info
+  params:
+    - { name: relation, type: resource }
+    - { name: key, type: string }
+    - { name: result, type: array }
+  return: int
+
+- tag: function
+  name: dbplus_last
+  params:
+    - { name: relation, type: resource }
+    - { name: tuple, type: array }
+  return: int
+
+- tag: function
+  name: dbplus_lockrel
+  params:
+    - { name: relation, type: resource }
+  return: int
+
+- tag: function
+  name: dbplus_next
+  params:
+    - { name: relation, type: resource }
+    - { name: tuple, type: array }
+  return: int
+
+- tag: function
+  name: dbplus_open
+  params:
+    - { name: name, type: string }
+  return: resource
+  flowsToReturn: [0]
+
+- tag: function
+  name: dbplus_prev
+  params:
+    - { name: relation, type: resource }
+    - { name: tuple, type: array }
+  return: int
+
+- tag: function
+  name: dbplus_rchperm
+  params:
+    - { name: relation, type: resource }
+    - { name: mask, type: int }
+    - { name: user, type: string }
+    - { name: group, type: string }
+  return: int
+
+- tag: function
+  name: dbplus_rcreate
+  params:
+    - { name: name, type: string }
+    - { name: domlist, type: mixed }
+    - { name: overwrite, type: bool, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: dbplus_rcrtexact
+  params:
+    - { name: name, type: string }
+    - { name: relation, type: resource }
+    - { name: overwrite, type: bool, optional: true }
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: dbplus_rcrtlike
+  params:
+    - { name: name, type: string }
+    - { name: relation, type: resource }
+    - { name: overwrite, type: int, optional: true }
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: dbplus_resolve
+  params:
+    - { name: relation_name, type: string }
+  return: array
+
+- tag: function
+  name: dbplus_restorepos
+  params:
+    - { name: relation, type: resource }
+    - { name: tuple, type: array }
+  return: int
+
+- tag: function
+  name: dbplus_rkeys
+  params:
+    - { name: relation, type: resource }
+    - { name: domlist, type: mixed }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: dbplus_ropen
+  params:
+    - { name: name, type: string }
+  return: resource
+  flowsToReturn: [0]
+
+- tag: function
+  name: dbplus_rquery
+  params:
+    - { name: query, type: string }
+    - { name: dbpath, type: string, optional: true }
+  return: resource
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: dbplus_rrename
+  params:
+    - { name: relation, type: resource }
+    - { name: name, type: string }
+  return: int
+
+- tag: function
+  name: dbplus_rsecindex
+  params:
+    - { name: relation, type: resource }
+    - { name: domlist, type: mixed }
+    - { name: type, type: int }
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: dbplus_runlink
+  params:
+    - { name: relation, type: resource }
+  return: int
+
+- tag: function
+  name: dbplus_rzap
+  params:
+    - { name: relation, type: resource }
+  return: int
+
+- tag: function
+  name: dbplus_savepos
+  params:
+    - { name: relation, type: resource }
+  return: int
+
+- tag: function
+  name: dbplus_setindex
+  params:
+    - { name: relation, type: resource }
+    - { name: idx_name, type: string }
+  return: int
+
+- tag: function
+  name: dbplus_setindexbynumber
+  params:
+    - { name: relation, type: resource }
+    - { name: idx_number, type: int }
+  return: int
+
+- tag: function
+  name: dbplus_sql
+  params:
+    - { name: query, type: string }
+    - { name: server, type: string, optional: true }
+    - { name: dbpath, type: string, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: dbplus_tcl
+  params:
+    - { name: sid, type: int }
+    - { name: script, type: string }
+  return: string
+  flowsToReturn: [1]
+
+- tag: function
+  name: dbplus_tremove
+  params:
+    - { name: relation, type: resource }
+    - { name: tuple, type: array }
+    - { name: current, type: array, optional: true }
+  return: int
+
+- tag: function
+  name: dbplus_undo
+  params:
+    - { name: relation, type: resource }
+  return: int
+
+- tag: function
+  name: dbplus_undoprepare
+  params:
+    - { name: relation, type: resource }
+  return: int
+
+- tag: function
+  name: dbplus_unlockrel
+  params:
+    - { name: relation, type: resource }
+  return: int
+
+- tag: function
+  name: dbplus_unselect
+  params:
+    - { name: relation, type: resource }
+  return: int
+
+- tag: function
+  name: dbplus_update
+  params:
+    - { name: relation, type: resource }
+    - { name: old, type: array }
+    - { name: new, type: array }
+  return: int
+
+- tag: function
+  name: dbplus_xlockrel
+  params:
+    - { name: relation, type: resource }
+  return: int
+
+- tag: function
+  name: dbplus_xunlockrel
+  params:
+    - { name: relation, type: resource }
+  return: int
+
+- tag: function
+  name: dbx_close
+  params:
+    - { name: link_identifier, type: object }
+  return: int
+
+- tag: function
+  name: dbx_compare
+  params:
+    - { name: row_a, type: array }
+    - { name: row_b, type: array }
+    - { name: column_key, type: string }
+    - { name: flags, type: int, optional: true }
+  return: int
+
+- tag: function
+  name: dbx_connect
+  params:
+    - { name: module, type: mixed }
+    - { name: host, type: string }
+    - { name: database, type: string }
+    - { name: username, type: string }
+    - { name: password, type: string }
+    - { name: persistent, type: int, optional: true }
+  return: object
+  flowsToReturn: [0, 1, 2, 3, 4, 5]
+
+- tag: function
+  name: dbx_error
+  params:
+    - { name: link_identifier, type: object }
+  return: string
+
+- tag: function
+  name: dbx_escape_string
+  params:
+    - { name: link_identifier, type: object }
+    - { name: text, type: string }
+  return: string
+  flowsToReturn: [1]
+
+- tag: function
+  name: dbx_fetch_row
+  params:
+    - { name: result_identifier, type: object }
+  flowsToReturn: [0]
+
+- tag: function
+  name: dbx_query
+  params:
+    - { name: link_identifier, type: object }
+    - { name: sql_statement, type: string }
+    - { name: flags, type: int, optional: true }
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: dbx_sort
+  params:
+    - { name: result, type: object }
+    - { name: user_compare_function, type: string }
+  return: bool
+
+- tag: function
+  name: dcgettext
+  params:
+    - { name: domain, type: string }
+    - { name: message, type: string }
+    - { name: category, type: int }
+  return: string
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: dcngettext
+  params:
+    - { name: domain, type: string }
+    - { name: singular, type: string }
+    - { name: plural, type: string }
+    - { name: count, type: int }
+    - { name: category, type: int }
+  return: string
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: deaggregate
+  params:
+    - { name: object, type: object }
+    - { name: class_name, type: string, optional: true }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: debug_backtrace
+  params:
+    - { name: options, type: int, optional: true }
+    - { name: limit, type: int, optional: true }
+  return: array
+
+- tag: function
+  name: debug_print_backtrace
+  params:
+    - { name: options, type: int, optional: true }
+    - { name: limit, type: int, optional: true }
+  return: void
+
+- tag: function
+  name: debug_zval_dump
+  params:
+    - { name: value, type: mixed }
+    - { name: values, type: mixed, optional: true }
+  return: void
+
+- tag: function
+  name: debugger_connect
+
+- tag: function
+  name: debugger_connector_pid
+
+- tag: function
+  name: debugger_get_server_start_time
+
+- tag: function
+  name: debugger_print
+
+- tag: function
+  name: debugger_start_debug
+
+- tag: function
+  name: decbin
+  params:
+    - { name: num, type: int }
+  return: string
+
+- tag: function
+  name: dechex
+  params:
+    - { name: num, type: int }
+  return: string
+
+- tag: function
+  name: decoct
+  params:
+    - { name: num, type: int }
+  return: string
+
+- tag: function
+  name: defer
+  params:
+    - { name: callback, type: callable }
+  return: void
+
+- tag: function
+  name: define
+  params:
+    - { name: constant_name, type: string }
+    - { name: value, type: array }
+    - { name: case_insensitive, type: bool, optional: true }
+  return: bool
+
+- tag: function
+  name: define_syslog_variables
+  return: void
+
+- tag: function
+  name: defined
+  params:
+    - { name: constant_name, type: string }
+  return: bool
+
+- tag: function
+  name: deflate_add
+  params:
+    - { name: context, type: mixed }
+    - { name: data, type: string }
+    - { name: flush_mode, type: int, optional: true }
+  return: string
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: deflate_init
+  params:
+    - { name: encoding, type: int }
+    - { name: options, type: array, optional: true }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: deg2rad
+  params:
+    - { name: num, type: float }
+  return: float
+
+- tag: function
+  name: dio_close
+  params:
+    - { name: fd, type: resource }
+  return: void
+
+- tag: function
+  name: dio_fcntl
+  params:
+    - { name: fd, type: resource }
+    - { name: cmd, type: int }
+    - { name: args, type: mixed, optional: true }
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: dio_open
+  params:
+    - { name: filename, type: string }
+    - { name: flags, type: int }
+    - { name: mode, type: int, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: dio_read
+  params:
+    - { name: fd, type: resource }
+    - { name: length, type: int, optional: true }
+  return: string
+
+- tag: function
+  name: dio_seek
+  params:
+    - { name: fd, type: resource }
+    - { name: pos, type: int }
+    - { name: whence, type: int, optional: true }
+  return: int
+
+- tag: function
+  name: dio_stat
+  params:
+    - { name: fd, type: resource }
+  return: array
+
+- tag: function
+  name: dio_tcsetattr
+  params:
+    - { name: fd, type: resource }
+    - { name: options, type: array }
+  return: bool
+
+- tag: function
+  name: dio_truncate
+  params:
+    - { name: fd, type: resource }
+    - { name: offset, type: int }
+  return: bool
+
+- tag: function
+  name: dio_write
+  params:
+    - { name: fd, type: resource }
+    - { name: data, type: string }
+    - { name: length, type: int, optional: true }
+  return: int
+
+- tag: function
+  name: dir
+  params:
+    - { name: directory, type: string }
+    - { name: context, type: resource, optional: true }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: disk_free_space
+  params:
+    - { name: directory, type: string }
+  return: float
+
+- tag: function
+  name: disk_total_space
+  params:
+    - { name: directory, type: string }
+  return: float
+
+- tag: function
+  name: diskfreespace
+  params:
+    - { name: directory, type: string }
+  return: float
+
+- tag: function
+  name: display_disabled_function
+
+- tag: function
+  name: dl
+  params:
+    - { name: extension_filename, type: string }
+  return: bool
+
+- tag: function
+  name: dngettext
+  params:
+    - { name: domain, type: string }
+    - { name: singular, type: string }
+    - { name: plural, type: string }
+    - { name: count, type: int }
+  return: string
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: dns_check_record
+  params:
+    - { name: hostname, type: string }
+    - { name: type, type: string, optional: true }
+  return: bool
+
+- tag: function
+  name: dns_get_mx
+  params:
+    - { name: hostname, type: string }
+    - { name: hosts, type: array }
+    - { name: weights, type: array, optional: true }
+  return: bool
+
+- tag: function
+  name: dns_get_record
+  params:
+    - { name: hostname, type: string }
+    - { name: type, type: int, optional: true }
+    - { name: authoritative_name_servers, type: array, optional: true }
+    - { name: additional_records, type: array, optional: true }
+    - { name: raw, type: bool, optional: true }
+  return: array
+  flowsToReturn: [2, 3]
+
+- tag: function
+  name: dom_document_relaxng_validate_file
+  params:
+    - { name: filename, type: string }
+  return: bool
+
+- tag: function
+  name: dom_document_relaxng_validate_xml
+  params:
+    - { name: source, type: string }
+  return: bool
+
+- tag: function
+  name: dom_document_schema_validate
+  params:
+    - { name: source, type: string }
+    - { name: flags, type: int }
+  return: bool
+
+- tag: function
+  name: dom_document_schema_validate_file
+  params:
+    - { name: filename, type: string }
+    - { name: flags, type: int }
+  return: bool
+
+- tag: function
+  name: dom_document_xinclude
+  params:
+    - { name: options, type: int }
+  return: int
+
+- tag: function
+  name: dom_import_simplexml
+  params:
+    - { name: node, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: dom_xpath_evaluate
+  params:
+    - { name: expr, type: string }
+    - { name: context, type: mixed }
+    - { name: registernodens, type: bool }
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: dom_xpath_query
+  params:
+    - { name: expr, type: string }
+    - { name: context, type: mixed }
+    - { name: registernodens, type: bool }
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: dom_xpath_register_ns
+  params:
+    - { name: prefix, type: string }
+    - { name: uri, type: string }
+  return: bool
+
+- tag: function
+  name: dom_xpath_register_php_functions
+
+- tag: function
+  name: domxml_new_doc
+  params:
+    - { name: version, type: string }
+  flowsToReturn: [0]
+
+- tag: function
+  name: domxml_open_file
+  params:
+    - { name: filename, type: string }
+    - { name: mode, type: int, optional: true }
+    - { name: error, type: array, optional: true }
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: domxml_open_mem
+  params:
+    - { name: string, type: string }
+    - { name: mode, type: int, optional: true }
+    - { name: error, type: array, optional: true }
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: domxml_version
+  return: string
+
+- tag: function
+  name: domxml_xmltree
+  params:
+    - { name: string, type: string }
+  flowsToReturn: [0]
+
+- tag: function
+  name: domxml_xslt_stylesheet
+  params:
+    - { name: xsl_buf, type: string }
+  flowsToReturn: [0]
+
+- tag: function
+  name: domxml_xslt_stylesheet_doc
+  params:
+    - { name: xsl_doc, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: domxml_xslt_stylesheet_file
+  params:
+    - { name: xsl_file, type: string }
+  flowsToReturn: [0]
+
+- tag: function
+  name: domxml_xslt_version
+  return: int
+
+- tag: function
+  name: dotnet_load
+  params:
+    - { name: assembly_name, type: string }
+    - { name: datatype_name, type: string, optional: true }
+    - { name: codepage, type: int, optional: true }
+  return: int
+
+- tag: function
+  name: doubleval
+  params:
+    - { name: value, type: mixed }
+  return: float
+
+- tag: function
+  name: easter_date
+  params:
+    - { name: year, type: int, optional: true }
+    - { name: mode, type: int, optional: true }
+  return: int
+
+- tag: function
+  name: easter_days
+  params:
+    - { name: year, type: int, optional: true }
+    - { name: mode, type: int, optional: true }
+  return: int
+
+- tag: function
+  name: echo
+  params:
+    - { name: arg1, type: string }
+    - { name: args, type: string, optional: true }
+  return: void
+
+- tag: function
+  name: eio_busy
+  params:
+    - { name: delay, type: int }
+    - { name: pri, type: int, optional: true }
+    - { name: callback, type: callable, optional: true }
+    - { name: data, type: mixed, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: eio_cancel
+  params:
+    - { name: req, type: resource }
+  return: void
+
+- tag: function
+  name: eio_chmod
+  params:
+    - { name: path, type: string }
+    - { name: mode, type: int }
+    - { name: pri, type: int, optional: true }
+    - { name: callback, type: callable, optional: true }
+    - { name: data, type: mixed, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3, 4]
+
+- tag: function
+  name: eio_chown
+  params:
+    - { name: path, type: string }
+    - { name: uid, type: int }
+    - { name: gid, type: int, optional: true }
+    - { name: pri, type: int, optional: true }
+    - { name: callback, type: callable, optional: true }
+    - { name: data, type: mixed, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3, 4, 5]
+
+- tag: function
+  name: eio_close
+  params:
+    - { name: fd, type: mixed }
+    - { name: pri, type: int, optional: true }
+    - { name: callback, type: callable, optional: true }
+    - { name: data, type: mixed, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: eio_custom
+  params:
+    - { name: execute, type: callable }
+    - { name: pri, type: int }
+    - { name: callback, type: callable }
+    - { name: data, type: mixed, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: eio_dup2
+  params:
+    - { name: fd, type: mixed }
+    - { name: fd2, type: mixed }
+    - { name: pri, type: int, optional: true }
+    - { name: callback, type: callable, optional: true }
+    - { name: data, type: mixed, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3, 4]
+
+- tag: function
+  name: eio_event_loop
+  return: bool
+
+- tag: function
+  name: eio_fallocate
+  params:
+    - { name: fd, type: mixed }
+    - { name: mode, type: int }
+    - { name: offset, type: int }
+    - { name: length, type: int }
+    - { name: pri, type: int, optional: true }
+    - { name: callback, type: callable, optional: true }
+    - { name: data, type: mixed, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3, 4, 5, 6]
+
+- tag: function
+  name: eio_fchmod
+  params:
+    - { name: fd, type: mixed }
+    - { name: mode, type: int }
+    - { name: pri, type: int, optional: true }
+    - { name: callback, type: callable, optional: true }
+    - { name: data, type: mixed, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3, 4]
+
+- tag: function
+  name: eio_fchown
+  params:
+    - { name: fd, type: mixed }
+    - { name: uid, type: int }
+    - { name: gid, type: int, optional: true }
+    - { name: pri, type: int, optional: true }
+    - { name: callback, type: callable, optional: true }
+    - { name: data, type: mixed, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3, 4, 5]
+
+- tag: function
+  name: eio_fdatasync
+  params:
+    - { name: fd, type: mixed }
+    - { name: pri, type: int, optional: true }
+    - { name: callback, type: callable, optional: true }
+    - { name: data, type: mixed, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: eio_fstat
+  params:
+    - { name: fd, type: mixed }
+    - { name: pri, type: int }
+    - { name: callback, type: callable }
+    - { name: data, type: mixed, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: eio_fstatvfs
+  params:
+    - { name: fd, type: mixed }
+    - { name: pri, type: int }
+    - { name: callback, type: callable }
+    - { name: data, type: mixed, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: eio_fsync
+  params:
+    - { name: fd, type: mixed }
+    - { name: pri, type: int, optional: true }
+    - { name: callback, type: callable, optional: true }
+    - { name: data, type: mixed, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: eio_ftruncate
+  params:
+    - { name: fd, type: mixed }
+    - { name: offset, type: int, optional: true }
+    - { name: pri, type: int, optional: true }
+    - { name: callback, type: callable, optional: true }
+    - { name: data, type: mixed, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3, 4]
+
+- tag: function
+  name: eio_futime
+  params:
+    - { name: fd, type: mixed }
+    - { name: atime, type: float }
+    - { name: mtime, type: float }
+    - { name: pri, type: int, optional: true }
+    - { name: callback, type: callable, optional: true }
+    - { name: data, type: mixed, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3, 4, 5]
+
+- tag: function
+  name: eio_get_event_stream
+
+- tag: function
+  name: eio_get_last_error
+  params:
+    - { name: req, type: resource }
+  return: string
+
+- tag: function
+  name: eio_grp
+  params:
+    - { name: callback, type: callable }
+    - { name: data, type: string, optional: true }
+  return: resource
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: eio_grp_add
+  params:
+    - { name: grp, type: resource }
+    - { name: req, type: resource }
+  return: void
+
+- tag: function
+  name: eio_grp_cancel
+  params:
+    - { name: grp, type: resource }
+  return: void
+
+- tag: function
+  name: eio_grp_limit
+  params:
+    - { name: grp, type: resource }
+    - { name: limit, type: int }
+  return: void
+
+- tag: function
+  name: eio_init
+  return: void
+
+- tag: function
+  name: eio_link
+  params:
+    - { name: path, type: string }
+    - { name: new_path, type: string }
+    - { name: pri, type: int, optional: true }
+    - { name: callback, type: callable, optional: true }
+    - { name: data, type: mixed, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3, 4]
+
+- tag: function
+  name: eio_lstat
+  params:
+    - { name: path, type: string }
+    - { name: pri, type: int }
+    - { name: callback, type: callable }
+    - { name: data, type: mixed, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: eio_mkdir
+  params:
+    - { name: path, type: string }
+    - { name: mode, type: int }
+    - { name: pri, type: int, optional: true }
+    - { name: callback, type: callable, optional: true }
+    - { name: data, type: mixed, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3, 4]
+
+- tag: function
+  name: eio_mknod
+  params:
+    - { name: path, type: string }
+    - { name: mode, type: int }
+    - { name: dev, type: int }
+    - { name: pri, type: int, optional: true }
+    - { name: callback, type: callable, optional: true }
+    - { name: data, type: mixed, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3, 4, 5]
+
+- tag: function
+  name: eio_nop
+  params:
+    - { name: pri, type: int, optional: true }
+    - { name: callback, type: callable, optional: true }
+    - { name: data, type: mixed, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: eio_npending
+  return: int
+
+- tag: function
+  name: eio_nready
+  return: int
+
+- tag: function
+  name: eio_nreqs
+  return: int
+
+- tag: function
+  name: eio_nthreads
+  return: int
+
+- tag: function
+  name: eio_open
+  params:
+    - { name: path, type: string }
+    - { name: flags, type: int }
+    - { name: mode, type: int }
+    - { name: pri, type: int }
+    - { name: callback, type: callable }
+    - { name: data, type: mixed, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3, 4, 5]
+
+- tag: function
+  name: eio_poll
+  return: int
+
+- tag: function
+  name: eio_read
+  params:
+    - { name: fd, type: mixed }
+    - { name: length, type: int }
+    - { name: offset, type: int }
+    - { name: pri, type: int }
+    - { name: callback, type: callable }
+    - { name: data, type: mixed, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3, 4, 5]
+
+- tag: function
+  name: eio_readahead
+  params:
+    - { name: fd, type: mixed }
+    - { name: offset, type: int }
+    - { name: length, type: int }
+    - { name: pri, type: int, optional: true }
+    - { name: callback, type: callable, optional: true }
+    - { name: data, type: mixed, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3, 4, 5]
+
+- tag: function
+  name: eio_readdir
+  params:
+    - { name: path, type: string }
+    - { name: flags, type: int }
+    - { name: pri, type: int }
+    - { name: callback, type: callable }
+    - { name: data, type: string, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3, 4]
+
+- tag: function
+  name: eio_readlink
+  params:
+    - { name: path, type: string }
+    - { name: pri, type: int }
+    - { name: callback, type: callable }
+    - { name: data, type: string, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: eio_realpath
+  params:
+    - { name: path, type: string }
+    - { name: pri, type: int }
+    - { name: callback, type: callable }
+    - { name: data, type: string, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: eio_rename
+  params:
+    - { name: path, type: string }
+    - { name: new_path, type: string }
+    - { name: pri, type: int, optional: true }
+    - { name: callback, type: callable, optional: true }
+    - { name: data, type: mixed, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3, 4]
+
+- tag: function
+  name: eio_rmdir
+  params:
+    - { name: path, type: string }
+    - { name: pri, type: int, optional: true }
+    - { name: callback, type: callable, optional: true }
+    - { name: data, type: mixed, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: eio_seek
+  params:
+    - { name: fd, type: mixed }
+    - { name: offset, type: int }
+    - { name: whence, type: int }
+    - { name: pri, type: int, optional: true }
+    - { name: callback, type: callable, optional: true }
+    - { name: data, type: mixed, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3, 4, 5]
+
+- tag: function
+  name: eio_sendfile
+  params:
+    - { name: out_fd, type: mixed }
+    - { name: in_fd, type: mixed }
+    - { name: offset, type: int }
+    - { name: length, type: int }
+    - { name: pri, type: int, optional: true }
+    - { name: callback, type: callable, optional: true }
+    - { name: data, type: string, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3, 4, 5, 6]
+
+- tag: function
+  name: eio_set_max_idle
+  params:
+    - { name: nthreads, type: int }
+  return: void
+
+- tag: function
+  name: eio_set_max_parallel
+  params:
+    - { name: nthreads, type: int }
+  return: void
+
+- tag: function
+  name: eio_set_max_poll_reqs
+  params:
+    - { name: nreqs, type: int }
+  return: void
+
+- tag: function
+  name: eio_set_max_poll_time
+  params:
+    - { name: nseconds, type: float }
+  return: void
+
+- tag: function
+  name: eio_set_min_parallel
+  params:
+    - { name: nthreads, type: string }
+  return: void
+
+- tag: function
+  name: eio_stat
+  params:
+    - { name: path, type: string }
+    - { name: pri, type: int }
+    - { name: callback, type: callable }
+    - { name: data, type: mixed, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: eio_statvfs
+  params:
+    - { name: path, type: string }
+    - { name: pri, type: int }
+    - { name: callback, type: callable }
+    - { name: data, type: mixed, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: eio_symlink
+  params:
+    - { name: path, type: string }
+    - { name: new_path, type: string }
+    - { name: pri, type: int, optional: true }
+    - { name: callback, type: callable, optional: true }
+    - { name: data, type: mixed, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3, 4]
+
+- tag: function
+  name: eio_sync
+  params:
+    - { name: pri, type: int, optional: true }
+    - { name: callback, type: callable, optional: true }
+    - { name: data, type: mixed, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: eio_sync_file_range
+  params:
+    - { name: fd, type: mixed }
+    - { name: offset, type: int }
+    - { name: nbytes, type: int }
+    - { name: flags, type: int }
+    - { name: pri, type: int, optional: true }
+    - { name: callback, type: callable, optional: true }
+    - { name: data, type: mixed, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3, 4, 5, 6]
+
+- tag: function
+  name: eio_syncfs
+  params:
+    - { name: fd, type: mixed }
+    - { name: pri, type: int, optional: true }
+    - { name: callback, type: callable, optional: true }
+    - { name: data, type: mixed, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: eio_truncate
+  params:
+    - { name: path, type: string }
+    - { name: offset, type: int, optional: true }
+    - { name: pri, type: int, optional: true }
+    - { name: callback, type: callable, optional: true }
+    - { name: data, type: mixed, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3, 4]
+
+- tag: function
+  name: eio_unlink
+  params:
+    - { name: path, type: string }
+    - { name: pri, type: int, optional: true }
+    - { name: callback, type: callable, optional: true }
+    - { name: data, type: mixed, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: eio_utime
+  params:
+    - { name: path, type: string }
+    - { name: atime, type: float }
+    - { name: mtime, type: float }
+    - { name: pri, type: int, optional: true }
+    - { name: callback, type: callable, optional: true }
+    - { name: data, type: mixed, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3, 4, 5]
+
+- tag: function
+  name: eio_write
+  params:
+    - { name: fd, type: mixed }
+    - { name: string, type: string }
+    - { name: length, type: int, optional: true }
+    - { name: offset, type: int, optional: true }
+    - { name: pri, type: int, optional: true }
+    - { name: callback, type: callable, optional: true }
+    - { name: data, type: mixed, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3, 4, 5, 6]
+
+- tag: function
+  name: empty
+  params:
+    - { name: value, type: mixed }
+  return: bool
+
+- tag: function
+  name: enchant_broker_describe
+  params:
+    - { name: broker, type: mixed }
+  return: array
+  flowsToReturn: [0]
+
+- tag: function
+  name: enchant_broker_dict_exists
+  params:
+    - { name: broker, type: mixed }
+    - { name: tag, type: string }
+  return: bool
+
+- tag: function
+  name: enchant_broker_free
+  params:
+    - { name: broker, type: mixed }
+  return: bool
+
+- tag: function
+  name: enchant_broker_free_dict
+  params:
+    - { name: dictionary, type: mixed }
+  return: bool
+
+- tag: function
+  name: enchant_broker_get_dict_path
+  params:
+    - { name: broker, type: mixed }
+    - { name: type, type: int }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: enchant_broker_get_error
+  params:
+    - { name: broker, type: mixed }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: enchant_broker_init
+
+- tag: function
+  name: enchant_broker_list_dicts
+  params:
+    - { name: broker, type: mixed }
+  return: array
+  flowsToReturn: [0]
+
+- tag: function
+  name: enchant_broker_request_dict
+  params:
+    - { name: broker, type: mixed }
+    - { name: tag, type: string }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: enchant_broker_request_pwl_dict
+  params:
+    - { name: broker, type: mixed }
+    - { name: filename, type: string }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: enchant_broker_set_dict_path
+  params:
+    - { name: broker, type: mixed }
+    - { name: type, type: int }
+    - { name: path, type: string }
+  return: bool
+
+- tag: function
+  name: enchant_broker_set_ordering
+  params:
+    - { name: broker, type: mixed }
+    - { name: tag, type: string }
+    - { name: ordering, type: string }
+  return: bool
+
+- tag: function
+  name: enchant_dict_add_to_personal
+  params:
+    - { name: dictionary, type: mixed }
+    - { name: word, type: string }
+  return: void
+
+- tag: function
+  name: enchant_dict_add_to_session
+  params:
+    - { name: dictionary, type: mixed }
+    - { name: word, type: string }
+  return: void
+
+- tag: function
+  name: enchant_dict_check
+  params:
+    - { name: dictionary, type: mixed }
+    - { name: word, type: string }
+  return: bool
+
+- tag: function
+  name: enchant_dict_describe
+  params:
+    - { name: dictionary, type: mixed }
+  return: array
+  flowsToReturn: [0]
+
+- tag: function
+  name: enchant_dict_get_error
+  params:
+    - { name: dictionary, type: mixed }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: enchant_dict_is_in_session
+  params:
+    - { name: dictionary, type: mixed }
+    - { name: word, type: string }
+  return: bool
+
+- tag: function
+  name: enchant_dict_quick_check
+  params:
+    - { name: dictionary, type: mixed }
+    - { name: word, type: string }
+    - { name: suggestions, type: array, optional: true }
+  return: bool
+
+- tag: function
+  name: enchant_dict_store_replacement
+  params:
+    - { name: dictionary, type: mixed }
+    - { name: misspelled, type: string }
+    - { name: correct, type: string }
+  return: void
+
+- tag: function
+  name: enchant_dict_suggest
+  params:
+    - { name: dictionary, type: mixed }
+    - { name: word, type: string }
+  return: array
+  flowsToReturn: [0]
+
+- tag: function
+  name: end
+  params:
+    - { name: array, type: array }
+  flowsToReturn: [0]
+
+- tag: function
+  name: error_clear_last
+  return: void
+
+- tag: function
+  name: error_get_last
+  return: array
+
+- tag: function
+  name: error_log
+  params:
+    - { name: message, type: string }
+    - { name: message_type, type: int, optional: true }
+    - { name: destination, type: string, optional: true }
+    - { name: additional_headers, type: string, optional: true }
+  return: bool
+
+- tag: function
+  name: error_reporting
+  params:
+    - { name: error_level, type: int, optional: true }
+  return: int
+
+- tag: function
+  name: escapeshellarg
+  params:
+    - { name: arg, type: string }
+  return: string
+
+- tag: function
+  name: escapeshellcmd
+  params:
+    - { name: command, type: string }
+  return: string
+
+- tag: function
+  name: eval
+  params:
+    - { name: code_str, type: string }
+  flowsToReturn: [0]
+
+- tag: function
+  name: event_add
+  params:
+    - { name: event, type: resource }
+    - { name: timeout, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: event_base_free
+  params:
+    - { name: event_base, type: resource }
+  return: void
+
+- tag: function
+  name: event_base_loop
+  params:
+    - { name: event_base, type: resource }
+    - { name: flags, type: int, optional: true }
+  return: int
+
+- tag: function
+  name: event_base_loopbreak
+  params:
+    - { name: event_base, type: resource }
+  return: bool
+
+- tag: function
+  name: event_base_loopexit
+  params:
+    - { name: event_base, type: resource }
+    - { name: timeout, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: event_base_new
+  return: resource
+
+- tag: function
+  name: event_base_priority_init
+  params:
+    - { name: event_base, type: resource }
+    - { name: npriorities, type: int }
+  return: bool
+
+- tag: function
+  name: event_base_reinit
+  params:
+    - { name: event_base, type: resource }
+  return: bool
+
+- tag: function
+  name: event_base_set
+  params:
+    - { name: event, type: resource }
+    - { name: event_base, type: resource }
+  return: bool
+
+- tag: function
+  name: event_buffer_base_set
+  params:
+    - { name: bevent, type: resource }
+    - { name: event_base, type: resource }
+  return: bool
+
+- tag: function
+  name: event_buffer_disable
+  params:
+    - { name: bevent, type: resource }
+    - { name: events, type: int }
+  return: bool
+
+- tag: function
+  name: event_buffer_enable
+  params:
+    - { name: bevent, type: resource }
+    - { name: events, type: int }
+  return: bool
+
+- tag: function
+  name: event_buffer_fd_set
+  params:
+    - { name: bevent, type: resource }
+    - { name: fd, type: resource }
+  return: void
+
+- tag: function
+  name: event_buffer_free
+  params:
+    - { name: bevent, type: resource }
+  return: void
+
+- tag: function
+  name: event_buffer_new
+  params:
+    - { name: stream, type: resource }
+    - { name: readcb, type: callable }
+    - { name: writecb, type: callable }
+    - { name: errorcb, type: callable }
+    - { name: arg, type: mixed, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3, 4]
+
+- tag: function
+  name: event_buffer_priority_set
+  params:
+    - { name: bevent, type: resource }
+    - { name: priority, type: int }
+  return: bool
+
+- tag: function
+  name: event_buffer_read
+  params:
+    - { name: bevent, type: resource }
+    - { name: data_size, type: int }
+  return: string
+
+- tag: function
+  name: event_buffer_set_callback
+  params:
+    - { name: event, type: resource }
+    - { name: readcb, type: mixed }
+    - { name: writecb, type: mixed }
+    - { name: errorcb, type: mixed }
+    - { name: arg, type: mixed, optional: true }
+  return: bool
+
+- tag: function
+  name: event_buffer_timeout_set
+  params:
+    - { name: bevent, type: resource }
+    - { name: read_timeout, type: int }
+    - { name: write_timeout, type: int }
+  return: void
+
+- tag: function
+  name: event_buffer_watermark_set
+  params:
+    - { name: bevent, type: resource }
+    - { name: events, type: int }
+    - { name: lowmark, type: int }
+    - { name: highmark, type: int }
+  return: void
+
+- tag: function
+  name: event_buffer_write
+  params:
+    - { name: bevent, type: resource }
+    - { name: data, type: string }
+    - { name: data_size, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: event_del
+  params:
+    - { name: event, type: resource }
+  return: bool
+
+- tag: function
+  name: event_free
+  params:
+    - { name: event, type: resource }
+  return: void
+
+- tag: function
+  name: event_new
+  return: resource
+
+- tag: function
+  name: event_priority_set
+  params:
+    - { name: event, type: resource }
+    - { name: priority, type: int }
+  return: bool
+
+- tag: function
+  name: event_set
+  params:
+    - { name: event, type: resource }
+    - { name: fd, type: int }
+    - { name: events, type: int }
+    - { name: callback, type: callable }
+    - { name: arg, type: mixed, optional: true }
+  return: bool
+
+- tag: function
+  name: event_timer_add
+  params:
+    - { name: event, type: resource }
+    - { name: timeout, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: event_timer_del
+  params:
+    - { name: event, type: resource }
+  return: bool
+
+- tag: function
+  name: event_timer_new
+  return: resource
+
+- tag: function
+  name: event_timer_pending
+  params:
+    - { name: event, type: resource }
+    - { name: timeout, type: int, optional: true }
+  return: bool
+

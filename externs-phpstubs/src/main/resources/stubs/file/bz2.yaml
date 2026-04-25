@@ -1,0 +1,68 @@
+- tag: function
+  name: bzclose
+  params:
+    - { name: bz, type: resource }
+  return: bool
+
+- tag: function
+  name: bzcompress
+  params:
+    - { name: data, type: string }
+    - { name: block_size, type: int, optional: true }
+    - { name: work_factor, type: int, optional: true }
+  return: int
+
+- tag: function
+  name: bzdecompress
+  params:
+    - { name: data, type: string }
+    - { name: use_less_memory, type: bool, optional: true }
+  return: int
+
+- tag: function
+  name: bzerrno
+  params:
+    - { name: bz, type: resource }
+  return: int
+
+- tag: function
+  name: bzerror
+  params:
+    - { name: bz, type: resource }
+  return: array
+
+- tag: function
+  name: bzerrstr
+  params:
+    - { name: bz, type: resource }
+  return: string
+
+- tag: function
+  name: bzflush
+  params:
+    - { name: bz, type: resource }
+  return: bool
+
+- tag: function
+  name: bzopen
+  params:
+    - { name: file, type: resource }
+    - { name: mode, type: string }
+  return: resource
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: bzread
+  params:
+    - { name: bz, type: resource }
+    - { name: length, type: int, optional: true }
+  return: string
+
+- tag: function
+  name: bzwrite
+  params:
+    - { name: bz, type: resource }
+    - { name: data, type: string }
+    - { name: length, type: int, optional: true }
+  return: int
+

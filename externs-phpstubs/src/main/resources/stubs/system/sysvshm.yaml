@@ -1,0 +1,49 @@
+- tag: function
+  name: shm_attach
+  params:
+    - { name: key, type: int }
+    - { name: size, type: int, optional: true }
+    - { name: permissions, type: int, optional: true }
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: shm_detach
+  params:
+    - { name: shm, type: mixed }
+  return: bool
+
+- tag: function
+  name: shm_get_var
+  params:
+    - { name: shm, type: mixed }
+    - { name: key, type: int }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: shm_has_var
+  params:
+    - { name: shm, type: mixed }
+    - { name: key, type: int }
+  return: bool
+
+- tag: function
+  name: shm_put_var
+  params:
+    - { name: shm, type: mixed }
+    - { name: key, type: int }
+    - { name: value, type: mixed }
+  return: bool
+
+- tag: function
+  name: shm_remove
+  params:
+    - { name: shm, type: mixed }
+  return: bool
+
+- tag: function
+  name: shm_remove_var
+  params:
+    - { name: shm, type: mixed }
+    - { name: key, type: int }
+  return: bool
+

@@ -1,0 +1,35 @@
+- tag: function
+  name: libxml_clear_errors
+  return: void
+
+- tag: function
+  name: libxml_disable_entity_loader
+  params:
+    - { name: disable, type: bool, optional: true }
+  return: bool
+
+- tag: function
+  name: libxml_get_errors
+  return: array
+
+- tag: function
+  name: libxml_get_last_error
+
+- tag: function
+  name: libxml_set_external_entity_loader
+  params:
+    - { name: resolver_function, type: mixed }
+  return: bool
+
+- tag: function
+  name: libxml_set_streams_context
+  params:
+    - { name: context, type: resource }
+  return: void
+
+- tag: function
+  name: libxml_use_internal_errors
+  params:
+    - { name: use_errors, type: bool, optional: true }
+  return: bool
+

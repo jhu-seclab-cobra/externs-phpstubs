@@ -1,0 +1,3724 @@
+- tag: function
+  name: pdf_setrgbcolor_stroke
+  params:
+    - { name: p, type: resource }
+    - { name: red, type: float }
+    - { name: green, type: float }
+    - { name: blue, type: float }
+  return: bool
+
+- tag: function
+  name: pdf_shading
+  params:
+    - { name: pdfdoc, type: resource }
+    - { name: shtype, type: string }
+    - { name: x0, type: float }
+    - { name: y0, type: float }
+    - { name: x1, type: float }
+    - { name: y1, type: float }
+    - { name: c1, type: float }
+    - { name: c2, type: float }
+    - { name: c3, type: float }
+    - { name: c4, type: float }
+    - { name: optlist, type: string }
+  return: int
+
+- tag: function
+  name: pdf_shading_pattern
+  params:
+    - { name: pdfdoc, type: resource }
+    - { name: shading, type: int }
+    - { name: optlist, type: string }
+  return: int
+
+- tag: function
+  name: pdf_shfill
+  params:
+    - { name: pdfdoc, type: resource }
+    - { name: shading, type: int }
+  return: bool
+
+- tag: function
+  name: pdf_show
+  params:
+    - { name: pdfdoc, type: resource }
+    - { name: text, type: string }
+  return: bool
+
+- tag: function
+  name: pdf_show_boxed
+  params:
+    - { name: p, type: resource }
+    - { name: text, type: string }
+    - { name: left, type: float }
+    - { name: top, type: float }
+    - { name: width, type: float }
+    - { name: height, type: float }
+    - { name: mode, type: string }
+    - { name: feature, type: string }
+  return: int
+
+- tag: function
+  name: pdf_show_xy
+  params:
+    - { name: p, type: resource }
+    - { name: text, type: string }
+    - { name: x, type: float }
+    - { name: y, type: float }
+  return: bool
+
+- tag: function
+  name: pdf_skew
+  params:
+    - { name: p, type: resource }
+    - { name: alpha, type: float }
+    - { name: beta, type: float }
+  return: bool
+
+- tag: function
+  name: pdf_stringwidth
+  params:
+    - { name: p, type: resource }
+    - { name: text, type: string }
+    - { name: font, type: int }
+    - { name: fontsize, type: float }
+  return: float
+
+- tag: function
+  name: pdf_stroke
+  params:
+    - { name: p, type: resource }
+  return: bool
+
+- tag: function
+  name: pdf_suspend_page
+  params:
+    - { name: pdfdoc, type: resource }
+    - { name: optlist, type: string }
+  return: bool
+
+- tag: function
+  name: pdf_translate
+  params:
+    - { name: p, type: resource }
+    - { name: tx, type: float }
+    - { name: ty, type: float }
+  return: bool
+
+- tag: function
+  name: pdf_utf16_to_utf8
+  params:
+    - { name: pdfdoc, type: resource }
+    - { name: utf16string, type: string }
+  return: string
+  flowsToReturn: [1]
+
+- tag: function
+  name: pdf_utf32_to_utf16
+  params:
+    - { name: pdfdoc, type: resource }
+    - { name: utf32string, type: string }
+    - { name: ordering, type: string }
+  return: string
+  flowsToReturn: [1, 2]
+
+- tag: function
+  name: pdf_utf8_to_utf16
+  params:
+    - { name: pdfdoc, type: resource }
+    - { name: utf8string, type: string }
+    - { name: ordering, type: string }
+  return: string
+  flowsToReturn: [1, 2]
+
+- tag: function
+  name: pdo_drivers
+  return: array
+
+- tag: function
+  name: pfsockopen
+  params:
+    - { name: hostname, type: string }
+    - { name: port, type: int, optional: true }
+    - { name: error_code, type: int, optional: true }
+    - { name: error_message, type: string, optional: true }
+    - { name: timeout, type: float, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3, 4]
+
+- tag: function
+  name: php_check_syntax
+  params:
+    - { name: filename, type: string }
+    - { name: error_message, type: string, optional: true }
+  return: bool
+
+- tag: function
+  name: php_ini_loaded_file
+  return: string
+
+- tag: function
+  name: php_ini_scanned_files
+  return: string
+
+- tag: function
+  name: php_logo_guid
+  return: string
+
+- tag: function
+  name: php_sapi_name
+  return: string
+
+- tag: function
+  name: php_strip_whitespace
+  params:
+    - { name: filename, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: php_uname
+  params:
+    - { name: mode, type: string, optional: true }
+  return: string
+
+- tag: function
+  name: phpcredits
+  params:
+    - { name: flags, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: phpdbg_break_file
+  params:
+    - { name: file, type: string }
+    - { name: line, type: int }
+  return: void
+
+- tag: function
+  name: phpdbg_break_function
+  params:
+    - { name: function, type: string }
+  return: void
+
+- tag: function
+  name: phpdbg_break_method
+  params:
+    - { name: class, type: string }
+    - { name: method, type: string }
+  return: void
+
+- tag: function
+  name: phpdbg_break_next
+  return: void
+
+- tag: function
+  name: phpdbg_clear
+  return: void
+
+- tag: function
+  name: phpdbg_color
+  params:
+    - { name: element, type: int }
+    - { name: color, type: string }
+  return: void
+
+- tag: function
+  name: phpdbg_end_oplog
+  params:
+    - { name: options, type: array, optional: true }
+  return: array
+  flowsToReturn: [0]
+
+- tag: function
+  name: phpdbg_exec
+  params:
+    - { name: context, type: string, optional: true }
+  flowsToReturn: [0]
+
+- tag: function
+  name: phpdbg_get_executable
+  params:
+    - { name: options, type: array, optional: true }
+  return: array
+  flowsToReturn: [0]
+
+- tag: function
+  name: phpdbg_prompt
+  params:
+    - { name: string, type: string }
+  return: void
+
+- tag: function
+  name: phpdbg_start_oplog
+  return: void
+
+- tag: function
+  name: phpinfo
+  params:
+    - { name: flags, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: phpversion
+  params:
+    - { name: extension, type: string, optional: true }
+  return: string
+
+- tag: function
+  name: pi
+  return: float
+
+- tag: function
+  name: popen
+  params:
+    - { name: command, type: string }
+    - { name: mode, type: string }
+  return: resource
+
+- tag: function
+  name: pos
+  params:
+    - { name: array, type: array }
+  flowsToReturn: [0]
+
+- tag: function
+  name: pow
+  params:
+    - { name: num, type: float }
+    - { name: exponent, type: float }
+  return: float
+
+- tag: function
+  name: prev
+  params:
+    - { name: array, type: array }
+  flowsToReturn: [0]
+
+- tag: function
+  name: print
+  params:
+    - { name: arg, type: string }
+  return: int
+
+- tag: function
+  name: print_r
+  params:
+    - { name: value, type: mixed }
+    - { name: return, type: bool, optional: true }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: printf
+  params:
+    - { name: format, type: string }
+    - { name: values, type: float, optional: true }
+  return: int
+
+- tag: function
+  name: proc_close
+  params:
+    - { name: process, type: resource }
+  return: int
+
+- tag: function
+  name: proc_get_status
+  params:
+    - { name: process, type: resource }
+  return: array
+
+- tag: function
+  name: proc_nice
+  params:
+    - { name: priority, type: int }
+  return: bool
+
+- tag: function
+  name: proc_open
+  params:
+    - { name: command, type: array }
+    - { name: descriptor_spec, type: array }
+    - { name: pipes, type: array }
+    - { name: cwd, type: string, optional: true }
+    - { name: env_vars, type: array, optional: true }
+    - { name: options, type: array, optional: true }
+  return: resource
+
+- tag: function
+  name: proc_terminate
+  params:
+    - { name: process, type: resource }
+    - { name: signal, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: property_exists
+  params:
+    - { name: object_or_class, type: object }
+    - { name: property, type: string }
+  return: bool
+
+- tag: function
+  name: ps_add_bookmark
+  params:
+    - { name: psdoc, type: resource }
+    - { name: text, type: string }
+    - { name: parent, type: int, optional: true }
+    - { name: open, type: int, optional: true }
+  return: int
+
+- tag: function
+  name: ps_add_launchlink
+  params:
+    - { name: psdoc, type: resource }
+    - { name: llx, type: float }
+    - { name: lly, type: float }
+    - { name: urx, type: float }
+    - { name: ury, type: float }
+    - { name: filename, type: string }
+  return: bool
+
+- tag: function
+  name: ps_add_locallink
+  params:
+    - { name: psdoc, type: resource }
+    - { name: llx, type: float }
+    - { name: lly, type: float }
+    - { name: urx, type: float }
+    - { name: ury, type: float }
+    - { name: page, type: int }
+    - { name: dest, type: string }
+  return: bool
+
+- tag: function
+  name: ps_add_note
+  params:
+    - { name: psdoc, type: resource }
+    - { name: llx, type: float }
+    - { name: lly, type: float }
+    - { name: urx, type: float }
+    - { name: ury, type: float }
+    - { name: contents, type: string }
+    - { name: title, type: string }
+    - { name: icon, type: string }
+    - { name: open, type: int }
+  return: bool
+
+- tag: function
+  name: ps_add_pdflink
+  params:
+    - { name: psdoc, type: resource }
+    - { name: llx, type: float }
+    - { name: lly, type: float }
+    - { name: urx, type: float }
+    - { name: ury, type: float }
+    - { name: filename, type: string }
+    - { name: page, type: int }
+    - { name: dest, type: string }
+  return: bool
+
+- tag: function
+  name: ps_add_weblink
+  params:
+    - { name: psdoc, type: resource }
+    - { name: llx, type: float }
+    - { name: lly, type: float }
+    - { name: urx, type: float }
+    - { name: ury, type: float }
+    - { name: url, type: string }
+  return: bool
+
+- tag: function
+  name: ps_arc
+  params:
+    - { name: psdoc, type: resource }
+    - { name: x, type: float }
+    - { name: y, type: float }
+    - { name: radius, type: float }
+    - { name: alpha, type: float }
+    - { name: beta, type: float }
+  return: bool
+
+- tag: function
+  name: ps_arcn
+  params:
+    - { name: psdoc, type: resource }
+    - { name: x, type: float }
+    - { name: y, type: float }
+    - { name: radius, type: float }
+    - { name: alpha, type: float }
+    - { name: beta, type: float }
+  return: bool
+
+- tag: function
+  name: ps_begin_page
+  params:
+    - { name: psdoc, type: resource }
+    - { name: width, type: float }
+    - { name: height, type: float }
+  return: bool
+
+- tag: function
+  name: ps_begin_pattern
+  params:
+    - { name: psdoc, type: resource }
+    - { name: width, type: float }
+    - { name: height, type: float }
+    - { name: xstep, type: float }
+    - { name: ystep, type: float }
+    - { name: painttype, type: int }
+  return: int
+
+- tag: function
+  name: ps_begin_template
+  params:
+    - { name: psdoc, type: resource }
+    - { name: width, type: float }
+    - { name: height, type: float }
+  return: int
+
+- tag: function
+  name: ps_circle
+  params:
+    - { name: psdoc, type: resource }
+    - { name: x, type: float }
+    - { name: y, type: float }
+    - { name: radius, type: float }
+  return: bool
+
+- tag: function
+  name: ps_clip
+  params:
+    - { name: psdoc, type: resource }
+  return: bool
+
+- tag: function
+  name: ps_close
+  params:
+    - { name: psdoc, type: resource }
+  return: bool
+
+- tag: function
+  name: ps_close_image
+  params:
+    - { name: psdoc, type: resource }
+    - { name: imageid, type: int }
+  return: void
+
+- tag: function
+  name: ps_closepath
+  params:
+    - { name: psdoc, type: resource }
+  return: bool
+
+- tag: function
+  name: ps_closepath_stroke
+  params:
+    - { name: psdoc, type: resource }
+  return: bool
+
+- tag: function
+  name: ps_continue_text
+  params:
+    - { name: psdoc, type: resource }
+    - { name: text, type: string }
+  return: bool
+
+- tag: function
+  name: ps_curveto
+  params:
+    - { name: psdoc, type: resource }
+    - { name: x1, type: float }
+    - { name: y1, type: float }
+    - { name: x2, type: float }
+    - { name: y2, type: float }
+    - { name: x3, type: float }
+    - { name: y3, type: float }
+  return: bool
+
+- tag: function
+  name: ps_delete
+  params:
+    - { name: psdoc, type: resource }
+  return: bool
+
+- tag: function
+  name: ps_end_page
+  params:
+    - { name: psdoc, type: resource }
+  return: bool
+
+- tag: function
+  name: ps_end_pattern
+  params:
+    - { name: psdoc, type: resource }
+  return: bool
+
+- tag: function
+  name: ps_end_template
+  params:
+    - { name: psdoc, type: resource }
+  return: bool
+
+- tag: function
+  name: ps_fill
+  params:
+    - { name: psdoc, type: resource }
+  return: bool
+
+- tag: function
+  name: ps_fill_stroke
+  params:
+    - { name: psdoc, type: resource }
+  return: bool
+
+- tag: function
+  name: ps_findfont
+  params:
+    - { name: psdoc, type: resource }
+    - { name: fontname, type: string }
+    - { name: encoding, type: string }
+    - { name: embed, type: bool, optional: true }
+  return: int
+
+- tag: function
+  name: ps_get_buffer
+  params:
+    - { name: psdoc, type: resource }
+  return: string
+
+- tag: function
+  name: ps_get_parameter
+  params:
+    - { name: psdoc, type: resource }
+    - { name: name, type: string }
+    - { name: modifier, type: float, optional: true }
+  return: string
+  flowsToReturn: [1]
+
+- tag: function
+  name: ps_get_value
+  params:
+    - { name: psdoc, type: resource }
+    - { name: name, type: string }
+    - { name: modifier, type: float, optional: true }
+  return: float
+
+- tag: function
+  name: ps_hyphenate
+  params:
+    - { name: psdoc, type: resource }
+    - { name: text, type: string }
+  return: array
+
+- tag: function
+  name: ps_include_file
+  params:
+    - { name: psdoc, type: resource }
+    - { name: file, type: string }
+  return: bool
+
+- tag: function
+  name: ps_lineto
+  params:
+    - { name: psdoc, type: resource }
+    - { name: x, type: float }
+    - { name: y, type: float }
+  return: bool
+
+- tag: function
+  name: ps_makespotcolor
+  params:
+    - { name: psdoc, type: resource }
+    - { name: name, type: string }
+    - { name: reserved, type: int, optional: true }
+  return: int
+
+- tag: function
+  name: ps_moveto
+  params:
+    - { name: psdoc, type: resource }
+    - { name: x, type: float }
+    - { name: y, type: float }
+  return: bool
+
+- tag: function
+  name: ps_new
+  return: resource
+
+- tag: function
+  name: ps_open_file
+  params:
+    - { name: psdoc, type: resource }
+    - { name: filename, type: string, optional: true }
+  return: bool
+
+- tag: function
+  name: ps_open_image
+  params:
+    - { name: psdoc, type: resource }
+    - { name: type, type: string }
+    - { name: source, type: string }
+    - { name: data, type: string }
+    - { name: length, type: int }
+    - { name: width, type: int }
+    - { name: height, type: int }
+    - { name: components, type: int }
+    - { name: bpc, type: int }
+    - { name: params, type: string }
+  return: int
+
+- tag: function
+  name: ps_open_image_file
+  params:
+    - { name: psdoc, type: resource }
+    - { name: type, type: string }
+    - { name: filename, type: string }
+    - { name: stringparam, type: string, optional: true }
+    - { name: intparam, type: int, optional: true }
+  return: int
+
+- tag: function
+  name: ps_open_memory_image
+  params:
+    - { name: psdoc, type: resource }
+    - { name: gd, type: int }
+  return: int
+
+- tag: function
+  name: ps_place_image
+  params:
+    - { name: psdoc, type: resource }
+    - { name: imageid, type: int }
+    - { name: x, type: float }
+    - { name: y, type: float }
+    - { name: scale, type: float }
+  return: bool
+
+- tag: function
+  name: ps_rect
+  params:
+    - { name: psdoc, type: resource }
+    - { name: x, type: float }
+    - { name: y, type: float }
+    - { name: width, type: float }
+    - { name: height, type: float }
+  return: bool
+
+- tag: function
+  name: ps_restore
+  params:
+    - { name: psdoc, type: resource }
+  return: bool
+
+- tag: function
+  name: ps_rotate
+  params:
+    - { name: psdoc, type: resource }
+    - { name: rot, type: float }
+  return: bool
+
+- tag: function
+  name: ps_save
+  params:
+    - { name: psdoc, type: resource }
+  return: bool
+
+- tag: function
+  name: ps_scale
+  params:
+    - { name: psdoc, type: resource }
+    - { name: x, type: float }
+    - { name: y, type: float }
+  return: bool
+
+- tag: function
+  name: ps_set_border_color
+  params:
+    - { name: psdoc, type: resource }
+    - { name: red, type: float }
+    - { name: green, type: float }
+    - { name: blue, type: float }
+  return: bool
+
+- tag: function
+  name: ps_set_border_dash
+  params:
+    - { name: psdoc, type: resource }
+    - { name: black, type: float }
+    - { name: white, type: float }
+  return: bool
+
+- tag: function
+  name: ps_set_border_style
+  params:
+    - { name: psdoc, type: resource }
+    - { name: style, type: string }
+    - { name: width, type: float }
+  return: bool
+
+- tag: function
+  name: ps_set_info
+  params:
+    - { name: p, type: resource }
+    - { name: key, type: string }
+    - { name: value, type: string }
+  return: bool
+
+- tag: function
+  name: ps_set_parameter
+  params:
+    - { name: psdoc, type: resource }
+    - { name: name, type: string }
+    - { name: value, type: string }
+  return: bool
+
+- tag: function
+  name: ps_set_text_pos
+  params:
+    - { name: psdoc, type: resource }
+    - { name: x, type: float }
+    - { name: y, type: float }
+  return: bool
+
+- tag: function
+  name: ps_set_value
+  params:
+    - { name: psdoc, type: resource }
+    - { name: name, type: string }
+    - { name: value, type: float }
+  return: bool
+
+- tag: function
+  name: ps_setcolor
+  params:
+    - { name: psdoc, type: resource }
+    - { name: type, type: string }
+    - { name: colorspace, type: string }
+    - { name: c1, type: float }
+    - { name: c2, type: float }
+    - { name: c3, type: float }
+    - { name: c4, type: float }
+  return: bool
+
+- tag: function
+  name: ps_setdash
+  params:
+    - { name: psdoc, type: resource }
+    - { name: True, type: float }
+    - { name: False, type: float }
+  return: bool
+
+- tag: function
+  name: ps_setflat
+  params:
+    - { name: psdoc, type: resource }
+    - { name: value, type: float }
+  return: bool
+
+- tag: function
+  name: ps_setfont
+  params:
+    - { name: psdoc, type: resource }
+    - { name: fontid, type: int }
+    - { name: size, type: float }
+  return: bool
+
+- tag: function
+  name: ps_setgray
+  params:
+    - { name: psdoc, type: resource }
+    - { name: gray, type: float }
+  return: bool
+
+- tag: function
+  name: ps_setlinecap
+  params:
+    - { name: psdoc, type: resource }
+    - { name: type, type: int }
+  return: bool
+
+- tag: function
+  name: ps_setlinejoin
+  params:
+    - { name: psdoc, type: resource }
+    - { name: type, type: int }
+  return: bool
+
+- tag: function
+  name: ps_setlinewidth
+  params:
+    - { name: psdoc, type: resource }
+    - { name: width, type: float }
+  return: bool
+
+- tag: function
+  name: ps_setmiterlimit
+  params:
+    - { name: psdoc, type: resource }
+    - { name: value, type: float }
+  return: bool
+
+- tag: function
+  name: ps_setoverprintmode
+  params:
+    - { name: psdoc, type: resource }
+    - { name: mode, type: int }
+  return: bool
+
+- tag: function
+  name: ps_setpolydash
+  params:
+    - { name: psdoc, type: resource }
+    - { name: arr, type: float }
+  return: bool
+
+- tag: function
+  name: ps_shading
+  params:
+    - { name: psdoc, type: resource }
+    - { name: type, type: string }
+    - { name: x0, type: float }
+    - { name: y0, type: float }
+    - { name: x1, type: float }
+    - { name: y1, type: float }
+    - { name: c1, type: float }
+    - { name: c2, type: float }
+    - { name: c3, type: float }
+    - { name: c4, type: float }
+    - { name: optlist, type: string }
+  return: int
+
+- tag: function
+  name: ps_shading_pattern
+  params:
+    - { name: psdoc, type: resource }
+    - { name: shadingid, type: int }
+    - { name: optlist, type: string }
+  return: int
+
+- tag: function
+  name: ps_shfill
+  params:
+    - { name: psdoc, type: resource }
+    - { name: shadingid, type: int }
+  return: bool
+
+- tag: function
+  name: ps_show
+  params:
+    - { name: psdoc, type: resource }
+    - { name: text, type: string }
+  return: bool
+
+- tag: function
+  name: ps_show2
+  params:
+    - { name: psdoc, type: resource }
+    - { name: text, type: string }
+    - { name: length, type: int }
+  return: bool
+
+- tag: function
+  name: ps_show_boxed
+  params:
+    - { name: psdoc, type: resource }
+    - { name: text, type: string }
+    - { name: left, type: float }
+    - { name: bottom, type: float }
+    - { name: width, type: float }
+    - { name: height, type: float }
+    - { name: hmode, type: string }
+    - { name: feature, type: string, optional: true }
+  return: int
+
+- tag: function
+  name: ps_show_xy
+  params:
+    - { name: psdoc, type: resource }
+    - { name: text, type: string }
+    - { name: x, type: float }
+    - { name: y, type: float }
+  return: bool
+
+- tag: function
+  name: ps_show_xy2
+  params:
+    - { name: psdoc, type: resource }
+    - { name: text, type: string }
+    - { name: length, type: int }
+    - { name: xcoor, type: float }
+    - { name: ycoor, type: float }
+  return: bool
+
+- tag: function
+  name: ps_string_geometry
+  params:
+    - { name: psdoc, type: resource }
+    - { name: text, type: string }
+    - { name: fontid, type: int, optional: true }
+    - { name: size, type: float, optional: true }
+  return: array
+
+- tag: function
+  name: ps_stringwidth
+  params:
+    - { name: psdoc, type: resource }
+    - { name: text, type: string }
+    - { name: fontid, type: int, optional: true }
+    - { name: size, type: float, optional: true }
+  return: float
+
+- tag: function
+  name: ps_stroke
+  params:
+    - { name: psdoc, type: resource }
+  return: bool
+
+- tag: function
+  name: ps_symbol
+  params:
+    - { name: psdoc, type: resource }
+    - { name: ord, type: int }
+  return: bool
+
+- tag: function
+  name: ps_symbol_name
+  params:
+    - { name: psdoc, type: resource }
+    - { name: ord, type: int }
+    - { name: fontid, type: int, optional: true }
+  return: string
+
+- tag: function
+  name: ps_symbol_width
+  params:
+    - { name: psdoc, type: resource }
+    - { name: ord, type: int }
+    - { name: fontid, type: int, optional: true }
+    - { name: size, type: float, optional: true }
+  return: float
+
+- tag: function
+  name: ps_translate
+  params:
+    - { name: psdoc, type: resource }
+    - { name: x, type: float }
+    - { name: y, type: float }
+  return: bool
+
+- tag: function
+  name: pspell_add_to_personal
+  params:
+    - { name: dictionary, type: int }
+    - { name: word, type: string }
+  return: bool
+
+- tag: function
+  name: pspell_add_to_session
+  params:
+    - { name: dictionary, type: int }
+    - { name: word, type: string }
+  return: bool
+
+- tag: function
+  name: pspell_check
+  params:
+    - { name: dictionary, type: int }
+    - { name: word, type: string }
+  return: bool
+
+- tag: function
+  name: pspell_clear_session
+  params:
+    - { name: dictionary, type: int }
+  return: bool
+
+- tag: function
+  name: pspell_config_create
+  params:
+    - { name: language, type: string }
+    - { name: spelling, type: string, optional: true }
+    - { name: jargon, type: string, optional: true }
+    - { name: encoding, type: string, optional: true }
+  return: int
+
+- tag: function
+  name: pspell_config_data_dir
+  params:
+    - { name: config, type: int }
+    - { name: directory, type: string }
+  return: bool
+
+- tag: function
+  name: pspell_config_dict_dir
+  params:
+    - { name: config, type: int }
+    - { name: directory, type: string }
+  return: bool
+
+- tag: function
+  name: pspell_config_ignore
+  params:
+    - { name: config, type: int }
+    - { name: min_length, type: int }
+  return: bool
+
+- tag: function
+  name: pspell_config_mode
+  params:
+    - { name: config, type: int }
+    - { name: mode, type: int }
+  return: bool
+
+- tag: function
+  name: pspell_config_personal
+  params:
+    - { name: config, type: int }
+    - { name: filename, type: string }
+  return: bool
+
+- tag: function
+  name: pspell_config_repl
+  params:
+    - { name: config, type: int }
+    - { name: filename, type: string }
+  return: bool
+
+- tag: function
+  name: pspell_config_runtogether
+  params:
+    - { name: config, type: int }
+    - { name: allow, type: bool }
+  return: bool
+
+- tag: function
+  name: pspell_config_save_repl
+  params:
+    - { name: config, type: int }
+    - { name: save, type: bool }
+  return: bool
+
+- tag: function
+  name: pspell_new
+  params:
+    - { name: language, type: string }
+    - { name: spelling, type: string, optional: true }
+    - { name: jargon, type: string, optional: true }
+    - { name: encoding, type: string, optional: true }
+    - { name: mode, type: int, optional: true }
+  return: int
+
+- tag: function
+  name: pspell_new_config
+  params:
+    - { name: config, type: int }
+  return: int
+
+- tag: function
+  name: pspell_new_personal
+  params:
+    - { name: filename, type: string }
+    - { name: language, type: string }
+    - { name: spelling, type: string, optional: true }
+    - { name: jargon, type: string, optional: true }
+    - { name: encoding, type: string, optional: true }
+    - { name: mode, type: int, optional: true }
+  return: int
+
+- tag: function
+  name: pspell_save_wordlist
+  params:
+    - { name: dictionary, type: int }
+  return: bool
+
+- tag: function
+  name: pspell_store_replacement
+  params:
+    - { name: dictionary, type: int }
+    - { name: misspelled, type: string }
+    - { name: correct, type: string }
+  return: bool
+
+- tag: function
+  name: pspell_suggest
+  params:
+    - { name: dictionary, type: int }
+    - { name: word, type: string }
+  return: array
+
+- tag: function
+  name: putenv
+  params:
+    - { name: assignment, type: string }
+  return: bool
+
+- tag: function
+  name: px_close
+  params:
+    - { name: pxdoc, type: resource }
+  return: bool
+
+- tag: function
+  name: px_create_fp
+  params:
+    - { name: pxdoc, type: resource }
+    - { name: file, type: resource }
+    - { name: fielddesc, type: array }
+  return: bool
+
+- tag: function
+  name: px_date2string
+  params:
+    - { name: pxdoc, type: resource }
+    - { name: value, type: int }
+    - { name: format, type: string }
+  return: string
+  flowsToReturn: [2]
+
+- tag: function
+  name: px_delete
+  params:
+    - { name: pxdoc, type: resource }
+  return: bool
+
+- tag: function
+  name: px_delete_record
+  params:
+    - { name: pxdoc, type: resource }
+    - { name: num, type: int }
+  return: bool
+
+- tag: function
+  name: px_get_field
+  params:
+    - { name: pxdoc, type: resource }
+    - { name: fieldno, type: int }
+  return: array
+
+- tag: function
+  name: px_get_info
+  params:
+    - { name: pxdoc, type: resource }
+  return: array
+
+- tag: function
+  name: px_get_parameter
+  params:
+    - { name: pxdoc, type: resource }
+    - { name: name, type: string }
+  return: string
+  flowsToReturn: [1]
+
+- tag: function
+  name: px_get_record
+  params:
+    - { name: pxdoc, type: resource }
+    - { name: num, type: int }
+    - { name: mode, type: int, optional: true }
+  return: array
+
+- tag: function
+  name: px_get_schema
+  params:
+    - { name: pxdoc, type: resource }
+    - { name: mode, type: int, optional: true }
+  return: array
+
+- tag: function
+  name: px_get_value
+  params:
+    - { name: pxdoc, type: resource }
+    - { name: name, type: string }
+  return: float
+
+- tag: function
+  name: px_insert_record
+  params:
+    - { name: pxdoc, type: resource }
+    - { name: data, type: array }
+  return: int
+
+- tag: function
+  name: px_new
+  return: resource
+
+- tag: function
+  name: px_numfields
+  params:
+    - { name: pxdoc, type: resource }
+  return: int
+
+- tag: function
+  name: px_numrecords
+  params:
+    - { name: pxdoc, type: resource }
+  return: int
+
+- tag: function
+  name: px_open_fp
+  params:
+    - { name: pxdoc, type: resource }
+    - { name: file, type: resource }
+  return: bool
+
+- tag: function
+  name: px_put_record
+  params:
+    - { name: pxdoc, type: resource }
+    - { name: record, type: array }
+    - { name: recpos, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: px_retrieve_record
+  params:
+    - { name: pxdoc, type: resource }
+    - { name: num, type: int }
+    - { name: mode, type: int, optional: true }
+  return: array
+
+- tag: function
+  name: px_set_blob_file
+  params:
+    - { name: pxdoc, type: resource }
+    - { name: filename, type: string }
+  return: bool
+
+- tag: function
+  name: px_set_parameter
+  params:
+    - { name: pxdoc, type: resource }
+    - { name: name, type: string }
+    - { name: value, type: string }
+  return: bool
+
+- tag: function
+  name: px_set_tablename
+  params:
+    - { name: pxdoc, type: resource }
+    - { name: name, type: string }
+  return: void
+
+- tag: function
+  name: px_set_targetencoding
+  params:
+    - { name: pxdoc, type: resource }
+    - { name: encoding, type: string }
+  return: bool
+
+- tag: function
+  name: px_set_value
+  params:
+    - { name: pxdoc, type: resource }
+    - { name: name, type: string }
+    - { name: value, type: float }
+  return: bool
+
+- tag: function
+  name: px_timestamp2string
+  params:
+    - { name: pxdoc, type: resource }
+    - { name: value, type: float }
+    - { name: format, type: string }
+  return: string
+  flowsToReturn: [2]
+
+- tag: function
+  name: px_update_record
+  params:
+    - { name: pxdoc, type: resource }
+    - { name: data, type: array }
+    - { name: num, type: int }
+  return: bool
+
+- tag: function
+  name: qdom_error
+  return: string
+
+- tag: function
+  name: qdom_tree
+  params:
+    - { name: doc, type: string }
+  flowsToReturn: [0]
+
+- tag: function
+  name: quoted_printable_decode
+  params:
+    - { name: string, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: quoted_printable_encode
+  params:
+    - { name: string, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: quotemeta
+  params:
+    - { name: string, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: rad2deg
+  params:
+    - { name: num, type: float }
+  return: float
+
+- tag: function
+  name: radius_acct_open
+  return: resource
+
+- tag: function
+  name: radius_add_server
+  params:
+    - { name: radius_handle, type: resource }
+    - { name: hostname, type: string }
+    - { name: port, type: int }
+    - { name: secret, type: string }
+    - { name: timeout, type: int }
+    - { name: max_tries, type: int }
+  return: bool
+
+- tag: function
+  name: radius_auth_open
+  return: resource
+
+- tag: function
+  name: radius_close
+  params:
+    - { name: radius_handle, type: resource }
+  return: bool
+
+- tag: function
+  name: radius_config
+  params:
+    - { name: radius_handle, type: resource }
+    - { name: file, type: string }
+  return: bool
+
+- tag: function
+  name: radius_create_request
+  params:
+    - { name: radius_handle, type: resource }
+    - { name: type, type: int }
+  return: bool
+
+- tag: function
+  name: radius_cvt_addr
+  params:
+    - { name: data, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: radius_cvt_int
+  params:
+    - { name: data, type: string }
+  return: int
+
+- tag: function
+  name: radius_cvt_string
+  params:
+    - { name: data, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: radius_demangle
+  params:
+    - { name: radius_handle, type: resource }
+    - { name: mangled, type: string }
+  return: string
+  flowsToReturn: [1]
+
+- tag: function
+  name: radius_demangle_mppe_key
+  params:
+    - { name: radius_handle, type: resource }
+    - { name: mangled, type: string }
+  return: string
+  flowsToReturn: [1]
+
+- tag: function
+  name: radius_get_attr
+  params:
+    - { name: radius_handle, type: resource }
+  flowsToReturn: [0]
+
+- tag: function
+  name: radius_get_tagged_attr_data
+  params:
+    - { name: data, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: radius_get_tagged_attr_tag
+  params:
+    - { name: data, type: string }
+  return: int
+
+- tag: function
+  name: radius_get_vendor_attr
+  params:
+    - { name: data, type: string }
+  return: array
+
+- tag: function
+  name: radius_put_addr
+  params:
+    - { name: radius_handle, type: resource }
+    - { name: type, type: int }
+    - { name: addr, type: string }
+  return: bool
+
+- tag: function
+  name: radius_put_attr
+  params:
+    - { name: radius_handle, type: resource }
+    - { name: type, type: int }
+    - { name: value, type: string }
+  return: bool
+
+- tag: function
+  name: radius_put_int
+  params:
+    - { name: radius_handle, type: resource }
+    - { name: type, type: int }
+    - { name: value, type: int }
+  return: bool
+
+- tag: function
+  name: radius_put_string
+  params:
+    - { name: radius_handle, type: resource }
+    - { name: type, type: int }
+    - { name: value, type: string }
+  return: bool
+
+- tag: function
+  name: radius_put_vendor_addr
+  params:
+    - { name: radius_handle, type: resource }
+    - { name: vendor, type: int }
+    - { name: type, type: int }
+    - { name: addr, type: string }
+  return: bool
+
+- tag: function
+  name: radius_put_vendor_attr
+  params:
+    - { name: radius_handle, type: resource }
+    - { name: vendor, type: int }
+    - { name: type, type: int }
+    - { name: value, type: string }
+  return: bool
+
+- tag: function
+  name: radius_put_vendor_int
+  params:
+    - { name: radius_handle, type: resource }
+    - { name: vendor, type: int }
+    - { name: type, type: int }
+    - { name: value, type: int }
+  return: bool
+
+- tag: function
+  name: radius_put_vendor_string
+  params:
+    - { name: radius_handle, type: resource }
+    - { name: vendor, type: int }
+    - { name: type, type: int }
+    - { name: value, type: string }
+  return: bool
+
+- tag: function
+  name: radius_request_authenticator
+  params:
+    - { name: radius_handle, type: resource }
+  return: string
+
+- tag: function
+  name: radius_salt_encrypt_attr
+  params:
+    - { name: radius_handle, type: resource }
+    - { name: data, type: string }
+  return: string
+  flowsToReturn: [1]
+
+- tag: function
+  name: radius_send_request
+  params:
+    - { name: radius_handle, type: resource }
+  return: int
+
+- tag: function
+  name: radius_server_secret
+  params:
+    - { name: radius_handle, type: resource }
+  return: string
+
+- tag: function
+  name: radius_strerror
+  params:
+    - { name: radius_handle, type: resource }
+  return: string
+
+- tag: function
+  name: rand
+  params:
+    - { name: min, type: int, optional: true }
+    - { name: max, type: int, optional: true }
+  return: int
+
+- tag: function
+  name: random_bytes
+  params:
+    - { name: length, type: int }
+  return: string
+
+- tag: function
+  name: random_int
+  params:
+    - { name: min, type: int }
+    - { name: max, type: int }
+  return: int
+
+- tag: function
+  name: range
+  params:
+    - { name: start, type: float }
+    - { name: end, type: float }
+    - { name: step, type: float, optional: true }
+  return: array
+
+- tag: function
+  name: rar_allow_broken_set
+  params:
+    - { name: rarfile, type: mixed }
+    - { name: allow_broken, type: bool }
+  return: bool
+
+- tag: function
+  name: rar_broken_is
+  params:
+    - { name: rarfile, type: mixed }
+  return: bool
+
+- tag: function
+  name: rar_close
+  params:
+    - { name: rarfile, type: mixed }
+  return: bool
+
+- tag: function
+  name: rar_comment_get
+  params:
+    - { name: rarfile, type: mixed }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: rar_entry_get
+  params:
+    - { name: rarfile, type: mixed }
+    - { name: entryname, type: string }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: rar_list
+  params:
+    - { name: rarfile, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: rar_open
+  params:
+    - { name: filename, type: string }
+    - { name: password, type: string, optional: true }
+    - { name: volume_callback, type: callable, optional: true }
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: rar_solid_is
+  params:
+    - { name: rarfile, type: mixed }
+  return: bool
+
+- tag: function
+  name: rar_wrapper_cache_stats
+  return: string
+
+- tag: function
+  name: rawurldecode
+  params:
+    - { name: string, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: rawurlencode
+  params:
+    - { name: string, type: string }
+  return: string
+
+- tag: function
+  name: readdir
+  params:
+    - { name: dir_handle, type: resource, optional: true }
+  return: string
+
+- tag: function
+  name: readgzfile
+  params:
+    - { name: filename, type: string }
+    - { name: use_include_path, type: int, optional: true }
+  return: int
+
+- tag: function
+  name: recode
+  params:
+    - { name: request, type: string }
+    - { name: string, type: string }
+  return: string
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: recode_file
+  params:
+    - { name: request, type: string }
+    - { name: input, type: resource }
+    - { name: output, type: resource }
+  return: bool
+
+- tag: function
+  name: recode_string
+  params:
+    - { name: request, type: string }
+    - { name: string, type: string }
+  return: string
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: register_event_handler
+  params:
+    - { name: event_handler_func, type: string }
+    - { name: handler_register_name, type: string }
+    - { name: event_type_mask, type: int }
+  return: bool
+
+- tag: function
+  name: register_shutdown_function
+  params:
+    - { name: callback, type: callable }
+    - { name: args, type: mixed, optional: true }
+  return: bool
+
+- tag: function
+  name: register_tick_function
+  params:
+    - { name: callback, type: mixed }
+    - { name: args, type: mixed, optional: true }
+  return: bool
+
+- tag: function
+  name: reset
+  params:
+    - { name: array, type: array }
+  flowsToReturn: [0]
+
+- tag: function
+  name: resourcebundle_count
+  params:
+    - { name: bundle, type: mixed }
+  return: int
+
+- tag: function
+  name: resourcebundle_create
+  params:
+    - { name: locale, type: string }
+    - { name: bundle, type: string }
+    - { name: fallback, type: bool, optional: true }
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: resourcebundle_get
+  params:
+    - { name: bundle, type: mixed }
+    - { name: index, type: int }
+    - { name: fallback, type: bool, optional: true }
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: resourcebundle_get_error_code
+  params:
+    - { name: bundle, type: mixed }
+  return: int
+
+- tag: function
+  name: resourcebundle_get_error_message
+  params:
+    - { name: bundle, type: mixed }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: resourcebundle_locales
+  params:
+    - { name: bundle, type: string }
+  return: array
+
+- tag: function
+  name: restore_error_handler
+  return: bool
+
+- tag: function
+  name: restore_exception_handler
+  return: bool
+
+- tag: function
+  name: rewind
+  params:
+    - { name: stream, type: resource }
+  return: bool
+
+- tag: function
+  name: rewinddir
+  params:
+    - { name: dir_handle, type: resource, optional: true }
+  return: void
+
+- tag: function
+  name: round
+  params:
+    - { name: num, type: float }
+    - { name: precision, type: int, optional: true }
+    - { name: mode, type: int, optional: true }
+  return: float
+
+- tag: function
+  name: rpm_close
+  params:
+    - { name: rpmr, type: resource }
+  return: bool
+
+- tag: function
+  name: rpm_get_tag
+  params:
+    - { name: rpmr, type: resource }
+    - { name: tagnum, type: int }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: rpm_is_valid
+  params:
+    - { name: filename, type: string }
+  return: bool
+
+- tag: function
+  name: rpm_open
+  params:
+    - { name: filename, type: string }
+  return: resource
+  flowsToReturn: [0]
+
+- tag: function
+  name: rpm_version
+  return: string
+
+- tag: function
+  name: rpmaddtag
+  params:
+    - { name: tag, type: int }
+  return: bool
+
+- tag: function
+  name: rpmdbinfo
+  params:
+    - { name: nevr, type: string }
+    - { name: full, type: bool, optional: true }
+  return: array
+
+- tag: function
+  name: rpmdbsearch
+  params:
+    - { name: pattern, type: string }
+    - { name: rpmtag, type: int, optional: true }
+    - { name: rpmmire, type: int, optional: true }
+    - { name: full, type: bool, optional: true }
+  return: array
+
+- tag: function
+  name: rpminfo
+  params:
+    - { name: path, type: string }
+    - { name: full, type: bool, optional: true }
+    - { name: error, type: string, optional: true }
+  return: array
+
+- tag: function
+  name: rpmvercmp
+  params:
+    - { name: evr1, type: string }
+    - { name: evr2, type: string }
+  return: int
+
+- tag: function
+  name: rrd_create
+  params:
+    - { name: filename, type: string }
+    - { name: options, type: array }
+  return: bool
+
+- tag: function
+  name: rrd_disconnect
+  return: void
+
+- tag: function
+  name: rrd_error
+  return: string
+
+- tag: function
+  name: rrd_fetch
+  params:
+    - { name: filename, type: string }
+    - { name: options, type: array }
+  return: array
+  flowsToReturn: [1]
+
+- tag: function
+  name: rrd_first
+  params:
+    - { name: file, type: string }
+    - { name: raaindex, type: int, optional: true }
+  return: int
+
+- tag: function
+  name: rrd_graph
+  params:
+    - { name: filename, type: string }
+    - { name: options, type: array }
+  return: array
+  flowsToReturn: [1]
+
+- tag: function
+  name: rrd_info
+  params:
+    - { name: filename, type: string }
+  return: array
+
+- tag: function
+  name: rrd_last
+  params:
+    - { name: filename, type: string }
+  return: int
+
+- tag: function
+  name: rrd_lastupdate
+  params:
+    - { name: filename, type: string }
+  return: array
+
+- tag: function
+  name: rrd_restore
+  params:
+    - { name: xml_file, type: string }
+    - { name: rrd_file, type: string }
+    - { name: options, type: array, optional: true }
+  return: bool
+
+- tag: function
+  name: rrd_tune
+  params:
+    - { name: filename, type: string }
+    - { name: options, type: array }
+  return: bool
+
+- tag: function
+  name: rrd_update
+  params:
+    - { name: filename, type: string }
+    - { name: options, type: array }
+  return: bool
+
+- tag: function
+  name: rrd_version
+  return: string
+
+- tag: function
+  name: rrd_xport
+  params:
+    - { name: options, type: array }
+  return: array
+  flowsToReturn: [0]
+
+- tag: function
+  name: rrdc_disconnect
+  return: void
+
+- tag: function
+  name: rsort
+  params:
+    - { name: array, type: array }
+    - { name: flags, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: rtrim
+  params:
+    - { name: string, type: string }
+    - { name: characters, type: string, optional: true }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: runkit7_constant_add
+  params:
+    - { name: constant_name, type: string }
+    - { name: value, type: mixed }
+    - { name: new_visibility, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: runkit7_constant_redefine
+  params:
+    - { name: constant_name, type: string }
+    - { name: value, type: mixed }
+    - { name: new_visibility, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: runkit7_constant_remove
+  params:
+    - { name: constant_name, type: string }
+  return: bool
+
+- tag: function
+  name: runkit7_function_add
+  params:
+    - { name: function_name, type: string }
+    - { name: argument_list_or_closure, type: callable }
+    - { name: code_or_doc_comment, type: string, optional: true }
+    - { name: return_by_reference, type: bool, optional: true }
+    - { name: doc_comment, type: string, optional: true }
+    - { name: return_type, type: string, optional: true }
+    - { name: is_strict, type: bool, optional: true }
+  return: bool
+
+- tag: function
+  name: runkit7_function_copy
+  params:
+    - { name: source_name, type: string }
+    - { name: target_name, type: string }
+  return: bool
+
+- tag: function
+  name: runkit7_function_redefine
+  params:
+    - { name: function_name, type: string }
+    - { name: argument_list_or_closure, type: callable }
+    - { name: code_or_doc_comment, type: string, optional: true }
+    - { name: return_by_reference, type: bool, optional: true }
+    - { name: doc_comment, type: string, optional: true }
+    - { name: return_type, type: string, optional: true }
+    - { name: is_strict, type: bool, optional: true }
+  return: bool
+
+- tag: function
+  name: runkit7_function_remove
+  params:
+    - { name: function_name, type: string }
+  return: bool
+
+- tag: function
+  name: runkit7_function_rename
+  params:
+    - { name: source_name, type: string }
+    - { name: target_name, type: string }
+  return: bool
+
+- tag: function
+  name: runkit7_import
+  params:
+    - { name: filename, type: string }
+    - { name: flags, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: runkit7_method_add
+  params:
+    - { name: class_name, type: string }
+    - { name: method_name, type: string }
+    - { name: argument_list_or_closure, type: callable }
+    - { name: code_or_flags, type: int, optional: true }
+    - { name: flags_or_doc_comment, type: int, optional: true }
+    - { name: doc_comment, type: string, optional: true }
+    - { name: return_type, type: string, optional: true }
+    - { name: is_strict, type: bool, optional: true }
+  return: bool
+
+- tag: function
+  name: runkit7_method_copy
+  params:
+    - { name: destination_class, type: string }
+    - { name: destination_method, type: string }
+    - { name: source_class, type: string }
+    - { name: source_method, type: string, optional: true }
+  return: bool
+
+- tag: function
+  name: runkit7_method_redefine
+  params:
+    - { name: class_name, type: string }
+    - { name: method_name, type: string }
+    - { name: argument_list_or_closure, type: callable }
+    - { name: code_or_flags, type: int, optional: true }
+    - { name: flags_or_doc_comment, type: int, optional: true }
+    - { name: doc_comment, type: string, optional: true }
+    - { name: return_type, type: string, optional: true }
+    - { name: is_strict, type: bool, optional: true }
+  return: bool
+
+- tag: function
+  name: runkit7_method_remove
+  params:
+    - { name: class_name, type: string }
+    - { name: method_name, type: string }
+  return: bool
+
+- tag: function
+  name: runkit7_method_rename
+  params:
+    - { name: class_name, type: string }
+    - { name: source_method_name, type: string }
+    - { name: source_target_name, type: string }
+  return: bool
+
+- tag: function
+  name: runkit7_superglobals
+  return: array
+
+- tag: function
+  name: runkit7_zval_inspect
+  params:
+    - { name: value, type: mixed }
+  return: array
+  flowsToReturn: [0]
+
+- tag: function
+  name: runkit_class_adopt
+  params:
+    - { name: classname, type: string }
+    - { name: parentname, type: string }
+  return: bool
+
+- tag: function
+  name: runkit_class_emancipate
+  params:
+    - { name: classname, type: string }
+  return: bool
+
+- tag: function
+  name: runkit_constant_add
+  params:
+    - { name: constname, type: string }
+    - { name: value, type: mixed }
+  return: bool
+
+- tag: function
+  name: runkit_constant_redefine
+  params:
+    - { name: constname, type: string }
+    - { name: newvalue, type: mixed }
+  return: bool
+
+- tag: function
+  name: runkit_constant_remove
+  params:
+    - { name: constname, type: string }
+  return: bool
+
+- tag: function
+  name: runkit_function_add
+  params:
+    - { name: funcname, type: string }
+    - { name: arglist, type: string }
+    - { name: code, type: string }
+    - { name: doccomment, type: string, optional: true }
+  return: bool
+
+- tag: function
+  name: runkit_function_copy
+  params:
+    - { name: funcname, type: string }
+    - { name: targetname, type: string }
+  return: bool
+
+- tag: function
+  name: runkit_function_redefine
+  params:
+    - { name: funcname, type: string }
+    - { name: arglist, type: string }
+    - { name: code, type: string }
+    - { name: doccomment, type: string, optional: true }
+  return: bool
+
+- tag: function
+  name: runkit_function_remove
+  params:
+    - { name: funcname, type: string }
+  return: bool
+
+- tag: function
+  name: runkit_function_rename
+  params:
+    - { name: funcname, type: string }
+    - { name: newname, type: string }
+  return: bool
+
+- tag: function
+  name: runkit_import
+  params:
+    - { name: filename, type: string }
+    - { name: flags, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: runkit_lint
+  params:
+    - { name: code, type: string }
+  return: bool
+
+- tag: function
+  name: runkit_lint_file
+  params:
+    - { name: filename, type: string }
+  return: bool
+
+- tag: function
+  name: runkit_method_add
+  params:
+    - { name: classname, type: string }
+    - { name: methodname, type: string }
+    - { name: args, type: string }
+    - { name: code, type: string }
+    - { name: flags, type: int, optional: true }
+    - { name: doccomment, type: string, optional: true }
+  return: bool
+
+- tag: function
+  name: runkit_method_copy
+  params:
+    - { name: dclass, type: string }
+    - { name: dmethod, type: string }
+    - { name: sclass, type: string }
+    - { name: smethod, type: string, optional: true }
+  return: bool
+
+- tag: function
+  name: runkit_method_redefine
+  params:
+    - { name: classname, type: string }
+    - { name: methodname, type: string }
+    - { name: args, type: string }
+    - { name: code, type: string }
+    - { name: flags, type: int, optional: true }
+    - { name: doccomment, type: string, optional: true }
+  return: bool
+
+- tag: function
+  name: runkit_method_remove
+  params:
+    - { name: classname, type: string }
+    - { name: methodname, type: string }
+  return: bool
+
+- tag: function
+  name: runkit_method_rename
+  params:
+    - { name: classname, type: string }
+    - { name: methodname, type: string }
+    - { name: newname, type: string }
+  return: bool
+
+- tag: function
+  name: runkit_return_value_used
+  return: bool
+
+- tag: function
+  name: runkit_sandbox_output_handler
+  params:
+    - { name: sandbox, type: object }
+    - { name: callback, type: mixed, optional: true }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: runkit_sandbox_parent
+
+- tag: function
+  name: runkit_superglobals
+  return: array
+
+- tag: function
+  name: runkit_zval_inspect
+  params:
+    - { name: value, type: mixed }
+  return: array
+  flowsToReturn: [0]
+
+- tag: function
+  name: sapi_windows_cp_conv
+  params:
+    - { name: in_codepage, type: int }
+    - { name: out_codepage, type: int }
+    - { name: subject, type: string }
+  return: string
+  flowsToReturn: [2]
+
+- tag: function
+  name: sapi_windows_cp_get
+  params:
+    - { name: kind, type: string, optional: true }
+  return: int
+
+- tag: function
+  name: sapi_windows_cp_is_utf8
+  return: bool
+
+- tag: function
+  name: sapi_windows_cp_set
+  params:
+    - { name: codepage, type: int }
+  return: bool
+
+- tag: function
+  name: sapi_windows_vt100_support
+  params:
+    - { name: stream, type: resource }
+    - { name: enable, type: bool, optional: true }
+  return: bool
+
+- tag: function
+  name: seaslog_get_author
+  return: string
+
+- tag: function
+  name: seaslog_get_version
+  return: string
+
+- tag: function
+  name: serialize
+  params:
+    - { name: value, type: mixed }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: set_error_handler
+  params:
+    - { name: callback, type: mixed }
+    - { name: error_levels, type: int, optional: true }
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: set_exception_handler
+  params:
+    - { name: callback, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: set_file_buffer
+  params:
+    - { name: stream, type: resource }
+    - { name: size, type: int }
+  return: int
+
+- tag: function
+  name: set_include_path
+  params:
+    - { name: include_path, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: set_magic_quotes_runtime
+  params:
+    - { name: new_setting, type: bool }
+  return: bool
+
+- tag: function
+  name: set_time_limit
+  params:
+    - { name: seconds, type: int }
+  return: bool
+
+- tag: function
+  name: setcookie
+  params:
+    - { name: name, type: string }
+    - { name: value, type: string, optional: true }
+    - { name: expires_or_options, type: int, optional: true }
+    - { name: path, type: string, optional: true }
+    - { name: domain, type: string, optional: true }
+    - { name: secure, type: bool, optional: true }
+    - { name: httponly, type: bool, optional: true }
+  return: bool
+
+- tag: function
+  name: setleftfill
+  params:
+    - { name: red, type: int }
+    - { name: green, type: int }
+    - { name: blue, type: int }
+    - { name: a, type: int, optional: true }
+  return: void
+
+- tag: function
+  name: setline
+  params:
+    - { name: width, type: int }
+    - { name: red, type: int }
+    - { name: green, type: int }
+    - { name: blue, type: int }
+    - { name: a, type: int, optional: true }
+  return: void
+
+- tag: function
+  name: setlocale
+  params:
+    - { name: category, type: int }
+    - { name: locales, type: mixed }
+    - { name: rest, type: string, optional: true }
+  return: string
+  flowsToReturn: [1, 2]
+
+- tag: function
+  name: setproctitle
+  params:
+    - { name: title, type: string }
+  return: void
+
+- tag: function
+  name: setrawcookie
+  params:
+    - { name: name, type: string }
+    - { name: value, type: string, optional: true }
+    - { name: expires_or_options, type: int, optional: true }
+    - { name: path, type: string, optional: true }
+    - { name: domain, type: string, optional: true }
+    - { name: secure, type: bool, optional: true }
+    - { name: httponly, type: bool, optional: true }
+  return: bool
+
+- tag: function
+  name: setrightfill
+  params:
+    - { name: red, type: int }
+    - { name: green, type: int }
+    - { name: blue, type: int }
+    - { name: a, type: int, optional: true }
+  return: void
+
+- tag: function
+  name: setthreadtitle
+  params:
+    - { name: title, type: string }
+  return: bool
+
+- tag: function
+  name: settype
+  params:
+    - { name: var, type: mixed }
+    - { name: type, type: string }
+  return: bool
+
+- tag: function
+  name: sha1
+  params:
+    - { name: string, type: string }
+    - { name: binary, type: bool, optional: true }
+  return: string
+
+- tag: function
+  name: sha1_file
+  params:
+    - { name: filename, type: string }
+    - { name: binary, type: bool, optional: true }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: sha256
+  params:
+    - { name: string, type: string }
+    - { name: raw_output, type: bool, optional: true }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: sha256_file
+  params:
+    - { name: filename, type: string }
+    - { name: raw_output, type: bool, optional: true }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: shell_exec
+  params:
+    - { name: command, type: string }
+  return: string
+
+- tag: function
+  name: shmop_close
+  params:
+    - { name: shmop, type: mixed }
+  return: void
+
+- tag: function
+  name: shmop_delete
+  params:
+    - { name: shmop, type: mixed }
+  return: bool
+
+- tag: function
+  name: shmop_open
+  params:
+    - { name: key, type: int }
+    - { name: mode, type: string }
+    - { name: permissions, type: int }
+    - { name: size, type: int }
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: shmop_read
+  params:
+    - { name: shmop, type: mixed }
+    - { name: offset, type: int }
+    - { name: size, type: int }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: shmop_size
+  params:
+    - { name: shmop, type: mixed }
+  return: int
+
+- tag: function
+  name: shmop_write
+  params:
+    - { name: shmop, type: mixed }
+    - { name: data, type: string }
+    - { name: offset, type: int }
+  return: int
+
+- tag: function
+  name: show_source
+  params:
+    - { name: filename, type: string }
+    - { name: return, type: bool, optional: true }
+  return: bool
+
+- tag: function
+  name: shuffle
+  params:
+    - { name: array, type: array }
+  return: bool
+
+- tag: function
+  name: signeurlpaiement
+  params:
+    - { name: clent, type: string }
+    - { name: data, type: string }
+  return: string
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: similar_text
+  params:
+    - { name: string1, type: string }
+    - { name: string2, type: string }
+    - { name: percent, type: float, optional: true }
+  return: int
+
+- tag: function
+  name: sin
+  params:
+    - { name: num, type: float }
+  return: float
+
+- tag: function
+  name: sinh
+  params:
+    - { name: num, type: float }
+  return: float
+
+- tag: function
+  name: sizeof
+  params:
+    - { name: value, type: mixed }
+    - { name: mode, type: int, optional: true }
+  return: int
+
+- tag: function
+  name: sleep
+  params:
+    - { name: seconds, type: int }
+  return: int
+
+- tag: function
+  name: snmp2_get
+  params:
+    - { name: hostname, type: string }
+    - { name: community, type: string }
+    - { name: object_id, type: array }
+    - { name: timeout, type: int, optional: true }
+    - { name: retries, type: int, optional: true }
+  return: string
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: snmp2_getnext
+  params:
+    - { name: hostname, type: string }
+    - { name: community, type: string }
+    - { name: object_id, type: array }
+    - { name: timeout, type: int, optional: true }
+    - { name: retries, type: int, optional: true }
+  return: string
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: snmp2_real_walk
+  params:
+    - { name: hostname, type: string }
+    - { name: community, type: string }
+    - { name: object_id, type: array }
+    - { name: timeout, type: int, optional: true }
+    - { name: retries, type: int, optional: true }
+  return: array
+  flowsToReturn: [2]
+
+- tag: function
+  name: snmp2_set
+  params:
+    - { name: hostname, type: string }
+    - { name: community, type: string }
+    - { name: object_id, type: array }
+    - { name: type, type: array }
+    - { name: value, type: array }
+    - { name: timeout, type: int, optional: true }
+    - { name: retries, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: snmp2_walk
+  params:
+    - { name: hostname, type: string }
+    - { name: community, type: string }
+    - { name: object_id, type: array }
+    - { name: timeout, type: int, optional: true }
+    - { name: retries, type: int, optional: true }
+  return: array
+  flowsToReturn: [2]
+
+- tag: function
+  name: snmp3_get
+  params:
+    - { name: hostname, type: string }
+    - { name: security_name, type: string }
+    - { name: security_level, type: string }
+    - { name: auth_protocol, type: string }
+    - { name: auth_passphrase, type: string }
+    - { name: privacy_protocol, type: string }
+    - { name: privacy_passphrase, type: string }
+    - { name: object_id, type: array }
+    - { name: timeout, type: int, optional: true }
+    - { name: retries, type: int, optional: true }
+  return: string
+  flowsToReturn: [0, 1, 2, 3, 4, 5, 6]
+
+- tag: function
+  name: snmp3_getnext
+  params:
+    - { name: hostname, type: string }
+    - { name: security_name, type: string }
+    - { name: security_level, type: string }
+    - { name: auth_protocol, type: string }
+    - { name: auth_passphrase, type: string }
+    - { name: privacy_protocol, type: string }
+    - { name: privacy_passphrase, type: string }
+    - { name: object_id, type: array }
+    - { name: timeout, type: int, optional: true }
+    - { name: retries, type: int, optional: true }
+  return: string
+  flowsToReturn: [0, 1, 2, 3, 4, 5, 6]
+
+- tag: function
+  name: snmp3_real_walk
+  params:
+    - { name: hostname, type: string }
+    - { name: security_name, type: string }
+    - { name: security_level, type: string }
+    - { name: auth_protocol, type: string }
+    - { name: auth_passphrase, type: string }
+    - { name: privacy_protocol, type: string }
+    - { name: privacy_passphrase, type: string }
+    - { name: object_id, type: array }
+    - { name: timeout, type: int, optional: true }
+    - { name: retries, type: int, optional: true }
+  return: array
+  flowsToReturn: [7]
+
+- tag: function
+  name: snmp3_set
+  params:
+    - { name: hostname, type: string }
+    - { name: security_name, type: string }
+    - { name: security_level, type: string }
+    - { name: auth_protocol, type: string }
+    - { name: auth_passphrase, type: string }
+    - { name: privacy_protocol, type: string }
+    - { name: privacy_passphrase, type: string }
+    - { name: object_id, type: array }
+    - { name: type, type: array }
+    - { name: value, type: array }
+    - { name: timeout, type: int, optional: true }
+    - { name: retries, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: snmp3_walk
+  params:
+    - { name: hostname, type: string }
+    - { name: security_name, type: string }
+    - { name: security_level, type: string }
+    - { name: auth_protocol, type: string }
+    - { name: auth_passphrase, type: string }
+    - { name: privacy_protocol, type: string }
+    - { name: privacy_passphrase, type: string }
+    - { name: object_id, type: array }
+    - { name: timeout, type: int, optional: true }
+    - { name: retries, type: int, optional: true }
+  return: array
+  flowsToReturn: [7]
+
+- tag: function
+  name: snmp_get_quick_print
+  return: bool
+
+- tag: function
+  name: snmp_get_valueretrieval
+  return: int
+
+- tag: function
+  name: snmp_read_mib
+  params:
+    - { name: filename, type: string }
+  return: bool
+
+- tag: function
+  name: snmp_set_enum_print
+  params:
+    - { name: enable, type: bool }
+  return: bool
+
+- tag: function
+  name: snmp_set_oid_numeric_print
+  params:
+    - { name: format, type: int }
+  return: bool
+
+- tag: function
+  name: snmp_set_oid_output_format
+  params:
+    - { name: format, type: int }
+  return: bool
+
+- tag: function
+  name: snmp_set_quick_print
+  params:
+    - { name: enable, type: bool }
+  return: bool
+
+- tag: function
+  name: snmp_set_valueretrieval
+  params:
+    - { name: method, type: int }
+  return: bool
+
+- tag: function
+  name: snmpget
+  params:
+    - { name: hostname, type: string }
+    - { name: community, type: string }
+    - { name: object_id, type: array }
+    - { name: timeout, type: int, optional: true }
+    - { name: retries, type: int, optional: true }
+  return: string
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: snmpgetnext
+  params:
+    - { name: hostname, type: string }
+    - { name: community, type: string }
+    - { name: object_id, type: array }
+    - { name: timeout, type: int, optional: true }
+    - { name: retries, type: int, optional: true }
+  return: string
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: snmprealwalk
+  params:
+    - { name: hostname, type: string }
+    - { name: community, type: string }
+    - { name: object_id, type: array }
+    - { name: timeout, type: int, optional: true }
+    - { name: retries, type: int, optional: true }
+  return: array
+  flowsToReturn: [2]
+
+- tag: function
+  name: snmpset
+  params:
+    - { name: hostname, type: string }
+    - { name: community, type: string }
+    - { name: object_id, type: array }
+    - { name: type, type: array }
+    - { name: value, type: array }
+    - { name: timeout, type: int, optional: true }
+    - { name: retries, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: snmpwalk
+  params:
+    - { name: hostname, type: string }
+    - { name: community, type: string }
+    - { name: object_id, type: array }
+    - { name: timeout, type: int, optional: true }
+    - { name: retries, type: int, optional: true }
+  return: array
+  flowsToReturn: [2]
+
+- tag: function
+  name: snmpwalkoid
+  params:
+    - { name: hostname, type: string }
+    - { name: community, type: string }
+    - { name: object_id, type: array }
+    - { name: timeout, type: int, optional: true }
+    - { name: retries, type: int, optional: true }
+  return: array
+  flowsToReturn: [2]
+
+- tag: function
+  name: sodium_add
+  params:
+    - { name: string1, type: string }
+    - { name: string2, type: string }
+  return: void
+
+- tag: function
+  name: sodium_base642bin
+  params:
+    - { name: string, type: string }
+    - { name: id, type: int }
+    - { name: ignore, type: string, optional: true }
+  return: string
+  flowsToReturn: [0, 2]
+
+- tag: function
+  name: sodium_bin2base64
+  params:
+    - { name: string, type: string }
+    - { name: id, type: int }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: sodium_bin2hex
+  params:
+    - { name: string, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: sodium_compare
+  params:
+    - { name: string1, type: string }
+    - { name: string2, type: string }
+  return: int
+
+- tag: function
+  name: sodium_crypto_aead_aes256gcm_decrypt
+  params:
+    - { name: ciphertext, type: string }
+    - { name: additional_data, type: string }
+    - { name: nonce, type: string }
+    - { name: key, type: string }
+  return: string
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: sodium_crypto_aead_aes256gcm_encrypt
+  params:
+    - { name: message, type: string }
+    - { name: additional_data, type: string }
+    - { name: nonce, type: string }
+    - { name: key, type: string }
+  return: string
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: sodium_crypto_aead_aes256gcm_is_available
+  return: bool
+
+- tag: function
+  name: sodium_crypto_aead_aes256gcm_keygen
+  return: string
+
+- tag: function
+  name: sodium_crypto_aead_chacha20poly1305_decrypt
+  params:
+    - { name: ciphertext, type: string }
+    - { name: additional_data, type: string }
+    - { name: nonce, type: string }
+    - { name: key, type: string }
+  return: string
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: sodium_crypto_aead_chacha20poly1305_encrypt
+  params:
+    - { name: message, type: string }
+    - { name: additional_data, type: string }
+    - { name: nonce, type: string }
+    - { name: key, type: string }
+  return: string
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: sodium_crypto_aead_chacha20poly1305_ietf_decrypt
+  params:
+    - { name: ciphertext, type: string }
+    - { name: additional_data, type: string }
+    - { name: nonce, type: string }
+    - { name: key, type: string }
+  return: string
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: sodium_crypto_aead_chacha20poly1305_ietf_encrypt
+  params:
+    - { name: message, type: string }
+    - { name: additional_data, type: string }
+    - { name: nonce, type: string }
+    - { name: key, type: string }
+  return: string
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: sodium_crypto_aead_chacha20poly1305_ietf_keygen
+  return: string
+
+- tag: function
+  name: sodium_crypto_aead_chacha20poly1305_keygen
+  return: string
+
+- tag: function
+  name: sodium_crypto_aead_xchacha20poly1305_ietf_decrypt
+  params:
+    - { name: ciphertext, type: string }
+    - { name: additional_data, type: string }
+    - { name: nonce, type: string }
+    - { name: key, type: string }
+  return: string
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: sodium_crypto_aead_xchacha20poly1305_ietf_encrypt
+  params:
+    - { name: message, type: string }
+    - { name: additional_data, type: string }
+    - { name: nonce, type: string }
+    - { name: key, type: string }
+  return: string
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: sodium_crypto_aead_xchacha20poly1305_ietf_keygen
+  return: string
+
+- tag: function
+  name: sodium_crypto_auth
+  params:
+    - { name: message, type: string }
+    - { name: key, type: string }
+  return: string
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: sodium_crypto_auth_keygen
+  return: string
+
+- tag: function
+  name: sodium_crypto_auth_verify
+  params:
+    - { name: mac, type: string }
+    - { name: message, type: string }
+    - { name: key, type: string }
+  return: bool
+
+- tag: function
+  name: sodium_crypto_box
+  params:
+    - { name: message, type: string }
+    - { name: nonce, type: string }
+    - { name: key_pair, type: string }
+  return: string
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: sodium_crypto_box_keypair
+  return: string
+
+- tag: function
+  name: sodium_crypto_box_keypair_from_secretkey_and_publickey
+  params:
+    - { name: secret_key, type: string }
+    - { name: public_key, type: string }
+  return: string
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: sodium_crypto_box_open
+  params:
+    - { name: ciphertext, type: string }
+    - { name: nonce, type: string }
+    - { name: key_pair, type: string }
+  return: string
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: sodium_crypto_box_publickey
+  params:
+    - { name: key_pair, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: sodium_crypto_box_publickey_from_secretkey
+  params:
+    - { name: secret_key, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: sodium_crypto_box_seal
+  params:
+    - { name: message, type: string }
+    - { name: public_key, type: string }
+  return: string
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: sodium_crypto_box_seal_open
+  params:
+    - { name: ciphertext, type: string }
+    - { name: key_pair, type: string }
+  return: string
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: sodium_crypto_box_secretkey
+  params:
+    - { name: key_pair, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: sodium_crypto_box_seed_keypair
+  params:
+    - { name: seed, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: sodium_crypto_generichash
+  params:
+    - { name: message, type: string }
+    - { name: key, type: string, optional: true }
+    - { name: length, type: int, optional: true }
+  return: string
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: sodium_crypto_generichash_final
+  params:
+    - { name: state, type: string }
+    - { name: length, type: int, optional: true }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: sodium_crypto_generichash_init
+  params:
+    - { name: key, type: string, optional: true }
+    - { name: length, type: int, optional: true }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: sodium_crypto_generichash_keygen
+  return: string
+
+- tag: function
+  name: sodium_crypto_generichash_update
+  params:
+    - { name: state, type: string }
+    - { name: message, type: string }
+  return: bool
+
+- tag: function
+  name: sodium_crypto_kdf_derive_from_key
+  params:
+    - { name: subkey_length, type: int }
+    - { name: subkey_id, type: int }
+    - { name: context, type: string }
+    - { name: key, type: string }
+  return: string
+  flowsToReturn: [2, 3]
+
+- tag: function
+  name: sodium_crypto_kdf_keygen
+  return: string
+
+- tag: function
+  name: sodium_crypto_kx_client_session_keys
+  params:
+    - { name: client_key_pair, type: string }
+    - { name: server_key, type: string }
+  return: array
+
+- tag: function
+  name: sodium_crypto_kx_keypair
+  return: string
+
+- tag: function
+  name: sodium_crypto_kx_publickey
+  params:
+    - { name: key_pair, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: sodium_crypto_kx_secretkey
+  params:
+    - { name: key_pair, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: sodium_crypto_kx_seed_keypair
+  params:
+    - { name: seed, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: sodium_crypto_kx_server_session_keys
+  params:
+    - { name: server_key_pair, type: string }
+    - { name: client_key, type: string }
+  return: array
+
+- tag: function
+  name: sodium_crypto_pwhash
+  params:
+    - { name: length, type: int }
+    - { name: password, type: string }
+    - { name: salt, type: string }
+    - { name: opslimit, type: int }
+    - { name: memlimit, type: int }
+    - { name: algo, type: int, optional: true }
+  return: string
+  flowsToReturn: [1, 2]
+
+- tag: function
+  name: sodium_crypto_pwhash_scryptsalsa208sha256
+  params:
+    - { name: length, type: int }
+    - { name: password, type: string }
+    - { name: salt, type: string }
+    - { name: opslimit, type: int }
+    - { name: memlimit, type: int }
+  return: string
+  flowsToReturn: [1, 2]
+
+- tag: function
+  name: sodium_crypto_pwhash_scryptsalsa208sha256_str
+  params:
+    - { name: password, type: string }
+    - { name: opslimit, type: int }
+    - { name: memlimit, type: int }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: sodium_crypto_pwhash_scryptsalsa208sha256_str_verify
+  params:
+    - { name: hash, type: string }
+    - { name: password, type: string }
+  return: bool
+
+- tag: function
+  name: sodium_crypto_pwhash_str
+  params:
+    - { name: password, type: string }
+    - { name: opslimit, type: int }
+    - { name: memlimit, type: int }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: sodium_crypto_pwhash_str_needs_rehash
+  params:
+    - { name: password, type: string }
+    - { name: opslimit, type: int }
+    - { name: memlimit, type: int }
+  return: bool
+
+- tag: function
+  name: sodium_crypto_pwhash_str_verify
+  params:
+    - { name: hash, type: string }
+    - { name: password, type: string }
+  return: bool
+
+- tag: function
+  name: sodium_crypto_scalarmult
+  params:
+    - { name: n, type: string }
+    - { name: p, type: string }
+  return: string
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: sodium_crypto_scalarmult_base
+  params:
+    - { name: secret_key, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: sodium_crypto_secretbox
+  params:
+    - { name: message, type: string }
+    - { name: nonce, type: string }
+    - { name: key, type: string }
+  return: string
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: sodium_crypto_secretbox_keygen
+  return: string
+
+- tag: function
+  name: sodium_crypto_secretbox_open
+  params:
+    - { name: ciphertext, type: string }
+    - { name: nonce, type: string }
+    - { name: key, type: string }
+  return: string
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: sodium_crypto_secretstream_xchacha20poly1305_init_pull
+  params:
+    - { name: header, type: string }
+    - { name: key, type: string }
+  return: string
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: sodium_crypto_secretstream_xchacha20poly1305_init_push
+  params:
+    - { name: key, type: string }
+  return: array
+
+- tag: function
+  name: sodium_crypto_secretstream_xchacha20poly1305_keygen
+  return: string
+
+- tag: function
+  name: sodium_crypto_secretstream_xchacha20poly1305_pull
+  params:
+    - { name: state, type: string }
+    - { name: ciphertext, type: string }
+    - { name: additional_data, type: string, optional: true }
+  return: array
+
+- tag: function
+  name: sodium_crypto_secretstream_xchacha20poly1305_push
+  params:
+    - { name: state, type: string }
+    - { name: message, type: string }
+    - { name: additional_data, type: string, optional: true }
+    - { name: tag, type: int, optional: true }
+  return: string
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: sodium_crypto_secretstream_xchacha20poly1305_rekey
+  params:
+    - { name: state, type: string }
+  return: void
+
+- tag: function
+  name: sodium_crypto_shorthash
+  params:
+    - { name: message, type: string }
+    - { name: key, type: string }
+  return: string
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: sodium_crypto_shorthash_keygen
+  return: string
+
+- tag: function
+  name: sodium_crypto_sign
+  params:
+    - { name: message, type: string }
+    - { name: secret_key, type: string }
+  return: string
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: sodium_crypto_sign_detached
+  params:
+    - { name: message, type: string }
+    - { name: secret_key, type: string }
+  return: string
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: sodium_crypto_sign_ed25519_pk_to_curve25519
+  params:
+    - { name: public_key, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: sodium_crypto_sign_ed25519_sk_to_curve25519
+  params:
+    - { name: secret_key, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: sodium_crypto_sign_keypair
+  return: string
+
+- tag: function
+  name: sodium_crypto_sign_keypair_from_secretkey_and_publickey
+  params:
+    - { name: secret_key, type: string }
+    - { name: public_key, type: string }
+  return: string
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: sodium_crypto_sign_open
+  params:
+    - { name: signed_message, type: string }
+    - { name: public_key, type: string }
+  return: string
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: sodium_crypto_sign_publickey
+  params:
+    - { name: key_pair, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: sodium_crypto_sign_publickey_from_secretkey
+  params:
+    - { name: secret_key, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: sodium_crypto_sign_secretkey
+  params:
+    - { name: key_pair, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: sodium_crypto_sign_seed_keypair
+  params:
+    - { name: seed, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: sodium_crypto_sign_verify_detached
+  params:
+    - { name: signature, type: string }
+    - { name: message, type: string }
+    - { name: public_key, type: string }
+  return: bool
+
+- tag: function
+  name: sodium_crypto_stream
+  params:
+    - { name: length, type: int }
+    - { name: nonce, type: string }
+    - { name: key, type: string }
+  return: string
+  flowsToReturn: [1, 2]
+
+- tag: function
+  name: sodium_crypto_stream_keygen
+  return: string
+
+- tag: function
+  name: sodium_crypto_stream_xor
+  params:
+    - { name: message, type: string }
+    - { name: nonce, type: string }
+    - { name: key, type: string }
+  return: string
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: sodium_hex2bin
+  params:
+    - { name: string, type: string }
+    - { name: ignore, type: string, optional: true }
+  return: string
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: sodium_increment
+  params:
+    - { name: string, type: string }
+  return: void
+
+- tag: function
+  name: sodium_memcmp
+  params:
+    - { name: string1, type: string }
+    - { name: string2, type: string }
+  return: int
+
+- tag: function
+  name: sodium_memzero
+  params:
+    - { name: string, type: string }
+  return: void
+
+- tag: function
+  name: sodium_pad
+  params:
+    - { name: string, type: string }
+    - { name: block_size, type: int }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: sodium_unpad
+  params:
+    - { name: string, type: string }
+    - { name: block_size, type: int }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: solid_fetch_prev
+  params:
+    - { name: result_id, type: mixed }
+  return: bool
+
+- tag: function
+  name: solr_get_version
+  return: string
+
+- tag: function
+  name: sort
+  params:
+    - { name: array, type: array }
+    - { name: flags, type: int, optional: true }
+  return: bool
+
+- tag: function
+  name: soundex
+  params:
+    - { name: string, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: sprintf
+  params:
+    - { name: format, type: string }
+    - { name: values, type: float, optional: true }
+  return: string
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: sqlite_array_query
+  params:
+    - { name: dbhandle, type: resource }
+    - { name: query, type: string }
+    - { name: result_type, type: int, optional: true }
+    - { name: decode_binary, type: bool, optional: true }
+  return: array
+
+- tag: function
+  name: sqlite_busy_timeout
+  params:
+    - { name: dbhandle, type: resource }
+    - { name: milliseconds, type: int }
+  return: void
+
+- tag: function
+  name: sqlite_changes
+  params:
+    - { name: dbhandle, type: resource }
+  return: int
+
+- tag: function
+  name: sqlite_close
+  params:
+    - { name: dbhandle, type: resource }
+  return: void
+
+- tag: function
+  name: sqlite_column
+  params:
+    - { name: result, type: resource }
+    - { name: index_or_name, type: mixed }
+    - { name: decode_binary, type: bool, optional: true }
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: sqlite_create_aggregate
+  params:
+    - { name: dbhandle, type: resource }
+    - { name: function_name, type: string }
+    - { name: step_func, type: callable }
+    - { name: finalize_func, type: callable }
+    - { name: num_args, type: int, optional: true }
+  return: void
+
+- tag: function
+  name: sqlite_create_function
+  params:
+    - { name: dbhandle, type: resource }
+    - { name: function_name, type: string }
+    - { name: callback, type: callable }
+    - { name: num_args, type: int, optional: true }
+  return: void
+
+- tag: function
+  name: sqlite_current
+  params:
+    - { name: result, type: resource }
+    - { name: result_type, type: int, optional: true }
+    - { name: decode_binary, type: bool, optional: true }
+  return: array
+
+- tag: function
+  name: sqlite_error_string
+  params:
+    - { name: error_code, type: int }
+  return: string
+
+- tag: function
+  name: sqlite_escape_string
+  params:
+    - { name: item, type: string }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: sqlite_exec
+  params:
+    - { name: dbhandle, type: resource }
+    - { name: query, type: string }
+    - { name: error_msg, type: string, optional: true }
+  return: bool
+
+- tag: function
+  name: sqlite_factory
+  params:
+    - { name: filename, type: string }
+    - { name: mode, type: int, optional: true }
+    - { name: error_message, type: string, optional: true }
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: sqlite_fetch_all
+  params:
+    - { name: result, type: resource }
+    - { name: result_type, type: int, optional: true }
+    - { name: decode_binary, type: bool, optional: true }
+  return: array
+
+- tag: function
+  name: sqlite_fetch_array
+  params:
+    - { name: result, type: resource }
+    - { name: result_type, type: int, optional: true }
+    - { name: decode_binary, type: bool, optional: true }
+  return: array
+
+- tag: function
+  name: sqlite_fetch_column_types
+  params:
+    - { name: table_name, type: string }
+    - { name: dbhandle, type: resource }
+    - { name: result_type, type: int, optional: true }
+  return: array
+
+- tag: function
+  name: sqlite_fetch_object
+  params:
+    - { name: result, type: resource }
+    - { name: class_name, type: string, optional: true }
+    - { name: ctor_params, type: array, optional: true }
+    - { name: decode_binary, type: bool, optional: true }
+  return: object
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: sqlite_fetch_single
+  params:
+    - { name: result, type: resource }
+    - { name: decode_binary, type: bool, optional: true }
+  return: string
+
+- tag: function
+  name: sqlite_fetch_string
+  params:
+    - { name: result, type: resource }
+    - { name: decode_binary, type: bool }
+  return: string
+
+- tag: function
+  name: sqlite_field_name
+  params:
+    - { name: result, type: resource }
+    - { name: field_index, type: int }
+  return: string
+
+- tag: function
+  name: sqlite_has_more
+  params:
+    - { name: result, type: resource }
+  return: bool
+
+- tag: function
+  name: sqlite_has_prev
+  params:
+    - { name: result, type: resource }
+  return: bool
+
+- tag: function
+  name: sqlite_key
+  params:
+    - { name: result, type: resource }
+  return: int
+
+- tag: function
+  name: sqlite_last_error
+  params:
+    - { name: dbhandle, type: resource }
+  return: int
+
+- tag: function
+  name: sqlite_last_insert_rowid
+  params:
+    - { name: dbhandle, type: resource }
+  return: int
+
+- tag: function
+  name: sqlite_libencoding
+  return: string
+
+- tag: function
+  name: sqlite_libversion
+  return: string
+
+- tag: function
+  name: sqlite_next
+  params:
+    - { name: result, type: resource }
+  return: bool
+
+- tag: function
+  name: sqlite_num_fields
+  params:
+    - { name: result, type: resource }
+  return: int
+
+- tag: function
+  name: sqlite_num_rows
+  params:
+    - { name: result, type: resource }
+  return: int
+
+- tag: function
+  name: sqlite_open
+  params:
+    - { name: filename, type: string }
+    - { name: mode, type: int, optional: true }
+    - { name: error_message, type: string, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: sqlite_popen
+  params:
+    - { name: filename, type: string }
+    - { name: mode, type: int, optional: true }
+    - { name: error_message, type: string, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: sqlite_prev
+  params:
+    - { name: result, type: resource }
+  return: bool
+
+- tag: function
+  name: sqlite_query
+  params:
+    - { name: dbhandle, type: resource }
+    - { name: query, type: resource }
+    - { name: result_type, type: int, optional: true }
+    - { name: error_msg, type: string, optional: true }
+  return: resource
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: sqlite_rewind
+  params:
+    - { name: result, type: resource }
+  return: bool
+

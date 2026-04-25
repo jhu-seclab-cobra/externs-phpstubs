@@ -1,0 +1,190 @@
+- tag: function
+  name: tidy_access_count
+  params:
+    - { name: tidy, type: mixed }
+  return: int
+
+- tag: function
+  name: tidy_clean_repair
+  params:
+    - { name: tidy, type: mixed }
+  return: bool
+
+- tag: function
+  name: tidy_config_count
+  params:
+    - { name: tidy, type: mixed }
+  return: int
+
+- tag: function
+  name: tidy_diagnose
+  params:
+    - { name: tidy, type: mixed }
+  return: bool
+
+- tag: function
+  name: tidy_error_count
+  params:
+    - { name: tidy, type: mixed }
+  return: int
+
+- tag: function
+  name: tidy_get_body
+  params:
+    - { name: tidy, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: tidy_get_config
+  params:
+    - { name: tidy, type: mixed }
+  return: array
+  flowsToReturn: [0]
+
+- tag: function
+  name: tidy_get_error_buffer
+  params:
+    - { name: tidy, type: mixed }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: tidy_get_head
+  params:
+    - { name: tidy, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: tidy_get_html
+  params:
+    - { name: tidy, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: tidy_get_html_ver
+  params:
+    - { name: tidy, type: mixed }
+  return: int
+
+- tag: function
+  name: tidy_get_opt_doc
+  params:
+    - { name: tidy, type: mixed }
+    - { name: option, type: string }
+  return: string
+  flowsToReturn: [0, 1]
+
+- tag: function
+  name: tidy_get_output
+  params:
+    - { name: tidy, type: mixed }
+  return: string
+  flowsToReturn: [0]
+
+- tag: function
+  name: tidy_get_release
+  return: string
+
+- tag: function
+  name: tidy_get_root
+  params:
+    - { name: tidy, type: mixed }
+  flowsToReturn: [0]
+
+- tag: function
+  name: tidy_get_status
+  params:
+    - { name: tidy, type: mixed }
+  return: int
+
+- tag: function
+  name: tidy_getopt
+  params:
+    - { name: tidy, type: mixed }
+    - { name: option, type: string }
+  return: bool
+
+- tag: function
+  name: tidy_is_xhtml
+  params:
+    - { name: tidy, type: mixed }
+  return: bool
+
+- tag: function
+  name: tidy_is_xml
+  params:
+    - { name: tidy, type: mixed }
+  return: bool
+
+- tag: function
+  name: tidy_load_config
+  params:
+    - { name: filename, type: string }
+    - { name: encoding, type: string }
+  return: void
+
+- tag: function
+  name: tidy_parse_file
+  params:
+    - { name: filename, type: string }
+    - { name: config, type: array, optional: true }
+    - { name: encoding, type: string, optional: true }
+    - { name: useIncludePath, type: bool, optional: true }
+  flowsToReturn: [0, 1, 2, 3]
+
+- tag: function
+  name: tidy_parse_string
+  params:
+    - { name: string, type: string }
+    - { name: config, type: array, optional: true }
+    - { name: encoding, type: string, optional: true }
+  flowsToReturn: [0, 1, 2]
+
+- tag: function
+  name: tidy_repair_file
+  params:
+    - { name: filename, type: string }
+    - { name: config, type: array, optional: true }
+    - { name: encoding, type: string, optional: true }
+    - { name: useIncludePath, type: bool, optional: true }
+  return: string
+  flowsToReturn: [0, 2]
+
+- tag: function
+  name: tidy_repair_string
+  params:
+    - { name: string, type: string }
+    - { name: config, type: array, optional: true }
+    - { name: encoding, type: string, optional: true }
+  return: string
+  flowsToReturn: [0, 2]
+
+- tag: function
+  name: tidy_reset_config
+  return: bool
+
+- tag: function
+  name: tidy_save_config
+  params:
+    - { name: filename, type: string }
+  return: bool
+
+- tag: function
+  name: tidy_set_encoding
+  params:
+    - { name: encoding, type: string }
+  return: bool
+
+- tag: function
+  name: tidy_setopt
+  params:
+    - { name: option, type: string }
+    - { name: value, type: mixed }
+  return: bool
+
+- tag: function
+  name: tidy_warning_count
+  params:
+    - { name: tidy, type: mixed }
+  return: int
+
