@@ -1,20 +1,19 @@
 # externs-phpstubs
 
-> Read-only Kotlin registry for PHP built-in function, class, method, and constant stubs with O(1) existence checks.
+> Read-only Kotlin registry for PHP built-in function, class, method, and constant metadata with dataflow summaries.
 
-`PhpStubs` is the singleton entry point. Hot-path `contains*` methods check existence without deserialization. Cold-path `search*` methods return `StubRecord` instances with lazy caching. All input names are normalized (lowercase, strip leading `/`).
+`PhpStubs` is the singleton entry point. All input names normalized: strip leading `/` and `\`, then lowercase.
 
 ## Instructions for Agents
 
-- Use `PhpStubs.containsFunc/Class/Method/Const(name)` for existence checks on the hot path.
-- Use `PhpStubs.searchFunc/Class(name)` for `StubRecord` retrieval on the cold path.
-- Pass method names with optional `className` parameter: `searchMethod("query", "mysqli")`.
-- Omit `className` for suffix-only lookup: `containsMethod("query")` scans all classes.
-- Access `StubRecord.name` and `StubRecord.extension` for metadata.
-- Use `getFuncRawData(name)` to get raw bytes for `IValue` reconstruction with `DftByteArraySerializerImpl`.
-- Never instantiate `PhpStubs` — it is an `object` (singleton).
-- Never assume case-sensitive matching. All lookups normalize to lowercase.
+- Call `PhpStubs.searchFunc(name)` for `StubRecord.Function?`, `searchClass(name)` for `StubRecord.PhpClass?`.
+- Call `PhpStubs.searchMethod(methodName, className?)` for `Pair<String, StubRecord.Method>?`.
+- Call `PhpStubs.searchGlobalConst(name)` for `StubRecord.Constant?`, `searchClassConst(constName, className?)` for `StubRecord.ClassConstant?`.
+- `StubRecord` is a sealed class with 6 subtypes: `Function`, `Method`, `PhpClass`, `Constant`, `ClassConstant`, `Property`.
+- `normalize()` strips both `/` and `\` prefix. Pass names with or without leading slash.
+- `flowsToReturn` empty = pure function. Return does not contain parameter data.
+- Taint rules (source/sink/sanitizer) are NOT in this library.
 
 ## API Reference
 
-- [Stubs API](llms/stubs.md): `PhpStubs`, `StubRecord`, `StubSection`, exceptions, thread-safety model.
+- [Stubs API](llms/stubs.md): `PhpStubs`, `StubRecord`, `StubParam`, `PhpType`, `Visibility`.

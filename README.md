@@ -1,15 +1,13 @@
 # COBRA.EXTERNS.PHPSTUBS
 
-> Named for the PHP stub definitions it indexes — built-in function, class, method, and constant metadata.
+> Named for the PHP stub definitions it indexes — built-in function, class, method, and constant metadata with dataflow summaries.
 
-Read-only Kotlin registry for PHP built-in stubs, backed by a compact binary index (~1 MB) with O(1) existence checks and lazy record retrieval.
+Read-only Kotlin registry for PHP built-in stubs with typed metadata, dataflow rules, and constant values. Loaded from YAML files at startup.
 
 [![](https://jitpack.io/v/jhu-seclab-cobra/externs-phpstubs.svg)](https://jitpack.io/#jhu-seclab-cobra/externs-phpstubs)
 [![license](https://img.shields.io/github/license/jhu-seclab-cobra/externs-phpstubs)](./LICENSE)
 
 ## Install
-
-Requires Java 21+. Add JitPack repository and the dependency to `build.gradle.kts`:
 
 ```kotlin
 repositories {
@@ -26,46 +24,75 @@ dependencies {
 ```kotlin
 import edu.jhu.cobra.externs.phpstubs.PhpStubs
 
-// Existence checks — O(1)
-PhpStubs.containsFunc("strlen")         // true
-PhpStubs.containsClass("Exception")     // true
-PhpStubs.containsMethod("query", "mysqli") // true
-PhpStubs.containsConst("PHP_EOL")       // true
+// Existence checks
+PhpStubs.containsFunc("strlen")             // true
+PhpStubs.containsClass("Exception")         // true
 
-// Record retrieval — lazy, cached after first access
+// Function metadata
 val func = PhpStubs.searchFunc("strlen")
-println("${func?.name} from ${func?.extension}") // strlen from standard
-```
+func?.returnType                             // PhpType.INT
+func?.params                                 // [StubParam("string", STRING)]
 
-All lookups normalize input: lowercase and strip leading `/`. `"Strlen"`, `"/strlen"`, `"STRLEN"` are equivalent.
+// Dataflow summary
+val substr = PhpStubs.searchFunc("substr")
+substr?.flowsToReturn                        // setOf(0) — param 0 data flows to return
+
+// Class hierarchy
+val cls = PhpStubs.searchClass("runtimeexception")
+cls?.parent                                  // "exception"
+
+// Constant values
+PhpStubs.searchGlobalConst("PHP_INT_MAX")?.value  // "9223372036854775807"
+```
 
 ## API
 
-**`PhpStubs`** (singleton) — query entry point for all sections.
+**`PhpStubs`** — singleton registry.
 
-| Method | Return | Description |
-|--------|--------|-------------|
-| `containsFunc/Class/Method/Const(name)` | `Boolean` | O(1) existence check |
-| `searchFunc/Class(name)` | `StubRecord?` | Lazy record retrieval |
-| `searchMethod(name, className?)` | `Pair<String, StubRecord>?` | Method lookup, suffix scan if no class |
-| `searchGlobalConst/ClassConst(name, className?)` | `StubRecord?` | Constant lookup |
-| `getAllFuncNames/ClassNames/MethodNames/ConstNames()` | `Set<String>` | All keys in section |
-| `getKeywordFuncNames()` | `Set<String>` | Hardcoded keyword functions |
-| `getScalarTypeNames()` | `Set<String>` | Hardcoded scalar types |
+| Method | Return |
+|--------|--------|
+| `containsFunc/Class/Method/Const(name)` | `Boolean` |
+| `searchFunc(name)` | `StubRecord.Function?` |
+| `searchClass(name)` | `StubRecord.PhpClass?` |
+| `searchMethod(name, className?)` | `Pair<String, StubRecord.Method>?` |
+| `searchGlobalConst(name)` | `StubRecord.Constant?` |
+| `searchClassConst(name, className?)` | `StubRecord.ClassConstant?` |
+| `getAllFuncNames/ClassNames/MethodNames/ConstNames()` | `Set<String>` |
 
-**`StubRecord(name: String, extension: String)`** — stub metadata.
+**`StubRecord`** — sealed class with subtypes: `Function`, `Method`, `PhpClass`, `Constant`, `ClassConstant`, `Property`. Each subtype carries only the fields relevant to its entity kind.
 
-**Exceptions**: `StubIndexNotFoundException`, `StubIndexInvalidException`.
+## Data Sources
+
+Stub data derived from the following open-source projects:
+
+| Source | Data | License |
+|--------|------|---------|
+| [JetBrains/phpstorm-stubs](https://github.com/JetBrains/phpstorm-stubs) | Function signatures, class definitions, constant values | [Apache-2.0](https://github.com/JetBrains/phpstorm-stubs/blob/master/LICENSE) |
+| [vimeo/psalm](https://github.com/vimeo/psalm) | Dataflow annotations (`@psalm-flow`), function call map | [MIT](https://github.com/vimeo/psalm/blob/master/LICENSE) |
 
 ## Documentation
 
-- [Concepts & Terminology](docs/idea.md) — problem context, two-tier architecture, core concepts, scenarios
-- [Design](docs/design.md) — class/type specifications, function signatures, exceptions, validation rules
-- [Implementation Notes](docs/impl.md) — external dependencies and developer instructions
+- [Concepts & Terminology](docs/idea.md) — tag-based YAML format, dataflow summaries, eager loading
+- [Design](docs/design.md) — sealed class hierarchy, YAML schema, type specifications, validation rules
+- [Implementation Notes](docs/impl.md) — developer instructions, library gotchas
 
 ## For Agents
 
-Agent-consumable documentation index at `docs/llms.txt` (llmstxt.org format).
+Agent-consumable documentation index at `docs/llms.txt` ([llmstxt.org](https://llmstxt.org) format).
+
+## Citation
+
+If you use this repository in your research, please cite our paper:
+
+```bibtex
+@inproceedings{xu2026cobra,
+  title     = {CoBrA: Context-, Branch-sensitive Static Analysis for Detecting Taint-style Vulnerabilities in PHP Web Applications},
+  author    = {Xu, Yichao and Kang, Mingqing and Thimmaiah, Neil and Gjomemo, Rigel and Venkatakrishnan, V. N. and Cao, Yinzhi},
+  booktitle = {Proceedings of the 48th IEEE/ACM International Conference on Software Engineering (ICSE)},
+  year      = {2026},
+  address   = {Rio de Janeiro, Brazil}
+}
+```
 
 ## License
 

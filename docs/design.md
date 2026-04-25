@@ -1,147 +1,159 @@
-# PHP Stubs Library Design Document
+# PHP Stubs Library Design
 
 ## Design Overview
 
-- **Classes**: `PhpStubs`, `StubData`, `StubSection`, `StubRecord`
-- **Relationships**: `PhpStubs` contains `StubData`, `StubData` contains four `StubSection` instances, `StubSection` produces `StubRecord`
-- **Exceptions**: `StubIndexNotFoundException` extends `RuntimeException`, `StubIndexInvalidException` extends `RuntimeException`, both raised by `PhpStubs`
-- **Dependency roles**: Data holders: `StubRecord`, `StubData`. Orchestrator: `PhpStubs`. Helper: `StubSection` (owns cache, provides two-tier lookup).
+- **Sealed class**: `StubRecord` (6 subtypes: `Function`, `Method`, `PhpClass`, `Constant`, `ClassConstant`, `Property`)
+- **Data classes**: `StubParam`, `StubRegistry`, `YamlStubParser.ParseResult`
+- **Enums**: `PhpType`, `Visibility`
+- **Objects**: `YamlStubParser`, `StubLoader`, `PhpStubs`
+- **Relationships**: `StubLoader` reads YAML via `YamlStubParser`, builds `StubRegistry`. `PhpStubs` delegates to `StubRegistry`.
+- **Exceptions**: `StubIndexNotFoundException`, `StubIndexInvalidException` (both extend `RuntimeException`)
+- **Dependency roles**: Data holders: `StubRecord`, `StubParam`, `StubRegistry`, `ParseResult`. Orchestrator: `StubLoader`. Parser: `YamlStubParser`. Facade: `PhpStubs`.
+
+---
+
+## YAML Format
+
+### Tag System
+
+Each YAML file contains a flat list of map entries. Every entry has a `tag` field.
+
+| Tag | Description | Example |
+|-----|-------------|---------|
+| `function` | Top-level PHP function | `strlen`, `array_map` |
+| `method` | Class method | `PDO::prepare` |
+| `class` | Class or interface definition | `Exception`, `PDOStatement` |
+| `constant` | Global constant | `PHP_INT_MAX`, `ENT_QUOTES` |
+| `class_constant` | Class constant | `PDO::ATTR_ERRMODE` |
+| `property` | Class property | `Exception::$message` |
+
+### Entry Schemas
+
+**`function`**: `tag` (required), `name` (required), `params` (list, optional), `return` (string, default `mixed`), `flowsToReturn` (list[int], optional -- parameter indices whose data flows to return value).
+
+**`params` element**: `name` (required), `type` (string, default `mixed`), `optional` (bool, default `false`), `default` (string, optional -- default value literal).
+
+**`method`**: `tag` (required), `class` (required -- owning class), `name` (required), `params` (same as `function`), `return` (default `mixed`), `static` (bool, default `false`), `visibility` (`public`/`protected`/`private`, default `public`), `flowsToReturn` (list[int], optional -- 0 = first explicit parameter).
+
+**`class`**: `tag` (required), `name` (required), `parent` (string, optional), `interfaces` (list[string], optional), `abstract` (bool, default `false`), `final` (bool, default `false`).
+
+**`constant`**: `tag` (required), `name` (required), `type` (required), `value` (required).
+
+**`class_constant`**: `tag` (required), `class` (required), `name` (required), `type` (required), `value` (required), `visibility` (default `public`).
+
+**`property`**: `tag` (required), `class` (required), `name` (required), `type` (default `mixed`), `static` (bool, default `false`), `visibility` (default `public`).
+
+### File Organization
+
+```
+stubs/
+├── core.yaml              # core constructs, Exception hierarchy, constants
+├── crypto/                # bcmath, gmp, hash, mcrypt, openssl
+├── database/              # cubrid, dba, ibm_db2, mysqli, oci8, odbc, pgsql
+├── file/                  # bz2, exif, file, fileinfo, filter, zip, zlib
+├── image/                 # gd
+├── misc/                  # apcu, date, yp
+├── network/               # curl, ftp, imap, ldap, session, sockets, stream
+├── standard/              # standard_1..standard_8 (split for size)
+├── system/                # pcntl, posix, readline, spl, sysvmsg, sysvsem, sysvshm
+├── text/                  # ctype, gettext, iconv, intl, json, mbstring, pcre
+├── xml/                   # libxml, simplexml, tidy, xml, xmlwriter
+└── index.txt              # auto-generated manifest (Gradle processResources)
+```
+
+### Data Extraction Pipeline
+
+YAML stub files are produced offline by a script that parses JetBrains PhpStorm PHP stubs (`.phpstub` source files) and emits the unified YAML format. The script is not part of this library. The resulting YAML files are committed as resources and shipped in the JAR.
+
+---
 
 ## Class / Type Specifications
 
+### `PhpType`
+
+Enum. Values: `STRING`, `INT`, `FLOAT`, `BOOL`, `ARRAY`, `OBJECT`, `MIXED`, `VOID`, `NULL`, `CALLABLE`, `RESOURCE`.
+
+### `Visibility`
+
+Enum. Values: `PUBLIC`, `PROTECTED`, `PRIVATE`.
+
+### `StubParam`
+
+Data class. Fields: `name: String`, `type: PhpType`, `optional: Boolean` (default `false`), `defaultValue: String?` (default `null`). Invariant: non-optional param cannot have `defaultValue`. Enforced via `require` in `init`.
+
+### `StubRecord` (sealed class)
+
+Base properties: `name: String`, `extension: String`.
+
+| Subtype | Fields (beyond base) |
+|---------|---------------------|
+| `Function` | `params: List<StubParam>`, `returnType: PhpType`, `flowsToReturn: Set<Int>` |
+| `Method` | `owningClass: String`, `params: List<StubParam>`, `returnType: PhpType`, `flowsToReturn: Set<Int>`, `visibility: Visibility`, `isStatic: Boolean` |
+| `PhpClass` | `parent: String?`, `interfaces: List<String>`, `isAbstract: Boolean`, `isFinal: Boolean` |
+| `Constant` | `type: PhpType`, `value: String` |
+| `ClassConstant` | `owningClass: String`, `type: PhpType`, `value: String`, `visibility: Visibility` |
+| `Property` | `owningClass: String`, `type: PhpType`, `visibility: Visibility`, `isStatic: Boolean` |
+
+### `StubRegistry`
+
+Data class. Six typed unmodifiable maps:
+`functions: Map<String, StubRecord.Function>`, `classes: Map<String, StubRecord.PhpClass>`, `methods: Map<String, StubRecord.Method>`, `constants: Map<String, StubRecord.Constant>`, `classConstants: Map<String, StubRecord.ClassConstant>`, `properties: Map<String, StubRecord.Property>`.
+
+### `YamlStubParser` (object)
+
+**`ParseResult`**: nested data class with six typed lists matching `StubRegistry` field types.
+
+- `parse(reader: BufferedReader, extension: String): ParseResult` -- Parses one YAML file. Dispatches entries by `tag` field. Throws `StubIndexInvalidException` on unknown tags or missing required fields.
+- `mapPhpType(typeStr: String): PhpType` -- Internal. Union types (containing `|`) resolve to `MIXED`. Unknown type names resolve to `MIXED`.
+- `mapVisibility(raw: String?): Visibility` -- Internal. Null or unknown defaults to `PUBLIC`.
+
+### `StubLoader` (object)
+
+`loadAll(resourceBase: String = "/stubs/"): StubRegistry` -- Reads `index.txt` manifest from classpath, parses all listed YAML files, merges into a single `StubRegistry` with unmodifiable maps. Extension name derived from filename with `_\d+$` suffix stripped. Throws `StubIndexNotFoundException` if `index.txt` or any listed YAML file is missing.
+
 ### `PhpStubs` (object)
 
-**Responsibility:** Singleton registry providing all public query APIs for PHP built-in entity lookup.
+Facade. Lazy-loads `StubRegistry` on first access. Builds suffix indexes (method suffix after `::` mapped to full key) for O(1) lookup when `className` is null. `normalize()` strips leading `/` or `\` and lowercases.
 
-**State / Fields**
+Synthetic records: keyword functions (`echo`, `empty`, `eval`, `exit`, `die`, `isset`, `print`, `unset`, `clone`, `instanceof`, `shell_exec`, `include`, `include_once`, `require`, `require_once`) and synthetic classes (`int`, `float`, `string`, `bool`, `array`, `exit`, `resource`).
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `MAGIC` | `Int` | Binary format magic number `0x43534253` ("CSBS"). |
-| `VERSION` | `Byte` | Supported binary format version (`1`). |
-| `DEFAULT_RESOURCE` | `String` | Classpath resource path `/stubs/builtin.bin`. |
-| `KEYWORD_FUNC_NAMES` | `Set<String>` | Hardcoded PHP keyword-functions (`echo`, `isset`, `require`, etc.). |
-| `SCALAR_TYPE_NAMES` | `Set<String>` | Hardcoded PHP scalar types (`int`, `float`, `string`, `bool`, `array`). |
-| `data` | `StubData` | Lazily loaded, immutable stub data. Uses `LazyThreadSafetyMode.SYNCHRONIZED`. |
-
-**Methods**
-
-| Method | Behavior | Input | Output | Errors |
-|--------|----------|-------|--------|--------|
-| `loadFromStream(stream)` | Reads and validates a binary input stream, parses four sections into an immutable `StubData`. | `stream: InputStream` — binary stub index. | `StubData` | `StubIndexInvalidException` if magic or version mismatch. |
-| `containsFunc(name)` | Tier 1 existence check. Normalizes name, checks functions key set and keyword set. | `name: String` — function name (case-insensitive, optional `/` prefix). | `Boolean` | — |
-| `containsClass(name)` | Tier 1 existence check. Normalizes name, checks classes key set, scalar types, `"exit"`, `"resource"`. | `name: String` | `Boolean` | — |
-| `containsMethod(methodName, className?)` | Tier 1 existence check. If `className` provided, checks exact `"class::method"` key. Otherwise scans all keys by suffix. | `methodName: String`, `className: String?` | `Boolean` | — |
-| `containsConst(name)` | Tier 1 existence check on constants section. | `name: String` | `Boolean` | — |
-| `searchFunc(name)` | Tier 2 record retrieval. Returns `StubRecord` from index or synthetic keyword record. | `name: String` | `StubRecord?` — null if not found. | — |
-| `searchClass(name)` | Tier 2 record retrieval. Returns `StubRecord` from index or synthetic records for scalars, `"exit"`, `"resource"`. | `name: String` | `StubRecord?` | — |
-| `searchMethod(methodName, className?)` | Tier 2 record retrieval. Returns fully-qualified key paired with `StubRecord`. Suffix scan if no className. | `methodName: String`, `className: String?` | `Pair<String, StubRecord>?` | — |
-| `searchGlobalConst(name)` | Tier 2 record retrieval for global constants. | `name: String` | `StubRecord?` | — |
-| `searchClassConst(constName, className?)` | Tier 2 record retrieval for class constants. Suffix scan if no className. | `constName: String`, `className: String?` | `StubRecord?` | — |
-| `getAllFuncNames()` | Returns all function keys from Tier 1. | — | `Set<String>` | — |
-| `getAllClassNames()` | Returns all class keys from Tier 1. | — | `Set<String>` | — |
-| `getAllMethodNames()` | Returns all method keys from Tier 1. | — | `Set<String>` | — |
-| `getAllConstNames()` | Returns all constant keys from Tier 1. | — | `Set<String>` | — |
-| `getKeywordFuncNames()` | Returns the hardcoded keyword function name set. | — | `Set<String>` | — |
-| `getScalarTypeNames()` | Returns the hardcoded scalar type name set. | — | `Set<String>` | — |
-| `getFuncRawData(name)` | Returns raw serialized bytes for consumer-side `IValue` reconstruction. | `name: String` | `ByteArray?` | — |
-| `getClassRawData(name)` | Returns raw serialized bytes for a class entry. | `name: String` | `ByteArray?` | — |
-| `getMethodRawData(name, className?)` | Returns raw serialized bytes for a method entry. Suffix scan if no className. | `name: String`, `className: String?` | `ByteArray?` | — |
-| `getConstRawData(name)` | Returns raw serialized bytes for a constant entry. | `name: String` | `ByteArray?` | — |
+| Method | Return Type | Behavior |
+|--------|-------------|----------|
+| `containsFunc(name)` | `Boolean` | Checks registry and keyword set |
+| `containsClass(name)` | `Boolean` | Checks registry and synthetic class records |
+| `containsMethod(methodName, className?)` | `Boolean` | Full key if `className` provided; suffix index otherwise |
+| `containsConst(name)` | `Boolean` | Checks global and class constants |
+| `searchFunc(name)` | `Function?` | Keywords first, then registry |
+| `searchClass(name)` | `PhpClass?` | Registry first, then synthetic |
+| `searchMethod(methodName, className?)` | `Pair<String, Method>?` | Full key if `className` provided; suffix index otherwise |
+| `searchGlobalConst(name)` | `Constant?` | Registry lookup |
+| `searchClassConst(constName, className?)` | `ClassConstant?` | Full key if `className` provided; suffix index otherwise |
+| `getAllFuncNames()` | `Set<String>` | Registry function keys |
+| `getAllClassNames()` | `Set<String>` | Registry class keys |
+| `getAllMethodNames()` | `Set<String>` | Registry method keys |
+| `getAllConstNames()` | `Set<String>` | Registry constant keys |
+| `getKeywordFuncNames()` | `Set<String>` | Hardcoded keyword set |
+| `getScalarTypeNames()` | `Set<String>` | Hardcoded scalar type set |
 
 ---
-
-### `StubData`
-
-**Responsibility:** Immutable container grouping the four stub sections.
-
-**State / Fields**
-
-| Field | Type | Description |
-|-------|------|-------------|
-| `functions` | `StubSection` | Functions section (~5,000 entries). |
-| `classes` | `StubSection` | Classes section (~1,500 entries). |
-| `methods` | `StubSection` | Methods section (~9,800 entries). |
-| `constants` | `StubSection` | Constants section (~6,000 entries). |
-
-**Companion**
-
-| Field | Type | Description |
-|-------|------|-------------|
-| `EMPTY` | `StubData` | Singleton with four `StubSection.EMPTY` instances. |
-
----
-
-### `StubSection`
-
-**Responsibility:** Immutable, thread-safe section implementing two-tier loading — O(1) existence checks (Tier 1) and lazy-deserialized record retrieval with lock-free caching (Tier 2).
-
-**State / Fields**
-
-| Field | Type | Description |
-|-------|------|-------------|
-| `keys` | `Set<String>` | Immutable set of normalized keys (Tier 1). |
-| `rawData` | `Map<String, ByteArray>` | Immutable map of key to serialized value bytes (Tier 2 source). |
-| `cache` | `ConcurrentHashMap<String, StubRecord>` | Lazily populated deserialization cache. |
-
-**Methods**
-
-| Method | Behavior | Input | Output | Errors |
-|--------|----------|-------|--------|--------|
-| `contains(key)` | O(1) set membership check. No allocation, no synchronization. | `key: String` — normalized key. | `Boolean` | — |
-| `get(key)` | Returns cached `StubRecord` or deserializes lazily via `computeIfAbsent`. Extracts extension name from raw bytes without full `IValue` deserialization. | `key: String` — normalized key. | `StubRecord?` — null if key absent. | — |
-| `getAll()` | Materializes all entries by calling `get()` on every key. | — | `Map<String, StubRecord>` | — |
-
-**Companion Methods**
-
-| Method | Behavior | Input | Output | Errors |
-|--------|----------|-------|--------|--------|
-| `extractExtension(bytes)` | Parses the first element of a serialized `ListVal` or `StrVal` to extract the extension name. Falls back to `"unknown"` for unrecognized formats. | `bytes: ByteArray` — raw serialized data. | `String` — extension name. | — |
-
----
-
-### `StubRecord`
-
-**Responsibility:** Immutable data holder representing a single PHP built-in entity.
-
-**State / Fields**
-
-| Field | Type | Description |
-|-------|------|-------------|
-| `name` | `String` | Normalized entity name (e.g., `"strlen"`, `"pdo::query"`). |
-| `extension` | `String` | PHP extension name (e.g., `"standard"`, `"Core"`, `"keyword"`, `"Scalar"`). |
-
-## Function Specifications
-
-### Name Normalization (private)
-
-**`String.normalize()`** — Converts input to lowercase and strips leading `/` prefix. Applied to all lookup inputs before key comparison.
-
-- **Input:** Any PHP entity name string.
-- **Output:** Normalized lowercase string without leading `/`.
 
 ## Exception / Error Types
 
 | Exception | When Raised |
 |-----------|-------------|
-| `StubIndexNotFoundException` | Stub index resource cannot be found on the classpath. Takes the resource path as constructor argument. |
-| `StubIndexInvalidException` | Binary format validation fails: wrong magic number (`0x43534253` expected) or unsupported version byte. Takes a reason description as constructor argument. |
+| `StubIndexNotFoundException` | YAML resource or `index.txt` not found on classpath |
+| `StubIndexInvalidException` | Missing required field, unknown tag, or invalid field value in YAML |
 
-Both extend `RuntimeException`.
+---
 
 ## Validation Rules
 
-### `PhpStubs.loadFromStream`
-- Magic number must equal `0x43534253`; otherwise throw `StubIndexInvalidException`.
-- Version byte must equal `1`; otherwise throw `StubIndexInvalidException`.
-- Stream must contain exactly four sections in order: functions, classes, methods, constants.
-
-### `StubSection.extractExtension`
-- If `bytes` is empty, return `"unknown"`.
-- If first byte is `0x0C` (LIST type) and total length < 6, return `"unknown"`.
-- If computed string length exceeds byte array bounds, return `"unknown"`.
-- Recognized type tags: `0x0C` (ListVal), `0x01` (StrVal). All others return `"unknown"`.
-
-### Name Normalization
-- All public query methods normalize input before lookup: `lowercase()` then `removePrefix("/")`.
-- Callers may pass names in any case and with or without leading `/`.
+- YAML files are UTF-8 encoded. Each file is a top-level YAML list of maps.
+- Every entry requires a `tag` field. Unknown tags raise `StubIndexInvalidException`.
+- Required fields per tag enforced at parse time by `YamlStubParser`.
+- `flowsToReturn` values must be integers.
+- Type strings containing `|` resolve to `MIXED`. Unknown type strings resolve to `MIXED`.
+- Visibility strings are case-insensitive. Null or unknown defaults to `PUBLIC`.
+- Duplicate names within the same entity type across files: last-loaded wins.
+- All registry maps frozen as unmodifiable after loading.
+- `index.txt` auto-generated by Gradle `processResources`. Lists relative paths of all `*.yaml` under `stubs/`, sorted alphabetically.

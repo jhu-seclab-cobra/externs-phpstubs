@@ -1,90 +1,117 @@
 # Stubs API
 
-> PHP built-in entity registry with two-tier lookup: O(1) existence checks and lazy record retrieval.
+> PHP built-in entity registry with typed metadata and dataflow summaries.
 
 ## Quick Start
 
 ```kotlin
 import edu.jhu.cobra.externs.phpstubs.PhpStubs
 
-val isBuiltin = PhpStubs.containsFunc("strlen")
-val record = PhpStubs.searchFunc("strlen")
-println("${record?.name} from ${record?.extension}")
+val func = PhpStubs.searchFunc("strlen")       // StubRecord.Function?
+val method = PhpStubs.searchMethod("query", "mysqli")  // Pair<String, StubRecord.Method>?
+val cls = PhpStubs.searchClass("Exception")    // StubRecord.PhpClass?
 ```
 
 ## API
 
 ### PhpStubs (singleton)
 
-**Hot-path existence checks:**
+**Existence checks:**
 
-**`containsFunc(name: String): Boolean`** — Check function existence. Includes keyword functions (`echo`, `isset`, etc.).
+**`containsFunc(name: String): Boolean`** -- Includes keyword functions (`echo`, `isset`, etc.).
 
-**`containsClass(name: String): Boolean`** — Check class existence. Includes scalar types (`int`, `float`, etc.) and `exit`/`resource`.
+**`containsClass(name: String): Boolean`** -- Includes scalar types (`int`, `float`, etc.) and synthetic classes (`exit`, `resource`).
 
-**`containsMethod(methodName: String, className: String? = null): Boolean`** — Check method existence. Suffix scan if `className` is `null`.
+**`containsMethod(methodName: String, className: String? = null): Boolean`** -- Full key lookup when `className` provided; suffix index lookup when null.
 
-**`containsConst(name: String): Boolean`** — Check constant existence.
+**`containsConst(name: String): Boolean`** -- Checks both global and class constants.
 
-**Cold-path record retrieval:**
+**Record retrieval:**
 
-**`searchFunc(name: String): StubRecord?`** — Retrieve function record. Returns synthetic record for keywords.
+**`searchFunc(name: String): StubRecord.Function?`** -- Returns keyword records for `echo`/`isset`/etc., otherwise registry lookup.
 
-**`searchClass(name: String): StubRecord?`** — Retrieve class record. Returns synthetic record for scalar types.
+**`searchClass(name: String): StubRecord.PhpClass?`** -- Returns registry lookup, falls back to synthetic records for scalar types/`exit`/`resource`.
 
-**`searchMethod(methodName: String, className: String? = null): Pair<String, StubRecord>?`** — Retrieve method record with fully-qualified key. Suffix scan if `className` is `null`.
+**`searchMethod(methodName: String, className: String? = null): Pair<String, StubRecord.Method>?`** -- Pair contains the full `"class::method"` key and the record. Suffix index lookup when `className` null.
 
-**`searchGlobalConst(name: String): StubRecord?`** — Retrieve global constant record.
+**`searchGlobalConst(name: String): StubRecord.Constant?`** -- Global constants only.
 
-**`searchClassConst(constName: String, className: String? = null): StubRecord?`** — Retrieve class constant record. Suffix scan if `className` is `null`.
+**`searchClassConst(constName: String, className: String? = null): StubRecord.ClassConstant?`** -- Suffix index lookup when `className` null.
 
-**Bulk access:**
+**Bulk key access:**
 
-**`getAllFuncNames(): Set<String>`** — All function keys.
+**`getAllFuncNames(): Set<String>`** -- Registry functions only (excludes keywords).
 
-**`getAllClassNames(): Set<String>`** — All class keys.
+**`getAllClassNames(): Set<String>`** -- Registry classes only (excludes synthetic).
 
-**`getAllMethodNames(): Set<String>`** — All method keys.
+**`getAllMethodNames(): Set<String>`**
 
-**`getAllConstNames(): Set<String>`** — All constant keys.
+**`getAllConstNames(): Set<String>`** -- Global constants only.
 
-**`getKeywordFuncNames(): Set<String>`** — Hardcoded keyword function names (`echo`, `isset`, `require`, etc.).
+**`getKeywordFuncNames(): Set<String>`** -- echo, empty, eval, exit, die, isset, print, unset, clone, instanceof, shell_exec, include, include_once, require, require_once.
 
-**`getScalarTypeNames(): Set<String>`** — Hardcoded scalar type names (`int`, `float`, `string`, `bool`, `array`).
+**`getScalarTypeNames(): Set<String>`** -- int, float, string, bool, array.
 
-**Raw data access:**
+### StubRecord (sealed class)
 
-**`getFuncRawData(name: String): ByteArray?`** — Raw serialized bytes for consumer-side `IValue` reconstruction.
+Base properties on all 6 subtypes:
 
-**`getClassRawData(name: String): ByteArray?`** — Raw bytes for class entry.
+**`name: String`** -- Entity name.
 
-**`getMethodRawData(name: String, className: String? = null): ByteArray?`** — Raw bytes for method entry.
+**`extension: String`** -- PHP extension (e.g., `"standard"`, `"core"`).
 
-**`getConstRawData(name: String): ByteArray?`** — Raw bytes for constant entry.
+#### StubRecord.Function
 
-### StubRecord
+**`params: List<StubParam>`**, **`returnType: PhpType`**, **`flowsToReturn: Set<Int>`**
 
-**`StubRecord(name: String, extension: String)`** — Stub metadata. `name`: normalized entity name. `extension`: PHP extension name (e.g., `"standard"`, `"Core"`, `"keyword"`, `"Scalar"`).
+#### StubRecord.Method
 
-### StubSection
+**`owningClass: String`**, **`params: List<StubParam>`**, **`returnType: PhpType`**, **`flowsToReturn: Set<Int>`**, **`visibility: Visibility`**, **`isStatic: Boolean`**
 
-**`contains(key: String): Boolean`** — O(1) set membership. Immutable key set.
+#### StubRecord.PhpClass
 
-**`get(key: String): StubRecord?`** — Lazy deserialization with `ConcurrentHashMap` cache.
+**`parent: String?`**, **`interfaces: List<String>`**, **`isAbstract: Boolean`**, **`isFinal: Boolean`**
 
-**`getAll(): Map<String, StubRecord>`** — Materialize all entries.
+#### StubRecord.Constant
+
+**`type: PhpType`**, **`value: String`**
+
+#### StubRecord.ClassConstant
+
+**`owningClass: String`**, **`type: PhpType`**, **`value: String`**, **`visibility: Visibility`**
+
+#### StubRecord.Property
+
+**`owningClass: String`**, **`type: PhpType`**, **`visibility: Visibility`**, **`isStatic: Boolean`**
+
+### StubParam
+
+**`name: String`**, **`type: PhpType`**, **`optional: Boolean`**, **`defaultValue: String?`**
+
+Invariant: non-optional params cannot have `defaultValue`.
+
+### PhpType
+
+`STRING`, `INT`, `FLOAT`, `BOOL`, `ARRAY`, `OBJECT`, `MIXED`, `VOID`, `NULL`, `CALLABLE`, `RESOURCE`.
+
+Union types in YAML resolve to `MIXED`. Unknown type names resolve to `MIXED`.
+
+### Visibility
+
+`PUBLIC`, `PROTECTED`, `PRIVATE`.
 
 ### Exceptions
 
-**`StubIndexNotFoundException`** — Stub index resource not found on classpath.
+**`StubIndexNotFoundException`** -- Classpath resource not found (`index.txt` or YAML file).
 
-**`StubIndexInvalidException`** — Binary format validation fails (wrong magic or version).
+**`StubIndexInvalidException`** -- Malformed YAML entry, unknown tag, or missing required field.
 
 ## Gotchas
 
-- All input names normalized: `lowercase()` then `removePrefix("/")`. `"Strlen"`, `"/strlen"`, `"STRLEN"` are equivalent.
-- `containsMethod("query")` without `className` uses a reverse suffix index. `containsMethod("query", "mysqli")` builds a composite `"mysqli::query"` key.
-- Keyword functions (`echo`, `isset`, etc.) and scalar types (`int`, `float`, etc.) are hardcoded, not in the binary index. `searchFunc("echo")` returns `StubRecord(name="echo", extension="keyword")`.
-- `getFuncRawData()` returns bytes for `DftByteArraySerializerImpl.deserialize()`. The library does not depend on `commons-value` at runtime — consumers bring their own deserializer.
-- Thread-safe: immutable data after lazy init (`LazyThreadSafetyMode.SYNCHRONIZED`). All post-init reads are lock-free.
-- `getAll()` forces eager deserialization of the entire section.
+- `normalize()` strips both `/` and `\` prefix, then lowercases. Applied to all lookup inputs.
+- `StubRecord` is a sealed class -- use `searchFunc` for `Function`, `searchClass` for `PhpClass`, `searchMethod` for `Method`, `searchGlobalConst` for `Constant`, `searchClassConst` for `ClassConstant`.
+- Keyword functions and scalar type classes are synthetic in-memory records, not loaded from YAML.
+- `defaultValue` on `StubParam` is a string representation. Consumer converts to domain types.
+- Constants use `.value` field on `StubRecord.Constant` and `StubRecord.ClassConstant`.
+- `flowsToReturn` empty = pure computation. Return value does not contain parameter data.
+- Taint rules (source/sink/sanitizer) are NOT in this library.
