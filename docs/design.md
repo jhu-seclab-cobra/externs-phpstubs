@@ -111,27 +111,33 @@ Data class. Six typed unmodifiable maps:
 
 `loadAll(resourceBase: String = "/stubs/"): StubRegistry` -- Reads `index.txt` manifest from classpath, parses all listed YAML files, merges into a single `StubRegistry` with unmodifiable maps. Extension name derived from filename with `_\d+$` suffix stripped. Throws `StubIndexNotFoundException` if `index.txt` or any listed YAML file is missing.
 
+Key normalization follows PHP case sensitivity: function, class, method, and property keys are lowercased. Constant keys (global and class) preserve original case from YAML. Class-constant keys use lowercased class name + original constant name (`exception::SEVERITY_ERROR`).
+
 ### `PhpStubs` (object)
 
-Facade. Lazy-loads `StubRegistry` on first access. Builds suffix indexes (method suffix after `::` mapped to full key) for O(1) lookup when `className` is null. `normalize()` strips leading `/` or `\` and lowercases.
+Facade. Lazy-loads `StubRegistry` on first access. Builds suffix indexes (method suffix after `::` mapped to full key) for O(1) lookup when `className` is null.
+
+**Case sensitivity follows PHP semantics:**
+- Functions, classes, methods: case-insensitive. `normalize()` strips leading `/` or `\` and lowercases.
+- Constants (global and class): **case-sensitive by default** (`PHP_INT_MAX` ≠ `php_int_max`). Constant-related methods accept `caseSensitive: Boolean = true`. Pass `false` for over-approximation in static analysis.
 
 Synthetic records: keyword functions (`echo`, `empty`, `eval`, `exit`, `die`, `isset`, `print`, `unset`, `clone`, `instanceof`, `shell_exec`, `include`, `include_once`, `require`, `require_once`) and synthetic classes (`int`, `float`, `string`, `bool`, `array`, `exit`, `resource`).
 
 | Method | Return Type | Behavior |
 |--------|-------------|----------|
-| `containsFunc(name)` | `Boolean` | Checks registry and keyword set |
-| `containsClass(name)` | `Boolean` | Checks registry and synthetic class records |
-| `containsMethod(methodName, className?)` | `Boolean` | Full key if `className` provided; suffix index otherwise |
-| `containsConst(name)` | `Boolean` | Checks global and class constants |
-| `searchFunc(name)` | `Function?` | Keywords first, then registry |
-| `searchClass(name)` | `PhpClass?` | Registry first, then synthetic |
-| `searchMethod(methodName, className?)` | `Pair<String, Method>?` | Full key if `className` provided; suffix index otherwise |
-| `searchGlobalConst(name)` | `Constant?` | Registry lookup |
-| `searchClassConst(constName, className?)` | `ClassConstant?` | Full key if `className` provided; suffix index otherwise |
-| `getAllFuncNames()` | `Set<String>` | Registry function keys |
-| `getAllClassNames()` | `Set<String>` | Registry class keys |
-| `getAllMethodNames()` | `Set<String>` | Registry method keys |
-| `getAllConstNames()` | `Set<String>` | Registry constant keys |
+| `containsFunc(name)` | `Boolean` | Checks registry and keyword set (case-insensitive) |
+| `containsClass(name)` | `Boolean` | Checks registry and synthetic class records (case-insensitive) |
+| `containsMethod(methodName, className?)` | `Boolean` | Full key if `className` provided; suffix index otherwise (case-insensitive) |
+| `containsConst(name, caseSensitive?)` | `Boolean` | Checks global and class constants. Default case-sensitive |
+| `searchFunc(name)` | `Function?` | Keywords first, then registry (case-insensitive) |
+| `searchClass(name)` | `PhpClass?` | Registry first, then synthetic (case-insensitive) |
+| `searchMethod(methodName, className?)` | `Pair<String, Method>?` | Full key if `className` provided; suffix index otherwise (case-insensitive) |
+| `searchGlobalConst(name, caseSensitive?)` | `Constant?` | Registry lookup. Default case-sensitive |
+| `searchClassConst(constName, className?, caseSensitive?)` | `ClassConstant?` | Class name case-insensitive, constant name case-sensitive by default |
+| `getAllFuncNames()` | `Set<String>` | Registry function keys (lowercase) |
+| `getAllClassNames()` | `Set<String>` | Registry class keys (lowercase) |
+| `getAllMethodNames()` | `Set<String>` | Registry method keys (lowercase class::lowercase method) |
+| `getAllConstNames()` | `Set<String>` | Registry constant keys (original case) |
 | `getKeywordFuncNames()` | `Set<String>` | Hardcoded keyword set |
 | `getScalarTypeNames()` | `Set<String>` | Hardcoded scalar type set |
 
