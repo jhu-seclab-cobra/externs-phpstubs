@@ -6,6 +6,9 @@ import kotlin.test.assertTrue
 
 /**
  * Tests for [StubRegistry] data class.
+ *
+ * - `construction with empty maps` — verifies all maps are empty after default construction
+ * - `construction with populated maps` — verifies all six record maps store and retrieve entries
  */
 internal class StubRegistryTest {
 

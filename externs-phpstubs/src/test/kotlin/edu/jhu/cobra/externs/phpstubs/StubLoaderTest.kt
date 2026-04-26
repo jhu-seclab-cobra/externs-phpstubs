@@ -10,6 +10,19 @@ import kotlin.test.assertTrue
 /**
  * Tests for [StubLoader] YAML-based loading.
  * Test data in `/stubs-test/` with `standard.yaml` and `core.yaml`.
+ *
+ * - `loads functions from both YAML files` — verifies functions from multiple YAML files are present
+ * - `function records have correct extension` — verifies extension field matches source file
+ * - `function records have parsed params` — verifies parameter list parsing
+ * - `function records have return type` — verifies return type mapping
+ * - `function records have flowsToReturn` — verifies taint flow index sets
+ * - `loads classes from YAML` — verifies class record fields and interfaces
+ * - `loads methods with class double-colon name keys` — verifies method keying and fields
+ * - `loads constants with values` — verifies constant type and value parsing
+ * - `loads class constants with class double-colon name keys` — verifies class constant keying
+ * - `loads properties with class double-colon name keys` — verifies property visibility and type
+ * - `missing index file throws StubIndexNotFoundException` — verifies error on missing resource
+ * - `functions map is unmodifiable` — verifies returned maps are immutable
  */
 internal class StubLoaderTest {
 
@@ -56,8 +69,8 @@ internal class StubLoaderTest {
 
     @Test
     fun `loads classes from YAML`() {
-        assertTrue(registry.classes.containsKey("Exception"))
-        val exception = registry.classes["Exception"]
+        assertTrue(registry.classes.containsKey("exception"))
+        val exception = registry.classes["exception"]
         assertNotNull(exception)
         assertIs<StubRecord.PhpClass>(exception)
         assertEquals("core", exception.extension)
@@ -68,8 +81,8 @@ internal class StubLoaderTest {
 
     @Test
     fun `loads methods with class double-colon name keys`() {
-        assertTrue(registry.methods.containsKey("Exception::getMessage"))
-        val m = registry.methods["Exception::getMessage"]
+        assertTrue(registry.methods.containsKey("exception::getmessage"))
+        val m = registry.methods["exception::getmessage"]
         assertNotNull(m)
         assertEquals("Exception", m.owningClass)
         assertEquals("getMessage", m.name)
@@ -94,7 +107,7 @@ internal class StubLoaderTest {
 
     @Test
     fun `loads class constants with class double-colon name keys`() {
-        val seekSet = registry.classConstants["SplFileObject::SEEK_SET"]
+        val seekSet = registry.classConstants["splfileobject::SEEK_SET"]
         assertNotNull(seekSet)
         assertEquals("0", seekSet.value)
         assertEquals("SplFileObject", seekSet.owningClass)
@@ -104,7 +117,7 @@ internal class StubLoaderTest {
 
     @Test
     fun `loads properties with class double-colon name keys`() {
-        val msg = registry.properties["Exception::message"]
+        val msg = registry.properties["exception::message"]
         assertNotNull(msg)
         assertEquals(Visibility.PROTECTED, msg.visibility)
         assertEquals(PhpType.STRING, msg.type)

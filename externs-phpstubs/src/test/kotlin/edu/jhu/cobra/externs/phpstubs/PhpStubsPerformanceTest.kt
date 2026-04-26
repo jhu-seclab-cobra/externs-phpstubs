@@ -3,6 +3,26 @@ package edu.jhu.cobra.externs.phpstubs
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 
+/**
+ * Tests for [PhpStubs] performance characteristics.
+ *
+ * - `containsFunc throughput - known functions` — measures lookup speed for registered functions
+ * - `containsFunc throughput - unknown functions` — measures lookup speed for missing names
+ * - `containsFunc throughput - keywords` — measures lookup speed for keyword functions
+ * - `containsClass throughput - known classes` — measures lookup speed for registered classes
+ * - `containsClass throughput - scalar types` — measures lookup speed for scalar type names
+ * - `containsMethod throughput - with class name` — measures method lookup with owning class
+ * - `containsMethod throughput - suffix only` — measures method lookup by name suffix
+ * - `containsConst throughput` — measures constant lookup speed
+ * - `searchFunc throughput - known functions` — measures record retrieval for registered functions
+ * - `searchFunc throughput - keywords` — measures record retrieval for keyword functions
+ * - `searchClass throughput - scalar types` — measures record retrieval for scalar types
+ * - `searchMethod throughput - with class name` — measures method record retrieval with class
+ * - `searchMethod throughput - suffix only` — measures method record retrieval by suffix
+ * - `containsFunc throughput - uppercase input` — measures normalization overhead for uppercase
+ * - `containsFunc throughput - slash prefix input` — measures normalization overhead for slash prefix
+ * - `memory footprint of loaded StubData` — reports heap usage after full data load
+ */
 @Tag("performance")
 class PhpStubsPerformanceTest {
 

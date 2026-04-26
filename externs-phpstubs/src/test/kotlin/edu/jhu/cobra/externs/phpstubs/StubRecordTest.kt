@@ -10,6 +10,20 @@ import kotlin.test.assertTrue
  * Tests for [StubRecord] sealed class and its subtypes.
  *
  * Each subtype tested for: required fields, default values, data class equality/copy.
+ *
+ * - `Function with minimal fields` — verifies defaults for params, returnType, flowsToReturn
+ * - `Function with all fields` — verifies explicit params, returnType, flowsToReturn
+ * - `Function is StubRecord` — verifies sealed class subtyping
+ * - `Method with minimal fields` — verifies defaults for visibility and isStatic
+ * - `Method with all fields` — verifies explicit visibility, isStatic, flowsToReturn
+ * - `PhpClass with minimal fields` — verifies defaults for parent, interfaces, isAbstract, isFinal
+ * - `PhpClass with inheritance` — verifies parent, interfaces, and isFinal fields
+ * - `Constant requires type and value` — verifies type and value fields
+ * - `ClassConstant with owningClass` — verifies owningClass and default visibility
+ * - `Property with minimal fields` — verifies defaults for type, visibility, isStatic
+ * - `Property with all fields` — verifies explicit type, visibility, isStatic
+ * - `equal Functions are equal` — verifies data class equality
+ * - `Function copy preserves fields` — verifies data class copy
  */
 internal class StubRecordTest {
 
