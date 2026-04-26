@@ -1,8 +1,8 @@
 # COBRA.EXTERNS.PHPSTUBS
 
-> Named for the PHP stub definitions it indexes — built-in function, class, method, and constant metadata with dataflow summaries.
+> PHP built-in entity registry for static analysis.
 
-Read-only Kotlin registry for PHP built-in stubs with typed metadata, dataflow rules, and constant values. Loaded from YAML files at startup.
+Typed lookup of PHP standard library functions, classes, methods, constants, and their metadata — signatures, return types, parameter info, dataflow summaries, and constant values.
 
 [![codecov](https://codecov.io/gh/jhu-seclab-cobra/externs-phpstubs/branch/main/graph/badge.svg)](https://codecov.io/gh/jhu-seclab-cobra/externs-phpstubs)
 ![Kotlin JVM](https://img.shields.io/badge/Kotlin%20JVM-2.0.1%20%7C%20JVM%201.8%2B-blue?logo=kotlin)
@@ -40,54 +40,55 @@ func?.params                                 // [StubParam("string", STRING)]
 
 // Dataflow summary
 val substr = PhpStubs.searchFunc("substr")
-substr?.flowsToReturn                        // setOf(0) — param 0 data flows to return
+substr?.flowsToReturn                        // setOf(0) -- param 0 flows to return
 
 // Class hierarchy
 val cls = PhpStubs.searchClass("runtimeexception")
 cls?.parent                                  // "exception"
 
-// Constant values
-PhpStubs.searchGlobalConst("PHP_INT_MAX")?.value  // "9223372036854775807"
+// Constants (case-sensitive by default, matching PHP semantics)
+PhpStubs.searchGlobalConst("PHP_INT_MAX")?.value    // "9223372036854775807"
+PhpStubs.searchGlobalConst("php_int_max")           // null (case mismatch)
+PhpStubs.searchGlobalConst("php_int_max", caseSensitive = false)?.value  // "9223372036854775807"
 ```
 
 ## API
 
-**`PhpStubs`** — singleton registry.
+**`PhpStubs`** -- singleton facade. All lookups are case-insensitive for functions, classes, and methods. Constants are case-sensitive by default.
 
 | Method | Return |
 |--------|--------|
-| `containsFunc/Class/Method/Const(name)` | `Boolean` |
+| `containsFunc(name)` | `Boolean` |
+| `containsClass(name)` | `Boolean` |
+| `containsMethod(methodName, className?)` | `Boolean` |
+| `containsConst(name, caseSensitive?)` | `Boolean` |
 | `searchFunc(name)` | `StubRecord.Function?` |
 | `searchClass(name)` | `StubRecord.PhpClass?` |
-| `searchMethod(name, className?)` | `Pair<String, StubRecord.Method>?` |
-| `searchGlobalConst(name)` | `StubRecord.Constant?` |
-| `searchClassConst(name, className?)` | `StubRecord.ClassConstant?` |
-| `getAllFuncNames/ClassNames/MethodNames/ConstNames()` | `Set<String>` |
+| `searchMethod(methodName, className?)` | `Pair<String, StubRecord.Method>?` |
+| `searchGlobalConst(name, caseSensitive?)` | `StubRecord.Constant?` |
+| `searchClassConst(constName, className?, caseSensitive?)` | `StubRecord.ClassConstant?` |
+| `getAllFuncNames()` | `Set<String>` |
+| `getAllClassNames()` | `Set<String>` |
+| `getAllMethodNames()` | `Set<String>` |
+| `getAllConstNames()` | `Set<String>` |
 
-**`StubRecord`** — sealed class with subtypes: `Function`, `Method`, `PhpClass`, `Constant`, `ClassConstant`, `Property`. Each subtype carries only the fields relevant to its entity kind.
+**`StubRecord`** -- sealed class. Subtypes: `Function`, `Method`, `PhpClass`, `Constant`, `ClassConstant`, `Property`.
 
-## Data Sources
+## Background
 
-Stub data derived from the following open-source projects:
-
-| Source | Data | License |
-|--------|------|---------|
-| [JetBrains/phpstorm-stubs](https://github.com/JetBrains/phpstorm-stubs) | Function signatures, class definitions, constant values | [Apache-2.0](https://github.com/JetBrains/phpstorm-stubs/blob/master/LICENSE) |
-| [vimeo/psalm](https://github.com/vimeo/psalm) | Dataflow annotations (`@psalm-flow`), function call map | [MIT](https://github.com/vimeo/psalm/blob/master/LICENSE) |
+Stub data derived from [JetBrains/phpstorm-stubs](https://github.com/JetBrains/phpstorm-stubs) (signatures, Apache-2.0) and [vimeo/psalm](https://github.com/vimeo/psalm) (dataflow annotations, MIT).
 
 ## Documentation
 
-- [Concepts & Terminology](docs/idea.md) — tag-based YAML format, dataflow summaries, eager loading
-- [Design](docs/design.md) — sealed class hierarchy, YAML schema, type specifications, validation rules
-- [Implementation Notes](docs/impl.md) — developer instructions, library gotchas
+- [Concepts](docs/idea.md) -- tag-based YAML format, dataflow summaries, eager loading
+- [Design](docs/design.md) -- sealed class hierarchy, YAML schema, type specifications
+- [Implementation Notes](docs/impl.md) -- developer instructions, library gotchas
 
 ## For Agents
 
 Agent-consumable documentation index at `docs/llms.txt` ([llmstxt.org](https://llmstxt.org) format).
 
 ## Citation
-
-If you use this repository in your research, please cite our paper:
 
 ```bibtex
 @inproceedings{xu2026cobra,
