@@ -322,6 +322,22 @@
 - tag: class
   name: soapfault
 
+- tag: method
+  class: Exception
+  name: getMessage
+  return: string
+
+- tag: method
+  class: Exception
+  name: getCode
+  return: int
+
+- tag: class_constant
+  class: Exception
+  name: SEVERITY_ERROR
+  type: int
+  value: "1"
+
 - tag: constant
   name: "TRUE"
   type: bool

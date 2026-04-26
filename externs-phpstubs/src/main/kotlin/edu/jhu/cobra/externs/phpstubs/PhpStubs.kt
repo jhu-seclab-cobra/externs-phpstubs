@@ -1,12 +1,6 @@
 package edu.jhu.cobra.externs.phpstubs
 
-/**
- * Central registry for PHP built-in function, class, method, and constant stubs.
- *
- * Loads a [StubRegistry] from YAML stub files on first access. Provides normalized
- * lookup and existence-check methods for all entity categories. Keyword functions
- * and scalar type names are handled via in-memory synthetic records.
- */
+/** PHP built-in entity registry. Normalized lookup and existence checks for functions, classes, methods, and constants. */
 object PhpStubs {
 
     private val KEYWORD_FUNC_NAMES = setOf(
@@ -32,14 +26,24 @@ object PhpStubs {
 
     private val registry: StubRegistry by lazy { loadRegistry() }
 
-    /** Suffix → full key index for methods (built lazily). */
+    // Suffix → full key index for methods.
     private val methodSuffixIndex: Map<String, String> by lazy {
         buildSuffixIndex(registry.methods.keys)
     }
 
-    /** Suffix → full key index for class constants (built lazily). */
+    // Suffix → full key index for class constants (case-preserved suffix).
     private val classConstSuffixIndex: Map<String, String> by lazy {
         buildSuffixIndex(registry.classConstants.keys)
+    }
+
+    // Normalized key → original key for case-insensitive constant lookup.
+    private val constCiIndex: Map<String, String> by lazy {
+        registry.constants.keys.associateBy { it.lowercase() }
+    }
+
+    // Normalized key → original key for case-insensitive class constant lookup.
+    private val classConstCiIndex: Map<String, String> by lazy {
+        registry.classConstants.keys.associateBy { it.lowercase() }
     }
 
     private fun loadRegistry(): StubRegistry =
@@ -69,16 +73,19 @@ object PhpStubs {
 
     // -- Existence checks --
 
+    /** Returns true if [name] is a known built-in or keyword function. */
     fun containsFunc(name: String): Boolean {
         val key = name.normalize()
         return key in registry.functions || key in KEYWORD_FUNC_NAMES
     }
 
+    /** Returns true if [name] is a known built-in or scalar class. */
     fun containsClass(name: String): Boolean {
         val key = name.normalize()
         return key in registry.classes || key in SYNTHETIC_CLASS_RECORDS
     }
 
+    /** Returns true if the method exists. Checks "class::method" when [className] provided, otherwise matches by suffix. */
     fun containsMethod(methodName: String, className: String? = null): Boolean {
         if (className != null) {
             return "${className.normalize()}::${methodName.normalize()}" in registry.methods
@@ -86,23 +93,29 @@ object PhpStubs {
         return methodName.normalize() in methodSuffixIndex
     }
 
-    fun containsConst(name: String): Boolean {
-        val key = name.normalize()
-        return key in registry.constants || key in registry.classConstants
+    /** Returns true if [name] is a known global or class constant. */
+    fun containsConst(name: String, caseSensitive: Boolean = true): Boolean {
+        val stripped = name.stripLeadingSlash()
+        if (caseSensitive) return stripped in registry.constants || stripped in registry.classConstants
+        val lower = stripped.lowercase()
+        return lower in constCiIndex || lower in classConstCiIndex
     }
 
     // -- Record retrieval --
 
+    /** Returns the function stub record for [name], or null if unknown. */
     fun searchFunc(name: String): StubRecord.Function? {
         val key = name.normalize()
         return KEYWORD_RECORDS[key] ?: registry.functions[key]
     }
 
+    /** Returns the class stub record for [name], or null if unknown. */
     fun searchClass(name: String): StubRecord.PhpClass? {
         val key = name.normalize()
         return registry.classes[key] ?: SYNTHETIC_CLASS_RECORDS[key]
     }
 
+    /** Returns (fullKey, method) for the given method, or null if unknown. */
     fun searchMethod(methodName: String, className: String? = null): Pair<String, StubRecord.Method>? {
         if (className != null) {
             val fullName = "${className.normalize()}::${methodName.normalize()}"
@@ -112,33 +125,52 @@ object PhpStubs {
         return registry.methods[fullKey]?.let { fullKey to it }
     }
 
-    fun searchGlobalConst(name: String): StubRecord.Constant? =
-        registry.constants[name.normalize()]
+    /** Returns the global constant stub record for [name], or null if unknown. */
+    fun searchGlobalConst(name: String, caseSensitive: Boolean = true): StubRecord.Constant? {
+        val stripped = name.stripLeadingSlash()
+        if (caseSensitive) return registry.constants[stripped]
+        val key = constCiIndex[stripped.lowercase()] ?: return null
+        return registry.constants[key]
+    }
 
-    fun searchClassConst(constName: String, className: String? = null): StubRecord.ClassConstant? {
+    /** Returns the class constant stub record, or null if unknown. */
+    fun searchClassConst(constName: String, className: String? = null, caseSensitive: Boolean = true): StubRecord.ClassConstant? {
+        val strippedConst = constName.stripLeadingSlash()
         if (className != null) {
-            return registry.classConstants["${className.normalize()}::${constName.normalize()}"]
+            val clsKey = className.normalize()
+            val fullKey = if (caseSensitive) "$clsKey::$strippedConst" else "$clsKey::${strippedConst.lowercase()}"
+            if (caseSensitive) return registry.classConstants[fullKey]
+            val originalKey = classConstCiIndex[fullKey] ?: return null
+            return registry.classConstants[originalKey]
         }
-        val fullKey = classConstSuffixIndex[constName.normalize()] ?: return null
+        val suffix = if (caseSensitive) strippedConst else strippedConst.lowercase()
+        val fullKey = classConstSuffixIndex[suffix] ?: return null
         return registry.classConstants[fullKey]
     }
 
     // -- Bulk access --
 
+    /** All registered built-in function names. */
     fun getAllFuncNames(): Set<String> = registry.functions.keys
+
+    /** All registered built-in class names. */
     fun getAllClassNames(): Set<String> = registry.classes.keys
+
+    /** All registered built-in method names. */
     fun getAllMethodNames(): Set<String> = registry.methods.keys
+
+    /** All registered constant names (global + class). */
     fun getAllConstNames(): Set<String> = registry.constants.keys
+
+    /** PHP keyword function names (echo, isset, etc.). */
     fun getKeywordFuncNames(): Set<String> = KEYWORD_FUNC_NAMES
+
+    /** PHP scalar type names (int, string, etc.). */
     fun getScalarTypeNames(): Set<String> = SCALAR_TYPE_NAMES
 
-    /** Strips leading slash (forward or back) and lowercases. */
-    internal fun String.normalize(): String {
-        val stripped = if (startsWith('/') || startsWith('\\')) substring(1) else this
-        var allLower = true
-        for (c in stripped) {
-            if (c in 'A'..'Z') { allLower = false; break }
-        }
-        return if (allLower) stripped else stripped.lowercase()
-    }
+    internal fun String.stripLeadingSlash(): String =
+        if (startsWith('/') || startsWith('\\')) substring(1) else this
+
+    /** Strips leading slash and lowercases. For case-insensitive entities (functions, classes, methods). */
+    internal fun String.normalize(): String = stripLeadingSlash().lowercase()
 }
