@@ -3,10 +3,7 @@ package edu.jhu.cobra.externs.phpstubs
 import org.yaml.snakeyaml.Yaml
 import java.io.BufferedReader
 
-/**
- * Parses unified YAML stub files into [StubRecord] instances.
- * Each entry is dispatched by its `tag` field to the appropriate builder.
- */
+/** Parses unified YAML stub files into [StubRecord] instances. */
 object YamlStubParser {
 
     /**
@@ -190,9 +187,8 @@ object YamlStubParser {
     }
 
     /**
-     * Maps a YAML type string to [PhpType].
-     * Union types containing "|" resolve to [PhpType.MIXED].
-     * Unknown type names resolve to [PhpType.MIXED].
+     * Maps a YAML visibility string to [Visibility].
+     * Unrecognized or null values default to [Visibility.PUBLIC].
      */
     internal fun mapVisibility(raw: String?): Visibility =
         when (raw?.lowercase()) {

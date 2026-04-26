@@ -4,8 +4,8 @@ package edu.jhu.cobra.externs.phpstubs
  * Immutable record representing a PHP built-in entity parsed from unified YAML stubs.
  * Each subtype carries only the fields relevant to its entity kind.
  *
- * @property name Entity name (e.g., "strlen", "Exception", "PHP_INT_MAX").
- * @property extension PHP extension this entity belongs to (e.g., "standard", "core").
+ * @property name Entity name.
+ * @property extension PHP extension name.
  */
 sealed class StubRecord {
     abstract val name: String
