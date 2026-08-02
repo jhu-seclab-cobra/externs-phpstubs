@@ -1,0 +1,1435 @@
+# Generated from stubs/image/gd.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: image_type_to_extension
+  signature:
+    params:
+    - name: image_type
+      type: int
+    - name: include_dot
+      type: bool
+      optional: true
+    returnType: string
+- subject:
+    function: image_type_to_mime_type
+  signature:
+    params:
+    - name: image_type
+      type: int
+    returnType: string
+- subject:
+    function: imageaffine
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: affine
+      type: array
+    - name: clip
+      type: array
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: imageaffinematrixconcat
+  signature:
+    params:
+    - name: matrix1
+      type: array
+    - name: matrix2
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: imageaffinematrixget
+  signature:
+    params:
+    - name: type
+      type: int
+    - name: options
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: imagealphablending
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: enable
+      type: bool
+    returnType: bool
+- subject:
+    function: imageantialias
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: enable
+      type: bool
+    returnType: bool
+- subject:
+    function: imagearc
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: center_x
+      type: int
+    - name: center_y
+      type: int
+    - name: width
+      type: int
+    - name: height
+      type: int
+    - name: start_angle
+      type: int
+    - name: end_angle
+      type: int
+    - name: color
+      type: int
+    returnType: bool
+- subject:
+    function: imagebmp
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: file
+      type: resource
+      optional: true
+    - name: compressed
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: imagechar
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: font
+      type: int
+    - name: x
+      type: int
+    - name: y
+      type: int
+    - name: char
+      type: string
+    - name: color
+      type: int
+    returnType: bool
+- subject:
+    function: imagecharup
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: font
+      type: int
+    - name: x
+      type: int
+    - name: y
+      type: int
+    - name: char
+      type: string
+    - name: color
+      type: int
+    returnType: bool
+- subject:
+    function: imagecolorallocate
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: red
+      type: int
+    - name: green
+      type: int
+    - name: blue
+      type: int
+    returnType: int
+- subject:
+    function: imagecolorallocatealpha
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: red
+      type: int
+    - name: green
+      type: int
+    - name: blue
+      type: int
+    - name: alpha
+      type: int
+    returnType: int
+- subject:
+    function: imagecolorat
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: x
+      type: int
+    - name: y
+      type: int
+    returnType: int
+- subject:
+    function: imagecolorclosest
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: red
+      type: int
+    - name: green
+      type: int
+    - name: blue
+      type: int
+    returnType: int
+- subject:
+    function: imagecolorclosestalpha
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: red
+      type: int
+    - name: green
+      type: int
+    - name: blue
+      type: int
+    - name: alpha
+      type: int
+    returnType: int
+- subject:
+    function: imagecolorclosesthwb
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: red
+      type: int
+    - name: green
+      type: int
+    - name: blue
+      type: int
+    returnType: int
+- subject:
+    function: imagecolordeallocate
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: color
+      type: int
+    returnType: bool
+- subject:
+    function: imagecolorexact
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: red
+      type: int
+    - name: green
+      type: int
+    - name: blue
+      type: int
+    returnType: int
+- subject:
+    function: imagecolorexactalpha
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: red
+      type: int
+    - name: green
+      type: int
+    - name: blue
+      type: int
+    - name: alpha
+      type: int
+    returnType: int
+- subject:
+    function: imagecolormatch
+  signature:
+    params:
+    - name: image1
+      type: mixed
+    - name: image2
+      type: mixed
+    returnType: bool
+- subject:
+    function: imagecolorresolve
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: red
+      type: int
+    - name: green
+      type: int
+    - name: blue
+      type: int
+    returnType: int
+- subject:
+    function: imagecolorresolvealpha
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: red
+      type: int
+    - name: green
+      type: int
+    - name: blue
+      type: int
+    - name: alpha
+      type: int
+    returnType: int
+- subject:
+    function: imagecolorset
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: color
+      type: int
+    - name: red
+      type: int
+    - name: green
+      type: int
+    - name: blue
+      type: int
+    - name: alpha
+      type: int
+      optional: true
+    returnType: mixed
+- subject:
+    function: imagecolorsforindex
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: color
+      type: int
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: imagecolorstotal
+  signature:
+    params:
+    - name: image
+      type: mixed
+    returnType: int
+- subject:
+    function: imagecolortransparent
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: color
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: imageconvolution
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: matrix
+      type: array
+    - name: divisor
+      type: float
+    - name: offset
+      type: float
+    returnType: bool
+- subject:
+    function: imagecopy
+  signature:
+    params:
+    - name: dst_image
+      type: mixed
+    - name: src_image
+      type: mixed
+    - name: dst_x
+      type: int
+    - name: dst_y
+      type: int
+    - name: src_x
+      type: int
+    - name: src_y
+      type: int
+    - name: src_width
+      type: int
+    - name: src_height
+      type: int
+    returnType: bool
+- subject:
+    function: imagecopymerge
+  signature:
+    params:
+    - name: dst_image
+      type: mixed
+    - name: src_image
+      type: mixed
+    - name: dst_x
+      type: int
+    - name: dst_y
+      type: int
+    - name: src_x
+      type: int
+    - name: src_y
+      type: int
+    - name: src_width
+      type: int
+    - name: src_height
+      type: int
+    - name: pct
+      type: int
+    returnType: bool
+- subject:
+    function: imagecopymergegray
+  signature:
+    params:
+    - name: dst_image
+      type: mixed
+    - name: src_image
+      type: mixed
+    - name: dst_x
+      type: int
+    - name: dst_y
+      type: int
+    - name: src_x
+      type: int
+    - name: src_y
+      type: int
+    - name: src_width
+      type: int
+    - name: src_height
+      type: int
+    - name: pct
+      type: int
+    returnType: bool
+- subject:
+    function: imagecopyresampled
+  signature:
+    params:
+    - name: dst_image
+      type: mixed
+    - name: src_image
+      type: mixed
+    - name: dst_x
+      type: int
+    - name: dst_y
+      type: int
+    - name: src_x
+      type: int
+    - name: src_y
+      type: int
+    - name: dst_width
+      type: int
+    - name: dst_height
+      type: int
+    - name: src_width
+      type: int
+    - name: src_height
+      type: int
+    returnType: bool
+- subject:
+    function: imagecopyresized
+  signature:
+    params:
+    - name: dst_image
+      type: mixed
+    - name: src_image
+      type: mixed
+    - name: dst_x
+      type: int
+    - name: dst_y
+      type: int
+    - name: src_x
+      type: int
+    - name: src_y
+      type: int
+    - name: dst_width
+      type: int
+    - name: dst_height
+      type: int
+    - name: src_width
+      type: int
+    - name: src_height
+      type: int
+    returnType: bool
+- subject:
+    function: imagecreate
+  signature:
+    params:
+    - name: width
+      type: int
+    - name: height
+      type: int
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: imagecreatefrombmp
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: imagecreatefromgd
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: imagecreatefromgd2
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: imagecreatefromgd2part
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: x
+      type: int
+    - name: y
+      type: int
+    - name: width
+      type: int
+    - name: height
+      type: int
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: imagecreatefromgif
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: imagecreatefromjpeg
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: imagecreatefrompng
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: imagecreatefromstring
+  signature:
+    params:
+    - name: data
+      type: string
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: imagecreatefromtga
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: imagecreatefromwbmp
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: imagecreatefromwebp
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: imagecreatefromxbm
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: imagecreatefromxpm
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: imagecreatetruecolor
+  signature:
+    params:
+    - name: width
+      type: int
+    - name: height
+      type: int
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: imagecrop
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: rectangle
+      type: array
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: imagecropauto
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: mode
+      type: int
+      optional: true
+    - name: threshold
+      type: float
+      optional: true
+    - name: color
+      type: int
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: imagedashedline
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: x1
+      type: int
+    - name: y1
+      type: int
+    - name: x2
+      type: int
+    - name: y2
+      type: int
+    - name: color
+      type: int
+    returnType: bool
+- subject:
+    function: imagedestroy
+  signature:
+    params:
+    - name: image
+      type: mixed
+    returnType: bool
+- subject:
+    function: imageellipse
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: center_x
+      type: int
+    - name: center_y
+      type: int
+    - name: width
+      type: int
+    - name: height
+      type: int
+    - name: color
+      type: int
+    returnType: bool
+- subject:
+    function: imagefill
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: x
+      type: int
+    - name: y
+      type: int
+    - name: color
+      type: int
+    returnType: bool
+- subject:
+    function: imagefilledarc
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: center_x
+      type: int
+    - name: center_y
+      type: int
+    - name: width
+      type: int
+    - name: height
+      type: int
+    - name: start_angle
+      type: int
+    - name: end_angle
+      type: int
+    - name: color
+      type: int
+    - name: style
+      type: int
+    returnType: bool
+- subject:
+    function: imagefilledellipse
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: center_x
+      type: int
+    - name: center_y
+      type: int
+    - name: width
+      type: int
+    - name: height
+      type: int
+    - name: color
+      type: int
+    returnType: bool
+- subject:
+    function: imagefilledpolygon
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: points
+      type: array
+    - name: num_points_or_color
+      type: int
+    - name: color
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: imagefilledrectangle
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: x1
+      type: int
+    - name: y1
+      type: int
+    - name: x2
+      type: int
+    - name: y2
+      type: int
+    - name: color
+      type: int
+    returnType: bool
+- subject:
+    function: imagefilltoborder
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: x
+      type: int
+    - name: y
+      type: int
+    - name: border_color
+      type: int
+    - name: color
+      type: int
+    returnType: bool
+- subject:
+    function: imagefilter
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: filter
+      type: int
+    - name: args
+      type: array
+      optional: true
+    returnType: bool
+- subject:
+    function: imageflip
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: mode
+      type: int
+    returnType: bool
+- subject:
+    function: imagefontheight
+  signature:
+    params:
+    - name: font
+      type: int
+    returnType: int
+- subject:
+    function: imagefontwidth
+  signature:
+    params:
+    - name: font
+      type: int
+    returnType: int
+- subject:
+    function: imageftbbox
+  signature:
+    params:
+    - name: size
+      type: float
+    - name: angle
+      type: float
+    - name: font_filename
+      type: string
+    - name: string
+      type: string
+    - name: options
+      type: array
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(4)
+    to: return
+- subject:
+    function: imagefttext
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: size
+      type: float
+    - name: angle
+      type: float
+    - name: x
+      type: int
+    - name: y
+      type: int
+    - name: color
+      type: int
+    - name: font_filename
+      type: string
+    - name: text
+      type: string
+    - name: options
+      type: array
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(8)
+    to: return
+- subject:
+    function: imagegammacorrect
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: input_gamma
+      type: float
+    - name: output_gamma
+      type: float
+    returnType: bool
+- subject:
+    function: imagegd
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: file
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: imagegd2
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: file
+      type: string
+      optional: true
+    - name: chunk_size
+      type: int
+      optional: true
+    - name: mode
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: imagegetclip
+  signature:
+    params:
+    - name: image
+      type: mixed
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: imagegetinterpolation
+  signature:
+    params:
+    - name: image
+      type: mixed
+    returnType: int
+- subject:
+    function: imagegif
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: file
+      type: resource
+      optional: true
+    returnType: bool
+- subject:
+    function: imagegrabscreen
+  signature:
+    returnType: mixed
+- subject:
+    function: imagegrabwindow
+  signature:
+    params:
+    - name: handle
+      type: int
+    - name: client_area
+      type: int
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: imageinterlace
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: enable
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: imageistruecolor
+  signature:
+    params:
+    - name: image
+      type: mixed
+    returnType: bool
+- subject:
+    function: imagejpeg
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: file
+      type: resource
+      optional: true
+    - name: quality
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: imagelayereffect
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: effect
+      type: int
+    returnType: bool
+- subject:
+    function: imageline
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: x1
+      type: int
+    - name: y1
+      type: int
+    - name: x2
+      type: int
+    - name: y2
+      type: int
+    - name: color
+      type: int
+    returnType: bool
+- subject:
+    function: imageloadfont
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: int
+- subject:
+    function: imageopenpolygon
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: points
+      type: array
+    - name: num_points_or_color
+      type: int
+    - name: color
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: imagepalettecopy
+  signature:
+    params:
+    - name: dst
+      type: mixed
+    - name: src
+      type: mixed
+    returnType: void
+- subject:
+    function: imagepalettetotruecolor
+  signature:
+    params:
+    - name: image
+      type: mixed
+    returnType: bool
+- subject:
+    function: imagepng
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: file
+      type: resource
+      optional: true
+    - name: quality
+      type: int
+      optional: true
+    - name: filters
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: imagepolygon
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: points
+      type: array
+    - name: num_points_or_color
+      type: int
+    - name: color
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: imagerectangle
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: x1
+      type: int
+    - name: y1
+      type: int
+    - name: x2
+      type: int
+    - name: y2
+      type: int
+    - name: color
+      type: int
+    returnType: bool
+- subject:
+    function: imageresolution
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: resolution_x
+      type: int
+      optional: true
+    - name: resolution_y
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: imagerotate
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: angle
+      type: float
+    - name: background_color
+      type: int
+    - name: ignore_transparent
+      type: bool
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: imagesavealpha
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: enable
+      type: bool
+    returnType: bool
+- subject:
+    function: imagescale
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: width
+      type: int
+    - name: height
+      type: int
+      optional: true
+    - name: mode
+      type: int
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: imagesetbrush
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: brush
+      type: mixed
+    returnType: bool
+- subject:
+    function: imagesetclip
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: x1
+      type: int
+    - name: y1
+      type: int
+    - name: x2
+      type: int
+    - name: y2
+      type: int
+    returnType: bool
+- subject:
+    function: imagesetinterpolation
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: method
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: imagesetpixel
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: x
+      type: int
+    - name: y
+      type: int
+    - name: color
+      type: int
+    returnType: bool
+- subject:
+    function: imagesetstyle
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: style
+      type: array
+    returnType: bool
+- subject:
+    function: imagesetthickness
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: thickness
+      type: int
+    returnType: bool
+- subject:
+    function: imagesettile
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: tile
+      type: mixed
+    returnType: bool
+- subject:
+    function: imagestring
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: font
+      type: int
+    - name: x
+      type: int
+    - name: y
+      type: int
+    - name: string
+      type: string
+    - name: color
+      type: int
+    returnType: bool
+- subject:
+    function: imagestringup
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: font
+      type: int
+    - name: x
+      type: int
+    - name: y
+      type: int
+    - name: string
+      type: string
+    - name: color
+      type: int
+    returnType: bool
+- subject:
+    function: imagesx
+  signature:
+    params:
+    - name: image
+      type: mixed
+    returnType: int
+- subject:
+    function: imagesy
+  signature:
+    params:
+    - name: image
+      type: mixed
+    returnType: int
+- subject:
+    function: imagetruecolortopalette
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: dither
+      type: bool
+    - name: num_colors
+      type: int
+    returnType: bool
+- subject:
+    function: imagettfbbox
+  signature:
+    params:
+    - name: size
+      type: float
+    - name: angle
+      type: float
+    - name: font_filename
+      type: string
+    - name: string
+      type: string
+    - name: options
+      type: array
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(4)
+    to: return
+- subject:
+    function: imagettftext
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: size
+      type: float
+    - name: angle
+      type: float
+    - name: x
+      type: int
+    - name: y
+      type: int
+    - name: color
+      type: int
+    - name: font_filename
+      type: string
+    - name: text
+      type: string
+    - name: options
+      type: array
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(8)
+    to: return
+- subject:
+    function: imagetypes
+  signature:
+    returnType: int
+- subject:
+    function: imagewbmp
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: file
+      type: resource
+      optional: true
+    - name: foreground_color
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: imagewebp
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: file
+      type: resource
+      optional: true
+    - name: quality
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: imagexbm
+  signature:
+    params:
+    - name: image
+      type: mixed
+    - name: filename
+      type: string
+    - name: foreground_color
+      type: int
+      optional: true
+    returnType: bool

@@ -1,0 +1,5860 @@
+# Generated from stubs/standard/standard_1.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: _
+  signature:
+    params:
+    - name: message
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: __halt_compiler
+  signature:
+    returnType: void
+- subject:
+    function: _array
+  signature:
+    params:
+    - name: array
+      type: array
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: _mbstring
+  signature:
+    params:
+    - name: string
+      type: string
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: _string
+  signature:
+    params:
+    - name: string
+      type: string
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: abs
+  signature:
+    params:
+    - name: num
+      type: int
+    returnType: int
+- subject:
+    function: accelerator_get_configuration
+  signature:
+    returnType: array
+- subject:
+    function: accelerator_get_scripts
+  signature:
+    returnType: array
+- subject:
+    function: accelerator_get_status
+  signature:
+    params:
+    - name: fetch_scripts
+      type: bool
+    returnType: array
+- subject:
+    function: accelerator_reset
+  signature:
+    returnType: mixed
+- subject:
+    function: accelerator_set_status
+  signature:
+    params:
+    - name: status
+      type: bool
+    returnType: void
+- subject:
+    function: acos
+  signature:
+    params:
+    - name: num
+      type: float
+    returnType: float
+- subject:
+    function: acosh
+  signature:
+    params:
+    - name: num
+      type: float
+    returnType: float
+- subject:
+    function: addcslashes
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: characters
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: addslashes
+  signature:
+    params:
+    - name: string
+      type: string
+    returnType: string
+- subject:
+    function: apache_child_terminate
+  signature:
+    returnType: bool
+- subject:
+    function: apache_get_modules
+  signature:
+    returnType: array
+- subject:
+    function: apache_get_version
+  signature:
+    returnType: string
+- subject:
+    function: apache_getenv
+  signature:
+    params:
+    - name: variable
+      type: string
+    - name: walk_to_top
+      type: bool
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: apache_lookup_uri
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: object
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: apache_note
+  signature:
+    params:
+    - name: note_name
+      type: string
+    - name: note_value
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: apache_request_headers
+  signature:
+    returnType: array
+- subject:
+    function: apache_reset_timeout
+  signature:
+    returnType: bool
+- subject:
+    function: apache_response_headers
+  signature:
+    returnType: array
+- subject:
+    function: apache_setenv
+  signature:
+    params:
+    - name: variable
+      type: string
+    - name: value
+      type: string
+    - name: walk_to_top
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: apd_breakpoint
+  signature:
+    params:
+    - name: debug_level
+      type: int
+    returnType: bool
+- subject:
+    function: apd_callstack
+  signature:
+    returnType: array
+- subject:
+    function: apd_clunk
+  signature:
+    params:
+    - name: warning
+      type: string
+    - name: delimiter
+      type: string
+      optional: true
+    returnType: void
+- subject:
+    function: apd_continue
+  signature:
+    params:
+    - name: debug_level
+      type: int
+    returnType: bool
+- subject:
+    function: apd_croak
+  signature:
+    params:
+    - name: warning
+      type: string
+    - name: delimiter
+      type: string
+      optional: true
+    returnType: void
+- subject:
+    function: apd_dump_function_table
+  signature:
+    returnType: void
+- subject:
+    function: apd_dump_persistent_resources
+  signature:
+    returnType: array
+- subject:
+    function: apd_dump_regular_resources
+  signature:
+    returnType: array
+- subject:
+    function: apd_echo
+  signature:
+    params:
+    - name: output
+      type: string
+    returnType: bool
+- subject:
+    function: apd_get_active_symbols
+  signature:
+    returnType: array
+- subject:
+    function: apd_set_pprof_trace
+  signature:
+    params:
+    - name: dump_directory
+      type: string
+      optional: true
+    - name: fragment
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: apd_set_session
+  signature:
+    params:
+    - name: debug_level
+      type: int
+    returnType: void
+- subject:
+    function: apd_set_session_trace
+  signature:
+    params:
+    - name: debug_level
+      type: int
+    - name: dump_directory
+      type: string
+      optional: true
+    returnType: void
+- subject:
+    function: apd_set_session_trace_socket
+  signature:
+    params:
+    - name: tcp_server
+      type: string
+    - name: socket_type
+      type: int
+    - name: port
+      type: int
+    - name: debug_level
+      type: int
+    returnType: bool
+- subject:
+    function: array_change_key_case
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: case
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: array_chunk
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: length
+      type: int
+    - name: preserve_keys
+      type: bool
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: array_column
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: column_key
+      type: int
+    - name: index_key
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: array_combine
+  signature:
+    params:
+    - name: keys
+      type: array
+    - name: values
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: array_count_values
+  signature:
+    params:
+    - name: array
+      type: array
+    returnType: array
+- subject:
+    function: array_diff
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: arrays
+      type: array
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: array_diff_assoc
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: arrays
+      type: array
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: array_diff_key
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: arrays
+      type: array
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: array_diff_uassoc
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: rest
+      type: array
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: array_diff_ukey
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: rest
+      type: array
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: array_fill
+  signature:
+    params:
+    - name: start_index
+      type: int
+    - name: count
+      type: int
+    - name: value
+      type: mixed
+    returnType: array
+  propagation:
+  - from: argument(2)
+    to: return
+- subject:
+    function: array_fill_keys
+  signature:
+    params:
+    - name: keys
+      type: array
+    - name: value
+      type: mixed
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: array_filter
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: callback
+      type: mixed
+      optional: true
+    - name: mode
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: array_flip
+  signature:
+    params:
+    - name: array
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: array_intersect
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: arrays
+      type: array
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: array_intersect_assoc
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: arrays
+      type: array
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: array_intersect_key
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: arrays
+      type: array
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: array_intersect_uassoc
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: rest
+      type: array
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: array_intersect_ukey
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: rest
+      type: array
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: array_key_exists
+  signature:
+    params:
+    - name: key
+      type: int
+    - name: array
+      type: array
+    returnType: bool
+- subject:
+    function: array_key_first
+  signature:
+    params:
+    - name: array
+      type: array
+    returnType: int
+- subject:
+    function: array_key_last
+  signature:
+    params:
+    - name: array
+      type: array
+    returnType: int
+- subject:
+    function: array_keys
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: filter_value
+      type: mixed
+      optional: true
+    - name: strict
+      type: bool
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: array_map
+  signature:
+    params:
+    - name: callback
+      type: callable
+    - name: array
+      type: array
+    - name: arrays
+      type: array
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: array_merge
+  signature:
+    params:
+    - name: arrays
+      type: array
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: array_merge_recursive
+  signature:
+    params:
+    - name: arrays
+      type: array
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: array_multisort
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: rest
+      type: array
+      optional: true
+    returnType: bool
+- subject:
+    function: array_pad
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: length
+      type: int
+    - name: value
+      type: mixed
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: array_pop
+  signature:
+    params:
+    - name: array
+      type: array
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: array_product
+  signature:
+    params:
+    - name: array
+      type: array
+    returnType: float
+- subject:
+    function: array_push
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: values
+      type: mixed
+      optional: true
+    returnType: int
+- subject:
+    function: array_rand
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: num
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: array_reduce
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: callback
+      type: mixed
+    - name: initial
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: array_replace
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: replacements
+      type: array
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: array_replace_recursive
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: replacements
+      type: array
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: array_reverse
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: preserve_keys
+      type: bool
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: array_search
+  signature:
+    params:
+    - name: needle
+      type: mixed
+    - name: haystack
+      type: array
+    - name: strict
+      type: bool
+      optional: true
+    returnType: int
+- subject:
+    function: array_shift
+  signature:
+    params:
+    - name: array
+      type: array
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: array_slice
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: offset
+      type: int
+    - name: length
+      type: int
+      optional: true
+    - name: preserve_keys
+      type: bool
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: array_splice
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: offset
+      type: int
+    - name: length
+      type: int
+      optional: true
+    - name: replacement
+      type: array
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: array_sum
+  signature:
+    params:
+    - name: array
+      type: array
+    returnType: float
+- subject:
+    function: array_udiff
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: rest
+      type: array
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: array_udiff_assoc
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: rest
+      type: array
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: array_udiff_uassoc
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: arr2
+      type: array
+    - name: value_compare_func
+      type: mixed
+    - name: key_compare_func
+      type: mixed
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: array_uintersect
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: rest
+      type: array
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: array_uintersect_assoc
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: rest
+      type: array
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: array_uintersect_uassoc
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: arr2
+      type: array
+    - name: value_compare_func
+      type: mixed
+    - name: key_compare_func
+      type: mixed
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: array_unique
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: flags
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: array_unshift
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: values
+      type: mixed
+      optional: true
+    returnType: int
+- subject:
+    function: array_values
+  signature:
+    params:
+    - name: array
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: array_walk
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: callback
+      type: callable
+    - name: arg
+      type: mixed
+      optional: true
+    returnType: bool
+- subject:
+    function: array_walk_recursive
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: callback
+      type: callable
+    - name: arg
+      type: mixed
+      optional: true
+    returnType: bool
+- subject:
+    function: arsort
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: asin
+  signature:
+    params:
+    - name: num
+      type: float
+    returnType: float
+- subject:
+    function: asinh
+  signature:
+    params:
+    - name: num
+      type: float
+    returnType: float
+- subject:
+    function: asort
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: assert
+  signature:
+    params:
+    - name: assertion
+      type: bool
+    - name: description
+      type: mixed
+      optional: true
+    returnType: bool
+- subject:
+    function: assert_options
+  signature:
+    params:
+    - name: option
+      type: int
+    - name: value
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: ast\\get_kind_name
+  signature:
+    params:
+    - name: kind
+      type: int
+    returnType: string
+- subject:
+    function: ast\\get_metadata
+  signature:
+    returnType: array
+- subject:
+    function: ast\\get_supported_versions
+  signature:
+    params:
+    - name: exclude_deprecated
+      type: bool
+      optional: true
+    returnType: array
+- subject:
+    function: ast\\kind_uses_flags
+  signature:
+    params:
+    - name: kind
+      type: int
+    returnType: bool
+- subject:
+    function: ast\\parse_code
+  signature:
+    params:
+    - name: code
+      type: string
+    - name: version
+      type: int
+    - name: filename
+      type: string
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: ast\\parse_file
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: version
+      type: int
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: atan
+  signature:
+    params:
+    - name: num
+      type: float
+    returnType: float
+- subject:
+    function: atan2
+  signature:
+    params:
+    - name: y
+      type: float
+    - name: x
+      type: float
+    returnType: float
+- subject:
+    function: atanh
+  signature:
+    params:
+    - name: num
+      type: float
+    returnType: float
+- subject:
+    function: base64_decode
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: strict
+      type: bool
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: base64_encode
+  signature:
+    params:
+    - name: string
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: base_convert
+  signature:
+    params:
+    - name: num
+      type: string
+    - name: from_base
+      type: int
+    - name: to_base
+      type: int
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: bbcode_add_element
+  signature:
+    params:
+    - name: bbcode_container
+      type: resource
+    - name: tag_name
+      type: string
+    - name: tag_rules
+      type: array
+    returnType: bool
+- subject:
+    function: bbcode_add_smiley
+  signature:
+    params:
+    - name: bbcode_container
+      type: resource
+    - name: smiley
+      type: string
+    - name: replace_by
+      type: string
+    returnType: bool
+- subject:
+    function: bbcode_create
+  signature:
+    params:
+    - name: bbcode_initial_tags
+      type: array
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: bbcode_destroy
+  signature:
+    params:
+    - name: bbcode_container
+      type: resource
+    returnType: bool
+- subject:
+    function: bbcode_parse
+  signature:
+    params:
+    - name: bbcode_container
+      type: resource
+    - name: to_parse
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: bbcode_set_arg_parser
+  signature:
+    params:
+    - name: bbcode_container
+      type: resource
+    - name: bbcode_arg_parser
+      type: resource
+    returnType: bool
+- subject:
+    function: bbcode_set_flags
+  signature:
+    params:
+    - name: bbcode_container
+      type: resource
+    - name: flags
+      type: int
+    - name: mode
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: bcompiler_load
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: bool
+- subject:
+    function: bcompiler_load_exe
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: bool
+- subject:
+    function: bcompiler_parse_class
+  signature:
+    params:
+    - name: class
+      type: string
+    - name: callback
+      type: string
+    returnType: bool
+- subject:
+    function: bcompiler_read
+  signature:
+    params:
+    - name: filehandle
+      type: resource
+    returnType: bool
+- subject:
+    function: bcompiler_write_class
+  signature:
+    params:
+    - name: filehandle
+      type: resource
+    - name: classname
+      type: string
+    - name: extends
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: bcompiler_write_constant
+  signature:
+    params:
+    - name: filehandle
+      type: resource
+    - name: constantname
+      type: string
+    returnType: bool
+- subject:
+    function: bcompiler_write_exe_footer
+  signature:
+    params:
+    - name: filehandle
+      type: resource
+    - name: startpos
+      type: int
+    returnType: bool
+- subject:
+    function: bcompiler_write_file
+  signature:
+    params:
+    - name: filehandle
+      type: resource
+    - name: filename
+      type: string
+    returnType: bool
+- subject:
+    function: bcompiler_write_footer
+  signature:
+    params:
+    - name: filehandle
+      type: resource
+    returnType: bool
+- subject:
+    function: bcompiler_write_function
+  signature:
+    params:
+    - name: filehandle
+      type: resource
+    - name: functionname
+      type: string
+    returnType: bool
+- subject:
+    function: bcompiler_write_functions_from_file
+  signature:
+    params:
+    - name: filehandle
+      type: resource
+    - name: filename
+      type: string
+    returnType: bool
+- subject:
+    function: bcompiler_write_header
+  signature:
+    params:
+    - name: filehandle
+      type: resource
+    - name: write_ver
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: bcompiler_write_included_filename
+  signature:
+    params:
+    - name: filehandle
+      type: resource
+    - name: filename
+      type: string
+    returnType: bool
+- subject:
+    function: bin2hex
+  signature:
+    params:
+    - name: string
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: bind_textdomain_codeset
+  signature:
+    params:
+    - name: domain
+      type: string
+    - name: codeset
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: bindec
+  signature:
+    params:
+    - name: binary_string
+      type: string
+    returnType: float
+- subject:
+    function: birdstep_autocommit
+  signature:
+    params:
+    - name: index
+      type: int
+    returnType: bool
+- subject:
+    function: birdstep_close
+  signature:
+    params:
+    - name: id
+      type: int
+    returnType: bool
+- subject:
+    function: birdstep_commit
+  signature:
+    params:
+    - name: index
+      type: int
+    returnType: bool
+- subject:
+    function: birdstep_connect
+  signature:
+    params:
+    - name: server
+      type: string
+    - name: user
+      type: string
+    - name: pass
+      type: string
+    returnType: int
+- subject:
+    function: birdstep_exec
+  signature:
+    params:
+    - name: index
+      type: int
+    - name: exec_str
+      type: string
+    returnType: int
+- subject:
+    function: birdstep_fetch
+  signature:
+    params:
+    - name: index
+      type: int
+    returnType: bool
+- subject:
+    function: birdstep_fieldname
+  signature:
+    params:
+    - name: index
+      type: int
+    - name: col
+      type: int
+    returnType: string
+- subject:
+    function: birdstep_fieldnum
+  signature:
+    params:
+    - name: index
+      type: int
+    returnType: int
+- subject:
+    function: birdstep_freeresult
+  signature:
+    params:
+    - name: index
+      type: int
+    returnType: bool
+- subject:
+    function: birdstep_off_autocommit
+  signature:
+    params:
+    - name: index
+      type: int
+    returnType: bool
+- subject:
+    function: birdstep_result
+  signature:
+    params:
+    - name: index
+      type: int
+    - name: col
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: birdstep_rollback
+  signature:
+    params:
+    - name: index
+      type: int
+    returnType: bool
+- subject:
+    function: blenc_encrypt
+  signature:
+    params:
+    - name: plaintext
+      type: string
+    - name: encodedfile
+      type: string
+    - name: encryption_key
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: boolval
+  signature:
+    params:
+    - name: value
+      type: mixed
+    returnType: bool
+- subject:
+    function: bson_decode
+  signature:
+    params:
+    - name: bson
+      type: string
+    returnType: array
+- subject:
+    function: bson_encode
+  signature:
+    params:
+    - name: anything
+      type: mixed
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: cal_days_in_month
+  signature:
+    params:
+    - name: calendar
+      type: int
+    - name: month
+      type: int
+    - name: year
+      type: int
+    returnType: int
+- subject:
+    function: cal_from_jd
+  signature:
+    params:
+    - name: julian_day
+      type: int
+    - name: calendar
+      type: int
+    returnType: array
+- subject:
+    function: cal_info
+  signature:
+    params:
+    - name: calendar
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    function: cal_to_jd
+  signature:
+    params:
+    - name: calendar
+      type: int
+    - name: month
+      type: int
+    - name: day
+      type: int
+    - name: year
+      type: int
+    returnType: int
+- subject:
+    function: calcul_hmac
+  signature:
+    params:
+    - name: clent
+      type: string
+    - name: siretcode
+      type: string
+    - name: price
+      type: string
+    - name: reference
+      type: string
+    - name: validity
+      type: string
+    - name: taxation
+      type: string
+    - name: devise
+      type: string
+    - name: language
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+  - from: argument(5)
+    to: return
+  - from: argument(6)
+    to: return
+  - from: argument(7)
+    to: return
+- subject:
+    function: calculhmac
+  signature:
+    params:
+    - name: clent
+      type: string
+    - name: data
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: call_user_func
+  signature:
+    params:
+    - name: callback
+      type: callable
+    - name: args
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: call_user_func_array
+  signature:
+    params:
+    - name: callback
+      type: callable
+    - name: args
+      type: array
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: call_user_method
+  signature:
+    params:
+    - name: method_name
+      type: string
+    - name: object
+      type: object
+    - name: parameter
+      type: mixed
+      optional: true
+    - name: args
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: call_user_method_array
+  signature:
+    params:
+    - name: method_name
+      type: string
+    - name: object
+      type: object
+    - name: params
+      type: array
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: ceil
+  signature:
+    params:
+    - name: num
+      type: float
+    returnType: float
+- subject:
+    function: chdb_create
+  signature:
+    params:
+    - name: pathname
+      type: string
+    - name: data
+      type: array
+    returnType: bool
+- subject:
+    function: chdir
+  signature:
+    params:
+    - name: directory
+      type: string
+    returnType: bool
+- subject:
+    function: checkdnsrr
+  signature:
+    params:
+    - name: hostname
+      type: string
+    - name: type
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: chop
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: characters
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: chr
+  signature:
+    params:
+    - name: codepoint
+      type: int
+    returnType: string
+- subject:
+    function: chroot
+  signature:
+    params:
+    - name: directory
+      type: string
+    returnType: bool
+- subject:
+    function: chunk_split
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: length
+      type: int
+      optional: true
+    - name: separator
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: class_alias
+  signature:
+    params:
+    - name: class
+      type: string
+    - name: alias
+      type: string
+    - name: autoload
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: class_exists
+  signature:
+    params:
+    - name: class
+      type: string
+    - name: autoload
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: class_implements
+  signature:
+    params:
+    - name: object_or_class
+      type: object
+    - name: autoload
+      type: bool
+      optional: true
+    returnType: array
+- subject:
+    function: class_parents
+  signature:
+    params:
+    - name: object_or_class
+      type: object
+    - name: autoload
+      type: bool
+      optional: true
+    returnType: array
+- subject:
+    function: class_uses
+  signature:
+    params:
+    - name: object_or_class
+      type: object
+    - name: autoload
+      type: bool
+      optional: true
+    returnType: array
+- subject:
+    function: classkit_import
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: array
+- subject:
+    function: classkit_method_add
+  signature:
+    params:
+    - name: classname
+      type: string
+    - name: methodname
+      type: string
+    - name: args
+      type: string
+    - name: code
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: classkit_method_copy
+  signature:
+    params:
+    - name: dclass
+      type: string
+    - name: dmethod
+      type: string
+    - name: sclass
+      type: string
+    - name: smethod
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: classkit_method_redefine
+  signature:
+    params:
+    - name: classname
+      type: string
+    - name: methodname
+      type: string
+    - name: args
+      type: string
+    - name: code
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: classkit_method_remove
+  signature:
+    params:
+    - name: classname
+      type: string
+    - name: methodname
+      type: string
+    returnType: bool
+- subject:
+    function: classkit_method_rename
+  signature:
+    params:
+    - name: classname
+      type: string
+    - name: methodname
+      type: string
+    - name: newname
+      type: string
+    returnType: bool
+- subject:
+    function: clearstatcache
+  signature:
+    params:
+    - name: clear_realpath_cache
+      type: bool
+      optional: true
+    - name: filename
+      type: string
+      optional: true
+    returnType: void
+- subject:
+    function: cli_get_process_title
+  signature:
+    returnType: string
+- subject:
+    function: cli_set_process_title
+  signature:
+    params:
+    - name: title
+      type: string
+    returnType: bool
+- subject:
+    function: closedir
+  signature:
+    params:
+    - name: dir_handle
+      type: resource
+      optional: true
+    returnType: void
+- subject:
+    function: closelog
+  signature:
+    returnType: bool
+- subject:
+    function: co\\defer
+  signature:
+    params:
+    - name: fn
+      type: callable
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: co\\go
+  signature:
+    params:
+    - name: fn
+      type: callable
+    - name: args
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: co\\run
+  signature:
+    params:
+    - name: fn
+      type: callable
+    - name: args
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: collator_asort
+  signature:
+    params:
+    - name: object
+      type: mixed
+    - name: array
+      type: array
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: collator_compare
+  signature:
+    params:
+    - name: object
+      type: mixed
+    - name: string1
+      type: string
+    - name: string2
+      type: string
+    returnType: int
+- subject:
+    function: collator_create
+  signature:
+    params:
+    - name: locale
+      type: string
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: collator_get_attribute
+  signature:
+    params:
+    - name: object
+      type: mixed
+    - name: attribute
+      type: int
+    returnType: int
+- subject:
+    function: collator_get_error_code
+  signature:
+    params:
+    - name: object
+      type: mixed
+    returnType: int
+- subject:
+    function: collator_get_error_message
+  signature:
+    params:
+    - name: object
+      type: mixed
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: collator_get_locale
+  signature:
+    params:
+    - name: object
+      type: mixed
+    - name: type
+      type: int
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: collator_get_sort_key
+  signature:
+    params:
+    - name: object
+      type: mixed
+    - name: string
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: collator_get_strength
+  signature:
+    params:
+    - name: object
+      type: mixed
+    returnType: int
+- subject:
+    function: collator_set_attribute
+  signature:
+    params:
+    - name: object
+      type: mixed
+    - name: attribute
+      type: int
+    - name: value
+      type: int
+    returnType: bool
+- subject:
+    function: collator_set_strength
+  signature:
+    params:
+    - name: object
+      type: mixed
+    - name: strength
+      type: int
+    returnType: bool
+- subject:
+    function: collator_sort
+  signature:
+    params:
+    - name: object
+      type: mixed
+    - name: array
+      type: array
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: collator_sort_with_sort_keys
+  signature:
+    params:
+    - name: object
+      type: mixed
+    - name: array
+      type: array
+    returnType: bool
+- subject:
+    function: com_addref
+  signature:
+    returnType: mixed
+- subject:
+    function: com_create_guid
+  signature:
+    returnType: string
+- subject:
+    function: com_event_sink
+  signature:
+    params:
+    - name: variant
+      type: mixed
+    - name: sink_object
+      type: object
+    - name: sink_interface
+      type: mixed
+      optional: true
+    returnType: bool
+- subject:
+    function: com_get_active_object
+  signature:
+    params:
+    - name: prog_id
+      type: string
+    - name: codepage
+      type: int
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: com_isenum
+  signature:
+    params:
+    - name: com_module
+      type: mixed
+    returnType: bool
+- subject:
+    function: com_load_typelib
+  signature:
+    params:
+    - name: typelib_name
+      type: string
+    - name: case_insensitive
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: com_message_pump
+  signature:
+    params:
+    - name: timeout_milliseconds
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: com_print_typeinfo
+  signature:
+    params:
+    - name: variant
+      type: object
+    - name: dispatch_interface
+      type: string
+      optional: true
+    - name: display_sink
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: commonmark\\parse
+  signature:
+    params:
+    - name: content
+      type: string
+    - name: options
+      type: int
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: commonmark\\render
+  signature:
+    params:
+    - name: node
+      type: mixed
+    - name: options
+      type: int
+      optional: true
+    - name: width
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: commonmark\\render\\html
+  signature:
+    params:
+    - name: node
+      type: mixed
+    - name: options
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: commonmark\\render\\latex
+  signature:
+    params:
+    - name: node
+      type: mixed
+    - name: options
+      type: int
+      optional: true
+    - name: width
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: commonmark\\render\\man
+  signature:
+    params:
+    - name: node
+      type: mixed
+    - name: options
+      type: int
+      optional: true
+    - name: width
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: commonmark\\render\\xml
+  signature:
+    params:
+    - name: node
+      type: mixed
+    - name: options
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: compact
+  signature:
+    params:
+    - name: var_name
+      type: array
+    - name: var_names
+      type: array
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: componere\\cast
+  signature:
+    params:
+    - name: arg1
+      type: string
+    - name: object
+      type: object
+    returnType: object
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: componere\\cast_by_ref
+  signature:
+    params:
+    - name: arg1
+      type: string
+    - name: object
+      type: object
+    returnType: object
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: confirm_pdo_ibm_compiled
+  signature:
+    returnType: mixed
+- subject:
+    function: connection_aborted
+  signature:
+    returnType: int
+- subject:
+    function: connection_status
+  signature:
+    returnType: int
+- subject:
+    function: connection_timeout
+  signature:
+    returnType: int
+- subject:
+    function: constant
+  signature:
+    params:
+    - name: name
+      type: string
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: convert_uudecode
+  signature:
+    params:
+    - name: string
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: convert_uuencode
+  signature:
+    params:
+    - name: string
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: cos
+  signature:
+    params:
+    - name: num
+      type: float
+    returnType: float
+- subject:
+    function: cosh
+  signature:
+    params:
+    - name: num
+      type: float
+    returnType: float
+- subject:
+    function: couchbase\\basicdecoderv1
+  signature:
+    params:
+    - name: bytes
+      type: string
+    - name: flags
+      type: int
+    - name: datatype
+      type: int
+    - name: options
+      type: array
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: couchbase\\basicencoderv1
+  signature:
+    params:
+    - name: value
+      type: mixed
+    - name: options
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: couchbase\\defaultdecoder
+  signature:
+    params:
+    - name: bytes
+      type: string
+    - name: flags
+      type: int
+    - name: datatype
+      type: int
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: couchbase\\defaultencoder
+  signature:
+    params:
+    - name: value
+      type: mixed
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: couchbase\\fastlzcompress
+  signature:
+    params:
+    - name: data
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: couchbase\\fastlzdecompress
+  signature:
+    params:
+    - name: data
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: couchbase\\passthrudecoder
+  signature:
+    params:
+    - name: bytes
+      type: string
+    - name: flags
+      type: int
+    - name: datatype
+      type: int
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: couchbase\\passthruencoder
+  signature:
+    params:
+    - name: value
+      type: string
+    returnType: array
+- subject:
+    function: couchbase\\zlibcompress
+  signature:
+    params:
+    - name: data
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: couchbase\\zlibdecompress
+  signature:
+    params:
+    - name: data
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: count
+  signature:
+    params:
+    - name: value
+      type: mixed
+    - name: mode
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: count_chars
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: mode
+      type: mixed
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: crack_check
+  signature:
+    params:
+    - name: dictionary
+      type: mixed
+    - name: password
+      type: string
+    returnType: bool
+- subject:
+    function: crack_closedict
+  signature:
+    params:
+    - name: dictionary
+      type: resource
+      optional: true
+    returnType: bool
+- subject:
+    function: crack_getlastmessage
+  signature:
+    returnType: string
+- subject:
+    function: crack_opendict
+  signature:
+    params:
+    - name: dictionary
+      type: string
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: crash
+  signature:
+    returnType: mixed
+- subject:
+    function: crc32
+  signature:
+    params:
+    - name: string
+      type: string
+    returnType: int
+- subject:
+    function: crypt
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: salt
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: current
+  signature:
+    params:
+    - name: array
+      type: array
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: cyrus_authenticate
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: mechlist
+      type: string
+      optional: true
+    - name: service
+      type: string
+      optional: true
+    - name: user
+      type: string
+      optional: true
+    - name: minssf
+      type: int
+      optional: true
+    - name: maxssf
+      type: int
+      optional: true
+    - name: authname
+      type: string
+      optional: true
+    - name: password
+      type: string
+      optional: true
+    returnType: void
+- subject:
+    function: cyrus_bind
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: callbacks
+      type: array
+    returnType: bool
+- subject:
+    function: cyrus_close
+  signature:
+    params:
+    - name: connection
+      type: resource
+    returnType: bool
+- subject:
+    function: cyrus_connect
+  signature:
+    params:
+    - name: host
+      type: string
+      optional: true
+    - name: port
+      type: string
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: cyrus_query
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: query
+      type: string
+    returnType: array
+- subject:
+    function: cyrus_unbind
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: trigger_name
+      type: string
+    returnType: bool
+- subject:
+    function: dbase_add_record
+  signature:
+    params:
+    - name: dbase_identifier
+      type: resource
+    - name: record
+      type: array
+    returnType: bool
+- subject:
+    function: dbase_close
+  signature:
+    params:
+    - name: dbase_identifier
+      type: resource
+    returnType: bool
+- subject:
+    function: dbase_create
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: fields
+      type: array
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: dbase_delete_record
+  signature:
+    params:
+    - name: dbase_identifier
+      type: resource
+    - name: record_number
+      type: int
+    returnType: bool
+- subject:
+    function: dbase_get_header_info
+  signature:
+    params:
+    - name: dbase_identifier
+      type: resource
+    returnType: array
+- subject:
+    function: dbase_get_record
+  signature:
+    params:
+    - name: dbase_identifier
+      type: resource
+    - name: record_number
+      type: int
+    returnType: array
+- subject:
+    function: dbase_get_record_with_names
+  signature:
+    params:
+    - name: dbase_identifier
+      type: resource
+    - name: record_number
+      type: int
+    returnType: array
+- subject:
+    function: dbase_numfields
+  signature:
+    params:
+    - name: dbase_identifier
+      type: resource
+    returnType: int
+- subject:
+    function: dbase_numrecords
+  signature:
+    params:
+    - name: dbase_identifier
+      type: resource
+    returnType: int
+- subject:
+    function: dbase_open
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: mode
+      type: int
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: dbase_pack
+  signature:
+    params:
+    - name: dbase_identifier
+      type: resource
+    returnType: bool
+- subject:
+    function: dbase_replace_record
+  signature:
+    params:
+    - name: dbase_identifier
+      type: resource
+    - name: record
+      type: array
+    - name: record_number
+      type: int
+    returnType: bool
+- subject:
+    function: dbplus_add
+  signature:
+    params:
+    - name: relation
+      type: resource
+    - name: tuple
+      type: array
+    returnType: int
+- subject:
+    function: dbplus_aql
+  signature:
+    params:
+    - name: query
+      type: string
+    - name: server
+      type: string
+      optional: true
+    - name: dbpath
+      type: string
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: dbplus_chdir
+  signature:
+    params:
+    - name: newdir
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: dbplus_close
+  signature:
+    params:
+    - name: relation
+      type: resource
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: dbplus_curr
+  signature:
+    params:
+    - name: relation
+      type: resource
+    - name: tuple
+      type: array
+    returnType: int
+- subject:
+    function: dbplus_errcode
+  signature:
+    params:
+    - name: errno
+      type: int
+      optional: true
+    returnType: string
+- subject:
+    function: dbplus_errno
+  signature:
+    returnType: int
+- subject:
+    function: dbplus_find
+  signature:
+    params:
+    - name: relation
+      type: resource
+    - name: constraints
+      type: array
+    - name: tuple
+      type: mixed
+    returnType: int
+- subject:
+    function: dbplus_first
+  signature:
+    params:
+    - name: relation
+      type: resource
+    - name: tuple
+      type: array
+    returnType: int
+- subject:
+    function: dbplus_flush
+  signature:
+    params:
+    - name: relation
+      type: resource
+    returnType: int
+- subject:
+    function: dbplus_freealllocks
+  signature:
+    returnType: int
+- subject:
+    function: dbplus_freelock
+  signature:
+    params:
+    - name: relation
+      type: resource
+    - name: tuple
+      type: string
+    returnType: int
+- subject:
+    function: dbplus_freerlocks
+  signature:
+    params:
+    - name: relation
+      type: resource
+    returnType: int
+- subject:
+    function: dbplus_getlock
+  signature:
+    params:
+    - name: relation
+      type: resource
+    - name: tuple
+      type: string
+    returnType: int
+- subject:
+    function: dbplus_getunique
+  signature:
+    params:
+    - name: relation
+      type: resource
+    - name: uniqueid
+      type: int
+    returnType: int
+- subject:
+    function: dbplus_info
+  signature:
+    params:
+    - name: relation
+      type: resource
+    - name: key
+      type: string
+    - name: result
+      type: array
+    returnType: int
+- subject:
+    function: dbplus_last
+  signature:
+    params:
+    - name: relation
+      type: resource
+    - name: tuple
+      type: array
+    returnType: int
+- subject:
+    function: dbplus_lockrel
+  signature:
+    params:
+    - name: relation
+      type: resource
+    returnType: int
+- subject:
+    function: dbplus_next
+  signature:
+    params:
+    - name: relation
+      type: resource
+    - name: tuple
+      type: array
+    returnType: int
+- subject:
+    function: dbplus_open
+  signature:
+    params:
+    - name: name
+      type: string
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: dbplus_prev
+  signature:
+    params:
+    - name: relation
+      type: resource
+    - name: tuple
+      type: array
+    returnType: int
+- subject:
+    function: dbplus_rchperm
+  signature:
+    params:
+    - name: relation
+      type: resource
+    - name: mask
+      type: int
+    - name: user
+      type: string
+    - name: group
+      type: string
+    returnType: int
+- subject:
+    function: dbplus_rcreate
+  signature:
+    params:
+    - name: name
+      type: string
+    - name: domlist
+      type: mixed
+    - name: overwrite
+      type: bool
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: dbplus_rcrtexact
+  signature:
+    params:
+    - name: name
+      type: string
+    - name: relation
+      type: resource
+    - name: overwrite
+      type: bool
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: dbplus_rcrtlike
+  signature:
+    params:
+    - name: name
+      type: string
+    - name: relation
+      type: resource
+    - name: overwrite
+      type: int
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: dbplus_resolve
+  signature:
+    params:
+    - name: relation_name
+      type: string
+    returnType: array
+- subject:
+    function: dbplus_restorepos
+  signature:
+    params:
+    - name: relation
+      type: resource
+    - name: tuple
+      type: array
+    returnType: int
+- subject:
+    function: dbplus_rkeys
+  signature:
+    params:
+    - name: relation
+      type: resource
+    - name: domlist
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: dbplus_ropen
+  signature:
+    params:
+    - name: name
+      type: string
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: dbplus_rquery
+  signature:
+    params:
+    - name: query
+      type: string
+    - name: dbpath
+      type: string
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: dbplus_rrename
+  signature:
+    params:
+    - name: relation
+      type: resource
+    - name: name
+      type: string
+    returnType: int
+- subject:
+    function: dbplus_rsecindex
+  signature:
+    params:
+    - name: relation
+      type: resource
+    - name: domlist
+      type: mixed
+    - name: type
+      type: int
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: dbplus_runlink
+  signature:
+    params:
+    - name: relation
+      type: resource
+    returnType: int
+- subject:
+    function: dbplus_rzap
+  signature:
+    params:
+    - name: relation
+      type: resource
+    returnType: int
+- subject:
+    function: dbplus_savepos
+  signature:
+    params:
+    - name: relation
+      type: resource
+    returnType: int
+- subject:
+    function: dbplus_setindex
+  signature:
+    params:
+    - name: relation
+      type: resource
+    - name: idx_name
+      type: string
+    returnType: int
+- subject:
+    function: dbplus_setindexbynumber
+  signature:
+    params:
+    - name: relation
+      type: resource
+    - name: idx_number
+      type: int
+    returnType: int
+- subject:
+    function: dbplus_sql
+  signature:
+    params:
+    - name: query
+      type: string
+    - name: server
+      type: string
+      optional: true
+    - name: dbpath
+      type: string
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: dbplus_tcl
+  signature:
+    params:
+    - name: sid
+      type: int
+    - name: script
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: dbplus_tremove
+  signature:
+    params:
+    - name: relation
+      type: resource
+    - name: tuple
+      type: array
+    - name: current
+      type: array
+      optional: true
+    returnType: int
+- subject:
+    function: dbplus_undo
+  signature:
+    params:
+    - name: relation
+      type: resource
+    returnType: int
+- subject:
+    function: dbplus_undoprepare
+  signature:
+    params:
+    - name: relation
+      type: resource
+    returnType: int
+- subject:
+    function: dbplus_unlockrel
+  signature:
+    params:
+    - name: relation
+      type: resource
+    returnType: int
+- subject:
+    function: dbplus_unselect
+  signature:
+    params:
+    - name: relation
+      type: resource
+    returnType: int
+- subject:
+    function: dbplus_update
+  signature:
+    params:
+    - name: relation
+      type: resource
+    - name: old
+      type: array
+    - name: new
+      type: array
+    returnType: int
+- subject:
+    function: dbplus_xlockrel
+  signature:
+    params:
+    - name: relation
+      type: resource
+    returnType: int
+- subject:
+    function: dbplus_xunlockrel
+  signature:
+    params:
+    - name: relation
+      type: resource
+    returnType: int
+- subject:
+    function: dbx_close
+  signature:
+    params:
+    - name: link_identifier
+      type: object
+    returnType: int
+- subject:
+    function: dbx_compare
+  signature:
+    params:
+    - name: row_a
+      type: array
+    - name: row_b
+      type: array
+    - name: column_key
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: dbx_connect
+  signature:
+    params:
+    - name: module
+      type: mixed
+    - name: host
+      type: string
+    - name: database
+      type: string
+    - name: username
+      type: string
+    - name: password
+      type: string
+    - name: persistent
+      type: int
+      optional: true
+    returnType: object
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+  - from: argument(5)
+    to: return
+- subject:
+    function: dbx_error
+  signature:
+    params:
+    - name: link_identifier
+      type: object
+    returnType: string
+- subject:
+    function: dbx_escape_string
+  signature:
+    params:
+    - name: link_identifier
+      type: object
+    - name: text
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: dbx_fetch_row
+  signature:
+    params:
+    - name: result_identifier
+      type: object
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: dbx_query
+  signature:
+    params:
+    - name: link_identifier
+      type: object
+    - name: sql_statement
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: dbx_sort
+  signature:
+    params:
+    - name: result
+      type: object
+    - name: user_compare_function
+      type: string
+    returnType: bool
+- subject:
+    function: dcgettext
+  signature:
+    params:
+    - name: domain
+      type: string
+    - name: message
+      type: string
+    - name: category
+      type: int
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: dcngettext
+  signature:
+    params:
+    - name: domain
+      type: string
+    - name: singular
+      type: string
+    - name: plural
+      type: string
+    - name: count
+      type: int
+    - name: category
+      type: int
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: deaggregate
+  signature:
+    params:
+    - name: object
+      type: object
+    - name: class_name
+      type: string
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: debug_backtrace
+  signature:
+    params:
+    - name: options
+      type: int
+      optional: true
+    - name: limit
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    function: debug_print_backtrace
+  signature:
+    params:
+    - name: options
+      type: int
+      optional: true
+    - name: limit
+      type: int
+      optional: true
+    returnType: void
+- subject:
+    function: debug_zval_dump
+  signature:
+    params:
+    - name: value
+      type: mixed
+    - name: values
+      type: mixed
+      optional: true
+    returnType: void
+- subject:
+    function: debugger_connect
+  signature:
+    returnType: mixed
+- subject:
+    function: debugger_connector_pid
+  signature:
+    returnType: mixed
+- subject:
+    function: debugger_get_server_start_time
+  signature:
+    returnType: mixed
+- subject:
+    function: debugger_print
+  signature:
+    returnType: mixed
+- subject:
+    function: debugger_start_debug
+  signature:
+    returnType: mixed
+- subject:
+    function: decbin
+  signature:
+    params:
+    - name: num
+      type: int
+    returnType: string
+- subject:
+    function: dechex
+  signature:
+    params:
+    - name: num
+      type: int
+    returnType: string
+- subject:
+    function: decoct
+  signature:
+    params:
+    - name: num
+      type: int
+    returnType: string
+- subject:
+    function: defer
+  signature:
+    params:
+    - name: callback
+      type: callable
+    returnType: void
+- subject:
+    function: define
+  signature:
+    params:
+    - name: constant_name
+      type: string
+    - name: value
+      type: array
+    - name: case_insensitive
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: define_syslog_variables
+  signature:
+    returnType: void
+- subject:
+    function: defined
+  signature:
+    params:
+    - name: constant_name
+      type: string
+    returnType: bool
+- subject:
+    function: deflate_add
+  signature:
+    params:
+    - name: context
+      type: mixed
+    - name: data
+      type: string
+    - name: flush_mode
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: deflate_init
+  signature:
+    params:
+    - name: encoding
+      type: int
+    - name: options
+      type: array
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: deg2rad
+  signature:
+    params:
+    - name: num
+      type: float
+    returnType: float
+- subject:
+    function: dio_close
+  signature:
+    params:
+    - name: fd
+      type: resource
+    returnType: void
+- subject:
+    function: dio_fcntl
+  signature:
+    params:
+    - name: fd
+      type: resource
+    - name: cmd
+      type: int
+    - name: args
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: dio_open
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: flags
+      type: int
+    - name: mode
+      type: int
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: dio_read
+  signature:
+    params:
+    - name: fd
+      type: resource
+    - name: length
+      type: int
+      optional: true
+    returnType: string
+- subject:
+    function: dio_seek
+  signature:
+    params:
+    - name: fd
+      type: resource
+    - name: pos
+      type: int
+    - name: whence
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: dio_stat
+  signature:
+    params:
+    - name: fd
+      type: resource
+    returnType: array
+- subject:
+    function: dio_tcsetattr
+  signature:
+    params:
+    - name: fd
+      type: resource
+    - name: options
+      type: array
+    returnType: bool
+- subject:
+    function: dio_truncate
+  signature:
+    params:
+    - name: fd
+      type: resource
+    - name: offset
+      type: int
+    returnType: bool
+- subject:
+    function: dio_write
+  signature:
+    params:
+    - name: fd
+      type: resource
+    - name: data
+      type: string
+    - name: length
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: dir
+  signature:
+    params:
+    - name: directory
+      type: string
+    - name: context
+      type: resource
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: disk_free_space
+  signature:
+    params:
+    - name: directory
+      type: string
+    returnType: float
+- subject:
+    function: disk_total_space
+  signature:
+    params:
+    - name: directory
+      type: string
+    returnType: float
+- subject:
+    function: diskfreespace
+  signature:
+    params:
+    - name: directory
+      type: string
+    returnType: float
+- subject:
+    function: display_disabled_function
+  signature:
+    returnType: mixed
+- subject:
+    function: dl
+  signature:
+    params:
+    - name: extension_filename
+      type: string
+    returnType: bool
+- subject:
+    function: dngettext
+  signature:
+    params:
+    - name: domain
+      type: string
+    - name: singular
+      type: string
+    - name: plural
+      type: string
+    - name: count
+      type: int
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: dns_check_record
+  signature:
+    params:
+    - name: hostname
+      type: string
+    - name: type
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: dns_get_mx
+  signature:
+    params:
+    - name: hostname
+      type: string
+    - name: hosts
+      type: array
+    - name: weights
+      type: array
+      optional: true
+    returnType: bool
+- subject:
+    function: dns_get_record
+  signature:
+    params:
+    - name: hostname
+      type: string
+    - name: type
+      type: int
+      optional: true
+    - name: authoritative_name_servers
+      type: array
+      optional: true
+    - name: additional_records
+      type: array
+      optional: true
+    - name: raw
+      type: bool
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: dom_document_relaxng_validate_file
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: bool
+- subject:
+    function: dom_document_relaxng_validate_xml
+  signature:
+    params:
+    - name: source
+      type: string
+    returnType: bool
+- subject:
+    function: dom_document_schema_validate
+  signature:
+    params:
+    - name: source
+      type: string
+    - name: flags
+      type: int
+    returnType: bool
+- subject:
+    function: dom_document_schema_validate_file
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: flags
+      type: int
+    returnType: bool
+- subject:
+    function: dom_document_xinclude
+  signature:
+    params:
+    - name: options
+      type: int
+    returnType: int
+- subject:
+    function: dom_import_simplexml
+  signature:
+    params:
+    - name: node
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: dom_xpath_evaluate
+  signature:
+    params:
+    - name: expr
+      type: string
+    - name: context
+      type: mixed
+    - name: registernodens
+      type: bool
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: dom_xpath_query
+  signature:
+    params:
+    - name: expr
+      type: string
+    - name: context
+      type: mixed
+    - name: registernodens
+      type: bool
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: dom_xpath_register_ns
+  signature:
+    params:
+    - name: prefix
+      type: string
+    - name: uri
+      type: string
+    returnType: bool
+- subject:
+    function: dom_xpath_register_php_functions
+  signature:
+    returnType: mixed
+- subject:
+    function: domxml_new_doc
+  signature:
+    params:
+    - name: version
+      type: string
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: domxml_open_file
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: mode
+      type: int
+      optional: true
+    - name: error
+      type: array
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: domxml_open_mem
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: mode
+      type: int
+      optional: true
+    - name: error
+      type: array
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: domxml_version
+  signature:
+    returnType: string
+- subject:
+    function: domxml_xmltree
+  signature:
+    params:
+    - name: string
+      type: string
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: domxml_xslt_stylesheet
+  signature:
+    params:
+    - name: xsl_buf
+      type: string
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: domxml_xslt_stylesheet_doc
+  signature:
+    params:
+    - name: xsl_doc
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: domxml_xslt_stylesheet_file
+  signature:
+    params:
+    - name: xsl_file
+      type: string
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: domxml_xslt_version
+  signature:
+    returnType: int
+- subject:
+    function: dotnet_load
+  signature:
+    params:
+    - name: assembly_name
+      type: string
+    - name: datatype_name
+      type: string
+      optional: true
+    - name: codepage
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: doubleval
+  signature:
+    params:
+    - name: value
+      type: mixed
+    returnType: float
+- subject:
+    function: easter_date
+  signature:
+    params:
+    - name: year
+      type: int
+      optional: true
+    - name: mode
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: easter_days
+  signature:
+    params:
+    - name: year
+      type: int
+      optional: true
+    - name: mode
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: echo
+  signature:
+    params:
+    - name: arg1
+      type: string
+    - name: args
+      type: string
+      optional: true
+    returnType: void
+- subject:
+    function: eio_busy
+  signature:
+    params:
+    - name: delay
+      type: int
+    - name: pri
+      type: int
+      optional: true
+    - name: callback
+      type: callable
+      optional: true
+    - name: data
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: eio_cancel
+  signature:
+    params:
+    - name: req
+      type: resource
+    returnType: void
+- subject:
+    function: eio_chmod
+  signature:
+    params:
+    - name: path
+      type: string
+    - name: mode
+      type: int
+    - name: pri
+      type: int
+      optional: true
+    - name: callback
+      type: callable
+      optional: true
+    - name: data
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: eio_chown
+  signature:
+    params:
+    - name: path
+      type: string
+    - name: uid
+      type: int
+    - name: gid
+      type: int
+      optional: true
+    - name: pri
+      type: int
+      optional: true
+    - name: callback
+      type: callable
+      optional: true
+    - name: data
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+  - from: argument(5)
+    to: return
+- subject:
+    function: eio_close
+  signature:
+    params:
+    - name: fd
+      type: mixed
+    - name: pri
+      type: int
+      optional: true
+    - name: callback
+      type: callable
+      optional: true
+    - name: data
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: eio_custom
+  signature:
+    params:
+    - name: execute
+      type: callable
+    - name: pri
+      type: int
+    - name: callback
+      type: callable
+    - name: data
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: eio_dup2
+  signature:
+    params:
+    - name: fd
+      type: mixed
+    - name: fd2
+      type: mixed
+    - name: pri
+      type: int
+      optional: true
+    - name: callback
+      type: callable
+      optional: true
+    - name: data
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: eio_event_loop
+  signature:
+    returnType: bool
+- subject:
+    function: eio_fallocate
+  signature:
+    params:
+    - name: fd
+      type: mixed
+    - name: mode
+      type: int
+    - name: offset
+      type: int
+    - name: length
+      type: int
+    - name: pri
+      type: int
+      optional: true
+    - name: callback
+      type: callable
+      optional: true
+    - name: data
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+  - from: argument(5)
+    to: return
+  - from: argument(6)
+    to: return
+- subject:
+    function: eio_fchmod
+  signature:
+    params:
+    - name: fd
+      type: mixed
+    - name: mode
+      type: int
+    - name: pri
+      type: int
+      optional: true
+    - name: callback
+      type: callable
+      optional: true
+    - name: data
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: eio_fchown
+  signature:
+    params:
+    - name: fd
+      type: mixed
+    - name: uid
+      type: int
+    - name: gid
+      type: int
+      optional: true
+    - name: pri
+      type: int
+      optional: true
+    - name: callback
+      type: callable
+      optional: true
+    - name: data
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+  - from: argument(5)
+    to: return
+- subject:
+    function: eio_fdatasync
+  signature:
+    params:
+    - name: fd
+      type: mixed
+    - name: pri
+      type: int
+      optional: true
+    - name: callback
+      type: callable
+      optional: true
+    - name: data
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: eio_fstat
+  signature:
+    params:
+    - name: fd
+      type: mixed
+    - name: pri
+      type: int
+    - name: callback
+      type: callable
+    - name: data
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: eio_fstatvfs
+  signature:
+    params:
+    - name: fd
+      type: mixed
+    - name: pri
+      type: int
+    - name: callback
+      type: callable
+    - name: data
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: eio_fsync
+  signature:
+    params:
+    - name: fd
+      type: mixed
+    - name: pri
+      type: int
+      optional: true
+    - name: callback
+      type: callable
+      optional: true
+    - name: data
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: eio_ftruncate
+  signature:
+    params:
+    - name: fd
+      type: mixed
+    - name: offset
+      type: int
+      optional: true
+    - name: pri
+      type: int
+      optional: true
+    - name: callback
+      type: callable
+      optional: true
+    - name: data
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: eio_futime
+  signature:
+    params:
+    - name: fd
+      type: mixed
+    - name: atime
+      type: float
+    - name: mtime
+      type: float
+    - name: pri
+      type: int
+      optional: true
+    - name: callback
+      type: callable
+      optional: true
+    - name: data
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+  - from: argument(5)
+    to: return
+- subject:
+    function: eio_get_event_stream
+  signature:
+    returnType: mixed
+- subject:
+    function: eio_get_last_error
+  signature:
+    params:
+    - name: req
+      type: resource
+    returnType: string
+- subject:
+    function: eio_grp
+  signature:
+    params:
+    - name: callback
+      type: callable
+    - name: data
+      type: string
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: eio_grp_add
+  signature:
+    params:
+    - name: grp
+      type: resource
+    - name: req
+      type: resource
+    returnType: void
+- subject:
+    function: eio_grp_cancel
+  signature:
+    params:
+    - name: grp
+      type: resource
+    returnType: void
+- subject:
+    function: eio_grp_limit
+  signature:
+    params:
+    - name: grp
+      type: resource
+    - name: limit
+      type: int
+    returnType: void
+- subject:
+    function: eio_init
+  signature:
+    returnType: void
+- subject:
+    function: eio_link
+  signature:
+    params:
+    - name: path
+      type: string
+    - name: new_path
+      type: string
+    - name: pri
+      type: int
+      optional: true
+    - name: callback
+      type: callable
+      optional: true
+    - name: data
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: eio_lstat
+  signature:
+    params:
+    - name: path
+      type: string
+    - name: pri
+      type: int
+    - name: callback
+      type: callable
+    - name: data
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: eio_mkdir
+  signature:
+    params:
+    - name: path
+      type: string
+    - name: mode
+      type: int
+    - name: pri
+      type: int
+      optional: true
+    - name: callback
+      type: callable
+      optional: true
+    - name: data
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: eio_mknod
+  signature:
+    params:
+    - name: path
+      type: string
+    - name: mode
+      type: int
+    - name: dev
+      type: int
+    - name: pri
+      type: int
+      optional: true
+    - name: callback
+      type: callable
+      optional: true
+    - name: data
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+  - from: argument(5)
+    to: return
+- subject:
+    function: eio_nop
+  signature:
+    params:
+    - name: pri
+      type: int
+      optional: true
+    - name: callback
+      type: callable
+      optional: true
+    - name: data
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: eio_npending
+  signature:
+    returnType: int
+- subject:
+    function: eio_nready
+  signature:
+    returnType: int
+- subject:
+    function: eio_nreqs
+  signature:
+    returnType: int
+- subject:
+    function: eio_nthreads
+  signature:
+    returnType: int
+- subject:
+    function: eio_open
+  signature:
+    params:
+    - name: path
+      type: string
+    - name: flags
+      type: int
+    - name: mode
+      type: int
+    - name: pri
+      type: int
+    - name: callback
+      type: callable
+    - name: data
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+  - from: argument(5)
+    to: return
+- subject:
+    function: eio_poll
+  signature:
+    returnType: int
+- subject:
+    function: eio_read
+  signature:
+    params:
+    - name: fd
+      type: mixed
+    - name: length
+      type: int
+    - name: offset
+      type: int
+    - name: pri
+      type: int
+    - name: callback
+      type: callable
+    - name: data
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+  - from: argument(5)
+    to: return
+- subject:
+    function: eio_readahead
+  signature:
+    params:
+    - name: fd
+      type: mixed
+    - name: offset
+      type: int
+    - name: length
+      type: int
+    - name: pri
+      type: int
+      optional: true
+    - name: callback
+      type: callable
+      optional: true
+    - name: data
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+  - from: argument(5)
+    to: return
+- subject:
+    function: eio_readdir
+  signature:
+    params:
+    - name: path
+      type: string
+    - name: flags
+      type: int
+    - name: pri
+      type: int
+    - name: callback
+      type: callable
+    - name: data
+      type: string
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: eio_readlink
+  signature:
+    params:
+    - name: path
+      type: string
+    - name: pri
+      type: int
+    - name: callback
+      type: callable
+    - name: data
+      type: string
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: eio_realpath
+  signature:
+    params:
+    - name: path
+      type: string
+    - name: pri
+      type: int
+    - name: callback
+      type: callable
+    - name: data
+      type: string
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: eio_rename
+  signature:
+    params:
+    - name: path
+      type: string
+    - name: new_path
+      type: string
+    - name: pri
+      type: int
+      optional: true
+    - name: callback
+      type: callable
+      optional: true
+    - name: data
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: eio_rmdir
+  signature:
+    params:
+    - name: path
+      type: string
+    - name: pri
+      type: int
+      optional: true
+    - name: callback
+      type: callable
+      optional: true
+    - name: data
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: eio_seek
+  signature:
+    params:
+    - name: fd
+      type: mixed
+    - name: offset
+      type: int
+    - name: whence
+      type: int
+    - name: pri
+      type: int
+      optional: true
+    - name: callback
+      type: callable
+      optional: true
+    - name: data
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+  - from: argument(5)
+    to: return
+- subject:
+    function: eio_sendfile
+  signature:
+    params:
+    - name: out_fd
+      type: mixed
+    - name: in_fd
+      type: mixed
+    - name: offset
+      type: int
+    - name: length
+      type: int
+    - name: pri
+      type: int
+      optional: true
+    - name: callback
+      type: callable
+      optional: true
+    - name: data
+      type: string
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+  - from: argument(5)
+    to: return
+  - from: argument(6)
+    to: return
+- subject:
+    function: eio_set_max_idle
+  signature:
+    params:
+    - name: nthreads
+      type: int
+    returnType: void
+- subject:
+    function: eio_set_max_parallel
+  signature:
+    params:
+    - name: nthreads
+      type: int
+    returnType: void
+- subject:
+    function: eio_set_max_poll_reqs
+  signature:
+    params:
+    - name: nreqs
+      type: int
+    returnType: void
+- subject:
+    function: eio_set_max_poll_time
+  signature:
+    params:
+    - name: nseconds
+      type: float
+    returnType: void
+- subject:
+    function: eio_set_min_parallel
+  signature:
+    params:
+    - name: nthreads
+      type: string
+    returnType: void
+- subject:
+    function: eio_stat
+  signature:
+    params:
+    - name: path
+      type: string
+    - name: pri
+      type: int
+    - name: callback
+      type: callable
+    - name: data
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: eio_statvfs
+  signature:
+    params:
+    - name: path
+      type: string
+    - name: pri
+      type: int
+    - name: callback
+      type: callable
+    - name: data
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: eio_symlink
+  signature:
+    params:
+    - name: path
+      type: string
+    - name: new_path
+      type: string
+    - name: pri
+      type: int
+      optional: true
+    - name: callback
+      type: callable
+      optional: true
+    - name: data
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: eio_sync
+  signature:
+    params:
+    - name: pri
+      type: int
+      optional: true
+    - name: callback
+      type: callable
+      optional: true
+    - name: data
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: eio_sync_file_range
+  signature:
+    params:
+    - name: fd
+      type: mixed
+    - name: offset
+      type: int
+    - name: nbytes
+      type: int
+    - name: flags
+      type: int
+    - name: pri
+      type: int
+      optional: true
+    - name: callback
+      type: callable
+      optional: true
+    - name: data
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+  - from: argument(5)
+    to: return
+  - from: argument(6)
+    to: return
+- subject:
+    function: eio_syncfs
+  signature:
+    params:
+    - name: fd
+      type: mixed
+    - name: pri
+      type: int
+      optional: true
+    - name: callback
+      type: callable
+      optional: true
+    - name: data
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: eio_truncate
+  signature:
+    params:
+    - name: path
+      type: string
+    - name: offset
+      type: int
+      optional: true
+    - name: pri
+      type: int
+      optional: true
+    - name: callback
+      type: callable
+      optional: true
+    - name: data
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: eio_unlink
+  signature:
+    params:
+    - name: path
+      type: string
+    - name: pri
+      type: int
+      optional: true
+    - name: callback
+      type: callable
+      optional: true
+    - name: data
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: eio_utime
+  signature:
+    params:
+    - name: path
+      type: string
+    - name: atime
+      type: float
+    - name: mtime
+      type: float
+    - name: pri
+      type: int
+      optional: true
+    - name: callback
+      type: callable
+      optional: true
+    - name: data
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+  - from: argument(5)
+    to: return
+- subject:
+    function: eio_write
+  signature:
+    params:
+    - name: fd
+      type: mixed
+    - name: string
+      type: string
+    - name: length
+      type: int
+      optional: true
+    - name: offset
+      type: int
+      optional: true
+    - name: pri
+      type: int
+      optional: true
+    - name: callback
+      type: callable
+      optional: true
+    - name: data
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+  - from: argument(5)
+    to: return
+  - from: argument(6)
+    to: return
+- subject:
+    function: empty
+  signature:
+    params:
+    - name: value
+      type: mixed
+    returnType: bool
+- subject:
+    function: enchant_broker_describe
+  signature:
+    params:
+    - name: broker
+      type: mixed
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: enchant_broker_dict_exists
+  signature:
+    params:
+    - name: broker
+      type: mixed
+    - name: tag
+      type: string
+    returnType: bool
+- subject:
+    function: enchant_broker_free
+  signature:
+    params:
+    - name: broker
+      type: mixed
+    returnType: bool
+- subject:
+    function: enchant_broker_free_dict
+  signature:
+    params:
+    - name: dictionary
+      type: mixed
+    returnType: bool
+- subject:
+    function: enchant_broker_get_dict_path
+  signature:
+    params:
+    - name: broker
+      type: mixed
+    - name: type
+      type: int
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: enchant_broker_get_error
+  signature:
+    params:
+    - name: broker
+      type: mixed
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: enchant_broker_init
+  signature:
+    returnType: mixed
+- subject:
+    function: enchant_broker_list_dicts
+  signature:
+    params:
+    - name: broker
+      type: mixed
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: enchant_broker_request_dict
+  signature:
+    params:
+    - name: broker
+      type: mixed
+    - name: tag
+      type: string
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: enchant_broker_request_pwl_dict
+  signature:
+    params:
+    - name: broker
+      type: mixed
+    - name: filename
+      type: string
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: enchant_broker_set_dict_path
+  signature:
+    params:
+    - name: broker
+      type: mixed
+    - name: type
+      type: int
+    - name: path
+      type: string
+    returnType: bool
+- subject:
+    function: enchant_broker_set_ordering
+  signature:
+    params:
+    - name: broker
+      type: mixed
+    - name: tag
+      type: string
+    - name: ordering
+      type: string
+    returnType: bool
+- subject:
+    function: enchant_dict_add_to_personal
+  signature:
+    params:
+    - name: dictionary
+      type: mixed
+    - name: word
+      type: string
+    returnType: void
+- subject:
+    function: enchant_dict_add_to_session
+  signature:
+    params:
+    - name: dictionary
+      type: mixed
+    - name: word
+      type: string
+    returnType: void
+- subject:
+    function: enchant_dict_check
+  signature:
+    params:
+    - name: dictionary
+      type: mixed
+    - name: word
+      type: string
+    returnType: bool
+- subject:
+    function: enchant_dict_describe
+  signature:
+    params:
+    - name: dictionary
+      type: mixed
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: enchant_dict_get_error
+  signature:
+    params:
+    - name: dictionary
+      type: mixed
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: enchant_dict_is_in_session
+  signature:
+    params:
+    - name: dictionary
+      type: mixed
+    - name: word
+      type: string
+    returnType: bool
+- subject:
+    function: enchant_dict_quick_check
+  signature:
+    params:
+    - name: dictionary
+      type: mixed
+    - name: word
+      type: string
+    - name: suggestions
+      type: array
+      optional: true
+    returnType: bool
+- subject:
+    function: enchant_dict_store_replacement
+  signature:
+    params:
+    - name: dictionary
+      type: mixed
+    - name: misspelled
+      type: string
+    - name: correct
+      type: string
+    returnType: void
+- subject:
+    function: enchant_dict_suggest
+  signature:
+    params:
+    - name: dictionary
+      type: mixed
+    - name: word
+      type: string
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: end
+  signature:
+    params:
+    - name: array
+      type: array
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: error_clear_last
+  signature:
+    returnType: void
+- subject:
+    function: error_get_last
+  signature:
+    returnType: array
+- subject:
+    function: error_log
+  signature:
+    params:
+    - name: message
+      type: string
+    - name: message_type
+      type: int
+      optional: true
+    - name: destination
+      type: string
+      optional: true
+    - name: additional_headers
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: error_reporting
+  signature:
+    params:
+    - name: error_level
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: escapeshellarg
+  signature:
+    params:
+    - name: arg
+      type: string
+    returnType: string
+- subject:
+    function: escapeshellcmd
+  signature:
+    params:
+    - name: command
+      type: string
+    returnType: string
+- subject:
+    function: eval
+  signature:
+    params:
+    - name: code_str
+      type: string
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: event_add
+  signature:
+    params:
+    - name: event
+      type: resource
+    - name: timeout
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: event_base_free
+  signature:
+    params:
+    - name: event_base
+      type: resource
+    returnType: void
+- subject:
+    function: event_base_loop
+  signature:
+    params:
+    - name: event_base
+      type: resource
+    - name: flags
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: event_base_loopbreak
+  signature:
+    params:
+    - name: event_base
+      type: resource
+    returnType: bool
+- subject:
+    function: event_base_loopexit
+  signature:
+    params:
+    - name: event_base
+      type: resource
+    - name: timeout
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: event_base_new
+  signature:
+    returnType: resource
+- subject:
+    function: event_base_priority_init
+  signature:
+    params:
+    - name: event_base
+      type: resource
+    - name: npriorities
+      type: int
+    returnType: bool
+- subject:
+    function: event_base_reinit
+  signature:
+    params:
+    - name: event_base
+      type: resource
+    returnType: bool
+- subject:
+    function: event_base_set
+  signature:
+    params:
+    - name: event
+      type: resource
+    - name: event_base
+      type: resource
+    returnType: bool
+- subject:
+    function: event_buffer_base_set
+  signature:
+    params:
+    - name: bevent
+      type: resource
+    - name: event_base
+      type: resource
+    returnType: bool
+- subject:
+    function: event_buffer_disable
+  signature:
+    params:
+    - name: bevent
+      type: resource
+    - name: events
+      type: int
+    returnType: bool
+- subject:
+    function: event_buffer_enable
+  signature:
+    params:
+    - name: bevent
+      type: resource
+    - name: events
+      type: int
+    returnType: bool
+- subject:
+    function: event_buffer_fd_set
+  signature:
+    params:
+    - name: bevent
+      type: resource
+    - name: fd
+      type: resource
+    returnType: void
+- subject:
+    function: event_buffer_free
+  signature:
+    params:
+    - name: bevent
+      type: resource
+    returnType: void
+- subject:
+    function: event_buffer_new
+  signature:
+    params:
+    - name: stream
+      type: resource
+    - name: readcb
+      type: callable
+    - name: writecb
+      type: callable
+    - name: errorcb
+      type: callable
+    - name: arg
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: event_buffer_priority_set
+  signature:
+    params:
+    - name: bevent
+      type: resource
+    - name: priority
+      type: int
+    returnType: bool
+- subject:
+    function: event_buffer_read
+  signature:
+    params:
+    - name: bevent
+      type: resource
+    - name: data_size
+      type: int
+    returnType: string
+- subject:
+    function: event_buffer_set_callback
+  signature:
+    params:
+    - name: event
+      type: resource
+    - name: readcb
+      type: mixed
+    - name: writecb
+      type: mixed
+    - name: errorcb
+      type: mixed
+    - name: arg
+      type: mixed
+      optional: true
+    returnType: bool
+- subject:
+    function: event_buffer_timeout_set
+  signature:
+    params:
+    - name: bevent
+      type: resource
+    - name: read_timeout
+      type: int
+    - name: write_timeout
+      type: int
+    returnType: void
+- subject:
+    function: event_buffer_watermark_set
+  signature:
+    params:
+    - name: bevent
+      type: resource
+    - name: events
+      type: int
+    - name: lowmark
+      type: int
+    - name: highmark
+      type: int
+    returnType: void
+- subject:
+    function: event_buffer_write
+  signature:
+    params:
+    - name: bevent
+      type: resource
+    - name: data
+      type: string
+    - name: data_size
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: event_del
+  signature:
+    params:
+    - name: event
+      type: resource
+    returnType: bool
+- subject:
+    function: event_free
+  signature:
+    params:
+    - name: event
+      type: resource
+    returnType: void
+- subject:
+    function: event_new
+  signature:
+    returnType: resource
+- subject:
+    function: event_priority_set
+  signature:
+    params:
+    - name: event
+      type: resource
+    - name: priority
+      type: int
+    returnType: bool
+- subject:
+    function: event_set
+  signature:
+    params:
+    - name: event
+      type: resource
+    - name: fd
+      type: int
+    - name: events
+      type: int
+    - name: callback
+      type: callable
+    - name: arg
+      type: mixed
+      optional: true
+    returnType: bool
+- subject:
+    function: event_timer_add
+  signature:
+    params:
+    - name: event
+      type: resource
+    - name: timeout
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: event_timer_del
+  signature:
+    params:
+    - name: event
+      type: resource
+    returnType: bool
+- subject:
+    function: event_timer_new
+  signature:
+    returnType: resource
+- subject:
+    function: event_timer_pending
+  signature:
+    params:
+    - name: event
+      type: resource
+    - name: timeout
+      type: int
+      optional: true
+    returnType: bool

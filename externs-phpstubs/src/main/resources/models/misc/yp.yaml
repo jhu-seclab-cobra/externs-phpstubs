@@ -1,0 +1,98 @@
+# Generated from stubs/misc/yp.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: yp_all
+  signature:
+    params:
+    - name: domain
+      type: string
+    - name: map
+      type: string
+    - name: callback
+      type: string
+    returnType: void
+- subject:
+    function: yp_cat
+  signature:
+    params:
+    - name: domain
+      type: string
+    - name: map
+      type: string
+    returnType: array
+- subject:
+    function: yp_err_string
+  signature:
+    params:
+    - name: errorcode
+      type: int
+    returnType: string
+- subject:
+    function: yp_errno
+  signature:
+    returnType: int
+- subject:
+    function: yp_first
+  signature:
+    params:
+    - name: domain
+      type: string
+    - name: map
+      type: string
+    returnType: array
+- subject:
+    function: yp_get_default_domain
+  signature:
+    returnType: string
+- subject:
+    function: yp_master
+  signature:
+    params:
+    - name: domain
+      type: string
+    - name: map
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: yp_match
+  signature:
+    params:
+    - name: domain
+      type: string
+    - name: map
+      type: string
+    - name: key
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: yp_next
+  signature:
+    params:
+    - name: domain
+      type: string
+    - name: map
+      type: string
+    - name: key
+      type: string
+    returnType: array
+- subject:
+    function: yp_order
+  signature:
+    params:
+    - name: domain
+      type: string
+    - name: map
+      type: string
+    returnType: int

@@ -1,0 +1,619 @@
+# Generated from stubs/crypto/gmp.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: gmp_abs
+  signature:
+    params:
+    - name: num
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gmp_add
+  signature:
+    params:
+    - name: num1
+      type: mixed
+    - name: num2
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gmp_and
+  signature:
+    params:
+    - name: num1
+      type: mixed
+    - name: num2
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gmp_binomial
+  signature:
+    params:
+    - name: n
+      type: mixed
+    - name: k
+      type: int
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gmp_clrbit
+  signature:
+    params:
+    - name: num
+      type: mixed
+    - name: index
+      type: int
+    returnType: void
+- subject:
+    function: gmp_cmp
+  signature:
+    params:
+    - name: num1
+      type: mixed
+    - name: num2
+      type: mixed
+    returnType: int
+- subject:
+    function: gmp_com
+  signature:
+    params:
+    - name: num
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gmp_div
+  signature:
+    params:
+    - name: num1
+      type: mixed
+    - name: num2
+      type: mixed
+    - name: rounding_mode
+      type: int
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: gmp_div_q
+  signature:
+    params:
+    - name: num1
+      type: mixed
+    - name: num2
+      type: mixed
+    - name: rounding_mode
+      type: int
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: gmp_div_qr
+  signature:
+    params:
+    - name: num1
+      type: mixed
+    - name: num2
+      type: mixed
+    - name: rounding_mode
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gmp_div_r
+  signature:
+    params:
+    - name: num1
+      type: mixed
+    - name: num2
+      type: mixed
+    - name: rounding_mode
+      type: int
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: gmp_divexact
+  signature:
+    params:
+    - name: num1
+      type: mixed
+    - name: num2
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gmp_export
+  signature:
+    params:
+    - name: num
+      type: mixed
+    - name: word_size
+      type: int
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gmp_fact
+  signature:
+    params:
+    - name: num
+      type: int
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gmp_gcd
+  signature:
+    params:
+    - name: num1
+      type: mixed
+    - name: num2
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gmp_gcdext
+  signature:
+    params:
+    - name: num1
+      type: mixed
+    - name: num2
+      type: mixed
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gmp_hamdist
+  signature:
+    params:
+    - name: num1
+      type: mixed
+    - name: num2
+      type: mixed
+    returnType: int
+- subject:
+    function: gmp_import
+  signature:
+    params:
+    - name: data
+      type: string
+    - name: word_size
+      type: int
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: gmp_init
+  signature:
+    params:
+    - name: num
+      type: int
+    - name: base
+      type: int
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gmp_intval
+  signature:
+    params:
+    - name: num
+      type: mixed
+    returnType: int
+- subject:
+    function: gmp_invert
+  signature:
+    params:
+    - name: num1
+      type: mixed
+    - name: num2
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gmp_jacobi
+  signature:
+    params:
+    - name: num1
+      type: mixed
+    - name: num2
+      type: mixed
+    returnType: int
+- subject:
+    function: gmp_kronecker
+  signature:
+    params:
+    - name: num1
+      type: mixed
+    - name: num2
+      type: mixed
+    returnType: int
+- subject:
+    function: gmp_lcm
+  signature:
+    params:
+    - name: num1
+      type: mixed
+    - name: num2
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gmp_legendre
+  signature:
+    params:
+    - name: num1
+      type: mixed
+    - name: num2
+      type: mixed
+    returnType: int
+- subject:
+    function: gmp_mod
+  signature:
+    params:
+    - name: num1
+      type: mixed
+    - name: num2
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gmp_mul
+  signature:
+    params:
+    - name: num1
+      type: mixed
+    - name: num2
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gmp_neg
+  signature:
+    params:
+    - name: num
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gmp_nextprime
+  signature:
+    params:
+    - name: num
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gmp_or
+  signature:
+    params:
+    - name: num1
+      type: mixed
+    - name: num2
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gmp_perfect_power
+  signature:
+    params:
+    - name: num
+      type: mixed
+    returnType: bool
+- subject:
+    function: gmp_perfect_square
+  signature:
+    params:
+    - name: num
+      type: mixed
+    returnType: bool
+- subject:
+    function: gmp_popcount
+  signature:
+    params:
+    - name: num
+      type: mixed
+    returnType: int
+- subject:
+    function: gmp_pow
+  signature:
+    params:
+    - name: num
+      type: mixed
+    - name: exponent
+      type: int
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gmp_powm
+  signature:
+    params:
+    - name: num
+      type: mixed
+    - name: exponent
+      type: mixed
+    - name: modulus
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: gmp_prob_prime
+  signature:
+    params:
+    - name: num
+      type: mixed
+    - name: repetitions
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: gmp_random_bits
+  signature:
+    params:
+    - name: bits
+      type: int
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gmp_random_range
+  signature:
+    params:
+    - name: min
+      type: mixed
+    - name: max
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gmp_random_seed
+  signature:
+    params:
+    - name: seed
+      type: mixed
+    returnType: void
+- subject:
+    function: gmp_root
+  signature:
+    params:
+    - name: num
+      type: mixed
+    - name: nth
+      type: int
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gmp_rootrem
+  signature:
+    params:
+    - name: num
+      type: mixed
+    - name: nth
+      type: int
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gmp_scan0
+  signature:
+    params:
+    - name: num1
+      type: mixed
+    - name: start
+      type: int
+    returnType: int
+- subject:
+    function: gmp_scan1
+  signature:
+    params:
+    - name: num1
+      type: mixed
+    - name: start
+      type: int
+    returnType: int
+- subject:
+    function: gmp_setbit
+  signature:
+    params:
+    - name: num
+      type: mixed
+    - name: index
+      type: int
+    - name: value
+      type: bool
+      optional: true
+    returnType: void
+- subject:
+    function: gmp_sign
+  signature:
+    params:
+    - name: num
+      type: mixed
+    returnType: int
+- subject:
+    function: gmp_sqrt
+  signature:
+    params:
+    - name: num
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gmp_sqrtrem
+  signature:
+    params:
+    - name: num
+      type: mixed
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gmp_strval
+  signature:
+    params:
+    - name: num
+      type: mixed
+    - name: base
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gmp_sub
+  signature:
+    params:
+    - name: num1
+      type: mixed
+    - name: num2
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gmp_testbit
+  signature:
+    params:
+    - name: num
+      type: mixed
+    - name: index
+      type: int
+    returnType: bool
+- subject:
+    function: gmp_xor
+  signature:
+    params:
+    - name: num1
+      type: mixed
+    - name: num2
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return

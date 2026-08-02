@@ -1,0 +1,615 @@
+# Generated from stubs/file/file.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: basename
+  signature:
+    params:
+    - name: path
+      type: string
+    - name: suffix
+      type: string
+      optional: true
+    returnType: string
+- subject:
+    function: chgrp
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: group
+      type: int
+    returnType: bool
+- subject:
+    function: chmod
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: permissions
+      type: int
+    returnType: bool
+- subject:
+    function: chown
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: user
+      type: int
+    returnType: bool
+- subject:
+    function: copy
+  signature:
+    params:
+    - name: from
+      type: string
+    - name: to
+      type: string
+    - name: context
+      type: resource
+      optional: true
+    returnType: bool
+- subject:
+    function: dirname
+  signature:
+    params:
+    - name: path
+      type: string
+    - name: levels
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: fclose
+  signature:
+    params:
+    - name: stream
+      type: resource
+    returnType: bool
+- subject:
+    function: feof
+  signature:
+    params:
+    - name: stream
+      type: resource
+    returnType: bool
+- subject:
+    function: fflush
+  signature:
+    params:
+    - name: stream
+      type: resource
+    returnType: bool
+- subject:
+    function: fgetc
+  signature:
+    params:
+    - name: stream
+      type: resource
+    returnType: string
+- subject:
+    function: fgetcsv
+  signature:
+    params:
+    - name: stream
+      type: resource
+    - name: length
+      type: int
+      optional: true
+    - name: separator
+      type: string
+      optional: true
+    - name: enclosure
+      type: string
+      optional: true
+    - name: escape
+      type: string
+      optional: true
+    returnType: array
+- subject:
+    function: fgets
+  signature:
+    params:
+    - name: stream
+      type: resource
+    - name: length
+      type: int
+      optional: true
+    returnType: string
+- subject:
+    function: file
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    - name: context
+      type: resource
+      optional: true
+    returnType: array
+- subject:
+    function: file_exists
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: bool
+- subject:
+    function: file_get_contents
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: use_include_path
+      type: bool
+      optional: true
+    - name: context
+      type: resource
+      optional: true
+    - name: offset
+      type: int
+      optional: true
+    - name: length
+      type: int
+      optional: true
+    returnType: string
+- subject:
+    function: file_put_contents
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: data
+      type: array
+    - name: flags
+      type: int
+      optional: true
+    - name: context
+      type: resource
+      optional: true
+    returnType: int
+- subject:
+    function: fileatime
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: int
+- subject:
+    function: filectime
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: int
+- subject:
+    function: filegroup
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: int
+- subject:
+    function: fileinode
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: int
+- subject:
+    function: filemtime
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: int
+- subject:
+    function: fileowner
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: int
+- subject:
+    function: fileperms
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: int
+- subject:
+    function: filepro
+  signature:
+    params:
+    - name: directory
+      type: string
+    returnType: bool
+- subject:
+    function: filepro_fieldcount
+  signature:
+    returnType: int
+- subject:
+    function: filepro_fieldname
+  signature:
+    params:
+    - name: field_number
+      type: int
+    returnType: string
+- subject:
+    function: filepro_fieldtype
+  signature:
+    params:
+    - name: field_number
+      type: int
+    returnType: string
+- subject:
+    function: filepro_fieldwidth
+  signature:
+    params:
+    - name: field_number
+      type: int
+    returnType: int
+- subject:
+    function: filepro_retrieve
+  signature:
+    params:
+    - name: row_number
+      type: int
+    - name: field_number
+      type: int
+    returnType: string
+- subject:
+    function: filepro_rowcount
+  signature:
+    returnType: int
+- subject:
+    function: filesize
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: int
+- subject:
+    function: filetype
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: flock
+  signature:
+    params:
+    - name: stream
+      type: resource
+    - name: operation
+      type: int
+    - name: would_block
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: fopen
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: mode
+      type: string
+    - name: use_include_path
+      type: bool
+      optional: true
+    - name: context
+      type: resource
+      optional: true
+    returnType: resource
+- subject:
+    function: fpassthru
+  signature:
+    params:
+    - name: stream
+      type: resource
+    returnType: int
+- subject:
+    function: fputcsv
+  signature:
+    params:
+    - name: stream
+      type: resource
+    - name: fields
+      type: array
+    - name: separator
+      type: string
+      optional: true
+    - name: enclosure
+      type: string
+      optional: true
+    - name: escape
+      type: string
+      optional: true
+    returnType: int
+- subject:
+    function: fread
+  signature:
+    params:
+    - name: stream
+      type: resource
+    - name: length
+      type: int
+    returnType: string
+- subject:
+    function: fseek
+  signature:
+    params:
+    - name: stream
+      type: resource
+    - name: offset
+      type: int
+    - name: whence
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: fstat
+  signature:
+    params:
+    - name: stream
+      type: resource
+    returnType: array
+- subject:
+    function: ftell
+  signature:
+    params:
+    - name: stream
+      type: resource
+    returnType: int
+- subject:
+    function: ftruncate
+  signature:
+    params:
+    - name: stream
+      type: resource
+    - name: size
+      type: int
+    returnType: bool
+- subject:
+    function: fwrite
+  signature:
+    params:
+    - name: stream
+      type: resource
+    - name: data
+      type: string
+    - name: length
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: glob
+  signature:
+    params:
+    - name: pattern
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    function: is_dir
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: bool
+- subject:
+    function: is_executable
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: bool
+- subject:
+    function: is_file
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: bool
+- subject:
+    function: is_link
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: bool
+- subject:
+    function: is_readable
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: bool
+- subject:
+    function: is_uploaded_file
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: bool
+- subject:
+    function: is_writable
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: bool
+- subject:
+    function: is_writeable
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: bool
+- subject:
+    function: mkdir
+  signature:
+    params:
+    - name: directory
+      type: string
+    - name: permissions
+      type: int
+      optional: true
+    - name: recursive
+      type: bool
+      optional: true
+    - name: context
+      type: resource
+      optional: true
+    returnType: bool
+- subject:
+    function: move_uploaded_file
+  signature:
+    params:
+    - name: from
+      type: string
+    - name: to
+      type: string
+    returnType: bool
+- subject:
+    function: opendir
+  signature:
+    params:
+    - name: directory
+      type: string
+    - name: context
+      type: resource
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: pathinfo
+  signature:
+    params:
+    - name: path
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    function: readfile
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: use_include_path
+      type: bool
+      optional: true
+    - name: context
+      type: resource
+      optional: true
+    returnType: int
+- subject:
+    function: readlink
+  signature:
+    params:
+    - name: path
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: realpath
+  signature:
+    params:
+    - name: path
+      type: string
+    returnType: string
+- subject:
+    function: realpath_cache_get
+  signature:
+    returnType: array
+- subject:
+    function: realpath_cache_size
+  signature:
+    returnType: int
+- subject:
+    function: rename
+  signature:
+    params:
+    - name: from
+      type: string
+    - name: to
+      type: string
+    - name: context
+      type: resource
+      optional: true
+    returnType: bool
+- subject:
+    function: rename_function
+  signature:
+    params:
+    - name: original_name
+      type: string
+    - name: new_name
+      type: string
+    returnType: bool
+- subject:
+    function: rmdir
+  signature:
+    params:
+    - name: directory
+      type: string
+    - name: context
+      type: resource
+      optional: true
+    returnType: bool
+- subject:
+    function: scandir
+  signature:
+    params:
+    - name: directory
+      type: string
+    - name: sorting_order
+      type: int
+      optional: true
+    - name: context
+      type: resource
+      optional: true
+    returnType: array
+- subject:
+    function: tempnam
+  signature:
+    params:
+    - name: directory
+      type: string
+    - name: prefix
+      type: string
+    returnType: string
+- subject:
+    function: tmpfile
+  signature:
+    returnType: resource
+- subject:
+    function: unlink
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: context
+      type: resource
+      optional: true
+    returnType: bool

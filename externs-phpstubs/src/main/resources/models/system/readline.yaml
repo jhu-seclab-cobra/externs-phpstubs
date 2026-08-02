@@ -1,0 +1,92 @@
+# Generated from stubs/system/readline.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: readline
+  signature:
+    params:
+    - name: prompt
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: readline_add_history
+  signature:
+    params:
+    - name: prompt
+      type: string
+    returnType: bool
+- subject:
+    function: readline_callback_handler_install
+  signature:
+    params:
+    - name: prompt
+      type: string
+    - name: callback
+      type: callable
+    returnType: bool
+- subject:
+    function: readline_callback_handler_remove
+  signature:
+    returnType: bool
+- subject:
+    function: readline_callback_read_char
+  signature:
+    returnType: void
+- subject:
+    function: readline_clear_history
+  signature:
+    returnType: bool
+- subject:
+    function: readline_completion_function
+  signature:
+    params:
+    - name: callback
+      type: mixed
+    returnType: bool
+- subject:
+    function: readline_info
+  signature:
+    params:
+    - name: var_name
+      type: string
+      optional: true
+    - name: value
+      type: bool
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: readline_list_history
+  signature:
+    returnType: array
+- subject:
+    function: readline_on_new_line
+  signature:
+    returnType: void
+- subject:
+    function: readline_read_history
+  signature:
+    params:
+    - name: filename
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: readline_redisplay
+  signature:
+    returnType: void
+- subject:
+    function: readline_write_history
+  signature:
+    params:
+    - name: filename
+      type: string
+      optional: true
+    returnType: bool

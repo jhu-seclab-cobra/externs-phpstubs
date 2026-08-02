@@ -1,0 +1,873 @@
+# Generated from stubs/network/ldap.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: ldap_8859_to_t61
+  signature:
+    params:
+    - name: value
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: ldap_add
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    - name: dn
+      type: string
+    - name: entry
+      type: array
+    - name: controls
+      type: array
+      optional: true
+    returnType: bool
+- subject:
+    function: ldap_add_ext
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    - name: dn
+      type: string
+    - name: entry
+      type: array
+    - name: controls
+      type: array
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: ldap_bind
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    - name: dn
+      type: string
+      optional: true
+    - name: password
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: ldap_bind_ext
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    - name: dn
+      type: string
+      optional: true
+    - name: password
+      type: string
+      optional: true
+    - name: controls
+      type: array
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: ldap_close
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    returnType: bool
+- subject:
+    function: ldap_compare
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    - name: dn
+      type: string
+    - name: attribute
+      type: string
+    - name: value
+      type: string
+    - name: controls
+      type: array
+      optional: true
+    returnType: bool
+- subject:
+    function: ldap_connect
+  signature:
+    params:
+    - name: uri
+      type: string
+      optional: true
+    - name: port
+      type: int
+      optional: true
+    - name: wallet
+      type: string
+      optional: true
+    - name: password
+      type: string
+      optional: true
+    - name: auth_mode
+      type: int
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: ldap_count_entries
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    - name: result
+      type: resource
+    returnType: int
+- subject:
+    function: ldap_delete
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    - name: dn
+      type: string
+    - name: controls
+      type: array
+      optional: true
+    returnType: bool
+- subject:
+    function: ldap_delete_ext
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    - name: dn
+      type: string
+    - name: controls
+      type: array
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: ldap_dn2ufn
+  signature:
+    params:
+    - name: dn
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: ldap_err2str
+  signature:
+    params:
+    - name: errno
+      type: int
+    returnType: string
+- subject:
+    function: ldap_errno
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    returnType: int
+- subject:
+    function: ldap_error
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    returnType: string
+- subject:
+    function: ldap_escape
+  signature:
+    params:
+    - name: value
+      type: string
+    - name: ignore
+      type: string
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: ldap_exop
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    - name: request_oid
+      type: string
+    - name: request_data
+      type: string
+      optional: true
+    - name: controls
+      type: array
+      optional: true
+    - name: response_data
+      type: string
+      optional: true
+    - name: response_oid
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: ldap_exop_passwd
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    - name: user
+      type: string
+      optional: true
+    - name: old_password
+      type: string
+      optional: true
+    - name: new_password
+      type: string
+      optional: true
+    - name: controls
+      type: array
+      optional: true
+    returnType: bool
+- subject:
+    function: ldap_exop_refresh
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    - name: dn
+      type: string
+    - name: ttl
+      type: int
+    returnType: int
+- subject:
+    function: ldap_exop_whoami
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    returnType: string
+- subject:
+    function: ldap_explode_dn
+  signature:
+    params:
+    - name: dn
+      type: string
+    - name: with_attrib
+      type: int
+    returnType: array
+- subject:
+    function: ldap_first_attribute
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    - name: entry
+      type: resource
+    returnType: string
+- subject:
+    function: ldap_first_entry
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    - name: result
+      type: resource
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: ldap_first_reference
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    - name: result
+      type: resource
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: ldap_free_result
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    returnType: bool
+- subject:
+    function: ldap_get_attributes
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    - name: entry
+      type: resource
+    returnType: array
+- subject:
+    function: ldap_get_dn
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    - name: entry
+      type: resource
+    returnType: string
+- subject:
+    function: ldap_get_entries
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    - name: result
+      type: resource
+    returnType: array
+- subject:
+    function: ldap_get_option
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    - name: option
+      type: int
+    - name: value
+      type: array
+      optional: true
+    returnType: bool
+- subject:
+    function: ldap_get_values
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    - name: entry
+      type: resource
+    - name: attribute
+      type: string
+    returnType: array
+- subject:
+    function: ldap_get_values_len
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    - name: entry
+      type: resource
+    - name: attribute
+      type: string
+    returnType: array
+- subject:
+    function: ldap_list
+  signature:
+    params:
+    - name: ldap
+      type: array
+    - name: base
+      type: array
+    - name: filter
+      type: array
+    - name: attributes
+      type: array
+      optional: true
+    - name: attributes_only
+      type: int
+      optional: true
+    - name: sizelimit
+      type: int
+      optional: true
+    - name: timelimit
+      type: int
+      optional: true
+    - name: deref
+      type: int
+      optional: true
+    - name: controls
+      type: array
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+  - from: argument(5)
+    to: return
+  - from: argument(6)
+    to: return
+  - from: argument(7)
+    to: return
+  - from: argument(8)
+    to: return
+- subject:
+    function: ldap_mod_add
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    - name: dn
+      type: string
+    - name: entry
+      type: array
+    - name: controls
+      type: array
+      optional: true
+    returnType: bool
+- subject:
+    function: ldap_mod_add_ext
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    - name: dn
+      type: string
+    - name: entry
+      type: array
+    - name: controls
+      type: array
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: ldap_mod_del
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    - name: dn
+      type: string
+    - name: entry
+      type: array
+    - name: controls
+      type: array
+      optional: true
+    returnType: bool
+- subject:
+    function: ldap_mod_del_ext
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    - name: dn
+      type: string
+    - name: entry
+      type: array
+    - name: controls
+      type: array
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: ldap_mod_replace
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    - name: dn
+      type: string
+    - name: entry
+      type: array
+    - name: controls
+      type: array
+      optional: true
+    returnType: bool
+- subject:
+    function: ldap_mod_replace_ext
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    - name: dn
+      type: string
+    - name: entry
+      type: array
+    - name: controls
+      type: array
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: ldap_modify
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    - name: dn
+      type: string
+    - name: entry
+      type: array
+    - name: controls
+      type: array
+      optional: true
+    returnType: bool
+- subject:
+    function: ldap_modify_batch
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    - name: dn
+      type: string
+    - name: modifications_info
+      type: array
+    - name: controls
+      type: array
+      optional: true
+    returnType: bool
+- subject:
+    function: ldap_next_attribute
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    - name: entry
+      type: resource
+    returnType: string
+- subject:
+    function: ldap_next_entry
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    - name: entry
+      type: resource
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: ldap_next_reference
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    - name: entry
+      type: resource
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: ldap_parse_exop
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    - name: result
+      type: resource
+    - name: response_data
+      type: string
+      optional: true
+    - name: response_oid
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: ldap_parse_reference
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    - name: entry
+      type: resource
+    - name: referrals
+      type: array
+    returnType: bool
+- subject:
+    function: ldap_parse_result
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    - name: result
+      type: resource
+    - name: error_code
+      type: int
+    - name: matched_dn
+      type: string
+      optional: true
+    - name: error_message
+      type: string
+      optional: true
+    - name: referrals
+      type: array
+      optional: true
+    - name: controls
+      type: array
+      optional: true
+    returnType: bool
+- subject:
+    function: ldap_read
+  signature:
+    params:
+    - name: ldap
+      type: array
+    - name: base
+      type: array
+    - name: filter
+      type: array
+    - name: attributes
+      type: array
+      optional: true
+    - name: attributes_only
+      type: int
+      optional: true
+    - name: sizelimit
+      type: int
+      optional: true
+    - name: timelimit
+      type: int
+      optional: true
+    - name: deref
+      type: int
+      optional: true
+    - name: controls
+      type: array
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+  - from: argument(5)
+    to: return
+  - from: argument(6)
+    to: return
+  - from: argument(7)
+    to: return
+  - from: argument(8)
+    to: return
+- subject:
+    function: ldap_rename
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    - name: dn
+      type: string
+    - name: new_rdn
+      type: string
+    - name: new_parent
+      type: string
+    - name: delete_old_rdn
+      type: bool
+    - name: controls
+      type: array
+      optional: true
+    returnType: bool
+- subject:
+    function: ldap_rename_ext
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    - name: dn
+      type: string
+    - name: new_rdn
+      type: string
+    - name: new_parent
+      type: string
+    - name: delete_old_rdn
+      type: bool
+    - name: controls
+      type: array
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+  - from: argument(5)
+    to: return
+- subject:
+    function: ldap_sasl_bind
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    - name: dn
+      type: string
+      optional: true
+    - name: password
+      type: string
+      optional: true
+    - name: mech
+      type: string
+      optional: true
+    - name: realm
+      type: string
+      optional: true
+    - name: authc_id
+      type: string
+      optional: true
+    - name: authz_id
+      type: string
+      optional: true
+    - name: props
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: ldap_search
+  signature:
+    params:
+    - name: ldap
+      type: array
+    - name: base
+      type: array
+    - name: filter
+      type: array
+    - name: attributes
+      type: array
+      optional: true
+    - name: attributes_only
+      type: int
+      optional: true
+    - name: sizelimit
+      type: int
+      optional: true
+    - name: timelimit
+      type: int
+      optional: true
+    - name: deref
+      type: int
+      optional: true
+    - name: controls
+      type: array
+      optional: true
+    returnType: array
+- subject:
+    function: ldap_set_option
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    - name: option
+      type: int
+    - name: value
+      type: mixed
+    returnType: bool
+- subject:
+    function: ldap_set_rebind_proc
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    - name: callback
+      type: callable
+    returnType: bool
+- subject:
+    function: ldap_start_tls
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    returnType: bool
+- subject:
+    function: ldap_t61_to_8859
+  signature:
+    params:
+    - name: value
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: ldap_unbind
+  signature:
+    params:
+    - name: ldap
+      type: resource
+    returnType: bool

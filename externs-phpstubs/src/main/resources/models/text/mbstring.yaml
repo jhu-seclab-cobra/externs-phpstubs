@@ -1,0 +1,802 @@
+# Generated from stubs/text/mbstring.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: mb_check_encoding
+  signature:
+    params:
+    - name: value
+      type: array
+      optional: true
+    - name: encoding
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: mb_chr
+  signature:
+    params:
+    - name: codepoint
+      type: int
+    - name: encoding
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: mb_convert_case
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: mode
+      type: int
+    - name: encoding
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: mb_convert_encoding
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: to_encoding
+      type: string
+    - name: from_encoding
+      type: array
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mb_convert_kana
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: mode
+      type: string
+      optional: true
+    - name: encoding
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: mb_convert_variables
+  signature:
+    params:
+    - name: to_encoding
+      type: string
+    - name: from_encoding
+      type: array
+    - name: var
+      type: array
+    - name: None
+      type: array
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mb_decode_mimeheader
+  signature:
+    params:
+    - name: string
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mb_decode_numericentity
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: map
+      type: array
+    - name: encoding
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: mb_detect_encoding
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: encodings
+      type: array
+      optional: true
+    - name: strict
+      type: bool
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mb_detect_order
+  signature:
+    params:
+    - name: encoding
+      type: array
+      optional: true
+    returnType: bool
+- subject:
+    function: mb_encode_mimeheader
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: charset
+      type: string
+      optional: true
+    - name: transfer_encoding
+      type: string
+      optional: true
+    - name: newline
+      type: string
+      optional: true
+    - name: indent
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: mb_encode_numericentity
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: map
+      type: array
+    - name: encoding
+      type: string
+      optional: true
+    - name: hex
+      type: bool
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: mb_encoding_aliases
+  signature:
+    params:
+    - name: encoding
+      type: string
+    returnType: array
+- subject:
+    function: mb_ereg
+  signature:
+    params:
+    - name: pattern
+      type: string
+    - name: string
+      type: string
+    - name: matches
+      type: array
+      optional: true
+    returnType: bool
+- subject:
+    function: mb_ereg_match
+  signature:
+    params:
+    - name: pattern
+      type: string
+    - name: string
+      type: string
+    - name: options
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: mb_ereg_replace
+  signature:
+    params:
+    - name: pattern
+      type: string
+    - name: replacement
+      type: string
+    - name: string
+      type: string
+    - name: options
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: mb_ereg_replace_callback
+  signature:
+    params:
+    - name: pattern
+      type: string
+    - name: callback
+      type: callable
+    - name: string
+      type: string
+    - name: options
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: mb_ereg_search
+  signature:
+    params:
+    - name: pattern
+      type: string
+      optional: true
+    - name: options
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: mb_ereg_search_getpos
+  signature:
+    returnType: int
+- subject:
+    function: mb_ereg_search_getregs
+  signature:
+    returnType: array
+- subject:
+    function: mb_ereg_search_init
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: pattern
+      type: string
+      optional: true
+    - name: options
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: mb_ereg_search_pos
+  signature:
+    params:
+    - name: pattern
+      type: string
+      optional: true
+    - name: options
+      type: string
+      optional: true
+    returnType: array
+- subject:
+    function: mb_ereg_search_regs
+  signature:
+    params:
+    - name: pattern
+      type: string
+      optional: true
+    - name: options
+      type: string
+      optional: true
+    returnType: array
+- subject:
+    function: mb_ereg_search_setpos
+  signature:
+    params:
+    - name: offset
+      type: int
+    returnType: bool
+- subject:
+    function: mb_eregi
+  signature:
+    params:
+    - name: pattern
+      type: string
+    - name: string
+      type: string
+    - name: matches
+      type: array
+      optional: true
+    returnType: bool
+- subject:
+    function: mb_eregi_replace
+  signature:
+    params:
+    - name: pattern
+      type: string
+    - name: replacement
+      type: string
+    - name: string
+      type: string
+    - name: options
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: mb_get_info
+  signature:
+    params:
+    - name: type
+      type: string
+      optional: true
+    returnType: array
+- subject:
+    function: mb_http_input
+  signature:
+    params:
+    - name: type
+      type: string
+      optional: true
+    returnType: array
+- subject:
+    function: mb_http_output
+  signature:
+    params:
+    - name: encoding
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: mb_internal_encoding
+  signature:
+    params:
+    - name: encoding
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: mb_language
+  signature:
+    params:
+    - name: language
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: mb_list_encodings
+  signature:
+    returnType: array
+- subject:
+    function: mb_ord
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: encoding
+      type: string
+      optional: true
+    returnType: int
+- subject:
+    function: mb_output_handler
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: status
+      type: int
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mb_parse_str
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: result
+      type: array
+    returnType: bool
+- subject:
+    function: mb_preferred_mime_name
+  signature:
+    params:
+    - name: encoding
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mb_regex_encoding
+  signature:
+    params:
+    - name: encoding
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: mb_regex_set_options
+  signature:
+    params:
+    - name: options
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mb_scrub
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: encoding
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: mb_send_mail
+  signature:
+    params:
+    - name: to
+      type: string
+    - name: subject
+      type: string
+    - name: message
+      type: string
+    - name: additional_headers
+      type: array
+      optional: true
+    - name: additional_params
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: mb_split
+  signature:
+    params:
+    - name: pattern
+      type: string
+    - name: string
+      type: string
+    - name: limit
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    function: mb_str_split
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: length
+      type: int
+      optional: true
+    - name: encoding
+      type: string
+      optional: true
+    returnType: array
+- subject:
+    function: mb_strcut
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: start
+      type: int
+    - name: length
+      type: int
+      optional: true
+    - name: encoding
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: mb_strimwidth
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: start
+      type: int
+    - name: width
+      type: int
+    - name: trim_marker
+      type: string
+      optional: true
+    - name: encoding
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: mb_stripos
+  signature:
+    params:
+    - name: haystack
+      type: string
+    - name: needle
+      type: string
+    - name: offset
+      type: int
+      optional: true
+    - name: encoding
+      type: string
+      optional: true
+    returnType: int
+- subject:
+    function: mb_stristr
+  signature:
+    params:
+    - name: haystack
+      type: string
+    - name: needle
+      type: string
+    - name: before_needle
+      type: bool
+      optional: true
+    - name: encoding
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: mb_strlen
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: encoding
+      type: string
+      optional: true
+    returnType: int
+- subject:
+    function: mb_strpos
+  signature:
+    params:
+    - name: haystack
+      type: string
+    - name: needle
+      type: string
+    - name: offset
+      type: int
+      optional: true
+    - name: encoding
+      type: string
+      optional: true
+    returnType: int
+- subject:
+    function: mb_strrchr
+  signature:
+    params:
+    - name: haystack
+      type: string
+    - name: needle
+      type: string
+    - name: before_needle
+      type: bool
+      optional: true
+    - name: encoding
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: mb_strrichr
+  signature:
+    params:
+    - name: haystack
+      type: string
+    - name: needle
+      type: string
+    - name: before_needle
+      type: bool
+      optional: true
+    - name: encoding
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: mb_strripos
+  signature:
+    params:
+    - name: haystack
+      type: string
+    - name: needle
+      type: string
+    - name: offset
+      type: int
+      optional: true
+    - name: encoding
+      type: string
+      optional: true
+    returnType: int
+- subject:
+    function: mb_strrpos
+  signature:
+    params:
+    - name: haystack
+      type: string
+    - name: needle
+      type: string
+    - name: offset
+      type: int
+      optional: true
+    - name: encoding
+      type: string
+      optional: true
+    returnType: int
+- subject:
+    function: mb_strstr
+  signature:
+    params:
+    - name: haystack
+      type: string
+    - name: needle
+      type: string
+    - name: before_needle
+      type: bool
+      optional: true
+    - name: encoding
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: mb_strtolower
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: encoding
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mb_strtoupper
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: encoding
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mb_strwidth
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: encoding
+      type: string
+      optional: true
+    returnType: int
+- subject:
+    function: mb_substitute_character
+  signature:
+    params:
+    - name: substitute_character
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: mb_substr
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: start
+      type: int
+    - name: length
+      type: int
+      optional: true
+    - name: encoding
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mb_substr_count
+  signature:
+    params:
+    - name: haystack
+      type: string
+    - name: needle
+      type: string
+    - name: encoding
+      type: string
+      optional: true
+    returnType: int

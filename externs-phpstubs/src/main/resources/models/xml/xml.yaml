@@ -1,0 +1,209 @@
+# Generated from stubs/xml/xml.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: xml_error_string
+  signature:
+    params:
+    - name: error_code
+      type: int
+    returnType: string
+- subject:
+    function: xml_get_current_byte_index
+  signature:
+    params:
+    - name: parser
+      type: mixed
+    returnType: int
+- subject:
+    function: xml_get_current_column_number
+  signature:
+    params:
+    - name: parser
+      type: mixed
+    returnType: int
+- subject:
+    function: xml_get_current_line_number
+  signature:
+    params:
+    - name: parser
+      type: mixed
+    returnType: int
+- subject:
+    function: xml_get_error_code
+  signature:
+    params:
+    - name: parser
+      type: mixed
+    returnType: int
+- subject:
+    function: xml_parse
+  signature:
+    params:
+    - name: parser
+      type: mixed
+    - name: data
+      type: string
+    - name: is_final
+      type: bool
+      optional: true
+    returnType: int
+- subject:
+    function: xml_parse_into_struct
+  signature:
+    params:
+    - name: parser
+      type: mixed
+    - name: data
+      type: string
+    - name: values
+      type: array
+    - name: index
+      type: array
+      optional: true
+    returnType: int
+- subject:
+    function: xml_parser_create
+  signature:
+    params:
+    - name: encoding
+      type: string
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: xml_parser_create_ns
+  signature:
+    params:
+    - name: encoding
+      type: string
+      optional: true
+    - name: separator
+      type: string
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: xml_parser_free
+  signature:
+    params:
+    - name: parser
+      type: mixed
+    returnType: bool
+- subject:
+    function: xml_parser_get_option
+  signature:
+    params:
+    - name: parser
+      type: mixed
+    - name: option
+      type: int
+    returnType: int
+- subject:
+    function: xml_parser_set_option
+  signature:
+    params:
+    - name: parser
+      type: mixed
+    - name: option
+      type: int
+    - name: value
+      type: mixed
+    returnType: bool
+- subject:
+    function: xml_set_character_data_handler
+  signature:
+    params:
+    - name: parser
+      type: mixed
+    - name: handler
+      type: callable
+    returnType: bool
+- subject:
+    function: xml_set_default_handler
+  signature:
+    params:
+    - name: parser
+      type: mixed
+    - name: handler
+      type: callable
+    returnType: bool
+- subject:
+    function: xml_set_element_handler
+  signature:
+    params:
+    - name: parser
+      type: mixed
+    - name: start_handler
+      type: callable
+    - name: end_handler
+      type: callable
+    returnType: bool
+- subject:
+    function: xml_set_end_namespace_decl_handler
+  signature:
+    params:
+    - name: parser
+      type: mixed
+    - name: handler
+      type: callable
+    returnType: bool
+- subject:
+    function: xml_set_external_entity_ref_handler
+  signature:
+    params:
+    - name: parser
+      type: mixed
+    - name: handler
+      type: callable
+    returnType: bool
+- subject:
+    function: xml_set_notation_decl_handler
+  signature:
+    params:
+    - name: parser
+      type: mixed
+    - name: handler
+      type: callable
+    returnType: bool
+- subject:
+    function: xml_set_object
+  signature:
+    params:
+    - name: parser
+      type: mixed
+    - name: object
+      type: object
+    returnType: bool
+- subject:
+    function: xml_set_processing_instruction_handler
+  signature:
+    params:
+    - name: parser
+      type: mixed
+    - name: handler
+      type: callable
+    returnType: bool
+- subject:
+    function: xml_set_start_namespace_decl_handler
+  signature:
+    params:
+    - name: parser
+      type: mixed
+    - name: handler
+      type: callable
+    returnType: bool
+- subject:
+    function: xml_set_unparsed_entity_decl_handler
+  signature:
+    params:
+    - name: parser
+      type: mixed
+    - name: handler
+      type: callable
+    returnType: bool

@@ -1,0 +1,77 @@
+# Generated from stubs/file/fileinfo.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: finfo_buffer
+  signature:
+    params:
+    - name: finfo
+      type: resource
+    - name: string
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    - name: context
+      type: resource
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: finfo_close
+  signature:
+    params:
+    - name: finfo
+      type: resource
+    returnType: bool
+- subject:
+    function: finfo_file
+  signature:
+    params:
+    - name: finfo
+      type: resource
+    - name: filename
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    - name: context
+      type: resource
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: finfo_open
+  signature:
+    params:
+    - name: flags
+      type: int
+      optional: true
+    - name: magic_database
+      type: string
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: finfo_set_flags
+  signature:
+    params:
+    - name: finfo
+      type: resource
+    - name: flags
+      type: int
+    returnType: bool
+- subject:
+    function: mime_content_type
+  signature:
+    params:
+    - name: filename
+      type: resource
+    returnType: string

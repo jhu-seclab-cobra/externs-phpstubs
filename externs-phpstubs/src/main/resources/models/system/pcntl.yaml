@@ -1,0 +1,211 @@
+# Generated from stubs/system/pcntl.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: pcntl_alarm
+  signature:
+    params:
+    - name: seconds
+      type: int
+    returnType: int
+- subject:
+    function: pcntl_async_signals
+  signature:
+    params:
+    - name: enable
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: pcntl_errno
+  signature:
+    returnType: int
+- subject:
+    function: pcntl_exec
+  signature:
+    params:
+    - name: path
+      type: string
+    - name: args
+      type: array
+      optional: true
+    - name: env_vars
+      type: array
+      optional: true
+    returnType: bool
+- subject:
+    function: pcntl_fork
+  signature:
+    returnType: int
+- subject:
+    function: pcntl_get_last_error
+  signature:
+    returnType: int
+- subject:
+    function: pcntl_getpriority
+  signature:
+    params:
+    - name: process_id
+      type: int
+      optional: true
+    - name: mode
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: pcntl_setpriority
+  signature:
+    params:
+    - name: priority
+      type: int
+    - name: process_id
+      type: int
+      optional: true
+    - name: mode
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: pcntl_signal
+  signature:
+    params:
+    - name: signal
+      type: int
+    - name: handler
+      type: mixed
+    - name: restart_syscalls
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: pcntl_signal_dispatch
+  signature:
+    returnType: bool
+- subject:
+    function: pcntl_signal_get_handler
+  signature:
+    params:
+    - name: signal
+      type: int
+    returnType: int
+- subject:
+    function: pcntl_sigprocmask
+  signature:
+    params:
+    - name: mode
+      type: int
+    - name: signals
+      type: array
+    - name: old_signals
+      type: array
+      optional: true
+    returnType: bool
+- subject:
+    function: pcntl_sigtimedwait
+  signature:
+    params:
+    - name: signals
+      type: array
+    - name: info
+      type: array
+      optional: true
+    - name: seconds
+      type: int
+      optional: true
+    - name: nanoseconds
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: pcntl_sigwaitinfo
+  signature:
+    params:
+    - name: signals
+      type: array
+    - name: info
+      type: array
+      optional: true
+    returnType: int
+- subject:
+    function: pcntl_strerror
+  signature:
+    params:
+    - name: error_code
+      type: int
+    returnType: string
+- subject:
+    function: pcntl_unshare
+  signature:
+    params:
+    - name: flags
+      type: int
+    returnType: bool
+- subject:
+    function: pcntl_wait
+  signature:
+    params:
+    - name: status
+      type: int
+    - name: flags
+      type: int
+      optional: true
+    - name: resource_usage
+      type: array
+      optional: true
+    returnType: int
+- subject:
+    function: pcntl_waitpid
+  signature:
+    params:
+    - name: process_id
+      type: int
+    - name: status
+      type: int
+    - name: flags
+      type: int
+      optional: true
+    - name: resource_usage
+      type: array
+      optional: true
+    returnType: int
+- subject:
+    function: pcntl_wexitstatus
+  signature:
+    params:
+    - name: status
+      type: int
+    returnType: int
+- subject:
+    function: pcntl_wifexited
+  signature:
+    params:
+    - name: status
+      type: int
+    returnType: bool
+- subject:
+    function: pcntl_wifsignaled
+  signature:
+    params:
+    - name: status
+      type: int
+    returnType: bool
+- subject:
+    function: pcntl_wifstopped
+  signature:
+    params:
+    - name: status
+      type: int
+    returnType: bool
+- subject:
+    function: pcntl_wstopsig
+  signature:
+    params:
+    - name: status
+      type: int
+    returnType: int
+- subject:
+    function: pcntl_wtermsig
+  signature:
+    params:
+    - name: status
+      type: int
+    returnType: int

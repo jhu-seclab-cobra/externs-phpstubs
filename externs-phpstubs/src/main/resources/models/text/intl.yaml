@@ -1,0 +1,24 @@
+# Generated from stubs/text/intl.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: intl_error_name
+  signature:
+    params:
+    - name: errorCode
+      type: int
+    returnType: string
+- subject:
+    function: intl_get_error_code
+  signature:
+    returnType: int
+- subject:
+    function: intl_get_error_message
+  signature:
+    returnType: string
+- subject:
+    function: intl_is_failure
+  signature:
+    params:
+    - name: errorCode
+      type: int
+    returnType: bool

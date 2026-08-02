@@ -1,0 +1,44 @@
+# Generated from stubs/xml/libxml.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: libxml_clear_errors
+  signature:
+    returnType: void
+- subject:
+    function: libxml_disable_entity_loader
+  signature:
+    params:
+    - name: disable
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: libxml_get_errors
+  signature:
+    returnType: array
+- subject:
+    function: libxml_get_last_error
+  signature:
+    returnType: mixed
+- subject:
+    function: libxml_set_external_entity_loader
+  signature:
+    params:
+    - name: resolver_function
+      type: mixed
+    returnType: bool
+- subject:
+    function: libxml_set_streams_context
+  signature:
+    params:
+    - name: context
+      type: resource
+    returnType: void
+- subject:
+    function: libxml_use_internal_errors
+  signature:
+    params:
+    - name: use_errors
+      type: bool
+      optional: true
+    returnType: bool

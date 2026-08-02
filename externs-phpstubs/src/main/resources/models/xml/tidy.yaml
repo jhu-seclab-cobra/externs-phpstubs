@@ -1,0 +1,289 @@
+# Generated from stubs/xml/tidy.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: tidy_access_count
+  signature:
+    params:
+    - name: tidy
+      type: mixed
+    returnType: int
+- subject:
+    function: tidy_clean_repair
+  signature:
+    params:
+    - name: tidy
+      type: mixed
+    returnType: bool
+- subject:
+    function: tidy_config_count
+  signature:
+    params:
+    - name: tidy
+      type: mixed
+    returnType: int
+- subject:
+    function: tidy_diagnose
+  signature:
+    params:
+    - name: tidy
+      type: mixed
+    returnType: bool
+- subject:
+    function: tidy_error_count
+  signature:
+    params:
+    - name: tidy
+      type: mixed
+    returnType: int
+- subject:
+    function: tidy_get_body
+  signature:
+    params:
+    - name: tidy
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: tidy_get_config
+  signature:
+    params:
+    - name: tidy
+      type: mixed
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: tidy_get_error_buffer
+  signature:
+    params:
+    - name: tidy
+      type: mixed
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: tidy_get_head
+  signature:
+    params:
+    - name: tidy
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: tidy_get_html
+  signature:
+    params:
+    - name: tidy
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: tidy_get_html_ver
+  signature:
+    params:
+    - name: tidy
+      type: mixed
+    returnType: int
+- subject:
+    function: tidy_get_opt_doc
+  signature:
+    params:
+    - name: tidy
+      type: mixed
+    - name: option
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: tidy_get_output
+  signature:
+    params:
+    - name: tidy
+      type: mixed
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: tidy_get_release
+  signature:
+    returnType: string
+- subject:
+    function: tidy_get_root
+  signature:
+    params:
+    - name: tidy
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: tidy_get_status
+  signature:
+    params:
+    - name: tidy
+      type: mixed
+    returnType: int
+- subject:
+    function: tidy_getopt
+  signature:
+    params:
+    - name: tidy
+      type: mixed
+    - name: option
+      type: string
+    returnType: bool
+- subject:
+    function: tidy_is_xhtml
+  signature:
+    params:
+    - name: tidy
+      type: mixed
+    returnType: bool
+- subject:
+    function: tidy_is_xml
+  signature:
+    params:
+    - name: tidy
+      type: mixed
+    returnType: bool
+- subject:
+    function: tidy_load_config
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: encoding
+      type: string
+    returnType: void
+- subject:
+    function: tidy_parse_file
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: config
+      type: array
+      optional: true
+    - name: encoding
+      type: string
+      optional: true
+    - name: useIncludePath
+      type: bool
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: tidy_parse_string
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: config
+      type: array
+      optional: true
+    - name: encoding
+      type: string
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: tidy_repair_file
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: config
+      type: array
+      optional: true
+    - name: encoding
+      type: string
+      optional: true
+    - name: useIncludePath
+      type: bool
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: tidy_repair_string
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: config
+      type: array
+      optional: true
+    - name: encoding
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: tidy_reset_config
+  signature:
+    returnType: bool
+- subject:
+    function: tidy_save_config
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: bool
+- subject:
+    function: tidy_set_encoding
+  signature:
+    params:
+    - name: encoding
+      type: string
+    returnType: bool
+- subject:
+    function: tidy_setopt
+  signature:
+    params:
+    - name: option
+      type: string
+    - name: value
+      type: mixed
+    returnType: bool
+- subject:
+    function: tidy_warning_count
+  signature:
+    params:
+    - name: tidy
+      type: mixed
+    returnType: int

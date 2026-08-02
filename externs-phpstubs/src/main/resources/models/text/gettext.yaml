@@ -1,0 +1,66 @@
+# Generated from stubs/text/gettext.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: bindtextdomain
+  signature:
+    params:
+    - name: domain
+      type: string
+    - name: directory
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: dgettext
+  signature:
+    params:
+    - name: domain
+      type: string
+    - name: message
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gettext
+  signature:
+    params:
+    - name: message
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: ngettext
+  signature:
+    params:
+    - name: singular
+      type: string
+    - name: plural
+      type: string
+    - name: count
+      type: int
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: textdomain
+  signature:
+    params:
+    - name: domain
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return

@@ -1,0 +1,233 @@
+# Generated from stubs/system/posix.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: posix_access
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: posix_ctermid
+  signature:
+    returnType: string
+- subject:
+    function: posix_errno
+  signature:
+    returnType: int
+- subject:
+    function: posix_get_last_error
+  signature:
+    returnType: int
+- subject:
+    function: posix_getcwd
+  signature:
+    returnType: string
+- subject:
+    function: posix_getegid
+  signature:
+    returnType: int
+- subject:
+    function: posix_geteuid
+  signature:
+    returnType: int
+- subject:
+    function: posix_getgid
+  signature:
+    returnType: int
+- subject:
+    function: posix_getgrgid
+  signature:
+    params:
+    - name: group_id
+      type: int
+    returnType: array
+- subject:
+    function: posix_getgrnam
+  signature:
+    params:
+    - name: name
+      type: string
+    returnType: array
+- subject:
+    function: posix_getgroups
+  signature:
+    returnType: array
+- subject:
+    function: posix_getlogin
+  signature:
+    returnType: string
+- subject:
+    function: posix_getpgid
+  signature:
+    params:
+    - name: process_id
+      type: int
+    returnType: int
+- subject:
+    function: posix_getpgrp
+  signature:
+    returnType: int
+- subject:
+    function: posix_getpid
+  signature:
+    returnType: int
+- subject:
+    function: posix_getppid
+  signature:
+    returnType: int
+- subject:
+    function: posix_getpwnam
+  signature:
+    params:
+    - name: username
+      type: string
+    returnType: array
+- subject:
+    function: posix_getpwuid
+  signature:
+    params:
+    - name: user_id
+      type: int
+    returnType: array
+- subject:
+    function: posix_getrlimit
+  signature:
+    returnType: array
+- subject:
+    function: posix_getsid
+  signature:
+    params:
+    - name: process_id
+      type: int
+    returnType: int
+- subject:
+    function: posix_getuid
+  signature:
+    returnType: int
+- subject:
+    function: posix_initgroups
+  signature:
+    params:
+    - name: username
+      type: string
+    - name: group_id
+      type: int
+    returnType: bool
+- subject:
+    function: posix_isatty
+  signature:
+    params:
+    - name: file_descriptor
+      type: int
+    returnType: bool
+- subject:
+    function: posix_kill
+  signature:
+    params:
+    - name: process_id
+      type: int
+    - name: signal
+      type: int
+    returnType: bool
+- subject:
+    function: posix_mkfifo
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: permissions
+      type: int
+    returnType: bool
+- subject:
+    function: posix_mknod
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: flags
+      type: int
+    - name: major
+      type: int
+      optional: true
+    - name: minor
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: posix_setegid
+  signature:
+    params:
+    - name: group_id
+      type: int
+    returnType: bool
+- subject:
+    function: posix_seteuid
+  signature:
+    params:
+    - name: user_id
+      type: int
+    returnType: bool
+- subject:
+    function: posix_setgid
+  signature:
+    params:
+    - name: group_id
+      type: int
+    returnType: bool
+- subject:
+    function: posix_setpgid
+  signature:
+    params:
+    - name: process_id
+      type: int
+    - name: process_group_id
+      type: int
+    returnType: bool
+- subject:
+    function: posix_setrlimit
+  signature:
+    params:
+    - name: resource
+      type: int
+    - name: soft_limit
+      type: int
+    - name: hard_limit
+      type: int
+    returnType: bool
+- subject:
+    function: posix_setsid
+  signature:
+    returnType: int
+- subject:
+    function: posix_setuid
+  signature:
+    params:
+    - name: user_id
+      type: int
+    returnType: bool
+- subject:
+    function: posix_strerror
+  signature:
+    params:
+    - name: error_code
+      type: int
+    returnType: string
+- subject:
+    function: posix_times
+  signature:
+    returnType: array
+- subject:
+    function: posix_ttyname
+  signature:
+    params:
+    - name: file_descriptor
+      type: int
+    returnType: string
+- subject:
+    function: posix_uname
+  signature:
+    returnType: array

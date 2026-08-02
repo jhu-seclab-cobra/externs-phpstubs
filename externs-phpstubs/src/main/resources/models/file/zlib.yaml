@@ -1,0 +1,215 @@
+# Generated from stubs/file/zlib.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: gzclose
+  signature:
+    params:
+    - name: stream
+      type: resource
+    returnType: bool
+- subject:
+    function: gzcompress
+  signature:
+    params:
+    - name: data
+      type: string
+    - name: level
+      type: int
+      optional: true
+    - name: encoding
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gzdecode
+  signature:
+    params:
+    - name: data
+      type: string
+    - name: max_length
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gzdeflate
+  signature:
+    params:
+    - name: data
+      type: string
+    - name: level
+      type: int
+      optional: true
+    - name: encoding
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gzencode
+  signature:
+    params:
+    - name: data
+      type: string
+    - name: level
+      type: int
+      optional: true
+    - name: encoding
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gzeof
+  signature:
+    params:
+    - name: stream
+      type: resource
+    returnType: bool
+- subject:
+    function: gzfile
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: use_include_path
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    function: gzgetc
+  signature:
+    params:
+    - name: stream
+      type: resource
+    returnType: string
+- subject:
+    function: gzgets
+  signature:
+    params:
+    - name: stream
+      type: resource
+    - name: length
+      type: int
+      optional: true
+    returnType: string
+- subject:
+    function: gzinflate
+  signature:
+    params:
+    - name: data
+      type: string
+    - name: max_length
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gzopen
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: mode
+      type: string
+    - name: use_include_path
+      type: int
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: gzpassthru
+  signature:
+    params:
+    - name: stream
+      type: resource
+    returnType: int
+- subject:
+    function: gzputs
+  signature:
+    params:
+    - name: stream
+      type: resource
+    - name: data
+      type: string
+    - name: length
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: gzread
+  signature:
+    params:
+    - name: stream
+      type: resource
+    - name: length
+      type: int
+    returnType: string
+- subject:
+    function: gzrewind
+  signature:
+    params:
+    - name: stream
+      type: resource
+    returnType: bool
+- subject:
+    function: gzseek
+  signature:
+    params:
+    - name: stream
+      type: resource
+    - name: offset
+      type: int
+    - name: whence
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: gztell
+  signature:
+    params:
+    - name: stream
+      type: resource
+    returnType: int
+- subject:
+    function: gzuncompress
+  signature:
+    params:
+    - name: data
+      type: string
+    - name: max_length
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gzwrite
+  signature:
+    params:
+    - name: stream
+      type: resource
+    - name: data
+      type: string
+    - name: length
+      type: int
+      optional: true
+    returnType: int

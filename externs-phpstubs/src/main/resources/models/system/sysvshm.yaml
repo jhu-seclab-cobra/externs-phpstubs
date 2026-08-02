@@ -1,0 +1,79 @@
+# Generated from stubs/system/sysvshm.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: shm_attach
+  signature:
+    params:
+    - name: key
+      type: int
+    - name: size
+      type: int
+      optional: true
+    - name: permissions
+      type: int
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: shm_detach
+  signature:
+    params:
+    - name: shm
+      type: mixed
+    returnType: bool
+- subject:
+    function: shm_get_var
+  signature:
+    params:
+    - name: shm
+      type: mixed
+    - name: key
+      type: int
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: shm_has_var
+  signature:
+    params:
+    - name: shm
+      type: mixed
+    - name: key
+      type: int
+    returnType: bool
+- subject:
+    function: shm_put_var
+  signature:
+    params:
+    - name: shm
+      type: mixed
+    - name: key
+      type: int
+    - name: value
+      type: mixed
+    returnType: bool
+- subject:
+    function: shm_remove
+  signature:
+    params:
+    - name: shm
+      type: mixed
+    returnType: bool
+- subject:
+    function: shm_remove_var
+  signature:
+    params:
+    - name: shm
+      type: mixed
+    - name: key
+      type: int
+    returnType: bool

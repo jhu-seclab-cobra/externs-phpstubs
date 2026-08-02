@@ -1,0 +1,414 @@
+# Generated from stubs/crypto/mcrypt.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: mcrypt_cbc
+  signature:
+    params:
+    - name: cipher
+      type: int
+    - name: key
+      type: string
+    - name: data
+      type: string
+    - name: mode
+      type: int
+    - name: iv
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: mcrypt_cfb
+  signature:
+    params:
+    - name: cipher
+      type: int
+    - name: key
+      type: string
+    - name: data
+      type: string
+    - name: mode
+      type: int
+    - name: iv
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: mcrypt_create_iv
+  signature:
+    params:
+    - name: size
+      type: int
+    - name: source
+      type: int
+      optional: true
+    returnType: string
+- subject:
+    function: mcrypt_decrypt
+  signature:
+    params:
+    - name: cipher
+      type: string
+    - name: key
+      type: string
+    - name: data
+      type: string
+    - name: mode
+      type: string
+    - name: iv
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: mcrypt_ecb
+  signature:
+    params:
+    - name: cipher
+      type: int
+    - name: key
+      type: string
+    - name: data
+      type: string
+    - name: mode
+      type: int
+    - name: iv
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: mcrypt_enc_get_algorithms_name
+  signature:
+    params:
+    - name: td
+      type: resource
+    returnType: string
+- subject:
+    function: mcrypt_enc_get_block_size
+  signature:
+    params:
+    - name: td
+      type: resource
+    returnType: int
+- subject:
+    function: mcrypt_enc_get_iv_size
+  signature:
+    params:
+    - name: td
+      type: resource
+    returnType: int
+- subject:
+    function: mcrypt_enc_get_key_size
+  signature:
+    params:
+    - name: td
+      type: resource
+    returnType: int
+- subject:
+    function: mcrypt_enc_get_modes_name
+  signature:
+    params:
+    - name: td
+      type: resource
+    returnType: string
+- subject:
+    function: mcrypt_enc_get_supported_key_sizes
+  signature:
+    params:
+    - name: td
+      type: resource
+    returnType: array
+- subject:
+    function: mcrypt_enc_is_block_algorithm
+  signature:
+    params:
+    - name: td
+      type: resource
+    returnType: bool
+- subject:
+    function: mcrypt_enc_is_block_algorithm_mode
+  signature:
+    params:
+    - name: td
+      type: resource
+    returnType: bool
+- subject:
+    function: mcrypt_enc_is_block_mode
+  signature:
+    params:
+    - name: td
+      type: resource
+    returnType: bool
+- subject:
+    function: mcrypt_enc_self_test
+  signature:
+    params:
+    - name: td
+      type: resource
+    returnType: int
+- subject:
+    function: mcrypt_encrypt
+  signature:
+    params:
+    - name: cipher
+      type: string
+    - name: key
+      type: string
+    - name: data
+      type: string
+    - name: mode
+      type: string
+    - name: iv
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: mcrypt_generic
+  signature:
+    params:
+    - name: td
+      type: resource
+    - name: data
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: mcrypt_generic_deinit
+  signature:
+    params:
+    - name: td
+      type: resource
+    returnType: bool
+- subject:
+    function: mcrypt_generic_end
+  signature:
+    params:
+    - name: td
+      type: resource
+    returnType: bool
+- subject:
+    function: mcrypt_generic_init
+  signature:
+    params:
+    - name: td
+      type: resource
+    - name: key
+      type: string
+    - name: iv
+      type: string
+    returnType: int
+- subject:
+    function: mcrypt_get_block_size
+  signature:
+    params:
+    - name: cipher
+      type: int
+    - name: module
+      type: string
+    returnType: int
+- subject:
+    function: mcrypt_get_cipher_name
+  signature:
+    params:
+    - name: cipher
+      type: int
+    returnType: string
+- subject:
+    function: mcrypt_get_iv_size
+  signature:
+    params:
+    - name: cipher
+      type: int
+    - name: module
+      type: string
+    returnType: int
+- subject:
+    function: mcrypt_get_key_size
+  signature:
+    params:
+    - name: cipher
+      type: int
+    - name: module
+      type: string
+    returnType: int
+- subject:
+    function: mcrypt_list_algorithms
+  signature:
+    params:
+    - name: lib_dir
+      type: string
+      optional: true
+    returnType: array
+- subject:
+    function: mcrypt_list_modes
+  signature:
+    params:
+    - name: lib_dir
+      type: string
+      optional: true
+    returnType: array
+- subject:
+    function: mcrypt_module_close
+  signature:
+    params:
+    - name: td
+      type: resource
+    returnType: bool
+- subject:
+    function: mcrypt_module_get_algo_block_size
+  signature:
+    params:
+    - name: algorithm
+      type: string
+    - name: lib_dir
+      type: string
+      optional: true
+    returnType: int
+- subject:
+    function: mcrypt_module_get_algo_key_size
+  signature:
+    params:
+    - name: algorithm
+      type: string
+    - name: lib_dir
+      type: string
+      optional: true
+    returnType: int
+- subject:
+    function: mcrypt_module_get_supported_key_sizes
+  signature:
+    params:
+    - name: algorithm
+      type: string
+    - name: lib_dir
+      type: string
+      optional: true
+    returnType: array
+- subject:
+    function: mcrypt_module_is_block_algorithm
+  signature:
+    params:
+    - name: algorithm
+      type: string
+    - name: lib_dir
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: mcrypt_module_is_block_algorithm_mode
+  signature:
+    params:
+    - name: mode
+      type: string
+    - name: lib_dir
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: mcrypt_module_is_block_mode
+  signature:
+    params:
+    - name: mode
+      type: string
+    - name: lib_dir
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: mcrypt_module_open
+  signature:
+    params:
+    - name: cipher
+      type: string
+    - name: cipher_directory
+      type: string
+    - name: mode
+      type: string
+    - name: mode_directory
+      type: string
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: mcrypt_module_self_test
+  signature:
+    params:
+    - name: algorithm
+      type: string
+    - name: lib_dir
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: mcrypt_ofb
+  signature:
+    params:
+    - name: cipher
+      type: int
+    - name: key
+      type: string
+    - name: data
+      type: string
+    - name: mode
+      type: int
+    - name: iv
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(4)
+    to: return

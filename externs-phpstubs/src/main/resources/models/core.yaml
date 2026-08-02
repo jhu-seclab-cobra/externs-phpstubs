@@ -1,0 +1,1659 @@
+# Generated from stubs/core.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    class: exception
+  signature:
+    classifier: class
+- subject:
+    class: error
+  signature:
+    classifier: class
+- subject:
+    class: typeerror
+  signature:
+    classifier: class
+- subject:
+    class: valueerror
+  signature:
+    classifier: class
+- subject:
+    class: argumentcounterror
+  signature:
+    classifier: class
+- subject:
+    class: arithmeticerror
+  signature:
+    classifier: class
+- subject:
+    class: divisionbyzeroerror
+  signature:
+    classifier: class
+- subject:
+    class: parseerror
+  signature:
+    classifier: class
+- subject:
+    class: compileerror
+  signature:
+    classifier: class
+- subject:
+    class: runtimeexception
+  signature:
+    classifier: class
+- subject:
+    class: logicexception
+  signature:
+    classifier: class
+- subject:
+    class: invalidargumentexception
+  signature:
+    classifier: class
+- subject:
+    class: outofrangeexception
+  signature:
+    classifier: class
+- subject:
+    class: outofboundsexception
+  signature:
+    classifier: class
+- subject:
+    class: overflowexception
+  signature:
+    classifier: class
+- subject:
+    class: underflowexception
+  signature:
+    classifier: class
+- subject:
+    class: unexpectedvalueexception
+  signature:
+    classifier: class
+- subject:
+    class: badmethodcallexception
+  signature:
+    classifier: class
+- subject:
+    class: badfunctioncallexception
+  signature:
+    classifier: class
+- subject:
+    class: domainexception
+  signature:
+    classifier: class
+- subject:
+    class: lengthexception
+  signature:
+    classifier: class
+- subject:
+    class: rangeexception
+  signature:
+    classifier: class
+- subject:
+    class: stdclass
+  signature:
+    classifier: class
+- subject:
+    class: closure
+  signature:
+    classifier: class
+- subject:
+    class: generator
+  signature:
+    classifier: class
+- subject:
+    class: fiber
+  signature:
+    classifier: class
+- subject:
+    class: weakreference
+  signature:
+    classifier: class
+- subject:
+    class: weakmap
+  signature:
+    classifier: class
+- subject:
+    class: stringable
+  signature:
+    classifier: class
+- subject:
+    class: throwable
+  signature:
+    classifier: class
+- subject:
+    class: serializable
+  signature:
+    classifier: class
+- subject:
+    class: traversable
+  signature:
+    classifier: class
+- subject:
+    class: iterator
+  signature:
+    classifier: class
+- subject:
+    class: iteratoraggregate
+  signature:
+    classifier: class
+- subject:
+    class: arrayaccess
+  signature:
+    classifier: class
+- subject:
+    class: countable
+  signature:
+    classifier: class
+- subject:
+    class: jsonserializable
+  signature:
+    classifier: class
+- subject:
+    class: arrayobject
+  signature:
+    classifier: class
+- subject:
+    class: arrayiterator
+  signature:
+    classifier: class
+- subject:
+    class: splfileinfo
+  signature:
+    classifier: class
+- subject:
+    class: splfileobject
+  signature:
+    classifier: class
+- subject:
+    class: splfixedarray
+  signature:
+    classifier: class
+- subject:
+    class: splstack
+  signature:
+    classifier: class
+- subject:
+    class: splqueue
+  signature:
+    classifier: class
+- subject:
+    class: splheap
+  signature:
+    classifier: class
+- subject:
+    class: splpriorityqueue
+  signature:
+    classifier: class
+- subject:
+    class: splobjectstorage
+  signature:
+    classifier: class
+- subject:
+    class: directoryiterator
+  signature:
+    classifier: class
+- subject:
+    class: recursivedirectoryiterator
+  signature:
+    classifier: class
+- subject:
+    class: datetime
+  signature:
+    classifier: class
+- subject:
+    class: datetimeimmutable
+  signature:
+    classifier: class
+- subject:
+    class: datetimeinterface
+  signature:
+    classifier: class
+- subject:
+    class: datetimezone
+  signature:
+    classifier: class
+- subject:
+    class: dateinterval
+  signature:
+    classifier: class
+- subject:
+    class: dateperiod
+  signature:
+    classifier: class
+- subject:
+    class: pdo
+  signature:
+    classifier: class
+- subject:
+    class: pdostatement
+  signature:
+    classifier: class
+- subject:
+    class: pdoexception
+  signature:
+    classifier: class
+- subject:
+    class: mysqli
+  signature:
+    classifier: class
+- subject:
+    class: mysqli_result
+  signature:
+    classifier: class
+- subject:
+    class: mysqli_stmt
+  signature:
+    classifier: class
+- subject:
+    class: mysqli_driver
+  signature:
+    classifier: class
+- subject:
+    class: curlhandle
+  signature:
+    classifier: class
+- subject:
+    class: curlmultihandle
+  signature:
+    classifier: class
+- subject:
+    class: curlsharehandle
+  signature:
+    classifier: class
+- subject:
+    class: reflectionclass
+  signature:
+    classifier: class
+- subject:
+    class: reflectionmethod
+  signature:
+    classifier: class
+- subject:
+    class: reflectionfunction
+  signature:
+    classifier: class
+- subject:
+    class: reflectionproperty
+  signature:
+    classifier: class
+- subject:
+    class: reflectionparameter
+  signature:
+    classifier: class
+- subject:
+    class: reflectiontype
+  signature:
+    classifier: class
+- subject:
+    class: reflectionnamedtype
+  signature:
+    classifier: class
+- subject:
+    class: reflectionuniontype
+  signature:
+    classifier: class
+- subject:
+    class: reflectionintersectiontype
+  signature:
+    classifier: class
+- subject:
+    class: domnode
+  signature:
+    classifier: class
+- subject:
+    class: domdocument
+  signature:
+    classifier: class
+- subject:
+    class: domelement
+  signature:
+    classifier: class
+- subject:
+    class: domnodelist
+  signature:
+    classifier: class
+- subject:
+    class: domattr
+  signature:
+    classifier: class
+- subject:
+    class: domtext
+  signature:
+    classifier: class
+- subject:
+    class: domcomment
+  signature:
+    classifier: class
+- subject:
+    class: simplexmlelement
+  signature:
+    classifier: class
+- subject:
+    class: xmlreader
+  signature:
+    classifier: class
+- subject:
+    class: xmlwriter
+  signature:
+    classifier: class
+- subject:
+    class: intldateformatter
+  signature:
+    classifier: class
+- subject:
+    class: numberformatter
+  signature:
+    classifier: class
+- subject:
+    class: collator
+  signature:
+    classifier: class
+- subject:
+    class: messageformatter
+  signature:
+    classifier: class
+- subject:
+    class: locale
+  signature:
+    classifier: class
+- subject:
+    class: normalizer
+  signature:
+    classifier: class
+- subject:
+    class: resourcebundle
+  signature:
+    classifier: class
+- subject:
+    class: transliterator
+  signature:
+    classifier: class
+- subject:
+    class: spoofchecker
+  signature:
+    classifier: class
+- subject:
+    class: intlcalendar
+  signature:
+    classifier: class
+- subject:
+    class: intltimezone
+  signature:
+    classifier: class
+- subject:
+    class: gdimage
+  signature:
+    classifier: class
+- subject:
+    class: sqlite3
+  signature:
+    classifier: class
+- subject:
+    class: sqlite3stmt
+  signature:
+    classifier: class
+- subject:
+    class: sqlite3result
+  signature:
+    classifier: class
+- subject:
+    class: ziparchive
+  signature:
+    classifier: class
+- subject:
+    class: redis
+  signature:
+    classifier: class
+- subject:
+    class: memcached
+  signature:
+    classifier: class
+- subject:
+    class: imagick
+  signature:
+    classifier: class
+- subject:
+    class: imagickdraw
+  signature:
+    classifier: class
+- subject:
+    class: imagickpixel
+  signature:
+    classifier: class
+- subject:
+    class: soapclient
+  signature:
+    classifier: class
+- subject:
+    class: soapserver
+  signature:
+    classifier: class
+- subject:
+    class: soapfault
+  signature:
+    classifier: class
+- subject:
+    method: Exception::getMessage
+  signature:
+    returnType: string
+- subject:
+    method: Exception::getCode
+  signature:
+    returnType: int
+- subject:
+    class_constant: Exception::SEVERITY_ERROR
+  signature:
+    type: int
+    value: '1'
+- subject:
+    constant: 'TRUE'
+  signature:
+    type: bool
+    value: 'true'
+- subject:
+    constant: 'FALSE'
+  signature:
+    type: bool
+    value: 'false'
+- subject:
+    constant: 'NULL'
+  signature:
+    type: 'null'
+    value: 'null'
+- subject:
+    constant: PHP_INT_MAX
+  signature:
+    type: int
+    value: '9223372036854775807'
+- subject:
+    constant: PHP_INT_MIN
+  signature:
+    type: int
+    value: '-9223372036854775808'
+- subject:
+    constant: PHP_INT_SIZE
+  signature:
+    type: int
+    value: '8'
+- subject:
+    constant: PHP_FLOAT_MAX
+  signature:
+    type: float
+    value: '1.7976931348623E+308'
+- subject:
+    constant: PHP_FLOAT_MIN
+  signature:
+    type: float
+    value: '2.2250738585072E-308'
+- subject:
+    constant: PHP_FLOAT_EPSILON
+  signature:
+    type: float
+    value: '2.2204460492503E-16'
+- subject:
+    constant: PHP_FLOAT_DIG
+  signature:
+    type: int
+    value: '15'
+- subject:
+    constant: PHP_FLOAT_INF
+  signature:
+    type: float
+    value: INF
+- subject:
+    constant: PHP_FLOAT_NAN
+  signature:
+    type: float
+    value: NAN
+- subject:
+    constant: PHP_MAXPATHLEN
+  signature:
+    type: int
+    value: '4096'
+- subject:
+    constant: PHP_EOL
+  signature:
+    type: string
+    value: '
+
+      '
+- subject:
+    constant: PHP_SAPI
+  signature:
+    type: string
+    value: cli
+- subject:
+    constant: PHP_MAJOR_VERSION
+  signature:
+    type: int
+    value: '8'
+- subject:
+    constant: PHP_MINOR_VERSION
+  signature:
+    type: int
+    value: '0'
+- subject:
+    constant: PHP_RELEASE_VERSION
+  signature:
+    type: int
+    value: '0'
+- subject:
+    constant: PHP_VERSION
+  signature:
+    type: string
+    value: 8.0.0
+- subject:
+    constant: PHP_VERSION_ID
+  signature:
+    type: int
+    value: '80000'
+- subject:
+    constant: PHP_OS
+  signature:
+    type: string
+    value: Linux
+- subject:
+    constant: PHP_OS_FAMILY
+  signature:
+    type: string
+    value: Linux
+- subject:
+    constant: PHP_PREFIX
+  signature:
+    type: string
+    value: /usr
+- subject:
+    constant: PHP_BINDIR
+  signature:
+    type: string
+    value: /usr/bin
+- subject:
+    constant: PHP_LIBDIR
+  signature:
+    type: string
+    value: /usr/lib
+- subject:
+    constant: PHP_DATADIR
+  signature:
+    type: string
+    value: /usr/share/php
+- subject:
+    constant: PHP_EXTENSION_DIR
+  signature:
+    type: string
+    value: /usr/lib/php
+- subject:
+    constant: PHP_EXTRA_VERSION
+  signature:
+    type: string
+    value: ''
+- subject:
+    constant: STDIN
+  signature:
+    type: resource
+    value: STDIN
+- subject:
+    constant: STDOUT
+  signature:
+    type: resource
+    value: STDOUT
+- subject:
+    constant: STDERR
+  signature:
+    type: resource
+    value: STDERR
+- subject:
+    constant: DIRECTORY_SEPARATOR
+  signature:
+    type: string
+    value: /
+- subject:
+    constant: PATH_SEPARATOR
+  signature:
+    type: string
+    value: ':'
+- subject:
+    constant: SORT_REGULAR
+  signature:
+    type: int
+    value: '0'
+- subject:
+    constant: SORT_NUMERIC
+  signature:
+    type: int
+    value: '1'
+- subject:
+    constant: SORT_STRING
+  signature:
+    type: int
+    value: '2'
+- subject:
+    constant: SORT_ASC
+  signature:
+    type: int
+    value: '4'
+- subject:
+    constant: SORT_DESC
+  signature:
+    type: int
+    value: '3'
+- subject:
+    constant: SORT_LOCALE_STRING
+  signature:
+    type: int
+    value: '5'
+- subject:
+    constant: SORT_NATURAL
+  signature:
+    type: int
+    value: '6'
+- subject:
+    constant: SORT_FLAG_CASE
+  signature:
+    type: int
+    value: '8'
+- subject:
+    constant: CASE_LOWER
+  signature:
+    type: int
+    value: '0'
+- subject:
+    constant: CASE_UPPER
+  signature:
+    type: int
+    value: '1'
+- subject:
+    constant: ARRAY_FILTER_USE_BOTH
+  signature:
+    type: int
+    value: '1'
+- subject:
+    constant: ARRAY_FILTER_USE_KEY
+  signature:
+    type: int
+    value: '2'
+- subject:
+    constant: ARRAY_UNIQUE_REGULAR
+  signature:
+    type: int
+    value: '0'
+- subject:
+    constant: SEEK_SET
+  signature:
+    type: int
+    value: '0'
+- subject:
+    constant: SEEK_CUR
+  signature:
+    type: int
+    value: '1'
+- subject:
+    constant: SEEK_END
+  signature:
+    type: int
+    value: '2'
+- subject:
+    constant: LOCK_SH
+  signature:
+    type: int
+    value: '1'
+- subject:
+    constant: LOCK_EX
+  signature:
+    type: int
+    value: '2'
+- subject:
+    constant: LOCK_UN
+  signature:
+    type: int
+    value: '3'
+- subject:
+    constant: LOCK_NB
+  signature:
+    type: int
+    value: '4'
+- subject:
+    constant: FILE_USE_INCLUDE_PATH
+  signature:
+    type: int
+    value: '1'
+- subject:
+    constant: FILE_APPEND
+  signature:
+    type: int
+    value: '8'
+- subject:
+    constant: FILE_IGNORE_NEW_LINES
+  signature:
+    type: int
+    value: '2'
+- subject:
+    constant: FILE_SKIP_EMPTY_LINES
+  signature:
+    type: int
+    value: '4'
+- subject:
+    constant: GLOB_BRACE
+  signature:
+    type: int
+    value: '1024'
+- subject:
+    constant: GLOB_MARK
+  signature:
+    type: int
+    value: '2'
+- subject:
+    constant: GLOB_NOSORT
+  signature:
+    type: int
+    value: '4'
+- subject:
+    constant: GLOB_NOCHECK
+  signature:
+    type: int
+    value: '16'
+- subject:
+    constant: GLOB_NOESCAPE
+  signature:
+    type: int
+    value: '64'
+- subject:
+    constant: GLOB_ONLYDIR
+  signature:
+    type: int
+    value: '8192'
+- subject:
+    constant: PATHINFO_DIRNAME
+  signature:
+    type: int
+    value: '1'
+- subject:
+    constant: PATHINFO_BASENAME
+  signature:
+    type: int
+    value: '2'
+- subject:
+    constant: PATHINFO_EXTENSION
+  signature:
+    type: int
+    value: '4'
+- subject:
+    constant: PATHINFO_FILENAME
+  signature:
+    type: int
+    value: '8'
+- subject:
+    constant: PREG_PATTERN_ORDER
+  signature:
+    type: int
+    value: '1'
+- subject:
+    constant: PREG_SET_ORDER
+  signature:
+    type: int
+    value: '2'
+- subject:
+    constant: PREG_OFFSET_CAPTURE
+  signature:
+    type: int
+    value: '256'
+- subject:
+    constant: PREG_UNMATCHED_AS_NULL
+  signature:
+    type: int
+    value: '512'
+- subject:
+    constant: PREG_SPLIT_NO_EMPTY
+  signature:
+    type: int
+    value: '1'
+- subject:
+    constant: PREG_SPLIT_DELIM_CAPTURE
+  signature:
+    type: int
+    value: '2'
+- subject:
+    constant: PREG_SPLIT_OFFSET_CAPTURE
+  signature:
+    type: int
+    value: '4'
+- subject:
+    constant: JSON_ERROR_NONE
+  signature:
+    type: int
+    value: '0'
+- subject:
+    constant: JSON_ERROR_DEPTH
+  signature:
+    type: int
+    value: '1'
+- subject:
+    constant: JSON_ERROR_STATE_MISMATCH
+  signature:
+    type: int
+    value: '2'
+- subject:
+    constant: JSON_ERROR_CTRL_CHAR
+  signature:
+    type: int
+    value: '3'
+- subject:
+    constant: JSON_ERROR_SYNTAX
+  signature:
+    type: int
+    value: '4'
+- subject:
+    constant: JSON_ERROR_UTF8
+  signature:
+    type: int
+    value: '5'
+- subject:
+    constant: JSON_HEX_TAG
+  signature:
+    type: int
+    value: '1'
+- subject:
+    constant: JSON_HEX_AMP
+  signature:
+    type: int
+    value: '2'
+- subject:
+    constant: JSON_HEX_APOS
+  signature:
+    type: int
+    value: '4'
+- subject:
+    constant: JSON_HEX_QUOT
+  signature:
+    type: int
+    value: '8'
+- subject:
+    constant: JSON_FORCE_OBJECT
+  signature:
+    type: int
+    value: '16'
+- subject:
+    constant: JSON_NUMERIC_CHECK
+  signature:
+    type: int
+    value: '32'
+- subject:
+    constant: JSON_UNESCAPED_SLASHES
+  signature:
+    type: int
+    value: '64'
+- subject:
+    constant: JSON_PRETTY_PRINT
+  signature:
+    type: int
+    value: '128'
+- subject:
+    constant: JSON_UNESCAPED_UNICODE
+  signature:
+    type: int
+    value: '256'
+- subject:
+    constant: JSON_PARTIAL_OUTPUT_ON_ERROR
+  signature:
+    type: int
+    value: '512'
+- subject:
+    constant: JSON_BIGINT_AS_STRING
+  signature:
+    type: int
+    value: '2'
+- subject:
+    constant: JSON_THROW_ON_ERROR
+  signature:
+    type: int
+    value: '4194304'
+- subject:
+    constant: ENT_COMPAT
+  signature:
+    type: int
+    value: '2'
+- subject:
+    constant: ENT_QUOTES
+  signature:
+    type: int
+    value: '3'
+- subject:
+    constant: ENT_NOQUOTES
+  signature:
+    type: int
+    value: '0'
+- subject:
+    constant: ENT_HTML401
+  signature:
+    type: int
+    value: '0'
+- subject:
+    constant: ENT_XML1
+  signature:
+    type: int
+    value: '16'
+- subject:
+    constant: ENT_XHTML
+  signature:
+    type: int
+    value: '32'
+- subject:
+    constant: ENT_HTML5
+  signature:
+    type: int
+    value: '48'
+- subject:
+    constant: ENT_SUBSTITUTE
+  signature:
+    type: int
+    value: '8'
+- subject:
+    constant: ENT_DISALLOWED
+  signature:
+    type: int
+    value: '128'
+- subject:
+    constant: STR_PAD_RIGHT
+  signature:
+    type: int
+    value: '1'
+- subject:
+    constant: STR_PAD_LEFT
+  signature:
+    type: int
+    value: '0'
+- subject:
+    constant: STR_PAD_BOTH
+  signature:
+    type: int
+    value: '2'
+- subject:
+    constant: CRYPT_BLOWFISH
+  signature:
+    type: int
+    value: '1'
+- subject:
+    constant: CRYPT_MD5
+  signature:
+    type: int
+    value: '1'
+- subject:
+    constant: CRYPT_SHA256
+  signature:
+    type: int
+    value: '1'
+- subject:
+    constant: CRYPT_SHA512
+  signature:
+    type: int
+    value: '1'
+- subject:
+    constant: PASSWORD_DEFAULT
+  signature:
+    type: string
+    value: 2y
+- subject:
+    constant: PASSWORD_BCRYPT
+  signature:
+    type: string
+    value: 2y
+- subject:
+    constant: PASSWORD_ARGON2I
+  signature:
+    type: string
+    value: argon2i
+- subject:
+    constant: PASSWORD_ARGON2ID
+  signature:
+    type: string
+    value: argon2id
+- subject:
+    constant: FILTER_DEFAULT
+  signature:
+    type: int
+    value: '516'
+- subject:
+    constant: FILTER_VALIDATE_INT
+  signature:
+    type: int
+    value: '257'
+- subject:
+    constant: FILTER_VALIDATE_FLOAT
+  signature:
+    type: int
+    value: '259'
+- subject:
+    constant: FILTER_VALIDATE_EMAIL
+  signature:
+    type: int
+    value: '274'
+- subject:
+    constant: FILTER_VALIDATE_URL
+  signature:
+    type: int
+    value: '273'
+- subject:
+    constant: FILTER_VALIDATE_IP
+  signature:
+    type: int
+    value: '275'
+- subject:
+    constant: FILTER_VALIDATE_BOOLEAN
+  signature:
+    type: int
+    value: '258'
+- subject:
+    constant: FILTER_VALIDATE_DOMAIN
+  signature:
+    type: int
+    value: '277'
+- subject:
+    constant: FILTER_VALIDATE_MAC
+  signature:
+    type: int
+    value: '281'
+- subject:
+    constant: FILTER_SANITIZE_STRING
+  signature:
+    type: int
+    value: '513'
+- subject:
+    constant: FILTER_SANITIZE_STRIPPED
+  signature:
+    type: int
+    value: '513'
+- subject:
+    constant: FILTER_SANITIZE_ENCODED
+  signature:
+    type: int
+    value: '514'
+- subject:
+    constant: FILTER_SANITIZE_SPECIAL_CHARS
+  signature:
+    type: int
+    value: '515'
+- subject:
+    constant: FILTER_SANITIZE_EMAIL
+  signature:
+    type: int
+    value: '517'
+- subject:
+    constant: FILTER_SANITIZE_URL
+  signature:
+    type: int
+    value: '518'
+- subject:
+    constant: FILTER_SANITIZE_NUMBER_INT
+  signature:
+    type: int
+    value: '519'
+- subject:
+    constant: FILTER_SANITIZE_NUMBER_FLOAT
+  signature:
+    type: int
+    value: '520'
+- subject:
+    constant: FILTER_SANITIZE_ADD_SLASHES
+  signature:
+    type: int
+    value: '523'
+- subject:
+    constant: FILTER_FLAG_NONE
+  signature:
+    type: int
+    value: '0'
+- subject:
+    constant: FILTER_FLAG_STRIP_LOW
+  signature:
+    type: int
+    value: '4'
+- subject:
+    constant: FILTER_FLAG_STRIP_HIGH
+  signature:
+    type: int
+    value: '8'
+- subject:
+    constant: FILTER_FLAG_ALLOW_FRACTION
+  signature:
+    type: int
+    value: '4096'
+- subject:
+    constant: FILTER_FLAG_ALLOW_THOUSAND
+  signature:
+    type: int
+    value: '8192'
+- subject:
+    constant: FILTER_FLAG_ALLOW_SCIENTIFIC
+  signature:
+    type: int
+    value: '16384'
+- subject:
+    constant: FILTER_FLAG_NO_ENCODE_QUOTES
+  signature:
+    type: int
+    value: '128'
+- subject:
+    constant: FILTER_FLAG_ENCODE_LOW
+  signature:
+    type: int
+    value: '16'
+- subject:
+    constant: FILTER_FLAG_ENCODE_HIGH
+  signature:
+    type: int
+    value: '32'
+- subject:
+    constant: FILTER_FLAG_ENCODE_AMP
+  signature:
+    type: int
+    value: '64'
+- subject:
+    constant: FILTER_FLAG_IPV4
+  signature:
+    type: int
+    value: '1048576'
+- subject:
+    constant: FILTER_FLAG_IPV6
+  signature:
+    type: int
+    value: '2097152'
+- subject:
+    constant: FILTER_FLAG_NO_RES_RANGE
+  signature:
+    type: int
+    value: '4194304'
+- subject:
+    constant: FILTER_FLAG_NO_PRIV_RANGE
+  signature:
+    type: int
+    value: '8388608'
+- subject:
+    constant: FILTER_FLAG_EMAIL_UNICODE
+  signature:
+    type: int
+    value: '1048576'
+- subject:
+    constant: INPUT_GET
+  signature:
+    type: int
+    value: '1'
+- subject:
+    constant: INPUT_POST
+  signature:
+    type: int
+    value: '0'
+- subject:
+    constant: INPUT_COOKIE
+  signature:
+    type: int
+    value: '2'
+- subject:
+    constant: INPUT_SERVER
+  signature:
+    type: int
+    value: '5'
+- subject:
+    constant: INPUT_ENV
+  signature:
+    type: int
+    value: '4'
+- subject:
+    constant: CURLOPT_URL
+  signature:
+    type: int
+    value: '10002'
+- subject:
+    constant: CURLOPT_RETURNTRANSFER
+  signature:
+    type: int
+    value: '19913'
+- subject:
+    constant: CURLOPT_POST
+  signature:
+    type: int
+    value: '47'
+- subject:
+    constant: CURLOPT_POSTFIELDS
+  signature:
+    type: int
+    value: '10015'
+- subject:
+    constant: CURLOPT_HTTPHEADER
+  signature:
+    type: int
+    value: '10023'
+- subject:
+    constant: CURLOPT_FOLLOWLOCATION
+  signature:
+    type: int
+    value: '52'
+- subject:
+    constant: CURLOPT_TIMEOUT
+  signature:
+    type: int
+    value: '13'
+- subject:
+    constant: CURLOPT_CONNECTTIMEOUT
+  signature:
+    type: int
+    value: '78'
+- subject:
+    constant: CURLOPT_SSL_VERIFYPEER
+  signature:
+    type: int
+    value: '64'
+- subject:
+    constant: CURLOPT_SSL_VERIFYHOST
+  signature:
+    type: int
+    value: '81'
+- subject:
+    constant: CURLOPT_USERAGENT
+  signature:
+    type: int
+    value: '10018'
+- subject:
+    constant: CURLOPT_HEADER
+  signature:
+    type: int
+    value: '42'
+- subject:
+    constant: CURLOPT_NOBODY
+  signature:
+    type: int
+    value: '44'
+- subject:
+    constant: CURLOPT_CUSTOMREQUEST
+  signature:
+    type: int
+    value: '10036'
+- subject:
+    constant: CURLOPT_ENCODING
+  signature:
+    type: int
+    value: '10102'
+- subject:
+    constant: CURLINFO_HTTP_CODE
+  signature:
+    type: int
+    value: '2097154'
+- subject:
+    constant: CURLINFO_CONTENT_TYPE
+  signature:
+    type: int
+    value: '1048594'
+- subject:
+    constant: CURLINFO_HEADER_SIZE
+  signature:
+    type: int
+    value: '2097163'
+- subject:
+    constant: E_ERROR
+  signature:
+    type: int
+    value: '1'
+- subject:
+    constant: E_WARNING
+  signature:
+    type: int
+    value: '2'
+- subject:
+    constant: E_PARSE
+  signature:
+    type: int
+    value: '4'
+- subject:
+    constant: E_NOTICE
+  signature:
+    type: int
+    value: '8'
+- subject:
+    constant: E_CORE_ERROR
+  signature:
+    type: int
+    value: '16'
+- subject:
+    constant: E_CORE_WARNING
+  signature:
+    type: int
+    value: '32'
+- subject:
+    constant: E_COMPILE_ERROR
+  signature:
+    type: int
+    value: '64'
+- subject:
+    constant: E_COMPILE_WARNING
+  signature:
+    type: int
+    value: '128'
+- subject:
+    constant: E_USER_ERROR
+  signature:
+    type: int
+    value: '256'
+- subject:
+    constant: E_USER_WARNING
+  signature:
+    type: int
+    value: '512'
+- subject:
+    constant: E_USER_NOTICE
+  signature:
+    type: int
+    value: '1024'
+- subject:
+    constant: E_STRICT
+  signature:
+    type: int
+    value: '2048'
+- subject:
+    constant: E_RECOVERABLE_ERROR
+  signature:
+    type: int
+    value: '4096'
+- subject:
+    constant: E_DEPRECATED
+  signature:
+    type: int
+    value: '8192'
+- subject:
+    constant: E_USER_DEPRECATED
+  signature:
+    type: int
+    value: '16384'
+- subject:
+    constant: E_ALL
+  signature:
+    type: int
+    value: '32767'
+- subject:
+    constant: T_ABSTRACT
+  signature:
+    type: int
+    value: '361'
+- subject:
+    constant: T_STRING
+  signature:
+    type: int
+    value: '312'
+- subject:
+    constant: T_VARIABLE
+  signature:
+    type: int
+    value: '309'
+- subject:
+    constant: T_LNUMBER
+  signature:
+    type: int
+    value: '310'
+- subject:
+    constant: T_DNUMBER
+  signature:
+    type: int
+    value: '311'
+- subject:
+    constant: M_PI
+  signature:
+    type: float
+    value: '3.14159265358979'
+- subject:
+    constant: M_E
+  signature:
+    type: float
+    value: '2.71828182845905'
+- subject:
+    constant: M_LOG2E
+  signature:
+    type: float
+    value: '1.44269504088896'
+- subject:
+    constant: M_LOG10E
+  signature:
+    type: float
+    value: '0.434294481903252'
+- subject:
+    constant: M_LN2
+  signature:
+    type: float
+    value: '0.693147180559945'
+- subject:
+    constant: M_LN10
+  signature:
+    type: float
+    value: '2.30258509299405'
+- subject:
+    constant: M_SQRT2
+  signature:
+    type: float
+    value: '1.41421356237310'
+- subject:
+    constant: M_SQRT3
+  signature:
+    type: float
+    value: '1.73205080756888'
+- subject:
+    constant: INF
+  signature:
+    type: float
+    value: INF
+- subject:
+    constant: NAN
+  signature:
+    type: float
+    value: NAN
+- subject:
+    constant: UPLOAD_ERR_OK
+  signature:
+    type: int
+    value: '0'
+- subject:
+    constant: UPLOAD_ERR_INI_SIZE
+  signature:
+    type: int
+    value: '1'
+- subject:
+    constant: UPLOAD_ERR_FORM_SIZE
+  signature:
+    type: int
+    value: '2'
+- subject:
+    constant: UPLOAD_ERR_PARTIAL
+  signature:
+    type: int
+    value: '3'
+- subject:
+    constant: UPLOAD_ERR_NO_FILE
+  signature:
+    type: int
+    value: '4'
+- subject:
+    constant: UPLOAD_ERR_NO_TMP_DIR
+  signature:
+    type: int
+    value: '6'
+- subject:
+    constant: UPLOAD_ERR_CANT_WRITE
+  signature:
+    type: int
+    value: '7'
+- subject:
+    constant: UPLOAD_ERR_EXTENSION
+  signature:
+    type: int
+    value: '8'
+- subject:
+    constant: MYSQLI_ASSOC
+  signature:
+    type: int
+    value: '1'
+- subject:
+    constant: MYSQLI_NUM
+  signature:
+    type: int
+    value: '2'
+- subject:
+    constant: MYSQLI_BOTH
+  signature:
+    type: int
+    value: '3'
+- subject:
+    constant: MYSQLI_STORE_RESULT
+  signature:
+    type: int
+    value: '0'
+- subject:
+    constant: MYSQLI_USE_RESULT
+  signature:
+    type: int
+    value: '1'
+- subject:
+    constant: PDO_FETCH_ASSOC
+  signature:
+    type: int
+    value: '2'
+- subject:
+    constant: PDO_FETCH_NUM
+  signature:
+    type: int
+    value: '3'
+- subject:
+    constant: PDO_FETCH_BOTH
+  signature:
+    type: int
+    value: '4'
+- subject:
+    constant: PDO_FETCH_OBJ
+  signature:
+    type: int
+    value: '5'
+- subject:
+    constant: PDO_FETCH_COLUMN
+  signature:
+    type: int
+    value: '7'
+- subject:
+    constant: PDO_FETCH_CLASS
+  signature:
+    type: int
+    value: '8'
+- subject:
+    constant: OPENSSL_ALGO_SHA1
+  signature:
+    type: int
+    value: '1'
+- subject:
+    constant: OPENSSL_ALGO_SHA256
+  signature:
+    type: int
+    value: '7'
+- subject:
+    constant: OPENSSL_ALGO_SHA384
+  signature:
+    type: int
+    value: '8'
+- subject:
+    constant: OPENSSL_ALGO_SHA512
+  signature:
+    type: int
+    value: '9'
+- subject:
+    constant: OPENSSL_ALGO_MD5
+  signature:
+    type: int
+    value: '4'
+- subject:
+    constant: LOG_EMERG
+  signature:
+    type: int
+    value: '0'
+- subject:
+    constant: LOG_ALERT
+  signature:
+    type: int
+    value: '1'
+- subject:
+    constant: LOG_CRIT
+  signature:
+    type: int
+    value: '2'
+- subject:
+    constant: LOG_ERR
+  signature:
+    type: int
+    value: '3'
+- subject:
+    constant: LOG_WARNING
+  signature:
+    type: int
+    value: '4'
+- subject:
+    constant: LOG_NOTICE
+  signature:
+    type: int
+    value: '5'
+- subject:
+    constant: LOG_INFO
+  signature:
+    type: int
+    value: '6'
+- subject:
+    constant: LOG_DEBUG
+  signature:
+    type: int
+    value: '7'
+- subject:
+    constant: EXTR_OVERWRITE
+  signature:
+    type: int
+    value: '0'
+- subject:
+    constant: EXTR_SKIP
+  signature:
+    type: int
+    value: '1'
+- subject:
+    constant: EXTR_PREFIX_SAME
+  signature:
+    type: int
+    value: '2'
+- subject:
+    constant: EXTR_PREFIX_ALL
+  signature:
+    type: int
+    value: '3'
+- subject:
+    constant: EXTR_PREFIX_INVALID
+  signature:
+    type: int
+    value: '4'
+- subject:
+    constant: EXTR_IF_EXISTS
+  signature:
+    type: int
+    value: '6'
+- subject:
+    constant: EXTR_PREFIX_IF_EXISTS
+  signature:
+    type: int
+    value: '7'
+- subject:
+    constant: EXTR_REFS
+  signature:
+    type: int
+    value: '256'
+- subject:
+    constant: STREAM_FILTER_READ
+  signature:
+    type: int
+    value: '1'
+- subject:
+    constant: STREAM_FILTER_WRITE
+  signature:
+    type: int
+    value: '2'
+- subject:
+    constant: STREAM_FILTER_ALL
+  signature:
+    type: int
+    value: '3'

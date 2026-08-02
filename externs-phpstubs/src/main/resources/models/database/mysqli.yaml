@@ -1,0 +1,1121 @@
+# Generated from stubs/database/mysqli.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: mysqli_affected_rows
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    returnType: int
+- subject:
+    function: mysqli_autocommit
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    - name: enable
+      type: bool
+    returnType: bool
+- subject:
+    function: mysqli_begin_transaction
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    - name: flags
+      type: int
+      optional: true
+    - name: name
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: mysqli_change_user
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    - name: username
+      type: string
+    - name: password
+      type: string
+    - name: database
+      type: string
+    returnType: bool
+- subject:
+    function: mysqli_character_set_name
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mysqli_close
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    returnType: bool
+- subject:
+    function: mysqli_commit
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    - name: flags
+      type: int
+      optional: true
+    - name: name
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: mysqli_connect
+  signature:
+    params:
+    - name: hostname
+      type: string
+      optional: true
+    - name: username
+      type: string
+      optional: true
+    - name: password
+      type: string
+      optional: true
+    - name: database
+      type: string
+      optional: true
+    - name: port
+      type: int
+      optional: true
+    - name: socket
+      type: string
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+  - from: argument(5)
+    to: return
+- subject:
+    function: mysqli_connect_errno
+  signature:
+    returnType: int
+- subject:
+    function: mysqli_connect_error
+  signature:
+    returnType: string
+- subject:
+    function: mysqli_data_seek
+  signature:
+    params:
+    - name: result
+      type: mixed
+    - name: offset
+      type: int
+    returnType: bool
+- subject:
+    function: mysqli_debug
+  signature:
+    params:
+    - name: options
+      type: string
+    returnType: bool
+- subject:
+    function: mysqli_disable_reads_from_master
+  signature:
+    params:
+    - name: link
+      type: mixed
+    returnType: bool
+- subject:
+    function: mysqli_disable_rpl_parse
+  signature:
+    params:
+    - name: link
+      type: mixed
+    returnType: bool
+- subject:
+    function: mysqli_dump_debug_info
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    returnType: bool
+- subject:
+    function: mysqli_embedded_server_end
+  signature:
+    returnType: void
+- subject:
+    function: mysqli_embedded_server_start
+  signature:
+    params:
+    - name: start
+      type: int
+    - name: arguments
+      type: array
+    - name: groups
+      type: array
+    returnType: bool
+- subject:
+    function: mysqli_enable_reads_from_master
+  signature:
+    params:
+    - name: link
+      type: mixed
+    returnType: bool
+- subject:
+    function: mysqli_enable_rpl_parse
+  signature:
+    params:
+    - name: link
+      type: mixed
+    returnType: bool
+- subject:
+    function: mysqli_errno
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    returnType: int
+- subject:
+    function: mysqli_error
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mysqli_error_list
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mysqli_escape_string
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    - name: string
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: mysqli_execute
+  signature:
+    params:
+    - name: statement
+      type: mixed
+    returnType: bool
+- subject:
+    function: mysqli_fetch_all
+  signature:
+    params:
+    - name: result
+      type: mixed
+    - name: mode
+      type: mixed
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: mysqli_fetch_array
+  signature:
+    params:
+    - name: result
+      type: mixed
+    - name: mode
+      type: mixed
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: mysqli_fetch_assoc
+  signature:
+    params:
+    - name: result
+      type: mixed
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mysqli_fetch_field
+  signature:
+    params:
+    - name: result
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mysqli_fetch_field_direct
+  signature:
+    params:
+    - name: result
+      type: mixed
+    - name: index
+      type: int
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: mysqli_fetch_fields
+  signature:
+    params:
+    - name: result
+      type: mixed
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mysqli_fetch_lengths
+  signature:
+    params:
+    - name: result
+      type: mixed
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mysqli_fetch_object
+  signature:
+    params:
+    - name: result
+      type: mixed
+    - name: class
+      type: string
+      optional: true
+    - name: constructor_args
+      type: array
+      optional: true
+    returnType: object
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: mysqli_fetch_row
+  signature:
+    params:
+    - name: result
+      type: mixed
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mysqli_field_count
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    returnType: int
+- subject:
+    function: mysqli_field_seek
+  signature:
+    params:
+    - name: result
+      type: mixed
+    - name: index
+      type: int
+    returnType: bool
+- subject:
+    function: mysqli_field_tell
+  signature:
+    params:
+    - name: result
+      type: mixed
+    returnType: int
+- subject:
+    function: mysqli_free_result
+  signature:
+    params:
+    - name: result
+      type: mixed
+    returnType: void
+- subject:
+    function: mysqli_get_cache_stats
+  signature:
+    returnType: array
+- subject:
+    function: mysqli_get_charset
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    returnType: object
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mysqli_get_client_info
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mysqli_get_client_stats
+  signature:
+    returnType: array
+- subject:
+    function: mysqli_get_client_version
+  signature:
+    returnType: int
+- subject:
+    function: mysqli_get_connection_stats
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mysqli_get_host_info
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mysqli_get_links_stats
+  signature:
+    returnType: array
+- subject:
+    function: mysqli_get_proto_info
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    returnType: int
+- subject:
+    function: mysqli_get_server_info
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mysqli_get_server_version
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    returnType: int
+- subject:
+    function: mysqli_get_warnings
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mysqli_info
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mysqli_init
+  signature:
+    returnType: mixed
+- subject:
+    function: mysqli_insert_id
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    returnType: int
+- subject:
+    function: mysqli_kill
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    - name: process_id
+      type: int
+    returnType: bool
+- subject:
+    function: mysqli_link_construct
+  signature:
+    returnType: object
+- subject:
+    function: mysqli_master_query
+  signature:
+    params:
+    - name: link
+      type: mixed
+    - name: query
+      type: string
+    returnType: bool
+- subject:
+    function: mysqli_more_results
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    returnType: bool
+- subject:
+    function: mysqli_multi_query
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    - name: query
+      type: string
+    returnType: bool
+- subject:
+    function: mysqli_next_result
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    returnType: bool
+- subject:
+    function: mysqli_num_fields
+  signature:
+    params:
+    - name: result
+      type: mixed
+    returnType: int
+- subject:
+    function: mysqli_num_rows
+  signature:
+    params:
+    - name: result
+      type: mixed
+    returnType: int
+- subject:
+    function: mysqli_options
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    - name: option
+      type: int
+    - name: value
+      type: int
+    returnType: bool
+- subject:
+    function: mysqli_ping
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    returnType: bool
+- subject:
+    function: mysqli_poll
+  signature:
+    params:
+    - name: read
+      type: array
+    - name: error
+      type: array
+    - name: reject
+      type: array
+    - name: seconds
+      type: int
+    - name: microseconds
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: mysqli_prepare
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    - name: query
+      type: string
+    returnType: mixed
+- subject:
+    function: mysqli_query
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    - name: query
+      type: string
+    - name: result_mode
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: mysqli_real_connect
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    - name: hostname
+      type: string
+      optional: true
+    - name: username
+      type: string
+      optional: true
+    - name: password
+      type: string
+      optional: true
+    - name: database
+      type: string
+      optional: true
+    - name: port
+      type: int
+      optional: true
+    - name: socket
+      type: string
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: mysqli_real_escape_string
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    - name: string
+      type: string
+    returnType: string
+- subject:
+    function: mysqli_real_query
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    - name: query
+      type: string
+    returnType: bool
+- subject:
+    function: mysqli_reap_async_query
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mysqli_refresh
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    - name: flags
+      type: int
+    returnType: bool
+- subject:
+    function: mysqli_release_savepoint
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    - name: name
+      type: string
+    returnType: bool
+- subject:
+    function: mysqli_report
+  signature:
+    params:
+    - name: flags
+      type: int
+    returnType: bool
+- subject:
+    function: mysqli_rollback
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    - name: flags
+      type: int
+      optional: true
+    - name: name
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: mysqli_rpl_parse_enabled
+  signature:
+    params:
+    - name: link
+      type: mixed
+    returnType: int
+- subject:
+    function: mysqli_rpl_probe
+  signature:
+    params:
+    - name: link
+      type: mixed
+    returnType: bool
+- subject:
+    function: mysqli_rpl_query_type
+  signature:
+    params:
+    - name: link
+      type: mixed
+    - name: query
+      type: string
+    returnType: int
+- subject:
+    function: mysqli_savepoint
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    - name: name
+      type: string
+    returnType: bool
+- subject:
+    function: mysqli_savepoint_libmysql
+  signature:
+    returnType: bool
+- subject:
+    function: mysqli_select_db
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    - name: database
+      type: string
+    returnType: bool
+- subject:
+    function: mysqli_send_query
+  signature:
+    params:
+    - name: link
+      type: mixed
+    - name: query
+      type: string
+    returnType: bool
+- subject:
+    function: mysqli_set_charset
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    - name: charset
+      type: string
+    returnType: bool
+- subject:
+    function: mysqli_set_local_infile_default
+  signature:
+    params:
+    - name: link
+      type: mixed
+    returnType: void
+- subject:
+    function: mysqli_set_local_infile_handler
+  signature:
+    params:
+    - name: link
+      type: mixed
+    - name: read_func
+      type: callable
+    returnType: bool
+- subject:
+    function: mysqli_set_opt
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    - name: option
+      type: int
+    - name: value
+      type: int
+    returnType: bool
+- subject:
+    function: mysqli_slave_query
+  signature:
+    params:
+    - name: link
+      type: mixed
+    - name: query
+      type: string
+    returnType: bool
+- subject:
+    function: mysqli_sqlstate
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mysqli_ssl_set
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    - name: key
+      type: string
+    - name: certificate
+      type: string
+    - name: ca_certificate
+      type: string
+    - name: ca_path
+      type: string
+    - name: cipher_algos
+      type: string
+    returnType: bool
+- subject:
+    function: mysqli_stat
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mysqli_stmt_affected_rows
+  signature:
+    params:
+    - name: statement
+      type: mixed
+    returnType: int
+- subject:
+    function: mysqli_stmt_attr_get
+  signature:
+    params:
+    - name: statement
+      type: mixed
+    - name: attribute
+      type: int
+    returnType: int
+- subject:
+    function: mysqli_stmt_attr_set
+  signature:
+    params:
+    - name: statement
+      type: mixed
+    - name: attribute
+      type: int
+    - name: value
+      type: int
+    returnType: bool
+- subject:
+    function: mysqli_stmt_bind_param
+  signature:
+    params:
+    - name: statement
+      type: mixed
+    - name: types
+      type: string
+    - name: var
+      type: mixed
+    - name: vars
+      type: mixed
+      optional: true
+    returnType: bool
+- subject:
+    function: mysqli_stmt_bind_result
+  signature:
+    params:
+    - name: statement
+      type: mixed
+    - name: var1
+      type: mixed
+    - name: vars
+      type: mixed
+      optional: true
+    returnType: bool
+- subject:
+    function: mysqli_stmt_close
+  signature:
+    params:
+    - name: statement
+      type: mixed
+    returnType: bool
+- subject:
+    function: mysqli_stmt_data_seek
+  signature:
+    params:
+    - name: statement
+      type: mixed
+    - name: offset
+      type: int
+    returnType: void
+- subject:
+    function: mysqli_stmt_errno
+  signature:
+    params:
+    - name: statement
+      type: mixed
+    returnType: int
+- subject:
+    function: mysqli_stmt_error
+  signature:
+    params:
+    - name: statement
+      type: mixed
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mysqli_stmt_error_list
+  signature:
+    params:
+    - name: statement
+      type: mixed
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mysqli_stmt_execute
+  signature:
+    params:
+    - name: statement
+      type: mixed
+    returnType: bool
+- subject:
+    function: mysqli_stmt_fetch
+  signature:
+    params:
+    - name: statement
+      type: mixed
+    returnType: bool
+- subject:
+    function: mysqli_stmt_field_count
+  signature:
+    params:
+    - name: statement
+      type: mixed
+    returnType: int
+- subject:
+    function: mysqli_stmt_free_result
+  signature:
+    params:
+    - name: statement
+      type: mixed
+    returnType: void
+- subject:
+    function: mysqli_stmt_get_result
+  signature:
+    params:
+    - name: statement
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mysqli_stmt_get_warnings
+  signature:
+    params:
+    - name: statement
+      type: mixed
+    returnType: object
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mysqli_stmt_init
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mysqli_stmt_insert_id
+  signature:
+    params:
+    - name: statement
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mysqli_stmt_more_results
+  signature:
+    params:
+    - name: statement
+      type: mixed
+    returnType: bool
+- subject:
+    function: mysqli_stmt_next_result
+  signature:
+    params:
+    - name: statement
+      type: mixed
+    returnType: bool
+- subject:
+    function: mysqli_stmt_num_rows
+  signature:
+    params:
+    - name: statement
+      type: mixed
+    returnType: int
+- subject:
+    function: mysqli_stmt_param_count
+  signature:
+    params:
+    - name: statement
+      type: mixed
+    returnType: int
+- subject:
+    function: mysqli_stmt_prepare
+  signature:
+    params:
+    - name: statement
+      type: mixed
+    - name: query
+      type: string
+    returnType: bool
+- subject:
+    function: mysqli_stmt_reset
+  signature:
+    params:
+    - name: statement
+      type: mixed
+    returnType: bool
+- subject:
+    function: mysqli_stmt_result_metadata
+  signature:
+    params:
+    - name: statement
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mysqli_stmt_send_long_data
+  signature:
+    params:
+    - name: statement
+      type: mixed
+    - name: param_num
+      type: int
+    - name: data
+      type: string
+    returnType: bool
+- subject:
+    function: mysqli_stmt_sqlstate
+  signature:
+    params:
+    - name: statement
+      type: mixed
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mysqli_stmt_store_result
+  signature:
+    params:
+    - name: statement
+      type: mixed
+    returnType: bool
+- subject:
+    function: mysqli_store_result
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    - name: mode
+      type: int
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: mysqli_thread_id
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    returnType: int
+- subject:
+    function: mysqli_thread_safe
+  signature:
+    returnType: bool
+- subject:
+    function: mysqli_use_result
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mysqli_warning_count
+  signature:
+    params:
+    - name: mysql
+      type: mixed
+    returnType: int

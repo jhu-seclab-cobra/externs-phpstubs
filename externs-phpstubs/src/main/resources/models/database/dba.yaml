@@ -1,0 +1,155 @@
+# Generated from stubs/database/dba.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: dba_close
+  signature:
+    params:
+    - name: dba
+      type: resource
+    returnType: void
+- subject:
+    function: dba_delete
+  signature:
+    params:
+    - name: key
+      type: array
+    - name: dba
+      type: resource
+    returnType: bool
+- subject:
+    function: dba_exists
+  signature:
+    params:
+    - name: key
+      type: array
+    - name: dba
+      type: resource
+    returnType: bool
+- subject:
+    function: dba_fetch
+  signature:
+    params:
+    - name: key
+      type: array
+    - name: skip
+      type: int
+    - name: dba
+      type: resource
+    returnType: string
+- subject:
+    function: dba_firstkey
+  signature:
+    params:
+    - name: dba
+      type: resource
+    returnType: string
+- subject:
+    function: dba_handlers
+  signature:
+    params:
+    - name: full_info
+      type: bool
+      optional: true
+    returnType: array
+- subject:
+    function: dba_insert
+  signature:
+    params:
+    - name: key
+      type: array
+    - name: value
+      type: string
+    - name: dba
+      type: resource
+    returnType: bool
+- subject:
+    function: dba_key_split
+  signature:
+    params:
+    - name: key
+      type: string
+    returnType: array
+- subject:
+    function: dba_list
+  signature:
+    returnType: array
+- subject:
+    function: dba_nextkey
+  signature:
+    params:
+    - name: dba
+      type: resource
+    returnType: string
+- subject:
+    function: dba_open
+  signature:
+    params:
+    - name: path
+      type: string
+    - name: mode
+      type: string
+    - name: handler
+      type: string
+      optional: true
+    - name: handler_params
+      type: string
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: dba_optimize
+  signature:
+    params:
+    - name: dba
+      type: resource
+    returnType: bool
+- subject:
+    function: dba_popen
+  signature:
+    params:
+    - name: path
+      type: string
+    - name: mode
+      type: string
+    - name: handler
+      type: string
+      optional: true
+    - name: handler_params
+      type: string
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: dba_replace
+  signature:
+    params:
+    - name: key
+      type: array
+    - name: value
+      type: string
+    - name: dba
+      type: resource
+    returnType: bool
+- subject:
+    function: dba_sync
+  signature:
+    params:
+    - name: dba
+      type: resource
+    returnType: bool

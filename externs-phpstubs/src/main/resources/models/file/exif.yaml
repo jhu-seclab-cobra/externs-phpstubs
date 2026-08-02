@@ -1,0 +1,51 @@
+# Generated from stubs/file/exif.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: exif_imagetype
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: int
+- subject:
+    function: exif_read_data
+  signature:
+    params:
+    - name: file
+      type: resource
+    - name: required_sections
+      type: string
+      optional: true
+    - name: as_arrays
+      type: bool
+      optional: true
+    - name: read_thumbnail
+      type: bool
+      optional: true
+    returnType: array
+- subject:
+    function: exif_tagname
+  signature:
+    params:
+    - name: index
+      type: int
+    returnType: string
+- subject:
+    function: exif_thumbnail
+  signature:
+    params:
+    - name: file
+      type: string
+    - name: width
+      type: int
+      optional: true
+    - name: height
+      type: int
+      optional: true
+    - name: image_type
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return

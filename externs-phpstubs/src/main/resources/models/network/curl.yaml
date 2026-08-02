@@ -1,0 +1,293 @@
+# Generated from stubs/network/curl.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: curl_close
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    returnType: void
+- subject:
+    function: curl_copy_handle
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: curl_errno
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    returnType: int
+- subject:
+    function: curl_error
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: curl_escape
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    - name: string
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: curl_exec
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    returnType: bool
+- subject:
+    function: curl_file_create
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: mime_type
+      type: string
+      optional: true
+    - name: posted_filename
+      type: string
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: curl_getinfo
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    - name: option
+      type: int
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: curl_init
+  signature:
+    params:
+    - name: url
+      type: string
+      optional: true
+    returnType: mixed
+- subject:
+    function: curl_multi_add_handle
+  signature:
+    params:
+    - name: multi_handle
+      type: mixed
+    - name: handle
+      type: mixed
+    returnType: int
+- subject:
+    function: curl_multi_close
+  signature:
+    params:
+    - name: multi_handle
+      type: mixed
+    returnType: void
+- subject:
+    function: curl_multi_errno
+  signature:
+    params:
+    - name: multi_handle
+      type: mixed
+    returnType: int
+- subject:
+    function: curl_multi_exec
+  signature:
+    params:
+    - name: multi_handle
+      type: mixed
+    - name: still_running
+      type: int
+    returnType: int
+- subject:
+    function: curl_multi_getcontent
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: curl_multi_info_read
+  signature:
+    params:
+    - name: multi_handle
+      type: mixed
+    - name: queued_messages
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: curl_multi_init
+  signature:
+    returnType: mixed
+- subject:
+    function: curl_multi_remove_handle
+  signature:
+    params:
+    - name: multi_handle
+      type: mixed
+    - name: handle
+      type: mixed
+    returnType: int
+- subject:
+    function: curl_multi_select
+  signature:
+    params:
+    - name: multi_handle
+      type: mixed
+    - name: timeout
+      type: float
+      optional: true
+    returnType: int
+- subject:
+    function: curl_multi_setopt
+  signature:
+    params:
+    - name: multi_handle
+      type: mixed
+    - name: option
+      type: int
+    - name: value
+      type: mixed
+    returnType: bool
+- subject:
+    function: curl_multi_strerror
+  signature:
+    params:
+    - name: error_code
+      type: int
+    returnType: string
+- subject:
+    function: curl_pause
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    - name: flags
+      type: int
+    returnType: int
+- subject:
+    function: curl_reset
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    returnType: void
+- subject:
+    function: curl_setopt
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    - name: option
+      type: int
+    - name: value
+      type: callable
+    returnType: bool
+- subject:
+    function: curl_setopt_array
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    - name: options
+      type: array
+    returnType: bool
+- subject:
+    function: curl_share_close
+  signature:
+    params:
+    - name: share_handle
+      type: mixed
+    returnType: void
+- subject:
+    function: curl_share_errno
+  signature:
+    params:
+    - name: share_handle
+      type: mixed
+    returnType: int
+- subject:
+    function: curl_share_init
+  signature:
+    returnType: mixed
+- subject:
+    function: curl_share_setopt
+  signature:
+    params:
+    - name: share_handle
+      type: mixed
+    - name: option
+      type: int
+    - name: value
+      type: mixed
+    returnType: bool
+- subject:
+    function: curl_share_strerror
+  signature:
+    params:
+    - name: error_code
+      type: int
+    returnType: string
+- subject:
+    function: curl_strerror
+  signature:
+    params:
+    - name: error_code
+      type: int
+    returnType: string
+- subject:
+    function: curl_unescape
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    - name: string
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: curl_version
+  signature:
+    returnType: array

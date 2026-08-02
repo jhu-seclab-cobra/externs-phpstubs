@@ -1,0 +1,729 @@
+# Generated from stubs/database/ibm_db2.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: db2_autocommit
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: value
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: db2_bind_param
+  signature:
+    params:
+    - name: stmt
+      type: resource
+    - name: parameter_number
+      type: int
+    - name: variable_name
+      type: string
+    - name: parameter_type
+      type: int
+      optional: true
+    - name: data_type
+      type: int
+      optional: true
+    - name: precision
+      type: int
+      optional: true
+    - name: scale
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: db2_client_info
+  signature:
+    params:
+    - name: connection
+      type: resource
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: db2_close
+  signature:
+    params:
+    - name: connection
+      type: resource
+    returnType: bool
+- subject:
+    function: db2_column_privileges
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: qualifier
+      type: string
+      optional: true
+    - name: schema
+      type: string
+      optional: true
+    - name: table_name
+      type: string
+      optional: true
+    - name: column_name
+      type: string
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: db2_columnprivileges
+  signature:
+    returnType: mixed
+- subject:
+    function: db2_columns
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: qualifier
+      type: string
+      optional: true
+    - name: schema
+      type: string
+      optional: true
+    - name: table_name
+      type: string
+      optional: true
+    - name: column_name
+      type: string
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: db2_commit
+  signature:
+    params:
+    - name: connection
+      type: resource
+    returnType: bool
+- subject:
+    function: db2_conn_error
+  signature:
+    params:
+    - name: connection
+      type: resource
+      optional: true
+    returnType: string
+- subject:
+    function: db2_conn_errormsg
+  signature:
+    params:
+    - name: connection
+      type: resource
+      optional: true
+    returnType: string
+- subject:
+    function: db2_connect
+  signature:
+    params:
+    - name: database
+      type: string
+    - name: username
+      type: string
+    - name: password
+      type: string
+    - name: options
+      type: array
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: db2_cursor_type
+  signature:
+    params:
+    - name: stmt
+      type: resource
+    returnType: int
+- subject:
+    function: db2_escape_string
+  signature:
+    params:
+    - name: string_literal
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: db2_exec
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: statement
+      type: string
+    - name: options
+      type: array
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: db2_execute
+  signature:
+    params:
+    - name: stmt
+      type: resource
+    - name: parameters
+      type: array
+      optional: true
+    returnType: bool
+- subject:
+    function: db2_fetch_array
+  signature:
+    params:
+    - name: stmt
+      type: resource
+    - name: row_number
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    function: db2_fetch_assoc
+  signature:
+    params:
+    - name: stmt
+      type: resource
+    - name: row_number
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    function: db2_fetch_both
+  signature:
+    params:
+    - name: stmt
+      type: resource
+    - name: row_number
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    function: db2_fetch_object
+  signature:
+    params:
+    - name: stmt
+      type: resource
+    - name: row_number
+      type: int
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: db2_fetch_row
+  signature:
+    params:
+    - name: stmt
+      type: resource
+    - name: row_number
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: db2_field_display_size
+  signature:
+    params:
+    - name: stmt
+      type: resource
+    - name: column
+      type: int
+    returnType: int
+- subject:
+    function: db2_field_name
+  signature:
+    params:
+    - name: stmt
+      type: resource
+    - name: column
+      type: int
+    returnType: string
+- subject:
+    function: db2_field_num
+  signature:
+    params:
+    - name: stmt
+      type: resource
+    - name: column
+      type: int
+    returnType: int
+- subject:
+    function: db2_field_precision
+  signature:
+    params:
+    - name: stmt
+      type: resource
+    - name: column
+      type: int
+    returnType: int
+- subject:
+    function: db2_field_scale
+  signature:
+    params:
+    - name: stmt
+      type: resource
+    - name: column
+      type: int
+    returnType: int
+- subject:
+    function: db2_field_type
+  signature:
+    params:
+    - name: stmt
+      type: resource
+    - name: column
+      type: int
+    returnType: string
+- subject:
+    function: db2_field_width
+  signature:
+    params:
+    - name: stmt
+      type: resource
+    - name: column
+      type: int
+    returnType: int
+- subject:
+    function: db2_foreign_keys
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: qualifier
+      type: string
+    - name: schema
+      type: string
+    - name: table_name
+      type: string
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: db2_foreignkeys
+  signature:
+    returnType: mixed
+- subject:
+    function: db2_free_result
+  signature:
+    params:
+    - name: stmt
+      type: resource
+    returnType: bool
+- subject:
+    function: db2_free_stmt
+  signature:
+    params:
+    - name: stmt
+      type: resource
+    returnType: bool
+- subject:
+    function: db2_get_option
+  signature:
+    params:
+    - name: resource
+      type: resource
+    - name: option
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: db2_last_insert_id
+  signature:
+    params:
+    - name: resource
+      type: resource
+    returnType: string
+- subject:
+    function: db2_lob_read
+  signature:
+    params:
+    - name: stmt
+      type: resource
+    - name: colnum
+      type: int
+    - name: length
+      type: int
+    returnType: string
+- subject:
+    function: db2_next_result
+  signature:
+    params:
+    - name: stmt
+      type: resource
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: db2_num_fields
+  signature:
+    params:
+    - name: stmt
+      type: resource
+    returnType: int
+- subject:
+    function: db2_num_rows
+  signature:
+    params:
+    - name: stmt
+      type: resource
+    returnType: int
+- subject:
+    function: db2_pclose
+  signature:
+    params:
+    - name: connection
+      type: resource
+    returnType: bool
+- subject:
+    function: db2_pconnect
+  signature:
+    params:
+    - name: database
+      type: string
+    - name: username
+      type: string
+    - name: password
+      type: string
+    - name: options
+      type: array
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: db2_prepare
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: statement
+      type: string
+    - name: options
+      type: array
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: db2_primary_keys
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: qualifier
+      type: string
+    - name: schema
+      type: string
+    - name: table_name
+      type: string
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: db2_primarykeys
+  signature:
+    returnType: mixed
+- subject:
+    function: db2_procedure_columns
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: qualifier
+      type: string
+    - name: schema
+      type: string
+    - name: procedure
+      type: string
+    - name: parameter
+      type: string
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: db2_procedurecolumns
+  signature:
+    returnType: mixed
+- subject:
+    function: db2_procedures
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: qualifier
+      type: string
+    - name: schema
+      type: string
+    - name: procedure
+      type: string
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: db2_result
+  signature:
+    params:
+    - name: stmt
+      type: resource
+    - name: column
+      type: int
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: db2_rollback
+  signature:
+    params:
+    - name: connection
+      type: resource
+    returnType: bool
+- subject:
+    function: db2_server_info
+  signature:
+    params:
+    - name: connection
+      type: resource
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: db2_set_option
+  signature:
+    params:
+    - name: resource
+      type: resource
+    - name: options
+      type: array
+    - name: type
+      type: int
+    returnType: bool
+- subject:
+    function: db2_setoption
+  signature:
+    returnType: bool
+- subject:
+    function: db2_special_columns
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: qualifier
+      type: string
+    - name: schema
+      type: string
+    - name: table_name
+      type: string
+    - name: scope
+      type: int
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: db2_specialcolumns
+  signature:
+    returnType: mixed
+- subject:
+    function: db2_statistics
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: qualifier
+      type: string
+    - name: schema
+      type: string
+    - name: table_name
+      type: string
+    - name: unique
+      type: bool
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: db2_stmt_error
+  signature:
+    params:
+    - name: stmt
+      type: resource
+      optional: true
+    returnType: string
+- subject:
+    function: db2_stmt_errormsg
+  signature:
+    params:
+    - name: stmt
+      type: resource
+      optional: true
+    returnType: string
+- subject:
+    function: db2_table_privileges
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: qualifier
+      type: string
+      optional: true
+    - name: schema
+      type: string
+      optional: true
+    - name: table_name
+      type: string
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: db2_tableprivileges
+  signature:
+    returnType: mixed
+- subject:
+    function: db2_tables
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: qualifier
+      type: string
+      optional: true
+    - name: schema
+      type: string
+      optional: true
+    - name: table_name
+      type: string
+      optional: true
+    - name: table_type
+      type: string
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return

@@ -1,0 +1,45 @@
+# Generated from stubs/text/json.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: json_decode
+  signature:
+    params:
+    - name: json
+      type: string
+    - name: associative
+      type: bool
+      optional: true
+    - name: depth
+      type: int
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: json_encode
+  signature:
+    params:
+    - name: value
+      type: mixed
+    - name: flags
+      type: int
+      optional: true
+    - name: depth
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: json_last_error
+  signature:
+    returnType: int
+- subject:
+    function: json_last_error_msg
+  signature:
+    returnType: string

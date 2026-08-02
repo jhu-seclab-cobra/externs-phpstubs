@@ -1,0 +1,158 @@
+# Generated from stubs/crypto/bcmath.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: bcadd
+  signature:
+    params:
+    - name: num1
+      type: string
+    - name: num2
+      type: string
+    - name: scale
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: bccomp
+  signature:
+    params:
+    - name: num1
+      type: string
+    - name: num2
+      type: string
+    - name: scale
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: bcdiv
+  signature:
+    params:
+    - name: num1
+      type: string
+    - name: num2
+      type: string
+    - name: scale
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: bcmod
+  signature:
+    params:
+    - name: num1
+      type: string
+    - name: num2
+      type: string
+    - name: scale
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: bcmul
+  signature:
+    params:
+    - name: num1
+      type: string
+    - name: num2
+      type: string
+    - name: scale
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: bcpow
+  signature:
+    params:
+    - name: num
+      type: string
+    - name: exponent
+      type: string
+    - name: scale
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: bcpowmod
+  signature:
+    params:
+    - name: num
+      type: string
+    - name: exponent
+      type: string
+    - name: modulus
+      type: string
+    - name: scale
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: bcscale
+  signature:
+    params:
+    - name: scale
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: bcsqrt
+  signature:
+    params:
+    - name: num
+      type: string
+    - name: scale
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: bcsub
+  signature:
+    params:
+    - name: num1
+      type: string
+    - name: num2
+      type: string
+    - name: scale
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return

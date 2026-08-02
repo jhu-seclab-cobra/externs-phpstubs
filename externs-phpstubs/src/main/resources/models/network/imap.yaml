@@ -1,0 +1,907 @@
+# Generated from stubs/network/imap.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: imap_8bit
+  signature:
+    params:
+    - name: string
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: imap_alerts
+  signature:
+    returnType: array
+- subject:
+    function: imap_append
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: folder
+      type: string
+    - name: message
+      type: string
+    - name: options
+      type: string
+      optional: true
+    - name: internal_date
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: imap_base64
+  signature:
+    params:
+    - name: string
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: imap_binary
+  signature:
+    params:
+    - name: string
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: imap_body
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: message_num
+      type: int
+    - name: flags
+      type: int
+      optional: true
+    returnType: string
+- subject:
+    function: imap_bodystruct
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: message_num
+      type: int
+    - name: section
+      type: string
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: imap_check
+  signature:
+    params:
+    - name: imap
+      type: resource
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: imap_clearflag_full
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: sequence
+      type: string
+    - name: flag
+      type: string
+    - name: options
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: imap_close
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: imap_create
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: mailbox
+      type: string
+    returnType: bool
+- subject:
+    function: imap_createmailbox
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: mailbox
+      type: string
+    returnType: bool
+- subject:
+    function: imap_delete
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: message_nums
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: imap_deletemailbox
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: mailbox
+      type: string
+    returnType: bool
+- subject:
+    function: imap_errors
+  signature:
+    returnType: array
+- subject:
+    function: imap_expunge
+  signature:
+    params:
+    - name: imap
+      type: resource
+    returnType: bool
+- subject:
+    function: imap_fetch_overview
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: sequence
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    function: imap_fetchbody
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: message_num
+      type: int
+    - name: section
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(2)
+    to: return
+- subject:
+    function: imap_fetchheader
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: message_num
+      type: int
+    - name: flags
+      type: int
+      optional: true
+    returnType: string
+- subject:
+    function: imap_fetchmime
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: message_num
+      type: int
+    - name: section
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(2)
+    to: return
+- subject:
+    function: imap_fetchstructure
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: message_num
+      type: int
+    - name: flags
+      type: int
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: imap_fetchtext
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: message_num
+      type: int
+    - name: flags
+      type: int
+      optional: true
+    returnType: string
+- subject:
+    function: imap_gc
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: flags
+      type: int
+    returnType: bool
+- subject:
+    function: imap_get_quota
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: quota_root
+      type: string
+    returnType: array
+- subject:
+    function: imap_get_quotaroot
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: mailbox
+      type: string
+    returnType: array
+- subject:
+    function: imap_getacl
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: mailbox
+      type: string
+    returnType: array
+- subject:
+    function: imap_getmailboxes
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: reference
+      type: string
+    - name: pattern
+      type: string
+    returnType: array
+- subject:
+    function: imap_getsubscribed
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: reference
+      type: string
+    - name: pattern
+      type: string
+    returnType: array
+- subject:
+    function: imap_header
+  signature:
+    params:
+    - name: stream_id
+      type: resource
+    - name: msg_no
+      type: int
+    - name: from_length
+      type: int
+      optional: true
+    - name: subject_length
+      type: int
+      optional: true
+    - name: default_host
+      type: string
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: imap_headerinfo
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: message_num
+      type: int
+    - name: from_length
+      type: int
+      optional: true
+    - name: subject_length
+      type: int
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: imap_headers
+  signature:
+    params:
+    - name: imap
+      type: resource
+    returnType: array
+- subject:
+    function: imap_last_error
+  signature:
+    returnType: string
+- subject:
+    function: imap_list
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: reference
+      type: string
+    - name: pattern
+      type: string
+    returnType: array
+- subject:
+    function: imap_listmailbox
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: reference
+      type: string
+    - name: pattern
+      type: string
+    returnType: array
+- subject:
+    function: imap_listscan
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: reference
+      type: string
+    - name: pattern
+      type: string
+    - name: content
+      type: string
+    returnType: array
+- subject:
+    function: imap_listsubscribed
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: reference
+      type: string
+    - name: pattern
+      type: string
+    returnType: array
+- subject:
+    function: imap_lsub
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: reference
+      type: string
+    - name: pattern
+      type: string
+    returnType: array
+- subject:
+    function: imap_mail
+  signature:
+    params:
+    - name: to
+      type: string
+    - name: subject
+      type: string
+    - name: message
+      type: string
+    - name: additional_headers
+      type: string
+      optional: true
+    - name: cc
+      type: string
+      optional: true
+    - name: bcc
+      type: string
+      optional: true
+    - name: return_path
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: imap_mail_compose
+  signature:
+    params:
+    - name: envelope
+      type: array
+    - name: bodies
+      type: array
+    returnType: string
+- subject:
+    function: imap_mail_copy
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: message_nums
+      type: string
+    - name: mailbox
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: imap_mail_move
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: message_nums
+      type: string
+    - name: mailbox
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: imap_mailboxmsginfo
+  signature:
+    params:
+    - name: imap
+      type: resource
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: imap_mime_header_decode
+  signature:
+    params:
+    - name: string
+      type: string
+    returnType: array
+- subject:
+    function: imap_msgno
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: message_uid
+      type: int
+    returnType: int
+- subject:
+    function: imap_mutf7_to_utf8
+  signature:
+    params:
+    - name: string
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: imap_num_msg
+  signature:
+    params:
+    - name: imap
+      type: resource
+    returnType: int
+- subject:
+    function: imap_num_recent
+  signature:
+    params:
+    - name: imap
+      type: resource
+    returnType: int
+- subject:
+    function: imap_open
+  signature:
+    params:
+    - name: mailbox
+      type: string
+    - name: user
+      type: string
+    - name: password
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    - name: retries
+      type: int
+      optional: true
+    - name: options
+      type: array
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+  - from: argument(5)
+    to: return
+- subject:
+    function: imap_ping
+  signature:
+    params:
+    - name: imap
+      type: resource
+    returnType: bool
+- subject:
+    function: imap_qprint
+  signature:
+    params:
+    - name: string
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: imap_rename
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: from
+      type: string
+    - name: to
+      type: string
+    returnType: bool
+- subject:
+    function: imap_renamemailbox
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: from
+      type: string
+    - name: to
+      type: string
+    returnType: bool
+- subject:
+    function: imap_reopen
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: mailbox
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    - name: retries
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: imap_rfc822_parse_adrlist
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: default_hostname
+      type: string
+    returnType: array
+- subject:
+    function: imap_rfc822_parse_headers
+  signature:
+    params:
+    - name: headers
+      type: string
+    - name: default_hostname
+      type: string
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: imap_rfc822_write_address
+  signature:
+    params:
+    - name: mailbox
+      type: string
+    - name: hostname
+      type: string
+    - name: personal
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: imap_savebody
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: file
+      type: resource
+    - name: message_num
+      type: int
+    - name: section
+      type: string
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: imap_scan
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: reference
+      type: string
+    - name: pattern
+      type: string
+    - name: content
+      type: string
+    returnType: array
+- subject:
+    function: imap_scanmailbox
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: reference
+      type: string
+    - name: pattern
+      type: string
+    - name: content
+      type: string
+    returnType: array
+- subject:
+    function: imap_search
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: criteria
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    - name: charset
+      type: string
+      optional: true
+    returnType: array
+- subject:
+    function: imap_set_quota
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: quota_root
+      type: string
+    - name: mailbox_size
+      type: int
+    returnType: bool
+- subject:
+    function: imap_setacl
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: mailbox
+      type: string
+    - name: user_id
+      type: string
+    - name: rights
+      type: string
+    returnType: bool
+- subject:
+    function: imap_setflag_full
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: sequence
+      type: string
+    - name: flag
+      type: string
+    - name: options
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: imap_sort
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: criteria
+      type: int
+    - name: reverse
+      type: bool
+    - name: flags
+      type: int
+      optional: true
+    - name: search_criteria
+      type: string
+      optional: true
+    - name: charset
+      type: string
+      optional: true
+    returnType: array
+- subject:
+    function: imap_status
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: mailbox
+      type: string
+    - name: flags
+      type: int
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: imap_subscribe
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: mailbox
+      type: string
+    returnType: bool
+- subject:
+    function: imap_thread
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: flags
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    function: imap_timeout
+  signature:
+    params:
+    - name: timeout_type
+      type: int
+    - name: timeout
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: imap_uid
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: message_num
+      type: int
+    returnType: int
+- subject:
+    function: imap_undelete
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: message_nums
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: imap_unsubscribe
+  signature:
+    params:
+    - name: imap
+      type: resource
+    - name: mailbox
+      type: string
+    returnType: bool
+- subject:
+    function: imap_utf7_decode
+  signature:
+    params:
+    - name: string
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: imap_utf7_encode
+  signature:
+    params:
+    - name: string
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: imap_utf8
+  signature:
+    params:
+    - name: mime_encoded_text
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: imap_utf8_to_mutf7
+  signature:
+    params:
+    - name: string
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return

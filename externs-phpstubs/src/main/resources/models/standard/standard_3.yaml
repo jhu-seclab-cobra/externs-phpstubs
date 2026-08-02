@@ -1,0 +1,5147 @@
+# Generated from stubs/standard/standard_3.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: gupnp_device_info_get_service
+  signature:
+    params:
+    - name: root_device
+      type: resource
+    - name: type
+      type: string
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gupnp_root_device_get_available
+  signature:
+    params:
+    - name: root_device
+      type: resource
+    returnType: bool
+- subject:
+    function: gupnp_root_device_get_relative_location
+  signature:
+    params:
+    - name: root_device
+      type: resource
+    returnType: string
+- subject:
+    function: gupnp_root_device_new
+  signature:
+    params:
+    - name: context
+      type: resource
+    - name: location
+      type: string
+    - name: description_dir
+      type: string
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: gupnp_root_device_set_available
+  signature:
+    params:
+    - name: root_device
+      type: resource
+    - name: available
+      type: bool
+    returnType: bool
+- subject:
+    function: gupnp_root_device_start
+  signature:
+    params:
+    - name: root_device
+      type: resource
+    returnType: bool
+- subject:
+    function: gupnp_root_device_stop
+  signature:
+    params:
+    - name: root_device
+      type: resource
+    returnType: bool
+- subject:
+    function: gupnp_service_action_get
+  signature:
+    params:
+    - name: action
+      type: resource
+    - name: name
+      type: string
+    - name: type
+      type: int
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: gupnp_service_action_return
+  signature:
+    params:
+    - name: action
+      type: resource
+    returnType: bool
+- subject:
+    function: gupnp_service_action_return_error
+  signature:
+    params:
+    - name: action
+      type: resource
+    - name: error_code
+      type: int
+    - name: error_description
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: gupnp_service_action_set
+  signature:
+    params:
+    - name: action
+      type: resource
+    - name: name
+      type: string
+    - name: type
+      type: int
+    - name: value
+      type: mixed
+    returnType: bool
+- subject:
+    function: gupnp_service_freeze_notify
+  signature:
+    params:
+    - name: service
+      type: resource
+    returnType: bool
+- subject:
+    function: gupnp_service_info_get
+  signature:
+    params:
+    - name: proxy
+      type: resource
+    returnType: array
+- subject:
+    function: gupnp_service_info_get_introspection
+  signature:
+    params:
+    - name: proxy
+      type: resource
+    - name: callback
+      type: mixed
+      optional: true
+    - name: arg
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: gupnp_service_introspection_get_state_variable
+  signature:
+    params:
+    - name: introspection
+      type: resource
+    - name: variable_name
+      type: string
+    returnType: array
+- subject:
+    function: gupnp_service_notify
+  signature:
+    params:
+    - name: service
+      type: resource
+    - name: name
+      type: string
+    - name: type
+      type: int
+    - name: value
+      type: mixed
+    returnType: bool
+- subject:
+    function: gupnp_service_proxy_action_get
+  signature:
+    params:
+    - name: proxy
+      type: resource
+    - name: action
+      type: string
+    - name: name
+      type: string
+    - name: type
+      type: int
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: gupnp_service_proxy_action_set
+  signature:
+    params:
+    - name: proxy
+      type: resource
+    - name: action
+      type: string
+    - name: name
+      type: string
+    - name: value
+      type: mixed
+    - name: type
+      type: int
+    returnType: bool
+- subject:
+    function: gupnp_service_proxy_add_notify
+  signature:
+    params:
+    - name: proxy
+      type: resource
+    - name: value
+      type: string
+    - name: type
+      type: int
+    - name: callback
+      type: mixed
+    - name: arg
+      type: mixed
+      optional: true
+    returnType: bool
+- subject:
+    function: gupnp_service_proxy_callback_set
+  signature:
+    params:
+    - name: proxy
+      type: resource
+    - name: signal
+      type: int
+    - name: callback
+      type: mixed
+    - name: arg
+      type: mixed
+      optional: true
+    returnType: bool
+- subject:
+    function: gupnp_service_proxy_get_subscribed
+  signature:
+    params:
+    - name: proxy
+      type: resource
+    returnType: bool
+- subject:
+    function: gupnp_service_proxy_remove_notify
+  signature:
+    params:
+    - name: proxy
+      type: resource
+    - name: value
+      type: string
+    returnType: bool
+- subject:
+    function: gupnp_service_proxy_send_action
+  signature:
+    params:
+    - name: proxy
+      type: resource
+    - name: action
+      type: string
+    - name: in_params
+      type: array
+    - name: out_params
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: gupnp_service_proxy_set_subscribed
+  signature:
+    params:
+    - name: proxy
+      type: resource
+    - name: subscribed
+      type: bool
+    returnType: bool
+- subject:
+    function: gupnp_service_thaw_notify
+  signature:
+    params:
+    - name: service
+      type: resource
+    returnType: bool
+- subject:
+    function: header
+  signature:
+    params:
+    - name: header
+      type: string
+    - name: replace
+      type: bool
+      optional: true
+    - name: response_code
+      type: int
+      optional: true
+    returnType: void
+- subject:
+    function: header_register_callback
+  signature:
+    params:
+    - name: callback
+      type: mixed
+    returnType: bool
+- subject:
+    function: header_remove
+  signature:
+    params:
+    - name: name
+      type: string
+      optional: true
+    returnType: void
+- subject:
+    function: headers_list
+  signature:
+    returnType: array
+- subject:
+    function: headers_sent
+  signature:
+    params:
+    - name: filename
+      type: string
+      optional: true
+    - name: line
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: hebrev
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: max_chars_per_line
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: hex2bin
+  signature:
+    params:
+    - name: string
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: hexdec
+  signature:
+    params:
+    - name: hex_string
+      type: string
+    returnType: float
+- subject:
+    function: highlight_file
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: return
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: highlight_string
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: return
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: hrtime
+  signature:
+    params:
+    - name: as_number
+      type: bool
+      optional: true
+    returnType: array
+- subject:
+    function: html_entity_decode
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    - name: encoding
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: htmlentities
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    - name: encoding
+      type: string
+      optional: true
+    - name: double_encode
+      type: bool
+      optional: true
+    returnType: string
+- subject:
+    function: htmlspecialchars
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    - name: encoding
+      type: string
+      optional: true
+    - name: double_encode
+      type: bool
+      optional: true
+    returnType: string
+- subject:
+    function: htmlspecialchars_decode
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: http_build_cookie
+  signature:
+    params:
+    - name: cookie
+      type: array
+    returnType: string
+- subject:
+    function: http_build_query
+  signature:
+    params:
+    - name: data
+      type: array
+    - name: numeric_prefix
+      type: string
+      optional: true
+    - name: arg_separator
+      type: string
+      optional: true
+    - name: encoding_type
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: http_build_str
+  signature:
+    params:
+    - name: query
+      type: array
+    - name: prefix
+      type: string
+      optional: true
+    - name: arg_separator
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: http_build_url
+  signature:
+    params:
+    - name: url
+      type: array
+      optional: true
+    - name: parts
+      type: array
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    - name: new_url
+      type: array
+      optional: true
+    returnType: string
+- subject:
+    function: http_cache_etag
+  signature:
+    params:
+    - name: etag
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: http_cache_last_modified
+  signature:
+    params:
+    - name: timestamp_or_expires
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: http_chunked_decode
+  signature:
+    params:
+    - name: encoded
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: http_date
+  signature:
+    params:
+    - name: timestamp
+      type: int
+      optional: true
+    returnType: string
+- subject:
+    function: http_deflate
+  signature:
+    params:
+    - name: data
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: http_get
+  signature:
+    params:
+    - name: url
+      type: string
+    - name: options
+      type: array
+      optional: true
+    - name: info
+      type: array
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: http_get_request_body
+  signature:
+    returnType: string
+- subject:
+    function: http_get_request_body_stream
+  signature:
+    returnType: resource
+- subject:
+    function: http_get_request_headers
+  signature:
+    returnType: array
+- subject:
+    function: http_head
+  signature:
+    params:
+    - name: url
+      type: string
+    - name: options
+      type: array
+      optional: true
+    - name: info
+      type: array
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: http_inflate
+  signature:
+    params:
+    - name: data
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: http_match_etag
+  signature:
+    params:
+    - name: etag
+      type: string
+    - name: for_range
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: http_match_modified
+  signature:
+    params:
+    - name: timestamp
+      type: int
+      optional: true
+    - name: for_range
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: http_match_request_header
+  signature:
+    params:
+    - name: header
+      type: string
+    - name: value
+      type: string
+    - name: match_case
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: http_negotiate_charset
+  signature:
+    params:
+    - name: supported
+      type: array
+    - name: result
+      type: array
+      optional: true
+    returnType: string
+- subject:
+    function: http_negotiate_content_type
+  signature:
+    params:
+    - name: supported
+      type: array
+    - name: result
+      type: array
+      optional: true
+    returnType: string
+- subject:
+    function: http_negotiate_language
+  signature:
+    params:
+    - name: supported
+      type: array
+    - name: result
+      type: array
+      optional: true
+    returnType: string
+- subject:
+    function: http_parse_cookie
+  signature:
+    params:
+    - name: cookie
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    - name: allowed_extras
+      type: array
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: http_parse_headers
+  signature:
+    params:
+    - name: header
+      type: string
+    returnType: array
+- subject:
+    function: http_parse_message
+  signature:
+    params:
+    - name: message
+      type: string
+    returnType: object
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: http_parse_params
+  signature:
+    params:
+    - name: param
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: http_persistent_handles_clean
+  signature:
+    params:
+    - name: ident
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: http_persistent_handles_count
+  signature:
+    returnType: mixed
+- subject:
+    function: http_persistent_handles_ident
+  signature:
+    params:
+    - name: ident
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: http_post_data
+  signature:
+    params:
+    - name: url
+      type: string
+    - name: data
+      type: string
+    - name: options
+      type: array
+      optional: true
+    - name: info
+      type: array
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: http_post_fields
+  signature:
+    params:
+    - name: url
+      type: string
+    - name: data
+      type: array
+    - name: files
+      type: array
+      optional: true
+    - name: options
+      type: array
+      optional: true
+    - name: info
+      type: array
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: http_put_data
+  signature:
+    params:
+    - name: url
+      type: string
+    - name: data
+      type: string
+    - name: options
+      type: array
+      optional: true
+    - name: info
+      type: array
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: http_put_file
+  signature:
+    params:
+    - name: url
+      type: string
+    - name: file
+      type: string
+    - name: options
+      type: array
+      optional: true
+    - name: info
+      type: array
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: http_put_stream
+  signature:
+    params:
+    - name: url
+      type: string
+    - name: stream
+      type: resource
+    - name: options
+      type: array
+      optional: true
+    - name: info
+      type: array
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: http_redirect
+  signature:
+    params:
+    - name: url
+      type: string
+      optional: true
+    - name: params
+      type: array
+      optional: true
+    - name: session
+      type: bool
+      optional: true
+    - name: status
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: http_request
+  signature:
+    params:
+    - name: method
+      type: int
+    - name: url
+      type: string
+    - name: body
+      type: string
+      optional: true
+    - name: options
+      type: array
+      optional: true
+    - name: info
+      type: array
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: http_request_body_encode
+  signature:
+    params:
+    - name: fields
+      type: array
+    - name: files
+      type: array
+    returnType: string
+- subject:
+    function: http_request_method_exists
+  signature:
+    params:
+    - name: method
+      type: mixed
+    returnType: bool
+- subject:
+    function: http_request_method_name
+  signature:
+    params:
+    - name: method
+      type: int
+    returnType: string
+- subject:
+    function: http_request_method_register
+  signature:
+    params:
+    - name: method
+      type: string
+    returnType: int
+- subject:
+    function: http_request_method_unregister
+  signature:
+    params:
+    - name: method
+      type: mixed
+    returnType: bool
+- subject:
+    function: http_response_code
+  signature:
+    params:
+    - name: response_code
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: http_send_content_disposition
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: inline
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: http_send_content_type
+  signature:
+    params:
+    - name: content_type
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: http_send_data
+  signature:
+    params:
+    - name: data
+      type: string
+    returnType: bool
+- subject:
+    function: http_send_file
+  signature:
+    params:
+    - name: file
+      type: string
+    returnType: bool
+- subject:
+    function: http_send_last_modified
+  signature:
+    params:
+    - name: timestamp
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: http_send_status
+  signature:
+    params:
+    - name: status
+      type: int
+    returnType: bool
+- subject:
+    function: http_send_stream
+  signature:
+    params:
+    - name: stream
+      type: resource
+    returnType: bool
+- subject:
+    function: http_support
+  signature:
+    params:
+    - name: feature
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: http_throttle
+  signature:
+    params:
+    - name: sec
+      type: float
+    - name: bytes
+      type: int
+      optional: true
+    returnType: void
+- subject:
+    function: hw_api_attribute
+  signature:
+    params:
+    - name: name
+      type: string
+      optional: true
+    - name: value
+      type: string
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: hw_api_content
+  signature:
+    params:
+    - name: content
+      type: string
+    - name: mimetype
+      type: string
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: hw_api_object
+  signature:
+    params:
+    - name: parameter
+      type: array
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: hw_array2objrec
+  signature:
+    params:
+    - name: object_array
+      type: array
+    returnType: string
+- subject:
+    function: hw_changeobject
+  signature:
+    params:
+    - name: link
+      type: int
+    - name: objid
+      type: int
+    - name: attributes
+      type: array
+    returnType: bool
+- subject:
+    function: hw_children
+  signature:
+    params:
+    - name: connection
+      type: int
+    - name: objectid
+      type: int
+    returnType: array
+- subject:
+    function: hw_childrenobj
+  signature:
+    params:
+    - name: connection
+      type: int
+    - name: objectid
+      type: int
+    returnType: array
+- subject:
+    function: hw_close
+  signature:
+    params:
+    - name: connection
+      type: int
+    returnType: bool
+- subject:
+    function: hw_connect
+  signature:
+    params:
+    - name: host
+      type: string
+    - name: port
+      type: int
+    - name: username
+      type: string
+      optional: true
+    - name: password
+      type: string
+      optional: true
+    returnType: int
+- subject:
+    function: hw_connection_info
+  signature:
+    params:
+    - name: link
+      type: int
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: hw_cp
+  signature:
+    params:
+    - name: connection
+      type: int
+    - name: object_id_array
+      type: array
+    - name: destination_id
+      type: int
+    returnType: int
+- subject:
+    function: hw_deleteobject
+  signature:
+    params:
+    - name: connection
+      type: int
+    - name: object_to_delete
+      type: int
+    returnType: bool
+- subject:
+    function: hw_docbyanchor
+  signature:
+    params:
+    - name: connection
+      type: int
+    - name: anchorid
+      type: int
+    returnType: int
+- subject:
+    function: hw_docbyanchorobj
+  signature:
+    params:
+    - name: connection
+      type: int
+    - name: anchorid
+      type: int
+    returnType: string
+- subject:
+    function: hw_document_attributes
+  signature:
+    params:
+    - name: hw_document
+      type: int
+    returnType: string
+- subject:
+    function: hw_document_bodytag
+  signature:
+    params:
+    - name: hw_document
+      type: int
+    - name: prefix
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: hw_document_content
+  signature:
+    params:
+    - name: hw_document
+      type: int
+    returnType: string
+- subject:
+    function: hw_document_setcontent
+  signature:
+    params:
+    - name: hw_document
+      type: int
+    - name: content
+      type: string
+    returnType: bool
+- subject:
+    function: hw_document_size
+  signature:
+    params:
+    - name: hw_document
+      type: int
+    returnType: int
+- subject:
+    function: hw_dummy
+  signature:
+    params:
+    - name: link
+      type: int
+    - name: id
+      type: int
+    - name: msgid
+      type: int
+    returnType: string
+- subject:
+    function: hw_edittext
+  signature:
+    params:
+    - name: connection
+      type: int
+    - name: hw_document
+      type: int
+    returnType: bool
+- subject:
+    function: hw_error
+  signature:
+    params:
+    - name: connection
+      type: int
+    returnType: int
+- subject:
+    function: hw_errormsg
+  signature:
+    params:
+    - name: connection
+      type: int
+    returnType: string
+- subject:
+    function: hw_free_document
+  signature:
+    params:
+    - name: hw_document
+      type: int
+    returnType: bool
+- subject:
+    function: hw_getanchors
+  signature:
+    params:
+    - name: connection
+      type: int
+    - name: objectid
+      type: int
+    returnType: array
+- subject:
+    function: hw_getanchorsobj
+  signature:
+    params:
+    - name: connection
+      type: int
+    - name: objectid
+      type: int
+    returnType: array
+- subject:
+    function: hw_getandlock
+  signature:
+    params:
+    - name: connection
+      type: int
+    - name: objectid
+      type: int
+    returnType: string
+- subject:
+    function: hw_getchildcoll
+  signature:
+    params:
+    - name: connection
+      type: int
+    - name: objectid
+      type: int
+    returnType: array
+- subject:
+    function: hw_getchildcollobj
+  signature:
+    params:
+    - name: connection
+      type: int
+    - name: objectid
+      type: int
+    returnType: array
+- subject:
+    function: hw_getchilddoccoll
+  signature:
+    params:
+    - name: connection
+      type: int
+    - name: objectid
+      type: int
+    returnType: array
+- subject:
+    function: hw_getchilddoccollobj
+  signature:
+    params:
+    - name: connection
+      type: int
+    - name: objectid
+      type: int
+    returnType: array
+- subject:
+    function: hw_getobject
+  signature:
+    params:
+    - name: connection
+      type: int
+    - name: objectid
+      type: mixed
+    - name: query
+      type: string
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: hw_getobjectbyquery
+  signature:
+    params:
+    - name: connection
+      type: int
+    - name: query
+      type: string
+    - name: max_hits
+      type: int
+    returnType: array
+- subject:
+    function: hw_getobjectbyquerycoll
+  signature:
+    params:
+    - name: connection
+      type: int
+    - name: objectid
+      type: int
+    - name: query
+      type: string
+    - name: max_hits
+      type: int
+    returnType: array
+- subject:
+    function: hw_getobjectbyquerycollobj
+  signature:
+    params:
+    - name: connection
+      type: int
+    - name: objectid
+      type: int
+    - name: query
+      type: string
+    - name: max_hits
+      type: int
+    returnType: array
+- subject:
+    function: hw_getobjectbyqueryobj
+  signature:
+    params:
+    - name: connection
+      type: int
+    - name: query
+      type: string
+    - name: max_hits
+      type: int
+    returnType: array
+- subject:
+    function: hw_getparents
+  signature:
+    params:
+    - name: connection
+      type: int
+    - name: objectid
+      type: int
+    returnType: array
+- subject:
+    function: hw_getparentsobj
+  signature:
+    params:
+    - name: connection
+      type: int
+    - name: objectid
+      type: int
+    returnType: array
+- subject:
+    function: hw_getrellink
+  signature:
+    params:
+    - name: link
+      type: int
+    - name: rootid
+      type: int
+    - name: sourceid
+      type: int
+    - name: destid
+      type: int
+    returnType: string
+- subject:
+    function: hw_getremote
+  signature:
+    params:
+    - name: connection
+      type: int
+    - name: objectid
+      type: int
+    returnType: int
+- subject:
+    function: hw_getremotechildren
+  signature:
+    params:
+    - name: connection
+      type: int
+    - name: object_record
+      type: string
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: hw_getsrcbydestobj
+  signature:
+    params:
+    - name: connection
+      type: int
+    - name: objectid
+      type: int
+    returnType: array
+- subject:
+    function: hw_gettext
+  signature:
+    params:
+    - name: connection
+      type: int
+    - name: objectid
+      type: int
+    - name: prefix
+      type: mixed
+      optional: true
+    returnType: int
+- subject:
+    function: hw_getusername
+  signature:
+    params:
+    - name: connection
+      type: int
+    returnType: string
+- subject:
+    function: hw_identify
+  signature:
+    params:
+    - name: link
+      type: int
+    - name: username
+      type: string
+    - name: password
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: hw_incollections
+  signature:
+    params:
+    - name: connection
+      type: int
+    - name: object_id_array
+      type: array
+    - name: collection_id_array
+      type: array
+    - name: return_collections
+      type: int
+    returnType: array
+  propagation:
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: hw_info
+  signature:
+    params:
+    - name: connection
+      type: int
+    returnType: string
+- subject:
+    function: hw_inscoll
+  signature:
+    params:
+    - name: connection
+      type: int
+    - name: objectid
+      type: int
+    - name: object_array
+      type: array
+    returnType: int
+- subject:
+    function: hw_insdoc
+  signature:
+    params:
+    - name: connection
+      type: mixed
+    - name: parentid
+      type: int
+    - name: object_record
+      type: string
+    - name: text
+      type: string
+      optional: true
+    returnType: int
+- subject:
+    function: hw_insertanchors
+  signature:
+    params:
+    - name: hwdoc
+      type: int
+    - name: anchorecs
+      type: array
+    - name: dest
+      type: array
+    - name: urlprefixes
+      type: array
+      optional: true
+    returnType: bool
+- subject:
+    function: hw_insertdocument
+  signature:
+    params:
+    - name: connection
+      type: int
+    - name: parent_id
+      type: int
+    - name: hw_document
+      type: int
+    returnType: int
+- subject:
+    function: hw_insertobject
+  signature:
+    params:
+    - name: connection
+      type: int
+    - name: object_rec
+      type: string
+    - name: parameter
+      type: string
+    returnType: int
+- subject:
+    function: hw_mapid
+  signature:
+    params:
+    - name: connection
+      type: int
+    - name: server_id
+      type: int
+    - name: object_id
+      type: int
+    returnType: int
+- subject:
+    function: hw_modifyobject
+  signature:
+    params:
+    - name: connection
+      type: int
+    - name: object_to_change
+      type: int
+    - name: remove
+      type: array
+    - name: add
+      type: array
+    - name: mode
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: hw_mv
+  signature:
+    params:
+    - name: connection
+      type: int
+    - name: object_id_array
+      type: array
+    - name: source_id
+      type: int
+    - name: destination_id
+      type: int
+    returnType: int
+- subject:
+    function: hw_new_document
+  signature:
+    params:
+    - name: object_record
+      type: string
+    - name: document_data
+      type: string
+    - name: document_size
+      type: int
+    returnType: int
+- subject:
+    function: hw_objrec2array
+  signature:
+    params:
+    - name: object_record
+      type: string
+    - name: format
+      type: array
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: hw_output_document
+  signature:
+    params:
+    - name: hw_document
+      type: int
+    returnType: bool
+- subject:
+    function: hw_pconnect
+  signature:
+    params:
+    - name: host
+      type: string
+    - name: port
+      type: int
+    - name: username
+      type: string
+      optional: true
+    - name: password
+      type: string
+      optional: true
+    returnType: int
+- subject:
+    function: hw_pipedocument
+  signature:
+    params:
+    - name: connection
+      type: int
+    - name: objectid
+      type: int
+    - name: url_prefixes
+      type: array
+      optional: true
+    returnType: int
+- subject:
+    function: hw_root
+  signature:
+    returnType: int
+- subject:
+    function: hw_setlinkroot
+  signature:
+    params:
+    - name: link
+      type: int
+    - name: rootid
+      type: int
+    returnType: int
+- subject:
+    function: hw_stat
+  signature:
+    params:
+    - name: link
+      type: int
+    returnType: string
+- subject:
+    function: hw_unlock
+  signature:
+    params:
+    - name: connection
+      type: int
+    - name: objectid
+      type: int
+    returnType: bool
+- subject:
+    function: hw_who
+  signature:
+    params:
+    - name: connection
+      type: int
+    returnType: array
+- subject:
+    function: hwapi_attribute_new
+  signature:
+    params:
+    - name: name
+      type: string
+      optional: true
+    - name: value
+      type: string
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: hwapi_content_new
+  signature:
+    params:
+    - name: content
+      type: string
+    - name: mimetype
+      type: string
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: hwapi_hgcsp
+  signature:
+    params:
+    - name: hostname
+      type: string
+    - name: port
+      type: int
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: hwapi_object_new
+  signature:
+    params:
+    - name: parameter
+      type: array
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: hypot
+  signature:
+    params:
+    - name: x
+      type: float
+    - name: y
+      type: float
+    returnType: float
+- subject:
+    function: ibase_add_user
+  signature:
+    params:
+    - name: service_handle
+      type: resource
+    - name: user_name
+      type: string
+    - name: password
+      type: string
+    - name: first_name
+      type: string
+      optional: true
+    - name: middle_name
+      type: string
+      optional: true
+    - name: last_name
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: ibase_affected_rows
+  signature:
+    params:
+    - name: link_identifier
+      type: resource
+      optional: true
+    returnType: int
+- subject:
+    function: ibase_backup
+  signature:
+    params:
+    - name: service_handle
+      type: resource
+    - name: source_db
+      type: string
+    - name: dest_file
+      type: string
+    - name: options
+      type: int
+      optional: true
+    - name: verbose
+      type: bool
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: ibase_blob_add
+  signature:
+    params:
+    - name: blob_handle
+      type: resource
+    - name: data
+      type: string
+    returnType: void
+- subject:
+    function: ibase_blob_cancel
+  signature:
+    params:
+    - name: blob_handle
+      type: resource
+    returnType: bool
+- subject:
+    function: ibase_blob_close
+  signature:
+    params:
+    - name: blob_handle
+      type: resource
+    returnType: bool
+- subject:
+    function: ibase_blob_create
+  signature:
+    params:
+    - name: link_identifier
+      type: resource
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: ibase_blob_echo
+  signature:
+    params:
+    - name: link_identifier
+      type: mixed
+    - name: blob_id
+      type: string
+    returnType: bool
+- subject:
+    function: ibase_blob_get
+  signature:
+    params:
+    - name: blob_handle
+      type: resource
+    - name: length
+      type: int
+    returnType: string
+- subject:
+    function: ibase_blob_import
+  signature:
+    params:
+    - name: link_identifier
+      type: resource
+    - name: file_handle
+      type: resource
+    returnType: string
+- subject:
+    function: ibase_blob_info
+  signature:
+    params:
+    - name: link_identifier
+      type: resource
+    - name: blob_id
+      type: string
+    returnType: array
+- subject:
+    function: ibase_blob_open
+  signature:
+    params:
+    - name: link_identifier
+      type: mixed
+    - name: blob_id
+      type: string
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: ibase_close
+  signature:
+    params:
+    - name: link_identifier
+      type: resource
+      optional: true
+    returnType: bool
+- subject:
+    function: ibase_commit
+  signature:
+    params:
+    - name: link_identifier
+      type: resource
+      optional: true
+    returnType: bool
+- subject:
+    function: ibase_commit_ret
+  signature:
+    params:
+    - name: link_identifier
+      type: resource
+      optional: true
+    returnType: bool
+- subject:
+    function: ibase_connect
+  signature:
+    params:
+    - name: database
+      type: string
+      optional: true
+    - name: username
+      type: string
+      optional: true
+    - name: password
+      type: string
+      optional: true
+    - name: charset
+      type: string
+      optional: true
+    - name: buffers
+      type: int
+      optional: true
+    - name: dialect
+      type: int
+      optional: true
+    - name: role
+      type: string
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+  - from: argument(5)
+    to: return
+  - from: argument(6)
+    to: return
+- subject:
+    function: ibase_db_info
+  signature:
+    params:
+    - name: service_handle
+      type: resource
+    - name: db
+      type: string
+    - name: action
+      type: int
+    - name: argument
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: ibase_delete_user
+  signature:
+    params:
+    - name: service_handle
+      type: resource
+    - name: user_name
+      type: string
+    - name: password
+      type: string
+      optional: true
+    - name: first_name
+      type: string
+      optional: true
+    - name: middle_name
+      type: string
+      optional: true
+    - name: last_name
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: ibase_drop_db
+  signature:
+    params:
+    - name: link_identifier
+      type: resource
+      optional: true
+    returnType: bool
+- subject:
+    function: ibase_errcode
+  signature:
+    returnType: int
+- subject:
+    function: ibase_errmsg
+  signature:
+    returnType: string
+- subject:
+    function: ibase_execute
+  signature:
+    params:
+    - name: query
+      type: resource
+    - name: bind_arg
+      type: mixed
+      optional: true
+    - name: args
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: ibase_fetch_assoc
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: fetch_flags
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    function: ibase_fetch_object
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: fetch_flags
+      type: int
+      optional: true
+    returnType: object
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: ibase_fetch_row
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: fetch_flags
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    function: ibase_field_info
+  signature:
+    params:
+    - name: query_result
+      type: resource
+    - name: field_number
+      type: int
+    returnType: array
+- subject:
+    function: ibase_free_event_handler
+  signature:
+    params:
+    - name: event
+      type: resource
+    returnType: bool
+- subject:
+    function: ibase_free_query
+  signature:
+    params:
+    - name: query
+      type: resource
+    returnType: bool
+- subject:
+    function: ibase_free_result
+  signature:
+    params:
+    - name: result
+      type: resource
+    returnType: bool
+- subject:
+    function: ibase_gen_id
+  signature:
+    params:
+    - name: generator
+      type: string
+    - name: increment
+      type: int
+      optional: true
+    - name: link_identifier
+      type: resource
+      optional: true
+    returnType: int
+- subject:
+    function: ibase_maintain_db
+  signature:
+    params:
+    - name: service_handle
+      type: resource
+    - name: db
+      type: string
+    - name: action
+      type: int
+    - name: argument
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: ibase_modify_user
+  signature:
+    params:
+    - name: service_handle
+      type: resource
+    - name: user_name
+      type: string
+    - name: password
+      type: string
+    - name: first_name
+      type: string
+      optional: true
+    - name: middle_name
+      type: string
+      optional: true
+    - name: last_name
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: ibase_name_result
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: name
+      type: string
+    returnType: bool
+- subject:
+    function: ibase_num_fields
+  signature:
+    params:
+    - name: query_result
+      type: resource
+    returnType: int
+- subject:
+    function: ibase_num_params
+  signature:
+    params:
+    - name: query
+      type: resource
+    returnType: int
+- subject:
+    function: ibase_num_rows
+  signature:
+    params:
+    - name: result_identifier
+      type: mixed
+    returnType: int
+- subject:
+    function: ibase_param_info
+  signature:
+    params:
+    - name: query
+      type: resource
+    - name: field_number
+      type: int
+    returnType: array
+- subject:
+    function: ibase_pconnect
+  signature:
+    params:
+    - name: database
+      type: string
+      optional: true
+    - name: username
+      type: string
+      optional: true
+    - name: password
+      type: string
+      optional: true
+    - name: charset
+      type: string
+      optional: true
+    - name: buffers
+      type: int
+      optional: true
+    - name: dialect
+      type: int
+      optional: true
+    - name: role
+      type: string
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+  - from: argument(5)
+    to: return
+  - from: argument(6)
+    to: return
+- subject:
+    function: ibase_prepare
+  signature:
+    params:
+    - name: link_identifier
+      type: mixed
+    - name: query
+      type: string
+    - name: trans_identifier
+      type: mixed
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: ibase_query
+  signature:
+    params:
+    - name: link_identifier
+      type: resource
+      optional: true
+    - name: string
+      type: string
+      optional: true
+    - name: bind_arg
+      type: int
+      optional: true
+    - name: args
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: ibase_restore
+  signature:
+    params:
+    - name: service_handle
+      type: resource
+    - name: source_file
+      type: string
+    - name: dest_db
+      type: string
+    - name: options
+      type: int
+      optional: true
+    - name: verbose
+      type: bool
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: ibase_rollback
+  signature:
+    params:
+    - name: link_identifier
+      type: resource
+      optional: true
+    returnType: bool
+- subject:
+    function: ibase_rollback_ret
+  signature:
+    params:
+    - name: link_identifier
+      type: resource
+      optional: true
+    returnType: bool
+- subject:
+    function: ibase_server_info
+  signature:
+    params:
+    - name: service_handle
+      type: resource
+    - name: action
+      type: int
+    returnType: string
+- subject:
+    function: ibase_service_attach
+  signature:
+    params:
+    - name: host
+      type: string
+    - name: dba_username
+      type: string
+    - name: dba_password
+      type: string
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: ibase_service_detach
+  signature:
+    params:
+    - name: service_handle
+      type: resource
+    returnType: bool
+- subject:
+    function: ibase_set_event_handler
+  signature:
+    params:
+    - name: link_identifier
+      type: mixed
+    - name: callback
+      type: callable
+    - name: event
+      type: string
+      optional: true
+    - name: args
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: ibase_timefmt
+  signature:
+    params:
+    - name: format
+      type: string
+    - name: columntype
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: ibase_trans
+  signature:
+    params:
+    - name: trans_args
+      type: int
+      optional: true
+    - name: link_identifier
+      type: mixed
+      optional: true
+    - name: args
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: ibase_wait_event
+  signature:
+    params:
+    - name: link_identifier
+      type: mixed
+    - name: event
+      type: string
+      optional: true
+    - name: args
+      type: mixed
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: iconv
+  signature:
+    params:
+    - name: from_encoding
+      type: string
+    - name: to_encoding
+      type: string
+    - name: string
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: id3_get_frame_long_name
+  signature:
+    params:
+    - name: frameid
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: id3_get_frame_short_name
+  signature:
+    params:
+    - name: frameid
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: id3_get_genre_id
+  signature:
+    params:
+    - name: genre
+      type: string
+    returnType: int
+- subject:
+    function: id3_get_genre_list
+  signature:
+    returnType: array
+- subject:
+    function: id3_get_genre_name
+  signature:
+    params:
+    - name: genre_id
+      type: int
+    returnType: string
+- subject:
+    function: id3_get_tag
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: version
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    function: id3_get_version
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: int
+- subject:
+    function: id3_remove_tag
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: version
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: id3_set_tag
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: tag
+      type: array
+    - name: version
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: idate
+  signature:
+    params:
+    - name: format
+      type: string
+    - name: timestamp
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: idn_strerror
+  signature:
+    params:
+    - name: errorcode
+      type: int
+    returnType: string
+- subject:
+    function: idn_to_ascii
+  signature:
+    params:
+    - name: domain
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    - name: variant
+      type: int
+      optional: true
+    - name: idna_info
+      type: array
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: idn_to_utf8
+  signature:
+    params:
+    - name: domain
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    - name: variant
+      type: int
+      optional: true
+    - name: idna_info
+      type: array
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: ifx_affected_rows
+  signature:
+    params:
+    - name: result_id
+      type: resource
+    returnType: int
+- subject:
+    function: ifx_blobinfile_mode
+  signature:
+    params:
+    - name: mode
+      type: int
+    returnType: bool
+- subject:
+    function: ifx_byteasvarchar
+  signature:
+    params:
+    - name: mode
+      type: int
+    returnType: bool
+- subject:
+    function: ifx_close
+  signature:
+    params:
+    - name: link_identifier
+      type: resource
+      optional: true
+    returnType: bool
+- subject:
+    function: ifx_connect
+  signature:
+    params:
+    - name: database
+      type: string
+      optional: true
+    - name: userid
+      type: string
+      optional: true
+    - name: password
+      type: string
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: ifx_copy_blob
+  signature:
+    params:
+    - name: bid
+      type: int
+    returnType: int
+- subject:
+    function: ifx_create_blob
+  signature:
+    params:
+    - name: type
+      type: int
+    - name: mode
+      type: int
+    - name: param
+      type: string
+    returnType: int
+- subject:
+    function: ifx_create_char
+  signature:
+    params:
+    - name: param
+      type: string
+    returnType: int
+- subject:
+    function: ifx_do
+  signature:
+    params:
+    - name: result_id
+      type: resource
+    returnType: bool
+- subject:
+    function: ifx_error
+  signature:
+    params:
+    - name: link_identifier
+      type: resource
+      optional: true
+    returnType: string
+- subject:
+    function: ifx_errormsg
+  signature:
+    params:
+    - name: errorcode
+      type: int
+      optional: true
+    returnType: string
+- subject:
+    function: ifx_fetch_row
+  signature:
+    params:
+    - name: result_id
+      type: resource
+    - name: position
+      type: mixed
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: ifx_fieldproperties
+  signature:
+    params:
+    - name: result_id
+      type: resource
+    returnType: array
+- subject:
+    function: ifx_fieldtypes
+  signature:
+    params:
+    - name: result_id
+      type: resource
+    returnType: array
+- subject:
+    function: ifx_free_blob
+  signature:
+    params:
+    - name: bid
+      type: int
+    returnType: bool
+- subject:
+    function: ifx_free_char
+  signature:
+    params:
+    - name: bid
+      type: int
+    returnType: bool
+- subject:
+    function: ifx_free_result
+  signature:
+    params:
+    - name: result_id
+      type: resource
+    returnType: bool
+- subject:
+    function: ifx_get_blob
+  signature:
+    params:
+    - name: bid
+      type: int
+    returnType: string
+- subject:
+    function: ifx_get_char
+  signature:
+    params:
+    - name: bid
+      type: int
+    returnType: string
+- subject:
+    function: ifx_getsqlca
+  signature:
+    params:
+    - name: result_id
+      type: resource
+    returnType: array
+- subject:
+    function: ifx_htmltbl_result
+  signature:
+    params:
+    - name: result_id
+      type: resource
+    - name: html_table_options
+      type: string
+      optional: true
+    returnType: int
+- subject:
+    function: ifx_nullformat
+  signature:
+    params:
+    - name: mode
+      type: int
+    returnType: bool
+- subject:
+    function: ifx_num_fields
+  signature:
+    params:
+    - name: result_id
+      type: resource
+    returnType: int
+- subject:
+    function: ifx_num_rows
+  signature:
+    params:
+    - name: result_id
+      type: resource
+    returnType: int
+- subject:
+    function: ifx_pconnect
+  signature:
+    params:
+    - name: database
+      type: string
+      optional: true
+    - name: userid
+      type: string
+      optional: true
+    - name: password
+      type: string
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: ifx_prepare
+  signature:
+    params:
+    - name: query
+      type: string
+    - name: link_identifier
+      type: resource
+    - name: cursor_def
+      type: int
+      optional: true
+    - name: blobidarray
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: ifx_query
+  signature:
+    params:
+    - name: query
+      type: string
+    - name: link_identifier
+      type: resource
+    - name: cursor_type
+      type: int
+      optional: true
+    - name: blobidarray
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: ifx_textasvarchar
+  signature:
+    params:
+    - name: mode
+      type: int
+    returnType: bool
+- subject:
+    function: ifx_update_blob
+  signature:
+    params:
+    - name: bid
+      type: int
+    - name: content
+      type: string
+    returnType: bool
+- subject:
+    function: ifx_update_char
+  signature:
+    params:
+    - name: bid
+      type: int
+    - name: content
+      type: string
+    returnType: bool
+- subject:
+    function: ifxus_close_slob
+  signature:
+    params:
+    - name: bid
+      type: int
+    returnType: bool
+- subject:
+    function: ifxus_create_slob
+  signature:
+    params:
+    - name: mode
+      type: int
+    returnType: int
+- subject:
+    function: ifxus_free_slob
+  signature:
+    params:
+    - name: bid
+      type: int
+    returnType: bool
+- subject:
+    function: ifxus_open_slob
+  signature:
+    params:
+    - name: bid
+      type: int
+    - name: mode
+      type: int
+    returnType: int
+- subject:
+    function: ifxus_read_slob
+  signature:
+    params:
+    - name: bid
+      type: int
+    - name: nbytes
+      type: int
+    returnType: string
+- subject:
+    function: ifxus_seek_slob
+  signature:
+    params:
+    - name: bid
+      type: int
+    - name: mode
+      type: int
+    - name: offset
+      type: int
+    returnType: int
+- subject:
+    function: ifxus_tell_slob
+  signature:
+    params:
+    - name: bid
+      type: int
+    returnType: int
+- subject:
+    function: ifxus_write_slob
+  signature:
+    params:
+    - name: bid
+      type: int
+    - name: content
+      type: string
+    returnType: int
+- subject:
+    function: igbinary_serialize
+  signature:
+    params:
+    - name: value
+      type: mixed
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: igbinary_unserialize
+  signature:
+    params:
+    - name: str
+      type: string
+    returnType: mixed
+- subject:
+    function: ignore_user_abort
+  signature:
+    params:
+    - name: enable
+      type: bool
+      optional: true
+    returnType: int
+- subject:
+    function: iis_add_server
+  signature:
+    params:
+    - name: path
+      type: string
+    - name: comment
+      type: string
+    - name: server_ip
+      type: string
+    - name: port
+      type: int
+    - name: host_name
+      type: string
+    - name: rights
+      type: int
+    - name: start_server
+      type: int
+    returnType: int
+- subject:
+    function: iis_get_dir_security
+  signature:
+    params:
+    - name: server_instance
+      type: int
+    - name: virtual_path
+      type: string
+    returnType: int
+- subject:
+    function: iis_get_script_map
+  signature:
+    params:
+    - name: server_instance
+      type: int
+    - name: virtual_path
+      type: string
+    - name: script_extension
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: iis_get_server_by_comment
+  signature:
+    params:
+    - name: comment
+      type: string
+    returnType: int
+- subject:
+    function: iis_get_server_by_path
+  signature:
+    params:
+    - name: path
+      type: string
+    returnType: int
+- subject:
+    function: iis_get_server_rights
+  signature:
+    params:
+    - name: server_instance
+      type: int
+    - name: virtual_path
+      type: string
+    returnType: int
+- subject:
+    function: iis_get_service_state
+  signature:
+    params:
+    - name: service_id
+      type: string
+    returnType: int
+- subject:
+    function: iis_remove_server
+  signature:
+    params:
+    - name: server_instance
+      type: int
+    returnType: int
+- subject:
+    function: iis_set_app_settings
+  signature:
+    params:
+    - name: server_instance
+      type: int
+    - name: virtual_path
+      type: string
+    - name: application_scope
+      type: string
+    returnType: int
+- subject:
+    function: iis_set_dir_security
+  signature:
+    params:
+    - name: server_instance
+      type: int
+    - name: virtual_path
+      type: string
+    - name: directory_flags
+      type: int
+    returnType: int
+- subject:
+    function: iis_set_script_map
+  signature:
+    params:
+    - name: server_instance
+      type: int
+    - name: virtual_path
+      type: string
+    - name: script_extension
+      type: string
+    - name: engine_path
+      type: string
+    - name: allow_scripting
+      type: int
+    returnType: int
+- subject:
+    function: iis_set_server_rights
+  signature:
+    params:
+    - name: server_instance
+      type: int
+    - name: virtual_path
+      type: string
+    - name: directory_flags
+      type: int
+    returnType: int
+- subject:
+    function: iis_start_server
+  signature:
+    params:
+    - name: server_instance
+      type: int
+    returnType: int
+- subject:
+    function: iis_start_service
+  signature:
+    params:
+    - name: service_id
+      type: string
+    returnType: int
+- subject:
+    function: iis_stop_server
+  signature:
+    params:
+    - name: server_instance
+      type: int
+    returnType: int
+- subject:
+    function: iis_stop_service
+  signature:
+    params:
+    - name: service_id
+      type: string
+    returnType: int
+- subject:
+    function: implode
+  signature:
+    params:
+    - name: separator
+      type: string
+    - name: array
+      type: array
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: import_request_variables
+  signature:
+    params:
+    - name: types
+      type: string
+    - name: prefix
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: in_array
+  signature:
+    params:
+    - name: needle
+      type: mixed
+    - name: haystack
+      type: array
+    - name: strict
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: inclued_get_data
+  signature:
+    returnType: array
+- subject:
+    function: inet_ntop
+  signature:
+    params:
+    - name: ip
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: inet_pton
+  signature:
+    params:
+    - name: ip
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: inflate_add
+  signature:
+    params:
+    - name: context
+      type: mixed
+    - name: data
+      type: string
+    - name: flush_mode
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: inflate_get_read_len
+  signature:
+    params:
+    - name: context
+      type: mixed
+    returnType: int
+- subject:
+    function: inflate_get_status
+  signature:
+    params:
+    - name: context
+      type: mixed
+    returnType: int
+- subject:
+    function: inflate_init
+  signature:
+    params:
+    - name: encoding
+      type: int
+    - name: options
+      type: array
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: ingres_autocommit
+  signature:
+    params:
+    - name: link
+      type: resource
+    returnType: bool
+- subject:
+    function: ingres_autocommit_state
+  signature:
+    params:
+    - name: link
+      type: resource
+    returnType: bool
+- subject:
+    function: ingres_charset
+  signature:
+    params:
+    - name: link
+      type: resource
+    returnType: string
+- subject:
+    function: ingres_close
+  signature:
+    params:
+    - name: link
+      type: resource
+    returnType: bool
+- subject:
+    function: ingres_commit
+  signature:
+    params:
+    - name: link
+      type: resource
+    returnType: bool
+- subject:
+    function: ingres_connect
+  signature:
+    params:
+    - name: database
+      type: string
+      optional: true
+    - name: username
+      type: string
+      optional: true
+    - name: password
+      type: string
+      optional: true
+    - name: options
+      type: array
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: ingres_cursor
+  signature:
+    params:
+    - name: result
+      type: resource
+    returnType: string
+- subject:
+    function: ingres_errno
+  signature:
+    params:
+    - name: link
+      type: resource
+      optional: true
+    returnType: int
+- subject:
+    function: ingres_error
+  signature:
+    params:
+    - name: link
+      type: resource
+      optional: true
+    returnType: string
+- subject:
+    function: ingres_errsqlstate
+  signature:
+    params:
+    - name: link
+      type: resource
+      optional: true
+    returnType: string
+- subject:
+    function: ingres_escape_string
+  signature:
+    params:
+    - name: link
+      type: resource
+    - name: source_string
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: ingres_execute
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: params
+      type: array
+      optional: true
+    - name: types
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: ingres_fetch_array
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: result_type
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    function: ingres_fetch_assoc
+  signature:
+    params:
+    - name: result
+      type: resource
+    returnType: array
+- subject:
+    function: ingres_fetch_object
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: result_type
+      type: int
+      optional: true
+    returnType: object
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: ingres_fetch_proc_return
+  signature:
+    params:
+    - name: result
+      type: resource
+    returnType: int
+- subject:
+    function: ingres_fetch_row
+  signature:
+    params:
+    - name: result
+      type: resource
+    returnType: array
+- subject:
+    function: ingres_field_length
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: index
+      type: int
+    returnType: int
+- subject:
+    function: ingres_field_name
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: index
+      type: int
+    returnType: string
+- subject:
+    function: ingres_field_nullable
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: index
+      type: int
+    returnType: bool
+- subject:
+    function: ingres_field_precision
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: index
+      type: int
+    returnType: int
+- subject:
+    function: ingres_field_scale
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: index
+      type: int
+    returnType: int
+- subject:
+    function: ingres_field_type
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: index
+      type: int
+    returnType: string
+- subject:
+    function: ingres_free_result
+  signature:
+    params:
+    - name: result
+      type: resource
+    returnType: bool
+- subject:
+    function: ingres_next_error
+  signature:
+    params:
+    - name: link
+      type: resource
+      optional: true
+    returnType: bool
+- subject:
+    function: ingres_num_fields
+  signature:
+    params:
+    - name: result
+      type: resource
+    returnType: int
+- subject:
+    function: ingres_num_rows
+  signature:
+    params:
+    - name: result
+      type: resource
+    returnType: int
+- subject:
+    function: ingres_pconnect
+  signature:
+    params:
+    - name: database
+      type: string
+      optional: true
+    - name: username
+      type: string
+      optional: true
+    - name: password
+      type: string
+      optional: true
+    - name: options
+      type: array
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: ingres_prepare
+  signature:
+    params:
+    - name: link
+      type: resource
+    - name: query
+      type: string
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: ingres_query
+  signature:
+    params:
+    - name: link
+      type: resource
+    - name: query
+      type: string
+    - name: params
+      type: array
+      optional: true
+    - name: types
+      type: string
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: ingres_result_seek
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: position
+      type: int
+    returnType: bool
+- subject:
+    function: ingres_rollback
+  signature:
+    params:
+    - name: link
+      type: resource
+    returnType: bool
+- subject:
+    function: ingres_set_environment
+  signature:
+    params:
+    - name: link
+      type: resource
+    - name: options
+      type: array
+    returnType: bool
+- subject:
+    function: ingres_unbuffered_query
+  signature:
+    params:
+    - name: link
+      type: resource
+    - name: query
+      type: string
+    - name: params
+      type: array
+      optional: true
+    - name: types
+      type: string
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: ini_alter
+  signature:
+    params:
+    - name: option
+      type: string
+    - name: value
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: ini_get
+  signature:
+    params:
+    - name: option
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: ini_get_all
+  signature:
+    params:
+    - name: extension
+      type: string
+      optional: true
+    - name: details
+      type: bool
+      optional: true
+    returnType: array
+- subject:
+    function: ini_restore
+  signature:
+    params:
+    - name: option
+      type: string
+    returnType: void
+- subject:
+    function: ini_set
+  signature:
+    params:
+    - name: option
+      type: string
+    - name: value
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: inotify_add_watch
+  signature:
+    params:
+    - name: inotify_instance
+      type: resource
+    - name: pathname
+      type: string
+    - name: mask
+      type: int
+    returnType: int
+- subject:
+    function: inotify_init
+  signature:
+    returnType: resource
+- subject:
+    function: inotify_queue_len
+  signature:
+    params:
+    - name: inotify_instance
+      type: resource
+    returnType: int
+- subject:
+    function: inotify_read
+  signature:
+    params:
+    - name: inotify_instance
+      type: resource
+    returnType: array
+- subject:
+    function: inotify_rm_watch
+  signature:
+    params:
+    - name: inotify_instance
+      type: resource
+    - name: watch_descriptor
+      type: int
+    returnType: bool
+- subject:
+    function: intdiv
+  signature:
+    params:
+    - name: num1
+      type: int
+    - name: num2
+      type: int
+    returnType: int
+- subject:
+    function: interface_exists
+  signature:
+    params:
+    - name: interface
+      type: string
+    - name: autoload
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: intlcal_add
+  signature:
+    params:
+    - name: calendar
+      type: int
+    - name: field
+      type: int
+    - name: value
+      type: int
+    returnType: bool
+- subject:
+    function: intlcal_after
+  signature:
+    params:
+    - name: calendar
+      type: int
+    - name: other
+      type: int
+    returnType: bool
+- subject:
+    function: intlcal_before
+  signature:
+    params:
+    - name: calendar
+      type: int
+    - name: other
+      type: int
+    returnType: bool
+- subject:
+    function: intlcal_clear
+  signature:
+    params:
+    - name: calendar
+      type: int
+    - name: field
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: intlcal_create_instance
+  signature:
+    params:
+    - name: timezone
+      type: mixed
+      optional: true
+    - name: locale
+      type: string
+      optional: true
+    returnType: int
+- subject:
+    function: intlcal_equals
+  signature:
+    params:
+    - name: calendar
+      type: int
+    - name: other
+      type: int
+    returnType: bool
+- subject:
+    function: intlcal_field_difference
+  signature:
+    params:
+    - name: calendar
+      type: int
+    - name: timestamp
+      type: float
+    - name: field
+      type: int
+    returnType: int
+- subject:
+    function: intlcal_from_date_time
+  signature:
+    params:
+    - name: datetime
+      type: mixed
+    - name: locale
+      type: string
+      optional: true
+    returnType: int
+- subject:
+    function: intlcal_get
+  signature:
+    params:
+    - name: calendar
+      type: int
+    - name: field
+      type: int
+    returnType: int
+- subject:
+    function: intlcal_get_actual_maximum
+  signature:
+    params:
+    - name: calendar
+      type: int
+    - name: field
+      type: int
+    returnType: int
+- subject:
+    function: intlcal_get_actual_minimum
+  signature:
+    params:
+    - name: calendar
+      type: int
+    - name: field
+      type: int
+    returnType: int
+- subject:
+    function: intlcal_get_available_locales
+  signature:
+    returnType: array
+- subject:
+    function: intlcal_get_day_of_week_type
+  signature:
+    params:
+    - name: calendar
+      type: int
+    - name: dayOfWeek
+      type: int
+    returnType: int
+- subject:
+    function: intlcal_get_error_code
+  signature:
+    params:
+    - name: calendar
+      type: int
+    returnType: int
+- subject:
+    function: intlcal_get_error_message
+  signature:
+    params:
+    - name: calendar
+      type: int
+    returnType: string
+- subject:
+    function: intlcal_get_first_day_of_week
+  signature:
+    params:
+    - name: calendar
+      type: int
+    returnType: int
+- subject:
+    function: intlcal_get_greatest_minimum
+  signature:
+    params:
+    - name: calendar
+      type: int
+    - name: field
+      type: int
+    returnType: int
+- subject:
+    function: intlcal_get_keyword_values_for_locale
+  signature:
+    params:
+    - name: keyword
+      type: string
+    - name: locale
+      type: string
+    - name: onlyCommon
+      type: bool
+    returnType: int
+- subject:
+    function: intlcal_get_least_maximum
+  signature:
+    params:
+    - name: calendar
+      type: int
+    - name: field
+      type: int
+    returnType: int
+- subject:
+    function: intlcal_get_locale
+  signature:
+    params:
+    - name: calendar
+      type: int
+    - name: type
+      type: int
+    returnType: string
+- subject:
+    function: intlcal_get_maximum
+  signature:
+    params:
+    - name: calendar
+      type: int
+    - name: field
+      type: int
+    returnType: int
+- subject:
+    function: intlcal_get_minimal_days_in_first_week
+  signature:
+    params:
+    - name: calendar
+      type: int
+    returnType: int
+- subject:
+    function: intlcal_get_minimum
+  signature:
+    params:
+    - name: calendar
+      type: int
+    - name: field
+      type: int
+    returnType: int
+- subject:
+    function: intlcal_get_now
+  signature:
+    returnType: float
+- subject:
+    function: intlcal_get_repeated_wall_time_option
+  signature:
+    params:
+    - name: calendar
+      type: int
+    returnType: int
+- subject:
+    function: intlcal_get_skipped_wall_time_option
+  signature:
+    params:
+    - name: calendar
+      type: int
+    returnType: int
+- subject:
+    function: intlcal_get_time
+  signature:
+    params:
+    - name: calendar
+      type: int
+    returnType: float
+- subject:
+    function: intlcal_get_time_zone
+  signature:
+    params:
+    - name: calendar
+      type: int
+    returnType: int
+- subject:
+    function: intlcal_get_type
+  signature:
+    params:
+    - name: calendar
+      type: int
+    returnType: string
+- subject:
+    function: intlcal_get_weekend_transition
+  signature:
+    params:
+    - name: calendar
+      type: int
+    - name: dayOfWeek
+      type: int
+    returnType: int
+- subject:
+    function: intlcal_in_daylight_time
+  signature:
+    params:
+    - name: calendar
+      type: int
+    returnType: bool
+- subject:
+    function: intlcal_is_equivalent_to
+  signature:
+    params:
+    - name: calendar
+      type: int
+    - name: other
+      type: int
+    returnType: bool
+- subject:
+    function: intlcal_is_lenient
+  signature:
+    params:
+    - name: calendar
+      type: int
+    returnType: bool
+- subject:
+    function: intlcal_is_set
+  signature:
+    params:
+    - name: calendar
+      type: int
+    - name: field
+      type: int
+    returnType: bool
+- subject:
+    function: intlcal_is_weekend
+  signature:
+    params:
+    - name: calendar
+      type: int
+    - name: timestamp
+      type: float
+      optional: true
+    returnType: bool
+- subject:
+    function: intlcal_roll
+  signature:
+    params:
+    - name: calendar
+      type: int
+    - name: field
+      type: int
+    - name: value
+      type: mixed
+    returnType: bool
+- subject:
+    function: intlcal_set
+  signature:
+    params:
+    - name: calendar
+      type: int
+    - name: year
+      type: int
+    - name: month
+      type: int
+    - name: dayOfMonth
+      type: int
+      optional: true
+    - name: hour
+      type: int
+      optional: true
+    - name: minute
+      type: int
+      optional: true
+    - name: second
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: intlcal_set_first_day_of_week
+  signature:
+    params:
+    - name: calendar
+      type: int
+    - name: dayOfWeek
+      type: int
+    returnType: bool
+- subject:
+    function: intlcal_set_lenient
+  signature:
+    params:
+    - name: calendar
+      type: int
+    - name: lenient
+      type: bool
+    returnType: bool
+- subject:
+    function: intlcal_set_minimal_days_in_first_week
+  signature:
+    params:
+    - name: calendar
+      type: int
+    - name: days
+      type: int
+    returnType: bool
+- subject:
+    function: intlcal_set_repeated_wall_time_option
+  signature:
+    params:
+    - name: calendar
+      type: int
+    - name: option
+      type: int
+    returnType: bool
+- subject:
+    function: intlcal_set_skipped_wall_time_option
+  signature:
+    params:
+    - name: calendar
+      type: int
+    - name: option
+      type: int
+    returnType: bool
+- subject:
+    function: intlcal_set_time
+  signature:
+    params:
+    - name: calendar
+      type: int
+    - name: timestamp
+      type: float
+    returnType: bool
+- subject:
+    function: intlcal_set_time_zone
+  signature:
+    params:
+    - name: calendar
+      type: int
+    - name: timezone
+      type: mixed
+    returnType: bool
+- subject:
+    function: intlcal_to_date_time
+  signature:
+    params:
+    - name: calendar
+      type: int
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: intlgregcal_create_instance
+  signature:
+    params:
+    - name: timezoneOrYear
+      type: mixed
+      optional: true
+    - name: localeOrMonth
+      type: int
+      optional: true
+    - name: day
+      type: int
+      optional: true
+    - name: hour
+      type: int
+      optional: true
+    - name: minute
+      type: int
+      optional: true
+    - name: second
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: intlgregcal_get_gregorian_change
+  signature:
+    params:
+    - name: calendar
+      type: int
+    returnType: float
+- subject:
+    function: intlgregcal_is_leap_year
+  signature:
+    params:
+    - name: calendar
+      type: int
+    - name: year
+      type: int
+    returnType: bool
+- subject:
+    function: intlgregcal_set_gregorian_change
+  signature:
+    params:
+    - name: calendar
+      type: int
+    - name: timestamp
+      type: float
+    returnType: bool
+- subject:
+    function: intltz_count_equivalent_ids
+  signature:
+    params:
+    - name: timezoneId
+      type: string
+    returnType: int
+- subject:
+    function: intltz_create_default
+  signature:
+    returnType: int
+- subject:
+    function: intltz_create_enumeration
+  signature:
+    params:
+    - name: countryOrRawOffset
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: intltz_create_time_zone
+  signature:
+    params:
+    - name: timezoneId
+      type: string
+    returnType: int
+- subject:
+    function: intltz_create_time_zone_id_enumeration
+  signature:
+    params:
+    - name: type
+      type: int
+    - name: region
+      type: string
+      optional: true
+    - name: rawOffset
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: intltz_from_date_time_zone
+  signature:
+    params:
+    - name: timezone
+      type: mixed
+    returnType: int
+- subject:
+    function: intltz_get_canonical_id
+  signature:
+    params:
+    - name: timezoneId
+      type: string
+    - name: isSystemId
+      type: bool
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: intltz_get_display_name
+  signature:
+    params:
+    - name: timezone
+      type: int
+    - name: dst
+      type: bool
+      optional: true
+    - name: style
+      type: int
+      optional: true
+    - name: locale
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(3)
+    to: return
+- subject:
+    function: intltz_get_dst_savings
+  signature:
+    params:
+    - name: timezone
+      type: int
+    returnType: int
+- subject:
+    function: intltz_get_equivalent_id
+  signature:
+    params:
+    - name: timezoneId
+      type: string
+    - name: offset
+      type: int
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: intltz_get_error_code
+  signature:
+    params:
+    - name: timezone
+      type: int
+    returnType: int
+- subject:
+    function: intltz_get_error_message
+  signature:
+    params:
+    - name: timezone
+      type: int
+    returnType: string
+- subject:
+    function: intltz_get_gmt
+  signature:
+    returnType: int
+- subject:
+    function: intltz_get_id
+  signature:
+    params:
+    - name: timezone
+      type: int
+    returnType: string
+- subject:
+    function: intltz_get_id_for_windows_id
+  signature:
+    params:
+    - name: timezoneId
+      type: string
+    - name: region
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: intltz_get_offset
+  signature:
+    params:
+    - name: timezone
+      type: int
+    - name: timestamp
+      type: float
+    - name: local
+      type: bool
+    - name: rawOffset
+      type: int
+    - name: dstOffset
+      type: int
+    returnType: bool
+- subject:
+    function: intltz_get_raw_offset
+  signature:
+    params:
+    - name: timezone
+      type: int
+    returnType: int
+- subject:
+    function: intltz_get_region
+  signature:
+    params:
+    - name: timezoneId
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: intltz_get_tz_data_version
+  signature:
+    returnType: string
+- subject:
+    function: intltz_get_unknown
+  signature:
+    returnType: int
+- subject:
+    function: intltz_get_windows_id
+  signature:
+    params:
+    - name: timezoneId
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: intltz_getgmt
+  signature:
+    returnType: int
+- subject:
+    function: intltz_has_same_rules
+  signature:
+    params:
+    - name: timezone
+      type: int
+    - name: other
+      type: int
+    returnType: bool
+- subject:
+    function: intltz_to_date_time_zone
+  signature:
+    params:
+    - name: timezone
+      type: int
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: intltz_use_daylight_time
+  signature:
+    params:
+    - name: timezone
+      type: int
+    returnType: bool
+- subject:
+    function: intlz_create_default
+  signature:
+    returnType: int
+- subject:
+    function: intval
+  signature:
+    params:
+    - name: value
+      type: mixed
+    - name: base
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: ip2long
+  signature:
+    params:
+    - name: ip
+      type: string
+    returnType: int
+- subject:
+    function: iptcembed
+  signature:
+    params:
+    - name: iptc_data
+      type: string
+    - name: filename
+      type: string
+    - name: spool
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: iptcparse
+  signature:
+    params:
+    - name: iptc_block
+      type: string
+    returnType: array
+- subject:
+    function: is_a
+  signature:
+    params:
+    - name: object_or_class
+      type: mixed
+    - name: class
+      type: string
+    - name: allow_string
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: is_array
+  signature:
+    params:
+    - name: value
+      type: mixed
+    returnType: bool
+- subject:
+    function: is_bool
+  signature:
+    params:
+    - name: value
+      type: mixed
+    returnType: bool
+- subject:
+    function: is_callable
+  signature:
+    params:
+    - name: value
+      type: callable
+    - name: syntax_only
+      type: bool
+      optional: true
+    - name: callable_name
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: is_countable
+  signature:
+    params:
+    - name: value
+      type: mixed
+    returnType: bool
+- subject:
+    function: is_double
+  signature:
+    params:
+    - name: value
+      type: mixed
+    returnType: bool
+- subject:
+    function: is_finite
+  signature:
+    params:
+    - name: num
+      type: float
+    returnType: bool
+- subject:
+    function: is_float
+  signature:
+    params:
+    - name: value
+      type: mixed
+    returnType: bool
+- subject:
+    function: is_infinite
+  signature:
+    params:
+    - name: num
+      type: float
+    returnType: bool
+- subject:
+    function: is_int
+  signature:
+    params:
+    - name: value
+      type: mixed
+    returnType: bool
+- subject:
+    function: is_integer
+  signature:
+    params:
+    - name: value
+      type: mixed
+    returnType: bool
+- subject:
+    function: is_iterable
+  signature:
+    params:
+    - name: value
+      type: mixed
+    returnType: bool
+- subject:
+    function: is_long
+  signature:
+    params:
+    - name: value
+      type: mixed
+    returnType: bool
+- subject:
+    function: is_nan
+  signature:
+    params:
+    - name: num
+      type: float
+    returnType: bool
+- subject:
+    function: is_null
+  signature:
+    params:
+    - name: value
+      type: mixed
+    returnType: bool
+- subject:
+    function: is_numeric
+  signature:
+    params:
+    - name: value
+      type: mixed
+    returnType: bool
+- subject:
+    function: is_object
+  signature:
+    params:
+    - name: value
+      type: mixed
+    returnType: bool
+- subject:
+    function: is_resource
+  signature:
+    params:
+    - name: value
+      type: mixed
+    returnType: bool
+- subject:
+    function: is_scalar
+  signature:
+    params:
+    - name: value
+      type: mixed
+    returnType: bool
+- subject:
+    function: is_soap_fault
+  signature:
+    params:
+    - name: object
+      type: mixed
+    returnType: bool
+- subject:
+    function: is_string
+  signature:
+    params:
+    - name: value
+      type: mixed
+    returnType: bool
+- subject:
+    function: is_subclass_of
+  signature:
+    params:
+    - name: object_or_class
+      type: object
+    - name: class
+      type: string
+    - name: allow_string
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: is_tainted
+  signature:
+    params:
+    - name: string
+      type: string
+    returnType: bool
+- subject:
+    function: isset
+  signature:
+    params:
+    - name: value
+      type: mixed
+    - name: rest
+      type: mixed
+      optional: true
+    returnType: bool
+- subject:
+    function: iterator_apply
+  signature:
+    params:
+    - name: iterator
+      type: mixed
+    - name: callback
+      type: mixed
+    - name: args
+      type: array
+      optional: true
+    returnType: int
+- subject:
+    function: iterator_count
+  signature:
+    params:
+    - name: iterator
+      type: mixed
+    returnType: int
+- subject:
+    function: iterator_to_array
+  signature:
+    params:
+    - name: iterator
+      type: mixed
+    - name: preserve_keys
+      type: bool
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: java_last_exception_clear
+  signature:
+    returnType: void
+- subject:
+    function: java_last_exception_get
+  signature:
+    returnType: object
+- subject:
+    function: java_reload
+  signature:
+    params:
+    - name: new_jarpath
+      type: string
+    returnType: array
+- subject:
+    function: java_require
+  signature:
+    params:
+    - name: new_classpath
+      type: string
+    returnType: array
+- subject:
+    function: java_set_encoding
+  signature:
+    params:
+    - name: encoding
+      type: string
+    returnType: array
+- subject:
+    function: java_set_ignore_case
+  signature:
+    params:
+    - name: ignore
+      type: bool
+    returnType: void
+- subject:
+    function: java_throw_exceptions
+  signature:
+    params:
+    - name: throw
+      type: bool
+    returnType: void
+- subject:
+    function: jddayofweek
+  signature:
+    params:
+    - name: julian_day
+      type: int
+    - name: mode
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: jdmonthname
+  signature:
+    params:
+    - name: julian_day
+      type: int
+    - name: mode
+      type: int
+    returnType: string
+- subject:
+    function: jdtofrench
+  signature:
+    params:
+    - name: julian_day
+      type: int
+    returnType: string
+- subject:
+    function: jdtogregorian
+  signature:
+    params:
+    - name: julian_day
+      type: int
+    returnType: string
+- subject:
+    function: jdtojewish
+  signature:
+    params:
+    - name: julian_day
+      type: int
+    - name: hebrew
+      type: bool
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: string
+- subject:
+    function: jdtojulian
+  signature:
+    params:
+    - name: julian_day
+      type: int
+    returnType: string
+- subject:
+    function: jdtounix
+  signature:
+    params:
+    - name: julian_day
+      type: int
+    returnType: int
+- subject:
+    function: jewishtojd
+  signature:
+    params:
+    - name: month
+      type: int
+    - name: day
+      type: int
+    - name: year
+      type: int
+    returnType: int
+- subject:
+    function: jobqueue_license_info
+  signature:
+    returnType: array
+- subject:
+    function: join
+  signature:
+    params:
+    - name: separator
+      type: string
+    - name: array
+      type: array
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: judy_type
+  signature:
+    params:
+    - name: array
+      type: mixed
+    returnType: int
+- subject:
+    function: judy_version
+  signature:
+    returnType: string
+- subject:
+    function: juliantojd
+  signature:
+    params:
+    - name: month
+      type: int
+    - name: day
+      type: int
+    - name: year
+      type: int
+    returnType: int
+- subject:
+    function: kadm5_chpass_principal
+  signature:
+    params:
+    - name: handle
+      type: resource
+    - name: principal
+      type: string
+    - name: password
+      type: string
+    returnType: bool
+- subject:
+    function: kadm5_create_principal
+  signature:
+    params:
+    - name: handle
+      type: resource
+    - name: principal
+      type: string
+    - name: password
+      type: string
+      optional: true
+    - name: options
+      type: array
+      optional: true
+    returnType: bool
+- subject:
+    function: kadm5_delete_principal
+  signature:
+    params:
+    - name: handle
+      type: resource
+    - name: principal
+      type: string
+    returnType: bool
+- subject:
+    function: kadm5_destroy
+  signature:
+    params:
+    - name: handle
+      type: resource
+    returnType: bool
+- subject:
+    function: kadm5_flush
+  signature:
+    params:
+    - name: handle
+      type: resource
+    returnType: bool
+- subject:
+    function: kadm5_get_policies
+  signature:
+    params:
+    - name: handle
+      type: resource
+    returnType: array
+- subject:
+    function: kadm5_get_principal
+  signature:
+    params:
+    - name: handle
+      type: resource
+    - name: principal
+      type: string
+    returnType: array
+- subject:
+    function: kadm5_get_principals
+  signature:
+    params:
+    - name: handle
+      type: resource
+    returnType: array
+- subject:
+    function: kadm5_init_with_password
+  signature:
+    params:
+    - name: admin_server
+      type: string
+    - name: realm
+      type: string
+    - name: principal
+      type: string
+    - name: password
+      type: string
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: kadm5_modify_principal
+  signature:
+    params:
+    - name: handle
+      type: resource
+    - name: principal
+      type: string
+    - name: options
+      type: array
+    returnType: bool
+- subject:
+    function: key
+  signature:
+    params:
+    - name: array
+      type: array
+    returnType: int
+- subject:
+    function: key_exists
+  signature:
+    params:
+    - name: key
+      type: int
+    - name: array
+      type: array
+    returnType: bool
+- subject:
+    function: krsort
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: ksort
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: lcfirst
+  signature:
+    params:
+    - name: string
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: lcg_value
+  signature:
+    returnType: float
+- subject:
+    function: lchgrp
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: group
+      type: int
+    returnType: bool
+- subject:
+    function: lchown
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: user
+      type: int
+    returnType: bool
+- subject:
+    function: leak
+  signature:
+    params:
+    - name: num_bytes
+      type: int
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: leak_variable
+  signature:
+    params:
+    - name: variable
+      type: mixed
+    - name: leak_data
+      type: bool
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: levenshtein
+  signature:
+    params:
+    - name: string1
+      type: string
+    - name: string2
+      type: string
+    - name: insertion_cost
+      type: int
+      optional: true
+    - name: replacement_cost
+      type: int
+      optional: true
+    - name: deletion_cost
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: link
+  signature:
+    params:
+    - name: target
+      type: string
+    - name: link
+      type: string
+    returnType: bool
+- subject:
+    function: linkinfo
+  signature:
+    params:
+    - name: path
+      type: string
+    returnType: int
+- subject:
+    function: litespeed_request_headers
+  signature:
+    returnType: array
+- subject:
+    function: litespeed_response_headers
+  signature:
+    returnType: array
+- subject:
+    function: locale_accept_from_http
+  signature:
+    params:
+    - name: header
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: locale_canonicalize
+  signature:
+    params:
+    - name: locale
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: locale_compose
+  signature:
+    params:
+    - name: subtags
+      type: array
+    returnType: string
+- subject:
+    function: locale_filter_matches
+  signature:
+    params:
+    - name: languageTag
+      type: string
+    - name: locale
+      type: string
+    - name: canonicalize
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: locale_get_all_variants
+  signature:
+    params:
+    - name: locale
+      type: string
+    returnType: array
+- subject:
+    function: locale_get_default
+  signature:
+    returnType: string
+- subject:
+    function: locale_get_display_language
+  signature:
+    params:
+    - name: locale
+      type: string
+    - name: displayLocale
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: locale_get_display_name
+  signature:
+    params:
+    - name: locale
+      type: string
+    - name: displayLocale
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: locale_get_display_region
+  signature:
+    params:
+    - name: locale
+      type: string
+    - name: displayLocale
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: locale_get_display_script
+  signature:
+    params:
+    - name: locale
+      type: string
+    - name: displayLocale
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: locale_get_display_variant
+  signature:
+    params:
+    - name: locale
+      type: string
+    - name: displayLocale
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: locale_get_keywords
+  signature:
+    params:
+    - name: locale
+      type: string
+    returnType: array

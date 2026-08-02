@@ -1,0 +1,1041 @@
+# Generated from stubs/database/cubrid.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: cubrid_affected_rows
+  signature:
+    params:
+    - name: req_identifier
+      type: mixed
+      optional: true
+    returnType: int
+- subject:
+    function: cubrid_bind
+  signature:
+    params:
+    - name: req_identifier
+      type: resource
+    - name: bind_param
+      type: int
+    - name: bind_value
+      type: mixed
+    - name: bind_value_type
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: cubrid_client_encoding
+  signature:
+    params:
+    - name: conn_identifier
+      type: mixed
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: cubrid_close
+  signature:
+    params:
+    - name: conn_identifier
+      type: mixed
+      optional: true
+    returnType: bool
+- subject:
+    function: cubrid_close_prepare
+  signature:
+    params:
+    - name: req_identifier
+      type: resource
+    returnType: bool
+- subject:
+    function: cubrid_close_request
+  signature:
+    params:
+    - name: req_identifier
+      type: resource
+    returnType: bool
+- subject:
+    function: cubrid_col_get
+  signature:
+    params:
+    - name: conn_identifier
+      type: resource
+    - name: oid
+      type: string
+    - name: attr_name
+      type: string
+    returnType: array
+- subject:
+    function: cubrid_col_size
+  signature:
+    params:
+    - name: conn_identifier
+      type: resource
+    - name: oid
+      type: string
+    - name: attr_name
+      type: string
+    returnType: int
+- subject:
+    function: cubrid_column_names
+  signature:
+    params:
+    - name: req_identifier
+      type: resource
+    returnType: array
+- subject:
+    function: cubrid_column_types
+  signature:
+    params:
+    - name: req_identifier
+      type: resource
+    returnType: array
+- subject:
+    function: cubrid_commit
+  signature:
+    params:
+    - name: conn_identifier
+      type: resource
+    returnType: bool
+- subject:
+    function: cubrid_connect
+  signature:
+    params:
+    - name: host
+      type: string
+    - name: port
+      type: int
+    - name: dbname
+      type: string
+    - name: userid
+      type: string
+      optional: true
+    - name: passwd
+      type: string
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: cubrid_connect_with_url
+  signature:
+    params:
+    - name: conn_url
+      type: string
+    - name: userid
+      type: string
+      optional: true
+    - name: passwd
+      type: string
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: cubrid_current_oid
+  signature:
+    params:
+    - name: req_identifier
+      type: resource
+    returnType: string
+- subject:
+    function: cubrid_data_seek
+  signature:
+    params:
+    - name: req_identifier
+      type: mixed
+    - name: row_number
+      type: int
+    returnType: bool
+- subject:
+    function: cubrid_db_name
+  signature:
+    params:
+    - name: result
+      type: array
+    - name: index
+      type: int
+    returnType: string
+- subject:
+    function: cubrid_db_parameter
+  signature:
+    params:
+    - name: conn_identifier
+      type: resource
+    returnType: array
+- subject:
+    function: cubrid_disconnect
+  signature:
+    params:
+    - name: conn_identifier
+      type: resource
+    returnType: bool
+- subject:
+    function: cubrid_drop
+  signature:
+    params:
+    - name: conn_identifier
+      type: resource
+    - name: oid
+      type: string
+    returnType: bool
+- subject:
+    function: cubrid_errno
+  signature:
+    params:
+    - name: conn_identifier
+      type: mixed
+      optional: true
+    returnType: int
+- subject:
+    function: cubrid_error
+  signature:
+    params:
+    - name: connection
+      type: mixed
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: cubrid_error_code
+  signature:
+    returnType: int
+- subject:
+    function: cubrid_error_code_facility
+  signature:
+    returnType: int
+- subject:
+    function: cubrid_error_msg
+  signature:
+    returnType: string
+- subject:
+    function: cubrid_execute
+  signature:
+    params:
+    - name: conn_identifier
+      type: mixed
+    - name: sql
+      type: string
+    - name: option
+      type: int
+      optional: true
+    - name: request_identifier
+      type: mixed
+      optional: true
+    returnType: bool
+- subject:
+    function: cubrid_fetch
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: type
+      type: int
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: cubrid_fetch_array
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: type
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    function: cubrid_fetch_assoc
+  signature:
+    params:
+    - name: result
+      type: resource
+    returnType: array
+- subject:
+    function: cubrid_fetch_field
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: field_offset
+      type: int
+      optional: true
+    returnType: object
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: cubrid_fetch_lengths
+  signature:
+    params:
+    - name: result
+      type: resource
+    returnType: array
+- subject:
+    function: cubrid_fetch_object
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: class_name
+      type: string
+      optional: true
+    - name: params
+      type: array
+      optional: true
+    returnType: object
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: cubrid_fetch_row
+  signature:
+    params:
+    - name: result
+      type: resource
+    returnType: array
+- subject:
+    function: cubrid_field_flags
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: field_offset
+      type: int
+    returnType: string
+- subject:
+    function: cubrid_field_len
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: field_offset
+      type: int
+    returnType: int
+- subject:
+    function: cubrid_field_name
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: field_offset
+      type: int
+    returnType: string
+- subject:
+    function: cubrid_field_seek
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: field_offset
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: cubrid_field_table
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: field_offset
+      type: int
+    returnType: string
+- subject:
+    function: cubrid_field_type
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: field_offset
+      type: int
+    returnType: string
+- subject:
+    function: cubrid_free_result
+  signature:
+    params:
+    - name: req_identifier
+      type: resource
+    returnType: bool
+- subject:
+    function: cubrid_get
+  signature:
+    params:
+    - name: conn_identifier
+      type: resource
+    - name: oid
+      type: string
+    - name: attr
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: cubrid_get_autocommit
+  signature:
+    params:
+    - name: conn_identifier
+      type: resource
+    returnType: bool
+- subject:
+    function: cubrid_get_charset
+  signature:
+    params:
+    - name: conn_identifier
+      type: resource
+    returnType: string
+- subject:
+    function: cubrid_get_class_name
+  signature:
+    params:
+    - name: conn_identifier
+      type: resource
+    - name: oid
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: cubrid_get_client_info
+  signature:
+    returnType: string
+- subject:
+    function: cubrid_get_db_parameter
+  signature:
+    params:
+    - name: conn_identifier
+      type: resource
+    returnType: array
+- subject:
+    function: cubrid_get_query_timeout
+  signature:
+    params:
+    - name: req_identifier
+      type: resource
+    returnType: int
+- subject:
+    function: cubrid_get_server_info
+  signature:
+    params:
+    - name: conn_identifier
+      type: resource
+    returnType: string
+- subject:
+    function: cubrid_insert_id
+  signature:
+    params:
+    - name: conn_identifier
+      type: resource
+      optional: true
+    returnType: string
+- subject:
+    function: cubrid_is_instance
+  signature:
+    params:
+    - name: conn_identifier
+      type: resource
+    - name: oid
+      type: string
+    returnType: int
+- subject:
+    function: cubrid_list_dbs
+  signature:
+    params:
+    - name: conn_identifier
+      type: resource
+    returnType: array
+- subject:
+    function: cubrid_load_from_glo
+  signature:
+    params:
+    - name: conn_identifier
+      type: mixed
+    - name: oid
+      type: string
+    - name: file_name
+      type: string
+    returnType: int
+- subject:
+    function: cubrid_lob2_bind
+  signature:
+    params:
+    - name: req_identifier
+      type: resource
+    - name: bind_index
+      type: int
+    - name: bind_value
+      type: mixed
+    - name: bind_value_type
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: cubrid_lob2_close
+  signature:
+    params:
+    - name: lob_identifier
+      type: resource
+    returnType: bool
+- subject:
+    function: cubrid_lob2_export
+  signature:
+    params:
+    - name: lob_identifier
+      type: resource
+    - name: file_name
+      type: string
+    returnType: bool
+- subject:
+    function: cubrid_lob2_import
+  signature:
+    params:
+    - name: lob_identifier
+      type: resource
+    - name: file_name
+      type: string
+    returnType: bool
+- subject:
+    function: cubrid_lob2_new
+  signature:
+    params:
+    - name: conn_identifier
+      type: resource
+      optional: true
+    - name: type
+      type: string
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: cubrid_lob2_read
+  signature:
+    params:
+    - name: lob_identifier
+      type: resource
+    - name: length
+      type: int
+    returnType: string
+- subject:
+    function: cubrid_lob2_seek
+  signature:
+    params:
+    - name: lob_identifier
+      type: resource
+    - name: offset
+      type: int
+    - name: origin
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: cubrid_lob2_seek64
+  signature:
+    params:
+    - name: lob_identifier
+      type: resource
+    - name: offset
+      type: string
+    - name: origin
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: cubrid_lob2_size
+  signature:
+    params:
+    - name: lob_identifier
+      type: resource
+    returnType: int
+- subject:
+    function: cubrid_lob2_size64
+  signature:
+    params:
+    - name: lob_identifier
+      type: resource
+    returnType: string
+- subject:
+    function: cubrid_lob2_tell
+  signature:
+    params:
+    - name: lob_identifier
+      type: resource
+    returnType: int
+- subject:
+    function: cubrid_lob2_tell64
+  signature:
+    params:
+    - name: lob_identifier
+      type: resource
+    returnType: string
+- subject:
+    function: cubrid_lob2_write
+  signature:
+    params:
+    - name: lob_identifier
+      type: resource
+    - name: buf
+      type: string
+    returnType: bool
+- subject:
+    function: cubrid_lob_close
+  signature:
+    params:
+    - name: lob_identifier_array
+      type: array
+    returnType: bool
+- subject:
+    function: cubrid_lob_export
+  signature:
+    params:
+    - name: conn_identifier
+      type: resource
+    - name: lob_identifier
+      type: resource
+    - name: path_name
+      type: string
+    returnType: bool
+- subject:
+    function: cubrid_lob_get
+  signature:
+    params:
+    - name: conn_identifier
+      type: resource
+    - name: sql
+      type: string
+    returnType: array
+- subject:
+    function: cubrid_lob_send
+  signature:
+    params:
+    - name: conn_identifier
+      type: resource
+    - name: lob_identifier
+      type: resource
+    returnType: bool
+- subject:
+    function: cubrid_lob_size
+  signature:
+    params:
+    - name: lob_identifier
+      type: resource
+    returnType: string
+- subject:
+    function: cubrid_lock_read
+  signature:
+    params:
+    - name: conn_identifier
+      type: resource
+    - name: oid
+      type: string
+    returnType: bool
+- subject:
+    function: cubrid_lock_write
+  signature:
+    params:
+    - name: conn_identifier
+      type: resource
+    - name: oid
+      type: string
+    returnType: bool
+- subject:
+    function: cubrid_move_cursor
+  signature:
+    params:
+    - name: req_identifier
+      type: resource
+    - name: offset
+      type: int
+    - name: origin
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: cubrid_new_glo
+  signature:
+    params:
+    - name: conn_identifier
+      type: mixed
+    - name: class_name
+      type: string
+    - name: file_name
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: cubrid_next_result
+  signature:
+    params:
+    - name: result
+      type: resource
+    returnType: bool
+- subject:
+    function: cubrid_num_cols
+  signature:
+    params:
+    - name: req_identifier
+      type: resource
+    returnType: int
+- subject:
+    function: cubrid_num_fields
+  signature:
+    params:
+    - name: result
+      type: resource
+    returnType: int
+- subject:
+    function: cubrid_num_rows
+  signature:
+    params:
+    - name: req_identifier
+      type: resource
+    returnType: int
+- subject:
+    function: cubrid_pconnect
+  signature:
+    params:
+    - name: host
+      type: string
+    - name: port
+      type: int
+    - name: dbname
+      type: string
+    - name: userid
+      type: string
+      optional: true
+    - name: passwd
+      type: string
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: cubrid_pconnect_with_url
+  signature:
+    params:
+    - name: conn_url
+      type: string
+    - name: userid
+      type: string
+      optional: true
+    - name: passwd
+      type: string
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: cubrid_ping
+  signature:
+    params:
+    - name: conn_identifier
+      type: mixed
+      optional: true
+    returnType: bool
+- subject:
+    function: cubrid_prepare
+  signature:
+    params:
+    - name: conn_identifier
+      type: resource
+    - name: prepare_stmt
+      type: string
+    - name: option
+      type: int
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: cubrid_put
+  signature:
+    params:
+    - name: conn_identifier
+      type: resource
+    - name: oid
+      type: string
+    - name: attr
+      type: string
+      optional: true
+    - name: value
+      type: mixed
+      optional: true
+    returnType: bool
+- subject:
+    function: cubrid_query
+  signature:
+    params:
+    - name: query
+      type: string
+    - name: conn_identifier
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: cubrid_real_escape_string
+  signature:
+    params:
+    - name: unescaped_string
+      type: string
+    - name: conn_identifier
+      type: mixed
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: cubrid_result
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: row
+      type: int
+    - name: field
+      type: mixed
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(2)
+    to: return
+- subject:
+    function: cubrid_rollback
+  signature:
+    params:
+    - name: conn_identifier
+      type: resource
+    returnType: bool
+- subject:
+    function: cubrid_save_to_glo
+  signature:
+    params:
+    - name: conn_identifier
+      type: mixed
+    - name: oid
+      type: string
+    - name: file_name
+      type: string
+    returnType: int
+- subject:
+    function: cubrid_schema
+  signature:
+    params:
+    - name: conn_identifier
+      type: resource
+    - name: schema_type
+      type: int
+    - name: class_name
+      type: string
+      optional: true
+    - name: attr_name
+      type: string
+      optional: true
+    returnType: array
+- subject:
+    function: cubrid_send_glo
+  signature:
+    params:
+    - name: conn_identifier
+      type: mixed
+    - name: oid
+      type: string
+    returnType: int
+- subject:
+    function: cubrid_seq_add
+  signature:
+    params:
+    - name: conn_identifier
+      type: resource
+    - name: oid
+      type: string
+    - name: attr_name
+      type: string
+    - name: seq_element
+      type: string
+    returnType: bool
+- subject:
+    function: cubrid_seq_drop
+  signature:
+    params:
+    - name: conn_identifier
+      type: resource
+    - name: oid
+      type: string
+    - name: attr_name
+      type: string
+    - name: index
+      type: int
+    returnType: bool
+- subject:
+    function: cubrid_seq_insert
+  signature:
+    params:
+    - name: conn_identifier
+      type: resource
+    - name: oid
+      type: string
+    - name: attr_name
+      type: string
+    - name: index
+      type: int
+    - name: seq_element
+      type: string
+    returnType: bool
+- subject:
+    function: cubrid_seq_put
+  signature:
+    params:
+    - name: conn_identifier
+      type: resource
+    - name: oid
+      type: string
+    - name: attr_name
+      type: string
+    - name: index
+      type: int
+    - name: seq_element
+      type: string
+    returnType: bool
+- subject:
+    function: cubrid_set_add
+  signature:
+    params:
+    - name: conn_identifier
+      type: resource
+    - name: oid
+      type: string
+    - name: attr_name
+      type: string
+    - name: set_element
+      type: string
+    returnType: bool
+- subject:
+    function: cubrid_set_autocommit
+  signature:
+    params:
+    - name: conn_identifier
+      type: resource
+    - name: mode
+      type: bool
+    returnType: bool
+- subject:
+    function: cubrid_set_db_parameter
+  signature:
+    params:
+    - name: conn_identifier
+      type: resource
+    - name: param_type
+      type: int
+    - name: param_value
+      type: int
+    returnType: bool
+- subject:
+    function: cubrid_set_drop
+  signature:
+    params:
+    - name: conn_identifier
+      type: resource
+    - name: oid
+      type: string
+    - name: attr_name
+      type: string
+    - name: set_element
+      type: string
+    returnType: bool
+- subject:
+    function: cubrid_set_query_timeout
+  signature:
+    params:
+    - name: req_identifier
+      type: resource
+    - name: timeout
+      type: int
+    returnType: bool
+- subject:
+    function: cubrid_unbuffered_query
+  signature:
+    params:
+    - name: query
+      type: string
+    - name: conn_identifier
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: cubrid_version
+  signature:
+    returnType: string

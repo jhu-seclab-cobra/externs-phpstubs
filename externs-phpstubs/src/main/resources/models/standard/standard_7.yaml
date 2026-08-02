@@ -1,0 +1,6863 @@
+# Generated from stubs/standard/standard_7.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: trader_atan
+  signature:
+    params:
+    - name: real
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_atr
+  signature:
+    params:
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: trader_avgprice
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_bbands
+  signature:
+    params:
+    - name: real
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    - name: nbDevUp
+      type: float
+      optional: true
+    - name: nbDevDn
+      type: float
+      optional: true
+    - name: mAType
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_beta
+  signature:
+    params:
+    - name: real0
+      type: array
+    - name: real1
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: trader_bop
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cci
+  signature:
+    params:
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: trader_cdl2crows
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdl3blackcrows
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdl3inside
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdl3linestrike
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdl3outside
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdl3starsinsouth
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdl3whitesoldiers
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdlabandonedbaby
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    - name: penetration
+      type: float
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdladvanceblock
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdlbelthold
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdlbreakaway
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdlclosingmarubozu
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdlconcealbabyswall
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdlcounterattack
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdldarkcloudcover
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    - name: penetration
+      type: float
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdldoji
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdldojistar
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdldragonflydoji
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdlengulfing
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdleveningdojistar
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    - name: penetration
+      type: float
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdleveningstar
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    - name: penetration
+      type: float
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdlgapsidesidewhite
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdlgravestonedoji
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdlhammer
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdlhangingman
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdlharami
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdlharamicross
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdlhighwave
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdlhikkake
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdlhikkakemod
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdlhomingpigeon
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdlidentical3crows
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdlinneck
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdlinvertedhammer
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdlkicking
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdlkickingbylength
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdlladderbottom
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdllongleggeddoji
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdllongline
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdlmarubozu
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdlmatchinglow
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdlmathold
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    - name: penetration
+      type: float
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdlmorningdojistar
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    - name: penetration
+      type: float
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdlmorningstar
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    - name: penetration
+      type: float
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdlonneck
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdlpiercing
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdlrickshawman
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdlrisefall3methods
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdlseparatinglines
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdlshootingstar
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdlshortline
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdlspinningtop
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdlstalledpattern
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdlsticksandwich
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdltakuri
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdltasukigap
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdlthrusting
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdltristar
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdlunique3river
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdlupsidegap2crows
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_cdlxsidegap3methods
+  signature:
+    params:
+    - name: open
+      type: array
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_ceil
+  signature:
+    params:
+    - name: real
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_cmo
+  signature:
+    params:
+    - name: real
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_correl
+  signature:
+    params:
+    - name: real0
+      type: array
+    - name: real1
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: trader_cos
+  signature:
+    params:
+    - name: real
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_cosh
+  signature:
+    params:
+    - name: real
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_dema
+  signature:
+    params:
+    - name: real
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_div
+  signature:
+    params:
+    - name: real0
+      type: array
+    - name: real1
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: trader_dx
+  signature:
+    params:
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: trader_ema
+  signature:
+    params:
+    - name: real
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_errno
+  signature:
+    returnType: int
+- subject:
+    function: trader_exp
+  signature:
+    params:
+    - name: real
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_floor
+  signature:
+    params:
+    - name: real
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_get_compat
+  signature:
+    returnType: int
+- subject:
+    function: trader_get_unstable_period
+  signature:
+    params:
+    - name: functionId
+      type: int
+    returnType: int
+- subject:
+    function: trader_ht_dcperiod
+  signature:
+    params:
+    - name: real
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_ht_dcphase
+  signature:
+    params:
+    - name: real
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_ht_phasor
+  signature:
+    params:
+    - name: real
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_ht_sine
+  signature:
+    params:
+    - name: real
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_ht_trendline
+  signature:
+    params:
+    - name: real
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_ht_trendmode
+  signature:
+    params:
+    - name: real
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_kama
+  signature:
+    params:
+    - name: real
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_linearreg
+  signature:
+    params:
+    - name: real
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_linearreg_angle
+  signature:
+    params:
+    - name: real
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_linearreg_intercept
+  signature:
+    params:
+    - name: real
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_linearreg_slope
+  signature:
+    params:
+    - name: real
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_ln
+  signature:
+    params:
+    - name: real
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_log10
+  signature:
+    params:
+    - name: real
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_ma
+  signature:
+    params:
+    - name: real
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    - name: mAType
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_macd
+  signature:
+    params:
+    - name: real
+      type: array
+    - name: fastPeriod
+      type: int
+      optional: true
+    - name: slowPeriod
+      type: int
+      optional: true
+    - name: signalPeriod
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_macdext
+  signature:
+    params:
+    - name: real
+      type: array
+    - name: fastPeriod
+      type: int
+      optional: true
+    - name: fastMAType
+      type: int
+      optional: true
+    - name: slowPeriod
+      type: int
+      optional: true
+    - name: slowMAType
+      type: int
+      optional: true
+    - name: signalPeriod
+      type: int
+      optional: true
+    - name: signalMAType
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_macdfix
+  signature:
+    params:
+    - name: real
+      type: array
+    - name: signalPeriod
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_mama
+  signature:
+    params:
+    - name: real
+      type: array
+    - name: fastLimit
+      type: float
+      optional: true
+    - name: slowLimit
+      type: float
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_mavp
+  signature:
+    params:
+    - name: real
+      type: array
+    - name: periods
+      type: array
+    - name: minPeriod
+      type: int
+      optional: true
+    - name: maxPeriod
+      type: int
+      optional: true
+    - name: mAType
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: trader_max
+  signature:
+    params:
+    - name: real
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_maxindex
+  signature:
+    params:
+    - name: real
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_medprice
+  signature:
+    params:
+    - name: high
+      type: array
+    - name: low
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: trader_mfi
+  signature:
+    params:
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    - name: volume
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: trader_midpoint
+  signature:
+    params:
+    - name: real
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_midprice
+  signature:
+    params:
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: trader_min
+  signature:
+    params:
+    - name: real
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_minindex
+  signature:
+    params:
+    - name: real
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_minmax
+  signature:
+    params:
+    - name: real
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_minmaxindex
+  signature:
+    params:
+    - name: real
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_minus_di
+  signature:
+    params:
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: trader_minus_dm
+  signature:
+    params:
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: trader_mom
+  signature:
+    params:
+    - name: real
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_mult
+  signature:
+    params:
+    - name: real0
+      type: array
+    - name: real1
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: trader_natr
+  signature:
+    params:
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: trader_obv
+  signature:
+    params:
+    - name: real
+      type: array
+    - name: volume
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: trader_plus_di
+  signature:
+    params:
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: trader_plus_dm
+  signature:
+    params:
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: trader_ppo
+  signature:
+    params:
+    - name: real
+      type: array
+    - name: fastPeriod
+      type: int
+      optional: true
+    - name: slowPeriod
+      type: int
+      optional: true
+    - name: mAType
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_roc
+  signature:
+    params:
+    - name: real
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_rocp
+  signature:
+    params:
+    - name: real
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_rocr
+  signature:
+    params:
+    - name: real
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_rocr100
+  signature:
+    params:
+    - name: real
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_rsi
+  signature:
+    params:
+    - name: real
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_sar
+  signature:
+    params:
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: acceleration
+      type: float
+      optional: true
+    - name: maximum
+      type: float
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: trader_sarext
+  signature:
+    params:
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: startValue
+      type: float
+      optional: true
+    - name: offsetOnReverse
+      type: float
+      optional: true
+    - name: accelerationInitLong
+      type: float
+      optional: true
+    - name: accelerationLong
+      type: float
+      optional: true
+    - name: accelerationMaxLong
+      type: float
+      optional: true
+    - name: accelerationInitShort
+      type: float
+      optional: true
+    - name: accelerationShort
+      type: float
+      optional: true
+    - name: accelerationMaxShort
+      type: float
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: trader_set_compat
+  signature:
+    params:
+    - name: compatId
+      type: int
+    returnType: void
+- subject:
+    function: trader_set_unstable_period
+  signature:
+    params:
+    - name: functionId
+      type: int
+    - name: timePeriod
+      type: int
+    returnType: void
+- subject:
+    function: trader_sin
+  signature:
+    params:
+    - name: real
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_sinh
+  signature:
+    params:
+    - name: real
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_sma
+  signature:
+    params:
+    - name: real
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_sqrt
+  signature:
+    params:
+    - name: real
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_stddev
+  signature:
+    params:
+    - name: real
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    - name: nbDev
+      type: float
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_stoch
+  signature:
+    params:
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    - name: fastK_Period
+      type: int
+      optional: true
+    - name: slowK_Period
+      type: int
+      optional: true
+    - name: slowK_MAType
+      type: int
+      optional: true
+    - name: slowD_Period
+      type: int
+      optional: true
+    - name: slowD_MAType
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: trader_stochf
+  signature:
+    params:
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    - name: fastK_Period
+      type: int
+      optional: true
+    - name: fastD_Period
+      type: int
+      optional: true
+    - name: fastD_MAType
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: trader_stochrsi
+  signature:
+    params:
+    - name: real
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    - name: fastK_Period
+      type: int
+      optional: true
+    - name: fastD_Period
+      type: int
+      optional: true
+    - name: fastD_MAType
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_sub
+  signature:
+    params:
+    - name: real0
+      type: array
+    - name: real1
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: trader_sum
+  signature:
+    params:
+    - name: real
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_t3
+  signature:
+    params:
+    - name: real
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    - name: vFactor
+      type: float
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_tan
+  signature:
+    params:
+    - name: real
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_tanh
+  signature:
+    params:
+    - name: real
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_tema
+  signature:
+    params:
+    - name: real
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_trange
+  signature:
+    params:
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: trader_trima
+  signature:
+    params:
+    - name: real
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_trix
+  signature:
+    params:
+    - name: real
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_tsf
+  signature:
+    params:
+    - name: real
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_typprice
+  signature:
+    params:
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: trader_ultosc
+  signature:
+    params:
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    - name: timePeriod1
+      type: int
+      optional: true
+    - name: timePeriod2
+      type: int
+      optional: true
+    - name: timePeriod3
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: trader_var
+  signature:
+    params:
+    - name: real
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    - name: nbDev
+      type: float
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trader_wclprice
+  signature:
+    params:
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: trader_willr
+  signature:
+    params:
+    - name: high
+      type: array
+    - name: low
+      type: array
+    - name: close
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: trader_wma
+  signature:
+    params:
+    - name: real
+      type: array
+    - name: timePeriod
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: trait_exists
+  signature:
+    params:
+    - name: trait
+      type: string
+    - name: autoload
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: transliterator_create
+  signature:
+    params:
+    - name: id
+      type: string
+    - name: direction
+      type: int
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: transliterator_create_from_rules
+  signature:
+    params:
+    - name: rules
+      type: string
+    - name: direction
+      type: int
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: transliterator_create_inverse
+  signature:
+    params:
+    - name: transliterator
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: transliterator_get_error_code
+  signature:
+    params:
+    - name: transliterator
+      type: mixed
+    returnType: int
+- subject:
+    function: transliterator_get_error_message
+  signature:
+    params:
+    - name: transliterator
+      type: mixed
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: transliterator_list_ids
+  signature:
+    returnType: array
+- subject:
+    function: transliterator_transliterate
+  signature:
+    params:
+    - name: transliterator
+      type: mixed
+    - name: string
+      type: string
+    - name: start
+      type: int
+      optional: true
+    - name: end
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: trigger_error
+  signature:
+    params:
+    - name: message
+      type: string
+    - name: error_level
+      type: mixed
+      optional: true
+    returnType: bool
+- subject:
+    function: trim
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: characters
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uasort
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: callback
+      type: mixed
+    returnType: bool
+- subject:
+    function: ucfirst
+  signature:
+    params:
+    - name: string
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: ucwords
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: separators
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: udm_add_search_limit
+  signature:
+    params:
+    - name: agent
+      type: resource
+    - name: var
+      type: int
+    - name: value
+      type: string
+    returnType: bool
+- subject:
+    function: udm_alloc_agent
+  signature:
+    params:
+    - name: dbaddr
+      type: string
+    - name: dbmode
+      type: string
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: udm_alloc_agent_array
+  signature:
+    params:
+    - name: databases
+      type: array
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: udm_api_version
+  signature:
+    returnType: int
+- subject:
+    function: udm_cat_list
+  signature:
+    params:
+    - name: agent
+      type: resource
+    - name: category
+      type: string
+    returnType: array
+- subject:
+    function: udm_cat_path
+  signature:
+    params:
+    - name: agent
+      type: resource
+    - name: category
+      type: string
+    returnType: array
+- subject:
+    function: udm_check_charset
+  signature:
+    params:
+    - name: agent
+      type: resource
+    - name: charset
+      type: string
+    returnType: bool
+- subject:
+    function: udm_check_stored
+  signature:
+    params:
+    - name: agent
+      type: mixed
+    - name: link
+      type: int
+    - name: doc_id
+      type: string
+    returnType: int
+- subject:
+    function: udm_clear_search_limits
+  signature:
+    params:
+    - name: agent
+      type: resource
+    returnType: bool
+- subject:
+    function: udm_close_stored
+  signature:
+    params:
+    - name: agent
+      type: mixed
+    - name: link
+      type: int
+    returnType: int
+- subject:
+    function: udm_crc32
+  signature:
+    params:
+    - name: agent
+      type: resource
+    - name: string
+      type: string
+    returnType: int
+- subject:
+    function: udm_errno
+  signature:
+    params:
+    - name: agent
+      type: resource
+    returnType: int
+- subject:
+    function: udm_error
+  signature:
+    params:
+    - name: agent
+      type: resource
+    returnType: string
+- subject:
+    function: udm_find
+  signature:
+    params:
+    - name: agent
+      type: resource
+    - name: query
+      type: string
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: udm_free_agent
+  signature:
+    params:
+    - name: agent
+      type: resource
+    returnType: int
+- subject:
+    function: udm_free_ispell_data
+  signature:
+    params:
+    - name: agent
+      type: int
+    returnType: bool
+- subject:
+    function: udm_free_res
+  signature:
+    params:
+    - name: res
+      type: resource
+    returnType: bool
+- subject:
+    function: udm_get_doc_count
+  signature:
+    params:
+    - name: agent
+      type: resource
+    returnType: int
+- subject:
+    function: udm_get_res_field
+  signature:
+    params:
+    - name: res
+      type: resource
+    - name: row
+      type: int
+    - name: field
+      type: int
+    returnType: string
+- subject:
+    function: udm_get_res_param
+  signature:
+    params:
+    - name: res
+      type: resource
+    - name: param
+      type: int
+    returnType: string
+- subject:
+    function: udm_hash32
+  signature:
+    params:
+    - name: agent
+      type: resource
+    - name: string
+      type: string
+    returnType: int
+- subject:
+    function: udm_load_ispell_data
+  signature:
+    params:
+    - name: agent
+      type: resource
+    - name: var
+      type: int
+    - name: val1
+      type: string
+    - name: val2
+      type: string
+    - name: flag
+      type: int
+    returnType: bool
+- subject:
+    function: udm_open_stored
+  signature:
+    params:
+    - name: agent
+      type: mixed
+    - name: storedaddr
+      type: string
+    returnType: int
+- subject:
+    function: udm_set_agent_param
+  signature:
+    params:
+    - name: agent
+      type: resource
+    - name: var
+      type: int
+    - name: val
+      type: string
+    returnType: bool
+- subject:
+    function: ui\\draw\\text\\font\\fontfamilies
+  signature:
+    returnType: array
+- subject:
+    function: ui\\quit
+  signature:
+    returnType: void
+- subject:
+    function: ui\\run
+  signature:
+    params:
+    - name: flags
+      type: int
+      optional: true
+    returnType: void
+- subject:
+    function: uksort
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: callback
+      type: mixed
+    returnType: bool
+- subject:
+    function: umask
+  signature:
+    params:
+    - name: mask
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: uniqid
+  signature:
+    params:
+    - name: prefix
+      type: string
+      optional: true
+    - name: more_entropy
+      type: bool
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: unixtojd
+  signature:
+    params:
+    - name: timestamp
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: unpack
+  signature:
+    params:
+    - name: format
+      type: string
+    - name: string
+      type: string
+    - name: offset
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: unregister_tick_function
+  signature:
+    params:
+    - name: callback
+      type: callable
+    returnType: void
+- subject:
+    function: unserialize
+  signature:
+    params:
+    - name: data
+      type: string
+    - name: options
+      type: array
+      optional: true
+    returnType: mixed
+- subject:
+    function: unset
+  signature:
+    params:
+    - name: var
+      type: mixed
+      optional: true
+    - name: args
+      type: mixed
+      optional: true
+    returnType: void
+- subject:
+    function: untaint
+  signature:
+    params:
+    - name: rw string
+      type: string
+    - name: rw strings
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: uopz_allow_exit
+  signature:
+    params:
+    - name: allow
+      type: bool
+    returnType: void
+- subject:
+    function: uopz_backup
+  signature:
+    params:
+    - name: class
+      type: string
+    - name: function
+      type: string
+    returnType: void
+- subject:
+    function: uopz_compose
+  signature:
+    params:
+    - name: name
+      type: string
+    - name: classes
+      type: array
+    - name: methods
+      type: array
+      optional: true
+    - name: properties
+      type: array
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: void
+- subject:
+    function: uopz_copy
+  signature:
+    params:
+    - name: class
+      type: string
+    - name: function
+      type: string
+    returnType: callable
+- subject:
+    function: uopz_delete
+  signature:
+    params:
+    - name: class
+      type: string
+    - name: function
+      type: string
+    returnType: void
+- subject:
+    function: uopz_extend
+  signature:
+    params:
+    - name: class
+      type: string
+    - name: parent
+      type: string
+    returnType: bool
+- subject:
+    function: uopz_flags
+  signature:
+    params:
+    - name: class
+      type: string
+    - name: function
+      type: string
+    - name: flags
+      type: int
+    returnType: int
+- subject:
+    function: uopz_function
+  signature:
+    params:
+    - name: class
+      type: string
+    - name: function
+      type: string
+    - name: handler
+      type: callable
+    - name: modifiers
+      type: int
+      optional: true
+    returnType: void
+- subject:
+    function: uopz_get_exit_status
+  signature:
+    returnType: int
+- subject:
+    function: uopz_get_hook
+  signature:
+    params:
+    - name: class
+      type: string
+    - name: function
+      type: string
+    returnType: callable
+- subject:
+    function: uopz_get_mock
+  signature:
+    params:
+    - name: class
+      type: string
+    returnType: object
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uopz_get_property
+  signature:
+    params:
+    - name: class
+      type: object
+    - name: property
+      type: string
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: uopz_get_return
+  signature:
+    params:
+    - name: class
+      type: string
+      optional: true
+    - name: function
+      type: string
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: uopz_get_static
+  signature:
+    params:
+    - name: class
+      type: string
+    - name: function
+      type: string
+    returnType: array
+- subject:
+    function: uopz_implement
+  signature:
+    params:
+    - name: class
+      type: string
+    - name: interface
+      type: string
+    returnType: bool
+- subject:
+    function: uopz_overload
+  signature:
+    params:
+    - name: opcode
+      type: int
+    - name: callable
+      type: callable
+    returnType: void
+- subject:
+    function: uopz_redefine
+  signature:
+    params:
+    - name: class
+      type: string
+    - name: constant
+      type: string
+    - name: value
+      type: mixed
+    returnType: bool
+- subject:
+    function: uopz_rename
+  signature:
+    params:
+    - name: class
+      type: string
+    - name: function
+      type: string
+    - name: rename
+      type: string
+    returnType: void
+- subject:
+    function: uopz_restore
+  signature:
+    params:
+    - name: class
+      type: string
+    - name: function
+      type: string
+    returnType: void
+- subject:
+    function: uopz_set_hook
+  signature:
+    params:
+    - name: class
+      type: string
+    - name: function
+      type: string
+    - name: hook
+      type: callable
+    returnType: bool
+- subject:
+    function: uopz_set_mock
+  signature:
+    params:
+    - name: class
+      type: string
+    - name: mock
+      type: object
+    returnType: void
+- subject:
+    function: uopz_set_property
+  signature:
+    params:
+    - name: class
+      type: object
+    - name: property
+      type: string
+    - name: value
+      type: mixed
+    returnType: void
+- subject:
+    function: uopz_set_return
+  signature:
+    params:
+    - name: class
+      type: string
+    - name: function
+      type: string
+    - name: value
+      type: mixed
+    - name: execute
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: uopz_set_static
+  signature:
+    params:
+    - name: class
+      type: string
+    - name: function
+      type: string
+    - name: static
+      type: array
+    returnType: void
+- subject:
+    function: uopz_undefine
+  signature:
+    params:
+    - name: class
+      type: string
+    - name: constant
+      type: string
+    returnType: bool
+- subject:
+    function: uopz_unset_hook
+  signature:
+    params:
+    - name: class
+      type: string
+    - name: function
+      type: string
+    returnType: bool
+- subject:
+    function: uopz_unset_mock
+  signature:
+    params:
+    - name: class
+      type: string
+    returnType: void
+- subject:
+    function: uopz_unset_return
+  signature:
+    params:
+    - name: class
+      type: string
+      optional: true
+    - name: function
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: urldecode
+  signature:
+    params:
+    - name: string
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: urlencode
+  signature:
+    params:
+    - name: string
+      type: string
+    returnType: string
+- subject:
+    function: use_soap_error_handler
+  signature:
+    params:
+    - name: enable
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: user_error
+  signature:
+    params:
+    - name: message
+      type: string
+    - name: error_level
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: usleep
+  signature:
+    params:
+    - name: microseconds
+      type: int
+    returnType: void
+- subject:
+    function: usort
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: callback
+      type: mixed
+    returnType: bool
+- subject:
+    function: utf8_decode
+  signature:
+    params:
+    - name: string
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: utf8_encode
+  signature:
+    params:
+    - name: string
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_accept
+  signature:
+    params:
+    - name: server
+      type: mixed
+    - name: client
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: uv_async_init
+  signature:
+    params:
+    - name: loop
+      type: mixed
+    - name: callback
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: uv_async_send
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_chdir
+  signature:
+    params:
+    - name: dir
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_check_init
+  signature:
+    params:
+    - name: loop
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_check_start
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    - name: callback
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: uv_check_stop
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_close
+  signature:
+    params:
+    - name: stream
+      type: mixed
+    - name: callback
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: uv_cpu_info
+  signature:
+    returnType: mixed
+- subject:
+    function: uv_cwd
+  signature:
+    returnType: mixed
+- subject:
+    function: uv_default_loop
+  signature:
+    returnType: mixed
+- subject:
+    function: uv_err_name
+  signature:
+    params:
+    - name: error
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_exepath
+  signature:
+    returnType: mixed
+- subject:
+    function: uv_fs_chmod
+  signature:
+    params:
+    - name: loop
+      type: mixed
+    - name: path
+      type: mixed
+    - name: mode
+      type: mixed
+    - name: callback
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: uv_fs_chown
+  signature:
+    params:
+    - name: loop
+      type: mixed
+    - name: path
+      type: mixed
+    - name: uid
+      type: mixed
+    - name: gid
+      type: mixed
+    - name: callback
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: uv_fs_close
+  signature:
+    params:
+    - name: loop
+      type: mixed
+    - name: fd
+      type: mixed
+    - name: callback
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: uv_fs_event_init
+  signature:
+    params:
+    - name: loop
+      type: mixed
+    - name: path
+      type: mixed
+    - name: callback
+      type: mixed
+    - name: flags
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: uv_fs_fchmod
+  signature:
+    params:
+    - name: loop
+      type: mixed
+    - name: fd
+      type: mixed
+    - name: mode
+      type: mixed
+    - name: callback
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: uv_fs_fchown
+  signature:
+    params:
+    - name: loop
+      type: mixed
+    - name: fd
+      type: mixed
+    - name: uid
+      type: mixed
+    - name: gid
+      type: mixed
+    - name: callback
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: uv_fs_fdatasync
+  signature:
+    params:
+    - name: loop
+      type: mixed
+    - name: fd
+      type: mixed
+    - name: callback
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: uv_fs_fstat
+  signature:
+    params:
+    - name: loop
+      type: mixed
+    - name: fd
+      type: mixed
+    - name: callback
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: uv_fs_fsync
+  signature:
+    params:
+    - name: loop
+      type: mixed
+    - name: fd
+      type: mixed
+    - name: callback
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: uv_fs_ftruncate
+  signature:
+    params:
+    - name: loop
+      type: mixed
+    - name: fd
+      type: mixed
+    - name: offset
+      type: mixed
+    - name: callback
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: uv_fs_futime
+  signature:
+    params:
+    - name: loop
+      type: mixed
+    - name: fd
+      type: mixed
+    - name: utime
+      type: mixed
+    - name: atime
+      type: mixed
+    - name: callback
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: uv_fs_link
+  signature:
+    params:
+    - name: loop
+      type: mixed
+    - name: from
+      type: mixed
+    - name: to
+      type: mixed
+    - name: callback
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: uv_fs_lstat
+  signature:
+    params:
+    - name: loop
+      type: mixed
+    - name: path
+      type: mixed
+    - name: callback
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: uv_fs_mkdir
+  signature:
+    params:
+    - name: loop
+      type: mixed
+    - name: path
+      type: mixed
+    - name: mode
+      type: mixed
+    - name: callback
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: uv_fs_open
+  signature:
+    params:
+    - name: loop
+      type: mixed
+    - name: path
+      type: mixed
+    - name: flag
+      type: mixed
+    - name: mode
+      type: mixed
+    - name: callback
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: uv_fs_poll_init
+  signature:
+    params:
+    - name: loop
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_fs_poll_start
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    - name: callback
+      type: mixed
+    - name: path
+      type: mixed
+    - name: interval
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: uv_fs_poll_stop
+  signature:
+    params:
+    - name: loop
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_fs_read
+  signature:
+    params:
+    - name: loop
+      type: mixed
+    - name: fd
+      type: mixed
+    - name: offset
+      type: mixed
+      optional: true
+    - name: size
+      type: mixed
+      optional: true
+    - name: callback
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: uv_fs_readdir
+  signature:
+    params:
+    - name: loop
+      type: mixed
+    - name: path
+      type: mixed
+    - name: flags
+      type: mixed
+    - name: callback
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: uv_fs_readlink
+  signature:
+    params:
+    - name: loop
+      type: mixed
+    - name: path
+      type: mixed
+    - name: callback
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: uv_fs_rename
+  signature:
+    params:
+    - name: loop
+      type: mixed
+    - name: from
+      type: mixed
+    - name: to
+      type: mixed
+    - name: callback
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: uv_fs_rmdir
+  signature:
+    params:
+    - name: loop
+      type: mixed
+    - name: path
+      type: mixed
+    - name: callback
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: uv_fs_scandir
+  signature:
+    params:
+    - name: loop
+      type: mixed
+    - name: path
+      type: mixed
+    - name: flags
+      type: mixed
+    - name: callback
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: uv_fs_sendfile
+  signature:
+    params:
+    - name: loop
+      type: mixed
+    - name: in
+      type: mixed
+    - name: out
+      type: mixed
+    - name: offset
+      type: mixed
+    - name: length
+      type: mixed
+    - name: callback
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+  - from: argument(5)
+    to: return
+- subject:
+    function: uv_fs_stat
+  signature:
+    params:
+    - name: loop
+      type: mixed
+    - name: path
+      type: mixed
+    - name: callback
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: uv_fs_symlink
+  signature:
+    params:
+    - name: loop
+      type: mixed
+    - name: from
+      type: mixed
+    - name: to
+      type: mixed
+    - name: callback
+      type: mixed
+    - name: flags
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: uv_fs_unlink
+  signature:
+    params:
+    - name: loop
+      type: mixed
+    - name: path
+      type: mixed
+    - name: callback
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: uv_fs_utime
+  signature:
+    params:
+    - name: loop
+      type: mixed
+    - name: path
+      type: mixed
+    - name: utime
+      type: mixed
+    - name: atime
+      type: mixed
+    - name: callback
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: uv_fs_write
+  signature:
+    params:
+    - name: loop
+      type: mixed
+    - name: fd
+      type: mixed
+    - name: buffer
+      type: mixed
+    - name: offset
+      type: mixed
+    - name: callback
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: uv_get_free_memory
+  signature:
+    returnType: mixed
+- subject:
+    function: uv_get_total_memory
+  signature:
+    returnType: mixed
+- subject:
+    function: uv_getaddrinfo
+  signature:
+    params:
+    - name: loop
+      type: mixed
+    - name: callback
+      type: mixed
+    - name: node
+      type: mixed
+    - name: service
+      type: mixed
+    - name: hints
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: uv_guess_handle
+  signature:
+    params:
+    - name: fd
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_hrtime
+  signature:
+    returnType: mixed
+- subject:
+    function: uv_idle_init
+  signature:
+    params:
+    - name: loop
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_idle_start
+  signature:
+    params:
+    - name: timer
+      type: mixed
+    - name: callback
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: uv_idle_stop
+  signature:
+    params:
+    - name: idle
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_interface_addresses
+  signature:
+    returnType: mixed
+- subject:
+    function: uv_ip4_addr
+  signature:
+    params:
+    - name: address
+      type: mixed
+    - name: port
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: uv_ip4_name
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_ip6_addr
+  signature:
+    params:
+    - name: address
+      type: mixed
+    - name: port
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: uv_ip6_name
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_is_active
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_is_closing
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_is_readable
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_is_writable
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_kill
+  signature:
+    params:
+    - name: pid
+      type: mixed
+    - name: signal
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: uv_listen
+  signature:
+    params:
+    - name: resource
+      type: mixed
+    - name: backlog
+      type: mixed
+    - name: callback
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: uv_loadavg
+  signature:
+    returnType: mixed
+- subject:
+    function: uv_loop_delete
+  signature:
+    params:
+    - name: loop
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_loop_new
+  signature:
+    returnType: mixed
+- subject:
+    function: uv_mutex_init
+  signature:
+    returnType: mixed
+- subject:
+    function: uv_mutex_lock
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_mutex_trylock
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_mutex_unlock
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_now
+  signature:
+    params:
+    - name: loop
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_pipe_bind
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    - name: name
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: uv_pipe_connect
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    - name: name
+      type: mixed
+    - name: callback
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: uv_pipe_init
+  signature:
+    params:
+    - name: file
+      type: mixed
+      optional: true
+    - name: ipc
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: uv_pipe_open
+  signature:
+    params:
+    - name: file
+      type: mixed
+    - name: pipe
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: uv_pipe_pending_count
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_pipe_pending_instances
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    - name: count
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: uv_pipe_pending_type
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_poll_init
+  signature:
+    params:
+    - name: loop
+      type: mixed
+    - name: fd
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: uv_poll_init_socket
+  signature:
+    params:
+    - name: loop
+      type: mixed
+    - name: fd
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: uv_poll_start
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    - name: events
+      type: mixed
+    - name: callback
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: uv_poll_stop
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_prepare_init
+  signature:
+    params:
+    - name: loop
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_prepare_start
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    - name: callback
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: uv_prepare_stop
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_process_get_pid
+  signature:
+    params:
+    - name: process
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_process_kill
+  signature:
+    params:
+    - name: process
+      type: mixed
+    - name: signal
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: uv_read_start
+  signature:
+    params:
+    - name: server
+      type: mixed
+    - name: callback
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: uv_read_stop
+  signature:
+    params:
+    - name: server
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_ref
+  signature:
+    params:
+    - name: loop
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_resident_set_memory
+  signature:
+    returnType: mixed
+- subject:
+    function: uv_run
+  signature:
+    params:
+    - name: loop
+      type: mixed
+      optional: true
+    - name: run_mode
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: uv_rwlock_init
+  signature:
+    returnType: mixed
+- subject:
+    function: uv_rwlock_rdlock
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_rwlock_rdunlock
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_rwlock_tryrdlock
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_rwlock_trywrlock
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_rwlock_wrlock
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_rwlock_wrunlock
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_sem_init
+  signature:
+    params:
+    - name: val
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_sem_post
+  signature:
+    params:
+    - name: resource
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_sem_trywait
+  signature:
+    params:
+    - name: resource
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_sem_wait
+  signature:
+    params:
+    - name: resource
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_shutdown
+  signature:
+    params:
+    - name: stream
+      type: mixed
+    - name: callback
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: uv_signal_init
+  signature:
+    params:
+    - name: loop
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_signal_start
+  signature:
+    params:
+    - name: sig_handle
+      type: mixed
+    - name: sig_callback
+      type: mixed
+    - name: sig_num
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: uv_signal_stop
+  signature:
+    params:
+    - name: sig_handle
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_spawn
+  signature:
+    params:
+    - name: loop
+      type: mixed
+    - name: command
+      type: mixed
+    - name: args
+      type: mixed
+    - name: stdio
+      type: mixed
+    - name: cwd
+      type: mixed
+    - name: env
+      type: mixed
+    - name: callback
+      type: mixed
+    - name: flags
+      type: mixed
+      optional: true
+    - name: options
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+  - from: argument(5)
+    to: return
+  - from: argument(6)
+    to: return
+  - from: argument(7)
+    to: return
+  - from: argument(8)
+    to: return
+- subject:
+    function: uv_stdio_new
+  signature:
+    returnType: mixed
+- subject:
+    function: uv_stop
+  signature:
+    params:
+    - name: loop
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_strerror
+  signature:
+    params:
+    - name: error
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_tcp_bind
+  signature:
+    params:
+    - name: resource
+      type: mixed
+    - name: address
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: uv_tcp_bind6
+  signature:
+    params:
+    - name: resource
+      type: mixed
+    - name: address
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: uv_tcp_connect
+  signature:
+    params:
+    - name: resource
+      type: mixed
+    - name: sock_addr
+      type: mixed
+    - name: callback
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: uv_tcp_connect6
+  signature:
+    params:
+    - name: resource
+      type: mixed
+    - name: ipv6_addr
+      type: mixed
+    - name: callback
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: uv_tcp_getpeername
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_tcp_getsockname
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_tcp_init
+  signature:
+    params:
+    - name: loop
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_tcp_nodelay
+  signature:
+    params:
+    - name: tcp
+      type: mixed
+    - name: enabled
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: uv_tcp_open
+  signature:
+    params:
+    - name: resource
+      type: mixed
+    - name: tcpfd
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: uv_tcp_simultaneous_accepts
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    - name: enable
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: uv_timer_again
+  signature:
+    params:
+    - name: timer
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_timer_get_repeat
+  signature:
+    params:
+    - name: timer
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_timer_init
+  signature:
+    params:
+    - name: loop
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_timer_set_repeat
+  signature:
+    params:
+    - name: timer
+      type: mixed
+    - name: timeout
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: uv_timer_start
+  signature:
+    params:
+    - name: timer
+      type: mixed
+    - name: timeout
+      type: mixed
+    - name: repeat
+      type: mixed
+    - name: callback
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: uv_timer_stop
+  signature:
+    params:
+    - name: timer
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_tty_get_winsize
+  signature:
+    params:
+    - name: tty
+      type: mixed
+    - name: width
+      type: mixed
+    - name: height
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: uv_tty_init
+  signature:
+    params:
+    - name: loop
+      type: mixed
+    - name: fd
+      type: mixed
+    - name: readable
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: uv_tty_reset_mode
+  signature:
+    returnType: mixed
+- subject:
+    function: uv_tty_set_mode
+  signature:
+    returnType: mixed
+- subject:
+    function: uv_udp_bind
+  signature:
+    params:
+    - name: resource
+      type: mixed
+    - name: address
+      type: mixed
+    - name: flags
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: uv_udp_bind6
+  signature:
+    params:
+    - name: resource
+      type: mixed
+    - name: address
+      type: mixed
+    - name: flags
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: uv_udp_getsockname
+  signature:
+    params:
+    - name: handle
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_udp_init
+  signature:
+    params:
+    - name: loop
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_udp_open
+  signature:
+    params:
+    - name: resource
+      type: mixed
+    - name: udpfd
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: uv_udp_recv_start
+  signature:
+    params:
+    - name: server
+      type: mixed
+    - name: callback
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: uv_udp_recv_stop
+  signature:
+    params:
+    - name: server
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_udp_send
+  signature:
+    params:
+    - name: server
+      type: mixed
+    - name: buffer
+      type: mixed
+    - name: address
+      type: mixed
+    - name: callback
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: uv_udp_send6
+  signature:
+    params:
+    - name: server
+      type: mixed
+    - name: buffer
+      type: mixed
+    - name: address
+      type: mixed
+    - name: callback
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: uv_udp_set_broadcast
+  signature:
+    params:
+    - name: server
+      type: mixed
+    - name: enabled
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: uv_udp_set_membership
+  signature:
+    params:
+    - name: client
+      type: mixed
+    - name: multicast_addr
+      type: mixed
+    - name: interface_addr
+      type: mixed
+    - name: membership
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: uv_udp_set_multicast_loop
+  signature:
+    params:
+    - name: server
+      type: mixed
+    - name: enabled
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: uv_udp_set_multicast_ttl
+  signature:
+    params:
+    - name: server
+      type: mixed
+    - name: ttl
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: uv_unref
+  signature:
+    params:
+    - name: loop
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_update_time
+  signature:
+    params:
+    - name: loop
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: uv_uptime
+  signature:
+    returnType: mixed
+- subject:
+    function: uv_walk
+  signature:
+    params:
+    - name: loop
+      type: mixed
+    - name: callback
+      type: mixed
+    - name: opaque
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: uv_write
+  signature:
+    params:
+    - name: client
+      type: mixed
+    - name: data
+      type: mixed
+    - name: callback
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: uv_write2
+  signature:
+    params:
+    - name: client
+      type: mixed
+    - name: data
+      type: mixed
+    - name: send
+      type: mixed
+    - name: callback
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: var_dump
+  signature:
+    params:
+    - name: value
+      type: mixed
+    - name: values
+      type: mixed
+      optional: true
+    returnType: void
+- subject:
+    function: var_export
+  signature:
+    params:
+    - name: value
+      type: mixed
+    - name: return
+      type: bool
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: variant_abs
+  signature:
+    params:
+    - name: value
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: variant_add
+  signature:
+    params:
+    - name: left
+      type: mixed
+    - name: right
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: variant_and
+  signature:
+    params:
+    - name: left
+      type: mixed
+    - name: right
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: variant_cast
+  signature:
+    params:
+    - name: variant
+      type: mixed
+    - name: type
+      type: int
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: variant_cat
+  signature:
+    params:
+    - name: left
+      type: mixed
+    - name: right
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: variant_cmp
+  signature:
+    params:
+    - name: left
+      type: mixed
+    - name: right
+      type: mixed
+    - name: locale_id
+      type: int
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: variant_date_from_timestamp
+  signature:
+    params:
+    - name: timestamp
+      type: int
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: variant_date_to_timestamp
+  signature:
+    params:
+    - name: variant
+      type: mixed
+    returnType: int
+- subject:
+    function: variant_div
+  signature:
+    params:
+    - name: left
+      type: mixed
+    - name: right
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: variant_eqv
+  signature:
+    params:
+    - name: left
+      type: mixed
+    - name: right
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: variant_fix
+  signature:
+    params:
+    - name: value
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: variant_get_type
+  signature:
+    params:
+    - name: variant
+      type: mixed
+    returnType: int
+- subject:
+    function: variant_idiv
+  signature:
+    params:
+    - name: left
+      type: mixed
+    - name: right
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: variant_imp
+  signature:
+    params:
+    - name: left
+      type: mixed
+    - name: right
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: variant_int
+  signature:
+    params:
+    - name: value
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: variant_mod
+  signature:
+    params:
+    - name: left
+      type: mixed
+    - name: right
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: variant_mul
+  signature:
+    params:
+    - name: left
+      type: mixed
+    - name: right
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: variant_neg
+  signature:
+    params:
+    - name: value
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: variant_not
+  signature:
+    params:
+    - name: value
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: variant_or
+  signature:
+    params:
+    - name: left
+      type: mixed
+    - name: right
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: variant_pow
+  signature:
+    params:
+    - name: left
+      type: mixed
+    - name: right
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: variant_round
+  signature:
+    params:
+    - name: value
+      type: mixed
+    - name: decimals
+      type: int
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: variant_set
+  signature:
+    params:
+    - name: variant
+      type: object
+    - name: value
+      type: mixed
+    returnType: void
+- subject:
+    function: variant_set_type
+  signature:
+    params:
+    - name: variant
+      type: object
+    - name: type
+      type: int
+    returnType: void
+- subject:
+    function: variant_sub
+  signature:
+    params:
+    - name: left
+      type: mixed
+    - name: right
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: variant_xor
+  signature:
+    params:
+    - name: left
+      type: mixed
+    - name: right
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: version_compare
+  signature:
+    params:
+    - name: version1
+      type: string
+    - name: version2
+      type: string
+    - name: operator
+      type: mixed
+    returnType: bool
+- subject:
+    function: vfprintf
+  signature:
+    params:
+    - name: stream
+      type: resource
+    - name: format
+      type: string
+    - name: values
+      type: array
+    returnType: int
+- subject:
+    function: virtual
+  signature:
+    params:
+    - name: uri
+      type: string
+    returnType: bool
+- subject:
+    function: vpopmail_add_alias_domain
+  signature:
+    params:
+    - name: domain
+      type: string
+    - name: aliasdomain
+      type: string
+    returnType: bool
+- subject:
+    function: vpopmail_add_alias_domain_ex
+  signature:
+    params:
+    - name: olddomain
+      type: string
+    - name: newdomain
+      type: string
+    returnType: bool
+- subject:
+    function: vpopmail_add_domain
+  signature:
+    params:
+    - name: domain
+      type: string
+    - name: dir
+      type: string
+    - name: uid
+      type: int
+    - name: gid
+      type: int
+    returnType: bool
+- subject:
+    function: vpopmail_add_domain_ex
+  signature:
+    params:
+    - name: domain
+      type: string
+    - name: passwd
+      type: string
+    - name: quota
+      type: string
+      optional: true
+    - name: bounce
+      type: string
+      optional: true
+    - name: apop
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: vpopmail_add_user
+  signature:
+    params:
+    - name: user
+      type: string
+    - name: domain
+      type: string
+    - name: password
+      type: string
+    - name: gecos
+      type: string
+      optional: true
+    - name: apop
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: vpopmail_alias_add
+  signature:
+    params:
+    - name: user
+      type: string
+    - name: domain
+      type: string
+    - name: alias
+      type: string
+    returnType: bool
+- subject:
+    function: vpopmail_alias_del
+  signature:
+    params:
+    - name: user
+      type: string
+    - name: domain
+      type: string
+    returnType: bool
+- subject:
+    function: vpopmail_alias_del_domain
+  signature:
+    params:
+    - name: domain
+      type: string
+    returnType: bool
+- subject:
+    function: vpopmail_alias_get
+  signature:
+    params:
+    - name: alias
+      type: string
+    - name: domain
+      type: string
+    returnType: array
+- subject:
+    function: vpopmail_alias_get_all
+  signature:
+    params:
+    - name: domain
+      type: string
+    returnType: array
+- subject:
+    function: vpopmail_auth_user
+  signature:
+    params:
+    - name: user
+      type: string
+    - name: domain
+      type: string
+    - name: password
+      type: string
+    - name: apop
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: vpopmail_del_domain
+  signature:
+    params:
+    - name: domain
+      type: string
+    returnType: bool
+- subject:
+    function: vpopmail_del_domain_ex
+  signature:
+    params:
+    - name: domain
+      type: string
+    returnType: bool
+- subject:
+    function: vpopmail_del_user
+  signature:
+    params:
+    - name: user
+      type: string
+    - name: domain
+      type: string
+    returnType: bool
+- subject:
+    function: vpopmail_error
+  signature:
+    returnType: string
+- subject:
+    function: vpopmail_passwd
+  signature:
+    params:
+    - name: user
+      type: string
+    - name: domain
+      type: string
+    - name: password
+      type: string
+    - name: apop
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: vpopmail_set_user_quota
+  signature:
+    params:
+    - name: user
+      type: string
+    - name: domain
+      type: string
+    - name: quota
+      type: string
+    returnType: bool
+- subject:
+    function: vprintf
+  signature:
+    params:
+    - name: format
+      type: string
+    - name: values
+      type: array
+    returnType: int
+- subject:
+    function: vsprintf
+  signature:
+    params:
+    - name: format
+      type: string
+    - name: values
+      type: array
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: w32api_deftype
+  signature:
+    params:
+    - name: typename
+      type: string
+    - name: member1_type
+      type: string
+    - name: member1_name
+      type: string
+    - name: args
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: w32api_init_dtype
+  signature:
+    params:
+    - name: typename
+      type: string
+    - name: value
+      type: mixed
+    - name: args
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: w32api_invoke_function
+  signature:
+    params:
+    - name: funcname
+      type: string
+    - name: argument
+      type: mixed
+    - name: args
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: w32api_register_function
+  signature:
+    params:
+    - name: library
+      type: string
+    - name: function_name
+      type: string
+    - name: return_type
+      type: string
+    returnType: bool
+- subject:
+    function: w32api_set_call_method
+  signature:
+    params:
+    - name: method
+      type: int
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: wddx_add_vars
+  signature:
+    params:
+    - name: packet_id
+      type: resource
+    - name: var_names
+      type: mixed
+    - name: vars
+      type: mixed
+      optional: true
+    returnType: bool
+- subject:
+    function: wddx_deserialize
+  signature:
+    params:
+    - name: packet
+      type: string
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: wddx_packet_end
+  signature:
+    params:
+    - name: packet_id
+      type: resource
+    returnType: string
+- subject:
+    function: wddx_packet_start
+  signature:
+    params:
+    - name: comment
+      type: string
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: wddx_serialize_value
+  signature:
+    params:
+    - name: value
+      type: mixed
+    - name: comment
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: wddx_serialize_vars
+  signature:
+    params:
+    - name: var_name
+      type: mixed
+    - name: vars
+      type: mixed
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: win32_continue_service
+  signature:
+    params:
+    - name: servicename
+      type: string
+    - name: machine
+      type: string
+      optional: true
+    returnType: int
+- subject:
+    function: win32_create_service
+  signature:
+    params:
+    - name: details
+      type: array
+    - name: machine
+      type: string
+      optional: true
+    returnType: int
+- subject:
+    function: win32_delete_service
+  signature:
+    params:
+    - name: servicename
+      type: string
+    - name: machine
+      type: string
+      optional: true
+    returnType: int
+- subject:
+    function: win32_get_last_control_message
+  signature:
+    returnType: int
+- subject:
+    function: win32_pause_service
+  signature:
+    params:
+    - name: servicename
+      type: string
+    - name: machine
+      type: string
+      optional: true
+    returnType: int
+- subject:
+    function: win32_ps_list_procs
+  signature:
+    returnType: array
+- subject:
+    function: win32_ps_stat_mem
+  signature:
+    returnType: array
+- subject:
+    function: win32_ps_stat_proc
+  signature:
+    params:
+    - name: pid
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    function: win32_query_service_status
+  signature:
+    params:
+    - name: servicename
+      type: string
+    - name: machine
+      type: string
+      optional: true
+    returnType: array
+- subject:
+    function: win32_send_custom_control
+  signature:
+    params:
+    - name: servicename
+      type: string
+    - name: control
+      type: int
+    - name: machine
+      type: string
+      optional: true
+    returnType: int
+- subject:
+    function: win32_set_service_exit_code
+  signature:
+    params:
+    - name: exitCode
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: win32_set_service_exit_mode
+  signature:
+    params:
+    - name: gracefulMode
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: win32_set_service_status
+  signature:
+    params:
+    - name: status
+      type: int
+    - name: checkpoint
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: win32_start_service
+  signature:
+    params:
+    - name: servicename
+      type: string
+    - name: machine
+      type: string
+      optional: true
+    returnType: int
+- subject:
+    function: win32_start_service_ctrl_dispatcher
+  signature:
+    params:
+    - name: name
+      type: string
+    returnType: bool
+- subject:
+    function: win32_stop_service
+  signature:
+    params:
+    - name: servicename
+      type: string
+    - name: machine
+      type: string
+      optional: true
+    returnType: int
+- subject:
+    function: wincache_fcache_fileinfo
+  signature:
+    params:
+    - name: summaryonly
+      type: bool
+      optional: true
+    returnType: array
+- subject:
+    function: wincache_fcache_meminfo
+  signature:
+    returnType: array
+- subject:
+    function: wincache_lock
+  signature:
+    params:
+    - name: key
+      type: string
+    - name: isglobal
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: wincache_ocache_fileinfo
+  signature:
+    params:
+    - name: summaryonly
+      type: bool
+      optional: true
+    returnType: array
+- subject:
+    function: wincache_ocache_meminfo
+  signature:
+    returnType: array
+- subject:
+    function: wincache_refresh_if_changed
+  signature:
+    params:
+    - name: files
+      type: array
+      optional: true
+    returnType: bool
+- subject:
+    function: wincache_rplist_fileinfo
+  signature:
+    params:
+    - name: summaryonly
+      type: bool
+      optional: true
+    returnType: array
+- subject:
+    function: wincache_rplist_meminfo
+  signature:
+    returnType: array
+- subject:
+    function: wincache_scache_info
+  signature:
+    params:
+    - name: summaryonly
+      type: bool
+      optional: true
+    returnType: array
+- subject:
+    function: wincache_scache_meminfo
+  signature:
+    returnType: array
+- subject:
+    function: wincache_ucache_add
+  signature:
+    params:
+    - name: key
+      type: string
+    - name: value
+      type: mixed
+    - name: ttl
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: wincache_ucache_cas
+  signature:
+    params:
+    - name: key
+      type: string
+    - name: old_value
+      type: int
+    - name: new_value
+      type: int
+    returnType: bool
+- subject:
+    function: wincache_ucache_clear
+  signature:
+    returnType: bool
+- subject:
+    function: wincache_ucache_dec
+  signature:
+    params:
+    - name: key
+      type: string
+    - name: dec_by
+      type: int
+      optional: true
+    - name: success
+      type: bool
+      optional: true
+    returnType: int
+- subject:
+    function: wincache_ucache_delete
+  signature:
+    params:
+    - name: key
+      type: mixed
+    returnType: bool
+- subject:
+    function: wincache_ucache_exists
+  signature:
+    params:
+    - name: key
+      type: string
+    returnType: bool
+- subject:
+    function: wincache_ucache_get
+  signature:
+    params:
+    - name: key
+      type: mixed
+    - name: success
+      type: bool
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: wincache_ucache_inc
+  signature:
+    params:
+    - name: key
+      type: string
+    - name: inc_by
+      type: int
+      optional: true
+    - name: success
+      type: bool
+      optional: true
+    returnType: int
+- subject:
+    function: wincache_ucache_info
+  signature:
+    params:
+    - name: summaryonly
+      type: bool
+      optional: true
+    - name: key
+      type: string
+      optional: true
+    returnType: array
+- subject:
+    function: wincache_ucache_meminfo
+  signature:
+    returnType: array
+- subject:
+    function: wincache_ucache_set
+  signature:
+    params:
+    - name: key
+      type: mixed
+    - name: value
+      type: mixed
+    - name: ttl
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: wincache_unlock
+  signature:
+    params:
+    - name: key
+      type: string
+    returnType: bool
+- subject:
+    function: wordwrap
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: width
+      type: int
+      optional: true
+    - name: break
+      type: string
+      optional: true
+    - name: cut_long_words
+      type: bool
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: xattr_get
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: name
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: xattr_list
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    function: xattr_remove
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: name
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: xattr_set
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: name
+      type: string
+    - name: value
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: xattr_supported
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: xcache_asm
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: xcache_clear_cache
+  signature:
+    params:
+    - name: type
+      type: int
+    - name: id
+      type: int
+      optional: true
+    returnType: void
+- subject:
+    function: xcache_coredump
+  signature:
+    params:
+    - name: op_type
+      type: int
+    returnType: string
+- subject:
+    function: xcache_count
+  signature:
+    params:
+    - name: type
+      type: int
+    returnType: int
+- subject:
+    function: xcache_coverager_decode
+  signature:
+    params:
+    - name: data
+      type: string
+    returnType: array
+- subject:
+    function: xcache_coverager_get
+  signature:
+    params:
+    - name: clean
+      type: bool
+      optional: true
+    returnType: array
+- subject:
+    function: xcache_coverager_start
+  signature:
+    params:
+    - name: clean
+      type: bool
+      optional: true
+    returnType: void
+- subject:
+    function: xcache_coverager_stop
+  signature:
+    params:
+    - name: clean
+      type: bool
+      optional: true
+    returnType: void

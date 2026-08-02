@@ -1,0 +1,644 @@
+# Generated from stubs/database/odbc.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: odbc_autocommit
+  signature:
+    params:
+    - name: odbc
+      type: resource
+    - name: enable
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: odbc_binmode
+  signature:
+    params:
+    - name: statement
+      type: resource
+    - name: mode
+      type: int
+    returnType: bool
+- subject:
+    function: odbc_close
+  signature:
+    params:
+    - name: odbc
+      type: resource
+    returnType: void
+- subject:
+    function: odbc_close_all
+  signature:
+    returnType: void
+- subject:
+    function: odbc_columnprivileges
+  signature:
+    params:
+    - name: odbc
+      type: resource
+    - name: catalog
+      type: string
+    - name: schema
+      type: string
+    - name: table
+      type: string
+    - name: column
+      type: string
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: odbc_columns
+  signature:
+    params:
+    - name: odbc
+      type: resource
+    - name: catalog
+      type: string
+      optional: true
+    - name: schema
+      type: string
+      optional: true
+    - name: table
+      type: string
+      optional: true
+    - name: column
+      type: string
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: odbc_commit
+  signature:
+    params:
+    - name: odbc
+      type: resource
+    returnType: bool
+- subject:
+    function: odbc_connect
+  signature:
+    params:
+    - name: dsn
+      type: string
+    - name: user
+      type: string
+    - name: password
+      type: string
+    - name: cursor_option
+      type: int
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: odbc_cursor
+  signature:
+    params:
+    - name: statement
+      type: resource
+    returnType: string
+- subject:
+    function: odbc_data_source
+  signature:
+    params:
+    - name: odbc
+      type: resource
+    - name: fetch_type
+      type: int
+    returnType: array
+- subject:
+    function: odbc_do
+  signature:
+    params:
+    - name: odbc
+      type: resource
+    - name: query
+      type: string
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: odbc_error
+  signature:
+    params:
+    - name: odbc
+      type: resource
+      optional: true
+    returnType: string
+- subject:
+    function: odbc_errormsg
+  signature:
+    params:
+    - name: odbc
+      type: resource
+      optional: true
+    returnType: string
+- subject:
+    function: odbc_exec
+  signature:
+    params:
+    - name: odbc
+      type: resource
+    - name: query
+      type: string
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: odbc_execute
+  signature:
+    params:
+    - name: statement
+      type: resource
+    - name: params
+      type: array
+      optional: true
+    returnType: bool
+- subject:
+    function: odbc_fetch_array
+  signature:
+    params:
+    - name: statement
+      type: resource
+    - name: row
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    function: odbc_fetch_into
+  signature:
+    params:
+    - name: statement
+      type: resource
+    - name: array
+      type: array
+    - name: row
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: odbc_fetch_object
+  signature:
+    params:
+    - name: statement
+      type: resource
+    - name: row
+      type: int
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: odbc_fetch_row
+  signature:
+    params:
+    - name: statement
+      type: resource
+    - name: row
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: odbc_field_len
+  signature:
+    params:
+    - name: statement
+      type: resource
+    - name: field
+      type: int
+    returnType: int
+- subject:
+    function: odbc_field_name
+  signature:
+    params:
+    - name: statement
+      type: resource
+    - name: field
+      type: int
+    returnType: string
+- subject:
+    function: odbc_field_num
+  signature:
+    params:
+    - name: statement
+      type: resource
+    - name: field
+      type: string
+    returnType: int
+- subject:
+    function: odbc_field_precision
+  signature:
+    params:
+    - name: statement
+      type: resource
+    - name: field
+      type: int
+    returnType: int
+- subject:
+    function: odbc_field_scale
+  signature:
+    params:
+    - name: statement
+      type: resource
+    - name: field
+      type: int
+    returnType: int
+- subject:
+    function: odbc_field_type
+  signature:
+    params:
+    - name: statement
+      type: resource
+    - name: field
+      type: int
+    returnType: string
+- subject:
+    function: odbc_foreignkeys
+  signature:
+    params:
+    - name: odbc
+      type: resource
+    - name: pk_catalog
+      type: string
+    - name: pk_schema
+      type: string
+    - name: pk_table
+      type: string
+    - name: fk_catalog
+      type: string
+    - name: fk_schema
+      type: string
+    - name: fk_table
+      type: string
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+  - from: argument(5)
+    to: return
+  - from: argument(6)
+    to: return
+- subject:
+    function: odbc_free_result
+  signature:
+    params:
+    - name: statement
+      type: resource
+    returnType: bool
+- subject:
+    function: odbc_gettypeinfo
+  signature:
+    params:
+    - name: odbc
+      type: resource
+    - name: data_type
+      type: int
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: odbc_longreadlen
+  signature:
+    params:
+    - name: statement
+      type: resource
+    - name: length
+      type: int
+    returnType: bool
+- subject:
+    function: odbc_next_result
+  signature:
+    params:
+    - name: statement
+      type: resource
+    returnType: bool
+- subject:
+    function: odbc_num_fields
+  signature:
+    params:
+    - name: statement
+      type: resource
+    returnType: int
+- subject:
+    function: odbc_num_rows
+  signature:
+    params:
+    - name: statement
+      type: resource
+    returnType: int
+- subject:
+    function: odbc_pconnect
+  signature:
+    params:
+    - name: dsn
+      type: string
+    - name: user
+      type: string
+    - name: password
+      type: string
+    - name: cursor_option
+      type: int
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: odbc_prepare
+  signature:
+    params:
+    - name: odbc
+      type: resource
+    - name: query
+      type: string
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: odbc_primarykeys
+  signature:
+    params:
+    - name: odbc
+      type: resource
+    - name: catalog
+      type: string
+    - name: schema
+      type: string
+    - name: table
+      type: string
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: odbc_procedurecolumns
+  signature:
+    params:
+    - name: odbc
+      type: resource
+    - name: catalog
+      type: string
+      optional: true
+    - name: schema
+      type: string
+      optional: true
+    - name: procedure
+      type: string
+      optional: true
+    - name: column
+      type: string
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: odbc_procedures
+  signature:
+    params:
+    - name: odbc
+      type: resource
+    - name: catalog
+      type: string
+      optional: true
+    - name: schema
+      type: string
+      optional: true
+    - name: procedure
+      type: string
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: odbc_result
+  signature:
+    params:
+    - name: statement
+      type: resource
+    - name: field
+      type: int
+    returnType: bool
+- subject:
+    function: odbc_result_all
+  signature:
+    params:
+    - name: statement
+      type: resource
+    - name: format
+      type: string
+      optional: true
+    returnType: int
+- subject:
+    function: odbc_rollback
+  signature:
+    params:
+    - name: odbc
+      type: resource
+    returnType: bool
+- subject:
+    function: odbc_setoption
+  signature:
+    params:
+    - name: odbc
+      type: resource
+    - name: which
+      type: int
+    - name: option
+      type: int
+    - name: value
+      type: int
+    returnType: bool
+- subject:
+    function: odbc_specialcolumns
+  signature:
+    params:
+    - name: odbc
+      type: resource
+    - name: type
+      type: int
+    - name: catalog
+      type: string
+    - name: schema
+      type: string
+    - name: table
+      type: string
+    - name: scope
+      type: int
+    - name: nullable
+      type: int
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+  - from: argument(5)
+    to: return
+  - from: argument(6)
+    to: return
+- subject:
+    function: odbc_statistics
+  signature:
+    params:
+    - name: odbc
+      type: resource
+    - name: catalog
+      type: string
+    - name: schema
+      type: string
+    - name: table
+      type: string
+    - name: unique
+      type: int
+    - name: accuracy
+      type: int
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+  - from: argument(5)
+    to: return
+- subject:
+    function: odbc_tableprivileges
+  signature:
+    params:
+    - name: odbc
+      type: resource
+    - name: catalog
+      type: string
+    - name: schema
+      type: string
+    - name: table
+      type: string
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: odbc_tables
+  signature:
+    params:
+    - name: odbc
+      type: resource
+    - name: catalog
+      type: string
+      optional: true
+    - name: schema
+      type: string
+      optional: true
+    - name: table
+      type: string
+      optional: true
+    - name: types
+      type: string
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return

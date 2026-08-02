@@ -1,0 +1,219 @@
+# Generated from stubs/crypto/hash.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: hash
+  signature:
+    params:
+    - name: algo
+      type: string
+    - name: data
+      type: string
+    - name: binary
+      type: bool
+      optional: true
+    returnType: string
+- subject:
+    function: hash_algos
+  signature:
+    returnType: array
+- subject:
+    function: hash_copy
+  signature:
+    params:
+    - name: context
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: hash_equals
+  signature:
+    params:
+    - name: known_string
+      type: string
+    - name: user_string
+      type: string
+    returnType: bool
+- subject:
+    function: hash_file
+  signature:
+    params:
+    - name: algo
+      type: string
+    - name: filename
+      type: string
+    - name: binary
+      type: bool
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: hash_final
+  signature:
+    params:
+    - name: context
+      type: mixed
+    - name: binary
+      type: bool
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: hash_hkdf
+  signature:
+    params:
+    - name: algo
+      type: string
+    - name: key
+      type: string
+    - name: length
+      type: int
+      optional: true
+    - name: info
+      type: string
+      optional: true
+    - name: salt
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: hash_hmac
+  signature:
+    params:
+    - name: algo
+      type: string
+    - name: data
+      type: string
+    - name: key
+      type: string
+    - name: binary
+      type: bool
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: hash_hmac_algos
+  signature:
+    returnType: array
+- subject:
+    function: hash_hmac_file
+  signature:
+    params:
+    - name: algo
+      type: string
+    - name: filename
+      type: string
+    - name: key
+      type: string
+    - name: binary
+      type: bool
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: hash_init
+  signature:
+    params:
+    - name: algo
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    - name: key
+      type: string
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: hash_pbkdf2
+  signature:
+    params:
+    - name: algo
+      type: string
+    - name: password
+      type: string
+    - name: salt
+      type: string
+    - name: iterations
+      type: int
+    - name: length
+      type: int
+      optional: true
+    - name: binary
+      type: bool
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: hash_update
+  signature:
+    params:
+    - name: context
+      type: mixed
+    - name: data
+      type: string
+    returnType: bool
+- subject:
+    function: hash_update_file
+  signature:
+    params:
+    - name: context
+      type: mixed
+    - name: filename
+      type: string
+    - name: stream_context
+      type: resource
+      optional: true
+    returnType: bool
+- subject:
+    function: hash_update_stream
+  signature:
+    params:
+    - name: context
+      type: mixed
+    - name: stream
+      type: resource
+    - name: length
+      type: int
+      optional: true
+    returnType: int

@@ -1,0 +1,83 @@
+# Generated from stubs/file/zip.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: zip_close
+  signature:
+    params:
+    - name: zip
+      type: resource
+    returnType: void
+- subject:
+    function: zip_entry_close
+  signature:
+    params:
+    - name: zip_entry
+      type: resource
+    returnType: bool
+- subject:
+    function: zip_entry_compressedsize
+  signature:
+    params:
+    - name: zip_entry
+      type: resource
+    returnType: int
+- subject:
+    function: zip_entry_compressionmethod
+  signature:
+    params:
+    - name: zip_entry
+      type: resource
+    returnType: string
+- subject:
+    function: zip_entry_filesize
+  signature:
+    params:
+    - name: zip_entry
+      type: resource
+    returnType: int
+- subject:
+    function: zip_entry_name
+  signature:
+    params:
+    - name: zip_entry
+      type: resource
+    returnType: string
+- subject:
+    function: zip_entry_open
+  signature:
+    params:
+    - name: zip_dp
+      type: resource
+    - name: zip_entry
+      type: resource
+    - name: mode
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: zip_entry_read
+  signature:
+    params:
+    - name: zip_entry
+      type: resource
+    - name: len
+      type: int
+      optional: true
+    returnType: string
+- subject:
+    function: zip_open
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: int
+- subject:
+    function: zip_read
+  signature:
+    params:
+    - name: zip
+      type: resource
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return

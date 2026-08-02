@@ -1,0 +1,1362 @@
+# Generated from stubs/standard/standard_8.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: xcache_dasm_file
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: xcache_dasm_string
+  signature:
+    params:
+    - name: code
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: xcache_dec
+  signature:
+    params:
+    - name: name
+      type: string
+    - name: value
+      type: int
+      optional: true
+    - name: ttl
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: xcache_decode
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: bool
+- subject:
+    function: xcache_encode
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: xcache_get
+  signature:
+    params:
+    - name: name
+      type: string
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: xcache_get_data_type
+  signature:
+    params:
+    - name: type
+      type: int
+    returnType: string
+- subject:
+    function: xcache_get_op_spec
+  signature:
+    params:
+    - name: op_type
+      type: int
+    returnType: string
+- subject:
+    function: xcache_get_op_type
+  signature:
+    params:
+    - name: op_type
+      type: int
+    returnType: string
+- subject:
+    function: xcache_get_opcode
+  signature:
+    params:
+    - name: opcode
+      type: int
+    returnType: string
+- subject:
+    function: xcache_get_opcode_spec
+  signature:
+    params:
+    - name: opcode
+      type: int
+    returnType: string
+- subject:
+    function: xcache_inc
+  signature:
+    params:
+    - name: name
+      type: string
+    - name: value
+      type: int
+      optional: true
+    - name: ttl
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: xcache_info
+  signature:
+    params:
+    - name: type
+      type: int
+    - name: id
+      type: int
+    returnType: array
+- subject:
+    function: xcache_is_autoglobal
+  signature:
+    params:
+    - name: name
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: xcache_isset
+  signature:
+    params:
+    - name: name
+      type: string
+    returnType: bool
+- subject:
+    function: xcache_list
+  signature:
+    params:
+    - name: type
+      type: int
+    - name: id
+      type: int
+    returnType: array
+- subject:
+    function: xcache_set
+  signature:
+    params:
+    - name: name
+      type: string
+    - name: value
+      type: mixed
+    - name: ttl
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: xcache_unset
+  signature:
+    params:
+    - name: name
+      type: string
+    returnType: bool
+- subject:
+    function: xcache_unset_by_prefix
+  signature:
+    params:
+    - name: prefix
+      type: string
+    returnType: bool
+- subject:
+    function: xdebug_break
+  signature:
+    returnType: bool
+- subject:
+    function: xdebug_call_class
+  signature:
+    params:
+    - name: depth
+      type: int
+      optional: true
+    returnType: string
+- subject:
+    function: xdebug_call_file
+  signature:
+    params:
+    - name: depth
+      type: int
+      optional: true
+    returnType: string
+- subject:
+    function: xdebug_call_function
+  signature:
+    params:
+    - name: depth
+      type: int
+      optional: true
+    returnType: string
+- subject:
+    function: xdebug_call_line
+  signature:
+    params:
+    - name: depth
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: xdebug_clear_aggr_profiling_data
+  signature:
+    returnType: bool
+- subject:
+    function: xdebug_code_coverage_started
+  signature:
+    returnType: bool
+- subject:
+    function: xdebug_debug_zval
+  signature:
+    params:
+    - name: varName
+      type: string
+      optional: true
+    returnType: void
+- subject:
+    function: xdebug_debug_zval_stdout
+  signature:
+    params:
+    - name: varName
+      type: string
+      optional: true
+    returnType: void
+- subject:
+    function: xdebug_disable
+  signature:
+    returnType: void
+- subject:
+    function: xdebug_dump_aggr_profiling_data
+  signature:
+    returnType: bool
+- subject:
+    function: xdebug_dump_superglobals
+  signature:
+    returnType: void
+- subject:
+    function: xdebug_enable
+  signature:
+    returnType: void
+- subject:
+    function: xdebug_get_code_coverage
+  signature:
+    returnType: array
+- subject:
+    function: xdebug_get_collected_errors
+  signature:
+    params:
+    - name: clean
+      type: bool
+      optional: true
+    returnType: string
+- subject:
+    function: xdebug_get_declared_vars
+  signature:
+    returnType: array
+- subject:
+    function: xdebug_get_formatted_function_stack
+  signature:
+    returnType: mixed
+- subject:
+    function: xdebug_get_function_count
+  signature:
+    returnType: int
+- subject:
+    function: xdebug_get_function_stack
+  signature:
+    params:
+    - name: message
+      type: string
+      optional: true
+    - name: options
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    function: xdebug_get_headers
+  signature:
+    returnType: array
+- subject:
+    function: xdebug_get_monitored_functions
+  signature:
+    returnType: array
+- subject:
+    function: xdebug_get_profiler_filename
+  signature:
+    returnType: string
+- subject:
+    function: xdebug_get_stack_depth
+  signature:
+    returnType: int
+- subject:
+    function: xdebug_get_tracefile_name
+  signature:
+    returnType: string
+- subject:
+    function: xdebug_info
+  signature:
+    params:
+    - name: category
+      type: string
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: xdebug_is_debugger_active
+  signature:
+    returnType: bool
+- subject:
+    function: xdebug_is_enabled
+  signature:
+    returnType: bool
+- subject:
+    function: xdebug_memory_usage
+  signature:
+    returnType: int
+- subject:
+    function: xdebug_peak_memory_usage
+  signature:
+    returnType: int
+- subject:
+    function: xdebug_print_function_stack
+  signature:
+    params:
+    - name: message
+      type: string
+      optional: true
+    - name: options
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    function: xdebug_set_filter
+  signature:
+    params:
+    - name: group
+      type: int
+    - name: list_type
+      type: int
+    - name: configuration
+      type: array
+    returnType: void
+- subject:
+    function: xdebug_start_code_coverage
+  signature:
+    params:
+    - name: options
+      type: int
+      optional: true
+    returnType: void
+- subject:
+    function: xdebug_start_error_collection
+  signature:
+    returnType: void
+- subject:
+    function: xdebug_start_function_monitor
+  signature:
+    params:
+    - name: list_of_functions_to_monitor
+      type: array
+    returnType: void
+- subject:
+    function: xdebug_start_trace
+  signature:
+    params:
+    - name: trace_file
+      type: mixed
+    - name: options
+      type: int
+      optional: true
+    returnType: void
+- subject:
+    function: xdebug_stop_code_coverage
+  signature:
+    params:
+    - name: cleanup
+      type: bool
+      optional: true
+    returnType: void
+- subject:
+    function: xdebug_stop_error_collection
+  signature:
+    returnType: void
+- subject:
+    function: xdebug_stop_function_monitor
+  signature:
+    returnType: void
+- subject:
+    function: xdebug_stop_trace
+  signature:
+    returnType: void
+- subject:
+    function: xdebug_time_index
+  signature:
+    returnType: float
+- subject:
+    function: xdebug_var_dump
+  signature:
+    params:
+    - name: var
+      type: mixed
+      optional: true
+    returnType: void
+- subject:
+    function: xdiff_file_bdiff
+  signature:
+    params:
+    - name: old_file
+      type: string
+    - name: new_file
+      type: string
+    - name: dest
+      type: string
+    returnType: bool
+- subject:
+    function: xdiff_file_bdiff_size
+  signature:
+    params:
+    - name: file
+      type: string
+    returnType: int
+- subject:
+    function: xdiff_file_bpatch
+  signature:
+    params:
+    - name: file
+      type: string
+    - name: patch
+      type: string
+    - name: dest
+      type: string
+    returnType: bool
+- subject:
+    function: xdiff_file_diff
+  signature:
+    params:
+    - name: old_file
+      type: string
+    - name: new_file
+      type: string
+    - name: dest
+      type: string
+    - name: context
+      type: int
+      optional: true
+    - name: minimal
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: xdiff_file_diff_binary
+  signature:
+    params:
+    - name: old_file
+      type: string
+    - name: new_file
+      type: string
+    - name: dest
+      type: string
+    returnType: bool
+- subject:
+    function: xdiff_file_merge3
+  signature:
+    params:
+    - name: old_file
+      type: string
+    - name: new_file1
+      type: string
+    - name: new_file2
+      type: string
+    - name: dest
+      type: string
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: xdiff_file_patch
+  signature:
+    params:
+    - name: file
+      type: string
+    - name: patch
+      type: string
+    - name: dest
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: xdiff_file_patch_binary
+  signature:
+    params:
+    - name: file
+      type: string
+    - name: patch
+      type: string
+    - name: dest
+      type: string
+    returnType: bool
+- subject:
+    function: xdiff_file_rabdiff
+  signature:
+    params:
+    - name: old_file
+      type: string
+    - name: new_file
+      type: string
+    - name: dest
+      type: string
+    returnType: bool
+- subject:
+    function: xdiff_string_bdiff
+  signature:
+    params:
+    - name: old_data
+      type: string
+    - name: new_data
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: xdiff_string_bdiff_size
+  signature:
+    params:
+    - name: patch
+      type: string
+    returnType: int
+- subject:
+    function: xdiff_string_bpatch
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: patch
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: xdiff_string_diff
+  signature:
+    params:
+    - name: old_data
+      type: string
+    - name: new_data
+      type: string
+    - name: context
+      type: int
+      optional: true
+    - name: minimal
+      type: bool
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: xdiff_string_diff_binary
+  signature:
+    params:
+    - name: old_data
+      type: string
+    - name: new_data
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: xdiff_string_merge3
+  signature:
+    params:
+    - name: old_data
+      type: string
+    - name: new_data1
+      type: string
+    - name: new_data2
+      type: string
+    - name: error
+      type: string
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: xdiff_string_patch
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: patch
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    - name: error
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: xdiff_string_patch_binary
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: patch
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: xdiff_string_rabdiff
+  signature:
+    params:
+    - name: old_data
+      type: string
+    - name: new_data
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: xhprof_disable
+  signature:
+    returnType: array
+- subject:
+    function: xhprof_enable
+  signature:
+    params:
+    - name: flags
+      type: int
+      optional: true
+    - name: options
+      type: array
+      optional: true
+    returnType: void
+- subject:
+    function: xhprof_sample_disable
+  signature:
+    returnType: array
+- subject:
+    function: xhprof_sample_enable
+  signature:
+    returnType: void
+- subject:
+    function: xlswriter_get_author
+  signature:
+    returnType: string
+- subject:
+    function: xlswriter_get_version
+  signature:
+    returnType: string
+- subject:
+    function: xpath_new_context
+  signature:
+    params:
+    - name: dom_document
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: xpath_register_ns
+  signature:
+    params:
+    - name: xpath_context
+      type: mixed
+    - name: prefix
+      type: string
+    - name: uri
+      type: string
+    returnType: bool
+- subject:
+    function: xpath_register_ns_auto
+  signature:
+    params:
+    - name: xpath_context
+      type: mixed
+    - name: context_node
+      type: object
+      optional: true
+    returnType: bool
+- subject:
+    function: xptr_new_context
+  signature:
+    returnType: mixed
+- subject:
+    function: yaml_emit
+  signature:
+    params:
+    - name: data
+      type: mixed
+    - name: encoding
+      type: int
+      optional: true
+    - name: linebreak
+      type: int
+      optional: true
+    - name: callbacks
+      type: array
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: yaml_emit_file
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: data
+      type: mixed
+    - name: encoding
+      type: int
+      optional: true
+    - name: linebreak
+      type: int
+      optional: true
+    - name: callbacks
+      type: array
+      optional: true
+    returnType: bool
+- subject:
+    function: yaml_parse
+  signature:
+    params:
+    - name: input
+      type: string
+    - name: pos
+      type: int
+      optional: true
+    - name: ndocs
+      type: int
+      optional: true
+    - name: callbacks
+      type: array
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: yaml_parse_file
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: pos
+      type: int
+      optional: true
+    - name: ndocs
+      type: int
+      optional: true
+    - name: callbacks
+      type: array
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: yaml_parse_url
+  signature:
+    params:
+    - name: url
+      type: string
+    - name: pos
+      type: int
+      optional: true
+    - name: ndocs
+      type: int
+      optional: true
+    - name: callbacks
+      type: array
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: yaz_addinfo
+  signature:
+    params:
+    - name: id
+      type: resource
+    returnType: string
+- subject:
+    function: yaz_ccl_conf
+  signature:
+    params:
+    - name: id
+      type: resource
+    - name: config
+      type: array
+    returnType: void
+- subject:
+    function: yaz_ccl_parse
+  signature:
+    params:
+    - name: id
+      type: resource
+    - name: query
+      type: string
+    - name: result
+      type: array
+    returnType: bool
+- subject:
+    function: yaz_close
+  signature:
+    params:
+    - name: id
+      type: resource
+    returnType: bool
+- subject:
+    function: yaz_connect
+  signature:
+    params:
+    - name: zurl
+      type: string
+    - name: options
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: yaz_database
+  signature:
+    params:
+    - name: id
+      type: resource
+    - name: databases
+      type: string
+    returnType: bool
+- subject:
+    function: yaz_element
+  signature:
+    params:
+    - name: id
+      type: resource
+    - name: elementset
+      type: string
+    returnType: bool
+- subject:
+    function: yaz_errno
+  signature:
+    params:
+    - name: id
+      type: resource
+    returnType: int
+- subject:
+    function: yaz_error
+  signature:
+    params:
+    - name: id
+      type: resource
+    returnType: string
+- subject:
+    function: yaz_es
+  signature:
+    params:
+    - name: id
+      type: resource
+    - name: type
+      type: string
+    - name: args
+      type: array
+    returnType: void
+- subject:
+    function: yaz_es_result
+  signature:
+    params:
+    - name: id
+      type: resource
+    returnType: array
+- subject:
+    function: yaz_get_option
+  signature:
+    params:
+    - name: id
+      type: resource
+    - name: name
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: yaz_hits
+  signature:
+    params:
+    - name: id
+      type: resource
+    - name: searchresult
+      type: array
+      optional: true
+    returnType: int
+- subject:
+    function: yaz_itemorder
+  signature:
+    params:
+    - name: id
+      type: resource
+    - name: args
+      type: array
+    returnType: void
+- subject:
+    function: yaz_present
+  signature:
+    params:
+    - name: id
+      type: resource
+    returnType: bool
+- subject:
+    function: yaz_range
+  signature:
+    params:
+    - name: id
+      type: resource
+    - name: start
+      type: int
+    - name: number
+      type: int
+    returnType: void
+- subject:
+    function: yaz_record
+  signature:
+    params:
+    - name: id
+      type: resource
+    - name: pos
+      type: int
+    - name: type
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(2)
+    to: return
+- subject:
+    function: yaz_scan
+  signature:
+    params:
+    - name: id
+      type: resource
+    - name: type
+      type: string
+    - name: startterm
+      type: string
+    - name: flags
+      type: array
+      optional: true
+    returnType: void
+- subject:
+    function: yaz_scan_result
+  signature:
+    params:
+    - name: id
+      type: resource
+    - name: result
+      type: array
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: yaz_schema
+  signature:
+    params:
+    - name: id
+      type: resource
+    - name: schema
+      type: string
+    returnType: void
+- subject:
+    function: yaz_search
+  signature:
+    params:
+    - name: id
+      type: resource
+    - name: type
+      type: string
+    - name: query
+      type: string
+    returnType: bool
+- subject:
+    function: yaz_set_option
+  signature:
+    params:
+    - name: id
+      type: mixed
+    - name: name
+      type: string
+    - name: value
+      type: string
+    - name: options
+      type: array
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: yaz_sort
+  signature:
+    params:
+    - name: id
+      type: resource
+    - name: criteria
+      type: string
+    returnType: void
+- subject:
+    function: yaz_syntax
+  signature:
+    params:
+    - name: id
+      type: resource
+    - name: syntax
+      type: string
+    returnType: void
+- subject:
+    function: yaz_wait
+  signature:
+    params:
+    - name: rw options
+      type: array
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: zem_get_extension_info_by_id
+  signature:
+    returnType: mixed
+- subject:
+    function: zem_get_extension_info_by_name
+  signature:
+    returnType: mixed
+- subject:
+    function: zem_get_extensions_info
+  signature:
+    returnType: mixed
+- subject:
+    function: zem_get_license_info
+  signature:
+    returnType: mixed
+- subject:
+    function: zend_current_obfuscation_level
+  signature:
+    returnType: int
+- subject:
+    function: zend_disk_cache_clear
+  signature:
+    params:
+    - name: namespace
+      type: mixed
+      optional: true
+    returnType: bool
+- subject:
+    function: zend_disk_cache_delete
+  signature:
+    params:
+    - name: key
+      type: string
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: zend_disk_cache_fetch
+  signature:
+    params:
+    - name: key
+      type: string
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: zend_disk_cache_store
+  signature:
+    params:
+    - name: key
+      type: mixed
+    - name: value
+      type: mixed
+    - name: ttl
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: zend_get_id
+  signature:
+    params:
+    - name: all_ids
+      type: mixed
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: zend_is_configuration_changed
+  signature:
+    returnType: mixed
+- subject:
+    function: zend_loader_current_file
+  signature:
+    returnType: string
+- subject:
+    function: zend_loader_enabled
+  signature:
+    returnType: bool
+- subject:
+    function: zend_loader_file_encoded
+  signature:
+    returnType: bool
+- subject:
+    function: zend_loader_file_licensed
+  signature:
+    returnType: array
+- subject:
+    function: zend_loader_install_license
+  signature:
+    params:
+    - name: license_file
+      type: string
+    - name: override
+      type: bool
+    returnType: bool
+- subject:
+    function: zend_logo_guid
+  signature:
+    returnType: string
+- subject:
+    function: zend_obfuscate_class_name
+  signature:
+    params:
+    - name: class_name
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: zend_obfuscate_function_name
+  signature:
+    params:
+    - name: function_name
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: zend_optimizer_version
+  signature:
+    returnType: string
+- subject:
+    function: zend_runtime_obfuscate
+  signature:
+    returnType: void
+- subject:
+    function: zend_send_buffer
+  signature:
+    params:
+    - name: buffer
+      type: string
+    - name: mime_type
+      type: string
+      optional: true
+    - name: custom_headers
+      type: string
+      optional: true
+    returnType: mixed
+- subject:
+    function: zend_send_file
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: mime_type
+      type: string
+      optional: true
+    - name: custom_headers
+      type: string
+      optional: true
+    returnType: mixed
+- subject:
+    function: zend_set_configuration_changed
+  signature:
+    returnType: mixed
+- subject:
+    function: zend_shm_cache_clear
+  signature:
+    params:
+    - name: namespace
+      type: mixed
+      optional: true
+    returnType: bool
+- subject:
+    function: zend_shm_cache_delete
+  signature:
+    params:
+    - name: key
+      type: string
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: zend_shm_cache_fetch
+  signature:
+    params:
+    - name: key
+      type: string
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: zend_shm_cache_store
+  signature:
+    params:
+    - name: key
+      type: mixed
+    - name: value
+      type: mixed
+    - name: ttl
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: zend_thread_id
+  signature:
+    returnType: int
+- subject:
+    function: zend_version
+  signature:
+    returnType: string
+- subject:
+    function: zlib_decode
+  signature:
+    params:
+    - name: data
+      type: string
+    - name: max_length
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: zlib_encode
+  signature:
+    params:
+    - name: data
+      type: string
+    - name: encoding
+      type: int
+    - name: level
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: zlib_get_coding_type
+  signature:
+    returnType: string
+- subject:
+    function: zookeeper_dispatch
+  signature:
+    returnType: void

@@ -1,0 +1,425 @@
+# Generated from stubs/xml/xmlwriter.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: xmlwriter_end_attribute
+  signature:
+    params:
+    - name: writer
+      type: mixed
+    returnType: bool
+- subject:
+    function: xmlwriter_end_cdata
+  signature:
+    params:
+    - name: writer
+      type: mixed
+    returnType: bool
+- subject:
+    function: xmlwriter_end_comment
+  signature:
+    params:
+    - name: writer
+      type: mixed
+    returnType: bool
+- subject:
+    function: xmlwriter_end_document
+  signature:
+    params:
+    - name: writer
+      type: mixed
+    returnType: bool
+- subject:
+    function: xmlwriter_end_dtd
+  signature:
+    params:
+    - name: writer
+      type: mixed
+    returnType: bool
+- subject:
+    function: xmlwriter_end_dtd_attlist
+  signature:
+    params:
+    - name: writer
+      type: mixed
+    returnType: bool
+- subject:
+    function: xmlwriter_end_dtd_element
+  signature:
+    params:
+    - name: writer
+      type: mixed
+    returnType: bool
+- subject:
+    function: xmlwriter_end_dtd_entity
+  signature:
+    params:
+    - name: writer
+      type: mixed
+    returnType: bool
+- subject:
+    function: xmlwriter_end_element
+  signature:
+    params:
+    - name: writer
+      type: mixed
+    returnType: bool
+- subject:
+    function: xmlwriter_end_pi
+  signature:
+    params:
+    - name: writer
+      type: mixed
+    returnType: bool
+- subject:
+    function: xmlwriter_flush
+  signature:
+    params:
+    - name: writer
+      type: mixed
+    - name: empty
+      type: bool
+      optional: true
+    returnType: int
+- subject:
+    function: xmlwriter_full_end_element
+  signature:
+    params:
+    - name: writer
+      type: mixed
+    returnType: bool
+- subject:
+    function: xmlwriter_open_memory
+  signature:
+    returnType: mixed
+- subject:
+    function: xmlwriter_open_uri
+  signature:
+    params:
+    - name: uri
+      type: string
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: xmlwriter_output_memory
+  signature:
+    params:
+    - name: writer
+      type: mixed
+    - name: flush
+      type: bool
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: xmlwriter_set_indent
+  signature:
+    params:
+    - name: writer
+      type: mixed
+    - name: enable
+      type: bool
+    returnType: bool
+- subject:
+    function: xmlwriter_set_indent_string
+  signature:
+    params:
+    - name: writer
+      type: mixed
+    - name: indentation
+      type: string
+    returnType: bool
+- subject:
+    function: xmlwriter_start_attribute
+  signature:
+    params:
+    - name: writer
+      type: mixed
+    - name: name
+      type: string
+    returnType: bool
+- subject:
+    function: xmlwriter_start_attribute_ns
+  signature:
+    params:
+    - name: writer
+      type: mixed
+    - name: prefix
+      type: string
+    - name: name
+      type: string
+    - name: namespace
+      type: string
+    returnType: bool
+- subject:
+    function: xmlwriter_start_cdata
+  signature:
+    params:
+    - name: writer
+      type: mixed
+    returnType: bool
+- subject:
+    function: xmlwriter_start_comment
+  signature:
+    params:
+    - name: writer
+      type: mixed
+    returnType: bool
+- subject:
+    function: xmlwriter_start_document
+  signature:
+    params:
+    - name: writer
+      type: mixed
+    - name: version
+      type: string
+      optional: true
+    - name: encoding
+      type: string
+      optional: true
+    - name: standalone
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: xmlwriter_start_dtd
+  signature:
+    params:
+    - name: writer
+      type: mixed
+    - name: qualifiedName
+      type: string
+    - name: publicId
+      type: string
+      optional: true
+    - name: systemId
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: xmlwriter_start_dtd_attlist
+  signature:
+    params:
+    - name: writer
+      type: mixed
+    - name: name
+      type: string
+    returnType: bool
+- subject:
+    function: xmlwriter_start_dtd_element
+  signature:
+    params:
+    - name: writer
+      type: mixed
+    - name: qualifiedName
+      type: string
+    returnType: bool
+- subject:
+    function: xmlwriter_start_dtd_entity
+  signature:
+    params:
+    - name: writer
+      type: mixed
+    - name: name
+      type: string
+    - name: isParam
+      type: bool
+    returnType: bool
+- subject:
+    function: xmlwriter_start_element
+  signature:
+    params:
+    - name: writer
+      type: mixed
+    - name: name
+      type: string
+    returnType: bool
+- subject:
+    function: xmlwriter_start_element_ns
+  signature:
+    params:
+    - name: writer
+      type: mixed
+    - name: prefix
+      type: string
+    - name: name
+      type: string
+    - name: namespace
+      type: string
+    returnType: bool
+- subject:
+    function: xmlwriter_start_pi
+  signature:
+    params:
+    - name: writer
+      type: mixed
+    - name: target
+      type: string
+    returnType: bool
+- subject:
+    function: xmlwriter_text
+  signature:
+    params:
+    - name: writer
+      type: mixed
+    - name: content
+      type: string
+    returnType: bool
+- subject:
+    function: xmlwriter_write_attribute
+  signature:
+    params:
+    - name: writer
+      type: mixed
+    - name: name
+      type: string
+    - name: value
+      type: string
+    returnType: bool
+- subject:
+    function: xmlwriter_write_attribute_ns
+  signature:
+    params:
+    - name: writer
+      type: mixed
+    - name: prefix
+      type: string
+    - name: name
+      type: string
+    - name: namespace
+      type: string
+    - name: value
+      type: string
+    returnType: bool
+- subject:
+    function: xmlwriter_write_cdata
+  signature:
+    params:
+    - name: writer
+      type: mixed
+    - name: content
+      type: string
+    returnType: bool
+- subject:
+    function: xmlwriter_write_comment
+  signature:
+    params:
+    - name: writer
+      type: mixed
+    - name: content
+      type: string
+    returnType: bool
+- subject:
+    function: xmlwriter_write_dtd
+  signature:
+    params:
+    - name: writer
+      type: mixed
+    - name: name
+      type: string
+    - name: publicId
+      type: string
+      optional: true
+    - name: systemId
+      type: string
+      optional: true
+    - name: content
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: xmlwriter_write_dtd_attlist
+  signature:
+    params:
+    - name: writer
+      type: mixed
+    - name: name
+      type: string
+    - name: content
+      type: string
+    returnType: bool
+- subject:
+    function: xmlwriter_write_dtd_element
+  signature:
+    params:
+    - name: writer
+      type: mixed
+    - name: name
+      type: string
+    - name: content
+      type: string
+    returnType: bool
+- subject:
+    function: xmlwriter_write_dtd_entity
+  signature:
+    params:
+    - name: writer
+      type: mixed
+    - name: name
+      type: string
+    - name: content
+      type: string
+    - name: isParam
+      type: bool
+      optional: true
+    - name: publicId
+      type: string
+      optional: true
+    - name: systemId
+      type: string
+      optional: true
+    - name: notationData
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: xmlwriter_write_element
+  signature:
+    params:
+    - name: writer
+      type: mixed
+    - name: name
+      type: string
+    - name: content
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: xmlwriter_write_element_ns
+  signature:
+    params:
+    - name: writer
+      type: mixed
+    - name: prefix
+      type: string
+    - name: name
+      type: string
+    - name: namespace
+      type: string
+    - name: content
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: xmlwriter_write_pi
+  signature:
+    params:
+    - name: writer
+      type: mixed
+    - name: target
+      type: string
+    - name: content
+      type: string
+    returnType: bool
+- subject:
+    function: xmlwriter_write_raw
+  signature:
+    params:
+    - name: writer
+      type: mixed
+    - name: content
+      type: string
+    returnType: bool

@@ -1,0 +1,5191 @@
+# Generated from stubs/standard/standard_2.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: event_timer_set
+  signature:
+    params:
+    - name: event
+      type: resource
+    - name: callback
+      type: callable
+    - name: arg
+      type: mixed
+      optional: true
+    returnType: bool
+- subject:
+    function: exec
+  signature:
+    params:
+    - name: command
+      type: string
+    - name: output
+      type: array
+      optional: true
+    - name: result_code
+      type: int
+      optional: true
+    returnType: string
+- subject:
+    function: exp
+  signature:
+    params:
+    - name: num
+      type: float
+    returnType: float
+- subject:
+    function: expect_expectl
+  signature:
+    params:
+    - name: expect
+      type: resource
+    - name: cases
+      type: array
+    - name: match
+      type: array
+      optional: true
+    returnType: int
+- subject:
+    function: expect_popen
+  signature:
+    params:
+    - name: command
+      type: string
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: explode
+  signature:
+    params:
+    - name: separator
+      type: string
+    - name: string
+      type: string
+    - name: limit
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: expm1
+  signature:
+    params:
+    - name: num
+      type: float
+    returnType: float
+- subject:
+    function: extension_loaded
+  signature:
+    params:
+    - name: extension
+      type: string
+    returnType: bool
+- subject:
+    function: extract
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: flags
+      type: int
+      optional: true
+    - name: prefix
+      type: string
+      optional: true
+    returnType: int
+- subject:
+    function: fam_cancel_monitor
+  signature:
+    params:
+    - name: fam
+      type: resource
+    - name: fam_monitor
+      type: resource
+    returnType: bool
+- subject:
+    function: fam_close
+  signature:
+    params:
+    - name: fam
+      type: resource
+    returnType: void
+- subject:
+    function: fam_monitor_collection
+  signature:
+    params:
+    - name: fam
+      type: resource
+    - name: dirname
+      type: string
+    - name: depth
+      type: int
+    - name: mask
+      type: string
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: fam_monitor_directory
+  signature:
+    params:
+    - name: fam
+      type: resource
+    - name: dirname
+      type: string
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: fam_monitor_file
+  signature:
+    params:
+    - name: fam
+      type: resource
+    - name: filename
+      type: string
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: fam_next_event
+  signature:
+    params:
+    - name: fam
+      type: resource
+    returnType: array
+- subject:
+    function: fam_open
+  signature:
+    params:
+    - name: appname
+      type: string
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: fam_pending
+  signature:
+    params:
+    - name: fam
+      type: resource
+    returnType: int
+- subject:
+    function: fam_resume_monitor
+  signature:
+    params:
+    - name: fam
+      type: resource
+    - name: fam_monitor
+      type: resource
+    returnType: bool
+- subject:
+    function: fam_suspend_monitor
+  signature:
+    params:
+    - name: fam
+      type: resource
+    - name: fam_monitor
+      type: resource
+    returnType: bool
+- subject:
+    function: fann_cascadetrain_on_data
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: data
+      type: resource
+    - name: max_neurons
+      type: int
+    - name: neurons_between_reports
+      type: int
+    - name: desired_error
+      type: float
+    returnType: bool
+- subject:
+    function: fann_cascadetrain_on_file
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: filename
+      type: string
+    - name: max_neurons
+      type: int
+    - name: neurons_between_reports
+      type: int
+    - name: desired_error
+      type: float
+    returnType: bool
+- subject:
+    function: fann_clear_scaling_params
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: bool
+- subject:
+    function: fann_copy
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: fann_create_from_file
+  signature:
+    params:
+    - name: configuration_file
+      type: string
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: fann_create_shortcut
+  signature:
+    params:
+    - name: num_layers
+      type: int
+    - name: num_neurons1
+      type: int
+    - name: num_neurons2
+      type: int
+    - name: args
+      type: int
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: fann_create_shortcut_array
+  signature:
+    params:
+    - name: num_layers
+      type: int
+    - name: layers
+      type: array
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: fann_create_sparse
+  signature:
+    params:
+    - name: connection_rate
+      type: float
+    - name: num_layers
+      type: int
+    - name: num_neurons1
+      type: int
+    - name: num_neurons2
+      type: int
+    - name: args
+      type: int
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: fann_create_sparse_array
+  signature:
+    params:
+    - name: connection_rate
+      type: float
+    - name: num_layers
+      type: int
+    - name: layers
+      type: array
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: fann_create_standard
+  signature:
+    params:
+    - name: num_layers
+      type: int
+    - name: num_neurons1
+      type: int
+    - name: num_neurons2
+      type: int
+    - name: args
+      type: int
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: fann_create_standard_array
+  signature:
+    params:
+    - name: num_layers
+      type: int
+    - name: layers
+      type: array
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: fann_create_train
+  signature:
+    params:
+    - name: num_data
+      type: int
+    - name: num_input
+      type: int
+    - name: num_output
+      type: int
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: fann_create_train_from_callback
+  signature:
+    params:
+    - name: num_data
+      type: int
+    - name: num_input
+      type: int
+    - name: num_output
+      type: int
+    - name: user_function
+      type: callable
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: fann_descale_input
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: input_vector
+      type: array
+    returnType: bool
+- subject:
+    function: fann_descale_output
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: output_vector
+      type: array
+    returnType: bool
+- subject:
+    function: fann_descale_train
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: train_data
+      type: resource
+    returnType: bool
+- subject:
+    function: fann_destroy
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: bool
+- subject:
+    function: fann_destroy_train
+  signature:
+    params:
+    - name: train_data
+      type: resource
+    returnType: bool
+- subject:
+    function: fann_duplicate_train_data
+  signature:
+    params:
+    - name: data
+      type: resource
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: fann_get_activation_function
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: layer
+      type: int
+    - name: neuron
+      type: int
+    returnType: int
+- subject:
+    function: fann_get_activation_steepness
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: layer
+      type: int
+    - name: neuron
+      type: int
+    returnType: float
+- subject:
+    function: fann_get_bias_array
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: array
+- subject:
+    function: fann_get_bit_fail
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: int
+- subject:
+    function: fann_get_bit_fail_limit
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: float
+- subject:
+    function: fann_get_cascade_activation_functions
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: array
+- subject:
+    function: fann_get_cascade_activation_functions_count
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: int
+- subject:
+    function: fann_get_cascade_activation_steepnesses
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: array
+- subject:
+    function: fann_get_cascade_activation_steepnesses_count
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: int
+- subject:
+    function: fann_get_cascade_candidate_change_fraction
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: float
+- subject:
+    function: fann_get_cascade_candidate_limit
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: float
+- subject:
+    function: fann_get_cascade_candidate_stagnation_epochs
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: float
+- subject:
+    function: fann_get_cascade_max_cand_epochs
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: int
+- subject:
+    function: fann_get_cascade_max_out_epochs
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: int
+- subject:
+    function: fann_get_cascade_min_cand_epochs
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: int
+- subject:
+    function: fann_get_cascade_min_out_epochs
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: int
+- subject:
+    function: fann_get_cascade_num_candidate_groups
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: int
+- subject:
+    function: fann_get_cascade_num_candidates
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: int
+- subject:
+    function: fann_get_cascade_output_change_fraction
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: float
+- subject:
+    function: fann_get_cascade_output_stagnation_epochs
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: int
+- subject:
+    function: fann_get_cascade_weight_multiplier
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: float
+- subject:
+    function: fann_get_connection_array
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: array
+- subject:
+    function: fann_get_connection_rate
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: float
+- subject:
+    function: fann_get_errno
+  signature:
+    params:
+    - name: errdat
+      type: resource
+    returnType: int
+- subject:
+    function: fann_get_errstr
+  signature:
+    params:
+    - name: errdat
+      type: resource
+    returnType: string
+- subject:
+    function: fann_get_layer_array
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: array
+- subject:
+    function: fann_get_learning_momentum
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: float
+- subject:
+    function: fann_get_learning_rate
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: float
+- subject:
+    function: fann_get_mse
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: float
+- subject:
+    function: fann_get_network_type
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: int
+- subject:
+    function: fann_get_num_input
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: int
+- subject:
+    function: fann_get_num_layers
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: int
+- subject:
+    function: fann_get_num_output
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: int
+- subject:
+    function: fann_get_quickprop_decay
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: float
+- subject:
+    function: fann_get_quickprop_mu
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: float
+- subject:
+    function: fann_get_rprop_decrease_factor
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: float
+- subject:
+    function: fann_get_rprop_delta_max
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: float
+- subject:
+    function: fann_get_rprop_delta_min
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: float
+- subject:
+    function: fann_get_rprop_delta_zero
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: float
+- subject:
+    function: fann_get_rprop_increase_factor
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: float
+- subject:
+    function: fann_get_sarprop_step_error_shift
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: float
+- subject:
+    function: fann_get_sarprop_step_error_threshold_factor
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: float
+- subject:
+    function: fann_get_sarprop_temperature
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: float
+- subject:
+    function: fann_get_sarprop_weight_decay_shift
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: float
+- subject:
+    function: fann_get_total_connections
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: int
+- subject:
+    function: fann_get_total_neurons
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: int
+- subject:
+    function: fann_get_train_error_function
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: int
+- subject:
+    function: fann_get_train_stop_function
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: int
+- subject:
+    function: fann_get_training_algorithm
+  signature:
+    params:
+    - name: ann
+      type: resource
+    returnType: int
+- subject:
+    function: fann_init_weights
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: train_data
+      type: resource
+    returnType: bool
+- subject:
+    function: fann_length_train_data
+  signature:
+    params:
+    - name: data
+      type: resource
+    returnType: int
+- subject:
+    function: fann_merge_train_data
+  signature:
+    params:
+    - name: data1
+      type: resource
+    - name: data2
+      type: resource
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: fann_num_input_train_data
+  signature:
+    params:
+    - name: data
+      type: resource
+    returnType: int
+- subject:
+    function: fann_num_output_train_data
+  signature:
+    params:
+    - name: data
+      type: resource
+    returnType: int
+- subject:
+    function: fann_print_error
+  signature:
+    params:
+    - name: errdat
+      type: string
+    returnType: void
+- subject:
+    function: fann_randomize_weights
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: min_weight
+      type: float
+    - name: max_weight
+      type: float
+    returnType: bool
+- subject:
+    function: fann_read_train_from_file
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: fann_reset_errno
+  signature:
+    params:
+    - name: errdat
+      type: resource
+    returnType: void
+- subject:
+    function: fann_reset_errstr
+  signature:
+    params:
+    - name: errdat
+      type: resource
+    returnType: void
+- subject:
+    function: fann_reset_mse
+  signature:
+    params:
+    - name: ann
+      type: string
+    returnType: bool
+- subject:
+    function: fann_run
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: input
+      type: array
+    returnType: array
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: fann_save
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: configuration_file
+      type: string
+    returnType: bool
+- subject:
+    function: fann_save_train
+  signature:
+    params:
+    - name: data
+      type: resource
+    - name: file_name
+      type: string
+    returnType: bool
+- subject:
+    function: fann_scale_input
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: input_vector
+      type: array
+    returnType: bool
+- subject:
+    function: fann_scale_input_train_data
+  signature:
+    params:
+    - name: train_data
+      type: resource
+    - name: new_min
+      type: float
+    - name: new_max
+      type: float
+    returnType: bool
+- subject:
+    function: fann_scale_output
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: output_vector
+      type: array
+    returnType: bool
+- subject:
+    function: fann_scale_output_train_data
+  signature:
+    params:
+    - name: train_data
+      type: resource
+    - name: new_min
+      type: float
+    - name: new_max
+      type: float
+    returnType: bool
+- subject:
+    function: fann_scale_train
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: train_data
+      type: resource
+    returnType: bool
+- subject:
+    function: fann_scale_train_data
+  signature:
+    params:
+    - name: train_data
+      type: resource
+    - name: new_min
+      type: float
+    - name: new_max
+      type: float
+    returnType: bool
+- subject:
+    function: fann_set_activation_function
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: activation_function
+      type: int
+    - name: layer
+      type: int
+    - name: neuron
+      type: int
+    returnType: bool
+- subject:
+    function: fann_set_activation_function_hidden
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: activation_function
+      type: int
+    returnType: bool
+- subject:
+    function: fann_set_activation_function_layer
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: activation_function
+      type: int
+    - name: layer
+      type: int
+    returnType: bool
+- subject:
+    function: fann_set_activation_function_output
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: activation_function
+      type: int
+    returnType: bool
+- subject:
+    function: fann_set_activation_steepness
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: activation_steepness
+      type: float
+    - name: layer
+      type: int
+    - name: neuron
+      type: int
+    returnType: bool
+- subject:
+    function: fann_set_activation_steepness_hidden
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: activation_steepness
+      type: float
+    returnType: bool
+- subject:
+    function: fann_set_activation_steepness_layer
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: activation_steepness
+      type: float
+    - name: layer
+      type: int
+    returnType: bool
+- subject:
+    function: fann_set_activation_steepness_output
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: activation_steepness
+      type: float
+    returnType: bool
+- subject:
+    function: fann_set_bit_fail_limit
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: bit_fail_limit
+      type: float
+    returnType: bool
+- subject:
+    function: fann_set_callback
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: callback
+      type: callable
+    returnType: bool
+- subject:
+    function: fann_set_cascade_activation_functions
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: cascade_activation_functions
+      type: array
+    returnType: bool
+- subject:
+    function: fann_set_cascade_activation_steepnesses
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: cascade_activation_steepnesses_count
+      type: array
+    returnType: bool
+- subject:
+    function: fann_set_cascade_candidate_change_fraction
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: cascade_candidate_change_fraction
+      type: float
+    returnType: bool
+- subject:
+    function: fann_set_cascade_candidate_limit
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: cascade_candidate_limit
+      type: float
+    returnType: bool
+- subject:
+    function: fann_set_cascade_candidate_stagnation_epochs
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: cascade_candidate_stagnation_epochs
+      type: int
+    returnType: bool
+- subject:
+    function: fann_set_cascade_max_cand_epochs
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: cascade_max_cand_epochs
+      type: int
+    returnType: bool
+- subject:
+    function: fann_set_cascade_max_out_epochs
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: cascade_max_out_epochs
+      type: int
+    returnType: bool
+- subject:
+    function: fann_set_cascade_min_cand_epochs
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: cascade_min_cand_epochs
+      type: int
+    returnType: bool
+- subject:
+    function: fann_set_cascade_min_out_epochs
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: cascade_min_out_epochs
+      type: int
+    returnType: bool
+- subject:
+    function: fann_set_cascade_num_candidate_groups
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: cascade_num_candidate_groups
+      type: int
+    returnType: bool
+- subject:
+    function: fann_set_cascade_output_change_fraction
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: cascade_output_change_fraction
+      type: float
+    returnType: bool
+- subject:
+    function: fann_set_cascade_output_stagnation_epochs
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: cascade_output_stagnation_epochs
+      type: int
+    returnType: bool
+- subject:
+    function: fann_set_cascade_weight_multiplier
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: cascade_weight_multiplier
+      type: float
+    returnType: bool
+- subject:
+    function: fann_set_error_log
+  signature:
+    params:
+    - name: errdat
+      type: resource
+    - name: log_file
+      type: string
+    returnType: void
+- subject:
+    function: fann_set_input_scaling_params
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: train_data
+      type: resource
+    - name: new_input_min
+      type: float
+    - name: new_input_max
+      type: float
+    returnType: bool
+- subject:
+    function: fann_set_learning_momentum
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: learning_momentum
+      type: float
+    returnType: bool
+- subject:
+    function: fann_set_learning_rate
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: learning_rate
+      type: float
+    returnType: bool
+- subject:
+    function: fann_set_output_scaling_params
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: train_data
+      type: resource
+    - name: new_output_min
+      type: float
+    - name: new_output_max
+      type: float
+    returnType: bool
+- subject:
+    function: fann_set_quickprop_decay
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: quickprop_decay
+      type: float
+    returnType: bool
+- subject:
+    function: fann_set_quickprop_mu
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: quickprop_mu
+      type: float
+    returnType: bool
+- subject:
+    function: fann_set_rprop_decrease_factor
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: rprop_decrease_factor
+      type: float
+    returnType: bool
+- subject:
+    function: fann_set_rprop_delta_max
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: rprop_delta_max
+      type: float
+    returnType: bool
+- subject:
+    function: fann_set_rprop_delta_min
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: rprop_delta_min
+      type: float
+    returnType: bool
+- subject:
+    function: fann_set_rprop_delta_zero
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: rprop_delta_zero
+      type: float
+    returnType: bool
+- subject:
+    function: fann_set_rprop_increase_factor
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: rprop_increase_factor
+      type: float
+    returnType: bool
+- subject:
+    function: fann_set_sarprop_step_error_shift
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: sarprop_step_error_shift
+      type: float
+    returnType: bool
+- subject:
+    function: fann_set_sarprop_step_error_threshold_factor
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: sarprop_step_error_threshold_factor
+      type: float
+    returnType: bool
+- subject:
+    function: fann_set_sarprop_temperature
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: sarprop_temperature
+      type: float
+    returnType: bool
+- subject:
+    function: fann_set_sarprop_weight_decay_shift
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: sarprop_weight_decay_shift
+      type: float
+    returnType: bool
+- subject:
+    function: fann_set_scaling_params
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: train_data
+      type: resource
+    - name: new_input_min
+      type: float
+    - name: new_input_max
+      type: float
+    - name: new_output_min
+      type: float
+    - name: new_output_max
+      type: float
+    returnType: bool
+- subject:
+    function: fann_set_train_error_function
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: error_function
+      type: int
+    returnType: bool
+- subject:
+    function: fann_set_train_stop_function
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: stop_function
+      type: int
+    returnType: bool
+- subject:
+    function: fann_set_training_algorithm
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: training_algorithm
+      type: int
+    returnType: bool
+- subject:
+    function: fann_set_weight
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: from_neuron
+      type: int
+    - name: to_neuron
+      type: int
+    - name: weight
+      type: float
+    returnType: bool
+- subject:
+    function: fann_set_weight_array
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: connections
+      type: array
+    returnType: bool
+- subject:
+    function: fann_shuffle_train_data
+  signature:
+    params:
+    - name: train_data
+      type: resource
+    returnType: bool
+- subject:
+    function: fann_subset_train_data
+  signature:
+    params:
+    - name: data
+      type: resource
+    - name: pos
+      type: int
+    - name: length
+      type: int
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: fann_test
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: input
+      type: array
+    - name: desired_output
+      type: array
+    returnType: bool
+- subject:
+    function: fann_test_data
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: data
+      type: resource
+    returnType: float
+- subject:
+    function: fann_train
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: input
+      type: array
+    - name: desired_output
+      type: array
+    returnType: bool
+- subject:
+    function: fann_train_epoch
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: data
+      type: resource
+    returnType: float
+- subject:
+    function: fann_train_on_data
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: data
+      type: resource
+    - name: max_epochs
+      type: int
+    - name: epochs_between_reports
+      type: int
+    - name: desired_error
+      type: float
+    returnType: bool
+- subject:
+    function: fann_train_on_file
+  signature:
+    params:
+    - name: ann
+      type: resource
+    - name: filename
+      type: string
+    - name: max_epochs
+      type: int
+    - name: epochs_between_reports
+      type: int
+    - name: desired_error
+      type: float
+    returnType: bool
+- subject:
+    function: fastcgi_finish_request
+  signature:
+    returnType: bool
+- subject:
+    function: fbsql_affected_rows
+  signature:
+    params:
+    - name: link_identifier
+      type: resource
+      optional: true
+    returnType: int
+- subject:
+    function: fbsql_autocommit
+  signature:
+    params:
+    - name: link_identifier
+      type: resource
+    - name: onoff
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: fbsql_blob_size
+  signature:
+    params:
+    - name: blob_handle
+      type: string
+    - name: link_identifier
+      type: resource
+      optional: true
+    returnType: int
+- subject:
+    function: fbsql_change_user
+  signature:
+    params:
+    - name: user
+      type: string
+    - name: password
+      type: string
+    - name: database
+      type: string
+      optional: true
+    - name: link_identifier
+      type: resource
+      optional: true
+    returnType: bool
+- subject:
+    function: fbsql_clob_size
+  signature:
+    params:
+    - name: clob_handle
+      type: string
+    - name: link_identifier
+      type: resource
+      optional: true
+    returnType: int
+- subject:
+    function: fbsql_close
+  signature:
+    params:
+    - name: link_identifier
+      type: resource
+      optional: true
+    returnType: bool
+- subject:
+    function: fbsql_commit
+  signature:
+    params:
+    - name: link_identifier
+      type: resource
+      optional: true
+    returnType: bool
+- subject:
+    function: fbsql_connect
+  signature:
+    params:
+    - name: hostname
+      type: string
+      optional: true
+    - name: username
+      type: string
+      optional: true
+    - name: password
+      type: string
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: fbsql_create_blob
+  signature:
+    params:
+    - name: blob_data
+      type: string
+    - name: link_identifier
+      type: resource
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: fbsql_create_clob
+  signature:
+    params:
+    - name: clob_data
+      type: string
+    - name: link_identifier
+      type: resource
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: fbsql_create_db
+  signature:
+    params:
+    - name: database_name
+      type: string
+    - name: link_identifier
+      type: resource
+      optional: true
+    - name: database_options
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: fbsql_data_seek
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: row_number
+      type: int
+    returnType: bool
+- subject:
+    function: fbsql_database
+  signature:
+    params:
+    - name: link_identifier
+      type: resource
+    - name: database
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: fbsql_database_password
+  signature:
+    params:
+    - name: link_identifier
+      type: resource
+    - name: database_password
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: fbsql_db_query
+  signature:
+    params:
+    - name: database
+      type: string
+    - name: query
+      type: string
+    - name: link_identifier
+      type: resource
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: fbsql_db_status
+  signature:
+    params:
+    - name: database_name
+      type: string
+    - name: link_identifier
+      type: resource
+      optional: true
+    returnType: int
+- subject:
+    function: fbsql_drop_db
+  signature:
+    params:
+    - name: database_name
+      type: string
+    - name: link_identifier
+      type: resource
+      optional: true
+    returnType: bool
+- subject:
+    function: fbsql_errno
+  signature:
+    params:
+    - name: link_identifier
+      type: resource
+      optional: true
+    returnType: int
+- subject:
+    function: fbsql_error
+  signature:
+    params:
+    - name: link_identifier
+      type: resource
+      optional: true
+    returnType: string
+- subject:
+    function: fbsql_fetch_array
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: result_type
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    function: fbsql_fetch_assoc
+  signature:
+    params:
+    - name: result
+      type: resource
+    returnType: array
+- subject:
+    function: fbsql_fetch_field
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: field_offset
+      type: int
+      optional: true
+    returnType: object
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: fbsql_fetch_lengths
+  signature:
+    params:
+    - name: result
+      type: resource
+    returnType: array
+- subject:
+    function: fbsql_fetch_object
+  signature:
+    params:
+    - name: result
+      type: resource
+    returnType: object
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: fbsql_fetch_row
+  signature:
+    params:
+    - name: result
+      type: resource
+    returnType: array
+- subject:
+    function: fbsql_field_flags
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: field_offset
+      type: int
+      optional: true
+    returnType: string
+- subject:
+    function: fbsql_field_len
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: field_offset
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: fbsql_field_name
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: field_index
+      type: int
+      optional: true
+    returnType: string
+- subject:
+    function: fbsql_field_seek
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: field_offset
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: fbsql_field_table
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: field_offset
+      type: int
+      optional: true
+    returnType: string
+- subject:
+    function: fbsql_field_type
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: field_offset
+      type: int
+      optional: true
+    returnType: string
+- subject:
+    function: fbsql_free_result
+  signature:
+    params:
+    - name: result
+      type: resource
+    returnType: bool
+- subject:
+    function: fbsql_get_autostart_info
+  signature:
+    params:
+    - name: link_identifier
+      type: resource
+      optional: true
+    returnType: array
+- subject:
+    function: fbsql_hostname
+  signature:
+    params:
+    - name: link_identifier
+      type: resource
+    - name: host_name
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: fbsql_insert_id
+  signature:
+    params:
+    - name: link_identifier
+      type: resource
+      optional: true
+    returnType: int
+- subject:
+    function: fbsql_list_dbs
+  signature:
+    params:
+    - name: link_identifier
+      type: resource
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: fbsql_list_fields
+  signature:
+    params:
+    - name: database_name
+      type: string
+    - name: table_name
+      type: string
+    - name: link_identifier
+      type: resource
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: fbsql_list_tables
+  signature:
+    params:
+    - name: database
+      type: string
+    - name: link_identifier
+      type: resource
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: fbsql_next_result
+  signature:
+    params:
+    - name: result
+      type: resource
+    returnType: bool
+- subject:
+    function: fbsql_num_fields
+  signature:
+    params:
+    - name: result
+      type: resource
+    returnType: int
+- subject:
+    function: fbsql_num_rows
+  signature:
+    params:
+    - name: result
+      type: resource
+    returnType: int
+- subject:
+    function: fbsql_password
+  signature:
+    params:
+    - name: link_identifier
+      type: resource
+    - name: password
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: fbsql_pconnect
+  signature:
+    params:
+    - name: hostname
+      type: string
+      optional: true
+    - name: username
+      type: string
+      optional: true
+    - name: password
+      type: string
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: fbsql_query
+  signature:
+    params:
+    - name: query
+      type: string
+    - name: link_identifier
+      type: resource
+      optional: true
+    - name: batch_size
+      type: int
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: fbsql_read_blob
+  signature:
+    params:
+    - name: blob_handle
+      type: string
+    - name: link_identifier
+      type: resource
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: fbsql_read_clob
+  signature:
+    params:
+    - name: clob_handle
+      type: string
+    - name: link_identifier
+      type: resource
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: fbsql_result
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: row
+      type: int
+      optional: true
+    - name: field
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: fbsql_rollback
+  signature:
+    params:
+    - name: link_identifier
+      type: resource
+      optional: true
+    returnType: bool
+- subject:
+    function: fbsql_rows_fetched
+  signature:
+    params:
+    - name: result
+      type: resource
+    returnType: int
+- subject:
+    function: fbsql_select_db
+  signature:
+    params:
+    - name: database_name
+      type: string
+      optional: true
+    - name: link_identifier
+      type: resource
+      optional: true
+    returnType: bool
+- subject:
+    function: fbsql_set_characterset
+  signature:
+    params:
+    - name: link_identifier
+      type: resource
+    - name: characterset
+      type: int
+    - name: in_out_both
+      type: int
+      optional: true
+    returnType: void
+- subject:
+    function: fbsql_set_lob_mode
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: lob_mode
+      type: int
+    returnType: bool
+- subject:
+    function: fbsql_set_password
+  signature:
+    params:
+    - name: link_identifier
+      type: resource
+    - name: user
+      type: string
+    - name: password
+      type: string
+    - name: old_password
+      type: string
+    returnType: bool
+- subject:
+    function: fbsql_set_transaction
+  signature:
+    params:
+    - name: link_identifier
+      type: resource
+    - name: locking
+      type: int
+    - name: isolation
+      type: int
+    returnType: void
+- subject:
+    function: fbsql_start_db
+  signature:
+    params:
+    - name: database_name
+      type: string
+    - name: link_identifier
+      type: resource
+      optional: true
+    - name: database_options
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: fbsql_stop_db
+  signature:
+    params:
+    - name: database_name
+      type: string
+    - name: link_identifier
+      type: resource
+      optional: true
+    returnType: bool
+- subject:
+    function: fbsql_table_name
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: index
+      type: int
+    returnType: string
+- subject:
+    function: fbsql_username
+  signature:
+    params:
+    - name: link_identifier
+      type: resource
+    - name: username
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: fbsql_warnings
+  signature:
+    params:
+    - name: onoff
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: fdf_add_doc_javascript
+  signature:
+    params:
+    - name: fdf_document
+      type: resource
+    - name: script_name
+      type: string
+    - name: script_code
+      type: string
+    returnType: bool
+- subject:
+    function: fdf_add_template
+  signature:
+    params:
+    - name: fdf_document
+      type: resource
+    - name: newpage
+      type: int
+    - name: filename
+      type: string
+    - name: template
+      type: string
+    - name: rename
+      type: int
+    returnType: bool
+- subject:
+    function: fdf_close
+  signature:
+    params:
+    - name: fdf_document
+      type: resource
+    returnType: void
+- subject:
+    function: fdf_create
+  signature:
+    returnType: resource
+- subject:
+    function: fdf_enum_values
+  signature:
+    params:
+    - name: fdf_document
+      type: resource
+    - name: function
+      type: callable
+    - name: userdata
+      type: mixed
+      optional: true
+    returnType: bool
+- subject:
+    function: fdf_errno
+  signature:
+    returnType: int
+- subject:
+    function: fdf_error
+  signature:
+    params:
+    - name: error_code
+      type: int
+      optional: true
+    returnType: string
+- subject:
+    function: fdf_get_ap
+  signature:
+    params:
+    - name: fdf_document
+      type: resource
+    - name: field
+      type: string
+    - name: face
+      type: int
+    - name: filename
+      type: string
+    returnType: bool
+- subject:
+    function: fdf_get_attachment
+  signature:
+    params:
+    - name: fdf_document
+      type: resource
+    - name: fieldname
+      type: string
+    - name: savepath
+      type: string
+    returnType: array
+- subject:
+    function: fdf_get_encoding
+  signature:
+    params:
+    - name: fdf_document
+      type: resource
+    returnType: string
+- subject:
+    function: fdf_get_file
+  signature:
+    params:
+    - name: fdf_document
+      type: resource
+    returnType: string
+- subject:
+    function: fdf_get_flags
+  signature:
+    params:
+    - name: fdf_document
+      type: resource
+    - name: fieldname
+      type: string
+    - name: whichflags
+      type: int
+    returnType: int
+- subject:
+    function: fdf_get_opt
+  signature:
+    params:
+    - name: fdf_document
+      type: resource
+    - name: fieldname
+      type: string
+    - name: element
+      type: int
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: fdf_get_status
+  signature:
+    params:
+    - name: fdf_document
+      type: resource
+    returnType: string
+- subject:
+    function: fdf_get_value
+  signature:
+    params:
+    - name: fdf_document
+      type: resource
+    - name: fieldname
+      type: string
+    - name: which
+      type: int
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: fdf_get_version
+  signature:
+    params:
+    - name: fdf_document
+      type: resource
+      optional: true
+    returnType: string
+- subject:
+    function: fdf_header
+  signature:
+    returnType: void
+- subject:
+    function: fdf_next_field_name
+  signature:
+    params:
+    - name: fdf_document
+      type: resource
+    - name: fieldname
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: fdf_open
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: fdf_open_string
+  signature:
+    params:
+    - name: fdf_data
+      type: string
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: fdf_remove_item
+  signature:
+    params:
+    - name: fdf_document
+      type: resource
+    - name: fieldname
+      type: string
+    - name: item
+      type: int
+    returnType: bool
+- subject:
+    function: fdf_save
+  signature:
+    params:
+    - name: fdf_document
+      type: resource
+    - name: filename
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: fdf_save_string
+  signature:
+    params:
+    - name: fdf_document
+      type: resource
+    returnType: string
+- subject:
+    function: fdf_set_ap
+  signature:
+    params:
+    - name: fdf_document
+      type: resource
+    - name: field_name
+      type: string
+    - name: face
+      type: int
+    - name: filename
+      type: string
+    - name: page_number
+      type: int
+    returnType: bool
+- subject:
+    function: fdf_set_encoding
+  signature:
+    params:
+    - name: fdf_document
+      type: resource
+    - name: encoding
+      type: string
+    returnType: bool
+- subject:
+    function: fdf_set_file
+  signature:
+    params:
+    - name: fdf_document
+      type: resource
+    - name: url
+      type: string
+    - name: target_frame
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: fdf_set_flags
+  signature:
+    params:
+    - name: fdf_document
+      type: resource
+    - name: fieldname
+      type: string
+    - name: whichflags
+      type: int
+    - name: newflags
+      type: int
+    returnType: bool
+- subject:
+    function: fdf_set_javascript_action
+  signature:
+    params:
+    - name: fdf_document
+      type: resource
+    - name: fieldname
+      type: string
+    - name: trigger
+      type: int
+    - name: script
+      type: string
+    returnType: bool
+- subject:
+    function: fdf_set_on_import_javascript
+  signature:
+    params:
+    - name: fdf_document
+      type: resource
+    - name: script
+      type: string
+    - name: before_data_import
+      type: bool
+    returnType: bool
+- subject:
+    function: fdf_set_opt
+  signature:
+    params:
+    - name: fdf_document
+      type: resource
+    - name: fieldname
+      type: string
+    - name: element
+      type: int
+    - name: string1
+      type: string
+    - name: string2
+      type: string
+    returnType: bool
+- subject:
+    function: fdf_set_status
+  signature:
+    params:
+    - name: fdf_document
+      type: resource
+    - name: status
+      type: string
+    returnType: bool
+- subject:
+    function: fdf_set_submit_form_action
+  signature:
+    params:
+    - name: fdf_document
+      type: resource
+    - name: fieldname
+      type: string
+    - name: trigger
+      type: int
+    - name: script
+      type: string
+    - name: flags
+      type: int
+    returnType: bool
+- subject:
+    function: fdf_set_target_frame
+  signature:
+    params:
+    - name: fdf_document
+      type: resource
+    - name: frame_name
+      type: string
+    returnType: bool
+- subject:
+    function: fdf_set_value
+  signature:
+    params:
+    - name: fdf_document
+      type: resource
+    - name: fieldname
+      type: string
+    - name: value
+      type: mixed
+    - name: isname
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: fdf_set_version
+  signature:
+    params:
+    - name: fdf_document
+      type: resource
+    - name: version
+      type: string
+    returnType: bool
+- subject:
+    function: fdiv
+  signature:
+    params:
+    - name: num1
+      type: float
+    - name: num2
+      type: float
+    returnType: float
+- subject:
+    function: floatval
+  signature:
+    params:
+    - name: value
+      type: mixed
+    returnType: float
+- subject:
+    function: floor
+  signature:
+    params:
+    - name: num
+      type: float
+    returnType: float
+- subject:
+    function: flush
+  signature:
+    returnType: void
+- subject:
+    function: fmod
+  signature:
+    params:
+    - name: num1
+      type: float
+    - name: num2
+      type: float
+    returnType: float
+- subject:
+    function: fnmatch
+  signature:
+    params:
+    - name: pattern
+      type: string
+    - name: filename
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: forward_static_call
+  signature:
+    params:
+    - name: callback
+      type: callable
+    - name: args
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: forward_static_call_array
+  signature:
+    params:
+    - name: callback
+      type: callable
+    - name: args
+      type: array
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: fpm_get_status
+  signature:
+    returnType: array
+- subject:
+    function: fprintf
+  signature:
+    params:
+    - name: stream
+      type: resource
+    - name: format
+      type: string
+    - name: values
+      type: float
+      optional: true
+    returnType: int
+- subject:
+    function: fputs
+  signature:
+    params:
+    - name: stream
+      type: resource
+    - name: data
+      type: string
+    - name: length
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: frenchtojd
+  signature:
+    params:
+    - name: month
+      type: int
+    - name: day
+      type: int
+    - name: year
+      type: int
+    returnType: int
+- subject:
+    function: fribidi_log2vis
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: direction
+      type: string
+    - name: charset
+      type: int
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: fscanf
+  signature:
+    params:
+    - name: stream
+      type: resource
+    - name: format
+      type: string
+    - name: vars
+      type: mixed
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(2)
+    to: return
+- subject:
+    function: fsockopen
+  signature:
+    params:
+    - name: hostname
+      type: string
+    - name: port
+      type: int
+      optional: true
+    - name: error_code
+      type: int
+      optional: true
+    - name: error_message
+      type: string
+      optional: true
+    - name: timeout
+      type: float
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: ftok
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: project_id
+      type: string
+    returnType: int
+- subject:
+    function: func_get_arg
+  signature:
+    params:
+    - name: position
+      type: int
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: func_get_args
+  signature:
+    returnType: array
+- subject:
+    function: func_num_args
+  signature:
+    returnType: int
+- subject:
+    function: function_exists
+  signature:
+    params:
+    - name: function
+      type: string
+    returnType: bool
+- subject:
+    function: gc_collect_cycles
+  signature:
+    returnType: int
+- subject:
+    function: gc_disable
+  signature:
+    returnType: void
+- subject:
+    function: gc_enable
+  signature:
+    returnType: void
+- subject:
+    function: gc_enabled
+  signature:
+    returnType: bool
+- subject:
+    function: gc_mem_caches
+  signature:
+    returnType: int
+- subject:
+    function: gc_status
+  signature:
+    returnType: array
+- subject:
+    function: gd_info
+  signature:
+    returnType: array
+- subject:
+    function: gearman_bugreport
+  signature:
+    returnType: mixed
+- subject:
+    function: gearman_client_add_options
+  signature:
+    params:
+    - name: client_object
+      type: mixed
+    - name: option
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gearman_client_add_server
+  signature:
+    params:
+    - name: client_object
+      type: mixed
+    - name: host
+      type: mixed
+    - name: port
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: gearman_client_add_servers
+  signature:
+    params:
+    - name: client_object
+      type: mixed
+    - name: servers
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gearman_client_add_task
+  signature:
+    params:
+    - name: client_object
+      type: mixed
+    - name: function_name
+      type: mixed
+    - name: workload
+      type: mixed
+    - name: context
+      type: mixed
+    - name: unique
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: gearman_client_add_task_background
+  signature:
+    params:
+    - name: client_object
+      type: mixed
+    - name: function_name
+      type: mixed
+    - name: workload
+      type: mixed
+    - name: context
+      type: mixed
+    - name: unique
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: gearman_client_add_task_high
+  signature:
+    params:
+    - name: client_object
+      type: mixed
+    - name: function_name
+      type: mixed
+    - name: workload
+      type: mixed
+    - name: context
+      type: mixed
+    - name: unique
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: gearman_client_add_task_high_background
+  signature:
+    params:
+    - name: client_object
+      type: mixed
+    - name: function_name
+      type: mixed
+    - name: workload
+      type: mixed
+    - name: context
+      type: mixed
+    - name: unique
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: gearman_client_add_task_low
+  signature:
+    params:
+    - name: client_object
+      type: mixed
+    - name: function_name
+      type: mixed
+    - name: workload
+      type: mixed
+    - name: context
+      type: mixed
+    - name: unique
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: gearman_client_add_task_low_background
+  signature:
+    params:
+    - name: client_object
+      type: mixed
+    - name: function_name
+      type: mixed
+    - name: workload
+      type: mixed
+    - name: context
+      type: mixed
+    - name: unique
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: gearman_client_add_task_status
+  signature:
+    params:
+    - name: client_object
+      type: mixed
+    - name: job_handle
+      type: mixed
+    - name: context
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: gearman_client_clear_fn
+  signature:
+    params:
+    - name: client_object
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gearman_client_clone
+  signature:
+    params:
+    - name: client_object
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gearman_client_context
+  signature:
+    params:
+    - name: client_object
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gearman_client_create
+  signature:
+    params:
+    - name: client_object
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gearman_client_do
+  signature:
+    params:
+    - name: client_object
+      type: mixed
+    - name: function_name
+      type: mixed
+    - name: workload
+      type: mixed
+    - name: unique
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: gearman_client_do_background
+  signature:
+    params:
+    - name: client_object
+      type: mixed
+    - name: function_name
+      type: mixed
+    - name: workload
+      type: mixed
+    - name: unique
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: gearman_client_do_high
+  signature:
+    params:
+    - name: client_object
+      type: mixed
+    - name: function_name
+      type: mixed
+    - name: workload
+      type: mixed
+    - name: unique
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: gearman_client_do_high_background
+  signature:
+    params:
+    - name: client_object
+      type: mixed
+    - name: function_name
+      type: mixed
+    - name: workload
+      type: mixed
+    - name: unique
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: gearman_client_do_job_handle
+  signature:
+    params:
+    - name: client_object
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gearman_client_do_low
+  signature:
+    params:
+    - name: client_object
+      type: mixed
+    - name: function_name
+      type: mixed
+    - name: workload
+      type: mixed
+    - name: unique
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: gearman_client_do_low_background
+  signature:
+    params:
+    - name: client_object
+      type: mixed
+    - name: function_name
+      type: mixed
+    - name: workload
+      type: mixed
+    - name: unique
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: gearman_client_do_normal
+  signature:
+    params:
+    - name: client_object
+      type: mixed
+    - name: function_name
+      type: string
+    - name: workload
+      type: string
+    - name: unique
+      type: string
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: gearman_client_do_status
+  signature:
+    params:
+    - name: client_object
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gearman_client_echo
+  signature:
+    params:
+    - name: client_object
+      type: mixed
+    - name: workload
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gearman_client_errno
+  signature:
+    params:
+    - name: client_object
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gearman_client_error
+  signature:
+    params:
+    - name: client_object
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gearman_client_job_status
+  signature:
+    params:
+    - name: client_object
+      type: mixed
+    - name: job_handle
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gearman_client_options
+  signature:
+    params:
+    - name: client_object
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gearman_client_remove_options
+  signature:
+    params:
+    - name: client_object
+      type: mixed
+    - name: option
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gearman_client_return_code
+  signature:
+    params:
+    - name: client_object
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gearman_client_run_tasks
+  signature:
+    params:
+    - name: data
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gearman_client_set_complete_fn
+  signature:
+    params:
+    - name: client_object
+      type: mixed
+    - name: callback
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gearman_client_set_context
+  signature:
+    params:
+    - name: client_object
+      type: mixed
+    - name: context
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gearman_client_set_created_fn
+  signature:
+    params:
+    - name: client_object
+      type: mixed
+    - name: callback
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gearman_client_set_data_fn
+  signature:
+    params:
+    - name: client_object
+      type: mixed
+    - name: callback
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gearman_client_set_exception_fn
+  signature:
+    params:
+    - name: client_object
+      type: mixed
+    - name: callback
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gearman_client_set_fail_fn
+  signature:
+    params:
+    - name: client_object
+      type: mixed
+    - name: callback
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gearman_client_set_options
+  signature:
+    params:
+    - name: client_object
+      type: mixed
+    - name: option
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gearman_client_set_status_fn
+  signature:
+    params:
+    - name: client_object
+      type: mixed
+    - name: callback
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gearman_client_set_timeout
+  signature:
+    params:
+    - name: client_object
+      type: mixed
+    - name: timeout
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gearman_client_set_warning_fn
+  signature:
+    params:
+    - name: client_object
+      type: mixed
+    - name: callback
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gearman_client_set_workload_fn
+  signature:
+    params:
+    - name: client_object
+      type: mixed
+    - name: callback
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gearman_client_timeout
+  signature:
+    params:
+    - name: client_object
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gearman_client_wait
+  signature:
+    params:
+    - name: client_object
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gearman_job_function_name
+  signature:
+    params:
+    - name: job_object
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gearman_job_handle
+  signature:
+    returnType: string
+- subject:
+    function: gearman_job_return_code
+  signature:
+    params:
+    - name: job_object
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gearman_job_send_complete
+  signature:
+    params:
+    - name: job_object
+      type: mixed
+    - name: result
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gearman_job_send_data
+  signature:
+    params:
+    - name: job_object
+      type: mixed
+    - name: data
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gearman_job_send_exception
+  signature:
+    params:
+    - name: job_object
+      type: mixed
+    - name: exception
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gearman_job_send_fail
+  signature:
+    params:
+    - name: job_object
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gearman_job_send_status
+  signature:
+    params:
+    - name: job_object
+      type: mixed
+    - name: numerator
+      type: mixed
+    - name: denominator
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: gearman_job_send_warning
+  signature:
+    params:
+    - name: job_object
+      type: mixed
+    - name: warning
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gearman_job_status
+  signature:
+    params:
+    - name: job_handle
+      type: string
+    returnType: array
+- subject:
+    function: gearman_job_unique
+  signature:
+    params:
+    - name: job_object
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gearman_job_workload
+  signature:
+    params:
+    - name: job_object
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gearman_job_workload_size
+  signature:
+    params:
+    - name: job_object
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gearman_task_data
+  signature:
+    params:
+    - name: task_object
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gearman_task_data_size
+  signature:
+    params:
+    - name: task_object
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gearman_task_denominator
+  signature:
+    params:
+    - name: task_object
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gearman_task_function_name
+  signature:
+    params:
+    - name: task_object
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gearman_task_is_known
+  signature:
+    params:
+    - name: task_object
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gearman_task_is_running
+  signature:
+    params:
+    - name: task_object
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gearman_task_job_handle
+  signature:
+    params:
+    - name: task_object
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gearman_task_numerator
+  signature:
+    params:
+    - name: task_object
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gearman_task_recv_data
+  signature:
+    params:
+    - name: task_object
+      type: mixed
+    - name: data_len
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gearman_task_return_code
+  signature:
+    params:
+    - name: task_object
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gearman_task_send_workload
+  signature:
+    params:
+    - name: task_object
+      type: mixed
+    - name: data
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gearman_task_unique
+  signature:
+    params:
+    - name: task_object
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gearman_verbose_name
+  signature:
+    params:
+    - name: verbose
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gearman_version
+  signature:
+    returnType: mixed
+- subject:
+    function: gearman_worker_add_function
+  signature:
+    params:
+    - name: worker_object
+      type: mixed
+    - name: function_name
+      type: mixed
+    - name: function
+      type: mixed
+    - name: data
+      type: mixed
+    - name: timeout
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: gearman_worker_add_options
+  signature:
+    params:
+    - name: worker_object
+      type: mixed
+    - name: option
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gearman_worker_add_server
+  signature:
+    params:
+    - name: worker_object
+      type: mixed
+    - name: host
+      type: mixed
+    - name: port
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: gearman_worker_add_servers
+  signature:
+    params:
+    - name: worker_object
+      type: mixed
+    - name: servers
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gearman_worker_clone
+  signature:
+    params:
+    - name: worker_object
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gearman_worker_create
+  signature:
+    returnType: mixed
+- subject:
+    function: gearman_worker_echo
+  signature:
+    params:
+    - name: worker_object
+      type: mixed
+    - name: workload
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gearman_worker_errno
+  signature:
+    params:
+    - name: worker_object
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gearman_worker_error
+  signature:
+    params:
+    - name: worker_object
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gearman_worker_grab_job
+  signature:
+    params:
+    - name: worker_object
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gearman_worker_options
+  signature:
+    params:
+    - name: worker_object
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gearman_worker_register
+  signature:
+    params:
+    - name: worker_object
+      type: mixed
+    - name: function_name
+      type: mixed
+    - name: timeout
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: gearman_worker_remove_options
+  signature:
+    params:
+    - name: worker_object
+      type: mixed
+    - name: option
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gearman_worker_return_code
+  signature:
+    params:
+    - name: worker_object
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gearman_worker_set_options
+  signature:
+    params:
+    - name: worker_object
+      type: mixed
+    - name: option
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gearman_worker_set_timeout
+  signature:
+    params:
+    - name: worker_object
+      type: mixed
+    - name: timeout
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gearman_worker_timeout
+  signature:
+    params:
+    - name: worker_object
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gearman_worker_unregister
+  signature:
+    params:
+    - name: worker_object
+      type: mixed
+    - name: function_name
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gearman_worker_unregister_all
+  signature:
+    params:
+    - name: worker_object
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gearman_worker_wait
+  signature:
+    params:
+    - name: worker_object
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gearman_worker_work
+  signature:
+    params:
+    - name: worker_object
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: geoip_asnum_by_name
+  signature:
+    params:
+    - name: hostname
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: geoip_continent_code_by_name
+  signature:
+    params:
+    - name: hostname
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: geoip_country_code3_by_name
+  signature:
+    params:
+    - name: hostname
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: geoip_country_code_by_name
+  signature:
+    params:
+    - name: hostname
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: geoip_country_name_by_name
+  signature:
+    params:
+    - name: hostname
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: geoip_database_info
+  signature:
+    params:
+    - name: database
+      type: int
+      optional: true
+    returnType: string
+- subject:
+    function: geoip_db_avail
+  signature:
+    params:
+    - name: database
+      type: int
+    returnType: bool
+- subject:
+    function: geoip_db_filename
+  signature:
+    params:
+    - name: database
+      type: int
+    returnType: string
+- subject:
+    function: geoip_db_get_all_info
+  signature:
+    returnType: array
+- subject:
+    function: geoip_domain_by_name
+  signature:
+    params:
+    - name: hostname
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: geoip_id_by_name
+  signature:
+    params:
+    - name: hostname
+      type: string
+    returnType: int
+- subject:
+    function: geoip_isp_by_name
+  signature:
+    params:
+    - name: hostname
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: geoip_netspeedcell_by_name
+  signature:
+    params:
+    - name: hostname
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: geoip_org_by_name
+  signature:
+    params:
+    - name: hostname
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: geoip_record_by_name
+  signature:
+    params:
+    - name: hostname
+      type: string
+    returnType: array
+- subject:
+    function: geoip_region_by_name
+  signature:
+    params:
+    - name: hostname
+      type: string
+    returnType: array
+- subject:
+    function: geoip_region_name_by_code
+  signature:
+    params:
+    - name: country_code
+      type: string
+    - name: region_code
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: geoip_setup_custom_directory
+  signature:
+    params:
+    - name: path
+      type: string
+    returnType: void
+- subject:
+    function: geoip_time_zone_by_country_and_region
+  signature:
+    params:
+    - name: country_code
+      type: string
+    - name: region_code
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: geoslinemerge
+  signature:
+    params:
+    - name: geom
+      type: mixed
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: geospolygonize
+  signature:
+    params:
+    - name: geom
+      type: mixed
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: geosrelatematch
+  signature:
+    params:
+    - name: matrix
+      type: string
+    - name: pattern
+      type: string
+    returnType: bool
+- subject:
+    function: geossharedpaths
+  signature:
+    params:
+    - name: geom1
+      type: mixed
+    - name: geom2
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: geosversion
+  signature:
+    returnType: string
+- subject:
+    function: get_browser
+  signature:
+    params:
+    - name: user_agent
+      type: string
+      optional: true
+    - name: return_array
+      type: bool
+      optional: true
+    returnType: array
+- subject:
+    function: get_call_stack
+  signature:
+    returnType: mixed
+- subject:
+    function: get_called_class
+  signature:
+    returnType: string
+- subject:
+    function: get_cfg_var
+  signature:
+    params:
+    - name: option
+      type: string
+    returnType: array
+- subject:
+    function: get_class
+  signature:
+    params:
+    - name: object
+      type: object
+      optional: true
+    returnType: string
+- subject:
+    function: get_class_methods
+  signature:
+    params:
+    - name: object_or_class
+      type: string
+    returnType: array
+- subject:
+    function: get_class_vars
+  signature:
+    params:
+    - name: class
+      type: string
+    returnType: array
+- subject:
+    function: get_current_user
+  signature:
+    returnType: string
+- subject:
+    function: get_debug_type
+  signature:
+    params:
+    - name: value
+      type: mixed
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: get_declared_classes
+  signature:
+    returnType: array
+- subject:
+    function: get_declared_interfaces
+  signature:
+    returnType: array
+- subject:
+    function: get_declared_traits
+  signature:
+    returnType: array
+- subject:
+    function: get_defined_constants
+  signature:
+    params:
+    - name: categorize
+      type: bool
+      optional: true
+    returnType: array
+- subject:
+    function: get_defined_functions
+  signature:
+    params:
+    - name: exclude_disabled
+      type: bool
+      optional: true
+    returnType: array
+- subject:
+    function: get_defined_vars
+  signature:
+    returnType: array
+- subject:
+    function: get_extension_funcs
+  signature:
+    params:
+    - name: extension
+      type: string
+    returnType: array
+- subject:
+    function: get_headers
+  signature:
+    params:
+    - name: url
+      type: string
+    - name: associative
+      type: bool
+      optional: true
+    - name: context
+      type: resource
+      optional: true
+    returnType: array
+- subject:
+    function: get_html_translation_table
+  signature:
+    params:
+    - name: table
+      type: int
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    - name: encoding
+      type: string
+      optional: true
+    returnType: array
+- subject:
+    function: get_include_path
+  signature:
+    returnType: string
+- subject:
+    function: get_included_files
+  signature:
+    returnType: array
+- subject:
+    function: get_loaded_extensions
+  signature:
+    params:
+    - name: zend_extensions
+      type: bool
+      optional: true
+    returnType: array
+- subject:
+    function: get_mangled_object_vars
+  signature:
+    params:
+    - name: object
+      type: object
+    returnType: array
+- subject:
+    function: get_meta_tags
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: use_include_path
+      type: bool
+      optional: true
+    returnType: array
+- subject:
+    function: get_object_vars
+  signature:
+    params:
+    - name: object
+      type: object
+    returnType: array
+- subject:
+    function: get_parent_class
+  signature:
+    params:
+    - name: object_or_class
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: get_required_files
+  signature:
+    returnType: array
+- subject:
+    function: get_resource_id
+  signature:
+    params:
+    - name: resource
+      type: resource
+    returnType: int
+- subject:
+    function: get_resource_type
+  signature:
+    params:
+    - name: resource
+      type: resource
+    returnType: string
+- subject:
+    function: get_resources
+  signature:
+    params:
+    - name: type
+      type: string
+      optional: true
+    returnType: array
+- subject:
+    function: getallheaders
+  signature:
+    returnType: array
+- subject:
+    function: getcwd
+  signature:
+    returnType: string
+- subject:
+    function: getenv
+  signature:
+    params:
+    - name: name
+      type: string
+      optional: true
+    - name: local_only
+      type: bool
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gethostbyaddr
+  signature:
+    params:
+    - name: ip
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gethostbyname
+  signature:
+    params:
+    - name: hostname
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gethostbynamel
+  signature:
+    params:
+    - name: hostname
+      type: string
+    returnType: array
+- subject:
+    function: gethostname
+  signature:
+    returnType: string
+- subject:
+    function: getimagesize
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: image_info
+      type: array
+      optional: true
+    returnType: array
+- subject:
+    function: getimagesizefromstring
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: image_info
+      type: array
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: getlastmod
+  signature:
+    returnType: int
+- subject:
+    function: getmxrr
+  signature:
+    params:
+    - name: hostname
+      type: string
+    - name: hosts
+      type: array
+    - name: weights
+      type: array
+      optional: true
+    returnType: bool
+- subject:
+    function: getmygid
+  signature:
+    returnType: int
+- subject:
+    function: getmyinode
+  signature:
+    returnType: int
+- subject:
+    function: getmypid
+  signature:
+    returnType: int
+- subject:
+    function: getmyuid
+  signature:
+    returnType: int
+- subject:
+    function: getopt
+  signature:
+    params:
+    - name: short_options
+      type: string
+    - name: long_options
+      type: array
+      optional: true
+    - name: rest_index
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: getprotobyname
+  signature:
+    params:
+    - name: protocol
+      type: string
+    returnType: int
+- subject:
+    function: getprotobynumber
+  signature:
+    params:
+    - name: protocol
+      type: int
+    returnType: string
+- subject:
+    function: getrandmax
+  signature:
+    returnType: int
+- subject:
+    function: getrusage
+  signature:
+    params:
+    - name: mode
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    function: getservbyname
+  signature:
+    params:
+    - name: service
+      type: string
+    - name: protocol
+      type: string
+    returnType: int
+- subject:
+    function: getservbyport
+  signature:
+    params:
+    - name: port
+      type: int
+    - name: protocol
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: gettimeofday
+  signature:
+    params:
+    - name: as_float
+      type: bool
+      optional: true
+    returnType: array
+- subject:
+    function: gettype
+  signature:
+    params:
+    - name: value
+      type: mixed
+    returnType: string
+- subject:
+    function: gmstrftime
+  signature:
+    params:
+    - name: format
+      type: string
+    - name: timestamp
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gnupg_adddecryptkey
+  signature:
+    params:
+    - name: identifier
+      type: resource
+    - name: fingerprint
+      type: string
+    - name: passphrase
+      type: string
+    returnType: bool
+- subject:
+    function: gnupg_addencryptkey
+  signature:
+    params:
+    - name: identifier
+      type: resource
+    - name: fingerprint
+      type: string
+    returnType: bool
+- subject:
+    function: gnupg_addsignkey
+  signature:
+    params:
+    - name: identifier
+      type: resource
+    - name: fingerprint
+      type: string
+    - name: passphrase
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: gnupg_cleardecryptkeys
+  signature:
+    params:
+    - name: identifier
+      type: resource
+    returnType: bool
+- subject:
+    function: gnupg_clearencryptkeys
+  signature:
+    params:
+    - name: identifier
+      type: resource
+    returnType: bool
+- subject:
+    function: gnupg_clearsignkeys
+  signature:
+    params:
+    - name: identifier
+      type: resource
+    returnType: bool
+- subject:
+    function: gnupg_decrypt
+  signature:
+    params:
+    - name: identifier
+      type: resource
+    - name: text
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: gnupg_decryptverify
+  signature:
+    params:
+    - name: identifier
+      type: resource
+    - name: text
+      type: string
+    - name: plaintext
+      type: string
+    returnType: array
+- subject:
+    function: gnupg_encrypt
+  signature:
+    params:
+    - name: identifier
+      type: resource
+    - name: plaintext
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: gnupg_encryptsign
+  signature:
+    params:
+    - name: identifier
+      type: resource
+    - name: plaintext
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: gnupg_export
+  signature:
+    params:
+    - name: identifier
+      type: resource
+    - name: fingerprint
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: gnupg_geterror
+  signature:
+    params:
+    - name: identifier
+      type: resource
+    returnType: string
+- subject:
+    function: gnupg_getprotocol
+  signature:
+    params:
+    - name: identifier
+      type: resource
+    returnType: int
+- subject:
+    function: gnupg_import
+  signature:
+    params:
+    - name: identifier
+      type: resource
+    - name: keydata
+      type: string
+    returnType: array
+- subject:
+    function: gnupg_init
+  signature:
+    returnType: resource
+- subject:
+    function: gnupg_keyinfo
+  signature:
+    params:
+    - name: identifier
+      type: resource
+    - name: pattern
+      type: string
+    returnType: array
+- subject:
+    function: gnupg_setarmor
+  signature:
+    params:
+    - name: identifier
+      type: resource
+    - name: armor
+      type: int
+    returnType: bool
+- subject:
+    function: gnupg_seterrormode
+  signature:
+    params:
+    - name: identifier
+      type: resource
+    - name: errormode
+      type: int
+    returnType: void
+- subject:
+    function: gnupg_setsignmode
+  signature:
+    params:
+    - name: identifier
+      type: resource
+    - name: signmode
+      type: int
+    returnType: bool
+- subject:
+    function: gnupg_sign
+  signature:
+    params:
+    - name: identifier
+      type: resource
+    - name: plaintext
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: gnupg_verify
+  signature:
+    params:
+    - name: identifier
+      type: resource
+    - name: signed_text
+      type: string
+    - name: signature
+      type: string
+    - name: plaintext
+      type: string
+      optional: true
+    returnType: array
+- subject:
+    function: go
+  signature:
+    params:
+    - name: func
+      type: callable
+    returnType: int
+- subject:
+    function: gopher_parsedir
+  signature:
+    params:
+    - name: dirent
+      type: string
+    returnType: array
+- subject:
+    function: grapheme_extract
+  signature:
+    params:
+    - name: haystack
+      type: string
+    - name: size
+      type: int
+    - name: type
+      type: int
+      optional: true
+    - name: offset
+      type: int
+      optional: true
+    - name: next
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: grapheme_stripos
+  signature:
+    params:
+    - name: haystack
+      type: string
+    - name: needle
+      type: string
+    - name: offset
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: grapheme_stristr
+  signature:
+    params:
+    - name: haystack
+      type: string
+    - name: needle
+      type: string
+    - name: beforeNeedle
+      type: bool
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: grapheme_strlen
+  signature:
+    params:
+    - name: string
+      type: string
+    returnType: int
+- subject:
+    function: grapheme_strpos
+  signature:
+    params:
+    - name: haystack
+      type: string
+    - name: needle
+      type: string
+    - name: offset
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: grapheme_strripos
+  signature:
+    params:
+    - name: haystack
+      type: string
+    - name: needle
+      type: string
+    - name: offset
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: grapheme_strrpos
+  signature:
+    params:
+    - name: haystack
+      type: string
+    - name: needle
+      type: string
+    - name: offset
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: grapheme_strstr
+  signature:
+    params:
+    - name: haystack
+      type: string
+    - name: needle
+      type: string
+    - name: beforeNeedle
+      type: bool
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: grapheme_substr
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: offset
+      type: int
+    - name: length
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gregoriantojd
+  signature:
+    params:
+    - name: month
+      type: int
+    - name: day
+      type: int
+    - name: year
+      type: int
+    returnType: int
+- subject:
+    function: gupnp_context_get_host_ip
+  signature:
+    params:
+    - name: context
+      type: resource
+    returnType: string
+- subject:
+    function: gupnp_context_get_port
+  signature:
+    params:
+    - name: context
+      type: resource
+    returnType: int
+- subject:
+    function: gupnp_context_get_subscription_timeout
+  signature:
+    params:
+    - name: context
+      type: resource
+    returnType: int
+- subject:
+    function: gupnp_context_host_path
+  signature:
+    params:
+    - name: context
+      type: resource
+    - name: local_path
+      type: string
+    - name: server_path
+      type: string
+    returnType: bool
+- subject:
+    function: gupnp_context_new
+  signature:
+    params:
+    - name: host_ip
+      type: string
+      optional: true
+    - name: port
+      type: int
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gupnp_context_set_subscription_timeout
+  signature:
+    params:
+    - name: context
+      type: resource
+    - name: timeout
+      type: int
+    returnType: void
+- subject:
+    function: gupnp_context_timeout_add
+  signature:
+    params:
+    - name: context
+      type: resource
+    - name: timeout
+      type: int
+    - name: callback
+      type: mixed
+    - name: arg
+      type: mixed
+      optional: true
+    returnType: bool
+- subject:
+    function: gupnp_context_unhost_path
+  signature:
+    params:
+    - name: context
+      type: resource
+    - name: server_path
+      type: string
+    returnType: bool
+- subject:
+    function: gupnp_control_point_browse_start
+  signature:
+    params:
+    - name: cpoint
+      type: resource
+    returnType: bool
+- subject:
+    function: gupnp_control_point_browse_stop
+  signature:
+    params:
+    - name: cpoint
+      type: resource
+    returnType: bool
+- subject:
+    function: gupnp_control_point_callback_set
+  signature:
+    params:
+    - name: cpoint
+      type: resource
+    - name: signal
+      type: int
+    - name: callback
+      type: mixed
+    - name: arg
+      type: mixed
+      optional: true
+    returnType: bool
+- subject:
+    function: gupnp_control_point_new
+  signature:
+    params:
+    - name: context
+      type: resource
+    - name: target
+      type: string
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: gupnp_device_action_callback_set
+  signature:
+    params:
+    - name: root_device
+      type: resource
+    - name: signal
+      type: int
+    - name: action_name
+      type: string
+    - name: callback
+      type: mixed
+    - name: arg
+      type: mixed
+      optional: true
+    returnType: bool
+- subject:
+    function: gupnp_device_info_get
+  signature:
+    params:
+    - name: root_device
+      type: resource
+    returnType: array

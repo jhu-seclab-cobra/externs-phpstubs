@@ -1,0 +1,360 @@
+# Generated from stubs/misc/apcu.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: apc_add
+  signature:
+    params:
+    - name: key
+      type: string
+    - name: var
+      type: mixed
+    - name: ttl
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: apc_bin_dump
+  signature:
+    params:
+    - name: files
+      type: array
+      optional: true
+    - name: user_vars
+      type: array
+      optional: true
+    returnType: string
+- subject:
+    function: apc_bin_dumpfile
+  signature:
+    params:
+    - name: files
+      type: array
+    - name: user_vars
+      type: array
+    - name: filename
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    - name: context
+      type: resource
+      optional: true
+    returnType: int
+- subject:
+    function: apc_bin_load
+  signature:
+    params:
+    - name: data
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: apc_bin_loadfile
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: context
+      type: resource
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: apc_cache_info
+  signature:
+    params:
+    - name: cache_type
+      type: string
+      optional: true
+    - name: limited
+      type: bool
+      optional: true
+    returnType: array
+- subject:
+    function: apc_cas
+  signature:
+    params:
+    - name: key
+      type: string
+    - name: old
+      type: int
+    - name: new
+      type: int
+    returnType: bool
+- subject:
+    function: apc_clear_cache
+  signature:
+    params:
+    - name: cache_type
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: apc_compile_file
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: atomic
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: apc_dec
+  signature:
+    params:
+    - name: key
+      type: string
+    - name: step
+      type: int
+      optional: true
+    - name: success
+      type: bool
+      optional: true
+    returnType: int
+- subject:
+    function: apc_define_constants
+  signature:
+    params:
+    - name: key
+      type: string
+    - name: constants
+      type: array
+    - name: case_sensitive
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: apc_delete
+  signature:
+    params:
+    - name: key
+      type: mixed
+    returnType: bool
+- subject:
+    function: apc_delete_file
+  signature:
+    params:
+    - name: keys
+      type: mixed
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: apc_exists
+  signature:
+    params:
+    - name: keys
+      type: string
+    returnType: bool
+- subject:
+    function: apc_fetch
+  signature:
+    params:
+    - name: key
+      type: string
+    - name: success
+      type: bool
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: apc_inc
+  signature:
+    params:
+    - name: key
+      type: string
+    - name: step
+      type: int
+      optional: true
+    - name: success
+      type: bool
+      optional: true
+    returnType: int
+- subject:
+    function: apc_load_constants
+  signature:
+    params:
+    - name: key
+      type: string
+    - name: case_sensitive
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: apc_sma_info
+  signature:
+    params:
+    - name: limited
+      type: bool
+      optional: true
+    returnType: array
+- subject:
+    function: apc_store
+  signature:
+    params:
+    - name: key
+      type: string
+    - name: var
+      type: mixed
+    - name: ttl
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: apcu_add
+  signature:
+    params:
+    - name: key
+      type: string
+    - name: value
+      type: mixed
+      optional: true
+    - name: ttl
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: apcu_cache_info
+  signature:
+    params:
+    - name: limited
+      type: bool
+      optional: true
+    returnType: array
+- subject:
+    function: apcu_cas
+  signature:
+    params:
+    - name: key
+      type: string
+    - name: old
+      type: int
+    - name: new
+      type: int
+    returnType: bool
+- subject:
+    function: apcu_clear_cache
+  signature:
+    returnType: bool
+- subject:
+    function: apcu_dec
+  signature:
+    params:
+    - name: key
+      type: string
+    - name: step
+      type: int
+      optional: true
+    - name: success
+      type: bool
+      optional: true
+    - name: ttl
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: apcu_delete
+  signature:
+    params:
+    - name: key
+      type: mixed
+    returnType: bool
+- subject:
+    function: apcu_enabled
+  signature:
+    returnType: bool
+- subject:
+    function: apcu_entry
+  signature:
+    params:
+    - name: key
+      type: string
+    - name: callback
+      type: mixed
+    - name: ttl
+      type: int
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: apcu_exists
+  signature:
+    params:
+    - name: key
+      type: string
+    returnType: bool
+- subject:
+    function: apcu_fetch
+  signature:
+    params:
+    - name: key
+      type: string
+    - name: success
+      type: bool
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: apcu_inc
+  signature:
+    params:
+    - name: key
+      type: string
+    - name: step
+      type: int
+      optional: true
+    - name: success
+      type: bool
+      optional: true
+    - name: ttl
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: apcu_key_info
+  signature:
+    params:
+    - name: key
+      type: string
+    returnType: array
+- subject:
+    function: apcu_sma_info
+  signature:
+    params:
+    - name: limited
+      type: bool
+      optional: true
+    returnType: array
+- subject:
+    function: apcu_store
+  signature:
+    params:
+    - name: key
+      type: string
+    - name: value
+      type: mixed
+      optional: true
+    - name: ttl
+      type: int
+      optional: true
+    returnType: bool

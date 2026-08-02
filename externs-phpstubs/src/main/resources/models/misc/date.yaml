@@ -1,0 +1,796 @@
+# Generated from stubs/misc/date.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: checkdate
+  signature:
+    params:
+    - name: month
+      type: int
+    - name: day
+      type: int
+    - name: year
+      type: int
+    returnType: bool
+- subject:
+    function: date
+  signature:
+    params:
+    - name: format
+      type: string
+    - name: timestamp
+      type: int
+      optional: true
+    returnType: string
+- subject:
+    function: date_add
+  signature:
+    params:
+    - name: object
+      type: mixed
+    - name: interval
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: date_create
+  signature:
+    params:
+    - name: datetime
+      type: string
+      optional: true
+    - name: timezone
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: date_create_from_format
+  signature:
+    params:
+    - name: format
+      type: string
+    - name: datetime
+      type: string
+    - name: timezone
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: date_create_immutable
+  signature:
+    params:
+    - name: datetime
+      type: string
+      optional: true
+    - name: timezone
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: date_create_immutable_from_format
+  signature:
+    params:
+    - name: format
+      type: string
+    - name: datetime
+      type: string
+    - name: timezone
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: date_date_set
+  signature:
+    params:
+    - name: object
+      type: mixed
+    - name: year
+      type: int
+    - name: month
+      type: int
+    - name: day
+      type: int
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: date_default_timezone_get
+  signature:
+    returnType: string
+- subject:
+    function: date_default_timezone_set
+  signature:
+    params:
+    - name: timezoneId
+      type: string
+    returnType: bool
+- subject:
+    function: date_diff
+  signature:
+    params:
+    - name: baseObject
+      type: mixed
+    - name: targetObject
+      type: mixed
+    - name: absolute
+      type: bool
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: date_format
+  signature:
+    params:
+    - name: object
+      type: mixed
+    - name: format
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: date_get_last_errors
+  signature:
+    returnType: array
+- subject:
+    function: date_interval_create_from_date_string
+  signature:
+    params:
+    - name: datetime
+      type: string
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: date_interval_format
+  signature:
+    params:
+    - name: object
+      type: mixed
+    - name: format
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: date_isodate_set
+  signature:
+    params:
+    - name: object
+      type: mixed
+    - name: year
+      type: int
+    - name: week
+      type: int
+    - name: dayOfWeek
+      type: int
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: date_modify
+  signature:
+    params:
+    - name: object
+      type: mixed
+    - name: modifier
+      type: string
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: date_offset_get
+  signature:
+    params:
+    - name: object
+      type: mixed
+    returnType: int
+- subject:
+    function: date_parse
+  signature:
+    params:
+    - name: datetime
+      type: string
+    returnType: array
+- subject:
+    function: date_parse_from_format
+  signature:
+    params:
+    - name: format
+      type: string
+    - name: datetime
+      type: string
+    returnType: array
+- subject:
+    function: date_sub
+  signature:
+    params:
+    - name: object
+      type: mixed
+    - name: interval
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: date_sun_info
+  signature:
+    params:
+    - name: timestamp
+      type: int
+    - name: latitude
+      type: float
+    - name: longitude
+      type: float
+    returnType: array
+- subject:
+    function: date_sunrise
+  signature:
+    params:
+    - name: timestamp
+      type: int
+    - name: returnFormat
+      type: int
+      optional: true
+    - name: latitude
+      type: float
+      optional: true
+    - name: longitude
+      type: float
+      optional: true
+    - name: zenith
+      type: float
+      optional: true
+    - name: utcOffset
+      type: float
+      optional: true
+    returnType: float
+- subject:
+    function: date_sunset
+  signature:
+    params:
+    - name: timestamp
+      type: int
+    - name: returnFormat
+      type: int
+      optional: true
+    - name: latitude
+      type: float
+      optional: true
+    - name: longitude
+      type: float
+      optional: true
+    - name: zenith
+      type: float
+      optional: true
+    - name: utcOffset
+      type: float
+      optional: true
+    returnType: float
+- subject:
+    function: date_time_set
+  signature:
+    params:
+    - name: object
+      type: mixed
+    - name: hour
+      type: int
+    - name: minute
+      type: int
+    - name: second
+      type: int
+      optional: true
+    - name: microsecond
+      type: int
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: date_timestamp_get
+  signature:
+    params:
+    - name: object
+      type: mixed
+    returnType: int
+- subject:
+    function: date_timestamp_set
+  signature:
+    params:
+    - name: object
+      type: mixed
+    - name: timestamp
+      type: int
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: date_timezone_get
+  signature:
+    params:
+    - name: object
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: date_timezone_set
+  signature:
+    params:
+    - name: object
+      type: mixed
+    - name: timezone
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: datefmt_create
+  signature:
+    params:
+    - name: locale
+      type: string
+    - name: dateType
+      type: int
+    - name: timeType
+      type: int
+    - name: timezone
+      type: mixed
+      optional: true
+    - name: calendar
+      type: int
+      optional: true
+    - name: pattern
+      type: string
+      optional: true
+    returnType: int
+- subject:
+    function: datefmt_format
+  signature:
+    params:
+    - name: formatter
+      type: int
+    - name: datetime
+      type: mixed
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: datefmt_format_object
+  signature:
+    params:
+    - name: datetime
+      type: object
+    - name: format
+      type: mixed
+      optional: true
+    - name: locale
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: datefmt_get_calendar
+  signature:
+    params:
+    - name: formatter
+      type: int
+    returnType: int
+- subject:
+    function: datefmt_get_calendar_object
+  signature:
+    params:
+    - name: formatter
+      type: int
+    returnType: int
+- subject:
+    function: datefmt_get_datetype
+  signature:
+    params:
+    - name: formatter
+      type: int
+    returnType: int
+- subject:
+    function: datefmt_get_error_code
+  signature:
+    params:
+    - name: formatter
+      type: int
+    returnType: int
+- subject:
+    function: datefmt_get_error_message
+  signature:
+    params:
+    - name: formatter
+      type: int
+    returnType: string
+- subject:
+    function: datefmt_get_locale
+  signature:
+    params:
+    - name: formatter
+      type: int
+    - name: type
+      type: int
+      optional: true
+    returnType: string
+- subject:
+    function: datefmt_get_pattern
+  signature:
+    params:
+    - name: formatter
+      type: int
+    returnType: string
+- subject:
+    function: datefmt_get_timetype
+  signature:
+    params:
+    - name: formatter
+      type: int
+    returnType: int
+- subject:
+    function: datefmt_get_timezone
+  signature:
+    params:
+    - name: formatter
+      type: int
+    returnType: int
+- subject:
+    function: datefmt_get_timezone_id
+  signature:
+    params:
+    - name: formatter
+      type: int
+    returnType: string
+- subject:
+    function: datefmt_is_lenient
+  signature:
+    params:
+    - name: formatter
+      type: int
+    returnType: bool
+- subject:
+    function: datefmt_localtime
+  signature:
+    params:
+    - name: formatter
+      type: int
+    - name: string
+      type: string
+    - name: offset
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    function: datefmt_parse
+  signature:
+    params:
+    - name: formatter
+      type: int
+    - name: string
+      type: string
+    - name: offset
+      type: int
+      optional: true
+    returnType: float
+- subject:
+    function: datefmt_set_calendar
+  signature:
+    params:
+    - name: formatter
+      type: int
+    - name: calendar
+      type: int
+    returnType: bool
+- subject:
+    function: datefmt_set_lenient
+  signature:
+    params:
+    - name: formatter
+      type: int
+    - name: lenient
+      type: bool
+    returnType: void
+- subject:
+    function: datefmt_set_pattern
+  signature:
+    params:
+    - name: formatter
+      type: int
+    - name: pattern
+      type: string
+    returnType: bool
+- subject:
+    function: datefmt_set_timezone
+  signature:
+    params:
+    - name: formatter
+      type: int
+    - name: timezone
+      type: mixed
+    returnType: mixed
+- subject:
+    function: getdate
+  signature:
+    params:
+    - name: timestamp
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    function: gmdate
+  signature:
+    params:
+    - name: format
+      type: string
+    - name: timestamp
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: gmmktime
+  signature:
+    params:
+    - name: hour
+      type: int
+    - name: minute
+      type: int
+      optional: true
+    - name: second
+      type: int
+      optional: true
+    - name: month
+      type: int
+      optional: true
+    - name: day
+      type: int
+      optional: true
+    - name: year
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: microtime
+  signature:
+    params:
+    - name: as_float
+      type: bool
+      optional: true
+    returnType: string
+- subject:
+    function: mktime
+  signature:
+    params:
+    - name: hour
+      type: int
+    - name: minute
+      type: int
+      optional: true
+    - name: second
+      type: int
+      optional: true
+    - name: month
+      type: int
+      optional: true
+    - name: day
+      type: int
+      optional: true
+    - name: year
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: strftime
+  signature:
+    params:
+    - name: format
+      type: string
+    - name: timestamp
+      type: int
+      optional: true
+    returnType: string
+- subject:
+    function: strtotime
+  signature:
+    params:
+    - name: datetime
+      type: string
+    - name: baseTimestamp
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: time
+  signature:
+    returnType: int
+- subject:
+    function: time_nanosleep
+  signature:
+    params:
+    - name: seconds
+      type: int
+    - name: nanoseconds
+      type: int
+    returnType: array
+- subject:
+    function: time_sleep_until
+  signature:
+    params:
+    - name: timestamp
+      type: float
+    returnType: bool
+- subject:
+    function: timezone_abbreviations_list
+  signature:
+    returnType: array
+- subject:
+    function: timezone_identifiers_list
+  signature:
+    params:
+    - name: timezoneGroup
+      type: int
+      optional: true
+    - name: countryCode
+      type: string
+      optional: true
+    returnType: array
+- subject:
+    function: timezone_location_get
+  signature:
+    params:
+    - name: object
+      type: mixed
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: timezone_name_from_abbr
+  signature:
+    params:
+    - name: abbr
+      type: string
+    - name: utcOffset
+      type: int
+      optional: true
+    - name: isDST
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: timezone_name_get
+  signature:
+    params:
+    - name: object
+      type: mixed
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: timezone_offset_get
+  signature:
+    params:
+    - name: object
+      type: mixed
+    - name: datetime
+      type: mixed
+    returnType: int
+- subject:
+    function: timezone_open
+  signature:
+    params:
+    - name: timezone
+      type: string
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: timezone_transitions_get
+  signature:
+    params:
+    - name: object
+      type: mixed
+    - name: timestampBegin
+      type: int
+      optional: true
+    - name: timestampEnd
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: timezone_version_get
+  signature:
+    returnType: string

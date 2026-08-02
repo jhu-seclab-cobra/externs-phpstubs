@@ -1,0 +1,96 @@
+# Generated from stubs/file/bz2.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: bzclose
+  signature:
+    params:
+    - name: bz
+      type: resource
+    returnType: bool
+- subject:
+    function: bzcompress
+  signature:
+    params:
+    - name: data
+      type: string
+    - name: block_size
+      type: int
+      optional: true
+    - name: work_factor
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: bzdecompress
+  signature:
+    params:
+    - name: data
+      type: string
+    - name: use_less_memory
+      type: bool
+      optional: true
+    returnType: int
+- subject:
+    function: bzerrno
+  signature:
+    params:
+    - name: bz
+      type: resource
+    returnType: int
+- subject:
+    function: bzerror
+  signature:
+    params:
+    - name: bz
+      type: resource
+    returnType: array
+- subject:
+    function: bzerrstr
+  signature:
+    params:
+    - name: bz
+      type: resource
+    returnType: string
+- subject:
+    function: bzflush
+  signature:
+    params:
+    - name: bz
+      type: resource
+    returnType: bool
+- subject:
+    function: bzopen
+  signature:
+    params:
+    - name: file
+      type: resource
+    - name: mode
+      type: string
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: bzread
+  signature:
+    params:
+    - name: bz
+      type: resource
+    - name: length
+      type: int
+      optional: true
+    returnType: string
+- subject:
+    function: bzwrite
+  signature:
+    params:
+    - name: bz
+      type: resource
+    - name: data
+      type: string
+    - name: length
+      type: int
+      optional: true
+    returnType: int

@@ -1,0 +1,86 @@
+# Generated from stubs/file/filter.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: filter_has_var
+  signature:
+    params:
+    - name: input_type
+      type: mixed
+    - name: var_name
+      type: string
+    returnType: bool
+- subject:
+    function: filter_id
+  signature:
+    params:
+    - name: name
+      type: string
+    returnType: int
+- subject:
+    function: filter_input
+  signature:
+    params:
+    - name: type
+      type: mixed
+    - name: var_name
+      type: string
+    - name: filter
+      type: int
+      optional: true
+    - name: options
+      type: array
+      optional: true
+    returnType: mixed
+- subject:
+    function: filter_input_array
+  signature:
+    params:
+    - name: type
+      type: mixed
+    - name: options
+      type: array
+      optional: true
+    - name: add_empty
+      type: bool
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: filter_list
+  signature:
+    returnType: array
+- subject:
+    function: filter_var
+  signature:
+    params:
+    - name: value
+      type: mixed
+    - name: filter
+      type: int
+      optional: true
+    - name: options
+      type: array
+      optional: true
+    returnType: mixed
+- subject:
+    function: filter_var_array
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: options
+      type: array
+      optional: true
+    - name: add_empty
+      type: bool
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return

@@ -1,0 +1,746 @@
+# Generated from stubs/database/oci8.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: oci_bind_array_by_name
+  signature:
+    params:
+    - name: statement
+      type: resource
+    - name: param
+      type: string
+    - name: rw var
+      type: array
+    - name: max_array_length
+      type: int
+    - name: max_item_length
+      type: int
+      optional: true
+    - name: type
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: oci_bind_by_name
+  signature:
+    params:
+    - name: statement
+      type: resource
+    - name: param
+      type: string
+    - name: rw var
+      type: mixed
+    - name: max_length
+      type: int
+      optional: true
+    - name: type
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: oci_cancel
+  signature:
+    params:
+    - name: statement
+      type: resource
+    returnType: bool
+- subject:
+    function: oci_client_version
+  signature:
+    returnType: string
+- subject:
+    function: oci_close
+  signature:
+    params:
+    - name: connection
+      type: resource
+    returnType: bool
+- subject:
+    function: oci_collection_append
+  signature:
+    params:
+    - name: collection
+      type: string
+    returnType: bool
+- subject:
+    function: oci_collection_assign
+  signature:
+    params:
+    - name: to
+      type: object
+    returnType: bool
+- subject:
+    function: oci_collection_element_assign
+  signature:
+    params:
+    - name: collection
+      type: int
+    - name: index
+      type: string
+    returnType: bool
+- subject:
+    function: oci_collection_element_get
+  signature:
+    params:
+    - name: collection
+      type: int
+    returnType: string
+- subject:
+    function: oci_collection_max
+  signature:
+    returnType: int
+- subject:
+    function: oci_collection_size
+  signature:
+    returnType: int
+- subject:
+    function: oci_collection_trim
+  signature:
+    params:
+    - name: collection
+      type: int
+    returnType: bool
+- subject:
+    function: oci_commit
+  signature:
+    params:
+    - name: connection
+      type: resource
+    returnType: bool
+- subject:
+    function: oci_connect
+  signature:
+    params:
+    - name: username
+      type: string
+    - name: password
+      type: string
+    - name: connection_string
+      type: string
+      optional: true
+    - name: encoding
+      type: string
+      optional: true
+    - name: session_mode
+      type: int
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: oci_define_by_name
+  signature:
+    params:
+    - name: statement
+      type: resource
+    - name: column
+      type: string
+    - name: var
+      type: mixed
+    - name: type
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: oci_error
+  signature:
+    params:
+    - name: connection_or_statement
+      type: resource
+      optional: true
+    returnType: array
+- subject:
+    function: oci_execute
+  signature:
+    params:
+    - name: statement
+      type: resource
+    - name: mode
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: oci_fetch
+  signature:
+    params:
+    - name: statement
+      type: resource
+    returnType: bool
+- subject:
+    function: oci_fetch_all
+  signature:
+    params:
+    - name: statement
+      type: resource
+    - name: output
+      type: array
+    - name: offset
+      type: int
+      optional: true
+    - name: limit
+      type: int
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: oci_fetch_array
+  signature:
+    params:
+    - name: statement
+      type: resource
+    - name: mode
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    function: oci_fetch_assoc
+  signature:
+    params:
+    - name: statement
+      type: resource
+    returnType: array
+- subject:
+    function: oci_fetch_object
+  signature:
+    params:
+    - name: statement
+      type: resource
+    returnType: object
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: oci_fetch_row
+  signature:
+    params:
+    - name: statement
+      type: resource
+    returnType: array
+- subject:
+    function: oci_field_is_null
+  signature:
+    params:
+    - name: statement
+      type: resource
+    - name: column
+      type: mixed
+    returnType: bool
+- subject:
+    function: oci_field_name
+  signature:
+    params:
+    - name: statement
+      type: resource
+    - name: column
+      type: mixed
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: oci_field_precision
+  signature:
+    params:
+    - name: statement
+      type: resource
+    - name: column
+      type: mixed
+    returnType: int
+- subject:
+    function: oci_field_scale
+  signature:
+    params:
+    - name: statement
+      type: resource
+    - name: column
+      type: mixed
+    returnType: int
+- subject:
+    function: oci_field_size
+  signature:
+    params:
+    - name: statement
+      type: resource
+    - name: column
+      type: mixed
+    returnType: int
+- subject:
+    function: oci_field_type
+  signature:
+    params:
+    - name: statement
+      type: resource
+    - name: column
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: oci_field_type_raw
+  signature:
+    params:
+    - name: statement
+      type: resource
+    - name: column
+      type: mixed
+    returnType: int
+- subject:
+    function: oci_free_collection
+  signature:
+    returnType: bool
+- subject:
+    function: oci_free_cursor
+  signature:
+    params:
+    - name: statement
+      type: resource
+    returnType: bool
+- subject:
+    function: oci_free_descriptor
+  signature:
+    returnType: bool
+- subject:
+    function: oci_free_statement
+  signature:
+    params:
+    - name: statement
+      type: resource
+    returnType: bool
+- subject:
+    function: oci_get_implicit
+  signature:
+    params:
+    - name: stmt
+      type: mixed
+    returnType: bool
+- subject:
+    function: oci_get_implicit_resultset
+  signature:
+    params:
+    - name: statement
+      type: resource
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: oci_internal_debug
+  signature:
+    params:
+    - name: onoff
+      type: bool
+    returnType: void
+- subject:
+    function: oci_lob_append
+  signature:
+    params:
+    - name: to
+      type: object
+    returnType: bool
+- subject:
+    function: oci_lob_close
+  signature:
+    returnType: bool
+- subject:
+    function: oci_lob_copy
+  signature:
+    params:
+    - name: to
+      type: mixed
+    - name: from
+      type: mixed
+    - name: length
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: oci_lob_eof
+  signature:
+    returnType: bool
+- subject:
+    function: oci_lob_erase
+  signature:
+    params:
+    - name: lob
+      type: int
+    - name: offset
+      type: int
+    returnType: int
+- subject:
+    function: oci_lob_export
+  signature:
+    params:
+    - name: lob
+      type: string
+    - name: filename
+      type: int
+    - name: offset
+      type: int
+    returnType: bool
+- subject:
+    function: oci_lob_flush
+  signature:
+    params:
+    - name: lob
+      type: int
+    returnType: bool
+- subject:
+    function: oci_lob_import
+  signature:
+    params:
+    - name: lob
+      type: string
+    returnType: bool
+- subject:
+    function: oci_lob_is_equal
+  signature:
+    params:
+    - name: lob1
+      type: mixed
+    - name: lob2
+      type: mixed
+    returnType: bool
+- subject:
+    function: oci_lob_load
+  signature:
+    returnType: string
+- subject:
+    function: oci_lob_read
+  signature:
+    params:
+    - name: lob
+      type: int
+    returnType: string
+- subject:
+    function: oci_lob_rewind
+  signature:
+    returnType: bool
+- subject:
+    function: oci_lob_save
+  signature:
+    params:
+    - name: lob
+      type: string
+    - name: data
+      type: int
+    returnType: bool
+- subject:
+    function: oci_lob_seek
+  signature:
+    params:
+    - name: lob
+      type: int
+    - name: offset
+      type: int
+    returnType: bool
+- subject:
+    function: oci_lob_size
+  signature:
+    returnType: int
+- subject:
+    function: oci_lob_tell
+  signature:
+    returnType: int
+- subject:
+    function: oci_lob_truncate
+  signature:
+    params:
+    - name: lob
+      type: int
+    returnType: bool
+- subject:
+    function: oci_lob_write
+  signature:
+    params:
+    - name: lob
+      type: string
+    - name: data
+      type: int
+    returnType: int
+- subject:
+    function: oci_lob_write_temporary
+  signature:
+    params:
+    - name: value
+      type: string
+    - name: lob_type
+      type: int
+    returnType: bool
+- subject:
+    function: oci_new_collection
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: type_name
+      type: string
+    - name: schema
+      type: string
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: oci_new_connect
+  signature:
+    params:
+    - name: username
+      type: string
+    - name: password
+      type: string
+    - name: connection_string
+      type: string
+      optional: true
+    - name: encoding
+      type: string
+      optional: true
+    - name: session_mode
+      type: int
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: oci_new_cursor
+  signature:
+    params:
+    - name: connection
+      type: resource
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: oci_new_descriptor
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: type
+      type: int
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: oci_num_fields
+  signature:
+    params:
+    - name: statement
+      type: resource
+    returnType: int
+- subject:
+    function: oci_num_rows
+  signature:
+    params:
+    - name: statement
+      type: resource
+    returnType: int
+- subject:
+    function: oci_parse
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: sql
+      type: string
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: oci_password_change
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: username
+      type: string
+    - name: old_password
+      type: string
+    - name: new_password
+      type: string
+    returnType: bool
+- subject:
+    function: oci_pconnect
+  signature:
+    params:
+    - name: username
+      type: string
+    - name: password
+      type: string
+    - name: connection_string
+      type: string
+      optional: true
+    - name: encoding
+      type: string
+      optional: true
+    - name: session_mode
+      type: int
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: oci_register_taf_callback
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: callback
+      type: callable
+      optional: true
+    returnType: bool
+- subject:
+    function: oci_result
+  signature:
+    params:
+    - name: statement
+      type: resource
+    - name: column
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: oci_rollback
+  signature:
+    params:
+    - name: connection
+      type: resource
+    returnType: bool
+- subject:
+    function: oci_server_version
+  signature:
+    params:
+    - name: connection
+      type: resource
+    returnType: string
+- subject:
+    function: oci_set_action
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: action
+      type: string
+    returnType: bool
+- subject:
+    function: oci_set_call_timeout
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: timeout
+      type: int
+    returnType: bool
+- subject:
+    function: oci_set_client_identifier
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: client_id
+      type: string
+    returnType: bool
+- subject:
+    function: oci_set_client_info
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: client_info
+      type: string
+    returnType: bool
+- subject:
+    function: oci_set_db_operation
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: action
+      type: string
+    returnType: bool
+- subject:
+    function: oci_set_edition
+  signature:
+    params:
+    - name: edition
+      type: string
+    returnType: bool
+- subject:
+    function: oci_set_module_name
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: name
+      type: string
+    returnType: bool
+- subject:
+    function: oci_set_prefetch
+  signature:
+    params:
+    - name: statement
+      type: resource
+    - name: rows
+      type: int
+    returnType: bool
+- subject:
+    function: oci_statement_type
+  signature:
+    params:
+    - name: statement
+      type: resource
+    returnType: string
+- subject:
+    function: oci_unregister_taf_callback
+  signature:
+    params:
+    - name: connection
+      type: resource
+    returnType: bool

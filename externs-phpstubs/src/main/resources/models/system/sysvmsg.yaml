@@ -1,0 +1,94 @@
+# Generated from stubs/system/sysvmsg.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: msg_get_queue
+  signature:
+    params:
+    - name: key
+      type: int
+    - name: permissions
+      type: int
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: msg_queue_exists
+  signature:
+    params:
+    - name: key
+      type: int
+    returnType: bool
+- subject:
+    function: msg_receive
+  signature:
+    params:
+    - name: queue
+      type: mixed
+    - name: desired_message_type
+      type: int
+    - name: received_message_type
+      type: int
+    - name: max_message_size
+      type: int
+    - name: message
+      type: mixed
+    - name: unserialize
+      type: bool
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    - name: error_code
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: msg_remove_queue
+  signature:
+    params:
+    - name: queue
+      type: mixed
+    returnType: bool
+- subject:
+    function: msg_send
+  signature:
+    params:
+    - name: queue
+      type: mixed
+    - name: message_type
+      type: int
+    - name: message
+      type: mixed
+    - name: serialize
+      type: bool
+      optional: true
+    - name: blocking
+      type: bool
+      optional: true
+    - name: error_code
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: msg_set_queue
+  signature:
+    params:
+    - name: queue
+      type: mixed
+    - name: data
+      type: array
+    returnType: bool
+- subject:
+    function: msg_stat_queue
+  signature:
+    params:
+    - name: queue
+      type: mixed
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return

@@ -1,0 +1,422 @@
+# Generated from stubs/network/ftp.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: ftp_alloc
+  signature:
+    params:
+    - name: ftp
+      type: resource
+    - name: size
+      type: int
+    - name: response
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: ftp_append
+  signature:
+    params:
+    - name: ftp
+      type: resource
+    - name: remote_filename
+      type: string
+    - name: local_filename
+      type: string
+    - name: mode
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: ftp_cdup
+  signature:
+    params:
+    - name: ftp
+      type: resource
+    returnType: bool
+- subject:
+    function: ftp_chdir
+  signature:
+    params:
+    - name: ftp
+      type: resource
+    - name: directory
+      type: string
+    returnType: bool
+- subject:
+    function: ftp_chmod
+  signature:
+    params:
+    - name: ftp
+      type: resource
+    - name: permissions
+      type: int
+    - name: filename
+      type: string
+    returnType: int
+- subject:
+    function: ftp_close
+  signature:
+    params:
+    - name: ftp
+      type: resource
+    returnType: bool
+- subject:
+    function: ftp_connect
+  signature:
+    params:
+    - name: hostname
+      type: string
+    - name: port
+      type: int
+      optional: true
+    - name: timeout
+      type: int
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: ftp_delete
+  signature:
+    params:
+    - name: ftp
+      type: resource
+    - name: filename
+      type: string
+    returnType: bool
+- subject:
+    function: ftp_exec
+  signature:
+    params:
+    - name: ftp
+      type: resource
+    - name: command
+      type: string
+    returnType: bool
+- subject:
+    function: ftp_fget
+  signature:
+    params:
+    - name: ftp
+      type: resource
+    - name: stream
+      type: resource
+    - name: remote_filename
+      type: string
+    - name: mode
+      type: int
+      optional: true
+    - name: offset
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: ftp_fput
+  signature:
+    params:
+    - name: ftp
+      type: resource
+    - name: remote_filename
+      type: string
+    - name: stream
+      type: resource
+    - name: mode
+      type: int
+      optional: true
+    - name: offset
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: ftp_get
+  signature:
+    params:
+    - name: ftp
+      type: resource
+    - name: local_filename
+      type: string
+    - name: remote_filename
+      type: string
+    - name: mode
+      type: int
+      optional: true
+    - name: offset
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: ftp_get_option
+  signature:
+    params:
+    - name: ftp
+      type: resource
+    - name: option
+      type: int
+    returnType: int
+- subject:
+    function: ftp_login
+  signature:
+    params:
+    - name: ftp
+      type: resource
+    - name: username
+      type: string
+    - name: password
+      type: string
+    returnType: bool
+- subject:
+    function: ftp_mdtm
+  signature:
+    params:
+    - name: ftp
+      type: resource
+    - name: filename
+      type: string
+    returnType: int
+- subject:
+    function: ftp_mkdir
+  signature:
+    params:
+    - name: ftp
+      type: resource
+    - name: directory
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: ftp_mlsd
+  signature:
+    params:
+    - name: ftp
+      type: resource
+    - name: directory
+      type: string
+    returnType: array
+- subject:
+    function: ftp_nb_continue
+  signature:
+    params:
+    - name: ftp
+      type: resource
+    returnType: int
+- subject:
+    function: ftp_nb_fget
+  signature:
+    params:
+    - name: ftp
+      type: resource
+    - name: stream
+      type: resource
+    - name: remote_filename
+      type: string
+    - name: mode
+      type: int
+      optional: true
+    - name: offset
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: ftp_nb_fput
+  signature:
+    params:
+    - name: ftp
+      type: resource
+    - name: remote_filename
+      type: string
+    - name: stream
+      type: resource
+    - name: mode
+      type: int
+      optional: true
+    - name: offset
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: ftp_nb_get
+  signature:
+    params:
+    - name: ftp
+      type: resource
+    - name: local_filename
+      type: string
+    - name: remote_filename
+      type: string
+    - name: mode
+      type: int
+      optional: true
+    - name: offset
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: ftp_nb_put
+  signature:
+    params:
+    - name: ftp
+      type: resource
+    - name: remote_filename
+      type: string
+    - name: local_filename
+      type: string
+    - name: mode
+      type: int
+      optional: true
+    - name: offset
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: ftp_nlist
+  signature:
+    params:
+    - name: ftp
+      type: resource
+    - name: directory
+      type: string
+    returnType: array
+- subject:
+    function: ftp_pasv
+  signature:
+    params:
+    - name: ftp
+      type: resource
+    - name: enable
+      type: bool
+    returnType: bool
+- subject:
+    function: ftp_put
+  signature:
+    params:
+    - name: ftp
+      type: resource
+    - name: remote_filename
+      type: string
+    - name: local_filename
+      type: string
+    - name: mode
+      type: int
+      optional: true
+    - name: offset
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: ftp_pwd
+  signature:
+    params:
+    - name: ftp
+      type: resource
+    returnType: string
+- subject:
+    function: ftp_quit
+  signature:
+    params:
+    - name: ftp
+      type: resource
+    returnType: bool
+- subject:
+    function: ftp_raw
+  signature:
+    params:
+    - name: ftp
+      type: resource
+    - name: command
+      type: string
+    returnType: array
+- subject:
+    function: ftp_rawlist
+  signature:
+    params:
+    - name: ftp
+      type: resource
+    - name: directory
+      type: string
+    - name: recursive
+      type: bool
+      optional: true
+    returnType: array
+- subject:
+    function: ftp_rename
+  signature:
+    params:
+    - name: ftp
+      type: resource
+    - name: from
+      type: string
+    - name: to
+      type: string
+    returnType: bool
+- subject:
+    function: ftp_rmdir
+  signature:
+    params:
+    - name: ftp
+      type: resource
+    - name: directory
+      type: string
+    returnType: bool
+- subject:
+    function: ftp_set_option
+  signature:
+    params:
+    - name: ftp
+      type: resource
+    - name: option
+      type: int
+    - name: value
+      type: mixed
+    returnType: bool
+- subject:
+    function: ftp_site
+  signature:
+    params:
+    - name: ftp
+      type: resource
+    - name: command
+      type: string
+    returnType: bool
+- subject:
+    function: ftp_size
+  signature:
+    params:
+    - name: ftp
+      type: resource
+    - name: filename
+      type: string
+    returnType: int
+- subject:
+    function: ftp_ssl_connect
+  signature:
+    params:
+    - name: hostname
+      type: string
+    - name: port
+      type: int
+      optional: true
+    - name: timeout
+      type: int
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: ftp_systype
+  signature:
+    params:
+    - name: ftp
+      type: resource
+    returnType: string

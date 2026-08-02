@@ -1,0 +1,5214 @@
+# Generated from stubs/standard/standard_4.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: locale_get_primary_language
+  signature:
+    params:
+    - name: locale
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: locale_get_region
+  signature:
+    params:
+    - name: locale
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: locale_get_script
+  signature:
+    params:
+    - name: locale
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: locale_lookup
+  signature:
+    params:
+    - name: languageTag
+      type: array
+    - name: locale
+      type: string
+    - name: canonicalize
+      type: bool
+      optional: true
+    - name: defaultLocale
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: locale_parse
+  signature:
+    params:
+    - name: locale
+      type: string
+    returnType: array
+- subject:
+    function: locale_set_default
+  signature:
+    params:
+    - name: locale
+      type: string
+    returnType: bool
+- subject:
+    function: localeconv
+  signature:
+    returnType: array
+- subject:
+    function: localtime
+  signature:
+    params:
+    - name: timestamp
+      type: int
+      optional: true
+    - name: associative
+      type: bool
+      optional: true
+    returnType: array
+- subject:
+    function: log
+  signature:
+    params:
+    - name: num
+      type: float
+    - name: base
+      type: float
+      optional: true
+    returnType: float
+- subject:
+    function: log10
+  signature:
+    params:
+    - name: num
+      type: float
+    returnType: float
+- subject:
+    function: log1p
+  signature:
+    params:
+    - name: num
+      type: float
+    returnType: float
+- subject:
+    function: long2ip
+  signature:
+    params:
+    - name: ip
+      type: int
+    returnType: string
+- subject:
+    function: lstat
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: array
+- subject:
+    function: ltrim
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: characters
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: lzf_compress
+  signature:
+    params:
+    - name: data
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: lzf_decompress
+  signature:
+    params:
+    - name: data
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: lzf_optimized_for
+  signature:
+    returnType: int
+- subject:
+    function: magic_quotes_runtime
+  signature:
+    params:
+    - name: new_setting
+      type: bool
+    returnType: bool
+- subject:
+    function: mail
+  signature:
+    params:
+    - name: to
+      type: string
+    - name: subject
+      type: string
+    - name: message
+      type: string
+    - name: additional_headers
+      type: array
+      optional: true
+    - name: additional_params
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: mailparse_determine_best_xfer_encoding
+  signature:
+    params:
+    - name: fp
+      type: resource
+    returnType: string
+- subject:
+    function: mailparse_msg_create
+  signature:
+    returnType: resource
+- subject:
+    function: mailparse_msg_extract_part
+  signature:
+    params:
+    - name: mimemail
+      type: resource
+    - name: msgbody
+      type: string
+    - name: callbackfunc
+      type: callable
+      optional: true
+    returnType: void
+- subject:
+    function: mailparse_msg_extract_part_file
+  signature:
+    params:
+    - name: mimemail
+      type: resource
+    - name: filename
+      type: mixed
+    - name: callbackfunc
+      type: callable
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: mailparse_msg_extract_whole_part_file
+  signature:
+    params:
+    - name: mimemail
+      type: resource
+    - name: filename
+      type: string
+    - name: callbackfunc
+      type: callable
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: mailparse_msg_free
+  signature:
+    params:
+    - name: mimemail
+      type: resource
+    returnType: bool
+- subject:
+    function: mailparse_msg_get_part
+  signature:
+    params:
+    - name: mimemail
+      type: resource
+    - name: mimesection
+      type: string
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: mailparse_msg_get_part_data
+  signature:
+    params:
+    - name: mimemail
+      type: resource
+    returnType: array
+- subject:
+    function: mailparse_msg_get_structure
+  signature:
+    params:
+    - name: mimemail
+      type: resource
+    returnType: array
+- subject:
+    function: mailparse_msg_parse
+  signature:
+    params:
+    - name: mimemail
+      type: resource
+    - name: data
+      type: string
+    returnType: bool
+- subject:
+    function: mailparse_msg_parse_file
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mailparse_rfc822_parse_addresses
+  signature:
+    params:
+    - name: addresses
+      type: string
+    returnType: array
+- subject:
+    function: mailparse_stream_encode
+  signature:
+    params:
+    - name: sourcefp
+      type: resource
+    - name: destfp
+      type: resource
+    - name: encoding
+      type: string
+    returnType: bool
+- subject:
+    function: mailparse_uudecode_all
+  signature:
+    params:
+    - name: fp
+      type: resource
+    returnType: array
+- subject:
+    function: max
+  signature:
+    params:
+    - name: value
+      type: array
+    returnType: mixed
+- subject:
+    function: md5
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: binary
+      type: bool
+      optional: true
+    returnType: string
+- subject:
+    function: md5_file
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: binary
+      type: bool
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mdecrypt_generic
+  signature:
+    params:
+    - name: td
+      type: resource
+    - name: data
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: memcache_add
+  signature:
+    params:
+    - name: memcache_obj
+      type: mixed
+    - name: key
+      type: string
+    - name: var
+      type: mixed
+    - name: flag
+      type: int
+      optional: true
+    - name: expire
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: memcache_add_server
+  signature:
+    params:
+    - name: memcache_obj
+      type: mixed
+    - name: host
+      type: string
+    - name: port
+      type: int
+      optional: true
+    - name: persistent
+      type: bool
+      optional: true
+    - name: weight
+      type: int
+      optional: true
+    - name: timeout
+      type: int
+      optional: true
+    - name: retry_interval
+      type: int
+      optional: true
+    - name: status
+      type: bool
+      optional: true
+    - name: failure_callback
+      type: callable
+      optional: true
+    - name: timeoutms
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: memcache_append
+  signature:
+    params:
+    - name: memcache_obj
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: memcache_cas
+  signature:
+    params:
+    - name: memcache_obj
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: memcache_close
+  signature:
+    params:
+    - name: memcache_obj
+      type: mixed
+    returnType: bool
+- subject:
+    function: memcache_connect
+  signature:
+    params:
+    - name: host
+      type: string
+    - name: port
+      type: int
+      optional: true
+    - name: timeout
+      type: int
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: memcache_debug
+  signature:
+    params:
+    - name: on_off
+      type: bool
+    returnType: bool
+- subject:
+    function: memcache_decrement
+  signature:
+    params:
+    - name: memcache_obj
+      type: mixed
+    - name: key
+      type: string
+    - name: value
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: memcache_delete
+  signature:
+    params:
+    - name: memcache_obj
+      type: mixed
+    - name: key
+      type: string
+    - name: timeout
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: memcache_flush
+  signature:
+    params:
+    - name: memcache_obj
+      type: mixed
+    returnType: bool
+- subject:
+    function: memcache_get
+  signature:
+    params:
+    - name: memcache_obj
+      type: mixed
+    - name: key
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: memcache_get_extended_stats
+  signature:
+    params:
+    - name: memcache_obj
+      type: mixed
+    - name: type
+      type: string
+      optional: true
+    - name: slabid
+      type: int
+      optional: true
+    - name: limit
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: memcache_get_server_status
+  signature:
+    params:
+    - name: memcache_obj
+      type: mixed
+    - name: host
+      type: string
+    - name: port
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: memcache_get_stats
+  signature:
+    params:
+    - name: memcache_obj
+      type: mixed
+    - name: type
+      type: string
+      optional: true
+    - name: slabid
+      type: int
+      optional: true
+    - name: limit
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: memcache_get_version
+  signature:
+    params:
+    - name: memcache_obj
+      type: mixed
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: memcache_increment
+  signature:
+    params:
+    - name: memcache_obj
+      type: mixed
+    - name: key
+      type: string
+    - name: value
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: memcache_pconnect
+  signature:
+    params:
+    - name: host
+      type: string
+    - name: port
+      type: int
+      optional: true
+    - name: timeout
+      type: int
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: memcache_prepend
+  signature:
+    params:
+    - name: memcache_obj
+      type: mixed
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: memcache_replace
+  signature:
+    params:
+    - name: memcache_obj
+      type: mixed
+    - name: key
+      type: string
+    - name: var
+      type: mixed
+    - name: flag
+      type: int
+      optional: true
+    - name: expire
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: memcache_set
+  signature:
+    params:
+    - name: memcache_obj
+      type: mixed
+    - name: key
+      type: string
+    - name: var
+      type: mixed
+    - name: flag
+      type: int
+      optional: true
+    - name: expire
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: memcache_set_compress_threshold
+  signature:
+    params:
+    - name: memcache_obj
+      type: mixed
+    - name: threshold
+      type: int
+    - name: min_savings
+      type: float
+      optional: true
+    returnType: bool
+- subject:
+    function: memcache_set_failure_callback
+  signature:
+    params:
+    - name: memcache_obj
+      type: mixed
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: memcache_set_server_params
+  signature:
+    params:
+    - name: memcache_obj
+      type: mixed
+    - name: host
+      type: string
+    - name: port
+      type: int
+      optional: true
+    - name: timeout
+      type: int
+      optional: true
+    - name: retry_interval
+      type: int
+      optional: true
+    - name: status
+      type: bool
+      optional: true
+    - name: failure_callback
+      type: callable
+      optional: true
+    returnType: bool
+- subject:
+    function: memory_get_peak_usage
+  signature:
+    params:
+    - name: real_usage
+      type: bool
+      optional: true
+    returnType: int
+- subject:
+    function: memory_get_usage
+  signature:
+    params:
+    - name: real_usage
+      type: bool
+      optional: true
+    returnType: int
+- subject:
+    function: metaphone
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: max_phonemes
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: method_exists
+  signature:
+    params:
+    - name: object_or_class
+      type: string
+    - name: method
+      type: string
+    returnType: bool
+- subject:
+    function: mhash
+  signature:
+    params:
+    - name: algo
+      type: int
+    - name: data
+      type: string
+    - name: key
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: mhash_count
+  signature:
+    returnType: int
+- subject:
+    function: mhash_get_block_size
+  signature:
+    params:
+    - name: algo
+      type: int
+    returnType: int
+- subject:
+    function: mhash_get_hash_name
+  signature:
+    params:
+    - name: algo
+      type: int
+    returnType: string
+- subject:
+    function: mhash_keygen_s2k
+  signature:
+    params:
+    - name: algo
+      type: int
+    - name: password
+      type: string
+    - name: salt
+      type: string
+    - name: length
+      type: int
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: min
+  signature:
+    params:
+    - name: value
+      type: array
+    returnType: mixed
+- subject:
+    function: ming_keypress
+  signature:
+    params:
+    - name: char
+      type: string
+    returnType: int
+- subject:
+    function: ming_setcubicthreshold
+  signature:
+    params:
+    - name: threshold
+      type: int
+    returnType: void
+- subject:
+    function: ming_setscale
+  signature:
+    params:
+    - name: scale
+      type: float
+    returnType: void
+- subject:
+    function: ming_setswfcompression
+  signature:
+    params:
+    - name: level
+      type: int
+    returnType: void
+- subject:
+    function: ming_useconstants
+  signature:
+    params:
+    - name: use
+      type: int
+    returnType: void
+- subject:
+    function: ming_useswfversion
+  signature:
+    params:
+    - name: version
+      type: int
+    returnType: void
+- subject:
+    function: mongodb\\bson\\fromjson
+  signature:
+    params:
+    - name: json
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mongodb\\bson\\fromphp
+  signature:
+    params:
+    - name: value
+      type: array
+    returnType: string
+- subject:
+    function: mongodb\\bson\\tocanonicalextendedjson
+  signature:
+    params:
+    - name: bson
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mongodb\\bson\\tojson
+  signature:
+    params:
+    - name: bson
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mongodb\\bson\\tophp
+  signature:
+    params:
+    - name: bson
+      type: string
+    - name: typemap
+      type: array
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: mongodb\\bson\\torelaxedextendedjson
+  signature:
+    params:
+    - name: bson
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mongodb\\driver\\monitoring\\addsubscriber
+  signature:
+    params:
+    - name: subscriber
+      type: mixed
+    returnType: void
+- subject:
+    function: mongodb\\driver\\monitoring\\mongoc_log
+  signature:
+    params:
+    - name: level
+      type: int
+    - name: domain
+      type: string
+    - name: message
+      type: string
+    returnType: void
+- subject:
+    function: mongodb\\driver\\monitoring\\removesubscriber
+  signature:
+    params:
+    - name: subscriber
+      type: mixed
+    returnType: void
+- subject:
+    function: monitor_custom_event
+  signature:
+    params:
+    - name: class
+      type: string
+    - name: text
+      type: string
+    - name: severe
+      type: int
+      optional: true
+    - name: user_data
+      type: mixed
+      optional: true
+    returnType: void
+- subject:
+    function: monitor_httperror_event
+  signature:
+    params:
+    - name: error_code
+      type: int
+    - name: url
+      type: string
+    - name: severe
+      type: int
+      optional: true
+    returnType: void
+- subject:
+    function: monitor_license_info
+  signature:
+    returnType: array
+- subject:
+    function: monitor_pass_error
+  signature:
+    params:
+    - name: errno
+      type: int
+    - name: errstr
+      type: string
+    - name: errfile
+      type: string
+    - name: errline
+      type: int
+    returnType: void
+- subject:
+    function: monitor_set_aggregation_hint
+  signature:
+    params:
+    - name: hint
+      type: string
+    returnType: void
+- subject:
+    function: mqseries_back
+  signature:
+    params:
+    - name: hconn
+      type: resource
+    - name: compcode
+      type: resource
+    - name: reason
+      type: resource
+    returnType: void
+- subject:
+    function: mqseries_begin
+  signature:
+    params:
+    - name: hconn
+      type: resource
+    - name: beginoptions
+      type: array
+    - name: compcode
+      type: resource
+    - name: reason
+      type: resource
+    returnType: void
+- subject:
+    function: mqseries_close
+  signature:
+    params:
+    - name: hconn
+      type: resource
+    - name: hobj
+      type: resource
+    - name: options
+      type: int
+    - name: compcode
+      type: resource
+    - name: reason
+      type: resource
+    returnType: void
+- subject:
+    function: mqseries_cmit
+  signature:
+    params:
+    - name: hconn
+      type: resource
+    - name: compcode
+      type: resource
+    - name: reason
+      type: resource
+    returnType: void
+- subject:
+    function: mqseries_conn
+  signature:
+    params:
+    - name: qmanagername
+      type: string
+    - name: hconn
+      type: resource
+    - name: compcode
+      type: resource
+    - name: reason
+      type: resource
+    returnType: void
+- subject:
+    function: mqseries_connx
+  signature:
+    params:
+    - name: qmanagername
+      type: string
+    - name: connoptions
+      type: array
+    - name: hconn
+      type: resource
+    - name: compcode
+      type: resource
+    - name: reason
+      type: resource
+    returnType: void
+- subject:
+    function: mqseries_disc
+  signature:
+    params:
+    - name: hconn
+      type: resource
+    - name: compcode
+      type: resource
+    - name: reason
+      type: resource
+    returnType: void
+- subject:
+    function: mqseries_get
+  signature:
+    params:
+    - name: hconn
+      type: resource
+    - name: hobj
+      type: resource
+    - name: md
+      type: array
+    - name: gmo
+      type: array
+    - name: bufferlength
+      type: int
+    - name: msg
+      type: string
+    - name: data_length
+      type: int
+    - name: compcode
+      type: resource
+    - name: reason
+      type: resource
+    returnType: void
+- subject:
+    function: mqseries_inq
+  signature:
+    params:
+    - name: hconn
+      type: resource
+    - name: hobj
+      type: resource
+    - name: selectorcount
+      type: int
+    - name: selectors
+      type: array
+    - name: intattrcount
+      type: int
+    - name: intattr
+      type: resource
+    - name: charattrlength
+      type: int
+    - name: charattr
+      type: resource
+    - name: compcode
+      type: resource
+    - name: reason
+      type: resource
+    returnType: void
+- subject:
+    function: mqseries_open
+  signature:
+    params:
+    - name: hconn
+      type: resource
+    - name: objdesc
+      type: array
+    - name: option
+      type: int
+    - name: hobj
+      type: resource
+    - name: compcode
+      type: resource
+    - name: reason
+      type: resource
+    returnType: void
+- subject:
+    function: mqseries_put
+  signature:
+    params:
+    - name: hconn
+      type: resource
+    - name: hobj
+      type: resource
+    - name: md
+      type: array
+    - name: pmo
+      type: array
+    - name: message
+      type: string
+    - name: compcode
+      type: resource
+    - name: reason
+      type: resource
+    returnType: void
+- subject:
+    function: mqseries_put1
+  signature:
+    params:
+    - name: hconn
+      type: resource
+    - name: objdesc
+      type: resource
+    - name: msgdesc
+      type: resource
+    - name: pmo
+      type: resource
+    - name: buffer
+      type: string
+    - name: compcode
+      type: resource
+    - name: reason
+      type: resource
+    returnType: void
+- subject:
+    function: mqseries_set
+  signature:
+    params:
+    - name: hconn
+      type: resource
+    - name: hobj
+      type: resource
+    - name: selectorcount
+      type: int
+    - name: selectors
+      type: array
+    - name: intattrcount
+      type: int
+    - name: intattrs
+      type: array
+    - name: charattrlength
+      type: int
+    - name: charattrs
+      type: array
+    - name: compcode
+      type: resource
+    - name: reason
+      type: resource
+    returnType: void
+- subject:
+    function: mqseries_strerror
+  signature:
+    params:
+    - name: reason
+      type: int
+    returnType: string
+- subject:
+    function: ms_geterrorobj
+  signature:
+    returnType: mixed
+- subject:
+    function: ms_getversion
+  signature:
+    returnType: string
+- subject:
+    function: ms_getversionint
+  signature:
+    returnType: int
+- subject:
+    function: ms_iogetstdoutbufferbytes
+  signature:
+    returnType: int
+- subject:
+    function: ms_iogetstdoutbufferstring
+  signature:
+    returnType: void
+- subject:
+    function: ms_ioinstallstdinfrombuffer
+  signature:
+    returnType: void
+- subject:
+    function: ms_ioinstallstdouttobuffer
+  signature:
+    returnType: void
+- subject:
+    function: ms_ioresethandlers
+  signature:
+    returnType: void
+- subject:
+    function: ms_iostripstdoutbuffercontentheaders
+  signature:
+    returnType: void
+- subject:
+    function: ms_iostripstdoutbuffercontenttype
+  signature:
+    returnType: string
+- subject:
+    function: ms_reseterrorlist
+  signature:
+    returnType: void
+- subject:
+    function: ms_tokenizemap
+  signature:
+    params:
+    - name: map_file_name
+      type: string
+    returnType: array
+- subject:
+    function: msession_connect
+  signature:
+    params:
+    - name: host
+      type: string
+    - name: port
+      type: string
+    returnType: bool
+- subject:
+    function: msession_count
+  signature:
+    returnType: int
+- subject:
+    function: msession_create
+  signature:
+    params:
+    - name: session
+      type: string
+    - name: classname
+      type: string
+      optional: true
+    - name: data
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: msession_destroy
+  signature:
+    params:
+    - name: name
+      type: string
+    returnType: bool
+- subject:
+    function: msession_disconnect
+  signature:
+    returnType: void
+- subject:
+    function: msession_find
+  signature:
+    params:
+    - name: name
+      type: string
+    - name: value
+      type: string
+    returnType: array
+- subject:
+    function: msession_get
+  signature:
+    params:
+    - name: session
+      type: string
+    - name: name
+      type: string
+    - name: value
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: msession_get_array
+  signature:
+    params:
+    - name: session
+      type: string
+    returnType: array
+- subject:
+    function: msession_get_data
+  signature:
+    params:
+    - name: session
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: msession_inc
+  signature:
+    params:
+    - name: session
+      type: string
+    - name: name
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: msession_list
+  signature:
+    returnType: array
+- subject:
+    function: msession_listvar
+  signature:
+    params:
+    - name: name
+      type: string
+    returnType: array
+- subject:
+    function: msession_lock
+  signature:
+    params:
+    - name: name
+      type: string
+    returnType: int
+- subject:
+    function: msession_plugin
+  signature:
+    params:
+    - name: session
+      type: string
+    - name: value
+      type: string
+    - name: param
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: msession_randstr
+  signature:
+    params:
+    - name: param
+      type: int
+    returnType: string
+- subject:
+    function: msession_set
+  signature:
+    params:
+    - name: session
+      type: string
+    - name: name
+      type: string
+    - name: value
+      type: string
+    returnType: bool
+- subject:
+    function: msession_set_array
+  signature:
+    params:
+    - name: session
+      type: string
+    - name: tuples
+      type: array
+    returnType: void
+- subject:
+    function: msession_set_data
+  signature:
+    params:
+    - name: session
+      type: string
+    - name: value
+      type: string
+    returnType: bool
+- subject:
+    function: msession_timeout
+  signature:
+    params:
+    - name: session
+      type: string
+    - name: param
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: msession_uniq
+  signature:
+    params:
+    - name: param
+      type: int
+    - name: classname
+      type: string
+      optional: true
+    - name: data
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: msession_unlock
+  signature:
+    params:
+    - name: session
+      type: string
+    - name: key
+      type: int
+    returnType: int
+- subject:
+    function: msgfmt_create
+  signature:
+    params:
+    - name: locale
+      type: string
+    - name: pattern
+      type: string
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: msgfmt_format
+  signature:
+    params:
+    - name: formatter
+      type: mixed
+    - name: values
+      type: array
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: msgfmt_format_message
+  signature:
+    params:
+    - name: locale
+      type: string
+    - name: pattern
+      type: string
+    - name: values
+      type: array
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: msgfmt_get_error_code
+  signature:
+    params:
+    - name: formatter
+      type: mixed
+    returnType: int
+- subject:
+    function: msgfmt_get_error_message
+  signature:
+    params:
+    - name: formatter
+      type: mixed
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: msgfmt_get_locale
+  signature:
+    params:
+    - name: formatter
+      type: mixed
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: msgfmt_get_pattern
+  signature:
+    params:
+    - name: formatter
+      type: mixed
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: msgfmt_parse
+  signature:
+    params:
+    - name: formatter
+      type: mixed
+    - name: string
+      type: string
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: msgfmt_parse_message
+  signature:
+    params:
+    - name: locale
+      type: string
+    - name: pattern
+      type: string
+    - name: message
+      type: string
+    returnType: array
+- subject:
+    function: msgfmt_set_pattern
+  signature:
+    params:
+    - name: formatter
+      type: mixed
+    - name: pattern
+      type: string
+    returnType: bool
+- subject:
+    function: msql_affected_rows
+  signature:
+    params:
+    - name: result
+      type: resource
+    returnType: int
+- subject:
+    function: msql_close
+  signature:
+    params:
+    - name: link_identifier
+      type: resource
+      optional: true
+    returnType: bool
+- subject:
+    function: msql_connect
+  signature:
+    params:
+    - name: hostname
+      type: string
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: msql_create_db
+  signature:
+    params:
+    - name: database_name
+      type: string
+    - name: link_identifier
+      type: resource
+      optional: true
+    returnType: bool
+- subject:
+    function: msql_data_seek
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: row_number
+      type: int
+    returnType: bool
+- subject:
+    function: msql_db_query
+  signature:
+    params:
+    - name: database
+      type: string
+    - name: query
+      type: string
+    - name: link_identifier
+      type: resource
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: msql_drop_db
+  signature:
+    params:
+    - name: database_name
+      type: string
+    - name: link_identifier
+      type: resource
+      optional: true
+    returnType: bool
+- subject:
+    function: msql_error
+  signature:
+    returnType: string
+- subject:
+    function: msql_fetch_array
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: result_type
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    function: msql_fetch_field
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: field_offset
+      type: int
+      optional: true
+    returnType: object
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: msql_fetch_object
+  signature:
+    params:
+    - name: result
+      type: resource
+    returnType: object
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: msql_fetch_row
+  signature:
+    params:
+    - name: result
+      type: resource
+    returnType: array
+- subject:
+    function: msql_field_flags
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: field_offset
+      type: int
+    returnType: string
+- subject:
+    function: msql_field_len
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: field_offset
+      type: int
+    returnType: int
+- subject:
+    function: msql_field_name
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: field_offset
+      type: int
+    returnType: string
+- subject:
+    function: msql_field_seek
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: field_offset
+      type: int
+    returnType: bool
+- subject:
+    function: msql_field_table
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: field_offset
+      type: int
+    returnType: int
+- subject:
+    function: msql_field_type
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: field_offset
+      type: int
+    returnType: string
+- subject:
+    function: msql_free_result
+  signature:
+    params:
+    - name: result
+      type: resource
+    returnType: bool
+- subject:
+    function: msql_list_dbs
+  signature:
+    params:
+    - name: link_identifier
+      type: resource
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: msql_list_fields
+  signature:
+    params:
+    - name: database
+      type: string
+    - name: tablename
+      type: string
+    - name: link_identifier
+      type: resource
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: msql_list_tables
+  signature:
+    params:
+    - name: database
+      type: string
+    - name: link_identifier
+      type: resource
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: msql_num_fields
+  signature:
+    params:
+    - name: result
+      type: resource
+    returnType: int
+- subject:
+    function: msql_num_rows
+  signature:
+    params:
+    - name: query_identifier
+      type: resource
+    returnType: int
+- subject:
+    function: msql_pconnect
+  signature:
+    params:
+    - name: hostname
+      type: string
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: msql_query
+  signature:
+    params:
+    - name: query
+      type: string
+    - name: link_identifier
+      type: resource
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: msql_result
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: row
+      type: int
+    - name: field
+      type: mixed
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(2)
+    to: return
+- subject:
+    function: msql_select_db
+  signature:
+    params:
+    - name: database_name
+      type: string
+    - name: link_identifier
+      type: resource
+      optional: true
+    returnType: bool
+- subject:
+    function: mt_getrandmax
+  signature:
+    returnType: int
+- subject:
+    function: mt_rand
+  signature:
+    params:
+    - name: min
+      type: int
+      optional: true
+    - name: max
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: mt_srand
+  signature:
+    params:
+    - name: seed
+      type: int
+      optional: true
+    - name: mode
+      type: int
+      optional: true
+    returnType: void
+- subject:
+    function: mysql_xdevapi\\getsession
+  signature:
+    params:
+    - name: uri
+      type: string
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mysqlnd_memcache_get_config
+  signature:
+    params:
+    - name: connection
+      type: mixed
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mysqlnd_memcache_set
+  signature:
+    params:
+    - name: mysql_connection
+      type: mixed
+    - name: memcache_connection
+      type: mixed
+      optional: true
+    - name: pattern
+      type: string
+      optional: true
+    - name: callback
+      type: callable
+      optional: true
+    returnType: bool
+- subject:
+    function: mysqlnd_ms_dump_servers
+  signature:
+    params:
+    - name: connection
+      type: mixed
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mysqlnd_ms_fabric_select_global
+  signature:
+    params:
+    - name: connection
+      type: mixed
+    - name: table_name
+      type: mixed
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: mysqlnd_ms_fabric_select_shard
+  signature:
+    params:
+    - name: connection
+      type: mixed
+    - name: table_name
+      type: mixed
+    - name: shard_key
+      type: mixed
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: mysqlnd_ms_get_last_gtid
+  signature:
+    params:
+    - name: connection
+      type: mixed
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mysqlnd_ms_get_last_used_connection
+  signature:
+    params:
+    - name: connection
+      type: mixed
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mysqlnd_ms_get_stats
+  signature:
+    returnType: array
+- subject:
+    function: mysqlnd_ms_match_wild
+  signature:
+    params:
+    - name: table_name
+      type: string
+    - name: wildcard
+      type: string
+    returnType: bool
+- subject:
+    function: mysqlnd_ms_query_is_select
+  signature:
+    params:
+    - name: query
+      type: string
+    returnType: int
+- subject:
+    function: mysqlnd_ms_set_qos
+  signature:
+    params:
+    - name: connection
+      type: mixed
+    - name: service_level
+      type: int
+    - name: service_level_option
+      type: int
+      optional: true
+    - name: option_value
+      type: mixed
+      optional: true
+    returnType: bool
+- subject:
+    function: mysqlnd_ms_set_user_pick_server
+  signature:
+    params:
+    - name: function
+      type: string
+    returnType: bool
+- subject:
+    function: mysqlnd_ms_xa_begin
+  signature:
+    params:
+    - name: connection
+      type: mixed
+    - name: gtrid
+      type: string
+    - name: timeout
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: mysqlnd_ms_xa_commit
+  signature:
+    params:
+    - name: connection
+      type: mixed
+    - name: gtrid
+      type: string
+    returnType: int
+- subject:
+    function: mysqlnd_ms_xa_gc
+  signature:
+    params:
+    - name: connection
+      type: mixed
+    - name: gtrid
+      type: string
+      optional: true
+    - name: ignore_max_retries
+      type: bool
+      optional: true
+    returnType: int
+- subject:
+    function: mysqlnd_ms_xa_rollback
+  signature:
+    params:
+    - name: connection
+      type: mixed
+    - name: gtrid
+      type: string
+    returnType: int
+- subject:
+    function: mysqlnd_qc_change_handler
+  signature:
+    params:
+    - name: handler
+      type: mixed
+    returnType: bool
+- subject:
+    function: mysqlnd_qc_clear_cache
+  signature:
+    returnType: bool
+- subject:
+    function: mysqlnd_qc_get_available_handlers
+  signature:
+    returnType: array
+- subject:
+    function: mysqlnd_qc_get_cache_info
+  signature:
+    returnType: array
+- subject:
+    function: mysqlnd_qc_get_core_stats
+  signature:
+    returnType: array
+- subject:
+    function: mysqlnd_qc_get_handler
+  signature:
+    returnType: array
+- subject:
+    function: mysqlnd_qc_get_normalized_query_trace_log
+  signature:
+    returnType: array
+- subject:
+    function: mysqlnd_qc_get_query_trace_log
+  signature:
+    returnType: array
+- subject:
+    function: mysqlnd_qc_set_cache_condition
+  signature:
+    params:
+    - name: condition_type
+      type: int
+    - name: condition
+      type: mixed
+    - name: condition_option
+      type: mixed
+    returnType: bool
+- subject:
+    function: mysqlnd_qc_set_is_select
+  signature:
+    params:
+    - name: callback
+      type: string
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mysqlnd_qc_set_storage_handler
+  signature:
+    params:
+    - name: handler
+      type: string
+    returnType: bool
+- subject:
+    function: mysqlnd_qc_set_user_handlers
+  signature:
+    params:
+    - name: get_hash
+      type: string
+    - name: find_query_in_cache
+      type: string
+    - name: return_to_cache
+      type: string
+    - name: add_query_to_cache_if_not_exists
+      type: string
+    - name: query_is_select
+      type: string
+    - name: update_query_run_time_stats
+      type: string
+    - name: get_stats
+      type: string
+    - name: clear_cache
+      type: string
+    returnType: bool
+- subject:
+    function: mysqlnd_uh_convert_to_mysqlnd
+  signature:
+    params:
+    - name: rw mysql_connection
+      type: mixed
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: mysqlnd_uh_set_connection_proxy
+  signature:
+    params:
+    - name: rw connection_proxy
+      type: mixed
+    - name: rw mysqli_connection
+      type: mixed
+      optional: true
+    returnType: bool
+- subject:
+    function: mysqlnd_uh_set_statement_proxy
+  signature:
+    params:
+    - name: rw statement_proxy
+      type: mixed
+    returnType: bool
+- subject:
+    function: natcasesort
+  signature:
+    params:
+    - name: array
+      type: array
+    returnType: bool
+- subject:
+    function: natsort
+  signature:
+    params:
+    - name: array
+      type: array
+    returnType: bool
+- subject:
+    function: net_get_interfaces
+  signature:
+    returnType: array
+- subject:
+    function: newrelic_add_custom_parameter
+  signature:
+    params:
+    - name: key
+      type: string
+    - name: value
+      type: mixed
+    returnType: bool
+- subject:
+    function: newrelic_add_custom_tracer
+  signature:
+    params:
+    - name: function_name
+      type: string
+    returnType: bool
+- subject:
+    function: newrelic_background_job
+  signature:
+    params:
+    - name: flag
+      type: bool
+      optional: true
+    returnType: void
+- subject:
+    function: newrelic_capture_params
+  signature:
+    params:
+    - name: enable
+      type: bool
+      optional: true
+    returnType: void
+- subject:
+    function: newrelic_custom_metric
+  signature:
+    params:
+    - name: metric_name
+      type: string
+    - name: value
+      type: float
+    returnType: bool
+- subject:
+    function: newrelic_disable_autorum
+  signature:
+    returnType: bool
+- subject:
+    function: newrelic_end_of_transaction
+  signature:
+    returnType: void
+- subject:
+    function: newrelic_end_transaction
+  signature:
+    params:
+    - name: ignore
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: newrelic_get_browser_timing_footer
+  signature:
+    params:
+    - name: include_tags
+      type: bool
+      optional: true
+    returnType: string
+- subject:
+    function: newrelic_get_browser_timing_header
+  signature:
+    params:
+    - name: include_tags
+      type: bool
+      optional: true
+    returnType: string
+- subject:
+    function: newrelic_ignore_apdex
+  signature:
+    returnType: void
+- subject:
+    function: newrelic_ignore_transaction
+  signature:
+    returnType: void
+- subject:
+    function: newrelic_name_transaction
+  signature:
+    params:
+    - name: name
+      type: string
+    returnType: bool
+- subject:
+    function: newrelic_notice_error
+  signature:
+    params:
+    - name: message
+      type: string
+    - name: exception
+      type: mixed
+      optional: true
+    returnType: void
+- subject:
+    function: newrelic_record_custom_event
+  signature:
+    params:
+    - name: name
+      type: string
+    - name: attributes
+      type: array
+    returnType: void
+- subject:
+    function: newrelic_record_datastore_segment
+  signature:
+    params:
+    - name: func
+      type: callable
+    - name: parameters
+      type: array
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: newrelic_set_appname
+  signature:
+    params:
+    - name: name
+      type: string
+    - name: license
+      type: string
+      optional: true
+    - name: xmit
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: newrelic_set_user_attributes
+  signature:
+    params:
+    - name: user
+      type: string
+    - name: account
+      type: string
+    - name: product
+      type: string
+    returnType: bool
+- subject:
+    function: newrelic_start_transaction
+  signature:
+    params:
+    - name: appname
+      type: string
+    - name: license
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: next
+  signature:
+    params:
+    - name: array
+      type: array
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: nl2br
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: use_xhtml
+      type: bool
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: nl_langinfo
+  signature:
+    params:
+    - name: item
+      type: int
+    returnType: string
+- subject:
+    function: normalizer_get_raw_decomposition
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: form
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: normalizer_is_normalized
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: form
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: normalizer_normalize
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: form
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: notes_body
+  signature:
+    params:
+    - name: server
+      type: string
+    - name: mailbox
+      type: string
+    - name: msg_number
+      type: int
+    returnType: array
+- subject:
+    function: notes_copy_db
+  signature:
+    params:
+    - name: from_database_name
+      type: string
+    - name: to_database_name
+      type: string
+    returnType: bool
+- subject:
+    function: notes_create_db
+  signature:
+    params:
+    - name: database_name
+      type: string
+    returnType: bool
+- subject:
+    function: notes_create_note
+  signature:
+    params:
+    - name: database_name
+      type: string
+    - name: form_name
+      type: string
+    returnType: bool
+- subject:
+    function: notes_drop_db
+  signature:
+    params:
+    - name: database_name
+      type: string
+    returnType: bool
+- subject:
+    function: notes_find_note
+  signature:
+    params:
+    - name: database_name
+      type: string
+    - name: name
+      type: string
+    - name: type
+      type: string
+      optional: true
+    returnType: int
+- subject:
+    function: notes_header_info
+  signature:
+    params:
+    - name: server
+      type: string
+    - name: mailbox
+      type: string
+    - name: msg_number
+      type: int
+    returnType: object
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: notes_list_msgs
+  signature:
+    params:
+    - name: db
+      type: string
+    returnType: bool
+- subject:
+    function: notes_mark_read
+  signature:
+    params:
+    - name: database_name
+      type: string
+    - name: user_name
+      type: string
+    - name: note_id
+      type: string
+    returnType: bool
+- subject:
+    function: notes_mark_unread
+  signature:
+    params:
+    - name: database_name
+      type: string
+    - name: user_name
+      type: string
+    - name: note_id
+      type: string
+    returnType: bool
+- subject:
+    function: notes_nav_create
+  signature:
+    params:
+    - name: database_name
+      type: string
+    - name: name
+      type: string
+    returnType: bool
+- subject:
+    function: notes_search
+  signature:
+    params:
+    - name: database_name
+      type: string
+    - name: keywords
+      type: string
+    returnType: array
+- subject:
+    function: notes_unread
+  signature:
+    params:
+    - name: database_name
+      type: string
+    - name: user_name
+      type: string
+    returnType: array
+- subject:
+    function: notes_version
+  signature:
+    params:
+    - name: database_name
+      type: string
+    returnType: float
+- subject:
+    function: nsapi_request_headers
+  signature:
+    returnType: array
+- subject:
+    function: nsapi_response_headers
+  signature:
+    returnType: array
+- subject:
+    function: nsapi_virtual
+  signature:
+    params:
+    - name: uri
+      type: string
+    returnType: bool
+- subject:
+    function: nthmac
+  signature:
+    params:
+    - name: clent
+      type: string
+    - name: data
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: number_format
+  signature:
+    params:
+    - name: num
+      type: float
+    - name: decimals
+      type: int
+      optional: true
+    - name: decimal_separator
+      type: string
+      optional: true
+    - name: thousands_separator
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: numfmt_create
+  signature:
+    params:
+    - name: locale
+      type: string
+    - name: style
+      type: int
+    - name: pattern
+      type: string
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: numfmt_format
+  signature:
+    params:
+    - name: formatter
+      type: mixed
+    - name: num
+      type: float
+    - name: type
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: numfmt_format_currency
+  signature:
+    params:
+    - name: formatter
+      type: mixed
+    - name: amount
+      type: float
+    - name: currency
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: numfmt_get_attribute
+  signature:
+    params:
+    - name: formatter
+      type: mixed
+    - name: attribute
+      type: int
+    returnType: float
+- subject:
+    function: numfmt_get_error_code
+  signature:
+    params:
+    - name: formatter
+      type: mixed
+    returnType: int
+- subject:
+    function: numfmt_get_error_message
+  signature:
+    params:
+    - name: formatter
+      type: mixed
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: numfmt_get_locale
+  signature:
+    params:
+    - name: formatter
+      type: mixed
+    - name: type
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: numfmt_get_pattern
+  signature:
+    params:
+    - name: formatter
+      type: mixed
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: numfmt_get_symbol
+  signature:
+    params:
+    - name: formatter
+      type: mixed
+    - name: symbol
+      type: int
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: numfmt_get_text_attribute
+  signature:
+    params:
+    - name: formatter
+      type: mixed
+    - name: attribute
+      type: int
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: numfmt_parse
+  signature:
+    params:
+    - name: formatter
+      type: mixed
+    - name: string
+      type: string
+    - name: type
+      type: int
+      optional: true
+    - name: offset
+      type: int
+      optional: true
+    returnType: float
+- subject:
+    function: numfmt_parse_currency
+  signature:
+    params:
+    - name: formatter
+      type: mixed
+    - name: string
+      type: string
+    - name: currency
+      type: string
+    - name: offset
+      type: int
+      optional: true
+    returnType: float
+- subject:
+    function: numfmt_set_attribute
+  signature:
+    params:
+    - name: formatter
+      type: mixed
+    - name: attribute
+      type: int
+    - name: value
+      type: float
+    returnType: bool
+- subject:
+    function: numfmt_set_pattern
+  signature:
+    params:
+    - name: formatter
+      type: mixed
+    - name: pattern
+      type: string
+    returnType: bool
+- subject:
+    function: numfmt_set_symbol
+  signature:
+    params:
+    - name: formatter
+      type: mixed
+    - name: symbol
+      type: int
+    - name: value
+      type: string
+    returnType: bool
+- subject:
+    function: numfmt_set_text_attribute
+  signature:
+    params:
+    - name: formatter
+      type: mixed
+    - name: attribute
+      type: int
+    - name: value
+      type: string
+    returnType: bool
+- subject:
+    function: oauth_get_sbs
+  signature:
+    params:
+    - name: http_method
+      type: string
+    - name: uri
+      type: string
+    - name: parameters
+      type: array
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: oauth_urlencode
+  signature:
+    params:
+    - name: uri
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: ob_clean
+  signature:
+    returnType: bool
+- subject:
+    function: ob_deflatehandler
+  signature:
+    params:
+    - name: data
+      type: string
+    - name: mode
+      type: int
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: ob_end_clean
+  signature:
+    returnType: bool
+- subject:
+    function: ob_end_flush
+  signature:
+    returnType: bool
+- subject:
+    function: ob_etaghandler
+  signature:
+    params:
+    - name: data
+      type: string
+    - name: mode
+      type: int
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: ob_flush
+  signature:
+    returnType: bool
+- subject:
+    function: ob_get_clean
+  signature:
+    returnType: string
+- subject:
+    function: ob_get_contents
+  signature:
+    returnType: string
+- subject:
+    function: ob_get_flush
+  signature:
+    returnType: string
+- subject:
+    function: ob_get_length
+  signature:
+    returnType: int
+- subject:
+    function: ob_get_level
+  signature:
+    returnType: int
+- subject:
+    function: ob_get_status
+  signature:
+    params:
+    - name: full_status
+      type: bool
+      optional: true
+    returnType: array
+- subject:
+    function: ob_gzhandler
+  signature:
+    params:
+    - name: data
+      type: string
+    - name: flags
+      type: int
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: ob_iconv_handler
+  signature:
+    params:
+    - name: contents
+      type: string
+    - name: status
+      type: int
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: ob_implicit_flush
+  signature:
+    params:
+    - name: enable
+      type: bool
+      optional: true
+    returnType: void
+- subject:
+    function: ob_inflatehandler
+  signature:
+    params:
+    - name: data
+      type: string
+    - name: mode
+      type: int
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: ob_list_handlers
+  signature:
+    returnType: array
+- subject:
+    function: ob_start
+  signature:
+    params:
+    - name: callback
+      type: array
+      optional: true
+    - name: chunk_size
+      type: int
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: ob_tidyhandler
+  signature:
+    params:
+    - name: input
+      type: string
+    - name: mode
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: ocifetchinto
+  signature:
+    params:
+    - name: statement
+      type: resource
+    - name: result
+      type: array
+    - name: mode
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: ocigetbufferinglob
+  signature:
+    returnType: bool
+- subject:
+    function: ocisetbufferinglob
+  signature:
+    params:
+    - name: lob
+      type: bool
+    returnType: bool
+- subject:
+    function: octdec
+  signature:
+    params:
+    - name: octal_string
+      type: string
+    returnType: float
+- subject:
+    function: opcache_compile_file
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: bool
+- subject:
+    function: opcache_get_configuration
+  signature:
+    returnType: array
+- subject:
+    function: opcache_get_status
+  signature:
+    params:
+    - name: include_scripts
+      type: bool
+      optional: true
+    returnType: array
+- subject:
+    function: opcache_invalidate
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: force
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: opcache_is_script_cached
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: bool
+- subject:
+    function: opcache_reset
+  signature:
+    returnType: bool
+- subject:
+    function: openal_buffer_create
+  signature:
+    returnType: resource
+- subject:
+    function: openal_buffer_data
+  signature:
+    params:
+    - name: buffer
+      type: resource
+    - name: format
+      type: int
+    - name: data
+      type: string
+    - name: freq
+      type: int
+    returnType: bool
+- subject:
+    function: openal_buffer_destroy
+  signature:
+    params:
+    - name: buffer
+      type: resource
+    returnType: bool
+- subject:
+    function: openal_buffer_get
+  signature:
+    params:
+    - name: buffer
+      type: resource
+    - name: property
+      type: int
+    returnType: int
+- subject:
+    function: openal_buffer_loadwav
+  signature:
+    params:
+    - name: buffer
+      type: resource
+    - name: wavfile
+      type: string
+    returnType: bool
+- subject:
+    function: openal_context_create
+  signature:
+    params:
+    - name: device
+      type: resource
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: openal_context_current
+  signature:
+    params:
+    - name: context
+      type: resource
+    returnType: bool
+- subject:
+    function: openal_context_destroy
+  signature:
+    params:
+    - name: context
+      type: resource
+    returnType: bool
+- subject:
+    function: openal_context_process
+  signature:
+    params:
+    - name: context
+      type: resource
+    returnType: bool
+- subject:
+    function: openal_context_suspend
+  signature:
+    params:
+    - name: context
+      type: resource
+    returnType: bool
+- subject:
+    function: openal_device_close
+  signature:
+    params:
+    - name: device
+      type: resource
+    returnType: bool
+- subject:
+    function: openal_device_open
+  signature:
+    params:
+    - name: device_desc
+      type: string
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: openal_listener_get
+  signature:
+    params:
+    - name: property
+      type: int
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: openal_listener_set
+  signature:
+    params:
+    - name: property
+      type: int
+    - name: setting
+      type: mixed
+    returnType: bool
+- subject:
+    function: openal_source_create
+  signature:
+    returnType: resource
+- subject:
+    function: openal_source_destroy
+  signature:
+    params:
+    - name: source
+      type: resource
+    returnType: bool
+- subject:
+    function: openal_source_get
+  signature:
+    params:
+    - name: source
+      type: resource
+    - name: property
+      type: int
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: openal_source_pause
+  signature:
+    params:
+    - name: source
+      type: resource
+    returnType: bool
+- subject:
+    function: openal_source_play
+  signature:
+    params:
+    - name: source
+      type: resource
+    returnType: bool
+- subject:
+    function: openal_source_rewind
+  signature:
+    params:
+    - name: source
+      type: resource
+    returnType: bool
+- subject:
+    function: openal_source_set
+  signature:
+    params:
+    - name: source
+      type: resource
+    - name: property
+      type: int
+    - name: setting
+      type: mixed
+    returnType: bool
+- subject:
+    function: openal_source_stop
+  signature:
+    params:
+    - name: source
+      type: resource
+    returnType: bool
+- subject:
+    function: openal_stream
+  signature:
+    params:
+    - name: source
+      type: resource
+    - name: format
+      type: int
+    - name: rate
+      type: int
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: openlog
+  signature:
+    params:
+    - name: prefix
+      type: string
+    - name: flags
+      type: int
+    - name: facility
+      type: int
+    returnType: bool
+- subject:
+    function: ord
+  signature:
+    params:
+    - name: character
+      type: string
+    returnType: int
+- subject:
+    function: output_add_rewrite_var
+  signature:
+    params:
+    - name: name
+      type: string
+    - name: value
+      type: string
+    returnType: bool
+- subject:
+    function: output_cache_disable
+  signature:
+    returnType: void
+- subject:
+    function: output_cache_disable_compression
+  signature:
+    returnType: void
+- subject:
+    function: output_cache_exists
+  signature:
+    params:
+    - name: key
+      type: string
+    - name: lifetime
+      type: int
+    returnType: bool
+- subject:
+    function: output_cache_fetch
+  signature:
+    params:
+    - name: key
+      type: string
+    - name: function
+      type: mixed
+    - name: lifetime
+      type: int
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: output_cache_get
+  signature:
+    params:
+    - name: key
+      type: string
+    - name: lifetime
+      type: int
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: output_cache_output
+  signature:
+    params:
+    - name: key
+      type: string
+    - name: function
+      type: mixed
+    - name: lifetime
+      type: int
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: output_cache_put
+  signature:
+    params:
+    - name: key
+      type: string
+    - name: data
+      type: mixed
+    returnType: bool
+- subject:
+    function: output_cache_remove
+  signature:
+    params:
+    - name: filename
+      type: mixed
+    returnType: bool
+- subject:
+    function: output_cache_remove_key
+  signature:
+    params:
+    - name: key
+      type: string
+    returnType: bool
+- subject:
+    function: output_cache_remove_url
+  signature:
+    params:
+    - name: url
+      type: string
+    returnType: bool
+- subject:
+    function: output_cache_stop
+  signature:
+    returnType: void
+- subject:
+    function: output_reset_rewrite_vars
+  signature:
+    returnType: bool
+- subject:
+    function: overload
+  signature:
+    params:
+    - name: class_name
+      type: string
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: override_function
+  signature:
+    params:
+    - name: function_name
+      type: string
+    - name: function_args
+      type: string
+    - name: function_code
+      type: string
+    returnType: bool
+- subject:
+    function: pack
+  signature:
+    params:
+    - name: format
+      type: string
+    - name: values
+      type: mixed
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: parse_ini_file
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: process_sections
+      type: bool
+      optional: true
+    - name: scanner_mode
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    function: parse_ini_string
+  signature:
+    params:
+    - name: ini_string
+      type: string
+    - name: process_sections
+      type: bool
+      optional: true
+    - name: scanner_mode
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    function: parse_str
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: result
+      type: array
+    returnType: void
+- subject:
+    function: parse_url
+  signature:
+    params:
+    - name: url
+      type: string
+    - name: component
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    function: parsekit_compile_file
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: errors
+      type: array
+      optional: true
+    - name: options
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: parsekit_compile_string
+  signature:
+    params:
+    - name: phpcode
+      type: string
+    - name: errors
+      type: array
+      optional: true
+    - name: options
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: parsekit_func_arginfo
+  signature:
+    params:
+    - name: function
+      type: mixed
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: passthru
+  signature:
+    params:
+    - name: command
+      type: string
+    - name: result_code
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: password_algos
+  signature:
+    returnType: array
+- subject:
+    function: password_get_info
+  signature:
+    params:
+    - name: hash
+      type: string
+    returnType: array
+- subject:
+    function: password_hash
+  signature:
+    params:
+    - name: password
+      type: string
+    - name: algo
+      type: int
+    - name: options
+      type: array
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: password_make_salt
+  signature:
+    params:
+    - name: password
+      type: string
+    - name: hash
+      type: string
+    returnType: bool
+- subject:
+    function: password_needs_rehash
+  signature:
+    params:
+    - name: hash
+      type: string
+    - name: algo
+      type: int
+    - name: options
+      type: array
+      optional: true
+    returnType: bool
+- subject:
+    function: password_verify
+  signature:
+    params:
+    - name: password
+      type: string
+    - name: hash
+      type: string
+    returnType: bool
+- subject:
+    function: pclose
+  signature:
+    params:
+    - name: handle
+      type: resource
+    returnType: int
+- subject:
+    function: pcnlt_sigwaitinfo
+  signature:
+    params:
+    - name: set
+      type: array
+    - name: siginfo
+      type: array
+    returnType: int
+- subject:
+    function: pdf_activate_item
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: id
+      type: int
+    returnType: bool
+- subject:
+    function: pdf_add_launchlink
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: llx
+      type: float
+    - name: lly
+      type: float
+    - name: urx
+      type: float
+    - name: ury
+      type: float
+    - name: filename
+      type: string
+    returnType: bool
+- subject:
+    function: pdf_add_locallink
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: lowerleftx
+      type: float
+    - name: lowerlefty
+      type: float
+    - name: upperrightx
+      type: float
+    - name: upperrighty
+      type: float
+    - name: page
+      type: int
+    - name: dest
+      type: string
+    returnType: bool
+- subject:
+    function: pdf_add_nameddest
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: name
+      type: string
+    - name: optlist
+      type: string
+    returnType: bool
+- subject:
+    function: pdf_add_note
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: llx
+      type: float
+    - name: lly
+      type: float
+    - name: urx
+      type: float
+    - name: ury
+      type: float
+    - name: contents
+      type: string
+    - name: title
+      type: string
+    - name: icon
+      type: string
+    - name: open
+      type: int
+    returnType: bool
+- subject:
+    function: pdf_add_pdflink
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: bottom_left_x
+      type: float
+    - name: bottom_left_y
+      type: float
+    - name: up_right_x
+      type: float
+    - name: up_right_y
+      type: float
+    - name: filename
+      type: string
+    - name: page
+      type: int
+    - name: dest
+      type: string
+    returnType: bool
+- subject:
+    function: pdf_add_table_cell
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: table
+      type: int
+    - name: column
+      type: int
+    - name: row
+      type: int
+    - name: text
+      type: string
+    - name: optlist
+      type: string
+    returnType: int
+- subject:
+    function: pdf_add_textflow
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: textflow
+      type: int
+    - name: text
+      type: string
+    - name: optlist
+      type: string
+    returnType: int
+- subject:
+    function: pdf_add_thumbnail
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: image
+      type: int
+    returnType: bool
+- subject:
+    function: pdf_add_weblink
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: lowerleftx
+      type: float
+    - name: lowerlefty
+      type: float
+    - name: upperrightx
+      type: float
+    - name: upperrighty
+      type: float
+    - name: url
+      type: string
+    returnType: bool
+- subject:
+    function: pdf_arc
+  signature:
+    params:
+    - name: p
+      type: resource
+    - name: x
+      type: float
+    - name: y
+      type: float
+    - name: r
+      type: float
+    - name: alpha
+      type: float
+    - name: beta
+      type: float
+    returnType: bool
+- subject:
+    function: pdf_arcn
+  signature:
+    params:
+    - name: p
+      type: resource
+    - name: x
+      type: float
+    - name: y
+      type: float
+    - name: r
+      type: float
+    - name: alpha
+      type: float
+    - name: beta
+      type: float
+    returnType: bool
+- subject:
+    function: pdf_attach_file
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: llx
+      type: float
+    - name: lly
+      type: float
+    - name: urx
+      type: float
+    - name: ury
+      type: float
+    - name: filename
+      type: string
+    - name: description
+      type: string
+    - name: author
+      type: string
+    - name: mimetype
+      type: string
+    - name: icon
+      type: string
+    returnType: bool
+- subject:
+    function: pdf_begin_document
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: filename
+      type: string
+    - name: optlist
+      type: string
+    returnType: int
+- subject:
+    function: pdf_begin_font
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: filename
+      type: string
+    - name: a
+      type: float
+    - name: b
+      type: float
+    - name: c
+      type: float
+    - name: d
+      type: float
+    - name: e
+      type: float
+    - name: f
+      type: float
+    - name: optlist
+      type: string
+    returnType: bool
+- subject:
+    function: pdf_begin_glyph
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: glyphname
+      type: string
+    - name: wx
+      type: float
+    - name: llx
+      type: float
+    - name: lly
+      type: float
+    - name: urx
+      type: float
+    - name: ury
+      type: float
+    returnType: bool
+- subject:
+    function: pdf_begin_item
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: tag
+      type: string
+    - name: optlist
+      type: string
+    returnType: int
+- subject:
+    function: pdf_begin_layer
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: layer
+      type: int
+    returnType: bool
+- subject:
+    function: pdf_begin_page
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: width
+      type: float
+    - name: height
+      type: float
+    returnType: bool
+- subject:
+    function: pdf_begin_page_ext
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: width
+      type: float
+    - name: height
+      type: float
+    - name: optlist
+      type: string
+    returnType: bool
+- subject:
+    function: pdf_begin_pattern
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: width
+      type: float
+    - name: height
+      type: float
+    - name: xstep
+      type: float
+    - name: ystep
+      type: float
+    - name: painttype
+      type: int
+    returnType: int
+- subject:
+    function: pdf_begin_template
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: width
+      type: float
+    - name: height
+      type: float
+    returnType: int
+- subject:
+    function: pdf_begin_template_ext
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: width
+      type: float
+    - name: height
+      type: float
+    - name: optlist
+      type: string
+    returnType: int
+- subject:
+    function: pdf_circle
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: x
+      type: float
+    - name: y
+      type: float
+    - name: r
+      type: float
+    returnType: bool
+- subject:
+    function: pdf_clip
+  signature:
+    params:
+    - name: p
+      type: resource
+    returnType: bool
+- subject:
+    function: pdf_close
+  signature:
+    params:
+    - name: p
+      type: resource
+    returnType: bool
+- subject:
+    function: pdf_close_image
+  signature:
+    params:
+    - name: p
+      type: resource
+    - name: image
+      type: int
+    returnType: bool
+- subject:
+    function: pdf_close_pdi
+  signature:
+    params:
+    - name: p
+      type: resource
+    - name: doc
+      type: int
+    returnType: bool
+- subject:
+    function: pdf_close_pdi_page
+  signature:
+    params:
+    - name: p
+      type: resource
+    - name: page
+      type: int
+    returnType: bool
+- subject:
+    function: pdf_closepath
+  signature:
+    params:
+    - name: p
+      type: resource
+    returnType: bool
+- subject:
+    function: pdf_closepath_fill_stroke
+  signature:
+    params:
+    - name: p
+      type: resource
+    returnType: bool
+- subject:
+    function: pdf_closepath_stroke
+  signature:
+    params:
+    - name: p
+      type: resource
+    returnType: bool
+- subject:
+    function: pdf_concat
+  signature:
+    params:
+    - name: p
+      type: resource
+    - name: a
+      type: float
+    - name: b
+      type: float
+    - name: c
+      type: float
+    - name: d
+      type: float
+    - name: e
+      type: float
+    - name: f
+      type: float
+    returnType: bool
+- subject:
+    function: pdf_continue_text
+  signature:
+    params:
+    - name: p
+      type: resource
+    - name: text
+      type: string
+    returnType: bool
+- subject:
+    function: pdf_create_3dview
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: username
+      type: string
+    - name: optlist
+      type: string
+    returnType: int
+- subject:
+    function: pdf_create_action
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: type
+      type: string
+    - name: optlist
+      type: string
+    returnType: int
+- subject:
+    function: pdf_create_annotation
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: llx
+      type: float
+    - name: lly
+      type: float
+    - name: urx
+      type: float
+    - name: ury
+      type: float
+    - name: type
+      type: string
+    - name: optlist
+      type: string
+    returnType: bool
+- subject:
+    function: pdf_create_bookmark
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: text
+      type: string
+    - name: optlist
+      type: string
+    returnType: int
+- subject:
+    function: pdf_create_field
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: llx
+      type: float
+    - name: lly
+      type: float
+    - name: urx
+      type: float
+    - name: ury
+      type: float
+    - name: name
+      type: string
+    - name: type
+      type: string
+    - name: optlist
+      type: string
+    returnType: bool
+- subject:
+    function: pdf_create_fieldgroup
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: name
+      type: string
+    - name: optlist
+      type: string
+    returnType: bool
+- subject:
+    function: pdf_create_gstate
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: optlist
+      type: string
+    returnType: int
+- subject:
+    function: pdf_create_pvf
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: filename
+      type: string
+    - name: data
+      type: string
+    - name: optlist
+      type: string
+    returnType: bool
+- subject:
+    function: pdf_create_textflow
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: text
+      type: string
+    - name: optlist
+      type: string
+    returnType: int
+- subject:
+    function: pdf_curveto
+  signature:
+    params:
+    - name: p
+      type: resource
+    - name: x1
+      type: float
+    - name: y1
+      type: float
+    - name: x2
+      type: float
+    - name: y2
+      type: float
+    - name: x3
+      type: float
+    - name: y3
+      type: float
+    returnType: bool
+- subject:
+    function: pdf_define_layer
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: name
+      type: string
+    - name: optlist
+      type: string
+    returnType: int
+- subject:
+    function: pdf_delete
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    returnType: bool
+- subject:
+    function: pdf_delete_pvf
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: filename
+      type: string
+    returnType: int
+- subject:
+    function: pdf_delete_table
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: table
+      type: int
+    - name: optlist
+      type: string
+    returnType: bool
+- subject:
+    function: pdf_delete_textflow
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: textflow
+      type: int
+    returnType: bool
+- subject:
+    function: pdf_encoding_set_char
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: encoding
+      type: string
+    - name: slot
+      type: int
+    - name: glyphname
+      type: string
+    - name: uv
+      type: int
+    returnType: bool
+- subject:
+    function: pdf_end_document
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: optlist
+      type: string
+    returnType: bool
+- subject:
+    function: pdf_end_font
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    returnType: bool
+- subject:
+    function: pdf_end_glyph
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    returnType: bool
+- subject:
+    function: pdf_end_item
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: id
+      type: int
+    returnType: bool
+- subject:
+    function: pdf_end_layer
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    returnType: bool
+- subject:
+    function: pdf_end_page
+  signature:
+    params:
+    - name: p
+      type: resource
+    returnType: bool
+- subject:
+    function: pdf_end_page_ext
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: optlist
+      type: string
+    returnType: bool
+- subject:
+    function: pdf_end_pattern
+  signature:
+    params:
+    - name: p
+      type: resource
+    returnType: bool
+- subject:
+    function: pdf_end_template
+  signature:
+    params:
+    - name: p
+      type: resource
+    returnType: bool
+- subject:
+    function: pdf_endpath
+  signature:
+    params:
+    - name: p
+      type: resource
+    returnType: bool
+- subject:
+    function: pdf_fill
+  signature:
+    params:
+    - name: p
+      type: resource
+    returnType: bool
+- subject:
+    function: pdf_fill_imageblock
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: page
+      type: int
+    - name: blockname
+      type: string
+    - name: image
+      type: int
+    - name: optlist
+      type: string
+    returnType: int
+- subject:
+    function: pdf_fill_pdfblock
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: page
+      type: int
+    - name: blockname
+      type: string
+    - name: contents
+      type: int
+    - name: optlist
+      type: string
+    returnType: int
+- subject:
+    function: pdf_fill_stroke
+  signature:
+    params:
+    - name: p
+      type: resource
+    returnType: bool
+- subject:
+    function: pdf_fill_textblock
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: page
+      type: int
+    - name: blockname
+      type: string
+    - name: text
+      type: string
+    - name: optlist
+      type: string
+    returnType: int
+- subject:
+    function: pdf_findfont
+  signature:
+    params:
+    - name: p
+      type: resource
+    - name: fontname
+      type: string
+    - name: encoding
+      type: string
+    - name: embed
+      type: int
+    returnType: int
+- subject:
+    function: pdf_fit_image
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: image
+      type: int
+    - name: x
+      type: float
+    - name: y
+      type: float
+    - name: optlist
+      type: string
+    returnType: bool
+- subject:
+    function: pdf_fit_pdi_page
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: page
+      type: int
+    - name: x
+      type: float
+    - name: y
+      type: float
+    - name: optlist
+      type: string
+    returnType: bool
+- subject:
+    function: pdf_fit_table
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: table
+      type: int
+    - name: llx
+      type: float
+    - name: lly
+      type: float
+    - name: urx
+      type: float
+    - name: ury
+      type: float
+    - name: optlist
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(6)
+    to: return
+- subject:
+    function: pdf_fit_textflow
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: textflow
+      type: int
+    - name: llx
+      type: float
+    - name: lly
+      type: float
+    - name: urx
+      type: float
+    - name: ury
+      type: float
+    - name: optlist
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(6)
+    to: return
+- subject:
+    function: pdf_fit_textline
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: text
+      type: string
+    - name: x
+      type: float
+    - name: y
+      type: float
+    - name: optlist
+      type: string
+    returnType: bool
+- subject:
+    function: pdf_get_apiname
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    returnType: string
+- subject:
+    function: pdf_get_buffer
+  signature:
+    params:
+    - name: p
+      type: resource
+    returnType: string
+- subject:
+    function: pdf_get_errmsg
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    returnType: string
+- subject:
+    function: pdf_get_errnum
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    returnType: int
+- subject:
+    function: pdf_get_majorversion
+  signature:
+    returnType: int
+- subject:
+    function: pdf_get_minorversion
+  signature:
+    returnType: int
+- subject:
+    function: pdf_get_parameter
+  signature:
+    params:
+    - name: p
+      type: resource
+    - name: key
+      type: string
+    - name: modifier
+      type: float
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: pdf_get_pdi_parameter
+  signature:
+    params:
+    - name: p
+      type: resource
+    - name: key
+      type: string
+    - name: doc
+      type: int
+    - name: page
+      type: int
+    - name: reserved
+      type: int
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: pdf_get_pdi_value
+  signature:
+    params:
+    - name: p
+      type: resource
+    - name: key
+      type: string
+    - name: doc
+      type: int
+    - name: page
+      type: int
+    - name: reserved
+      type: int
+    returnType: float
+- subject:
+    function: pdf_get_value
+  signature:
+    params:
+    - name: p
+      type: resource
+    - name: key
+      type: string
+    - name: modifier
+      type: float
+    returnType: float
+- subject:
+    function: pdf_info_font
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: font
+      type: int
+    - name: keyword
+      type: string
+    - name: optlist
+      type: string
+    returnType: float
+- subject:
+    function: pdf_info_matchbox
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: boxname
+      type: string
+    - name: num
+      type: int
+    - name: keyword
+      type: string
+    returnType: float
+- subject:
+    function: pdf_info_table
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: table
+      type: int
+    - name: keyword
+      type: string
+    returnType: float
+- subject:
+    function: pdf_info_textflow
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: textflow
+      type: int
+    - name: keyword
+      type: string
+    returnType: float
+- subject:
+    function: pdf_info_textline
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: text
+      type: string
+    - name: keyword
+      type: string
+    - name: optlist
+      type: string
+    returnType: float
+- subject:
+    function: pdf_initgraphics
+  signature:
+    params:
+    - name: p
+      type: resource
+    returnType: bool
+- subject:
+    function: pdf_lineto
+  signature:
+    params:
+    - name: p
+      type: resource
+    - name: x
+      type: float
+    - name: y
+      type: float
+    returnType: bool
+- subject:
+    function: pdf_load_3ddata
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: filename
+      type: string
+    - name: optlist
+      type: string
+    returnType: int
+- subject:
+    function: pdf_load_font
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: fontname
+      type: string
+    - name: encoding
+      type: string
+    - name: optlist
+      type: string
+    returnType: int
+- subject:
+    function: pdf_load_iccprofile
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: profilename
+      type: string
+    - name: optlist
+      type: string
+    returnType: int
+- subject:
+    function: pdf_load_image
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: imagetype
+      type: string
+    - name: filename
+      type: string
+    - name: optlist
+      type: string
+    returnType: int
+- subject:
+    function: pdf_makespotcolor
+  signature:
+    params:
+    - name: p
+      type: resource
+    - name: spotname
+      type: string
+    returnType: int
+- subject:
+    function: pdf_moveto
+  signature:
+    params:
+    - name: p
+      type: resource
+    - name: x
+      type: float
+    - name: y
+      type: float
+    returnType: bool
+- subject:
+    function: pdf_new
+  signature:
+    returnType: resource
+- subject:
+    function: pdf_open_ccitt
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: filename
+      type: string
+    - name: width
+      type: int
+    - name: height
+      type: int
+    - name: bitreverse
+      type: int
+    - name: k
+      type: int
+    - name: blackls1
+      type: int
+    returnType: int
+- subject:
+    function: pdf_open_file
+  signature:
+    params:
+    - name: p
+      type: resource
+    - name: filename
+      type: string
+    returnType: bool
+- subject:
+    function: pdf_open_image
+  signature:
+    params:
+    - name: p
+      type: resource
+    - name: imagetype
+      type: string
+    - name: source
+      type: string
+    - name: data
+      type: string
+    - name: length
+      type: int
+    - name: width
+      type: int
+    - name: height
+      type: int
+    - name: components
+      type: int
+    - name: bpc
+      type: int
+    - name: params
+      type: string
+    returnType: int
+- subject:
+    function: pdf_open_image_file
+  signature:
+    params:
+    - name: p
+      type: resource
+    - name: imagetype
+      type: string
+    - name: filename
+      type: string
+    - name: stringparam
+      type: string
+    - name: intparam
+      type: int
+    returnType: int
+- subject:
+    function: pdf_open_memory_image
+  signature:
+    params:
+    - name: p
+      type: resource
+    - name: image
+      type: resource
+    returnType: int
+- subject:
+    function: pdf_open_pdi
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: filename
+      type: string
+    - name: optlist
+      type: string
+    - name: length
+      type: int
+    returnType: int
+- subject:
+    function: pdf_open_pdi_document
+  signature:
+    params:
+    - name: p
+      type: resource
+    - name: filename
+      type: string
+    - name: optlist
+      type: string
+    returnType: int
+- subject:
+    function: pdf_open_pdi_page
+  signature:
+    params:
+    - name: p
+      type: resource
+    - name: doc
+      type: int
+    - name: pagenumber
+      type: int
+    - name: optlist
+      type: string
+    returnType: int
+- subject:
+    function: pdf_pcos_get_number
+  signature:
+    params:
+    - name: p
+      type: resource
+    - name: doc
+      type: int
+    - name: path
+      type: string
+    returnType: float
+- subject:
+    function: pdf_pcos_get_stream
+  signature:
+    params:
+    - name: p
+      type: resource
+    - name: doc
+      type: int
+    - name: optlist
+      type: string
+    - name: path
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: pdf_pcos_get_string
+  signature:
+    params:
+    - name: p
+      type: resource
+    - name: doc
+      type: int
+    - name: path
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(2)
+    to: return
+- subject:
+    function: pdf_place_image
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: image
+      type: int
+    - name: x
+      type: float
+    - name: y
+      type: float
+    - name: scale
+      type: float
+    returnType: bool
+- subject:
+    function: pdf_place_pdi_page
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: page
+      type: int
+    - name: x
+      type: float
+    - name: y
+      type: float
+    - name: sx
+      type: float
+    - name: sy
+      type: float
+    returnType: bool
+- subject:
+    function: pdf_process_pdi
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: doc
+      type: int
+    - name: page
+      type: int
+    - name: optlist
+      type: string
+    returnType: int
+- subject:
+    function: pdf_rect
+  signature:
+    params:
+    - name: p
+      type: resource
+    - name: x
+      type: float
+    - name: y
+      type: float
+    - name: width
+      type: float
+    - name: height
+      type: float
+    returnType: bool
+- subject:
+    function: pdf_restore
+  signature:
+    params:
+    - name: p
+      type: resource
+    returnType: bool
+- subject:
+    function: pdf_resume_page
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: optlist
+      type: string
+    returnType: bool
+- subject:
+    function: pdf_rotate
+  signature:
+    params:
+    - name: p
+      type: resource
+    - name: phi
+      type: float
+    returnType: bool
+- subject:
+    function: pdf_save
+  signature:
+    params:
+    - name: p
+      type: resource
+    returnType: bool
+- subject:
+    function: pdf_scale
+  signature:
+    params:
+    - name: p
+      type: resource
+    - name: sx
+      type: float
+    - name: sy
+      type: float
+    returnType: bool
+- subject:
+    function: pdf_set_border_color
+  signature:
+    params:
+    - name: p
+      type: resource
+    - name: red
+      type: float
+    - name: green
+      type: float
+    - name: blue
+      type: float
+    returnType: bool
+- subject:
+    function: pdf_set_border_dash
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: black
+      type: float
+    - name: white
+      type: float
+    returnType: bool
+- subject:
+    function: pdf_set_border_style
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: style
+      type: string
+    - name: width
+      type: float
+    returnType: bool
+- subject:
+    function: pdf_set_gstate
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: gstate
+      type: int
+    returnType: bool
+- subject:
+    function: pdf_set_info
+  signature:
+    params:
+    - name: p
+      type: resource
+    - name: key
+      type: string
+    - name: value
+      type: string
+    returnType: bool
+- subject:
+    function: pdf_set_layer_dependency
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: type
+      type: string
+    - name: optlist
+      type: string
+    returnType: bool
+- subject:
+    function: pdf_set_parameter
+  signature:
+    params:
+    - name: p
+      type: resource
+    - name: key
+      type: string
+    - name: value
+      type: string
+    returnType: bool
+- subject:
+    function: pdf_set_text_pos
+  signature:
+    params:
+    - name: p
+      type: resource
+    - name: x
+      type: float
+    - name: y
+      type: float
+    returnType: bool
+- subject:
+    function: pdf_set_value
+  signature:
+    params:
+    - name: p
+      type: resource
+    - name: key
+      type: string
+    - name: value
+      type: float
+    returnType: bool
+- subject:
+    function: pdf_setcolor
+  signature:
+    params:
+    - name: p
+      type: resource
+    - name: fstype
+      type: string
+    - name: colorspace
+      type: string
+    - name: c1
+      type: float
+    - name: c2
+      type: float
+    - name: c3
+      type: float
+    - name: c4
+      type: float
+    returnType: bool
+- subject:
+    function: pdf_setdash
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: b
+      type: float
+    - name: w
+      type: float
+    returnType: bool
+- subject:
+    function: pdf_setdashpattern
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: optlist
+      type: string
+    returnType: bool
+- subject:
+    function: pdf_setflat
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: flatness
+      type: float
+    returnType: bool
+- subject:
+    function: pdf_setfont
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: font
+      type: int
+    - name: fontsize
+      type: float
+    returnType: bool
+- subject:
+    function: pdf_setgray
+  signature:
+    params:
+    - name: p
+      type: resource
+    - name: g
+      type: float
+    returnType: bool
+- subject:
+    function: pdf_setgray_fill
+  signature:
+    params:
+    - name: p
+      type: resource
+    - name: g
+      type: float
+    returnType: bool
+- subject:
+    function: pdf_setgray_stroke
+  signature:
+    params:
+    - name: p
+      type: resource
+    - name: g
+      type: float
+    returnType: bool
+- subject:
+    function: pdf_setlinecap
+  signature:
+    params:
+    - name: p
+      type: resource
+    - name: linecap
+      type: int
+    returnType: bool
+- subject:
+    function: pdf_setlinejoin
+  signature:
+    params:
+    - name: p
+      type: resource
+    - name: value
+      type: int
+    returnType: bool
+- subject:
+    function: pdf_setlinewidth
+  signature:
+    params:
+    - name: p
+      type: resource
+    - name: width
+      type: float
+    returnType: bool
+- subject:
+    function: pdf_setmatrix
+  signature:
+    params:
+    - name: p
+      type: resource
+    - name: a
+      type: float
+    - name: b
+      type: float
+    - name: c
+      type: float
+    - name: d
+      type: float
+    - name: e
+      type: float
+    - name: f
+      type: float
+    returnType: bool
+- subject:
+    function: pdf_setmiterlimit
+  signature:
+    params:
+    - name: pdfdoc
+      type: resource
+    - name: miter
+      type: float
+    returnType: bool
+- subject:
+    function: pdf_setrgbcolor
+  signature:
+    params:
+    - name: p
+      type: resource
+    - name: red
+      type: float
+    - name: green
+      type: float
+    - name: blue
+      type: float
+    returnType: bool
+- subject:
+    function: pdf_setrgbcolor_fill
+  signature:
+    params:
+    - name: p
+      type: resource
+    - name: red
+      type: float
+    - name: green
+      type: float
+    - name: blue
+      type: float
+    returnType: bool

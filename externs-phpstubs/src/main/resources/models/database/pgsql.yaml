@@ -1,0 +1,1210 @@
+# Generated from stubs/database/pgsql.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: pg_affected_rows
+  signature:
+    params:
+    - name: result
+      type: resource
+    returnType: int
+- subject:
+    function: pg_cancel_query
+  signature:
+    params:
+    - name: connection
+      type: resource
+    returnType: bool
+- subject:
+    function: pg_client_encoding
+  signature:
+    params:
+    - name: connection
+      type: resource
+      optional: true
+    returnType: string
+- subject:
+    function: pg_clientencoding
+  signature:
+    params:
+    - name: connection
+      type: mixed
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: pg_close
+  signature:
+    params:
+    - name: connection
+      type: resource
+      optional: true
+    returnType: bool
+- subject:
+    function: pg_cmdtuples
+  signature:
+    params:
+    - name: result
+      type: mixed
+    returnType: int
+- subject:
+    function: pg_connect
+  signature:
+    params:
+    - name: connection_string
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: pg_connect_poll
+  signature:
+    params:
+    - name: connection
+      type: resource
+    returnType: int
+- subject:
+    function: pg_connection_busy
+  signature:
+    params:
+    - name: connection
+      type: resource
+    returnType: bool
+- subject:
+    function: pg_connection_reset
+  signature:
+    params:
+    - name: connection
+      type: resource
+    returnType: bool
+- subject:
+    function: pg_connection_status
+  signature:
+    params:
+    - name: connection
+      type: resource
+    returnType: int
+- subject:
+    function: pg_consume_input
+  signature:
+    params:
+    - name: connection
+      type: resource
+    returnType: bool
+- subject:
+    function: pg_convert
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: table_name
+      type: string
+    - name: values
+      type: array
+    - name: flags
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(2)
+    to: return
+- subject:
+    function: pg_copy_from
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: table_name
+      type: string
+    - name: rows
+      type: array
+    - name: separator
+      type: string
+      optional: true
+    - name: null_as
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: pg_copy_to
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: table_name
+      type: string
+    - name: separator
+      type: string
+      optional: true
+    - name: null_as
+      type: string
+      optional: true
+    returnType: array
+- subject:
+    function: pg_dbname
+  signature:
+    params:
+    - name: connection
+      type: resource
+      optional: true
+    returnType: string
+- subject:
+    function: pg_delete
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: table_name
+      type: string
+    - name: conditions
+      type: array
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: pg_end_copy
+  signature:
+    params:
+    - name: connection
+      type: resource
+      optional: true
+    returnType: bool
+- subject:
+    function: pg_errormessage
+  signature:
+    params:
+    - name: connection
+      type: mixed
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: pg_escape_bytea
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: string
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: pg_escape_identifier
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: string
+      type: string
+      optional: true
+    returnType: string
+- subject:
+    function: pg_escape_literal
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: string
+      type: string
+      optional: true
+    returnType: string
+- subject:
+    function: pg_escape_string
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: string
+      type: string
+      optional: true
+    returnType: string
+- subject:
+    function: pg_exec
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: query
+      type: string
+      optional: true
+    returnType: resource
+- subject:
+    function: pg_execute
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: statement_name
+      type: string
+    - name: params
+      type: array
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: pg_fetch_all
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: mode
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    function: pg_fetch_all_columns
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: field
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    function: pg_fetch_array
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: row
+      type: int
+      optional: true
+    - name: mode
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    function: pg_fetch_assoc
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: row
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    function: pg_fetch_object
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: row
+      type: int
+      optional: true
+    - name: class
+      type: string
+      optional: true
+    - name: constructor_args
+      type: array
+      optional: true
+    returnType: object
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: pg_fetch_result
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: row
+      type: int
+    - name: field
+      type: int
+      optional: true
+    returnType: string
+- subject:
+    function: pg_fetch_row
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: row
+      type: int
+      optional: true
+    - name: mode
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    function: pg_field_is_null
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: row
+      type: int
+    - name: field
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: pg_field_name
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: field
+      type: int
+    returnType: string
+- subject:
+    function: pg_field_num
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: field
+      type: string
+    returnType: int
+- subject:
+    function: pg_field_prtlen
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: row
+      type: int
+    - name: field
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: pg_field_size
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: field
+      type: int
+    returnType: int
+- subject:
+    function: pg_field_table
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: field
+      type: int
+    - name: oid_only
+      type: bool
+      optional: true
+    returnType: int
+- subject:
+    function: pg_field_type
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: field
+      type: int
+    returnType: string
+- subject:
+    function: pg_field_type_oid
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: field
+      type: int
+    returnType: int
+- subject:
+    function: pg_fieldisnull
+  signature:
+    params:
+    - name: result
+      type: mixed
+    - name: row
+      type: mixed
+    - name: field
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: pg_fieldname
+  signature:
+    params:
+    - name: result
+      type: mixed
+    - name: field
+      type: int
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: pg_fieldnum
+  signature:
+    params:
+    - name: result
+      type: mixed
+    - name: field
+      type: string
+    returnType: int
+- subject:
+    function: pg_fieldprtlen
+  signature:
+    params:
+    - name: result
+      type: mixed
+    - name: row
+      type: mixed
+    - name: field
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: pg_fieldsize
+  signature:
+    params:
+    - name: result
+      type: mixed
+    - name: field
+      type: int
+    returnType: int
+- subject:
+    function: pg_fieldtype
+  signature:
+    params:
+    - name: result
+      type: mixed
+    - name: field
+      type: int
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: pg_flush
+  signature:
+    params:
+    - name: connection
+      type: resource
+    returnType: bool
+- subject:
+    function: pg_free_result
+  signature:
+    params:
+    - name: result
+      type: resource
+    returnType: bool
+- subject:
+    function: pg_freeresult
+  signature:
+    params:
+    - name: result
+      type: mixed
+    returnType: bool
+- subject:
+    function: pg_get_notify
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: mode
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    function: pg_get_pid
+  signature:
+    params:
+    - name: connection
+      type: resource
+    returnType: int
+- subject:
+    function: pg_get_result
+  signature:
+    params:
+    - name: connection
+      type: resource
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: pg_getlastoid
+  signature:
+    params:
+    - name: result
+      type: mixed
+    returnType: int
+- subject:
+    function: pg_host
+  signature:
+    params:
+    - name: connection
+      type: resource
+      optional: true
+    returnType: string
+- subject:
+    function: pg_insert
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: table_name
+      type: string
+    - name: values
+      type: array
+    - name: flags
+      type: int
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: pg_last_error
+  signature:
+    params:
+    - name: connection
+      type: resource
+      optional: true
+    returnType: string
+- subject:
+    function: pg_last_notice
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: mode
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    function: pg_last_oid
+  signature:
+    params:
+    - name: result
+      type: resource
+    returnType: int
+- subject:
+    function: pg_lo_close
+  signature:
+    params:
+    - name: lob
+      type: resource
+    returnType: bool
+- subject:
+    function: pg_lo_create
+  signature:
+    params:
+    - name: connection
+      type: resource
+      optional: true
+    - name: oid
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: pg_lo_export
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: oid
+      type: int
+      optional: true
+    - name: filename
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: pg_lo_import
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: filename
+      type: string
+      optional: true
+    - name: oid
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: pg_lo_open
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: oid
+      type: int
+      optional: true
+    - name: mode
+      type: string
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: pg_lo_read
+  signature:
+    params:
+    - name: lob
+      type: resource
+    - name: length
+      type: int
+      optional: true
+    returnType: string
+- subject:
+    function: pg_lo_read_all
+  signature:
+    params:
+    - name: lob
+      type: resource
+    returnType: int
+- subject:
+    function: pg_lo_seek
+  signature:
+    params:
+    - name: lob
+      type: resource
+    - name: offset
+      type: int
+    - name: whence
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: pg_lo_tell
+  signature:
+    params:
+    - name: lob
+      type: resource
+    returnType: int
+- subject:
+    function: pg_lo_truncate
+  signature:
+    params:
+    - name: lob
+      type: resource
+    - name: size
+      type: int
+    returnType: bool
+- subject:
+    function: pg_lo_unlink
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: oid
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: pg_lo_write
+  signature:
+    params:
+    - name: lob
+      type: resource
+    - name: data
+      type: string
+    - name: length
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: pg_loclose
+  signature:
+    params:
+    - name: lob
+      type: mixed
+    returnType: bool
+- subject:
+    function: pg_locreate
+  signature:
+    params:
+    - name: connection
+      type: mixed
+      optional: true
+    - name: oid
+      type: mixed
+      optional: true
+    returnType: int
+- subject:
+    function: pg_loexport
+  signature:
+    params:
+    - name: connection
+      type: mixed
+    - name: oid
+      type: mixed
+      optional: true
+    - name: filename
+      type: mixed
+      optional: true
+    returnType: bool
+- subject:
+    function: pg_loimport
+  signature:
+    params:
+    - name: connection
+      type: mixed
+    - name: filename
+      type: mixed
+      optional: true
+    - name: oid
+      type: mixed
+      optional: true
+    returnType: int
+- subject:
+    function: pg_loopen
+  signature:
+    params:
+    - name: connection
+      type: mixed
+    - name: oid
+      type: mixed
+      optional: true
+    - name: mode
+      type: string
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: pg_loread
+  signature:
+    params:
+    - name: lob
+      type: mixed
+    - name: length
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: pg_loreadall
+  signature:
+    params:
+    - name: lob
+      type: mixed
+    returnType: int
+- subject:
+    function: pg_lounlink
+  signature:
+    params:
+    - name: connection
+      type: mixed
+    - name: oid
+      type: mixed
+      optional: true
+    returnType: bool
+- subject:
+    function: pg_lowrite
+  signature:
+    params:
+    - name: lob
+      type: mixed
+    - name: data
+      type: string
+    - name: length
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: pg_meta_data
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: table_name
+      type: string
+    - name: extended
+      type: bool
+      optional: true
+    returnType: array
+- subject:
+    function: pg_num_fields
+  signature:
+    params:
+    - name: result
+      type: resource
+    returnType: int
+- subject:
+    function: pg_num_rows
+  signature:
+    params:
+    - name: result
+      type: resource
+    returnType: int
+- subject:
+    function: pg_numfields
+  signature:
+    params:
+    - name: result
+      type: mixed
+    returnType: int
+- subject:
+    function: pg_numrows
+  signature:
+    params:
+    - name: result
+      type: mixed
+    returnType: int
+- subject:
+    function: pg_options
+  signature:
+    params:
+    - name: connection
+      type: resource
+      optional: true
+    returnType: string
+- subject:
+    function: pg_parameter_status
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: name
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: pg_pconnect
+  signature:
+    params:
+    - name: connection_string
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: pg_ping
+  signature:
+    params:
+    - name: connection
+      type: resource
+      optional: true
+    returnType: bool
+- subject:
+    function: pg_port
+  signature:
+    params:
+    - name: connection
+      type: resource
+      optional: true
+    returnType: string
+- subject:
+    function: pg_prepare
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: statement_name
+      type: string
+    - name: query
+      type: string
+      optional: true
+    returnType: resource
+- subject:
+    function: pg_put_line
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: query
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: pg_query
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: query
+      type: string
+      optional: true
+    returnType: resource
+- subject:
+    function: pg_query_params
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: query
+      type: string
+    - name: params
+      type: array
+      optional: true
+    returnType: resource
+- subject:
+    function: pg_result
+  signature:
+    params:
+    - name: result
+      type: mixed
+    - name: row
+      type: mixed
+    - name: field
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: pg_result_error
+  signature:
+    params:
+    - name: result
+      type: resource
+    returnType: string
+- subject:
+    function: pg_result_error_field
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: field_code
+      type: int
+    returnType: string
+- subject:
+    function: pg_result_seek
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: row
+      type: int
+    returnType: bool
+- subject:
+    function: pg_result_status
+  signature:
+    params:
+    - name: result
+      type: resource
+    - name: mode
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: pg_select
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: table_name
+      type: string
+    - name: conditions
+      type: array
+    - name: flags
+      type: int
+      optional: true
+    - name: mode
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(2)
+    to: return
+- subject:
+    function: pg_send_execute
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: statement_name
+      type: string
+    - name: params
+      type: array
+    returnType: bool
+- subject:
+    function: pg_send_prepare
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: statement_name
+      type: string
+    - name: query
+      type: string
+    returnType: bool
+- subject:
+    function: pg_send_query
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: query
+      type: string
+    returnType: bool
+- subject:
+    function: pg_send_query_params
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: query
+      type: string
+    - name: params
+      type: array
+    returnType: bool
+- subject:
+    function: pg_set_client_encoding
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: encoding
+      type: string
+      optional: true
+    returnType: int
+- subject:
+    function: pg_set_error_verbosity
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: verbosity
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: pg_setclientencoding
+  signature:
+    params:
+    - name: connection
+      type: mixed
+    - name: encoding
+      type: string
+      optional: true
+    returnType: int
+- subject:
+    function: pg_socket
+  signature:
+    params:
+    - name: connection
+      type: resource
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: pg_trace
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: mode
+      type: string
+      optional: true
+    - name: connection
+      type: resource
+      optional: true
+    returnType: bool
+- subject:
+    function: pg_transaction_status
+  signature:
+    params:
+    - name: connection
+      type: resource
+    returnType: int
+- subject:
+    function: pg_tty
+  signature:
+    params:
+    - name: connection
+      type: resource
+      optional: true
+    returnType: string
+- subject:
+    function: pg_unescape_bytea
+  signature:
+    params:
+    - name: string
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: pg_untrace
+  signature:
+    params:
+    - name: connection
+      type: resource
+      optional: true
+    returnType: bool
+- subject:
+    function: pg_update
+  signature:
+    params:
+    - name: connection
+      type: resource
+    - name: table_name
+      type: string
+    - name: values
+      type: array
+    - name: conditions
+      type: array
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: pg_version
+  signature:
+    params:
+    - name: connection
+      type: resource
+      optional: true
+    returnType: array

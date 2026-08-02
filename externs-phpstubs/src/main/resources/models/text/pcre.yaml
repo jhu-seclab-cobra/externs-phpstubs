@@ -1,0 +1,185 @@
+# Generated from stubs/text/pcre.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: preg_filter
+  signature:
+    params:
+    - name: pattern
+      type: array
+    - name: replacement
+      type: array
+    - name: subject
+      type: array
+    - name: limit
+      type: int
+      optional: true
+    - name: count
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: preg_grep
+  signature:
+    params:
+    - name: pattern
+      type: string
+    - name: array
+      type: array
+    - name: flags
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: preg_last_error
+  signature:
+    returnType: int
+- subject:
+    function: preg_last_error_msg
+  signature:
+    returnType: string
+- subject:
+    function: preg_match
+  signature:
+    params:
+    - name: pattern
+      type: string
+    - name: subject
+      type: string
+    - name: matches
+      type: array
+      optional: true
+    - name: flags
+      type: mixed
+      optional: true
+    - name: offset
+      type: int
+      optional: true
+    returnType: mixed
+- subject:
+    function: preg_match_all
+  signature:
+    params:
+    - name: pattern
+      type: string
+    - name: subject
+      type: string
+    - name: matches
+      type: array
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    - name: offset
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: preg_quote
+  signature:
+    params:
+    - name: str
+      type: string
+    - name: delimiter
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: preg_replace
+  signature:
+    params:
+    - name: pattern
+      type: array
+    - name: replacement
+      type: array
+    - name: subject
+      type: array
+    - name: limit
+      type: int
+      optional: true
+    - name: count
+      type: int
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: preg_replace_callback
+  signature:
+    params:
+    - name: pattern
+      type: array
+    - name: callback
+      type: mixed
+    - name: subject
+      type: string
+    - name: limit
+      type: int
+      optional: true
+    - name: count
+      type: int
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: preg_replace_callback_array
+  signature:
+    params:
+    - name: pattern
+      type: array
+    - name: subject
+      type: string
+    - name: limit
+      type: int
+      optional: true
+    - name: count
+      type: int
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: preg_split
+  signature:
+    params:
+    - name: pattern
+      type: string
+    - name: subject
+      type: string
+    - name: limit
+      type: int
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: array

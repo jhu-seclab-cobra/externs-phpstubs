@@ -1,0 +1,580 @@
+# Generated from stubs/network/stream.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: stream_bucket_append
+  signature:
+    params:
+    - name: brigade
+      type: resource
+    - name: bucket
+      type: object
+    returnType: void
+- subject:
+    function: stream_bucket_make_writeable
+  signature:
+    params:
+    - name: brigade
+      type: resource
+    returnType: object
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: stream_bucket_new
+  signature:
+    params:
+    - name: stream
+      type: resource
+    - name: buffer
+      type: string
+    returnType: object
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: stream_bucket_prepend
+  signature:
+    params:
+    - name: brigade
+      type: resource
+    - name: bucket
+      type: object
+    returnType: void
+- subject:
+    function: stream_context_create
+  signature:
+    params:
+    - name: options
+      type: array
+      optional: true
+    - name: params
+      type: array
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: stream_context_get_default
+  signature:
+    params:
+    - name: options
+      type: array
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: stream_context_get_options
+  signature:
+    params:
+    - name: stream_or_context
+      type: resource
+    returnType: array
+- subject:
+    function: stream_context_get_params
+  signature:
+    params:
+    - name: context
+      type: resource
+    returnType: array
+- subject:
+    function: stream_context_set_default
+  signature:
+    params:
+    - name: options
+      type: array
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: stream_context_set_option
+  signature:
+    params:
+    - name: context
+      type: mixed
+    - name: wrapper_or_options
+      type: string
+    - name: option_name
+      type: string
+      optional: true
+    - name: value
+      type: mixed
+      optional: true
+    returnType: bool
+- subject:
+    function: stream_context_set_params
+  signature:
+    params:
+    - name: context
+      type: resource
+    - name: params
+      type: array
+    returnType: bool
+- subject:
+    function: stream_copy_to_stream
+  signature:
+    params:
+    - name: from
+      type: resource
+    - name: to
+      type: resource
+    - name: length
+      type: int
+      optional: true
+    - name: offset
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: stream_encoding
+  signature:
+    params:
+    - name: stream
+      type: resource
+    - name: encoding
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: stream_filter_append
+  signature:
+    params:
+    - name: stream
+      type: resource
+    - name: filter_name
+      type: string
+    - name: mode
+      type: int
+      optional: true
+    - name: params
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: stream_filter_prepend
+  signature:
+    params:
+    - name: stream
+      type: resource
+    - name: filter_name
+      type: string
+    - name: mode
+      type: int
+      optional: true
+    - name: params
+      type: mixed
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: stream_filter_register
+  signature:
+    params:
+    - name: filter_name
+      type: string
+    - name: class
+      type: string
+    returnType: bool
+- subject:
+    function: stream_filter_remove
+  signature:
+    params:
+    - name: stream_filter
+      type: resource
+    returnType: bool
+- subject:
+    function: stream_get_contents
+  signature:
+    params:
+    - name: stream
+      type: resource
+    - name: length
+      type: int
+      optional: true
+    - name: offset
+      type: int
+      optional: true
+    returnType: string
+- subject:
+    function: stream_get_filters
+  signature:
+    returnType: array
+- subject:
+    function: stream_get_line
+  signature:
+    params:
+    - name: stream
+      type: resource
+    - name: length
+      type: int
+    - name: ending
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(2)
+    to: return
+- subject:
+    function: stream_get_meta_data
+  signature:
+    params:
+    - name: stream
+      type: resource
+    returnType: array
+- subject:
+    function: stream_get_transports
+  signature:
+    returnType: array
+- subject:
+    function: stream_get_wrappers
+  signature:
+    returnType: array
+- subject:
+    function: stream_is_local
+  signature:
+    params:
+    - name: stream
+      type: resource
+    returnType: bool
+- subject:
+    function: stream_isatty
+  signature:
+    params:
+    - name: stream
+      type: resource
+    returnType: bool
+- subject:
+    function: stream_notification_callback
+  signature:
+    params:
+    - name: notification_code
+      type: int
+    - name: severity
+      type: int
+    - name: message
+      type: string
+    - name: message_code
+      type: int
+    - name: bytes_transferred
+      type: int
+    - name: bytes_max
+      type: int
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+  - from: argument(5)
+    to: return
+- subject:
+    function: stream_register_wrapper
+  signature:
+    params:
+    - name: protocol
+      type: string
+    - name: class
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: stream_resolve_include_path
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: stream_select
+  signature:
+    params:
+    - name: read
+      type: array
+    - name: write
+      type: array
+    - name: except
+      type: array
+    - name: seconds
+      type: int
+    - name: microseconds
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: stream_set_blocking
+  signature:
+    params:
+    - name: stream
+      type: resource
+    - name: enable
+      type: bool
+    returnType: bool
+- subject:
+    function: stream_set_chunk_size
+  signature:
+    params:
+    - name: stream
+      type: resource
+    - name: size
+      type: int
+    returnType: int
+- subject:
+    function: stream_set_read_buffer
+  signature:
+    params:
+    - name: stream
+      type: resource
+    - name: size
+      type: int
+    returnType: int
+- subject:
+    function: stream_set_timeout
+  signature:
+    params:
+    - name: stream
+      type: resource
+    - name: seconds
+      type: int
+    - name: microseconds
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: stream_set_write_buffer
+  signature:
+    params:
+    - name: stream
+      type: resource
+    - name: size
+      type: int
+    returnType: int
+- subject:
+    function: stream_socket_accept
+  signature:
+    params:
+    - name: socket
+      type: resource
+    - name: timeout
+      type: float
+      optional: true
+    - name: peer_name
+      type: string
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: stream_socket_client
+  signature:
+    params:
+    - name: address
+      type: string
+    - name: error_code
+      type: int
+      optional: true
+    - name: error_message
+      type: string
+      optional: true
+    - name: timeout
+      type: float
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    - name: context
+      type: resource
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+  - from: argument(5)
+    to: return
+- subject:
+    function: stream_socket_enable_crypto
+  signature:
+    params:
+    - name: stream
+      type: resource
+    - name: enable
+      type: bool
+    - name: crypto_method
+      type: int
+      optional: true
+    - name: session_stream
+      type: resource
+      optional: true
+    returnType: bool
+- subject:
+    function: stream_socket_get_name
+  signature:
+    params:
+    - name: socket
+      type: resource
+    - name: remote
+      type: bool
+    returnType: string
+- subject:
+    function: stream_socket_pair
+  signature:
+    params:
+    - name: domain
+      type: int
+    - name: type
+      type: int
+    - name: protocol
+      type: int
+    returnType: array
+- subject:
+    function: stream_socket_recvfrom
+  signature:
+    params:
+    - name: socket
+      type: resource
+    - name: length
+      type: int
+    - name: flags
+      type: int
+      optional: true
+    - name: address
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(3)
+    to: return
+- subject:
+    function: stream_socket_sendto
+  signature:
+    params:
+    - name: socket
+      type: resource
+    - name: data
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    - name: address
+      type: string
+      optional: true
+    returnType: int
+- subject:
+    function: stream_socket_server
+  signature:
+    params:
+    - name: address
+      type: string
+    - name: error_code
+      type: int
+      optional: true
+    - name: error_message
+      type: string
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    - name: context
+      type: resource
+      optional: true
+    returnType: resource
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: stream_socket_shutdown
+  signature:
+    params:
+    - name: stream
+      type: resource
+    - name: mode
+      type: int
+    returnType: bool
+- subject:
+    function: stream_supports_lock
+  signature:
+    params:
+    - name: stream
+      type: resource
+    returnType: bool
+- subject:
+    function: stream_wrapper_register
+  signature:
+    params:
+    - name: protocol
+      type: string
+    - name: class
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: stream_wrapper_restore
+  signature:
+    params:
+    - name: protocol
+      type: string
+    returnType: bool
+- subject:
+    function: stream_wrapper_unregister
+  signature:
+    params:
+    - name: protocol
+      type: string
+    returnType: bool

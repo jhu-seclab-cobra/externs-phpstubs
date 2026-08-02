@@ -1,0 +1,254 @@
+# Generated from stubs/network/session.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: session_abort
+  signature:
+    returnType: bool
+- subject:
+    function: session_cache_expire
+  signature:
+    params:
+    - name: value
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: session_cache_limiter
+  signature:
+    params:
+    - name: value
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: session_commit
+  signature:
+    returnType: bool
+- subject:
+    function: session_create_id
+  signature:
+    params:
+    - name: prefix
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: session_decode
+  signature:
+    params:
+    - name: data
+      type: string
+    returnType: bool
+- subject:
+    function: session_destroy
+  signature:
+    returnType: bool
+- subject:
+    function: session_encode
+  signature:
+    returnType: string
+- subject:
+    function: session_gc
+  signature:
+    returnType: int
+- subject:
+    function: session_get_cookie_params
+  signature:
+    returnType: array
+- subject:
+    function: session_id
+  signature:
+    params:
+    - name: id
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: session_is_registered
+  signature:
+    params:
+    - name: name
+      type: string
+    returnType: bool
+- subject:
+    function: session_module_name
+  signature:
+    params:
+    - name: module
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: session_name
+  signature:
+    params:
+    - name: name
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: session_pgsql_add_error
+  signature:
+    params:
+    - name: error_level
+      type: int
+    - name: error_message
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    function: session_pgsql_get_error
+  signature:
+    params:
+    - name: with_error_message
+      type: bool
+      optional: true
+    returnType: array
+- subject:
+    function: session_pgsql_get_field
+  signature:
+    returnType: string
+- subject:
+    function: session_pgsql_reset
+  signature:
+    returnType: bool
+- subject:
+    function: session_pgsql_set_field
+  signature:
+    params:
+    - name: value
+      type: string
+    returnType: bool
+- subject:
+    function: session_pgsql_status
+  signature:
+    returnType: array
+- subject:
+    function: session_regenerate_id
+  signature:
+    params:
+    - name: delete_old_session
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: session_register
+  signature:
+    params:
+    - name: name
+      type: mixed
+    - name: args
+      type: mixed
+      optional: true
+    returnType: bool
+- subject:
+    function: session_register_shutdown
+  signature:
+    returnType: void
+- subject:
+    function: session_reset
+  signature:
+    returnType: bool
+- subject:
+    function: session_save_path
+  signature:
+    params:
+    - name: path
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: session_set_cookie_params
+  signature:
+    params:
+    - name: lifetime_or_options
+      type: int
+    - name: path
+      type: string
+      optional: true
+    - name: domain
+      type: string
+      optional: true
+    - name: secure
+      type: bool
+      optional: true
+    - name: httponly
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: session_set_save_handler
+  signature:
+    params:
+    - name: open
+      type: mixed
+    - name: close
+      type: mixed
+      optional: true
+    - name: read
+      type: mixed
+      optional: true
+    - name: write
+      type: mixed
+      optional: true
+    - name: destroy
+      type: mixed
+      optional: true
+    - name: gc
+      type: mixed
+      optional: true
+    - name: create_sid
+      type: mixed
+      optional: true
+    - name: validate_sid
+      type: mixed
+      optional: true
+    - name: update_timestamp
+      type: mixed
+      optional: true
+    returnType: bool
+- subject:
+    function: session_start
+  signature:
+    params:
+    - name: options
+      type: array
+      optional: true
+    returnType: bool
+- subject:
+    function: session_status
+  signature:
+    returnType: int
+- subject:
+    function: session_unregister
+  signature:
+    params:
+    - name: name
+      type: string
+    returnType: bool
+- subject:
+    function: session_unset
+  signature:
+    returnType: bool
+- subject:
+    function: session_write_close
+  signature:
+    returnType: bool

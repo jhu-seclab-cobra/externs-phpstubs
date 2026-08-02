@@ -1,0 +1,73 @@
+# Generated from stubs/system/spl.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: spl_autoload
+  signature:
+    params:
+    - name: class
+      type: string
+    - name: file_extensions
+      type: string
+      optional: true
+    returnType: void
+- subject:
+    function: spl_autoload_call
+  signature:
+    params:
+    - name: class
+      type: string
+    returnType: void
+- subject:
+    function: spl_autoload_extensions
+  signature:
+    params:
+    - name: file_extensions
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: spl_autoload_functions
+  signature:
+    returnType: array
+- subject:
+    function: spl_autoload_register
+  signature:
+    params:
+    - name: callback
+      type: mixed
+      optional: true
+    - name: throw
+      type: bool
+      optional: true
+    - name: prepend
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: spl_autoload_unregister
+  signature:
+    params:
+    - name: callback
+      type: mixed
+    returnType: bool
+- subject:
+    function: spl_classes
+  signature:
+    returnType: array
+- subject:
+    function: spl_object_hash
+  signature:
+    params:
+    - name: object
+      type: object
+    returnType: string
+- subject:
+    function: spl_object_id
+  signature:
+    params:
+    - name: object
+      type: object
+    returnType: int

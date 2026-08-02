@@ -1,0 +1,79 @@
+# Generated from stubs/text/ctype.yaml by tools/convert_stubs.py v1.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: ctype_alnum
+  signature:
+    params:
+    - name: text
+      type: int
+    returnType: bool
+- subject:
+    function: ctype_alpha
+  signature:
+    params:
+    - name: text
+      type: int
+    returnType: bool
+- subject:
+    function: ctype_cntrl
+  signature:
+    params:
+    - name: text
+      type: int
+    returnType: bool
+- subject:
+    function: ctype_digit
+  signature:
+    params:
+    - name: text
+      type: int
+    returnType: bool
+- subject:
+    function: ctype_graph
+  signature:
+    params:
+    - name: text
+      type: int
+    returnType: bool
+- subject:
+    function: ctype_lower
+  signature:
+    params:
+    - name: text
+      type: int
+    returnType: bool
+- subject:
+    function: ctype_print
+  signature:
+    params:
+    - name: text
+      type: int
+    returnType: bool
+- subject:
+    function: ctype_punct
+  signature:
+    params:
+    - name: text
+      type: int
+    returnType: bool
+- subject:
+    function: ctype_space
+  signature:
+    params:
+    - name: text
+      type: int
+    returnType: bool
+- subject:
+    function: ctype_upper
+  signature:
+    params:
+    - name: text
+      type: int
+    returnType: bool
+- subject:
+    function: ctype_xdigit
+  signature:
+    params:
+    - name: text
+      type: int
+    returnType: bool
