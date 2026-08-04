@@ -24,7 +24,7 @@ object PhpStubs {
         put("resource", StubRecord.PhpClass(name = "resource", extension = "legacy"))
     }
 
-    private val registry: StubRegistry by lazy { loadRegistry() }
+    private val registry: StubRegistry by lazy { StubLoader.loadAll() }
 
     // Suffix → full key index for methods.
     private val methodSuffixIndex: Map<String, String> by lazy {
@@ -45,20 +45,6 @@ object PhpStubs {
     private val classConstCiIndex: Map<String, String> by lazy {
         registry.classConstants.keys.associateBy { it.lowercase() }
     }
-
-    private fun loadRegistry(): StubRegistry =
-        try {
-            StubLoader.loadAll()
-        } catch (_: StubIndexNotFoundException) {
-            StubRegistry(
-                functions = emptyMap(),
-                classes = emptyMap(),
-                methods = emptyMap(),
-                constants = emptyMap(),
-                classConstants = emptyMap(),
-                properties = emptyMap(),
-            )
-        }
 
     private fun buildSuffixIndex(keys: Set<String>): Map<String, String> {
         val index = mutableMapOf<String, String>()
@@ -159,7 +145,7 @@ object PhpStubs {
     /** All registered built-in method names. */
     fun getAllMethodNames(): Set<String> = registry.methods.keys
 
-    /** All registered constant names (global + class). */
+    /** All registered global constant names. Class constants are not included. */
     fun getAllConstNames(): Set<String> = registry.constants.keys
 
     /** PHP keyword function names (echo, isset, etc.). */
