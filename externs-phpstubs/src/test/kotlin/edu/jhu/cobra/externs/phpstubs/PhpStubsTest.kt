@@ -41,8 +41,8 @@ import kotlin.test.assertTrue
  * - `searchClassConst returns null for unknown` — verifies null return for missing class constant
  * - `searchClassConst returns ClassConstant without className via suffix index` — verifies suffix-only class constant lookup
  * - `searchClassConst case-insensitive with className returns record` — verifies case-insensitive qualified class constant lookup
- * - `searchClassConst case-insensitive without className falls back to suffix index` — verifies
- *   case-insensitive suffix lookup misses on case-preserved index
+ * - `searchClassConst case-insensitive without className matches via suffix index` — verifies
+ *   case-insensitive suffix lookup matches uppercase constants from lowercase input
  * - `getKeywordFuncNames contains standard keywords` — verifies bulk keyword name retrieval
  * - `getScalarTypeNames contains all scalar types` — verifies bulk scalar type name retrieval
  * - `getAllFuncNames returns non-empty set` — verifies registry function names are populated
@@ -282,9 +282,12 @@ internal class PhpStubsTest {
     }
 
     @Test
-    fun `searchClassConst case-insensitive without className falls back to suffix index`() {
-        // Suffix index is case-preserved, so lowercase input misses
-        assertNull(PhpStubs.searchClassConst("severity_error", caseSensitive = false))
+    fun `searchClassConst case-insensitive without className matches via suffix index`() {
+        val record = PhpStubs.searchClassConst("severity_error", caseSensitive = false)
+        assertNotNull(record)
+        assertIs<StubRecord.ClassConstant>(record)
+        assertEquals("SEVERITY_ERROR", record.name)
+        assertEquals("Exception", record.owningClass)
     }
 
     // -- Bulk access (registry) --

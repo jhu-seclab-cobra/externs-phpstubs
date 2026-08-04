@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test
  * - `memory footprint of loaded StubData` — reports heap usage after full data load
  */
 @Tag("performance")
-class PhpStubsPerformanceTest {
+internal class PhpStubsPerformanceTest {
     private val warmupRuns = 5
     private val measureRuns = 7
 

@@ -49,6 +49,11 @@ public object PhpStubs {
         buildSuffixIndex(registry.classConstants.keys)
     }
 
+    // Lowercased suffix → full key index for case-insensitive class constant lookup.
+    private val classConstSuffixCiIndex: Map<String, String> by lazy {
+        classConstSuffixIndex.entries.associate { (suffix, fullKey) -> suffix.lowercase() to fullKey }
+    }
+
     // Normalized key → original key for case-insensitive constant lookup.
     private val constCiIndex: Map<String, String> by lazy {
         registry.constants.keys.associateBy { it.lowercase() }
@@ -88,12 +93,7 @@ public object PhpStubs {
     public fun containsMethod(
         methodName: String,
         className: String? = null,
-    ): Boolean {
-        if (className != null) {
-            return "${className.normalizeStubKey()}::${methodName.normalizeStubKey()}" in registry.methods
-        }
-        return methodName.normalizeStubKey() in methodSuffixIndex
-    }
+    ): Boolean = searchMethod(methodName, className) != null
 
     /** Returns true if [name] is a known global or class constant. */
     public fun containsConst(
@@ -126,7 +126,7 @@ public object PhpStubs {
         className: String? = null,
     ): Pair<String, StubRecord.Method>? {
         if (className != null) {
-            val fullName = "${className.normalizeStubKey()}::${methodName.normalizeStubKey()}"
+            val fullName = qualifiedStubKey(className, methodName.normalizeStubKey())
             return registry.methods[fullName]?.let { fullName to it }
         }
         val fullKey = methodSuffixIndex[methodName.normalizeStubKey()] ?: return null
@@ -152,15 +152,18 @@ public object PhpStubs {
     ): StubRecord.ClassConstant? {
         val strippedConst = constName.stripLeadingSlash()
         if (className != null) {
-            val clsKey = className.normalizeStubKey()
-            val fullKey = if (caseSensitive) "$clsKey::$strippedConst" else "$clsKey::${strippedConst.lowercase()}"
-            if (caseSensitive) return registry.classConstants[fullKey]
-            val originalKey = classConstCiIndex[fullKey] ?: return null
+            if (caseSensitive) return registry.classConstants[qualifiedStubKey(className, strippedConst)]
+            val ciKey = qualifiedStubKey(className, strippedConst.lowercase())
+            val originalKey = classConstCiIndex[ciKey] ?: return null
             return registry.classConstants[originalKey]
         }
-        val suffix = if (caseSensitive) strippedConst else strippedConst.lowercase()
-        val fullKey = classConstSuffixIndex[suffix] ?: return null
-        return registry.classConstants[fullKey]
+        val fullKey =
+            if (caseSensitive) {
+                classConstSuffixIndex[strippedConst]
+            } else {
+                classConstSuffixCiIndex[strippedConst.lowercase()]
+            }
+        return fullKey?.let { registry.classConstants[it] }
     }
 
     // -- Bulk access --
