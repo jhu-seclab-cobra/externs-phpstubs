@@ -25,7 +25,6 @@ import org.junit.jupiter.api.Test
  */
 @Tag("performance")
 class PhpStubsPerformanceTest {
-
     private val warmupRuns = 5
     private val measureRuns = 7
 
@@ -34,11 +33,12 @@ class PhpStubsPerformanceTest {
     private val keywordFuncs = listOf("echo", "isset", "require", "include_once", "print")
     private val knownClasses = listOf("exception", "stdclass", "pdo", "datetime", "arrayobject")
     private val scalarTypes = listOf("int", "float", "string", "bool", "array")
-    private val knownMethods = listOf(
-        "query" to "mysqli",
-        "prepare" to "pdo",
-        "format" to "datetime",
-    )
+    private val knownMethods =
+        listOf(
+            "query" to "mysqli",
+            "prepare" to "pdo",
+            "format" to "datetime",
+        )
     private val suffixOnlyMethods = listOf("query", "prepare", "format", "getcode", "getmessage")
 
     private val iterationsPerRun = 100_000
@@ -200,7 +200,8 @@ class PhpStubsPerformanceTest {
         PhpStubs.getAllConstNames()
 
         val runtime = Runtime.getRuntime()
-        runtime.gc(); Thread.sleep(100)
+        runtime.gc()
+        Thread.sleep(100)
         val used = runtime.totalMemory() - runtime.freeMemory()
         println("[memory-loaded] heap used after full load: %,d bytes (%.2f MB)".format(used, used / 1_048_576.0))
         println("[memory-loaded] functions: %,d keys".format(PhpStubs.getAllFuncNames().size))
@@ -211,16 +212,21 @@ class PhpStubsPerformanceTest {
 
     // -- Helpers --
 
-    private fun benchmarkOps(label: String, opsPerRun: Long, block: () -> Unit) {
+    private fun benchmarkOps(
+        label: String,
+        opsPerRun: Long,
+        block: () -> Unit,
+    ) {
         // warmup
         repeat(warmupRuns) { block() }
 
         // measure
-        val timesMs = (1..measureRuns).map {
-            val start = System.nanoTime()
-            block()
-            (System.nanoTime() - start) / 1_000_000.0
-        }
+        val timesMs =
+            (1..measureRuns).map {
+                val start = System.nanoTime()
+                block()
+                (System.nanoTime() - start) / 1_000_000.0
+            }
 
         val sorted = timesMs.sorted()
         val median = sorted[sorted.size / 2]

@@ -26,7 +26,6 @@ import kotlin.test.assertTrue
  * - `Function copy preserves fields` — verifies data class copy
  */
 internal class StubRecordTest {
-
     // -- Function --
 
     @Test
@@ -42,13 +41,14 @@ internal class StubRecordTest {
     @Test
     fun `Function with all fields`() {
         val params = listOf(StubParam("s", PhpType.STRING))
-        val f = StubRecord.Function(
-            name = "substr",
-            extension = "standard",
-            params = params,
-            returnType = PhpType.STRING,
-            flowsToReturn = setOf(0),
-        )
+        val f =
+            StubRecord.Function(
+                name = "substr",
+                extension = "standard",
+                params = params,
+                returnType = PhpType.STRING,
+                flowsToReturn = setOf(0),
+            )
         assertEquals(params, f.params)
         assertEquals(PhpType.STRING, f.returnType)
         assertEquals(setOf(0), f.flowsToReturn)
@@ -73,16 +73,17 @@ internal class StubRecordTest {
 
     @Test
     fun `Method with all fields`() {
-        val m = StubRecord.Method(
-            name = "getInstance",
-            extension = "core",
-            owningClass = "Singleton",
-            params = listOf(StubParam("x", PhpType.INT)),
-            returnType = PhpType.OBJECT,
-            flowsToReturn = setOf(0),
-            visibility = Visibility.PRIVATE,
-            isStatic = true,
-        )
+        val m =
+            StubRecord.Method(
+                name = "getInstance",
+                extension = "core",
+                owningClass = "Singleton",
+                params = listOf(StubParam("x", PhpType.INT)),
+                returnType = PhpType.OBJECT,
+                flowsToReturn = setOf(0),
+                visibility = Visibility.PRIVATE,
+                isStatic = true,
+            )
         assertTrue(m.isStatic)
         assertEquals(Visibility.PRIVATE, m.visibility)
         assertEquals(setOf(0), m.flowsToReturn)
@@ -101,14 +102,15 @@ internal class StubRecordTest {
 
     @Test
     fun `PhpClass with inheritance`() {
-        val c = StubRecord.PhpClass(
-            name = "RuntimeException",
-            extension = "core",
-            parent = "Exception",
-            interfaces = listOf("Throwable"),
-            isAbstract = false,
-            isFinal = true,
-        )
+        val c =
+            StubRecord.PhpClass(
+                name = "RuntimeException",
+                extension = "core",
+                parent = "Exception",
+                interfaces = listOf("Throwable"),
+                isAbstract = false,
+                isFinal = true,
+            )
         assertEquals("Exception", c.parent)
         assertEquals(listOf("Throwable"), c.interfaces)
         assertTrue(c.isFinal)
@@ -118,12 +120,13 @@ internal class StubRecordTest {
 
     @Test
     fun `Constant requires type and value`() {
-        val c = StubRecord.Constant(
-            name = "PHP_INT_MAX",
-            extension = "core",
-            type = PhpType.INT,
-            value = "9223372036854775807",
-        )
+        val c =
+            StubRecord.Constant(
+                name = "PHP_INT_MAX",
+                extension = "core",
+                type = PhpType.INT,
+                value = "9223372036854775807",
+            )
         assertEquals(PhpType.INT, c.type)
         assertEquals("9223372036854775807", c.value)
     }
@@ -132,13 +135,14 @@ internal class StubRecordTest {
 
     @Test
     fun `ClassConstant with owningClass`() {
-        val cc = StubRecord.ClassConstant(
-            name = "SEEK_SET",
-            extension = "spl",
-            owningClass = "SplFileObject",
-            type = PhpType.INT,
-            value = "0",
-        )
+        val cc =
+            StubRecord.ClassConstant(
+                name = "SEEK_SET",
+                extension = "spl",
+                owningClass = "SplFileObject",
+                type = PhpType.INT,
+                value = "0",
+            )
         assertEquals("SplFileObject", cc.owningClass)
         assertEquals(Visibility.PUBLIC, cc.visibility)
     }
@@ -147,11 +151,12 @@ internal class StubRecordTest {
 
     @Test
     fun `Property with minimal fields`() {
-        val p = StubRecord.Property(
-            name = "message",
-            extension = "core",
-            owningClass = "Exception",
-        )
+        val p =
+            StubRecord.Property(
+                name = "message",
+                extension = "core",
+                owningClass = "Exception",
+            )
         assertEquals(PhpType.MIXED, p.type)
         assertEquals(Visibility.PUBLIC, p.visibility)
         assertFalse(p.isStatic)
@@ -159,14 +164,15 @@ internal class StubRecordTest {
 
     @Test
     fun `Property with all fields`() {
-        val p = StubRecord.Property(
-            name = "instance",
-            extension = "core",
-            owningClass = "Singleton",
-            type = PhpType.OBJECT,
-            visibility = Visibility.PRIVATE,
-            isStatic = true,
-        )
+        val p =
+            StubRecord.Property(
+                name = "instance",
+                extension = "core",
+                owningClass = "Singleton",
+                type = PhpType.OBJECT,
+                visibility = Visibility.PRIVATE,
+                isStatic = true,
+            )
         assertTrue(p.isStatic)
         assertEquals(Visibility.PRIVATE, p.visibility)
         assertEquals(PhpType.OBJECT, p.type)

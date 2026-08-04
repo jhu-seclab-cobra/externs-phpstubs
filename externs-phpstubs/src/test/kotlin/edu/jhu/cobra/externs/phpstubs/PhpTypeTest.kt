@@ -22,7 +22,6 @@ import kotlin.test.assertNotNull
  * - `valueOf works for all entries` -- round-trip name to enum.
  */
 internal class PhpTypeTest {
-
     @Test
     fun `enum has exactly 11 entries`() {
         assertEquals(11, PhpType.entries.size)

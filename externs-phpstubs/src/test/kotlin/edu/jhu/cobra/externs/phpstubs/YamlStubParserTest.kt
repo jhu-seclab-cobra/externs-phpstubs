@@ -55,13 +55,15 @@ import kotlin.test.assertTrue
  * - `param with default infers optional` -- optional inferred from default presence.
  */
 internal class YamlStubParserTest {
-
-    private fun parseYaml(yaml: String, extension: String = "standard"): YamlStubParser.ParseResult =
-        YamlStubParser.parse(BufferedReader(StringReader(yaml)), extension)
+    private fun parseYaml(
+        yaml: String,
+        extension: String = "standard",
+    ): YamlStubParser.ParseResult = YamlStubParser.parse(BufferedReader(StringReader(yaml)), extension)
 
     @Test
     fun `parse function with all fields`() {
-        val yaml = """
+        val yaml =
+            """
             - tag: function
               name: substr
               params:
@@ -74,7 +76,7 @@ internal class YamlStubParserTest {
                   optional: true
                   default: "null"
               return: string
-        """.trimIndent()
+            """.trimIndent()
 
         val result = parseYaml(yaml)
         assertEquals(1, result.functions.size)
@@ -95,7 +97,8 @@ internal class YamlStubParserTest {
 
     @Test
     fun `parse function with flowsToReturn`() {
-        val yaml = """
+        val yaml =
+            """
             - tag: function
               name: str_replace
               params:
@@ -109,7 +112,7 @@ internal class YamlStubParserTest {
               flowsToReturn:
                 - 1
                 - 2
-        """.trimIndent()
+            """.trimIndent()
 
         val result = parseYaml(yaml)
         assertEquals(1, result.functions.size)
@@ -118,10 +121,11 @@ internal class YamlStubParserTest {
 
     @Test
     fun `parse function minimal`() {
-        val yaml = """
+        val yaml =
+            """
             - tag: function
               name: phpinfo
-        """.trimIndent()
+            """.trimIndent()
 
         val result = parseYaml(yaml)
         assertEquals(1, result.functions.size)
@@ -134,7 +138,8 @@ internal class YamlStubParserTest {
 
     @Test
     fun `parse method with class and visibility`() {
-        val yaml = """
+        val yaml =
+            """
             - tag: method
               name: query
               class: PDO
@@ -144,7 +149,7 @@ internal class YamlStubParserTest {
               return: object
               static: false
               visibility: public
-        """.trimIndent()
+            """.trimIndent()
 
         val result = parseYaml(yaml)
         assertEquals(1, result.methods.size)
@@ -159,7 +164,8 @@ internal class YamlStubParserTest {
 
     @Test
     fun `parse class with parent and interfaces`() {
-        val yaml = """
+        val yaml =
+            """
             - tag: class
               name: PDOStatement
               parent: PDO
@@ -168,7 +174,7 @@ internal class YamlStubParserTest {
                 - Countable
               abstract: false
               final: true
-        """.trimIndent()
+            """.trimIndent()
 
         val result = parseYaml(yaml)
         assertEquals(1, result.classes.size)
@@ -182,12 +188,13 @@ internal class YamlStubParserTest {
 
     @Test
     fun `parse constant with type and value`() {
-        val yaml = """
+        val yaml =
+            """
             - tag: constant
               name: PHP_INT_MAX
               type: int
               value: 9223372036854775807
-        """.trimIndent()
+            """.trimIndent()
 
         val result = parseYaml(yaml)
         assertEquals(1, result.constants.size)
@@ -199,14 +206,15 @@ internal class YamlStubParserTest {
 
     @Test
     fun `parse class_constant`() {
-        val yaml = """
+        val yaml =
+            """
             - tag: class_constant
               name: FETCH_ASSOC
               class: PDO
               type: int
               value: 2
               visibility: public
-        """.trimIndent()
+            """.trimIndent()
 
         val result = parseYaml(yaml)
         assertEquals(1, result.classConstants.size)
@@ -220,14 +228,15 @@ internal class YamlStubParserTest {
 
     @Test
     fun `parse property`() {
-        val yaml = """
+        val yaml =
+            """
             - tag: property
               name: errorCode
               class: PDO
               type: string
               static: false
               visibility: protected
-        """.trimIndent()
+            """.trimIndent()
 
         val result = parseYaml(yaml)
         assertEquals(1, result.properties.size)
@@ -241,64 +250,71 @@ internal class YamlStubParserTest {
 
     @Test
     fun `unknown tag throws StubIndexInvalidException`() {
-        val yaml = """
+        val yaml =
+            """
             - tag: interface
               name: Serializable
-        """.trimIndent()
+            """.trimIndent()
         assertFailsWith<StubIndexInvalidException> { parseYaml(yaml) }
     }
 
     @Test
     fun `missing name throws StubIndexInvalidException`() {
-        val yaml = """
+        val yaml =
+            """
             - tag: function
               return: string
-        """.trimIndent()
+            """.trimIndent()
         assertFailsWith<StubIndexInvalidException> { parseYaml(yaml) }
     }
 
     @Test
     fun `missing constant type throws StubIndexInvalidException`() {
-        val yaml = """
+        val yaml =
+            """
             - tag: constant
               name: SOME_CONST
               value: 42
-        """.trimIndent()
+            """.trimIndent()
         assertFailsWith<StubIndexInvalidException> { parseYaml(yaml) }
     }
 
     @Test
     fun `missing constant value throws StubIndexInvalidException`() {
-        val yaml = """
+        val yaml =
+            """
             - tag: constant
               name: SOME_CONST
               type: int
-        """.trimIndent()
+            """.trimIndent()
         assertFailsWith<StubIndexInvalidException> { parseYaml(yaml) }
     }
 
     @Test
     fun `missing tag field throws StubIndexInvalidException`() {
-        val yaml = """
+        val yaml =
+            """
             - name: strlen
               return: int
-        """.trimIndent()
+            """.trimIndent()
         assertFailsWith<StubIndexInvalidException> { parseYaml(yaml) }
     }
 
     @Test
     fun `missing class on method throws StubIndexInvalidException`() {
-        val yaml = """
+        val yaml =
+            """
             - tag: method
               name: doSomething
               return: void
-        """.trimIndent()
+            """.trimIndent()
         assertFailsWith<StubIndexInvalidException> { parseYaml(yaml) }
     }
 
     @Test
     fun `mixed tags in single file parsed correctly`() {
-        val yaml = """
+        val yaml =
+            """
             - tag: function
               name: strlen
               return: int
@@ -321,7 +337,7 @@ internal class YamlStubParserTest {
               name: date
               class: DateTime
               type: string
-        """.trimIndent()
+            """.trimIndent()
 
         val result = parseYaml(yaml)
         assertEquals(1, result.functions.size)
@@ -334,11 +350,12 @@ internal class YamlStubParserTest {
 
     @Test
     fun `union types mapped to MIXED`() {
-        val yaml = """
+        val yaml =
+            """
             - tag: function
               name: array_pop
               return: "string|false"
-        """.trimIndent()
+            """.trimIndent()
         val result = parseYaml(yaml)
         assertEquals(PhpType.MIXED, result.functions[0].returnType)
     }
@@ -399,11 +416,12 @@ internal class YamlStubParserTest {
 
     @Test
     fun `parse method minimal`() {
-        val yaml = """
+        val yaml =
+            """
             - tag: method
               name: doSomething
               class: MyClass
-        """.trimIndent()
+            """.trimIndent()
 
         val result = parseYaml(yaml)
         assertEquals(1, result.methods.size)
@@ -418,10 +436,11 @@ internal class YamlStubParserTest {
 
     @Test
     fun `parse class minimal`() {
-        val yaml = """
+        val yaml =
+            """
             - tag: class
               name: stdClass
-        """.trimIndent()
+            """.trimIndent()
 
         val result = parseYaml(yaml)
         assertEquals(1, result.classes.size)
@@ -435,13 +454,14 @@ internal class YamlStubParserTest {
 
     @Test
     fun `parse class_constant minimal`() {
-        val yaml = """
+        val yaml =
+            """
             - tag: class_constant
               name: MY_CONST
               class: MyClass
               type: int
               value: 42
-        """.trimIndent()
+            """.trimIndent()
 
         val result = parseYaml(yaml)
         assertEquals(1, result.classConstants.size)
@@ -451,11 +471,12 @@ internal class YamlStubParserTest {
 
     @Test
     fun `parse property minimal`() {
-        val yaml = """
+        val yaml =
+            """
             - tag: property
               name: data
               class: MyClass
-        """.trimIndent()
+            """.trimIndent()
 
         val result = parseYaml(yaml)
         assertEquals(1, result.properties.size)
@@ -471,61 +492,67 @@ internal class YamlStubParserTest {
 
     @Test
     fun `missing class_constant type throws StubIndexInvalidException`() {
-        val yaml = """
+        val yaml =
+            """
             - tag: class_constant
               name: X
               class: Foo
               value: 1
-        """.trimIndent()
+            """.trimIndent()
         assertFailsWith<StubIndexInvalidException> { parseYaml(yaml) }
     }
 
     @Test
     fun `missing class_constant value throws StubIndexInvalidException`() {
-        val yaml = """
+        val yaml =
+            """
             - tag: class_constant
               name: X
               class: Foo
               type: int
-        """.trimIndent()
+            """.trimIndent()
         assertFailsWith<StubIndexInvalidException> { parseYaml(yaml) }
     }
 
     @Test
     fun `missing class on class_constant throws StubIndexInvalidException`() {
-        val yaml = """
+        val yaml =
+            """
             - tag: class_constant
               name: X
               type: int
               value: 1
-        """.trimIndent()
+            """.trimIndent()
         assertFailsWith<StubIndexInvalidException> { parseYaml(yaml) }
     }
 
     @Test
     fun `missing class on property throws StubIndexInvalidException`() {
-        val yaml = """
+        val yaml =
+            """
             - tag: property
               name: data
               type: string
-        """.trimIndent()
+            """.trimIndent()
         assertFailsWith<StubIndexInvalidException> { parseYaml(yaml) }
     }
 
     @Test
     fun `non-list top-level throws StubIndexInvalidException`() {
-        val yaml = """
+        val yaml =
+            """
             tag: function
             name: strlen
-        """.trimIndent()
+            """.trimIndent()
         assertFailsWith<StubIndexInvalidException> { parseYaml(yaml) }
     }
 
     @Test
     fun `non-map entry throws StubIndexInvalidException`() {
-        val yaml = """
+        val yaml =
+            """
             - just a string
-        """.trimIndent()
+            """.trimIndent()
         assertFailsWith<StubIndexInvalidException> { parseYaml(yaml) }
     }
 
@@ -533,13 +560,14 @@ internal class YamlStubParserTest {
 
     @Test
     fun `union type in param mapped to MIXED`() {
-        val yaml = """
+        val yaml =
+            """
             - tag: function
               name: test
               params:
                 - name: value
                   type: "string|array"
-        """.trimIndent()
+            """.trimIndent()
         val result = parseYaml(yaml)
         assertEquals(PhpType.MIXED, result.functions[0].params[0].type)
     }
@@ -555,56 +583,61 @@ internal class YamlStubParserTest {
 
     @Test
     fun `constant with integer value parsed as string`() {
-        val yaml = """
+        val yaml =
+            """
             - tag: constant
               name: MY_CONST
               type: int
               value: 42
-        """.trimIndent()
+            """.trimIndent()
         val result = parseYaml(yaml)
         assertEquals("42", result.constants[0].value)
     }
 
     @Test
     fun `param name on parsed as string not boolean`() {
-        val yaml = """
+        val yaml =
+            """
             - tag: function
               name: test
               params:
                 - name: "on"
                   type: bool
-        """.trimIndent()
+            """.trimIndent()
         val result = parseYaml(yaml)
         assertEquals("on", result.functions[0].params[0].name)
     }
 
     @Test
     fun `param name true parsed as string not boolean`() {
-        val yaml = """
+        val yaml =
+            """
             - tag: function
               name: test
               params:
                 - name: "true"
                   type: bool
-        """.trimIndent()
+            """.trimIndent()
         val result = parseYaml(yaml)
         assertEquals("true", result.functions[0].params[0].name)
     }
 
     @Test
     fun `flowsToReturn with empty list`() {
-        val yaml = """
+        val yaml =
+            """
             - tag: function
               name: test
               flowsToReturn: []
-        """.trimIndent()
+            """.trimIndent()
         val result = parseYaml(yaml)
         assertEquals(emptySet(), result.functions[0].flowsToReturn)
     }
 
     @Test
     fun `extension passed through to all records`() {
-        val yaml = """
+        val yaml =
+            """
             - tag: function
               name: f
             - tag: class
@@ -624,7 +657,7 @@ internal class YamlStubParserTest {
             - tag: property
               name: p
               class: C
-        """.trimIndent()
+            """.trimIndent()
         val result = parseYaml(yaml, "myext")
         assertEquals("myext", result.functions[0].extension)
         assertEquals("myext", result.classes[0].extension)
@@ -636,49 +669,53 @@ internal class YamlStubParserTest {
 
     @Test
     fun `method with static true`() {
-        val yaml = """
+        val yaml =
+            """
             - tag: method
               name: create
               class: Factory
               static: true
-        """.trimIndent()
+            """.trimIndent()
         val result = parseYaml(yaml)
         assertTrue(result.methods[0].isStatic)
     }
 
     @Test
     fun `property with static true`() {
-        val yaml = """
+        val yaml =
+            """
             - tag: property
               name: instance
               class: Singleton
               static: true
-        """.trimIndent()
+            """.trimIndent()
         val result = parseYaml(yaml)
         assertTrue(result.properties[0].isStatic)
     }
 
     @Test
     fun `class with abstract true`() {
-        val yaml = """
+        val yaml =
+            """
             - tag: class
               name: AbstractBase
               abstract: true
-        """.trimIndent()
+            """.trimIndent()
         val result = parseYaml(yaml)
         assertTrue(result.classes[0].isAbstract)
     }
 
     @Test
     fun `param with default infers optional`() {
-        val yaml = """
+        val yaml =
+            """
             - tag: function
               name: test
               params:
                 - name: x
                   type: int
                   default: "10"
-        """.trimIndent()
+            """.trimIndent()
         val result = parseYaml(yaml)
         val param = result.functions[0].params[0]
         assertTrue(param.optional)

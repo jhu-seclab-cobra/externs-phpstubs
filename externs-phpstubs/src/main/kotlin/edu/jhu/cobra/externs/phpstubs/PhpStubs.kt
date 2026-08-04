@@ -2,12 +2,24 @@ package edu.jhu.cobra.externs.phpstubs
 
 /** PHP built-in entity registry. Normalized lookup and existence checks for functions, classes, methods, and constants. */
 object PhpStubs {
-
-    private val KEYWORD_FUNC_NAMES = setOf(
-        "echo", "empty", "eval", "exit", "die", "isset",
-        "print", "unset", "clone", "instanceof", "shell_exec",
-        "include", "include_once", "require", "require_once",
-    )
+    private val KEYWORD_FUNC_NAMES =
+        setOf(
+            "echo",
+            "empty",
+            "eval",
+            "exit",
+            "die",
+            "isset",
+            "print",
+            "unset",
+            "clone",
+            "instanceof",
+            "shell_exec",
+            "include",
+            "include_once",
+            "require",
+            "require_once",
+        )
 
     private val SCALAR_TYPE_NAMES = setOf("int", "float", "string", "bool", "array")
 
@@ -16,13 +28,14 @@ object PhpStubs {
             StubRecord.Function(name = name, extension = "keyword")
         }
 
-    private val SYNTHETIC_CLASS_RECORDS: Map<String, StubRecord.PhpClass> = buildMap {
-        for (name in SCALAR_TYPE_NAMES) {
-            put(name, StubRecord.PhpClass(name = name, extension = "Scalar"))
+    private val SYNTHETIC_CLASS_RECORDS: Map<String, StubRecord.PhpClass> =
+        buildMap {
+            for (name in SCALAR_TYPE_NAMES) {
+                put(name, StubRecord.PhpClass(name = name, extension = "Scalar"))
+            }
+            put("exit", StubRecord.PhpClass(name = "exit", extension = "Core"))
+            put("resource", StubRecord.PhpClass(name = "resource", extension = "legacy"))
         }
-        put("exit", StubRecord.PhpClass(name = "exit", extension = "Core"))
-        put("resource", StubRecord.PhpClass(name = "resource", extension = "legacy"))
-    }
 
     private val registry: StubRegistry by lazy { StubLoader.loadAll() }
 
@@ -72,7 +85,10 @@ object PhpStubs {
     }
 
     /** Returns true if the method exists. Checks "class::method" when [className] provided, otherwise matches by suffix. */
-    fun containsMethod(methodName: String, className: String? = null): Boolean {
+    fun containsMethod(
+        methodName: String,
+        className: String? = null,
+    ): Boolean {
         if (className != null) {
             return "${className.normalize()}::${methodName.normalize()}" in registry.methods
         }
@@ -80,7 +96,10 @@ object PhpStubs {
     }
 
     /** Returns true if [name] is a known global or class constant. */
-    fun containsConst(name: String, caseSensitive: Boolean = true): Boolean {
+    fun containsConst(
+        name: String,
+        caseSensitive: Boolean = true,
+    ): Boolean {
         val stripped = name.stripLeadingSlash()
         if (caseSensitive) return stripped in registry.constants || stripped in registry.classConstants
         val lower = stripped.lowercase()
@@ -102,7 +121,10 @@ object PhpStubs {
     }
 
     /** Returns (fullKey, method) for the given method, or null if unknown. */
-    fun searchMethod(methodName: String, className: String? = null): Pair<String, StubRecord.Method>? {
+    fun searchMethod(
+        methodName: String,
+        className: String? = null,
+    ): Pair<String, StubRecord.Method>? {
         if (className != null) {
             val fullName = "${className.normalize()}::${methodName.normalize()}"
             return registry.methods[fullName]?.let { fullName to it }
@@ -112,7 +134,10 @@ object PhpStubs {
     }
 
     /** Returns the global constant stub record for [name], or null if unknown. */
-    fun searchGlobalConst(name: String, caseSensitive: Boolean = true): StubRecord.Constant? {
+    fun searchGlobalConst(
+        name: String,
+        caseSensitive: Boolean = true,
+    ): StubRecord.Constant? {
         val stripped = name.stripLeadingSlash()
         if (caseSensitive) return registry.constants[stripped]
         val key = constCiIndex[stripped.lowercase()] ?: return null
@@ -120,7 +145,11 @@ object PhpStubs {
     }
 
     /** Returns the class constant stub record, or null if unknown. */
-    fun searchClassConst(constName: String, className: String? = null, caseSensitive: Boolean = true): StubRecord.ClassConstant? {
+    fun searchClassConst(
+        constName: String,
+        className: String? = null,
+        caseSensitive: Boolean = true,
+    ): StubRecord.ClassConstant? {
         val strippedConst = constName.stripLeadingSlash()
         if (className != null) {
             val clsKey = className.normalize()
@@ -154,8 +183,7 @@ object PhpStubs {
     /** PHP scalar type names (int, string, etc.). */
     fun getScalarTypeNames(): Set<String> = SCALAR_TYPE_NAMES
 
-    internal fun String.stripLeadingSlash(): String =
-        if (startsWith('/') || startsWith('\\')) substring(1) else this
+    internal fun String.stripLeadingSlash(): String = if (startsWith('/') || startsWith('\\')) substring(1) else this
 
     /** Strips leading slash and lowercases. For case-insensitive entities (functions, classes, methods). */
     internal fun String.normalize(): String = stripLeadingSlash().lowercase()

@@ -25,7 +25,6 @@ import kotlin.test.assertTrue
  * - `functions map is unmodifiable` — verifies returned maps are immutable
  */
 internal class StubLoaderTest {
-
     private val registry: StubRegistry by lazy { StubLoader.loadAll("/stubs-test/") }
 
     // -- Functions --

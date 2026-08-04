@@ -5,13 +5,15 @@ package edu.jhu.cobra.externs.phpstubs
  *
  * @param resource The resource path that failed to load.
  */
-class StubIndexNotFoundException(resource: String) :
-    RuntimeException("Stub index resource not found: $resource")
+class StubIndexNotFoundException(
+    resource: String,
+) : RuntimeException("Stub index resource not found: $resource")
 
 /**
  * Thrown when a stub index file has an invalid or corrupted format.
  *
  * @param reason Description of the format violation.
  */
-class StubIndexInvalidException(reason: String) :
-    RuntimeException("Stub index is invalid: $reason")
+class StubIndexInvalidException(
+    reason: String,
+) : RuntimeException("Stub index is invalid: $reason")

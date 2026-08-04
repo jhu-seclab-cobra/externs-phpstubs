@@ -13,7 +13,6 @@ import kotlin.test.assertIs
  * - `StubIndexInvalidException extends RuntimeException` -- inheritance.
  */
 internal class ExceptionsTest {
-
     @Test
     fun `StubIndexNotFoundException message contains resource path`() {
         val ex = StubIndexNotFoundException("/stubs/missing.yaml")

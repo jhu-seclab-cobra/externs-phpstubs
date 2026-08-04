@@ -12,7 +12,6 @@ import kotlin.test.assertEquals
  * - `valueOf PRIVATE returns PRIVATE` — verifies valueOf round-trip for PRIVATE
  */
 internal class VisibilityTest {
-
     @Test
     fun `enum has exactly three entries`() {
         assertEquals(3, Visibility.entries.size)

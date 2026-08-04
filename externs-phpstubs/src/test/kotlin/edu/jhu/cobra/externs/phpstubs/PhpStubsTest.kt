@@ -41,7 +41,8 @@ import kotlin.test.assertTrue
  * - `searchClassConst returns null for unknown` — verifies null return for missing class constant
  * - `searchClassConst returns ClassConstant without className via suffix index` — verifies suffix-only class constant lookup
  * - `searchClassConst case-insensitive with className returns record` — verifies case-insensitive qualified class constant lookup
- * - `searchClassConst case-insensitive without className falls back to suffix index` — verifies case-insensitive suffix lookup misses on case-preserved index
+ * - `searchClassConst case-insensitive without className falls back to suffix index` — verifies
+ *   case-insensitive suffix lookup misses on case-preserved index
  * - `normalize strips forward slash and lowercases` — verifies leading `/` removal and lowercasing
  * - `normalize strips backslash` — verifies leading `\` removal and lowercasing
  * - `getKeywordFuncNames contains standard keywords` — verifies bulk keyword name retrieval
@@ -52,7 +53,6 @@ import kotlin.test.assertTrue
  * - `getAllConstNames returns non-empty set` — verifies registry constant names are populated
  */
 internal class PhpStubsTest {
-
     // -- Keywords --
 
     @Test

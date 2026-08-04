@@ -23,15 +23,15 @@ import kotlin.test.assertTrue
  * - `copy preserves fields` -- data class copy.
  */
 internal class StubParamTest {
-
     @Test
     fun `construction with all fields`() {
-        val param = StubParam(
-            name = "offset",
-            type = PhpType.INT,
-            optional = true,
-            defaultValue = "0",
-        )
+        val param =
+            StubParam(
+                name = "offset",
+                type = PhpType.INT,
+                optional = true,
+                defaultValue = "0",
+            )
         assertEquals("offset", param.name)
         assertEquals(PhpType.INT, param.type)
         assertTrue(param.optional)
