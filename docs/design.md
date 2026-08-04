@@ -79,7 +79,7 @@ Enum. Values: `PUBLIC`, `PROTECTED`, `PRIVATE`.
 
 ### `StubParam`
 
-Data class. Fields: `name: String`, `type: PhpType`, `optional: Boolean` (default `false`), `defaultValue: String?` (default `null`). Invariant: non-optional param cannot have `defaultValue`. Enforced via `require` in `init`.
+Data class. Fields: `name: String`, `type: PhpType`, `optional: Boolean` (default `false`), `defaultValue: String?` (default `null`). Invariant: non-optional param cannot have `defaultValue`. `YamlStubParser` validates the combination at parse time and raises `StubIndexInvalidException` naming the source file and param; the `require` in `init` remains as a backstop for direct construction.
 
 ### `StubRecord` (sealed class)
 
@@ -111,11 +111,11 @@ Data class. Six typed unmodifiable maps:
 
 `loadAll(resourceBase: String = "/stubs/"): StubRegistry` -- Reads `index.txt` manifest from classpath, parses all listed YAML files, merges into a single `StubRegistry` with unmodifiable maps. Extension name derived from filename with `_\d+$` suffix stripped. Throws `StubIndexNotFoundException` if `index.txt` or any listed YAML file is missing; the message names the missing resource path.
 
-Key normalization follows PHP case sensitivity: function, class, method, and property keys are lowercased. Constant keys (global and class) preserve original case from YAML. Class-constant keys use lowercased class name + original constant name (`exception::SEVERITY_ERROR`).
+Key normalization follows PHP case sensitivity: function, class, method, and property keys are lowercased. Constant keys (global and class) strip one leading `/` or `\` namespace separator and preserve original case from YAML. Class-constant keys use lowercased class name + original constant name (`exception::SEVERITY_ERROR`). Qualified member keys are built by the shared `qualifiedStubKey()` in `StubKey.kt`, used by both `StubLoader` and `PhpStubs`.
 
 ### `PhpStubs` (object)
 
-Facade. Lazy-loads `StubRegistry` on first access. Builds suffix indexes (method suffix after `::` mapped to full key) for O(1) lookup when `className` is null.
+Facade. Lazy-loads `StubRegistry` on first access. Builds suffix indexes (method suffix after `::` mapped to full key) for O(1) lookup when `className` is null. Method suffixes are lowercased by key normalization; the class-constant suffix index is case-preserved, with a lazy lowercased companion index serving case-insensitive suffix lookups.
 
 **Case sensitivity follows PHP semantics:**
 - Functions, classes, methods: case-insensitive. `normalizeStubKey()` (shared with `StubLoader`) strips leading `/` or `\` and lowercases.
@@ -133,7 +133,7 @@ Synthetic records: keyword functions (`echo`, `empty`, `eval`, `exit`, `die`, `i
 | `searchClass(name)` | `PhpClass?` | Registry first, then synthetic (case-insensitive) |
 | `searchMethod(methodName, className?)` | `Pair<String, Method>?` | Full key if `className` provided; suffix index otherwise (case-insensitive) |
 | `searchGlobalConst(name, caseSensitive?)` | `Constant?` | Registry lookup. Default case-sensitive |
-| `searchClassConst(constName, className?, caseSensitive?)` | `ClassConstant?` | Class name case-insensitive, constant name case-sensitive by default |
+| `searchClassConst(constName, className?, caseSensitive?)` | `ClassConstant?` | Class name case-insensitive, constant name case-sensitive by default. With `caseSensitive = false` and no `className`, the lowercased suffix index matches uppercase constants from any-case input |
 | `getAllFuncNames()` | `Set<String>` | Registry function keys (lowercase) |
 | `getAllClassNames()` | `Set<String>` | Registry class keys (lowercase) |
 | `getAllMethodNames()` | `Set<String>` | Registry method keys (lowercase class::lowercase method) |
@@ -154,9 +154,12 @@ Synthetic records: keyword functions (`echo`, `empty`, `eval`, `exit`, `die`, `i
 
 ## Validation Rules
 
-- YAML files are UTF-8 encoded. Each file is a top-level YAML list of maps.
+- YAML files are UTF-8 encoded. Each file is a top-level YAML list of maps. Files are loaded with SnakeYAML's `SafeConstructor` (standard types only, no arbitrary object instantiation).
+- Syntactically malformed YAML raises `StubIndexInvalidException` naming the source file, with the SnakeYAML error as cause.
 - Every entry requires a `tag` field. Unknown tags raise `StubIndexInvalidException`.
 - Required fields per tag enforced at parse time by `YamlStubParser`.
+- Boolean fields (`static`, `abstract`, `final`, `optional`) must be YAML booleans; present non-boolean values (e.g. the string `"true"`) raise `StubIndexInvalidException` naming the field.
+- A param with `optional: false` and a `default` raises `StubIndexInvalidException` naming the param.
 - `flowsToReturn` values must be integers.
 - Type strings containing `|` resolve to `MIXED`. Unknown type strings raise `StubIndexInvalidException`.
 - Visibility strings are case-insensitive. Absent visibility defaults to `PUBLIC`; unknown values raise `StubIndexInvalidException`.
