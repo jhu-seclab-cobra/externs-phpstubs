@@ -1,6 +1,9 @@
 package edu.jhu.cobra.externs.phpstubs
 
+import org.yaml.snakeyaml.LoaderOptions
 import org.yaml.snakeyaml.Yaml
+import org.yaml.snakeyaml.constructor.SafeConstructor
+import org.yaml.snakeyaml.error.YAMLException
 import java.io.BufferedReader
 
 /** Parses unified YAML stub files into [StubRecord] instances. */
@@ -24,14 +27,20 @@ public object YamlStubParser {
      * @param source Resource path or name of the YAML file; prefixed to every error message.
      * @param extension The PHP extension name to assign to each record.
      * @return Categorized [ParseResult] with records for each entity type.
-     * @throws StubIndexInvalidException If a tag is unknown or required fields are missing; the message names [source].
+     * @throws StubIndexInvalidException If the YAML is malformed, a tag is unknown, or required fields are
+     *   missing or ill-typed; the message names [source].
      */
     public fun parse(
         reader: BufferedReader,
         source: String,
         extension: String,
     ): ParseResult {
-        val raw = Yaml().load<Any>(reader) ?: return ParseResult()
+        val raw =
+            try {
+                Yaml(SafeConstructor(LoaderOptions())).load<Any>(reader)
+            } catch (cause: YAMLException) {
+                throw StubIndexInvalidException("$source: ${cause.message}", cause)
+            } ?: return ParseResult()
         val entries =
             raw as? List<*>
                 ?: throw StubIndexInvalidException("$source: Expected YAML list at top level")
@@ -126,7 +135,7 @@ private class StubEntryParser(
             name = requireString(map, "name"),
             extension = extension,
             params = parseParams(map["params"]),
-            returnType = mapType(map["return"]?.toString() ?: "mixed"),
+            returnType = map["return"]?.let { mapType(it.toString()) } ?: PhpType.MIXED,
             flowsToReturn = parseFlowsToReturn(map["flowsToReturn"]),
         )
 
@@ -136,9 +145,9 @@ private class StubEntryParser(
             extension = extension,
             owningClass = requireString(map, "class"),
             params = parseParams(map["params"]),
-            returnType = mapType(map["return"]?.toString() ?: "mixed"),
+            returnType = map["return"]?.let { mapType(it.toString()) } ?: PhpType.MIXED,
             flowsToReturn = parseFlowsToReturn(map["flowsToReturn"]),
-            isStatic = map["static"] as? Boolean ?: false,
+            isStatic = booleanField(map, "static"),
             visibility = mapVisibility(map["visibility"]?.toString()),
         )
 
@@ -148,8 +157,8 @@ private class StubEntryParser(
             extension = extension,
             parent = map["parent"]?.toString(),
             interfaces = parseStringList(map["interfaces"]),
-            isAbstract = map["abstract"] as? Boolean ?: false,
-            isFinal = map["final"] as? Boolean ?: false,
+            isAbstract = booleanField(map, "abstract"),
+            isFinal = booleanField(map, "final"),
         )
 
     private fun parseConstant(map: Map<*, *>): StubRecord.Constant {
@@ -188,8 +197,8 @@ private class StubEntryParser(
             name = requireString(map, "name"),
             extension = extension,
             owningClass = requireString(map, "class"),
-            type = mapType(map["type"]?.toString() ?: "mixed"),
-            isStatic = map["static"] as? Boolean ?: false,
+            type = map["type"]?.let { mapType(it.toString()) } ?: PhpType.MIXED,
+            isStatic = booleanField(map, "static"),
             visibility = mapVisibility(map["visibility"]?.toString()),
         )
 
@@ -197,6 +206,18 @@ private class StubEntryParser(
         map: Map<*, *>,
         key: String,
     ): String = map[key]?.toString() ?: invalid("Missing required field '$key'")
+
+    // Absent fields fall back to [absent]; present non-boolean values are corpus defects.
+    private fun booleanField(
+        map: Map<*, *>,
+        key: String,
+        absent: Boolean = false,
+    ): Boolean =
+        when (val value = map[key]) {
+            null -> absent
+            is Boolean -> value
+            else -> invalid("Expected boolean for '$key', got: $value")
+        }
 
     private fun parseParams(raw: Any?): List<StubParam> {
         if (raw == null) return emptyList()
@@ -208,10 +229,14 @@ private class StubEntryParser(
         val paramMap = item as? Map<*, *> ?: invalid("Expected map in 'params' list")
         val name = paramMap["name"]?.toString() ?: invalid("Missing 'name' in param entry")
         val default = paramMap["default"]?.toString()
+        val optional = booleanField(paramMap, "optional", absent = default != null)
+        if (!optional && default != null) {
+            invalid("Param '$name' is non-optional but has default value '$default'")
+        }
         return StubParam(
             name = name,
-            type = mapType(paramMap["type"]?.toString() ?: "mixed"),
-            optional = paramMap["optional"] as? Boolean ?: (default != null),
+            type = paramMap["type"]?.let { mapType(it.toString()) } ?: PhpType.MIXED,
+            optional = optional,
             defaultValue = default,
         )
     }

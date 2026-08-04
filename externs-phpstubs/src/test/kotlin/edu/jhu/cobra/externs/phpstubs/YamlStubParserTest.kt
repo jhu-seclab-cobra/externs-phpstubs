@@ -5,6 +5,7 @@ import java.io.StringReader
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 /**
@@ -55,6 +56,12 @@ import kotlin.test.assertTrue
  * - `param with default infers optional` -- optional inferred from default presence.
  * - `parse error message is prefixed with source` -- entry errors name the YAML file.
  * - `non-list top-level error message is prefixed with source` -- top-level errors name the YAML file.
+ * - `syntactically broken YAML throws StubIndexInvalidException naming source` -- snakeyaml errors wrapped.
+ * - `method static string value throws StubIndexInvalidException` -- non-boolean 'static' rejected.
+ * - `class abstract string value throws StubIndexInvalidException` -- non-boolean 'abstract' rejected.
+ * - `param optional string value throws StubIndexInvalidException` -- non-boolean 'optional' rejected.
+ * - `param non-optional with default throws StubIndexInvalidException` -- optional/default conflict
+ *   reported as parse error naming the param.
  */
 internal class YamlStubParserTest {
     private fun parseYaml(
@@ -731,6 +738,79 @@ internal class YamlStubParserTest {
             """.trimIndent()
         val result = parseYaml(yaml)
         assertTrue(result.classes[0].isAbstract)
+    }
+
+    @Test
+    fun `syntactically broken YAML throws StubIndexInvalidException naming source`() {
+        val yaml =
+            """
+            - tag: function
+              name: [unclosed
+            """.trimIndent()
+        val ex = assertFailsWith<StubIndexInvalidException> { parseYaml(yaml) }
+        val message = assertNotNull(ex.message)
+        assertTrue(SOURCE in message, "expected message to name $SOURCE, was: $message")
+    }
+
+    @Test
+    fun `method static string value throws StubIndexInvalidException`() {
+        val yaml =
+            """
+            - tag: method
+              name: create
+              class: Factory
+              static: "true"
+            """.trimIndent()
+        val ex = assertFailsWith<StubIndexInvalidException> { parseYaml(yaml) }
+        val message = assertNotNull(ex.message)
+        assertTrue("static" in message, "expected message to name field 'static', was: $message")
+    }
+
+    @Test
+    fun `class abstract string value throws StubIndexInvalidException`() {
+        val yaml =
+            """
+            - tag: class
+              name: AbstractBase
+              abstract: "yes"
+            """.trimIndent()
+        val ex = assertFailsWith<StubIndexInvalidException> { parseYaml(yaml) }
+        val message = assertNotNull(ex.message)
+        assertTrue("abstract" in message, "expected message to name field 'abstract', was: $message")
+    }
+
+    @Test
+    fun `param optional string value throws StubIndexInvalidException`() {
+        val yaml =
+            """
+            - tag: function
+              name: test
+              params:
+                - name: x
+                  type: int
+                  optional: "true"
+            """.trimIndent()
+        val ex = assertFailsWith<StubIndexInvalidException> { parseYaml(yaml) }
+        val message = assertNotNull(ex.message)
+        assertTrue("optional" in message, "expected message to name field 'optional', was: $message")
+    }
+
+    @Test
+    fun `param non-optional with default throws StubIndexInvalidException`() {
+        val yaml =
+            """
+            - tag: function
+              name: test
+              params:
+                - name: x
+                  type: int
+                  optional: false
+                  default: "10"
+            """.trimIndent()
+        val ex = assertFailsWith<StubIndexInvalidException> { parseYaml(yaml) }
+        val message = assertNotNull(ex.message)
+        assertTrue("x" in message, "expected message to name param 'x', was: $message")
+        assertTrue(SOURCE in message, "expected message to name $SOURCE, was: $message")
     }
 
     @Test

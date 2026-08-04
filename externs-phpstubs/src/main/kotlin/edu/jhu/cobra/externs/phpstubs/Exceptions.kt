@@ -13,7 +13,9 @@ public class StubIndexNotFoundException(
  * Thrown when a stub index file has an invalid or corrupted format.
  *
  * @param reason Description of the format violation.
+ * @param cause Underlying parser error, or null when the violation is detected directly.
  */
 public class StubIndexInvalidException(
     reason: String,
-) : RuntimeException("Stub index is invalid: $reason")
+    cause: Throwable? = null,
+) : RuntimeException("Stub index is invalid: $reason", cause)
