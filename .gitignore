@@ -59,3 +59,7 @@ cobra.log
 # (add more patterns as needed)
 !.gitmodules
 **/.gradle/
+
+# Task docs are local-only
+todo.md
+*todo*.md
