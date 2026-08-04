@@ -208,7 +208,6 @@
     - { name: green, type: int }
     - { name: blue, type: int }
     - { name: alpha, type: int, optional: true }
-  return: None
 
 - tag: function
   name: imagecolorsforindex

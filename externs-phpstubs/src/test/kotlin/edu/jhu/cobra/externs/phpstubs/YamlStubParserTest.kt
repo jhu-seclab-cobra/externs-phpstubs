@@ -40,7 +40,9 @@ import kotlin.test.assertTrue
  * - `empty file returns empty ParseResult` -- null/empty YAML handled.
  * - `mapPhpType maps known types` -- all recognized type strings.
  * - `mapPhpType maps aliases` -- integer, double, boolean aliases.
- * - `mapPhpType maps unknown type to MIXED` -- fallback behavior.
+ * - `mapPhpType throws on unknown type` -- unknown type strings rejected.
+ * - `mapVisibility throws on unknown visibility` -- unknown visibility strings rejected.
+ * - `mapVisibility defaults absent visibility to PUBLIC` -- null means absent field.
  * - `mapPhpType is case insensitive` -- case normalization.
  * - `constant with integer value parsed as string` -- SnakeYAML Integer to String.
  * - `param name on parsed as string not boolean` -- YAML special value preserved.
@@ -371,9 +373,19 @@ internal class YamlStubParserTest {
     }
 
     @Test
-    fun `mapPhpType maps unknown type to MIXED`() {
-        assertEquals(PhpType.MIXED, YamlStubParser.mapPhpType("SomeClass"))
-        assertEquals(PhpType.MIXED, YamlStubParser.mapPhpType("iterable"))
+    fun `mapPhpType throws on unknown type`() {
+        assertFailsWith<StubIndexInvalidException> { YamlStubParser.mapPhpType("SomeClass") }
+        assertFailsWith<StubIndexInvalidException> { YamlStubParser.mapPhpType("iterable") }
+    }
+
+    @Test
+    fun `mapVisibility throws on unknown visibility`() {
+        assertFailsWith<StubIndexInvalidException> { YamlStubParser.mapVisibility("banana") }
+    }
+
+    @Test
+    fun `mapVisibility defaults absent visibility to PUBLIC`() {
+        assertEquals(Visibility.PUBLIC, YamlStubParser.mapVisibility(null))
     }
 
     @Test

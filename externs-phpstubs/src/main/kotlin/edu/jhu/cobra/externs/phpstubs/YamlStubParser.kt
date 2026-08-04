@@ -188,15 +188,24 @@ object YamlStubParser {
 
     /**
      * Maps a YAML visibility string to [Visibility].
-     * Unrecognized or null values default to [Visibility.PUBLIC].
+     * Null means the field is absent and defaults to [Visibility.PUBLIC].
+     *
+     * @throws StubIndexInvalidException If [raw] is not a recognized visibility.
      */
     internal fun mapVisibility(raw: String?): Visibility =
         when (raw?.lowercase()) {
+            null -> Visibility.PUBLIC
+            "public" -> Visibility.PUBLIC
             "protected" -> Visibility.PROTECTED
             "private" -> Visibility.PRIVATE
-            else -> Visibility.PUBLIC
+            else -> throw StubIndexInvalidException("Unknown visibility: $raw")
         }
 
+    /**
+     * Maps a YAML type string to [PhpType]. Union types collapse to [PhpType.MIXED].
+     *
+     * @throws StubIndexInvalidException If [typeStr] is not a recognized type.
+     */
     internal fun mapPhpType(typeStr: String): PhpType {
         if ("|" in typeStr) return PhpType.MIXED
         return when (typeStr.lowercase()) {
@@ -211,7 +220,7 @@ object YamlStubParser {
             "null" -> PhpType.NULL
             "callable" -> PhpType.CALLABLE
             "resource" -> PhpType.RESOURCE
-            else -> PhpType.MIXED
+            else -> throw StubIndexInvalidException("Unknown PHP type: $typeStr")
         }
     }
 }

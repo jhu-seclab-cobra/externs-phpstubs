@@ -858,7 +858,6 @@
     - { name: buffer, type: string }
     - { name: mime_type, type: string, optional: true }
     - { name: custom_headers, type: string, optional: true }
-  return: None
 
 - tag: function
   name: zend_send_file
@@ -866,7 +865,6 @@
     - { name: filename, type: string }
     - { name: mime_type, type: string, optional: true }
     - { name: custom_headers, type: string, optional: true }
-  return: None
 
 - tag: function
   name: zend_set_configuration_changed

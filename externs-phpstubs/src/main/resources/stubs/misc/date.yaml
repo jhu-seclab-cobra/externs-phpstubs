@@ -348,7 +348,6 @@
   params:
     - { name: formatter, type: int }
     - { name: timezone, type: mixed }
-  return: None
 
 - tag: function
   name: getdate
