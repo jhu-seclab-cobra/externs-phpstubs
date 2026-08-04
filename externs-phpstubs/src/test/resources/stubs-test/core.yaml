@@ -33,6 +33,11 @@
   type: bool
   value: ""
 
+- tag: constant
+  name: "\\SLASHED_CONST"
+  type: int
+  value: "7"
+
 - tag: class_constant
   class: SplFileObject
   name: SEEK_SET

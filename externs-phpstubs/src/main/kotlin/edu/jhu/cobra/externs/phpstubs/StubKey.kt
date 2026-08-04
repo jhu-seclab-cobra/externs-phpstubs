@@ -8,3 +8,13 @@ internal fun String.stripLeadingSlash(): String = if (startsWith('/') || startsW
  * Shared by [StubLoader] key construction and [PhpStubs] lookup so stored keys and query keys always match.
  */
 internal fun String.normalizeStubKey(): String = stripLeadingSlash().lowercase()
+
+/**
+ * Builds a qualified member key: normalized owning class + `::` + member key.
+ * [memberKey] arrives already normalized (methods, properties) or case-preserved (class constants).
+ * Shared by [StubLoader] key construction and [PhpStubs] lookup so stored keys and query keys always match.
+ */
+internal fun qualifiedStubKey(
+    owningClass: String,
+    memberKey: String,
+): String = "${owningClass.normalizeStubKey()}::$memberKey"

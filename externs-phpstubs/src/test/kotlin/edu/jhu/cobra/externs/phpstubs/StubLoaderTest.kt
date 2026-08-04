@@ -19,6 +19,7 @@ import kotlin.test.assertTrue
  * - `loads classes from YAML` — verifies class record fields and interfaces
  * - `loads methods with class double-colon name keys` — verifies method keying and fields
  * - `loads constants with values` — verifies constant type and value parsing
+ * - `constant key strips leading namespace slash` — verifies stored key matches slash-stripped queries
  * - `loads class constants with class double-colon name keys` — verifies class constant keying
  * - `loads properties with class double-colon name keys` — verifies property visibility and type
  * - `missing index file throws StubIndexNotFoundException` — verifies error on missing resource
@@ -103,6 +104,13 @@ internal class StubLoaderTest {
         assertNotNull(phpIntMax)
         assertEquals("9223372036854775807", phpIntMax.value)
         assertEquals(PhpType.INT, phpIntMax.type)
+    }
+
+    @Test
+    fun `constant key strips leading namespace slash`() {
+        val slashed = registry.constants["SLASHED_CONST"]
+        assertNotNull(slashed)
+        assertEquals("7", slashed.value)
     }
 
     // -- Class constants --

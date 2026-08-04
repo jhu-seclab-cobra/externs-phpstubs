@@ -6,6 +6,9 @@ import java.util.Collections
 
 /** Discovers and loads YAML stub files into a [StubRegistry]. */
 public object StubLoader {
+    // Strips the numeric split suffix (standard_1.yaml -> standard) when deriving the extension name.
+    private val SPLIT_SUFFIX = Regex("_\\d+$")
+
     /**
      * Loads all stub files under [resourceBase] and merges into a [StubRegistry].
      *
@@ -31,7 +34,7 @@ public object StubLoader {
         yamlFile: String,
     ): ParsedFile {
         val rawName = yamlFile.removeSuffix(".yaml").substringAfterLast('/')
-        val extension = rawName.replace(Regex("_\\d+$"), "")
+        val extension = rawName.replace(SPLIT_SUFFIX, "")
         val path = "$base$yamlFile"
         return ParsedFile(path, openResourceReader(path).use { YamlStubParser.parse(it, path, extension) })
     }
@@ -40,10 +43,10 @@ public object StubLoader {
         StubRegistry(
             functions = merge(files, { it.functions }) { it.name.normalizeStubKey() },
             classes = merge(files, { it.classes }) { it.name.normalizeStubKey() },
-            methods = merge(files, { it.methods }) { qualifiedKey(it.owningClass, it.name.normalizeStubKey()) },
-            constants = merge(files, { it.constants }) { it.name },
-            classConstants = merge(files, { it.classConstants }) { qualifiedKey(it.owningClass, it.name) },
-            properties = merge(files, { it.properties }) { qualifiedKey(it.owningClass, it.name.normalizeStubKey()) },
+            methods = merge(files, { it.methods }) { qualifiedStubKey(it.owningClass, it.name.normalizeStubKey()) },
+            constants = merge(files, { it.constants }) { it.name.stripLeadingSlash() },
+            classConstants = merge(files, { it.classConstants }) { qualifiedStubKey(it.owningClass, it.name.stripLeadingSlash()) },
+            properties = merge(files, { it.properties }) { qualifiedStubKey(it.owningClass, it.name.normalizeStubKey()) },
         )
 
     // Duplicate keys are corpus defects: fail loading instead of silently overwriting a record.
@@ -66,11 +69,6 @@ public object StubLoader {
         }
         return Collections.unmodifiableMap(merged)
     }
-
-    private fun qualifiedKey(
-        owningClass: String,
-        memberKey: String,
-    ): String = "${owningClass.normalizeStubKey()}::$memberKey"
 
     private fun discoverYamlFiles(base: String): List<String> {
         val indexPath = "${base}index.txt"
