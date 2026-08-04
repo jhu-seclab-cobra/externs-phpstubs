@@ -20,9 +20,9 @@ repositories {
 }
 
 dependencies {
-    implementation("org.yaml:snakeyaml:2.2")
+    implementation(libs.snakeyaml)
     testImplementation(kotlin("test"))
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.2")
+    testImplementation(libs.junit.jupiter.api)
 }
 
 kotlin {
