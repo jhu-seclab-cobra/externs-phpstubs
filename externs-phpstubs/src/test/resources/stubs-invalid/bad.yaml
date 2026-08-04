@@ -1,0 +1,3 @@
+# Fixture: entry with an unknown tag; loading must fail naming this file.
+- tag: interface
+  name: Serializable

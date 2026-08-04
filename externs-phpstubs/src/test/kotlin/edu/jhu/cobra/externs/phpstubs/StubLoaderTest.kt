@@ -22,6 +22,9 @@ import kotlin.test.assertTrue
  * - `loads class constants with class double-colon name keys` — verifies class constant keying
  * - `loads properties with class double-colon name keys` — verifies property visibility and type
  * - `missing index file throws StubIndexNotFoundException` — verifies error on missing resource
+ * - `missing stub file error names the stub file` — verifies the message reports the missing YAML path, not the index
+ * - `invalid stub file error names the source file` — verifies parse errors carry the failing YAML path
+ * - `duplicate key across files throws naming key and both files` — verifies merge rejects colliding normalized keys
  * - `functions map is unmodifiable` — verifies returned maps are immutable
  */
 internal class StubLoaderTest {
@@ -130,6 +133,40 @@ internal class StubLoaderTest {
         assertFailsWith<StubIndexNotFoundException> {
             StubLoader.loadAll("/nonexistent-path/")
         }
+    }
+
+    @Test
+    fun `missing stub file error names the stub file`() {
+        val ex =
+            assertFailsWith<StubIndexNotFoundException> {
+                StubLoader.loadAll("/stubs-missing-file/")
+            }
+        assertEquals("Stub resource not found: /stubs-missing-file/ghost.yaml", ex.message)
+    }
+
+    @Test
+    fun `invalid stub file error names the source file`() {
+        val ex =
+            assertFailsWith<StubIndexInvalidException> {
+                StubLoader.loadAll("/stubs-invalid/")
+            }
+        val message = assertNotNull(ex.message)
+        assertTrue(
+            "/stubs-invalid/bad.yaml" in message,
+            "expected message to name /stubs-invalid/bad.yaml, was: $message",
+        )
+    }
+
+    @Test
+    fun `duplicate key across files throws naming key and both files`() {
+        val ex =
+            assertFailsWith<StubIndexInvalidException> {
+                StubLoader.loadAll("/stubs-duplicate/")
+            }
+        val message = assertNotNull(ex.message)
+        assertTrue("'strlen'" in message, "expected message to name key 'strlen', was: $message")
+        assertTrue("/stubs-duplicate/first.yaml" in message, "expected message to name first.yaml, was: $message")
+        assertTrue("/stubs-duplicate/second.yaml" in message, "expected message to name second.yaml, was: $message")
     }
 
     // -- Immutability --

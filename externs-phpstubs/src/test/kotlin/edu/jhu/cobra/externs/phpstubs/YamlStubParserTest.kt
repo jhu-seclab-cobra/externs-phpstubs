@@ -53,12 +53,18 @@ import kotlin.test.assertTrue
  * - `property with static true` -- static property parsing.
  * - `class with abstract true` -- abstract class parsing.
  * - `param with default infers optional` -- optional inferred from default presence.
+ * - `parse error message is prefixed with source` -- entry errors name the YAML file.
+ * - `non-list top-level error message is prefixed with source` -- top-level errors name the YAML file.
  */
 internal class YamlStubParserTest {
     private fun parseYaml(
         yaml: String,
         extension: String = "standard",
-    ): YamlStubParser.ParseResult = YamlStubParser.parse(BufferedReader(StringReader(yaml)), extension)
+    ): YamlStubParser.ParseResult = YamlStubParser.parse(BufferedReader(StringReader(yaml)), SOURCE, extension)
+
+    private companion object {
+        const val SOURCE = "test.yaml"
+    }
 
     @Test
     fun `parse function with all fields`() {
@@ -249,6 +255,28 @@ internal class YamlStubParserTest {
     }
 
     @Test
+    fun `parse error message is prefixed with source`() {
+        val yaml =
+            """
+            - tag: banana
+              name: x
+            """.trimIndent()
+        val ex = assertFailsWith<StubIndexInvalidException> { parseYaml(yaml) }
+        assertEquals("Stub index is invalid: $SOURCE: Unknown tag: banana", ex.message)
+    }
+
+    @Test
+    fun `non-list top-level error message is prefixed with source`() {
+        val yaml =
+            """
+            tag: function
+            name: strlen
+            """.trimIndent()
+        val ex = assertFailsWith<StubIndexInvalidException> { parseYaml(yaml) }
+        assertEquals("Stub index is invalid: $SOURCE: Expected YAML list at top level", ex.message)
+    }
+
+    @Test
     fun `unknown tag throws StubIndexInvalidException`() {
         val yaml =
             """
@@ -373,43 +401,43 @@ internal class YamlStubParserTest {
 
     @Test
     fun `mapPhpType maps known types`() {
-        assertEquals(PhpType.STRING, YamlStubParser.mapPhpType("string"))
-        assertEquals(PhpType.INT, YamlStubParser.mapPhpType("int"))
-        assertEquals(PhpType.INT, YamlStubParser.mapPhpType("integer"))
-        assertEquals(PhpType.FLOAT, YamlStubParser.mapPhpType("float"))
-        assertEquals(PhpType.FLOAT, YamlStubParser.mapPhpType("double"))
-        assertEquals(PhpType.BOOL, YamlStubParser.mapPhpType("bool"))
-        assertEquals(PhpType.BOOL, YamlStubParser.mapPhpType("boolean"))
-        assertEquals(PhpType.ARRAY, YamlStubParser.mapPhpType("array"))
-        assertEquals(PhpType.OBJECT, YamlStubParser.mapPhpType("object"))
-        assertEquals(PhpType.MIXED, YamlStubParser.mapPhpType("mixed"))
-        assertEquals(PhpType.VOID, YamlStubParser.mapPhpType("void"))
-        assertEquals(PhpType.NULL, YamlStubParser.mapPhpType("null"))
-        assertEquals(PhpType.CALLABLE, YamlStubParser.mapPhpType("callable"))
-        assertEquals(PhpType.RESOURCE, YamlStubParser.mapPhpType("resource"))
+        assertEquals(PhpType.STRING, YamlStubParser.mapPhpType("string", SOURCE))
+        assertEquals(PhpType.INT, YamlStubParser.mapPhpType("int", SOURCE))
+        assertEquals(PhpType.INT, YamlStubParser.mapPhpType("integer", SOURCE))
+        assertEquals(PhpType.FLOAT, YamlStubParser.mapPhpType("float", SOURCE))
+        assertEquals(PhpType.FLOAT, YamlStubParser.mapPhpType("double", SOURCE))
+        assertEquals(PhpType.BOOL, YamlStubParser.mapPhpType("bool", SOURCE))
+        assertEquals(PhpType.BOOL, YamlStubParser.mapPhpType("boolean", SOURCE))
+        assertEquals(PhpType.ARRAY, YamlStubParser.mapPhpType("array", SOURCE))
+        assertEquals(PhpType.OBJECT, YamlStubParser.mapPhpType("object", SOURCE))
+        assertEquals(PhpType.MIXED, YamlStubParser.mapPhpType("mixed", SOURCE))
+        assertEquals(PhpType.VOID, YamlStubParser.mapPhpType("void", SOURCE))
+        assertEquals(PhpType.NULL, YamlStubParser.mapPhpType("null", SOURCE))
+        assertEquals(PhpType.CALLABLE, YamlStubParser.mapPhpType("callable", SOURCE))
+        assertEquals(PhpType.RESOURCE, YamlStubParser.mapPhpType("resource", SOURCE))
     }
 
     @Test
     fun `mapPhpType throws on unknown type`() {
-        assertFailsWith<StubIndexInvalidException> { YamlStubParser.mapPhpType("SomeClass") }
-        assertFailsWith<StubIndexInvalidException> { YamlStubParser.mapPhpType("iterable") }
+        assertFailsWith<StubIndexInvalidException> { YamlStubParser.mapPhpType("SomeClass", SOURCE) }
+        assertFailsWith<StubIndexInvalidException> { YamlStubParser.mapPhpType("iterable", SOURCE) }
     }
 
     @Test
     fun `mapVisibility throws on unknown visibility`() {
-        assertFailsWith<StubIndexInvalidException> { YamlStubParser.mapVisibility("banana") }
+        assertFailsWith<StubIndexInvalidException> { YamlStubParser.mapVisibility("banana", SOURCE) }
     }
 
     @Test
     fun `mapVisibility defaults absent visibility to PUBLIC`() {
-        assertEquals(Visibility.PUBLIC, YamlStubParser.mapVisibility(null))
+        assertEquals(Visibility.PUBLIC, YamlStubParser.mapVisibility(null, SOURCE))
     }
 
     @Test
     fun `mapPhpType is case insensitive`() {
-        assertEquals(PhpType.STRING, YamlStubParser.mapPhpType("String"))
-        assertEquals(PhpType.INT, YamlStubParser.mapPhpType("INT"))
-        assertEquals(PhpType.BOOL, YamlStubParser.mapPhpType("Boolean"))
+        assertEquals(PhpType.STRING, YamlStubParser.mapPhpType("String", SOURCE))
+        assertEquals(PhpType.INT, YamlStubParser.mapPhpType("INT", SOURCE))
+        assertEquals(PhpType.BOOL, YamlStubParser.mapPhpType("Boolean", SOURCE))
     }
 
     // -- Additional tag coverage: minimal fields --
@@ -574,9 +602,9 @@ internal class YamlStubParserTest {
 
     @Test
     fun `mapPhpType maps aliases`() {
-        assertEquals(PhpType.INT, YamlStubParser.mapPhpType("integer"))
-        assertEquals(PhpType.FLOAT, YamlStubParser.mapPhpType("double"))
-        assertEquals(PhpType.BOOL, YamlStubParser.mapPhpType("boolean"))
+        assertEquals(PhpType.INT, YamlStubParser.mapPhpType("integer", SOURCE))
+        assertEquals(PhpType.FLOAT, YamlStubParser.mapPhpType("double", SOURCE))
+        assertEquals(PhpType.BOOL, YamlStubParser.mapPhpType("boolean", SOURCE))
     }
 
     // -- SnakeYAML edge cases --

@@ -16,7 +16,7 @@ internal class ExceptionsTest {
     @Test
     fun `StubIndexNotFoundException message contains resource path`() {
         val ex = StubIndexNotFoundException("/stubs/missing.yaml")
-        assertEquals("Stub index resource not found: /stubs/missing.yaml", ex.message)
+        assertEquals("Stub resource not found: /stubs/missing.yaml", ex.message)
     }
 
     @Test

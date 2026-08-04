@@ -43,8 +43,6 @@ import kotlin.test.assertTrue
  * - `searchClassConst case-insensitive with className returns record` — verifies case-insensitive qualified class constant lookup
  * - `searchClassConst case-insensitive without className falls back to suffix index` — verifies
  *   case-insensitive suffix lookup misses on case-preserved index
- * - `normalize strips forward slash and lowercases` — verifies leading `/` removal and lowercasing
- * - `normalize strips backslash` — verifies leading `\` removal and lowercasing
  * - `getKeywordFuncNames contains standard keywords` — verifies bulk keyword name retrieval
  * - `getScalarTypeNames contains all scalar types` — verifies bulk scalar type name retrieval
  * - `getAllFuncNames returns non-empty set` — verifies registry function names are populated
@@ -140,26 +138,6 @@ internal class PhpStubsTest {
     fun `containsClass returns true for exit and resource`() {
         assertTrue(PhpStubs.containsClass("exit"))
         assertTrue(PhpStubs.containsClass("resource"))
-    }
-
-    // -- Normalization --
-
-    @Test
-    fun `normalize strips forward slash and lowercases`() {
-        with(PhpStubs) {
-            assertEquals("strlen", "strlen".normalize())
-            assertEquals("strlen", "/strlen".normalize())
-            assertEquals("strlen", "Strlen".normalize())
-            assertEquals("strlen", "/STRLEN".normalize())
-        }
-    }
-
-    @Test
-    fun `normalize strips backslash`() {
-        with(PhpStubs) {
-            assertEquals("strlen", "\\strlen".normalize())
-            assertEquals("strlen", "\\STRLEN".normalize())
-        }
     }
 
     // -- Bulk access --
