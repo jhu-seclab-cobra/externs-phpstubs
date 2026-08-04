@@ -46,25 +46,14 @@ tasks.test {
     }
 }
 
-tasks.processResources {
-    doLast {
-        val stubsDir = destinationDir.resolve("stubs")
-        if (stubsDir.isDirectory) {
-            val yamlFiles =
-                stubsDir
-                    .walkTopDown()
-                    .filter { it.extension == "yaml" }
-                    .map { it.relativeTo(stubsDir).path }
-                    .sorted()
-                    .toList()
-            stubsDir.resolve("index.txt").writeText(yamlFiles.joinToString("\n") + "\n")
-        }
-    }
-}
+// One index-generation action for both resource tasks; the map names each task's stubs directory.
+// Inline lambda (not a script function) keeps the action configuration-cache serializable.
+val stubIndexDirNames = mapOf("processResources" to "stubs", "processTestResources" to "stubs-test")
 
-tasks.processTestResources {
+tasks.withType<ProcessResources>().configureEach {
+    val stubsDirName = stubIndexDirNames[name] ?: return@configureEach
     doLast {
-        val stubsDir = destinationDir.resolve("stubs-test")
+        val stubsDir = destinationDir.resolve(stubsDirName)
         if (stubsDir.isDirectory) {
             val yamlFiles =
                 stubsDir
