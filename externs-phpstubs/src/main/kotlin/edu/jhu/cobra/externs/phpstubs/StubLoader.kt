@@ -6,55 +6,51 @@ import java.util.Collections
 
 /** Discovers and loads YAML stub files into a [StubRegistry]. */
 object StubLoader {
-
     /** Loads all stub files under [resourceBase] and merges into a [StubRegistry]. */
     fun loadAll(resourceBase: String = "/stubs/"): StubRegistry {
         val base = if (resourceBase.endsWith("/")) resourceBase else "$resourceBase/"
-
-        val functions = mutableMapOf<String, StubRecord.Function>()
-        val classes = mutableMapOf<String, StubRecord.PhpClass>()
-        val methods = mutableMapOf<String, StubRecord.Method>()
-        val constants = mutableMapOf<String, StubRecord.Constant>()
-        val classConstants = mutableMapOf<String, StubRecord.ClassConstant>()
-        val properties = mutableMapOf<String, StubRecord.Property>()
-
-        val yamlFiles = discoverYamlFiles(base)
-        for (yamlFile in yamlFiles) {
-            val rawName = yamlFile.removeSuffix(".yaml").substringAfterLast('/')
-            val extension = rawName.replace(Regex("_\\d+$"), "")
-            val reader = openResourceReader("$base$yamlFile")
-            val result = reader.use { YamlStubParser.parse(it, extension) }
-
-            for (record in result.functions) functions[record.name.normalizeKey()] = record
-            for (record in result.classes) classes[record.name.normalizeKey()] = record
-            for (record in result.methods) {
-                methods["${record.owningClass.normalizeKey()}::${record.name.normalizeKey()}"] = record
-            }
-            for (record in result.constants) constants[record.name] = record
-            for (record in result.classConstants) {
-                classConstants["${record.owningClass.normalizeKey()}::${record.name}"] = record
-            }
-            for (record in result.properties) {
-                properties["${record.owningClass.normalizeKey()}::${record.name.normalizeKey()}"] = record
-            }
-        }
-
-        return StubRegistry(
-            functions = Collections.unmodifiableMap(functions),
-            classes = Collections.unmodifiableMap(classes),
-            methods = Collections.unmodifiableMap(methods),
-            constants = Collections.unmodifiableMap(constants),
-            classConstants = Collections.unmodifiableMap(classConstants),
-            properties = Collections.unmodifiableMap(properties),
-        )
+        val results = discoverYamlFiles(base).map { yamlFile -> parseFile(base, yamlFile) }
+        return buildRegistry(results)
     }
+
+    private fun parseFile(
+        base: String,
+        yamlFile: String,
+    ): YamlStubParser.ParseResult {
+        val rawName = yamlFile.removeSuffix(".yaml").substringAfterLast('/')
+        val extension = rawName.replace(Regex("_\\d+$"), "")
+        return openResourceReader("$base$yamlFile").use { YamlStubParser.parse(it, extension) }
+    }
+
+    // associateBy keeps the last record per key, matching per-file overwrite order.
+    private fun buildRegistry(results: List<YamlStubParser.ParseResult>): StubRegistry =
+        StubRegistry(
+            functions = unmodifiable(results.flatMap { it.functions }.associateBy { it.name.normalizeKey() }),
+            classes = unmodifiable(results.flatMap { it.classes }.associateBy { it.name.normalizeKey() }),
+            methods = unmodifiable(results.flatMap { it.methods }.associateBy { qualifiedKey(it.owningClass, it.name.normalizeKey()) }),
+            constants = unmodifiable(results.flatMap { it.constants }.associateBy { it.name }),
+            classConstants = unmodifiable(results.flatMap { it.classConstants }.associateBy { qualifiedKey(it.owningClass, it.name) }),
+            properties =
+                unmodifiable(
+                    results.flatMap { it.properties }.associateBy { qualifiedKey(it.owningClass, it.name.normalizeKey()) },
+                ),
+        )
+
+    private fun qualifiedKey(
+        owningClass: String,
+        memberKey: String,
+    ): String = "${owningClass.normalizeKey()}::$memberKey"
+
+    private fun <V> unmodifiable(map: Map<String, V>): Map<String, V> = Collections.unmodifiableMap(map)
 
     private fun discoverYamlFiles(base: String): List<String> {
         val indexPath = "${base}index.txt"
-        val stream = StubLoader::class.java.getResourceAsStream(indexPath)
-            ?: throw StubIndexNotFoundException(indexPath)
+        val stream =
+            StubLoader::class.java.getResourceAsStream(indexPath)
+                ?: throw StubIndexNotFoundException(indexPath)
         return BufferedReader(InputStreamReader(stream, Charsets.UTF_8)).use { reader ->
-            reader.lineSequence()
+            reader
+                .lineSequence()
                 .map { it.trim() }
                 .filter { it.isNotBlank() && !it.startsWith("#") && it.endsWith(".yaml") }
                 .toList()
@@ -67,8 +63,9 @@ object StubLoader {
     }
 
     private fun openResourceReader(path: String): BufferedReader {
-        val stream = StubLoader::class.java.getResourceAsStream(path)
-            ?: throw StubIndexNotFoundException(path)
+        val stream =
+            StubLoader::class.java.getResourceAsStream(path)
+                ?: throw StubIndexNotFoundException(path)
         return BufferedReader(InputStreamReader(stream, Charsets.UTF_8))
     }
 }
