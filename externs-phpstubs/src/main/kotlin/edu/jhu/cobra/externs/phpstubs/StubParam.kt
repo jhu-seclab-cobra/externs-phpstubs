@@ -6,7 +6,7 @@ package edu.jhu.cobra.externs.phpstubs
  * @property optional True if the parameter has a default value.
  * @property defaultValue Default value string, or null if none.
  */
-data class StubParam(
+public data class StubParam(
     val name: String,
     val type: PhpType,
     val optional: Boolean = false,

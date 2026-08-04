@@ -1,7 +1,7 @@
 package edu.jhu.cobra.externs.phpstubs
 
 /** Immutable registry of parsed PHP stub records. All maps keyed by normalized name. */
-data class StubRegistry(
+public data class StubRegistry(
     val functions: Map<String, StubRecord.Function>,
     val classes: Map<String, StubRecord.PhpClass>,
     val methods: Map<String, StubRecord.Method>,

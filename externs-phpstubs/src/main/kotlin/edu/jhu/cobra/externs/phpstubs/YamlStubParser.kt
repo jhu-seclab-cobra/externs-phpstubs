@@ -4,11 +4,11 @@ import org.yaml.snakeyaml.Yaml
 import java.io.BufferedReader
 
 /** Parses unified YAML stub files into [StubRecord] instances. */
-object YamlStubParser {
+public object YamlStubParser {
     /**
      * Categorized parse output from a single YAML stub file.
      */
-    data class ParseResult(
+    public data class ParseResult(
         val functions: List<StubRecord.Function> = emptyList(),
         val classes: List<StubRecord.PhpClass> = emptyList(),
         val methods: List<StubRecord.Method> = emptyList(),
@@ -25,7 +25,7 @@ object YamlStubParser {
      * @return Categorized [ParseResult] with records for each entity type.
      * @throws StubIndexInvalidException If a tag is unknown or required fields are missing.
      */
-    fun parse(
+    public fun parse(
         reader: BufferedReader,
         extension: String,
     ): ParseResult {

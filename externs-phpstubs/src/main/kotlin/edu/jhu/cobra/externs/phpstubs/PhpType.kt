@@ -1,7 +1,7 @@
 package edu.jhu.cobra.externs.phpstubs
 
 /** PHP type system categories. */
-enum class PhpType {
+public enum class PhpType {
     STRING,
     INT,
     FLOAT,

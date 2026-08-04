@@ -5,9 +5,9 @@ import java.io.InputStreamReader
 import java.util.Collections
 
 /** Discovers and loads YAML stub files into a [StubRegistry]. */
-object StubLoader {
+public object StubLoader {
     /** Loads all stub files under [resourceBase] and merges into a [StubRegistry]. */
-    fun loadAll(resourceBase: String = "/stubs/"): StubRegistry {
+    public fun loadAll(resourceBase: String = "/stubs/"): StubRegistry {
         val base = if (resourceBase.endsWith("/")) resourceBase else "$resourceBase/"
         val results = discoverYamlFiles(base).map { yamlFile -> parseFile(base, yamlFile) }
         return buildRegistry(results)

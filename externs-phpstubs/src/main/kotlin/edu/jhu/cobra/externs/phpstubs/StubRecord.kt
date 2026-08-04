@@ -7,12 +7,12 @@ package edu.jhu.cobra.externs.phpstubs
  * @property name Entity name.
  * @property extension PHP extension name.
  */
-sealed class StubRecord {
-    abstract val name: String
-    abstract val extension: String
+public sealed class StubRecord {
+    public abstract val name: String
+    public abstract val extension: String
 
     /** Top-level PHP function. */
-    data class Function(
+    public data class Function(
         override val name: String,
         override val extension: String,
         val params: List<StubParam> = emptyList(),
@@ -21,7 +21,7 @@ sealed class StubRecord {
     ) : StubRecord()
 
     /** Class method. */
-    data class Method(
+    public data class Method(
         override val name: String,
         override val extension: String,
         val owningClass: String,
@@ -33,7 +33,7 @@ sealed class StubRecord {
     ) : StubRecord()
 
     /** Class or interface definition. */
-    data class PhpClass(
+    public data class PhpClass(
         override val name: String,
         override val extension: String,
         val parent: String? = null,
@@ -43,7 +43,7 @@ sealed class StubRecord {
     ) : StubRecord()
 
     /** Global constant. */
-    data class Constant(
+    public data class Constant(
         override val name: String,
         override val extension: String,
         val type: PhpType,
@@ -51,7 +51,7 @@ sealed class StubRecord {
     ) : StubRecord()
 
     /** Class constant. */
-    data class ClassConstant(
+    public data class ClassConstant(
         override val name: String,
         override val extension: String,
         val owningClass: String,
@@ -61,7 +61,7 @@ sealed class StubRecord {
     ) : StubRecord()
 
     /** Class property. */
-    data class Property(
+    public data class Property(
         override val name: String,
         override val extension: String,
         val owningClass: String,

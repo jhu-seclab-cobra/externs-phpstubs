@@ -1,7 +1,7 @@
 package edu.jhu.cobra.externs.phpstubs
 
 /** PHP built-in entity registry. Normalized lookup and existence checks for functions, classes, methods, and constants. */
-object PhpStubs {
+public object PhpStubs {
     private val KEYWORD_FUNC_NAMES =
         setOf(
             "echo",
@@ -73,19 +73,19 @@ object PhpStubs {
     // -- Existence checks --
 
     /** Returns true if [name] is a known built-in or keyword function. */
-    fun containsFunc(name: String): Boolean {
+    public fun containsFunc(name: String): Boolean {
         val key = name.normalize()
         return key in registry.functions || key in KEYWORD_FUNC_NAMES
     }
 
     /** Returns true if [name] is a known built-in or scalar class. */
-    fun containsClass(name: String): Boolean {
+    public fun containsClass(name: String): Boolean {
         val key = name.normalize()
         return key in registry.classes || key in SYNTHETIC_CLASS_RECORDS
     }
 
     /** Returns true if the method exists. Checks "class::method" when [className] provided, otherwise matches by suffix. */
-    fun containsMethod(
+    public fun containsMethod(
         methodName: String,
         className: String? = null,
     ): Boolean {
@@ -96,7 +96,7 @@ object PhpStubs {
     }
 
     /** Returns true if [name] is a known global or class constant. */
-    fun containsConst(
+    public fun containsConst(
         name: String,
         caseSensitive: Boolean = true,
     ): Boolean {
@@ -109,19 +109,19 @@ object PhpStubs {
     // -- Record retrieval --
 
     /** Returns the function stub record for [name], or null if unknown. */
-    fun searchFunc(name: String): StubRecord.Function? {
+    public fun searchFunc(name: String): StubRecord.Function? {
         val key = name.normalize()
         return KEYWORD_RECORDS[key] ?: registry.functions[key]
     }
 
     /** Returns the class stub record for [name], or null if unknown. */
-    fun searchClass(name: String): StubRecord.PhpClass? {
+    public fun searchClass(name: String): StubRecord.PhpClass? {
         val key = name.normalize()
         return registry.classes[key] ?: SYNTHETIC_CLASS_RECORDS[key]
     }
 
     /** Returns (fullKey, method) for the given method, or null if unknown. */
-    fun searchMethod(
+    public fun searchMethod(
         methodName: String,
         className: String? = null,
     ): Pair<String, StubRecord.Method>? {
@@ -134,7 +134,7 @@ object PhpStubs {
     }
 
     /** Returns the global constant stub record for [name], or null if unknown. */
-    fun searchGlobalConst(
+    public fun searchGlobalConst(
         name: String,
         caseSensitive: Boolean = true,
     ): StubRecord.Constant? {
@@ -145,7 +145,7 @@ object PhpStubs {
     }
 
     /** Returns the class constant stub record, or null if unknown. */
-    fun searchClassConst(
+    public fun searchClassConst(
         constName: String,
         className: String? = null,
         caseSensitive: Boolean = true,
@@ -166,22 +166,22 @@ object PhpStubs {
     // -- Bulk access --
 
     /** All registered built-in function names. */
-    fun getAllFuncNames(): Set<String> = registry.functions.keys
+    public fun getAllFuncNames(): Set<String> = registry.functions.keys
 
     /** All registered built-in class names. */
-    fun getAllClassNames(): Set<String> = registry.classes.keys
+    public fun getAllClassNames(): Set<String> = registry.classes.keys
 
     /** All registered built-in method names. */
-    fun getAllMethodNames(): Set<String> = registry.methods.keys
+    public fun getAllMethodNames(): Set<String> = registry.methods.keys
 
     /** All registered global constant names. Class constants are not included. */
-    fun getAllConstNames(): Set<String> = registry.constants.keys
+    public fun getAllConstNames(): Set<String> = registry.constants.keys
 
     /** PHP keyword function names (echo, isset, etc.). */
-    fun getKeywordFuncNames(): Set<String> = KEYWORD_FUNC_NAMES
+    public fun getKeywordFuncNames(): Set<String> = KEYWORD_FUNC_NAMES
 
     /** PHP scalar type names (int, string, etc.). */
-    fun getScalarTypeNames(): Set<String> = SCALAR_TYPE_NAMES
+    public fun getScalarTypeNames(): Set<String> = SCALAR_TYPE_NAMES
 
     internal fun String.stripLeadingSlash(): String = if (startsWith('/') || startsWith('\\')) substring(1) else this
 
