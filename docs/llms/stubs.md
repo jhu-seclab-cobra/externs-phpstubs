@@ -24,7 +24,7 @@ val cls = PhpStubs.searchClass("Exception")    // StubRecord.PhpClass?
 
 **`containsMethod(methodName: String, className: String? = null): Boolean`** -- Full key lookup when `className` provided; suffix index lookup when null.
 
-**`containsConst(name: String): Boolean`** -- Checks both global and class constants.
+**`containsConst(name: String, caseSensitive: Boolean = true): Boolean`** -- Checks both global and class constants. Pass `caseSensitive = false` for case-insensitive lookup.
 
 **Record retrieval:**
 
@@ -34,9 +34,9 @@ val cls = PhpStubs.searchClass("Exception")    // StubRecord.PhpClass?
 
 **`searchMethod(methodName: String, className: String? = null): Pair<String, StubRecord.Method>?`** -- Pair contains the full `"class::method"` key and the record. Suffix index lookup when `className` null.
 
-**`searchGlobalConst(name: String): StubRecord.Constant?`** -- Global constants only.
+**`searchGlobalConst(name: String, caseSensitive: Boolean = true): StubRecord.Constant?`** -- Global constants only. Case-sensitive by default.
 
-**`searchClassConst(constName: String, className: String? = null): StubRecord.ClassConstant?`** -- Suffix index lookup when `className` null.
+**`searchClassConst(constName: String, className: String? = null, caseSensitive: Boolean = true): StubRecord.ClassConstant?`** -- Suffix index lookup when `className` null. Constant name case-sensitive by default.
 
 **Bulk key access:**
 
@@ -94,7 +94,7 @@ Invariant: non-optional params cannot have `defaultValue`.
 
 `STRING`, `INT`, `FLOAT`, `BOOL`, `ARRAY`, `OBJECT`, `MIXED`, `VOID`, `NULL`, `CALLABLE`, `RESOURCE`.
 
-Union types in YAML resolve to `MIXED`. Unknown type names resolve to `MIXED`.
+Union types in YAML resolve to `MIXED`. Unknown type names raise `StubIndexInvalidException` at load time.
 
 ### Visibility
 
@@ -108,7 +108,7 @@ Union types in YAML resolve to `MIXED`. Unknown type names resolve to `MIXED`.
 
 ## Gotchas
 
-- `normalize()` strips both `/` and `\` prefix, then lowercases. Applied to all lookup inputs.
+- Function, class, and method lookup inputs are normalized: leading `/` and `\` stripped, then lowercased. Constant lookup inputs only strip the prefix -- constant case is preserved unless `caseSensitive = false`.
 - `StubRecord` is a sealed class -- use `searchFunc` for `Function`, `searchClass` for `PhpClass`, `searchMethod` for `Method`, `searchGlobalConst` for `Constant`, `searchClassConst` for `ClassConstant`.
 - Keyword functions and scalar type classes are synthetic in-memory records, not loaded from YAML.
 - `defaultValue` on `StubParam` is a string representation. Consumer converts to domain types.

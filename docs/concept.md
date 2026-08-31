@@ -53,9 +53,9 @@ Runtime Loading:
 - **Relationships:** Files loaded eagerly at startup into immutable maps keyed by entity name.
 
 - **Name:** Stub Record Hierarchy
-- **Definition:** `StubRecord` is a sealed class with six subtypes, one per entity kind: functions, methods, classes, constants, class constants, and properties. Each subtype carries only the fields relevant to its entity kind. All subtypes share a common name and extension identity.
+- **Definition:** A stub record is one member of a closed hierarchy with six subtypes, one per entity kind: functions, methods, classes, constants, class constants, and properties. Each subtype carries only the fields relevant to its entity kind. All subtypes share a common name and extension identity.
 - **Scope:** Represents the full taxonomy of PHP built-in entities.
-- **Relationships:** One `StubRecord` subtype per tag value. The `StubRegistry` holds one typed map per subtype.
+- **Relationships:** One stub record subtype per tag value. The registry holds one typed map per subtype.
 
 - **Name:** Dataflow Summary
 - **Definition:** `flowsToReturn` on function and method entries records which parameter indices' data appears in the return value. This is an intrinsic property of the function's behavior, independent of any security analysis. Absence of `flowsToReturn` means the return value is a pure computation that does not contain parameter data.
@@ -65,7 +65,7 @@ Runtime Loading:
 - **Name:** Eager Immutable Loading
 - **Definition:** All YAML files loaded at startup into immutable maps. No lazy loading, no caching layer. After loading, all queries are O(1) map lookup.
 - **Scope:** Startup cost proportional to total entry count.
-- **Relationships:** Maps frozen via `Collections.unmodifiableMap` after construction.
+- **Relationships:** Maps are frozen read-only after construction. See [design.md](design.md) for the enforcement mechanism.
 
 - **Name:** Data Extraction Pipeline
 - **Definition:** Offline scripts extract signatures from JetBrains/phpstorm-stubs and dataflow annotations from vimeo/psalm stubs, then merge results into the YAML format. The extraction is a one-time process per PHP version upgrade. Output YAML files are committed to the repository and bundled in the JAR.
@@ -75,7 +75,7 @@ Runtime Loading:
 ## 3. Contracts & Flow
 
 **Data Contracts**
-- **With cobraphp-core:** Direct API. `PhpStubs.searchFunc(name)` returns a `StubRecord.Function` with signature and dataflow fields. Taint rules (source/sink/sanitizer) are owned and loaded separately by cobraphp-core.
+- **With cobraphp-core:** Direct API. A function lookup by name returns the function's stub record with signature and dataflow fields (see [design.md](design.md) for signatures). Taint rules (source/sink/sanitizer) are owned and loaded separately by cobraphp-core.
 - **With extraction scripts:** Scripts produce YAML files conforming to the tag-based format. Scripts are idempotent -- re-running produces identical output for the same input stubs version.
 
 **Internal Processing Flow**
@@ -86,10 +86,10 @@ Runtime Loading:
 
 ## 4. Scenarios
 
-- **Typical:** Phase 1 encounters `strlen($x)`. `PhpStubs.searchFunc("strlen")` returns a `StubRecord.Function` with the function's parameter types, return type, and an empty `flowsToReturn` set -- pure computation, no parameter data in the return value.
+- **Typical:** Phase 1 encounters `strlen($x)`. A function lookup for `strlen` returns its stub record with the function's parameter types, return type, and an empty `flowsToReturn` set -- pure computation, no parameter data in the return value.
 
-- **Boundary:** A new PHP extension adds `sodium_crypto_aead_encrypt`. A developer runs the extraction script against updated phpstorm-stubs, which generates a new `crypto/sodium.yaml` with the function's signature. `flowsToReturn` is absent (not in Psalm stubs), so the `StubRecord.Function` defaults to no dataflow. A developer may later add `flowsToReturn` manually.
+- **Boundary:** A new PHP extension adds `sodium_crypto_aead_encrypt`. A developer runs the extraction script against updated phpstorm-stubs, which generates a new `crypto/sodium.yaml` with the function's signature. `flowsToReturn` is absent (not in Psalm stubs), so the function's stub record defaults to no dataflow. A developer may later add `flowsToReturn` manually.
 
-- **Interaction:** cobraphp-core loads `PhpStubs` for signature lookup, then loads its own taint YAML for security rules. `htmlspecialchars` has `flowsToReturn: [0]` in phpstubs (dataflow fact) and sanitizer classification in cobraphp-core's taint rules (security classification). The two concerns are independent.
+- **Interaction:** cobraphp-core loads the stubs registry for signature lookup, then loads its own taint YAML for security rules. `htmlspecialchars` has `flowsToReturn: [0]` in phpstubs (dataflow fact) and sanitizer classification in cobraphp-core's taint rules (security classification). The two concerns are independent.
 
 See [design.md](design.md) for type specifications.

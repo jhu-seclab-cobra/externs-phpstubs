@@ -2,13 +2,13 @@
 
 > Read-only Kotlin registry for PHP built-in function, class, method, and constant metadata with dataflow summaries.
 
-`PhpStubs` is the singleton entry point. All input names normalized: strip leading `/` and `\`, then lowercase.
+`PhpStubs` is the singleton entry point. Function, class, and method names are normalized: strip leading `/` and `\`, then lowercase. Constant names strip the prefix only; their case is preserved.
 
 ## Instructions for Agents
 
 - Call `PhpStubs.searchFunc(name)` for `StubRecord.Function?`, `searchClass(name)` for `StubRecord.PhpClass?`.
 - Call `PhpStubs.searchMethod(methodName, className?)` for `Pair<String, StubRecord.Method>?`.
-- Call `PhpStubs.searchGlobalConst(name)` for `StubRecord.Constant?`, `searchClassConst(constName, className?)` for `StubRecord.ClassConstant?`.
+- Call `PhpStubs.searchGlobalConst(name, caseSensitive?)` for `StubRecord.Constant?`, `searchClassConst(constName, className?, caseSensitive?)` for `StubRecord.ClassConstant?`. Constant lookups are case-sensitive by default.
 - `StubRecord` is a sealed class with 6 subtypes: `Function`, `Method`, `PhpClass`, `Constant`, `ClassConstant`, `Property`.
 - `normalize()` strips both `/` and `\` prefix. Pass names with or without leading slash.
 - `flowsToReturn` empty = pure function. Return does not contain parameter data.

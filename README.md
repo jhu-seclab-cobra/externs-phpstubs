@@ -80,7 +80,7 @@ Stub data derived from [JetBrains/phpstorm-stubs](https://github.com/JetBrains/p
 
 ## Documentation
 
-- [Concepts](docs/idea.md) -- tag-based YAML format, dataflow summaries, eager loading
+- [Concepts](docs/concept.md) -- tag-based YAML format, dataflow summaries, eager loading
 - [Design](docs/design.md) -- sealed class hierarchy, YAML schema, type specifications
 - [Implementation Notes](docs/impl.md) -- developer instructions, library gotchas
 
