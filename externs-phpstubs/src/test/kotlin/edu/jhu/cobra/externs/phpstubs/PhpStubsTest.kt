@@ -9,7 +9,8 @@ import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 /**
- * Tests for [PhpStubs] facade.
+ * Tests for [PhpStubs] facade — function, class, and method lookups plus bulk access.
+ * Constant lookups: [PhpStubsConstantTest].
  *
  * - `containsFunc returns true for keyword functions` — verifies keyword lookups succeed
  * - `containsFunc returns false for unknown function` — verifies unknown names return false
@@ -17,32 +18,21 @@ import kotlin.test.assertTrue
  * - `searchFunc returns keyword Function record` — verifies record fields for a keyword function
  * - `searchFunc returns null for unknown function` — verifies null return for missing names
  * - `searchFunc returns registry Function record` — verifies record fields for a registry function
+ * - `searchFunc normalizes case and leading slash` — verifies facade input normalization
  * - `containsClass returns true for scalar types` — verifies scalar type lookups succeed
  * - `containsClass returns false for unknown class` — verifies unknown class returns false
  * - `containsClass returns true for registry-loaded class` — verifies registry class lookup
  * - `searchClass returns PhpClass record` — verifies record fields for a scalar type
  * - `searchClass returns registry PhpClass record` — verifies record fields for a registry class
  * - `searchClass returns null for unknown class` — verifies null return for missing class
+ * - `searchClass normalizes case and leading backslash` — verifies facade input normalization
  * - `containsClass returns true for exit and resource` — verifies special built-in types
  * - `containsMethod returns true with className for known method` — verifies qualified method lookup
  * - `containsMethod returns false for unknown method` — verifies unknown method returns false
  * - `containsMethod returns true without className via suffix index` — verifies suffix-only method lookup
- * - `containsConst returns true for global constant` — verifies global constant lookup
- * - `containsConst returns true for class constant` — verifies class constant path in containsConst
- * - `containsConst returns false for unknown constant` — verifies unknown constant returns false
- * - `containsConst case-insensitive matches class constant` — verifies classConstCiIndex path
  * - `searchMethod returns pair for known method with className` — verifies qualified method retrieval
  * - `searchMethod returns null for unknown method` — verifies null return for missing method
  * - `searchMethod returns pair without className via suffix index` — verifies suffix-only method retrieval
- * - `searchGlobalConst returns Constant record` — verifies global constant retrieval
- * - `searchGlobalConst returns null for unknown` — verifies null return for missing constant
- * - `searchGlobalConst case-insensitive returns record` — verifies case-insensitive constant lookup
- * - `searchClassConst returns ClassConstant with className` — verifies class constant retrieval
- * - `searchClassConst returns null for unknown` — verifies null return for missing class constant
- * - `searchClassConst returns ClassConstant without className via suffix index` — verifies suffix-only class constant lookup
- * - `searchClassConst case-insensitive with className returns record` — verifies case-insensitive qualified class constant lookup
- * - `searchClassConst case-insensitive without className matches via suffix index` — verifies
- *   case-insensitive suffix lookup matches uppercase constants from lowercase input
  * - `getKeywordFuncNames contains standard keywords` — verifies bulk keyword name retrieval
  * - `getScalarTypeNames contains all scalar types` — verifies bulk scalar type name retrieval
  * - `getAllFuncNames returns non-empty set` — verifies registry function names are populated
@@ -93,6 +83,13 @@ internal class PhpStubsTest {
         assertEquals("strlen", record.name)
     }
 
+    @Test
+    fun `searchFunc normalizes case and leading slash`() {
+        assertNotNull(PhpStubs.searchFunc("STRLEN"))
+        assertNotNull(PhpStubs.searchFunc("/strlen"))
+        assertNotNull(PhpStubs.searchFunc("\\Strlen"))
+    }
+
     // -- Scalar types --
 
     @Test
@@ -132,6 +129,12 @@ internal class PhpStubsTest {
     @Test
     fun `searchClass returns null for unknown class`() {
         assertNull(PhpStubs.searchClass("nonexistent_xyz_class"))
+    }
+
+    @Test
+    fun `searchClass normalizes case and leading backslash`() {
+        assertNotNull(PhpStubs.searchClass("EXCEPTION"))
+        assertNotNull(PhpStubs.searchClass("\\Exception"))
     }
 
     @Test
@@ -175,35 +178,6 @@ internal class PhpStubsTest {
         assertTrue(PhpStubs.containsMethod("getMessage"))
     }
 
-    // -- Constants --
-
-    @Test
-    fun `containsConst case-sensitive matches exact name`() {
-        assertTrue(PhpStubs.containsConst("TRUE"))
-        assertFalse(PhpStubs.containsConst("true"))
-    }
-
-    @Test
-    fun `containsConst returns true for class constant`() {
-        assertTrue(PhpStubs.containsConst("exception::SEVERITY_ERROR"))
-    }
-
-    @Test
-    fun `containsConst case-insensitive matches any case`() {
-        assertTrue(PhpStubs.containsConst("true", caseSensitive = false))
-        assertTrue(PhpStubs.containsConst("TRUE", caseSensitive = false))
-    }
-
-    @Test
-    fun `containsConst case-insensitive matches class constant`() {
-        assertTrue(PhpStubs.containsConst("exception::severity_error", caseSensitive = false))
-    }
-
-    @Test
-    fun `containsConst returns false for unknown constant`() {
-        assertFalse(PhpStubs.containsConst("nonexistent_xyz_const"))
-    }
-
     // -- Record retrieval (registry) --
 
     @Test
@@ -227,67 +201,6 @@ internal class PhpStubsTest {
         assertEquals("exception::getmessage", result.first)
         assertIs<StubRecord.Method>(result.second)
         assertEquals("getMessage", result.second.name)
-    }
-
-    @Test
-    fun `searchGlobalConst returns Constant record`() {
-        val record = PhpStubs.searchGlobalConst("TRUE")
-        assertNotNull(record)
-        assertIs<StubRecord.Constant>(record)
-        assertEquals("TRUE", record.name)
-    }
-
-    @Test
-    fun `searchGlobalConst returns null for unknown`() {
-        assertNull(PhpStubs.searchGlobalConst("nonexistent_xyz_const"))
-    }
-
-    @Test
-    fun `searchGlobalConst case-insensitive returns record`() {
-        val record = PhpStubs.searchGlobalConst("php_int_max", caseSensitive = false)
-        assertNotNull(record)
-        assertIs<StubRecord.Constant>(record)
-        assertEquals("PHP_INT_MAX", record.name)
-    }
-
-    @Test
-    fun `searchClassConst returns ClassConstant with className`() {
-        val record = PhpStubs.searchClassConst("SEVERITY_ERROR", "Exception")
-        assertNotNull(record)
-        assertIs<StubRecord.ClassConstant>(record)
-        assertEquals("SEVERITY_ERROR", record.name)
-        assertEquals("Exception", record.owningClass)
-    }
-
-    @Test
-    fun `searchClassConst returns null for unknown`() {
-        assertNull(PhpStubs.searchClassConst("nonexistent_xyz_const", "exception"))
-    }
-
-    @Test
-    fun `searchClassConst returns ClassConstant without className via suffix index`() {
-        val record = PhpStubs.searchClassConst("SEVERITY_ERROR")
-        assertNotNull(record)
-        assertIs<StubRecord.ClassConstant>(record)
-        assertEquals("SEVERITY_ERROR", record.name)
-        assertEquals("Exception", record.owningClass)
-    }
-
-    @Test
-    fun `searchClassConst case-insensitive with className returns record`() {
-        val record = PhpStubs.searchClassConst("severity_error", "Exception", caseSensitive = false)
-        assertNotNull(record)
-        assertIs<StubRecord.ClassConstant>(record)
-        assertEquals("SEVERITY_ERROR", record.name)
-    }
-
-    @Test
-    fun `searchClassConst case-insensitive without className matches via suffix index`() {
-        val record = PhpStubs.searchClassConst("severity_error", caseSensitive = false)
-        assertNotNull(record)
-        assertIs<StubRecord.ClassConstant>(record)
-        assertEquals("SEVERITY_ERROR", record.name)
-        assertEquals("Exception", record.owningClass)
     }
 
     // -- Bulk access (registry) --
