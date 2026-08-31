@@ -11,6 +11,9 @@ import kotlin.test.assertEquals
  * - `normalizeStubKey strips backslash` -- verifies leading `\` removal and lowercasing
  * - `normalizeStubKey strips only one leading separator` -- verifies a single separator is removed
  * - `stripLeadingSlash preserves case` -- verifies case-sensitive stripping for constants
+ * - `qualifiedStubKey normalizes class and passes member key through` -- verifies class lowercasing
+ *   with member key untouched
+ * - `qualifiedStubKey strips leading separator from class` -- verifies class-side slash stripping
  */
 internal class StubKeyTest {
     @Test
@@ -38,5 +41,17 @@ internal class StubKeyTest {
         assertEquals("PHP_EOL", "/PHP_EOL".stripLeadingSlash())
         assertEquals("PHP_EOL", "\\PHP_EOL".stripLeadingSlash())
         assertEquals("PHP_EOL", "PHP_EOL".stripLeadingSlash())
+    }
+
+    @Test
+    fun `qualifiedStubKey normalizes class and passes member key through`() {
+        assertEquals("exception::getmessage", qualifiedStubKey("Exception", "getmessage"))
+        assertEquals("exception::SEVERITY_ERROR", qualifiedStubKey("Exception", "SEVERITY_ERROR"))
+    }
+
+    @Test
+    fun `qualifiedStubKey strips leading separator from class`() {
+        assertEquals("pdo::prepare", qualifiedStubKey("\\PDO", "prepare"))
+        assertEquals("pdo::prepare", qualifiedStubKey("/PDO", "prepare"))
     }
 }

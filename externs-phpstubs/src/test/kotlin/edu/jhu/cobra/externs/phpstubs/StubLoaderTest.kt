@@ -13,6 +13,7 @@ import kotlin.test.assertTrue
  *
  * - `loads functions from both YAML files` — verifies functions from multiple YAML files are present
  * - `function records have correct extension` — verifies extension field matches source file
+ * - `extension strips numeric split suffix from filename` — verifies `_N` filename suffix removal
  * - `function records have parsed params` — verifies parameter list parsing
  * - `function records have return type` — verifies return type mapping
  * - `function records have flowsToReturn` — verifies taint flow index sets
@@ -44,6 +45,12 @@ internal class StubLoaderTest {
     fun `function records have correct extension`() {
         assertEquals("standard", registry.functions["strlen"]?.extension)
         assertEquals("core", registry.functions["define"]?.extension)
+    }
+
+    @Test
+    fun `extension strips numeric split suffix from filename`() {
+        val split = StubLoader.loadAll("/stubs-split/")
+        assertEquals("standard", split.functions["splitfunc"]?.extension)
     }
 
     @Test
