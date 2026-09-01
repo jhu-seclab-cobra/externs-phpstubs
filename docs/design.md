@@ -1,168 +1,186 @@
-# PHP Stubs Library Design
+# PHP Stubs — Design
+
+Domain model and algorithm phases are skipped: the library is a registry
+over types commons-phpmodels already defines (no domain semantics of its
+own) and its load is a linear pass over documents (no worklist, fixpoint,
+or traversal). Concepts: [concept.md](concept.md).
 
 ## Design Overview
 
-- **Sealed class**: `StubRecord` (6 subtypes: `Function`, `Method`, `PhpClass`, `Constant`, `ClassConstant`, `Property`)
-- **Data classes**: `StubParam`, `StubRegistry`, `YamlStubParser.ParseResult`
-- **Enums**: `PhpType`, `Visibility`
-- **Objects**: `YamlStubParser`, `StubLoader`, `PhpStubs`
-- **Relationships**: `StubLoader` reads YAML via `YamlStubParser`, builds `StubRegistry`. `PhpStubs` delegates to `StubRegistry`.
-- **Exceptions**: `StubIndexNotFoundException`, `StubIndexInvalidException` (both extend `RuntimeException`)
-- **Dependency roles**: Data holders: `StubRecord`, `StubParam`, `StubRegistry`, `ParseResult`. Orchestrator: `StubLoader`. Parser: `YamlStubParser`. Facade: `PhpStubs`.
+- **Classes:** `StubEntry<S>` (data class), `StubRegistry` (data class),
+  `StubLoader` (object), `PhpStubs` (object)
+- **External types (commons-phpmodels):** `ModelLoader`, `ModelEntry`,
+  `SubjectModel`, `ModelGenerator`, `ModelSubject` and its seven subtypes,
+  `SignatureInfo` and its four subtypes, `ParameterInfo`, `DeclaredType`
+- **Relationships:** `StubEntry` contains one `ModelSubject` subtype and one
+  `SubjectModel`; `StubRegistry` contains `StubEntry` maps keyed by subject;
+  `StubLoader` uses `ModelLoader` and builds `StubRegistry`; `PhpStubs`
+  contains one `StubRegistry` and its lookup indexes. All arrows one-way.
+- **Exceptions:** `StubIndexNotFoundException`, `StubIndexInvalidException`
+  (both extend `RuntimeException`), raised by `StubLoader`.
+- **Dependency roles:** Data holders: `StubEntry`, `StubRegistry`.
+  Orchestrator: `StubLoader`. Facade: `PhpStubs`. Decoder and validator:
+  commons-phpmodels.
 
----
-
-## YAML Format
-
-### Tag System
-
-Each YAML file contains a flat list of map entries. Every entry has a `tag` field.
-
-| Tag | Description | Example |
-|-----|-------------|---------|
-| `function` | Top-level PHP function | `strlen`, `array_map` |
-| `method` | Class method | `PDO::prepare` |
-| `class` | Class or interface definition | `Exception`, `PDOStatement` |
-| `constant` | Global constant | `PHP_INT_MAX`, `ENT_QUOTES` |
-| `class_constant` | Class constant | `PDO::ATTR_ERRMODE` |
-| `property` | Class property | `Exception::$message` |
-
-### Entry Schemas
-
-**`function`**: `tag` (required), `name` (required), `params` (list, optional), `return` (string, default `mixed`), `flowsToReturn` (list[int], optional -- parameter indices whose data flows to return value).
-
-**`params` element**: `name` (required), `type` (string, default `mixed`), `optional` (bool, default `false`), `default` (string, optional -- default value literal).
-
-**`method`**: `tag` (required), `class` (required -- owning class), `name` (required), `params` (same as `function`), `return` (default `mixed`), `static` (bool, default `false`), `visibility` (`public`/`protected`/`private`, default `public`), `flowsToReturn` (list[int], optional -- 0 = first explicit parameter).
-
-**`class`**: `tag` (required), `name` (required), `parent` (string, optional), `interfaces` (list[string], optional), `abstract` (bool, default `false`), `final` (bool, default `false`).
-
-**`constant`**: `tag` (required), `name` (required), `type` (required), `value` (required).
-
-**`class_constant`**: `tag` (required), `class` (required), `name` (required), `type` (required), `value` (required), `visibility` (default `public`).
-
-**`property`**: `tag` (required), `class` (required), `name` (required), `type` (default `mixed`), `static` (bool, default `false`), `visibility` (default `public`).
-
-### File Organization
-
-```
-stubs/
-├── core.yaml              # core constructs, Exception hierarchy, constants
-├── crypto/                # bcmath, gmp, hash, mcrypt, openssl
-├── database/              # cubrid, dba, ibm_db2, mysqli, oci8, odbc, pgsql
-├── file/                  # bz2, exif, file, fileinfo, filter, zip, zlib
-├── image/                 # gd
-├── misc/                  # apcu, date, yp
-├── network/               # curl, ftp, imap, ldap, session, sockets, stream
-├── standard/              # standard_1..standard_8 (split for size)
-├── system/                # pcntl, posix, readline, spl, sysvmsg, sysvsem, sysvshm
-├── text/                  # ctype, gettext, iconv, intl, json, mbstring, pcre
-├── xml/                   # libxml, simplexml, tidy, xml, xmlwriter
-└── index.txt              # auto-generated manifest (Gradle processResources)
-```
-
-### Data Extraction Pipeline
-
-YAML stub files are produced offline by a script that parses JetBrains PhpStorm PHP stubs (`.phpstub` source files) and emits the unified YAML format. The script is not part of this library. The resulting YAML files are committed as resources and shipped in the JAR.
-
----
+Package `edu.jhu.cobra.externs.phpstubs`, one module, `explicitApi()`.
+commons-phpmodels is an `api` dependency: its subject and signature types
+are the entry surface. No YAML library is a direct dependency. Every type
+in this file is public.
 
 ## Class / Type Specifications
 
-### `PhpType`
+### StubEntry<S : ModelSubject>
 
-Enum. Values: `STRING`, `INT`, `FLOAT`, `BOOL`, `ARRAY`, `OBJECT`, `MIXED`, `VOID`, `NULL`, `CALLABLE`, `RESOURCE`.
+**Responsibility:** One registry entry: the decoded model together with its
+extension provenance. Generic over the subject kind so a lookup result
+exposes the identity fields of its kind (`owner`, `name`) without a cast.
 
-### `Visibility`
+**State/Fields:** `subject: S`, `model: SubjectModel`, `extension: String`
+(the extension name derived from document placement; value tier: data,
+never a constant in code).
 
-Enum. Values: `PUBLIC`, `PROTECTED`, `PRIVATE`.
+**Validation (`init`):** `model.subject == subject`; `extension` non-blank.
 
-### `StubParam`
+**Typed signature accessors** (top-level extension properties in
+`StubEntry.kt`, one per subject kind, narrowing `model.signature`):
+`StubEntry<FunctionSubject>.callableSignature`,
+`StubEntry<MethodSubject>.callableSignature`,
+`StubEntry<ClassSubject>.classSignature`,
+`StubEntry<ConstantSubject>.typedSignature`,
+`StubEntry<ClassConstantSubject>.typedSignature`,
+`StubEntry<PropertySubject>.propertySignature`. Non-null: the corpus rule
+below requires a signature on every entry, and commons-phpmodels rejects a
+signature subtype that does not match the subject kind.
 
-Data class. Fields: `name: String`, `type: PhpType`, `optional: Boolean` (default `false`), `defaultValue: String?` (default `null`). Invariant: non-optional param cannot have `defaultValue`. `YamlStubParser` validates the combination at parse time and raises `StubIndexInvalidException` naming the source file and param; the `require` in `init` remains as a backstop for direct construction.
+### StubRegistry
 
-### `StubRecord` (sealed class)
+**Responsibility:** The immutable per-kind entry maps, keyed by subject.
 
-Base properties: `name: String`, `extension: String`.
+**State/Fields:** `functions: Map<FunctionSubject, StubEntry<FunctionSubject>>`,
+`classes`, `methods`, `constants`, `classConstants`, `properties` — each
+map keyed by its subject subtype. Every map is unmodifiable.
 
-| Subtype | Fields (beyond base) |
-|---------|---------------------|
-| `Function` | `params: List<StubParam>`, `returnType: PhpType`, `flowsToReturn: Set<Int>` |
-| `Method` | `owningClass: String`, `params: List<StubParam>`, `returnType: PhpType`, `flowsToReturn: Set<Int>`, `visibility: Visibility`, `isStatic: Boolean` |
-| `PhpClass` | `parent: String?`, `interfaces: List<String>`, `isAbstract: Boolean`, `isFinal: Boolean` |
-| `Constant` | `type: PhpType`, `value: String` |
-| `ClassConstant` | `owningClass: String`, `type: PhpType`, `value: String`, `visibility: Visibility` |
-| `Property` | `owningClass: String`, `type: PhpType`, `visibility: Visibility`, `isStatic: Boolean` |
+### StubLoader (object)
 
-### `StubRegistry`
+**Responsibility:** Builds one `StubRegistry` from the documents a manifest
+lists. Owns the extension derivation and the corpus rules; owns no format
+rule (commons-phpmodels decodes and validates every entry).
 
-Data class. Six typed unmodifiable maps:
-`functions: Map<String, StubRecord.Function>`, `classes: Map<String, StubRecord.PhpClass>`, `methods: Map<String, StubRecord.Method>`, `constants: Map<String, StubRecord.Constant>`, `classConstants: Map<String, StubRecord.ClassConstant>`, `properties: Map<String, StubRecord.Property>`.
+**Methods:**
+- `loadAll(resourceBase: String = "/models/"): StubRegistry`
+  - **Behavior:** reads `index.txt` under `resourceBase`; decodes each
+    listed document through `ModelLoader.load`; attaches the extension
+    derived from the document's file name (`.yaml` removed, then a trailing
+    `_<digits>` split suffix removed); routes each entry into the map of
+    its subject kind; freezes the maps.
+  - **Input:** classpath directory holding `index.txt` and the documents it
+    lists, trailing slash optional.
+  - **Output:** the frozen registry.
+  - **Errors:** `StubIndexNotFoundException` when `index.txt` or a listed
+    document is absent (message names the resource path);
+    `StubIndexInvalidException` on a decode failure (message names the
+    document; cause is the commons-phpmodels `IllegalArgumentException`) or
+    on a corpus rule violation.
 
-### `YamlStubParser` (object)
+**Corpus rules** (each violation is a `StubIndexInvalidException` naming
+the document, and the subject where one exists):
+- Every entry is a `SubjectModel`; a `ModelGenerator` is not stub data.
+- No entry has a `VariableSubject`; predefined variables are not stubs.
+- Every entry declares a `signature`.
+- No two documents declare the same subject; the message names both.
 
-**`ParseResult`**: nested data class with six typed lists matching `StubRegistry` field types.
+Constant subjects fold nothing, so `TRUE` and `true` are distinct entries;
+case-insensitive lookup over them is the facade's over-approximation.
 
-- `parse(reader: BufferedReader, source: String, extension: String): ParseResult` -- Parses one YAML file. Dispatches entries by `tag` field. Throws `StubIndexInvalidException` on unknown tags or missing required fields; every error message is prefixed with `source`.
-- `mapPhpType(typeStr: String, source: String): PhpType` -- Internal. Union types (containing `|`) resolve to `MIXED`. Unknown type names raise `StubIndexInvalidException`.
-- `mapVisibility(raw: String?, source: String): Visibility` -- Internal. Null (absent field) defaults to `PUBLIC`; unknown values raise `StubIndexInvalidException`.
+### PhpStubs (object)
 
-### `StubLoader` (object)
+**Responsibility:** The lookup facade over one lazily loaded registry. Adds
+the name-resolution rules of [concept.md](concept.md) Lookup Semantics:
+unqualified member lookup through suffix indexes and case-insensitive
+constant lookup through folded indexes. Every index is built once, lazily,
+from the registry; every lookup afterwards is a map read.
 
-`loadAll(resourceBase: String = "/stubs/"): StubRegistry` -- Reads `index.txt` manifest from classpath, parses all listed YAML files, merges into a single `StubRegistry` with unmodifiable maps. Extension name derived from filename with `_\d+$` suffix stripped. Throws `StubIndexNotFoundException` if `index.txt` or any listed YAML file is missing; the message names the missing resource path.
+**State (private, lazy):** the registry (`StubLoader.loadAll()`); the
+method suffix index `name → MethodSubject`; the class-constant suffix
+index `name → ClassConstantSubject` and its lowercased companion; the
+folded constant index `lowercase name → ConstantSubject`; the folded
+class-constant index `lowercase spelling → ClassConstantSubject`. Where
+several subjects fold to one index key, the first in load order wins,
+deterministically.
 
-Key normalization follows PHP case sensitivity: function, class, method, and property keys are lowercased. Constant keys (global and class) strip one leading `/` or `\` namespace separator and preserve original case from YAML. Class-constant keys use lowercased class name + original constant name (`exception::SEVERITY_ERROR`). Qualified member keys are built by the shared `qualifiedStubKey()` in `StubKey.kt`, used by both `StubLoader` and `PhpStubs`.
+**Name handling:** a lookup name is converted to a subject through the
+commons-phpmodels creators (`FunctionSubject.parse`, `ClassSubject.parse`,
+`ConstantSubject.parse`; member constructors for a qualified lookup), so
+folding and namespace-slash stripping are decided once, in the format
+library. A name that is not a PHP identifier spelling (blank, whitespace,
+`::`, `$`) is an argument error: `IllegalArgumentException` from the
+creator, never a silent miss.
 
-### `PhpStubs` (object)
+**Methods:**
 
-Facade. Lazy-loads `StubRegistry` on first access. Builds suffix indexes (method suffix after `::` mapped to full key) for O(1) lookup when `className` is null. Method suffixes are lowercased by key normalization; the class-constant suffix index is case-preserved, with a lazy lowercased companion index serving case-insensitive suffix lookups.
+| Method | Return | Behavior |
+|--------|--------|----------|
+| `containsFunc(name)` | `Boolean` | Function subject present (language constructs included) |
+| `containsClass(name)` | `Boolean` | Class subject present (scalar types and `exit`, `resource` included) |
+| `containsMethod(methodName, className?)` | `Boolean` | `searchMethod` non-null |
+| `containsConst(name, caseSensitive = true)` | `Boolean` | Global or class constant present; folded indexes when `false` |
+| `searchFunc(name)` | `StubEntry<FunctionSubject>?` | Registry read |
+| `searchClass(name)` | `StubEntry<ClassSubject>?` | Registry read |
+| `searchMethod(methodName, className?)` | `StubEntry<MethodSubject>?` | Qualified read when `className` given; suffix index otherwise |
+| `searchGlobalConst(name, caseSensitive = true)` | `StubEntry<ConstantSubject>?` | Exact read, or folded index |
+| `searchClassConst(constName, className?, caseSensitive = true)` | `StubEntry<ClassConstantSubject>?` | Qualified exact or folded read; suffix index (exact or folded) without `className` |
+| `getAllFuncNames()` | `Set<String>` | Folded function names |
+| `getAllClassNames()` | `Set<String>` | Folded class names |
+| `getAllMethodNames()` | `Set<String>` | `owner::name` spellings, folded |
+| `getAllConstNames()` | `Set<String>` | Global constant names, case preserved |
+| `getKeywordFuncNames()` | `Set<String>` | Function names whose extension is `keyword` |
+| `getScalarTypeNames()` | `Set<String>` | Class names whose extension is `scalar` |
 
-**Case sensitivity follows PHP semantics:**
-- Functions, classes, methods: case-insensitive. `normalizeStubKey()` (shared with `StubLoader`) strips leading `/` or `\` and lowercases.
-- Constants (global and class): **case-sensitive by default** (`PHP_INT_MAX` ≠ `php_int_max`). Constant-related methods accept `caseSensitive: Boolean = true`. Pass `false` for over-approximation in static analysis.
+`searchMethod` returns the entry alone: its subject carries the owner and
+the folded name that the former key pair spelled. Language constructs are
+ordinary entries, so the bulk name sets include them; the two derived sets
+select by extension. Extension names `keyword` and `scalar` are constants
+in `PhpStubs.kt` (fixed by the document layout).
 
-Synthetic records: keyword functions (`echo`, `empty`, `eval`, `exit`, `die`, `isset`, `print`, `unset`, `clone`, `instanceof`, `shell_exec`, `include`, `include_once`, `require`, `require_once`) and synthetic classes (`int`, `float`, `string`, `bool`, `array`, `exit`, `resource`).
+## Resource Layout
 
-| Method | Return Type | Behavior |
-|--------|-------------|----------|
-| `containsFunc(name)` | `Boolean` | Checks registry and keyword set (case-insensitive) |
-| `containsClass(name)` | `Boolean` | Checks registry and synthetic class records (case-insensitive) |
-| `containsMethod(methodName, className?)` | `Boolean` | Full key if `className` provided; suffix index otherwise (case-insensitive) |
-| `containsConst(name, caseSensitive?)` | `Boolean` | Checks global and class constants. Default case-sensitive |
-| `searchFunc(name)` | `Function?` | Keywords first, then registry (case-insensitive) |
-| `searchClass(name)` | `PhpClass?` | Registry first, then synthetic (case-insensitive) |
-| `searchMethod(methodName, className?)` | `Pair<String, Method>?` | Full key if `className` provided; suffix index otherwise (case-insensitive) |
-| `searchGlobalConst(name, caseSensitive?)` | `Constant?` | Registry lookup. Default case-sensitive |
-| `searchClassConst(constName, className?, caseSensitive?)` | `ClassConstant?` | Class name case-insensitive, constant name case-sensitive by default. With `caseSensitive = false` and no `className`, the lowercased suffix index matches uppercase constants from any-case input |
-| `getAllFuncNames()` | `Set<String>` | Registry function keys (lowercase) |
-| `getAllClassNames()` | `Set<String>` | Registry class keys (lowercase) |
-| `getAllMethodNames()` | `Set<String>` | Registry method keys (lowercase class::lowercase method) |
-| `getAllConstNames()` | `Set<String>` | Registry constant keys (original case) |
-| `getKeywordFuncNames()` | `Set<String>` | Hardcoded keyword set |
-| `getScalarTypeNames()` | `Set<String>` | Hardcoded scalar type set |
+```
+models/
+├── index.txt              # build-generated manifest, sorted relative paths
+├── core.yaml              # extension "core"
+├── language/              # hand-declared language constructs
+│   ├── keyword.yaml       # 15 keyword functions + class exit, extension "keyword"
+│   ├── scalar.yaml        # classes int, float, string, bool, array, extension "scalar"
+│   └── legacy.yaml        # class resource, extension "legacy"
+├── standard/standard_1..8.yaml   # extension "standard" (split suffix removed)
+└── <category>/<extension>.yaml   # crypto, database, file, image, misc, network, system, text, xml
+```
 
----
+Generated documents carry the producer header of commons-phpmodels'
+generated layer and are never hand-edited. The language documents are the
+one hand-maintained exception and carry no producer header. A keyword
+function declares one optional variadic `mixed` parameter and a `mixed`
+return; a language class declares `classifier: class`.
+
+The Gradle resource task writes `index.txt` for `models/` (main) and
+`models-test/` (test); every other test fixture directory ships its own
+manifest.
 
 ## Exception / Error Types
 
-| Exception | When Raised |
+| Exception | When raised |
 |-----------|-------------|
-| `StubIndexNotFoundException` | YAML resource or `index.txt` not found on classpath |
-| `StubIndexInvalidException` | Missing required field, unknown tag, or invalid field value in YAML |
-
----
+| `StubIndexNotFoundException(resource)` | `index.txt` or a listed document is not on the classpath |
+| `StubIndexInvalidException(reason, cause?)` | A document fails commons-phpmodels decode (cause attached), or a corpus rule is violated |
+| `IllegalArgumentException` | A facade lookup name is not a PHP identifier spelling (raised by the commons-phpmodels subject creator) |
 
 ## Validation Rules
 
-- YAML files are UTF-8 encoded. Each file is a top-level YAML list of maps. Files are loaded with SnakeYAML's `SafeConstructor` (standard types only, no arbitrary object instantiation).
-- Syntactically malformed YAML raises `StubIndexInvalidException` naming the source file, with the SnakeYAML error as cause.
-- Every entry requires a `tag` field. Unknown tags raise `StubIndexInvalidException`.
-- Required fields per tag enforced at parse time by `YamlStubParser`.
-- Boolean fields (`static`, `abstract`, `final`, `optional`) must be YAML booleans; present non-boolean values (e.g. the string `"true"`) raise `StubIndexInvalidException` naming the field.
-- A param with `optional: false` and a `default` raises `StubIndexInvalidException` naming the param.
-- `flowsToReturn` values must be integers.
-- Type strings containing `|` resolve to `MIXED`. Unknown type strings raise `StubIndexInvalidException`.
-- Visibility strings are case-insensitive. Absent visibility defaults to `PUBLIC`; unknown values raise `StubIndexInvalidException`.
-- Duplicate keys within the same entity type raise `StubIndexInvalidException` naming the key and both defining files.
-- All registry maps frozen as unmodifiable after loading.
-- `index.txt` auto-generated by Gradle `processResources`. Lists relative paths of all `*.yaml` under `stubs/`, sorted alphabetically.
+- Format validation — YAML strictness, subject spellings, signature shape,
+  arity, declared types — is commons-phpmodels' and is not repeated here.
+- The four corpus rules above run in `StubLoader` at load, before any map
+  is frozen; a violation fails the whole load.
+- Duplicate detection compares subjects, so `Exception` and `exception`
+  collide (folded kind) while `TRUE` and `true` do not (sensitive kind).
+- `index.txt` lists relative document paths, one per line, sorted; blank
+  lines and `#` comments are skipped.
