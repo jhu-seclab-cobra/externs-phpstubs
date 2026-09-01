@@ -1,19 +1,19 @@
 # externs-phpstubs
 
-> Read-only Kotlin registry for PHP built-in function, class, method, and constant metadata with dataflow summaries.
+> Read-only Kotlin registry of PHP built-in declarations as commons-phpmodels entries, each with its extension provenance.
 
-`PhpStubs` is the singleton entry point. Function, class, and method names are normalized: strip leading `/` and `\`, then lowercase. Constant names strip the prefix only; their case is preserved.
+`PhpStubs` is the singleton entry point. Lookup names go through the commons-phpmodels subject creators: functions, classes, and methods fold case and drop a leading `\`; constants keep their case unless `caseSensitive = false`.
 
 ## Instructions for Agents
 
-- Call `PhpStubs.searchFunc(name)` for `StubRecord.Function?`, `searchClass(name)` for `StubRecord.PhpClass?`.
-- Call `PhpStubs.searchMethod(methodName, className?)` for `Pair<String, StubRecord.Method>?`.
-- Call `PhpStubs.searchGlobalConst(name, caseSensitive?)` for `StubRecord.Constant?`, `searchClassConst(constName, className?, caseSensitive?)` for `StubRecord.ClassConstant?`. Constant lookups are case-sensitive by default.
-- `StubRecord` is a sealed class with 6 subtypes: `Function`, `Method`, `PhpClass`, `Constant`, `ClassConstant`, `Property`.
-- `normalize()` strips both `/` and `\` prefix. Pass names with or without leading slash.
-- `flowsToReturn` empty = pure function. Return does not contain parameter data.
+- Call `PhpStubs.searchFunc(name)` for `StubEntry<FunctionSubject>?`, `searchClass(name)` for `StubEntry<ClassSubject>?`.
+- Call `PhpStubs.searchMethod(methodName, className?)` for `StubEntry<MethodSubject>?`; the entry's `subject` carries `owner` and `name`.
+- Call `PhpStubs.searchGlobalConst(name, caseSensitive?)` for `StubEntry<ConstantSubject>?`, `searchClassConst(constName, className?, caseSensitive?)` for `StubEntry<ClassConstantSubject>?`.
+- `StubEntry` holds `subject`, `model: SubjectModel` (commons-phpmodels), and `extension`. Read signatures through the typed accessors `callableSignature`, `classSignature`, `typedSignature`, `propertySignature`.
+- A name containing `::`, `$`, whitespace, or nothing raises `IllegalArgumentException`; an unknown name returns `null`.
+- Declared flows are `entry.model.body.propagation`; `null` means no flow is declared.
 - Taint rules (source/sink/sanitizer) are NOT in this library.
 
 ## API Reference
 
-- [Stubs API](llms/stubs.md): `PhpStubs`, `StubRecord`, `StubParam`, `PhpType`, `Visibility`.
+- [Stubs API](llms/stubs.md): `PhpStubs`, `StubEntry`, `StubRegistry`, `StubLoader`.

@@ -1,42 +1,40 @@
 # externs-phpstubs
 
-> Read-only Kotlin registry for PHP built-in function, class, method, and constant metadata with dataflow summaries.
+> Read-only Kotlin registry of PHP built-in declarations as commons-phpmodels entries, each with its extension provenance.
 
-`PhpStubs` is the singleton entry point. Function, class, and method names are normalized: strip leading `/` and `\`, then lowercase. Constant names strip the prefix only; their case is preserved.
+`PhpStubs` is the singleton entry point. Lookup names go through the commons-phpmodels subject creators: functions, classes, and methods fold case and drop a leading `\`; constants keep their case unless `caseSensitive = false`.
 
 ## Instructions for Agents
 
-- Call `PhpStubs.searchFunc(name)` for `StubRecord.Function?`, `searchClass(name)` for `StubRecord.PhpClass?`.
-- Call `PhpStubs.searchMethod(methodName, className?)` for `Pair<String, StubRecord.Method>?`.
-- Call `PhpStubs.searchGlobalConst(name, caseSensitive?)` for `StubRecord.Constant?`, `searchClassConst(constName, className?, caseSensitive?)` for `StubRecord.ClassConstant?`. Constant lookups are case-sensitive by default.
-- `StubRecord` is a sealed class with 6 subtypes: `Function`, `Method`, `PhpClass`, `Constant`, `ClassConstant`, `Property`.
-- `normalize()` strips both `/` and `\` prefix. Pass names with or without leading slash.
-- `flowsToReturn` empty = pure function. Return does not contain parameter data.
+- Call `PhpStubs.searchFunc(name)` for `StubEntry<FunctionSubject>?`, `searchClass(name)` for `StubEntry<ClassSubject>?`.
+- Call `PhpStubs.searchMethod(methodName, className?)` for `StubEntry<MethodSubject>?`; the entry's `subject` carries `owner` and `name`.
+- Call `PhpStubs.searchGlobalConst(name, caseSensitive?)` for `StubEntry<ConstantSubject>?`, `searchClassConst(constName, className?, caseSensitive?)` for `StubEntry<ClassConstantSubject>?`.
+- `StubEntry` holds `subject`, `model: SubjectModel` (commons-phpmodels), and `extension`. Read signatures through the typed accessors `callableSignature`, `classSignature`, `typedSignature`, `propertySignature`.
+- A name containing `::`, `$`, whitespace, or nothing raises `IllegalArgumentException`; an unknown name returns `null`.
+- Declared flows are `entry.model.body.propagation`; `null` means no flow is declared.
 - Taint rules (source/sink/sanitizer) are NOT in this library.
 
 ## API Reference
 
-- [Stubs API](llms/stubs.md): `PhpStubs`, `StubRecord`, `StubParam`, `PhpType`, `Visibility`.
-
+- [Stubs API](llms/stubs.md): `PhpStubs`, `StubEntry`, `StubRegistry`, `StubLoader`.
 
 ---
 
-# Referenced Documents
-
-## Source: llms/stubs.md
-
 # Stubs API
 
-> PHP built-in entity registry with typed metadata and dataflow summaries.
+> PHP built-in declaration registry over commons-phpmodels entries.
 
 ## Quick Start
 
 ```kotlin
 import edu.jhu.cobra.externs.phpstubs.PhpStubs
+import edu.jhu.cobra.externs.phpstubs.callableSignature
 
-val func = PhpStubs.searchFunc("strlen")       // StubRecord.Function?
-val method = PhpStubs.searchMethod("query", "mysqli")  // Pair<String, StubRecord.Method>?
-val cls = PhpStubs.searchClass("Exception")    // StubRecord.PhpClass?
+val func = PhpStubs.searchFunc("strlen")               // StubEntry<FunctionSubject>?
+val method = PhpStubs.searchMethod("getMessage", "Exception")  // StubEntry<MethodSubject>?
+val cls = PhpStubs.searchClass("Exception")            // StubEntry<ClassSubject>?
+func?.extension                                        // "standard"
+func?.callableSignature?.returnType                    // DeclaredType("int")
 ```
 
 ## API
@@ -45,103 +43,79 @@ val cls = PhpStubs.searchClass("Exception")    // StubRecord.PhpClass?
 
 **Existence checks:**
 
-**`containsFunc(name: String): Boolean`** -- Includes keyword functions (`echo`, `isset`, etc.).
+**`containsFunc(name: String): Boolean`** -- Includes keyword constructs (`echo`, `isset`, ...), extension `keyword`.
 
-**`containsClass(name: String): Boolean`** -- Includes scalar types (`int`, `float`, etc.) and synthetic classes (`exit`, `resource`).
+**`containsClass(name: String): Boolean`** -- Includes scalar types (`int`, `float`, ...; extension `scalar`), `exit` (`keyword`), and `resource` (`legacy`).
 
-**`containsMethod(methodName: String, className: String? = null): Boolean`** -- Full key lookup when `className` provided; suffix index lookup when null.
+**`containsMethod(methodName: String, className: String? = null): Boolean`** -- Qualified subject lookup when `className` is given; suffix index on the folded method name when null.
 
-**`containsConst(name: String, caseSensitive: Boolean = true): Boolean`** -- Checks both global and class constants. Pass `caseSensitive = false` for case-insensitive lookup.
+**`containsConst(name: String, caseSensitive: Boolean = true): Boolean`** -- Global constant, or class constant when spelled `Class::NAME`. `caseSensitive = false` reads the folded indexes.
 
-**Record retrieval:**
+**Entry retrieval:**
 
-**`searchFunc(name: String): StubRecord.Function?`** -- Returns keyword records for `echo`/`isset`/etc., otherwise registry lookup.
+**`searchFunc(name: String): StubEntry<FunctionSubject>?`**
 
-**`searchClass(name: String): StubRecord.PhpClass?`** -- Returns registry lookup, falls back to synthetic records for scalar types/`exit`/`resource`.
+**`searchClass(name: String): StubEntry<ClassSubject>?`**
 
-**`searchMethod(methodName: String, className: String? = null): Pair<String, StubRecord.Method>?`** -- Pair contains the full `"class::method"` key and the record. Suffix index lookup when `className` null.
+**`searchMethod(methodName: String, className: String? = null): StubEntry<MethodSubject>?`** -- First match in load order when `className` is null. `entry.subject.owner` and `entry.subject.name` are folded.
 
-**`searchGlobalConst(name: String, caseSensitive: Boolean = true): StubRecord.Constant?`** -- Global constants only. Case-sensitive by default.
+**`searchGlobalConst(name: String, caseSensitive: Boolean = true): StubEntry<ConstantSubject>?`** -- Global constants only.
 
-**`searchClassConst(constName: String, className: String? = null, caseSensitive: Boolean = true): StubRecord.ClassConstant?`** -- Suffix index lookup when `className` null. Constant name case-sensitive by default.
+**`searchClassConst(constName: String, className: String? = null, caseSensitive: Boolean = true): StubEntry<ClassConstantSubject>?`** -- Suffix index when `className` is null.
 
-**Bulk key access:**
+**Bulk access:**
 
-**`getAllFuncNames(): Set<String>`** -- Registry functions only (excludes keywords).
+**`getAllFuncNames(): Set<String>`** -- Folded names, keyword constructs included.
 
-**`getAllClassNames(): Set<String>`** -- Registry classes only (excludes synthetic).
+**`getAllClassNames(): Set<String>`** -- Folded names, scalar types and language classes included.
 
-**`getAllMethodNames(): Set<String>`**
+**`getAllMethodNames(): Set<String>`** -- `owner::name` spellings, folded.
 
-**`getAllConstNames(): Set<String>`** -- Global constants only.
+**`getAllConstNames(): Set<String>`** -- Global constants only, case preserved.
 
-**`getKeywordFuncNames(): Set<String>`** -- echo, empty, eval, exit, die, isset, print, unset, clone, instanceof, shell_exec, include, include_once, require, require_once.
+**`getKeywordFuncNames(): Set<String>`** -- Functions of the `keyword` extension: echo, empty, eval, exit, die, isset, print, unset, clone, instanceof, include, include_once, require, require_once.
 
-**`getScalarTypeNames(): Set<String>`** -- int, float, string, bool, array.
+**`getScalarTypeNames(): Set<String>`** -- Classes of the `scalar` extension: int, float, string, bool, array.
 
-### StubRecord (sealed class)
+### StubEntry<S : ModelSubject> (data class)
 
-Base properties on all 6 subtypes:
+**`subject: S`** -- The commons-phpmodels subject; equals `model.subject`.
 
-**`name: String`** -- Entity name.
+**`model: SubjectModel`** -- The decoded entry: `signature`, `body` (propagation, returns, sources, sinks, sanitizers), `guard`.
 
-**`extension: String`** -- PHP extension (e.g., `"standard"`, `"core"`).
+**`extension: String`** -- Providing PHP extension, derived from the document file name (`standard_3.yaml` -> `standard`).
 
-#### StubRecord.Function
+Typed accessors (top-level extension properties, non-null by the corpus rules):
 
-**`params: List<StubParam>`**, **`returnType: PhpType`**, **`flowsToReturn: Set<Int>`**
+**`StubEntry<FunctionSubject>.callableSignature`**, **`StubEntry<MethodSubject>.callableSignature`** -- `CallableSignature(params: List<ParameterInfo>, returnType: DeclaredType)`.
 
-#### StubRecord.Method
+**`StubEntry<ClassSubject>.classSignature`** -- `ClassSignature(classifier, parent, interfaces)`; `parent` and `interfaces` are folded.
 
-**`owningClass: String`**, **`params: List<StubParam>`**, **`returnType: PhpType`**, **`flowsToReturn: Set<Int>`**, **`visibility: Visibility`**, **`isStatic: Boolean`**
+**`StubEntry<ConstantSubject>.typedSignature`**, **`StubEntry<ClassConstantSubject>.typedSignature`** -- `TypedSignature(type, value)`.
 
-#### StubRecord.PhpClass
+**`StubEntry<PropertySubject>.propertySignature`** -- `PropertySignature(type, visibility, static)`.
 
-**`parent: String?`**, **`interfaces: List<String>`**, **`isAbstract: Boolean`**, **`isFinal: Boolean`**
+### StubRegistry (data class)
 
-#### StubRecord.Constant
+`functions`, `classes`, `methods`, `constants`, `classConstants`, `properties` -- unmodifiable maps from subject to entry.
 
-**`type: PhpType`**, **`value: String`**
+### StubLoader (object)
 
-#### StubRecord.ClassConstant
-
-**`owningClass: String`**, **`type: PhpType`**, **`value: String`**, **`visibility: Visibility`**
-
-#### StubRecord.Property
-
-**`owningClass: String`**, **`type: PhpType`**, **`visibility: Visibility`**, **`isStatic: Boolean`**
-
-### StubParam
-
-**`name: String`**, **`type: PhpType`**, **`optional: Boolean`**, **`defaultValue: String?`**
-
-Invariant: non-optional params cannot have `defaultValue`.
-
-### PhpType
-
-`STRING`, `INT`, `FLOAT`, `BOOL`, `ARRAY`, `OBJECT`, `MIXED`, `VOID`, `NULL`, `CALLABLE`, `RESOURCE`.
-
-Union types in YAML resolve to `MIXED`. Unknown type names raise `StubIndexInvalidException` at load time.
-
-### Visibility
-
-`PUBLIC`, `PROTECTED`, `PRIVATE`.
+**`loadAll(resourceBase: String = "/models/"): StubRegistry`** -- Reads `index.txt`, decodes each listed document with `ModelLoader`, attaches the extension, enforces the corpus rules, freezes.
 
 ### Exceptions
 
-**`StubIndexNotFoundException`** -- Classpath resource not found (`index.txt` or YAML file).
+**`StubIndexNotFoundException`** -- `index.txt` or a listed document is absent from the classpath.
 
-**`StubIndexInvalidException`** -- Malformed YAML entry, unknown tag, or missing required field.
+**`StubIndexInvalidException`** -- A document fails commons-phpmodels decode (cause attached, message names the document) or violates a corpus rule: generator entry, variable subject, entry without signature, duplicate subject across documents.
+
+**`IllegalArgumentException`** -- A facade lookup name is not a PHP identifier spelling.
 
 ## Gotchas
 
-- Function, class, and method lookup inputs are normalized: leading `/` and `\` stripped, then lowercased. Constant lookup inputs only strip the prefix -- constant case is preserved unless `caseSensitive = false`.
-- `StubRecord` is a sealed class -- use `searchFunc` for `Function`, `searchClass` for `PhpClass`, `searchMethod` for `Method`, `searchGlobalConst` for `Constant`, `searchClassConst` for `ClassConstant`.
-- Keyword functions and scalar type classes are synthetic in-memory records, not loaded from YAML.
-- `defaultValue` on `StubParam` is a string representation. Consumer converts to domain types.
-- Constants use `.value` field on `StubRecord.Constant` and `StubRecord.ClassConstant`.
-- `flowsToReturn` empty = pure computation. Return value does not contain parameter data.
+- Identity folding is decided by commons-phpmodels: `MethodSubject("Exception", "getMessage")` equals `MethodSubject("exception", "getmessage")`; `ConstantSubject("TRUE")` and `ConstantSubject("true")` differ.
+- `containsMethod`/`searchMethod` without `className` and `searchClassConst` without `className` return the first subject in load order; they are over-approximations.
+- Language constructs are ordinary entries loaded from `models/language/`; select them by `extension`.
+- Generated documents are never hand-edited; a correction belongs in a higher configuration layer of the consumer.
+- Constant values are strings on `typedSignature.value`; the consumer converts.
 - Taint rules (source/sink/sanitizer) are NOT in this library.
-
-
----

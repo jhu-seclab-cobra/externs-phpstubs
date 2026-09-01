@@ -1,8 +1,8 @@
 # COBRA.EXTERNS.PHPSTUBS
 
-> PHP built-in entity registry for static analysis.
+> PHP built-in declaration registry for static analysis.
 
-Typed lookup of PHP standard library functions, classes, methods, constants, and their metadata — signatures, return types, parameter info, dataflow summaries, and constant values.
+Lookup of PHP built-in functions, classes, methods, and constants as commons-phpmodels entries with extension provenance.
 
 [![codecov](https://codecov.io/gh/jhu-seclab-cobra/externs-phpstubs/branch/main/graph/badge.svg)](https://codecov.io/gh/jhu-seclab-cobra/externs-phpstubs)
 ![Kotlin JVM](https://img.shields.io/badge/Kotlin%20JVM-2.0.1%20%7C%20JVM%201.8%2B-blue?logo=kotlin)
@@ -28,33 +28,32 @@ dependencies {
 
 ```kotlin
 import edu.jhu.cobra.externs.phpstubs.PhpStubs
+import edu.jhu.cobra.externs.phpstubs.callableSignature
+import edu.jhu.cobra.externs.phpstubs.typedSignature
 
 // Existence checks
 PhpStubs.containsFunc("strlen")             // true
 PhpStubs.containsClass("Exception")         // true
 
-// Function metadata
-val func = PhpStubs.searchFunc("strlen")
-func?.returnType                             // PhpType.INT
-func?.params                                 // [StubParam("string", STRING)]
+// Function entry: extension provenance plus the decoded model
+val strlen = PhpStubs.searchFunc("strlen")
+strlen?.extension                            // "standard"
+strlen?.callableSignature?.returnType        // DeclaredType("int")
+strlen?.callableSignature?.params            // [ParameterInfo("string", ...)]
 
-// Dataflow summary
+// Declared flows come from the model body
 val substr = PhpStubs.searchFunc("substr")
-substr?.flowsToReturn                        // setOf(0) -- param 0 flows to return
-
-// Class hierarchy
-val cls = PhpStubs.searchClass("runtimeexception")
-cls?.parent                                  // "exception"
+substr?.model?.body?.propagation             // [Propagation(argument(0) -> return)]
 
 // Constants (case-sensitive by default, matching PHP semantics)
-PhpStubs.searchGlobalConst("PHP_INT_MAX")?.value    // "9223372036854775807"
-PhpStubs.searchGlobalConst("php_int_max")           // null (case mismatch)
-PhpStubs.searchGlobalConst("php_int_max", caseSensitive = false)?.value  // "9223372036854775807"
+PhpStubs.searchGlobalConst("PHP_INT_MAX")?.typedSignature?.value    // "9223372036854775807"
+PhpStubs.searchGlobalConst("php_int_max")                           // null (case mismatch)
+PhpStubs.searchGlobalConst("php_int_max", caseSensitive = false)    // folded lookup
 ```
 
 ## API
 
-**`PhpStubs`** -- singleton facade. All lookups are case-insensitive for functions, classes, and methods. Constants are case-sensitive by default.
+**`PhpStubs`** -- singleton facade. Names go through the [commons-phpmodels](https://github.com/jhu-seclab-cobra/commons-phpmodels) subject creators: functions, classes, and methods fold case, a leading `\` is stripped, and constants keep their case. A name that is not a PHP identifier spelling raises `IllegalArgumentException`.
 
 | Method | Return |
 |--------|--------|
@@ -62,27 +61,31 @@ PhpStubs.searchGlobalConst("php_int_max", caseSensitive = false)?.value  // "922
 | `containsClass(name)` | `Boolean` |
 | `containsMethod(methodName, className?)` | `Boolean` |
 | `containsConst(name, caseSensitive?)` | `Boolean` |
-| `searchFunc(name)` | `StubRecord.Function?` |
-| `searchClass(name)` | `StubRecord.PhpClass?` |
-| `searchMethod(methodName, className?)` | `Pair<String, StubRecord.Method>?` |
-| `searchGlobalConst(name, caseSensitive?)` | `StubRecord.Constant?` |
-| `searchClassConst(constName, className?, caseSensitive?)` | `StubRecord.ClassConstant?` |
+| `searchFunc(name)` | `StubEntry<FunctionSubject>?` |
+| `searchClass(name)` | `StubEntry<ClassSubject>?` |
+| `searchMethod(methodName, className?)` | `StubEntry<MethodSubject>?` |
+| `searchGlobalConst(name, caseSensitive?)` | `StubEntry<ConstantSubject>?` |
+| `searchClassConst(constName, className?, caseSensitive?)` | `StubEntry<ClassConstantSubject>?` |
 | `getAllFuncNames()` | `Set<String>` |
 | `getAllClassNames()` | `Set<String>` |
 | `getAllMethodNames()` | `Set<String>` |
 | `getAllConstNames()` | `Set<String>` |
+| `getKeywordFuncNames()` | `Set<String>` |
+| `getScalarTypeNames()` | `Set<String>` |
 
-**`StubRecord`** -- sealed class. Subtypes: `Function`, `Method`, `PhpClass`, `Constant`, `ClassConstant`, `Property`.
+**`StubEntry<S>`** -- data class `(subject: S, model: SubjectModel, extension: String)`. Typed accessors: `callableSignature` (function, method), `classSignature` (class), `typedSignature` (constant, class constant), `propertySignature` (property).
+
+**`StubRegistry`** -- the frozen per-kind maps behind the facade, built by `StubLoader.loadAll()`.
 
 ## Background
 
-Stub data derived from [JetBrains/phpstorm-stubs](https://github.com/JetBrains/phpstorm-stubs) (signatures, Apache-2.0) and [vimeo/psalm](https://github.com/vimeo/psalm) (dataflow annotations, MIT).
+Model documents derived from [JetBrains/phpstorm-stubs](https://github.com/JetBrains/phpstorm-stubs) (signatures, Apache-2.0) and [vimeo/psalm](https://github.com/vimeo/psalm) (dataflow annotations, MIT), emitted in the [commons-phpmodels](https://github.com/jhu-seclab-cobra/commons-phpmodels) format. Language constructs (`echo`, `isset`, `int`, ...) are declared as data under `models/language/`.
 
 ## Documentation
 
-- [Concepts](docs/concept.md) -- tag-based YAML format, dataflow summaries, eager loading
-- [Design](docs/design.md) -- sealed class hierarchy, YAML schema, type specifications
-- [Implementation Notes](docs/impl.md) -- developer instructions, library gotchas
+- [Concepts](docs/concept.md) -- generated layer over commons-phpmodels, extension provenance, lookup semantics
+- [Design](docs/design.md) -- entry, registry, loader, and facade specifications; corpus rules
+- [Implementation Notes](docs/impl.md) -- commons-phpmodels API findings, developer instructions
 
 ## For Agents
 
