@@ -1,4 +1,4 @@
-# Generated from stubs/standard/standard_5.yaml by tools/convert_stubs.py v1.
+# Generated from stubs/standard/standard_5.yaml by tools/convert_stubs.py v2.
 # Do not hand-edit; corrections belong in a higher configuration layer.
 - subject:
     function: pdf_setrgbcolor_stroke
@@ -5200,6 +5200,7 @@
     - name: values
       type: float
       optional: true
+      variadic: true
     returnType: string
   propagation:
   - from: argument(0)

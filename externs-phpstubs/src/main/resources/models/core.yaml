@@ -1,4 +1,4 @@
-# Generated from stubs/core.yaml by tools/convert_stubs.py v1.
+# Generated from stubs/core.yaml by tools/convert_stubs.py v2.
 # Do not hand-edit; corrections belong in a higher configuration layer.
 - subject:
     class: exception

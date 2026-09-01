@@ -1,4 +1,4 @@
-# Generated from stubs/file/zlib.yaml by tools/convert_stubs.py v1.
+# Generated from stubs/file/zlib.yaml by tools/convert_stubs.py v2.
 # Do not hand-edit; corrections belong in a higher configuration layer.
 - subject:
     function: gzclose

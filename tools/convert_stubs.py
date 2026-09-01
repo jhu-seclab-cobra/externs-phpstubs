@@ -26,7 +26,7 @@ from pathlib import Path
 import yaml
 
 # Producer identity stamped into every generated file header.
-PRODUCER = "tools/convert_stubs.py v1"
+PRODUCER = "tools/convert_stubs.py v2"
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 STUBS_ROOT = REPO_ROOT / "externs-phpstubs" / "src" / "main" / "resources" / "stubs"
@@ -66,6 +66,12 @@ def convert_params(entry: dict, context: str) -> list[dict]:
         if bool(param.get("optional", False)) or param.get("default") is not None:
             converted["optional"] = True
         params.append(converted)
+    # The tag format never states variadic parameters; a flow index beyond the
+    # parameter list is only reachable through a variadic tail, so the last
+    # parameter is marked variadic when any declared flow points past the list.
+    flows = [int(index) for index in entry.get("flowsToReturn") or []]
+    if params and flows and max(flows) >= len(params):
+        params[-1]["variadic"] = True
     return params
 
 
@@ -121,7 +127,7 @@ def canonical_source(entry: dict) -> tuple:
     if tag in ("function", "method"):
         subject = f"{entry['class']}::{name}" if tag == "method" else name
         params = tuple(
-            (p["name"], p["type"], p.get("optional", False))
+            (p["name"], p["type"], p.get("optional", False), p.get("variadic", False))
             for p in convert_params(entry, subject)
         )
         return_type = normalize_type(entry.get("return", "mixed"), subject)
@@ -139,7 +145,7 @@ def canonical_emitted(model: dict) -> tuple:
     signature = model["signature"]
     if kind in ("function", "method"):
         params = tuple(
-            (p["name"], p["type"], p.get("optional", False))
+            (p["name"], p["type"], p.get("optional", False), p.get("variadic", False))
             for p in signature.get("params") or []
         )
         flows = tuple(
