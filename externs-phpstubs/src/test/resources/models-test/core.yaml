@@ -1,0 +1,53 @@
+# Test fixture: core extension entries.
+- subject:
+    function: define
+  signature:
+    params:
+      - {name: constant_name, type: string}
+      - {name: value, type: mixed}
+    returnType: bool
+- subject:
+    class: Exception
+  signature:
+    classifier: class
+    interfaces: [Throwable]
+- subject:
+    class: RuntimeException
+  signature:
+    classifier: class
+    parent: Exception
+- subject:
+    method: Exception::getMessage
+  signature:
+    params: []
+    returnType: string
+- subject:
+    method: Exception::getCode
+  signature:
+    params: []
+    returnType: int
+- subject:
+    class_constant: Exception::SEVERITY_ERROR
+  signature:
+    type: int
+    value: '1'
+- subject:
+    property: Exception::$message
+  signature:
+    type: string
+    visibility: protected
+- subject:
+    constant: PHP_EOL
+  signature:
+    type: string
+    value: "\n"
+- subject:
+    constant: PHP_INT_MAX
+  signature:
+    type: int
+    value: '9223372036854775807'
+- subject:
+    constant: \SLASHED_CONST
+  signature:
+    type: int
+    value: '7'

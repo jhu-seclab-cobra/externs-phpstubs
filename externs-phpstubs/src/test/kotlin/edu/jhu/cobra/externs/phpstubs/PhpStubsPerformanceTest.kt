@@ -14,14 +14,14 @@ import org.junit.jupiter.api.Test
  * - `containsMethod throughput - with class name` — measures method lookup with owning class
  * - `containsMethod throughput - suffix only` — measures method lookup by name suffix
  * - `containsConst throughput` — measures constant lookup speed
- * - `searchFunc throughput - known functions` — measures record retrieval for registered functions
- * - `searchFunc throughput - keywords` — measures record retrieval for keyword functions
- * - `searchClass throughput - scalar types` — measures record retrieval for scalar types
- * - `searchMethod throughput - with class name` — measures method record retrieval with class
- * - `searchMethod throughput - suffix only` — measures method record retrieval by suffix
+ * - `searchFunc throughput - known functions` — measures entry retrieval for registered functions
+ * - `searchFunc throughput - keywords` — measures entry retrieval for keyword functions
+ * - `searchClass throughput - scalar types` — measures entry retrieval for scalar types
+ * - `searchMethod throughput - with class name` — measures method entry retrieval with class
+ * - `searchMethod throughput - suffix only` — measures method entry retrieval by suffix
  * - `containsFunc throughput - uppercase input` — measures normalization overhead for uppercase
- * - `containsFunc throughput - slash prefix input` — measures normalization overhead for slash prefix
- * - `memory footprint of loaded StubData` — reports heap usage after full data load
+ * - `containsFunc throughput - namespace prefix input` — measures spelling overhead for a leading backslash
+ * - `memory footprint of loaded registry` — reports heap usage after full data load
  */
 @Tag("performance")
 internal class PhpStubsPerformanceTest {
@@ -111,7 +111,7 @@ internal class PhpStubsPerformanceTest {
 
     @Test
     fun `containsConst throughput`() {
-        val consts = listOf("php_eol", "php_int_max", "true", "false", "null")
+        val consts = listOf("PHP_EOL", "PHP_INT_MAX", "TRUE", "FALSE", "NULL")
         benchmarkOps("containsConst", iterationsPerRun.toLong()) {
             repeat(iterationsPerRun) { i ->
                 PhpStubs.containsConst(consts[i % consts.size])
@@ -119,7 +119,7 @@ internal class PhpStubsPerformanceTest {
         }
     }
 
-    // -- Cold path: record retrieval --
+    // -- Cold path: entry retrieval --
 
     @Test
     fun `searchFunc throughput - known functions`() {
@@ -167,7 +167,7 @@ internal class PhpStubsPerformanceTest {
         }
     }
 
-    // -- Normalize edge cases --
+    // -- Spelling edge cases --
 
     @Test
     fun `containsFunc throughput - uppercase input`() {
@@ -180,11 +180,11 @@ internal class PhpStubsPerformanceTest {
     }
 
     @Test
-    fun `containsFunc throughput - slash prefix input`() {
-        val slashFuncs = knownFuncs.map { "/$it" }
-        benchmarkOps("containsFunc-slashPrefix", iterationsPerRun.toLong()) {
+    fun `containsFunc throughput - namespace prefix input`() {
+        val qualifiedFuncs = knownFuncs.map { "\\$it" }
+        benchmarkOps("containsFunc-namespacePrefix", iterationsPerRun.toLong()) {
             repeat(iterationsPerRun) { i ->
-                PhpStubs.containsFunc(slashFuncs[i % slashFuncs.size])
+                PhpStubs.containsFunc(qualifiedFuncs[i % qualifiedFuncs.size])
             }
         }
     }
@@ -192,7 +192,7 @@ internal class PhpStubsPerformanceTest {
     // -- Memory --
 
     @Test
-    fun `memory footprint of loaded StubData`() {
+    fun `memory footprint of loaded registry`() {
         // Force full load
         PhpStubs.getAllFuncNames()
         PhpStubs.getAllClassNames()

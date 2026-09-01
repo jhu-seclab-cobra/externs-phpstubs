@@ -1,4 +1,0 @@
-# Fixture: STRLEN normalizes to the same key as strlen in first.yaml.
-- tag: function
-  name: STRLEN
-  return: int

@@ -429,13 +429,6 @@
   - from: argument(0)
     to: return
 - subject:
-    function: print
-  signature:
-    params:
-    - name: arg
-      type: string
-    returnType: int
-- subject:
     function: print_r
   signature:
     params:

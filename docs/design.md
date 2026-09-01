@@ -114,7 +114,10 @@ commons-phpmodels creators (`FunctionSubject.parse`, `ClassSubject.parse`,
 folding and namespace-slash stripping are decided once, in the format
 library. A name that is not a PHP identifier spelling (blank, whitespace,
 `::`, `$`) is an argument error: `IllegalArgumentException` from the
-creator, never a silent miss.
+creator, never a silent miss. Two lookups have no subject to build: an
+unqualified member lookup (no `className`) folds the member name and reads
+the suffix index; `containsConst` given a `Class::NAME` spelling parses it
+as a `ClassConstantSubject` and resolves it as a class constant.
 
 **Methods:**
 
@@ -149,7 +152,7 @@ models/
 ├── index.txt              # build-generated manifest, sorted relative paths
 ├── core.yaml              # extension "core"
 ├── language/              # hand-declared language constructs
-│   ├── keyword.yaml       # 15 keyword functions + class exit, extension "keyword"
+│   ├── keyword.yaml       # 14 keyword functions + class exit, extension "keyword"
 │   ├── scalar.yaml        # classes int, float, string, bool, array, extension "scalar"
 │   └── legacy.yaml        # class resource, extension "legacy"
 ├── standard/standard_1..8.yaml   # extension "standard" (split suffix removed)

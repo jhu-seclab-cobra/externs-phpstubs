@@ -1,0 +1,6 @@
+- subject:
+    variable: $_GET
+  signature:
+    type: array
+  sources:
+    - provenance: [remote]

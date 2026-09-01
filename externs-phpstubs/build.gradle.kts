@@ -22,7 +22,6 @@ repositories {
 
 dependencies {
     api(libs.cobra.commons.phpmodels)
-    implementation(libs.snakeyaml)
     testImplementation(kotlin("test"))
     testImplementation(libs.junit.jupiter.api)
 }
@@ -48,23 +47,23 @@ tasks.test {
     }
 }
 
-// One index-generation action for both resource tasks; the map names each task's stubs directory.
+// One index-generation action for both resource tasks; the map names each task's models directory.
 // Inline lambda (not a script function) keeps the action configuration-cache serializable.
-val stubIndexDirNames = mapOf("processResources" to "stubs", "processTestResources" to "stubs-test")
+val modelIndexDirNames = mapOf("processResources" to "models", "processTestResources" to "models-test")
 
 tasks.withType<ProcessResources>().configureEach {
-    val stubsDirName = stubIndexDirNames[name] ?: return@configureEach
+    val modelsDirName = modelIndexDirNames[name] ?: return@configureEach
     doLast {
-        val stubsDir = destinationDir.resolve(stubsDirName)
-        if (stubsDir.isDirectory) {
+        val modelsDir = destinationDir.resolve(modelsDirName)
+        if (modelsDir.isDirectory) {
             val yamlFiles =
-                stubsDir
+                modelsDir
                     .walkTopDown()
                     .filter { it.extension == "yaml" }
-                    .map { it.relativeTo(stubsDir).path }
+                    .map { it.relativeTo(modelsDir).path }
                     .sorted()
                     .toList()
-            stubsDir.resolve("index.txt").writeText(yamlFiles.joinToString("\n") + "\n")
+            modelsDir.resolve("index.txt").writeText(yamlFiles.joinToString("\n") + "\n")
         }
     }
 }

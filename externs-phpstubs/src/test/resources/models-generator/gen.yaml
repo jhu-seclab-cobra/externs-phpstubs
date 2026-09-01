@@ -1,0 +1,7 @@
+- name: getters
+  find: function
+  where:
+    - constraint: name
+      pattern: get_.*
+  model:
+    returns: any

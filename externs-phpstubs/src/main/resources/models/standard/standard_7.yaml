@@ -3201,17 +3201,6 @@
       optional: true
     returnType: mixed
 - subject:
-    function: unset
-  signature:
-    params:
-    - name: var
-      type: mixed
-      optional: true
-    - name: args
-      type: mixed
-      optional: true
-    returnType: void
-- subject:
     function: untaint
   signature:
     params:

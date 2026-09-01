@@ -1,188 +1,178 @@
 package edu.jhu.cobra.externs.phpstubs
 
-/** PHP built-in entity registry. Normalized lookup and existence checks for functions, classes, methods, and constants. */
+import edu.jhu.cobra.commons.phpmodels.ClassConstantSubject
+import edu.jhu.cobra.commons.phpmodels.ClassSubject
+import edu.jhu.cobra.commons.phpmodels.ConstantSubject
+import edu.jhu.cobra.commons.phpmodels.FunctionSubject
+import edu.jhu.cobra.commons.phpmodels.MethodSubject
+
+/**
+ * PHP built-in declaration registry: existence checks and entry lookups by PHP name.
+ *
+ * Qualified lookups build their subject through the commons-phpmodels creators, so a name that is not a PHP
+ * identifier spelling raises [IllegalArgumentException]. Unqualified member lookups and case-insensitive
+ * constant lookups read prebuilt indexes and are over-approximations for analyses that cannot trust spelling.
+ */
 public object PhpStubs {
-    private val KEYWORD_FUNC_NAMES =
-        setOf(
-            "echo",
-            "empty",
-            "eval",
-            "exit",
-            "die",
-            "isset",
-            "print",
-            "unset",
-            "clone",
-            "instanceof",
-            "shell_exec",
-            "include",
-            "include_once",
-            "require",
-            "require_once",
-        )
-
-    private val SCALAR_TYPE_NAMES = setOf("int", "float", "string", "bool", "array")
-
-    private val KEYWORD_RECORDS: Map<String, StubRecord.Function> =
-        KEYWORD_FUNC_NAMES.associateWith { name ->
-            StubRecord.Function(name = name, extension = "keyword")
-        }
-
-    private val SYNTHETIC_CLASS_RECORDS: Map<String, StubRecord.PhpClass> =
-        buildMap {
-            for (name in SCALAR_TYPE_NAMES) {
-                put(name, StubRecord.PhpClass(name = name, extension = "Scalar"))
-            }
-            put("exit", StubRecord.PhpClass(name = "exit", extension = "Core"))
-            put("resource", StubRecord.PhpClass(name = "resource", extension = "legacy"))
-        }
+    // Extension names fixed by the language document layout: models/language/<extension>.yaml.
+    private const val KEYWORD_EXTENSION = "keyword"
+    private const val SCALAR_EXTENSION = "scalar"
+    private const val MEMBER_SEPARATOR = "::"
 
     private val registry: StubRegistry by lazy { StubLoader.loadAll() }
 
-    // Suffix → full key index for methods.
-    private val methodSuffixIndex: Map<String, String> by lazy {
-        buildSuffixIndex(registry.methods.keys)
+    // Unqualified member name -> first subject in load order.
+    private val methodSuffixIndex: Map<String, MethodSubject> by lazy {
+        firstByKey(registry.methods.keys) { it.name }
+    }
+    private val classConstSuffixIndex: Map<String, ClassConstantSubject> by lazy {
+        firstByKey(registry.classConstants.keys) { it.name }
+    }
+    private val classConstSuffixFoldedIndex: Map<String, ClassConstantSubject> by lazy {
+        firstByKey(registry.classConstants.keys) { it.name.lowercase() }
     }
 
-    // Suffix → full key index for class constants (case-preserved suffix).
-    private val classConstSuffixIndex: Map<String, String> by lazy {
-        buildSuffixIndex(registry.classConstants.keys)
+    // Folded spelling -> first subject in load order, for case-insensitive constant lookup.
+    private val constFoldedIndex: Map<String, ConstantSubject> by lazy {
+        firstByKey(registry.constants.keys) { it.name.lowercase() }
+    }
+    private val classConstFoldedIndex: Map<String, ClassConstantSubject> by lazy {
+        firstByKey(registry.classConstants.keys) { it.owner + MEMBER_SEPARATOR + it.name.lowercase() }
     }
 
-    // Lowercased suffix → full key index for case-insensitive class constant lookup.
-    private val classConstSuffixCiIndex: Map<String, String> by lazy {
-        classConstSuffixIndex.entries.associate { (suffix, fullKey) -> suffix.lowercase() to fullKey }
+    private val functionNames: Set<String> by lazy { registry.functions.keys.mapTo(LinkedHashSet()) { it.name } }
+    private val classNames: Set<String> by lazy { registry.classes.keys.mapTo(LinkedHashSet()) { it.name } }
+    private val methodNames: Set<String> by lazy {
+        registry.methods.keys.mapTo(LinkedHashSet()) { it.owner + MEMBER_SEPARATOR + it.name }
     }
+    private val constantNames: Set<String> by lazy { registry.constants.keys.mapTo(LinkedHashSet()) { it.name } }
+    private val keywordFunctionNames: Set<String> by lazy { functionNamesOfExtension(KEYWORD_EXTENSION) }
+    private val scalarClassNames: Set<String> by lazy { classNamesOfExtension(SCALAR_EXTENSION) }
 
-    // Normalized key → original key for case-insensitive constant lookup.
-    private val constCiIndex: Map<String, String> by lazy {
-        registry.constants.keys.associateBy { it.lowercase() }
-    }
-
-    // Normalized key → original key for case-insensitive class constant lookup.
-    private val classConstCiIndex: Map<String, String> by lazy {
-        registry.classConstants.keys.associateBy { it.lowercase() }
-    }
-
-    private fun buildSuffixIndex(keys: Set<String>): Map<String, String> {
-        val index = mutableMapOf<String, String>()
-        for (key in keys) {
-            val sep = key.indexOf("::")
-            if (sep < 0) continue
-            val suffix = key.substring(sep + 2)
-            index.putIfAbsent(suffix, key)
-        }
+    private fun <S> firstByKey(
+        subjects: Set<S>,
+        key: (S) -> String,
+    ): Map<String, S> {
+        val index = LinkedHashMap<String, S>()
+        for (subject in subjects) index.putIfAbsent(key(subject), subject)
         return index
     }
 
+    private fun functionNamesOfExtension(extension: String): Set<String> =
+        registry.functions.values
+            .filter { it.extension == extension }
+            .mapTo(LinkedHashSet()) { it.subject.name }
+
+    private fun classNamesOfExtension(extension: String): Set<String> =
+        registry.classes.values
+            .filter { it.extension == extension }
+            .mapTo(LinkedHashSet()) { it.subject.name }
+
     // -- Existence checks --
 
-    /** Returns true if [name] is a known built-in or keyword function. */
-    public fun containsFunc(name: String): Boolean {
-        val key = name.normalizeStubKey()
-        return key in registry.functions || key in KEYWORD_FUNC_NAMES
-    }
+    /** Returns true if [name] is a known built-in or language-construct function. */
+    public fun containsFunc(name: String): Boolean = FunctionSubject.parse(name) in registry.functions
 
-    /** Returns true if [name] is a known built-in or scalar class. */
-    public fun containsClass(name: String): Boolean {
-        val key = name.normalizeStubKey()
-        return key in registry.classes || key in SYNTHETIC_CLASS_RECORDS
-    }
+    /** Returns true if [name] is a known built-in, scalar-type, or language-construct class. */
+    public fun containsClass(name: String): Boolean = ClassSubject.parse(name) in registry.classes
 
-    /** Returns true if the method exists. Checks "class::method" when [className] provided, otherwise matches by suffix. */
+    /** Returns true if the method exists: qualified when [className] is given, by unqualified name otherwise. */
     public fun containsMethod(
         methodName: String,
         className: String? = null,
     ): Boolean = searchMethod(methodName, className) != null
 
-    /** Returns true if [name] is a known global or class constant. */
+    /** Returns true if [name] is a known global constant, or a known class constant when spelled `Class::NAME`. */
     public fun containsConst(
         name: String,
         caseSensitive: Boolean = true,
-    ): Boolean {
-        val stripped = name.stripLeadingSlash()
-        if (caseSensitive) return stripped in registry.constants || stripped in registry.classConstants
-        val lower = stripped.lowercase()
-        return lower in constCiIndex || lower in classConstCiIndex
-    }
+    ): Boolean =
+        if (MEMBER_SEPARATOR in name) {
+            val spelled = ClassConstantSubject.parse(name)
+            searchClassConst(spelled.name, spelled.owner, caseSensitive) != null
+        } else {
+            searchGlobalConst(name, caseSensitive) != null
+        }
 
-    // -- Record retrieval --
+    // -- Entry retrieval --
 
-    /** Returns the function stub record for [name], or null if unknown. */
-    public fun searchFunc(name: String): StubRecord.Function? {
-        val key = name.normalizeStubKey()
-        return KEYWORD_RECORDS[key] ?: registry.functions[key]
-    }
+    /** Returns the function entry for [name], or null if unknown. */
+    public fun searchFunc(name: String): StubEntry<FunctionSubject>? = registry.functions[FunctionSubject.parse(name)]
 
-    /** Returns the class stub record for [name], or null if unknown. */
-    public fun searchClass(name: String): StubRecord.PhpClass? {
-        val key = name.normalizeStubKey()
-        return registry.classes[key] ?: SYNTHETIC_CLASS_RECORDS[key]
-    }
+    /** Returns the class entry for [name], or null if unknown. */
+    public fun searchClass(name: String): StubEntry<ClassSubject>? = registry.classes[ClassSubject.parse(name)]
 
-    /** Returns (fullKey, method) for the given method, or null if unknown. */
+    /** Returns the method entry: qualified when [className] is given, first unqualified match otherwise. */
     public fun searchMethod(
         methodName: String,
         className: String? = null,
-    ): Pair<String, StubRecord.Method>? {
-        if (className != null) {
-            val fullName = qualifiedStubKey(className, methodName.normalizeStubKey())
-            return registry.methods[fullName]?.let { fullName to it }
-        }
-        val fullKey = methodSuffixIndex[methodName.normalizeStubKey()] ?: return null
-        return registry.methods[fullKey]?.let { fullKey to it }
+    ): StubEntry<MethodSubject>? {
+        val subject =
+            if (className == null) {
+                methodSuffixIndex[methodName.lowercase()]
+            } else {
+                MethodSubject(ClassSubject.parse(className).name, methodName)
+            }
+        return subject?.let { registry.methods[it] }
     }
 
-    /** Returns the global constant stub record for [name], or null if unknown. */
+    /** Returns the global constant entry for [name], exact by default or folded when [caseSensitive] is false. */
     public fun searchGlobalConst(
         name: String,
         caseSensitive: Boolean = true,
-    ): StubRecord.Constant? {
-        val stripped = name.stripLeadingSlash()
-        if (caseSensitive) return registry.constants[stripped]
-        val key = constCiIndex[stripped.lowercase()] ?: return null
-        return registry.constants[key]
+    ): StubEntry<ConstantSubject>? {
+        val spelled = ConstantSubject.parse(name)
+        val subject = if (caseSensitive) spelled else constFoldedIndex[spelled.name.lowercase()]
+        return subject?.let { registry.constants[it] }
     }
 
-    /** Returns the class constant stub record, or null if unknown. */
+    /** Returns the class constant entry: qualified when [className] is given, first unqualified match otherwise. */
     public fun searchClassConst(
         constName: String,
         className: String? = null,
         caseSensitive: Boolean = true,
-    ): StubRecord.ClassConstant? {
-        val strippedConst = constName.stripLeadingSlash()
-        if (className != null) {
-            if (caseSensitive) return registry.classConstants[qualifiedStubKey(className, strippedConst)]
-            val ciKey = qualifiedStubKey(className, strippedConst.lowercase())
-            val originalKey = classConstCiIndex[ciKey] ?: return null
-            return registry.classConstants[originalKey]
-        }
-        val fullKey =
-            if (caseSensitive) {
-                classConstSuffixIndex[strippedConst]
+    ): StubEntry<ClassConstantSubject>? {
+        val subject =
+            if (className == null) {
+                unqualifiedClassConst(constName, caseSensitive)
             } else {
-                classConstSuffixCiIndex[strippedConst.lowercase()]
+                qualifiedClassConst(constName, className, caseSensitive)
             }
-        return fullKey?.let { registry.classConstants[it] }
+        return subject?.let { registry.classConstants[it] }
+    }
+
+    private fun unqualifiedClassConst(
+        constName: String,
+        caseSensitive: Boolean,
+    ): ClassConstantSubject? = if (caseSensitive) classConstSuffixIndex[constName] else classConstSuffixFoldedIndex[constName.lowercase()]
+
+    private fun qualifiedClassConst(
+        constName: String,
+        className: String,
+        caseSensitive: Boolean,
+    ): ClassConstantSubject? {
+        val spelled = ClassConstantSubject(ClassSubject.parse(className).name, constName)
+        if (caseSensitive) return spelled
+        return classConstFoldedIndex[spelled.owner + MEMBER_SEPARATOR + spelled.name.lowercase()]
     }
 
     // -- Bulk access --
 
-    /** All registered built-in function names. */
-    public fun getAllFuncNames(): Set<String> = registry.functions.keys
+    /** All registered function names, folded. Language constructs included. */
+    public fun getAllFuncNames(): Set<String> = functionNames
 
-    /** All registered built-in class names. */
-    public fun getAllClassNames(): Set<String> = registry.classes.keys
+    /** All registered class names, folded. Scalar types and language constructs included. */
+    public fun getAllClassNames(): Set<String> = classNames
 
-    /** All registered built-in method names. */
-    public fun getAllMethodNames(): Set<String> = registry.methods.keys
+    /** All registered method spellings as `owner::name`, folded. */
+    public fun getAllMethodNames(): Set<String> = methodNames
 
-    /** All registered global constant names. Class constants are not included. */
-    public fun getAllConstNames(): Set<String> = registry.constants.keys
+    /** All registered global constant names, case preserved. Class constants are not included. */
+    public fun getAllConstNames(): Set<String> = constantNames
 
-    /** PHP keyword function names (echo, isset, etc.). */
-    public fun getKeywordFuncNames(): Set<String> = KEYWORD_FUNC_NAMES
+    /** PHP keyword construct names (echo, isset, ...): the functions of the `keyword` extension. */
+    public fun getKeywordFuncNames(): Set<String> = keywordFunctionNames
 
-    /** PHP scalar type names (int, string, etc.). */
-    public fun getScalarTypeNames(): Set<String> = SCALAR_TYPE_NAMES
+    /** PHP scalar type names (int, string, ...): the classes of the `scalar` extension. */
+    public fun getScalarTypeNames(): Set<String> = scalarClassNames
 }

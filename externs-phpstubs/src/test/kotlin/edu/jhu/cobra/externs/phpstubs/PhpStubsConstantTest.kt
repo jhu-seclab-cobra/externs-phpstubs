@@ -1,129 +1,108 @@
 package edu.jhu.cobra.externs.phpstubs
 
+import edu.jhu.cobra.commons.phpmodels.ClassConstantSubject
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
-import kotlin.test.assertIs
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 /**
- * Tests for [PhpStubs] facade — global and class constant lookups.
+ * Tests for [PhpStubs] constant lookups: exact by default, folded on request.
  *
- * - `containsConst case-sensitive matches exact name` — verifies default lookup preserves constant case
- * - `containsConst returns true for class constant` — verifies class constant path in containsConst
- * - `containsConst case-insensitive matches any case` — verifies constCiIndex path
- * - `containsConst case-insensitive matches class constant` — verifies classConstCiIndex path
- * - `containsConst returns false for unknown constant` — verifies unknown constant returns false
- * - `searchGlobalConst returns Constant record` — verifies global constant retrieval
- * - `searchGlobalConst returns null for unknown` — verifies null return for missing constant
- * - `searchGlobalConst case-sensitive mismatch returns null` — verifies case mismatch fails by default
- * - `searchGlobalConst case-insensitive returns record` — verifies case-insensitive constant lookup
- * - `searchClassConst returns ClassConstant with className` — verifies class constant retrieval
- * - `searchClassConst returns null for unknown` — verifies null return for missing class constant
- * - `searchClassConst case-sensitive mismatch returns null` — verifies case mismatch fails by default
- * - `searchClassConst returns ClassConstant without className via suffix index` — verifies suffix-only class constant lookup
- * - `searchClassConst case-insensitive with className returns record` — verifies case-insensitive qualified class constant lookup
- * - `searchClassConst case-insensitive without className matches via suffix index` — verifies
- *   case-insensitive suffix lookup matches uppercase constants from lowercase input
+ * - `searchGlobalConst is case-sensitive by default` — verifies exact spelling resolves and a folded one misses
+ * - `searchGlobalConst folds when requested` — verifies the case-insensitive over-approximation
+ * - `searchGlobalConst returns value and extension` — verifies the typed signature a consumer reads
+ * - `searchGlobalConst rejects a member spelling` — verifies a `::` spelling is an argument error
+ * - `containsConst resolves a global constant` — verifies the existence check for globals
+ * - `containsConst resolves a qualified class constant` — verifies the `Class::NAME` spelling
+ * - `containsConst folds a qualified class constant when requested` — verifies folded member spelling
+ * - `containsConst misses an unknown name` — verifies absence
+ * - `searchClassConst resolves a qualified lookup` — verifies owner plus name resolution
+ * - `searchClassConst unqualified returns the first match` — verifies suffix resolution
+ * - `searchClassConst folds name when requested` — verifies folded unqualified and qualified lookups
+ * - `searchClassConst misses a wrong owner` — verifies a qualified lookup needs the owning class
+ * - `getAllConstNames preserves case and excludes class constants` — verifies bulk constant access
  */
 internal class PhpStubsConstantTest {
-    @Test
-    fun `containsConst case-sensitive matches exact name`() {
-        assertTrue(PhpStubs.containsConst("TRUE"))
-        assertFalse(PhpStubs.containsConst("true"))
-    }
+    private val severityError = ClassConstantSubject("Exception", "SEVERITY_ERROR")
 
     @Test
-    fun `containsConst returns true for class constant`() {
-        assertTrue(PhpStubs.containsConst("exception::SEVERITY_ERROR"))
-    }
-
-    @Test
-    fun `containsConst case-insensitive matches any case`() {
-        assertTrue(PhpStubs.containsConst("true", caseSensitive = false))
-        assertTrue(PhpStubs.containsConst("TRUE", caseSensitive = false))
-    }
-
-    @Test
-    fun `containsConst case-insensitive matches class constant`() {
-        assertTrue(PhpStubs.containsConst("exception::severity_error", caseSensitive = false))
-    }
-
-    @Test
-    fun `containsConst returns false for unknown constant`() {
-        assertFalse(PhpStubs.containsConst("nonexistent_xyz_const"))
-    }
-
-    @Test
-    fun `searchGlobalConst returns Constant record`() {
-        val record = PhpStubs.searchGlobalConst("TRUE")
-        assertNotNull(record)
-        assertIs<StubRecord.Constant>(record)
-        assertEquals("TRUE", record.name)
-    }
-
-    @Test
-    fun `searchGlobalConst returns null for unknown`() {
-        assertNull(PhpStubs.searchGlobalConst("nonexistent_xyz_const"))
-    }
-
-    @Test
-    fun `searchGlobalConst case-sensitive mismatch returns null`() {
+    fun `searchGlobalConst is case-sensitive by default`() {
+        assertNotNull(PhpStubs.searchGlobalConst("PHP_INT_MAX"))
         assertNull(PhpStubs.searchGlobalConst("php_int_max"))
     }
 
     @Test
-    fun `searchGlobalConst case-insensitive returns record`() {
-        val record = PhpStubs.searchGlobalConst("php_int_max", caseSensitive = false)
-        assertNotNull(record)
-        assertIs<StubRecord.Constant>(record)
-        assertEquals("PHP_INT_MAX", record.name)
+    fun `searchGlobalConst folds when requested`() {
+        assertEquals(
+            "9223372036854775807",
+            assertNotNull(PhpStubs.searchGlobalConst("php_int_max", caseSensitive = false)).typedSignature.value,
+        )
     }
 
     @Test
-    fun `searchClassConst returns ClassConstant with className`() {
-        val record = PhpStubs.searchClassConst("SEVERITY_ERROR", "Exception")
-        assertNotNull(record)
-        assertIs<StubRecord.ClassConstant>(record)
-        assertEquals("SEVERITY_ERROR", record.name)
-        assertEquals("Exception", record.owningClass)
+    fun `searchGlobalConst returns value and extension`() {
+        val entry = assertNotNull(PhpStubs.searchGlobalConst("E_ALL"))
+        assertEquals("32767", entry.typedSignature.value)
+        assertEquals("core", entry.extension)
     }
 
     @Test
-    fun `searchClassConst returns null for unknown`() {
-        assertNull(PhpStubs.searchClassConst("nonexistent_xyz_const", "exception"))
+    fun `searchGlobalConst rejects a member spelling`() {
+        assertFailsWith<IllegalArgumentException> { PhpStubs.searchGlobalConst("Exception::SEVERITY_ERROR") }
     }
 
     @Test
-    fun `searchClassConst case-sensitive mismatch returns null`() {
-        assertNull(PhpStubs.searchClassConst("severity_error", "Exception"))
+    fun `containsConst resolves a global constant`() {
+        assertTrue(PhpStubs.containsConst("PHP_EOL"))
     }
 
     @Test
-    fun `searchClassConst returns ClassConstant without className via suffix index`() {
-        val record = PhpStubs.searchClassConst("SEVERITY_ERROR")
-        assertNotNull(record)
-        assertIs<StubRecord.ClassConstant>(record)
-        assertEquals("SEVERITY_ERROR", record.name)
-        assertEquals("Exception", record.owningClass)
+    fun `containsConst resolves a qualified class constant`() {
+        assertTrue(PhpStubs.containsConst("\\Exception::SEVERITY_ERROR"))
     }
 
     @Test
-    fun `searchClassConst case-insensitive with className returns record`() {
-        val record = PhpStubs.searchClassConst("severity_error", "Exception", caseSensitive = false)
-        assertNotNull(record)
-        assertIs<StubRecord.ClassConstant>(record)
-        assertEquals("SEVERITY_ERROR", record.name)
+    fun `containsConst folds a qualified class constant when requested`() {
+        assertFalse(PhpStubs.containsConst("Exception::severity_error"))
+        assertTrue(PhpStubs.containsConst("Exception::severity_error", caseSensitive = false))
     }
 
     @Test
-    fun `searchClassConst case-insensitive without className matches via suffix index`() {
-        val record = PhpStubs.searchClassConst("severity_error", caseSensitive = false)
-        assertNotNull(record)
-        assertIs<StubRecord.ClassConstant>(record)
-        assertEquals("SEVERITY_ERROR", record.name)
-        assertEquals("Exception", record.owningClass)
+    fun `containsConst misses an unknown name`() {
+        assertFalse(PhpStubs.containsConst("NO_SUCH_CONSTANT"))
+    }
+
+    @Test
+    fun `searchClassConst resolves a qualified lookup`() {
+        val entry = assertNotNull(PhpStubs.searchClassConst("SEVERITY_ERROR", "Exception"))
+        assertEquals(severityError, entry.subject)
+        assertEquals("1", entry.typedSignature.value)
+    }
+
+    @Test
+    fun `searchClassConst unqualified returns the first match`() {
+        assertEquals(severityError, assertNotNull(PhpStubs.searchClassConst("SEVERITY_ERROR")).subject)
+    }
+
+    @Test
+    fun `searchClassConst folds name when requested`() {
+        assertNull(PhpStubs.searchClassConst("severity_error"))
+        assertEquals(severityError, PhpStubs.searchClassConst("severity_error", caseSensitive = false)?.subject)
+        assertEquals(severityError, PhpStubs.searchClassConst("severity_error", "EXCEPTION", caseSensitive = false)?.subject)
+    }
+
+    @Test
+    fun `searchClassConst misses a wrong owner`() {
+        assertNull(PhpStubs.searchClassConst("SEVERITY_ERROR", "stdClass"))
+    }
+
+    @Test
+    fun `getAllConstNames preserves case and excludes class constants`() {
+        val names = PhpStubs.getAllConstNames()
+        assertTrue("PHP_EOL" in names && "php_eol" !in names && names.none { "::" in it })
     }
 }

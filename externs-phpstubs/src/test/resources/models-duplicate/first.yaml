@@ -1,0 +1,5 @@
+- subject:
+    function: dup_func
+  signature:
+    params: []
+    returnType: int

@@ -4578,16 +4578,6 @@
       type: string
     returnType: bool
 - subject:
-    function: isset
-  signature:
-    params:
-    - name: value
-      type: mixed
-    - name: rest
-      type: mixed
-      optional: true
-    returnType: bool
-- subject:
     function: iterator_apply
   signature:
     params:

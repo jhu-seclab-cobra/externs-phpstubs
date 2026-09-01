@@ -1,93 +1,144 @@
 package edu.jhu.cobra.externs.phpstubs
 
-import java.io.BufferedReader
-import java.io.InputStreamReader
+import edu.jhu.cobra.commons.phpmodels.ClassConstantSubject
+import edu.jhu.cobra.commons.phpmodels.ClassSubject
+import edu.jhu.cobra.commons.phpmodels.ConstantSubject
+import edu.jhu.cobra.commons.phpmodels.FunctionSubject
+import edu.jhu.cobra.commons.phpmodels.MethodSubject
+import edu.jhu.cobra.commons.phpmodels.ModelEntry
+import edu.jhu.cobra.commons.phpmodels.ModelGenerator
+import edu.jhu.cobra.commons.phpmodels.ModelLoader
+import edu.jhu.cobra.commons.phpmodels.ModelSubject
+import edu.jhu.cobra.commons.phpmodels.PropertySubject
+import edu.jhu.cobra.commons.phpmodels.SubjectModel
+import edu.jhu.cobra.commons.phpmodels.VariableSubject
+import java.io.InputStream
 import java.util.Collections
 
-/** Discovers and loads YAML stub files into a [StubRegistry]. */
+/** Discovers the manifest-listed model documents and builds a [StubRegistry] from them. */
 public object StubLoader {
     // Strips the numeric split suffix (standard_1.yaml -> standard) when deriving the extension name.
     private val SPLIT_SUFFIX = Regex("_\\d+$")
 
     /**
-     * Loads all stub files under [resourceBase] and merges into a [StubRegistry].
+     * Loads every document listed by `index.txt` under [resourceBase] and merges the entries into a registry.
      *
-     * @param resourceBase Classpath directory containing `index.txt` and the YAML stub files it lists.
-     * @return Registry with one record per key across all listed files.
-     * @throws StubIndexNotFoundException If the index or a listed stub file is missing.
-     * @throws StubIndexInvalidException If a stub file is malformed or two files define the same normalized key.
+     * @param resourceBase Classpath directory holding `index.txt` and the documents it lists.
+     * @return Registry with one entry per subject across all listed documents.
+     * @throws StubIndexNotFoundException If the manifest or a listed document is missing.
+     * @throws StubIndexInvalidException If a document fails decoding or violates a corpus rule.
      */
-    public fun loadAll(resourceBase: String = "/stubs/"): StubRegistry {
+    public fun loadAll(resourceBase: String = "/models/"): StubRegistry {
         val base = if (resourceBase.endsWith("/")) resourceBase else "$resourceBase/"
-        val results = discoverYamlFiles(base).map { yamlFile -> parseFile(base, yamlFile) }
-        return buildRegistry(results)
+        val builder = RegistryBuilder()
+        for (relative in discoverDocuments(base)) {
+            val document = decodeDocument(base, relative)
+            for (entry in document.entries) builder.add(document, entry)
+        }
+        return builder.freeze()
     }
 
-    /** One parsed YAML stub file together with its resource path for error reporting. */
-    private data class ParsedFile(
+    /** One decoded document with its resource path and derived extension. */
+    private class Document(
         val path: String,
-        val result: YamlStubParser.ParseResult,
+        val extension: String,
+        val entries: List<ModelEntry>,
     )
 
-    private fun parseFile(
+    private fun decodeDocument(
         base: String,
-        yamlFile: String,
-    ): ParsedFile {
-        val rawName = yamlFile.removeSuffix(".yaml").substringAfterLast('/')
-        val extension = rawName.replace(SPLIT_SUFFIX, "")
-        val path = "$base$yamlFile"
-        return ParsedFile(path, openResourceReader(path).use { YamlStubParser.parse(it, path, extension) })
-    }
-
-    private fun buildRegistry(files: List<ParsedFile>): StubRegistry =
-        StubRegistry(
-            functions = merge(files, { it.functions }) { it.name.normalizeStubKey() },
-            classes = merge(files, { it.classes }) { it.name.normalizeStubKey() },
-            methods = merge(files, { it.methods }) { qualifiedStubKey(it.owningClass, it.name.normalizeStubKey()) },
-            constants = merge(files, { it.constants }) { it.name.stripLeadingSlash() },
-            classConstants = merge(files, { it.classConstants }) { qualifiedStubKey(it.owningClass, it.name.stripLeadingSlash()) },
-            properties = merge(files, { it.properties }) { qualifiedStubKey(it.owningClass, it.name.normalizeStubKey()) },
-        )
-
-    // Duplicate keys are corpus defects: fail loading instead of silently overwriting a record.
-    private fun <R> merge(
-        files: List<ParsedFile>,
-        records: (YamlStubParser.ParseResult) -> List<R>,
-        keyOf: (R) -> String,
-    ): Map<String, R> {
-        val merged = LinkedHashMap<String, R>()
-        val origins = HashMap<String, String>()
-        for ((path, result) in files) {
-            for (record in records(result)) {
-                val key = keyOf(record)
-                val previous = origins.put(key, path)
-                if (previous != null) {
-                    throw StubIndexInvalidException("Duplicate stub key '$key' defined in $previous and $path")
-                }
-                merged[key] = record
+        relative: String,
+    ): Document {
+        val path = "$base$relative"
+        val extension = relative.removeSuffix(".yaml").substringAfterLast('/').replace(SPLIT_SUFFIX, "")
+        val entries =
+            try {
+                ModelLoader.load(openResource(path))
+            } catch (failure: IllegalArgumentException) {
+                throw StubIndexInvalidException("$path: ${failure.message}", failure)
             }
-        }
-        return Collections.unmodifiableMap(merged)
+        return Document(path, extension, entries)
     }
 
-    private fun discoverYamlFiles(base: String): List<String> {
+    private fun discoverDocuments(base: String): List<String> {
         val indexPath = "${base}index.txt"
-        val stream =
-            StubLoader::class.java.getResourceAsStream(indexPath)
-                ?: throw StubIndexNotFoundException(indexPath)
-        return BufferedReader(InputStreamReader(stream, Charsets.UTF_8)).use { reader ->
+        return openResource(indexPath).bufferedReader(Charsets.UTF_8).use { reader ->
             reader
                 .lineSequence()
                 .map { it.trim() }
-                .filter { it.isNotBlank() && !it.startsWith("#") && it.endsWith(".yaml") }
+                .filter { it.isNotBlank() && !it.startsWith("#") }
                 .toList()
         }
     }
 
-    private fun openResourceReader(path: String): BufferedReader {
-        val stream =
-            StubLoader::class.java.getResourceAsStream(path)
-                ?: throw StubIndexNotFoundException(path)
-        return BufferedReader(InputStreamReader(stream, Charsets.UTF_8))
+    private fun openResource(path: String): InputStream =
+        StubLoader::class.java.getResourceAsStream(path) ?: throw StubIndexNotFoundException(path)
+
+    /** Accumulates entries per subject kind and enforces the corpus rules before freezing. */
+    private class RegistryBuilder {
+        private val functions = LinkedHashMap<FunctionSubject, StubEntry<FunctionSubject>>()
+        private val classes = LinkedHashMap<ClassSubject, StubEntry<ClassSubject>>()
+        private val methods = LinkedHashMap<MethodSubject, StubEntry<MethodSubject>>()
+        private val constants = LinkedHashMap<ConstantSubject, StubEntry<ConstantSubject>>()
+        private val classConstants = LinkedHashMap<ClassConstantSubject, StubEntry<ClassConstantSubject>>()
+        private val properties = LinkedHashMap<PropertySubject, StubEntry<PropertySubject>>()
+        private val origins = HashMap<ModelSubject, String>()
+
+        fun add(
+            document: Document,
+            entry: ModelEntry,
+        ) {
+            when (entry) {
+                is SubjectModel -> addModel(document, entry)
+                is ModelGenerator ->
+                    throw StubIndexInvalidException("${document.path}: generator '${entry.name}' is not stub data")
+            }
+        }
+
+        private fun addModel(
+            document: Document,
+            model: SubjectModel,
+        ) {
+            val subject = model.subject
+            requireSignature(document, model)
+            recordOrigin(document, subject)
+            when (subject) {
+                is FunctionSubject -> functions[subject] = StubEntry(subject, model, document.extension)
+                is ClassSubject -> classes[subject] = StubEntry(subject, model, document.extension)
+                is MethodSubject -> methods[subject] = StubEntry(subject, model, document.extension)
+                is ConstantSubject -> constants[subject] = StubEntry(subject, model, document.extension)
+                is ClassConstantSubject -> classConstants[subject] = StubEntry(subject, model, document.extension)
+                is PropertySubject -> properties[subject] = StubEntry(subject, model, document.extension)
+                is VariableSubject ->
+                    throw StubIndexInvalidException("${document.path}: variable '$subject' is not stub data")
+            }
+        }
+
+        private fun requireSignature(
+            document: Document,
+            model: SubjectModel,
+        ) {
+            if (model.signature == null) {
+                throw StubIndexInvalidException("${document.path}: '${model.subject}' declares no signature")
+            }
+        }
+
+        private fun recordOrigin(
+            document: Document,
+            subject: ModelSubject,
+        ) {
+            val previous = origins.put(subject, document.path) ?: return
+            throw StubIndexInvalidException("Duplicate subject '$subject' declared in $previous and ${document.path}")
+        }
+
+        fun freeze(): StubRegistry =
+            StubRegistry(
+                functions = Collections.unmodifiableMap(functions),
+                classes = Collections.unmodifiableMap(classes),
+                methods = Collections.unmodifiableMap(methods),
+                constants = Collections.unmodifiableMap(constants),
+                classConstants = Collections.unmodifiableMap(classConstants),
+                properties = Collections.unmodifiableMap(properties),
+            )
     }
 }

@@ -1,65 +1,56 @@
 package edu.jhu.cobra.externs.phpstubs
 
+import edu.jhu.cobra.commons.phpmodels.FunctionSubject
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
+import kotlin.test.assertFailsWith
+import kotlin.test.assertNotNull
 
 /**
- * Tests for [StubRegistry] data class.
+ * Tests for [StubRegistry] as an immutable per-kind map holder.
  *
- * - `construction with empty maps` — verifies all maps are empty after default construction
- * - `construction with populated maps` — verifies all six record maps store and retrieve entries
+ * - `registry holds one map per subject kind` — verifies every kind of the fixture lands in its own map
+ * - `registries with equal maps are equal` — verifies data class equality over the maps
+ * - `functions map is unmodifiable` — verifies the frozen map rejects writes
  */
 internal class StubRegistryTest {
+    private val registry: StubRegistry by lazy { StubLoader.loadAll("/models-test/") }
+
     @Test
-    fun `construction with empty maps`() {
-        val registry =
-            StubRegistry(
-                functions = emptyMap(),
-                classes = emptyMap(),
-                methods = emptyMap(),
-                constants = emptyMap(),
-                classConstants = emptyMap(),
-                properties = emptyMap(),
-            )
-        assertTrue(registry.functions.isEmpty())
-        assertTrue(registry.classes.isEmpty())
-        assertTrue(registry.methods.isEmpty())
-        assertTrue(registry.constants.isEmpty())
-        assertTrue(registry.classConstants.isEmpty())
-        assertTrue(registry.properties.isEmpty())
+    fun `registry holds one map per subject kind`() {
+        assertEquals(
+            listOf(5, 5, 3, 3, 2, 1),
+            listOf(
+                registry.functions.size,
+                registry.classes.size,
+                registry.methods.size,
+                registry.constants.size,
+                registry.classConstants.size,
+                registry.properties.size,
+            ),
+        )
     }
 
     @Test
-    fun `construction with populated maps`() {
-        val f = StubRecord.Function(name = "strlen", extension = "standard")
-        val c = StubRecord.PhpClass(name = "Exception", extension = "core")
-        val m = StubRecord.Method(name = "getMessage", extension = "core", owningClass = "Exception")
-        val k = StubRecord.Constant(name = "PHP_EOL", extension = "core", type = PhpType.STRING, value = "\n")
-        val cc =
-            StubRecord.ClassConstant(
-                name = "SEEK_SET",
-                extension = "spl",
-                owningClass = "SplFileObject",
-                type = PhpType.INT,
-                value = "0",
-            )
-        val p = StubRecord.Property(name = "message", extension = "core", owningClass = "Exception")
-
-        val registry =
+    fun `registries with equal maps are equal`() {
+        val copy =
             StubRegistry(
-                functions = mapOf("strlen" to f),
-                classes = mapOf("Exception" to c),
-                methods = mapOf("Exception::getMessage" to m),
-                constants = mapOf("PHP_EOL" to k),
-                classConstants = mapOf("SplFileObject::SEEK_SET" to cc),
-                properties = mapOf("Exception::message" to p),
+                functions = registry.functions,
+                classes = registry.classes,
+                methods = registry.methods,
+                constants = registry.constants,
+                classConstants = registry.classConstants,
+                properties = registry.properties,
             )
-        assertEquals(f, registry.functions["strlen"])
-        assertEquals(c, registry.classes["Exception"])
-        assertEquals(m, registry.methods["Exception::getMessage"])
-        assertEquals(k, registry.constants["PHP_EOL"])
-        assertEquals(cc, registry.classConstants["SplFileObject::SEEK_SET"])
-        assertEquals(p, registry.properties["Exception::message"])
+        assertEquals(registry, copy)
+    }
+
+    @Test
+    fun `functions map is unmodifiable`() {
+        val entry = assertNotNull(registry.functions[FunctionSubject("strlen")])
+        assertFailsWith<UnsupportedOperationException> {
+            @Suppress("UNCHECKED_CAST")
+            (registry.functions as MutableMap<FunctionSubject, StubEntry<FunctionSubject>>)[FunctionSubject("hack")] = entry
+        }
     }
 }

@@ -1,0 +1,45 @@
+# Test fixture: standard extension entries.
+- subject:
+    function: strlen
+  signature:
+    params:
+      - {name: string, type: string}
+    returnType: int
+- subject:
+    function: substr
+  signature:
+    params:
+      - {name: string, type: string}
+      - {name: offset, type: int}
+      - {name: length, type: int, optional: true}
+    returnType: string
+  propagation:
+    - from: argument(0)
+      to: return
+- subject:
+    function: sprintf
+  signature:
+    params:
+      - {name: format, type: string}
+      - {name: values, type: mixed, optional: true, variadic: true}
+    returnType: string
+  propagation:
+    - from: argument(0)
+      to: return
+    - from: argument(3)
+      to: return
+- subject:
+    class: ArrayObject
+  signature:
+    classifier: class
+    interfaces: [IteratorAggregate, ArrayAccess]
+- subject:
+    method: ArrayObject::count
+  signature:
+    params: []
+    returnType: int
+- subject:
+    class_constant: ArrayObject::STD_PROP_LIST
+  signature:
+    type: int
+    value: '1'

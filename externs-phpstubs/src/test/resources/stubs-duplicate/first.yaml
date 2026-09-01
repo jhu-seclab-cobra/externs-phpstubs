@@ -1,5 +1,0 @@
-# Fixture: defines strlen; second.yaml redefines it under a spelling that
-# normalizes to the same key.
-- tag: function
-  name: strlen
-  return: int

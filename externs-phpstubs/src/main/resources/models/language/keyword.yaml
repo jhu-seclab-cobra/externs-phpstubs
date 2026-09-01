@@ -91,15 +91,6 @@
         variadic: true
     returnType: mixed
 - subject:
-    function: shell_exec
-  signature:
-    params:
-      - name: arguments
-        type: mixed
-        optional: true
-        variadic: true
-    returnType: mixed
-- subject:
     function: include
   signature:
     params:

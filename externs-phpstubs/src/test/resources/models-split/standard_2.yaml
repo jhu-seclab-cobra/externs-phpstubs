@@ -1,0 +1,6 @@
+- subject:
+    function: split_two
+  signature:
+    params:
+      - {name: value, type: string}
+    returnType: string

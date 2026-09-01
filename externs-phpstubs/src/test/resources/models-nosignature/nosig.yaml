@@ -1,0 +1,4 @@
+- subject:
+    function: no_signature
+  sources:
+    - provenance: [remote]

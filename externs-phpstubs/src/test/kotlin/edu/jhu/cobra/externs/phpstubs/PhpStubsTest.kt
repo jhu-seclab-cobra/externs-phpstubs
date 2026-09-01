@@ -1,235 +1,178 @@
 package edu.jhu.cobra.externs.phpstubs
 
+import edu.jhu.cobra.commons.phpmodels.FunctionSubject
+import edu.jhu.cobra.commons.phpmodels.MethodSubject
+import edu.jhu.cobra.commons.phpmodels.Port
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 import kotlin.test.assertFalse
-import kotlin.test.assertIs
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 /**
- * Tests for [PhpStubs] facade — function, class, and method lookups plus bulk access.
+ * Tests for the [PhpStubs] facade over the bundled corpus: functions, classes, methods, and bulk access.
  * Constant lookups: [PhpStubsConstantTest].
  *
- * - `containsFunc returns true for keyword functions` — verifies keyword lookups succeed
- * - `containsFunc returns false for unknown function` — verifies unknown names return false
- * - `containsFunc returns true for registry-loaded function` — verifies registry function lookup
- * - `searchFunc returns keyword Function record` — verifies record fields for a keyword function
- * - `searchFunc returns null for unknown function` — verifies null return for missing names
- * - `searchFunc returns registry Function record` — verifies record fields for a registry function
- * - `searchFunc normalizes case and leading slash` — verifies facade input normalization
- * - `containsClass returns true for scalar types` — verifies scalar type lookups succeed
- * - `containsClass returns false for unknown class` — verifies unknown class returns false
- * - `containsClass returns true for registry-loaded class` — verifies registry class lookup
- * - `searchClass returns PhpClass record` — verifies record fields for a scalar type
- * - `searchClass returns registry PhpClass record` — verifies record fields for a registry class
- * - `searchClass returns null for unknown class` — verifies null return for missing class
- * - `searchClass normalizes case and leading backslash` — verifies facade input normalization
- * - `containsClass returns true for exit and resource` — verifies special built-in types
- * - `containsMethod returns true with className for known method` — verifies qualified method lookup
- * - `containsMethod returns false for unknown method` — verifies unknown method returns false
- * - `containsMethod returns true without className via suffix index` — verifies suffix-only method lookup
- * - `searchMethod returns pair for known method with className` — verifies qualified method retrieval
- * - `searchMethod returns null for unknown method` — verifies null return for missing method
- * - `searchMethod returns pair without className via suffix index` — verifies suffix-only method retrieval
- * - `getKeywordFuncNames contains standard keywords` — verifies bulk keyword name retrieval
- * - `getScalarTypeNames contains all scalar types` — verifies bulk scalar type name retrieval
- * - `getAllFuncNames returns non-empty set` — verifies registry function names are populated
- * - `getAllClassNames returns non-empty set` — verifies registry class names are populated
- * - `getAllMethodNames returns non-empty set` — verifies registry method names are populated
- * - `getAllConstNames returns non-empty set` — verifies registry constant names are populated
+ * - `containsFunc finds a standard function` — verifies a known built-in resolves
+ * - `containsFunc folds case` — verifies function lookup is case-insensitive
+ * - `containsFunc strips the leading namespace slash` — verifies a fully qualified spelling resolves
+ * - `containsFunc finds keyword constructs` — verifies language constructs are functions
+ * - `containsFunc misses an unknown name` — verifies an unregistered name is absent
+ * - `containsFunc rejects a member spelling` — verifies a `::` spelling is an argument error
+ * - `containsClass finds built-in scalar and legacy classes` — verifies the three class documents load
+ * - `containsClass misses an unknown name` — verifies an unregistered class is absent
+ * - `containsMethod resolves qualified and unqualified names` — verifies both lookup forms
+ * - `containsMethod misses a wrong owner` — verifies a qualified lookup needs the owning class
+ * - `searchFunc returns entry with extension and signature` — verifies the entry a consumer reads
+ * - `searchFunc exposes declared propagation` — verifies the body reaches the consumer
+ * - `searchFunc exposes a variadic tail` — verifies the generated variadic mark decodes
+ * - `searchFunc returns null for unknown name` — verifies absence is null
+ * - `searchClass returns the keyword extension for exit` — verifies language-construct provenance
+ * - `searchMethod returns the qualified subject` — verifies the entry carries owner and name
+ * - `searchMethod unqualified returns the first match in load order` — verifies suffix resolution
+ * - `getAllFuncNames holds folded names including keywords` — verifies bulk function access
+ * - `getAllClassNames holds folded names including scalar types` — verifies bulk class access
+ * - `getAllMethodNames spells owner and name` — verifies the `owner::name` spelling
+ * - `getKeywordFuncNames is the keyword document` — verifies the closed keyword set
+ * - `getScalarTypeNames is the scalar document` — verifies the closed scalar set
  */
 internal class PhpStubsTest {
-    // -- Keywords --
-
     @Test
-    fun `containsFunc returns true for keyword functions`() {
-        assertTrue(PhpStubs.containsFunc("echo"))
-        assertTrue(PhpStubs.containsFunc("isset"))
-        assertTrue(PhpStubs.containsFunc("require"))
-        assertTrue(PhpStubs.containsFunc("include_once"))
-    }
-
-    @Test
-    fun `containsFunc returns false for unknown function`() {
-        assertFalse(PhpStubs.containsFunc("nonexistent_xyz_func"))
-    }
-
-    @Test
-    fun `containsFunc returns true for registry-loaded function`() {
+    fun `containsFunc finds a standard function`() {
         assertTrue(PhpStubs.containsFunc("strlen"))
     }
 
     @Test
-    fun `searchFunc returns keyword Function record`() {
-        val record = PhpStubs.searchFunc("echo")
-        assertNotNull(record)
-        assertIs<StubRecord.Function>(record)
-        assertEquals("echo", record.name)
-        assertEquals("keyword", record.extension)
+    fun `containsFunc folds case`() {
+        assertTrue(PhpStubs.containsFunc("STRLEN"))
     }
 
     @Test
-    fun `searchFunc returns null for unknown function`() {
-        assertNull(PhpStubs.searchFunc("nonexistent_xyz_func"))
+    fun `containsFunc strips the leading namespace slash`() {
+        assertTrue(PhpStubs.containsFunc("\\strlen"))
     }
 
     @Test
-    fun `searchFunc returns registry Function record`() {
-        val record = PhpStubs.searchFunc("strlen")
-        assertNotNull(record)
-        assertIs<StubRecord.Function>(record)
-        assertEquals("strlen", record.name)
+    fun `containsFunc finds keyword constructs`() {
+        assertTrue(PhpStubs.containsFunc("echo") && PhpStubs.containsFunc("include_once"))
     }
 
     @Test
-    fun `searchFunc normalizes case and leading slash`() {
-        assertNotNull(PhpStubs.searchFunc("STRLEN"))
-        assertNotNull(PhpStubs.searchFunc("/strlen"))
-        assertNotNull(PhpStubs.searchFunc("\\Strlen"))
-    }
-
-    // -- Scalar types --
-
-    @Test
-    fun `containsClass returns true for scalar types`() {
-        assertTrue(PhpStubs.containsClass("int"))
-        assertTrue(PhpStubs.containsClass("string"))
-        assertTrue(PhpStubs.containsClass("array"))
+    fun `containsFunc misses an unknown name`() {
+        assertFalse(PhpStubs.containsFunc("no_such_function"))
     }
 
     @Test
-    fun `containsClass returns false for unknown class`() {
-        assertFalse(PhpStubs.containsClass("nonexistent_xyz_class"))
+    fun `containsFunc rejects a member spelling`() {
+        assertFailsWith<IllegalArgumentException> { PhpStubs.containsFunc("Exception::getMessage") }
     }
 
     @Test
-    fun `containsClass returns true for registry-loaded class`() {
-        assertTrue(PhpStubs.containsClass("exception"))
+    fun `containsClass finds built-in scalar and legacy classes`() {
+        assertTrue(PhpStubs.containsClass("Exception") && PhpStubs.containsClass("int") && PhpStubs.containsClass("resource"))
     }
 
     @Test
-    fun `searchClass returns PhpClass record`() {
-        val record = PhpStubs.searchClass("int")
-        assertNotNull(record)
-        assertIs<StubRecord.PhpClass>(record)
-        assertEquals("Scalar", record.extension)
+    fun `containsClass misses an unknown name`() {
+        assertFalse(PhpStubs.containsClass("NoSuchClass"))
     }
 
     @Test
-    fun `searchClass returns registry PhpClass record`() {
-        val record = PhpStubs.searchClass("exception")
-        assertNotNull(record)
-        assertIs<StubRecord.PhpClass>(record)
-        assertEquals("exception", record.name)
-        assertEquals("core", record.extension)
+    fun `containsMethod resolves qualified and unqualified names`() {
+        assertTrue(PhpStubs.containsMethod("getMessage", "Exception") && PhpStubs.containsMethod("getMessage"))
     }
 
     @Test
-    fun `searchClass returns null for unknown class`() {
-        assertNull(PhpStubs.searchClass("nonexistent_xyz_class"))
+    fun `containsMethod misses a wrong owner`() {
+        assertFalse(PhpStubs.containsMethod("getMessage", "stdClass"))
     }
 
     @Test
-    fun `searchClass normalizes case and leading backslash`() {
-        assertNotNull(PhpStubs.searchClass("EXCEPTION"))
-        assertNotNull(PhpStubs.searchClass("\\Exception"))
+    fun `searchFunc returns entry with extension and signature`() {
+        val entry = assertNotNull(PhpStubs.searchFunc("strlen"))
+        assertEquals("standard", entry.extension)
+        assertEquals("int", entry.callableSignature.returnType.toString())
     }
 
     @Test
-    fun `containsClass returns true for exit and resource`() {
-        assertTrue(PhpStubs.containsClass("exit"))
-        assertTrue(PhpStubs.containsClass("resource"))
-    }
-
-    // -- Bulk access --
-
-    @Test
-    fun `getKeywordFuncNames contains standard keywords`() {
-        val keywords = PhpStubs.getKeywordFuncNames()
-        assertTrue("echo" in keywords)
-        assertTrue("isset" in keywords)
-        assertTrue("require" in keywords)
+    fun `searchFunc exposes declared propagation`() {
+        val flows = assertNotNull(assertNotNull(PhpStubs.searchFunc("substr")).model.body.propagation)
+        assertEquals(listOf(Port.Argument(0) to Port.Return), flows.map { it.from to it.to })
     }
 
     @Test
-    fun `getScalarTypeNames contains all scalar types`() {
-        val scalars = PhpStubs.getScalarTypeNames()
-        assertEquals(5, scalars.size)
-        assertTrue("int" in scalars)
-        assertTrue("string" in scalars)
-    }
-
-    // -- Methods --
-
-    @Test
-    fun `containsMethod returns true with className for known method`() {
-        assertTrue(PhpStubs.containsMethod("getmessage", "exception"))
+    fun `searchFunc exposes a variadic tail`() {
+        val params = assertNotNull(PhpStubs.searchFunc("sprintf")).callableSignature.params
+        assertTrue(params.last().variadic)
     }
 
     @Test
-    fun `containsMethod returns false for unknown method`() {
-        assertFalse(PhpStubs.containsMethod("nonexistent_xyz_method", "exception"))
+    fun `searchFunc returns null for unknown name`() {
+        assertNull(PhpStubs.searchFunc("no_such_function"))
     }
 
     @Test
-    fun `containsMethod returns true without className via suffix index`() {
-        assertTrue(PhpStubs.containsMethod("getMessage"))
-    }
-
-    // -- Record retrieval (registry) --
-
-    @Test
-    fun `searchMethod returns pair for known method with className`() {
-        val result = PhpStubs.searchMethod("getMessage", "Exception")
-        assertNotNull(result)
-        assertEquals("exception::getmessage", result.first)
-        assertIs<StubRecord.Method>(result.second)
-        assertEquals("getMessage", result.second.name)
+    fun `searchClass returns the keyword extension for exit`() {
+        assertEquals("keyword", assertNotNull(PhpStubs.searchClass("exit")).extension)
     }
 
     @Test
-    fun `searchMethod returns null for unknown method`() {
-        assertNull(PhpStubs.searchMethod("nonexistent_xyz_method", "exception"))
+    fun `searchMethod returns the qualified subject`() {
+        val entry = assertNotNull(PhpStubs.searchMethod("getCode", "\\Exception"))
+        assertEquals(MethodSubject("exception", "getcode"), entry.subject)
+        assertEquals("int", entry.callableSignature.returnType.toString())
     }
 
     @Test
-    fun `searchMethod returns pair without className via suffix index`() {
-        val result = PhpStubs.searchMethod("getMessage")
-        assertNotNull(result)
-        assertEquals("exception::getmessage", result.first)
-        assertIs<StubRecord.Method>(result.second)
-        assertEquals("getMessage", result.second.name)
+    fun `searchMethod unqualified returns the first match in load order`() {
+        assertEquals(MethodSubject("exception", "getmessage"), assertNotNull(PhpStubs.searchMethod("GETMESSAGE")).subject)
     }
 
-    // -- Bulk access (registry) --
-
     @Test
-    fun `getAllFuncNames returns non-empty set`() {
+    fun `getAllFuncNames holds folded names including keywords`() {
         val names = PhpStubs.getAllFuncNames()
-        assertTrue(names.isNotEmpty())
-        assertTrue("strlen" in names)
+        assertTrue("strlen" in names && "isset" in names && names.none { it != it.lowercase() })
     }
 
     @Test
-    fun `getAllClassNames returns non-empty set`() {
+    fun `getAllClassNames holds folded names including scalar types`() {
         val names = PhpStubs.getAllClassNames()
-        assertTrue(names.isNotEmpty())
-        assertTrue("exception" in names)
+        assertTrue("exception" in names && "string" in names && names.none { it != it.lowercase() })
     }
 
     @Test
-    fun `getAllMethodNames returns non-empty set`() {
-        val names = PhpStubs.getAllMethodNames()
-        assertTrue(names.isNotEmpty())
-        assertTrue("exception::getmessage" in names)
+    fun `getAllMethodNames spells owner and name`() {
+        assertTrue("exception::getmessage" in PhpStubs.getAllMethodNames())
     }
 
     @Test
-    fun `getAllConstNames returns non-empty set`() {
-        val names = PhpStubs.getAllConstNames()
-        assertTrue(names.isNotEmpty())
-        assertTrue("TRUE" in names)
+    fun `getKeywordFuncNames is the keyword document`() {
+        assertEquals(
+            setOf(
+                "echo",
+                "empty",
+                "eval",
+                "exit",
+                "die",
+                "isset",
+                "print",
+                "unset",
+                "clone",
+                "instanceof",
+                "include",
+                "include_once",
+                "require",
+                "require_once",
+            ),
+            PhpStubs.getKeywordFuncNames(),
+        )
+        assertTrue(PhpStubs.getKeywordFuncNames().all { PhpStubs.searchFunc(it)?.subject == FunctionSubject(it) })
+    }
+
+    @Test
+    fun `getScalarTypeNames is the scalar document`() {
+        assertEquals(setOf("int", "float", "string", "bool", "array"), PhpStubs.getScalarTypeNames())
     }
 }

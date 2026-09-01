@@ -1,0 +1,11 @@
+# Test fixture: keyword constructs.
+- subject:
+    function: echo
+  signature:
+    params:
+      - {name: arguments, type: mixed, optional: true, variadic: true}
+    returnType: mixed
+- subject:
+    class: exit
+  signature:
+    classifier: class

@@ -1,11 +1,18 @@
 package edu.jhu.cobra.externs.phpstubs
 
-/** Immutable registry of parsed PHP stub records. All maps keyed by normalized name. */
+import edu.jhu.cobra.commons.phpmodels.ClassConstantSubject
+import edu.jhu.cobra.commons.phpmodels.ClassSubject
+import edu.jhu.cobra.commons.phpmodels.ConstantSubject
+import edu.jhu.cobra.commons.phpmodels.FunctionSubject
+import edu.jhu.cobra.commons.phpmodels.MethodSubject
+import edu.jhu.cobra.commons.phpmodels.PropertySubject
+
+/** Immutable registry of loaded stub entries, one map per subject kind, keyed by subject. */
 public data class StubRegistry(
-    val functions: Map<String, StubRecord.Function>,
-    val classes: Map<String, StubRecord.PhpClass>,
-    val methods: Map<String, StubRecord.Method>,
-    val constants: Map<String, StubRecord.Constant>,
-    val classConstants: Map<String, StubRecord.ClassConstant>,
-    val properties: Map<String, StubRecord.Property>,
+    val functions: Map<FunctionSubject, StubEntry<FunctionSubject>>,
+    val classes: Map<ClassSubject, StubEntry<ClassSubject>>,
+    val methods: Map<MethodSubject, StubEntry<MethodSubject>>,
+    val constants: Map<ConstantSubject, StubEntry<ConstantSubject>>,
+    val classConstants: Map<ClassConstantSubject, StubEntry<ClassConstantSubject>>,
+    val properties: Map<PropertySubject, StubEntry<PropertySubject>>,
 )
