@@ -17,9 +17,11 @@ val jvmVersion =
 
 repositories {
     mavenCentral()
+    maven { url = uri("https://jitpack.io") }
 }
 
 dependencies {
+    api(libs.cobra.commons.phpmodels)
     implementation(libs.snakeyaml)
     testImplementation(kotlin("test"))
     testImplementation(libs.junit.jupiter.api)

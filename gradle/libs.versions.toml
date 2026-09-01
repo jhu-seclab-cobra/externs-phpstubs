@@ -6,11 +6,13 @@ detekt = "1.23.8"
 javaSource = "21"
 javaTarget = "21"
 cobra-commons-value = "0.1.0"
+cobra-commons-phpmodels = "0.1.1"
 snakeyaml = "2.2"
 junit = "5.10.2"
 
 [libraries]
 cobra-commons-value = { module = "com.github.jhu-seclab-cobra:commons-value", version.ref = "cobra-commons-value" }
+cobra-commons-phpmodels = { module = "com.github.jhu-seclab-cobra:commons-phpmodels", version.ref = "cobra-commons-phpmodels" }
 snakeyaml = { module = "org.yaml:snakeyaml", version.ref = "snakeyaml" }
 junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
 
