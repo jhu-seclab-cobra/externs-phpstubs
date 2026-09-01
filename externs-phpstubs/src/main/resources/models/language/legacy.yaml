@@ -1,0 +1,6 @@
+# Legacy pseudo-class names retained for older analyses.
+# Hand-maintained; extension provenance "legacy" comes from this file name.
+- subject:
+    class: resource
+  signature:
+    classifier: class

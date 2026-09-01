@@ -1,0 +1,22 @@
+# PHP scalar type names used in class position.
+# Hand-maintained; extension provenance "scalar" comes from this file name.
+- subject:
+    class: int
+  signature:
+    classifier: class
+- subject:
+    class: float
+  signature:
+    classifier: class
+- subject:
+    class: string
+  signature:
+    classifier: class
+- subject:
+    class: bool
+  signature:
+    classifier: class
+- subject:
+    class: array
+  signature:
+    classifier: class

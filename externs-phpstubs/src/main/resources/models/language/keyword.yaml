@@ -1,0 +1,141 @@
+# PHP language constructs that analyses treat as callable or class-like.
+# Hand-maintained; extension provenance "keyword" comes from this file name.
+- subject:
+    function: echo
+  signature:
+    params:
+      - name: arguments
+        type: mixed
+        optional: true
+        variadic: true
+    returnType: mixed
+- subject:
+    function: empty
+  signature:
+    params:
+      - name: arguments
+        type: mixed
+        optional: true
+        variadic: true
+    returnType: mixed
+- subject:
+    function: eval
+  signature:
+    params:
+      - name: arguments
+        type: mixed
+        optional: true
+        variadic: true
+    returnType: mixed
+- subject:
+    function: exit
+  signature:
+    params:
+      - name: arguments
+        type: mixed
+        optional: true
+        variadic: true
+    returnType: mixed
+- subject:
+    function: die
+  signature:
+    params:
+      - name: arguments
+        type: mixed
+        optional: true
+        variadic: true
+    returnType: mixed
+- subject:
+    function: isset
+  signature:
+    params:
+      - name: arguments
+        type: mixed
+        optional: true
+        variadic: true
+    returnType: mixed
+- subject:
+    function: print
+  signature:
+    params:
+      - name: arguments
+        type: mixed
+        optional: true
+        variadic: true
+    returnType: mixed
+- subject:
+    function: unset
+  signature:
+    params:
+      - name: arguments
+        type: mixed
+        optional: true
+        variadic: true
+    returnType: mixed
+- subject:
+    function: clone
+  signature:
+    params:
+      - name: arguments
+        type: mixed
+        optional: true
+        variadic: true
+    returnType: mixed
+- subject:
+    function: instanceof
+  signature:
+    params:
+      - name: arguments
+        type: mixed
+        optional: true
+        variadic: true
+    returnType: mixed
+- subject:
+    function: shell_exec
+  signature:
+    params:
+      - name: arguments
+        type: mixed
+        optional: true
+        variadic: true
+    returnType: mixed
+- subject:
+    function: include
+  signature:
+    params:
+      - name: arguments
+        type: mixed
+        optional: true
+        variadic: true
+    returnType: mixed
+- subject:
+    function: include_once
+  signature:
+    params:
+      - name: arguments
+        type: mixed
+        optional: true
+        variadic: true
+    returnType: mixed
+- subject:
+    function: require
+  signature:
+    params:
+      - name: arguments
+        type: mixed
+        optional: true
+        variadic: true
+    returnType: mixed
+- subject:
+    function: require_once
+  signature:
+    params:
+      - name: arguments
+        type: mixed
+        optional: true
+        variadic: true
+    returnType: mixed
+- subject:
+    class: exit
+  signature:
+    classifier: class
