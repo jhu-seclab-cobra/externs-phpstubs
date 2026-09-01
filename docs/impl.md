@@ -34,6 +34,10 @@
 - Derived at load from the document file name: `standard_3.yaml` → `standard`; `language/keyword.yaml` → `keyword`. The model format carries no extension field.
 - Former synthetic extension spellings `Scalar` and `Core` (for class `exit`) become `scalar` and `keyword`, following the document names.
 
+### Consumer name spelling
+
+- cobraphp-core spells namespaces with `/` (`Qualified`); `BuiltinExt` joins the parts with `\` before every facade lookup, since the subject creators treat `/` as an ordinary name character.
+
 ### Variadic tails in generated data
 
 - The upstream tag data never stated variadic parameters; the generator marked the last parameter variadic when a declared flow index reached past the parameter list (`sprintf`, `array_merge`, `compact`). Without the mark, commons-phpmodels HEAD rejects the entry for arity.
