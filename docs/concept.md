@@ -16,7 +16,7 @@ the declarations, and two document sets serving the taint assertions.
 This library is the generated layer of the Cobra PHP model stack: it owns
 the generated model documents for PHP built-ins, their provenance, a
 read-only registry that resolves PHP names to model entries, and two taint
-document sets ([concept-taint.md](concept-taint.md), [concept-rules.md](concept-rules.md)).
+document sets ([concept-taint.md](concept-taint.md), [concept-taint-rules.md](concept-taint-rules.md)).
 The format, decoding, and validation belong to commons-phpmodels.
 
 **Data Flow**
@@ -47,7 +47,7 @@ Offline (per upstream release):
     phpstorm-stubs, psalm stubs ──extraction──► models/<category>/<extension>.yaml
                                                 models/language/*.yaml (hand-declared)
     psalm taint data ───────────extraction──► taint/** (document set)
-    Argus sink lists ───────────review──────► rules/** (document set)
+    Argus sink lists ───────────review──────► taint-rules/** (document set)
 
 Runtime:
     models/** ──manifest──► commons-phpmodels decode ──► Stub Registry
@@ -195,6 +195,6 @@ Runtime:
   supplying the signature and extension. The two layers meet per subject
   and unit in the consumer, not here.
 
-Taint sets: [concept-taint.md](concept-taint.md), [concept-rules.md](concept-rules.md).
+Taint sets: [concept-taint.md](concept-taint.md), [concept-taint-rules.md](concept-taint-rules.md).
 Software structure: [design.md](design.md). Format semantics: commons-phpmodels
 `docs/model-declarations.md`.

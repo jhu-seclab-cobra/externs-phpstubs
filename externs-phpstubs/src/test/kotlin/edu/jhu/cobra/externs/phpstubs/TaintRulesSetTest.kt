@@ -21,21 +21,21 @@ import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 /**
- * Tests for the hand-maintained rules set rooted at [StubResources.RULES].
+ * Tests for the hand-maintained taint rules set rooted at [StubResources.TAINT_RULES].
  *
- * - `rules set loads only over the taint vocabulary` — verifies the set's names resolve through the taint set's context
- * - `rules set declares its own additions` — verifies the xpath kind, the external color, and the policy rows
- * - `every rules entry is an unsigned model with exactly one taint section` — verifies the shape rule
+ * - `taint rules set loads only over the taint vocabulary` — verifies the set's names resolve through the taint set's context
+ * - `taint rules set declares its own additions` — verifies the xpath kind, the external color, and the policy rows
+ * - `every taint rules entry is an unsigned model with exactly one taint section` — verifies the shape rule
  * - `no rules unit repeats a taint unit` — verifies each (subject, guard, section) differs from the taint set's
- * - `a rules sink over a taint subject widens psalm's ports` — verifies restated entries are strict supersets
+ * - `a taint rules sink over a taint subject widens psalm's ports` — verifies restated entries are strict supersets
  * - `sinks follow the Argus lists` — verifies representative sinks per category
  * - `sanitizers and sources name the added escapes and colors` — verifies representative entries
  * - `mapped load translates the additions` — verifies a consumer mapping covering xpath and external
  */
-internal class RulesSetTest {
+internal class TaintRulesSetTest {
     private val taint by lazy { DocumentSetLoader.load(StubResources.opener(StubResources.TAINT)) }
 
-    private val rules by lazy { DocumentSetLoader.load(StubResources.opener(StubResources.RULES), taint.vocabulary) }
+    private val rules by lazy { DocumentSetLoader.load(StubResources.opener(StubResources.TAINT_RULES), taint.vocabulary) }
 
     private val models: Map<ModelSubject, SubjectModel> by lazy {
         rules.entries
@@ -45,13 +45,13 @@ internal class RulesSetTest {
     }
 
     @Test
-    fun `rules set loads only over the taint vocabulary`() {
-        assertFailsWith<VocabularyException> { DocumentSetLoader.load(StubResources.opener(StubResources.RULES)) }
+    fun `taint rules set loads only over the taint vocabulary`() {
+        assertFailsWith<VocabularyException> { DocumentSetLoader.load(StubResources.opener(StubResources.TAINT_RULES)) }
         assertTrue(rules.entries.isNotEmpty())
     }
 
     @Test
-    fun `rules set declares its own additions`() {
+    fun `taint rules set declares its own additions`() {
         assertEquals(setOf(VulnClassId("xpath")), rules.vocabulary.vulnClasses.keys)
         assertEquals(setOf(ProvenanceId("external")), rules.vocabulary.provenances.keys)
         val byOrigin = rules.policy.associate { it.origin to it.enables }
@@ -62,7 +62,7 @@ internal class RulesSetTest {
     }
 
     @Test
-    fun `every rules entry is an unsigned model with exactly one taint section`() {
+    fun `every taint rules entry is an unsigned model with exactly one taint section`() {
         for (entry in rules.entries) {
             val model = entry as SubjectModel
             assertNull(model.signature, "${model.subject}")
@@ -85,7 +85,7 @@ internal class RulesSetTest {
     }
 
     @Test
-    fun `a rules sink over a taint subject widens psalm's ports`() {
+    fun `a taint rules sink over a taint subject widens psalm's ports`() {
         val psalm =
             taint.entries
                 .filterIsInstance<SubjectModel>()
@@ -135,9 +135,9 @@ internal class RulesSetTest {
 
     @Test
     fun `mapped load translates the additions`() {
-        val context = RulesSetTest::class.java.getResourceAsStream("/taint-context-test.yaml")!!.use(VocabularyLoader::load)
-        val mapping = RulesSetTest::class.java.getResourceAsStream("/taint-mapping-test.yaml")!!.use(CategoryMappingLoader::load)
-        val mapped = DocumentSetLoader.load(StubResources.opener(StubResources.RULES), context, mapping)
+        val context = TaintRulesSetTest::class.java.getResourceAsStream("/taint-context-test.yaml")!!.use(VocabularyLoader::load)
+        val mapping = TaintRulesSetTest::class.java.getResourceAsStream("/taint-mapping-test.yaml")!!.use(CategoryMappingLoader::load)
+        val mapped = DocumentSetLoader.load(StubResources.opener(StubResources.TAINT_RULES), context, mapping)
         val bySubject = mapped.entries.filterIsInstance<SubjectModel>().associateBy { it.subject }
         assertEquals(setOf(Port.Argument(0) to "xpathi"), sinksOf(bySubject.getValue(MethodSubject("DOMXPath", "query"))))
         assertEquals(setOf(Port.Argument(0) to "xss"), sinksOf(bySubject.getValue(FunctionSubject("echo"))))

@@ -50,7 +50,7 @@ tasks.test {
 // One index-generation action for both resource tasks; the map names each task's document-set directories.
 // Inline lambda (not a script function) keeps the action configuration-cache serializable.
 val documentSetDirNames =
-    mapOf("processResources" to listOf("models", "taint", "rules"), "processTestResources" to listOf("models-test"))
+    mapOf("processResources" to listOf("models", "taint", "taint-rules"), "processTestResources" to listOf("models-test"))
 
 tasks.withType<ProcessResources>().configureEach {
     val setDirNames = documentSetDirNames[name] ?: return@configureEach

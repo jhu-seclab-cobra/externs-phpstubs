@@ -172,9 +172,9 @@ function declares one optional variadic `mixed` parameter and a `mixed`
 return; a language class declares `classifier: class`.
 
 The Gradle resource task writes `index.txt` for `models/`, `taint/`, and
-`rules/` (main) and `models-test/` (test); every other test fixture
+`taint-rules/` (main) and `models-test/` (test); every other test fixture
 directory ships its own manifest. The taint set's layout:
-[design-taint.md](design-taint.md); the rules set's: [design-rules.md](design-rules.md).
+[design-taint.md](design-taint.md); the taint rules set's: [design-taint-rules.md](design-taint-rules.md).
 
 ## Exception / Error Types
 

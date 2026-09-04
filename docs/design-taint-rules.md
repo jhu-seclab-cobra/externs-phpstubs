@@ -1,7 +1,7 @@
-# PHP Stubs — Rules Document Set Design
+# PHP Stubs — Taint Rules Document Set Design
 
-The classpath root and layout of the hand-maintained rules document set.
-Concepts: [concept-rules.md](concept-rules.md). The opener and the taint
+The classpath root and layout of the hand-maintained taint rules document set.
+Concepts: [concept-taint-rules.md](concept-taint-rules.md). The opener and the taint
 set: [design-taint.md](design-taint.md).
 
 ## Design Overview
@@ -9,7 +9,7 @@ set: [design-taint.md](design-taint.md).
 - **Classes:** `StubResources` (object; the `RULES` constant only)
 - **External types (commons-phpmodels):** `DocumentSetLoader`,
   `DocumentSet`, `CategoryMapping`, `Vocabulary`
-- **Relationships:** consumers pass `StubResources.opener(StubResources.RULES)`
+- **Relationships:** consumers pass `StubResources.opener(StubResources.TAINT_RULES)`
   to `DocumentSetLoader` with the taint set's vocabulary (or their own
   vocabulary plus a mapping) as context. Nothing in this module reads the
   set at runtime.
@@ -19,13 +19,13 @@ set: [design-taint.md](design-taint.md).
 
 ### StubResources (object), addition
 
-**State:** `const val RULES = "/rules/"` — value tier: constant, fixed by
+**State:** `const val TAINT_RULES = "/taint-rules/"` — value tier: constant, fixed by
 the resource layout. `MODELS`, `TAINT`, and `opener`: [design-taint.md](design-taint.md).
 
 ## Resource Layout
 
 ```
-rules/
+taint-rules/
 ├── index.txt          # build-generated manifest: sanitizers.yaml, sinks.yaml, sources.yaml
 ├── vocabulary.yaml    # additions only: kind `xpath`, color `external`
 ├── policy.yaml        # input enables xpath; external enables every input kind and xpath

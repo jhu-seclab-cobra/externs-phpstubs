@@ -30,8 +30,8 @@ opener that reads under a root. The taint set has no registry, facade, or
 entry type here: its consumer is the format library's set loader.
 
 **State:** `const val MODELS = "/models/"`, `const val TAINT = "/taint/"`,
-`const val RULES = "/rules/"` — value tier: constants, fixed by the
-resource layout. The rules set: [design-rules.md](design-rules.md).
+`const val TAINT_RULES = "/taint-rules/"` — value tier: constants, fixed by the
+resource layout. The taint rules set: [design-taint-rules.md](design-taint-rules.md).
 
 **Methods:**
 - `opener(root: String): ResourceOpener`
