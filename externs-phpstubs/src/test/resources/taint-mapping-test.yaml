@@ -1,0 +1,18 @@
+categories:
+  sql: sqli
+  html: xss
+  has_quotes: ignore
+  shell: ignore
+  callable: ignore
+  unserialize: ignore
+  include: ignore
+  eval: ignore
+  ldap: ignore
+  ssrf: ignore
+  file: ignore
+  cookie: ignore
+  header: ignore
+  user_secret: ignore
+  system_secret: ignore
+provenances:
+  input: user-input

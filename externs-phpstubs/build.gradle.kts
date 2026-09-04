@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "edu.jhu.cobra"
-version = "0.2.0"
+version = "0.3.0"
 
 val jvmVersion =
     libs.versions.javaTarget
@@ -47,23 +47,25 @@ tasks.test {
     }
 }
 
-// One index-generation action for both resource tasks; the map names each task's models directory.
+// One index-generation action for both resource tasks; the map names each task's document-set directories.
 // Inline lambda (not a script function) keeps the action configuration-cache serializable.
-val modelIndexDirNames = mapOf("processResources" to "models", "processTestResources" to "models-test")
+val documentSetDirNames =
+    mapOf("processResources" to listOf("models", "taint"), "processTestResources" to listOf("models-test"))
 
 tasks.withType<ProcessResources>().configureEach {
-    val modelsDirName = modelIndexDirNames[name] ?: return@configureEach
+    val setDirNames = documentSetDirNames[name] ?: return@configureEach
     doLast {
-        val modelsDir = destinationDir.resolve(modelsDirName)
-        if (modelsDir.isDirectory) {
+        for (setDirName in setDirNames) {
+            val setDir = destinationDir.resolve(setDirName)
+            if (!setDir.isDirectory) continue
             val yamlFiles =
-                modelsDir
+                setDir
                     .walkTopDown()
-                    .filter { it.extension == "yaml" }
-                    .map { it.relativeTo(modelsDir).path }
+                    .filter { it.extension == "yaml" && it.name != "vocabulary.yaml" && it.name != "policy.yaml" }
+                    .map { it.relativeTo(setDir).path }
                     .sorted()
                     .toList()
-            modelsDir.resolve("index.txt").writeText(yamlFiles.joinToString("\n") + "\n")
+            setDir.resolve("index.txt").writeText(yamlFiles.joinToString("\n") + "\n")
         }
     }
 }

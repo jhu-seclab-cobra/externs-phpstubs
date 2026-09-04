@@ -1,0 +1,8 @@
+vulnClasses:
+  - name: sqli
+    description: SQL injection
+  - name: xss
+    description: Cross-site scripting
+provenances:
+  - name: user-input
+    description: Attacker-controlled input

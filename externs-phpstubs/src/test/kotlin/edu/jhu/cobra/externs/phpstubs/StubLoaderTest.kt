@@ -29,6 +29,7 @@ import kotlin.test.assertTrue
  * - `generator entry is rejected` — verifies the corpus rule against generators
  * - `variable subject is rejected` — verifies the corpus rule against predefined variables
  * - `entry without signature is rejected` — verifies the corpus rule that every entry declares a signature
+ * - `manifest listing a document twice is invalid` — verifies the set loader's doubled-path rule reaches the caller
  */
 internal class StubLoaderTest {
     private val registry: StubRegistry by lazy { StubLoader.loadAll("/models-test/") }
@@ -125,5 +126,11 @@ internal class StubLoaderTest {
         val failure = assertFailsWith<StubIndexInvalidException> { StubLoader.loadAll("/models-nosignature/") }
         val reason = assertNotNull(failure.message)
         assertTrue("no_signature" in reason, "expected the subject name, was: $reason")
+    }
+
+    @Test
+    fun `manifest listing a document twice is invalid`() {
+        val failure = assertFailsWith<StubIndexInvalidException> { StubLoader.loadAll("/models-doubled/") }
+        assertTrue("/models-doubled/standard.yaml" in failure.message.orEmpty(), failure.message)
     }
 }
