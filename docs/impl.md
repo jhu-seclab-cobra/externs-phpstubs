@@ -8,12 +8,12 @@
 - **[commons-phpmodels]** `MethodSubject(owner, name)` / `ClassConstantSubject(owner, name)` — direct constructors for a qualified lookup; `owner` folds, `name` folds for methods only.
 - **[commons-phpmodels]** `ModelSubject.name` is declared on the sealed interface since v0.1.2; identity fields are still read through the concrete subtypes here.
 - **[commons-phpmodels]** `SignatureInfo` subtypes: `CallableSignature(params, returnType)`, `ClassSignature(classifier, parent, interfaces)`, `TypedSignature(type, value)`, `PropertySignature(type, visibility, static)`; `ParameterInfo(name, type, optional, byRef, variadic)`. Field shape identical since v0.1.1; `ClassSignature` is built through its companion factory since v0.1.2 — read only, never construct.
-- **[commons-phpmodels]** Entry-level validation since v0.1.2: arity against the parameter list unless the last parameter is variadic; by-ref write direction; `void` return with a return propagation; whitespace in identities; YAML aliases. v0.1.2 is the released HEAD, so a corpus that loads against the pin is proven against every rule.
+- **[commons-phpmodels]** Entry-level validation since v0.1.2: arity against the parameter list unless the last parameter is variadic; by-ref write direction; `void` return with a return propagation; whitespace in identities; YAML aliases. v0.2.0 is the released HEAD, so a corpus that loads against the pin is proven against every rule.
 - **[JDK]** `Class.getResourceAsStream(path)` — resolves `index.txt` and documents from the classpath; null when absent → `StubIndexNotFoundException`.
 
 ## Libraries
 
-- com.github.jhu-seclab-cobra:commons-phpmodels:0.1.2 — model format, decoder, validation; `api` scope (its types are the entry surface); alias `cobra-commons-phpmodels` in `gradle/libs.versions.toml`; resolved from JitPack (`https://jitpack.io`, artifact verified present) standalone, substituted by the root composite when built from CobraPHP.
+- com.github.jhu-seclab-cobra:commons-phpmodels:0.2.0 — model format, decoder, validation; `api` scope (its types are the entry surface); alias `cobra-commons-phpmodels` in `gradle/libs.versions.toml`; resolved from JitPack (`https://jitpack.io`, artifact verified present) standalone, substituted by the root composite when built from CobraPHP.
 - Jackson stays transitive and hidden: commons-phpmodels declares it `implementation`; no YAML library is declared here.
 
 ## Developer Instructions
@@ -25,7 +25,7 @@
 - `shell_exec` is a `standard` function, not a language construct; the former hardcoded keyword set listed it and the keyword document does not.
 - Performance tests are excluded by default: `./gradlew test -Pperformance`.
 - Composite root build is the integration check for cobraphp-core; the standalone build (`./gradlew build` in this repository) is the check against the released commons-phpmodels tag.
-- A commons-phpmodels release carrying the HEAD validations (v0.1.2) is required before the declared version can be raised; until then the composite build is the only path exercising the stricter guarantees.
+- The pin (v0.2.0) carries every HEAD validation and `DocumentSetLoader`; the standalone JitPack build exercises the same guarantees as the root composite.
 
 ## Design-Specific
 
