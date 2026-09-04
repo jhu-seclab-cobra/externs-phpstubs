@@ -7,7 +7,7 @@ import edu.jhu.cobra.commons.phpmodels.FunctionSubject
 import edu.jhu.cobra.commons.phpmodels.MethodSubject
 
 /**
- * PHP built-in declaration registry: existence checks and entry lookups by PHP name.
+ * PHP built-in declaration registry: existence checks, entry lookups, and name sets by declaration kind.
  *
  * Qualified lookups build their subject through the commons-phpmodels creators, so a name that is not a PHP
  * identifier spelling raises [IllegalArgumentException]. Unqualified member lookups and case-insensitive
@@ -40,14 +40,27 @@ public object PhpStubs {
         firstByKey(registry.classConstants.keys) { it.owner + MEMBER_SEPARATOR + it.name.lowercase() }
     }
 
-    private val functionNames: Set<String> by lazy { registry.functions.keys.mapTo(LinkedHashSet()) { it.name } }
-    private val classNames: Set<String> by lazy { registry.classes.keys.mapTo(LinkedHashSet()) { it.name } }
-    private val methodNames: Set<String> by lazy {
+    // -- Name sets --
+
+    /** All registered function names, folded. Language constructs included. */
+    public val functionNames: Set<String> by lazy { registry.functions.keys.mapTo(LinkedHashSet()) { it.name } }
+
+    /** All registered class names, folded. Scalar types and language constructs included. */
+    public val classNames: Set<String> by lazy { registry.classes.keys.mapTo(LinkedHashSet()) { it.name } }
+
+    /** All registered method spellings as `owner::name`, folded. */
+    public val methodNames: Set<String> by lazy {
         registry.methods.keys.mapTo(LinkedHashSet()) { it.owner + MEMBER_SEPARATOR + it.name }
     }
-    private val constantNames: Set<String> by lazy { registry.constants.keys.mapTo(LinkedHashSet()) { it.name } }
-    private val keywordFunctionNames: Set<String> by lazy { functionNamesOfExtension(KEYWORD_EXTENSION) }
-    private val scalarClassNames: Set<String> by lazy { classNamesOfExtension(SCALAR_EXTENSION) }
+
+    /** All registered global constant names, case preserved. Class constants are not included. */
+    public val constantNames: Set<String> by lazy { registry.constants.keys.mapTo(LinkedHashSet()) { it.name } }
+
+    /** PHP keyword construct names (echo, isset, ...): the functions of the `keyword` extension. */
+    public val keywordFunctionNames: Set<String> by lazy { functionNamesOfExtension(KEYWORD_EXTENSION) }
+
+    /** PHP scalar type names (int, string, ...): the classes of the `scalar` extension. */
+    public val scalarTypeNames: Set<String> by lazy { classNamesOfExtension(SCALAR_EXTENSION) }
 
     private fun <S> firstByKey(
         subjects: Set<S>,
@@ -71,53 +84,53 @@ public object PhpStubs {
     // -- Existence checks --
 
     /** Returns true if [name] is a known built-in or language-construct function. */
-    public fun containsFunc(name: String): Boolean = FunctionSubject.parse(name) in registry.functions
+    public fun containsFunction(name: String): Boolean = FunctionSubject.parse(name) in registry.functions
 
     /** Returns true if [name] is a known built-in, scalar-type, or language-construct class. */
     public fun containsClass(name: String): Boolean = ClassSubject.parse(name) in registry.classes
 
-    /** Returns true if the method exists: qualified when [className] is given, by unqualified name otherwise. */
+    /** Returns true if the method exists: qualified when [owner] is given, by unqualified name otherwise. */
     public fun containsMethod(
-        methodName: String,
-        className: String? = null,
-    ): Boolean = searchMethod(methodName, className) != null
+        name: String,
+        owner: String? = null,
+    ): Boolean = findMethod(name, owner) != null
 
     /** Returns true if [name] is a known global constant, or a known class constant when spelled `Class::NAME`. */
-    public fun containsConst(
+    public fun containsConstant(
         name: String,
         caseSensitive: Boolean = true,
     ): Boolean =
         if (MEMBER_SEPARATOR in name) {
             val spelled = ClassConstantSubject.parse(name)
-            searchClassConst(spelled.name, spelled.owner, caseSensitive) != null
+            findClassConstant(spelled.name, spelled.owner, caseSensitive) != null
         } else {
-            searchGlobalConst(name, caseSensitive) != null
+            findConstant(name, caseSensitive) != null
         }
 
-    // -- Entry retrieval --
+    // -- Entry lookups --
 
     /** Returns the function entry for [name], or null if unknown. */
-    public fun searchFunc(name: String): StubEntry<FunctionSubject>? = registry.functions[FunctionSubject.parse(name)]
+    public fun findFunction(name: String): StubEntry<FunctionSubject>? = registry.functions[FunctionSubject.parse(name)]
 
     /** Returns the class entry for [name], or null if unknown. */
-    public fun searchClass(name: String): StubEntry<ClassSubject>? = registry.classes[ClassSubject.parse(name)]
+    public fun findClass(name: String): StubEntry<ClassSubject>? = registry.classes[ClassSubject.parse(name)]
 
-    /** Returns the method entry: qualified when [className] is given, first unqualified match otherwise. */
-    public fun searchMethod(
-        methodName: String,
-        className: String? = null,
+    /** Returns the method entry: qualified when [owner] is given, first unqualified match otherwise. */
+    public fun findMethod(
+        name: String,
+        owner: String? = null,
     ): StubEntry<MethodSubject>? {
         val subject =
-            if (className == null) {
-                methodSuffixIndex[methodName.lowercase()]
+            if (owner == null) {
+                methodSuffixIndex[name.lowercase()]
             } else {
-                MethodSubject(ClassSubject.parse(className).name, methodName)
+                MethodSubject(ClassSubject.parse(owner).name, name)
             }
         return subject?.let { registry.methods[it] }
     }
 
     /** Returns the global constant entry for [name], exact by default or folded when [caseSensitive] is false. */
-    public fun searchGlobalConst(
+    public fun findConstant(
         name: String,
         caseSensitive: Boolean = true,
     ): StubEntry<ConstantSubject>? {
@@ -126,53 +139,33 @@ public object PhpStubs {
         return subject?.let { registry.constants[it] }
     }
 
-    /** Returns the class constant entry: qualified when [className] is given, first unqualified match otherwise. */
-    public fun searchClassConst(
-        constName: String,
-        className: String? = null,
+    /** Returns the class constant entry: qualified when [owner] is given, first unqualified match otherwise. */
+    public fun findClassConstant(
+        name: String,
+        owner: String? = null,
         caseSensitive: Boolean = true,
     ): StubEntry<ClassConstantSubject>? {
         val subject =
-            if (className == null) {
-                unqualifiedClassConst(constName, caseSensitive)
+            if (owner == null) {
+                unqualifiedClassConst(name, caseSensitive)
             } else {
-                qualifiedClassConst(constName, className, caseSensitive)
+                qualifiedClassConst(name, owner, caseSensitive)
             }
         return subject?.let { registry.classConstants[it] }
     }
 
     private fun unqualifiedClassConst(
-        constName: String,
+        name: String,
         caseSensitive: Boolean,
-    ): ClassConstantSubject? = if (caseSensitive) classConstSuffixIndex[constName] else classConstSuffixFoldedIndex[constName.lowercase()]
+    ): ClassConstantSubject? = if (caseSensitive) classConstSuffixIndex[name] else classConstSuffixFoldedIndex[name.lowercase()]
 
     private fun qualifiedClassConst(
-        constName: String,
-        className: String,
+        name: String,
+        owner: String,
         caseSensitive: Boolean,
     ): ClassConstantSubject? {
-        val spelled = ClassConstantSubject(ClassSubject.parse(className).name, constName)
+        val spelled = ClassConstantSubject(ClassSubject.parse(owner).name, name)
         if (caseSensitive) return spelled
         return classConstFoldedIndex[spelled.owner + MEMBER_SEPARATOR + spelled.name.lowercase()]
     }
-
-    // -- Bulk access --
-
-    /** All registered function names, folded. Language constructs included. */
-    public fun getAllFuncNames(): Set<String> = functionNames
-
-    /** All registered class names, folded. Scalar types and language constructs included. */
-    public fun getAllClassNames(): Set<String> = classNames
-
-    /** All registered method spellings as `owner::name`, folded. */
-    public fun getAllMethodNames(): Set<String> = methodNames
-
-    /** All registered global constant names, case preserved. Class constants are not included. */
-    public fun getAllConstNames(): Set<String> = constantNames
-
-    /** PHP keyword construct names (echo, isset, ...): the functions of the `keyword` extension. */
-    public fun getKeywordFuncNames(): Set<String> = keywordFunctionNames
-
-    /** PHP scalar type names (int, string, ...): the classes of the `scalar` extension. */
-    public fun getScalarTypeNames(): Set<String> = scalarClassNames
 }

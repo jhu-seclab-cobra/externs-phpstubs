@@ -115,31 +115,31 @@ folding and namespace-slash stripping are decided once, in the format
 library. A name that is not a PHP identifier spelling (blank, whitespace,
 `::`, `$`) is an argument error: `IllegalArgumentException` from the
 creator, never a silent miss. Two lookups have no subject to build: an
-unqualified member lookup (no `className`) folds the member name and reads
-the suffix index; `containsConst` given a `Class::NAME` spelling parses it
+unqualified member lookup (no `owner`) folds the member name and reads
+the suffix index; `containsConstant` given a `Class::NAME` spelling parses it
 as a `ClassConstantSubject` and resolves it as a class constant.
 
-**Methods:**
+**Members** (name sets are lazy properties; lookups are functions):
 
-| Method | Return | Behavior |
+| Member | Return | Behavior |
 |--------|--------|----------|
-| `containsFunc(name)` | `Boolean` | Function subject present (language constructs included) |
+| `containsFunction(name)` | `Boolean` | Function subject present (language constructs included) |
 | `containsClass(name)` | `Boolean` | Class subject present (scalar types and `exit`, `resource` included) |
-| `containsMethod(methodName, className?)` | `Boolean` | `searchMethod` non-null |
-| `containsConst(name, caseSensitive = true)` | `Boolean` | Global or class constant present; folded indexes when `false` |
-| `searchFunc(name)` | `StubEntry<FunctionSubject>?` | Registry read |
-| `searchClass(name)` | `StubEntry<ClassSubject>?` | Registry read |
-| `searchMethod(methodName, className?)` | `StubEntry<MethodSubject>?` | Qualified read when `className` given; suffix index otherwise |
-| `searchGlobalConst(name, caseSensitive = true)` | `StubEntry<ConstantSubject>?` | Exact read, or folded index |
-| `searchClassConst(constName, className?, caseSensitive = true)` | `StubEntry<ClassConstantSubject>?` | Qualified exact or folded read; suffix index (exact or folded) without `className` |
-| `getAllFuncNames()` | `Set<String>` | Folded function names |
-| `getAllClassNames()` | `Set<String>` | Folded class names |
-| `getAllMethodNames()` | `Set<String>` | `owner::name` spellings, folded |
-| `getAllConstNames()` | `Set<String>` | Global constant names, case preserved |
-| `getKeywordFuncNames()` | `Set<String>` | Function names whose extension is `keyword` |
-| `getScalarTypeNames()` | `Set<String>` | Class names whose extension is `scalar` |
+| `containsMethod(name, owner?)` | `Boolean` | `findMethod` non-null |
+| `containsConstant(name, caseSensitive = true)` | `Boolean` | Global or class constant present; folded indexes when `false` |
+| `findFunction(name)` | `StubEntry<FunctionSubject>?` | Registry read |
+| `findClass(name)` | `StubEntry<ClassSubject>?` | Registry read |
+| `findMethod(name, owner?)` | `StubEntry<MethodSubject>?` | Qualified read when `owner` given; suffix index otherwise |
+| `findConstant(name, caseSensitive = true)` | `StubEntry<ConstantSubject>?` | Exact read, or folded index |
+| `findClassConstant(name, owner?, caseSensitive = true)` | `StubEntry<ClassConstantSubject>?` | Qualified exact or folded read; suffix index (exact or folded) without `owner` |
+| `functionNames` | `Set<String>` | Folded function names |
+| `classNames` | `Set<String>` | Folded class names |
+| `methodNames` | `Set<String>` | `owner::name` spellings, folded |
+| `constantNames` | `Set<String>` | Global constant names, case preserved |
+| `keywordFunctionNames` | `Set<String>` | Function names whose extension is `keyword` |
+| `scalarTypeNames` | `Set<String>` | Class names whose extension is `scalar` |
 
-`searchMethod` returns the entry alone: its subject carries the owner and
+`findMethod` returns the entry alone: its subject carries the owner and
 the folded name that the former key pair spelled. Language constructs are
 ordinary entries, so the bulk name sets include them; the two derived sets
 select by extension. Extension names `keyword` and `scalar` are constants

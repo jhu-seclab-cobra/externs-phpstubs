@@ -10,26 +10,26 @@ Dataset: 5,694 subjects (5,335 functions + 115 classes + 2 methods + 242 constan
 
 | Operation | Median (ms) | ns/op | Throughput (ops/s) |
 |-----------|------------|-------|-------------------|
-| containsFunc -- known | 2.75 | 27.5 | 36,422,136 |
-| containsFunc -- unknown | 3.29 | 32.9 | 30,352,081 |
-| containsFunc -- keywords | 3.14 | 31.4 | 31,854,742 |
-| containsFunc -- uppercase | 4.53 | 45.3 | 22,095,580 |
-| containsFunc -- namespace prefix | 3.67 | 36.7 | 27,252,902 |
+| containsFunction -- known | 2.75 | 27.5 | 36,422,136 |
+| containsFunction -- unknown | 3.29 | 32.9 | 30,352,081 |
+| containsFunction -- keywords | 3.14 | 31.4 | 31,854,742 |
+| containsFunction -- uppercase | 4.53 | 45.3 | 22,095,580 |
+| containsFunction -- namespace prefix | 3.67 | 36.7 | 27,252,902 |
 | containsClass -- known | 3.02 | 30.2 | 33,094,326 |
 | containsClass -- scalar types | 2.90 | 29.0 | 34,513,999 |
 | containsMethod -- with class | 5.36 | 53.6 | 18,650,046 |
 | containsMethod -- suffix only | 1.51 | 15.1 | 66,143,034 |
-| containsConst | 2.63 | 26.3 | 37,954,870 |
+| containsConstant | 2.63 | 26.3 | 37,954,870 |
 
 ### Cold Path -- Entry Retrieval (100K ops/run)
 
 | Operation | Median (ms) | ns/op | Throughput (ops/s) |
 |-----------|------------|-------|-------------------|
-| searchFunc -- known | 2.76 | 27.6 | 36,249,404 |
-| searchFunc -- keywords | 2.91 | 29.1 | 34,333,290 |
-| searchClass -- scalar types | 2.82 | 28.2 | 35,433,764 |
-| searchMethod -- with class | 3.90 | 39.0 | 25,621,592 |
-| searchMethod -- suffix only | 1.53 | 15.3 | 65,441,428 |
+| findFunction -- known | 2.76 | 27.6 | 36,249,404 |
+| findFunction -- keywords | 2.91 | 29.1 | 34,333,290 |
+| findClass -- scalar types | 2.82 | 28.2 | 35,433,764 |
+| findMethod -- with class | 3.90 | 39.0 | 25,621,592 |
+| findMethod -- suffix only | 1.53 | 15.3 | 65,441,428 |
 
 ### Memory
 

@@ -6,9 +6,9 @@
 
 ## Instructions for Agents
 
-- Call `PhpStubs.searchFunc(name)` for `StubEntry<FunctionSubject>?`, `searchClass(name)` for `StubEntry<ClassSubject>?`.
-- Call `PhpStubs.searchMethod(methodName, className?)` for `StubEntry<MethodSubject>?`; the entry's `subject` carries `owner` and `name`.
-- Call `PhpStubs.searchGlobalConst(name, caseSensitive?)` for `StubEntry<ConstantSubject>?`, `searchClassConst(constName, className?, caseSensitive?)` for `StubEntry<ClassConstantSubject>?`.
+- Call `PhpStubs.findFunction(name)` for `StubEntry<FunctionSubject>?`, `findClass(name)` for `StubEntry<ClassSubject>?`.
+- Call `PhpStubs.findMethod(name, owner?)` for `StubEntry<MethodSubject>?`; the entry's `subject` carries `owner` and `name`.
+- Call `PhpStubs.findConstant(name, caseSensitive?)` for `StubEntry<ConstantSubject>?`, `findClassConstant(name, owner?, caseSensitive?)` for `StubEntry<ClassConstantSubject>?`.
 - `StubEntry` holds `subject`, `model: SubjectModel` (commons-phpmodels), and `extension`. Read signatures through the typed accessors `callableSignature`, `classSignature`, `typedSignature`, `propertySignature`.
 - A name containing `::`, `$`, whitespace, or nothing raises `IllegalArgumentException`; an unknown name returns `null`.
 - Declared flows are `entry.model.body.propagation`; `null` means no flow is declared.

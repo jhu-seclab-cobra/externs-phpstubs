@@ -15,58 +15,58 @@ import kotlin.test.assertTrue
  * Tests for the [PhpStubs] facade over the bundled corpus: functions, classes, methods, and bulk access.
  * Constant lookups: [PhpStubsConstantTest].
  *
- * - `containsFunc finds a standard function` — verifies a known built-in resolves
- * - `containsFunc folds case` — verifies function lookup is case-insensitive
- * - `containsFunc strips the leading namespace slash` — verifies a fully qualified spelling resolves
- * - `containsFunc finds keyword constructs` — verifies language constructs are functions
- * - `containsFunc misses an unknown name` — verifies an unregistered name is absent
- * - `containsFunc rejects a member spelling` — verifies a `::` spelling is an argument error
+ * - `containsFunction finds a standard function` — verifies a known built-in resolves
+ * - `containsFunction folds case` — verifies function lookup is case-insensitive
+ * - `containsFunction strips the leading namespace slash` — verifies a fully qualified spelling resolves
+ * - `containsFunction finds keyword constructs` — verifies language constructs are functions
+ * - `containsFunction misses an unknown name` — verifies an unregistered name is absent
+ * - `containsFunction rejects a member spelling` — verifies a `::` spelling is an argument error
  * - `containsClass finds built-in scalar and legacy classes` — verifies the three class documents load
  * - `containsClass misses an unknown name` — verifies an unregistered class is absent
  * - `containsMethod resolves qualified and unqualified names` — verifies both lookup forms
  * - `containsMethod misses a wrong owner` — verifies a qualified lookup needs the owning class
- * - `searchFunc returns entry with extension and signature` — verifies the entry a consumer reads
- * - `searchFunc exposes declared propagation` — verifies the body reaches the consumer
- * - `searchFunc exposes a variadic tail` — verifies the generated variadic mark decodes
- * - `searchFunc returns null for unknown name` — verifies absence is null
- * - `searchClass returns the keyword extension for exit` — verifies language-construct provenance
- * - `searchMethod returns the qualified subject` — verifies the entry carries owner and name
- * - `searchMethod unqualified returns the first match in load order` — verifies suffix resolution
- * - `getAllFuncNames holds folded names including keywords` — verifies bulk function access
- * - `getAllClassNames holds folded names including scalar types` — verifies bulk class access
- * - `getAllMethodNames spells owner and name` — verifies the `owner::name` spelling
- * - `getKeywordFuncNames is the keyword document` — verifies the closed keyword set
- * - `getScalarTypeNames is the scalar document` — verifies the closed scalar set
+ * - `findFunction returns entry with extension and signature` — verifies the entry a consumer reads
+ * - `findFunction exposes declared propagation` — verifies the body reaches the consumer
+ * - `findFunction exposes a variadic tail` — verifies the generated variadic mark decodes
+ * - `findFunction returns null for unknown name` — verifies absence is null
+ * - `findClass returns the keyword extension for exit` — verifies language-construct provenance
+ * - `findMethod returns the qualified subject` — verifies the entry carries owner and name
+ * - `findMethod unqualified returns the first match in load order` — verifies suffix resolution
+ * - `functionNames holds folded names including keywords` — verifies bulk function access
+ * - `classNames holds folded names including scalar types` — verifies bulk class access
+ * - `methodNames spells owner and name` — verifies the `owner::name` spelling
+ * - `keywordFunctionNames is the keyword document` — verifies the closed keyword set
+ * - `scalarTypeNames is the scalar document` — verifies the closed scalar set
  */
 internal class PhpStubsTest {
     @Test
-    fun `containsFunc finds a standard function`() {
-        assertTrue(PhpStubs.containsFunc("strlen"))
+    fun `containsFunction finds a standard function`() {
+        assertTrue(PhpStubs.containsFunction("strlen"))
     }
 
     @Test
-    fun `containsFunc folds case`() {
-        assertTrue(PhpStubs.containsFunc("STRLEN"))
+    fun `containsFunction folds case`() {
+        assertTrue(PhpStubs.containsFunction("STRLEN"))
     }
 
     @Test
-    fun `containsFunc strips the leading namespace slash`() {
-        assertTrue(PhpStubs.containsFunc("\\strlen"))
+    fun `containsFunction strips the leading namespace slash`() {
+        assertTrue(PhpStubs.containsFunction("\\strlen"))
     }
 
     @Test
-    fun `containsFunc finds keyword constructs`() {
-        assertTrue(PhpStubs.containsFunc("echo") && PhpStubs.containsFunc("include_once"))
+    fun `containsFunction finds keyword constructs`() {
+        assertTrue(PhpStubs.containsFunction("echo") && PhpStubs.containsFunction("include_once"))
     }
 
     @Test
-    fun `containsFunc misses an unknown name`() {
-        assertFalse(PhpStubs.containsFunc("no_such_function"))
+    fun `containsFunction misses an unknown name`() {
+        assertFalse(PhpStubs.containsFunction("no_such_function"))
     }
 
     @Test
-    fun `containsFunc rejects a member spelling`() {
-        assertFailsWith<IllegalArgumentException> { PhpStubs.containsFunc("Exception::getMessage") }
+    fun `containsFunction rejects a member spelling`() {
+        assertFailsWith<IllegalArgumentException> { PhpStubs.containsFunction("Exception::getMessage") }
     }
 
     @Test
@@ -90,65 +90,65 @@ internal class PhpStubsTest {
     }
 
     @Test
-    fun `searchFunc returns entry with extension and signature`() {
-        val entry = assertNotNull(PhpStubs.searchFunc("strlen"))
+    fun `findFunction returns entry with extension and signature`() {
+        val entry = assertNotNull(PhpStubs.findFunction("strlen"))
         assertEquals("standard", entry.extension)
         assertEquals("int", entry.callableSignature.returnType.toString())
     }
 
     @Test
-    fun `searchFunc exposes declared propagation`() {
-        val flows = assertNotNull(assertNotNull(PhpStubs.searchFunc("substr")).model.body.propagation)
+    fun `findFunction exposes declared propagation`() {
+        val flows = assertNotNull(assertNotNull(PhpStubs.findFunction("substr")).model.body.propagation)
         assertEquals(listOf(Port.Argument(0) to Port.Return), flows.map { it.from to it.to })
     }
 
     @Test
-    fun `searchFunc exposes a variadic tail`() {
-        val params = assertNotNull(PhpStubs.searchFunc("sprintf")).callableSignature.params
+    fun `findFunction exposes a variadic tail`() {
+        val params = assertNotNull(PhpStubs.findFunction("sprintf")).callableSignature.params
         assertTrue(params.last().variadic)
     }
 
     @Test
-    fun `searchFunc returns null for unknown name`() {
-        assertNull(PhpStubs.searchFunc("no_such_function"))
+    fun `findFunction returns null for unknown name`() {
+        assertNull(PhpStubs.findFunction("no_such_function"))
     }
 
     @Test
-    fun `searchClass returns the keyword extension for exit`() {
-        assertEquals("keyword", assertNotNull(PhpStubs.searchClass("exit")).extension)
+    fun `findClass returns the keyword extension for exit`() {
+        assertEquals("keyword", assertNotNull(PhpStubs.findClass("exit")).extension)
     }
 
     @Test
-    fun `searchMethod returns the qualified subject`() {
-        val entry = assertNotNull(PhpStubs.searchMethod("getCode", "\\Exception"))
+    fun `findMethod returns the qualified subject`() {
+        val entry = assertNotNull(PhpStubs.findMethod("getCode", "\\Exception"))
         assertEquals(MethodSubject("exception", "getcode"), entry.subject)
         assertEquals("int", entry.callableSignature.returnType.toString())
     }
 
     @Test
-    fun `searchMethod unqualified returns the first match in load order`() {
-        assertEquals(MethodSubject("exception", "getmessage"), assertNotNull(PhpStubs.searchMethod("GETMESSAGE")).subject)
+    fun `findMethod unqualified returns the first match in load order`() {
+        assertEquals(MethodSubject("exception", "getmessage"), assertNotNull(PhpStubs.findMethod("GETMESSAGE")).subject)
     }
 
     @Test
-    fun `getAllFuncNames holds folded names including keywords`() {
-        val names = PhpStubs.getAllFuncNames()
+    fun `functionNames holds folded names including keywords`() {
+        val names = PhpStubs.functionNames
         assertTrue("strlen" in names && "isset" in names && names.none { it != it.lowercase() })
     }
 
     @Test
-    fun `getAllClassNames holds folded names including scalar types`() {
-        val names = PhpStubs.getAllClassNames()
+    fun `classNames holds folded names including scalar types`() {
+        val names = PhpStubs.classNames
         assertTrue("exception" in names && "string" in names && names.none { it != it.lowercase() })
     }
 
     @Test
-    fun `getAllMethodNames spells owner and name`() {
-        assertTrue("exception::getmessage" in PhpStubs.getAllMethodNames())
+    fun `methodNames spells owner and name`() {
+        assertTrue("exception::getmessage" in PhpStubs.methodNames)
     }
 
     @Test
-    fun `getKeywordFuncNames is the keyword document`() {
+    fun `keywordFunctionNames is the keyword document`() {
         assertEquals(
             setOf(
                 "echo",
@@ -166,13 +166,13 @@ internal class PhpStubsTest {
                 "require",
                 "require_once",
             ),
-            PhpStubs.getKeywordFuncNames(),
+            PhpStubs.keywordFunctionNames,
         )
-        assertTrue(PhpStubs.getKeywordFuncNames().all { PhpStubs.searchFunc(it)?.subject == FunctionSubject(it) })
+        assertTrue(PhpStubs.keywordFunctionNames.all { PhpStubs.findFunction(it)?.subject == FunctionSubject(it) })
     }
 
     @Test
-    fun `getScalarTypeNames is the scalar document`() {
-        assertEquals(setOf("int", "float", "string", "bool", "array"), PhpStubs.getScalarTypeNames())
+    fun `scalarTypeNames is the scalar document`() {
+        assertEquals(setOf("int", "float", "string", "bool", "array"), PhpStubs.scalarTypeNames)
     }
 }

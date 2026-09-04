@@ -8,9 +8,9 @@
 import edu.jhu.cobra.externs.phpstubs.PhpStubs
 import edu.jhu.cobra.externs.phpstubs.callableSignature
 
-val func = PhpStubs.searchFunc("strlen")               // StubEntry<FunctionSubject>?
-val method = PhpStubs.searchMethod("getMessage", "Exception")  // StubEntry<MethodSubject>?
-val cls = PhpStubs.searchClass("Exception")            // StubEntry<ClassSubject>?
+val func = PhpStubs.findFunction("strlen")               // StubEntry<FunctionSubject>?
+val method = PhpStubs.findMethod("getMessage", "Exception")  // StubEntry<MethodSubject>?
+val cls = PhpStubs.findClass("Exception")            // StubEntry<ClassSubject>?
 func?.extension                                        // "standard"
 func?.callableSignature?.returnType                    // DeclaredType("int")
 ```
@@ -21,39 +21,39 @@ func?.callableSignature?.returnType                    // DeclaredType("int")
 
 **Existence checks:**
 
-**`containsFunc(name: String): Boolean`** -- Includes keyword constructs (`echo`, `isset`, ...), extension `keyword`.
+**`containsFunction(name: String): Boolean`** -- Includes keyword constructs (`echo`, `isset`, ...), extension `keyword`.
 
 **`containsClass(name: String): Boolean`** -- Includes scalar types (`int`, `float`, ...; extension `scalar`), `exit` (`keyword`), and `resource` (`legacy`).
 
-**`containsMethod(methodName: String, className: String? = null): Boolean`** -- Qualified subject lookup when `className` is given; suffix index on the folded method name when null.
+**`containsMethod(name: String, owner: String? = null): Boolean`** -- Qualified subject lookup when `owner` is given; suffix index on the folded method name when null.
 
-**`containsConst(name: String, caseSensitive: Boolean = true): Boolean`** -- Global constant, or class constant when spelled `Class::NAME`. `caseSensitive = false` reads the folded indexes.
+**`containsConstant(name: String, caseSensitive: Boolean = true): Boolean`** -- Global constant, or class constant when spelled `Class::NAME`. `caseSensitive = false` reads the folded indexes.
 
 **Entry retrieval:**
 
-**`searchFunc(name: String): StubEntry<FunctionSubject>?`**
+**`findFunction(name: String): StubEntry<FunctionSubject>?`**
 
-**`searchClass(name: String): StubEntry<ClassSubject>?`**
+**`findClass(name: String): StubEntry<ClassSubject>?`**
 
-**`searchMethod(methodName: String, className: String? = null): StubEntry<MethodSubject>?`** -- First match in load order when `className` is null. `entry.subject.owner` and `entry.subject.name` are folded.
+**`findMethod(name: String, owner: String? = null): StubEntry<MethodSubject>?`** -- First match in load order when `owner` is null. `entry.subject.owner` and `entry.subject.name` are folded.
 
-**`searchGlobalConst(name: String, caseSensitive: Boolean = true): StubEntry<ConstantSubject>?`** -- Global constants only.
+**`findConstant(name: String, caseSensitive: Boolean = true): StubEntry<ConstantSubject>?`** -- Global constants only.
 
-**`searchClassConst(constName: String, className: String? = null, caseSensitive: Boolean = true): StubEntry<ClassConstantSubject>?`** -- Suffix index when `className` is null.
+**`findClassConstant(name: String, owner: String? = null, caseSensitive: Boolean = true): StubEntry<ClassConstantSubject>?`** -- Suffix index when `owner` is null.
 
 **Bulk access:**
 
-**`getAllFuncNames(): Set<String>`** -- Folded names, keyword constructs included.
+**`functionNames: Set<String>`** -- Folded names, keyword constructs included.
 
-**`getAllClassNames(): Set<String>`** -- Folded names, scalar types and language classes included.
+**`classNames: Set<String>`** -- Folded names, scalar types and language classes included.
 
-**`getAllMethodNames(): Set<String>`** -- `owner::name` spellings, folded.
+**`methodNames: Set<String>`** -- `owner::name` spellings, folded.
 
-**`getAllConstNames(): Set<String>`** -- Global constants only, case preserved.
+**`constantNames: Set<String>`** -- Global constants only, case preserved.
 
-**`getKeywordFuncNames(): Set<String>`** -- Functions of the `keyword` extension: echo, empty, eval, exit, die, isset, print, unset, clone, instanceof, include, include_once, require, require_once.
+**`keywordFunctionNames: Set<String>`** -- Functions of the `keyword` extension: echo, empty, eval, exit, die, isset, print, unset, clone, instanceof, include, include_once, require, require_once.
 
-**`getScalarTypeNames(): Set<String>`** -- Classes of the `scalar` extension: int, float, string, bool, array.
+**`scalarTypeNames: Set<String>`** -- Classes of the `scalar` extension: int, float, string, bool, array.
 
 ### StubEntry<S : ModelSubject> (data class)
 
@@ -92,7 +92,7 @@ Typed accessors (top-level extension properties, non-null by the corpus rules):
 ## Gotchas
 
 - Identity folding is decided by commons-phpmodels: `MethodSubject("Exception", "getMessage")` equals `MethodSubject("exception", "getmessage")`; `ConstantSubject("TRUE")` and `ConstantSubject("true")` differ.
-- `containsMethod`/`searchMethod` without `className` and `searchClassConst` without `className` return the first subject in load order; they are over-approximations.
+- `containsMethod`/`findMethod` without `owner` and `findClassConstant` without `owner` return the first subject in load order; they are over-approximations.
 - Language constructs are ordinary entries loaded from `models/language/`; select them by `extension`.
 - Generated documents are never hand-edited; a correction belongs in a higher configuration layer of the consumer.
 - Constant values are strings on `typedSignature.value`; the consumer converts.

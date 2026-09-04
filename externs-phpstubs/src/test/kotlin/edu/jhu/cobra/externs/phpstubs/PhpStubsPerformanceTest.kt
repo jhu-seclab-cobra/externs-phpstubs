@@ -6,21 +6,21 @@ import org.junit.jupiter.api.Test
 /**
  * Tests for [PhpStubs] performance characteristics.
  *
- * - `containsFunc throughput - known functions` — measures lookup speed for registered functions
- * - `containsFunc throughput - unknown functions` — measures lookup speed for missing names
- * - `containsFunc throughput - keywords` — measures lookup speed for keyword functions
+ * - `containsFunction throughput - known functions` — measures lookup speed for registered functions
+ * - `containsFunction throughput - unknown functions` — measures lookup speed for missing names
+ * - `containsFunction throughput - keywords` — measures lookup speed for keyword functions
  * - `containsClass throughput - known classes` — measures lookup speed for registered classes
  * - `containsClass throughput - scalar types` — measures lookup speed for scalar type names
  * - `containsMethod throughput - with class name` — measures method lookup with owning class
  * - `containsMethod throughput - suffix only` — measures method lookup by name suffix
- * - `containsConst throughput` — measures constant lookup speed
- * - `searchFunc throughput - known functions` — measures entry retrieval for registered functions
- * - `searchFunc throughput - keywords` — measures entry retrieval for keyword functions
- * - `searchClass throughput - scalar types` — measures entry retrieval for scalar types
- * - `searchMethod throughput - with class name` — measures method entry retrieval with class
- * - `searchMethod throughput - suffix only` — measures method entry retrieval by suffix
- * - `containsFunc throughput - uppercase input` — measures normalization overhead for uppercase
- * - `containsFunc throughput - namespace prefix input` — measures spelling overhead for a leading backslash
+ * - `containsConstant throughput` — measures constant lookup speed
+ * - `findFunction throughput - known functions` — measures entry retrieval for registered functions
+ * - `findFunction throughput - keywords` — measures entry retrieval for keyword functions
+ * - `findClass throughput - scalar types` — measures entry retrieval for scalar types
+ * - `findMethod throughput - with class name` — measures method entry retrieval with class
+ * - `findMethod throughput - suffix only` — measures method entry retrieval by suffix
+ * - `containsFunction throughput - uppercase input` — measures normalization overhead for uppercase
+ * - `containsFunction throughput - namespace prefix input` — measures spelling overhead for a leading backslash
  * - `memory footprint of loaded registry` — reports heap usage after full data load
  */
 @Tag("performance")
@@ -46,28 +46,28 @@ internal class PhpStubsPerformanceTest {
     // -- Hot path: existence checks --
 
     @Test
-    fun `containsFunc throughput - known functions`() {
-        benchmarkOps("containsFunc-known", iterationsPerRun.toLong()) {
+    fun `containsFunction throughput - known functions`() {
+        benchmarkOps("containsFunction-known", iterationsPerRun.toLong()) {
             repeat(iterationsPerRun) { i ->
-                PhpStubs.containsFunc(knownFuncs[i % knownFuncs.size])
+                PhpStubs.containsFunction(knownFuncs[i % knownFuncs.size])
             }
         }
     }
 
     @Test
-    fun `containsFunc throughput - unknown functions`() {
-        benchmarkOps("containsFunc-unknown", iterationsPerRun.toLong()) {
+    fun `containsFunction throughput - unknown functions`() {
+        benchmarkOps("containsFunction-unknown", iterationsPerRun.toLong()) {
             repeat(iterationsPerRun) { i ->
-                PhpStubs.containsFunc(unknownFuncs[i % unknownFuncs.size])
+                PhpStubs.containsFunction(unknownFuncs[i % unknownFuncs.size])
             }
         }
     }
 
     @Test
-    fun `containsFunc throughput - keywords`() {
-        benchmarkOps("containsFunc-keyword", iterationsPerRun.toLong()) {
+    fun `containsFunction throughput - keywords`() {
+        benchmarkOps("containsFunction-keyword", iterationsPerRun.toLong()) {
             repeat(iterationsPerRun) { i ->
-                PhpStubs.containsFunc(keywordFuncs[i % keywordFuncs.size])
+                PhpStubs.containsFunction(keywordFuncs[i % keywordFuncs.size])
             }
         }
     }
@@ -110,11 +110,11 @@ internal class PhpStubsPerformanceTest {
     }
 
     @Test
-    fun `containsConst throughput`() {
+    fun `containsConstant throughput`() {
         val consts = listOf("PHP_EOL", "PHP_INT_MAX", "TRUE", "FALSE", "NULL")
-        benchmarkOps("containsConst", iterationsPerRun.toLong()) {
+        benchmarkOps("containsConstant", iterationsPerRun.toLong()) {
             repeat(iterationsPerRun) { i ->
-                PhpStubs.containsConst(consts[i % consts.size])
+                PhpStubs.containsConstant(consts[i % consts.size])
             }
         }
     }
@@ -122,47 +122,47 @@ internal class PhpStubsPerformanceTest {
     // -- Cold path: entry retrieval --
 
     @Test
-    fun `searchFunc throughput - known functions`() {
-        benchmarkOps("searchFunc-known", iterationsPerRun.toLong()) {
+    fun `findFunction throughput - known functions`() {
+        benchmarkOps("findFunction-known", iterationsPerRun.toLong()) {
             repeat(iterationsPerRun) { i ->
-                PhpStubs.searchFunc(knownFuncs[i % knownFuncs.size])
+                PhpStubs.findFunction(knownFuncs[i % knownFuncs.size])
             }
         }
     }
 
     @Test
-    fun `searchFunc throughput - keywords`() {
-        benchmarkOps("searchFunc-keyword", iterationsPerRun.toLong()) {
+    fun `findFunction throughput - keywords`() {
+        benchmarkOps("findFunction-keyword", iterationsPerRun.toLong()) {
             repeat(iterationsPerRun) { i ->
-                PhpStubs.searchFunc(keywordFuncs[i % keywordFuncs.size])
+                PhpStubs.findFunction(keywordFuncs[i % keywordFuncs.size])
             }
         }
     }
 
     @Test
-    fun `searchClass throughput - scalar types`() {
-        benchmarkOps("searchClass-scalar", iterationsPerRun.toLong()) {
+    fun `findClass throughput - scalar types`() {
+        benchmarkOps("findClass-scalar", iterationsPerRun.toLong()) {
             repeat(iterationsPerRun) { i ->
-                PhpStubs.searchClass(scalarTypes[i % scalarTypes.size])
+                PhpStubs.findClass(scalarTypes[i % scalarTypes.size])
             }
         }
     }
 
     @Test
-    fun `searchMethod throughput - with class name`() {
-        benchmarkOps("searchMethod-withClass", iterationsPerRun.toLong()) {
+    fun `findMethod throughput - with class name`() {
+        benchmarkOps("findMethod-withClass", iterationsPerRun.toLong()) {
             repeat(iterationsPerRun) { i ->
                 val (method, cls) = knownMethods[i % knownMethods.size]
-                PhpStubs.searchMethod(method, cls)
+                PhpStubs.findMethod(method, cls)
             }
         }
     }
 
     @Test
-    fun `searchMethod throughput - suffix only`() {
-        benchmarkOps("searchMethod-suffixOnly", iterationsPerRun.toLong()) {
+    fun `findMethod throughput - suffix only`() {
+        benchmarkOps("findMethod-suffixOnly", iterationsPerRun.toLong()) {
             repeat(iterationsPerRun) { i ->
-                PhpStubs.searchMethod(suffixOnlyMethods[i % suffixOnlyMethods.size])
+                PhpStubs.findMethod(suffixOnlyMethods[i % suffixOnlyMethods.size])
             }
         }
     }
@@ -170,21 +170,21 @@ internal class PhpStubsPerformanceTest {
     // -- Spelling edge cases --
 
     @Test
-    fun `containsFunc throughput - uppercase input`() {
+    fun `containsFunction throughput - uppercase input`() {
         val uppercaseFuncs = knownFuncs.map { it.uppercase() }
-        benchmarkOps("containsFunc-uppercase", iterationsPerRun.toLong()) {
+        benchmarkOps("containsFunction-uppercase", iterationsPerRun.toLong()) {
             repeat(iterationsPerRun) { i ->
-                PhpStubs.containsFunc(uppercaseFuncs[i % uppercaseFuncs.size])
+                PhpStubs.containsFunction(uppercaseFuncs[i % uppercaseFuncs.size])
             }
         }
     }
 
     @Test
-    fun `containsFunc throughput - namespace prefix input`() {
+    fun `containsFunction throughput - namespace prefix input`() {
         val qualifiedFuncs = knownFuncs.map { "\\$it" }
-        benchmarkOps("containsFunc-namespacePrefix", iterationsPerRun.toLong()) {
+        benchmarkOps("containsFunction-namespacePrefix", iterationsPerRun.toLong()) {
             repeat(iterationsPerRun) { i ->
-                PhpStubs.containsFunc(qualifiedFuncs[i % qualifiedFuncs.size])
+                PhpStubs.containsFunction(qualifiedFuncs[i % qualifiedFuncs.size])
             }
         }
     }
@@ -194,20 +194,20 @@ internal class PhpStubsPerformanceTest {
     @Test
     fun `memory footprint of loaded registry`() {
         // Force full load
-        PhpStubs.getAllFuncNames()
-        PhpStubs.getAllClassNames()
-        PhpStubs.getAllMethodNames()
-        PhpStubs.getAllConstNames()
+        PhpStubs.functionNames
+        PhpStubs.classNames
+        PhpStubs.methodNames
+        PhpStubs.constantNames
 
         val runtime = Runtime.getRuntime()
         runtime.gc()
         Thread.sleep(100)
         val used = runtime.totalMemory() - runtime.freeMemory()
         println("[memory-loaded] heap used after full load: %,d bytes (%.2f MB)".format(used, used / 1_048_576.0))
-        println("[memory-loaded] functions: %,d keys".format(PhpStubs.getAllFuncNames().size))
-        println("[memory-loaded] classes: %,d keys".format(PhpStubs.getAllClassNames().size))
-        println("[memory-loaded] methods: %,d keys".format(PhpStubs.getAllMethodNames().size))
-        println("[memory-loaded] constants: %,d keys".format(PhpStubs.getAllConstNames().size))
+        println("[memory-loaded] functions: %,d keys".format(PhpStubs.functionNames.size))
+        println("[memory-loaded] classes: %,d keys".format(PhpStubs.classNames.size))
+        println("[memory-loaded] methods: %,d keys".format(PhpStubs.methodNames.size))
+        println("[memory-loaded] constants: %,d keys".format(PhpStubs.constantNames.size))
     }
 
     // -- Helpers --
