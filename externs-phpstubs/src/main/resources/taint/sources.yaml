@@ -1,0 +1,42 @@
+# Generated from vimeo/psalm 5.6.0 by tools/extract_taint.py.
+# Do not hand-edit; re-run the script on a newer psalm release.
+- subject:
+    variable: $_COOKIE
+  sources:
+    - provenance: [input]
+- subject:
+    variable: $_GET
+  sources:
+    - provenance: [input]
+- subject:
+    variable: $_POST
+  sources:
+    - provenance: [input]
+- subject:
+    variable: $_REQUEST
+  sources:
+    - provenance: [input]
+- subject:
+    method: Error::__toString
+  sources:
+    - provenance: [input]
+- subject:
+    method: Error::getTraceAsString
+  sources:
+    - provenance: [input]
+- subject:
+    method: Exception::__toString
+  sources:
+    - provenance: [input]
+- subject:
+    method: Exception::getTraceAsString
+  sources:
+    - provenance: [input]
+- subject:
+    method: Throwable::__toString
+  sources:
+    - provenance: [input]
+- subject:
+    method: Throwable::getTraceAsString
+  sources:
+    - provenance: [input]

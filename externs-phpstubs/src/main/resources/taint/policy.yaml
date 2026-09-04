@@ -1,0 +1,4 @@
+# Generated from vimeo/psalm 5.6.0 by tools/extract_taint.py.
+# Do not hand-edit; re-run the script on a newer psalm release.
+- origin: input
+  enables: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie]

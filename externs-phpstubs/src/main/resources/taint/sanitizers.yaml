@@ -1,0 +1,93 @@
+# Generated from vimeo/psalm 5.6.0 by tools/extract_taint.py.
+# Do not hand-edit; re-run the script on a newer psalm release.
+- subject:
+    function: cubrid_real_escape_string
+  sanitizers:
+    - categories: [sql]
+- subject:
+    function: db2_escape_string
+  sanitizers:
+    - categories: [sql]
+- subject:
+    function: filter_var
+  when:
+    port: argument(1)
+    is: 257
+  sanitizers:
+    - categories: [html]
+- subject:
+    function: filter_var
+  when:
+    port: argument(1)
+    is: 258
+  sanitizers:
+    - categories: [html]
+- subject:
+    function: filter_var
+  when:
+    port: argument(1)
+    is: 259
+  sanitizers:
+    - categories: [html]
+- subject:
+    function: filter_var
+  when:
+    port: argument(1)
+    is: 519
+  sanitizers:
+    - categories: [html]
+- subject:
+    function: filter_var
+  when:
+    port: argument(1)
+    is: 520
+  sanitizers:
+    - categories: [html]
+- subject:
+    function: ldap_escape
+  sanitizers:
+    - categories: [ldap]
+- subject:
+    method: mysqli::escape_string
+  sanitizers:
+    - categories: [sql]
+- subject:
+    method: mysqli::real_escape_string
+  sanitizers:
+    - categories: [sql]
+- subject:
+    function: mysqli_escape_string
+  sanitizers:
+    - categories: [sql]
+- subject:
+    function: mysqli_real_escape_string
+  sanitizers:
+    - categories: [sql]
+- subject:
+    function: pg_escape_bytea
+  sanitizers:
+    - categories: [sql]
+- subject:
+    function: pg_escape_identifier
+  sanitizers:
+    - categories: [sql]
+- subject:
+    function: pg_escape_literal
+  sanitizers:
+    - categories: [sql]
+- subject:
+    function: pg_escape_string
+  sanitizers:
+    - categories: [sql]
+- subject:
+    method: SQLite3::escapeString
+  sanitizers:
+    - categories: [sql]
+- subject:
+    function: strip_tags
+  sanitizers:
+    - categories: [html]
+- subject:
+    function: urlencode
+  sanitizers:
+    - categories: [html, has_quotes]

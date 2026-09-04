@@ -1,0 +1,36 @@
+# Generated from vimeo/psalm 5.6.0 by tools/extract_taint.py.
+# Do not hand-edit; re-run the script on a newer psalm release.
+vulnClasses:
+  - name: callable
+    description: Callable name resolved and invoked
+  - name: unserialize
+    description: Serialized payload passed to unserialize
+  - name: include
+    description: Path passed to include or require
+  - name: eval
+    description: PHP code passed to eval or create_function
+  - name: ldap
+    description: LDAP filter or DN text
+  - name: sql
+    description: SQL query text
+  - name: html
+    description: HTML output
+  - name: has_quotes
+    description: Text carrying quote characters into an HTML attribute
+  - name: shell
+    description: Shell command text
+  - name: ssrf
+    description: URL fetched by the server
+  - name: file
+    description: File system path
+  - name: cookie
+    description: Cookie name or value
+  - name: header
+    description: HTTP response header text
+  - name: user_secret
+    description: Secret belonging to one user
+  - name: system_secret
+    description: Secret belonging to the system
+provenances:
+  - name: input
+    description: Attacker-controlled input from colored superglobals and annotated sources

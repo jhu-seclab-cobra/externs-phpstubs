@@ -1,0 +1,360 @@
+# Generated from vimeo/psalm 5.6.0 by tools/extract_taint.py.
+# Do not hand-edit; re-run the script on a newer psalm release.
+- subject:
+    function: chown
+  sinks:
+    - port: argument(0)
+      category: file
+- subject:
+    function: copy
+  sinks:
+    - port: argument(0)
+      category: file
+    - port: argument(1)
+      category: file
+- subject:
+    function: create_function
+  sinks:
+    - port: argument(1)
+      category: eval
+- subject:
+    function: curl_init
+  sinks:
+    - port: argument(0)
+      category: ssrf
+- subject:
+    function: curl_setopt
+  sinks:
+    - port: argument(2)
+      category: ssrf
+- subject:
+    function: exec
+  sinks:
+    - port: argument(0)
+      category: shell
+- subject:
+    function: file
+  sinks:
+    - port: argument(0)
+      category: file
+- subject:
+    function: file_get_contents
+  sinks:
+    - port: argument(0)
+      category: file
+- subject:
+    function: file_put_contents
+  sinks:
+    - port: argument(0)
+      category: file
+- subject:
+    function: fopen
+  sinks:
+    - port: argument(0)
+      category: file
+- subject:
+    function: get_headers
+  sinks:
+    - port: argument(0)
+      category: ssrf
+- subject:
+    function: get_meta_tags
+  sinks:
+    - port: argument(0)
+      category: ssrf
+- subject:
+    function: getimagesize
+  sinks:
+    - port: argument(0)
+      category: ssrf
+- subject:
+    function: header
+  sinks:
+    - port: argument(0)
+      category: header
+- subject:
+    function: highlight_file
+  sinks:
+    - port: argument(0)
+      category: file
+- subject:
+    function: igbinary_unserialize
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    function: lchown
+  sinks:
+    - port: argument(0)
+      category: file
+- subject:
+    function: ldap_search
+  sinks:
+    - port: argument(1)
+      category: ldap
+    - port: argument(2)
+      category: ldap
+- subject:
+    function: link
+  sinks:
+    - port: argument(0)
+      category: file
+    - port: argument(1)
+      category: file
+- subject:
+    function: mkdir
+  sinks:
+    - port: argument(0)
+      category: file
+- subject:
+    function: move_uploaded_file
+  sinks:
+    - port: argument(0)
+      category: file
+    - port: argument(1)
+      category: file
+- subject:
+    method: mysqli::multi_query
+  sinks:
+    - port: argument(0)
+      category: sql
+- subject:
+    method: mysqli::prepare
+  sinks:
+    - port: argument(0)
+      category: sql
+- subject:
+    method: mysqli::query
+  sinks:
+    - port: argument(0)
+      category: sql
+- subject:
+    method: mysqli::real_query
+  sinks:
+    - port: argument(0)
+      category: sql
+- subject:
+    function: mysqli_fetch_object
+  sinks:
+    - port: argument(1)
+      category: callable
+- subject:
+    function: mysqli_multi_query
+  sinks:
+    - port: argument(1)
+      category: sql
+- subject:
+    function: mysqli_prepare
+  sinks:
+    - port: argument(1)
+      category: sql
+- subject:
+    function: mysqli_query
+  sinks:
+    - port: argument(1)
+      category: sql
+- subject:
+    function: mysqli_real_query
+  sinks:
+    - port: argument(1)
+      category: sql
+- subject:
+    method: mysqli_result::fetch_object
+  sinks:
+    - port: argument(0)
+      category: callable
+- subject:
+    method: mysqli_stmt::__construct
+  sinks:
+    - port: argument(1)
+      category: sql
+- subject:
+    method: mysqli_stmt::prepare
+  sinks:
+    - port: argument(0)
+      category: sql
+- subject:
+    function: mysqli_stmt_prepare
+  sinks:
+    - port: argument(1)
+      category: sql
+- subject:
+    function: parse_ini_file
+  sinks:
+    - port: argument(0)
+      category: file
+- subject:
+    function: passthru
+  sinks:
+    - port: argument(0)
+      category: shell
+- subject:
+    function: pcntl_exec
+  sinks:
+    - port: argument(0)
+      category: shell
+- subject:
+    method: PDO::exec
+  sinks:
+    - port: argument(0)
+      category: sql
+- subject:
+    method: PDO::prepare
+  sinks:
+    - port: argument(0)
+      category: sql
+- subject:
+    method: PDO::query
+  sinks:
+    - port: argument(0)
+      category: sql
+- subject:
+    method: PDOStatement::fetchObject
+  sinks:
+    - port: argument(0)
+      category: callable
+- subject:
+    function: pg_exec
+  sinks:
+    - port: argument(1)
+      category: sql
+- subject:
+    function: pg_prepare
+  sinks:
+    - port: argument(2)
+      category: sql
+- subject:
+    function: pg_put_line
+  sinks:
+    - port: argument(1)
+      category: sql
+- subject:
+    function: pg_query
+  sinks:
+    - port: argument(1)
+      category: sql
+- subject:
+    function: pg_query_params
+  sinks:
+    - port: argument(1)
+      category: sql
+- subject:
+    function: pg_send_prepare
+  sinks:
+    - port: argument(2)
+      category: sql
+- subject:
+    function: pg_send_query
+  sinks:
+    - port: argument(1)
+      category: sql
+- subject:
+    function: pg_send_query_params
+  sinks:
+    - port: argument(1)
+      category: sql
+- subject:
+    function: php_strip_whitespace
+  sinks:
+    - port: argument(0)
+      category: file
+- subject:
+    function: popen
+  sinks:
+    - port: argument(0)
+      category: shell
+- subject:
+    function: print_r
+  sinks:
+    - port: argument(0)
+      category: html
+- subject:
+    function: printf
+  sinks:
+    - port: argument(0)
+      category: html
+    - port: argument(1)
+      category: html
+- subject:
+    function: proc_open
+  sinks:
+    - port: argument(0)
+      category: shell
+- subject:
+    function: readfile
+  sinks:
+    - port: argument(0)
+      category: file
+- subject:
+    function: rename
+  sinks:
+    - port: argument(0)
+      category: file
+    - port: argument(1)
+      category: file
+- subject:
+    function: rmdir
+  sinks:
+    - port: argument(0)
+      category: file
+- subject:
+    function: setcookie
+  sinks:
+    - port: argument(0)
+      category: cookie
+    - port: argument(1)
+      category: cookie
+- subject:
+    function: shell_exec
+  sinks:
+    - port: argument(0)
+      category: shell
+- subject:
+    function: show_source
+  sinks:
+    - port: argument(0)
+      category: file
+- subject:
+    function: symlink
+  sinks:
+    - port: argument(0)
+      category: file
+- subject:
+    function: system
+  sinks:
+    - port: argument(0)
+      category: shell
+- subject:
+    function: tempnam
+  sinks:
+    - port: argument(0)
+      category: file
+- subject:
+    function: unlink
+  sinks:
+    - port: argument(0)
+      category: file
+- subject:
+    function: unserialize
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    function: var_dump
+  sinks:
+    - port: argument(0)
+      category: html
+    - port: argument(1)
+      category: html
+- subject:
+    function: var_export
+  sinks:
+    - port: argument(0)
+      category: html
+- subject:
+    function: vprintf
+  sinks:
+    - port: argument(0)
+      category: html
+    - port: argument(1)
+      category: html
