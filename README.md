@@ -2,11 +2,11 @@
 
 > PHP built-in declaration registry for static analysis.
 
-Lookup of PHP built-in functions, classes, methods, and constants as commons-phpmodels entries with extension provenance, plus psalm's taint sources, sinks, and escapes as a mountable document set.
+Lookup of PHP built-in functions, classes, methods, and constants as commons-phpmodels entries with extension provenance, plus psalm's taint sources, sinks, and escapes and a hand-maintained rules set as mountable document sets.
 
 [![codecov](https://codecov.io/gh/jhu-seclab-cobra/externs-phpstubs/branch/main/graph/badge.svg)](https://codecov.io/gh/jhu-seclab-cobra/externs-phpstubs)
 ![Kotlin JVM](https://img.shields.io/badge/Kotlin%20JVM-2.0.1%20%7C%20JVM%201.8%2B-blue?logo=kotlin)
-[![Release](https://img.shields.io/badge/release-v0.3.0-blue.svg)](https://github.com/jhu-seclab-cobra/externs-phpstubs/releases/tag/v0.3.0)
+[![Release](https://img.shields.io/badge/release-v0.4.0-blue.svg)](https://github.com/jhu-seclab-cobra/externs-phpstubs/releases/tag/v0.4.0)
 [![last commit](https://img.shields.io/github/last-commit/jhu-seclab-cobra/externs-phpstubs)](https://github.com/jhu-seclab-cobra/externs-phpstubs/commits/main)
 [![](https://jitpack.io/v/jhu-seclab-cobra/externs-phpstubs.svg)](https://jitpack.io/#jhu-seclab-cobra/externs-phpstubs)
 ![Repo Size](https://img.shields.io/github/repo-size/jhu-seclab-cobra/externs-phpstubs)
@@ -20,7 +20,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.jhu-seclab-cobra:externs-phpstubs:0.3.0")
+    implementation("com.github.jhu-seclab-cobra:externs-phpstubs:0.4.0")
 }
 ```
 
@@ -77,7 +77,7 @@ PhpStubs.findConstant("php_int_max", caseSensitive = false)    // folded lookup
 
 **`StubRegistry`** -- the frozen per-kind maps behind the facade, built by `StubLoader.loadAll()`.
 
-**`StubResources`** -- classpath roots of the two shipped document sets, `MODELS` (`/models/`) and `TAINT` (`/taint/`), and `opener(root)` returning a commons-phpmodels `ResourceOpener` over them.
+**`StubResources`** -- classpath roots of the three shipped document sets, `MODELS` (`/models/`), `TAINT` (`/taint/`), and `RULES` (`/rules/`), and `opener(root)` returning a commons-phpmodels `ResourceOpener` over them.
 
 ## Taint Document Set
 
@@ -93,6 +93,18 @@ val mapped = DocumentSetLoader.load(StubResources.opener(StubResources.TAINT), m
 
 The set is regenerated from a psalm checkout by `tools/extract_taint.py --psalm <root> --out externs-phpstubs/src/main/resources/taint`.
 
+## Rules Document Set
+
+`rules/` ships hand-maintained taint assertions beyond psalm's, in psalm's names: the sinks of the Argus lists (Jahanshahi and Egele, USENIX Security 2024) that the format expresses, escapes psalm lacks (`escapeshellarg`, `htmlspecialchars`, `intval`, ...), and sources psalm does not color (`$_SERVER`, `getenv`, `file_get_contents`, ...). Its `vocabulary.yaml` adds only the kind `xpath` and the color `external`; it decodes over the taint set's vocabulary and mounts after it under the same mapping, extended by those two names:
+
+```kotlin
+val psalm = DocumentSetLoader.load(StubResources.opener(StubResources.TAINT))
+val rules = DocumentSetLoader.load(StubResources.opener(StubResources.RULES), psalm.vocabulary)
+val mapped = DocumentSetLoader.load(StubResources.opener(StubResources.RULES), myVocabulary, myMapping)
+```
+
+An entry for a subject the taint set also states restates psalm's points and adds its own, so a consumer replacing one section per subject loses nothing.
+
 ## Background
 
 Model documents derived from [JetBrains/phpstorm-stubs](https://github.com/JetBrains/phpstorm-stubs) (signatures, Apache-2.0) and [vimeo/psalm](https://github.com/vimeo/psalm) (dataflow annotations and taint data, MIT), emitted in the [commons-phpmodels](https://github.com/jhu-seclab-cobra/commons-phpmodels) format. Language constructs (`echo`, `isset`, `int`, ...) are declared as data under `models/language/`.
@@ -103,6 +115,8 @@ Model documents derived from [JetBrains/phpstorm-stubs](https://github.com/JetBr
 - [Taint Concepts](docs/concept-taint.md) -- the taint document set in psalm's names and its extraction
 - [Design](docs/design.md) -- entry, registry, loader, and facade specifications; corpus rules
 - [Taint Design](docs/design-taint.md) -- `StubResources`, taint resource layout, extraction script
+- [Rules Concepts](docs/concept-rules.md) -- the hand-maintained rules document set and its contracts
+- [Rules Design](docs/design-rules.md) -- rules resource layout, validation and maintenance rules
 - [Implementation Notes](docs/impl.md) -- commons-phpmodels API findings, developer instructions
 
 ## For Agents

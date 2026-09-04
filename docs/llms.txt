@@ -1,6 +1,6 @@
 # externs-phpstubs
 
-> Read-only Kotlin registry of PHP built-in declarations as commons-phpmodels entries, each with its extension provenance, plus psalm's taint data as a mountable commons-phpmodels document set.
+> Read-only Kotlin registry of PHP built-in declarations as commons-phpmodels entries, each with its extension provenance, plus psalm's taint data and a hand-maintained rules set as mountable commons-phpmodels document sets.
 
 `PhpStubs` is the singleton entry point. Lookup names go through the commons-phpmodels subject creators: functions, classes, and methods fold case and drop a leading `\`; constants keep their case unless `caseSensitive = false`.
 
@@ -13,7 +13,8 @@
 - A name containing `::`, `$`, whitespace, or nothing raises `IllegalArgumentException`; an unknown name returns `null`.
 - Declared flows are `entry.model.body.propagation`; `null` means no flow is declared.
 - Taint sources, sinks, and sanitizers are NOT registry entries. They ship as the `taint/` document set in psalm's names: load it with `DocumentSetLoader.load(StubResources.opener(StubResources.TAINT), context, mapping)`.
-- `StubResources.MODELS` and `StubResources.TAINT` are the classpath roots; `StubResources.opener(root)` yields the `ResourceOpener` the set loader needs.
+- Assertions beyond psalm's (Argus sinks, `echo`, `escapeshellarg`, `$_SERVER`, `getenv`, ...) are the `rules/` set: load it with `DocumentSetLoader.load(StubResources.opener(StubResources.RULES), taintVocabulary)` or under the same mapping as `taint/` extended by `xpath` and `external`; mount it after `taint/`.
+- `StubResources.MODELS`, `StubResources.TAINT`, and `StubResources.RULES` are the classpath roots; `StubResources.opener(root)` yields the `ResourceOpener` the set loader needs.
 
 ## API Reference
 

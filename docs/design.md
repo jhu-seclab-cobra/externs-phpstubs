@@ -171,9 +171,10 @@ one hand-maintained exception and carry no producer header. A keyword
 function declares one optional variadic `mixed` parameter and a `mixed`
 return; a language class declares `classifier: class`.
 
-The Gradle resource task writes `index.txt` for `models/` and `taint/`
-(main) and `models-test/` (test); every other test fixture directory ships
-its own manifest. The taint set's layout: [design-taint.md](design-taint.md).
+The Gradle resource task writes `index.txt` for `models/`, `taint/`, and
+`rules/` (main) and `models-test/` (test); every other test fixture
+directory ships its own manifest. The taint set's layout:
+[design-taint.md](design-taint.md); the rules set's: [design-rules.md](design-rules.md).
 
 ## Exception / Error Types
 

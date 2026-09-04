@@ -10,25 +10,24 @@ constant's value is, and which built-ins psalm marks as taint sources, sinks,
 and escapes. This knowledge is extracted from upstream sources and is
 independent of any analysis technique. The model format for stating it
 exists in commons-phpmodels; what remains is the data, a registry serving
-the declarations, and a document set serving the taint assertions.
+the declarations, and two document sets serving the taint assertions.
 
 **System Role**
 This library is the generated layer of the Cobra PHP model stack: it owns
 the generated model documents for PHP built-ins, their provenance, a
-read-only registry that resolves PHP names to model entries, and the
-generated taint document set ([concept-taint.md](concept-taint.md)). The
-format, decoding, and validation belong to commons-phpmodels.
+read-only registry that resolves PHP names to model entries, and two taint
+document sets ([concept-taint.md](concept-taint.md), [concept-rules.md](concept-rules.md)).
+The format, decoding, and validation belong to commons-phpmodels.
 
 **Data Flow**
-- **Inputs:** upstream stub sources and psalm's taint data (offline);
-  generated model documents, one language-construct document, and the
-  taint document set (bundled resources).
+- **Inputs:** upstream stub sources, psalm's taint data, and the Argus
+  lists (offline); model documents and two taint sets (bundled resources).
 - **Outputs:** model entries keyed by subject, each carrying its
   extension provenance; PHP-name lookups over them; the taint document set
   as a classpath root consumers load themselves.
 - **Connections:** upstream stubs → extraction → model documents →
   [commons-phpmodels decode] → [this registry] → consumers (cobraphp-core);
-  psalm taint data → extraction → taint document set → consumers.
+  psalm taint data → extraction, Argus lists → review → document sets → consumers.
 
 **Scope Boundaries**
 - **Owned:** the generated model documents, the language-construct
@@ -48,6 +47,7 @@ Offline (per upstream release):
     phpstorm-stubs, psalm stubs ──extraction──► models/<category>/<extension>.yaml
                                                 models/language/*.yaml (hand-declared)
     psalm taint data ───────────extraction──► taint/** (document set)
+    Argus sink lists ───────────review──────► rules/** (document set)
 
 Runtime:
     models/** ──manifest──► commons-phpmodels decode ──► Stub Registry
@@ -195,6 +195,6 @@ Runtime:
   supplying the signature and extension. The two layers meet per subject
   and unit in the consumer, not here.
 
-Taint document set: [concept-taint.md](concept-taint.md). Software
-structure: [design.md](design.md). Format semantics: commons-phpmodels
+Taint sets: [concept-taint.md](concept-taint.md), [concept-rules.md](concept-rules.md).
+Software structure: [design.md](design.md). Format semantics: commons-phpmodels
 `docs/model-declarations.md`.

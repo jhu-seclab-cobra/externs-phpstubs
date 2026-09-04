@@ -87,14 +87,17 @@ Typed accessors (top-level extension properties, non-null by the corpus rules):
 
 **`TAINT: String`** -- `/taint/`, the taint set root: `vocabulary.yaml` (psalm's fifteen kinds, color `input`), `policy.yaml` (`input` enables the thirteen input kinds), `sinks.yaml`, `sanitizers.yaml`, `sources.yaml`.
 
+**`RULES: String`** -- `/rules/`, the hand-maintained rules set root: `vocabulary.yaml` (adds kind `xpath`, color `external`), `policy.yaml` (`input` enables `xpath`; `external` enables the input kinds and `xpath`), `sinks.yaml`, `sanitizers.yaml`, `sources.yaml`. Decodes over the taint set's vocabulary; mounts after it.
+
 **`opener(root: String): ResourceOpener`** -- Resolves `root + path` on this module's classpath; trailing slash optional; null for an absent path.
 
 ```kotlin
 val psalm = DocumentSetLoader.load(StubResources.opener(StubResources.TAINT))
 val mine = DocumentSetLoader.load(StubResources.opener(StubResources.TAINT), myVocabulary, myMapping)
+val rules = DocumentSetLoader.load(StubResources.opener(StubResources.RULES), psalm.vocabulary)
 ```
 
-Taint entries carry no signature and exactly one of `sinks`, `sanitizers`, `sources`; `filter_var` appears as five guarded entries (`argument(1)` is 257, 258, 259, 519, 520) escaping `html`. Subjects are spelled as psalm names them (`mysqli::query`, `$_GET`).
+Taint entries carry no signature and exactly one of `sinks`, `sanitizers`, `sources`; `filter_var` appears as five guarded entries (`argument(1)` is 257, 258, 259, 519, 520) escaping `html`. Subjects are spelled as psalm names them (`mysqli::query`, `$_GET`). A rules entry for a subject the taint set also states restates psalm's points and adds its own (`readfile`: `file`, `unserialize`, plus `ssrf`, `html`).
 
 ### Exceptions
 
@@ -111,4 +114,4 @@ Taint entries carry no signature and exactly one of `sinks`, `sanitizers`, `sour
 - Language constructs are ordinary entries loaded from `models/language/`; select them by `extension`.
 - Generated documents are never hand-edited; a correction belongs in a higher configuration layer of the consumer.
 - Constant values are strings on `typedSignature.value`; the consumer converts.
-- Taint rules are not registry entries; they are the `taint/` document set, mounted by the consumer through `DocumentSetLoader` with its own mapping.
+- Taint rules are not registry entries; they are the `taint/` and `rules/` document sets, mounted by the consumer through `DocumentSetLoader` with its own mapping, `rules/` after `taint/`.
