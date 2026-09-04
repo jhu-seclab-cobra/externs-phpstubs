@@ -13,7 +13,7 @@
 
 ## Libraries
 
-- com.github.jhu-seclab-cobra:commons-phpmodels:0.2.0 — model format, decoder, validation; `api` scope (its types are the entry surface); alias `cobra-commons-phpmodels` in `gradle/libs.versions.toml`; resolved from JitPack (`https://jitpack.io`, artifact verified present) standalone, substituted by the root composite when built from CobraPHP.
+- com.github.jhu-seclab-cobra:commons-phpmodels:0.2.1 — model format, decoder, validation; `api` scope (its types are the entry surface); alias `cobra-commons-phpmodels` in `gradle/libs.versions.toml`; resolved from JitPack (`https://jitpack.io`, artifact verified present) standalone, substituted by the root composite when built from CobraPHP.
 - Jackson stays transitive and hidden: commons-phpmodels declares it `implementation`; no YAML library is declared here.
 
 ## Developer Instructions
@@ -25,7 +25,7 @@
 - `shell_exec` is a `standard` function, not a language construct; the former hardcoded keyword set listed it and the keyword document does not.
 - Performance tests are excluded by default: `./gradlew test -Pperformance`.
 - Composite root build is the integration check for cobraphp-core; the standalone build (`./gradlew build` in this repository) is the check against the released commons-phpmodels tag.
-- The pin (v0.2.0) carries every HEAD validation and `DocumentSetLoader`; the standalone JitPack build exercises the same guarantees as the root composite.
+- The pin (v0.2.1) carries every HEAD validation, `DocumentSetLoader`, and document-naming set-load errors; the standalone JitPack build exercises the same guarantees as the root composite.
 
 ## Design-Specific
 
@@ -41,3 +41,10 @@
 ### Variadic tails in generated data
 
 - The upstream tag data never stated variadic parameters; the generator marked the last parameter variadic when a declared flow index reached past the parameter list (`sprintf`, `array_merge`, `compact`). Without the mark, commons-phpmodels HEAD rejects the entry for arity.
+
+### Taint document set
+- Source release: vimeo/psalm 5.6.0 (`vendor/vimeo/psalm` of a dataset checkout; version from `vendor/composer/installed.json`). Psalm declares 15 taint kinds; the `ALL_INPUT` group enables 13 (not `user_secret`, `system_secret`).
+- Psalm's sources are code, not data: only `$_GET`, `$_POST`, `$_COOKIE`, `$_REQUEST` are colored (`VariableFetchAnalyzer::taintVariable`); `$_SERVER` and `$_FILES` are not. `@psalm-taint-source input` appears on `Throwable`, `Exception`, and `Error` `getTraceAsString`/`__toString` only.
+- `@psalm-taint-specialize` has no model counterpart and is dropped. The five conditional escapes on `filter_var` become guarded entries on `argument(1)` (257, 258, 259, 519, 520).
+- Method subjects in the set (`mysqli::query`, `mysqli_stmt::prepare`, ...) are absent from `models/` (the registry carries two methods); the set is psalm's data verbatim, not a projection onto the registry.
+- **[commons-phpmodels 0.2.1]** `DocumentSetException(path, detail, cause?)` now wraps a malformed listed document; `VocabularyException` names the document on an undeclared reference. `StubLoader` maps absence to `StubIndexNotFoundException` by recording which path the opener could not resolve.

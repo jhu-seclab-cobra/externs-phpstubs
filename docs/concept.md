@@ -5,34 +5,40 @@
 **Problem Statement**
 PHP static analyses must recognise built-in declarations they never see the
 body of: whether a name is a built-in function, class, method, or constant,
-which PHP extension provides it, what its signature looks like, and what a
-constant's value is. This knowledge is extracted from upstream stub sources
-and is independent of any analysis technique. The model format for stating
-it already exists in commons-phpmodels; what remains is the data itself and
-a registry that serves it.
+which PHP extension provides it, what its signature looks like, what a
+constant's value is, and which built-ins psalm marks as taint sources, sinks,
+and escapes. This knowledge is extracted from upstream sources and is
+independent of any analysis technique. The model format for stating it
+exists in commons-phpmodels; what remains is the data, a registry serving
+the declarations, and a document set serving the taint assertions.
 
 **System Role**
 This library is the generated layer of the Cobra PHP model stack: it owns
-the generated model documents for PHP built-ins, their provenance, and a
-read-only registry that resolves PHP names to model entries. The format,
-decoding, and validation belong to commons-phpmodels.
+the generated model documents for PHP built-ins, their provenance, a
+read-only registry that resolves PHP names to model entries, and the
+generated taint document set ([concept-taint.md](concept-taint.md)). The
+format, decoding, and validation belong to commons-phpmodels.
 
 **Data Flow**
-- **Inputs:** upstream stub sources (offline); generated model documents
-  and one language-construct document (bundled resources).
+- **Inputs:** upstream stub sources and psalm's taint data (offline);
+  generated model documents, one language-construct document, and the
+  taint document set (bundled resources).
 - **Outputs:** model entries keyed by subject, each carrying its
-  extension provenance; PHP-name lookups over them.
+  extension provenance; PHP-name lookups over them; the taint document set
+  as a classpath root consumers load themselves.
 - **Connections:** upstream stubs → extraction → model documents →
-  [commons-phpmodels decode] → [this registry] → consumers (cobraphp-core).
+  [commons-phpmodels decode] → [this registry] → consumers (cobraphp-core);
+  psalm taint data → extraction → taint document set → consumers.
 
 **Scope Boundaries**
 - **Owned:** the generated model documents, the language-construct
-  document, extension provenance, document discovery, the registry, and
+  document, extension provenance, document discovery, the registry,
   PHP-name lookup semantics (unqualified member lookup, constant case
-  over-approximation).
-- **Not Owned:** the model format and its validation (commons-phpmodels);
-  configuration layering and override resolution, taint assertions, branch
-  selection, and compiled artifacts (consumers).
+  over-approximation), and the taint document set in psalm's names.
+- **Not Owned:** the model format, the document-set convention, and their
+  validation (commons-phpmodels); the consumer's category vocabulary, its
+  mapping from psalm's names, configuration layering, branch selection,
+  and compiled artifacts (consumers).
 
 ## 2. Concepts
 
@@ -40,7 +46,8 @@ decoding, and validation belong to commons-phpmodels.
 ```
 Offline (per upstream release):
     phpstorm-stubs, psalm stubs ──extraction──► models/<category>/<extension>.yaml
-                                                models/language.yaml (hand-declared)
+                                                models/language/*.yaml (hand-declared)
+    psalm taint data ───────────extraction──► taint/** (document set)
 
 Runtime:
     models/** ──manifest──► commons-phpmodels decode ──► Stub Registry
@@ -67,8 +74,8 @@ Runtime:
   commons-phpmodels: a kind plus a PHP-native spelling, case-folded per
   kind. The registry keys every entry by its subject, so identity and
   folding are decided once in the format library and never re-derived here.
-- **Scope:** the six declaration kinds this corpus carries; predefined
-  variables are not extracted.
+- **Scope:** the six declaration kinds the registry carries; predefined
+  variables appear only in the taint set.
 - **Relationships:** identifies exactly one Model Entry; the target of
   every lookup.
 
@@ -77,8 +84,8 @@ Runtime:
   commons-phpmodels: documents emitted by an extraction producer, marked
   by a provenance header, never hand-edited. A correction belongs in a
   higher layer of the consumer, not in these files.
-- **Scope:** every document under the models tree except the
-  language-construct document.
+- **Scope:** every generated document under the models tree, and every
+  file of the taint document set.
 - **Relationships:** produced by the Extraction Pipeline; consumed whole by
   the Stub Registry.
 
@@ -134,13 +141,12 @@ Runtime:
   its layout defines Extension Provenance.
 
 - **Name:** Extraction Pipeline
-- **Definition:** The offline producer: parses upstream stub sources and
-  emits model documents directly in the commons-phpmodels format, one per
-  extension, verified against the same decoder consumers use. Runs once
-  per upstream release; its output is committed.
-- **Scope:** development tooling, not a runtime dependency. Replaces the
-  former two-step path (tag documents plus a conversion script); only one
-  representation of the corpus exists.
+- **Definition:** The offline producer: parses upstream sources and emits
+  documents directly in the commons-phpmodels format, verified against the
+  same decoder consumers use. Runs once per upstream release; committed.
+- **Scope:** development tooling, not a runtime dependency; only one
+  representation of the corpus exists. The taint extraction is one script
+  in this repository ([concept-taint.md](concept-taint.md)).
 - **Relationships:** produces the Generated Layer.
 
 ## 3. Contracts & Flow
@@ -154,7 +160,8 @@ Runtime:
 - **With cobraphp-core:** a name lookup returns the model entry with its
   extension provenance, or nothing. Signature fields, constant values, and
   declared propagations are read from the entry as commons-phpmodels
-  types. Taint assertions and layer overrides are never in this library.
+  types. Taint assertions reach the consumer only through the taint
+  document set; layer overrides are never here.
 - **With the Extraction Pipeline:** generated documents are reproducible
   from the same upstream versions; a re-run yields identical files.
 
@@ -188,5 +195,6 @@ Runtime:
   supplying the signature and extension. The two layers meet per subject
   and unit in the consumer, not here.
 
-Software structure: [design.md](design.md). Format semantics:
-commons-phpmodels `docs/model-declarations.md`.
+Taint document set: [concept-taint.md](concept-taint.md). Software
+structure: [design.md](design.md). Format semantics: commons-phpmodels
+`docs/model-declarations.md`.

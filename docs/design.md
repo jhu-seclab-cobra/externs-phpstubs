@@ -8,19 +8,22 @@ or traversal). Concepts: [concept.md](concept.md).
 ## Design Overview
 
 - **Classes:** `StubEntry<S>` (data class), `StubRegistry` (data class),
-  `StubLoader` (object), `PhpStubs` (object)
-- **External types (commons-phpmodels):** `ModelLoader`, `ModelEntry`,
+  `StubLoader` (object), `PhpStubs` (object), `StubResources` (object,
+  [design-taint.md](design-taint.md))
+- **External types (commons-phpmodels):** `DocumentSetLoader`,
+  `DocumentSet`, `Document`, `ResourceOpener`, `ModelEntry`,
   `SubjectModel`, `ModelGenerator`, `ModelSubject` and its seven subtypes,
   `SignatureInfo` and its four subtypes, `ParameterInfo`, `DeclaredType`
 - **Relationships:** `StubEntry` contains one `ModelSubject` subtype and one
   `SubjectModel`; `StubRegistry` contains `StubEntry` maps keyed by subject;
-  `StubLoader` uses `ModelLoader` and builds `StubRegistry`; `PhpStubs`
-  contains one `StubRegistry` and its lookup indexes. All arrows one-way.
+  `StubLoader` uses `DocumentSetLoader` over a `StubResources` opener and
+  builds `StubRegistry`; `PhpStubs` contains one `StubRegistry` and its
+  lookup indexes. All arrows one-way.
 - **Exceptions:** `StubIndexNotFoundException`, `StubIndexInvalidException`
   (both extend `RuntimeException`), raised by `StubLoader`.
 - **Dependency roles:** Data holders: `StubEntry`, `StubRegistry`.
-  Orchestrator: `StubLoader`. Facade: `PhpStubs`. Decoder and validator:
-  commons-phpmodels.
+  Orchestrator: `StubLoader`. Facade: `PhpStubs`. Resource roots and
+  opener: `StubResources`. Decoder and validator: commons-phpmodels.
 
 Package `edu.jhu.cobra.externs.phpstubs`, one module, `explicitApi()`.
 commons-phpmodels is an `api` dependency: its subject and signature types
@@ -62,25 +65,28 @@ map keyed by its subject subtype. Every map is unmodifiable.
 
 ### StubLoader (object)
 
-**Responsibility:** Builds one `StubRegistry` from the documents a manifest
-lists. Owns the extension derivation and the corpus rules; owns no format
-rule (commons-phpmodels decodes and validates every entry).
+**Responsibility:** Builds one `StubRegistry` from the document set a
+manifest lists. Owns the extension derivation and the corpus rules; owns
+no discovery or format rule (commons-phpmodels' `DocumentSetLoader` reads
+the manifest, decodes, and validates every entry).
 
 **Methods:**
-- `loadAll(resourceBase: String = "/models/"): StubRegistry`
-  - **Behavior:** reads `index.txt` under `resourceBase`; decodes each
-    listed document through `ModelLoader.load`; attaches the extension
-    derived from the document's file name (`.yaml` removed, then a trailing
-    `_<digits>` split suffix removed); routes each entry into the map of
-    its subject kind; freezes the maps.
+- `loadAll(resourceBase: String = StubResources.MODELS): StubRegistry`
+  - **Behavior:** loads the set under `resourceBase` through
+    `DocumentSetLoader.load` over `StubResources.opener(resourceBase)`
+    with the empty vocabulary and no mapping; for each returned document,
+    attaches the extension derived from its path (`.yaml` removed, then a
+    trailing `_<digits>` split suffix removed); routes each entry into the
+    map of its subject kind; freezes the maps.
   - **Input:** classpath directory holding `index.txt` and the documents it
     lists, trailing slash optional.
   - **Output:** the frozen registry.
   - **Errors:** `StubIndexNotFoundException` when `index.txt` or a listed
-    document is absent (message names the resource path);
-    `StubIndexInvalidException` on a decode failure (message names the
-    document; cause is the commons-phpmodels `IllegalArgumentException`) or
-    on a corpus rule violation.
+    document is absent (the opener records which path resolved to nothing;
+    message names the full resource path); `StubIndexInvalidException` on
+    any other set-load failure (message names the document; cause is the
+    commons-phpmodels exception: a malformed document, a path listed twice,
+    an undeclared reference) or on a corpus rule violation.
 
 **Corpus rules** (each violation is a `StubIndexInvalidException` naming
 the document, and the subject where one exists):
@@ -165,16 +171,16 @@ one hand-maintained exception and carry no producer header. A keyword
 function declares one optional variadic `mixed` parameter and a `mixed`
 return; a language class declares `classifier: class`.
 
-The Gradle resource task writes `index.txt` for `models/` (main) and
-`models-test/` (test); every other test fixture directory ships its own
-manifest.
+The Gradle resource task writes `index.txt` for `models/` and `taint/`
+(main) and `models-test/` (test); every other test fixture directory ships
+its own manifest. The taint set's layout: [design-taint.md](design-taint.md).
 
 ## Exception / Error Types
 
 | Exception | When raised |
 |-----------|-------------|
 | `StubIndexNotFoundException(resource)` | `index.txt` or a listed document is not on the classpath |
-| `StubIndexInvalidException(reason, cause?)` | A document fails commons-phpmodels decode (cause attached), or a corpus rule is violated |
+| `StubIndexInvalidException(reason, cause?)` | The set load fails for any other reason (commons-phpmodels cause attached), or a corpus rule is violated |
 | `IllegalArgumentException` | A facade lookup name is not a PHP identifier spelling (raised by the commons-phpmodels subject creator) |
 
 ## Validation Rules
@@ -186,4 +192,5 @@ manifest.
 - Duplicate detection compares subjects, so `Exception` and `exception`
   collide (folded kind) while `TRUE` and `true` do not (sensitive kind).
 - `index.txt` lists relative document paths, one per line, sorted; blank
-  lines and `#` comments are skipped.
+  lines and `#` comments are skipped; a path listed twice fails the load
+  (commons-phpmodels rule).
