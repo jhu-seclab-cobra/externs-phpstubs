@@ -6,14 +6,14 @@
 - **[commons-phpmodels]** `ModelEntry` is sealed: `SubjectModel(subject, guard, signature, body)` or `ModelGenerator`; route with an exhaustive `when`.
 - **[commons-phpmodels]** `FunctionSubject.parse(raw)` / `ClassSubject.parse(raw)` / `ConstantSubject.parse(raw)` — strip one leading `\` only, then fold per kind; `IllegalArgumentException` on blank, whitespace, `::`, `$`. No `/` handling — PHP has no such separator.
 - **[commons-phpmodels]** `MethodSubject(owner, name)` / `ClassConstantSubject(owner, name)` — direct constructors for a qualified lookup; `owner` folds, `name` folds for methods only.
-- **[commons-phpmodels]** `ModelSubject.name` is declared on the sealed interface at HEAD but not in v0.1.1 — read identity fields through the concrete subtypes only, so the standalone build compiles against the released tag.
-- **[commons-phpmodels]** `SignatureInfo` subtypes: `CallableSignature(params, returnType)`, `ClassSignature(classifier, parent, interfaces)`, `TypedSignature(type, value)`, `PropertySignature(type, visibility, static)`; `ParameterInfo(name, type, optional, byRef, variadic)`. Field shape identical in v0.1.1 and HEAD; `ClassSignature` construction differs (plain class vs factory) — read only, never construct.
-- **[commons-phpmodels]** Entry-level validation at HEAD (v0.1.1+33): arity against the parameter list unless the last parameter is variadic; by-ref write direction; `void` return with a return propagation; whitespace in identities; YAML aliases. v0.1.1 has none of these — a corpus that loads against v0.1.1 is not proven against HEAD.
+- **[commons-phpmodels]** `ModelSubject.name` is declared on the sealed interface since v0.1.2; identity fields are still read through the concrete subtypes here.
+- **[commons-phpmodels]** `SignatureInfo` subtypes: `CallableSignature(params, returnType)`, `ClassSignature(classifier, parent, interfaces)`, `TypedSignature(type, value)`, `PropertySignature(type, visibility, static)`; `ParameterInfo(name, type, optional, byRef, variadic)`. Field shape identical since v0.1.1; `ClassSignature` is built through its companion factory since v0.1.2 — read only, never construct.
+- **[commons-phpmodels]** Entry-level validation since v0.1.2: arity against the parameter list unless the last parameter is variadic; by-ref write direction; `void` return with a return propagation; whitespace in identities; YAML aliases. v0.1.2 is the released HEAD, so a corpus that loads against the pin is proven against every rule.
 - **[JDK]** `Class.getResourceAsStream(path)` — resolves `index.txt` and documents from the classpath; null when absent → `StubIndexNotFoundException`.
 
 ## Libraries
 
-- com.github.jhu-seclab-cobra:commons-phpmodels:0.1.1 — model format, decoder, validation; `api` scope (its types are the entry surface); alias `cobra-commons-phpmodels` in `gradle/libs.versions.toml`; resolved from JitPack (`https://jitpack.io`, artifact verified present) standalone, substituted by the root composite when built from CobraPHP.
+- com.github.jhu-seclab-cobra:commons-phpmodels:0.1.2 — model format, decoder, validation; `api` scope (its types are the entry surface); alias `cobra-commons-phpmodels` in `gradle/libs.versions.toml`; resolved from JitPack (`https://jitpack.io`, artifact verified present) standalone, substituted by the root composite when built from CobraPHP.
 - Jackson stays transitive and hidden: commons-phpmodels declares it `implementation`; no YAML library is declared here.
 
 ## Developer Instructions
