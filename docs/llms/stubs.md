@@ -79,13 +79,28 @@ Typed accessors (top-level extension properties, non-null by the corpus rules):
 
 ### StubLoader (object)
 
-**`loadAll(resourceBase: String = "/models/"): StubRegistry`** -- Reads `index.txt`, decodes each listed document with `ModelLoader`, attaches the extension, enforces the corpus rules, freezes.
+**`loadAll(resourceBase: String = StubResources.MODELS): StubRegistry`** -- Loads the set through commons-phpmodels `DocumentSetLoader` over `StubResources.opener(resourceBase)`, attaches the extension per document path, enforces the corpus rules, freezes.
+
+### StubResources (object)
+
+**`MODELS: String`** -- `/models/`, the declaration set root.
+
+**`TAINT: String`** -- `/taint/`, the taint set root: `vocabulary.yaml` (psalm's fifteen kinds, color `input`), `policy.yaml` (`input` enables the thirteen input kinds), `sinks.yaml`, `sanitizers.yaml`, `sources.yaml`.
+
+**`opener(root: String): ResourceOpener`** -- Resolves `root + path` on this module's classpath; trailing slash optional; null for an absent path.
+
+```kotlin
+val psalm = DocumentSetLoader.load(StubResources.opener(StubResources.TAINT))
+val mine = DocumentSetLoader.load(StubResources.opener(StubResources.TAINT), myVocabulary, myMapping)
+```
+
+Taint entries carry no signature and exactly one of `sinks`, `sanitizers`, `sources`; `filter_var` appears as five guarded entries (`argument(1)` is 257, 258, 259, 519, 520) escaping `html`. Subjects are spelled as psalm names them (`mysqli::query`, `$_GET`).
 
 ### Exceptions
 
-**`StubIndexNotFoundException`** -- `index.txt` or a listed document is absent from the classpath.
+**`StubIndexNotFoundException`** -- `index.txt` or a listed document is absent from the classpath; the message names the full resource path.
 
-**`StubIndexInvalidException`** -- A document fails commons-phpmodels decode (cause attached, message names the document) or violates a corpus rule: generator entry, variable subject, entry without signature, duplicate subject across documents.
+**`StubIndexInvalidException`** -- The set loader rejects the set (malformed document, path listed twice, undeclared reference; cause attached, message names the document) or an entry violates a corpus rule: generator entry, variable subject, entry without signature, duplicate subject across documents.
 
 **`IllegalArgumentException`** -- A facade lookup name is not a PHP identifier spelling.
 
@@ -96,4 +111,4 @@ Typed accessors (top-level extension properties, non-null by the corpus rules):
 - Language constructs are ordinary entries loaded from `models/language/`; select them by `extension`.
 - Generated documents are never hand-edited; a correction belongs in a higher configuration layer of the consumer.
 - Constant values are strings on `typedSignature.value`; the consumer converts.
-- Taint rules (source/sink/sanitizer) are NOT in this library.
+- Taint rules are not registry entries; they are the `taint/` document set, mounted by the consumer through `DocumentSetLoader` with its own mapping.

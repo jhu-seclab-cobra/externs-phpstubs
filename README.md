@@ -2,11 +2,11 @@
 
 > PHP built-in declaration registry for static analysis.
 
-Lookup of PHP built-in functions, classes, methods, and constants as commons-phpmodels entries with extension provenance.
+Lookup of PHP built-in functions, classes, methods, and constants as commons-phpmodels entries with extension provenance, plus psalm's taint sources, sinks, and escapes as a mountable document set.
 
 [![codecov](https://codecov.io/gh/jhu-seclab-cobra/externs-phpstubs/branch/main/graph/badge.svg)](https://codecov.io/gh/jhu-seclab-cobra/externs-phpstubs)
 ![Kotlin JVM](https://img.shields.io/badge/Kotlin%20JVM-2.0.1%20%7C%20JVM%201.8%2B-blue?logo=kotlin)
-[![Release](https://img.shields.io/badge/release-v0.2.0-blue.svg)](https://github.com/jhu-seclab-cobra/externs-phpstubs/releases/tag/v0.2.0)
+[![Release](https://img.shields.io/badge/release-v0.3.0-blue.svg)](https://github.com/jhu-seclab-cobra/externs-phpstubs/releases/tag/v0.3.0)
 [![last commit](https://img.shields.io/github/last-commit/jhu-seclab-cobra/externs-phpstubs)](https://github.com/jhu-seclab-cobra/externs-phpstubs/commits/main)
 [![](https://jitpack.io/v/jhu-seclab-cobra/externs-phpstubs.svg)](https://jitpack.io/#jhu-seclab-cobra/externs-phpstubs)
 ![Repo Size](https://img.shields.io/github/repo-size/jhu-seclab-cobra/externs-phpstubs)
@@ -20,7 +20,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.jhu-seclab-cobra:externs-phpstubs:0.2.0")
+    implementation("com.github.jhu-seclab-cobra:externs-phpstubs:0.3.0")
 }
 ```
 
@@ -77,14 +77,32 @@ PhpStubs.findConstant("php_int_max", caseSensitive = false)    // folded lookup
 
 **`StubRegistry`** -- the frozen per-kind maps behind the facade, built by `StubLoader.loadAll()`.
 
+**`StubResources`** -- classpath roots of the two shipped document sets, `MODELS` (`/models/`) and `TAINT` (`/taint/`), and `opener(root)` returning a commons-phpmodels `ResourceOpener` over them.
+
+## Taint Document Set
+
+`taint/` ships psalm's taint data in psalm's own names: `vocabulary.yaml` (the fifteen taint kinds and the `input` color), `policy.yaml` (`input` enables psalm's input group), `sinks.yaml`, `sanitizers.yaml`, and `sources.yaml`. Entries carry no signature; a consumer mounts the set through the commons-phpmodels set loader, either under psalm's vocabulary or translated by its own `CategoryMapping`:
+
+```kotlin
+import edu.jhu.cobra.commons.phpmodels.DocumentSetLoader
+import edu.jhu.cobra.externs.phpstubs.StubResources
+
+val psalm = DocumentSetLoader.load(StubResources.opener(StubResources.TAINT))
+val mapped = DocumentSetLoader.load(StubResources.opener(StubResources.TAINT), myVocabulary, myMapping)
+```
+
+The set is regenerated from a psalm checkout by `tools/extract_taint.py --psalm <root> --out externs-phpstubs/src/main/resources/taint`.
+
 ## Background
 
-Model documents derived from [JetBrains/phpstorm-stubs](https://github.com/JetBrains/phpstorm-stubs) (signatures, Apache-2.0) and [vimeo/psalm](https://github.com/vimeo/psalm) (dataflow annotations, MIT), emitted in the [commons-phpmodels](https://github.com/jhu-seclab-cobra/commons-phpmodels) format. Language constructs (`echo`, `isset`, `int`, ...) are declared as data under `models/language/`.
+Model documents derived from [JetBrains/phpstorm-stubs](https://github.com/JetBrains/phpstorm-stubs) (signatures, Apache-2.0) and [vimeo/psalm](https://github.com/vimeo/psalm) (dataflow annotations and taint data, MIT), emitted in the [commons-phpmodels](https://github.com/jhu-seclab-cobra/commons-phpmodels) format. Language constructs (`echo`, `isset`, `int`, ...) are declared as data under `models/language/`.
 
 ## Documentation
 
 - [Concepts](docs/concept.md) -- generated layer over commons-phpmodels, extension provenance, lookup semantics
+- [Taint Concepts](docs/concept-taint.md) -- the taint document set in psalm's names and its extraction
 - [Design](docs/design.md) -- entry, registry, loader, and facade specifications; corpus rules
+- [Taint Design](docs/design-taint.md) -- `StubResources`, taint resource layout, extraction script
 - [Implementation Notes](docs/impl.md) -- commons-phpmodels API findings, developer instructions
 
 ## For Agents
