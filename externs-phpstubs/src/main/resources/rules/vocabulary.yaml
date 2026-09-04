@@ -1,0 +1,7 @@
+# Additions to the generated taint set's vocabulary; the set loads with that vocabulary as context.
+vulnClasses:
+  - name: xpath
+    description: XPath injection
+provenances:
+  - name: external
+    description: Data read from the environment, files, sockets, mail, LDAP, or stored records

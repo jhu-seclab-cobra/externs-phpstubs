@@ -1,0 +1,95 @@
+# Hand-maintained taint set in psalm's names, mounted after the generated taint set.
+# Escapes psalm does not state: per-kind escapes for one category, and value transforms whose
+# output alphabet cannot carry an injection for any kind (casts, digests, hex, base64).
+- subject:
+    function: addslashes
+  sanitizers:
+    - categories: [sql]
+- subject:
+    function: base64_encode
+  sanitizers:
+    - categories: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie, xpath]
+- subject:
+    function: basename
+  sanitizers:
+    - categories: [file]
+- subject:
+    function: bin2hex
+  sanitizers:
+    - categories: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie, xpath]
+- subject:
+    function: boolval
+  sanitizers:
+    - categories: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie, xpath]
+- subject:
+    function: crc32
+  sanitizers:
+    - categories: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie, xpath]
+- subject:
+    function: curl_escape
+  sanitizers:
+    - categories: [html]
+- subject:
+    function: dbx_escape_string
+  sanitizers:
+    - categories: [sql]
+- subject:
+    function: escapeshellarg
+  sanitizers:
+    - categories: [shell]
+- subject:
+    function: escapeshellcmd
+  sanitizers:
+    - categories: [shell]
+- subject:
+    function: floatval
+  sanitizers:
+    - categories: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie, xpath]
+- subject:
+    function: hash
+  sanitizers:
+    - categories: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie, xpath]
+- subject:
+    function: hash_hmac
+  sanitizers:
+    - categories: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie, xpath]
+- subject:
+    function: htmlentities
+  sanitizers:
+    - categories: [html]
+- subject:
+    function: htmlspecialchars
+  sanitizers:
+    - categories: [html]
+- subject:
+    function: ingres_escape_string
+  sanitizers:
+    - categories: [sql]
+- subject:
+    function: intval
+  sanitizers:
+    - categories: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie, xpath]
+- subject:
+    function: md5
+  sanitizers:
+    - categories: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie, xpath]
+- subject:
+    function: number_format
+  sanitizers:
+    - categories: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie, xpath]
+- subject:
+    function: password_hash
+  sanitizers:
+    - categories: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie, xpath]
+- subject:
+    function: rawurlencode
+  sanitizers:
+    - categories: [html]
+- subject:
+    function: sha1
+  sanitizers:
+    - categories: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie, xpath]
+- subject:
+    function: sqlite_escape_string
+  sanitizers:
+    - categories: [sql]

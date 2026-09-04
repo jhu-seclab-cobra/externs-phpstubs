@@ -1,0 +1,5 @@
+# `external` reaches every kind `input` reaches, plus xpath; `input` gains xpath.
+- origin: input
+  enables: [xpath]
+- origin: external
+  enables: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie, xpath]

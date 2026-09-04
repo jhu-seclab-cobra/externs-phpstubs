@@ -1,0 +1,994 @@
+# Hand-maintained taint set in psalm's names, mounted after the generated taint set.
+# Sinks follow Jahanshahi & Egele, "Argus: All your (PHP) Injection-sinks are belong to us"
+# (USENIX Security 2024), Table 5 and the artifact run, plus the curated lists shipped with it;
+# an entry for a subject the taint set already names restates psalm's ports and widens them.
+# Receiver-triggered sinks (methods with no path argument) are not expressible and are omitted.
+- subject:
+    function: array_filter
+  sinks:
+    - port: argument(1)
+      category: callable
+- subject:
+    function: array_map
+  sinks:
+    - port: argument(0)
+      category: callable
+- subject:
+    function: array_reduce
+  sinks:
+    - port: argument(1)
+      category: callable
+- subject:
+    function: array_walk
+  sinks:
+    - port: argument(1)
+      category: callable
+- subject:
+    function: array_walk_recursive
+  sinks:
+    - port: argument(1)
+      category: callable
+- subject:
+    function: assert
+  sinks:
+    - port: argument(0)
+      category: eval
+- subject:
+    function: bzopen
+  sinks:
+    - port: argument(0)
+      category: file
+- subject:
+    method: CachingIterator::offsetGet
+  sinks:
+    - port: argument(0)
+      category: html
+- subject:
+    function: call_user_func
+  sinks:
+    - port: argument(0)
+      category: callable
+- subject:
+    function: call_user_func_array
+  sinks:
+    - port: argument(0)
+      category: callable
+- subject:
+    function: chgrp
+  sinks:
+    - port: argument(0)
+      category: file
+- subject:
+    function: chmod
+  sinks:
+    - port: argument(0)
+      category: file
+- subject:
+    function: class_alias
+  sinks:
+    - port: argument(0)
+      category: html
+    - port: argument(1)
+      category: html
+- subject:
+    method: Closure::bind
+  sinks:
+    - port: argument(2)
+      category: html
+- subject:
+    method: Closure::bindTo
+  sinks:
+    - port: argument(1)
+      category: html
+- subject:
+    function: copy
+  sinks:
+    - port: argument(0)
+      category: unserialize
+    - port: argument(0)
+      category: file
+    - port: argument(1)
+      category: unserialize
+    - port: argument(1)
+      category: file
+- subject:
+    function: cubrid_execute
+  sinks:
+    - port: argument(1)
+      category: sql
+- subject:
+    function: cubrid_prepare
+  sinks:
+    - port: argument(1)
+      category: sql
+- subject:
+    function: db2_exec
+  sinks:
+    - port: argument(1)
+      category: sql
+- subject:
+    function: db2_prepare
+  sinks:
+    - port: argument(1)
+      category: sql
+- subject:
+    function: dbx_query
+  sinks:
+    - port: argument(1)
+      category: sql
+- subject:
+    function: die
+  sinks:
+    - port: argument(0)
+      category: html
+- subject:
+    function: dir
+  sinks:
+    - port: argument(0)
+      category: unserialize
+    - port: argument(0)
+      category: file
+- subject:
+    method: DirectoryIterator::__construct
+  sinks:
+    - port: argument(0)
+      category: unserialize
+    - port: argument(0)
+      category: file
+- subject:
+    function: disk_free_space
+  sinks:
+    - port: argument(0)
+      category: file
+- subject:
+    method: DOMDocument::loadHTMLFile
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    method: DOMDocument::relaxNGValidate
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    method: DOMXPath::evaluate
+  sinks:
+    - port: argument(0)
+      category: xpath
+- subject:
+    method: DOMXPath::query
+  sinks:
+    - port: argument(0)
+      category: xpath
+- subject:
+    function: echo
+  sinks:
+    - port: argument(0)
+      category: html
+- subject:
+    function: eval
+  sinks:
+    - port: argument(0)
+      category: eval
+- subject:
+    function: exif_imagetype
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    function: exif_read_data
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    function: exif_thumbnail
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    function: exit
+  sinks:
+    - port: argument(0)
+      category: html
+- subject:
+    function: fbsql_query
+  sinks:
+    - port: argument(0)
+      category: sql
+- subject:
+    function: file
+  sinks:
+    - port: argument(0)
+      category: unserialize
+    - port: argument(0)
+      category: file
+- subject:
+    function: file_exists
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    function: file_get_contents
+  sinks:
+    - port: argument(0)
+      category: unserialize
+    - port: argument(0)
+      category: file
+- subject:
+    function: fileatime
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    function: filectime
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    function: filegroup
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    function: fileinode
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    function: filemtime
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    function: fileowner
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    function: fileperms
+  sinks:
+    - port: argument(0)
+      category: unserialize
+    - port: argument(0)
+      category: file
+- subject:
+    function: filesize
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    method: FilesystemIterator::__construct
+  sinks:
+    - port: argument(0)
+      category: unserialize
+    - port: argument(0)
+      category: file
+- subject:
+    function: filetype
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    method: finfo::file
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    function: fopen
+  sinks:
+    - port: argument(0)
+      category: unserialize
+    - port: argument(0)
+      category: file
+- subject:
+    function: forward_static_call
+  sinks:
+    - port: argument(0)
+      category: callable
+- subject:
+    function: forward_static_call_array
+  sinks:
+    - port: argument(0)
+      category: callable
+- subject:
+    function: fpassthru
+  sinks:
+    - port: argument(0)
+      category: html
+- subject:
+    function: fsockopen
+  sinks:
+    - port: argument(0)
+      category: ssrf
+- subject:
+    function: ftp_nb_put
+  sinks:
+    - port: argument(2)
+      category: unserialize
+- subject:
+    function: ftp_put
+  sinks:
+    - port: argument(2)
+      category: unserialize
+- subject:
+    function: get_meta_tags
+  sinks:
+    - port: argument(0)
+      category: unserialize
+    - port: argument(0)
+      category: ssrf
+- subject:
+    function: getimagesize
+  sinks:
+    - port: argument(0)
+      category: unserialize
+    - port: argument(0)
+      category: ssrf
+- subject:
+    function: glob
+  sinks:
+    - port: argument(0)
+      category: file
+- subject:
+    function: gzfile
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    function: gzopen
+  sinks:
+    - port: argument(0)
+      category: unserialize
+    - port: argument(0)
+      category: file
+- subject:
+    function: gzpassthru
+  sinks:
+    - port: argument(0)
+      category: html
+- subject:
+    function: hash_file
+  sinks:
+    - port: argument(1)
+      category: unserialize
+- subject:
+    function: hash_hmac_file
+  sinks:
+    - port: argument(1)
+      category: unserialize
+- subject:
+    function: hash_update_file
+  sinks:
+    - port: argument(1)
+      category: unserialize
+- subject:
+    function: http_get
+  sinks:
+    - port: argument(0)
+      category: ssrf
+- subject:
+    function: http_post_data
+  sinks:
+    - port: argument(0)
+      category: ssrf
+- subject:
+    function: ibase_prepare
+  sinks:
+    - port: argument(1)
+      category: sql
+- subject:
+    function: ibase_query
+  sinks:
+    - port: argument(1)
+      category: sql
+- subject:
+    function: imagecreatefromgd2
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    function: imagecreatefromgd2part
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    function: imagecreatefromgif
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    function: imagecreatefromjpeg
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    function: imagecreatefrompng
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    function: imagecreatefromwbmp
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    function: imagecreatefromxbm
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    function: imagecreatefromxpm
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    function: imageloadfont
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    function: include
+  sinks:
+    - port: argument(0)
+      category: include
+- subject:
+    function: include_once
+  sinks:
+    - port: argument(0)
+      category: include
+- subject:
+    function: ingres_prepare
+  sinks:
+    - port: argument(1)
+      category: sql
+- subject:
+    function: ingres_query
+  sinks:
+    - port: argument(1)
+      category: sql
+- subject:
+    function: is_dir
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    function: is_executable
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    function: is_file
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    function: is_link
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    function: is_readable
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    function: is_writable
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    function: is_writeable
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    function: iterator_apply
+  sinks:
+    - port: argument(1)
+      category: callable
+- subject:
+    function: ldap_add
+  sinks:
+    - port: argument(1)
+      category: ldap
+    - port: argument(2)
+      category: ldap
+- subject:
+    function: ldap_bind
+  sinks:
+    - port: argument(1)
+      category: ldap
+- subject:
+    function: ldap_bind_ext
+  sinks:
+    - port: argument(1)
+      category: ldap
+- subject:
+    function: ldap_compare
+  sinks:
+    - port: argument(1)
+      category: ldap
+    - port: argument(2)
+      category: ldap
+    - port: argument(3)
+      category: ldap
+- subject:
+    function: ldap_delete
+  sinks:
+    - port: argument(1)
+      category: ldap
+- subject:
+    function: ldap_list
+  sinks:
+    - port: argument(1)
+      category: ldap
+    - port: argument(2)
+      category: ldap
+- subject:
+    function: ldap_mod_add
+  sinks:
+    - port: argument(1)
+      category: ldap
+    - port: argument(2)
+      category: ldap
+- subject:
+    function: ldap_mod_del
+  sinks:
+    - port: argument(1)
+      category: ldap
+    - port: argument(2)
+      category: ldap
+- subject:
+    function: ldap_mod_replace
+  sinks:
+    - port: argument(1)
+      category: ldap
+    - port: argument(2)
+      category: ldap
+- subject:
+    function: ldap_modify
+  sinks:
+    - port: argument(1)
+      category: ldap
+    - port: argument(2)
+      category: ldap
+- subject:
+    function: ldap_read
+  sinks:
+    - port: argument(1)
+      category: ldap
+    - port: argument(2)
+      category: ldap
+- subject:
+    function: ldap_rename
+  sinks:
+    - port: argument(1)
+      category: ldap
+    - port: argument(2)
+      category: ldap
+    - port: argument(3)
+      category: ldap
+- subject:
+    function: lstat
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    function: mail
+  sinks:
+    - port: argument(4)
+      category: shell
+- subject:
+    method: maxdb::query
+  sinks:
+    - port: argument(0)
+      category: sql
+- subject:
+    function: maxdb_query
+  sinks:
+    - port: argument(1)
+      category: sql
+- subject:
+    function: mb_ereg_replace
+  sinks:
+    - port: argument(1)
+      category: eval
+- subject:
+    function: mb_eregi_replace
+  sinks:
+    - port: argument(1)
+      category: eval
+- subject:
+    function: mb_send_mail
+  sinks:
+    - port: argument(4)
+      category: shell
+- subject:
+    function: md5_file
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    function: mime_content_type
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    function: msql_query
+  sinks:
+    - port: argument(0)
+      category: sql
+- subject:
+    function: mssql_query
+  sinks:
+    - port: argument(0)
+      category: sql
+- subject:
+    function: mysql_db_query
+  sinks:
+    - port: argument(1)
+      category: sql
+- subject:
+    function: mysql_query
+  sinks:
+    - port: argument(0)
+      category: sql
+- subject:
+    function: mysql_unbuffered_query
+  sinks:
+    - port: argument(0)
+      category: sql
+- subject:
+    function: ob_start
+  sinks:
+    - port: argument(0)
+      category: callable
+- subject:
+    function: oci_parse
+  sinks:
+    - port: argument(1)
+      category: sql
+- subject:
+    function: odbc_exec
+  sinks:
+    - port: argument(1)
+      category: sql
+- subject:
+    function: odbc_prepare
+  sinks:
+    - port: argument(1)
+      category: sql
+- subject:
+    function: odbc_result_all
+  sinks:
+    - port: argument(0)
+      category: html
+- subject:
+    function: opendir
+  sinks:
+    - port: argument(0)
+      category: unserialize
+    - port: argument(0)
+      category: file
+- subject:
+    function: pfsockopen
+  sinks:
+    - port: argument(0)
+      category: ssrf
+- subject:
+    function: pg_lo_read_all
+  sinks:
+    - port: argument(0)
+      category: html
+- subject:
+    function: pg_loreadall
+  sinks:
+    - port: argument(0)
+      category: html
+- subject:
+    method: Phar::__construct
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    method: Phar::addFile
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    method: Phar::buildFromDirectory
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    method: Phar::loadPhar
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    method: Phar::unlinkArchive
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    method: PharData::loadPhar
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    method: PharData::unlinkArchive
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    method: PharFileInfo::__construct
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    function: preg_replace
+  sinks:
+    - port: argument(1)
+      category: eval
+- subject:
+    function: preg_replace_callback
+  sinks:
+    - port: argument(1)
+      category: callable
+- subject:
+    function: preg_replace_callback_array
+  sinks:
+    - port: argument(0)
+      category: callable
+- subject:
+    function: print
+  sinks:
+    - port: argument(0)
+      category: html
+- subject:
+    function: read_exif_data
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    function: readfile
+  sinks:
+    - port: argument(0)
+      category: html
+    - port: argument(0)
+      category: unserialize
+    - port: argument(0)
+      category: ssrf
+    - port: argument(0)
+      category: file
+- subject:
+    function: readgzfile
+  sinks:
+    - port: argument(0)
+      category: html
+    - port: argument(0)
+      category: unserialize
+- subject:
+    function: realpath
+  sinks:
+    - port: argument(0)
+      category: file
+- subject:
+    method: RecursiveCachingIterator::offsetGet
+  sinks:
+    - port: argument(0)
+      category: html
+- subject:
+    method: RecursiveDirectoryIterator::__construct
+  sinks:
+    - port: argument(0)
+      category: unserialize
+    - port: argument(0)
+      category: file
+- subject:
+    function: register_shutdown_function
+  sinks:
+    - port: argument(0)
+      category: callable
+- subject:
+    function: register_tick_function
+  sinks:
+    - port: argument(0)
+      category: callable
+- subject:
+    function: require
+  sinks:
+    - port: argument(0)
+      category: include
+- subject:
+    function: require_once
+  sinks:
+    - port: argument(0)
+      category: include
+- subject:
+    function: scandir
+  sinks:
+    - port: argument(0)
+      category: unserialize
+    - port: argument(0)
+      category: file
+- subject:
+    function: set_error_handler
+  sinks:
+    - port: argument(0)
+      category: callable
+- subject:
+    function: set_exception_handler
+  sinks:
+    - port: argument(0)
+      category: callable
+- subject:
+    function: setcookie
+  sinks:
+    - port: argument(0)
+      category: header
+    - port: argument(0)
+      category: cookie
+    - port: argument(1)
+      category: header
+    - port: argument(1)
+      category: cookie
+- subject:
+    function: setrawcookie
+  sinks:
+    - port: argument(0)
+      category: header
+    - port: argument(0)
+      category: cookie
+    - port: argument(1)
+      category: header
+    - port: argument(1)
+      category: cookie
+- subject:
+    function: sha1_file
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    function: simplexml_load_file
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    method: SimpleXMLElement::xpath
+  sinks:
+    - port: argument(0)
+      category: xpath
+- subject:
+    function: spl_autoload_register
+  sinks:
+    - port: argument(0)
+      category: callable
+- subject:
+    method: SplFileInfo::__construct
+  sinks:
+    - port: argument(0)
+      category: unserialize
+    - port: argument(0)
+      category: file
+- subject:
+    method: SplFileObject::__construct
+  sinks:
+    - port: argument(0)
+      category: unserialize
+    - port: argument(0)
+      category: file
+- subject:
+    method: SQLite3::exec
+  sinks:
+    - port: argument(0)
+      category: sql
+- subject:
+    method: SQLite3::prepare
+  sinks:
+    - port: argument(0)
+      category: sql
+- subject:
+    method: SQLite3::query
+  sinks:
+    - port: argument(0)
+      category: sql
+- subject:
+    method: SQLite3::querySingle
+  sinks:
+    - port: argument(0)
+      category: sql
+- subject:
+    function: sqlite_array_query
+  sinks:
+    - port: argument(1)
+      category: sql
+- subject:
+    function: sqlite_exec
+  sinks:
+    - port: argument(1)
+      category: sql
+- subject:
+    function: sqlite_query
+  sinks:
+    - port: argument(1)
+      category: sql
+- subject:
+    function: sqlite_single_query
+  sinks:
+    - port: argument(1)
+      category: sql
+- subject:
+    function: sqlite_unbuffered_query
+  sinks:
+    - port: argument(1)
+      category: sql
+- subject:
+    function: sqlsrv_prepare
+  sinks:
+    - port: argument(1)
+      category: sql
+- subject:
+    function: sqlsrv_query
+  sinks:
+    - port: argument(1)
+      category: sql
+- subject:
+    function: stat
+  sinks:
+    - port: argument(0)
+      category: unserialize
+- subject:
+    function: stream_socket_client
+  sinks:
+    - port: argument(0)
+      category: ssrf
+- subject:
+    function: sybase_query
+  sinks:
+    - port: argument(0)
+      category: sql
+- subject:
+    function: touch
+  sinks:
+    - port: argument(0)
+      category: unserialize
+    - port: argument(0)
+      category: file
+- subject:
+    function: trigger_error
+  sinks:
+    - port: argument(0)
+      category: html
+- subject:
+    function: uasort
+  sinks:
+    - port: argument(1)
+      category: callable
+- subject:
+    function: uksort
+  sinks:
+    - port: argument(1)
+      category: callable
+- subject:
+    function: unlink
+  sinks:
+    - port: argument(0)
+      category: unserialize
+    - port: argument(0)
+      category: file
+- subject:
+    function: user_error
+  sinks:
+    - port: argument(0)
+      category: html
+- subject:
+    function: usort
+  sinks:
+    - port: argument(1)
+      category: callable
+- subject:
+    function: virtual
+  sinks:
+    - port: argument(0)
+      category: include

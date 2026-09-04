@@ -14,5 +14,7 @@ categories:
   header: ignore
   user_secret: ignore
   system_secret: ignore
+  xpath: xpathi
 provenances:
   input: user-input
+  external: external-input

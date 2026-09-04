@@ -1,0 +1,263 @@
+# Hand-maintained taint set in psalm's names, mounted after the generated taint set.
+# `input` colors request-controlled data psalm does not color; `external` colors data read from
+# the environment, files, sockets, mail, LDAP, or stored records (declared in vocabulary.yaml).
+- subject:
+    variable: $_ENV
+  sources:
+    - provenance: [external]
+- subject:
+    variable: $_FILES
+  sources:
+    - provenance: [input]
+- subject:
+    variable: $_SERVER
+  sources:
+    - provenance: [input]
+- subject:
+    variable: $_SESSION
+  sources:
+    - provenance: [external]
+- subject:
+    variable: $argv
+  sources:
+    - provenance: [external]
+- subject:
+    function: apache_getenv
+  sources:
+    - provenance: [external]
+- subject:
+    function: apache_request_headers
+  sources:
+    - provenance: [input]
+- subject:
+    function: curl_exec
+  sources:
+    - provenance: [external]
+- subject:
+    function: curl_multi_getcontent
+  sources:
+    - provenance: [external]
+- subject:
+    function: fgetc
+  sources:
+    - provenance: [external]
+- subject:
+    function: fgetcsv
+  sources:
+    - provenance: [external]
+- subject:
+    function: fgets
+  sources:
+    - provenance: [external]
+- subject:
+    function: file
+  sources:
+    - provenance: [external]
+- subject:
+    function: file_get_contents
+  sources:
+    - provenance: [external]
+- subject:
+    function: filter_input
+  sources:
+    - provenance: [input]
+- subject:
+    function: filter_input_array
+  sources:
+    - provenance: [input]
+- subject:
+    function: fread
+  sources:
+    - provenance: [external]
+- subject:
+    function: fscanf
+  sources:
+    - provenance: [external]
+- subject:
+    function: getallheaders
+  sources:
+    - provenance: [input]
+- subject:
+    function: getenv
+  sources:
+    - provenance: [external]
+- subject:
+    function: getopt
+  sources:
+    - provenance: [external]
+- subject:
+    function: gzfile
+  sources:
+    - provenance: [external]
+- subject:
+    function: gzgets
+  sources:
+    - provenance: [external]
+- subject:
+    function: gzread
+  sources:
+    - provenance: [external]
+- subject:
+    function: http_get_request_body
+  sources:
+    - provenance: [input]
+- subject:
+    function: http_get_request_body_stream
+  sources:
+    - provenance: [input]
+- subject:
+    function: http_get_request_headers
+  sources:
+    - provenance: [input]
+- subject:
+    function: imap_body
+  sources:
+    - provenance: [external]
+- subject:
+    function: imap_fetchbody
+  sources:
+    - provenance: [external]
+- subject:
+    function: imap_fetchheader
+  sources:
+    - provenance: [external]
+- subject:
+    function: imap_fetchmime
+  sources:
+    - provenance: [external]
+- subject:
+    function: imap_fetchtext
+  sources:
+    - provenance: [external]
+- subject:
+    function: ldap_get_attributes
+  sources:
+    - provenance: [external]
+- subject:
+    function: ldap_get_entries
+  sources:
+    - provenance: [external]
+- subject:
+    function: ldap_get_values
+  sources:
+    - provenance: [external]
+- subject:
+    function: mysqli_fetch_all
+  sources:
+    - provenance: [external]
+- subject:
+    function: mysqli_fetch_array
+  sources:
+    - provenance: [external]
+- subject:
+    function: mysqli_fetch_assoc
+  sources:
+    - provenance: [external]
+- subject:
+    function: mysqli_fetch_object
+  sources:
+    - provenance: [external]
+- subject:
+    function: mysqli_fetch_row
+  sources:
+    - provenance: [external]
+- subject:
+    method: mysqli_result::fetch_all
+  sources:
+    - provenance: [external]
+- subject:
+    method: mysqli_result::fetch_array
+  sources:
+    - provenance: [external]
+- subject:
+    method: mysqli_result::fetch_assoc
+  sources:
+    - provenance: [external]
+- subject:
+    method: mysqli_result::fetch_object
+  sources:
+    - provenance: [external]
+- subject:
+    method: mysqli_result::fetch_row
+  sources:
+    - provenance: [external]
+- subject:
+    method: PDOStatement::fetch
+  sources:
+    - provenance: [external]
+- subject:
+    method: PDOStatement::fetchAll
+  sources:
+    - provenance: [external]
+- subject:
+    method: PDOStatement::fetchColumn
+  sources:
+    - provenance: [external]
+- subject:
+    method: PDOStatement::fetchObject
+  sources:
+    - provenance: [external]
+- subject:
+    function: pg_fetch_all
+  sources:
+    - provenance: [external]
+- subject:
+    function: pg_fetch_array
+  sources:
+    - provenance: [external]
+- subject:
+    function: pg_fetch_assoc
+  sources:
+    - provenance: [external]
+- subject:
+    function: pg_fetch_object
+  sources:
+    - provenance: [external]
+- subject:
+    function: pg_fetch_result
+  sources:
+    - provenance: [external]
+- subject:
+    function: pg_fetch_row
+  sources:
+    - provenance: [external]
+- subject:
+    function: readline
+  sources:
+    - provenance: [external]
+- subject:
+    function: session_id
+  sources:
+    - provenance: [input]
+- subject:
+    function: socket_read
+  sources:
+    - provenance: [external]
+- subject:
+    function: socket_recv
+  sources:
+    - provenance: [external]
+- subject:
+    function: socket_recvfrom
+  sources:
+    - provenance: [external]
+- subject:
+    function: socket_recvmsg
+  sources:
+    - provenance: [external]
+- subject:
+    method: SQLite3Result::fetchArray
+  sources:
+    - provenance: [external]
+- subject:
+    function: stream_get_contents
+  sources:
+    - provenance: [external]
+- subject:
+    function: stream_get_line
+  sources:
+    - provenance: [external]
+- subject:
+    function: stream_socket_recvfrom
+  sources:
+    - provenance: [external]

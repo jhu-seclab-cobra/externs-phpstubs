@@ -3,6 +3,10 @@ vulnClasses:
     description: SQL injection
   - name: xss
     description: Cross-site scripting
+  - name: xpathi
+    description: XPath injection
 provenances:
   - name: user-input
     description: Attacker-controlled input
+  - name: external-input
+    description: Data read from outside the request

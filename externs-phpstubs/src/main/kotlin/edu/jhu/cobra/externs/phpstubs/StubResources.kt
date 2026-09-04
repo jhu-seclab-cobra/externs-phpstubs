@@ -10,6 +10,9 @@ public object StubResources {
     /** Root of the taint set: sinks, sanitizers, and sources in psalm's names. */
     public const val TAINT: String = "/taint/"
 
+    /** Root of the hand-maintained rules set: taint assertions beyond psalm's, in psalm's names plus its own additions. */
+    public const val RULES: String = "/rules/"
+
     /**
      * Resolves paths relative to [root] on this module's classpath.
      *
