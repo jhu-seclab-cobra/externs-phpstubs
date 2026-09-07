@@ -1,0 +1,20 @@
+# Hand-maintained value rules set: value semantics the generated declarations lack or state wrongly.
+# Runtime I/O boundary (PHP manual: Info, Readline, Filter, Network, Error handling).
+# An entry whose unit differs from the generated one carries the PHP manual reason above it.
+
+- subject: {function: filter_input}
+  returns: any
+- subject: {function: filter_var}
+  returns: any
+  propagation: [{from: argument(0), to: return}]
+# PHP manual: the result is the environment value; name only selects the variable.
+- subject: {function: getenv}
+  returns: str
+# PHP manual: returns void; the header string is sent, never returned.
+- subject: {function: header}
+  returns: any
+# PHP manual: the result is the line the user typed; prompt is only displayed.
+- subject: {function: readline}
+  returns: str
+- subject: {function: trigger_error}
+  returns: bool

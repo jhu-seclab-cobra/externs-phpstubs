@@ -1,0 +1,17 @@
+# Hand-maintained value rules set: value semantics the generated declarations lack or state wrongly.
+# Arrays (PHP manual: Arrays).
+# An entry whose unit differs from the generated one carries the PHP manual reason above it.
+
+- subject: {function: array_key_exists}
+  returns: bool
+  propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]
+# PHP manual: the result holds the callback's return values, so callback and array both determine it.
+- subject: {function: array_map}
+  returns: any
+  propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]
+- subject: {function: count}
+  returns: num
+  propagation: [{from: argument(0), to: return}]
+- subject: {function: in_array}
+  returns: bool
+  propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]

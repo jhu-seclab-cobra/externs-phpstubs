@@ -1,0 +1,16 @@
+# Hand-maintained value rules set: value semantics the generated declarations lack or state wrongly.
+# Filesystem (PHP manual: Filesystem).
+# An entry whose unit differs from the generated one carries the PHP manual reason above it.
+
+- subject: {function: basename}
+  returns: str
+  propagation: [{from: argument(0), to: return}]
+- subject: {function: fgets}
+  returns: str
+- subject: {function: file_exists}
+  returns: bool
+  propagation: [{from: argument(0), to: return}]
+- subject: {function: file_get_contents}
+  returns: str
+- subject: {function: fread}
+  returns: str

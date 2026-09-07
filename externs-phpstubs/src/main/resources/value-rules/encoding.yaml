@@ -1,0 +1,7 @@
+# Hand-maintained value rules set: value semantics the generated declarations lack or state wrongly.
+# Data encoding (PHP manual: URLs).
+# An entry whose unit differs from the generated one carries the PHP manual reason above it.
+
+- subject: {function: urlencode}
+  returns: str
+  propagation: [{from: argument(0), to: return}]

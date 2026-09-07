@@ -10,21 +10,22 @@ constant's value is, and which built-ins psalm marks as taint sources, sinks,
 and escapes. This knowledge is extracted from upstream sources and is
 independent of any analysis technique. The model format for stating it
 exists in commons-phpmodels; what remains is the data, a registry serving
-the declarations, and two document sets serving the taint assertions.
+the declarations, and document sets serving the taint and value assertions.
 
 **System Role**
 This library is the generated layer of the Cobra PHP model stack: it owns
 the generated model documents for PHP built-ins, their provenance, a
-read-only registry that resolves PHP names to model entries, and two taint
-document sets ([concept-taint.md](concept-taint.md), [concept-taint-rules.md](concept-taint-rules.md)).
+read-only registry that resolves PHP names to model entries, two taint
+document sets ([concept-taint.md](concept-taint.md), [concept-taint-rules.md](concept-taint-rules.md)),
+and a value rules set ([concept-value-rules.md](concept-value-rules.md)).
 The format, decoding, and validation belong to commons-phpmodels.
 
 **Data Flow**
 - **Inputs:** upstream stub sources, psalm's taint data, and the Argus
-  lists (offline); model documents and two taint sets (bundled resources).
+  lists (offline); model documents and three document sets (bundled).
 - **Outputs:** model entries keyed by subject, each carrying its
-  extension provenance; PHP-name lookups over them; the taint document set
-  as a classpath root consumers load themselves.
+  extension provenance; PHP-name lookups over them; the document sets as
+  classpath roots consumers load themselves.
 - **Connections:** upstream stubs → extraction → model documents →
   [commons-phpmodels decode] → [this registry] → consumers (cobraphp-core);
   psalm taint data → extraction, Argus lists → review → document sets → consumers.
@@ -33,10 +34,11 @@ The format, decoding, and validation belong to commons-phpmodels.
 - **Owned:** the generated model documents, the language-construct
   document, extension provenance, document discovery, the registry,
   PHP-name lookup semantics (unqualified member lookup, constant case
-  over-approximation), and the taint document set in psalm's names.
+  over-approximation), the taint sets in psalm's names, the value rules
+  set, and every shipped set's provenance.
 - **Not Owned:** the model format, the document-set convention, and their
   validation (commons-phpmodels); the consumer's category vocabulary, its
-  mapping from psalm's names, configuration layering, branch selection,
+  mapping from psalm's names, precedence and layering, branch selection,
   and compiled artifacts (consumers).
 
 ## 2. Concepts
@@ -48,6 +50,7 @@ Offline (per upstream release):
                                                 models/language/*.yaml (hand-declared)
     psalm taint data ───────────extraction──► taint/** (document set)
     Argus sink lists ───────────review──────► taint-rules/** (document set)
+    reviewed value semantics ───review──────► value-rules/** (document set)
 
 Runtime:
     models/** ──manifest──► commons-phpmodels decode ──► Stub Registry
@@ -81,9 +84,9 @@ Runtime:
 
 - **Name:** Generated Layer
 - **Definition:** The lowest configuration layer of a consumer, as named in
-  commons-phpmodels: documents emitted by an extraction producer, marked
-  by a provenance header, never hand-edited. A correction belongs in a
-  higher layer of the consumer, not in these files.
+  commons-phpmodels: documents emitted by an extraction producer, whose set
+  provenance declares them generated, never hand-edited. A correction
+  belongs in one of this library's hand-maintained sets, not in these files.
 - **Scope:** every generated document under the models tree, and every
   file of the taint document set.
 - **Relationships:** produced by the Extraction Pipeline; consumed whole by
@@ -160,8 +163,8 @@ Runtime:
 - **With cobraphp-core:** a name lookup returns the model entry with its
   extension provenance, or nothing. Signature fields, constant values, and
   declared propagations are read from the entry as commons-phpmodels
-  types. Taint assertions reach the consumer only through the taint
-  document set; layer overrides are never here.
+  types. Taint and value assertions reach the consumer only through the
+  document sets, each with its provenance; the fold is never here.
 - **With the Extraction Pipeline:** generated documents are reproducible
   from the same upstream versions; a re-run yields identical files.
 
@@ -183,18 +186,15 @@ Runtime:
 - **Typical:** an analysis meets `substr($s, 1)`. The registry resolves the
   function subject, returns the entry with extension `standard`, its
   signature, and the declared flow from the first argument to the result.
-
 - **Boundary:** a generated document carries a union return type. The
   format rejects it at decode, the load fails naming the document, and the
   fix is in the Extraction Pipeline, which simplifies the upstream type
   before emitting — never a hand edit of the generated file.
-
 - **Interaction:** cobraphp-core mounts the whole registry as its generated
-  layer beneath its hand-written rule layers. A hand-written entry for
-  `htmlspecialchars` adds a sanitizer section; the registry's entry keeps
-  supplying the signature and extension. The two layers meet per subject
-  and unit in the consumer, not here.
+  layer beneath this library's hand-maintained sets. The value rules entry
+  for `strlen` supplies the unit; the registry's entry keeps supplying the
+  signature and extension. The layers meet per subject and unit in the
+  consumer, not here.
 
-Taint sets: [concept-taint.md](concept-taint.md), [concept-taint-rules.md](concept-taint-rules.md).
-Software structure: [design.md](design.md). Format semantics: commons-phpmodels
-`docs/model-declarations.md`.
+Taint sets: [concept-taint.md](concept-taint.md), [concept-taint-rules.md](concept-taint-rules.md). Value rules: [concept-value-rules.md](concept-value-rules.md).
+Software structure: [design.md](design.md). Format semantics: commons-phpmodels `docs/model-declarations.md`.

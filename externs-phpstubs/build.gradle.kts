@@ -50,18 +50,23 @@ tasks.test {
 // One index-generation action for both resource tasks; the map names each task's document-set directories.
 // Inline lambda (not a script function) keeps the action configuration-cache serializable.
 val documentSetDirNames =
-    mapOf("processResources" to listOf("models", "taint", "taint-rules"), "processTestResources" to listOf("models-test"))
+    mapOf(
+        "processResources" to listOf("models", "taint", "taint-rules", "value-rules"),
+        "processTestResources" to listOf("models-test"),
+    )
 
 tasks.withType<ProcessResources>().configureEach {
     val setDirNames = documentSetDirNames[name] ?: return@configureEach
     doLast {
+        // The set-level documents the loader reads by fixed name; the manifest lists model documents only.
+        val unlistedSetFiles = setOf("vocabulary.yaml", "policy.yaml", "provenance.yaml")
         for (setDirName in setDirNames) {
             val setDir = destinationDir.resolve(setDirName)
             if (!setDir.isDirectory) continue
             val yamlFiles =
                 setDir
                     .walkTopDown()
-                    .filter { it.extension == "yaml" && it.name != "vocabulary.yaml" && it.name != "policy.yaml" }
+                    .filter { it.extension == "yaml" && it.name !in unlistedSetFiles }
                     .map { it.relativeTo(setDir).path }
                     .sorted()
                     .toList()

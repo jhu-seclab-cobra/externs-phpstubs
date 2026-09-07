@@ -1,0 +1,49 @@
+# Hand-maintained value rules set: value semantics the generated declarations lack or state wrongly.
+# Program and code execution (PHP manual: Program execution; eval language construct).
+# An entry whose unit differs from the generated one carries the PHP manual reason above it.
+
+- subject: {function: escapeshellarg}
+  returns: str
+  propagation: [{from: argument(0), to: return}]
+- subject: {function: escapeshellcmd}
+  returns: str
+  propagation: [{from: argument(0), to: return}]
+# PHP manual: the result is the value returned by the evaluated code.
+- subject: {function: eval}
+  returns: any
+  propagation: [{from: argument(0), to: return}]
+# PHP manual: returns the last line of the command output, or false.
+- subject: {function: exec}
+  returns: any
+  propagation: [{from: argument(0), to: return}]
+# PHP manual: returns null on success and false on failure.
+- subject: {function: passthru}
+  returns: any
+  propagation: [{from: argument(0), to: return}]
+# PHP manual: returns the termination status of the process, an int.
+- subject: {function: proc_close}
+  returns: num
+  propagation: [{from: argument(0), to: return}]
+- subject: {function: proc_get_status}
+  returns: any
+  propagation: [{from: argument(0), to: return}]
+# PHP manual: returns bool.
+- subject: {function: proc_nice}
+  returns: bool
+  propagation: [{from: argument(0), to: return}]
+# PHP manual: returns a process resource, or false.
+- subject: {function: proc_open}
+  returns: any
+  propagation: [{from: argument(0), to: return}]
+# PHP manual: returns bool.
+- subject: {function: proc_terminate}
+  returns: bool
+  propagation: [{from: argument(0), to: return}]
+# PHP manual: returns the command output, null when it produced none, or false.
+- subject: {function: shell_exec}
+  returns: any
+  propagation: [{from: argument(0), to: return}]
+# PHP manual: returns the last line of the command output, or false.
+- subject: {function: system}
+  returns: any
+  propagation: [{from: argument(0), to: return}]

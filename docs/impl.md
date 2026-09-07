@@ -9,11 +9,12 @@
 - **[commons-phpmodels]** `ModelSubject.name` is declared on the sealed interface since v0.1.2; identity fields are still read through the concrete subtypes here.
 - **[commons-phpmodels]** `SignatureInfo` subtypes: `CallableSignature(params, returnType)`, `ClassSignature(classifier, parent, interfaces)`, `TypedSignature(type, value)`, `PropertySignature(type, visibility, static)`; `ParameterInfo(name, type, optional, byRef, variadic)`. Field shape identical since v0.1.1; `ClassSignature` is built through its companion factory since v0.1.2 — read only, never construct.
 - **[commons-phpmodels]** Entry-level validation since v0.1.2: arity against the parameter list unless the last parameter is variadic; by-ref write direction; `void` return with a return propagation; whitespace in identities; YAML aliases. v0.2.0 is the released HEAD, so a corpus that loads against the pin is proven against every rule.
+- **[commons-phpmodels 0.3.0]** `DocumentSet.provenance: SetProvenance?` — `producer: String`, `verification: Verification` (`GENERATED`, `MANUAL`), read from the set's `provenance.yaml`; null when the file is absent. `Precedence.DEFAULT` ranks `MANUAL` above `GENERATED`; the fold is the consumer's.
 - **[JDK]** `Class.getResourceAsStream(path)` — resolves `index.txt` and documents from the classpath; null when absent → `StubIndexNotFoundException`.
 
 ## Libraries
 
-- com.github.jhu-seclab-cobra:commons-phpmodels:0.2.1 — model format, decoder, validation; `api` scope (its types are the entry surface); alias `cobra-commons-phpmodels` in `gradle/libs.versions.toml`; resolved from JitPack (`https://jitpack.io`, artifact verified present) standalone, substituted by the root composite when built from CobraPHP.
+- com.github.jhu-seclab-cobra:commons-phpmodels:0.3.0 — model format, decoder, validation; `api` scope (its types are the entry surface); alias `cobra-commons-phpmodels` in `gradle/libs.versions.toml`; resolved from JitPack (`https://jitpack.io`, artifact verified present) standalone, substituted by the root composite when built from CobraPHP.
 - Jackson stays transitive and hidden: commons-phpmodels declares it `implementation`; no YAML library is declared here.
 
 ## Developer Instructions
@@ -25,7 +26,7 @@
 - `shell_exec` is a `standard` function, not a language construct; the former hardcoded keyword set listed it and the keyword document does not.
 - Performance tests are excluded by default: `./gradlew test -Pperformance`.
 - Composite root build is the integration check for cobraphp-core; the standalone build (`./gradlew build` in this repository) is the check against the released commons-phpmodels tag.
-- The pin (v0.2.1) carries every HEAD validation, `DocumentSetLoader`, and document-naming set-load errors; the standalone JitPack build exercises the same guarantees as the root composite.
+- The pin (v0.3.0) carries every HEAD validation, `DocumentSetLoader`, set provenance, and document-naming set-load errors; the standalone JitPack build exercises the same guarantees as the root composite once the tag is published.
 
 ## Design-Specific
 
@@ -49,3 +50,15 @@
 - Method subjects in the set (`mysqli::query`, `mysqli_stmt::prepare`, ...) are absent from `models/` (the registry carries two methods); the set is psalm's data verbatim, not a projection onto the registry.
 - **[taint rules set]** Sinks follow `sinks.json` of the Argus artifact (411 sinks, 12 vulnerability types); `SinkPoint` accepts argument ports only, so the receiver-triggered deserialization getters (Phar, SplFileInfo, DirectoryIterator families) are omitted. `TaintPolicy` unions rows sharing an origin, so the set's `input → [xpath]` row extends psalm's row at load.
 - **[commons-phpmodels 0.2.1]** `DocumentSetException(path, detail, cause?)` now wraps a malformed listed document; `VocabularyException` names the document on an undeclared reference. `StubLoader` maps absence to `StubIndexNotFoundException` by recording which path the opener could not resolve.
+
+### Set provenance
+
+- Every shipped set carries `provenance.yaml`; the index task lists no set-level document (`vocabulary.yaml`, `policy.yaml`, `provenance.yaml`). `models/` and `taint/` are `generated`; `taint-rules/` and `value-rules/` are `manual`.
+
+### Value rules set
+
+- Migrated from cobraphp-core's 129 rule entries on 2026-09-07 by classifying each against `models/` (script kept out of the repository; the unit of a generated entry is its return type's kind with its propagation): 89 add a unit the generated entry lacks, 23 differ, 2 are guarded branches, 15 name subjects the corpus lacks.
+- PHP manual review of the 23 differing entries kept 20 with a reason comment and dropped 3 whose generated unit the manual confirms: `crypt` (the salt is a prefix of the hash), `str_word_count` (array or int by format), `setlocale` (echoes the locale set).
+- Corrected against the manual: `parse_str` and `header` return void (the flow into the result is removed; `parse_str` writes its by-reference result argument), `echo` has no result, `print` always returns 1, `mysqli_multi_query`, `mysqli_real_query`, `proc_nice`, `proc_terminate`, `register_tick_function` return bool, `proc_close` returns int.
+- Corpus gaps, excluded and listed as todo.md T11: `str_decrement`, `str_increment` (PHP 8.3), `hebrevc`, `convert_cyr_string`, `money_format`, `each`, `mysql_query`, `create_function` (removed before the upstream release), and the methods `mysqli::query`, `mysqli::multi_query`, `mysqli::real_query`, `PDO::query`, `PDO::exec`, `SQLite3::query`, `SQLite3::exec` (the corpus carries two methods).
+- The set ships 111 entries in thirteen documents.

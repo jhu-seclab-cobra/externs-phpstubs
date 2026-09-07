@@ -87,7 +87,11 @@ Typed accessors (top-level extension properties, non-null by the corpus rules):
 
 **`TAINT: String`** -- `/taint/`, the taint set root: `vocabulary.yaml` (psalm's fifteen kinds, color `input`), `policy.yaml` (`input` enables the thirteen input kinds), `sinks.yaml`, `sanitizers.yaml`, `sources.yaml`.
 
-**`TAINT_RULES: String`** -- `/taint-rules/`, the hand-maintained taint rules set root: `vocabulary.yaml` (adds kind `xpath`, color `external`), `policy.yaml` (`input` enables `xpath`; `external` enables the input kinds and `xpath`), `sinks.yaml`, `sanitizers.yaml`, `sources.yaml`. Decodes over the taint set's vocabulary; mounts after it.
+**`TAINT_RULES: String`** -- `/taint-rules/`, the hand-maintained taint rules set root: `vocabulary.yaml` (adds kind `xpath`, color `external`), `policy.yaml` (`input` enables `xpath`; `external` enables the input kinds and `xpath`), `sinks.yaml`, `sanitizers.yaml`, `sources.yaml`. Decodes over the taint set's vocabulary; provenance `manual`.
+
+**`VALUE_RULES: String`** -- `/value-rules/`, the hand-maintained value rules set root: thirteen documents by PHP manual area, every entry a signature-less model with `returns` and optional `propagation`; no vocabulary, no policy; provenance `manual`. Decodes with no context.
+
+Every set root holds `provenance.yaml` (`producer`, `verification: generated|manual`), surfaced as `DocumentSet.provenance`.
 
 **`opener(root: String): ResourceOpener`** -- Resolves `root + path` on this module's classpath; trailing slash optional; null for an absent path.
 
@@ -95,6 +99,8 @@ Typed accessors (top-level extension properties, non-null by the corpus rules):
 val psalm = DocumentSetLoader.load(StubResources.opener(StubResources.TAINT))
 val mine = DocumentSetLoader.load(StubResources.opener(StubResources.TAINT), myVocabulary, myMapping)
 val rules = DocumentSetLoader.load(StubResources.opener(StubResources.TAINT_RULES), psalm.vocabulary)
+val values = DocumentSetLoader.load(StubResources.opener(StubResources.VALUE_RULES))
+values.provenance?.verification                    // Verification.MANUAL
 ```
 
 Taint entries carry no signature and exactly one of `sinks`, `sanitizers`, `sources`; `filter_var` appears as five guarded entries (`argument(1)` is 257, 258, 259, 519, 520) escaping `html`. Subjects are spelled as psalm names them (`mysqli::query`, `$_GET`). A taint rules entry for a subject the taint set also states restates psalm's points and adds its own (`readfile`: `file`, `unserialize`, plus `ssrf`, `html`).
@@ -112,6 +118,7 @@ Taint entries carry no signature and exactly one of `sinks`, `sanitizers`, `sour
 - Identity folding is decided by commons-phpmodels: `MethodSubject("Exception", "getMessage")` equals `MethodSubject("exception", "getmessage")`; `ConstantSubject("TRUE")` and `ConstantSubject("true")` differ.
 - `containsMethod`/`findMethod` without `owner` and `findClassConstant` without `owner` return the first subject in load order; they are over-approximations.
 - Language constructs are ordinary entries loaded from `models/language/`; select them by `extension`.
-- Generated documents are never hand-edited; a correction belongs in a higher configuration layer of the consumer.
+- Generated documents are never hand-edited; a correction belongs in the value rules set or the taint rules set.
 - Constant values are strings on `typedSignature.value`; the consumer converts.
-- Taint rules are not registry entries; they are the `taint/` and `taint-rules/` document sets, mounted by the consumer through `DocumentSetLoader` with its own mapping, `taint-rules/` after `taint/`.
+- Taint and value rules are not registry entries; they are the `taint/`, `taint-rules/`, and `value-rules/` document sets, mounted by the consumer through `DocumentSetLoader` (the taint sets with its own mapping) and ranked by set provenance.
+- A value rules entry for a subject with a guarded branch (`print_r`, `var_export`) also states the default branch; a consumer that replaces the unit per subject and guard keeps both.

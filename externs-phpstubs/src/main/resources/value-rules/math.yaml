@@ -1,0 +1,12 @@
+# Hand-maintained value rules set: value semantics the generated declarations lack or state wrongly.
+# Math (PHP manual: Math).
+# An entry whose unit differs from the generated one carries the PHP manual reason above it.
+
+- subject: {function: abs}
+  returns: num
+  propagation: [{from: argument(0), to: return}]
+- subject: {function: rand}
+  returns: num
+- subject: {function: round}
+  returns: num
+  propagation: [{from: argument(0), to: return}]

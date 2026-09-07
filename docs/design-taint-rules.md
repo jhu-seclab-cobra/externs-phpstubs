@@ -27,6 +27,7 @@ the resource layout. `MODELS`, `TAINT`, and `opener`: [design-taint.md](design-t
 ```
 taint-rules/
 ├── index.txt          # build-generated manifest: sanitizers.yaml, sinks.yaml, sources.yaml
+├── provenance.yaml    # producer externs-phpstubs review of the Argus sink lists; verification manual
 ├── vocabulary.yaml    # additions only: kind `xpath`, color `external`
 ├── policy.yaml        # input enables xpath; external enables every input kind and xpath
 ├── sinks.yaml         # Argus sinks the format expresses; widened psalm subjects restate psalm's points

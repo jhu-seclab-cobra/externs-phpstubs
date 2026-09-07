@@ -1,0 +1,8 @@
+# Hand-maintained value rules set: value semantics the generated declarations lack or state wrongly.
+# Date and time (PHP manual: Date/Time).
+# An entry whose unit differs from the generated one carries the PHP manual reason above it.
+
+- subject: {function: date}
+  returns: str
+- subject: {function: time}
+  returns: num

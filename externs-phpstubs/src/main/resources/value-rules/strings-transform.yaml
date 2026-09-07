@@ -1,0 +1,59 @@
+# Hand-maintained value rules set: value semantics the generated declarations lack or state wrongly.
+# String transformations (PHP manual: Strings): derived-string builders.
+# An entry whose unit differs from the generated one carries the PHP manual reason above it.
+
+# PHP manual: the result is string with backslashes inserted; characters only selects which bytes are escaped.
+- subject: {function: addcslashes}
+  returns: str
+  propagation: [{from: argument(0), to: return}]
+- subject: {function: addslashes}
+  returns: str
+  propagation: [{from: argument(0), to: return}]
+# PHP manual rtrim: the result is a suffix-stripped copy of string; characters only selects what is stripped.
+- subject: {function: chop}
+  returns: str
+  propagation: [{from: argument(0), to: return}]
+# PHP manual: encoding selects the character set; the result is decoded string.
+- subject: {function: html_entity_decode}
+  returns: str
+  propagation: [{from: argument(0), to: return}]
+- subject: {function: htmlentities}
+  returns: str
+  propagation: [{from: argument(0), to: return}]
+- subject: {function: htmlspecialchars}
+  returns: str
+  propagation: [{from: argument(0), to: return}]
+- subject: {function: str_getcsv}
+  returns: any
+  propagation: [{from: argument(0), to: return}]
+# PHP manual: alias of strstr; the result is a portion of haystack.
+- subject: {function: strchr}
+  returns: str
+  propagation: [{from: argument(0), to: return}]
+- subject: {function: strip_tags}
+  returns: str
+  propagation: [{from: argument(0), to: return}]
+# PHP manual: the result is a portion of haystack; needle only positions the cut.
+- subject: {function: stristr}
+  returns: str
+  propagation: [{from: argument(0), to: return}]
+# PHP manual: the result is a portion of string; characters only positions the cut.
+- subject: {function: strpbrk}
+  returns: str
+  propagation: [{from: argument(0), to: return}]
+# PHP manual: the result is a portion of haystack from the last occurrence of needle.
+- subject: {function: strrchr}
+  returns: str
+  propagation: [{from: argument(0), to: return}]
+# PHP manual: the result is a portion of haystack; needle only positions the cut.
+- subject: {function: strstr}
+  returns: str
+  propagation: [{from: argument(0), to: return}]
+# PHP manual: the result is a token of string; token only delimits.
+- subject: {function: strtok}
+  returns: str
+  propagation: [{from: argument(0), to: return}]
+# PHP manual: the result splices replace into string, so both contents reach the result.
+- subject: {function: substr_replace}
+  returns: str
+  propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]

@@ -1,0 +1,13 @@
+# Hand-maintained value rules set: value semantics the generated declarations lack or state wrongly.
+# Function handling (PHP manual: Function handling).
+# An entry whose unit differs from the generated one carries the PHP manual reason above it.
+
+- subject: {function: func_num_args}
+  returns: num
+- subject: {function: get_defined_functions}
+  returns: any
+# PHP manual: returns bool.
+- subject: {function: register_tick_function}
+  returns: bool
+- subject: {function: unregister_tick_function}
+  returns: any

@@ -1,0 +1,89 @@
+# Hand-maintained value rules set: value semantics the generated declarations lack or state wrongly.
+# String inspection (PHP manual: Strings): measurement, comparison, search, hashing.
+# An entry whose unit differs from the generated one carries the PHP manual reason above it.
+
+- subject: {function: chr}
+  returns: str
+  propagation: [{from: argument(0), to: return}]
+# PHP manual: the counts describe string; mode only selects the form of the result.
+- subject: {function: count_chars}
+  returns: any
+  propagation: [{from: argument(0), to: return}]
+- subject: {function: crc32}
+  returns: num
+  propagation: [{from: argument(0), to: return}]
+- subject: {function: levenshtein}
+  returns: num
+  propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]
+- subject: {function: md5}
+  returns: str
+  propagation: [{from: argument(0), to: return}]
+- subject: {function: ord}
+  returns: num
+  propagation: [{from: argument(0), to: return}]
+- subject: {function: sha1}
+  returns: str
+  propagation: [{from: argument(0), to: return}]
+- subject: {function: similar_text}
+  returns: num
+  propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]
+# PHP manual: the truth value depends on both haystack and needle.
+- subject: {function: str_contains}
+  returns: bool
+  propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]
+# PHP manual: the truth value depends on both haystack and needle.
+- subject: {function: str_ends_with}
+  returns: bool
+  propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]
+# PHP manual: the truth value depends on both haystack and needle.
+- subject: {function: str_starts_with}
+  returns: bool
+  propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]
+- subject: {function: strcasecmp}
+  returns: num
+  propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]
+- subject: {function: strcmp}
+  returns: num
+  propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]
+- subject: {function: strcoll}
+  returns: num
+  propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]
+- subject: {function: strcspn}
+  returns: num
+  propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]
+- subject: {function: stripos}
+  returns: num
+  propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]
+- subject: {function: strlen}
+  returns: num
+  propagation: [{from: argument(0), to: return}]
+- subject: {function: strnatcasecmp}
+  returns: num
+  propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]
+- subject: {function: strnatcmp}
+  returns: num
+  propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]
+- subject: {function: strncasecmp}
+  returns: num
+  propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]
+- subject: {function: strncmp}
+  returns: num
+  propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]
+- subject: {function: strpos}
+  returns: num
+  propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]
+- subject: {function: strripos}
+  returns: num
+  propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]
+- subject: {function: strrpos}
+  returns: num
+  propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]
+- subject: {function: strspn}
+  returns: num
+  propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]
+- subject: {function: substr_compare}
+  returns: num
+  propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]
+- subject: {function: substr_count}
+  returns: num
+  propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]

@@ -10,6 +10,7 @@ import edu.jhu.cobra.commons.phpmodels.Port
 import edu.jhu.cobra.commons.phpmodels.ProvenanceId
 import edu.jhu.cobra.commons.phpmodels.SubjectModel
 import edu.jhu.cobra.commons.phpmodels.VariableSubject
+import edu.jhu.cobra.commons.phpmodels.Verification
 import edu.jhu.cobra.commons.phpmodels.Vocabulary
 import edu.jhu.cobra.commons.phpmodels.VocabularyLoader
 import edu.jhu.cobra.commons.phpmodels.VulnClassId
@@ -31,6 +32,7 @@ import kotlin.test.assertTrue
  * - `sanitizers keep psalm's escapes including guarded ones` — verifies filter_var's five guarded entries
  * - `sources name the colored superglobals and annotated methods` — verifies the source entries
  * - `mapped load translates and discards per the consumer's table` — verifies a consumer-side mapping
+ * - `every shipped set declares its provenance` — verifies producer and verification kind per set
  */
 internal class StubResourcesTest {
     private val taint by lazy { DocumentSetLoader.load(StubResources.opener(StubResources.TAINT)) }
@@ -140,6 +142,24 @@ internal class StubResourcesTest {
         assertNull(bySubject[FunctionSubject("exec")])
         assertEquals(setOf("xss"), sanitizersOf(bySubject.getValue(FunctionSubject("urlencode")).single()))
         assertEquals(listOf(Port.Argument(0) to "sqli"), sinksOf(bySubject.getValue(MethodSubject("mysqli", "query")).single()))
+    }
+
+    @Test
+    fun `every shipped set declares its provenance`() {
+        val expected =
+            mapOf(
+                StubResources.MODELS to Verification.GENERATED,
+                StubResources.TAINT to Verification.GENERATED,
+                StubResources.TAINT_RULES to Verification.MANUAL,
+                StubResources.VALUE_RULES to Verification.MANUAL,
+            )
+        for ((root, verification) in expected) {
+            val context = if (root == StubResources.TAINT_RULES) taint.vocabulary else Vocabulary.EMPTY
+            val provenance = assertNotNull(DocumentSetLoader.load(StubResources.opener(root), context).provenance, root)
+            assertEquals(verification, provenance.verification, root)
+            assertTrue(provenance.producer.isNotBlank(), root)
+        }
+        assertEquals("tools/extract_taint.py over vimeo/psalm 5.6.0", taint.provenance!!.producer)
     }
 
     private fun sinksOf(subject: ModelSubject): List<Pair<Port.Argument, String>> = sinksOf(models.getValue(subject))

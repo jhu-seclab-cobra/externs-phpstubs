@@ -156,6 +156,7 @@ in `PhpStubs.kt` (fixed by the document layout).
 ```
 models/
 ├── index.txt              # build-generated manifest, sorted relative paths
+├── provenance.yaml        # producer tools/convert_stubs.py v2; verification generated
 ├── core.yaml              # extension "core"
 ├── language/              # hand-declared language constructs
 │   ├── keyword.yaml       # 14 keyword functions + class exit, extension "keyword"
@@ -171,10 +172,12 @@ one hand-maintained exception and carry no producer header. A keyword
 function declares one optional variadic `mixed` parameter and a `mixed`
 return; a language class declares `classifier: class`.
 
-The Gradle resource task writes `index.txt` for `models/`, `taint/`, and
-`taint-rules/` (main) and `models-test/` (test); every other test fixture
-directory ships its own manifest. The taint set's layout:
-[design-taint.md](design-taint.md); the taint rules set's: [design-taint-rules.md](design-taint-rules.md).
+The Gradle resource task writes `index.txt` for `models/`, `taint/`,
+`taint-rules/`, and `value-rules/` (main) and `models-test/` (test), listing
+every document except `vocabulary.yaml`, `policy.yaml`, and `provenance.yaml`;
+every other test fixture directory ships its own manifest. Set layouts:
+[design-taint.md](design-taint.md), [design-taint-rules.md](design-taint-rules.md),
+[design-value-rules.md](design-value-rules.md).
 
 ## Exception / Error Types
 

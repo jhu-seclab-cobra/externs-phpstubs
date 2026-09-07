@@ -1,0 +1,2 @@
+producer: tools/convert_stubs.py v2 over JetBrains/phpstorm-stubs
+verification: generated

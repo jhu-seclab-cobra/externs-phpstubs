@@ -5,11 +5,13 @@
 | [concept.md](concept.md) | Problem statement, generated-layer concepts over commons-phpmodels, provenance, lookup semantics, scenarios |
 | [concept-taint.md](concept-taint.md) | The taint document set in psalm's names, its extraction, and its contracts with consumers |
 | [concept-taint-rules.md](concept-taint-rules.md) | The hand-maintained taint rules document set: Argus sinks, added escapes and sources, vocabulary additions |
+| [concept-value-rules.md](concept-value-rules.md) | The hand-maintained value rules set: value semantics beyond the generated declarations, corpus gaps |
 | [design.md](design.md) | Entry, registry, loader, and facade specifications; resource layout; corpus rules; exception types |
 | [design-taint.md](design-taint.md) | `StubResources`, taint resource layout, extraction script inputs and validation rules |
 | [design-taint-rules.md](design-taint-rules.md) | `StubResources.TAINT_RULES`, rules resource layout, validation and maintenance rules |
-| [impl.md](impl.md) | commons-phpmodels API findings, version constraints, provenance, variadic, and taint-extraction notes |
+| [design-value-rules.md](design-value-rules.md) | `StubResources.VALUE_RULES`, value rules resource layout, validation and maintenance rules |
+| [impl.md](impl.md) | commons-phpmodels API findings, version constraints, extension and set provenance, variadic, taint-extraction, and value rules review notes |
 | [performance.md](performance.md) | Load-time and lookup benchmark procedure and baselines |
 | [llms.txt](llms.txt) | Agent-facing L0 index (llmstxt.org format) |
-| [llms/stubs.md](llms/stubs.md) | Agent-facing API reference for the stubs registry, taint set, and taint rules set |
+| [llms/stubs.md](llms/stubs.md) | Agent-facing API reference for the stubs registry, taint sets, and value rules set |
 | [llms/full.txt](llms/full.txt) | Agent-facing L2 concatenation of llms.txt and llms/stubs.md |

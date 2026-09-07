@@ -1,0 +1,26 @@
+# Hand-maintained value rules set: value semantics the generated declarations lack or state wrongly.
+# Database access (PHP manual: MySQLi, PostgreSQL).
+# An entry whose unit differs from the generated one carries the PHP manual reason above it.
+
+# PHP manual: returns bool; the generated declaration's bool return type is confirmed.
+- subject: {function: mysqli_multi_query}
+  returns: bool
+  propagation: [{from: argument(1), to: return}]
+# PHP manual: returns a mysqli_result, true, or false depending on the query.
+- subject: {function: mysqli_query}
+  returns: any
+  propagation: [{from: argument(1), to: return}]
+- subject: {function: mysqli_real_escape_string}
+  returns: str
+  propagation: [{from: argument(1), to: return}]
+# PHP manual: returns bool; the generated declaration's bool return type is confirmed.
+- subject: {function: mysqli_real_query}
+  returns: bool
+  propagation: [{from: argument(1), to: return}]
+- subject: {function: pg_query}
+  returns: any
+  propagation: [{from: argument(1), to: return}]
+# PHP manual: returns true, false, or 0 when the connection is busy.
+- subject: {function: pg_send_query}
+  returns: any
+  propagation: [{from: argument(1), to: return}]

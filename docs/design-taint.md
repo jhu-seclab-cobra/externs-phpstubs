@@ -30,8 +30,9 @@ opener that reads under a root. The taint set has no registry, facade, or
 entry type here: its consumer is the format library's set loader.
 
 **State:** `const val MODELS = "/models/"`, `const val TAINT = "/taint/"`,
-`const val TAINT_RULES = "/taint-rules/"` — value tier: constants, fixed by the
-resource layout. The taint rules set: [design-taint-rules.md](design-taint-rules.md).
+`const val TAINT_RULES = "/taint-rules/"`, `const val VALUE_RULES = "/value-rules/"`
+— value tier: constants, fixed by the resource layout. The hand-maintained sets:
+[design-taint-rules.md](design-taint-rules.md), [design-value-rules.md](design-value-rules.md).
 
 **Methods:**
 - `opener(root: String): ResourceOpener`
@@ -47,6 +48,7 @@ resource layout. The taint rules set: [design-taint-rules.md](design-taint-rules
 ```
 taint/
 ├── index.txt          # build-generated manifest: sanitizers.yaml, sinks.yaml, sources.yaml
+├── provenance.yaml    # producer tools/extract_taint.py over vimeo/psalm 5.6.0; verification generated
 ├── vocabulary.yaml    # psalm's taint kinds as categories; origin `input`
 ├── policy.yaml        # one row: input enables every kind of psalm's input group
 ├── sinks.yaml         # dictionary + @psalm-taint-sink: one entry per subject
@@ -54,8 +56,8 @@ taint/
 └── sources.yaml       # superglobals + @psalm-taint-source: one entry per subject
 ```
 
-Every file except the manifest carries the producer header naming the
-psalm release and the script. Entry forms:
+Every document carries the producer header naming the psalm release and
+the script; `provenance.yaml` states the same producer as data. Entry forms:
 
 | Document | Subject kinds | Body | Guard |
 |----------|---------------|------|-------|

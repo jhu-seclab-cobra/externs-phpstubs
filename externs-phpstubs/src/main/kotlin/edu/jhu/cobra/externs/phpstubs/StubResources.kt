@@ -17,6 +17,12 @@ public object StubResources {
     public const val TAINT_RULES: String = "/taint-rules/"
 
     /**
+     * Root of the hand-maintained value rules set: value-semantics units the generated declarations
+     * lack or state wrongly, reviewed against the PHP manual. Names no category or color.
+     */
+    public const val VALUE_RULES: String = "/value-rules/"
+
+    /**
      * Resolves paths relative to [root] on this module's classpath.
      *
      * @param root Classpath directory of one document set; the trailing slash is optional.

@@ -1,0 +1,53 @@
+# Hand-maintained value rules set: value semantics the generated declarations lack or state wrongly.
+# Variable handling (PHP manual: Variable handling; isset and empty language constructs).
+# An entry whose unit differs from the generated one carries the PHP manual reason above it.
+
+- subject: {function: boolval}
+  returns: bool
+  propagation: [{from: argument(0), to: return}]
+# PHP manual: the result is the truth value of the argument's emptiness.
+- subject: {function: empty}
+  returns: bool
+  propagation: [{from: argument(0), to: return}]
+- subject: {function: floatval}
+  returns: num
+  propagation: [{from: argument(0), to: return}]
+- subject: {function: gettype}
+  returns: str
+  propagation: [{from: argument(0), to: return}]
+- subject: {function: intval}
+  returns: num
+  propagation: [{from: argument(0), to: return}]
+- subject: {function: is_array}
+  returns: bool
+  propagation: [{from: argument(0), to: return}]
+- subject: {function: is_null}
+  returns: bool
+  propagation: [{from: argument(0), to: return}]
+- subject: {function: is_numeric}
+  returns: bool
+  propagation: [{from: argument(0), to: return}]
+- subject: {function: is_string}
+  returns: bool
+  propagation: [{from: argument(0), to: return}]
+# PHP manual: the result reports whether the variables are set, not their values.
+- subject: {function: isset}
+  returns: bool
+# PHP manual: prints and returns true unless return is true, in which case the rendering of value is returned.
+- subject: {function: print_r}
+  when: {port: argument(1), is: true}
+  returns: str
+  propagation: [{from: argument(0), to: return}]
+# PHP manual: prints and returns true unless return is true, in which case the rendering of value is returned.
+- subject: {function: print_r}
+  returns: bool
+- subject: {function: var_dump}
+  returns: any
+# PHP manual: outputs and returns null unless return is true, in which case the representation of value is returned.
+- subject: {function: var_export}
+  when: {port: argument(1), is: true}
+  returns: str
+  propagation: [{from: argument(0), to: return}]
+# PHP manual: outputs and returns null unless return is true, in which case the representation of value is returned.
+- subject: {function: var_export}
+  returns: any

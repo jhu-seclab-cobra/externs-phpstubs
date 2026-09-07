@@ -1,0 +1,34 @@
+# Hand-maintained value rules set: value semantics the generated declarations lack or state wrongly.
+# String formatting and output (PHP manual: Strings; echo and print language constructs).
+# An entry whose unit differs from the generated one carries the PHP manual reason above it.
+
+# PHP manual: echo has no return value.
+- subject: {function: echo}
+  returns: any
+- subject: {function: fprintf}
+  returns: num
+- subject: {function: get_html_translation_table}
+  returns: any
+- subject: {function: localeconv}
+  returns: any
+- subject: {function: nl_langinfo}
+  returns: str
+# PHP manual: returns void; the parsed variables are written into the by-reference result argument.
+- subject: {function: parse_str}
+  returns: any
+  propagation: [{from: argument(0), to: argument(1)}]
+# PHP manual: print always returns 1, whatever its argument.
+- subject: {function: print}
+  returns: num
+# PHP manual: returns an array of parsed values, or the assignment count when result arguments are passed.
+- subject: {function: sscanf}
+  returns: any
+  propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]
+- subject: {function: vfprintf}
+  returns: num
+- subject: {function: vprintf}
+  returns: num
+# PHP manual: the values are formatted into the result beside format.
+- subject: {function: vsprintf}
+  returns: str
+  propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]
