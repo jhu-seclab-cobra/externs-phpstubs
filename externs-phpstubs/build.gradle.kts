@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "edu.jhu.cobra"
-version = "0.6.0"
+version = "0.6.1"
 
 val jvmVersion =
     libs.versions.javaTarget
