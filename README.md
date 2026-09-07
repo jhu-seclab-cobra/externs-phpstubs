@@ -2,11 +2,11 @@
 
 > PHP built-in declaration registry for static analysis.
 
-Lookup of PHP built-in functions, classes, methods, and constants as commons-phpmodels entries with extension provenance, plus psalm's taint sources, sinks, and escapes and a hand-maintained taint rules set as mountable document sets.
+Lookup of PHP built-in functions, classes, methods, and constants as commons-phpmodels entries with extension provenance, plus psalm's taint sources, sinks, and escapes, a hand-maintained taint rules set, and a hand-maintained value rules set as mountable document sets, each declaring its provenance.
 
 [![codecov](https://codecov.io/gh/jhu-seclab-cobra/externs-phpstubs/branch/main/graph/badge.svg)](https://codecov.io/gh/jhu-seclab-cobra/externs-phpstubs)
 ![Kotlin JVM](https://img.shields.io/badge/Kotlin%20JVM-2.0.1%20%7C%20JVM%201.8%2B-blue?logo=kotlin)
-[![Release](https://img.shields.io/badge/release-v0.4.0-blue.svg)](https://github.com/jhu-seclab-cobra/externs-phpstubs/releases/tag/v0.4.0)
+[![Release](https://img.shields.io/badge/release-v0.5.0-blue.svg)](https://github.com/jhu-seclab-cobra/externs-phpstubs/releases/tag/v0.5.0)
 [![last commit](https://img.shields.io/github/last-commit/jhu-seclab-cobra/externs-phpstubs)](https://github.com/jhu-seclab-cobra/externs-phpstubs/commits/main)
 [![](https://jitpack.io/v/jhu-seclab-cobra/externs-phpstubs.svg)](https://jitpack.io/#jhu-seclab-cobra/externs-phpstubs)
 ![Repo Size](https://img.shields.io/github/repo-size/jhu-seclab-cobra/externs-phpstubs)
@@ -20,7 +20,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.jhu-seclab-cobra:externs-phpstubs:0.4.0")
+    implementation("com.github.jhu-seclab-cobra:externs-phpstubs:0.5.0")
 }
 ```
 
@@ -77,7 +77,7 @@ PhpStubs.findConstant("php_int_max", caseSensitive = false)    // folded lookup
 
 **`StubRegistry`** -- the frozen per-kind maps behind the facade, built by `StubLoader.loadAll()`.
 
-**`StubResources`** -- classpath roots of the three shipped document sets, `MODELS` (`/models/`), `TAINT` (`/taint/`), and `TAINT_RULES` (`/taint-rules/`), and `opener(root)` returning a commons-phpmodels `ResourceOpener` over them.
+**`StubResources`** -- classpath roots of the four shipped document sets, `MODELS` (`/models/`), `TAINT` (`/taint/`), `TAINT_RULES` (`/taint-rules/`), and `VALUE_RULES` (`/value-rules/`), and `opener(root)` returning a commons-phpmodels `ResourceOpener` over them. Every set root holds `provenance.yaml`; the loader surfaces it as `DocumentSet.provenance`.
 
 ## Taint Document Set
 
@@ -105,6 +105,17 @@ val mapped = DocumentSetLoader.load(StubResources.opener(StubResources.TAINT_RUL
 
 An entry for a subject the taint set also states restates psalm's points and adds its own, so a consumer replacing one section per subject loses nothing.
 
+## Value Rules Document Set
+
+`value-rules/` ships hand-maintained value semantics the generated declarations lack or state wrongly: typed results and exhaustive argument-to-result flows for built-ins psalm never annotated (`strlen`, `intval`, `count`, ...), corrections checked against the PHP manual (`strstr` flows only its haystack, `getenv` flows no argument), and guarded branches for mode-switching built-ins (`print_r`, `var_export`). Entries carry no signature and name no category, so the set loads with no vocabulary and no mapping:
+
+```kotlin
+val values = DocumentSetLoader.load(StubResources.opener(StubResources.VALUE_RULES))
+values.provenance?.verification    // Verification.MANUAL
+```
+
+Set provenance decides precedence: `models/` and `taint/` are `generated`, `taint-rules/` and `value-rules/` are `manual`, and commons-phpmodels `Precedence.DEFAULT` ranks manual above generated whatever the mount order.
+
 ## Background
 
 Model documents derived from [JetBrains/phpstorm-stubs](https://github.com/JetBrains/phpstorm-stubs) (signatures, Apache-2.0) and [vimeo/psalm](https://github.com/vimeo/psalm) (dataflow annotations and taint data, MIT), emitted in the [commons-phpmodels](https://github.com/jhu-seclab-cobra/commons-phpmodels) format. Language constructs (`echo`, `isset`, `int`, ...) are declared as data under `models/language/`.
@@ -117,6 +128,8 @@ Model documents derived from [JetBrains/phpstorm-stubs](https://github.com/JetBr
 - [Taint Design](docs/design-taint.md) -- `StubResources`, taint resource layout, extraction script
 - [Taint Rules Concepts](docs/concept-taint-rules.md) -- the hand-maintained taint rules document set and its contracts
 - [Taint Rules Design](docs/design-taint-rules.md) -- rules resource layout, validation and maintenance rules
+- [Value Rules Concepts](docs/concept-value-rules.md) -- the hand-maintained value rules set, review reasons, corpus gaps
+- [Value Rules Design](docs/design-value-rules.md) -- value rules resource layout, validation and maintenance rules
 - [Implementation Notes](docs/impl.md) -- commons-phpmodels API findings, developer instructions
 
 ## For Agents
