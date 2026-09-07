@@ -6,7 +6,7 @@ Lookup of PHP built-in functions, classes, methods, and constants as commons-php
 
 [![codecov](https://codecov.io/gh/jhu-seclab-cobra/externs-phpstubs/branch/main/graph/badge.svg)](https://codecov.io/gh/jhu-seclab-cobra/externs-phpstubs)
 ![Kotlin JVM](https://img.shields.io/badge/Kotlin%20JVM-2.0.1%20%7C%20JVM%201.8%2B-blue?logo=kotlin)
-[![Release](https://img.shields.io/badge/release-v0.5.0-blue.svg)](https://github.com/jhu-seclab-cobra/externs-phpstubs/releases/tag/v0.5.0)
+[![Release](https://img.shields.io/badge/release-v0.6.0-blue.svg)](https://github.com/jhu-seclab-cobra/externs-phpstubs/releases/tag/v0.6.0)
 [![last commit](https://img.shields.io/github/last-commit/jhu-seclab-cobra/externs-phpstubs)](https://github.com/jhu-seclab-cobra/externs-phpstubs/commits/main)
 [![](https://jitpack.io/v/jhu-seclab-cobra/externs-phpstubs.svg)](https://jitpack.io/#jhu-seclab-cobra/externs-phpstubs)
 ![Repo Size](https://img.shields.io/github/repo-size/jhu-seclab-cobra/externs-phpstubs)
@@ -20,7 +20,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.jhu-seclab-cobra:externs-phpstubs:0.5.0")
+    implementation("com.github.jhu-seclab-cobra:externs-phpstubs:0.6.0")
 }
 ```
 
@@ -118,7 +118,7 @@ Set provenance decides precedence: `models/` and `taint/` are `generated`, `tain
 
 ## Background
 
-Model documents derived from [JetBrains/phpstorm-stubs](https://github.com/JetBrains/phpstorm-stubs) (signatures, Apache-2.0) and [vimeo/psalm](https://github.com/vimeo/psalm) (dataflow annotations and taint data, MIT), emitted in the [commons-phpmodels](https://github.com/jhu-seclab-cobra/commons-phpmodels) format. Language constructs (`echo`, `isset`, `int`, ...) are declared as data under `models/language/`.
+Model documents derived from [JetBrains/phpstorm-stubs](https://github.com/JetBrains/phpstorm-stubs) (signatures, Apache-2.0) and [vimeo/psalm](https://github.com/vimeo/psalm) (dataflow annotations and taint data, MIT), emitted in the [commons-phpmodels](https://github.com/jhu-seclab-cobra/commons-phpmodels) format. Language constructs (`echo`, `isset`, `int`, ...) are declared as data under `models/language/`; built-ins the extraction does not produce are hand-declared under `models/manual/`.
 
 ## Documentation
 

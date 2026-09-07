@@ -118,6 +118,7 @@ Taint entries carry no signature and exactly one of `sinks`, `sanitizers`, `sour
 - Identity folding is decided by commons-phpmodels: `MethodSubject("Exception", "getMessage")` equals `MethodSubject("exception", "getmessage")`; `ConstantSubject("TRUE")` and `ConstantSubject("true")` differ.
 - `containsMethod`/`findMethod` without `owner` and `findClassConstant` without `owner` return the first subject in load order; they are over-approximations.
 - Language constructs are ordinary entries loaded from `models/language/`; select them by `extension`.
+- Built-ins the extraction does not produce (`mysqli`/`PDO`/`SQLite3` query methods, PHP 8.3 and removed functions) are hand-declared under `models/manual/`, one document per extension name, with the PHP-manual flow in their propagation.
 - Generated documents are never hand-edited; a correction belongs in the value rules set or the taint rules set.
 - Constant values are strings on `typedSignature.value`; the consumer converts.
 - Taint and value rules are not registry entries; they are the `taint/`, `taint-rules/`, and `value-rules/` document sets, mounted by the consumer through `DocumentSetLoader` (the taint sets with its own mapping) and ranked by set provenance.

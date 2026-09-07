@@ -1,0 +1,31 @@
+# PDO methods the extraction does not emit (the upstream conversion carried no methods for this class).
+# Hand-maintained; extension provenance "pdo" comes from this file name. Signatures follow the PHP manual.
+# PHP manual: returns a PDOStatement or false; the query text reaches the result.
+- subject:
+    method: PDO::query
+  signature:
+    params:
+      - name: query
+        type: string
+      - name: fetchMode
+        type: int
+        optional: true
+      - name: fetchModeArgs
+        type: mixed
+        optional: true
+        variadic: true
+    returnType: mixed
+  propagation:
+    - from: argument(0)
+      to: return
+# PHP manual: returns the affected row count or false.
+- subject:
+    method: PDO::exec
+  signature:
+    params:
+      - name: statement
+        type: string
+    returnType: mixed
+  propagation:
+    - from: argument(0)
+      to: return

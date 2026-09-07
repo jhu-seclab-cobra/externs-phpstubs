@@ -1,0 +1,90 @@
+# Standard-extension functions newer (PHP 8.3) or older (removed before PHP 8.0) than the upstream release.
+# Hand-maintained; extension provenance "standard" comes from this file name. Signatures follow the PHP manual.
+# PHP manual (8.3): returns the string decremented by one in its alphanumeric sequence.
+- subject:
+    function: str_decrement
+  signature:
+    params:
+      - name: string
+        type: string
+    returnType: string
+  propagation:
+    - from: argument(0)
+      to: return
+# PHP manual (8.3): returns the string incremented by one in its alphanumeric sequence.
+- subject:
+    function: str_increment
+  signature:
+    params:
+      - name: string
+        type: string
+    returnType: string
+  propagation:
+    - from: argument(0)
+      to: return
+# PHP manual (removed 8.0): returns the text with line breaks converted; the text reaches the result.
+- subject:
+    function: hebrevc
+  signature:
+    params:
+      - name: hebrew_text
+        type: string
+      - name: max_chars_per_line
+        type: int
+        optional: true
+    returnType: string
+  propagation:
+    - from: argument(0)
+      to: return
+# PHP manual (removed 8.0): returns the string converted between Cyrillic character sets.
+- subject:
+    function: convert_cyr_string
+  signature:
+    params:
+      - name: str
+        type: string
+      - name: from
+        type: string
+      - name: to
+        type: string
+    returnType: string
+  propagation:
+    - from: argument(0)
+      to: return
+# PHP manual (removed 8.0): returns the number rendered under the format, so both reach the result.
+- subject:
+    function: money_format
+  signature:
+    params:
+      - name: format
+        type: string
+      - name: number
+        type: float
+    returnType: string
+  propagation:
+    - from: argument(0)
+      to: return
+    - from: argument(1)
+      to: return
+# PHP manual (removed 8.0): returns the current key/value pair of the array or false.
+- subject:
+    function: each
+  signature:
+    params:
+      - name: array
+        type: array
+    returnType: mixed
+  propagation:
+    - from: argument(0)
+      to: return
+# PHP manual (removed 8.0): returns a unique function name or false. No propagation is declared: the format rejects
+# an empty flow set, so the consumer's conservative default applies.
+- subject:
+    function: create_function
+  signature:
+    params:
+      - name: args
+        type: string
+      - name: code
+        type: string
+    returnType: mixed

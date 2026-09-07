@@ -146,10 +146,9 @@ as a `ClassConstantSubject` and resolves it as a class constant.
 | `scalarTypeNames` | `Set<String>` | Class names whose extension is `scalar` |
 
 `findMethod` returns the entry alone: its subject carries the owner and
-the folded name that the former key pair spelled. Language constructs are
-ordinary entries, so the bulk name sets include them; the two derived sets
-select by extension. Extension names `keyword` and `scalar` are constants
-in `PhpStubs.kt` (fixed by the document layout).
+folded name. Language constructs are ordinary entries in the bulk name
+sets; the two derived sets select by the extension constants `keyword`
+and `scalar` in `PhpStubs.kt` (fixed by the document layout).
 
 ## Resource Layout
 
@@ -162,22 +161,23 @@ models/
 │   ├── keyword.yaml       # 14 keyword functions + class exit, extension "keyword"
 │   ├── scalar.yaml        # classes int, float, string, bool, array, extension "scalar"
 │   └── legacy.yaml        # class resource, extension "legacy"
+├── manual/<extension>.yaml       # hand-declared built-ins the extraction omits: mysqli, pdo, sqlite3, mysql, standard
 ├── standard/standard_1..8.yaml   # extension "standard" (split suffix removed)
 └── <category>/<extension>.yaml   # crypto, database, file, image, misc, network, system, text, xml
 ```
 
 Generated documents carry the producer header of commons-phpmodels'
-generated layer and are never hand-edited. The language documents are the
-one hand-maintained exception and carry no producer header. A keyword
-function declares one optional variadic `mixed` parameter and a `mixed`
-return; a language class declares `classifier: class`.
+generated layer and are never hand-edited; language and manual documents
+are hand-maintained without one. A keyword function declares one optional
+variadic `mixed` parameter and a `mixed` return; a language class declares
+`classifier: class`. A manual entry declares its PHP-manual signature and,
+where the manual states a flow, a propagation; the reason is a comment.
 
 The Gradle resource task writes `index.txt` for `models/`, `taint/`,
-`taint-rules/`, and `value-rules/` (main) and `models-test/` (test), listing
-every document except `vocabulary.yaml`, `policy.yaml`, and `provenance.yaml`;
-every other test fixture directory ships its own manifest. Set layouts:
-[design-taint.md](design-taint.md), [design-taint-rules.md](design-taint-rules.md),
-[design-value-rules.md](design-value-rules.md).
+`taint-rules/`, `value-rules/` (main) and `models-test/` (test), listing every
+document except `vocabulary.yaml`, `policy.yaml`, `provenance.yaml`; every
+other test fixture directory ships its own manifest. Set layouts: [design-taint.md](design-taint.md),
+[design-taint-rules.md](design-taint-rules.md), [design-value-rules.md](design-value-rules.md).
 
 ## Exception / Error Types
 

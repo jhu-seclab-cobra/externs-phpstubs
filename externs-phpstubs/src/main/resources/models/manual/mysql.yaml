@@ -1,0 +1,16 @@
+# The mysql extension, removed in PHP 7.0 and absent from the upstream release.
+# Hand-maintained; extension provenance "mysql" comes from this file name. Signatures follow the PHP manual.
+# PHP manual: returns a resource, true, or false depending on the query; the query text reaches the result.
+- subject:
+    function: mysql_query
+  signature:
+    params:
+      - name: query
+        type: string
+      - name: link_identifier
+        type: resource
+        optional: true
+    returnType: mixed
+  propagation:
+    - from: argument(0)
+      to: return

@@ -93,9 +93,10 @@ consumer: models/ (generated) ◄──ranked below── value-rules/ (manual),
 - **Definition:** A built-in an analysis meets that the generated
   declarations do not carry: a class whose methods the extraction does not
   emit, or a function newer or older than the upstream release.
-- **Scope:** excluded from the set; recorded as an extraction task.
-- **Relationships:** resolved in the Extraction Pipeline, never by a Value
-  Rule.
+- **Scope:** excluded from the set; declared in a hand-maintained document
+  under `models/manual/` with its PHP-manual signature and flow.
+- **Relationships:** resolved in the models tree (the Extraction Pipeline
+  or a manual declaration document), never by a Value Rule.
 
 ## 3. Contracts & Flow
 
@@ -114,7 +115,7 @@ consumer: models/ (generated) ◄──ranked below── value-rules/ (manual),
 2. Review — check every differing or type-widened rule against the PHP
    manual: keep it with a Review Reason, correct it with a Review Reason,
    or drop it when the manual confirms the generated unit. A Corpus Gap
-   becomes an extraction task in `todo.md`.
+   becomes a declaration under `models/manual/`.
 3. Emit — write the provenance and one document per PHP manual area,
    subjects sorted, guarded branches before the default.
 4. Verify — the repository test loads the set beside the declarations and
@@ -128,8 +129,9 @@ consumer: models/ (generated) ◄──ranked below── value-rules/ (manual),
 - **Boundary:** `print_r` returns its rendering only when the second
   argument is true. A guarded entry states that branch; the default
   branch states a boolean result with no flow.
-- **Interaction:** `mysqli::query` is stated in no document because the
-  generated declarations carry no `mysqli` methods. The subject is a
-  Corpus Gap; an extraction task, not this set, owns it.
+- **Interaction:** `mysqli::query` is stated in no value rules document:
+  the extraction carries no `mysqli` methods, so `models/manual/mysqli.yaml`
+  declares its signature and reviewed flow, and the registry, not this set,
+  serves the unit.
 
 Software structure: [design-value-rules.md](design-value-rules.md).

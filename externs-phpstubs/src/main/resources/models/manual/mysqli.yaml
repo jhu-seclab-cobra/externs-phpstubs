@@ -1,0 +1,38 @@
+# mysqli methods the extraction does not emit (the upstream conversion carried no methods for this class).
+# Hand-maintained; extension provenance "mysqli" comes from this file name. Signatures follow the PHP manual.
+# PHP manual: returns a mysqli_result, true, or false depending on the query; the query text reaches the result.
+- subject:
+    method: mysqli::query
+  signature:
+    params:
+      - name: query
+        type: string
+      - name: result_mode
+        type: int
+        optional: true
+    returnType: mixed
+  propagation:
+    - from: argument(0)
+      to: return
+# PHP manual: returns bool.
+- subject:
+    method: mysqli::multi_query
+  signature:
+    params:
+      - name: query
+        type: string
+    returnType: bool
+  propagation:
+    - from: argument(0)
+      to: return
+# PHP manual: returns bool.
+- subject:
+    method: mysqli::real_query
+  signature:
+    params:
+      - name: query
+        type: string
+    returnType: bool
+  propagation:
+    - from: argument(0)
+      to: return

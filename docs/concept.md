@@ -47,7 +47,7 @@ The format, decoding, and validation belong to commons-phpmodels.
 ```
 Offline (per upstream release):
     phpstorm-stubs, psalm stubs ──extraction──► models/<category>/<extension>.yaml
-                                                models/language/*.yaml (hand-declared)
+                                                models/{language,manual}/*.yaml (hand-declared)
     psalm taint data ───────────extraction──► taint/** (document set)
     Argus sink lists ───────────review──────► taint-rules/** (document set)
     reviewed value semantics ───review──────► value-rules/** (document set)
@@ -87,8 +87,8 @@ Runtime:
   commons-phpmodels: documents emitted by an extraction producer, whose set
   provenance declares them generated, never hand-edited. A correction
   belongs in one of this library's hand-maintained sets, not in these files.
-- **Scope:** every generated document under the models tree, and every
-  file of the taint document set.
+- **Scope:** every generated document under the models tree (not the
+  hand-declared `language/` and `manual/` documents), and the taint set.
 - **Relationships:** produced by the Extraction Pipeline; consumed whole by
   the Stub Registry.
 
@@ -108,9 +108,10 @@ Runtime:
 - **Definition:** An entry for a PHP language construct that analyses
   treat as callable or class-like although no extension declares it:
   keyword constructs (`echo`, `isset`, `exit`, `include`, ...) and scalar
-  type names used in class position (`int`, `string`, ...). These are
-  declared as data in one hand-maintained document in the models tree so
-  that one load path and one entry type serve every lookup.
+  type names used in class position (`int`, `string`, ...), declared as
+  data in the models tree so one load path serves every lookup. The
+  `manual/` documents declare, the same way, built-ins the Extraction
+  Pipeline cannot produce: methods it omits, functions outside its release.
 - **Scope:** the closed keyword and scalar-type sets the registry serves
   today.
 - **Relationships:** a Model Entry like any other; distinguished only by
@@ -158,8 +159,7 @@ Runtime:
 - **With commons-phpmodels:** every document is decoded by the format
   library's model loader; every format violation is a load failure at the
   consumer's start or the extraction's verification — never a silent
-  miss. This library adds no validation rule of the format and holds no
-  parallel copy of its types.
+  miss. This library adds no validation rule of the format.
 - **With cobraphp-core:** a name lookup returns the model entry with its
   extension provenance, or nothing. Signature fields, constant values, and
   declared propagations are read from the entry as commons-phpmodels

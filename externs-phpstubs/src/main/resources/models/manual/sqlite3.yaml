@@ -1,0 +1,24 @@
+# SQLite3 methods the extraction does not emit (the upstream conversion carried no methods for this class).
+# Hand-maintained; extension provenance "sqlite3" comes from this file name. Signatures follow the PHP manual.
+# PHP manual: returns an SQLite3Result or false; the query text reaches the result.
+- subject:
+    method: SQLite3::query
+  signature:
+    params:
+      - name: query
+        type: string
+    returnType: mixed
+  propagation:
+    - from: argument(0)
+      to: return
+# PHP manual: returns bool.
+- subject:
+    method: SQLite3::exec
+  signature:
+    params:
+      - name: query
+        type: string
+    returnType: bool
+  propagation:
+    - from: argument(0)
+      to: return
