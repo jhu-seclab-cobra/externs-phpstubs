@@ -1,23 +1,22 @@
 # externs-phpstubs
 
-> Read-only Kotlin registry of PHP built-in declarations as commons-phpmodels entries, each with its extension provenance, plus psalm's taint data, a hand-maintained taint rules set, and a hand-maintained value rules set as mountable commons-phpmodels document sets, each carrying its set provenance.
+> Read-only Kotlin lookup of PHP built-ins: one `BuiltinRecord` per function, class, method, constant, class constant, property, or predefined variable, merging the generated declarations, the value rules, psalm's taint data, and the taint rules into the signature in force plus every fact, each tagged with its argument condition, in one canonical vocabulary.
 
-`PhpStubs` is the singleton entry point. Lookup names go through the commons-phpmodels subject creators: functions, classes, and methods fold case and drop a leading `\`; constants keep their case unless `caseSensitive = false`.
+`PhpStubs` is the entry point: its companion is the lookup over the bundled sets; `PhpStubs.with(...)` builds a lookup that also mounts extension sets. Lookup names go through the commons-phpmodels subject creators: functions, classes, and methods fold case and drop a leading `\`; constants keep their case.
 
 ## Instructions for Agents
 
-- Call `PhpStubs.findFunction(name)` for `StubEntry<FunctionSubject>?`, `findClass(name)` for `StubEntry<ClassSubject>?`.
-- Call `PhpStubs.findMethod(name, owner?)` for `StubEntry<MethodSubject>?`; the entry's `subject` carries `owner` and `name`.
-- Call `PhpStubs.findConstant(name, caseSensitive?)` for `StubEntry<ConstantSubject>?`, `findClassConstant(name, owner?, caseSensitive?)` for `StubEntry<ClassConstantSubject>?`.
-- `StubEntry` holds `subject`, `model: SubjectModel` (commons-phpmodels), and `extension`. Read signatures through the typed accessors `callableSignature`, `classSignature`, `typedSignature`, `propertySignature`.
-- A name containing `::`, `$`, whitespace, or nothing raises `IllegalArgumentException`; an unknown name returns `null`.
-- Declared flows are `entry.model.body.propagation`; `null` means no flow is declared.
-- Taint sources, sinks, and sanitizers are NOT registry entries. They ship as the `taint/` document set in psalm's names: load it with `DocumentSetLoader.load(StubResources.opener(StubResources.TAINT), context, mapping)`.
-- Assertions beyond psalm's (Argus sinks, `echo`, `escapeshellarg`, `$_SERVER`, `getenv`, ...) are the `taint-rules/` set: load it with `DocumentSetLoader.load(StubResources.opener(StubResources.TAINT_RULES), taintVocabulary)` or under the same mapping as `taint/` extended by `xpath` and `external`; mount it after `taint/`.
-- Value semantics beyond the generated declarations (`strlen` returns `num` from its first argument, `getenv` returns `str` from no argument, `print_r` under `argument(1)` true returns `str`, ...) are the `value-rules/` set: load it with `DocumentSetLoader.load(StubResources.opener(StubResources.VALUE_RULES))`; it needs no vocabulary and no mapping.
-- Every shipped set carries `provenance.yaml`: `models/` and `taint/` are `generated`, `taint-rules/` and `value-rules/` are `manual`. Read `set.provenance` and rank sets with commons-phpmodels `Precedence.DEFAULT` (manual outranks generated) instead of relying on mount order.
-- `StubResources.MODELS`, `StubResources.TAINT`, `StubResources.TAINT_RULES`, and `StubResources.VALUE_RULES` are the classpath roots; `StubResources.opener(root)` yields the `ResourceOpener` the set loader needs.
+- Call `PhpStubs.function(name)`, `clazz(name)`, `method("Owner::name")` or `method(owner, name)`, `constant(name)`, `classConstant(...)`, `property(...)`, `variable("$name")`, or `record(subject)`; each returns a `BuiltinRecord<…>?`. A name that is not a spelling of the kind raises `IllegalArgumentException`; an unknown name returns `null`.
+- `BuiltinRecord` holds `subject`, `extension: String?` (null when no generated set declares the subject), `signature: SignatureInfo?`, and the fact lists `returns`, `flows`, `sources`, `sinks`, `sanitizers`. Read signatures through the typed accessors `callableSignature`, `classSignature`, `typedSignature`, `propertySignature`.
+- Existence of a declaration is `signature != null`. A taint-only function or a predefined variable is a record without a signature.
+- Every fact carries `owner` and `condition: ArgPattern?`. Match `condition` against the call's arguments with `ArgPattern.matches(List<IPrimitiveVal?>)`; `null` (undecidable) is the consumer's rule to apply. The record ranks nothing.
+- Taint facts speak the canonical vocabulary only: `VulnClass` (`sqli`, `cmdi`, `codei`, `xss`, `headeri`, `ssrf`, `pathtrav`, `fileinc`, `deser`, `callablei`, `ldapi`, `xpathi`) and `Origin` (`user-input`, `external-input`). No psalm name survives the merge.
+- Enumerate with `PhpStubs.functions`, `classes`, `methods`, `constants`, `classConstants`, `properties`, `variables` (records) or `sinks`, `sources`, `sanitizers`, `flows`, `returns` (facts); a match looser than exact is your filter over an enumeration.
+- The merge keeps one statement per (subject, condition, unit); manual sets outrank generated ones, later position wins among equal ranks, and a unit is replaced whole. Merge order: `models/`, `value-rules/`, `vocabulary/`, `taint/`, `taint-rules/`.
+- `PhpStubs.with(Path)` / `with("/classpath/root/")` / `PhpStubs + root` mounts extension sets after the bundled ones; a set without `provenance.yaml` is manual. The bundled lookup is unchanged.
+- Every bundled set also loads alone through `DocumentSetLoader.load(StubResources.opener(root), context, mapping)`; `StubResources.VOCABULARY` and `StubResources.PSALM_MAPPING` give the context and mapping the taint sets need.
+- Errors: `StubIndexNotFoundException` (absent manifest or document), `StubIndexInvalidException` (malformed set, corpus rule, conditional signature, bundled set without provenance).
 
 ## API Reference
 
-- [Stubs API](llms/stubs.md): `PhpStubs`, `StubEntry`, `StubRegistry`, `StubLoader`.
+- [Stubs API](llms/stubs.md): `BuiltinLookup`, `PhpStubs`, `BuiltinRecord`, facts, `VulnClass`, `Origin`, `StubResources`.

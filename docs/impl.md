@@ -53,7 +53,7 @@
 - `@psalm-taint-specialize` has no model counterpart and is dropped. The five conditional escapes on `filter_var` become conditional entries `when: [_, 257]` … `[_, 520]`.
 - Method subjects in the set (`mysqli::query`, `mysqli_stmt::prepare`, ...) are absent from the generated documents (the registry's methods are the generated `Exception` pair and the hand-declared `models/manual/` methods); the set is psalm's data verbatim, not a projection onto the registry.
 - **[taint rules set]** Sinks follow `sinks.json` of the Argus artifact (411 sinks, 12 vulnerability types); `SinkPoint` accepts argument ports only, so the receiver-triggered deserialization getters (Phar, SplFileInfo, DirectoryIterator families) are omitted. `TaintPolicy` unions rows sharing an origin, so the set's `input → [xpath]` row extends psalm's row at load.
-- **[commons-phpmodels 0.2.1]** `DocumentSetException(path, detail, cause?)` now wraps a malformed listed document; `VocabularyException` names the document on an undeclared reference. `StubLoader` maps absence to `StubIndexNotFoundException` by recording which path the opener could not resolve.
+- **[commons-phpmodels 0.2.1]** `DocumentSetException(path, detail, cause?)` now wraps a malformed listed document; `VocabularyException` names the document on an undeclared reference. `MountSequence` maps absence to `StubIndexNotFoundException` by recording which path the opener could not resolve.
 
 ### Set provenance
 

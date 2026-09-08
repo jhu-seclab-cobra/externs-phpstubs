@@ -10,9 +10,8 @@ layout of the generated taint document set. Concepts:
 - **External types (commons-phpmodels):** `ResourceOpener`,
   `DocumentSetLoader`, `DocumentSet`, `CategoryMapping`, `Vocabulary`
 - **Relationships:** `StubResources` creates `ResourceOpener` instances;
-  `StubLoader` uses `StubResources` for the models root; consumers use
-  `StubResources` for the taint root and pass the opener to
-  `DocumentSetLoader`. One-way; `StubResources` depends on nothing in this
+  the bundled `MountSequence` opens every set root through `StubResources`;
+  a consumer loading one set alone passes the opener to `DocumentSetLoader`. One-way; `StubResources` depends on nothing in this
   module.
 - **Exceptions:** none of its own. A consumer's set load raises the
   commons-phpmodels exceptions unchanged.

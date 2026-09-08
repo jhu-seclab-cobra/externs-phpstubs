@@ -1,12 +1,12 @@
 # COBRA.EXTERNS.PHPSTUBS
 
-> PHP built-in declaration registry for static analysis.
+> PHP built-in lookup for static analysis: declarations, value semantics, and taint facts in one record per built-in.
 
-Lookup of PHP built-in functions, classes, methods, and constants as commons-phpmodels entries with extension provenance, plus psalm's taint sources, sinks, and escapes, a hand-maintained taint rules set, and a hand-maintained value rules set as mountable document sets, each declaring its provenance.
+Lookup of PHP built-in functions, classes, methods, constants, properties, and predefined variables by their PHP spelling. Each record merges the generated declarations (extension, signature), the hand-maintained value rules, psalm's taint data, and the hand-maintained taint rules into one `BuiltinRecord`: the signature in force plus every sink, source, sanitizer, flow, and returns fact, each tagged with the argument condition it holds under. Taint facts speak one canonical vocabulary; a consumer holds no set, mapping, or precedence.
 
 [![codecov](https://codecov.io/gh/jhu-seclab-cobra/externs-phpstubs/branch/main/graph/badge.svg)](https://codecov.io/gh/jhu-seclab-cobra/externs-phpstubs)
 ![Kotlin JVM](https://img.shields.io/badge/Kotlin%20JVM-2.0.1%20%7C%20JVM%201.8%2B-blue?logo=kotlin)
-[![Release](https://img.shields.io/badge/release-v0.6.1-blue.svg)](https://github.com/jhu-seclab-cobra/externs-phpstubs/releases/tag/v0.6.1)
+[![Release](https://img.shields.io/badge/release-v0.7.0-blue.svg)](https://github.com/jhu-seclab-cobra/externs-phpstubs/releases/tag/v0.7.0)
 [![last commit](https://img.shields.io/github/last-commit/jhu-seclab-cobra/externs-phpstubs)](https://github.com/jhu-seclab-cobra/externs-phpstubs/commits/main)
 [![](https://jitpack.io/v/jhu-seclab-cobra/externs-phpstubs.svg)](https://jitpack.io/#jhu-seclab-cobra/externs-phpstubs)
 ![Repo Size](https://img.shields.io/github/repo-size/jhu-seclab-cobra/externs-phpstubs)
@@ -20,7 +20,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.jhu-seclab-cobra:externs-phpstubs:0.6.1")
+    implementation("com.github.jhu-seclab-cobra:externs-phpstubs:0.7.0")
 }
 ```
 
@@ -28,93 +28,75 @@ dependencies {
 
 ```kotlin
 import edu.jhu.cobra.externs.phpstubs.PhpStubs
+import edu.jhu.cobra.externs.phpstubs.VulnClass
 import edu.jhu.cobra.externs.phpstubs.callableSignature
 import edu.jhu.cobra.externs.phpstubs.typedSignature
 
-// Existence checks
-PhpStubs.containsFunction("strlen")             // true
-PhpStubs.containsClass("Exception")         // true
-
-// Function entry: extension provenance plus the decoded model
-val strlen = PhpStubs.findFunction("strlen")
+// One record per built-in: extension, signature, and every fact in force
+val strlen = PhpStubs.function("strlen")
 strlen?.extension                            // "standard"
 strlen?.callableSignature?.returnType        // DeclaredType("int")
-strlen?.callableSignature?.params            // [ParameterInfo("string", ...)]
+strlen?.returns?.single()?.kind              // ReturnKind.NUM (value rules outrank the generated unit)
+strlen?.flows                                // [FlowFact(argument(0) -> return)]
 
-// Declared flows come from the model body
-val substr = PhpStubs.findFunction("substr")
-substr?.model?.body?.propagation             // [Propagation(argument(0) -> return)]
+// Taint facts in the canonical vocabulary, with their argument conditions
+PhpStubs.method("mysqli::query")?.sinks      // [SinkFact(port = argument(0), vulnClass = sqli)]
+PhpStubs.variable("\$_GET")?.sources         // [SourceFact(origins = {user-input})]
+PhpStubs.function("filter_var")?.sanitizers  // five facts, each with condition [_, <FILTER_* id>]
+    ?.filter { it.condition?.matches(myCallArguments) == true }
 
-// Constants (case-sensitive by default, matching PHP semantics)
-PhpStubs.findConstant("PHP_INT_MAX")?.typedSignature?.value    // "9223372036854775807"
-PhpStubs.findConstant("php_int_max")                           // null (case mismatch)
-PhpStubs.findConstant("php_int_max", caseSensitive = false)    // folded lookup
+// Constants keep their case; a member spelling on a function lookup is an argument error
+PhpStubs.constant("PHP_INT_MAX")?.typedSignature?.value    // "9223372036854775807"
+PhpStubs.constant("php_int_max")                           // null
+PhpStubs.classConstant("Exception::SEVERITY_ERROR")        // record
+
+// Enumerations for a consumer's own filter
+PhpStubs.sinks.filter { it.vulnClass == VulnClass.SQLI.id }
+PhpStubs.functions.filter { it.extension == "keyword" }
+
+// Extension sets mount after the bundled ones; the bundled lookup is unchanged
+val extended = PhpStubs.with(Path.of("models/site-rules"))
 ```
 
 ## API
 
-**`PhpStubs`** -- singleton facade. Names go through the [commons-phpmodels](https://github.com/jhu-seclab-cobra/commons-phpmodels) subject creators: functions, classes, and methods fold case, a leading `\` is stripped, and constants keep their case. A name that is not a PHP identifier spelling raises `IllegalArgumentException`.
+**`BuiltinLookup`** -- the read surface of one merge. Every exact lookup spells its subject in PHP's own grammar through the [commons-phpmodels](https://github.com/jhu-seclab-cobra/commons-phpmodels) subject creators: functions, classes, and methods fold case and drop a leading `\`; constants keep their case. A name that is not a spelling of the kind raises `IllegalArgumentException`; an absent subject is `null`.
 
-| Method | Return |
+| Member | Return |
 |--------|--------|
-| `containsFunction(name)` | `Boolean` |
-| `containsClass(name)` | `Boolean` |
-| `containsMethod(name, owner?)` | `Boolean` |
-| `containsConstant(name, caseSensitive?)` | `Boolean` |
-| `findFunction(name)` | `StubEntry<FunctionSubject>?` |
-| `findClass(name)` | `StubEntry<ClassSubject>?` |
-| `findMethod(name, owner?)` | `StubEntry<MethodSubject>?` |
-| `findConstant(name, caseSensitive?)` | `StubEntry<ConstantSubject>?` |
-| `findClassConstant(name, owner?, caseSensitive?)` | `StubEntry<ClassConstantSubject>?` |
-| `functionNames` | `Set<String>` |
-| `classNames` | `Set<String>` |
-| `methodNames` | `Set<String>` |
-| `constantNames` | `Set<String>` |
-| `keywordFunctionNames` | `Set<String>` |
-| `scalarTypeNames` | `Set<String>` |
+| `function(name)` | `BuiltinRecord<FunctionSubject>?` |
+| `clazz(name)` | `BuiltinRecord<ClassSubject>?` |
+| `method(spelling)`, `method(owner, name)` | `BuiltinRecord<MethodSubject>?` |
+| `constant(name)` | `BuiltinRecord<ConstantSubject>?` |
+| `classConstant(spelling)`, `classConstant(owner, name)` | `BuiltinRecord<ClassConstantSubject>?` |
+| `property(spelling)`, `property(owner, name)` | `BuiltinRecord<PropertySubject>?` |
+| `variable(name)` | `BuiltinRecord<VariableSubject>?` |
+| `record(subject)` | `BuiltinRecord<ModelSubject>?` |
+| `functions`, `classes`, `methods`, `constants`, `classConstants`, `properties`, `variables` | `Collection<BuiltinRecord<…>>` in first-statement order |
+| `sinks`, `sources`, `sanitizers`, `flows`, `returns` | `List<…Fact>` in record order |
+| `vocabulary`, `policy` | `Vocabulary`, `TaintPolicy` accumulated over every mounted set |
 
-**`StubEntry<S>`** -- data class `(subject: S, model: SubjectModel, extension: String)`. Typed accessors: `callableSignature` (function, method), `classSignature` (class), `typedSignature` (constant, class constant), `propertySignature` (property).
+**`PhpStubs`** -- one `BuiltinLookup` over one merge. The companion is the lookup over the bundled sets, built on first access and shared. `with(vararg roots: String)`, `with(vararg dirs: Path)`, and `plus` build a second lookup that mounts extension sets after the bundled ones, in order; a set without `provenance.yaml` mounts as manual.
 
-**`StubRegistry`** -- the frozen per-kind maps behind the facade, built by `StubLoader.loadAll()`.
+**`BuiltinRecord<S>`** -- `(subject, extension: String?, signature: SignatureInfo?, returns, flows, sources, sinks, sanitizers)`. Typed accessors: `callableSignature` (function, method), `classSignature` (class), `typedSignature` (constant, class constant), `propertySignature` (property). `extension` is the PHP extension of the generated declaration, `null` for a subject only a hand-maintained set states.
 
-**`StubResources`** -- classpath roots of the four shipped document sets, `MODELS` (`/models/`), `TAINT` (`/taint/`), `TAINT_RULES` (`/taint-rules/`), and `VALUE_RULES` (`/value-rules/`), and `opener(root)` returning a commons-phpmodels `ResourceOpener` over them. Every set root holds `provenance.yaml`; the loader surfaces it as `DocumentSet.provenance`.
+**`Fact`** -- `SinkFact(port, vulnClass)`, `SourceFact(origins, at, keys)`, `SanitizerFact(categories)`, `FlowFact(from, to)`, `ReturnsFact(kind)`; each carries `owner` and `condition: ArgPattern?`. The record ranks nothing: a consumer matches each condition against its call arguments and applies its own rule to an undecidable outcome.
 
-## Taint Document Set
+**`VulnClass`**, **`Origin`** -- enum constants for the canonical vocabulary (`sqli`, `cmdi`, `codei`, `xss`, `headeri`, `ssrf`, `pathtrav`, `fileinc`, `deser`, `callablei`, `ldapi`, `xpathi`; `user-input`, `external-input`).
 
-`taint/` ships psalm's taint data in psalm's own names: `vocabulary.yaml` (the fifteen taint kinds and the `input` color), `policy.yaml` (`input` enables psalm's input group), `sinks.yaml`, `sanitizers.yaml`, and `sources.yaml`. Entries carry no signature; a consumer mounts the set through the commons-phpmodels set loader, either under psalm's vocabulary or translated by its own `CategoryMapping`:
+**`StubResources`** -- classpath roots of the five bundled sets, `MODELS`, `VALUE_RULES`, `VOCABULARY`, `TAINT`, `TAINT_RULES`, the `PSALM_MAPPING` document, and `opener(root)`.
 
-```kotlin
-import edu.jhu.cobra.commons.phpmodels.DocumentSetLoader
-import edu.jhu.cobra.externs.phpstubs.StubResources
+## Bundled Sets and Merge Order
 
-val psalm = DocumentSetLoader.load(StubResources.opener(StubResources.TAINT))
-val mapped = DocumentSetLoader.load(StubResources.opener(StubResources.TAINT), myVocabulary, myMapping)
-```
+| Position | Root | Content | Provenance |
+|----------|------|---------|------------|
+| 0 | `models/` | Generated declarations: signature per entry, extension from document placement | generated |
+| 1 | `value-rules/` | Hand-maintained value semantics beyond or against the generated ones, checked against the PHP manual | manual |
+| 2 | `vocabulary/` | The canonical danger categories, origin colors, and policy; the psalm mapping | manual |
+| 3 | `taint/` | psalm's sinks, sanitizers, sources in psalm's names, translated by the psalm mapping | generated |
+| 4 | `taint-rules/` | Hand-maintained sinks (Argus lists), escapes, and sources psalm lacks, translated by the same mapping | manual |
 
-The set is regenerated from a psalm checkout by `tools/extract_taint.py --psalm <root> --out externs-phpstubs/src/main/resources/taint`.
-
-## Taint Rules Document Set
-
-`taint-rules/` ships hand-maintained taint assertions beyond psalm's, in psalm's names: the sinks of the Argus lists (Jahanshahi and Egele, USENIX Security 2024) that the format expresses, escapes psalm lacks (`escapeshellarg`, `htmlspecialchars`, `intval`, ...), and sources psalm does not color (`$_SERVER`, `getenv`, `file_get_contents`, ...). Its `vocabulary.yaml` adds only the kind `xpath` and the color `external`; it decodes over the taint set's vocabulary and mounts after it under the same mapping, extended by those two names:
-
-```kotlin
-val psalm = DocumentSetLoader.load(StubResources.opener(StubResources.TAINT))
-val rules = DocumentSetLoader.load(StubResources.opener(StubResources.TAINT_RULES), psalm.vocabulary)
-val mapped = DocumentSetLoader.load(StubResources.opener(StubResources.TAINT_RULES), myVocabulary, myMapping)
-```
-
-An entry for a subject the taint set also states restates psalm's points and adds its own, so a consumer replacing one section per subject loses nothing.
-
-## Value Rules Document Set
-
-`value-rules/` ships hand-maintained value semantics the generated declarations lack or state wrongly: typed results and exhaustive argument-to-result flows for built-ins psalm never annotated (`strlen`, `intval`, `count`, ...), corrections checked against the PHP manual (`strstr` flows only its haystack, `getenv` flows no argument), and guarded branches for mode-switching built-ins (`print_r`, `var_export`). Entries carry no signature and name no category, so the set loads with no vocabulary and no mapping:
-
-```kotlin
-val values = DocumentSetLoader.load(StubResources.opener(StubResources.VALUE_RULES))
-values.provenance?.verification    // Verification.MANUAL
-```
-
-Set provenance decides precedence: `models/` and `taint/` are `generated`, `taint-rules/` and `value-rules/` are `manual`, and commons-phpmodels `Precedence.DEFAULT` ranks manual above generated whatever the mount order.
+The merge keeps one statement per (subject, condition, unit); a higher-ranked provenance wins (`Precedence.DEFAULT`: manual over generated), and among equal ranks the later position wins. A unit is replaced whole; a set that omits a unit leaves the earlier statement in force. Each set also loads on its own through commons-phpmodels `DocumentSetLoader.load(StubResources.opener(root), context, mapping)`; the taint set is regenerated from a psalm checkout by `tools/extract_taint.py --psalm <root> --out externs-phpstubs/src/main/resources/taint`.
 
 ## Background
 
@@ -123,14 +105,20 @@ Model documents derived from [JetBrains/phpstorm-stubs](https://github.com/JetBr
 ## Documentation
 
 - [Concepts](docs/concept.md) -- generated layer over commons-phpmodels, extension provenance, lookup semantics
+- [Lookup Concepts](docs/concept-lookup.md) -- canonical vocabulary, the merge, Built-in Record and Built-in Lookup
+- [Lookup Model](docs/model-lookup.md) -- bundled sets, merge order, statements in force, records and facts
+- [Merge Algorithm](docs/spec-merge.md) -- folding the mounted sets into one statement per subject, condition, and unit
 - [Taint Concepts](docs/concept-taint.md) -- the taint document set in psalm's names and its extraction
-- [Design](docs/design.md) -- entry, registry, loader, and facade specifications; corpus rules
+- [Design](docs/design.md) -- resource roots, merge order, corpus rules, exception types
+- [Lookup Design](docs/design-lookup.md) -- `BuiltinLookup`, `PhpStubs`, `BuiltinRecord`, fact types, canonical enums
+- [Merge Design](docs/design-merge.md) -- `Mount`, `MountSequence`, `Merge`
 - [Taint Design](docs/design-taint.md) -- `StubResources`, taint resource layout, extraction script
 - [Taint Rules Concepts](docs/concept-taint-rules.md) -- the hand-maintained taint rules document set and its contracts
 - [Taint Rules Design](docs/design-taint-rules.md) -- rules resource layout, validation and maintenance rules
 - [Value Rules Concepts](docs/concept-value-rules.md) -- the hand-maintained value rules set, review reasons, corpus gaps
 - [Value Rules Design](docs/design-value-rules.md) -- value rules resource layout, validation and maintenance rules
 - [Implementation Notes](docs/impl.md) -- commons-phpmodels API findings, developer instructions
+- [Performance](docs/performance.md) -- lookup benchmark procedure and baselines
 
 ## For Agents
 
