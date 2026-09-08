@@ -117,16 +117,26 @@ internal class Merge private constructor(
         ) {
             val body = entry.body
             when (unit) {
-                OverrideUnit.SIGNATURE -> Unit
+                OverrideUnit.SIGNATURE -> {
+                    Unit
+                }
+
                 OverrideUnit.VALUE -> {
                     returns += ReturnsFact(owner, condition, body.returns!!)
                     body.propagation.orEmpty().mapTo(flows) { FlowFact(owner, condition, it.from, it.to) }
                 }
-                OverrideUnit.SOURCES ->
+
+                OverrideUnit.SOURCES -> {
                     body.sources.orEmpty().mapTo(sources) { SourceFact(owner, condition, it.origin, it.at, it.keys) }
-                OverrideUnit.SINKS -> body.sinks.orEmpty().mapTo(sinks) { SinkFact(owner, condition, it.port, it.vulnClass) }
-                OverrideUnit.SANITIZERS ->
+                }
+
+                OverrideUnit.SINKS -> {
+                    body.sinks.orEmpty().mapTo(sinks) { SinkFact(owner, condition, it.port, it.vulnClass) }
+                }
+
+                OverrideUnit.SANITIZERS -> {
                     body.sanitizers.orEmpty().mapTo(sanitizers) { SanitizerFact(owner, condition, it.categories) }
+                }
             }
         }
     }
