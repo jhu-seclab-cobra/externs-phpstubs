@@ -37,7 +37,7 @@ taint-rules/
 
 Every document carries a header naming its provenance. Entry forms match
 the taint set's table in [design-taint.md](design-taint.md); the set adds
-no guarded entry. Entries are sorted by subject spelling.
+no conditional entry. Entries are sorted by subject spelling.
 
 | Document | Subject kinds | Content |
 |----------|---------------|---------|
@@ -49,10 +49,10 @@ no guarded entry. Entries are sorted by subject spelling.
 
 - The set decodes over the taint set's vocabulary with no mapping and
   fails to decode alone: its vocabulary declares only the additions.
-- Every entry is a `SubjectModel` with no signature and exactly one of
+- Every entry declares no signature and exactly one of
   the three taint sections.
 - No entry's section equals the taint set's section for the same subject
-  and guard.
+  and condition.
 - A sinks entry whose subject the taint set also sinks contains every one
   of the taint set's sink points.
 - A consumer's mapping lists every psalm kind, `xpath`, `input`, and

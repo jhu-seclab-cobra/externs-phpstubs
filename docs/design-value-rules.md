@@ -36,8 +36,8 @@ value-rules/
 
 Every document carries a header naming the set and its PHP manual area.
 Entries are flat: `subject`, optional `when`, `returns`, optional
-`propagation`. Entries are sorted by subject spelling; a guarded branch
-precedes its default branch. A review reason is a `#` comment line
+`propagation`. Entries are sorted by subject spelling; a conditional entry
+precedes the unconditional entry of its subject. A review reason is a `#` comment line
 directly above the entry it justifies.
 
 | Document group | Subject kinds | Content |
@@ -51,11 +51,11 @@ directly above the entry it justifies.
 - The set decodes with no context: it names no category and no color, and
   its vocabulary and policy are absent.
 - `provenance.yaml` decodes to verification `manual`.
-- Every entry is a `SubjectModel` with no signature, a `returns` section,
+- Every entry declares no signature, a `returns` section,
   and no taint section.
 - Every subject is a function or method the registry declares.
-- No default-branch unit equals the registry entry's unit for the same
-  subject.
+- No unconditional entry's unit equals the registry entry's unit for the
+  same subject.
 - The repository tests, not the consumer, prove the set decodes.
 
 ## Maintenance

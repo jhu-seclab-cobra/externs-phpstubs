@@ -1,154 +1,83 @@
 # PHP Stubs — Design
 
-Domain model and algorithm phases are skipped: the library is a registry
-over types commons-phpmodels already defines (no domain semantics of its
-own) and its load is a linear pass over documents (no worklist, fixpoint,
-or traversal). Concepts: [concept.md](concept.md).
+The data side of the library: the resource roots, the four bundled sets and
+their fixed Merge Order, the corpus rules on the generated set, and the
+error types. The lookup surface — merge, records, facts, `PhpStubs` — is in
+[design-lookup.md](design-lookup.md). Concepts: [concept.md](concept.md),
+[concept-lookup.md](concept-lookup.md). Domain semantics:
+[model-lookup.md](model-lookup.md). Fold: [spec-merge.md](spec-merge.md).
 
 ## Design Overview
 
-- **Classes:** `StubEntry<S>` (data class), `StubRegistry` (data class),
-  `StubLoader` (object), `PhpStubs` (object), `StubResources` (object,
-  [design-taint.md](design-taint.md))
+- **Classes:** `StubResources` (object), `PhpStubs`, `BuiltinRecord<S>`,
+  the five fact types, `Merge`, `Mount` ([design-lookup.md](design-lookup.md))
 - **External types (commons-phpmodels):** `DocumentSetLoader`,
-  `DocumentSet`, `Document`, `ResourceOpener`, `ModelEntry`,
-  `SubjectModel`, `ModelGenerator`, `ModelSubject` and its seven subtypes,
-  `SignatureInfo` and its four subtypes, `ParameterInfo`, `DeclaredType`
-- **Relationships:** `StubEntry` contains one `ModelSubject` subtype and one
-  `SubjectModel`; `StubRegistry` contains `StubEntry` maps keyed by subject;
-  `StubLoader` uses `DocumentSetLoader` over a `StubResources` opener and
-  builds `StubRegistry`; `PhpStubs` contains one `StubRegistry` and its
-  lookup indexes. All arrows one-way.
+  `DocumentSet`, `Document`, `ResourceOpener`, `CategoryMappingLoader`,
+  `CategoryMapping`, `ModelEntry`, `ModelSubject` and its seven subtypes,
+  `ArgPattern`, `SignatureInfo` and its four subtypes, `Vocabulary`,
+  `TaintPolicy`, `Precedence`, `Verification`
+- **Relationships:** `StubResources` names the roots and opens them;
+  `PhpStubs` mounts the bundled roots in Merge Order through
+  `DocumentSetLoader` (the psalm mapping decoded once by
+  `CategoryMappingLoader` and applied to the two psalm-named sets) and
+  folds them in `Merge`. One-way: facade → merge → format library.
 - **Exceptions:** `StubIndexNotFoundException`, `StubIndexInvalidException`
-  (both extend `RuntimeException`), raised by `StubLoader`.
-- **Dependency roles:** Data holders: `StubEntry`, `StubRegistry`.
-  Orchestrator: `StubLoader`. Facade: `PhpStubs`. Resource roots and
-  opener: `StubResources`. Decoder and validator: commons-phpmodels.
+  (both extend `RuntimeException`).
+- **Dependency roles:** Resource roots and opener: `StubResources`.
+  Facade and composition root: `PhpStubs`. Decoder and validator:
+  commons-phpmodels.
 
 Package `edu.jhu.cobra.externs.phpstubs`, one module, `explicitApi()`.
-commons-phpmodels is an `api` dependency: its subject and signature types
-are the entry surface. No YAML library is a direct dependency. Every type
-in this file is public.
+commons-phpmodels is an `api` dependency: its subject, signature, section,
+and condition types are the record surface. No YAML library is a direct
+dependency.
 
 ## Class / Type Specifications
 
-### StubEntry<S : ModelSubject>
+### StubResources (object)
 
-**Responsibility:** One registry entry: the decoded model together with its
-extension provenance. Generic over the subject kind so a lookup result
-exposes the identity fields of its kind (`owner`, `name`) without a cast.
+**Responsibility:** The classpath roots of every bundled set and the
+opener over a root. Value tier: constants, because the layout is fixed by
+this repository's build.
 
-**State/Fields:** `subject: S`, `model: SubjectModel`, `extension: String`
-(the extension name derived from document placement; value tier: data,
-never a constant in code).
-
-**Validation (`init`):** `model.subject == subject`; `extension` non-blank.
-
-**Typed signature accessors** (top-level extension properties in
-`StubEntry.kt`, one per subject kind, narrowing `model.signature`):
-`StubEntry<FunctionSubject>.callableSignature`,
-`StubEntry<MethodSubject>.callableSignature`,
-`StubEntry<ClassSubject>.classSignature`,
-`StubEntry<ConstantSubject>.typedSignature`,
-`StubEntry<ClassConstantSubject>.typedSignature`,
-`StubEntry<PropertySubject>.propertySignature`. Non-null: the corpus rule
-below requires a signature on every entry, and commons-phpmodels rejects a
-signature subtype that does not match the subject kind.
-
-### StubRegistry
-
-**Responsibility:** The immutable per-kind entry maps, keyed by subject.
-
-**State/Fields:** `functions: Map<FunctionSubject, StubEntry<FunctionSubject>>`,
-`classes`, `methods`, `constants`, `classConstants`, `properties` — each
-map keyed by its subject subtype. Every map is unmodifiable.
-
-### StubLoader (object)
-
-**Responsibility:** Builds one `StubRegistry` from the document set a
-manifest lists. Owns the extension derivation and the corpus rules; owns
-no discovery or format rule (commons-phpmodels' `DocumentSetLoader` reads
-the manifest, decodes, and validates every entry).
+**Constants:** `MODELS = "/models/"`, `VALUE_RULES = "/value-rules/"`,
+`VOCABULARY = "/vocabulary/"`, `TAINT = "/taint/"`,
+`TAINT_RULES = "/taint-rules/"`, `PSALM_MAPPING = "/vocabulary/psalm-mapping.yaml"`.
 
 **Methods:**
-- `loadAll(resourceBase: String = StubResources.MODELS): StubRegistry`
-  - **Behavior:** loads the set under `resourceBase` through
-    `DocumentSetLoader.load` over `StubResources.opener(resourceBase)`
-    with the empty vocabulary and no mapping; for each returned document,
-    attaches the extension derived from its path (`.yaml` removed, then a
-    trailing `_<digits>` split suffix removed); routes each entry into the
-    map of its subject kind; freezes the maps.
-  - **Input:** classpath directory holding `index.txt` and the documents it
-    lists, trailing slash optional.
-  - **Output:** the frozen registry.
-  - **Errors:** `StubIndexNotFoundException` when `index.txt` or a listed
-    document is absent (the opener records which path resolved to nothing;
-    message names the full resource path); `StubIndexInvalidException` on
-    any other set-load failure (message names the document; cause is the
-    commons-phpmodels exception: a malformed document, a path listed twice,
-    an undeclared reference) or on a corpus rule violation.
+- `opener(root: String): ResourceOpener` — resolves a relative document
+  path against `root` (trailing slash optional) through
+  `Class.getResourceAsStream`; an absent resource is recorded so the
+  facade can raise `StubIndexNotFoundException` naming the full path.
 
-**Corpus rules** (each violation is a `StubIndexInvalidException` naming
-the document, and the subject where one exists):
-- Every entry is a `SubjectModel`; a `ModelGenerator` is not stub data.
+### Merge Order (constants of `PhpStubs.kt`)
+
+The bundled mounts, in this order, each with its mapping:
+
+| Position | Root | Mapping | Verification |
+|----------|------|---------|--------------|
+| 0 | `MODELS` | none | from `models/provenance.yaml` (generated) |
+| 1 | `VALUE_RULES` | none | from its provenance (manual) |
+| 2 | `VOCABULARY` | none | from its provenance (manual); empty manifest |
+| 3 | `TAINT` | `PSALM_MAPPING` | from its provenance (generated) |
+| 4 | `TAINT_RULES` | `PSALM_MAPPING` | from its provenance (manual) |
+
+Each set decodes against the vocabulary accumulated over the earlier
+positions; a set's own `vocabulary.yaml` merges after it decodes and its
+`policy.yaml` rows append. A bundled set without `provenance.yaml` is a
+packaging fault, not a default.
+
+**Corpus rules on the generated set** (position 0; each violation is a
+`StubIndexInvalidException` naming the document and subject):
 - No entry has a `VariableSubject`; predefined variables are not stubs.
-- Every entry declares a `signature`.
+- Every entry declares a `signature` and no condition.
 - No two documents declare the same subject; the message names both.
 
-Constant subjects fold nothing, so `TRUE` and `true` are distinct entries;
-case-insensitive lookup over them is the facade's over-approximation.
-
-### PhpStubs (object)
-
-**Responsibility:** The lookup facade over one lazily loaded registry. Adds
-the name-resolution rules of [concept.md](concept.md) Lookup Semantics:
-unqualified member lookup through suffix indexes and case-insensitive
-constant lookup through folded indexes. Every index is built once, lazily,
-from the registry; every lookup afterwards is a map read.
-
-**State (private, lazy):** the registry (`StubLoader.loadAll()`); the
-method suffix index `name → MethodSubject`; the class-constant suffix
-index `name → ClassConstantSubject` and its lowercased companion; the
-folded constant index `lowercase name → ConstantSubject`; the folded
-class-constant index `lowercase spelling → ClassConstantSubject`. Where
-several subjects fold to one index key, the first in load order wins,
-deterministically.
-
-**Name handling:** a lookup name is converted to a subject through the
-commons-phpmodels creators (`FunctionSubject.parse`, `ClassSubject.parse`,
-`ConstantSubject.parse`; member constructors for a qualified lookup), so
-folding and namespace-slash stripping are decided once, in the format
-library. A name that is not a PHP identifier spelling (blank, whitespace,
-`::`, `$`) is an argument error: `IllegalArgumentException` from the
-creator, never a silent miss. Two lookups have no subject to build: an
-unqualified member lookup (no `owner`) folds the member name and reads
-the suffix index; `containsConstant` given a `Class::NAME` spelling parses it
-as a `ClassConstantSubject` and resolves it as a class constant.
-
-**Members** (name sets are lazy properties; lookups are functions):
-
-| Member | Return | Behavior |
-|--------|--------|----------|
-| `containsFunction(name)` | `Boolean` | Function subject present (language constructs included) |
-| `containsClass(name)` | `Boolean` | Class subject present (scalar types and `exit`, `resource` included) |
-| `containsMethod(name, owner?)` | `Boolean` | `findMethod` non-null |
-| `containsConstant(name, caseSensitive = true)` | `Boolean` | Global or class constant present; folded indexes when `false` |
-| `findFunction(name)` | `StubEntry<FunctionSubject>?` | Registry read |
-| `findClass(name)` | `StubEntry<ClassSubject>?` | Registry read |
-| `findMethod(name, owner?)` | `StubEntry<MethodSubject>?` | Qualified read when `owner` given; suffix index otherwise |
-| `findConstant(name, caseSensitive = true)` | `StubEntry<ConstantSubject>?` | Exact read, or folded index |
-| `findClassConstant(name, owner?, caseSensitive = true)` | `StubEntry<ClassConstantSubject>?` | Qualified exact or folded read; suffix index (exact or folded) without `owner` |
-| `functionNames` | `Set<String>` | Folded function names |
-| `classNames` | `Set<String>` | Folded class names |
-| `methodNames` | `Set<String>` | `owner::name` spellings, folded |
-| `constantNames` | `Set<String>` | Global constant names, case preserved |
-| `keywordFunctionNames` | `Set<String>` | Function names whose extension is `keyword` |
-| `scalarTypeNames` | `Set<String>` | Class names whose extension is `scalar` |
-
-`findMethod` returns the entry alone: its subject carries the owner and
-folded name. Language constructs are ordinary entries in the bulk name
-sets; the two derived sets select by the extension constants `keyword`
-and `scalar` in `PhpStubs.kt` (fixed by the document layout).
+Constant subjects fold nothing, so `TRUE` and `true` are distinct entries.
+The other four sets follow their own set rules
+([design-taint.md](design-taint.md), [design-taint-rules.md](design-taint-rules.md),
+[design-value-rules.md](design-value-rules.md)) and the format library's
+duplicate rule per (subject, condition) within one document.
 
 ## Resource Layout
 
@@ -164,37 +93,54 @@ models/
 ├── manual/<extension>.yaml       # hand-declared built-ins the extraction omits: mysqli, pdo, sqlite3, mysql, standard
 ├── standard/standard_1..8.yaml   # extension "standard" (split suffix removed)
 └── <category>/<extension>.yaml   # crypto, database, file, image, misc, network, system, text, xml
+vocabulary/
+├── index.txt              # comment only: the set ships no model document
+├── provenance.yaml        # producer externs-phpstubs canonical vocabulary; verification manual
+├── vocabulary.yaml        # twelve danger categories, two origin colors, with descriptions
+├── policy.yaml            # both colors enable every category
+└── psalm-mapping.yaml     # psalm kinds → canonical names; has_quotes, cookie, user_secret, system_secret → ignore
 ```
 
 Generated documents carry the producer header of commons-phpmodels'
-generated layer and are never hand-edited; language and manual documents
-are hand-maintained without one. A keyword function declares one optional
-variadic `mixed` parameter and a `mixed` return; a language class declares
-`classifier: class`. A manual entry declares its PHP-manual signature and,
-where the manual states a flow, a propagation; the reason is a comment.
+generated layer and are never hand-edited; language, manual, and
+vocabulary documents are hand-maintained without one. A keyword function
+declares one optional variadic `mixed` parameter and a `mixed` return; a
+language class declares `classifier: class`. A manual entry declares its
+PHP-manual signature and, where the manual states a flow, a propagation;
+the reason is a comment.
 
 The Gradle resource task writes `index.txt` for `models/`, `taint/`,
-`taint-rules/`, `value-rules/` (main) and `models-test/` (test), listing every
-document except `vocabulary.yaml`, `policy.yaml`, `provenance.yaml`; every
-other test fixture directory ships its own manifest. Set layouts: [design-taint.md](design-taint.md),
-[design-taint-rules.md](design-taint-rules.md), [design-value-rules.md](design-value-rules.md).
+`taint-rules/`, `value-rules/` (main) and `models-test/` (test), listing
+every document except `vocabulary.yaml`, `policy.yaml`, `provenance.yaml`,
+and `psalm-mapping.yaml`; `vocabulary/index.txt` and every other test
+fixture directory ship their own manifest. Set layouts:
+[design-taint.md](design-taint.md), [design-taint-rules.md](design-taint-rules.md),
+[design-value-rules.md](design-value-rules.md).
 
 ## Exception / Error Types
 
 | Exception | When raised |
 |-----------|-------------|
-| `StubIndexNotFoundException(resource)` | `index.txt` or a listed document is not on the classpath |
-| `StubIndexInvalidException(reason, cause?)` | The set load fails for any other reason (commons-phpmodels cause attached), or a corpus rule is violated |
-| `IllegalArgumentException` | A facade lookup name is not a PHP identifier spelling (raised by the commons-phpmodels subject creator) |
+| `StubIndexNotFoundException(resource)` | `index.txt`, a listed document, or a bundled `provenance.yaml` is not on the classpath or under an extension directory |
+| `StubIndexInvalidException(reason, cause?)` | The set load or merge fails for any other reason (commons-phpmodels cause attached), a corpus rule is violated, or a conditional entry declares a signature |
+| `IllegalArgumentException` | A lookup name is not a PHP identifier spelling (raised by the commons-phpmodels subject creator) |
+
+Every bundled-set error surfaces on first access to `PhpStubs`; an
+extension-set error surfaces from the `with` call that mounts it.
 
 ## Validation Rules
 
 - Format validation — YAML strictness, subject spellings, signature shape,
-  arity, declared types — is commons-phpmodels' and is not repeated here.
-- The four corpus rules above run in `StubLoader` at load, before any map
-  is frozen; a violation fails the whole load.
+  arity against the parameter list and the condition's positions, declared
+  types, vocabulary references, mapping totality — is commons-phpmodels'
+  and is not repeated here.
+- The corpus rules run over the generated set before the fold; a violation
+  fails the whole load.
 - Duplicate detection compares subjects, so `Exception` and `exception`
   collide (folded kind) while `TRUE` and `true` do not (sensitive kind).
 - `index.txt` lists relative document paths, one per line, sorted; blank
   lines and `#` comments are skipped; a path listed twice fails the load
   (commons-phpmodels rule).
+- The bundled `vocabulary.yaml` declares every name `VulnClass` and
+  `Origin` enumerate, and no other; the psalm mapping lists every kind the
+  two psalm-named sets use.

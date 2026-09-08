@@ -52,22 +52,22 @@ taint/
 ├── vocabulary.yaml    # psalm's taint kinds as categories; origin `input`
 ├── policy.yaml        # one row: input enables every kind of psalm's input group
 ├── sinks.yaml         # dictionary + @psalm-taint-sink: one entry per subject
-├── sanitizers.yaml    # @psalm-taint-escape: one entry per (subject, guard)
+├── sanitizers.yaml    # @psalm-taint-escape: one entry per (subject, condition)
 └── sources.yaml       # superglobals + @psalm-taint-source: one entry per subject
 ```
 
 Every document carries the producer header naming the psalm release and
 the script; `provenance.yaml` states the same producer as data. Entry forms:
 
-| Document | Subject kinds | Body | Guard |
+| Document | Subject kinds | Body | Condition |
 |----------|---------------|------|-------|
 | sinks.yaml | function, method | `sinks`: one `(argument(n), kind)` per dangerous argument, ports ascending, kinds in psalm order | none |
-| sanitizers.yaml | function, method | `sanitizers`: one declaration with the escaped kinds | `when: {port: argument(n), is: <int>}` for a conditional escape |
+| sanitizers.yaml | function, method | `sanitizers`: one declaration with the escaped kinds | `when: [_, <int>]` (a wildcard per earlier position) for a conditional escape |
 | sources.yaml | variable, method | `sources`: one declaration producing `input` | none |
 
 No entry declares a signature: the set states psalm's assertions, not
 declarations, so no arity check applies and a subject absent from the
-registry is admitted. Entries are sorted by subject spelling, then guard
+registry is admitted. Entries are sorted by subject spelling, then condition
 value. A variadic dangerous parameter is stated at its own position only.
 
 ## Extraction
@@ -80,7 +80,7 @@ checkout and writes every file of the set except the manifest:
 | `src/Psalm/Type/TaintKind.php` | category names, in declaration order |
 | `src/Psalm/Type/TaintKindGroup.php` (`ALL_INPUT`) | the policy row's `enables` |
 | `dictionaries/InternalTaintSinkMap.php` | sinks by argument position |
-| `stubs/**/*.phpstub` docblocks | `@psalm-taint-sink kind $param` → sink at the parameter's position; `@psalm-taint-escape kind` → sanitizer; `@psalm-taint-escape ($param is N ? 'kind' : null)` → guarded sanitizer; `@psalm-taint-source input` → source |
+| `stubs/**/*.phpstub` docblocks | `@psalm-taint-sink kind $param` → sink at the parameter's position; `@psalm-taint-escape kind` → sanitizer; `@psalm-taint-escape ($param is N ? 'kind' : null)` → conditional sanitizer; `@psalm-taint-source input` → source |
 | `.../Fetch/VariableFetchAnalyzer.php` | the superglobal names psalm colors |
 
 Arguments: `--psalm <root>`, `--out <taint dir>`; the psalm version is read
@@ -92,8 +92,8 @@ aborts the run. Output is deterministic: same input, identical bytes.
 
 - The set decodes under its own vocabulary with no mapping: every kind
   and origin an entry names is declared in `vocabulary.yaml`.
-- Every entry is a `SubjectModel` with no signature and exactly one of
-  the three taint sections.
+- Every entry declares no signature and exactly one of the three taint
+  sections.
 - Consumers load with a mapping that lists every category and origin the
   set uses; an unlisted name is the format library's `VocabularyException`.
 - The repository tests, not the consumer, prove the set decodes.

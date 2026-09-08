@@ -2,6 +2,11 @@
 
 ## Current Baseline
 
+The tables below measure the retired `contains*`/`find*` facade over the
+generated set alone. The `PhpStubs` lookup over the five-set merge
+(design-lookup.md) is re-measured in the Verify phase; until then these
+numbers bound the generated-set share of the load.
+
 Measured on: 2026-09-01 | JVM: JDK 21 | Registry: commons-phpmodels entries (commit f2d4358)
 Benchmark: `./gradlew test -Pperformance` | Warmup: 5 runs | Measurement: 7 runs (median)
 Dataset: 5,694 subjects (5,335 functions + 115 classes + 2 methods + 242 constants) over 61 documents
@@ -47,9 +52,9 @@ The former registry keyed hand-normalised strings over `StubRecord` values; the 
 | ID | Title | Status |
 |----|-------|--------|
 | P1-1 | Fast-path `normalize()` | RETIRED -- name handling moved into the commons-phpmodels subject creators |
-| P1-2 | Reverse suffix index | KEEP -- `methodSuffixIndex`, `classConstSuffixIndex` and folded companions in `PhpStubs.kt` |
+| P1-2 | Reverse suffix index | RETIRED -- exact lookup only; a looser match is the consumer's filter over an enumeration |
 | P1-3 | Cache synthetic records | RETIRED -- language constructs are data under `models/language/`, no synthetic records exist |
-| P1-4 | Unmodifiable wrappers | KEEP -- `Collections.unmodifiableMap` in `StubLoader.freeze()` |
+| P1-4 | Unmodifiable wrappers | KEEP -- the per-kind record maps of `Merge` are frozen once at construction |
 | P1-5 | StringBuilder for member key concat | SKIP -- Kotlin string templates already compile to `StringBuilder` |
 
 ## Candidates
@@ -60,7 +65,7 @@ The former registry keyed hand-normalised strings over `StubRecord` values; the 
 ## Remaining Known Bottlenecks
 
 - `containsMethod -- with class` (53.6 ns/op) builds a `MethodSubject` through `ClassSubject.parse` plus the member constructor: two folds per call.
-- Decode at startup: 61 documents through Jackson YAML into validated entries; the lazy registry defers this to first access.
+- Decode at startup: every bundled document through Jackson YAML into validated entries, then the fold; the bundled merge is built on first access to `PhpStubs`.
 
 ## Key Insights
 

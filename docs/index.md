@@ -9,7 +9,8 @@
 | [concept-value-rules.md](concept-value-rules.md) | The hand-maintained value rules set: value semantics beyond the generated declarations, corpus gaps |
 | [model-lookup.md](model-lookup.md) | Bundled sets, canonical vocabulary, psalm mapping, merge order, merge, extension sets, Built-in Record, Fact with condition, Built-in Lookup |
 | [spec-merge.md](spec-merge.md) | Folding the mounted sets into one statement per subject, condition, and unit |
-| [design.md](design.md) | Entry, registry, loader, and facade specifications; resource layout; corpus rules; exception types |
+| [design.md](design.md) | `StubResources`, merge order, corpus rules, resource layout, exception types |
+| [design-lookup.md](design-lookup.md) | `BuiltinLookup`, `PhpStubs`, `Merge`, `BuiltinRecord`, fact types, canonical enums |
 | [design-taint.md](design-taint.md) | `StubResources`, taint resource layout, extraction script inputs and validation rules |
 | [design-taint-rules.md](design-taint-rules.md) | `StubResources.TAINT_RULES`, rules resource layout, validation and maintenance rules |
 | [design-value-rules.md](design-value-rules.md) | `StubResources.VALUE_RULES`, value rules resource layout, validation and maintenance rules |

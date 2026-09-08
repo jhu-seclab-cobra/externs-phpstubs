@@ -48,11 +48,12 @@ format library's: `extern/commons-phpmodels/docs/model.md`,
   the generated document's placement (`mysqli`, `standard`, `keyword`,
   `scalar`, ...). Data tier: read from placement, never a constant in code.
   A subject declared only by a non-generated set has no Extension.
-- **Built-in Record** — One subject whose Merge holds an unconditional
-  signature Statement: its PHP spelling, its Extension, its signature, and
-  its Facts. Existence condition: the subject exists after the merge.
-  Identity is the subject. One record kind per declaration kind: function,
-  method, class, constant, class constant, property.
+- **Built-in Record** — One subject the Merge holds any Statement for:
+  its PHP spelling, its Extension, its signature when an unconditional
+  signature Statement is in force, and its Facts. Existence condition: the
+  subject is keyed after the merge. Identity is the subject. One record
+  kind per subject kind: function, method, class, constant, class
+  constant, property, predefined variable.
 - **Fact** — One element of a record's assertion Statements, carrying its
   owner record and the Condition of the entry it came from, or none: a
   *sink* (port, danger category), a *source* (produced colors, site, key
@@ -106,8 +107,10 @@ Two Statements with the same (subject, condition, unit) key:
 
 ## Invariants
 
-- Every Built-in Record has a signature: existence is the unconditional
-  signature Statement, and the generated set declares one on every entry.
+- A Built-in Record holds a signature or at least one Fact; a declared
+  built-in is a record whose signature is in force, and the generated set
+  declares one on every entry. A predefined-variable record never holds a
+  signature.
 - The signature Statement is unconditional: a conditional entry that
   declares a signature is a load failure.
 - The Canonical Vocabulary is mounted before the mapped sets and before
