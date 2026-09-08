@@ -2,7 +2,8 @@
 
 Software structure of the Built-in Lookup: the merge over the bundled sets,
 the record and fact types a consumer reads, and the `PhpStubs` facade.
-Domain semantics: [model-lookup.md](model-lookup.md). Fold algorithm:
+Domain semantics: [model-lookup.md](model-lookup.md). Mount and merge
+types: [design-merge.md](design-merge.md). Fold algorithm:
 [spec-merge.md](spec-merge.md). Resource roots and set layouts:
 [design.md](design.md).
 
@@ -11,7 +12,8 @@ Domain semantics: [model-lookup.md](model-lookup.md). Fold algorithm:
 - **Classes:** `PhpStubs` (final class; companion delegates to the bundled
   instance), `BuiltinRecord<S>` (data class), `SinkFact`, `SourceFact`,
   `SanitizerFact`, `FlowFact`, `ReturnsFact` (data classes), `VulnClass`
-  and `Origin` (enums), `Merge` (internal), `Mount` (internal data class)
+  and `Origin` (enums); `Merge`, `Mount`, `MountSequence` (internal,
+  [design-merge.md](design-merge.md))
 - **Abstract:** `BuiltinLookup` (interface: every read of one merge),
   `Fact` (sealed interface)
 - **External types (commons-phpmodels):** `DocumentSetLoader`,
@@ -28,7 +30,7 @@ Domain semantics: [model-lookup.md](model-lookup.md). Fold algorithm:
   format library.
 - **Exceptions:** [design.md](design.md) Exception / Error Types.
 - **Dependency roles:** Facade: `PhpStubs`. Contract: `BuiltinLookup`.
-  Aggregate: `Merge`. Data holders: `BuiltinRecord`, the facts, `Mount`.
+  Aggregate: `Merge`. Data holders: `BuiltinRecord`, the facts.
   Decoder and validator: commons-phpmodels.
 
 Package `edu.jhu.cobra.externs.phpstubs`, `explicitApi()`. commons-phpmodels
@@ -73,11 +75,16 @@ enumeration.
 construction of merges. The bundled merge is built once when the class
 initializes and shared; every extension merge is a new instance.
 
-**Constructor (private):** `PhpStubs(merge: Merge)`.
+**Constructor (internal):** `PhpStubs(mounts: List<Mount>)`; the instance
+holds its mounts (so `with` can extend them) and `Merge.of(mounts)`.
 
 **Companion:** `companion object : BuiltinLookup by bundled`, where
-`bundled` is `PhpStubs(Merge.of(BUNDLED_MOUNTS))`; the four bundled mounts
-are the constants of [design.md](design.md) Merge Order.
+`bundled` is a top-level private `PhpStubs` over the mounts a
+`MountSequence` builds in [design.md](design.md) Merge Order (the psalm
+mapping read once from `StubResources.PSALM_MAPPING`). The constructor is
+internal, not private, because a top-level value cannot call a private
+constructor, and the companion cannot be referenced during its own
+initialization ([impl.md](impl.md)).
 
 **Methods:**
 - `fun with(vararg roots: String): PhpStubs` — classpath roots, each
@@ -93,39 +100,6 @@ are the constants of [design.md](design.md) Merge Order.
   `Verification.MANUAL`. The receiver is unchanged.
 - **Errors:** `StubIndexNotFoundException` (absent manifest or document),
   `StubIndexInvalidException` (any other set-load failure, cause attached).
-
-### Mount (internal data class)
-
-**Responsibility:** One set as mounted: its position in Merge Order, its
-verification, and its documents, each document paired with the extension
-its path yields (`.yaml` removed, trailing `_<digits>` removed) for the
-generated set and `null` for every other set.
-
-**State/Fields:** `position: Int`, `verification: Verification`,
-`entries: List<Pair<ModelEntry, String?>>`.
-
-### Merge (internal class)
-
-**Responsibility:** The fold of [spec-merge.md](spec-merge.md) and the
-records built from its result. Built once per set sequence, immutable.
-
-**State/Fields:** `vocabulary`, `policy`, one `LinkedHashMap<Subject, BuiltinRecord>`
-per declaration kind in first-statement order, and the five fact lists in
-record order.
-
-**Construction (`Merge.of(mounts: List<Mount>)`):** for each mount in
-position order and each entry: key = (subject, condition); per unit the
-entry declares, the statement in force is replaced when the new statement's
-verification ranks at least equal under `Precedence.DEFAULT` (equal rank,
-later position wins; lower rank never replaces). The extension of a record
-is the extension of the statement in force for its signature unit. A
-conditional entry declaring a signature is `StubIndexInvalidException`.
-
-**Record assembly:** per subject, the signature is the unconditional
-signature statement or `null`; the facts are every element of every
-statement in force under every condition of that subject, each tagged with
-its condition. Statement order within a subject is condition
-first-statement order; element order is document order.
 
 ### BuiltinRecord<S : ModelSubject> (data class)
 

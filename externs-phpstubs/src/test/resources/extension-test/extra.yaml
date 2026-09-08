@@ -1,0 +1,18 @@
+# Test fixture: an extension set in the canonical vocabulary, mounted after the bundled sets.
+- subject:
+    function: extension_only
+  signature:
+    params:
+      - {name: value, type: string}
+    returnType: string
+  sinks:
+    - port: argument(0)
+      category: sqli
+- subject:
+    function: strlen
+  returns: str
+- subject:
+    property: Exception::$message
+  signature:
+    type: string
+    visibility: protected

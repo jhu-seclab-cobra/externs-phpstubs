@@ -1,0 +1,8 @@
+# Global taint policy: which origin colors make which danger categories dangerous.
+# Each row lists an origin color and the categories a value of that color triggers
+# when it reaches a sink. Every `origin`/`enables` tag must be declared in
+# vocabulary.yaml. Editing the matrix is a data-file change — no code change.
+- origin: user-input
+  enables: [sqli, cmdi, codei, xss, headeri, ssrf, pathtrav, fileinc, deser, callablei, ldapi, xpathi]
+- origin: external-input
+  enables: [sqli, cmdi, codei, xss, headeri, ssrf, pathtrav, fileinc, deser, callablei, ldapi, xpathi]

@@ -10,7 +10,8 @@
 | [model-lookup.md](model-lookup.md) | Bundled sets, canonical vocabulary, psalm mapping, merge order, merge, extension sets, Built-in Record, Fact with condition, Built-in Lookup |
 | [spec-merge.md](spec-merge.md) | Folding the mounted sets into one statement per subject, condition, and unit |
 | [design.md](design.md) | `StubResources`, merge order, corpus rules, resource layout, exception types |
-| [design-lookup.md](design-lookup.md) | `BuiltinLookup`, `PhpStubs`, `Merge`, `BuiltinRecord`, fact types, canonical enums |
+| [design-lookup.md](design-lookup.md) | `BuiltinLookup`, `PhpStubs`, `BuiltinRecord`, fact types, canonical enums |
+| [design-merge.md](design-merge.md) | `Mount`, `MountSequence`, `Merge`: set mounting, failure classification, the fold |
 | [design-taint.md](design-taint.md) | `StubResources`, taint resource layout, extraction script inputs and validation rules |
 | [design-taint-rules.md](design-taint-rules.md) | `StubResources.TAINT_RULES`, rules resource layout, validation and maintenance rules |
 | [design-value-rules.md](design-value-rules.md) | `StubResources.VALUE_RULES`, value rules resource layout, validation and maintenance rules |

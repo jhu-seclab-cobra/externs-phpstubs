@@ -1,0 +1,3 @@
+# The canonical vocabulary set is written by hand: categories, colors, policy, and the psalm mapping.
+producer: externs-phpstubs canonical vocabulary
+verification: manual

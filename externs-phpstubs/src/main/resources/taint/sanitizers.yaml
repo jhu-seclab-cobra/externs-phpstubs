@@ -10,37 +10,27 @@
     - categories: [sql]
 - subject:
     function: filter_var
-  when:
-    port: argument(1)
-    is: 257
+  when: [_, 257]
   sanitizers:
     - categories: [html]
 - subject:
     function: filter_var
-  when:
-    port: argument(1)
-    is: 258
+  when: [_, 258]
   sanitizers:
     - categories: [html]
 - subject:
     function: filter_var
-  when:
-    port: argument(1)
-    is: 259
+  when: [_, 259]
   sanitizers:
     - categories: [html]
 - subject:
     function: filter_var
-  when:
-    port: argument(1)
-    is: 519
+  when: [_, 519]
   sanitizers:
     - categories: [html]
 - subject:
     function: filter_var
-  when:
-    port: argument(1)
-    is: 520
+  when: [_, 520]
   sanitizers:
     - categories: [html]
 - subject:

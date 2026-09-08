@@ -1,0 +1,36 @@
+# Two-axis vocabulary for taint analysis.
+# vulnClasses: danger categories; every category a bundled set entry or the psalm mapping names
+# must be declared here. provenances: origin colors; every color a
+# source entry, policy.yaml row, or psalm mapping names must be declared here.
+# Adding an entry is a data-file edit — no code change.
+vulnClasses:
+  - name: sqli
+    description: SQL injection
+  - name: cmdi
+    description: OS command injection
+  - name: codei
+    description: Code injection (eval, assert, dynamic include)
+  - name: xss
+    description: Cross-site scripting
+  - name: headeri
+    description: HTTP header injection and response splitting
+  - name: ssrf
+    description: Server-side request forgery
+  - name: pathtrav
+    description: Path traversal
+  - name: fileinc
+    description: File inclusion (include, require)
+  - name: deser
+    description: Insecure deserialization (phar and unserialize)
+  - name: callablei
+    description: Callable injection (attacker-chosen callback)
+  - name: ldapi
+    description: LDAP injection
+  - name: xpathi
+    description: XPath injection
+
+provenances:
+  - name: user-input
+    description: Attacker-controlled request input (superglobals, request body, headers)
+  - name: external-input
+    description: Data read from the environment, files, sockets, mail, LDAP, or stored records

@@ -35,7 +35,7 @@
   returns: bool
 # PHP manual: prints and returns true unless return is true, in which case the rendering of value is returned.
 - subject: {function: print_r}
-  when: {port: argument(1), is: true}
+  when: [_, true]
   returns: str
   propagation: [{from: argument(0), to: return}]
 # PHP manual: prints and returns true unless return is true, in which case the rendering of value is returned.
@@ -45,7 +45,7 @@
   returns: any
 # PHP manual: outputs and returns null unless return is true, in which case the representation of value is returned.
 - subject: {function: var_export}
-  when: {port: argument(1), is: true}
+  when: [_, true]
   returns: str
   propagation: [{from: argument(0), to: return}]
 # PHP manual: outputs and returns null unless return is true, in which case the representation of value is returned.

@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "edu.jhu.cobra"
-version = "0.6.1"
+version = "0.7.0"
 
 val jvmVersion =
     libs.versions.javaTarget
@@ -59,7 +59,7 @@ tasks.withType<ProcessResources>().configureEach {
     val setDirNames = documentSetDirNames[name] ?: return@configureEach
     doLast {
         // The set-level documents the loader reads by fixed name; the manifest lists model documents only.
-        val unlistedSetFiles = setOf("vocabulary.yaml", "policy.yaml", "provenance.yaml")
+        val unlistedSetFiles = setOf("vocabulary.yaml", "policy.yaml", "provenance.yaml", "psalm-mapping.yaml")
         for (setDirName in setDirNames) {
             val setDir = destinationDir.resolve(setDirName)
             if (!setDir.isDirectory) continue

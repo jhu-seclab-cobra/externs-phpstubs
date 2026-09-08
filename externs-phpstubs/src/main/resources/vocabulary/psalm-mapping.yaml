@@ -1,0 +1,24 @@
+# Translation of the taint set and the taint rules set (both in psalm's
+# names) into the canonical vocabulary. Every psalm kind and every name the rules set
+# adds is listed; `ignore` discards the kind, so an element naming only
+# ignored kinds is dropped. Editing is a data-file change.
+categories:
+  sql: sqli
+  html: xss
+  shell: cmdi
+  eval: codei
+  include: fileinc
+  header: headeri
+  ssrf: ssrf
+  file: pathtrav
+  unserialize: deser
+  callable: callablei
+  ldap: ldapi
+  xpath: xpathi
+  has_quotes: ignore
+  cookie: ignore
+  user_secret: ignore
+  system_secret: ignore
+provenances:
+  input: user-input
+  external: external-input

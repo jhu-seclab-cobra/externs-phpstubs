@@ -4,13 +4,12 @@ import edu.jhu.cobra.commons.phpmodels.CategoryMappingLoader
 import edu.jhu.cobra.commons.phpmodels.DocumentSetLoader
 import edu.jhu.cobra.commons.phpmodels.FunctionSubject
 import edu.jhu.cobra.commons.phpmodels.MethodSubject
+import edu.jhu.cobra.commons.phpmodels.ModelEntry
 import edu.jhu.cobra.commons.phpmodels.ModelSubject
+import edu.jhu.cobra.commons.phpmodels.OriginId
 import edu.jhu.cobra.commons.phpmodels.Port
-import edu.jhu.cobra.commons.phpmodels.ProvenanceId
-import edu.jhu.cobra.commons.phpmodels.SubjectModel
 import edu.jhu.cobra.commons.phpmodels.VariableSubject
 import edu.jhu.cobra.commons.phpmodels.VocabularyException
-import edu.jhu.cobra.commons.phpmodels.VocabularyLoader
 import edu.jhu.cobra.commons.phpmodels.VulnClassId
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -25,23 +24,19 @@ import kotlin.test.assertTrue
  *
  * - `taint rules set loads only over the taint vocabulary` — verifies the set's names resolve through the taint set's context
  * - `taint rules set declares its own additions` — verifies the xpath kind, the external color, and the policy rows
- * - `every taint rules entry is an unsigned model with exactly one taint section` — verifies the shape rule
- * - `no rules unit repeats a taint unit` — verifies each (subject, guard, section) differs from the taint set's
+ * - `every taint rules entry is an unsigned entry with exactly one taint section` — verifies the shape rule
+ * - `no rules unit repeats a taint unit` — verifies each (subject, condition, section) differs from the taint set's
  * - `a taint rules sink over a taint subject widens psalm's ports` — verifies restated entries are strict supersets
  * - `sinks follow the Argus lists` — verifies representative sinks per category
  * - `sanitizers and sources name the added escapes and colors` — verifies representative entries
- * - `mapped load translates the additions` — verifies a consumer mapping covering xpath and external
+ * - `the psalm mapping translates the additions` — verifies the bundled mapping covers xpath and external
  */
 internal class TaintRulesSetTest {
     private val taint by lazy { DocumentSetLoader.load(StubResources.opener(StubResources.TAINT)) }
-
     private val rules by lazy { DocumentSetLoader.load(StubResources.opener(StubResources.TAINT_RULES), taint.vocabulary) }
 
-    private val models: Map<ModelSubject, SubjectModel> by lazy {
-        rules.entries
-            .filterIsInstance<SubjectModel>()
-            .filter { it.guard == null }
-            .associateBy { it.subject }
+    private val unconditional: Map<ModelSubject, ModelEntry> by lazy {
+        rules.entries.filter { it.condition == null }.associateBy { it.subject }
     }
 
     @Test
@@ -53,49 +48,43 @@ internal class TaintRulesSetTest {
     @Test
     fun `taint rules set declares its own additions`() {
         assertEquals(setOf(VulnClassId("xpath")), rules.vocabulary.vulnClasses.keys)
-        assertEquals(setOf(ProvenanceId("external")), rules.vocabulary.provenances.keys)
+        assertEquals(setOf(OriginId("external")), rules.vocabulary.origins.keys)
         val byOrigin = rules.policy.associate { it.origin to it.enables }
-        assertEquals(setOf(VulnClassId("xpath")), byOrigin.getValue(ProvenanceId("input")))
-        val external = byOrigin.getValue(ProvenanceId("external"))
+        assertEquals(setOf(VulnClassId("xpath")), byOrigin.getValue(OriginId("input")))
+        val external = byOrigin.getValue(OriginId("external"))
         assertTrue(external.containsAll(taint.policy.single().enables))
         assertTrue(VulnClassId("xpath") in external)
     }
 
     @Test
-    fun `every taint rules entry is an unsigned model with exactly one taint section`() {
+    fun `every taint rules entry is an unsigned entry with exactly one taint section`() {
         for (entry in rules.entries) {
-            val model = entry as SubjectModel
-            assertNull(model.signature, "${model.subject}")
-            assertNull(model.body.returns, "${model.subject}")
-            val sections = listOfNotNull(model.body.sources, model.body.sinks, model.body.sanitizers)
-            assertEquals(1, sections.size, "${model.subject}")
+            assertNull(entry.signature, "${entry.subject}")
+            assertNull(entry.body.returns, "${entry.subject}")
+            val sections = listOfNotNull(entry.body.sources, entry.body.sinks, entry.body.sanitizers)
+            assertEquals(1, sections.size, "${entry.subject}")
         }
     }
 
     @Test
     fun `no rules unit repeats a taint unit`() {
-        val psalm = taint.entries.filterIsInstance<SubjectModel>().associateBy { it.subject to it.guard }
+        val psalm = taint.entries.associateBy { it.subject to it.condition }
         for (entry in rules.entries) {
-            val model = entry as SubjectModel
-            val other = psalm[model.subject to model.guard] ?: continue
-            model.body.sinks?.let { assertNotEquals(other.body.sinks, it, "${model.subject}") }
-            model.body.sanitizers?.let { assertNotEquals(other.body.sanitizers, it, "${model.subject}") }
-            model.body.sources?.let { assertNotEquals(other.body.sources, it, "${model.subject}") }
+            val other = psalm[entry.subject to entry.condition] ?: continue
+            entry.body.sinks?.let { assertNotEquals(other.body.sinks, it, "${entry.subject}") }
+            entry.body.sanitizers?.let { assertNotEquals(other.body.sanitizers, it, "${entry.subject}") }
+            entry.body.sources?.let { assertNotEquals(other.body.sources, it, "${entry.subject}") }
         }
     }
 
     @Test
     fun `a taint rules sink over a taint subject widens psalm's ports`() {
-        val psalm =
-            taint.entries
-                .filterIsInstance<SubjectModel>()
-                .filter { it.body.sinks != null }
-                .associateBy { it.subject }
-        val restated = models.values.filter { it.body.sinks != null && psalm[it.subject] != null }
+        val psalm = taint.entries.filter { it.body.sinks != null }.associateBy { it.subject }
+        val restated = unconditional.values.filter { it.body.sinks != null && psalm[it.subject] != null }
         assertTrue(restated.isNotEmpty())
-        for (model in restated) {
-            val base = psalm.getValue(model.subject).body.sinks!!
-            assertTrue(model.body.sinks!!.containsAll(base), "${model.subject}")
+        for (entry in restated) {
+            val base = psalm.getValue(entry.subject).body.sinks!!
+            assertTrue(entry.body.sinks!!.containsAll(base), "${entry.subject}")
         }
         assertEquals(
             setOf(Port.Argument(0) to "html", Port.Argument(0) to "ssrf", Port.Argument(0) to "file", Port.Argument(0) to "unserialize"),
@@ -116,8 +105,8 @@ internal class TaintRulesSetTest {
         assertEquals(setOf(Port.Argument(1) to "ldap"), sinksOf(FunctionSubject("ldap_bind")))
         assertEquals(setOf(Port.Argument(0) to "unserialize"), sinksOf(MethodSubject("Phar", "__construct")))
         assertEquals(setOf(Port.Argument(0) to "file", Port.Argument(0) to "unserialize"), sinksOf(FunctionSubject("scandir")))
-        assertNull(models.getValue(FunctionSubject("curl_exec")).body.sinks)
-        assertNull(models[MethodSubject("SplFileObject", "fpassthru")])
+        assertNull(unconditional.getValue(FunctionSubject("curl_exec")).body.sinks)
+        assertNull(unconditional[MethodSubject("SplFileObject", "fpassthru")])
     }
 
     @Test
@@ -130,47 +119,47 @@ internal class TaintRulesSetTest {
         assertEquals(setOf("input"), sourcesOf(FunctionSubject("getallheaders")))
         assertEquals(setOf("external"), sourcesOf(FunctionSubject("getenv")))
         assertEquals(setOf("external"), sourcesOf(MethodSubject("PDOStatement", "fetchAll")))
-        assertNull(models[VariableSubject("_GET")])
+        assertNull(unconditional[VariableSubject("_GET")])
     }
 
     @Test
-    fun `mapped load translates the additions`() {
-        val context = TaintRulesSetTest::class.java.getResourceAsStream("/taint-context-test.yaml")!!.use(VocabularyLoader::load)
-        val mapping = TaintRulesSetTest::class.java.getResourceAsStream("/taint-mapping-test.yaml")!!.use(CategoryMappingLoader::load)
+    fun `the psalm mapping translates the additions`() {
+        val context = DocumentSetLoader.load(StubResources.opener(StubResources.VOCABULARY)).vocabulary
+        val mapping = TaintRulesSetTest::class.java.getResourceAsStream(StubResources.PSALM_MAPPING)!!.use(CategoryMappingLoader::load)
         val mapped = DocumentSetLoader.load(StubResources.opener(StubResources.TAINT_RULES), context, mapping)
-        val bySubject = mapped.entries.filterIsInstance<SubjectModel>().associateBy { it.subject }
+        val bySubject = mapped.entries.filter { it.condition == null }.associateBy { it.subject }
         assertEquals(setOf(Port.Argument(0) to "xpathi"), sinksOf(bySubject.getValue(MethodSubject("DOMXPath", "query"))))
         assertEquals(setOf(Port.Argument(0) to "xss"), sinksOf(bySubject.getValue(FunctionSubject("echo"))))
-        assertNull(bySubject[FunctionSubject("mail")])
+        assertEquals(setOf(Port.Argument(4) to "cmdi"), sinksOf(bySubject.getValue(FunctionSubject("mail"))))
         val getenv =
             bySubject
                 .getValue(FunctionSubject("getenv"))
                 .body.sources!!
                 .single()
-        assertEquals(setOf(ProvenanceId("external-input")), getenv.provenance)
-        val external = mapped.policy.single { it.origin == ProvenanceId("external-input") }
-        assertEquals(setOf(VulnClassId("sqli"), VulnClassId("xss"), VulnClassId("xpathi")), external.enables)
-        assertNotNull(mapped.policy.singleOrNull { it.origin == ProvenanceId("user-input") })
+        assertEquals(setOf(OriginId("external-input")), getenv.origin)
+        val external = mapped.policy.single { it.origin == OriginId("external-input") }
+        assertEquals(VulnClass.entries.map { it.id }.toSet(), external.enables)
+        assertNotNull(mapped.policy.singleOrNull { it.origin == OriginId("user-input") })
     }
 
-    private fun sinksOf(subject: ModelSubject): Set<Pair<Port.Argument, String>> = sinksOf(models.getValue(subject))
+    private fun sinksOf(subject: ModelSubject): Set<Pair<Port.Argument, String>> = sinksOf(unconditional.getValue(subject))
 
-    private fun sinksOf(model: SubjectModel): Set<Pair<Port.Argument, String>> =
-        model.body.sinks!!
-            .map { it.port to it.category.id }
+    private fun sinksOf(entry: ModelEntry): Set<Pair<Port.Argument, String>> =
+        entry.body.sinks!!
+            .map { it.port to it.vulnClass.id }
             .toSet()
 
     private fun sanitizersOf(subject: ModelSubject): Set<String> =
-        models
+        unconditional
             .getValue(subject)
             .body.sanitizers!!
             .flatMap { decl -> decl.categories.map { it.id } }
             .toSet()
 
     private fun sourcesOf(subject: ModelSubject): Set<String> =
-        models
+        unconditional
             .getValue(subject)
             .body.sources!!
-            .flatMap { decl -> decl.provenance.map { it.id } }
+            .flatMap { decl -> decl.origin.map { it.id } }
             .toSet()
 }

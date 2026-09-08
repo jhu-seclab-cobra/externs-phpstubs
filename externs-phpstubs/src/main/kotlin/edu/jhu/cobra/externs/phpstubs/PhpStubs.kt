@@ -1,171 +1,158 @@
 package edu.jhu.cobra.externs.phpstubs
 
+import edu.jhu.cobra.commons.phpmodels.CategoryMappingLoader
 import edu.jhu.cobra.commons.phpmodels.ClassConstantSubject
 import edu.jhu.cobra.commons.phpmodels.ClassSubject
 import edu.jhu.cobra.commons.phpmodels.ConstantSubject
 import edu.jhu.cobra.commons.phpmodels.FunctionSubject
 import edu.jhu.cobra.commons.phpmodels.MethodSubject
+import edu.jhu.cobra.commons.phpmodels.ModelSubject
+import edu.jhu.cobra.commons.phpmodels.PropertySubject
+import edu.jhu.cobra.commons.phpmodels.ResourceOpener
+import edu.jhu.cobra.commons.phpmodels.TaintPolicy
+import edu.jhu.cobra.commons.phpmodels.VariableSubject
+import edu.jhu.cobra.commons.phpmodels.Vocabulary
+import java.nio.file.Files
+import java.nio.file.Path
+
+// The bundled merge: built on the first access to PhpStubs and shared by every later lookup.
+private val bundled: PhpStubs = PhpStubs(bundledMounts())
+
+// Merge order: generated declarations, value rules, canonical vocabulary, taint (mapped), taint rules (mapped).
+private fun bundledMounts(): List<Mount> {
+    val mapping =
+        StubResources::class.java.getResourceAsStream(StubResources.PSALM_MAPPING)?.use(CategoryMappingLoader::load)
+            ?: throw StubIndexNotFoundException(StubResources.PSALM_MAPPING)
+    return MountSequence()
+        .mount(StubResources.MODELS, StubResources.opener(StubResources.MODELS), fallback = null, corpus = true)
+        .mount(StubResources.VALUE_RULES, StubResources.opener(StubResources.VALUE_RULES), fallback = null)
+        .mount(StubResources.VOCABULARY, StubResources.opener(StubResources.VOCABULARY), fallback = null)
+        .mount(StubResources.TAINT, StubResources.opener(StubResources.TAINT), mapping, fallback = null)
+        .mount(StubResources.TAINT_RULES, StubResources.opener(StubResources.TAINT_RULES), mapping, fallback = null)
+        .toList()
+}
 
 /**
- * PHP built-in declaration registry: existence checks, entry lookups, and name sets by declaration kind.
+ * One [BuiltinLookup] over one merge of document sets. The companion is the lookup over the bundled sets,
+ * so `PhpStubs.function("substr")` reads the bundled merge; [with] and [plus] build a second lookup that
+ * mounts extension sets after the bundled ones, leaving the receiver unchanged.
  *
- * Qualified lookups build their subject through the commons-phpmodels creators, so a name that is not a PHP
- * identifier spelling raises [IllegalArgumentException]. Unqualified member lookups and case-insensitive
- * constant lookups read prebuilt indexes and are over-approximations for analyses that cannot trust spelling.
+ * Every bundled-set error surfaces on the first access to this class; an extension-set error surfaces
+ * from the call that mounts it.
  */
-public object PhpStubs {
-    // Extension names fixed by the language document layout: models/language/<extension>.yaml.
-    private const val KEYWORD_EXTENSION = "keyword"
-    private const val SCALAR_EXTENSION = "scalar"
-    private const val MEMBER_SEPARATOR = "::"
+public class PhpStubs internal constructor(
+    private val mounts: List<Mount>,
+) : BuiltinLookup {
+    private val merge = Merge.of(mounts)
 
-    private val registry: StubRegistry by lazy { StubLoader.loadAll() }
+    override fun function(name: String): BuiltinRecord<FunctionSubject>? = merge.functions[FunctionSubject.parse(name)]
 
-    // Unqualified member name -> first subject in load order.
-    private val methodSuffixIndex: Map<String, MethodSubject> by lazy {
-        firstByKey(registry.methods.keys) { it.name }
-    }
-    private val classConstSuffixIndex: Map<String, ClassConstantSubject> by lazy {
-        firstByKey(registry.classConstants.keys) { it.name }
-    }
-    private val classConstSuffixFoldedIndex: Map<String, ClassConstantSubject> by lazy {
-        firstByKey(registry.classConstants.keys) { it.name.lowercase() }
-    }
+    override fun clazz(name: String): BuiltinRecord<ClassSubject>? = merge.classes[ClassSubject.parse(name)]
 
-    // Folded spelling -> first subject in load order, for case-insensitive constant lookup.
-    private val constFoldedIndex: Map<String, ConstantSubject> by lazy {
-        firstByKey(registry.constants.keys) { it.name.lowercase() }
-    }
-    private val classConstFoldedIndex: Map<String, ClassConstantSubject> by lazy {
-        firstByKey(registry.classConstants.keys) { it.owner + MEMBER_SEPARATOR + it.name.lowercase() }
-    }
+    override fun method(spelling: String): BuiltinRecord<MethodSubject>? = merge.methods[MethodSubject.parse(spelling)]
 
-    // -- Name sets --
-
-    /** All registered function names, folded. Language constructs included. */
-    public val functionNames: Set<String> by lazy { registry.functions.keys.mapTo(LinkedHashSet()) { it.name } }
-
-    /** All registered class names, folded. Scalar types and language constructs included. */
-    public val classNames: Set<String> by lazy { registry.classes.keys.mapTo(LinkedHashSet()) { it.name } }
-
-    /** All registered method spellings as `owner::name`, folded. */
-    public val methodNames: Set<String> by lazy {
-        registry.methods.keys.mapTo(LinkedHashSet()) { it.owner + MEMBER_SEPARATOR + it.name }
-    }
-
-    /** All registered global constant names, case preserved. Class constants are not included. */
-    public val constantNames: Set<String> by lazy { registry.constants.keys.mapTo(LinkedHashSet()) { it.name } }
-
-    /** PHP keyword construct names (echo, isset, ...): the functions of the `keyword` extension. */
-    public val keywordFunctionNames: Set<String> by lazy { functionNamesOfExtension(KEYWORD_EXTENSION) }
-
-    /** PHP scalar type names (int, string, ...): the classes of the `scalar` extension. */
-    public val scalarTypeNames: Set<String> by lazy { classNamesOfExtension(SCALAR_EXTENSION) }
-
-    private fun <S> firstByKey(
-        subjects: Set<S>,
-        key: (S) -> String,
-    ): Map<String, S> {
-        val index = LinkedHashMap<String, S>()
-        for (subject in subjects) index.putIfAbsent(key(subject), subject)
-        return index
-    }
-
-    private fun functionNamesOfExtension(extension: String): Set<String> =
-        registry.functions.values
-            .filter { it.extension == extension }
-            .mapTo(LinkedHashSet()) { it.subject.name }
-
-    private fun classNamesOfExtension(extension: String): Set<String> =
-        registry.classes.values
-            .filter { it.extension == extension }
-            .mapTo(LinkedHashSet()) { it.subject.name }
-
-    // -- Existence checks --
-
-    /** Returns true if [name] is a known built-in or language-construct function. */
-    public fun containsFunction(name: String): Boolean = FunctionSubject.parse(name) in registry.functions
-
-    /** Returns true if [name] is a known built-in, scalar-type, or language-construct class. */
-    public fun containsClass(name: String): Boolean = ClassSubject.parse(name) in registry.classes
-
-    /** Returns true if the method exists: qualified when [owner] is given, by unqualified name otherwise. */
-    public fun containsMethod(
+    override fun method(
+        owner: String,
         name: String,
-        owner: String? = null,
-    ): Boolean = findMethod(name, owner) != null
+    ): BuiltinRecord<MethodSubject>? = merge.methods[MethodSubject(ClassSubject.parse(owner).name, name)]
 
-    /** Returns true if [name] is a known global constant, or a known class constant when spelled `Class::NAME`. */
-    public fun containsConstant(
+    override fun constant(name: String): BuiltinRecord<ConstantSubject>? = merge.constants[ConstantSubject.parse(name)]
+
+    override fun classConstant(spelling: String): BuiltinRecord<ClassConstantSubject>? =
+        merge.classConstants[ClassConstantSubject.parse(spelling)]
+
+    override fun classConstant(
+        owner: String,
         name: String,
-        caseSensitive: Boolean = true,
-    ): Boolean =
-        if (MEMBER_SEPARATOR in name) {
-            val spelled = ClassConstantSubject.parse(name)
-            findClassConstant(spelled.name, spelled.owner, caseSensitive) != null
-        } else {
-            findConstant(name, caseSensitive) != null
+    ): BuiltinRecord<ClassConstantSubject>? = merge.classConstants[ClassConstantSubject(ClassSubject.parse(owner).name, name)]
+
+    override fun property(spelling: String): BuiltinRecord<PropertySubject>? = merge.properties[PropertySubject.parse(spelling)]
+
+    override fun property(
+        owner: String,
+        name: String,
+    ): BuiltinRecord<PropertySubject>? = merge.properties[PropertySubject(ClassSubject.parse(owner).name, name)]
+
+    override fun variable(name: String): BuiltinRecord<VariableSubject>? = merge.variables[VariableSubject.parse(name)]
+
+    override fun record(subject: ModelSubject): BuiltinRecord<ModelSubject>? = merge.records[subject]
+
+    override val functions: Collection<BuiltinRecord<FunctionSubject>> get() = merge.functions.values
+
+    override val classes: Collection<BuiltinRecord<ClassSubject>> get() = merge.classes.values
+
+    override val methods: Collection<BuiltinRecord<MethodSubject>> get() = merge.methods.values
+
+    override val constants: Collection<BuiltinRecord<ConstantSubject>> get() = merge.constants.values
+
+    override val classConstants: Collection<BuiltinRecord<ClassConstantSubject>> get() = merge.classConstants.values
+
+    override val properties: Collection<BuiltinRecord<PropertySubject>> get() = merge.properties.values
+
+    override val variables: Collection<BuiltinRecord<VariableSubject>> get() = merge.variables.values
+
+    override val sinks: List<SinkFact> get() = merge.sinks
+
+    override val sources: List<SourceFact> get() = merge.sources
+
+    override val sanitizers: List<SanitizerFact> get() = merge.sanitizers
+
+    override val flows: List<FlowFact> get() = merge.flows
+
+    override val returns: List<ReturnsFact> get() = merge.returns
+
+    override val vocabulary: Vocabulary get() = merge.vocabulary
+
+    override val policy: TaintPolicy get() = merge.policy
+
+    /**
+     * A lookup that mounts the extension sets under the classpath [roots], in order, after this lookup's sets.
+     *
+     * @param roots Classpath directories each holding a manifest; a set without `provenance.yaml` mounts as manual.
+     * @throws StubIndexNotFoundException If a manifest or a listed document is absent.
+     * @throws StubIndexInvalidException If a set fails to load otherwise.
+     */
+    public fun with(vararg roots: String): PhpStubs = extend(roots.map { StubResources.normalize(it) to StubResources.opener(it) })
+
+    /**
+     * A lookup that mounts the extension sets under the filesystem [dirs], in order, after this lookup's sets.
+     *
+     * @param dirs Directories each holding a manifest; a set without `provenance.yaml` mounts as manual.
+     * @throws StubIndexNotFoundException If a manifest or a listed document is absent.
+     * @throws StubIndexInvalidException If a set fails to load otherwise.
+     */
+    public fun with(vararg dirs: Path): PhpStubs = extend(dirs.map { "$it/" to directoryOpener(it) })
+
+    /** [with] of one classpath root. */
+    public operator fun plus(root: String): PhpStubs = with(root)
+
+    /** [with] of one directory. */
+    public operator fun plus(dir: Path): PhpStubs = with(dir)
+
+    private fun extend(sets: List<Pair<String, ResourceOpener>>): PhpStubs {
+        val sequence = MountSequence(mounts)
+        for ((label, open) in sets) sequence.mount(label, open)
+        return PhpStubs(sequence.toList())
+    }
+
+    private fun directoryOpener(dir: Path): ResourceOpener =
+        ResourceOpener { path ->
+            val file = dir.resolve(path)
+            if (Files.isRegularFile(file)) Files.newInputStream(file) else null
         }
 
-    // -- Entry lookups --
+    /** The lookup over the bundled sets; [with] and [plus] extend it. */
+    public companion object : BuiltinLookup by bundled {
+        /** [PhpStubs.with] over the bundled lookup. */
+        public fun with(vararg roots: String): PhpStubs = bundled.with(*roots)
 
-    /** Returns the function entry for [name], or null if unknown. */
-    public fun findFunction(name: String): StubEntry<FunctionSubject>? = registry.functions[FunctionSubject.parse(name)]
+        /** [PhpStubs.with] over the bundled lookup. */
+        public fun with(vararg dirs: Path): PhpStubs = bundled.with(*dirs)
 
-    /** Returns the class entry for [name], or null if unknown. */
-    public fun findClass(name: String): StubEntry<ClassSubject>? = registry.classes[ClassSubject.parse(name)]
+        /** [PhpStubs.plus] over the bundled lookup. */
+        public operator fun plus(root: String): PhpStubs = bundled + root
 
-    /** Returns the method entry: qualified when [owner] is given, first unqualified match otherwise. */
-    public fun findMethod(
-        name: String,
-        owner: String? = null,
-    ): StubEntry<MethodSubject>? {
-        val subject =
-            if (owner == null) {
-                methodSuffixIndex[name.lowercase()]
-            } else {
-                MethodSubject(ClassSubject.parse(owner).name, name)
-            }
-        return subject?.let { registry.methods[it] }
-    }
-
-    /** Returns the global constant entry for [name], exact by default or folded when [caseSensitive] is false. */
-    public fun findConstant(
-        name: String,
-        caseSensitive: Boolean = true,
-    ): StubEntry<ConstantSubject>? {
-        val spelled = ConstantSubject.parse(name)
-        val subject = if (caseSensitive) spelled else constFoldedIndex[spelled.name.lowercase()]
-        return subject?.let { registry.constants[it] }
-    }
-
-    /** Returns the class constant entry: qualified when [owner] is given, first unqualified match otherwise. */
-    public fun findClassConstant(
-        name: String,
-        owner: String? = null,
-        caseSensitive: Boolean = true,
-    ): StubEntry<ClassConstantSubject>? {
-        val subject =
-            if (owner == null) {
-                unqualifiedClassConst(name, caseSensitive)
-            } else {
-                qualifiedClassConst(name, owner, caseSensitive)
-            }
-        return subject?.let { registry.classConstants[it] }
-    }
-
-    private fun unqualifiedClassConst(
-        name: String,
-        caseSensitive: Boolean,
-    ): ClassConstantSubject? = if (caseSensitive) classConstSuffixIndex[name] else classConstSuffixFoldedIndex[name.lowercase()]
-
-    private fun qualifiedClassConst(
-        name: String,
-        owner: String,
-        caseSensitive: Boolean,
-    ): ClassConstantSubject? {
-        val spelled = ClassConstantSubject(ClassSubject.parse(owner).name, name)
-        if (caseSensitive) return spelled
-        return classConstFoldedIndex[spelled.owner + MEMBER_SEPARATOR + spelled.name.lowercase()]
+        /** [PhpStubs.plus] over the bundled lookup. */
+        public operator fun plus(dir: Path): PhpStubs = bundled + dir
     }
 }
