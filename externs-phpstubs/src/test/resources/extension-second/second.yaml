@@ -1,0 +1,4 @@
+# Test fixture: a second extension set restating the strlen value unit, mounted after extension-test.
+- subject:
+    function: strlen
+  returns: any

@@ -1,0 +1,4 @@
+# Test fixture: the earlier document of a set stating the same key as b.yaml.
+- subject:
+    function: twice
+  returns: str

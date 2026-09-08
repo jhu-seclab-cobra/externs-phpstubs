@@ -1,0 +1,8 @@
+# Test fixture: a generated-corpus entry that declares a condition, which the corpus rules reject.
+- subject:
+    function: cond_func
+  when: [1]
+  signature:
+    params:
+      - {name: value, type: int}
+    returnType: int

@@ -1,15 +1,20 @@
 package edu.jhu.cobra.externs.phpstubs
 
+import edu.jhu.cobra.commons.phpmodels.ClassConstantSubject
 import edu.jhu.cobra.commons.phpmodels.ClassSubject
 import edu.jhu.cobra.commons.phpmodels.Classifier
 import edu.jhu.cobra.commons.phpmodels.ConstantSubject
 import edu.jhu.cobra.commons.phpmodels.DeclaredType
 import edu.jhu.cobra.commons.phpmodels.FunctionSubject
+import edu.jhu.cobra.commons.phpmodels.MethodSubject
+import edu.jhu.cobra.commons.phpmodels.ModelSubject
+import edu.jhu.cobra.commons.phpmodels.PropertySubject
 import edu.jhu.cobra.commons.phpmodels.ReturnKind
 import edu.jhu.cobra.commons.phpmodels.SignatureInfo
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
@@ -17,9 +22,12 @@ import kotlin.test.assertTrue
  * Tests for [BuiltinRecord] construction and its typed signature accessors.
  *
  * - `a record holds a signature or at least one fact` — verifies the empty record is rejected
+ * - `a record with a signature and no fact is valid` — verifies the declaration-only record
  * - `every fact names the record's subject` — verifies a foreign owner is rejected
  * - `facts enumerates every kind in order` — verifies returns precede flows precede taint facts
  * - `typed accessors narrow the signature per subject kind` — verifies the callable and typed views
+ * - `typed accessors are null for a fact-only record` — verifies the absent signature narrows to null
+ * - `member accessors narrow the method, class constant, and property signatures` — verifies the three member views
  */
 internal class BuiltinRecordTest {
     private val f = FunctionSubject("f")
@@ -28,6 +36,14 @@ internal class BuiltinRecordTest {
     fun `a record holds a signature or at least one fact`() {
         val failure = assertFailsWith<IllegalArgumentException> { record(f, signature = null) }
         assertTrue("neither" in failure.message!!)
+    }
+
+    @Test
+    fun `a record with a signature and no fact is valid`() {
+        val callable = SignatureInfo.CallableSignature(emptyList(), DeclaredType("int"))
+        val record = record(f, callable)
+        assertEquals(callable, record.signature)
+        assertTrue(record.facts.isEmpty())
     }
 
     @Test
@@ -54,7 +70,25 @@ internal class BuiltinRecordTest {
         assertNull(record(ClassSubject("K"), SignatureInfo.ClassSignature(Classifier.CLASS)).classSignature?.parent)
     }
 
-    private fun <S : edu.jhu.cobra.commons.phpmodels.ModelSubject> record(
+    @Test
+    fun `typed accessors are null for a fact-only record`() {
+        val record = record(f, signature = null, returns = listOf(ReturnsFact(f, null, ReturnKind.STR)))
+        assertNull(record.callableSignature)
+    }
+
+    @Test
+    fun `member accessors narrow the method, class constant, and property signatures`() {
+        val root = "/models-test/"
+        val merge = Merge.of(MountSequence().mount(root, StubResources.opener(root)).toList())
+        val method = merge.methods.getValue(MethodSubject("Exception", "getCode"))
+        assertEquals("int", assertNotNull(method.callableSignature).returnType.toString())
+        val constant = merge.classConstants.getValue(ClassConstantSubject("Exception", "SEVERITY_ERROR"))
+        assertEquals("1", assertNotNull(constant.typedSignature).value)
+        val property = merge.properties.getValue(PropertySubject("Exception", "message"))
+        assertEquals("string", assertNotNull(property.propertySignature).type.toString())
+    }
+
+    private fun <S : ModelSubject> record(
         subject: S,
         signature: SignatureInfo?,
         returns: List<ReturnsFact> = emptyList(),

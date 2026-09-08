@@ -3,6 +3,8 @@ package edu.jhu.cobra.externs.phpstubs
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertIs
+import kotlin.test.assertNull
+import kotlin.test.assertSame
 
 /**
  * Tests for [StubIndexNotFoundException] and [StubIndexInvalidException].
@@ -11,6 +13,8 @@ import kotlin.test.assertIs
  * - `StubIndexNotFoundException extends RuntimeException` -- inheritance.
  * - `StubIndexInvalidException message contains reason` -- message format.
  * - `StubIndexInvalidException extends RuntimeException` -- inheritance.
+ * - `StubIndexInvalidException attaches the format library's cause` -- cause chain.
+ * - `StubIndexInvalidException cause is null when detected directly` -- default cause.
  */
 internal class ExceptionsTest {
     @Test
@@ -35,5 +39,16 @@ internal class ExceptionsTest {
     fun `StubIndexInvalidException extends RuntimeException`() {
         val ex = StubIndexInvalidException("test")
         assertIs<RuntimeException>(ex)
+    }
+
+    @Test
+    fun `StubIndexInvalidException attaches the format library's cause`() {
+        val cause = IllegalArgumentException("malformed")
+        assertSame(cause, StubIndexInvalidException("bad.yaml", cause).cause)
+    }
+
+    @Test
+    fun `StubIndexInvalidException cause is null when detected directly`() {
+        assertNull(StubIndexInvalidException("corpus rule").cause)
     }
 }
