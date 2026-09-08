@@ -20,7 +20,7 @@ mapping serves both at the merge.
 The taint rules document set is the third shipped artifact of this library: a
 classpath root laid out by the commons-phpmodels document-set convention,
 written by hand, kept in psalm's names, and merged after the taint set
-under the same mapping into this library's Model Index.
+under the same mapping into this library's Built-in Records.
 
 **Data Flow**
 - **Inputs:** the Argus sink lists, the psalm kind names, and the corpus
@@ -28,7 +28,7 @@ under the same mapping into this library's Model Index.
 - **Outputs:** one document set: manifest, vocabulary additions, policy
   rows, and the sink, sanitizer, and source documents.
 - **Connections:** Argus lists + review → taint rules document set →
-  [commons-phpmodels set loader + this library's mapping] → Model Index,
+  [commons-phpmodels set loader + this library's mapping] → merge,
   mounted above the taint set.
 
 **Scope Boundaries**
@@ -97,7 +97,7 @@ merge: set loader(taint/, …) then set loader(taint-rules/, taint vocabulary, m
 **Data Contracts**
 - **With the taint document set:** the taint rules set decodes only over the
   taint set's vocabulary; every Psalm Kind it names is declared there. No
-  entry equals the taint set's entry for the same subject, guard, and
+  entry equals the taint set's entry for the same subject, condition, and
   section.
 - **With the merge:** this library loads the set with the same category
   mapping as the taint set, extended by the two Vocabulary Additions.

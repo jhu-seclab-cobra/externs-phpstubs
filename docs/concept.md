@@ -10,7 +10,7 @@ constant's value is, and which built-ins psalm marks as taint sources, sinks,
 and escapes. This knowledge is extracted from upstream sources and is
 independent of any analysis technique. The model format for stating it
 exists in commons-phpmodels; what remains is the data, its merge into one
-index, and a lookup that answers by PHP name in one vocabulary.
+body of facts, and a lookup that answers by PHP name in one vocabulary.
 
 **System Role**
 This library is the data layer and the lookup surface of the Cobra PHP
@@ -18,7 +18,7 @@ model stack: the generated model documents for PHP built-ins, two taint
 sets ([concept-taint.md](concept-taint.md), [concept-taint-rules.md](concept-taint-rules.md)),
 a value rules set ([concept-value-rules.md](concept-value-rules.md)), and the
 vocabulary, merge, and lookup by PHP name over them ([concept-lookup.md](concept-lookup.md)).
-The format, decoding, validation, and the merge rule belong to commons-phpmodels.
+The format, its decoding, and its validation belong to commons-phpmodels.
 
 **Data Flow**
 - **Inputs:** upstream stub sources, psalm's taint data, and the Argus
@@ -27,16 +27,16 @@ The format, decoding, validation, and the merge rule belong to commons-phpmodels
   sources, sinks, and sanitizers in the canonical vocabulary; the same facts enumerable by kind.
 - **Connections:** upstream stubs → extraction → model documents; psalm
   taint data → extraction, Argus lists → review → document sets; all sets
-  → [commons-phpmodels decode + merge] → Built-in Lookup → consumers.
+  → [commons-phpmodels decode] → merge → Built-in Lookup → consumers.
 
 **Scope Boundaries**
 - **Owned:** the generated model documents, the language-construct
   document, extension provenance, document discovery, the registry, the
   taint sets in psalm's names, the value rules set, every shipped set's
-  provenance, and the Lookup Surface.
+  provenance, the Canonical Vocabulary, the merge, and the Built-in Lookup.
 - **Not Owned:** the model format, the document-set convention, their
-  validation, and the merge rule (commons-phpmodels); guard arguments from
-  run-time values, branch choice under an undecided guard, computing a
+  validation, and condition matching (commons-phpmodels); a call's
+  argument values, the rule for an undecidable condition, computing a
   call's result, and compiled artifacts (consumers).
 
 ## 2. Concepts
@@ -53,9 +53,9 @@ Offline (per upstream release):
 Runtime:
     models/** ──manifest──► commons-phpmodels decode ──► Stub Registry (generated set)
     value-rules/** ─────────────────────────────────────┐
-    vocabulary (canonical) ─────────────────────────────┤──► commons-phpmodels merge ──► Model Index
-    taint/** + mapping onto canonical names ────────────┤                                    │
-    taint-rules/** + the same mapping ──────────────────┘                                    ▼
+    vocabulary (canonical) ─────────────────────────────┤──► this library's merge ──► Built-in Records
+    taint/** + mapping onto canonical names ────────────┤                                  │
+    taint-rules/** + the same mapping ──────────────────┘                                  ▼
                                                                                    Built-in Lookup by PHP name
 ```
 
@@ -123,12 +123,12 @@ Runtime:
   Built once; it enters the merge as the generated set and carries the
   extension each Built-in Record reports.
 - **Scope:** internal; existence and entry retrieval for the merge.
-- **Relationships:** built from Model Entries; one input of the Model Index.
+- **Relationships:** built from Model Entries; the first input of the merge.
 
 - **Name:** Lookup Surface
-- **Definition:** The Canonical Vocabulary, Model Index, Built-in Record,
-  and Built-in Lookup ([concept-lookup.md](concept-lookup.md)): how the
-  sets merge and how a consumer reads them.
+- **Definition:** The Canonical Vocabulary, Merge, Built-in Record, and
+  Built-in Lookup ([concept-lookup.md](concept-lookup.md)): how the sets
+  merge and how a consumer reads them.
 - **Relationships:** built over the Stub Registry and the document sets.
 
 - **Name:** Document Manifest
@@ -152,14 +152,14 @@ Runtime:
 
 **Data Contracts**
 - **With commons-phpmodels:** every document is decoded by the format
-  library's set loader and every set merged by its index; a format or
-  merge violation is a load failure at the consumer's start or in this
+  library's set loader; a format violation, or a conflict the merge finds
+  between sets, is a load failure at the consumer's start or in this
   repository's tests — never a silent miss. This library adds no rule of
-  the format and no rule of the merge.
+  the format.
 - **With cobraphp-core:** a name lookup returns one Built-in Record or
   nothing. Signature fields and constant values are read as
   commons-phpmodels types; flows, sources, sinks, and sanitizers are read
-  from the record in the Canonical Vocabulary, guards attached. The
+  from the record in the Canonical Vocabulary, conditions attached. The
   consumer holds no set, layer, mapping, or precedence; which set stated a
   fact is answered on request, never required.
 - **With the Extraction Pipeline:** generated documents are reproducible
@@ -174,11 +174,11 @@ Runtime:
 4. Register — insert entries into per-kind maps keyed by subject; two
    documents declaring the same subject is a corpus defect and fails the
    load naming both documents.
-5. Merge — hand the registry as the generated set, then the value rules
-   set, the Canonical Vocabulary, and the two translated taint sets to
-   commons-phpmodels; receive the Model Index.
+5. Merge — fold the registry as the generated set, then the value rules
+   set, the Canonical Vocabulary, and the two translated taint sets, into
+   one statement per subject, condition, and section.
 6. Answer — resolve a PHP name to a subject and read its record from the
-   index; enumerate a fact kind across the index.
+   merge; enumerate a declaration kind or a fact kind across it.
 
 ## 4. Scenarios
 
@@ -193,8 +193,8 @@ Runtime:
   its sinks and receives one sink of the canonical SQL injection category
   at the first argument, translated from psalm's `sql`. It asks `strlen`
   for its flow and receives the value rules statement, the signature and
-  extension staying the registry's. The sets meet per subject and section
-  in the Model Index, never in the consumer.
+  extension staying the registry's. The sets meet per subject, condition,
+  and section in this library's merge, never in the consumer.
 
 Lookup: [concept-lookup.md](concept-lookup.md). Sets: [concept-taint.md](concept-taint.md), [concept-taint-rules.md](concept-taint-rules.md), [concept-value-rules.md](concept-value-rules.md).
 Software structure: [design.md](design.md). Format semantics: commons-phpmodels `docs/model-declarations.md`.

@@ -19,7 +19,7 @@ vocabulary happens once, at this library's merge.
 **System Role**
 The taint document set is the second generated artifact of this library:
 a classpath root laid out by the commons-phpmodels document-set convention,
-merged by this library into its Model Index under its own category mapping
+merged by this library into its Built-in Records under its own category mapping
 onto the Canonical Vocabulary ([concept.md](concept.md)).
 
 **Data Flow**
@@ -29,7 +29,7 @@ onto the Canonical Vocabulary ([concept.md](concept.md)).
 - **Outputs:** one document set: manifest, vocabulary, policy, and the
   sink, sanitizer, and source documents.
 - **Connections:** psalm release → taint extraction → taint document set →
-  [commons-phpmodels set loader + this library's mapping] → Model Index.
+  [commons-phpmodels set loader + this library's mapping] → merge.
 
 **Scope Boundaries**
 - **Owned:** the set's files, psalm's kind names as its vocabulary, the
@@ -80,8 +80,8 @@ merge: set loader(taint/, canonical vocabulary, mapping) ─► entries in canon
 - **Definition:** A model entry with no signature whose body holds exactly
   one taint section: sinks with one argument port per dangerous argument,
   sanitizers with the escaped kinds, or sources producing `input`. A
-  guarded escape (an escape that holds only under one argument value)
-  is a guarded entry whose guard states that value.
+  conditional escape (an escape that holds only under one argument value)
+  is an entry whose condition states that value at its position.
 - **Scope:** function, method, and predefined-variable subjects.
   A variadic dangerous parameter is stated at the variadic's position.
 - **Relationships:** a Model Entry; its Subject may or may not exist in
@@ -129,7 +129,7 @@ merge: set loader(taint/, canonical vocabulary, mapping) ─► entries in canon
   canonical SQL injection category at the merge.
 - **Boundary:** psalm escapes `html` in `filter_var` only when the filter
   argument equals one of five sanitize-filter values. The set states five
-  guarded entries, one per value; an unguarded call keeps no escape.
+  conditional entries, one per value; a call matching none keeps no escape.
 - **Interaction:** the mapping discards psalm's `has_quotes`. The
   `urlencode` entry, which escapes `html` and `has_quotes`, arrives with
   `html` alone; an entry whose every kind is discarded arrives not at all.

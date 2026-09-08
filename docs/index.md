@@ -3,7 +3,7 @@
 | File | Topic |
 |------|-------|
 | [concept.md](concept.md) | Problem statement, data-side concepts over commons-phpmodels, extension provenance, scenarios |
-| [concept-lookup.md](concept-lookup.md) | Canonical vocabulary, the merge into one Model Index, Built-in Record and Built-in Lookup by PHP name |
+| [concept-lookup.md](concept-lookup.md) | Canonical vocabulary, the merge, Built-in Record and Built-in Lookup by PHP name |
 | [concept-taint.md](concept-taint.md) | The taint document set in psalm's names, its extraction, and its translation at the merge |
 | [concept-taint-rules.md](concept-taint-rules.md) | The hand-maintained taint rules document set: Argus sinks, added escapes and sources, vocabulary additions |
 | [concept-value-rules.md](concept-value-rules.md) | The hand-maintained value rules set: value semantics beyond the generated declarations, corpus gaps |

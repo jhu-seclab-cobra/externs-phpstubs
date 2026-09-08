@@ -40,8 +40,8 @@ each unit override the generated one for its subject.
   declarations, the recorded reason for every unit that differs from a
   generated one, and the classpath root constant that names it.
 - **Not Owned:** taint sections (the taint sets), the generated unit it
-  overrides, the merge rule (commons-phpmodels), the consumer's
-  conservative default, and the consumer's compute overlay.
+  overrides, the merge ([concept-lookup.md](concept-lookup.md)), the
+  consumer's conservative default, and the consumer's compute overlay.
 
 ## 2. Concepts
 
@@ -63,7 +63,7 @@ merge: models/ (generated) ◄──ranked below── value-rules/ (manual), pe
   result. Its provenance declares it manually verified.
 - **Scope:** built-ins whose generated entry has no unit, whose generated
   unit the PHP manual contradicts, and mode-switching built-ins that need
-  a guarded branch. Nothing a generated entry already states correctly.
+  a conditional entry. Nothing a generated entry already states correctly.
 - **Relationships:** outranks the Generated Layer under the default
   precedence; never read by the Stub Registry; sibling of the Taint Rules
   Document Set.
@@ -73,8 +73,8 @@ merge: models/ (generated) ◄──ranked below── value-rules/ (manual), pe
   a hand-written entry without a signature asserts the unit exhaustively:
   the returns classification and every argument-to-result flow, with an
   absent flow set meaning the result is unrelated to the arguments.
-- **Scope:** function and method subjects; an optional when guard on one
-  argument value selects a branch for a mode-switching built-in.
+- **Scope:** function and method subjects; an optional condition on the
+  argument values states the mode of a mode-switching built-in.
 - **Relationships:** a Model Entry; its Subject must exist in the
   generated declarations (an entry for an unknown subject can never be
   selected, because a record exists only where a signature does).
@@ -111,13 +111,13 @@ merge: models/ (generated) ◄──ranked below── value-rules/ (manual), pe
 
 **Internal Processing Flow**
 1. Classify — compare each migrated rule with the generated entry: no
-   generated unit, differing unit, guarded branch, or Corpus Gap.
+   generated unit, differing unit, conditional entry, or Corpus Gap.
 2. Review — check every differing or type-widened rule against the PHP
    manual: keep it with a Review Reason, correct it with a Review Reason,
    or drop it when the manual confirms the generated unit. A Corpus Gap
    becomes a declaration under `models/manual/`.
 3. Emit — write the provenance and one document per PHP manual area,
-   subjects sorted, guarded branches before the default.
+   subjects sorted, conditional entries before the unconditional one.
 4. Verify — the repository test loads the set beside the declarations and
    asserts provenance, existence, shape, and non-repetition.
 
@@ -127,8 +127,8 @@ merge: models/ (generated) ◄──ranked below── value-rules/ (manual), pe
   states `returns: num` with the first argument flowing to the result; the
   consumer's result is a typed unknown instead of an untyped one.
 - **Boundary:** `print_r` returns its rendering only when the second
-  argument is true. A guarded entry states that branch; the default
-  branch states a boolean result with no flow.
+  argument is true. A conditional entry states that case; the
+  unconditional entry states a boolean result with no flow.
 - **Interaction:** `mysqli::query` is stated in no value rules document:
   the extraction carries no `mysqli` methods, so `models/manual/mysqli.yaml`
   declares its signature and reviewed flow, and the registry, not this set,
