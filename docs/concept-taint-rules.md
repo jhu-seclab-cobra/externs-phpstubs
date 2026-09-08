@@ -12,15 +12,15 @@ psalm's taint data misses sinks, escapes, and sources that published PHP
 analyses treat as standard: the Argus sink lists (Jahanshahi and Egele,
 USENIX Security 2024), output built-ins such as `echo`, callback-taking
 built-ins, LDAP and XPath queries, and data read from the environment,
-files, sockets, and stored records. Consumers need these as one more
+files, sockets, and stored records. This library states them as one more
 document set in the same format and the same names, so that one category
-mapping serves both.
+mapping serves both at the merge.
 
 **System Role**
 The taint rules document set is the third shipped artifact of this library: a
 classpath root laid out by the commons-phpmodels document-set convention,
-written by hand, kept in psalm's names, and served to consumers that mount
-it after the taint set under the same mapping.
+written by hand, kept in psalm's names, and merged after the taint set
+under the same mapping into this library's Model Index.
 
 **Data Flow**
 - **Inputs:** the Argus sink lists, the psalm kind names, and the corpus
@@ -28,15 +28,16 @@ it after the taint set under the same mapping.
 - **Outputs:** one document set: manifest, vocabulary additions, policy
   rows, and the sink, sanitizer, and source documents.
 - **Connections:** Argus lists + review → taint rules document set →
-  [commons-phpmodels set loader + consumer mapping] → consumer layers,
+  [commons-phpmodels set loader + this library's mapping] → Model Index,
   mounted above the taint set.
 
 **Scope Boundaries**
 - **Owned:** the set's files, the two names it adds to psalm's vocabulary,
   the choice of which subjects and ports it states, and the classpath root
   constant that names it.
-- **Not Owned:** psalm's own assertions (the taint set), the consumer's
-  vocabulary and mapping, and any runtime lookup over the set.
+- **Not Owned:** psalm's own assertions (the taint set), the Canonical
+  Vocabulary and mapping ([concept.md](concept.md)), and any lookup over
+  the set.
 
 ## 2. Concepts
 
@@ -50,7 +51,7 @@ built-in name corpus ──────┘    ├── index.txt
                                 ├── sinks.yaml
                                 ├── sanitizers.yaml
                                 └── sources.yaml
-consumer: set loader(taint/, …) then set loader(taint-rules/, taint vocabulary, mapping)
+merge: set loader(taint/, …) then set loader(taint-rules/, taint vocabulary, mapping)
 ```
 
 **Core Concepts**
@@ -63,7 +64,7 @@ consumer: set loader(taint/, …) then set loader(taint-rules/, taint vocabulary
   escapes and sources those lists and the built-in corpus imply, and
   nothing psalm already states identically.
 - **Relationships:** loaded over the Taint Document Set's vocabulary;
-  mounted by consumers above it; never read by the Stub Registry.
+  mounted by the merge above it; never read by the Stub Registry.
 
 - **Name:** Vocabulary Addition
 - **Definition:** A danger category or origin color the set declares
@@ -72,11 +73,11 @@ consumer: set loader(taint/, …) then set loader(taint-rules/, taint vocabulary
   sockets, mail, LDAP, or stored records).
 - **Scope:** the two names; every other name in the set is a Psalm Kind.
 - **Relationships:** declared in the set's vocabulary, enabled by its
-  policy rows, translated by the consumer's mapping like a Psalm Kind.
+  policy rows, translated by the library's mapping like a Psalm Kind.
 
 - **Name:** Widened Entry
 - **Definition:** A taint rules entry for a subject and section the taint set
-  also states. Because a consumer replaces one section per subject at a
+  also states. Because the merge replaces one section per subject at a
   time, the entry restates every point of psalm's section and adds its
   own; it is a strict superset, never a rewrite.
 - **Scope:** sinks only in the shipped set; nine subjects.
@@ -98,11 +99,10 @@ consumer: set loader(taint/, …) then set loader(taint-rules/, taint vocabulary
   taint set's vocabulary; every Psalm Kind it names is declared there. No
   entry equals the taint set's entry for the same subject, guard, and
   section.
-- **With cobraphp-core:** the consumer opens the set at the root constant
-  this library exports and loads it with the same category mapping as the
-  taint set, extended by the two Vocabulary Additions. Mounting it after
-  the taint set makes each taint rules section override psalm's for that
-  subject.
+- **With the merge:** this library loads the set with the same category
+  mapping as the taint set, extended by the two Vocabulary Additions.
+  Mounting it after the taint set makes each taint rules section override
+  psalm's for that subject.
 
 **Internal Processing Flow**
 1. Select — take each Argus sink the format can express, drop those
@@ -121,9 +121,9 @@ consumer: set loader(taint/, …) then set loader(taint-rules/, taint vocabulary
 - **Boundary:** psalm states `readfile` as a `file` and `unserialize`
   sink; Argus adds server-side request forgery and output. The taint rules entry
   states all four kinds, and the test proves it contains psalm's two.
-- **Interaction:** the consumer maps `external` to its own color and
-  `xpath` to its own category. `getenv` arrives as a source of that color;
-  `DOMXPath::query` arrives as a sink of that category; the `external`
-  policy row arrives in the consumer's names.
+- **Interaction:** the mapping translates `external` to the canonical
+  color and `xpath` to the canonical category. `getenv` is answered as a
+  source of that color; `DOMXPath::query` as a sink of that category; the
+  `external` policy row in canonical names.
 
 Software structure: [design-taint-rules.md](design-taint-rules.md).

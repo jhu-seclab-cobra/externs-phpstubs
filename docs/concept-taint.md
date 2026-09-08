@@ -11,15 +11,16 @@ psalm states which PHP built-ins consume a value dangerously (sinks), which
 neutralize a value for one danger kind (escapes), and which produce
 attacker-controlled data (sources). That knowledge is spread over a
 dictionary, docblock annotations in psalm's stubs, and psalm's own analyzer
-code, all keyed by psalm's kind names. Consumers need it as one document
-set in the commons-phpmodels format, kept in psalm's names so that each
-consumer decides its own translation.
+code, all keyed by psalm's kind names. This library needs it as one
+document set in the commons-phpmodels format, kept in psalm's names so the
+extraction stays a faithful copy; the translation into the canonical
+vocabulary happens once, at this library's merge.
 
 **System Role**
 The taint document set is the second generated artifact of this library:
 a classpath root laid out by the commons-phpmodels document-set convention,
-served untouched to consumers that load it through the format library's
-set loader under their own category mapping.
+merged by this library into its Model Index under its own category mapping
+onto the Canonical Vocabulary ([concept.md](concept.md)).
 
 **Data Flow**
 - **Inputs:** psalm's internal sink dictionary, taint annotations in
@@ -28,14 +29,14 @@ set loader under their own category mapping.
 - **Outputs:** one document set: manifest, vocabulary, policy, and the
   sink, sanitizer, and source documents.
 - **Connections:** psalm release → taint extraction → taint document set →
-  [commons-phpmodels set loader + consumer mapping] → consumer layers.
+  [commons-phpmodels set loader + this library's mapping] → Model Index.
 
 **Scope Boundaries**
 - **Owned:** the set's files, psalm's kind names as its vocabulary, the
   reproducible extraction, and the classpath root constant that names it.
-- **Not Owned:** the consumer's vocabulary, the mapping from psalm's names
-  onto it, which psalm kinds a consumer keeps or discards, and any
-  runtime lookup over the set (the registry never reads it).
+- **Not Owned:** the Canonical Vocabulary and the mapping from psalm's
+  names onto it ([concept.md](concept.md)), and any lookup over the set:
+  the set is read only by the merge.
 
 ## 2. Concepts
 
@@ -49,7 +50,7 @@ psalm analyzer  superglobal source rule ───────┘             ├
                                                              ├── sinks.yaml
                                                              ├── sanitizers.yaml
                                                              └── sources.yaml
-consumer: set loader(taint/, context vocabulary, mapping) ─► entries in consumer names
+merge: set loader(taint/, canonical vocabulary, mapping) ─► entries in canonical names
 ```
 
 **Core Concepts**
@@ -63,7 +64,7 @@ consumer: set loader(taint/, context vocabulary, mapping) ─► entries in cons
   source annotation in psalm's stubs, and the superglobals psalm's analyzer
   colors. Nothing hand-added.
 - **Relationships:** a Generated Layer artifact; produced by the Taint
-  Extraction; loaded by consumers, never by the Stub Registry.
+  Extraction; loaded by the merge, never by the Stub Registry.
 
 - **Name:** Psalm Kind
 - **Definition:** One of psalm's taint kind names (`sql`, `html`, `shell`,
@@ -73,7 +74,7 @@ consumer: set loader(taint/, context vocabulary, mapping) ─► entries in cons
 - **Scope:** the closed list psalm's kind enumeration declares for one
   release; a kind the set declares but no document names stays declared.
 - **Relationships:** referenced by every taint entry; translated by the
-  consumer's mapping; never renamed here.
+  library's mapping at the merge; never renamed in the set.
 
 - **Name:** Taint Entry
 - **Definition:** A model entry with no signature whose body holds exactly
@@ -103,12 +104,12 @@ consumer: set loader(taint/, context vocabulary, mapping) ─► entries in cons
   manifest, optional vocabulary and policy under fixed names, documents
   in manifest order. Every entry decodes through the format library; a
   format violation fails this repository's tests, never a consumer's
-  start.
-- **With cobraphp-core:** the consumer opens the set at the root constant
-  this library exports and loads it through the set loader with its own
-  vocabulary as context and a category mapping that lists every psalm
-  kind and the origin `input`. Names the consumer maps to nothing are
-  dropped by the format library; nothing is dropped here.
+  start (the set is loaded before the registry is first read).
+- **With the merge:** this library opens the set at its root constant and
+  loads it through the set loader with the Canonical Vocabulary as context
+  and a category mapping that lists every psalm kind and the origin
+  `input`. Names the mapping omits are dropped by the format library;
+  nothing is dropped here.
 
 **Internal Processing Flow**
 1. Extract — read psalm's dictionary, stub annotations, and source rule.
@@ -124,15 +125,14 @@ consumer: set loader(taint/, context vocabulary, mapping) ─► entries in cons
 
 - **Typical:** psalm's dictionary lists `mysqli_query` with its second
   argument as `sql`. The sinks document states subject `mysqli_query`,
-  port `argument(1)`, category `sql`. The consumer's mapping renames
-  `sql` to its own category at load.
+  port `argument(1)`, category `sql`. The mapping renames `sql` to the
+  canonical SQL injection category at the merge.
 - **Boundary:** psalm escapes `html` in `filter_var` only when the filter
   argument equals one of five sanitize-filter values. The set states five
   guarded entries, one per value; an unguarded call keeps no escape.
-- **Interaction:** the consumer's mapping discards psalm's `has_quotes`.
-  The `urlencode` entry, which escapes `html` and `has_quotes`, arrives
-  with `html` alone; an entry whose every kind is discarded arrives not at
-  all. Both decisions are the format library's, driven by the consumer's
-  mapping.
+- **Interaction:** the mapping discards psalm's `has_quotes`. The
+  `urlencode` entry, which escapes `html` and `has_quotes`, arrives with
+  `html` alone; an entry whose every kind is discarded arrives not at all.
+  Both decisions are the format library's, driven by the mapping.
 
 Software structure: [design-taint.md](design-taint.md).

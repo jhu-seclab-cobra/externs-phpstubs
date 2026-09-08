@@ -23,7 +23,7 @@ any other consumer and mixed with that analyzer's configuration.
 The value rules document set is the fourth shipped artifact of this
 library: a hand-maintained classpath root in the commons-phpmodels
 document-set convention holding value-semantics units only, declared
-manually verified, so that a consumer ranking sets by verification lets
+manually verified, so that the merge, ranking sets by verification, lets
 each unit override the generated one for its subject.
 
 **Data Flow**
@@ -32,7 +32,7 @@ each unit override the generated one for its subject.
 - **Outputs:** one document set: manifest, provenance, and value documents
   grouped by PHP manual area.
 - **Connections:** review → value rules document set →
-  [commons-phpmodels set loader] → consumer fold by precedence.
+  [commons-phpmodels set loader] → this library's merge by precedence.
 
 **Scope Boundaries**
 - **Owned:** the set's files, its provenance, the choice of which subjects
@@ -40,7 +40,7 @@ each unit override the generated one for its subject.
   declarations, the recorded reason for every unit that differs from a
   generated one, and the classpath root constant that names it.
 - **Not Owned:** taint sections (the taint sets), the generated unit it
-  overrides, the precedence a consumer applies, the consumer's
+  overrides, the merge rule (commons-phpmodels), the consumer's
   conservative default, and the consumer's compute overlay.
 
 ## 2. Concepts
@@ -51,7 +51,7 @@ cobraphp-core rules ──review against models/ and the PHP manual──► val
                                                                     ├── index.txt
                                                                     ├── provenance.yaml  (manual)
                                                                     └── <area>.yaml      (returns + propagation only)
-consumer: models/ (generated) ◄──ranked below── value-rules/ (manual), per subject and unit
+merge: models/ (generated) ◄──ranked below── value-rules/ (manual), per subject and unit
 ```
 
 **Core Concepts**
@@ -77,7 +77,7 @@ consumer: models/ (generated) ◄──ranked below── value-rules/ (manual),
   argument value selects a branch for a mode-switching built-in.
 - **Relationships:** a Model Entry; its Subject must exist in the
   generated declarations (an entry for an unknown subject can never be
-  selected, because existence is a signature lookup in the consumer).
+  selected, because a record exists only where a signature does).
 
 - **Name:** Review Reason
 - **Definition:** The PHP manual statement that justifies a Value Rule
@@ -104,10 +104,10 @@ consumer: models/ (generated) ◄──ranked below── value-rules/ (manual),
 - **With the generated declarations:** every subject the set states has a
   generated entry; no default-branch unit equals the generated unit of the
   same subject.
-- **With cobraphp-core:** the consumer mounts the set as one unmapped
-  document set; the set names no category or color and needs no
-  vocabulary. Its provenance is manual, so under the consumer's precedence
-  its units outrank the generated ones whatever the mount order.
+- **With the merge:** this library mounts the set unmapped; the set names
+  no category or color and needs no vocabulary. Its provenance is manual,
+  so under the default precedence its units outrank the generated ones
+  whatever the mount order.
 
 **Internal Processing Flow**
 1. Classify — compare each migrated rule with the generated entry: no

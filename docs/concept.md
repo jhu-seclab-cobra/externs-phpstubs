@@ -9,37 +9,35 @@ which PHP extension provides it, what its signature looks like, what a
 constant's value is, and which built-ins psalm marks as taint sources, sinks,
 and escapes. This knowledge is extracted from upstream sources and is
 independent of any analysis technique. The model format for stating it
-exists in commons-phpmodels; what remains is the data, a registry serving
-the declarations, and document sets serving the taint and value assertions.
+exists in commons-phpmodels; what remains is the data, its merge into one
+index, and a lookup that answers by PHP name in one vocabulary.
 
 **System Role**
-This library is the generated layer of the Cobra PHP model stack: it owns
-the generated model documents for PHP built-ins, their provenance, a
-read-only registry that resolves PHP names to model entries, two taint
-document sets ([concept-taint.md](concept-taint.md), [concept-taint-rules.md](concept-taint-rules.md)),
-and a value rules set ([concept-value-rules.md](concept-value-rules.md)).
-The format, decoding, and validation belong to commons-phpmodels.
+This library is the data layer and the lookup surface of the Cobra PHP
+model stack: the generated model documents for PHP built-ins, two taint
+sets ([concept-taint.md](concept-taint.md), [concept-taint-rules.md](concept-taint-rules.md)),
+a value rules set ([concept-value-rules.md](concept-value-rules.md)), and the
+vocabulary, merge, and lookup by PHP name over them ([concept-lookup.md](concept-lookup.md)).
+The format, decoding, validation, and the merge rule belong to commons-phpmodels.
 
 **Data Flow**
 - **Inputs:** upstream stub sources, psalm's taint data, and the Argus
   lists (offline); model documents and three document sets (bundled).
-- **Outputs:** model entries keyed by subject, each carrying its
-  extension provenance; PHP-name lookups over them; the document sets as
-  classpath roots consumers load themselves.
-- **Connections:** upstream stubs → extraction → model documents →
-  [commons-phpmodels decode] → [this registry] → consumers (cobraphp-core);
-  psalm taint data → extraction, Argus lists → review → document sets → consumers.
+- **Outputs:** one Built-in Record per PHP name: extension, signature, flows,
+  sources, sinks, and sanitizers in the canonical vocabulary; the same facts enumerable by kind.
+- **Connections:** upstream stubs → extraction → model documents; psalm
+  taint data → extraction, Argus lists → review → document sets; all sets
+  → [commons-phpmodels decode + merge] → Built-in Lookup → consumers.
 
 **Scope Boundaries**
 - **Owned:** the generated model documents, the language-construct
-  document, extension provenance, document discovery, the registry,
-  PHP-name lookup semantics (unqualified member lookup, constant case
-  over-approximation), the taint sets in psalm's names, the value rules
-  set, and every shipped set's provenance.
-- **Not Owned:** the model format, the document-set convention, and their
-  validation (commons-phpmodels); the consumer's category vocabulary, its
-  mapping from psalm's names, precedence and layering, branch selection,
-  and compiled artifacts (consumers).
+  document, extension provenance, document discovery, the registry, the
+  taint sets in psalm's names, the value rules set, every shipped set's
+  provenance, and the Lookup Surface.
+- **Not Owned:** the model format, the document-set convention, their
+  validation, and the merge rule (commons-phpmodels); guard arguments from
+  run-time values, branch choice under an undecided guard, computing a
+  call's result, and compiled artifacts (consumers).
 
 ## 2. Concepts
 
@@ -53,10 +51,12 @@ Offline (per upstream release):
     reviewed value semantics ───review──────► value-rules/** (document set)
 
 Runtime:
-    models/** ──manifest──► commons-phpmodels decode ──► Stub Registry
-                            (strict, validated)          entries by subject
-                                                         + extension provenance
-                                                         + lookup indexes
+    models/** ──manifest──► commons-phpmodels decode ──► Stub Registry (generated set)
+    value-rules/** ─────────────────────────────────────┐
+    vocabulary (canonical) ─────────────────────────────┤──► commons-phpmodels merge ──► Model Index
+    taint/** + mapping onto canonical names ────────────┤                                    │
+    taint-rules/** + the same mapping ──────────────────┘                                    ▼
+                                                                                   Built-in Lookup by PHP name
 ```
 
 **Core Concepts**
@@ -83,10 +83,10 @@ Runtime:
   every lookup.
 
 - **Name:** Generated Layer
-- **Definition:** The lowest configuration layer of a consumer, as named in
-  commons-phpmodels: documents emitted by an extraction producer, whose set
-  provenance declares them generated, never hand-edited. A correction
-  belongs in one of this library's hand-maintained sets, not in these files.
+- **Definition:** The lowest set of this library's merge: documents emitted
+  by an extraction producer, whose set provenance declares them generated,
+  never hand-edited. A correction belongs in one of this library's
+  hand-maintained sets, not in these files.
 - **Scope:** every generated document under the models tree (not the
   hand-declared `language/` and `manual/` documents), and the taint set.
 - **Relationships:** produced by the Extraction Pipeline; consumed whole by
@@ -119,22 +119,17 @@ Runtime:
 
 - **Name:** Stub Registry
 - **Definition:** The immutable result of loading every document in the
-  manifest: per-kind maps from subject to entry, plus the indexes a
-  PHP-name lookup needs. Built eagerly once; every lookup afterwards is a
-  map read.
-- **Scope:** existence, entry retrieval, and bulk subject enumeration.
-- **Relationships:** built from Model Entries; queried by the Lookup
-  Semantics.
+  manifest: per-kind maps from subject to entry with extension provenance.
+  Built once; it enters the merge as the generated set and carries the
+  extension each Built-in Record reports.
+- **Scope:** internal; existence and entry retrieval for the merge.
+- **Relationships:** built from Model Entries; one input of the Model Index.
 
-- **Name:** Lookup Semantics
-- **Definition:** The name resolution rules this library adds above the
-  format's identity rules: a member (method, class constant) may be looked
-  up by its unqualified name alone through a suffix index; a constant may
-  be looked up case-insensitively as an explicit over-approximation for
-  analyses that cannot trust spelling.
-- **Scope:** lookup only; identity folding stays with the Subject.
-- **Relationships:** operates on the Stub Registry; answers consumer
-  queries.
+- **Name:** Lookup Surface
+- **Definition:** The Canonical Vocabulary, Model Index, Built-in Record,
+  and Built-in Lookup ([concept-lookup.md](concept-lookup.md)): how the
+  sets merge and how a consumer reads them.
+- **Relationships:** built over the Stub Registry and the document sets.
 
 - **Name:** Document Manifest
 - **Definition:** The build-generated list of every model document in the
@@ -157,14 +152,16 @@ Runtime:
 
 **Data Contracts**
 - **With commons-phpmodels:** every document is decoded by the format
-  library's model loader; every format violation is a load failure at the
-  consumer's start or the extraction's verification — never a silent
-  miss. This library adds no validation rule of the format.
-- **With cobraphp-core:** a name lookup returns the model entry with its
-  extension provenance, or nothing. Signature fields, constant values, and
-  declared propagations are read from the entry as commons-phpmodels
-  types. Taint and value assertions reach the consumer only through the
-  document sets, each with its provenance; the fold is never here.
+  library's set loader and every set merged by its index; a format or
+  merge violation is a load failure at the consumer's start or in this
+  repository's tests — never a silent miss. This library adds no rule of
+  the format and no rule of the merge.
+- **With cobraphp-core:** a name lookup returns one Built-in Record or
+  nothing. Signature fields and constant values are read as
+  commons-phpmodels types; flows, sources, sinks, and sanitizers are read
+  from the record in the Canonical Vocabulary, guards attached. The
+  consumer holds no set, layer, mapping, or precedence; which set stated a
+  fact is answered on request, never required.
 - **With the Extraction Pipeline:** generated documents are reproducible
   from the same upstream versions; a re-run yields identical files.
 
@@ -174,27 +171,30 @@ Runtime:
    failure names the document.
 3. Attribute — derive the Extension Provenance from the document's
    placement and attach it to each entry.
-4. Merge — insert entries into per-kind maps keyed by subject; two
+4. Register — insert entries into per-kind maps keyed by subject; two
    documents declaring the same subject is a corpus defect and fails the
    load naming both documents.
-5. Index — build the unqualified-member and case-insensitive-constant
-   indexes.
-6. Freeze — the registry is immutable from here on.
+5. Merge — hand the registry as the generated set, then the value rules
+   set, the Canonical Vocabulary, and the two translated taint sets to
+   commons-phpmodels; receive the Model Index.
+6. Answer — resolve a PHP name to a subject and read its record from the
+   index; enumerate a fact kind across the index.
 
 ## 4. Scenarios
 
-- **Typical:** an analysis meets `substr($s, 1)`. The registry resolves the
-  function subject, returns the entry with extension `standard`, its
-  signature, and the declared flow from the first argument to the result.
+- **Typical:** an analysis meets `substr($s, 1)`. The Built-in Lookup
+  answers the record with extension `standard`, its signature, and the
+  flow from the first argument to the result.
 - **Boundary:** a generated document carries a union return type. The
   format rejects it at decode, the load fails naming the document, and the
   fix is in the Extraction Pipeline, which simplifies the upstream type
   before emitting — never a hand edit of the generated file.
-- **Interaction:** cobraphp-core mounts the whole registry as its generated
-  layer beneath this library's hand-maintained sets. The value rules entry
-  for `strlen` supplies the unit; the registry's entry keeps supplying the
-  signature and extension. The layers meet per subject and unit in the
-  consumer, not here.
+- **Interaction:** cobraphp-core asks the record of `mysqli::query` for
+  its sinks and receives one sink of the canonical SQL injection category
+  at the first argument, translated from psalm's `sql`. It asks `strlen`
+  for its flow and receives the value rules statement, the signature and
+  extension staying the registry's. The sets meet per subject and section
+  in the Model Index, never in the consumer.
 
-Taint sets: [concept-taint.md](concept-taint.md), [concept-taint-rules.md](concept-taint-rules.md). Value rules: [concept-value-rules.md](concept-value-rules.md).
+Lookup: [concept-lookup.md](concept-lookup.md). Sets: [concept-taint.md](concept-taint.md), [concept-taint-rules.md](concept-taint-rules.md), [concept-value-rules.md](concept-value-rules.md).
 Software structure: [design.md](design.md). Format semantics: commons-phpmodels `docs/model-declarations.md`.
