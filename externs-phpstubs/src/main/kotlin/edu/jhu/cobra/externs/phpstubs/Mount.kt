@@ -88,7 +88,7 @@ internal class MountSequence(
     ): RuntimeException {
         val path = (failure as? DocumentSetException)?.path
         return when {
-            path != null && path in absent -> StubIndexNotFoundException(label + path)
+            path != null && path in absent -> StubIndexNotFoundException("$label$path")
             path != null -> StubIndexInvalidException("$label$path: ${failure.message}", failure)
             else -> StubIndexInvalidException("$label: ${failure.message}", failure)
         }
@@ -139,6 +139,7 @@ internal class MountSequence(
     }
 
     companion object {
+        // The document format of every set: the manifest lists YAML files only.
         private const val DOCUMENT_SUFFIX = ".yaml"
 
         // Strips the numeric split suffix (standard_1.yaml -> standard) when deriving the extension name.

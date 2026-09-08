@@ -43,9 +43,10 @@ public data class BuiltinRecord<out S : ModelSubject>(
         get() = returns + flows + sources + sinks + sanitizers
 
     init {
-        val foreign = facts.firstOrNull { it.owner != subject }
+        val declared = facts
+        val foreign = declared.firstOrNull { it.owner != subject }
         require(foreign == null) { "Record '$subject' holds a fact owned by '${foreign?.owner}'" }
-        require(signature != null || facts.isNotEmpty()) { "Record '$subject' declares neither a signature nor a fact" }
+        require(signature != null || declared.isNotEmpty()) { "Record '$subject' declares neither a signature nor a fact" }
     }
 }
 
