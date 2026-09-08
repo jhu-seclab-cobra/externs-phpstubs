@@ -22,7 +22,7 @@ The format, its decoding, and its validation belong to commons-phpmodels.
 
 **Data Flow**
 - **Inputs:** upstream stub sources, psalm's taint data, and the Argus
-  lists (offline); model documents and three document sets (bundled).
+  lists (offline); five bundled document sets.
 - **Outputs:** one Built-in Record per PHP name: extension, signature, flows,
   sources, sinks, and sanitizers in the canonical vocabulary; the same facts enumerable by kind.
 - **Connections:** upstream stubs → extraction → model documents; psalm
@@ -31,7 +31,7 @@ The format, its decoding, and its validation belong to commons-phpmodels.
 
 **Scope Boundaries**
 - **Owned:** the generated model documents, the language-construct
-  document, extension provenance, document discovery, the registry, the
+  document, extension provenance, document discovery, the
   taint sets in psalm's names, the value rules set, every shipped set's
   provenance, the Canonical Vocabulary, the merge, and the Built-in Lookup.
 - **Not Owned:** the model format, the document-set convention, their
@@ -51,7 +51,7 @@ Offline (per upstream release):
     reviewed value semantics ───review──────► value-rules/** (document set)
 
 Runtime:
-    models/** ──manifest──► commons-phpmodels decode ──► Stub Registry (generated set)
+    models/** ──manifest──► commons-phpmodels decode ──► generated declaration set
     value-rules/** ─────────────────────────────────────┐
     vocabulary (canonical) ─────────────────────────────┤──► this library's merge ──► Built-in Records
     taint/** + mapping onto canonical names ────────────┤                                  │
@@ -69,15 +69,15 @@ Runtime:
   no parallel record type exists.
 - **Scope:** every built-in function, class, method, constant, class
   constant, and property the upstream sources declare.
-- **Relationships:** decoded by commons-phpmodels; held by the Stub
-  Registry; identified by its Subject.
+- **Relationships:** decoded by commons-phpmodels; mounted as the
+  generated set; identified by its Subject.
 
 - **Name:** Subject
 - **Definition:** The identity of a PHP declaration as defined by
   commons-phpmodels: a kind plus a PHP-native spelling, case-folded per
-  kind. The registry keys every entry by its subject, so identity and
+  kind. The merge keys every entry by its subject, so identity and
   folding are decided once in the format library and never re-derived here.
-- **Scope:** the six declaration kinds the registry carries; predefined
+- **Scope:** the six declaration kinds the generated set carries; predefined
   variables appear only in the taint set.
 - **Relationships:** identifies exactly one Model Entry; the target of
   every lookup.
@@ -89,8 +89,9 @@ Runtime:
   hand-maintained sets, not in these files.
 - **Scope:** every generated document under the models tree (not the
   hand-declared `language/` and `manual/` documents), and the taint set.
-- **Relationships:** produced by the Extraction Pipeline; consumed whole by
-  the Stub Registry.
+- **Relationships:** produced by the Extraction Pipeline; the models tree
+  is mounted whole as the first set of the merge and carries the extension
+  each Built-in Record reports.
 
 - **Name:** Extension Provenance
 - **Definition:** The PHP extension that provides a declaration
@@ -112,31 +113,23 @@ Runtime:
   data in the models tree so one load path serves every lookup. The
   `manual/` documents declare, the same way, built-ins the Extraction
   Pipeline cannot produce: methods it omits, functions outside its release.
-- **Scope:** the closed keyword and scalar-type sets the registry serves
+- **Scope:** the closed keyword and scalar-type sets the generated set declares
   today.
 - **Relationships:** a Model Entry like any other; distinguished only by
   its Extension Provenance.
-
-- **Name:** Stub Registry
-- **Definition:** The immutable result of loading every document in the
-  manifest: per-kind maps from subject to entry with extension provenance.
-  Built once; it enters the merge as the generated set and carries the
-  extension each Built-in Record reports.
-- **Scope:** internal; existence and entry retrieval for the merge.
-- **Relationships:** built from Model Entries; the first input of the merge.
 
 - **Name:** Lookup Surface
 - **Definition:** The Canonical Vocabulary, Merge, Built-in Record, and
   Built-in Lookup ([concept-lookup.md](concept-lookup.md)): how the sets
   merge and how a consumer reads them.
-- **Relationships:** built over the Stub Registry and the document sets.
+- **Relationships:** built over the bundled document sets.
 
 - **Name:** Document Manifest
 - **Definition:** The build-generated list of every model document in the
   resource tree. Discovery reads the manifest, never the classpath
   directory, so packaging in a jar and in a directory behave identically.
 - **Scope:** one manifest per resource tree.
-- **Relationships:** enumerates the documents the Stub Registry loads;
+- **Relationships:** enumerates the documents of one set;
   its layout defines Extension Provenance.
 
 - **Name:** Extraction Pipeline
@@ -174,7 +167,7 @@ Runtime:
 4. Register — insert entries into per-kind maps keyed by subject; two
    documents declaring the same subject is a corpus defect and fails the
    load naming both documents.
-5. Merge — fold the registry as the generated set, then the value rules
+5. Merge — fold the generated set, then the value rules
    set, the Canonical Vocabulary, and the two translated taint sets, into
    one statement per subject, condition, and section.
 6. Answer — resolve a PHP name to a subject and read its record from the
@@ -193,7 +186,7 @@ Runtime:
   its sinks and receives one sink of the canonical SQL injection category
   at the first argument, translated from psalm's `sql`. It asks `strlen`
   for its flow and receives the value rules statement, the signature and
-  extension staying the registry's. The sets meet per subject, condition,
+  extension staying the generated set's. The sets meet per subject, condition,
   and section in this library's merge, never in the consumer.
 
 Lookup: [concept-lookup.md](concept-lookup.md). Sets: [concept-taint.md](concept-taint.md), [concept-taint-rules.md](concept-taint-rules.md), [concept-value-rules.md](concept-value-rules.md).

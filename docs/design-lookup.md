@@ -47,7 +47,7 @@ accumulated vocabulary and policy. Implemented by `PhpStubs` and, by
 delegation, by its companion, so `PhpStubs.function("substr")` and
 `PhpStubs.with(dir).function("substr")` are the same call on two merges.
 
-**Members** (all reads of a frozen merge; no lazy work after construction):
+**Members** (reads of a frozen merge; the five fact lists are built on first read):
 
 | Member | Return | Behavior |
 |--------|--------|----------|
@@ -84,7 +84,9 @@ holds its mounts (so `with` can extend them) and `Merge.of(mounts)`.
 mapping read once from `StubResources.PSALM_MAPPING`). The constructor is
 internal, not private, because a top-level value cannot call a private
 constructor, and the companion cannot be referenced during its own
-initialization ([impl.md](impl.md)).
+initialization ([impl.md](impl.md)). The companion declares `with`/`plus`
+overloads forwarding to `bundled`, since delegation covers interface
+members only.
 
 **Methods:**
 - `fun with(vararg roots: String): PhpStubs` — classpath roots, each
@@ -113,16 +115,6 @@ initialization ([impl.md](impl.md)).
 **Validation (`init`):** every fact's `owner == subject`; at least one of
 `signature` or a fact present.
 
-**Typed signature accessors** (extension properties, one per declaration
-kind, narrowing `signature` and `null` when absent):
-`BuiltinRecord<FunctionSubject>.callableSignature`,
-`BuiltinRecord<MethodSubject>.callableSignature`,
-`BuiltinRecord<ClassSubject>.classSignature`,
-`BuiltinRecord<ConstantSubject>.typedSignature`,
-`BuiltinRecord<ClassConstantSubject>.typedSignature`,
-`BuiltinRecord<PropertySubject>.propertySignature`. The format library
-already rejects a signature subtype that does not match the subject kind.
-
 ### Fact (sealed interface) and its five data classes
 
 **Responsibility:** One element of one assertion statement, with the record
@@ -149,6 +141,18 @@ consumer filters without spelling a string: `VulnClass.SQLI.id` is
 Twelve and two constants, each holding its `id`. A repository test asserts
 the bundled vocabulary document declares exactly these names; a category an
 extension set adds has no enum constant and is compared by `VulnClassId`.
+
+## Function Specifications
+
+Typed signature accessors: top-level extension properties, one per
+declaration kind, narrowing `BuiltinRecord.signature` and `null` when absent:
+`BuiltinRecord<FunctionSubject>.callableSignature`,
+`BuiltinRecord<MethodSubject>.callableSignature`,
+`BuiltinRecord<ClassSubject>.classSignature`,
+`BuiltinRecord<ConstantSubject>.typedSignature`,
+`BuiltinRecord<ClassConstantSubject>.typedSignature`,
+`BuiltinRecord<PropertySubject>.propertySignature`. The format library
+already rejects a signature subtype that does not match the subject kind.
 
 ## Validation Rules
 

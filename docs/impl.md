@@ -2,7 +2,7 @@
 
 ## APIs
 
-- **[commons-phpmodels]** `ModelLoader.load(input: InputStream): List<ModelEntry>` — decodes one document; consumes and closes the stream; every format violation is `IllegalArgumentException` (message carries the reason, cause chain carries Jackson's location).
+- **[commons-phpmodels]** (internal since 0.4.0; consumed through `DocumentSetLoader`) `ModelLoader.load(input: InputStream): List<ModelEntry>` — decodes one document; consumes and closes the stream; every format violation is `IllegalArgumentException` (message carries the reason, cause chain carries Jackson's location).
 - **[commons-phpmodels 0.4.0]** `ModelEntry(subject, condition: ArgPattern?, signature: SignatureInfo?, body: ModelBody)` is the one entry data class; generators and `WhenGuard` are gone. `ArgPattern.expected: List<IPrimitiveVal?>`, `positions`, `matches(actual: List<IPrimitiveVal?>): Boolean?`; `ArgPattern` is a data class, so it keys a `Map` by value (the `(subject, condition)` merge key).
 - **[commons-phpmodels 0.4.0]** `DocumentSetLoader.load(open, context, mapping)` and `CategoryMappingLoader.load(InputStream)` are the public loaders; `VocabularyLoader`, `PolicyLoader`, `ModelLoader`, `ProvenanceLoader` are internal. A set's verification is read from `DocumentSet.provenance?.verification`, never from a separate loader call. `DocumentSet.documents: List<Document(path, entries)>` keeps the manifest order the extension derivation needs.
 - **[commons-phpmodels 0.4.0]** Renames consumed here: `SinkDecl(port, vulnClass)`, `SourceDecl(origin: Set<OriginId>, at, keys)`, `Vocabulary.origins`, `CategoryMapping.origins`; YAML keys unchanged.
@@ -23,8 +23,8 @@
 ## Developer Instructions
 
 - Corpus probe (2026-09-01): all 58 generated documents decode against commons-phpmodels HEAD, 5,680 entries (5,327 functions, 108 classes, 2 methods, 242 constants, 1 class constant).
-- `index.txt` under `models/` and `models-test/` is written by Gradle `processResources` / `processTestResources`; every other test fixture directory keeps a hand-written manifest.
-- Generated documents (`models/**` except `models/language/` and `models/manual/`) are never hand-edited; a correction belongs in a higher configuration layer of the consumer.
+- `index.txt` under `models/`, `taint/`, `taint-rules/`, `value-rules/` and `models-test/` is written by Gradle `processResources` / `processTestResources`; `vocabulary/index.txt` and every other test fixture directory keep a hand-written manifest.
+- Generated documents (`models/**` except `models/language/` and `models/manual/`) are never hand-edited; a correction belongs in `value-rules/`, `taint-rules/`, or an extension set.
 - Generated documents carry no language-construct subject: the keyword document owns `echo`, `empty`, `eval`, `isset`, `print`, `unset`, and the loader's duplicate rule rejects a second declaration. The extraction pipeline excludes those names on its next run (removed from `standard_1/3/5/7.yaml` on 2026-09-01).
 - `shell_exec` is a `standard` function, not a language construct; the former hardcoded keyword set listed it and the keyword document does not.
 - Performance tests are excluded by default: `./gradlew test -Pperformance`.
@@ -51,7 +51,7 @@
 - Source release: vimeo/psalm 5.6.0 (`vendor/vimeo/psalm` of a dataset checkout; version from `vendor/composer/installed.json`). Psalm declares 15 taint kinds; the `ALL_INPUT` group enables 13 (not `user_secret`, `system_secret`).
 - Psalm's sources are code, not data: only `$_GET`, `$_POST`, `$_COOKIE`, `$_REQUEST` are colored (`VariableFetchAnalyzer::taintVariable`); `$_SERVER` and `$_FILES` are not. `@psalm-taint-source input` appears on `Throwable`, `Exception`, and `Error` `getTraceAsString`/`__toString` only.
 - `@psalm-taint-specialize` has no model counterpart and is dropped. The five conditional escapes on `filter_var` become conditional entries `when: [_, 257]` … `[_, 520]`.
-- Method subjects in the set (`mysqli::query`, `mysqli_stmt::prepare`, ...) are absent from the generated documents (the registry's methods are the generated `Exception` pair and the hand-declared `models/manual/` methods); the set is psalm's data verbatim, not a projection onto the registry.
+- Method subjects in the set (`mysqli::query`, `mysqli_stmt::prepare`, ...) are absent from the generated documents (the generated set's methods are the generated `Exception` pair and the hand-declared `models/manual/` methods); the set is psalm's data verbatim, not a projection onto the generated set.
 - **[taint rules set]** Sinks follow `sinks.json` of the Argus artifact (411 sinks, 12 vulnerability types); `SinkPoint` accepts argument ports only, so the receiver-triggered deserialization getters (Phar, SplFileInfo, DirectoryIterator families) are omitted. `TaintPolicy` unions rows sharing an origin, so the set's `input → [xpath]` row extends psalm's row at load.
 - **[commons-phpmodels 0.2.1]** `DocumentSetException(path, detail, cause?)` now wraps a malformed listed document; `VocabularyException` names the document on an undeclared reference. `MountSequence` maps absence to `StubIndexNotFoundException` by recording which path the opener could not resolve.
 

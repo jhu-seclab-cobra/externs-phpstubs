@@ -64,7 +64,7 @@ merge: set loader(taint/, …) then set loader(taint-rules/, taint vocabulary, m
   escapes and sources those lists and the built-in corpus imply, and
   nothing psalm already states identically.
 - **Relationships:** loaded over the Taint Document Set's vocabulary;
-  mounted by the merge above it; never read by the Stub Registry.
+  mounted by the merge above it.
 
 - **Name:** Vocabulary Addition
 - **Definition:** A danger category or origin color the set declares

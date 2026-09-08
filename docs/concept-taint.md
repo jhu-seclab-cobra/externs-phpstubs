@@ -1,7 +1,7 @@
 # PHP Stubs — Taint Document Set Concept
 
 Extends [concept.md](concept.md) with the one concern it does not cover:
-the generated taint assertions. Context, registry concepts, and the
+the generated taint assertions. Context, generated-set concepts, and the
 extraction pipeline are defined there and used here unchanged.
 
 ## 1. Context
@@ -64,7 +64,7 @@ merge: set loader(taint/, canonical vocabulary, mapping) ─► entries in canon
   source annotation in psalm's stubs, and the superglobals psalm's analyzer
   colors. Nothing hand-added.
 - **Relationships:** a Generated Layer artifact; produced by the Taint
-  Extraction; loaded by the merge, never by the Stub Registry.
+  Extraction; loaded by the merge, never as the generated set.
 
 - **Name:** Psalm Kind
 - **Definition:** One of psalm's taint kind names (`sql`, `html`, `shell`,
@@ -85,7 +85,7 @@ merge: set loader(taint/, canonical vocabulary, mapping) ─► entries in canon
 - **Scope:** function, method, and predefined-variable subjects.
   A variadic dangerous parameter is stated at the variadic's position.
 - **Relationships:** a Model Entry; its Subject may or may not exist in
-  the Stub Registry — the set states psalm's data, not the registry's.
+  the generated set — the set states psalm's data, not the generated set's.
 
 - **Name:** Taint Extraction
 - **Definition:** The offline producer for the set: one script in this
@@ -104,7 +104,7 @@ merge: set loader(taint/, canonical vocabulary, mapping) ─► entries in canon
   manifest, optional vocabulary and policy under fixed names, documents
   in manifest order. Every entry decodes through the format library; a
   format violation fails this repository's tests, never a consumer's
-  start (the set is loaded before the registry is first read).
+  start (every bundled set loads on the first access to the lookup).
 - **With the merge:** this library opens the set at its root constant and
   loads it through the set loader with the Canonical Vocabulary as context
   and a category mapping that lists every psalm kind and the origin

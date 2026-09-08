@@ -1,6 +1,6 @@
 # PHP Stubs — Design
 
-The data side of the library: the resource roots, the four bundled sets and
+The data side of the library: the resource roots, the five bundled sets and
 their fixed Merge Order, the corpus rules on the generated set, and the
 error types. The lookup surface — merge, records, facts, `PhpStubs` — is in
 [design-lookup.md](design-lookup.md). Concepts: [concept.md](concept.md),
@@ -47,10 +47,10 @@ this repository's build.
 **Methods:**
 - `opener(root: String): ResourceOpener` — resolves a relative document
   path against `root` (trailing slash optional) through
-  `Class.getResourceAsStream`; an absent resource is recorded so the
-  facade can raise `StubIndexNotFoundException` naming the full path.
+  `Class.getResourceAsStream`; returns `null` for an absent resource.
+  `MountSequence` records absences to raise `StubIndexNotFoundException`.
 
-### Merge Order (constants of `PhpStubs.kt`)
+### Merge Order (private `bundledMounts()` of `PhpStubs.kt`)
 
 The bundled mounts, in this order, each with its mapping:
 
@@ -74,6 +74,9 @@ packaging fault, not a default.
 - No two documents declare the same subject; the message names both.
 
 Constant subjects fold nothing, so `TRUE` and `true` are distinct entries.
+The extension of each generated entry is data tier: derived from the
+document's placement, never a constant in code.
+
 The other four sets follow their own set rules
 ([design-taint.md](design-taint.md), [design-taint-rules.md](design-taint-rules.md),
 [design-value-rules.md](design-value-rules.md)) and the format library's
@@ -121,8 +124,8 @@ fixture directory ship their own manifest. Set layouts:
 
 | Exception | When raised |
 |-----------|-------------|
-| `StubIndexNotFoundException(resource)` | `index.txt`, a listed document, or a bundled `provenance.yaml` is not on the classpath or under an extension directory |
-| `StubIndexInvalidException(reason, cause?)` | The set load or merge fails for any other reason (commons-phpmodels cause attached), a corpus rule is violated, or a conditional entry declares a signature |
+| `StubIndexNotFoundException(resource)` | `index.txt`, a listed document, or the psalm mapping resource is not on the classpath or under an extension directory |
+| `StubIndexInvalidException(reason, cause?)` | The set load or merge fails for any other reason (commons-phpmodels cause attached), a bundled set ships without `provenance.yaml`, a corpus rule is violated, or a conditional entry declares a signature |
 | `IllegalArgumentException` | A lookup name is not a PHP identifier spelling (raised by the commons-phpmodels subject creator) |
 
 Every bundled-set error surfaces on first access to `PhpStubs`; an

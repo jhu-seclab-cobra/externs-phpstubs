@@ -9,9 +9,8 @@ opener and the taint set: [design-taint.md](design-taint.md).
 - **Classes:** `StubResources` (object; the `VALUE_RULES` constant only)
 - **External types (commons-phpmodels):** `DocumentSetLoader`,
   `DocumentSet`, `SetProvenance`, `Verification`
-- **Relationships:** consumers pass `StubResources.opener(StubResources.VALUE_RULES)`
-  to `DocumentSetLoader` with no context and no mapping. Nothing in this
-  module reads the set at runtime.
+- **Relationships:** `PhpStubs` mounts the set at position 1, unmapped
+  ([design.md](design.md) Merge Order).
 - **Exceptions:** none of its own.
 
 ## Class / Type Specifications
@@ -53,17 +52,17 @@ directly above the entry it justifies.
 - `provenance.yaml` decodes to verification `manual`.
 - Every entry declares no signature, a `returns` section,
   and no taint section.
-- Every subject is a function or method the registry declares.
-- No unconditional entry's unit equals the registry entry's unit for the
+- Every subject is a function or method the generated set declares.
+- No unconditional entry's unit equals the generated entry's unit for the
   same subject.
 - The repository tests, not the consumer, prove the set decodes.
 
 ## Maintenance
 
-The set is edited by hand. A new rule states one subject the registry
+The set is edited by hand. A new rule states one subject the generated set
 declares, with the whole unit. A rule whose unit differs from the
 generated one, or that narrows the declared return type, is checked
 against the PHP manual and carries the reason as a comment; a rule the
 manual shows the generated declaration already states correctly is not
-added. A subject the registry lacks is an extraction task in `todo.md`,
+added. A subject the generated set lacks is an extraction task in `todo.md`,
 never a rule.

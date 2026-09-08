@@ -6,13 +6,12 @@ set: [design-taint.md](design-taint.md).
 
 ## Design Overview
 
-- **Classes:** `StubResources` (object; the `RULES` constant only)
+- **Classes:** `StubResources` (object; the `TAINT_RULES` constant only)
 - **External types (commons-phpmodels):** `DocumentSetLoader`,
   `DocumentSet`, `CategoryMapping`, `Vocabulary`
-- **Relationships:** consumers pass `StubResources.opener(StubResources.TAINT_RULES)`
-  to `DocumentSetLoader` with the taint set's vocabulary (or their own
-  vocabulary plus a mapping) as context. Nothing in this module reads the
-  set at runtime.
+- **Relationships:** `PhpStubs` mounts the set at position 4 under
+  `PSALM_MAPPING` against the accumulated canonical vocabulary
+  ([design.md](design.md) Merge Order).
 - **Exceptions:** none of its own.
 
 ## Class / Type Specifications

@@ -2,7 +2,7 @@
 
 The classpath roots, the opener consumers and the loader share, and the
 layout of the generated taint document set. Concepts:
-[concept-taint.md](concept-taint.md). Registry types: [design.md](design.md).
+[concept-taint.md](concept-taint.md). Resource roots and merge order: [design.md](design.md).
 
 ## Design Overview
 
@@ -10,13 +10,15 @@ layout of the generated taint document set. Concepts:
 - **External types (commons-phpmodels):** `ResourceOpener`,
   `DocumentSetLoader`, `DocumentSet`, `CategoryMapping`, `Vocabulary`
 - **Relationships:** `StubResources` creates `ResourceOpener` instances;
-  the bundled `MountSequence` opens every set root through `StubResources`;
-  a consumer loading one set alone passes the opener to `DocumentSetLoader`. One-way; `StubResources` depends on nothing in this
-  module.
-- **Exceptions:** none of its own. A consumer's set load raises the
-  commons-phpmodels exceptions unchanged.
+  the bundled `MountSequence` opens every set root through `StubResources`
+  and passes the opener to `DocumentSetLoader`. One-way; `StubResources`
+  depends on nothing in this module.
+- **Exceptions:** none of its own. A set-load failure surfaces as
+  `StubIndexNotFoundException` or `StubIndexInvalidException` from
+  `MountSequence` ([design-merge.md](design-merge.md)).
 - **Dependency roles:** Constants and factory: `StubResources`. Loader of
-  the taint set: commons-phpmodels (never this module at runtime).
+  the taint set at runtime: `MountSequence` under `PSALM_MAPPING`
+  ([design-merge.md](design-merge.md)); commons-phpmodels decodes it.
 
 Package `edu.jhu.cobra.externs.phpstubs`, public.
 
@@ -25,11 +27,12 @@ Package `edu.jhu.cobra.externs.phpstubs`, public.
 ### StubResources (object)
 
 **Responsibility:** Names the bundled classpath roots and builds the one
-opener that reads under a root. The taint set has no registry, facade, or
-entry type here: its consumer is the format library's set loader.
+opener that reads under a root. The taint set has no entry type of its
+own here: `MountSequence` decodes it through the format library's set loader.
 
 **State:** `const val MODELS = "/models/"`, `const val TAINT = "/taint/"`,
-`const val TAINT_RULES = "/taint-rules/"`, `const val VALUE_RULES = "/value-rules/"`
+`const val TAINT_RULES = "/taint-rules/"`, `const val VALUE_RULES = "/value-rules/"`,
+`const val VOCABULARY = "/vocabulary/"`, `const val PSALM_MAPPING = "/vocabulary/psalm-mapping.yaml"`
 — value tier: constants, fixed by the resource layout. The hand-maintained sets:
 [design-taint-rules.md](design-taint-rules.md), [design-value-rules.md](design-value-rules.md).
 
@@ -66,7 +69,7 @@ the script; `provenance.yaml` states the same producer as data. Entry forms:
 
 No entry declares a signature: the set states psalm's assertions, not
 declarations, so no arity check applies and a subject absent from the
-registry is admitted. Entries are sorted by subject spelling, then condition
+generated set is admitted. Entries are sorted by subject spelling, then condition
 value. A variadic dangerous parameter is stated at its own position only.
 
 ## Extraction

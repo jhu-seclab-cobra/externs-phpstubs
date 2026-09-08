@@ -65,8 +65,7 @@ merge: models/ (generated) ◄──ranked below── value-rules/ (manual), pe
   unit the PHP manual contradicts, and mode-switching built-ins that need
   a conditional entry. Nothing a generated entry already states correctly.
 - **Relationships:** outranks the Generated Layer under the default
-  precedence; never read by the Stub Registry; sibling of the Taint Rules
-  Document Set.
+  precedence; sibling of the Taint Rules Document Set.
 
 - **Name:** Value Rule
 - **Definition:** One entry of the set. Under the format's coupling rule,
@@ -76,8 +75,9 @@ merge: models/ (generated) ◄──ranked below── value-rules/ (manual), pe
 - **Scope:** function and method subjects; an optional condition on the
   argument values states the mode of a mode-switching built-in.
 - **Relationships:** a Model Entry; its Subject must exist in the
-  generated declarations (an entry for an unknown subject can never be
-  selected, because a record exists only where a signature does).
+  generated declarations (the set's own rule, checked by the repository
+  test: a value unit for an undeclared subject would produce a
+  signature-less record).
 
 - **Name:** Review Reason
 - **Definition:** The PHP manual statement that justifies a Value Rule
@@ -131,7 +131,7 @@ merge: models/ (generated) ◄──ranked below── value-rules/ (manual), pe
   unconditional entry states a boolean result with no flow.
 - **Interaction:** `mysqli::query` is stated in no value rules document:
   the extraction carries no `mysqli` methods, so `models/manual/mysqli.yaml`
-  declares its signature and reviewed flow, and the registry, not this set,
+  declares its signature and reviewed flow, and the generated set, not this set,
   serves the unit.
 
 Software structure: [design-value-rules.md](design-value-rules.md).

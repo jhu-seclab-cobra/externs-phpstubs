@@ -10,11 +10,11 @@ format library's: `extern/commons-phpmodels/docs/model.md`,
 
 ## Entities
 
-- **Bundled Set** — One of the four document sets this library ships:
-  the generated declaration set (the Stub Registry as a set), the value
-  rules set, the taint set, the taint rules set. Identity is its resource
-  root. Each carries a Set Provenance; generated for the first and third,
-  manual for the others.
+- **Bundled Set** — One of the five document sets this library ships:
+  the generated declaration set, the value rules set, the Canonical
+  Vocabulary set, the taint set, the taint rules set. Identity is its
+  resource root. Each carries a Set Provenance; generated for the
+  declaration set and the taint set, manual for the others.
 - **Canonical Vocabulary** — The danger categories and origin colors every
   record speaks: twelve categories (`sqli`, `cmdi`, `codei`, `xss`,
   `headeri`, `ssrf`, `pathtrav`, `fileinc`, `deser`, `callablei`, `ldapi`,
@@ -46,8 +46,8 @@ format library's: `extern/commons-phpmodels/docs/model.md`,
   Statement with a different condition never competes.
 - **Extension** — The PHP extension a declaration belongs to, derived from
   the generated document's placement (`mysqli`, `standard`, `keyword`,
-  `scalar`, ...). Data tier: read from placement, never a constant in code.
-  A subject declared only by a non-generated set has no Extension.
+  `scalar`, ...). A subject declared only by a non-generated set has no
+  Extension.
 - **Built-in Record** — One subject the Merge holds any Statement for:
   its PHP spelling, its Extension, its signature when an unconditional
   signature Statement is in force, and its Facts. Existence condition: the
@@ -72,7 +72,7 @@ format library's: `extern/commons-phpmodels/docs/model.md`,
 | From | To | Relation | Cardinality | Meaning |
 |------|----|----------|-------------|---------|
 | Built-in Lookup | Merge | reads | 1:1 | One merge per lookup; bundled or bundled plus extensions |
-| Merge | Bundled Set | folds | 1:4 | In Merge Order, under the default Precedence |
+| Merge | Bundled Set | folds | 1:5 | In Merge Order, under the default Precedence |
 | Merge | Extension Set | folds | 1:N | After the bundled sets, in supplied order |
 | Merge | Statement | holds | 1:N | Exactly one per (subject, condition, unit) key stated by any set |
 | Psalm Mapping | Bundled Set | translates | 1:2 | The taint set and the taint rules set |
@@ -92,7 +92,8 @@ Two Statements with the same (subject, condition, unit) key:
 |------------|----------|
 | Set Provenance ranks differ | The higher rank (manual over generated) |
 | Ranks equal, Merge Order positions differ | The later position |
-| Same set, same key | Load failure (the set's own duplicate rule) |
+| Same document, same key | Load failure (the format's per-document duplicate rule) |
+| Same set, different documents, same key | The later document (the generated set: load failure, corpus rule) |
 
 ### Lookup
 
@@ -102,7 +103,7 @@ Two Statements with the same (subject, condition, unit) key:
 | Frozen | exact lookup, subject exists | one record |
 | Frozen | exact lookup, subject absent | no record; not a failure |
 | Frozen | exact lookup, name not a PHP spelling | argument error |
-| Frozen | enumeration | every record or fact of the kind, in registry load order |
+| Frozen | enumeration | every record or fact of the kind, in first-statement order |
 | Frozen | extension sets supplied | a second merge: bundled sets then extensions; the bundled merge unchanged |
 
 ## Invariants
@@ -117,7 +118,7 @@ Two Statements with the same (subject, condition, unit) key:
   any Extension Set; every mapping target is one of its names.
 - No psalm name survives the merge: every kind of the two psalm-named sets
   is mapped or discarded, and a discarded-only element is dropped.
-- Merge Order is fixed and complete: the four bundled sets, once each, in
+- Merge Order is fixed and complete: the five bundled sets, once each, in
   the stated order, under the default Precedence.
 - A Statement is replaced whole per key, never merged with the one it
   replaces; a later set that omits a unit leaves the earlier Statement in
@@ -131,7 +132,7 @@ Two Statements with the same (subject, condition, unit) key:
 - Exact lookup is exact: the spelling is folded per kind by the format
   library and compared whole; no suffix, prefix, or case-insensitive match
   exists in the lookup.
-- Enumeration order is registry load order, so a consumer's "first match"
+- Enumeration order is first-statement order, so a consumer's "first match"
   is deterministic.
 - A Fact always names its owner; a fact never exists apart from a record.
 - The value rules set corrects only subjects the generated set declares,

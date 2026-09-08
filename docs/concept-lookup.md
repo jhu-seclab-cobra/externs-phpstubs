@@ -2,7 +2,7 @@
 
 Extends [concept.md](concept.md) with what this library does beyond
 shipping data: merging its sets into one body of facts and answering
-lookups by PHP name. Model Entry, Subject, Stub Registry, Generated Layer,
+lookups by PHP name. Model Entry, Subject, Generated Layer,
 and Extension Provenance are defined there; Model, Section, Condition,
 Document Set, Set Provenance, and Verification in commons-phpmodels
 `docs/concept.md` and `concept-provenance.md`.
@@ -10,8 +10,8 @@ Document Set, Set Provenance, and Verification in commons-phpmodels
 ## 1. Context
 
 **Problem Statement**
-Before this concern, a consumer of this library received four document
-sets and a registry and had to merge them itself: choose a mount order,
+Before this concern, a consumer of this library received five document
+sets and had to merge them itself: choose a mount order,
 declare its own vocabulary, write a mapping from psalm's names, rank sets
 by provenance. Every consumer repeated that work, and this library could
 not check that its own sets merge. A consumer that wants to know what
@@ -26,12 +26,12 @@ with its condition attached, and the consumer, which alone knows the call,
 decides.
 
 **Data Flow**
-- **Inputs:** the Stub Registry, the value rules set, the canonical
+- **Inputs:** the generated declaration set, the value rules set, the canonical
   vocabulary and policy, the taint set and the taint rules set with the
   one mapping that translates them; optionally a consumer's extension sets.
 - **Outputs:** one Built-in Record per PHP name; the returns, flows,
   sources, sinks, and sanitizers of every record enumerable by kind.
-- **Connections:** registry + sets → Merge → Built-in Lookup → consumers.
+- **Connections:** sets → Merge → Built-in Lookup → consumers.
 
 **Scope Boundaries**
 - **Owned:** the Canonical Vocabulary, the mapping onto it, the merge
@@ -47,7 +47,7 @@ decides.
 
 **Conceptual Diagram**
 ```
-Stub Registry (generated set) ──┐
+generated declaration set ──────┐
 value-rules/ (manual) ──────────┤
 canonical vocabulary + policy ──┤──► Merge (manual over generated, per subject / condition / section)
 taint/ ──── mapping ────────────┤                       │
@@ -85,8 +85,8 @@ consumer: fact kind ────────► Built-in Lookup ──► every 
   — returns, flows, sources, sinks, sanitizers — each carrying the
   condition its entry declared, or none. The same facts are enumerable by
   kind, each naming the record it belongs to.
-- **Scope:** one per subject with a signature; a name without one has no
-  record.
+- **Scope:** one per subject any set states; a record without a signature
+  is a fact-only record (taint-only function, predefined variable).
 - **Relationships:** read from the Merge; identified by its Subject.
 
 - **Name:** Built-in Lookup

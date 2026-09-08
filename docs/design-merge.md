@@ -20,6 +20,8 @@ mounts into records. Every type here is internal; the public surface is
 - **Relationships:** `MountSequence` produces `Mount`s in position order;
   `Merge.of` consumes them and builds one `BuiltinRecord` per subject.
   `PhpStubs` owns one mount list and one `Merge`.
+- **Exceptions:** `StubIndexNotFoundException`, `StubIndexInvalidException`
+  ([design.md](design.md) Exception / Error Types).
 - **Dependency roles:** Builder: `MountSequence`. Data holder: `Mount`.
   Aggregate: `Merge`.
 

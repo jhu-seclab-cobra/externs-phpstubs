@@ -61,7 +61,8 @@ conditions, signatures, arity, mapping translation and the dropping of
 elements left without a name — is applied there and not restated here.
 
 Reading a record from `statements` is a key scan: the record of subject
-`s` exists when `(s, none, signature)` is present; its Facts are the
+`s` exists when any key starts with `s`; its signature is the
+`(s, none, signature)` Statement or none; its Facts are the
 elements of every Statement whose key starts with `s`, each carrying that
 key's condition.
 
