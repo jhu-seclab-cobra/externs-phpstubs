@@ -149,7 +149,7 @@ Runtime:
   between sets, is a load failure at the consumer's start or in this
   repository's tests — never a silent miss. This library adds no rule of
   the format.
-- **With cobraphp-core:** a name lookup returns one Built-in Record or
+- **With cobraphp:** a name lookup returns one Built-in Record or
   nothing. Signature fields and constant values are read as
   commons-phpmodels types; flows, sources, sinks, and sanitizers are read
   from the record in the Canonical Vocabulary, conditions attached. The
@@ -182,7 +182,7 @@ Runtime:
   format rejects it at decode, the load fails naming the document, and the
   fix is in the Extraction Pipeline, which simplifies the upstream type
   before emitting — never a hand edit of the generated file.
-- **Interaction:** cobraphp-core asks the record of `mysqli::query` for
+- **Interaction:** cobraphp asks the record of `mysqli::query` for
   its sinks and receives one sink of the canonical SQL injection category
   at the first argument, translated from psalm's `sql`. It asks `strlen`
   for its flow and receives the value rules statement, the signature and
