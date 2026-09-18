@@ -17,7 +17,7 @@
 
 ## Libraries
 
-- com.github.jhu-seclab-cobra:commons-phpmodels:0.4.0 — model format, decoder, validation, condition match; `api` scope (its types are the record surface); commons-value 0.1.1 arrives transitively as its `api` dependency, so `ArgPattern` values are readable here without a direct declaration (the catalog alias `cobra-commons-value` is kept at 0.1.1 for the test that builds argument lists); alias `cobra-commons-phpmodels` in `gradle/libs.versions.toml`; resolved from JitPack (`https://jitpack.io`, artifact verified present) standalone, substituted by the root composite when built from CobraPHP.
+- com.github.jhu-seclab-cobra:commons-phpmodels:0.4.0 — model format, decoder, validation, condition match; `api` scope (its types are the record surface); commons-value 0.1.1 arrives transitively as its `api` dependency, so `ArgPattern` values are readable here without a direct declaration (the catalog alias `cobra-commons-value` is kept at 0.1.1 for the test that builds argument lists); alias `cobra-commons-phpmodels` in `gradle/libs.versions.toml`; resolved from JitPack (`https://jitpack.io`, artifact verified present) standalone, substituted by the enclosing composite build when one includes this repository.
 - Jackson stays transitive and hidden: commons-phpmodels declares it `implementation`; no YAML library is declared here.
 
 ## Developer Instructions
@@ -28,9 +28,9 @@
 - Generated documents carry no language-construct subject: the keyword document owns `echo`, `empty`, `eval`, `isset`, `print`, `unset`, and the loader's duplicate rule rejects a second declaration. The extraction pipeline excludes those names on its next run (removed from `standard_1/3/5/7.yaml` on 2026-09-01).
 - `shell_exec` is a `standard` function, not a language construct; the former hardcoded keyword set listed it and the keyword document does not.
 - Performance tests are excluded by default: `./gradlew test -Pperformance`.
-- Composite root build is the integration check for cobraphp; the standalone build (`./gradlew build` in this repository) is the check against the released commons-phpmodels tag.
+- The enclosing composite build is the integration check against a consumer; the standalone build (`./gradlew build` in this repository) is the check against the released commons-phpmodels tag.
 - The pin (v0.4.0) carries the one entry form, `ArgPattern`, the internal single-document loaders, and the `(subject, condition)` duplicate rule; the standalone JitPack build exercises the same guarantees as the root composite once the tag is published.
-- Canonical vocabulary resources migrated from cobraphp `src/main/resources/vocabulary/` on 2026-09-08 unchanged in content; `provenance.yaml` producer renamed to `externs-phpstubs canonical vocabulary`.
+- Canonical vocabulary resources live under `src/main/resources/vocabulary/`; `provenance.yaml` names the producer `externs-phpstubs canonical vocabulary`.
 
 ## Design-Specific
 
@@ -39,9 +39,9 @@
 - Derived at load from the document file name: `standard_3.yaml` → `standard`; `language/keyword.yaml` → `keyword`. The model format carries no extension field.
 - Former synthetic extension spellings `Scalar` and `Core` (for class `exit`) become `scalar` and `keyword`, following the document names.
 
-### Consumer name spelling
+### Subject name spelling
 
-- cobraphp spells namespaces with `/` (`Qualified`); `BuiltinExt` joins the parts with `\` before every facade lookup, since the subject creators treat `/` as an ordinary name character.
+- Subject names separate namespace parts with `\`; the subject creators treat `/` as an ordinary name character, so a consumer converts its own spelling before every facade lookup.
 
 ### Variadic tails in generated data
 
@@ -61,7 +61,7 @@
 
 ### Value rules set
 
-- Migrated from cobraphp's 129 rule entries on 2026-09-07 by classifying each against `models/` (script kept out of the repository; the unit of a generated entry is its return type's kind with its propagation): 89 add a unit the generated entry lacks, 23 differ, 2 are conditional entries (`when: [_, true]`), 15 name subjects the corpus lacks.
+- The set was built from 129 reviewed entries on 2026-09-07 by classifying each against `models/` (script kept out of the repository; the unit of a generated entry is its return type's kind with its propagation): 89 add a unit the generated entry lacks, 23 differ, 2 are conditional entries (`when: [_, true]`), 15 name subjects the corpus lacks.
 - PHP manual review of the 23 differing entries kept 20 with a reason comment and dropped 3 whose generated unit the manual confirms: `crypt` (the salt is a prefix of the hash), `str_word_count` (array or int by format), `setlocale` (echoes the locale set).
 - Corrected against the manual: `parse_str` and `header` return void (the flow into the result is removed; `parse_str` writes its by-reference result argument), `echo` has no result, `print` always returns 1, `mysqli_multi_query`, `mysqli_real_query`, `proc_nice`, `proc_terminate`, `register_tick_function` return bool, `proc_close` returns int.
 - Corpus gaps, excluded from the set and hand-declared under `models/manual/` on 2026-09-07 (todo.md T11): `str_decrement`, `str_increment` (PHP 8.3), `hebrevc`, `convert_cyr_string`, `money_format`, `each`, `mysql_query`, `create_function` (removed before the upstream release), and the methods `mysqli::query`, `mysqli::multi_query`, `mysqli::real_query`, `PDO::query`, `PDO::exec`, `SQLite3::query`, `SQLite3::exec` (the extraction emits no methods for these classes). Their reviewed unit is the declaration's signature and propagation; `create_function` declares no propagation because the format rejects an empty flow set.

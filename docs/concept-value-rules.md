@@ -16,8 +16,8 @@ annotation exists, so a consumer falls back to its conservative default:
 an untyped result that every argument influences. Where an annotation
 exists it is sometimes wider or narrower than the flow the PHP manual
 supports. The corrections are consumer-independent facts about PHP
-built-ins, yet they lived in cobraphp's own rule files, invisible to
-any other consumer and mixed with that analyzer's configuration.
+built-ins, so they belong beside the generated declarations, where every
+consumer reads them, not inside one analyzer's configuration.
 
 **System Role**
 The value rules document set is the fourth shipped artifact of this
@@ -27,8 +27,8 @@ manually verified, so that the merge, ranking sets by verification, lets
 each unit override the generated one for its subject.
 
 **Data Flow**
-- **Inputs:** the value-semantics rules migrated from cobraphp,
-  reviewed against the generated declarations and the PHP manual (offline).
+- **Inputs:** hand-reviewed value-semantics units, checked against the
+  generated declarations and the PHP manual (offline).
 - **Outputs:** one document set: manifest, provenance, and value documents
   grouped by PHP manual area.
 - **Connections:** review → value rules document set →
@@ -47,7 +47,7 @@ each unit override the generated one for its subject.
 
 **Conceptual Diagram**
 ```
-cobraphp rules ──review against models/ and the PHP manual──► value-rules/
+hand review against models/ and the PHP manual ──────────────► value-rules/
                                                                     ├── index.txt
                                                                     ├── provenance.yaml  (manual)
                                                                     └── <area>.yaml      (returns + propagation only)
