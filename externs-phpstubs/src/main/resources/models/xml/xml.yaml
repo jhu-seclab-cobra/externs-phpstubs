@@ -7,6 +7,7 @@
     - name: error_code
       type: int
     returnType: ?string
+  raises: []
 - subject:
     function: xml_get_current_byte_index
   signature:
@@ -14,6 +15,7 @@
     - name: parser
       type: XMLParser
     returnType: int
+  raises: []
 - subject:
     function: xml_get_current_column_number
   signature:
@@ -21,6 +23,7 @@
     - name: parser
       type: XMLParser
     returnType: int
+  raises: []
 - subject:
     function: xml_get_current_line_number
   signature:
@@ -28,6 +31,7 @@
     - name: parser
       type: XMLParser
     returnType: int
+  raises: []
 - subject:
     function: xml_get_error_code
   signature:
@@ -35,6 +39,7 @@
     - name: parser
       type: XMLParser
     returnType: int
+  raises: []
 - subject:
     function: xml_parse
   signature:
@@ -47,6 +52,7 @@
       type: bool
       optional: true
     returnType: int
+  raises: [error]
 - subject:
     function: xml_parse_into_struct
   signature:
@@ -63,6 +69,7 @@
       optional: true
       byRef: true
     returnType: int|false
+  raises: [error, typeerror]
 - subject:
     function: xml_parser_create
   signature:
@@ -74,6 +81,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [valueerror]
 - subject:
     function: xml_parser_create_ns
   signature:
@@ -90,6 +98,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [valueerror]
 - subject:
     function: xml_parser_free
   signature:
@@ -97,6 +106,7 @@
     - name: parser
       type: XMLParser
     returnType: bool
+  raises: []
 - subject:
     function: xml_parser_get_option
   signature:
@@ -106,6 +116,7 @@
     - name: option
       type: int
     returnType: string|int|bool
+  raises: [valueerror]
 - subject:
     function: xml_parser_set_option
   signature:
@@ -117,6 +128,7 @@
     - name: value
       type: mixed
     returnType: bool
+  raises: [error, valueerror]
 - subject:
     function: xml_set_character_data_handler
   signature:
@@ -126,6 +138,7 @@
     - name: handler
       type: callable|string|null
     returnType: 'true'
+  raises: [typeerror, valueerror]
 - subject:
     function: xml_set_default_handler
   signature:
@@ -135,6 +148,7 @@
     - name: handler
       type: callable|string|null
     returnType: 'true'
+  raises: [typeerror, valueerror]
 - subject:
     function: xml_set_element_handler
   signature:
@@ -146,6 +160,7 @@
     - name: end_handler
       type: callable|string|null
     returnType: 'true'
+  raises: [typeerror, valueerror]
 - subject:
     function: xml_set_end_namespace_decl_handler
   signature:
@@ -155,6 +170,7 @@
     - name: handler
       type: callable|string|null
     returnType: 'true'
+  raises: [typeerror, valueerror]
 - subject:
     function: xml_set_external_entity_ref_handler
   signature:
@@ -164,6 +180,7 @@
     - name: handler
       type: callable|string|null
     returnType: 'true'
+  raises: [typeerror, valueerror]
 - subject:
     function: xml_set_notation_decl_handler
   signature:
@@ -173,6 +190,7 @@
     - name: handler
       type: callable|string|null
     returnType: 'true'
+  raises: [typeerror, valueerror]
 - subject:
     function: xml_set_object
   signature:
@@ -182,6 +200,7 @@
     - name: object
       type: object
     returnType: 'true'
+  raises: [valueerror]
 - subject:
     function: xml_set_processing_instruction_handler
   signature:
@@ -191,6 +210,7 @@
     - name: handler
       type: callable|string|null
     returnType: 'true'
+  raises: [typeerror, valueerror]
 - subject:
     function: xml_set_start_namespace_decl_handler
   signature:
@@ -200,6 +220,7 @@
     - name: handler
       type: callable|string|null
     returnType: 'true'
+  raises: [typeerror, valueerror]
 - subject:
     function: xml_set_unparsed_entity_decl_handler
   signature:
@@ -209,6 +230,7 @@
     - name: handler
       type: callable|string|null
     returnType: 'true'
+  raises: [typeerror, valueerror]
 - subject:
     class: xmlparser
   signature:

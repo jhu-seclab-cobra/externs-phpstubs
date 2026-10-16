@@ -25,6 +25,7 @@
     to: return
   - from: argument(2)
     to: return
+  raises: [error, typeerror]
 - subject:
     function: preg_grep
   signature:
@@ -40,14 +41,17 @@
   propagation:
   - from: argument(1)
     to: return
+  raises: []
 - subject:
     function: preg_last_error
   signature:
     returnType: int
+  raises: []
 - subject:
     function: preg_last_error_msg
   signature:
     returnType: string
+  raises: []
 - subject:
     function: preg_match
   signature:
@@ -67,6 +71,7 @@
       type: int
       optional: true
     returnType: int|false
+  raises: [error, typeerror, valueerror]
 - subject:
     function: preg_match_all
   signature:
@@ -86,6 +91,7 @@
       type: int
       optional: true
     returnType: int|false
+  raises: [error, typeerror, valueerror]
 - subject:
     function: preg_quote
   signature:
@@ -101,6 +107,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: []
 - subject:
     function: preg_replace
   signature:
@@ -126,6 +133,7 @@
     to: return
   - from: argument(2)
     to: return
+  raises: [error, typeerror]
 - subject:
     function: preg_replace_callback
   signature:
@@ -152,6 +160,7 @@
     to: return
   - from: argument(2)
     to: return
+  raises: [error, typeerror]
 - subject:
     function: preg_replace_callback_array
   signature:
@@ -174,6 +183,7 @@
   propagation:
   - from: argument(1)
     to: return
+  raises: [error, typeerror]
 - subject:
     function: preg_split
   signature:
@@ -189,3 +199,4 @@
       type: int
       optional: true
     returnType: array|false
+  raises: []

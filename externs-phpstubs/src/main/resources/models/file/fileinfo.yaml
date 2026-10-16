@@ -18,6 +18,7 @@
   propagation:
   - from: argument(1)
     to: return
+  raises: [error, typeerror, valueerror]
 - subject:
     function: finfo_close
   signature:
@@ -25,6 +26,7 @@
     - name: finfo
       type: finfo
     returnType: 'true'
+  raises: []
 - subject:
     function: finfo_file
   signature:
@@ -43,6 +45,7 @@
   propagation:
   - from: argument(1)
     to: return
+  raises: [error, typeerror, valueerror]
 - subject:
     function: finfo_open
   signature:
@@ -59,6 +62,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [exception, valueerror]
 - subject:
     function: finfo_set_flags
   signature:
@@ -68,6 +72,7 @@
     - name: flags
       type: int
     returnType: 'true'
+  raises: [error]
 - subject:
     function: mime_content_type
   signature:
@@ -75,6 +80,7 @@
     - name: filename
       type: mixed
     returnType: string|false
+  raises: [error, typeerror, valueerror]
 - subject:
     class: finfo
   signature:
@@ -90,6 +96,7 @@
       type: ?string
       optional: true
     returnType: mixed
+  raises: [exception, valueerror]
 - subject:
     method: finfo::buffer
   signature:
@@ -103,6 +110,7 @@
       type: mixed
       optional: true
     returnType: string|false
+  raises: [error, typeerror, valueerror]
 - subject:
     method: finfo::file
   signature:
@@ -116,6 +124,7 @@
       type: mixed
       optional: true
     returnType: string|false
+  raises: [error, typeerror, valueerror]
 - subject:
     method: finfo::set_flags
   signature:
@@ -123,3 +132,4 @@
     - name: flags
       type: int
     returnType: 'true'
+  raises: [error]

@@ -7,14 +7,17 @@
     - name: errorCode
       type: int
     returnType: string
+  raises: []
 - subject:
     function: intl_get_error_code
   signature:
     returnType: int
+  raises: []
 - subject:
     function: intl_get_error_message
   signature:
     returnType: string
+  raises: []
 - subject:
     function: intl_is_failure
   signature:
@@ -22,6 +25,7 @@
     - name: errorCode
       type: int
     returnType: bool
+  raises: []
 - subject:
     class: intlbreakiterator
   signature:
@@ -94,6 +98,7 @@
       type: string
       optional: true
     returnType: int|false
+  raises: [intlexception, valueerror]
 - subject:
     function: grapheme_str_split
   signature:
@@ -104,6 +109,7 @@
       type: int
       optional: true
     returnType: array|false
+  raises: [intlexception, valueerror]
 - subject:
     function: intltz_get_iana_id
   signature:
@@ -111,6 +117,7 @@
     - name: timezoneId
       type: string
     returnType: string|false
+  raises: [intlexception]
 - subject:
     function: locale_add_likely_subtags
   signature:
@@ -118,6 +125,7 @@
     - name: locale
       type: string
     returnType: string|false
+  raises: [intlexception, valueerror]
 - subject:
     function: locale_is_right_to_left
   signature:
@@ -125,6 +133,7 @@
     - name: locale
       type: string
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: locale_minimize_subtags
   signature:
@@ -132,10 +141,12 @@
     - name: locale
       type: string
     returnType: string|false
+  raises: [intlexception, valueerror]
 - subject:
     method: IntlBreakIterator::__construct
   signature:
     returnType: mixed
+  raises: [exception]
 - subject:
     method: IntlBreakIterator::createCharacterInstance
   signature:
@@ -144,10 +155,12 @@
       type: ?string
       optional: true
     returnType: ?IntlBreakIterator
+  raises: [intlexception]
 - subject:
     method: IntlBreakIterator::createCodePointInstance
   signature:
     returnType: IntlCodePointBreakIterator
+  raises: []
 - subject:
     method: IntlBreakIterator::createLineInstance
   signature:
@@ -156,6 +169,7 @@
       type: ?string
       optional: true
     returnType: ?IntlBreakIterator
+  raises: [intlexception]
 - subject:
     method: IntlBreakIterator::createSentenceInstance
   signature:
@@ -164,6 +178,7 @@
       type: ?string
       optional: true
     returnType: ?IntlBreakIterator
+  raises: [intlexception]
 - subject:
     method: IntlBreakIterator::createTitleInstance
   signature:
@@ -172,6 +187,7 @@
       type: ?string
       optional: true
     returnType: ?IntlBreakIterator
+  raises: [intlexception]
 - subject:
     method: IntlBreakIterator::createWordInstance
   signature:
@@ -180,14 +196,17 @@
       type: ?string
       optional: true
     returnType: ?IntlBreakIterator
+  raises: [intlexception]
 - subject:
     method: IntlBreakIterator::current
   signature:
     returnType: int
+  raises: []
 - subject:
     method: IntlBreakIterator::first
   signature:
     returnType: int
+  raises: []
 - subject:
     method: IntlBreakIterator::following
   signature:
@@ -195,18 +214,22 @@
     - name: offset
       type: int
     returnType: int
+  raises: [valueerror]
 - subject:
     method: IntlBreakIterator::getErrorCode
   signature:
     returnType: int
+  raises: []
 - subject:
     method: IntlBreakIterator::getErrorMessage
   signature:
     returnType: string
+  raises: []
 - subject:
     method: IntlBreakIterator::getIterator
   signature:
     returnType: Iterator
+  raises: []
 - subject:
     method: IntlBreakIterator::getLocale
   signature:
@@ -214,6 +237,7 @@
     - name: type
       type: int
     returnType: string|false
+  raises: [intlexception]
 - subject:
     method: IntlBreakIterator::getPartsIterator
   signature:
@@ -222,10 +246,12 @@
       type: string
       optional: true
     returnType: IntlPartsIterator
+  raises: [valueerror]
 - subject:
     method: IntlBreakIterator::getText
   signature:
     returnType: ?string
+  raises: []
 - subject:
     method: IntlBreakIterator::isBoundary
   signature:
@@ -233,10 +259,12 @@
     - name: offset
       type: int
     returnType: bool
+  raises: [valueerror]
 - subject:
     method: IntlBreakIterator::last
   signature:
     returnType: int
+  raises: []
 - subject:
     method: IntlBreakIterator::next
   signature:
@@ -245,6 +273,7 @@
       type: ?int
       optional: true
     returnType: int
+  raises: [valueerror]
 - subject:
     method: IntlBreakIterator::preceding
   signature:
@@ -252,10 +281,12 @@
     - name: offset
       type: int
     returnType: int
+  raises: [valueerror]
 - subject:
     method: IntlBreakIterator::previous
   signature:
     returnType: int
+  raises: []
 - subject:
     method: IntlBreakIterator::setText
   signature:
@@ -263,6 +294,7 @@
     - name: text
       type: string
     returnType: bool
+  raises: [intlexception]
 - subject:
     method: IntlChar::charAge
   signature:
@@ -270,6 +302,7 @@
     - name: codepoint
       type: int|string
     returnType: ?array
+  raises: [intlexception]
 - subject:
     method: IntlChar::charDigitValue
   signature:
@@ -277,6 +310,7 @@
     - name: codepoint
       type: int|string
     returnType: ?int
+  raises: [intlexception]
 - subject:
     method: IntlChar::charDirection
   signature:
@@ -284,6 +318,7 @@
     - name: codepoint
       type: int|string
     returnType: ?int
+  raises: [intlexception]
 - subject:
     method: IntlChar::charFromName
   signature:
@@ -294,6 +329,7 @@
       type: int
       optional: true
     returnType: ?int
+  raises: [intlexception]
 - subject:
     method: IntlChar::charMirror
   signature:
@@ -301,6 +337,7 @@
     - name: codepoint
       type: int|string
     returnType: int|string|null
+  raises: [intlexception]
 - subject:
     method: IntlChar::charName
   signature:
@@ -311,6 +348,7 @@
       type: int
       optional: true
     returnType: ?string
+  raises: [intlexception]
 - subject:
     method: IntlChar::charType
   signature:
@@ -318,6 +356,7 @@
     - name: codepoint
       type: int|string
     returnType: ?int
+  raises: [intlexception]
 - subject:
     method: IntlChar::chr
   signature:
@@ -325,6 +364,7 @@
     - name: codepoint
       type: int|string
     returnType: ?string
+  raises: [intlexception]
 - subject:
     method: IntlChar::digit
   signature:
@@ -335,6 +375,7 @@
       type: int
       optional: true
     returnType: int|false|null
+  raises: [intlexception]
 - subject:
     method: IntlChar::enumCharNames
   signature:
@@ -349,6 +390,7 @@
       type: int
       optional: true
     returnType: bool
+  raises: [intlexception]
 - subject:
     method: IntlChar::enumCharTypes
   signature:
@@ -356,6 +398,7 @@
     - name: callback
       type: callable
     returnType: void
+  raises: [intlexception]
 - subject:
     method: IntlChar::foldCase
   signature:
@@ -366,6 +409,7 @@
       type: int
       optional: true
     returnType: int|string|null
+  raises: [intlexception]
 - subject:
     method: IntlChar::forDigit
   signature:
@@ -376,6 +420,7 @@
       type: int
       optional: true
     returnType: int
+  raises: []
 - subject:
     method: IntlChar::getBidiPairedBracket
   signature:
@@ -383,6 +428,7 @@
     - name: codepoint
       type: int|string
     returnType: int|string|null
+  raises: [intlexception]
 - subject:
     method: IntlChar::getBlockCode
   signature:
@@ -390,6 +436,7 @@
     - name: codepoint
       type: int|string
     returnType: ?int
+  raises: [intlexception]
 - subject:
     method: IntlChar::getCombiningClass
   signature:
@@ -397,6 +444,7 @@
     - name: codepoint
       type: int|string
     returnType: ?int
+  raises: [intlexception]
 - subject:
     method: IntlChar::getFC_NFKC_Closure
   signature:
@@ -404,6 +452,7 @@
     - name: codepoint
       type: int|string
     returnType: string|false|null
+  raises: [intlexception]
 - subject:
     method: IntlChar::getIntPropertyMaxValue
   signature:
@@ -411,6 +460,7 @@
     - name: property
       type: int
     returnType: int
+  raises: []
 - subject:
     method: IntlChar::getIntPropertyMinValue
   signature:
@@ -418,6 +468,7 @@
     - name: property
       type: int
     returnType: int
+  raises: []
 - subject:
     method: IntlChar::getIntPropertyValue
   signature:
@@ -427,6 +478,7 @@
     - name: property
       type: int
     returnType: ?int
+  raises: [intlexception]
 - subject:
     method: IntlChar::getNumericValue
   signature:
@@ -434,6 +486,7 @@
     - name: codepoint
       type: int|string
     returnType: ?float
+  raises: [intlexception]
 - subject:
     method: IntlChar::getPropertyEnum
   signature:
@@ -441,6 +494,7 @@
     - name: alias
       type: string
     returnType: int
+  raises: []
 - subject:
     method: IntlChar::getPropertyName
   signature:
@@ -451,6 +505,7 @@
       type: int
       optional: true
     returnType: string|false
+  raises: [intlexception]
 - subject:
     method: IntlChar::getPropertyValueEnum
   signature:
@@ -460,6 +515,7 @@
     - name: name
       type: string
     returnType: int
+  raises: []
 - subject:
     method: IntlChar::getPropertyValueName
   signature:
@@ -472,10 +528,12 @@
       type: int
       optional: true
     returnType: string|false
+  raises: [intlexception]
 - subject:
     method: IntlChar::getUnicodeVersion
   signature:
     returnType: array
+  raises: []
 - subject:
     method: IntlChar::hasBinaryProperty
   signature:
@@ -485,6 +543,7 @@
     - name: property
       type: int
     returnType: ?bool
+  raises: [intlexception]
 - subject:
     method: IntlChar::isalnum
   signature:
@@ -492,6 +551,7 @@
     - name: codepoint
       type: int|string
     returnType: ?bool
+  raises: [intlexception]
 - subject:
     method: IntlChar::isalpha
   signature:
@@ -499,6 +559,7 @@
     - name: codepoint
       type: int|string
     returnType: ?bool
+  raises: [intlexception]
 - subject:
     method: IntlChar::isbase
   signature:
@@ -506,6 +567,7 @@
     - name: codepoint
       type: int|string
     returnType: ?bool
+  raises: [intlexception]
 - subject:
     method: IntlChar::isblank
   signature:
@@ -513,6 +575,7 @@
     - name: codepoint
       type: int|string
     returnType: ?bool
+  raises: [intlexception]
 - subject:
     method: IntlChar::iscntrl
   signature:
@@ -520,6 +583,7 @@
     - name: codepoint
       type: int|string
     returnType: ?bool
+  raises: [intlexception]
 - subject:
     method: IntlChar::isdefined
   signature:
@@ -527,6 +591,7 @@
     - name: codepoint
       type: int|string
     returnType: ?bool
+  raises: [intlexception]
 - subject:
     method: IntlChar::isdigit
   signature:
@@ -534,6 +599,7 @@
     - name: codepoint
       type: int|string
     returnType: ?bool
+  raises: [intlexception]
 - subject:
     method: IntlChar::isgraph
   signature:
@@ -541,6 +607,7 @@
     - name: codepoint
       type: int|string
     returnType: ?bool
+  raises: [intlexception]
 - subject:
     method: IntlChar::isIDIgnorable
   signature:
@@ -548,6 +615,7 @@
     - name: codepoint
       type: int|string
     returnType: ?bool
+  raises: [intlexception]
 - subject:
     method: IntlChar::isIDPart
   signature:
@@ -555,6 +623,7 @@
     - name: codepoint
       type: int|string
     returnType: ?bool
+  raises: [intlexception]
 - subject:
     method: IntlChar::isIDStart
   signature:
@@ -562,6 +631,7 @@
     - name: codepoint
       type: int|string
     returnType: ?bool
+  raises: [intlexception]
 - subject:
     method: IntlChar::isISOControl
   signature:
@@ -569,6 +639,7 @@
     - name: codepoint
       type: int|string
     returnType: ?bool
+  raises: [intlexception]
 - subject:
     method: IntlChar::isJavaIDPart
   signature:
@@ -576,6 +647,7 @@
     - name: codepoint
       type: int|string
     returnType: ?bool
+  raises: [intlexception]
 - subject:
     method: IntlChar::isJavaIDStart
   signature:
@@ -583,6 +655,7 @@
     - name: codepoint
       type: int|string
     returnType: ?bool
+  raises: [intlexception]
 - subject:
     method: IntlChar::isJavaSpaceChar
   signature:
@@ -590,6 +663,7 @@
     - name: codepoint
       type: int|string
     returnType: ?bool
+  raises: [intlexception]
 - subject:
     method: IntlChar::islower
   signature:
@@ -597,6 +671,7 @@
     - name: codepoint
       type: int|string
     returnType: ?bool
+  raises: [intlexception]
 - subject:
     method: IntlChar::isMirrored
   signature:
@@ -604,6 +679,7 @@
     - name: codepoint
       type: int|string
     returnType: ?bool
+  raises: [intlexception]
 - subject:
     method: IntlChar::isprint
   signature:
@@ -611,6 +687,7 @@
     - name: codepoint
       type: int|string
     returnType: ?bool
+  raises: [intlexception]
 - subject:
     method: IntlChar::ispunct
   signature:
@@ -618,6 +695,7 @@
     - name: codepoint
       type: int|string
     returnType: ?bool
+  raises: [intlexception]
 - subject:
     method: IntlChar::isspace
   signature:
@@ -625,6 +703,7 @@
     - name: codepoint
       type: int|string
     returnType: ?bool
+  raises: [intlexception]
 - subject:
     method: IntlChar::istitle
   signature:
@@ -632,6 +711,7 @@
     - name: codepoint
       type: int|string
     returnType: ?bool
+  raises: [intlexception]
 - subject:
     method: IntlChar::isUAlphabetic
   signature:
@@ -639,6 +719,7 @@
     - name: codepoint
       type: int|string
     returnType: ?bool
+  raises: [intlexception]
 - subject:
     method: IntlChar::isULowercase
   signature:
@@ -646,6 +727,7 @@
     - name: codepoint
       type: int|string
     returnType: ?bool
+  raises: [intlexception]
 - subject:
     method: IntlChar::isupper
   signature:
@@ -653,6 +735,7 @@
     - name: codepoint
       type: int|string
     returnType: ?bool
+  raises: [intlexception]
 - subject:
     method: IntlChar::isUUppercase
   signature:
@@ -660,6 +743,7 @@
     - name: codepoint
       type: int|string
     returnType: ?bool
+  raises: [intlexception]
 - subject:
     method: IntlChar::isUWhiteSpace
   signature:
@@ -667,6 +751,7 @@
     - name: codepoint
       type: int|string
     returnType: ?bool
+  raises: [intlexception]
 - subject:
     method: IntlChar::isWhitespace
   signature:
@@ -674,6 +759,7 @@
     - name: codepoint
       type: int|string
     returnType: ?bool
+  raises: [intlexception]
 - subject:
     method: IntlChar::isxdigit
   signature:
@@ -681,6 +767,7 @@
     - name: codepoint
       type: int|string
     returnType: ?bool
+  raises: [intlexception]
 - subject:
     method: IntlChar::ord
   signature:
@@ -688,6 +775,7 @@
     - name: character
       type: int|string
     returnType: ?int
+  raises: [intlexception]
 - subject:
     method: IntlChar::tolower
   signature:
@@ -695,6 +783,7 @@
     - name: codepoint
       type: int|string
     returnType: int|string|null
+  raises: [intlexception]
 - subject:
     method: IntlChar::totitle
   signature:
@@ -702,6 +791,7 @@
     - name: codepoint
       type: int|string
     returnType: int|string|null
+  raises: [intlexception]
 - subject:
     method: IntlChar::toupper
   signature:
@@ -709,10 +799,12 @@
     - name: codepoint
       type: int|string
     returnType: int|string|null
+  raises: [intlexception]
 - subject:
     method: IntlCodePointBreakIterator::getLastCodePoint
   signature:
     returnType: int
+  raises: []
 - subject:
     method: IntlDatePatternGenerator::__construct
   signature:
@@ -721,6 +813,7 @@
       type: ?string
       optional: true
     returnType: mixed
+  raises: [intlexception]
 - subject:
     method: IntlDatePatternGenerator::create
   signature:
@@ -729,6 +822,7 @@
       type: ?string
       optional: true
     returnType: ?IntlDatePatternGenerator
+  raises: [intlexception]
 - subject:
     method: IntlDatePatternGenerator::getBestPattern
   signature:
@@ -736,6 +830,7 @@
     - name: skeleton
       type: string
     returnType: string|false
+  raises: [intlexception]
 - subject:
     method: IntlGregorianCalendar::__construct
   signature:
@@ -759,6 +854,7 @@
       type: mixed
       optional: true
     returnType: mixed
+  raises: [argumentcounterror, dateerror, error, intlexception, valueerror]
 - subject:
     method: IntlGregorianCalendar::createFromDate
   signature:
@@ -770,6 +866,7 @@
     - name: dayOfMonth
       type: int
     returnType: static
+  raises: [dateerror, intlexception, valueerror]
 - subject:
     method: IntlGregorianCalendar::createFromDateTime
   signature:
@@ -788,10 +885,12 @@
       type: ?int
       optional: true
     returnType: static
+  raises: [dateerror, intlexception, valueerror]
 - subject:
     method: IntlGregorianCalendar::getGregorianChange
   signature:
     returnType: float
+  raises: []
 - subject:
     method: IntlGregorianCalendar::isLeapYear
   signature:
@@ -799,6 +898,7 @@
     - name: year
       type: int
     returnType: bool
+  raises: [valueerror]
 - subject:
     method: IntlGregorianCalendar::setGregorianChange
   signature:
@@ -806,26 +906,32 @@
     - name: timestamp
       type: float
     returnType: bool
+  raises: [intlexception]
 - subject:
     method: IntlIterator::current
   signature:
     returnType: mixed
+  raises: []
 - subject:
     method: IntlIterator::key
   signature:
     returnType: mixed
+  raises: []
 - subject:
     method: IntlIterator::next
   signature:
     returnType: void
+  raises: []
 - subject:
     method: IntlIterator::rewind
   signature:
     returnType: void
+  raises: [intlexception]
 - subject:
     method: IntlIterator::valid
   signature:
     returnType: bool
+  raises: []
 - subject:
     method: IntlListFormatter::__construct
   signature:
@@ -839,6 +945,7 @@
       type: int
       optional: true
     returnType: mixed
+  raises: [error, intlexception, valueerror]
 - subject:
     method: IntlListFormatter::format
   signature:
@@ -846,22 +953,27 @@
     - name: strings
       type: array
     returnType: string|false
+  raises: [intlexception]
 - subject:
     method: IntlListFormatter::getErrorCode
   signature:
     returnType: int
+  raises: []
 - subject:
     method: IntlListFormatter::getErrorMessage
   signature:
     returnType: string
+  raises: []
 - subject:
     method: IntlPartsIterator::getBreakIterator
   signature:
     returnType: IntlBreakIterator
+  raises: []
 - subject:
     method: IntlPartsIterator::getRuleStatus
   signature:
     returnType: int
+  raises: []
 - subject:
     method: IntlRuleBasedBreakIterator::__construct
   signature:
@@ -872,22 +984,27 @@
       type: bool
       optional: true
     returnType: mixed
+  raises: [error, intlexception]
 - subject:
     method: IntlRuleBasedBreakIterator::getBinaryRules
   signature:
     returnType: string|false
+  raises: [intlexception]
 - subject:
     method: IntlRuleBasedBreakIterator::getRules
   signature:
     returnType: string|false
+  raises: [intlexception]
 - subject:
     method: IntlRuleBasedBreakIterator::getRuleStatus
   signature:
     returnType: int
+  raises: []
 - subject:
     method: IntlRuleBasedBreakIterator::getRuleStatusVec
   signature:
     returnType: array|false
+  raises: [intlexception]
 - subject:
     method: UConverter::__construct
   signature:
@@ -899,6 +1016,7 @@
       type: ?string
       optional: true
     returnType: mixed
+  raises: [intlexception]
 - subject:
     method: UConverter::convert
   signature:
@@ -909,6 +1027,7 @@
       type: bool
       optional: true
     returnType: string|false
+  raises: [intlexception]
 - subject:
     method: UConverter::fromUCallback
   signature:
@@ -923,6 +1042,7 @@
       type: mixed
       byRef: true
     returnType: string|int|array|null
+  raises: [error, intlexception, typeerror]
 - subject:
     method: UConverter::getAliases
   signature:
@@ -930,42 +1050,52 @@
     - name: name
       type: string
     returnType: array|false|null
+  raises: [intlexception]
 - subject:
     method: UConverter::getAvailable
   signature:
     returnType: array
+  raises: []
 - subject:
     method: UConverter::getDestinationEncoding
   signature:
     returnType: string|false|null
+  raises: [intlexception]
 - subject:
     method: UConverter::getDestinationType
   signature:
     returnType: int|false|null
+  raises: [intlexception]
 - subject:
     method: UConverter::getErrorCode
   signature:
     returnType: int
+  raises: []
 - subject:
     method: UConverter::getErrorMessage
   signature:
     returnType: ?string
+  raises: []
 - subject:
     method: UConverter::getSourceEncoding
   signature:
     returnType: string|false|null
+  raises: [intlexception]
 - subject:
     method: UConverter::getSourceType
   signature:
     returnType: int|false|null
+  raises: [intlexception]
 - subject:
     method: UConverter::getStandards
   signature:
     returnType: ?array
+  raises: [intlexception]
 - subject:
     method: UConverter::getSubstChars
   signature:
     returnType: string|false|null
+  raises: [intlexception]
 - subject:
     method: UConverter::reasonText
   signature:
@@ -973,6 +1103,7 @@
     - name: reason
       type: int
     returnType: string
+  raises: [valueerror]
 - subject:
     method: UConverter::setDestinationEncoding
   signature:
@@ -980,6 +1111,7 @@
     - name: encoding
       type: string
     returnType: bool
+  raises: [intlexception]
 - subject:
     method: UConverter::setSourceEncoding
   signature:
@@ -987,6 +1119,7 @@
     - name: encoding
       type: string
     returnType: bool
+  raises: [intlexception]
 - subject:
     method: UConverter::setSubstChars
   signature:
@@ -994,6 +1127,7 @@
     - name: chars
       type: string
     returnType: bool
+  raises: [intlexception]
 - subject:
     method: UConverter::toUCallback
   signature:
@@ -1008,6 +1142,7 @@
       type: mixed
       byRef: true
     returnType: string|int|array|null
+  raises: [error, intlexception, typeerror]
 - subject:
     method: UConverter::transcode
   signature:
@@ -1022,6 +1157,7 @@
       type: ?array
       optional: true
     returnType: string|false
+  raises: [intlexception]
 - subject:
     class: intldateformatter
   signature:
@@ -1089,6 +1225,7 @@
       type: ?string
       optional: true
     returnType: ?IntlDateFormatter
+  raises: [dateerror, error, intlexception, valueerror]
 - subject:
     function: datefmt_format
   signature:
@@ -1101,6 +1238,7 @@
   propagation:
   - from: argument(1)
     to: return
+  raises: [intlexception]
 - subject:
     function: datefmt_format_object
   signature:
@@ -1119,6 +1257,7 @@
     to: return
   - from: argument(2)
     to: return
+  raises: [intlexception]
 - subject:
     function: datefmt_get_calendar
   signature:
@@ -1126,6 +1265,7 @@
     - name: formatter
       type: IntlDateFormatter
     returnType: int|false
+  raises: []
 - subject:
     function: datefmt_get_calendar_object
   signature:
@@ -1133,6 +1273,7 @@
     - name: formatter
       type: IntlDateFormatter
     returnType: IntlCalendar|false|null
+  raises: [intlexception]
 - subject:
     function: datefmt_get_datetype
   signature:
@@ -1140,6 +1281,7 @@
     - name: formatter
       type: IntlDateFormatter
     returnType: int|false
+  raises: [intlexception]
 - subject:
     function: datefmt_get_error_code
   signature:
@@ -1147,6 +1289,7 @@
     - name: formatter
       type: IntlDateFormatter
     returnType: int
+  raises: []
 - subject:
     function: datefmt_get_error_message
   signature:
@@ -1154,6 +1297,7 @@
     - name: formatter
       type: IntlDateFormatter
     returnType: string
+  raises: []
 - subject:
     function: datefmt_get_locale
   signature:
@@ -1164,6 +1308,7 @@
       type: int
       optional: true
     returnType: string|false
+  raises: [intlexception]
 - subject:
     function: datefmt_get_pattern
   signature:
@@ -1171,6 +1316,7 @@
     - name: formatter
       type: IntlDateFormatter
     returnType: string|false
+  raises: [intlexception]
 - subject:
     function: datefmt_get_timetype
   signature:
@@ -1178,6 +1324,7 @@
     - name: formatter
       type: IntlDateFormatter
     returnType: int|false
+  raises: [intlexception]
 - subject:
     function: datefmt_get_timezone
   signature:
@@ -1185,6 +1332,7 @@
     - name: formatter
       type: IntlDateFormatter
     returnType: IntlTimeZone|false
+  raises: [intlexception]
 - subject:
     function: datefmt_get_timezone_id
   signature:
@@ -1192,6 +1340,7 @@
     - name: formatter
       type: IntlDateFormatter
     returnType: string|false
+  raises: [intlexception]
 - subject:
     function: datefmt_is_lenient
   signature:
@@ -1199,6 +1348,7 @@
     - name: formatter
       type: IntlDateFormatter
     returnType: bool
+  raises: []
 - subject:
     function: datefmt_localtime
   signature:
@@ -1212,6 +1362,7 @@
       optional: true
       byRef: true
     returnType: array|false
+  raises: [error, intlexception, typeerror]
 - subject:
     function: datefmt_parse
   signature:
@@ -1225,6 +1376,7 @@
       optional: true
       byRef: true
     returnType: int|float|false
+  raises: [error, intlexception, typeerror]
 - subject:
     function: datefmt_set_calendar
   signature:
@@ -1234,6 +1386,7 @@
     - name: calendar
       type: IntlCalendar|int|null
     returnType: bool
+  raises: [intlexception]
 - subject:
     function: datefmt_set_lenient
   signature:
@@ -1243,6 +1396,7 @@
     - name: lenient
       type: bool
     returnType: void
+  raises: []
 - subject:
     function: datefmt_set_pattern
   signature:
@@ -1252,6 +1406,7 @@
     - name: pattern
       type: string
     returnType: bool
+  raises: [intlexception]
 - subject:
     function: datefmt_set_timezone
   signature:
@@ -1261,6 +1416,7 @@
     - name: timezone
       type: IntlTimeZone|DateTimeZone|string|null
     returnType: bool
+  raises: [dateerror, error, intlexception]
 - subject:
     function: collator_asort
   signature:
@@ -1274,6 +1430,7 @@
       type: int
       optional: true
     returnType: bool
+  raises: [error, intlexception]
 - subject:
     function: collator_compare
   signature:
@@ -1285,6 +1442,7 @@
     - name: string2
       type: string
     returnType: int|false
+  raises: [error, intlexception]
 - subject:
     function: collator_create
   signature:
@@ -1295,6 +1453,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [error, intlexception]
 - subject:
     function: collator_get_attribute
   signature:
@@ -1304,6 +1463,7 @@
     - name: attribute
       type: int
     returnType: int|false
+  raises: [intlexception]
 - subject:
     function: collator_get_error_code
   signature:
@@ -1311,6 +1471,7 @@
     - name: object
       type: Collator
     returnType: int|false
+  raises: []
 - subject:
     function: collator_get_error_message
   signature:
@@ -1321,6 +1482,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: collator_get_locale
   signature:
@@ -1333,6 +1495,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [error, intlexception]
 - subject:
     function: collator_get_sort_key
   signature:
@@ -1347,6 +1510,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [error, intlexception]
 - subject:
     function: collator_get_strength
   signature:
@@ -1354,6 +1518,7 @@
     - name: object
       type: Collator
     returnType: int
+  raises: []
 - subject:
     function: collator_set_attribute
   signature:
@@ -1365,6 +1530,7 @@
     - name: value
       type: int
     returnType: bool
+  raises: [intlexception]
 - subject:
     function: collator_set_strength
   signature:
@@ -1374,6 +1540,7 @@
     - name: strength
       type: int
     returnType: 'true'
+  raises: []
 - subject:
     function: collator_sort
   signature:
@@ -1387,6 +1554,7 @@
       type: int
       optional: true
     returnType: bool
+  raises: [error, intlexception]
 - subject:
     function: collator_sort_with_sort_keys
   signature:
@@ -1397,6 +1565,7 @@
       type: array
       byRef: true
     returnType: bool
+  raises: [error, intlexception]
 - subject:
     function: grapheme_extract
   signature:
@@ -1419,6 +1588,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [error, intlexception, typeerror, valueerror]
 - subject:
     function: grapheme_stripos
   signature:
@@ -1434,6 +1604,7 @@
       type: string
       optional: true
     returnType: int|false
+  raises: [intlexception, valueerror]
 - subject:
     function: grapheme_stristr
   signature:
@@ -1454,6 +1625,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [intlexception, valueerror]
 - subject:
     function: grapheme_strlen
   signature:
@@ -1461,6 +1633,7 @@
     - name: string
       type: string
     returnType: int|false|null
+  raises: [intlexception]
 - subject:
     function: grapheme_strpos
   signature:
@@ -1476,6 +1649,7 @@
       type: string
       optional: true
     returnType: int|false
+  raises: [intlexception, valueerror]
 - subject:
     function: grapheme_strripos
   signature:
@@ -1491,6 +1665,7 @@
       type: string
       optional: true
     returnType: int|false
+  raises: [intlexception, valueerror]
 - subject:
     function: grapheme_strrpos
   signature:
@@ -1506,6 +1681,7 @@
       type: string
       optional: true
     returnType: int|false
+  raises: [intlexception, valueerror]
 - subject:
     function: grapheme_strstr
   signature:
@@ -1526,6 +1702,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [intlexception, valueerror]
 - subject:
     function: grapheme_substr
   signature:
@@ -1544,6 +1721,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [intlexception, valueerror]
 - subject:
     function: idn_to_ascii
   signature:
@@ -1564,6 +1742,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [error, intlexception, typeerror, valueerror]
 - subject:
     function: idn_to_utf8
   signature:
@@ -1584,6 +1763,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [error, intlexception, typeerror, valueerror]
 - subject:
     function: intlcal_add
   signature:
@@ -1595,6 +1775,7 @@
     - name: value
       type: int
     returnType: bool
+  raises: [intlexception, valueerror]
 - subject:
     function: intlcal_after
   signature:
@@ -1604,6 +1785,7 @@
     - name: other
       type: IntlCalendar
     returnType: bool
+  raises: [error, intlexception]
 - subject:
     function: intlcal_before
   signature:
@@ -1613,6 +1795,7 @@
     - name: other
       type: IntlCalendar
     returnType: bool
+  raises: [error, intlexception]
 - subject:
     function: intlcal_clear
   signature:
@@ -1623,6 +1806,7 @@
       type: ?int
       optional: true
     returnType: 'true'
+  raises: [valueerror]
 - subject:
     function: intlcal_create_instance
   signature:
@@ -1634,6 +1818,7 @@
       type: ?string
       optional: true
     returnType: ?IntlCalendar
+  raises: [dateerror, error, intlexception]
 - subject:
     function: intlcal_equals
   signature:
@@ -1643,6 +1828,7 @@
     - name: other
       type: IntlCalendar
     returnType: bool
+  raises: [error, intlexception]
 - subject:
     function: intlcal_field_difference
   signature:
@@ -1654,6 +1840,7 @@
     - name: field
       type: int
     returnType: int|false
+  raises: [intlexception, valueerror]
 - subject:
     function: intlcal_from_date_time
   signature:
@@ -1664,6 +1851,7 @@
       type: ?string
       optional: true
     returnType: ?IntlCalendar
+  raises: [intlexception]
 - subject:
     function: intlcal_get
   signature:
@@ -1673,6 +1861,7 @@
     - name: field
       type: int
     returnType: int|false
+  raises: [intlexception, valueerror]
 - subject:
     function: intlcal_get_actual_maximum
   signature:
@@ -1682,6 +1871,7 @@
     - name: field
       type: int
     returnType: int|false
+  raises: [intlexception, valueerror]
 - subject:
     function: intlcal_get_actual_minimum
   signature:
@@ -1691,10 +1881,12 @@
     - name: field
       type: int
     returnType: int|false
+  raises: [intlexception, valueerror]
 - subject:
     function: intlcal_get_available_locales
   signature:
     returnType: array
+  raises: []
 - subject:
     function: intlcal_get_day_of_week_type
   signature:
@@ -1704,6 +1896,7 @@
     - name: dayOfWeek
       type: int
     returnType: int|false
+  raises: [intlexception, valueerror]
 - subject:
     function: intlcal_get_error_code
   signature:
@@ -1711,6 +1904,7 @@
     - name: calendar
       type: IntlCalendar
     returnType: int|false
+  raises: []
 - subject:
     function: intlcal_get_error_message
   signature:
@@ -1718,6 +1912,7 @@
     - name: calendar
       type: IntlCalendar
     returnType: string|false
+  raises: []
 - subject:
     function: intlcal_get_first_day_of_week
   signature:
@@ -1725,6 +1920,7 @@
     - name: calendar
       type: IntlCalendar
     returnType: int|false
+  raises: [intlexception]
 - subject:
     function: intlcal_get_greatest_minimum
   signature:
@@ -1734,6 +1930,7 @@
     - name: field
       type: int
     returnType: int|false
+  raises: [intlexception, valueerror]
 - subject:
     function: intlcal_get_keyword_values_for_locale
   signature:
@@ -1745,6 +1942,7 @@
     - name: onlyCommon
       type: bool
     returnType: IntlIterator|false
+  raises: [intlexception]
 - subject:
     function: intlcal_get_least_maximum
   signature:
@@ -1754,6 +1952,7 @@
     - name: field
       type: int
     returnType: int|false
+  raises: [intlexception, valueerror]
 - subject:
     function: intlcal_get_locale
   signature:
@@ -1763,6 +1962,7 @@
     - name: type
       type: int
     returnType: string|false
+  raises: [intlexception, valueerror]
 - subject:
     function: intlcal_get_maximum
   signature:
@@ -1772,6 +1972,7 @@
     - name: field
       type: int
     returnType: int|false
+  raises: [intlexception, valueerror]
 - subject:
     function: intlcal_get_minimal_days_in_first_week
   signature:
@@ -1779,6 +1980,7 @@
     - name: calendar
       type: IntlCalendar
     returnType: int|false
+  raises: [intlexception]
 - subject:
     function: intlcal_get_minimum
   signature:
@@ -1788,10 +1990,12 @@
     - name: field
       type: int
     returnType: int|false
+  raises: [intlexception, valueerror]
 - subject:
     function: intlcal_get_now
   signature:
     returnType: float
+  raises: []
 - subject:
     function: intlcal_get_repeated_wall_time_option
   signature:
@@ -1799,6 +2003,7 @@
     - name: calendar
       type: IntlCalendar
     returnType: int
+  raises: []
 - subject:
     function: intlcal_get_skipped_wall_time_option
   signature:
@@ -1806,6 +2011,7 @@
     - name: calendar
       type: IntlCalendar
     returnType: int
+  raises: []
 - subject:
     function: intlcal_get_time
   signature:
@@ -1813,6 +2019,7 @@
     - name: calendar
       type: IntlCalendar
     returnType: float|false
+  raises: [intlexception]
 - subject:
     function: intlcal_get_time_zone
   signature:
@@ -1820,6 +2027,7 @@
     - name: calendar
       type: IntlCalendar
     returnType: IntlTimeZone|false
+  raises: [intlexception]
 - subject:
     function: intlcal_get_type
   signature:
@@ -1827,6 +2035,7 @@
     - name: calendar
       type: IntlCalendar
     returnType: string
+  raises: []
 - subject:
     function: intlcal_get_weekend_transition
   signature:
@@ -1836,6 +2045,7 @@
     - name: dayOfWeek
       type: int
     returnType: int|false
+  raises: [intlexception, valueerror]
 - subject:
     function: intlcal_in_daylight_time
   signature:
@@ -1843,6 +2053,7 @@
     - name: calendar
       type: IntlCalendar
     returnType: bool
+  raises: [intlexception]
 - subject:
     function: intlcal_is_equivalent_to
   signature:
@@ -1852,6 +2063,7 @@
     - name: other
       type: IntlCalendar
     returnType: bool
+  raises: [error]
 - subject:
     function: intlcal_is_lenient
   signature:
@@ -1859,6 +2071,7 @@
     - name: calendar
       type: IntlCalendar
     returnType: bool
+  raises: []
 - subject:
     function: intlcal_is_set
   signature:
@@ -1868,6 +2081,7 @@
     - name: field
       type: int
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: intlcal_is_weekend
   signature:
@@ -1878,6 +2092,7 @@
       type: ?float
       optional: true
     returnType: bool
+  raises: [intlexception]
 - subject:
     function: intlcal_roll
   signature:
@@ -1889,6 +2104,7 @@
     - name: value
       type: mixed
     returnType: bool
+  raises: [intlexception, valueerror]
 - subject:
     function: intlcal_set
   signature:
@@ -1912,6 +2128,7 @@
       type: int
       optional: true
     returnType: 'true'
+  raises: [argumentcounterror, valueerror]
 - subject:
     function: intlcal_set_first_day_of_week
   signature:
@@ -1921,6 +2138,7 @@
     - name: dayOfWeek
       type: int
     returnType: 'true'
+  raises: [valueerror]
 - subject:
     function: intlcal_set_lenient
   signature:
@@ -1930,6 +2148,7 @@
     - name: lenient
       type: bool
     returnType: 'true'
+  raises: []
 - subject:
     function: intlcal_set_minimal_days_in_first_week
   signature:
@@ -1939,6 +2158,7 @@
     - name: days
       type: int
     returnType: 'true'
+  raises: [valueerror]
 - subject:
     function: intlcal_set_repeated_wall_time_option
   signature:
@@ -1948,6 +2168,7 @@
     - name: option
       type: int
     returnType: 'true'
+  raises: [valueerror]
 - subject:
     function: intlcal_set_skipped_wall_time_option
   signature:
@@ -1957,6 +2178,7 @@
     - name: option
       type: int
     returnType: 'true'
+  raises: [valueerror]
 - subject:
     function: intlcal_set_time
   signature:
@@ -1966,6 +2188,7 @@
     - name: timestamp
       type: float
     returnType: bool
+  raises: [intlexception]
 - subject:
     function: intlcal_set_time_zone
   signature:
@@ -1975,6 +2198,7 @@
     - name: timezone
       type: IntlTimeZone|DateTimeZone|string|null
     returnType: bool
+  raises: [dateerror, error, intlexception]
 - subject:
     function: intlcal_to_date_time
   signature:
@@ -1985,6 +2209,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [error, intlexception, typeerror]
 - subject:
     function: intlgregcal_create_instance
   signature:
@@ -2008,6 +2233,7 @@
       type: mixed
       optional: true
     returnType: ?IntlGregorianCalendar
+  raises: [argumentcounterror, dateerror, error, intlexception, valueerror]
 - subject:
     function: intlgregcal_get_gregorian_change
   signature:
@@ -2015,6 +2241,7 @@
     - name: calendar
       type: IntlGregorianCalendar
     returnType: float
+  raises: []
 - subject:
     function: intlgregcal_is_leap_year
   signature:
@@ -2024,6 +2251,7 @@
     - name: year
       type: int
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: intlgregcal_set_gregorian_change
   signature:
@@ -2033,6 +2261,7 @@
     - name: timestamp
       type: float
     returnType: bool
+  raises: [intlexception]
 - subject:
     function: intltz_count_equivalent_ids
   signature:
@@ -2040,10 +2269,12 @@
     - name: timezoneId
       type: string
     returnType: int|false
+  raises: [intlexception]
 - subject:
     function: intltz_create_default
   signature:
     returnType: IntlTimeZone
+  raises: []
 - subject:
     function: intltz_create_enumeration
   signature:
@@ -2052,6 +2283,7 @@
       type: string|int|null
       optional: true
     returnType: IntlIterator|false
+  raises: [intlexception, valueerror]
 - subject:
     function: intltz_create_time_zone
   signature:
@@ -2059,6 +2291,7 @@
     - name: timezoneId
       type: string
     returnType: ?IntlTimeZone
+  raises: [intlexception]
 - subject:
     function: intltz_create_time_zone_id_enumeration
   signature:
@@ -2072,6 +2305,7 @@
       type: ?int
       optional: true
     returnType: IntlIterator|false
+  raises: [intlexception, valueerror]
 - subject:
     function: intltz_from_date_time_zone
   signature:
@@ -2079,6 +2313,7 @@
     - name: timezone
       type: DateTimeZone
     returnType: ?IntlTimeZone
+  raises: [error, intlexception]
 - subject:
     function: intltz_get_canonical_id
   signature:
@@ -2093,6 +2328,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [error, intlexception, typeerror]
 - subject:
     function: intltz_get_display_name
   signature:
@@ -2112,6 +2348,7 @@
   propagation:
   - from: argument(3)
     to: return
+  raises: [intlexception]
 - subject:
     function: intltz_get_dst_savings
   signature:
@@ -2119,6 +2356,7 @@
     - name: timezone
       type: IntlTimeZone
     returnType: int
+  raises: []
 - subject:
     function: intltz_get_equivalent_id
   signature:
@@ -2131,6 +2369,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [intlexception, valueerror]
 - subject:
     function: intltz_get_error_code
   signature:
@@ -2138,6 +2377,7 @@
     - name: timezone
       type: IntlTimeZone
     returnType: int|false
+  raises: []
 - subject:
     function: intltz_get_error_message
   signature:
@@ -2145,10 +2385,12 @@
     - name: timezone
       type: IntlTimeZone
     returnType: string|false
+  raises: []
 - subject:
     function: intltz_get_gmt
   signature:
     returnType: IntlTimeZone
+  raises: []
 - subject:
     function: intltz_get_id
   signature:
@@ -2156,6 +2398,7 @@
     - name: timezone
       type: IntlTimeZone
     returnType: string|false
+  raises: [intlexception]
 - subject:
     function: intltz_get_id_for_windows_id
   signature:
@@ -2171,6 +2414,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [intlexception]
 - subject:
     function: intltz_get_offset
   signature:
@@ -2188,6 +2432,7 @@
       type: mixed
       byRef: true
     returnType: bool
+  raises: [error, intlexception, typeerror]
 - subject:
     function: intltz_get_raw_offset
   signature:
@@ -2195,6 +2440,7 @@
     - name: timezone
       type: IntlTimeZone
     returnType: int
+  raises: []
 - subject:
     function: intltz_get_region
   signature:
@@ -2205,14 +2451,17 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [intlexception]
 - subject:
     function: intltz_get_tz_data_version
   signature:
     returnType: string|false
+  raises: [intlexception]
 - subject:
     function: intltz_get_unknown
   signature:
     returnType: IntlTimeZone
+  raises: []
 - subject:
     function: intltz_get_windows_id
   signature:
@@ -2223,6 +2472,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [intlexception]
 - subject:
     function: intltz_has_same_rules
   signature:
@@ -2232,6 +2482,7 @@
     - name: other
       type: IntlTimeZone
     returnType: bool
+  raises: [intlexception]
 - subject:
     function: intltz_to_date_time_zone
   signature:
@@ -2242,6 +2493,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [error, intlexception, typeerror]
 - subject:
     function: intltz_use_daylight_time
   signature:
@@ -2249,6 +2501,7 @@
     - name: timezone
       type: IntlTimeZone
     returnType: bool
+  raises: []
 - subject:
     function: locale_accept_from_http
   signature:
@@ -2259,6 +2512,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [intlexception]
 - subject:
     function: locale_canonicalize
   signature:
@@ -2269,6 +2523,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [intlexception, valueerror]
 - subject:
     function: locale_compose
   signature:
@@ -2276,6 +2531,7 @@
     - name: subtags
       type: array
     returnType: string|false
+  raises: [intlexception, valueerror]
 - subject:
     function: locale_filter_matches
   signature:
@@ -2288,6 +2544,7 @@
       type: bool
       optional: true
     returnType: ?bool
+  raises: [intlexception, valueerror]
 - subject:
     function: locale_get_all_variants
   signature:
@@ -2295,10 +2552,12 @@
     - name: locale
       type: string
     returnType: ?array
+  raises: [intlexception, valueerror]
 - subject:
     function: locale_get_default
   signature:
     returnType: string
+  raises: []
 - subject:
     function: locale_get_display_language
   signature:
@@ -2314,6 +2573,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [intlexception, valueerror]
 - subject:
     function: locale_get_display_name
   signature:
@@ -2329,6 +2589,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [intlexception, valueerror]
 - subject:
     function: locale_get_display_region
   signature:
@@ -2344,6 +2605,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [intlexception, valueerror]
 - subject:
     function: locale_get_display_script
   signature:
@@ -2359,6 +2621,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [intlexception, valueerror]
 - subject:
     function: locale_get_display_variant
   signature:
@@ -2374,6 +2637,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [intlexception, valueerror]
 - subject:
     function: locale_get_keywords
   signature:
@@ -2381,6 +2645,7 @@
     - name: locale
       type: string
     returnType: array|false|null
+  raises: [intlexception, valueerror]
 - subject:
     function: locale_get_primary_language
   signature:
@@ -2391,6 +2656,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [intlexception, valueerror]
 - subject:
     function: locale_get_region
   signature:
@@ -2401,6 +2667,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [intlexception, valueerror]
 - subject:
     function: locale_get_script
   signature:
@@ -2411,6 +2678,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [intlexception, valueerror]
 - subject:
     function: locale_lookup
   signature:
@@ -2431,6 +2699,7 @@
     to: return
   - from: argument(3)
     to: return
+  raises: [intlexception, typeerror, valueerror]
 - subject:
     function: locale_parse
   signature:
@@ -2438,6 +2707,7 @@
     - name: locale
       type: string
     returnType: ?array
+  raises: [intlexception, valueerror]
 - subject:
     function: locale_set_default
   signature:
@@ -2445,6 +2715,7 @@
     - name: locale
       type: string
     returnType: 'true'
+  raises: [valueerror]
 - subject:
     function: msgfmt_create
   signature:
@@ -2459,6 +2730,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [intlexception]
 - subject:
     function: msgfmt_format
   signature:
@@ -2471,6 +2743,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [dateerror, error, intlexception]
 - subject:
     function: msgfmt_format_message
   signature:
@@ -2487,6 +2760,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [dateerror, error, intlexception]
 - subject:
     function: msgfmt_get_error_code
   signature:
@@ -2494,6 +2768,7 @@
     - name: formatter
       type: MessageFormatter
     returnType: int
+  raises: []
 - subject:
     function: msgfmt_get_error_message
   signature:
@@ -2504,6 +2779,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: msgfmt_get_locale
   signature:
@@ -2514,6 +2790,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: msgfmt_get_pattern
   signature:
@@ -2524,6 +2801,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: msgfmt_parse
   signature:
@@ -2536,6 +2814,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [intlexception]
 - subject:
     function: msgfmt_parse_message
   signature:
@@ -2547,6 +2826,7 @@
     - name: message
       type: string
     returnType: array|false
+  raises: [intlexception]
 - subject:
     function: msgfmt_set_pattern
   signature:
@@ -2556,6 +2836,7 @@
     - name: pattern
       type: string
     returnType: bool
+  raises: [intlexception]
 - subject:
     function: normalizer_get_raw_decomposition
   signature:
@@ -2569,6 +2850,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [intlexception]
 - subject:
     function: normalizer_is_normalized
   signature:
@@ -2579,6 +2861,7 @@
       type: int
       optional: true
     returnType: bool
+  raises: [intlexception, valueerror]
 - subject:
     function: normalizer_normalize
   signature:
@@ -2592,6 +2875,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [intlexception, valueerror]
 - subject:
     function: numfmt_create
   signature:
@@ -2611,6 +2895,7 @@
     to: return
   - from: argument(2)
     to: return
+  raises: [error, intlexception, valueerror]
 - subject:
     function: numfmt_format
   signature:
@@ -2626,6 +2911,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [intlexception, valueerror]
 - subject:
     function: numfmt_format_currency
   signature:
@@ -2642,6 +2928,7 @@
     to: return
   - from: argument(2)
     to: return
+  raises: [intlexception]
 - subject:
     function: numfmt_get_attribute
   signature:
@@ -2651,6 +2938,7 @@
     - name: attribute
       type: int
     returnType: int|float|false
+  raises: [intlexception]
 - subject:
     function: numfmt_get_error_code
   signature:
@@ -2658,6 +2946,7 @@
     - name: formatter
       type: NumberFormatter
     returnType: int
+  raises: []
 - subject:
     function: numfmt_get_error_message
   signature:
@@ -2668,6 +2957,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: numfmt_get_locale
   signature:
@@ -2681,6 +2971,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [intlexception]
 - subject:
     function: numfmt_get_pattern
   signature:
@@ -2691,6 +2982,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [intlexception]
 - subject:
     function: numfmt_get_symbol
   signature:
@@ -2703,6 +2995,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [intlexception]
 - subject:
     function: numfmt_get_text_attribute
   signature:
@@ -2715,6 +3008,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [intlexception]
 - subject:
     function: numfmt_parse
   signature:
@@ -2731,6 +3025,7 @@
       optional: true
       byRef: true
     returnType: int|float|false
+  raises: [error, intlexception, typeerror, valueerror]
 - subject:
     function: numfmt_parse_currency
   signature:
@@ -2747,6 +3042,7 @@
       optional: true
       byRef: true
     returnType: float|false
+  raises: [error, intlexception, typeerror]
 - subject:
     function: numfmt_set_attribute
   signature:
@@ -2758,6 +3054,7 @@
     - name: value
       type: int|float
     returnType: bool
+  raises: [intlexception]
 - subject:
     function: numfmt_set_pattern
   signature:
@@ -2767,6 +3064,7 @@
     - name: pattern
       type: string
     returnType: bool
+  raises: [intlexception]
 - subject:
     function: numfmt_set_symbol
   signature:
@@ -2778,6 +3076,7 @@
     - name: value
       type: string
     returnType: bool
+  raises: [intlexception]
 - subject:
     function: numfmt_set_text_attribute
   signature:
@@ -2789,6 +3088,7 @@
     - name: value
       type: string
     returnType: bool
+  raises: [intlexception]
 - subject:
     function: resourcebundle_count
   signature:
@@ -2796,6 +3096,7 @@
     - name: bundle
       type: ResourceBundle
     returnType: int
+  raises: []
 - subject:
     function: resourcebundle_create
   signature:
@@ -2815,6 +3116,7 @@
     to: return
   - from: argument(2)
     to: return
+  raises: [error, intlexception, valueerror]
 - subject:
     function: resourcebundle_get
   signature:
@@ -2834,6 +3136,7 @@
     to: return
   - from: argument(2)
     to: return
+  raises: [intlexception, valueerror]
 - subject:
     function: resourcebundle_get_error_code
   signature:
@@ -2841,6 +3144,7 @@
     - name: bundle
       type: ResourceBundle
     returnType: int
+  raises: []
 - subject:
     function: resourcebundle_get_error_message
   signature:
@@ -2851,6 +3155,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: resourcebundle_locales
   signature:
@@ -2858,6 +3163,7 @@
     - name: bundle
       type: string
     returnType: array|false
+  raises: [intlexception, valueerror]
 - subject:
     function: transliterator_create
   signature:
@@ -2873,6 +3179,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [intlexception, valueerror]
 - subject:
     function: transliterator_create_from_rules
   signature:
@@ -2888,6 +3195,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [intlexception, valueerror]
 - subject:
     function: transliterator_create_inverse
   signature:
@@ -2898,6 +3206,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [intlexception]
 - subject:
     function: transliterator_get_error_code
   signature:
@@ -2905,6 +3214,7 @@
     - name: transliterator
       type: Transliterator
     returnType: int
+  raises: []
 - subject:
     function: transliterator_get_error_message
   signature:
@@ -2915,10 +3225,12 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: transliterator_list_ids
   signature:
     returnType: array|false
+  raises: [intlexception]
 - subject:
     function: transliterator_transliterate
   signature:
@@ -2939,6 +3251,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [intlexception, valueerror]
 - subject:
     method: Collator::__construct
   signature:
@@ -2946,6 +3259,7 @@
     - name: locale
       type: string
     returnType: mixed
+  raises: [error, intlexception]
 - subject:
     method: Collator::asort
   signature:
@@ -2957,6 +3271,7 @@
       type: int
       optional: true
     returnType: bool
+  raises: [error, intlexception]
 - subject:
     method: Collator::compare
   signature:
@@ -2966,6 +3281,7 @@
     - name: string2
       type: string
     returnType: int|false
+  raises: [error, intlexception]
 - subject:
     method: Collator::create
   signature:
@@ -2973,6 +3289,7 @@
     - name: locale
       type: string
     returnType: ?Collator
+  raises: [error, intlexception]
 - subject:
     method: Collator::getAttribute
   signature:
@@ -2980,14 +3297,17 @@
     - name: attribute
       type: int
     returnType: int|false
+  raises: [intlexception]
 - subject:
     method: Collator::getErrorCode
   signature:
     returnType: int|false
+  raises: []
 - subject:
     method: Collator::getErrorMessage
   signature:
     returnType: string|false
+  raises: []
 - subject:
     method: Collator::getLocale
   signature:
@@ -2995,6 +3315,7 @@
     - name: type
       type: int
     returnType: string|false
+  raises: [error, intlexception]
 - subject:
     method: Collator::getSortKey
   signature:
@@ -3002,10 +3323,12 @@
     - name: string
       type: string
     returnType: string|false
+  raises: [error, intlexception]
 - subject:
     method: Collator::getStrength
   signature:
     returnType: int
+  raises: []
 - subject:
     method: Collator::setAttribute
   signature:
@@ -3015,6 +3338,7 @@
     - name: value
       type: int
     returnType: bool
+  raises: [intlexception]
 - subject:
     method: Collator::setStrength
   signature:
@@ -3022,6 +3346,7 @@
     - name: strength
       type: int
     returnType: 'true'
+  raises: []
 - subject:
     method: Collator::sort
   signature:
@@ -3033,6 +3358,7 @@
       type: int
       optional: true
     returnType: bool
+  raises: [error, intlexception]
 - subject:
     method: Collator::sortWithSortKeys
   signature:
@@ -3041,10 +3367,12 @@
       type: array
       byRef: true
     returnType: bool
+  raises: [error, intlexception]
 - subject:
     method: IntlCalendar::__construct
   signature:
     returnType: mixed
+  raises: [exception]
 - subject:
     method: IntlCalendar::add
   signature:
@@ -3054,6 +3382,7 @@
     - name: value
       type: int
     returnType: bool
+  raises: [intlexception, valueerror]
 - subject:
     method: IntlCalendar::after
   signature:
@@ -3061,6 +3390,7 @@
     - name: other
       type: IntlCalendar
     returnType: bool
+  raises: [error, intlexception]
 - subject:
     method: IntlCalendar::before
   signature:
@@ -3068,6 +3398,7 @@
     - name: other
       type: IntlCalendar
     returnType: bool
+  raises: [error, intlexception]
 - subject:
     method: IntlCalendar::clear
   signature:
@@ -3076,6 +3407,7 @@
       type: ?int
       optional: true
     returnType: 'true'
+  raises: [valueerror]
 - subject:
     method: IntlCalendar::createInstance
   signature:
@@ -3087,6 +3419,7 @@
       type: ?string
       optional: true
     returnType: ?IntlCalendar
+  raises: [dateerror, error, intlexception]
 - subject:
     method: IntlCalendar::equals
   signature:
@@ -3094,6 +3427,7 @@
     - name: other
       type: IntlCalendar
     returnType: bool
+  raises: [error, intlexception]
 - subject:
     method: IntlCalendar::fieldDifference
   signature:
@@ -3103,6 +3437,7 @@
     - name: field
       type: int
     returnType: int|false
+  raises: [intlexception, valueerror]
 - subject:
     method: IntlCalendar::fromDateTime
   signature:
@@ -3113,6 +3448,7 @@
       type: ?string
       optional: true
     returnType: ?IntlCalendar
+  raises: [intlexception]
 - subject:
     method: IntlCalendar::get
   signature:
@@ -3120,6 +3456,7 @@
     - name: field
       type: int
     returnType: int|false
+  raises: [intlexception, valueerror]
 - subject:
     method: IntlCalendar::getActualMaximum
   signature:
@@ -3127,6 +3464,7 @@
     - name: field
       type: int
     returnType: int|false
+  raises: [intlexception, valueerror]
 - subject:
     method: IntlCalendar::getActualMinimum
   signature:
@@ -3134,10 +3472,12 @@
     - name: field
       type: int
     returnType: int|false
+  raises: [intlexception, valueerror]
 - subject:
     method: IntlCalendar::getAvailableLocales
   signature:
     returnType: array
+  raises: []
 - subject:
     method: IntlCalendar::getDayOfWeekType
   signature:
@@ -3145,18 +3485,22 @@
     - name: dayOfWeek
       type: int
     returnType: int|false
+  raises: [intlexception, valueerror]
 - subject:
     method: IntlCalendar::getErrorCode
   signature:
     returnType: int|false
+  raises: []
 - subject:
     method: IntlCalendar::getErrorMessage
   signature:
     returnType: string|false
+  raises: []
 - subject:
     method: IntlCalendar::getFirstDayOfWeek
   signature:
     returnType: int|false
+  raises: [intlexception]
 - subject:
     method: IntlCalendar::getGreatestMinimum
   signature:
@@ -3164,6 +3508,7 @@
     - name: field
       type: int
     returnType: int|false
+  raises: [intlexception, valueerror]
 - subject:
     method: IntlCalendar::getKeywordValuesForLocale
   signature:
@@ -3175,6 +3520,7 @@
     - name: onlyCommon
       type: bool
     returnType: IntlIterator|false
+  raises: [intlexception]
 - subject:
     method: IntlCalendar::getLeastMaximum
   signature:
@@ -3182,6 +3528,7 @@
     - name: field
       type: int
     returnType: int|false
+  raises: [intlexception, valueerror]
 - subject:
     method: IntlCalendar::getLocale
   signature:
@@ -3189,6 +3536,7 @@
     - name: type
       type: int
     returnType: string|false
+  raises: [intlexception, valueerror]
 - subject:
     method: IntlCalendar::getMaximum
   signature:
@@ -3196,10 +3544,12 @@
     - name: field
       type: int
     returnType: int|false
+  raises: [intlexception, valueerror]
 - subject:
     method: IntlCalendar::getMinimalDaysInFirstWeek
   signature:
     returnType: int|false
+  raises: [intlexception]
 - subject:
     method: IntlCalendar::getMinimum
   signature:
@@ -3207,30 +3557,37 @@
     - name: field
       type: int
     returnType: int|false
+  raises: [intlexception, valueerror]
 - subject:
     method: IntlCalendar::getNow
   signature:
     returnType: float
+  raises: []
 - subject:
     method: IntlCalendar::getRepeatedWallTimeOption
   signature:
     returnType: int
+  raises: []
 - subject:
     method: IntlCalendar::getSkippedWallTimeOption
   signature:
     returnType: int
+  raises: []
 - subject:
     method: IntlCalendar::getTime
   signature:
     returnType: float|false
+  raises: [intlexception]
 - subject:
     method: IntlCalendar::getTimeZone
   signature:
     returnType: IntlTimeZone|false
+  raises: [intlexception]
 - subject:
     method: IntlCalendar::getType
   signature:
     returnType: string
+  raises: []
 - subject:
     method: IntlCalendar::getWeekendTransition
   signature:
@@ -3238,10 +3595,12 @@
     - name: dayOfWeek
       type: int
     returnType: int|false
+  raises: [intlexception, valueerror]
 - subject:
     method: IntlCalendar::inDaylightTime
   signature:
     returnType: bool
+  raises: [intlexception]
 - subject:
     method: IntlCalendar::isEquivalentTo
   signature:
@@ -3249,10 +3608,12 @@
     - name: other
       type: IntlCalendar
     returnType: bool
+  raises: [error]
 - subject:
     method: IntlCalendar::isLenient
   signature:
     returnType: bool
+  raises: []
 - subject:
     method: IntlCalendar::isSet
   signature:
@@ -3260,6 +3621,7 @@
     - name: field
       type: int
     returnType: bool
+  raises: [valueerror]
 - subject:
     method: IntlCalendar::isWeekend
   signature:
@@ -3268,6 +3630,7 @@
       type: ?float
       optional: true
     returnType: bool
+  raises: [intlexception]
 - subject:
     method: IntlCalendar::roll
   signature:
@@ -3277,6 +3640,7 @@
     - name: value
       type: mixed
     returnType: bool
+  raises: [intlexception, valueerror]
 - subject:
     method: IntlCalendar::set
   signature:
@@ -3298,6 +3662,7 @@
       type: int
       optional: true
     returnType: 'true'
+  raises: [argumentcounterror, valueerror]
 - subject:
     method: IntlCalendar::setDate
   signature:
@@ -3309,6 +3674,7 @@
     - name: dayOfMonth
       type: int
     returnType: void
+  raises: [valueerror]
 - subject:
     method: IntlCalendar::setDateTime
   signature:
@@ -3327,6 +3693,7 @@
       type: ?int
       optional: true
     returnType: void
+  raises: [valueerror]
 - subject:
     method: IntlCalendar::setFirstDayOfWeek
   signature:
@@ -3334,6 +3701,7 @@
     - name: dayOfWeek
       type: int
     returnType: 'true'
+  raises: [valueerror]
 - subject:
     method: IntlCalendar::setLenient
   signature:
@@ -3341,6 +3709,7 @@
     - name: lenient
       type: bool
     returnType: 'true'
+  raises: []
 - subject:
     method: IntlCalendar::setMinimalDaysInFirstWeek
   signature:
@@ -3348,6 +3717,7 @@
     - name: days
       type: int
     returnType: 'true'
+  raises: [valueerror]
 - subject:
     method: IntlCalendar::setRepeatedWallTimeOption
   signature:
@@ -3355,6 +3725,7 @@
     - name: option
       type: int
     returnType: 'true'
+  raises: [valueerror]
 - subject:
     method: IntlCalendar::setSkippedWallTimeOption
   signature:
@@ -3362,6 +3733,7 @@
     - name: option
       type: int
     returnType: 'true'
+  raises: [valueerror]
 - subject:
     method: IntlCalendar::setTime
   signature:
@@ -3369,6 +3741,7 @@
     - name: timestamp
       type: float
     returnType: bool
+  raises: [intlexception]
 - subject:
     method: IntlCalendar::setTimeZone
   signature:
@@ -3376,10 +3749,12 @@
     - name: timezone
       type: IntlTimeZone|DateTimeZone|string|null
     returnType: bool
+  raises: [dateerror, error, intlexception]
 - subject:
     method: IntlCalendar::toDateTime
   signature:
     returnType: DateTime|false
+  raises: [error, intlexception, typeerror]
 - subject:
     method: IntlDateFormatter::__construct
   signature:
@@ -3402,6 +3777,7 @@
       type: ?string
       optional: true
     returnType: mixed
+  raises: [dateerror, error, intlexception, valueerror]
 - subject:
     method: IntlDateFormatter::create
   signature:
@@ -3424,6 +3800,7 @@
       type: ?string
       optional: true
     returnType: ?IntlDateFormatter
+  raises: [dateerror, error, intlexception, valueerror]
 - subject:
     method: IntlDateFormatter::format
   signature:
@@ -3431,6 +3808,7 @@
     - name: datetime
       type: mixed
     returnType: string|false
+  raises: [intlexception]
 - subject:
     method: IntlDateFormatter::formatObject
   signature:
@@ -3444,26 +3822,32 @@
       type: ?string
       optional: true
     returnType: string|false
+  raises: [intlexception]
 - subject:
     method: IntlDateFormatter::getCalendar
   signature:
     returnType: int|false
+  raises: []
 - subject:
     method: IntlDateFormatter::getCalendarObject
   signature:
     returnType: IntlCalendar|false|null
+  raises: [intlexception]
 - subject:
     method: IntlDateFormatter::getDateType
   signature:
     returnType: int|false
+  raises: [intlexception]
 - subject:
     method: IntlDateFormatter::getErrorCode
   signature:
     returnType: int
+  raises: []
 - subject:
     method: IntlDateFormatter::getErrorMessage
   signature:
     returnType: string
+  raises: []
 - subject:
     method: IntlDateFormatter::getLocale
   signature:
@@ -3472,26 +3856,32 @@
       type: int
       optional: true
     returnType: string|false
+  raises: [intlexception]
 - subject:
     method: IntlDateFormatter::getPattern
   signature:
     returnType: string|false
+  raises: [intlexception]
 - subject:
     method: IntlDateFormatter::getTimeType
   signature:
     returnType: int|false
+  raises: [intlexception]
 - subject:
     method: IntlDateFormatter::getTimeZone
   signature:
     returnType: IntlTimeZone|false
+  raises: [intlexception]
 - subject:
     method: IntlDateFormatter::getTimeZoneId
   signature:
     returnType: string|false
+  raises: [intlexception]
 - subject:
     method: IntlDateFormatter::isLenient
   signature:
     returnType: bool
+  raises: []
 - subject:
     method: IntlDateFormatter::localtime
   signature:
@@ -3503,6 +3893,7 @@
       optional: true
       byRef: true
     returnType: array|false
+  raises: [error, intlexception, typeerror]
 - subject:
     method: IntlDateFormatter::parse
   signature:
@@ -3514,6 +3905,7 @@
       optional: true
       byRef: true
     returnType: int|float|false
+  raises: [error, intlexception, typeerror]
 - subject:
     method: IntlDateFormatter::parseToCalendar
   signature:
@@ -3525,6 +3917,7 @@
       optional: true
       byRef: true
     returnType: int|float|false
+  raises: [error, intlexception, typeerror]
 - subject:
     method: IntlDateFormatter::setCalendar
   signature:
@@ -3532,6 +3925,7 @@
     - name: calendar
       type: IntlCalendar|int|null
     returnType: bool
+  raises: [intlexception]
 - subject:
     method: IntlDateFormatter::setLenient
   signature:
@@ -3539,6 +3933,7 @@
     - name: lenient
       type: bool
     returnType: void
+  raises: []
 - subject:
     method: IntlDateFormatter::setPattern
   signature:
@@ -3546,6 +3941,7 @@
     - name: pattern
       type: string
     returnType: bool
+  raises: [intlexception]
 - subject:
     method: IntlDateFormatter::setTimeZone
   signature:
@@ -3553,10 +3949,12 @@
     - name: timezone
       type: IntlTimeZone|DateTimeZone|string|null
     returnType: bool
+  raises: [dateerror, error, intlexception]
 - subject:
     method: IntlTimeZone::__construct
   signature:
     returnType: mixed
+  raises: [exception]
 - subject:
     method: IntlTimeZone::countEquivalentIDs
   signature:
@@ -3564,10 +3962,12 @@
     - name: timezoneId
       type: string
     returnType: int|false
+  raises: [intlexception]
 - subject:
     method: IntlTimeZone::createDefault
   signature:
     returnType: IntlTimeZone
+  raises: []
 - subject:
     method: IntlTimeZone::createEnumeration
   signature:
@@ -3576,6 +3976,7 @@
       type: string|int|null
       optional: true
     returnType: IntlIterator|false
+  raises: [intlexception, valueerror]
 - subject:
     method: IntlTimeZone::createTimeZone
   signature:
@@ -3583,6 +3984,7 @@
     - name: timezoneId
       type: string
     returnType: ?IntlTimeZone
+  raises: [intlexception]
 - subject:
     method: IntlTimeZone::createTimeZoneIDEnumeration
   signature:
@@ -3596,6 +3998,7 @@
       type: ?int
       optional: true
     returnType: IntlIterator|false
+  raises: [intlexception, valueerror]
 - subject:
     method: IntlTimeZone::fromDateTimeZone
   signature:
@@ -3603,6 +4006,7 @@
     - name: timezone
       type: DateTimeZone
     returnType: ?IntlTimeZone
+  raises: [error, intlexception]
 - subject:
     method: IntlTimeZone::getCanonicalID
   signature:
@@ -3614,6 +4018,7 @@
       optional: true
       byRef: true
     returnType: string|false
+  raises: [error, intlexception, typeerror]
 - subject:
     method: IntlTimeZone::getDisplayName
   signature:
@@ -3628,10 +4033,12 @@
       type: ?string
       optional: true
     returnType: string|false
+  raises: [intlexception]
 - subject:
     method: IntlTimeZone::getDSTSavings
   signature:
     returnType: int
+  raises: []
 - subject:
     method: IntlTimeZone::getEquivalentID
   signature:
@@ -3641,18 +4048,22 @@
     - name: offset
       type: int
     returnType: string|false
+  raises: [intlexception, valueerror]
 - subject:
     method: IntlTimeZone::getErrorCode
   signature:
     returnType: int|false
+  raises: []
 - subject:
     method: IntlTimeZone::getErrorMessage
   signature:
     returnType: string|false
+  raises: []
 - subject:
     method: IntlTimeZone::getGMT
   signature:
     returnType: IntlTimeZone
+  raises: []
 - subject:
     method: IntlTimeZone::getIanaID
   signature:
@@ -3660,10 +4071,12 @@
     - name: timezoneId
       type: string
     returnType: string|false
+  raises: [intlexception]
 - subject:
     method: IntlTimeZone::getID
   signature:
     returnType: string|false
+  raises: [intlexception]
 - subject:
     method: IntlTimeZone::getIDForWindowsID
   signature:
@@ -3674,6 +4087,7 @@
       type: ?string
       optional: true
     returnType: string|false
+  raises: [intlexception]
 - subject:
     method: IntlTimeZone::getOffset
   signature:
@@ -3689,10 +4103,12 @@
       type: mixed
       byRef: true
     returnType: bool
+  raises: [error, intlexception, typeerror]
 - subject:
     method: IntlTimeZone::getRawOffset
   signature:
     returnType: int
+  raises: []
 - subject:
     method: IntlTimeZone::getRegion
   signature:
@@ -3700,14 +4116,17 @@
     - name: timezoneId
       type: string
     returnType: string|false
+  raises: [intlexception]
 - subject:
     method: IntlTimeZone::getTZDataVersion
   signature:
     returnType: string|false
+  raises: [intlexception]
 - subject:
     method: IntlTimeZone::getUnknown
   signature:
     returnType: IntlTimeZone
+  raises: []
 - subject:
     method: IntlTimeZone::getWindowsID
   signature:
@@ -3715,6 +4134,7 @@
     - name: timezoneId
       type: string
     returnType: string|false
+  raises: [intlexception]
 - subject:
     method: IntlTimeZone::hasSameRules
   signature:
@@ -3722,14 +4142,17 @@
     - name: other
       type: IntlTimeZone
     returnType: bool
+  raises: [intlexception]
 - subject:
     method: IntlTimeZone::toDateTimeZone
   signature:
     returnType: DateTimeZone|false
+  raises: [error, intlexception, typeerror]
 - subject:
     method: IntlTimeZone::useDaylightTime
   signature:
     returnType: bool
+  raises: []
 - subject:
     method: Locale::acceptFromHttp
   signature:
@@ -3737,6 +4160,7 @@
     - name: header
       type: string
     returnType: string|false
+  raises: [intlexception]
 - subject:
     method: Locale::addLikelySubtags
   signature:
@@ -3744,6 +4168,7 @@
     - name: locale
       type: string
     returnType: string|false
+  raises: [intlexception, valueerror]
 - subject:
     method: Locale::canonicalize
   signature:
@@ -3751,6 +4176,7 @@
     - name: locale
       type: string
     returnType: ?string
+  raises: [intlexception, valueerror]
 - subject:
     method: Locale::composeLocale
   signature:
@@ -3758,6 +4184,7 @@
     - name: subtags
       type: array
     returnType: string|false
+  raises: [intlexception, valueerror]
 - subject:
     method: Locale::filterMatches
   signature:
@@ -3770,6 +4197,7 @@
       type: bool
       optional: true
     returnType: ?bool
+  raises: [intlexception, valueerror]
 - subject:
     method: Locale::getAllVariants
   signature:
@@ -3777,10 +4205,12 @@
     - name: locale
       type: string
     returnType: ?array
+  raises: [intlexception, valueerror]
 - subject:
     method: Locale::getDefault
   signature:
     returnType: string
+  raises: []
 - subject:
     method: Locale::getDisplayLanguage
   signature:
@@ -3791,6 +4221,7 @@
       type: ?string
       optional: true
     returnType: string|false
+  raises: [intlexception, valueerror]
 - subject:
     method: Locale::getDisplayName
   signature:
@@ -3801,6 +4232,7 @@
       type: ?string
       optional: true
     returnType: string|false
+  raises: [intlexception, valueerror]
 - subject:
     method: Locale::getDisplayRegion
   signature:
@@ -3811,6 +4243,7 @@
       type: ?string
       optional: true
     returnType: string|false
+  raises: [intlexception, valueerror]
 - subject:
     method: Locale::getDisplayScript
   signature:
@@ -3821,6 +4254,7 @@
       type: ?string
       optional: true
     returnType: string|false
+  raises: [intlexception, valueerror]
 - subject:
     method: Locale::getDisplayVariant
   signature:
@@ -3831,6 +4265,7 @@
       type: ?string
       optional: true
     returnType: string|false
+  raises: [intlexception, valueerror]
 - subject:
     method: Locale::getKeywords
   signature:
@@ -3838,6 +4273,7 @@
     - name: locale
       type: string
     returnType: array|false|null
+  raises: [intlexception, valueerror]
 - subject:
     method: Locale::getPrimaryLanguage
   signature:
@@ -3845,6 +4281,7 @@
     - name: locale
       type: string
     returnType: ?string
+  raises: [intlexception, valueerror]
 - subject:
     method: Locale::getRegion
   signature:
@@ -3852,6 +4289,7 @@
     - name: locale
       type: string
     returnType: ?string
+  raises: [intlexception, valueerror]
 - subject:
     method: Locale::getScript
   signature:
@@ -3859,6 +4297,7 @@
     - name: locale
       type: string
     returnType: ?string
+  raises: [intlexception, valueerror]
 - subject:
     method: Locale::isRightToLeft
   signature:
@@ -3866,6 +4305,7 @@
     - name: locale
       type: string
     returnType: bool
+  raises: [valueerror]
 - subject:
     method: Locale::lookup
   signature:
@@ -3881,6 +4321,7 @@
       type: ?string
       optional: true
     returnType: ?string
+  raises: [intlexception, typeerror, valueerror]
 - subject:
     method: Locale::minimizeSubtags
   signature:
@@ -3888,6 +4329,7 @@
     - name: locale
       type: string
     returnType: string|false
+  raises: [intlexception, valueerror]
 - subject:
     method: Locale::parseLocale
   signature:
@@ -3895,6 +4337,7 @@
     - name: locale
       type: string
     returnType: ?array
+  raises: [intlexception, valueerror]
 - subject:
     method: Locale::setDefault
   signature:
@@ -3902,6 +4345,7 @@
     - name: locale
       type: string
     returnType: 'true'
+  raises: [valueerror]
 - subject:
     method: MessageFormatter::__construct
   signature:
@@ -3911,6 +4355,7 @@
     - name: pattern
       type: string
     returnType: mixed
+  raises: [intlexception]
 - subject:
     method: MessageFormatter::create
   signature:
@@ -3920,6 +4365,7 @@
     - name: pattern
       type: string
     returnType: ?MessageFormatter
+  raises: [intlexception]
 - subject:
     method: MessageFormatter::format
   signature:
@@ -3927,6 +4373,7 @@
     - name: values
       type: array
     returnType: string|false
+  raises: [dateerror, error, intlexception]
 - subject:
     method: MessageFormatter::formatMessage
   signature:
@@ -3938,22 +4385,27 @@
     - name: values
       type: array
     returnType: string|false
+  raises: [dateerror, error, intlexception]
 - subject:
     method: MessageFormatter::getErrorCode
   signature:
     returnType: int
+  raises: []
 - subject:
     method: MessageFormatter::getErrorMessage
   signature:
     returnType: string
+  raises: []
 - subject:
     method: MessageFormatter::getLocale
   signature:
     returnType: string
+  raises: []
 - subject:
     method: MessageFormatter::getPattern
   signature:
     returnType: string|false
+  raises: []
 - subject:
     method: MessageFormatter::parse
   signature:
@@ -3961,6 +4413,7 @@
     - name: string
       type: string
     returnType: array|false
+  raises: [intlexception]
 - subject:
     method: MessageFormatter::parseMessage
   signature:
@@ -3972,6 +4425,7 @@
     - name: message
       type: string
     returnType: array|false
+  raises: [intlexception]
 - subject:
     method: MessageFormatter::setPattern
   signature:
@@ -3979,6 +4433,7 @@
     - name: pattern
       type: string
     returnType: bool
+  raises: [intlexception]
 - subject:
     method: Normalizer::getRawDecomposition
   signature:
@@ -3989,6 +4444,7 @@
       type: int
       optional: true
     returnType: ?string
+  raises: [intlexception]
 - subject:
     method: Normalizer::isNormalized
   signature:
@@ -3999,6 +4455,7 @@
       type: int
       optional: true
     returnType: bool
+  raises: [intlexception, valueerror]
 - subject:
     method: Normalizer::normalize
   signature:
@@ -4009,6 +4466,7 @@
       type: int
       optional: true
     returnType: string|false
+  raises: [intlexception, valueerror]
 - subject:
     method: NumberFormatter::__construct
   signature:
@@ -4021,6 +4479,7 @@
       type: ?string
       optional: true
     returnType: mixed
+  raises: [error, intlexception, valueerror]
 - subject:
     method: NumberFormatter::create
   signature:
@@ -4033,6 +4492,7 @@
       type: ?string
       optional: true
     returnType: ?NumberFormatter
+  raises: [error, intlexception, valueerror]
 - subject:
     method: NumberFormatter::format
   signature:
@@ -4043,6 +4503,7 @@
       type: int
       optional: true
     returnType: string|false
+  raises: [intlexception, valueerror]
 - subject:
     method: NumberFormatter::formatCurrency
   signature:
@@ -4052,6 +4513,7 @@
     - name: currency
       type: string
     returnType: string|false
+  raises: [intlexception]
 - subject:
     method: NumberFormatter::getAttribute
   signature:
@@ -4059,14 +4521,17 @@
     - name: attribute
       type: int
     returnType: int|float|false
+  raises: [intlexception]
 - subject:
     method: NumberFormatter::getErrorCode
   signature:
     returnType: int
+  raises: []
 - subject:
     method: NumberFormatter::getErrorMessage
   signature:
     returnType: string
+  raises: []
 - subject:
     method: NumberFormatter::getLocale
   signature:
@@ -4075,10 +4540,12 @@
       type: int
       optional: true
     returnType: string|false
+  raises: [intlexception]
 - subject:
     method: NumberFormatter::getPattern
   signature:
     returnType: string|false
+  raises: [intlexception]
 - subject:
     method: NumberFormatter::getSymbol
   signature:
@@ -4086,6 +4553,7 @@
     - name: symbol
       type: int
     returnType: string|false
+  raises: [intlexception]
 - subject:
     method: NumberFormatter::getTextAttribute
   signature:
@@ -4093,6 +4561,7 @@
     - name: attribute
       type: int
     returnType: string|false
+  raises: [intlexception]
 - subject:
     method: NumberFormatter::parse
   signature:
@@ -4107,6 +4576,7 @@
       optional: true
       byRef: true
     returnType: int|float|false
+  raises: [error, intlexception, typeerror, valueerror]
 - subject:
     method: NumberFormatter::parseCurrency
   signature:
@@ -4121,6 +4591,7 @@
       optional: true
       byRef: true
     returnType: float|false
+  raises: [error, intlexception, typeerror]
 - subject:
     method: NumberFormatter::setAttribute
   signature:
@@ -4130,6 +4601,7 @@
     - name: value
       type: int|float
     returnType: bool
+  raises: [intlexception]
 - subject:
     method: NumberFormatter::setPattern
   signature:
@@ -4137,6 +4609,7 @@
     - name: pattern
       type: string
     returnType: bool
+  raises: [intlexception]
 - subject:
     method: NumberFormatter::setSymbol
   signature:
@@ -4146,6 +4619,7 @@
     - name: value
       type: string
     returnType: bool
+  raises: [intlexception]
 - subject:
     method: NumberFormatter::setTextAttribute
   signature:
@@ -4155,6 +4629,7 @@
     - name: value
       type: string
     returnType: bool
+  raises: [intlexception]
 - subject:
     method: ResourceBundle::__construct
   signature:
@@ -4167,10 +4642,12 @@
       type: bool
       optional: true
     returnType: mixed
+  raises: [error, intlexception, valueerror]
 - subject:
     method: ResourceBundle::count
   signature:
     returnType: int
+  raises: []
 - subject:
     method: ResourceBundle::create
   signature:
@@ -4183,6 +4660,7 @@
       type: bool
       optional: true
     returnType: ?ResourceBundle
+  raises: [error, intlexception, valueerror]
 - subject:
     method: ResourceBundle::get
   signature:
@@ -4193,18 +4671,22 @@
       type: bool
       optional: true
     returnType: ResourceBundle|array|string|int|null
+  raises: [intlexception, valueerror]
 - subject:
     method: ResourceBundle::getErrorCode
   signature:
     returnType: int
+  raises: []
 - subject:
     method: ResourceBundle::getErrorMessage
   signature:
     returnType: string
+  raises: []
 - subject:
     method: ResourceBundle::getIterator
   signature:
     returnType: Iterator
+  raises: []
 - subject:
     method: ResourceBundle::getLocales
   signature:
@@ -4212,10 +4694,12 @@
     - name: bundle
       type: string
     returnType: array|false
+  raises: [intlexception, valueerror]
 - subject:
     method: Spoofchecker::__construct
   signature:
     returnType: mixed
+  raises: [error, intlexception]
 - subject:
     method: Spoofchecker::areConfusable
   signature:
@@ -4229,6 +4713,7 @@
       optional: true
       byRef: true
     returnType: bool
+  raises: [error, typeerror]
 - subject:
     method: Spoofchecker::isSuspicious
   signature:
@@ -4240,6 +4725,7 @@
       optional: true
       byRef: true
     returnType: bool
+  raises: [error, typeerror]
 - subject:
     method: Spoofchecker::setAllowedChars
   signature:
@@ -4250,6 +4736,7 @@
       type: int
       optional: true
     returnType: void
+  raises: [valueerror]
 - subject:
     method: Spoofchecker::setAllowedLocales
   signature:
@@ -4257,6 +4744,7 @@
     - name: locales
       type: string
     returnType: void
+  raises: []
 - subject:
     method: Spoofchecker::setChecks
   signature:
@@ -4264,6 +4752,7 @@
     - name: checks
       type: int
     returnType: void
+  raises: []
 - subject:
     method: Spoofchecker::setRestrictionLevel
   signature:
@@ -4271,10 +4760,12 @@
     - name: level
       type: int
     returnType: void
+  raises: [valueerror]
 - subject:
     method: Transliterator::__construct
   signature:
     returnType: mixed
+  raises: [exception]
 - subject:
     method: Transliterator::create
   signature:
@@ -4285,6 +4776,7 @@
       type: int
       optional: true
     returnType: ?Transliterator
+  raises: [intlexception, valueerror]
 - subject:
     method: Transliterator::createFromRules
   signature:
@@ -4295,22 +4787,27 @@
       type: int
       optional: true
     returnType: ?Transliterator
+  raises: [intlexception, valueerror]
 - subject:
     method: Transliterator::createInverse
   signature:
     returnType: ?Transliterator
+  raises: [intlexception]
 - subject:
     method: Transliterator::getErrorCode
   signature:
     returnType: int
+  raises: []
 - subject:
     method: Transliterator::getErrorMessage
   signature:
     returnType: string
+  raises: []
 - subject:
     method: Transliterator::listIDs
   signature:
     returnType: array|false
+  raises: [intlexception]
 - subject:
     method: Transliterator::transliterate
   signature:
@@ -4324,3 +4821,4 @@
       type: int
       optional: true
     returnType: string|false
+  raises: [intlexception, valueerror]

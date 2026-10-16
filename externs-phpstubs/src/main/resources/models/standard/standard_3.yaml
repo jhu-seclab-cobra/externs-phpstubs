@@ -305,6 +305,7 @@
       type: int
       optional: true
     returnType: void
+  raises: []
 - subject:
     function: header_register_callback
   signature:
@@ -312,6 +313,7 @@
     - name: callback
       type: callable
     returnType: bool
+  raises: []
 - subject:
     function: header_remove
   signature:
@@ -320,10 +322,12 @@
       type: ?string
       optional: true
     returnType: void
+  raises: []
 - subject:
     function: headers_list
   signature:
     returnType: array
+  raises: []
 - subject:
     function: headers_sent
   signature:
@@ -337,6 +341,7 @@
       optional: true
       byRef: true
     returnType: bool
+  raises: [error, typeerror]
 - subject:
     function: hebrev
   signature:
@@ -350,6 +355,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: hex2bin
   signature:
@@ -360,6 +366,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: hexdec
   signature:
@@ -367,6 +374,7 @@
     - name: hex_string
       type: string
     returnType: int|float
+  raises: []
 - subject:
     function: highlight_file
   signature:
@@ -377,6 +385,7 @@
       type: bool
       optional: true
     returnType: string|bool
+  raises: [error, valueerror]
 - subject:
     function: highlight_string
   signature:
@@ -387,6 +396,7 @@
       type: bool
       optional: true
     returnType: string|true
+  raises: [error]
 - subject:
     function: hrtime
   signature:
@@ -395,6 +405,7 @@
       type: bool
       optional: true
     returnType: array|int|float|false
+  raises: []
 - subject:
     function: html_entity_decode
   signature:
@@ -413,6 +424,7 @@
     to: return
   - from: argument(2)
     to: return
+  raises: []
 - subject:
     function: htmlentities
   signature:
@@ -429,6 +441,7 @@
       type: bool
       optional: true
     returnType: string
+  raises: []
 - subject:
     function: htmlspecialchars
   signature:
@@ -445,6 +458,7 @@
       type: bool
       optional: true
     returnType: string
+  raises: []
 - subject:
     function: htmlspecialchars_decode
   signature:
@@ -458,6 +472,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: http_build_cookie
   signature:
@@ -484,6 +499,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [error, typeerror, valueerror]
 - subject:
     function: http_build_str
   signature:
@@ -945,6 +961,7 @@
       type: int
       optional: true
     returnType: int|bool
+  raises: []
 - subject:
     function: http_send_content_disposition
   signature:
@@ -1759,6 +1776,7 @@
     - name: 'y'
       type: float
     returnType: float
+  raises: []
 - subject:
     function: ibase_add_user
   signature:
@@ -2894,6 +2912,7 @@
       type: ?bool
       optional: true
     returnType: int
+  raises: []
 - subject:
     function: iis_add_server
   signature:
@@ -3066,6 +3085,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [typeerror]
 - subject:
     function: import_request_variables
   signature:
@@ -3088,6 +3108,7 @@
       type: bool
       optional: true
     returnType: bool
+  raises: [error]
 - subject:
     function: inclued_get_data
   signature:
@@ -3102,6 +3123,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: inet_pton
   signature:
@@ -3112,6 +3134,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [valueerror]
 - subject:
     function: ingres_autocommit
   signature:
@@ -3485,6 +3508,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [typeerror]
 - subject:
     function: ini_get
   signature:
@@ -3495,6 +3519,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: ini_get_all
   signature:
@@ -3506,6 +3531,7 @@
       type: bool
       optional: true
     returnType: array|false
+  raises: []
 - subject:
     function: ini_restore
   signature:
@@ -3513,6 +3539,7 @@
     - name: option
       type: string
     returnType: void
+  raises: []
 - subject:
     function: ini_set
   signature:
@@ -3527,6 +3554,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [typeerror]
 - subject:
     function: inotify_add_watch
   signature:
@@ -3574,6 +3602,7 @@
     - name: num2
       type: int
     returnType: int
+  raises: [arithmeticerror, divisionbyzeroerror]
 - subject:
     function: intltz_getgmt
   signature:
@@ -3592,6 +3621,7 @@
       type: int
       optional: true
     returnType: int
+  raises: []
 - subject:
     function: ip2long
   signature:
@@ -3599,6 +3629,7 @@
     - name: ip
       type: string
     returnType: int|false
+  raises: [valueerror]
 - subject:
     function: iptcembed
   signature:
@@ -3611,6 +3642,7 @@
       type: int
       optional: true
     returnType: string|bool
+  raises: [error, valueerror]
 - subject:
     function: iptcparse
   signature:
@@ -3618,6 +3650,7 @@
     - name: iptc_block
       type: string
     returnType: array|false
+  raises: []
 - subject:
     function: is_array
   signature:
@@ -3625,6 +3658,7 @@
     - name: value
       type: mixed
     returnType: bool
+  raises: []
 - subject:
     function: is_bool
   signature:
@@ -3632,6 +3666,7 @@
     - name: value
       type: mixed
     returnType: bool
+  raises: []
 - subject:
     function: is_callable
   signature:
@@ -3646,6 +3681,7 @@
       optional: true
       byRef: true
     returnType: bool
+  raises: [error, typeerror]
 - subject:
     function: is_countable
   signature:
@@ -3653,6 +3689,7 @@
     - name: value
       type: mixed
     returnType: bool
+  raises: []
 - subject:
     function: is_double
   signature:
@@ -3660,6 +3697,7 @@
     - name: value
       type: mixed
     returnType: bool
+  raises: []
 - subject:
     function: is_finite
   signature:
@@ -3667,6 +3705,7 @@
     - name: num
       type: float
     returnType: bool
+  raises: []
 - subject:
     function: is_float
   signature:
@@ -3674,6 +3713,7 @@
     - name: value
       type: mixed
     returnType: bool
+  raises: []
 - subject:
     function: is_infinite
   signature:
@@ -3681,6 +3721,7 @@
     - name: num
       type: float
     returnType: bool
+  raises: []
 - subject:
     function: is_int
   signature:
@@ -3688,6 +3729,7 @@
     - name: value
       type: mixed
     returnType: bool
+  raises: []
 - subject:
     function: is_integer
   signature:
@@ -3695,6 +3737,7 @@
     - name: value
       type: mixed
     returnType: bool
+  raises: []
 - subject:
     function: is_iterable
   signature:
@@ -3702,6 +3745,7 @@
     - name: value
       type: mixed
     returnType: bool
+  raises: []
 - subject:
     function: is_long
   signature:
@@ -3709,6 +3753,7 @@
     - name: value
       type: mixed
     returnType: bool
+  raises: []
 - subject:
     function: is_nan
   signature:
@@ -3716,6 +3761,7 @@
     - name: num
       type: float
     returnType: bool
+  raises: []
 - subject:
     function: is_null
   signature:
@@ -3723,6 +3769,7 @@
     - name: value
       type: mixed
     returnType: bool
+  raises: []
 - subject:
     function: is_numeric
   signature:
@@ -3730,6 +3777,7 @@
     - name: value
       type: mixed
     returnType: bool
+  raises: []
 - subject:
     function: is_object
   signature:
@@ -3737,6 +3785,7 @@
     - name: value
       type: mixed
     returnType: bool
+  raises: []
 - subject:
     function: is_resource
   signature:
@@ -3744,6 +3793,7 @@
     - name: value
       type: mixed
     returnType: bool
+  raises: []
 - subject:
     function: is_scalar
   signature:
@@ -3751,6 +3801,7 @@
     - name: value
       type: mixed
     returnType: bool
+  raises: []
 - subject:
     function: is_string
   signature:
@@ -3758,6 +3809,7 @@
     - name: value
       type: mixed
     returnType: bool
+  raises: []
 - subject:
     function: is_tainted
   signature:
@@ -3827,6 +3879,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [typeerror]
 - subject:
     function: judy_type
   signature:
@@ -3950,6 +4003,7 @@
     - name: array
       type: array|object
     returnType: int|string|null
+  raises: []
 - subject:
     function: key_exists
   signature:
@@ -3959,6 +4013,7 @@
     - name: array
       type: array
     returnType: bool
+  raises: [typeerror]
 - subject:
     function: krsort
   signature:
@@ -3970,6 +4025,7 @@
       type: int
       optional: true
     returnType: 'true'
+  raises: []
 - subject:
     function: ksort
   signature:
@@ -3981,6 +4037,7 @@
       type: int
       optional: true
     returnType: 'true'
+  raises: []
 - subject:
     function: lcfirst
   signature:
@@ -3991,6 +4048,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: lchgrp
   signature:
@@ -4000,6 +4058,7 @@
     - name: group
       type: string|int
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: lchown
   signature:
@@ -4009,6 +4068,7 @@
     - name: user
       type: string|int
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: leak
   signature:
@@ -4051,6 +4111,7 @@
       type: int
       optional: true
     returnType: int
+  raises: []
 - subject:
     function: link
   signature:
@@ -4060,6 +4121,7 @@
     - name: link
       type: string
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: linkinfo
   signature:
@@ -4067,11 +4129,14 @@
     - name: path
       type: string
     returnType: int|false
+  raises: [valueerror]
 - subject:
     function: litespeed_request_headers
   signature:
     returnType: array
+  raises: []
 - subject:
     function: litespeed_response_headers
   signature:
     returnType: array|false
+  raises: []

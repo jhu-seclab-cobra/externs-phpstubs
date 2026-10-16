@@ -120,15 +120,17 @@ php-src, the interpreter's own declarations (CobraPHP user decision BP-2).
   classes folded and sorted, `[]` for none. An entry whose Handlers throw
   an object the caller supplies gets no line and is printed. Every other
   generated callable entry keeps no `raises` line: this tool owns the
-  line in generated documents.
+  line in generated documents. A method table no class registration
+  names is printed and keys no entry.
 - **Tables (constant tier, each naming the php-src header it reads):**
   the handler-defining macros, the throwing primitives and their class or
   object argument, the object creation primitive, the binding prefixes and
   the specifiers that throw beyond the declared type, the user-code
   entries, the diagnostic prefixes, and the conversion prefixes of
   `Zend/zend_operators.h`.
-- **Fails** when a class expression no rule resolves reaches an entry, or
-  when a raises element names a class no generated document declares.
+- **Fails** when a class expression no rule resolves reaches an entry,
+  when a raises element names a class no generated document declares,
+  when a Handler has no definition, or when a source brace is unbalanced.
 
 ### reflect.php
 
@@ -161,6 +163,8 @@ sorted tab-separated line per internal declaration the build reflects.
 | Undeclared class | A method's class or a raises element is declared by no generated document |
 | Unresolved class | A class expression no rule resolves reaches an entry's raises |
 | Unknown entry macro | A function entry table uses a macro outside the known set |
+| Undefined Handler | An entry names a Handler no C source defines |
+| Unbalanced source | A C source holds a brace no brace closes |
 | Propagation without a port | Every propagation statement of an entry names an argument position its php-src signature lacks |
 
 ## Open Gaps
@@ -184,3 +188,8 @@ sorted tab-separated line per internal declaration the build reflects.
   declares them as keyword constructs with the extension `keyword` and
   other signatures, so no tool rewrites them and the oracle test lists
   them as the signatures it rejects.
+- **PDO driver methods.** php-src declares `PDO_PGSql_Ext` and
+  `PDO_SQLite_Ext` as stub-only pseudo classes whose methods PHP attaches
+  to a `PDO` object of that driver; no class registration names their
+  method tables, so their entries keep no `raises` line and
+  `extract_raises.py` prints the two tables.

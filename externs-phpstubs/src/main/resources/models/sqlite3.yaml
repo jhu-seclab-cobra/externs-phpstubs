@@ -30,6 +30,7 @@
       type: string
       optional: true
     returnType: mixed
+  raises: [exception, sqlite3exception, valueerror]
 - subject:
     method: SQLite3::backup
   signature:
@@ -43,6 +44,7 @@
       type: string
       optional: true
     returnType: bool
+  raises: [error, sqlite3exception, valueerror]
 - subject:
     method: SQLite3::busyTimeout
   signature:
@@ -50,14 +52,17 @@
     - name: milliseconds
       type: int
     returnType: bool
+  raises: [error, sqlite3exception]
 - subject:
     method: SQLite3::changes
   signature:
     returnType: int
+  raises: [error]
 - subject:
     method: SQLite3::close
   signature:
     returnType: bool
+  raises: [sqlite3exception]
 - subject:
     method: SQLite3::createAggregate
   signature:
@@ -72,6 +77,7 @@
       type: int
       optional: true
     returnType: bool
+  raises: [error]
 - subject:
     method: SQLite3::createCollation
   signature:
@@ -81,6 +87,7 @@
     - name: callback
       type: callable
     returnType: bool
+  raises: [error]
 - subject:
     method: SQLite3::createFunction
   signature:
@@ -96,6 +103,7 @@
       type: int
       optional: true
     returnType: bool
+  raises: [error]
 - subject:
     method: SQLite3::enableExceptions
   signature:
@@ -104,6 +112,7 @@
       type: bool
       optional: true
     returnType: bool
+  raises: []
 - subject:
     method: SQLite3::enableExtendedResultCodes
   signature:
@@ -112,6 +121,7 @@
       type: bool
       optional: true
     returnType: bool
+  raises: [error]
 - subject:
     method: SQLite3::escapeString
   signature:
@@ -119,6 +129,7 @@
     - name: string
       type: string
     returnType: string
+  raises: []
 - subject:
     method: SQLite3::exec
   signature:
@@ -126,22 +137,27 @@
     - name: query
       type: string
     returnType: bool
+  raises: [error, sqlite3exception]
 - subject:
     method: SQLite3::lastErrorCode
   signature:
     returnType: int
+  raises: [error]
 - subject:
     method: SQLite3::lastErrorMsg
   signature:
     returnType: string
+  raises: [error]
 - subject:
     method: SQLite3::lastExtendedErrorCode
   signature:
     returnType: int
+  raises: [error]
 - subject:
     method: SQLite3::lastInsertRowID
   signature:
     returnType: int
+  raises: [error]
 - subject:
     method: SQLite3::loadExtension
   signature:
@@ -149,6 +165,7 @@
     - name: name
       type: string
     returnType: bool
+  raises: [error, sqlite3exception, valueerror]
 - subject:
     method: SQLite3::open
   signature:
@@ -162,6 +179,7 @@
       type: string
       optional: true
     returnType: void
+  raises: [exception, sqlite3exception, valueerror]
 - subject:
     method: SQLite3::openBlob
   signature:
@@ -179,6 +197,7 @@
       type: int
       optional: true
     returnType: mixed
+  raises: [error, sqlite3exception, valueerror]
 - subject:
     method: SQLite3::prepare
   signature:
@@ -186,6 +205,7 @@
     - name: query
       type: string
     returnType: SQLite3Stmt|false
+  raises: [error, sqlite3exception]
 - subject:
     method: SQLite3::query
   signature:
@@ -193,6 +213,7 @@
     - name: query
       type: string
     returnType: SQLite3Result|false
+  raises: [error, sqlite3exception]
 - subject:
     method: SQLite3::querySingle
   signature:
@@ -203,6 +224,7 @@
       type: bool
       optional: true
     returnType: mixed
+  raises: [error, sqlite3exception]
 - subject:
     method: SQLite3::setAuthorizer
   signature:
@@ -210,14 +232,17 @@
     - name: callback
       type: ?callable
     returnType: bool
+  raises: [error]
 - subject:
     method: SQLite3::version
   signature:
     returnType: array
+  raises: []
 - subject:
     method: SQLite3Result::__construct
   signature:
     returnType: mixed
+  raises: [exception]
 - subject:
     method: SQLite3Result::columnName
   signature:
@@ -225,6 +250,7 @@
     - name: column
       type: int
     returnType: string|false
+  raises: [error]
 - subject:
     method: SQLite3Result::columnType
   signature:
@@ -232,6 +258,7 @@
     - name: column
       type: int
     returnType: int|false
+  raises: [error]
 - subject:
     method: SQLite3Result::fetchAll
   signature:
@@ -240,6 +267,7 @@
       type: int
       optional: true
     returnType: array|false
+  raises: [error, sqlite3exception]
 - subject:
     method: SQLite3Result::fetchArray
   signature:
@@ -248,18 +276,22 @@
       type: int
       optional: true
     returnType: array|false
+  raises: [error, sqlite3exception]
 - subject:
     method: SQLite3Result::finalize
   signature:
     returnType: 'true'
+  raises: [error]
 - subject:
     method: SQLite3Result::numColumns
   signature:
     returnType: int
+  raises: [error]
 - subject:
     method: SQLite3Result::reset
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: SQLite3Stmt::__construct
   signature:
@@ -269,6 +301,7 @@
     - name: query
       type: string
     returnType: mixed
+  raises: [error, sqlite3exception]
 - subject:
     method: SQLite3Stmt::bindParam
   signature:
@@ -282,6 +315,7 @@
       type: int
       optional: true
     returnType: bool
+  raises: [error]
 - subject:
     method: SQLite3Stmt::bindValue
   signature:
@@ -294,26 +328,32 @@
       type: int
       optional: true
     returnType: bool
+  raises: [error]
 - subject:
     method: SQLite3Stmt::busy
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: SQLite3Stmt::clear
   signature:
     returnType: bool
+  raises: [error, sqlite3exception]
 - subject:
     method: SQLite3Stmt::close
   signature:
     returnType: 'true'
+  raises: [error]
 - subject:
     method: SQLite3Stmt::execute
   signature:
     returnType: SQLite3Result|false
+  raises: [error, sqlite3exception, typeerror]
 - subject:
     method: SQLite3Stmt::explain
   signature:
     returnType: int
+  raises: [error]
 - subject:
     method: SQLite3Stmt::getSQL
   signature:
@@ -322,18 +362,22 @@
       type: bool
       optional: true
     returnType: string|false
+  raises: [error, sqlite3exception, typeerror]
 - subject:
     method: SQLite3Stmt::paramCount
   signature:
     returnType: int
+  raises: [error]
 - subject:
     method: SQLite3Stmt::readOnly
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: SQLite3Stmt::reset
   signature:
     returnType: bool
+  raises: [error, sqlite3exception]
 - subject:
     method: SQLite3Stmt::setExplain
   signature:
@@ -341,3 +385,4 @@
     - name: mode
       type: int
     returnType: bool
+  raises: [error, valueerror]

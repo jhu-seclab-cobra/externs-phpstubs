@@ -20,6 +20,7 @@
     to: return
   - from: argument(2)
     to: return
+  raises: [valueerror]
 - subject:
     function: shm_detach
   signature:
@@ -27,6 +28,7 @@
     - name: shm
       type: SysvSharedMemory
     returnType: 'true'
+  raises: [error]
 - subject:
     function: shm_get_var
   signature:
@@ -41,6 +43,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [error]
 - subject:
     function: shm_has_var
   signature:
@@ -50,6 +53,7 @@
     - name: key
       type: int
     returnType: bool
+  raises: [error]
 - subject:
     function: shm_put_var
   signature:
@@ -61,6 +65,7 @@
     - name: value
       type: mixed
     returnType: bool
+  raises: [error, exception, typeerror]
 - subject:
     function: shm_remove
   signature:
@@ -68,6 +73,7 @@
     - name: shm
       type: SysvSharedMemory
     returnType: bool
+  raises: [error]
 - subject:
     function: shm_remove_var
   signature:
@@ -77,6 +83,7 @@
     - name: key
       type: int
     returnType: bool
+  raises: [error]
 - subject:
     class: sysvsharedmemory
   signature:

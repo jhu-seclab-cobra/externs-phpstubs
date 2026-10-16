@@ -11,6 +11,7 @@
     - name: shmop
       type: Shmop
     returnType: void
+  raises: []
 - subject:
     function: shmop_delete
   signature:
@@ -18,6 +19,7 @@
     - name: shmop
       type: Shmop
     returnType: bool
+  raises: []
 - subject:
     function: shmop_open
   signature:
@@ -40,6 +42,7 @@
     to: return
   - from: argument(3)
     to: return
+  raises: [valueerror]
 - subject:
     function: shmop_read
   signature:
@@ -54,6 +57,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [valueerror]
 - subject:
     function: shmop_size
   signature:
@@ -61,6 +65,7 @@
     - name: shmop
       type: Shmop
     returnType: int
+  raises: []
 - subject:
     function: shmop_write
   signature:
@@ -72,3 +77,4 @@
     - name: offset
       type: int
     returnType: int
+  raises: [error, valueerror]

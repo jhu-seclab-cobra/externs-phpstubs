@@ -43,6 +43,7 @@
       type: string
       optional: true
     returnType: mixed
+  raises: [com_exception, error]
 - subject:
     method: COMPersistHelper::__construct
   signature:
@@ -51,18 +52,22 @@
       type: ?variant
       optional: true
     returnType: mixed
+  raises: [com_exception]
 - subject:
     method: COMPersistHelper::GetCurFileName
   signature:
     returnType: string|false
+  raises: [com_exception]
 - subject:
     method: COMPersistHelper::GetMaxStreamSize
   signature:
     returnType: int
+  raises: [com_exception]
 - subject:
     method: COMPersistHelper::InitNew
   signature:
     returnType: bool
+  raises: [com_exception]
 - subject:
     method: COMPersistHelper::LoadFromFile
   signature:
@@ -73,6 +78,7 @@
       type: int
       optional: true
     returnType: bool
+  raises: [com_exception, valueerror]
 - subject:
     method: COMPersistHelper::LoadFromStream
   signature:
@@ -80,6 +86,7 @@
     - name: stream
       type: mixed
     returnType: bool
+  raises: [com_exception, typeerror]
 - subject:
     method: COMPersistHelper::SaveToFile
   signature:
@@ -90,6 +97,7 @@
       type: bool
       optional: true
     returnType: bool
+  raises: [com_exception, valueerror]
 - subject:
     method: COMPersistHelper::SaveToStream
   signature:
@@ -97,6 +105,7 @@
     - name: stream
       type: mixed
     returnType: bool
+  raises: [com_exception, typeerror]
 - subject:
     method: dotnet::__construct
   signature:
@@ -109,6 +118,7 @@
       type: int
       optional: true
     returnType: mixed
+  raises: [com_exception]
 - subject:
     method: variant::__construct
   signature:
@@ -123,10 +133,12 @@
       type: int
       optional: true
     returnType: mixed
+  raises: [com_exception]
 - subject:
     function: com_create_guid
   signature:
     returnType: string|false
+  raises: []
 - subject:
     function: com_event_sink
   signature:
@@ -139,6 +151,7 @@
       type: array|string|null
       optional: true
     returnType: bool
+  raises: [error]
 - subject:
     function: com_get_active_object
   signature:
@@ -154,6 +167,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [com_exception]
 - subject:
     function: com_load_typelib
   signature:
@@ -164,6 +178,7 @@
       type: bool
       optional: true
     returnType: bool
+  raises: [error]
 - subject:
     function: com_message_pump
   signature:
@@ -172,6 +187,7 @@
       type: int
       optional: true
     returnType: bool
+  raises: []
 - subject:
     function: com_print_typeinfo
   signature:
@@ -185,6 +201,7 @@
       type: bool
       optional: true
     returnType: bool
+  raises: [error]
 - subject:
     function: variant_abs
   signature:
@@ -195,6 +212,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [com_exception]
 - subject:
     function: variant_add
   signature:
@@ -209,6 +227,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [com_exception]
 - subject:
     function: variant_and
   signature:
@@ -223,6 +242,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [com_exception]
 - subject:
     function: variant_cast
   signature:
@@ -237,6 +257,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [com_exception]
 - subject:
     function: variant_cat
   signature:
@@ -251,6 +272,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [com_exception]
 - subject:
     function: variant_cmp
   signature:
@@ -266,6 +288,7 @@
       type: int
       optional: true
     returnType: int
+  raises: []
 - subject:
     function: variant_date_from_timestamp
   signature:
@@ -276,6 +299,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [valueerror]
 - subject:
     function: variant_date_to_timestamp
   signature:
@@ -283,6 +307,7 @@
     - name: variant
       type: variant
     returnType: ?int
+  raises: []
 - subject:
     function: variant_div
   signature:
@@ -297,6 +322,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [com_exception]
 - subject:
     function: variant_eqv
   signature:
@@ -311,6 +337,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [com_exception]
 - subject:
     function: variant_fix
   signature:
@@ -321,6 +348,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [com_exception]
 - subject:
     function: variant_get_type
   signature:
@@ -328,6 +356,7 @@
     - name: variant
       type: variant
     returnType: int
+  raises: []
 - subject:
     function: variant_idiv
   signature:
@@ -342,6 +371,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [com_exception]
 - subject:
     function: variant_imp
   signature:
@@ -356,6 +386,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [com_exception]
 - subject:
     function: variant_int
   signature:
@@ -366,6 +397,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [com_exception]
 - subject:
     function: variant_mod
   signature:
@@ -380,6 +412,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [com_exception]
 - subject:
     function: variant_mul
   signature:
@@ -394,6 +427,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [com_exception]
 - subject:
     function: variant_neg
   signature:
@@ -404,6 +438,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [com_exception]
 - subject:
     function: variant_not
   signature:
@@ -414,6 +449,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [com_exception]
 - subject:
     function: variant_or
   signature:
@@ -428,6 +464,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [com_exception]
 - subject:
     function: variant_pow
   signature:
@@ -442,6 +479,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [com_exception]
 - subject:
     function: variant_round
   signature:
@@ -456,6 +494,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: []
 - subject:
     function: variant_set
   signature:
@@ -465,6 +504,7 @@
     - name: value
       type: mixed
     returnType: void
+  raises: []
 - subject:
     function: variant_set_type
   signature:
@@ -474,6 +514,7 @@
     - name: type
       type: int
     returnType: void
+  raises: [com_exception]
 - subject:
     function: variant_sub
   signature:
@@ -488,6 +529,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [com_exception]
 - subject:
     function: variant_xor
   signature:
@@ -502,3 +544,4 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [com_exception]

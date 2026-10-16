@@ -1355,6 +1355,7 @@
     - name: callback
       type: callable
     returnType: bool
+  raises: []
 - subject:
     function: array_any
   signature:
@@ -1364,6 +1365,7 @@
     - name: callback
       type: callable
     returnType: bool
+  raises: []
 - subject:
     function: array_find
   signature:
@@ -1373,6 +1375,7 @@
     - name: callback
       type: callable
     returnType: mixed
+  raises: []
 - subject:
     function: array_find_key
   signature:
@@ -1382,6 +1385,7 @@
     - name: callback
       type: callable
     returnType: mixed
+  raises: []
 - subject:
     function: array_first
   signature:
@@ -1389,6 +1393,7 @@
     - name: array
       type: array
     returnType: mixed
+  raises: []
 - subject:
     function: array_is_list
   signature:
@@ -1396,6 +1401,7 @@
     - name: array
       type: array
     returnType: bool
+  raises: []
 - subject:
     function: array_last
   signature:
@@ -1403,10 +1409,12 @@
     - name: array
       type: array
     returnType: mixed
+  raises: []
 - subject:
     function: config_get_hash
   signature:
     returnType: array
+  raises: []
 - subject:
     function: fdatasync
   signature:
@@ -1414,6 +1422,7 @@
     - name: stream
       type: mixed
     returnType: bool
+  raises: [typeerror]
 - subject:
     function: fpow
   signature:
@@ -1423,6 +1432,7 @@
     - name: exponent
       type: float
     returnType: float
+  raises: []
 - subject:
     function: fsync
   signature:
@@ -1430,14 +1440,17 @@
     - name: stream
       type: mixed
     returnType: bool
+  raises: [typeerror]
 - subject:
     function: http_clear_last_response_headers
   signature:
     returnType: void
+  raises: []
 - subject:
     function: http_get_last_response_headers
   signature:
     returnType: ?array
+  raises: []
 - subject:
     function: ini_parse_quantity
   signature:
@@ -1445,14 +1458,17 @@
     - name: shorthand
       type: string
     returnType: int
+  raises: []
 - subject:
     function: litespeed_finish_request
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     function: memory_reset_peak_usage
   signature:
     returnType: void
+  raises: []
 - subject:
     function: request_parse_body
   signature:
@@ -1461,6 +1477,7 @@
       type: ?array
       optional: true
     returnType: array
+  raises: [requestparsebodyexception, valueerror]
 - subject:
     function: sapi_windows_generate_ctrl_event
   signature:
@@ -1471,6 +1488,7 @@
       type: int
       optional: true
     returnType: bool
+  raises: [error]
 - subject:
     function: sapi_windows_set_ctrl_handler
   signature:
@@ -1481,6 +1499,7 @@
       type: bool
       optional: true
     returnType: bool
+  raises: [error]
 - subject:
     function: str_decrement
   signature:
@@ -1488,6 +1507,7 @@
     - name: string
       type: string
     returnType: string
+  raises: [valueerror]
 - subject:
     function: str_increment
   signature:
@@ -1495,6 +1515,7 @@
     - name: string
       type: string
     returnType: string
+  raises: [valueerror]
 - subject:
     function: stream_context_set_options
   signature:
@@ -1504,18 +1525,22 @@
     - name: options
       type: array
     returnType: 'true'
+  raises: [typeerror, valueerror]
 - subject:
     method: Directory::close
   signature:
     returnType: void
+  raises: [error, typeerror]
 - subject:
     method: Directory::read
   signature:
     returnType: string|false
+  raises: [error, typeerror]
 - subject:
     method: Directory::rewind
   signature:
     returnType: void
+  raises: [error, typeerror]
 - subject:
     method: php_user_filter::filter
   signature:
@@ -1530,14 +1555,17 @@
     - name: closing
       type: bool
     returnType: int
+  raises: []
 - subject:
     method: php_user_filter::onClose
   signature:
     returnType: void
+  raises: []
 - subject:
     method: php_user_filter::onCreate
   signature:
     returnType: bool
+  raises: []
 - subject:
     function: basename
   signature:
@@ -1548,6 +1576,7 @@
       type: string
       optional: true
     returnType: string
+  raises: []
 - subject:
     function: chgrp
   signature:
@@ -1557,6 +1586,7 @@
     - name: group
       type: string|int
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: chmod
   signature:
@@ -1566,6 +1596,7 @@
     - name: permissions
       type: int
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: chown
   signature:
@@ -1575,6 +1606,7 @@
     - name: user
       type: string|int
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: copy
   signature:
@@ -1587,6 +1619,7 @@
       type: mixed
       optional: true
     returnType: bool
+  raises: [typeerror, valueerror]
 - subject:
     function: dirname
   signature:
@@ -1600,6 +1633,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [valueerror]
 - subject:
     function: fclose
   signature:
@@ -1607,6 +1641,7 @@
     - name: stream
       type: mixed
     returnType: bool
+  raises: [typeerror]
 - subject:
     function: feof
   signature:
@@ -1614,6 +1649,7 @@
     - name: stream
       type: mixed
     returnType: bool
+  raises: [typeerror]
 - subject:
     function: fflush
   signature:
@@ -1621,6 +1657,7 @@
     - name: stream
       type: mixed
     returnType: bool
+  raises: [typeerror]
 - subject:
     function: fgetc
   signature:
@@ -1628,6 +1665,7 @@
     - name: stream
       type: mixed
     returnType: string|false
+  raises: [typeerror]
 - subject:
     function: fgetcsv
   signature:
@@ -1647,6 +1685,7 @@
       type: string
       optional: true
     returnType: array|false
+  raises: [typeerror, valueerror]
 - subject:
     function: fgets
   signature:
@@ -1657,6 +1696,7 @@
       type: ?int
       optional: true
     returnType: string|false
+  raises: [typeerror, valueerror]
 - subject:
     function: file
   signature:
@@ -1670,6 +1710,7 @@
       type: mixed
       optional: true
     returnType: array|false
+  raises: [typeerror, valueerror]
 - subject:
     function: file_exists
   signature:
@@ -1677,6 +1718,7 @@
     - name: filename
       type: string
     returnType: bool
+  raises: []
 - subject:
     function: file_get_contents
   signature:
@@ -1696,6 +1738,7 @@
       type: ?int
       optional: true
     returnType: string|false
+  raises: [typeerror, valueerror]
 - subject:
     function: file_put_contents
   signature:
@@ -1711,6 +1754,7 @@
       type: mixed
       optional: true
     returnType: int|false
+  raises: [error, typeerror, valueerror]
 - subject:
     function: fileatime
   signature:
@@ -1718,6 +1762,7 @@
     - name: filename
       type: string
     returnType: int|false
+  raises: []
 - subject:
     function: filectime
   signature:
@@ -1725,6 +1770,7 @@
     - name: filename
       type: string
     returnType: int|false
+  raises: []
 - subject:
     function: filegroup
   signature:
@@ -1732,6 +1778,7 @@
     - name: filename
       type: string
     returnType: int|false
+  raises: []
 - subject:
     function: fileinode
   signature:
@@ -1739,6 +1786,7 @@
     - name: filename
       type: string
     returnType: int|false
+  raises: []
 - subject:
     function: filemtime
   signature:
@@ -1746,6 +1794,7 @@
     - name: filename
       type: string
     returnType: int|false
+  raises: []
 - subject:
     function: fileowner
   signature:
@@ -1753,6 +1802,7 @@
     - name: filename
       type: string
     returnType: int|false
+  raises: []
 - subject:
     function: fileperms
   signature:
@@ -1760,6 +1810,7 @@
     - name: filename
       type: string
     returnType: int|false
+  raises: []
 - subject:
     function: filesize
   signature:
@@ -1767,6 +1818,7 @@
     - name: filename
       type: string
     returnType: int|false
+  raises: []
 - subject:
     function: filetype
   signature:
@@ -1777,6 +1829,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: flock
   signature:
@@ -1790,6 +1843,7 @@
       optional: true
       byRef: true
     returnType: bool
+  raises: [error, typeerror, valueerror]
 - subject:
     function: fopen
   signature:
@@ -1805,6 +1859,7 @@
       type: mixed
       optional: true
     returnType: mixed
+  raises: [typeerror, valueerror]
 - subject:
     function: fpassthru
   signature:
@@ -1812,6 +1867,7 @@
     - name: stream
       type: mixed
     returnType: int
+  raises: [error, typeerror]
 - subject:
     function: fputcsv
   signature:
@@ -1833,6 +1889,7 @@
       type: string
       optional: true
     returnType: int|false
+  raises: [typeerror, valueerror]
 - subject:
     function: fread
   signature:
@@ -1842,6 +1899,7 @@
     - name: length
       type: int
     returnType: string|false
+  raises: [typeerror, valueerror]
 - subject:
     function: fseek
   signature:
@@ -1854,6 +1912,7 @@
       type: int
       optional: true
     returnType: int
+  raises: [typeerror]
 - subject:
     function: fstat
   signature:
@@ -1861,6 +1920,7 @@
     - name: stream
       type: mixed
     returnType: array|false
+  raises: [typeerror]
 - subject:
     function: ftell
   signature:
@@ -1868,6 +1928,7 @@
     - name: stream
       type: mixed
     returnType: int|false
+  raises: [typeerror]
 - subject:
     function: ftruncate
   signature:
@@ -1877,6 +1938,7 @@
     - name: size
       type: int
     returnType: bool
+  raises: [typeerror, valueerror]
 - subject:
     function: fwrite
   signature:
@@ -1889,6 +1951,7 @@
       type: ?int
       optional: true
     returnType: int|false
+  raises: [typeerror]
 - subject:
     function: glob
   signature:
@@ -1899,6 +1962,7 @@
       type: int
       optional: true
     returnType: array|false
+  raises: [valueerror]
 - subject:
     function: is_dir
   signature:
@@ -1906,6 +1970,7 @@
     - name: filename
       type: string
     returnType: bool
+  raises: []
 - subject:
     function: is_executable
   signature:
@@ -1913,6 +1978,7 @@
     - name: filename
       type: string
     returnType: bool
+  raises: []
 - subject:
     function: is_file
   signature:
@@ -1920,6 +1986,7 @@
     - name: filename
       type: string
     returnType: bool
+  raises: []
 - subject:
     function: is_link
   signature:
@@ -1927,6 +1994,7 @@
     - name: filename
       type: string
     returnType: bool
+  raises: []
 - subject:
     function: is_readable
   signature:
@@ -1934,6 +2002,7 @@
     - name: filename
       type: string
     returnType: bool
+  raises: []
 - subject:
     function: is_uploaded_file
   signature:
@@ -1941,6 +2010,7 @@
     - name: filename
       type: string
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: is_writable
   signature:
@@ -1948,6 +2018,7 @@
     - name: filename
       type: string
     returnType: bool
+  raises: []
 - subject:
     function: is_writeable
   signature:
@@ -1955,6 +2026,7 @@
     - name: filename
       type: string
     returnType: bool
+  raises: []
 - subject:
     function: mkdir
   signature:
@@ -1971,6 +2043,7 @@
       type: mixed
       optional: true
     returnType: bool
+  raises: [typeerror, valueerror]
 - subject:
     function: move_uploaded_file
   signature:
@@ -1980,6 +2053,7 @@
     - name: to
       type: string
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: opendir
   signature:
@@ -1995,6 +2069,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [typeerror, valueerror]
 - subject:
     function: pathinfo
   signature:
@@ -2005,6 +2080,7 @@
       type: int
       optional: true
     returnType: array|string
+  raises: []
 - subject:
     function: readfile
   signature:
@@ -2018,6 +2094,7 @@
       type: mixed
       optional: true
     returnType: int|false
+  raises: [error, typeerror, valueerror]
 - subject:
     function: readlink
   signature:
@@ -2028,6 +2105,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [valueerror]
 - subject:
     function: realpath
   signature:
@@ -2035,14 +2113,17 @@
     - name: path
       type: string
     returnType: string|false
+  raises: [valueerror]
 - subject:
     function: realpath_cache_get
   signature:
     returnType: array
+  raises: []
 - subject:
     function: realpath_cache_size
   signature:
     returnType: int
+  raises: []
 - subject:
     function: rename
   signature:
@@ -2055,6 +2136,7 @@
       type: mixed
       optional: true
     returnType: bool
+  raises: [typeerror, valueerror]
 - subject:
     function: rmdir
   signature:
@@ -2065,6 +2147,7 @@
       type: mixed
       optional: true
     returnType: bool
+  raises: [typeerror, valueerror]
 - subject:
     function: scandir
   signature:
@@ -2078,6 +2161,7 @@
       type: mixed
       optional: true
     returnType: array|false
+  raises: [typeerror, valueerror]
 - subject:
     function: tempnam
   signature:
@@ -2087,10 +2171,12 @@
     - name: prefix
       type: string
     returnType: string|false
+  raises: [valueerror]
 - subject:
     function: tmpfile
   signature:
     returnType: mixed
+  raises: []
 - subject:
     function: unlink
   signature:
@@ -2101,6 +2187,7 @@
       type: mixed
       optional: true
     returnType: bool
+  raises: [typeerror, valueerror]
 - subject:
     function: image_type_to_extension
   signature:
@@ -2111,6 +2198,7 @@
       type: bool
       optional: true
     returnType: string|false
+  raises: []
 - subject:
     function: image_type_to_mime_type
   signature:
@@ -2118,6 +2206,7 @@
     - name: image_type
       type: int
     returnType: string
+  raises: []
 - subject:
     function: microtime
   signature:
@@ -2126,6 +2215,7 @@
       type: bool
       optional: true
     returnType: string|float
+  raises: []
 - subject:
     function: time_nanosleep
   signature:
@@ -2135,6 +2225,7 @@
     - name: nanoseconds
       type: int
     returnType: array|bool
+  raises: [valueerror]
 - subject:
     function: time_sleep_until
   signature:
@@ -2142,6 +2233,7 @@
     - name: timestamp
       type: float
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: socket_get_status
   signature:
@@ -2152,6 +2244,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [typeerror]
 - subject:
     function: socket_set_blocking
   signature:
@@ -2161,6 +2254,7 @@
     - name: enable
       type: bool
     returnType: bool
+  raises: [typeerror]
 - subject:
     function: socket_set_timeout
   signature:
@@ -2173,6 +2267,7 @@
       type: int
       optional: true
     returnType: bool
+  raises: [typeerror]
 - subject:
     function: stream_bucket_append
   signature:
@@ -2182,6 +2277,7 @@
     - name: bucket
       type: StreamBucket
     returnType: void
+  raises: [typeerror, valueerror]
 - subject:
     function: stream_bucket_make_writeable
   signature:
@@ -2192,6 +2288,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [typeerror]
 - subject:
     function: stream_bucket_new
   signature:
@@ -2206,6 +2303,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [typeerror]
 - subject:
     function: stream_bucket_prepend
   signature:
@@ -2215,6 +2313,7 @@
     - name: bucket
       type: StreamBucket
     returnType: void
+  raises: [typeerror, valueerror]
 - subject:
     function: stream_context_create
   signature:
@@ -2231,6 +2330,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [error, typeerror, valueerror]
 - subject:
     function: stream_context_get_default
   signature:
@@ -2242,6 +2342,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [valueerror]
 - subject:
     function: stream_context_get_options
   signature:
@@ -2249,6 +2350,7 @@
     - name: stream_or_context
       type: mixed
     returnType: array
+  raises: [typeerror]
 - subject:
     function: stream_context_get_params
   signature:
@@ -2256,6 +2358,7 @@
     - name: context
       type: mixed
     returnType: array
+  raises: [typeerror]
 - subject:
     function: stream_context_set_default
   signature:
@@ -2266,6 +2369,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [valueerror]
 - subject:
     function: stream_context_set_option
   signature:
@@ -2281,6 +2385,7 @@
       type: mixed
       optional: true
     returnType: 'true'
+  raises: [typeerror, valueerror]
 - subject:
     function: stream_context_set_params
   signature:
@@ -2290,6 +2395,7 @@
     - name: params
       type: array
     returnType: 'true'
+  raises: [error, typeerror, valueerror]
 - subject:
     function: stream_copy_to_stream
   signature:
@@ -2305,6 +2411,7 @@
       type: int
       optional: true
     returnType: int|false
+  raises: [typeerror]
 - subject:
     function: stream_filter_append
   signature:
@@ -2329,6 +2436,7 @@
     to: return
   - from: argument(3)
     to: return
+  raises: [typeerror]
 - subject:
     function: stream_filter_prepend
   signature:
@@ -2353,6 +2461,7 @@
     to: return
   - from: argument(3)
     to: return
+  raises: [typeerror]
 - subject:
     function: stream_filter_register
   signature:
@@ -2362,6 +2471,7 @@
     - name: class
       type: string
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: stream_filter_remove
   signature:
@@ -2369,6 +2479,7 @@
     - name: stream_filter
       type: mixed
     returnType: bool
+  raises: [typeerror]
 - subject:
     function: stream_get_contents
   signature:
@@ -2382,10 +2493,12 @@
       type: int
       optional: true
     returnType: string|false
+  raises: [typeerror, valueerror]
 - subject:
     function: stream_get_filters
   signature:
     returnType: array
+  raises: []
 - subject:
     function: stream_get_line
   signature:
@@ -2401,6 +2514,7 @@
   propagation:
   - from: argument(2)
     to: return
+  raises: [typeerror, valueerror]
 - subject:
     function: stream_get_meta_data
   signature:
@@ -2408,14 +2522,17 @@
     - name: stream
       type: mixed
     returnType: array
+  raises: [typeerror]
 - subject:
     function: stream_get_transports
   signature:
     returnType: array
+  raises: []
 - subject:
     function: stream_get_wrappers
   signature:
     returnType: array
+  raises: []
 - subject:
     function: stream_is_local
   signature:
@@ -2423,6 +2540,7 @@
     - name: stream
       type: mixed
     returnType: bool
+  raises: [typeerror]
 - subject:
     function: stream_isatty
   signature:
@@ -2430,6 +2548,7 @@
     - name: stream
       type: mixed
     returnType: bool
+  raises: [typeerror]
 - subject:
     function: stream_register_wrapper
   signature:
@@ -2442,6 +2561,7 @@
       type: int
       optional: true
     returnType: bool
+  raises: [typeerror]
 - subject:
     function: stream_resolve_include_path
   signature:
@@ -2452,6 +2572,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [valueerror]
 - subject:
     function: stream_select
   signature:
@@ -2471,6 +2592,7 @@
       type: ?int
       optional: true
     returnType: int|false
+  raises: [typeerror, valueerror]
 - subject:
     function: stream_set_blocking
   signature:
@@ -2480,6 +2602,7 @@
     - name: enable
       type: bool
     returnType: bool
+  raises: [typeerror]
 - subject:
     function: stream_set_chunk_size
   signature:
@@ -2489,6 +2612,7 @@
     - name: size
       type: int
     returnType: int
+  raises: [typeerror, valueerror]
 - subject:
     function: stream_set_read_buffer
   signature:
@@ -2498,6 +2622,7 @@
     - name: size
       type: int
     returnType: int
+  raises: [typeerror]
 - subject:
     function: stream_set_timeout
   signature:
@@ -2510,6 +2635,7 @@
       type: int
       optional: true
     returnType: bool
+  raises: [typeerror]
 - subject:
     function: stream_set_write_buffer
   signature:
@@ -2519,6 +2645,7 @@
     - name: size
       type: int
     returnType: int
+  raises: [typeerror]
 - subject:
     function: stream_socket_accept
   signature:
@@ -2540,6 +2667,7 @@
     to: return
   - from: argument(2)
     to: return
+  raises: [error, typeerror, valueerror]
 - subject:
     function: stream_socket_client
   signature:
@@ -2577,6 +2705,7 @@
     to: return
   - from: argument(5)
     to: return
+  raises: [error, typeerror, valueerror]
 - subject:
     function: stream_socket_enable_crypto
   signature:
@@ -2592,6 +2721,7 @@
       type: mixed
       optional: true
     returnType: int|bool
+  raises: [typeerror, valueerror]
 - subject:
     function: stream_socket_get_name
   signature:
@@ -2601,6 +2731,7 @@
     - name: remote
       type: bool
     returnType: string|false
+  raises: [typeerror]
 - subject:
     function: stream_socket_pair
   signature:
@@ -2612,6 +2743,7 @@
     - name: protocol
       type: int
     returnType: array|false
+  raises: []
 - subject:
     function: stream_socket_recvfrom
   signature:
@@ -2631,6 +2763,7 @@
   propagation:
   - from: argument(3)
     to: return
+  raises: [error, typeerror, valueerror]
 - subject:
     function: stream_socket_sendto
   signature:
@@ -2646,6 +2779,7 @@
       type: string
       optional: true
     returnType: int|false
+  raises: [typeerror]
 - subject:
     function: stream_socket_server
   signature:
@@ -2678,6 +2812,7 @@
     to: return
   - from: argument(4)
     to: return
+  raises: [error, typeerror]
 - subject:
     function: stream_socket_shutdown
   signature:
@@ -2687,6 +2822,7 @@
     - name: mode
       type: int
     returnType: bool
+  raises: [typeerror, valueerror]
 - subject:
     function: stream_supports_lock
   signature:
@@ -2694,6 +2830,7 @@
     - name: stream
       type: mixed
     returnType: bool
+  raises: [typeerror]
 - subject:
     function: stream_wrapper_register
   signature:
@@ -2706,6 +2843,7 @@
       type: int
       optional: true
     returnType: bool
+  raises: [typeerror]
 - subject:
     function: stream_wrapper_restore
   signature:
@@ -2713,6 +2851,7 @@
     - name: protocol
       type: string
     returnType: bool
+  raises: []
 - subject:
     function: stream_wrapper_unregister
   signature:
@@ -2720,3 +2859,4 @@
     - name: protocol
       type: string
     returnType: bool
+  raises: []

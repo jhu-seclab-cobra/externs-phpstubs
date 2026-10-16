@@ -9,3 +9,4 @@
     method: Pdo\Firebird::getApiVersion
   signature:
     returnType: int
+  raises: []

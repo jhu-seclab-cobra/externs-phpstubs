@@ -10,6 +10,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [typeerror, valueerror]
 - subject:
     function: gmp_add
   signature:
@@ -24,6 +25,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [typeerror, valueerror]
 - subject:
     function: gmp_and
   signature:
@@ -38,6 +40,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [typeerror, valueerror]
 - subject:
     function: gmp_binomial
   signature:
@@ -52,6 +55,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [typeerror, valueerror]
 - subject:
     function: gmp_clrbit
   signature:
@@ -61,6 +65,7 @@
     - name: index
       type: int
     returnType: void
+  raises: [valueerror]
 - subject:
     function: gmp_cmp
   signature:
@@ -70,6 +75,7 @@
     - name: num2
       type: GMP|int|string
     returnType: int
+  raises: [typeerror, valueerror]
 - subject:
     function: gmp_com
   signature:
@@ -80,6 +86,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [typeerror, valueerror]
 - subject:
     function: gmp_div
   signature:
@@ -99,6 +106,7 @@
     to: return
   - from: argument(2)
     to: return
+  raises: [divisionbyzeroerror, typeerror, valueerror]
 - subject:
     function: gmp_div_q
   signature:
@@ -118,6 +126,7 @@
     to: return
   - from: argument(2)
     to: return
+  raises: [divisionbyzeroerror, typeerror, valueerror]
 - subject:
     function: gmp_div_qr
   signature:
@@ -135,6 +144,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [divisionbyzeroerror, typeerror, valueerror]
 - subject:
     function: gmp_div_r
   signature:
@@ -154,6 +164,7 @@
     to: return
   - from: argument(2)
     to: return
+  raises: [divisionbyzeroerror, typeerror, valueerror]
 - subject:
     function: gmp_divexact
   signature:
@@ -168,6 +179,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [divisionbyzeroerror, typeerror, valueerror]
 - subject:
     function: gmp_export
   signature:
@@ -184,6 +196,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [typeerror, valueerror]
 - subject:
     function: gmp_fact
   signature:
@@ -194,6 +207,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [typeerror, valueerror]
 - subject:
     function: gmp_gcd
   signature:
@@ -208,6 +222,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [typeerror, valueerror]
 - subject:
     function: gmp_gcdext
   signature:
@@ -222,6 +237,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [typeerror, valueerror]
 - subject:
     function: gmp_hamdist
   signature:
@@ -231,6 +247,7 @@
     - name: num2
       type: GMP|int|string
     returnType: int
+  raises: [typeerror, valueerror]
 - subject:
     function: gmp_import
   signature:
@@ -251,6 +268,7 @@
     to: return
   - from: argument(2)
     to: return
+  raises: [valueerror]
 - subject:
     function: gmp_init
   signature:
@@ -266,6 +284,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [valueerror]
 - subject:
     function: gmp_intval
   signature:
@@ -273,6 +292,7 @@
     - name: num
       type: GMP|int|string
     returnType: int
+  raises: [typeerror, valueerror]
 - subject:
     function: gmp_invert
   signature:
@@ -287,6 +307,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [divisionbyzeroerror, typeerror, valueerror]
 - subject:
     function: gmp_jacobi
   signature:
@@ -296,6 +317,7 @@
     - name: num2
       type: GMP|int|string
     returnType: int
+  raises: [typeerror, valueerror]
 - subject:
     function: gmp_kronecker
   signature:
@@ -305,6 +327,7 @@
     - name: num2
       type: GMP|int|string
     returnType: int
+  raises: [typeerror, valueerror]
 - subject:
     function: gmp_lcm
   signature:
@@ -319,6 +342,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [typeerror, valueerror]
 - subject:
     function: gmp_legendre
   signature:
@@ -328,6 +352,7 @@
     - name: num2
       type: GMP|int|string
     returnType: int
+  raises: [typeerror, valueerror]
 - subject:
     function: gmp_mod
   signature:
@@ -342,6 +367,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [divisionbyzeroerror, typeerror, valueerror]
 - subject:
     function: gmp_mul
   signature:
@@ -356,6 +382,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [typeerror, valueerror]
 - subject:
     function: gmp_neg
   signature:
@@ -366,6 +393,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [typeerror, valueerror]
 - subject:
     function: gmp_nextprime
   signature:
@@ -376,6 +404,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [typeerror, valueerror]
 - subject:
     function: gmp_or
   signature:
@@ -390,6 +419,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [typeerror, valueerror]
 - subject:
     function: gmp_perfect_power
   signature:
@@ -397,6 +427,7 @@
     - name: num
       type: GMP|int|string
     returnType: bool
+  raises: [typeerror, valueerror]
 - subject:
     function: gmp_perfect_square
   signature:
@@ -404,6 +435,7 @@
     - name: num
       type: GMP|int|string
     returnType: bool
+  raises: [typeerror, valueerror]
 - subject:
     function: gmp_popcount
   signature:
@@ -411,6 +443,7 @@
     - name: num
       type: GMP|int|string
     returnType: int
+  raises: [typeerror, valueerror]
 - subject:
     function: gmp_pow
   signature:
@@ -425,6 +458,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [typeerror, valueerror]
 - subject:
     function: gmp_powm
   signature:
@@ -443,6 +477,7 @@
     to: return
   - from: argument(2)
     to: return
+  raises: [divisionbyzeroerror, typeerror, valueerror]
 - subject:
     function: gmp_prob_prime
   signature:
@@ -453,6 +488,7 @@
       type: int
       optional: true
     returnType: int
+  raises: [typeerror, valueerror]
 - subject:
     function: gmp_random_bits
   signature:
@@ -463,6 +499,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [valueerror]
 - subject:
     function: gmp_random_range
   signature:
@@ -477,6 +514,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [typeerror, valueerror]
 - subject:
     function: gmp_random_seed
   signature:
@@ -484,6 +522,7 @@
     - name: seed
       type: GMP|int|string
     returnType: void
+  raises: [typeerror, valueerror]
 - subject:
     function: gmp_root
   signature:
@@ -498,6 +537,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [typeerror, valueerror]
 - subject:
     function: gmp_rootrem
   signature:
@@ -510,6 +550,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [typeerror, valueerror]
 - subject:
     function: gmp_scan0
   signature:
@@ -519,6 +560,7 @@
     - name: start
       type: int
     returnType: int
+  raises: [typeerror, valueerror]
 - subject:
     function: gmp_scan1
   signature:
@@ -528,6 +570,7 @@
     - name: start
       type: int
     returnType: int
+  raises: [typeerror, valueerror]
 - subject:
     function: gmp_setbit
   signature:
@@ -540,6 +583,7 @@
       type: bool
       optional: true
     returnType: void
+  raises: [valueerror]
 - subject:
     function: gmp_sign
   signature:
@@ -547,6 +591,7 @@
     - name: num
       type: GMP|int|string
     returnType: int
+  raises: [typeerror, valueerror]
 - subject:
     function: gmp_sqrt
   signature:
@@ -557,6 +602,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [typeerror, valueerror]
 - subject:
     function: gmp_sqrtrem
   signature:
@@ -567,6 +613,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [typeerror, valueerror]
 - subject:
     function: gmp_strval
   signature:
@@ -580,6 +627,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [typeerror, valueerror]
 - subject:
     function: gmp_sub
   signature:
@@ -594,6 +642,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [typeerror, valueerror]
 - subject:
     function: gmp_testbit
   signature:
@@ -603,6 +652,7 @@
     - name: index
       type: int
     returnType: bool
+  raises: [typeerror, valueerror]
 - subject:
     function: gmp_xor
   signature:
@@ -617,6 +667,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [typeerror, valueerror]
 - subject:
     class: gmp
   signature:
@@ -632,10 +683,12 @@
       type: int
       optional: true
     returnType: mixed
+  raises: [valueerror]
 - subject:
     method: GMP::__serialize
   signature:
     returnType: array
+  raises: [error, typeerror]
 - subject:
     method: GMP::__unserialize
   signature:
@@ -643,3 +696,4 @@
     - name: data
       type: array
     returnType: void
+  raises: [error, exception, typeerror, valueerror]

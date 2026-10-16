@@ -7,6 +7,7 @@
     - name: handle
       type: CurlHandle
     returnType: void
+  raises: [error]
 - subject:
     function: curl_copy_handle
   signature:
@@ -17,6 +18,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: curl_errno
   signature:
@@ -24,6 +26,7 @@
     - name: handle
       type: CurlHandle
     returnType: int
+  raises: []
 - subject:
     function: curl_error
   signature:
@@ -34,6 +37,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: curl_escape
   signature:
@@ -48,6 +52,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: []
 - subject:
     function: curl_exec
   signature:
@@ -55,6 +60,7 @@
     - name: handle
       type: CurlHandle
     returnType: string|bool
+  raises: []
 - subject:
     function: curl_file_create
   signature:
@@ -75,6 +81,7 @@
     to: return
   - from: argument(2)
     to: return
+  raises: [valueerror]
 - subject:
     function: curl_getinfo
   signature:
@@ -90,6 +97,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: []
 - subject:
     function: curl_init
   signature:
@@ -98,6 +106,7 @@
       type: ?string
       optional: true
     returnType: CurlHandle|false
+  raises: [error, valueerror]
 - subject:
     function: curl_multi_add_handle
   signature:
@@ -107,6 +116,7 @@
     - name: handle
       type: CurlHandle
     returnType: int
+  raises: []
 - subject:
     function: curl_multi_close
   signature:
@@ -114,6 +124,7 @@
     - name: multi_handle
       type: CurlMultiHandle
     returnType: void
+  raises: []
 - subject:
     function: curl_multi_errno
   signature:
@@ -121,6 +132,7 @@
     - name: multi_handle
       type: CurlMultiHandle
     returnType: int
+  raises: []
 - subject:
     function: curl_multi_exec
   signature:
@@ -131,6 +143,7 @@
       type: mixed
       byRef: true
     returnType: int
+  raises: [error, typeerror]
 - subject:
     function: curl_multi_getcontent
   signature:
@@ -141,6 +154,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: curl_multi_info_read
   signature:
@@ -155,10 +169,12 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [error, typeerror]
 - subject:
     function: curl_multi_init
   signature:
     returnType: CurlMultiHandle
+  raises: [error]
 - subject:
     function: curl_multi_remove_handle
   signature:
@@ -168,6 +184,7 @@
     - name: handle
       type: CurlHandle
     returnType: int
+  raises: []
 - subject:
     function: curl_multi_select
   signature:
@@ -178,6 +195,7 @@
       type: float
       optional: true
     returnType: int
+  raises: [valueerror]
 - subject:
     function: curl_multi_setopt
   signature:
@@ -189,6 +207,7 @@
     - name: value
       type: mixed
     returnType: bool
+  raises: [error, typeerror, valueerror]
 - subject:
     function: curl_multi_strerror
   signature:
@@ -196,6 +215,7 @@
     - name: error_code
       type: int
     returnType: ?string
+  raises: []
 - subject:
     function: curl_pause
   signature:
@@ -205,6 +225,7 @@
     - name: flags
       type: int
     returnType: int
+  raises: []
 - subject:
     function: curl_reset
   signature:
@@ -212,6 +233,7 @@
     - name: handle
       type: CurlHandle
     returnType: void
+  raises: [error]
 - subject:
     function: curl_setopt
   signature:
@@ -223,6 +245,7 @@
     - name: value
       type: mixed
     returnType: bool
+  raises: [error, typeerror, valueerror]
 - subject:
     function: curl_setopt_array
   signature:
@@ -232,6 +255,7 @@
     - name: options
       type: array
     returnType: bool
+  raises: [error, typeerror, valueerror]
 - subject:
     function: curl_share_close
   signature:
@@ -239,6 +263,7 @@
     - name: share_handle
       type: CurlShareHandle
     returnType: void
+  raises: []
 - subject:
     function: curl_share_errno
   signature:
@@ -246,10 +271,12 @@
     - name: share_handle
       type: CurlShareHandle
     returnType: int
+  raises: []
 - subject:
     function: curl_share_init
   signature:
     returnType: CurlShareHandle
+  raises: []
 - subject:
     function: curl_share_setopt
   signature:
@@ -261,6 +288,7 @@
     - name: value
       type: mixed
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: curl_share_strerror
   signature:
@@ -268,6 +296,7 @@
     - name: error_code
       type: int
     returnType: ?string
+  raises: []
 - subject:
     function: curl_strerror
   signature:
@@ -275,6 +304,7 @@
     - name: error_code
       type: int
     returnType: ?string
+  raises: []
 - subject:
     function: curl_unescape
   signature:
@@ -289,10 +319,12 @@
     to: return
   - from: argument(1)
     to: return
+  raises: []
 - subject:
     function: curl_version
   signature:
     returnType: array|false
+  raises: []
 - subject:
     class: curlfile
   signature:
@@ -312,6 +344,7 @@
     - name: multi_handle
       type: CurlMultiHandle
     returnType: array
+  raises: []
 - subject:
     function: curl_share_init_persistent
   signature:
@@ -319,6 +352,7 @@
     - name: share_options
       type: array
     returnType: CurlSharePersistentHandle
+  raises: [exception, typeerror, valueerror]
 - subject:
     function: curl_upkeep
   signature:
@@ -326,6 +360,7 @@
     - name: handle
       type: CurlHandle
     returnType: bool
+  raises: []
 - subject:
     method: CURLFile::__construct
   signature:
@@ -339,18 +374,22 @@
       type: ?string
       optional: true
     returnType: mixed
+  raises: [valueerror]
 - subject:
     method: CURLFile::getFilename
   signature:
     returnType: string
+  raises: []
 - subject:
     method: CURLFile::getMimeType
   signature:
     returnType: string
+  raises: []
 - subject:
     method: CURLFile::getPostFilename
   signature:
     returnType: string
+  raises: []
 - subject:
     method: CURLFile::setMimeType
   signature:
@@ -358,6 +397,7 @@
     - name: mime_type
       type: string
     returnType: void
+  raises: []
 - subject:
     method: CURLFile::setPostFilename
   signature:
@@ -365,6 +405,7 @@
     - name: posted_filename
       type: string
     returnType: void
+  raises: []
 - subject:
     method: CURLStringFile::__construct
   signature:
@@ -377,6 +418,7 @@
       type: string
       optional: true
     returnType: mixed
+  raises: []
 - subject:
     class: curlhandle
   signature:

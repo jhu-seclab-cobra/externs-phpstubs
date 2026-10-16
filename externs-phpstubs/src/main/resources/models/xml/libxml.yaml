@@ -4,6 +4,7 @@
     function: libxml_clear_errors
   signature:
     returnType: void
+  raises: []
 - subject:
     function: libxml_disable_entity_loader
   signature:
@@ -12,14 +13,17 @@
       type: bool
       optional: true
     returnType: bool
+  raises: []
 - subject:
     function: libxml_get_errors
   signature:
     returnType: array
+  raises: []
 - subject:
     function: libxml_get_last_error
   signature:
     returnType: LibXMLError|false
+  raises: []
 - subject:
     function: libxml_set_external_entity_loader
   signature:
@@ -27,6 +31,7 @@
     - name: resolver_function
       type: ?callable
     returnType: 'true'
+  raises: []
 - subject:
     function: libxml_set_streams_context
   signature:
@@ -34,6 +39,7 @@
     - name: context
       type: mixed
     returnType: void
+  raises: [typeerror]
 - subject:
     function: libxml_use_internal_errors
   signature:
@@ -42,6 +48,7 @@
       type: ?bool
       optional: true
     returnType: bool
+  raises: []
 - subject:
     class: libxmlerror
   signature:
@@ -50,3 +57,4 @@
     function: libxml_get_external_entity_loader
   signature:
     returnType: ?callable
+  raises: []

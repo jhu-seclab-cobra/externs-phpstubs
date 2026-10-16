@@ -11,6 +11,7 @@
     - name: year
       type: int
     returnType: bool
+  raises: []
 - subject:
     function: date
   signature:
@@ -21,6 +22,7 @@
       type: ?int
       optional: true
     returnType: string
+  raises: [dateerror]
 - subject:
     function: date_add
   signature:
@@ -35,6 +37,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [dateobjecterror]
 - subject:
     function: date_create
   signature:
@@ -51,6 +54,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [dateerror, datemalformedstringexception, error]
 - subject:
     function: date_create_from_format
   signature:
@@ -70,6 +74,7 @@
     to: return
   - from: argument(2)
     to: return
+  raises: [dateerror, datemalformedstringexception, error, valueerror]
 - subject:
     function: date_create_immutable
   signature:
@@ -86,6 +91,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [dateerror, datemalformedstringexception, error]
 - subject:
     function: date_create_immutable_from_format
   signature:
@@ -105,6 +111,7 @@
     to: return
   - from: argument(2)
     to: return
+  raises: [dateerror, datemalformedstringexception, error, valueerror]
 - subject:
     function: date_date_set
   signature:
@@ -127,10 +134,12 @@
     to: return
   - from: argument(3)
     to: return
+  raises: [dateobjecterror]
 - subject:
     function: date_default_timezone_get
   signature:
     returnType: string
+  raises: [dateerror]
 - subject:
     function: date_default_timezone_set
   signature:
@@ -138,6 +147,7 @@
     - name: timezoneId
       type: string
     returnType: bool
+  raises: []
 - subject:
     function: date_diff
   signature:
@@ -157,6 +167,7 @@
     to: return
   - from: argument(2)
     to: return
+  raises: [dateobjecterror]
 - subject:
     function: date_format
   signature:
@@ -171,10 +182,12 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [dateobjecterror]
 - subject:
     function: date_get_last_errors
   signature:
     returnType: array|false
+  raises: []
 - subject:
     function: date_interval_create_from_date_string
   signature:
@@ -185,6 +198,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: date_interval_format
   signature:
@@ -199,6 +213,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [dateobjecterror]
 - subject:
     function: date_isodate_set
   signature:
@@ -222,6 +237,7 @@
     to: return
   - from: argument(3)
     to: return
+  raises: [dateobjecterror]
 - subject:
     function: date_modify
   signature:
@@ -236,6 +252,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [dateobjecterror]
 - subject:
     function: date_offset_get
   signature:
@@ -243,6 +260,7 @@
     - name: object
       type: DateTimeInterface
     returnType: int
+  raises: [dateobjecterror]
 - subject:
     function: date_parse
   signature:
@@ -250,6 +268,7 @@
     - name: datetime
       type: string
     returnType: array
+  raises: []
 - subject:
     function: date_parse_from_format
   signature:
@@ -259,6 +278,7 @@
     - name: datetime
       type: string
     returnType: array
+  raises: [valueerror]
 - subject:
     function: date_sub
   signature:
@@ -273,6 +293,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [dateobjecterror]
 - subject:
     function: date_sun_info
   signature:
@@ -284,6 +305,7 @@
     - name: longitude
       type: float
     returnType: array
+  raises: [dateerror, valueerror]
 - subject:
     function: date_sunrise
   signature:
@@ -306,6 +328,7 @@
       type: ?float
       optional: true
     returnType: string|int|float|false
+  raises: [dateerror, valueerror]
 - subject:
     function: date_sunset
   signature:
@@ -328,6 +351,7 @@
       type: ?float
       optional: true
     returnType: string|int|float|false
+  raises: [dateerror, valueerror]
 - subject:
     function: date_time_set
   signature:
@@ -356,6 +380,7 @@
     to: return
   - from: argument(4)
     to: return
+  raises: [dateobjecterror]
 - subject:
     function: date_timestamp_get
   signature:
@@ -363,6 +388,7 @@
     - name: object
       type: DateTimeInterface
     returnType: int
+  raises: [dateobjecterror, daterangeerror]
 - subject:
     function: date_timestamp_set
   signature:
@@ -377,6 +403,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [dateobjecterror]
 - subject:
     function: date_timezone_get
   signature:
@@ -387,6 +414,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [dateobjecterror]
 - subject:
     function: date_timezone_set
   signature:
@@ -401,6 +429,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [dateobjecterror]
 - subject:
     function: getdate
   signature:
@@ -409,6 +438,7 @@
       type: ?int
       optional: true
     returnType: array
+  raises: [dateerror]
 - subject:
     function: gmdate
   signature:
@@ -422,6 +452,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: gmmktime
   signature:
@@ -444,6 +475,7 @@
       type: ?int
       optional: true
     returnType: int|false
+  raises: []
 - subject:
     function: mktime
   signature:
@@ -466,6 +498,7 @@
       type: ?int
       optional: true
     returnType: int|false
+  raises: [dateerror]
 - subject:
     function: strftime
   signature:
@@ -476,6 +509,7 @@
       type: ?int
       optional: true
     returnType: string|false
+  raises: [dateerror]
 - subject:
     function: strtotime
   signature:
@@ -486,14 +520,17 @@
       type: ?int
       optional: true
     returnType: int|false
+  raises: [dateerror]
 - subject:
     function: time
   signature:
     returnType: int
+  raises: []
 - subject:
     function: timezone_abbreviations_list
   signature:
     returnType: array
+  raises: []
 - subject:
     function: timezone_identifiers_list
   signature:
@@ -505,6 +542,7 @@
       type: ?string
       optional: true
     returnType: array
+  raises: [valueerror]
 - subject:
     function: timezone_location_get
   signature:
@@ -515,6 +553,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [dateobjecterror]
 - subject:
     function: timezone_name_from_abbr
   signature:
@@ -531,6 +570,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: timezone_name_get
   signature:
@@ -541,6 +581,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [dateobjecterror]
 - subject:
     function: timezone_offset_get
   signature:
@@ -550,6 +591,7 @@
     - name: datetime
       type: DateTimeInterface
     returnType: int
+  raises: [dateobjecterror]
 - subject:
     function: timezone_open
   signature:
@@ -560,6 +602,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [valueerror]
 - subject:
     function: timezone_transitions_get
   signature:
@@ -576,10 +619,12 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [dateobjecterror]
 - subject:
     function: timezone_version_get
   signature:
     returnType: string
+  raises: []
 - subject:
     class: dateerror
   signature:
@@ -665,6 +710,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: idate
   signature:
@@ -675,6 +721,7 @@
       type: ?int
       optional: true
     returnType: int|false
+  raises: [dateerror]
 - subject:
     function: localtime
   signature:
@@ -686,6 +733,7 @@
       type: bool
       optional: true
     returnType: array
+  raises: [dateerror]
 - subject:
     method: DateInterval::__construct
   signature:
@@ -693,10 +741,12 @@
     - name: duration
       type: string
     returnType: mixed
+  raises: [datemalformedintervalstringexception]
 - subject:
     method: DateInterval::__serialize
   signature:
     returnType: array
+  raises: [dateobjecterror, error, typeerror]
 - subject:
     method: DateInterval::__set_state
   signature:
@@ -704,6 +754,7 @@
     - name: array
       type: array
     returnType: DateInterval
+  raises: [error]
 - subject:
     method: DateInterval::__unserialize
   signature:
@@ -711,10 +762,12 @@
     - name: data
       type: array
     returnType: void
+  raises: [error]
 - subject:
     method: DateInterval::__wakeup
   signature:
     returnType: void
+  raises: [error]
 - subject:
     method: DateInterval::createFromDateString
   signature:
@@ -722,6 +775,7 @@
     - name: datetime
       type: string
     returnType: DateInterval
+  raises: [datemalformedintervalstringexception]
 - subject:
     method: DateInterval::format
   signature:
@@ -729,6 +783,7 @@
     - name: format
       type: string
     returnType: string
+  raises: [dateobjecterror]
 - subject:
     method: DatePeriod::__construct
   signature:
@@ -745,10 +800,12 @@
       type: mixed
       optional: true
     returnType: mixed
+  raises: [datemalformedperiodstringexception, datemalformedstringexception, dateobjecterror, typeerror]
 - subject:
     method: DatePeriod::__serialize
   signature:
     returnType: array
+  raises: [dateobjecterror, error, typeerror]
 - subject:
     method: DatePeriod::__set_state
   signature:
@@ -756,6 +813,7 @@
     - name: array
       type: array
     returnType: DatePeriod
+  raises: [error]
 - subject:
     method: DatePeriod::__unserialize
   signature:
@@ -763,10 +821,12 @@
     - name: data
       type: array
     returnType: void
+  raises: [error]
 - subject:
     method: DatePeriod::__wakeup
   signature:
     returnType: void
+  raises: [error]
 - subject:
     method: DatePeriod::createFromISO8601String
   signature:
@@ -777,26 +837,32 @@
       type: int
       optional: true
     returnType: static
+  raises: [datemalformedperiodstringexception, datemalformedstringexception]
 - subject:
     method: DatePeriod::getDateInterval
   signature:
     returnType: DateInterval
+  raises: [dateobjecterror]
 - subject:
     method: DatePeriod::getEndDate
   signature:
     returnType: ?DateTimeInterface
+  raises: []
 - subject:
     method: DatePeriod::getIterator
   signature:
     returnType: Iterator
+  raises: []
 - subject:
     method: DatePeriod::getRecurrences
   signature:
     returnType: ?int
+  raises: []
 - subject:
     method: DatePeriod::getStartDate
   signature:
     returnType: DateTimeInterface
+  raises: [dateobjecterror]
 - subject:
     method: DateTime::__construct
   signature:
@@ -808,10 +874,12 @@
       type: ?DateTimeZone
       optional: true
     returnType: mixed
+  raises: [dateerror, datemalformedstringexception, error]
 - subject:
     method: DateTime::__serialize
   signature:
     returnType: array
+  raises: [dateobjecterror, error, typeerror]
 - subject:
     method: DateTime::__set_state
   signature:
@@ -819,6 +887,7 @@
     - name: array
       type: array
     returnType: DateTime
+  raises: [dateerror, datemalformedstringexception, error]
 - subject:
     method: DateTime::__unserialize
   signature:
@@ -826,10 +895,12 @@
     - name: data
       type: array
     returnType: void
+  raises: [dateerror, datemalformedstringexception, error]
 - subject:
     method: DateTime::__wakeup
   signature:
     returnType: void
+  raises: [dateerror, datemalformedstringexception, error]
 - subject:
     method: DateTime::add
   signature:
@@ -837,6 +908,7 @@
     - name: interval
       type: DateInterval
     returnType: DateTime
+  raises: [dateobjecterror]
 - subject:
     method: DateTime::createFromFormat
   signature:
@@ -849,6 +921,7 @@
       type: ?DateTimeZone
       optional: true
     returnType: DateTime|false
+  raises: [dateerror, datemalformedstringexception, error, valueerror]
 - subject:
     method: DateTime::createFromImmutable
   signature:
@@ -856,6 +929,7 @@
     - name: object
       type: DateTimeImmutable
     returnType: static
+  raises: [dateobjecterror]
 - subject:
     method: DateTime::createFromInterface
   signature:
@@ -863,6 +937,7 @@
     - name: object
       type: DateTimeInterface
     returnType: DateTime
+  raises: [dateobjecterror]
 - subject:
     method: DateTime::createFromTimestamp
   signature:
@@ -870,6 +945,7 @@
     - name: timestamp
       type: int|float
     returnType: static
+  raises: [daterangeerror]
 - subject:
     method: DateTime::diff
   signature:
@@ -880,6 +956,7 @@
       type: bool
       optional: true
     returnType: DateInterval
+  raises: [dateobjecterror]
 - subject:
     method: DateTime::format
   signature:
@@ -887,26 +964,32 @@
     - name: format
       type: string
     returnType: string
+  raises: [dateobjecterror]
 - subject:
     method: DateTime::getLastErrors
   signature:
     returnType: array|false
+  raises: []
 - subject:
     method: DateTime::getMicrosecond
   signature:
     returnType: int
+  raises: [dateobjecterror]
 - subject:
     method: DateTime::getOffset
   signature:
     returnType: int
+  raises: [dateobjecterror]
 - subject:
     method: DateTime::getTimestamp
   signature:
     returnType: int
+  raises: [dateobjecterror, daterangeerror]
 - subject:
     method: DateTime::getTimezone
   signature:
     returnType: DateTimeZone|false
+  raises: [dateobjecterror]
 - subject:
     method: DateTime::modify
   signature:
@@ -914,6 +997,7 @@
     - name: modifier
       type: string
     returnType: DateTime
+  raises: [datemalformedstringexception, dateobjecterror]
 - subject:
     method: DateTime::setDate
   signature:
@@ -925,6 +1009,7 @@
     - name: day
       type: int
     returnType: DateTime
+  raises: [dateobjecterror]
 - subject:
     method: DateTime::setISODate
   signature:
@@ -937,6 +1022,7 @@
       type: int
       optional: true
     returnType: DateTime
+  raises: [dateobjecterror]
 - subject:
     method: DateTime::setMicrosecond
   signature:
@@ -944,6 +1030,7 @@
     - name: microsecond
       type: int
     returnType: static
+  raises: [dateobjecterror, daterangeerror]
 - subject:
     method: DateTime::setTime
   signature:
@@ -959,6 +1046,7 @@
       type: int
       optional: true
     returnType: DateTime
+  raises: [dateobjecterror]
 - subject:
     method: DateTime::setTimestamp
   signature:
@@ -966,6 +1054,7 @@
     - name: timestamp
       type: int
     returnType: DateTime
+  raises: [dateobjecterror]
 - subject:
     method: DateTime::setTimezone
   signature:
@@ -973,6 +1062,7 @@
     - name: timezone
       type: DateTimeZone
     returnType: DateTime
+  raises: [dateobjecterror]
 - subject:
     method: DateTime::sub
   signature:
@@ -980,6 +1070,7 @@
     - name: interval
       type: DateInterval
     returnType: DateTime
+  raises: [dateinvalidoperationexception, dateobjecterror]
 - subject:
     method: DateTimeImmutable::__construct
   signature:
@@ -991,10 +1082,12 @@
       type: ?DateTimeZone
       optional: true
     returnType: mixed
+  raises: [dateerror, datemalformedstringexception, error]
 - subject:
     method: DateTimeImmutable::__serialize
   signature:
     returnType: array
+  raises: [dateobjecterror, error, typeerror]
 - subject:
     method: DateTimeImmutable::__set_state
   signature:
@@ -1002,6 +1095,7 @@
     - name: array
       type: array
     returnType: DateTimeImmutable
+  raises: [dateerror, datemalformedstringexception, error]
 - subject:
     method: DateTimeImmutable::__unserialize
   signature:
@@ -1009,10 +1103,12 @@
     - name: data
       type: array
     returnType: void
+  raises: [dateerror, datemalformedstringexception, error]
 - subject:
     method: DateTimeImmutable::__wakeup
   signature:
     returnType: void
+  raises: [dateerror, datemalformedstringexception, error]
 - subject:
     method: DateTimeImmutable::add
   signature:
@@ -1020,6 +1116,7 @@
     - name: interval
       type: DateInterval
     returnType: DateTimeImmutable
+  raises: [dateobjecterror]
 - subject:
     method: DateTimeImmutable::createFromFormat
   signature:
@@ -1032,6 +1129,7 @@
       type: ?DateTimeZone
       optional: true
     returnType: DateTimeImmutable|false
+  raises: [dateerror, datemalformedstringexception, error, valueerror]
 - subject:
     method: DateTimeImmutable::createFromInterface
   signature:
@@ -1039,6 +1137,7 @@
     - name: object
       type: DateTimeInterface
     returnType: DateTimeImmutable
+  raises: [dateobjecterror]
 - subject:
     method: DateTimeImmutable::createFromMutable
   signature:
@@ -1046,6 +1145,7 @@
     - name: object
       type: DateTime
     returnType: static
+  raises: [dateobjecterror]
 - subject:
     method: DateTimeImmutable::createFromTimestamp
   signature:
@@ -1053,6 +1153,7 @@
     - name: timestamp
       type: int|float
     returnType: static
+  raises: [daterangeerror]
 - subject:
     method: DateTimeImmutable::diff
   signature:
@@ -1063,6 +1164,7 @@
       type: bool
       optional: true
     returnType: DateInterval
+  raises: [dateobjecterror]
 - subject:
     method: DateTimeImmutable::format
   signature:
@@ -1070,26 +1172,32 @@
     - name: format
       type: string
     returnType: string
+  raises: [dateobjecterror]
 - subject:
     method: DateTimeImmutable::getLastErrors
   signature:
     returnType: array|false
+  raises: []
 - subject:
     method: DateTimeImmutable::getMicrosecond
   signature:
     returnType: int
+  raises: [dateobjecterror]
 - subject:
     method: DateTimeImmutable::getOffset
   signature:
     returnType: int
+  raises: [dateobjecterror]
 - subject:
     method: DateTimeImmutable::getTimestamp
   signature:
     returnType: int
+  raises: [dateobjecterror, daterangeerror]
 - subject:
     method: DateTimeImmutable::getTimezone
   signature:
     returnType: DateTimeZone|false
+  raises: [dateobjecterror]
 - subject:
     method: DateTimeImmutable::modify
   signature:
@@ -1097,6 +1205,7 @@
     - name: modifier
       type: string
     returnType: DateTimeImmutable
+  raises: [datemalformedstringexception, dateobjecterror]
 - subject:
     method: DateTimeImmutable::setDate
   signature:
@@ -1108,6 +1217,7 @@
     - name: day
       type: int
     returnType: DateTimeImmutable
+  raises: [dateobjecterror]
 - subject:
     method: DateTimeImmutable::setISODate
   signature:
@@ -1120,6 +1230,7 @@
       type: int
       optional: true
     returnType: DateTimeImmutable
+  raises: [dateobjecterror]
 - subject:
     method: DateTimeImmutable::setMicrosecond
   signature:
@@ -1127,6 +1238,7 @@
     - name: microsecond
       type: int
     returnType: static
+  raises: [dateobjecterror, daterangeerror]
 - subject:
     method: DateTimeImmutable::setTime
   signature:
@@ -1142,6 +1254,7 @@
       type: int
       optional: true
     returnType: DateTimeImmutable
+  raises: [dateobjecterror]
 - subject:
     method: DateTimeImmutable::setTimestamp
   signature:
@@ -1149,6 +1262,7 @@
     - name: timestamp
       type: int
     returnType: DateTimeImmutable
+  raises: [dateobjecterror]
 - subject:
     method: DateTimeImmutable::setTimezone
   signature:
@@ -1156,6 +1270,7 @@
     - name: timezone
       type: DateTimeZone
     returnType: DateTimeImmutable
+  raises: [dateobjecterror]
 - subject:
     method: DateTimeImmutable::sub
   signature:
@@ -1163,6 +1278,7 @@
     - name: interval
       type: DateInterval
     returnType: DateTimeImmutable
+  raises: [dateinvalidoperationexception, dateobjecterror]
 - subject:
     method: DateTimeInterface::__serialize
   signature:
@@ -1218,10 +1334,12 @@
     - name: timezone
       type: string
     returnType: mixed
+  raises: [dateinvalidtimezoneexception, valueerror]
 - subject:
     method: DateTimeZone::__serialize
   signature:
     returnType: array
+  raises: [dateobjecterror, error, typeerror]
 - subject:
     method: DateTimeZone::__set_state
   signature:
@@ -1229,6 +1347,7 @@
     - name: array
       type: array
     returnType: DateTimeZone
+  raises: [error]
 - subject:
     method: DateTimeZone::__unserialize
   signature:
@@ -1236,18 +1355,22 @@
     - name: data
       type: array
     returnType: void
+  raises: [error]
 - subject:
     method: DateTimeZone::__wakeup
   signature:
     returnType: void
+  raises: [error]
 - subject:
     method: DateTimeZone::getLocation
   signature:
     returnType: array|false
+  raises: [dateobjecterror]
 - subject:
     method: DateTimeZone::getName
   signature:
     returnType: string
+  raises: [dateobjecterror]
 - subject:
     method: DateTimeZone::getOffset
   signature:
@@ -1255,6 +1378,7 @@
     - name: datetime
       type: DateTimeInterface
     returnType: int
+  raises: [dateobjecterror]
 - subject:
     method: DateTimeZone::getTransitions
   signature:
@@ -1266,10 +1390,12 @@
       type: int
       optional: true
     returnType: array|false
+  raises: [dateobjecterror]
 - subject:
     method: DateTimeZone::listAbbreviations
   signature:
     returnType: array
+  raises: []
 - subject:
     method: DateTimeZone::listIdentifiers
   signature:
@@ -1281,3 +1407,4 @@
       type: ?string
       optional: true
     returnType: array
+  raises: [valueerror]

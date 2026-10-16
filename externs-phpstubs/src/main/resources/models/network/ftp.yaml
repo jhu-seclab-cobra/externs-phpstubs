@@ -13,6 +13,7 @@
       optional: true
       byRef: true
     returnType: bool
+  raises: [error, typeerror, valueerror]
 - subject:
     function: ftp_append
   signature:
@@ -27,6 +28,7 @@
       type: int
       optional: true
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: ftp_cdup
   signature:
@@ -34,6 +36,7 @@
     - name: ftp
       type: FTP\Connection
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: ftp_chdir
   signature:
@@ -43,6 +46,7 @@
     - name: directory
       type: string
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: ftp_chmod
   signature:
@@ -54,6 +58,7 @@
     - name: filename
       type: string
     returnType: int|false
+  raises: [valueerror]
 - subject:
     function: ftp_close
   signature:
@@ -61,6 +66,7 @@
     - name: ftp
       type: FTP\Connection
     returnType: bool
+  raises: [error]
 - subject:
     function: ftp_connect
   signature:
@@ -81,6 +87,7 @@
     to: return
   - from: argument(2)
     to: return
+  raises: [valueerror]
 - subject:
     function: ftp_delete
   signature:
@@ -90,6 +97,7 @@
     - name: filename
       type: string
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: ftp_exec
   signature:
@@ -99,6 +107,7 @@
     - name: command
       type: string
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: ftp_fget
   signature:
@@ -116,6 +125,7 @@
       type: int
       optional: true
     returnType: bool
+  raises: [typeerror, valueerror]
 - subject:
     function: ftp_fput
   signature:
@@ -133,6 +143,7 @@
       type: int
       optional: true
     returnType: bool
+  raises: [typeerror, valueerror]
 - subject:
     function: ftp_get
   signature:
@@ -150,6 +161,7 @@
       type: int
       optional: true
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: ftp_get_option
   signature:
@@ -159,6 +171,7 @@
     - name: option
       type: int
     returnType: int|bool
+  raises: [valueerror]
 - subject:
     function: ftp_login
   signature:
@@ -170,6 +183,7 @@
     - name: password
       type: string
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: ftp_mdtm
   signature:
@@ -179,6 +193,7 @@
     - name: filename
       type: string
     returnType: int
+  raises: [valueerror]
 - subject:
     function: ftp_mkdir
   signature:
@@ -191,6 +206,7 @@
   propagation:
   - from: argument(1)
     to: return
+  raises: [valueerror]
 - subject:
     function: ftp_mlsd
   signature:
@@ -200,6 +216,7 @@
     - name: directory
       type: string
     returnType: array|false
+  raises: [valueerror]
 - subject:
     function: ftp_nb_continue
   signature:
@@ -207,6 +224,7 @@
     - name: ftp
       type: FTP\Connection
     returnType: int
+  raises: [valueerror]
 - subject:
     function: ftp_nb_fget
   signature:
@@ -224,6 +242,7 @@
       type: int
       optional: true
     returnType: int
+  raises: [typeerror, valueerror]
 - subject:
     function: ftp_nb_fput
   signature:
@@ -241,6 +260,7 @@
       type: int
       optional: true
     returnType: int
+  raises: [typeerror, valueerror]
 - subject:
     function: ftp_nb_get
   signature:
@@ -258,6 +278,7 @@
       type: int
       optional: true
     returnType: int|false
+  raises: [valueerror]
 - subject:
     function: ftp_nb_put
   signature:
@@ -275,6 +296,7 @@
       type: int
       optional: true
     returnType: int|false
+  raises: [valueerror]
 - subject:
     function: ftp_nlist
   signature:
@@ -284,6 +306,7 @@
     - name: directory
       type: string
     returnType: array|false
+  raises: [valueerror]
 - subject:
     function: ftp_pasv
   signature:
@@ -293,6 +316,7 @@
     - name: enable
       type: bool
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: ftp_put
   signature:
@@ -310,6 +334,7 @@
       type: int
       optional: true
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: ftp_pwd
   signature:
@@ -317,6 +342,7 @@
     - name: ftp
       type: FTP\Connection
     returnType: string|false
+  raises: [valueerror]
 - subject:
     function: ftp_quit
   signature:
@@ -324,6 +350,7 @@
     - name: ftp
       type: FTP\Connection
     returnType: bool
+  raises: [error]
 - subject:
     function: ftp_raw
   signature:
@@ -333,6 +360,7 @@
     - name: command
       type: string
     returnType: ?array
+  raises: [valueerror]
 - subject:
     function: ftp_rawlist
   signature:
@@ -345,6 +373,7 @@
       type: bool
       optional: true
     returnType: array|false
+  raises: [valueerror]
 - subject:
     function: ftp_rename
   signature:
@@ -356,6 +385,7 @@
     - name: to
       type: string
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: ftp_rmdir
   signature:
@@ -365,6 +395,7 @@
     - name: directory
       type: string
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: ftp_set_option
   signature:
@@ -376,6 +407,7 @@
     - name: value
       type: mixed
     returnType: 'true'
+  raises: [typeerror, valueerror]
 - subject:
     function: ftp_site
   signature:
@@ -385,6 +417,7 @@
     - name: command
       type: string
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: ftp_size
   signature:
@@ -394,6 +427,7 @@
     - name: filename
       type: string
     returnType: int
+  raises: [valueerror]
 - subject:
     function: ftp_ssl_connect
   signature:
@@ -414,6 +448,7 @@
     to: return
   - from: argument(2)
     to: return
+  raises: [valueerror]
 - subject:
     function: ftp_systype
   signature:
@@ -421,6 +456,7 @@
     - name: ftp
       type: FTP\Connection
     returnType: string|false
+  raises: [valueerror]
 - subject:
     class: ftp\connection
   signature:

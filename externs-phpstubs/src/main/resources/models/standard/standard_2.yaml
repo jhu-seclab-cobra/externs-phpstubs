@@ -27,6 +27,7 @@
       optional: true
       byRef: true
     returnType: string|false
+  raises: [error, typeerror, valueerror]
 - subject:
     function: exp
   signature:
@@ -34,6 +35,7 @@
     - name: num
       type: float
     returnType: float
+  raises: []
 - subject:
     function: expect_expectl
   signature:
@@ -71,6 +73,7 @@
   propagation:
   - from: argument(1)
     to: return
+  raises: [valueerror]
 - subject:
     function: expm1
   signature:
@@ -78,6 +81,7 @@
     - name: num
       type: float
     returnType: float
+  raises: []
 - subject:
     function: extract
   signature:
@@ -92,6 +96,7 @@
       type: string
       optional: true
     returnType: int
+  raises: [error, typeerror, valueerror]
 - subject:
     function: fam_cancel_monitor
   signature:
@@ -1538,6 +1543,7 @@
     function: fastcgi_finish_request
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     function: fbsql_affected_rows
   signature:
@@ -2580,6 +2586,7 @@
     - name: num2
       type: float
     returnType: float
+  raises: []
 - subject:
     function: floatval
   signature:
@@ -2587,6 +2594,7 @@
     - name: value
       type: mixed
     returnType: float
+  raises: []
 - subject:
     function: floor
   signature:
@@ -2594,10 +2602,12 @@
     - name: num
       type: int|float
     returnType: float
+  raises: []
 - subject:
     function: flush
   signature:
     returnType: void
+  raises: []
 - subject:
     function: fmod
   signature:
@@ -2607,6 +2617,7 @@
     - name: num2
       type: float
     returnType: float
+  raises: []
 - subject:
     function: fnmatch
   signature:
@@ -2619,6 +2630,7 @@
       type: int
       optional: true
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: forward_static_call
   signature:
@@ -2635,6 +2647,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [error]
 - subject:
     function: forward_static_call_array
   signature:
@@ -2649,10 +2662,12 @@
     to: return
   - from: argument(1)
     to: return
+  raises: []
 - subject:
     function: fpm_get_status
   signature:
     returnType: array|false
+  raises: []
 - subject:
     function: fprintf
   signature:
@@ -2666,6 +2681,7 @@
       optional: true
       variadic: true
     returnType: int
+  raises: [argumentcounterror, error, typeerror, valueerror]
 - subject:
     function: fputs
   signature:
@@ -2678,6 +2694,7 @@
       type: ?int
       optional: true
     returnType: int|false
+  raises: [typeerror]
 - subject:
     function: fribidi_log2vis
   signature:
@@ -2711,6 +2728,7 @@
   propagation:
   - from: argument(2)
     to: return
+  raises: [error, typeerror, valueerror]
 - subject:
     function: fsockopen
   signature:
@@ -2743,6 +2761,7 @@
     to: return
   - from: argument(4)
     to: return
+  raises: [error, typeerror, valueerror]
 - subject:
     function: ftok
   signature:
@@ -2752,6 +2771,7 @@
     - name: project_id
       type: string
     returnType: int
+  raises: [valueerror]
 - subject:
     function: gearman_bugreport
   signature:
@@ -4238,6 +4258,7 @@
       type: bool
       optional: true
     returnType: object|array|false
+  raises: [error, typeerror]
 - subject:
     function: get_call_stack
   signature:
@@ -4249,10 +4270,12 @@
     - name: option
       type: string
     returnType: string|array|false
+  raises: []
 - subject:
     function: get_current_user
   signature:
     returnType: string
+  raises: []
 - subject:
     function: get_debug_type
   signature:
@@ -4263,6 +4286,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: get_headers
   signature:
@@ -4276,6 +4300,7 @@
       type: mixed
       optional: true
     returnType: array|false
+  raises: [typeerror, valueerror]
 - subject:
     function: get_html_translation_table
   signature:
@@ -4290,10 +4315,12 @@
       type: string
       optional: true
     returnType: array
+  raises: []
 - subject:
     function: get_include_path
   signature:
     returnType: string|false
+  raises: []
 - subject:
     function: get_meta_tags
   signature:
@@ -4304,14 +4331,17 @@
       type: bool
       optional: true
     returnType: array|false
+  raises: [valueerror]
 - subject:
     function: getallheaders
   signature:
     returnType: array
+  raises: []
 - subject:
     function: getcwd
   signature:
     returnType: string|false
+  raises: []
 - subject:
     function: getenv
   signature:
@@ -4326,6 +4356,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: gethostbyaddr
   signature:
@@ -4336,6 +4367,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [valueerror]
 - subject:
     function: gethostbyname
   signature:
@@ -4346,6 +4378,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [valueerror]
 - subject:
     function: gethostbynamel
   signature:
@@ -4353,10 +4386,12 @@
     - name: hostname
       type: string
     returnType: array|false
+  raises: [valueerror]
 - subject:
     function: gethostname
   signature:
     returnType: string|false
+  raises: []
 - subject:
     function: getimagesize
   signature:
@@ -4368,6 +4403,7 @@
       optional: true
       byRef: true
     returnType: array|false
+  raises: [error, typeerror, valueerror]
 - subject:
     function: getimagesizefromstring
   signature:
@@ -4382,10 +4418,12 @@
   propagation:
   - from: argument(1)
     to: return
+  raises: [error, typeerror, valueerror]
 - subject:
     function: getlastmod
   signature:
     returnType: int|false
+  raises: []
 - subject:
     function: getmxrr
   signature:
@@ -4400,22 +4438,27 @@
       optional: true
       byRef: true
     returnType: bool
+  raises: [error, typeerror, valueerror]
 - subject:
     function: getmygid
   signature:
     returnType: int|false
+  raises: []
 - subject:
     function: getmyinode
   signature:
     returnType: int|false
+  raises: []
 - subject:
     function: getmypid
   signature:
     returnType: int|false
+  raises: []
 - subject:
     function: getmyuid
   signature:
     returnType: int|false
+  raises: []
 - subject:
     function: getopt
   signature:
@@ -4433,6 +4476,7 @@
   propagation:
   - from: argument(1)
     to: return
+  raises: [error, typeerror]
 - subject:
     function: getprotobyname
   signature:
@@ -4440,6 +4484,7 @@
     - name: protocol
       type: string
     returnType: int|false
+  raises: [valueerror]
 - subject:
     function: getprotobynumber
   signature:
@@ -4447,6 +4492,7 @@
     - name: protocol
       type: int
     returnType: string|false
+  raises: []
 - subject:
     function: getrusage
   signature:
@@ -4455,6 +4501,7 @@
       type: int
       optional: true
     returnType: array|false
+  raises: []
 - subject:
     function: getservbyname
   signature:
@@ -4464,6 +4511,7 @@
     - name: protocol
       type: string
     returnType: int|false
+  raises: [valueerror]
 - subject:
     function: getservbyport
   signature:
@@ -4476,6 +4524,7 @@
   propagation:
   - from: argument(1)
     to: return
+  raises: [valueerror]
 - subject:
     function: gettimeofday
   signature:
@@ -4484,6 +4533,7 @@
       type: bool
       optional: true
     returnType: array|float
+  raises: [dateerror]
 - subject:
     function: gettype
   signature:
@@ -4491,6 +4541,7 @@
     - name: value
       type: mixed
     returnType: string
+  raises: []
 - subject:
     function: gnupg_adddecryptkey
   signature:

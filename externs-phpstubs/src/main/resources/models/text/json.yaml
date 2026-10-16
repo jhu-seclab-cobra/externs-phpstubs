@@ -19,6 +19,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [jsonexception, valueerror]
 - subject:
     function: json_encode
   signature:
@@ -35,14 +36,17 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [error, jsonexception, typeerror]
 - subject:
     function: json_last_error
   signature:
     returnType: int
+  raises: []
 - subject:
     function: json_last_error_msg
   signature:
     returnType: string
+  raises: []
 - subject:
     class: jsonexception
   signature:
@@ -61,6 +65,7 @@
       type: int
       optional: true
     returnType: bool
+  raises: [valueerror]
 - subject:
     class: jsonserializable
   signature:

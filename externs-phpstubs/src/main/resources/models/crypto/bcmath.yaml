@@ -17,6 +17,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [valueerror]
 - subject:
     function: bccomp
   signature:
@@ -29,6 +30,7 @@
       type: ?int
       optional: true
     returnType: int
+  raises: [valueerror]
 - subject:
     function: bcdiv
   signature:
@@ -46,6 +48,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [divisionbyzeroerror, valueerror]
 - subject:
     function: bcmod
   signature:
@@ -63,6 +66,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [divisionbyzeroerror, valueerror]
 - subject:
     function: bcmul
   signature:
@@ -80,6 +84,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [valueerror]
 - subject:
     function: bcpow
   signature:
@@ -97,6 +102,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [divisionbyzeroerror, valueerror]
 - subject:
     function: bcpowmod
   signature:
@@ -118,6 +124,7 @@
     to: return
   - from: argument(2)
     to: return
+  raises: [divisionbyzeroerror, valueerror]
 - subject:
     function: bcscale
   signature:
@@ -126,6 +133,7 @@
       type: ?int
       optional: true
     returnType: int
+  raises: [valueerror]
 - subject:
     function: bcsqrt
   signature:
@@ -139,6 +147,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [valueerror]
 - subject:
     function: bcsub
   signature:
@@ -156,6 +165,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [valueerror]
 - subject:
     class: bcmath\number
   signature:
@@ -168,6 +178,7 @@
     - name: num
       type: string
     returnType: string
+  raises: [valueerror]
 - subject:
     function: bcdivmod
   signature:
@@ -180,6 +191,7 @@
       type: ?int
       optional: true
     returnType: array
+  raises: [divisionbyzeroerror, valueerror]
 - subject:
     function: bcfloor
   signature:
@@ -187,6 +199,7 @@
     - name: num
       type: string
     returnType: string
+  raises: [valueerror]
 - subject:
     function: bcround
   signature:
@@ -200,6 +213,7 @@
       type: RoundingMode
       optional: true
     returnType: string
+  raises: [valueerror]
 - subject:
     method: BcMath\Number::__construct
   signature:
@@ -207,14 +221,17 @@
     - name: num
       type: string|int
     returnType: mixed
+  raises: [error, valueerror]
 - subject:
     method: BcMath\Number::__serialize
   signature:
     returnType: array
+  raises: []
 - subject:
     method: BcMath\Number::__toString
   signature:
     returnType: string
+  raises: []
 - subject:
     method: BcMath\Number::__unserialize
   signature:
@@ -222,6 +239,7 @@
     - name: data
       type: array
     returnType: void
+  raises: [error, exception]
 - subject:
     method: BcMath\Number::add
   signature:
@@ -232,10 +250,12 @@
       type: ?int
       optional: true
     returnType: BcMath\Number
+  raises: [divisionbyzeroerror, typeerror, valueerror]
 - subject:
     method: BcMath\Number::ceil
   signature:
     returnType: BcMath\Number
+  raises: []
 - subject:
     method: BcMath\Number::compare
   signature:
@@ -246,6 +266,7 @@
       type: ?int
       optional: true
     returnType: int
+  raises: [typeerror, valueerror]
 - subject:
     method: BcMath\Number::div
   signature:
@@ -256,6 +277,7 @@
       type: ?int
       optional: true
     returnType: BcMath\Number
+  raises: [divisionbyzeroerror, typeerror, valueerror]
 - subject:
     method: BcMath\Number::divmod
   signature:
@@ -266,10 +288,12 @@
       type: ?int
       optional: true
     returnType: array
+  raises: [divisionbyzeroerror, typeerror, valueerror]
 - subject:
     method: BcMath\Number::floor
   signature:
     returnType: BcMath\Number
+  raises: []
 - subject:
     method: BcMath\Number::mod
   signature:
@@ -280,6 +304,7 @@
       type: ?int
       optional: true
     returnType: BcMath\Number
+  raises: [divisionbyzeroerror, typeerror, valueerror]
 - subject:
     method: BcMath\Number::mul
   signature:
@@ -290,6 +315,7 @@
       type: ?int
       optional: true
     returnType: BcMath\Number
+  raises: [divisionbyzeroerror, typeerror, valueerror]
 - subject:
     method: BcMath\Number::pow
   signature:
@@ -300,6 +326,7 @@
       type: ?int
       optional: true
     returnType: BcMath\Number
+  raises: [divisionbyzeroerror, typeerror, valueerror]
 - subject:
     method: BcMath\Number::powmod
   signature:
@@ -312,6 +339,7 @@
       type: ?int
       optional: true
     returnType: BcMath\Number
+  raises: [divisionbyzeroerror, typeerror, valueerror]
 - subject:
     method: BcMath\Number::round
   signature:
@@ -323,6 +351,7 @@
       type: RoundingMode
       optional: true
     returnType: BcMath\Number
+  raises: [valueerror]
 - subject:
     method: BcMath\Number::sqrt
   signature:
@@ -331,6 +360,7 @@
       type: ?int
       optional: true
     returnType: BcMath\Number
+  raises: [valueerror]
 - subject:
     method: BcMath\Number::sub
   signature:
@@ -341,3 +371,4 @@
       type: ?int
       optional: true
     returnType: BcMath\Number
+  raises: [divisionbyzeroerror, typeerror, valueerror]

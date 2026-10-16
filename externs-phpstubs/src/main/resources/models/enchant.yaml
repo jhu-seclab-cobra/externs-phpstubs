@@ -17,6 +17,7 @@
     - name: word
       type: string
     returnType: void
+  raises: [valueerror]
 - subject:
     function: enchant_dict_is_added
   signature:
@@ -26,6 +27,7 @@
     - name: word
       type: string
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: enchant_dict_remove
   signature:
@@ -35,6 +37,7 @@
     - name: word
       type: string
     returnType: void
+  raises: [valueerror]
 - subject:
     function: enchant_dict_remove_from_session
   signature:
@@ -44,6 +47,7 @@
     - name: word
       type: string
     returnType: void
+  raises: [valueerror]
 - subject:
     function: enchant_broker_describe
   signature:
@@ -54,6 +58,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: enchant_broker_dict_exists
   signature:
@@ -63,6 +68,7 @@
     - name: tag
       type: string
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: enchant_broker_free
   signature:
@@ -70,6 +76,7 @@
     - name: broker
       type: EnchantBroker
     returnType: bool
+  raises: [error]
 - subject:
     function: enchant_broker_free_dict
   signature:
@@ -77,6 +84,7 @@
     - name: dictionary
       type: EnchantDictionary
     returnType: bool
+  raises: []
 - subject:
     function: enchant_broker_get_dict_path
   signature:
@@ -89,6 +97,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: enchant_broker_get_error
   signature:
@@ -99,10 +108,12 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: enchant_broker_init
   signature:
     returnType: EnchantBroker|false
+  raises: []
 - subject:
     function: enchant_broker_list_dicts
   signature:
@@ -113,6 +124,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: enchant_broker_request_dict
   signature:
@@ -127,6 +139,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [valueerror]
 - subject:
     function: enchant_broker_request_pwl_dict
   signature:
@@ -141,6 +154,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [valueerror]
 - subject:
     function: enchant_broker_set_dict_path
   signature:
@@ -152,6 +166,7 @@
     - name: path
       type: string
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: enchant_broker_set_ordering
   signature:
@@ -163,6 +178,7 @@
     - name: ordering
       type: string
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: enchant_dict_add_to_personal
   signature:
@@ -172,6 +188,7 @@
     - name: word
       type: string
     returnType: void
+  raises: [valueerror]
 - subject:
     function: enchant_dict_add_to_session
   signature:
@@ -181,6 +198,7 @@
     - name: word
       type: string
     returnType: void
+  raises: [valueerror]
 - subject:
     function: enchant_dict_check
   signature:
@@ -190,6 +208,7 @@
     - name: word
       type: string
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: enchant_dict_describe
   signature:
@@ -200,6 +219,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: enchant_dict_get_error
   signature:
@@ -210,6 +230,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: enchant_dict_is_in_session
   signature:
@@ -219,6 +240,7 @@
     - name: word
       type: string
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: enchant_dict_quick_check
   signature:
@@ -232,6 +254,7 @@
       optional: true
       byRef: true
     returnType: bool
+  raises: [error, typeerror, valueerror]
 - subject:
     function: enchant_dict_store_replacement
   signature:
@@ -243,6 +266,7 @@
     - name: correct
       type: string
     returnType: void
+  raises: [valueerror]
 - subject:
     function: enchant_dict_suggest
   signature:
@@ -255,3 +279,4 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [valueerror]

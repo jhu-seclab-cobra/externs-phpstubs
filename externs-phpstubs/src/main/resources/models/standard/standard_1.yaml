@@ -44,6 +44,7 @@
     - name: num
       type: int|float
     returnType: int|float
+  raises: []
 - subject:
     function: accelerator_get_configuration
   signature:
@@ -77,6 +78,7 @@
     - name: num
       type: float
     returnType: float
+  raises: []
 - subject:
     function: acosh
   signature:
@@ -84,6 +86,7 @@
     - name: num
       type: float
     returnType: float
+  raises: []
 - subject:
     function: addcslashes
   signature:
@@ -98,6 +101,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: []
 - subject:
     function: addslashes
   signature:
@@ -105,18 +109,22 @@
     - name: string
       type: string
     returnType: string
+  raises: []
 - subject:
     function: apache_child_terminate
   signature:
     returnType: void
+  raises: []
 - subject:
     function: apache_get_modules
   signature:
     returnType: array
+  raises: []
 - subject:
     function: apache_get_version
   signature:
     returnType: string|false
+  raises: []
 - subject:
     function: apache_getenv
   signature:
@@ -130,6 +138,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: apache_lookup_uri
   signature:
@@ -140,6 +149,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [valueerror]
 - subject:
     function: apache_note
   signature:
@@ -155,10 +165,12 @@
     to: return
   - from: argument(1)
     to: return
+  raises: []
 - subject:
     function: apache_request_headers
   signature:
     returnType: array
+  raises: []
 - subject:
     function: apache_reset_timeout
   signature:
@@ -167,6 +179,7 @@
     function: apache_response_headers
   signature:
     returnType: array|false
+  raises: []
 - subject:
     function: apache_setenv
   signature:
@@ -179,6 +192,7 @@
       type: bool
       optional: true
     returnType: bool
+  raises: []
 - subject:
     function: apd_breakpoint
   signature:
@@ -299,6 +313,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: array_chunk
   signature:
@@ -314,6 +329,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [valueerror]
 - subject:
     function: array_column
   signature:
@@ -329,6 +345,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [error, typeerror]
 - subject:
     function: array_combine
   signature:
@@ -343,6 +360,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [valueerror]
 - subject:
     function: array_count_values
   signature:
@@ -350,6 +368,7 @@
     - name: array
       type: array
     returnType: array
+  raises: []
 - subject:
     function: array_diff
   signature:
@@ -366,6 +385,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [typeerror]
 - subject:
     function: array_diff_assoc
   signature:
@@ -382,6 +402,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [typeerror]
 - subject:
     function: array_diff_key
   signature:
@@ -398,6 +419,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [typeerror]
 - subject:
     function: array_diff_uassoc
   signature:
@@ -414,6 +436,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [typeerror]
 - subject:
     function: array_diff_ukey
   signature:
@@ -430,6 +453,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [typeerror]
 - subject:
     function: array_fill
   signature:
@@ -444,6 +468,7 @@
   propagation:
   - from: argument(2)
     to: return
+  raises: [error, valueerror]
 - subject:
     function: array_fill_keys
   signature:
@@ -458,6 +483,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: []
 - subject:
     function: array_filter
   signature:
@@ -474,6 +500,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: array_flip
   signature:
@@ -484,6 +511,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: array_intersect
   signature:
@@ -500,6 +528,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [typeerror]
 - subject:
     function: array_intersect_assoc
   signature:
@@ -516,6 +545,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [typeerror]
 - subject:
     function: array_intersect_key
   signature:
@@ -532,6 +562,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [typeerror]
 - subject:
     function: array_intersect_uassoc
   signature:
@@ -548,6 +579,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [typeerror]
 - subject:
     function: array_intersect_ukey
   signature:
@@ -564,6 +596,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [typeerror]
 - subject:
     function: array_key_exists
   signature:
@@ -573,6 +606,7 @@
     - name: array
       type: array
     returnType: bool
+  raises: [typeerror]
 - subject:
     function: array_key_first
   signature:
@@ -580,6 +614,7 @@
     - name: array
       type: array
     returnType: int|string|null
+  raises: []
 - subject:
     function: array_key_last
   signature:
@@ -587,6 +622,7 @@
     - name: array
       type: array
     returnType: int|string|null
+  raises: []
 - subject:
     function: array_keys
   signature:
@@ -603,6 +639,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [error]
 - subject:
     function: array_map
   signature:
@@ -619,6 +656,7 @@
   propagation:
   - from: argument(1)
     to: return
+  raises: [typeerror]
 - subject:
     function: array_merge
   signature:
@@ -633,6 +671,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [error, typeerror]
 - subject:
     function: array_merge_recursive
   signature:
@@ -645,6 +684,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [error, typeerror]
 - subject:
     function: array_multisort
   signature:
@@ -658,6 +698,7 @@
       byRef: true
       variadic: true
     returnType: 'true'
+  raises: [typeerror, valueerror]
 - subject:
     function: array_pad
   signature:
@@ -674,6 +715,7 @@
     to: return
   - from: argument(2)
     to: return
+  raises: [valueerror]
 - subject:
     function: array_pop
   signature:
@@ -685,6 +727,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: array_product
   signature:
@@ -692,6 +735,7 @@
     - name: array
       type: array
     returnType: int|float
+  raises: [typeerror]
 - subject:
     function: array_push
   signature:
@@ -704,6 +748,7 @@
       optional: true
       variadic: true
     returnType: int
+  raises: [error]
 - subject:
     function: array_rand
   signature:
@@ -717,6 +762,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [random\brokenrandomengineerror, valueerror]
 - subject:
     function: array_reduce
   signature:
@@ -736,6 +782,7 @@
     to: return
   - from: argument(2)
     to: return
+  raises: []
 - subject:
     function: array_replace
   signature:
@@ -752,6 +799,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [typeerror]
 - subject:
     function: array_replace_recursive
   signature:
@@ -768,6 +816,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [error, typeerror]
 - subject:
     function: array_reverse
   signature:
@@ -781,6 +830,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: array_search
   signature:
@@ -793,6 +843,7 @@
       type: bool
       optional: true
     returnType: int|string|false
+  raises: [error]
 - subject:
     function: array_shift
   signature:
@@ -804,6 +855,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: array_slice
   signature:
@@ -822,6 +874,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: array_splice
   signature:
@@ -843,6 +896,7 @@
     to: return
   - from: argument(3)
     to: return
+  raises: [error]
 - subject:
     function: array_sum
   signature:
@@ -850,6 +904,7 @@
     - name: array
       type: array
     returnType: int|float
+  raises: [typeerror]
 - subject:
     function: array_udiff
   signature:
@@ -866,6 +921,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [typeerror]
 - subject:
     function: array_udiff_assoc
   signature:
@@ -882,6 +938,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [typeerror]
 - subject:
     function: array_udiff_uassoc
   signature:
@@ -902,6 +959,7 @@
     to: return
   - from: argument(3)
     to: return
+  raises: [typeerror]
 - subject:
     function: array_uintersect
   signature:
@@ -918,6 +976,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [typeerror]
 - subject:
     function: array_uintersect_assoc
   signature:
@@ -934,6 +993,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [typeerror]
 - subject:
     function: array_uintersect_uassoc
   signature:
@@ -954,6 +1014,7 @@
     to: return
   - from: argument(3)
     to: return
+  raises: [typeerror]
 - subject:
     function: array_unique
   signature:
@@ -967,6 +1028,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: array_unshift
   signature:
@@ -979,6 +1041,7 @@
       optional: true
       variadic: true
     returnType: int
+  raises: []
 - subject:
     function: array_values
   signature:
@@ -989,6 +1052,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: array_walk
   signature:
@@ -1002,6 +1066,7 @@
       type: mixed
       optional: true
     returnType: 'true'
+  raises: [error, typeerror]
 - subject:
     function: array_walk_recursive
   signature:
@@ -1015,6 +1080,7 @@
       type: mixed
       optional: true
     returnType: 'true'
+  raises: [error, typeerror]
 - subject:
     function: arsort
   signature:
@@ -1026,6 +1092,7 @@
       type: int
       optional: true
     returnType: 'true'
+  raises: []
 - subject:
     function: asin
   signature:
@@ -1033,6 +1100,7 @@
     - name: num
       type: float
     returnType: float
+  raises: []
 - subject:
     function: asinh
   signature:
@@ -1040,6 +1108,7 @@
     - name: num
       type: float
     returnType: float
+  raises: []
 - subject:
     function: asort
   signature:
@@ -1051,6 +1120,7 @@
       type: int
       optional: true
     returnType: 'true'
+  raises: []
 - subject:
     function: assert
   signature:
@@ -1076,6 +1146,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [valueerror]
 - subject:
     function: ast\\get_kind_name
   signature:
@@ -1142,6 +1213,7 @@
     - name: num
       type: float
     returnType: float
+  raises: []
 - subject:
     function: atan2
   signature:
@@ -1151,6 +1223,7 @@
     - name: x
       type: float
     returnType: float
+  raises: []
 - subject:
     function: atanh
   signature:
@@ -1158,6 +1231,7 @@
     - name: num
       type: float
     returnType: float
+  raises: []
 - subject:
     function: base64_decode
   signature:
@@ -1171,6 +1245,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: base64_encode
   signature:
@@ -1181,6 +1256,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: base_convert
   signature:
@@ -1195,6 +1271,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [valueerror]
 - subject:
     function: bbcode_add_element
   signature:
@@ -1391,6 +1468,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: bindec
   signature:
@@ -1398,6 +1476,7 @@
     - name: binary_string
       type: string
     returnType: int|float
+  raises: []
 - subject:
     function: birdstep_autocommit
   signature:
@@ -1523,6 +1602,7 @@
     - name: value
       type: mixed
     returnType: bool
+  raises: []
 - subject:
     function: bson_decode
   signature:
@@ -1608,6 +1688,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: []
 - subject:
     function: call_user_func_array
   signature:
@@ -1622,6 +1703,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: []
 - subject:
     function: call_user_method
   signature:
@@ -1671,6 +1753,7 @@
     - name: num
       type: int|float
     returnType: float
+  raises: []
 - subject:
     function: chdb_create
   signature:
@@ -1687,6 +1770,7 @@
     - name: directory
       type: string
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: checkdnsrr
   signature:
@@ -1697,6 +1781,7 @@
       type: string
       optional: true
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: chop
   signature:
@@ -1712,6 +1797,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: []
 - subject:
     function: chr
   signature:
@@ -1719,6 +1805,7 @@
     - name: codepoint
       type: int
     returnType: string
+  raises: []
 - subject:
     function: chroot
   signature:
@@ -1726,6 +1813,7 @@
     - name: directory
       type: string
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: chunk_split
   signature:
@@ -1742,6 +1830,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [valueerror]
 - subject:
     function: classkit_import
   signature:
@@ -1826,6 +1915,7 @@
       type: string
       optional: true
     returnType: void
+  raises: [valueerror]
 - subject:
     function: cli_get_process_title
   signature:
@@ -1845,10 +1935,12 @@
       type: mixed
       optional: true
     returnType: void
+  raises: [typeerror]
 - subject:
     function: closelog
   signature:
     returnType: 'true'
+  raises: []
 - subject:
     function: co\\defer
   signature:
@@ -2007,6 +2099,7 @@
     to: return
   - from: argument(2)
     to: return
+  raises: [error]
 - subject:
     function: componere\\cast
   signature:
@@ -2043,10 +2136,12 @@
     function: connection_aborted
   signature:
     returnType: int
+  raises: []
 - subject:
     function: connection_status
   signature:
     returnType: int
+  raises: []
 - subject:
     function: connection_timeout
   signature:
@@ -2061,6 +2156,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [error, typeerror]
 - subject:
     function: convert_uudecode
   signature:
@@ -2071,6 +2167,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: convert_uuencode
   signature:
@@ -2081,6 +2178,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: cos
   signature:
@@ -2088,6 +2186,7 @@
     - name: num
       type: float
     returnType: float
+  raises: []
 - subject:
     function: cosh
   signature:
@@ -2095,6 +2194,7 @@
     - name: num
       type: float
     returnType: float
+  raises: []
 - subject:
     function: couchbase\\basicdecoderv1
   signature:
@@ -2230,6 +2330,7 @@
       type: int
       optional: true
     returnType: int
+  raises: [error, typeerror, valueerror]
 - subject:
     function: count_chars
   signature:
@@ -2243,6 +2344,7 @@
   propagation:
   - from: argument(1)
     to: return
+  raises: [valueerror]
 - subject:
     function: crack_check
   signature:
@@ -2285,6 +2387,7 @@
     - name: string
       type: string
     returnType: int
+  raises: []
 - subject:
     function: crypt
   signature:
@@ -2299,6 +2402,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: []
 - subject:
     function: current
   signature:
@@ -2309,6 +2413,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: cyrus_authenticate
   signature:
@@ -3116,6 +3221,7 @@
       optional: true
       variadic: true
     returnType: void
+  raises: [error, typeerror]
 - subject:
     function: debugger_connect
   signature:
@@ -3143,6 +3249,7 @@
     - name: num
       type: int
     returnType: string
+  raises: []
 - subject:
     function: dechex
   signature:
@@ -3150,6 +3257,7 @@
     - name: num
       type: int
     returnType: string
+  raises: []
 - subject:
     function: decoct
   signature:
@@ -3157,6 +3265,7 @@
     - name: num
       type: int
     returnType: string
+  raises: []
 - subject:
     function: defer
   signature:
@@ -3175,6 +3284,7 @@
     - name: num
       type: float
     returnType: float
+  raises: []
 - subject:
     function: dio_close
   signature:
@@ -3294,6 +3404,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [typeerror, valueerror]
 - subject:
     function: disk_free_space
   signature:
@@ -3301,6 +3412,7 @@
     - name: directory
       type: string
     returnType: float|false
+  raises: [valueerror]
 - subject:
     function: disk_total_space
   signature:
@@ -3308,6 +3420,7 @@
     - name: directory
       type: string
     returnType: float|false
+  raises: [valueerror]
 - subject:
     function: diskfreespace
   signature:
@@ -3315,6 +3428,7 @@
     - name: directory
       type: string
     returnType: float|false
+  raises: [valueerror]
 - subject:
     function: display_disabled_function
   signature:
@@ -3336,6 +3450,7 @@
       type: string
       optional: true
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: dns_get_mx
   signature:
@@ -3350,6 +3465,7 @@
       optional: true
       byRef: true
     returnType: bool
+  raises: [error, typeerror, valueerror]
 - subject:
     function: dns_get_record
   signature:
@@ -3376,6 +3492,7 @@
     to: return
   - from: argument(3)
     to: return
+  raises: [error, typeerror, valueerror]
 - subject:
     function: dom_document_relaxng_validate_file
   signature:
@@ -3582,6 +3699,7 @@
     - name: value
       type: mixed
     returnType: float
+  raises: []
 - subject:
     function: eio_busy
   signature:
@@ -4850,14 +4968,17 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: error_clear_last
   signature:
     returnType: void
+  raises: []
 - subject:
     function: error_get_last
   signature:
     returnType: ?array
+  raises: []
 - subject:
     function: error_log
   signature:
@@ -4874,6 +4995,7 @@
       type: ?string
       optional: true
     returnType: bool
+  raises: [dateerror, valueerror]
 - subject:
     function: escapeshellarg
   signature:
@@ -4881,6 +5003,7 @@
     - name: arg
       type: string
     returnType: string
+  raises: [valueerror]
 - subject:
     function: escapeshellcmd
   signature:
@@ -4888,6 +5011,7 @@
     - name: command
       type: string
     returnType: string
+  raises: [valueerror]
 - subject:
     function: event_add
   signature:

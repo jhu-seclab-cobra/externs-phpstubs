@@ -11,6 +11,7 @@
       type: ?string
       optional: true
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: mb_chr
   signature:
@@ -24,6 +25,7 @@
   propagation:
   - from: argument(1)
     to: return
+  raises: [valueerror]
 - subject:
     function: mb_convert_case
   signature:
@@ -41,6 +43,7 @@
     to: return
   - from: argument(2)
     to: return
+  raises: [valueerror]
 - subject:
     function: mb_convert_encoding
   signature:
@@ -56,6 +59,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [valueerror]
 - subject:
     function: mb_convert_kana
   signature:
@@ -76,6 +80,7 @@
     to: return
   - from: argument(2)
     to: return
+  raises: [valueerror]
 - subject:
     function: mb_convert_variables
   signature:
@@ -96,6 +101,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [error, valueerror]
 - subject:
     function: mb_decode_mimeheader
   signature:
@@ -106,6 +112,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: mb_decode_numericentity
   signature:
@@ -123,6 +130,7 @@
     to: return
   - from: argument(2)
     to: return
+  raises: [valueerror]
 - subject:
     function: mb_detect_encoding
   signature:
@@ -139,6 +147,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [valueerror]
 - subject:
     function: mb_detect_order
   signature:
@@ -147,6 +156,7 @@
       type: array|string|null
       optional: true
     returnType: array|bool
+  raises: [valueerror]
 - subject:
     function: mb_encode_mimeheader
   signature:
@@ -175,6 +185,7 @@
     to: return
   - from: argument(3)
     to: return
+  raises: [valueerror]
 - subject:
     function: mb_encode_numericentity
   signature:
@@ -195,6 +206,7 @@
     to: return
   - from: argument(2)
     to: return
+  raises: [valueerror]
 - subject:
     function: mb_encoding_aliases
   signature:
@@ -202,6 +214,7 @@
     - name: encoding
       type: string
     returnType: array
+  raises: [valueerror]
 - subject:
     function: mb_ereg
   signature:
@@ -215,6 +228,7 @@
       optional: true
       byRef: true
     returnType: bool
+  raises: [error, typeerror, valueerror]
 - subject:
     function: mb_ereg_match
   signature:
@@ -227,6 +241,7 @@
       type: ?string
       optional: true
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: mb_ereg_replace
   signature:
@@ -250,6 +265,7 @@
     to: return
   - from: argument(3)
     to: return
+  raises: [valueerror]
 - subject:
     function: mb_ereg_replace_callback
   signature:
@@ -271,6 +287,7 @@
     to: return
   - from: argument(3)
     to: return
+  raises: [valueerror]
 - subject:
     function: mb_ereg_search
   signature:
@@ -282,14 +299,17 @@
       type: ?string
       optional: true
     returnType: bool
+  raises: [error, valueerror]
 - subject:
     function: mb_ereg_search_getpos
   signature:
     returnType: int
+  raises: []
 - subject:
     function: mb_ereg_search_getregs
   signature:
     returnType: array|false
+  raises: []
 - subject:
     function: mb_ereg_search_init
   signature:
@@ -303,6 +323,7 @@
       type: ?string
       optional: true
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: mb_ereg_search_pos
   signature:
@@ -314,6 +335,7 @@
       type: ?string
       optional: true
     returnType: array|false
+  raises: [error, valueerror]
 - subject:
     function: mb_ereg_search_regs
   signature:
@@ -325,6 +347,7 @@
       type: ?string
       optional: true
     returnType: array|false
+  raises: [error, valueerror]
 - subject:
     function: mb_ereg_search_setpos
   signature:
@@ -332,6 +355,7 @@
     - name: offset
       type: int
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: mb_eregi
   signature:
@@ -345,6 +369,7 @@
       optional: true
       byRef: true
     returnType: bool
+  raises: [error, typeerror, valueerror]
 - subject:
     function: mb_eregi_replace
   signature:
@@ -368,6 +393,7 @@
     to: return
   - from: argument(3)
     to: return
+  raises: [valueerror]
 - subject:
     function: mb_get_info
   signature:
@@ -376,6 +402,7 @@
       type: string
       optional: true
     returnType: array|string|int|false|null
+  raises: []
 - subject:
     function: mb_http_input
   signature:
@@ -384,6 +411,7 @@
       type: ?string
       optional: true
     returnType: array|string|false
+  raises: [valueerror]
 - subject:
     function: mb_http_output
   signature:
@@ -392,6 +420,7 @@
       type: ?string
       optional: true
     returnType: string|bool
+  raises: [valueerror]
 - subject:
     function: mb_internal_encoding
   signature:
@@ -400,6 +429,7 @@
       type: ?string
       optional: true
     returnType: string|bool
+  raises: [valueerror]
 - subject:
     function: mb_language
   signature:
@@ -408,10 +438,12 @@
       type: ?string
       optional: true
     returnType: string|bool
+  raises: [valueerror]
 - subject:
     function: mb_list_encodings
   signature:
     returnType: array
+  raises: []
 - subject:
     function: mb_ord
   signature:
@@ -422,6 +454,7 @@
       type: ?string
       optional: true
     returnType: int|false
+  raises: [valueerror]
 - subject:
     function: mb_output_handler
   signature:
@@ -434,6 +467,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: mb_parse_str
   signature:
@@ -444,6 +478,7 @@
       type: mixed
       byRef: true
     returnType: bool
+  raises: [error, typeerror]
 - subject:
     function: mb_preferred_mime_name
   signature:
@@ -454,6 +489,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [valueerror]
 - subject:
     function: mb_regex_encoding
   signature:
@@ -462,6 +498,7 @@
       type: ?string
       optional: true
     returnType: string|bool
+  raises: [valueerror]
 - subject:
     function: mb_regex_set_options
   signature:
@@ -473,6 +510,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [valueerror]
 - subject:
     function: mb_scrub
   signature:
@@ -488,6 +526,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [valueerror]
 - subject:
     function: mb_send_mail
   signature:
@@ -505,6 +544,7 @@
       type: ?string
       optional: true
     returnType: bool
+  raises: [dateerror, typeerror, valueerror]
 - subject:
     function: mb_split
   signature:
@@ -517,6 +557,7 @@
       type: int
       optional: true
     returnType: array|false
+  raises: []
 - subject:
     function: mb_str_split
   signature:
@@ -530,6 +571,7 @@
       type: ?string
       optional: true
     returnType: array
+  raises: [valueerror]
 - subject:
     function: mb_strcut
   signature:
@@ -550,6 +592,7 @@
     to: return
   - from: argument(3)
     to: return
+  raises: [valueerror]
 - subject:
     function: mb_strimwidth
   signature:
@@ -574,6 +617,7 @@
     to: return
   - from: argument(4)
     to: return
+  raises: [valueerror]
 - subject:
     function: mb_stripos
   signature:
@@ -589,6 +633,7 @@
       type: ?string
       optional: true
     returnType: int|false
+  raises: [valueerror]
 - subject:
     function: mb_stristr
   signature:
@@ -611,6 +656,7 @@
     to: return
   - from: argument(3)
     to: return
+  raises: [valueerror]
 - subject:
     function: mb_strlen
   signature:
@@ -621,6 +667,7 @@
       type: ?string
       optional: true
     returnType: int
+  raises: [valueerror]
 - subject:
     function: mb_strpos
   signature:
@@ -636,6 +683,7 @@
       type: ?string
       optional: true
     returnType: int|false
+  raises: [valueerror]
 - subject:
     function: mb_strrchr
   signature:
@@ -658,6 +706,7 @@
     to: return
   - from: argument(3)
     to: return
+  raises: [valueerror]
 - subject:
     function: mb_strrichr
   signature:
@@ -680,6 +729,7 @@
     to: return
   - from: argument(3)
     to: return
+  raises: [valueerror]
 - subject:
     function: mb_strripos
   signature:
@@ -695,6 +745,7 @@
       type: ?string
       optional: true
     returnType: int|false
+  raises: [valueerror]
 - subject:
     function: mb_strrpos
   signature:
@@ -710,6 +761,7 @@
       type: ?string
       optional: true
     returnType: int|false
+  raises: [valueerror]
 - subject:
     function: mb_strstr
   signature:
@@ -732,6 +784,7 @@
     to: return
   - from: argument(3)
     to: return
+  raises: [valueerror]
 - subject:
     function: mb_strtolower
   signature:
@@ -745,6 +798,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [valueerror]
 - subject:
     function: mb_strtoupper
   signature:
@@ -758,6 +812,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [valueerror]
 - subject:
     function: mb_strwidth
   signature:
@@ -768,6 +823,7 @@
       type: ?string
       optional: true
     returnType: int
+  raises: [valueerror]
 - subject:
     function: mb_substitute_character
   signature:
@@ -776,6 +832,7 @@
       type: string|int|null
       optional: true
     returnType: string|int|bool
+  raises: [valueerror]
 - subject:
     function: mb_substr
   signature:
@@ -794,6 +851,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [valueerror]
 - subject:
     function: mb_substr_count
   signature:
@@ -806,6 +864,7 @@
       type: ?string
       optional: true
     returnType: int
+  raises: [valueerror]
 - subject:
     function: mb_lcfirst
   signature:
@@ -816,6 +875,7 @@
       type: ?string
       optional: true
     returnType: string
+  raises: [valueerror]
 - subject:
     function: mb_ltrim
   signature:
@@ -829,6 +889,7 @@
       type: ?string
       optional: true
     returnType: string
+  raises: [valueerror]
 - subject:
     function: mb_rtrim
   signature:
@@ -842,6 +903,7 @@
       type: ?string
       optional: true
     returnType: string
+  raises: [valueerror]
 - subject:
     function: mb_str_pad
   signature:
@@ -860,6 +922,7 @@
       type: ?string
       optional: true
     returnType: string
+  raises: [error, valueerror]
 - subject:
     function: mb_trim
   signature:
@@ -873,6 +936,7 @@
       type: ?string
       optional: true
     returnType: string
+  raises: [valueerror]
 - subject:
     function: mb_ucfirst
   signature:
@@ -883,3 +947,4 @@
       type: ?string
       optional: true
     returnType: string
+  raises: [valueerror]

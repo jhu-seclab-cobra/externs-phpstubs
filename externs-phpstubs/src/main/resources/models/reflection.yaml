@@ -88,42 +88,52 @@
     - name: modifiers
       type: int
     returnType: array
+  raises: []
 - subject:
     method: ReflectionAttribute::__clone
   signature:
     returnType: void
+  raises: [reflectionexception]
 - subject:
     method: ReflectionAttribute::__construct
   signature:
     returnType: mixed
+  raises: [reflectionexception]
 - subject:
     method: ReflectionAttribute::__toString
   signature:
     returnType: string
+  raises: [error]
 - subject:
     method: ReflectionAttribute::getArguments
   signature:
     returnType: array
+  raises: [error, typeerror]
 - subject:
     method: ReflectionAttribute::getName
   signature:
     returnType: string
+  raises: [error]
 - subject:
     method: ReflectionAttribute::getTarget
   signature:
     returnType: int
+  raises: [error]
 - subject:
     method: ReflectionAttribute::isRepeated
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionAttribute::newInstance
   signature:
     returnType: object
+  raises: [error, typeerror]
 - subject:
     method: ReflectionClassConstant::__clone
   signature:
     returnType: void
+  raises: [reflectionexception]
 - subject:
     method: ReflectionClassConstant::__construct
   signature:
@@ -133,10 +143,12 @@
     - name: constant
       type: string
     returnType: mixed
+  raises: [reflectionexception]
 - subject:
     method: ReflectionClassConstant::__toString
   signature:
     returnType: string
+  raises: [error, typeerror]
 - subject:
     method: ReflectionClassConstant::getAttributes
   signature:
@@ -148,58 +160,72 @@
       type: int
       optional: true
     returnType: array
+  raises: [error, valueerror]
 - subject:
     method: ReflectionClassConstant::getDeclaringClass
   signature:
     returnType: ReflectionClass
+  raises: [error]
 - subject:
     method: ReflectionClassConstant::getDocComment
   signature:
     returnType: string|false
+  raises: [error]
 - subject:
     method: ReflectionClassConstant::getModifiers
   signature:
     returnType: int
+  raises: [error]
 - subject:
     method: ReflectionClassConstant::getName
   signature:
     returnType: string
+  raises: [error]
 - subject:
     method: ReflectionClassConstant::getType
   signature:
     returnType: ?ReflectionType
+  raises: [error]
 - subject:
     method: ReflectionClassConstant::getValue
   signature:
     returnType: mixed
+  raises: [error, typeerror]
 - subject:
     method: ReflectionClassConstant::hasType
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionClassConstant::isDeprecated
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionClassConstant::isEnumCase
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionClassConstant::isFinal
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionClassConstant::isPrivate
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionClassConstant::isProtected
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionClassConstant::isPublic
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionConstant::__construct
   signature:
@@ -207,10 +233,12 @@
     - name: name
       type: string
     returnType: mixed
+  raises: [reflectionexception]
 - subject:
     method: ReflectionConstant::__toString
   signature:
     returnType: string
+  raises: [error]
 - subject:
     method: ReflectionConstant::getAttributes
   signature:
@@ -222,38 +250,47 @@
       type: int
       optional: true
     returnType: array
+  raises: [error, valueerror]
 - subject:
     method: ReflectionConstant::getExtension
   signature:
     returnType: ?ReflectionExtension
+  raises: [error, reflectionexception]
 - subject:
     method: ReflectionConstant::getExtensionName
   signature:
     returnType: string|false
+  raises: [error, reflectionexception]
 - subject:
     method: ReflectionConstant::getFileName
   signature:
     returnType: string|false
+  raises: [error]
 - subject:
     method: ReflectionConstant::getName
   signature:
     returnType: string
+  raises: [error]
 - subject:
     method: ReflectionConstant::getNamespaceName
   signature:
     returnType: string
+  raises: [error]
 - subject:
     method: ReflectionConstant::getShortName
   signature:
     returnType: string
+  raises: [error]
 - subject:
     method: ReflectionConstant::getValue
   signature:
     returnType: mixed
+  raises: [error]
 - subject:
     method: ReflectionConstant::isDeprecated
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionEnum::__construct
   signature:
@@ -261,10 +298,12 @@
     - name: objectOrClass
       type: object|string
     returnType: mixed
+  raises: [error, reflectionexception]
 - subject:
     method: ReflectionEnum::getBackingType
   signature:
     returnType: ?ReflectionNamedType
+  raises: [error]
 - subject:
     method: ReflectionEnum::getCase
   signature:
@@ -272,10 +311,12 @@
     - name: name
       type: string
     returnType: ReflectionEnumUnitCase
+  raises: [error, reflectionexception]
 - subject:
     method: ReflectionEnum::getCases
   signature:
     returnType: array
+  raises: [error]
 - subject:
     method: ReflectionEnum::hasCase
   signature:
@@ -283,10 +324,12 @@
     - name: name
       type: string
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionEnum::isBacked
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionEnumBackedCase::__construct
   signature:
@@ -296,10 +339,12 @@
     - name: constant
       type: string
     returnType: mixed
+  raises: [error, reflectionexception]
 - subject:
     method: ReflectionEnumBackedCase::getBackingValue
   signature:
     returnType: int|string
+  raises: [error, typeerror]
 - subject:
     method: ReflectionEnumUnitCase::__construct
   signature:
@@ -309,18 +354,22 @@
     - name: constant
       type: string
     returnType: mixed
+  raises: [error, reflectionexception]
 - subject:
     method: ReflectionEnumUnitCase::getEnum
   signature:
     returnType: ReflectionEnum
+  raises: [error]
 - subject:
     method: ReflectionEnumUnitCase::getValue
   signature:
     returnType: UnitEnum
+  raises: [error, typeerror]
 - subject:
     method: ReflectionExtension::__clone
   signature:
     returnType: void
+  raises: [reflectionexception]
 - subject:
     method: ReflectionExtension::__construct
   signature:
@@ -328,54 +377,67 @@
     - name: name
       type: string
     returnType: mixed
+  raises: [reflectionexception]
 - subject:
     method: ReflectionExtension::__toString
   signature:
     returnType: string
+  raises: [error, typeerror]
 - subject:
     method: ReflectionExtension::getClasses
   signature:
     returnType: array
+  raises: [error]
 - subject:
     method: ReflectionExtension::getClassNames
   signature:
     returnType: array
+  raises: [error]
 - subject:
     method: ReflectionExtension::getConstants
   signature:
     returnType: array
+  raises: [error]
 - subject:
     method: ReflectionExtension::getDependencies
   signature:
     returnType: array
+  raises: [error]
 - subject:
     method: ReflectionExtension::getFunctions
   signature:
     returnType: array
+  raises: [error]
 - subject:
     method: ReflectionExtension::getINIEntries
   signature:
     returnType: array
+  raises: [error]
 - subject:
     method: ReflectionExtension::getName
   signature:
     returnType: string
+  raises: [error]
 - subject:
     method: ReflectionExtension::getVersion
   signature:
     returnType: ?string
+  raises: [error]
 - subject:
     method: ReflectionExtension::info
   signature:
     returnType: void
+  raises: [error]
 - subject:
     method: ReflectionExtension::isPersistent
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionExtension::isTemporary
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionFiber::__construct
   signature:
@@ -383,22 +445,27 @@
     - name: fiber
       type: Fiber
     returnType: mixed
+  raises: []
 - subject:
     method: ReflectionFiber::getCallable
   signature:
     returnType: callable
+  raises: [error]
 - subject:
     method: ReflectionFiber::getExecutingFile
   signature:
     returnType: ?string
+  raises: [error]
 - subject:
     method: ReflectionFiber::getExecutingLine
   signature:
     returnType: ?int
+  raises: [error]
 - subject:
     method: ReflectionFiber::getFiber
   signature:
     returnType: Fiber
+  raises: []
 - subject:
     method: ReflectionFiber::getTrace
   signature:
@@ -407,10 +474,12 @@
       type: int
       optional: true
     returnType: array
+  raises: [error]
 - subject:
     method: ReflectionFunctionAbstract::__clone
   signature:
     returnType: void
+  raises: [reflectionexception]
 - subject:
     method: ReflectionFunctionAbstract::getAttributes
   signature:
@@ -422,126 +491,157 @@
       type: int
       optional: true
     returnType: array
+  raises: [error, valueerror]
 - subject:
     method: ReflectionFunctionAbstract::getClosureCalledClass
   signature:
     returnType: ?ReflectionClass
+  raises: [error]
 - subject:
     method: ReflectionFunctionAbstract::getClosureScopeClass
   signature:
     returnType: ?ReflectionClass
+  raises: [error]
 - subject:
     method: ReflectionFunctionAbstract::getClosureThis
   signature:
     returnType: ?object
+  raises: [error]
 - subject:
     method: ReflectionFunctionAbstract::getClosureUsedVariables
   signature:
     returnType: array
+  raises: [error]
 - subject:
     method: ReflectionFunctionAbstract::getDocComment
   signature:
     returnType: string|false
+  raises: [error]
 - subject:
     method: ReflectionFunctionAbstract::getEndLine
   signature:
     returnType: int|false
+  raises: [error]
 - subject:
     method: ReflectionFunctionAbstract::getExtension
   signature:
     returnType: ?ReflectionExtension
+  raises: [error]
 - subject:
     method: ReflectionFunctionAbstract::getExtensionName
   signature:
     returnType: string|false
+  raises: [error]
 - subject:
     method: ReflectionFunctionAbstract::getFileName
   signature:
     returnType: string|false
+  raises: [error]
 - subject:
     method: ReflectionFunctionAbstract::getName
   signature:
     returnType: string
+  raises: [error]
 - subject:
     method: ReflectionFunctionAbstract::getNamespaceName
   signature:
     returnType: string
+  raises: [error]
 - subject:
     method: ReflectionFunctionAbstract::getNumberOfParameters
   signature:
     returnType: int
+  raises: [error]
 - subject:
     method: ReflectionFunctionAbstract::getNumberOfRequiredParameters
   signature:
     returnType: int
+  raises: [error]
 - subject:
     method: ReflectionFunctionAbstract::getParameters
   signature:
     returnType: array
+  raises: [error]
 - subject:
     method: ReflectionFunctionAbstract::getReturnType
   signature:
     returnType: ?ReflectionType
+  raises: [error]
 - subject:
     method: ReflectionFunctionAbstract::getShortName
   signature:
     returnType: string
+  raises: [error]
 - subject:
     method: ReflectionFunctionAbstract::getStartLine
   signature:
     returnType: int|false
+  raises: [error]
 - subject:
     method: ReflectionFunctionAbstract::getStaticVariables
   signature:
     returnType: array
+  raises: [error]
 - subject:
     method: ReflectionFunctionAbstract::getTentativeReturnType
   signature:
     returnType: ?ReflectionType
+  raises: [error]
 - subject:
     method: ReflectionFunctionAbstract::hasReturnType
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionFunctionAbstract::hasTentativeReturnType
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionFunctionAbstract::inNamespace
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionFunctionAbstract::isClosure
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionFunctionAbstract::isDeprecated
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionFunctionAbstract::isGenerator
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionFunctionAbstract::isInternal
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionFunctionAbstract::isStatic
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionFunctionAbstract::isUserDefined
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionFunctionAbstract::isVariadic
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionFunctionAbstract::returnsReference
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionGenerator::__construct
   signature:
@@ -549,26 +649,32 @@
     - name: generator
       type: Generator
     returnType: mixed
+  raises: []
 - subject:
     method: ReflectionGenerator::getExecutingFile
   signature:
     returnType: string
+  raises: [reflectionexception]
 - subject:
     method: ReflectionGenerator::getExecutingGenerator
   signature:
     returnType: Generator
+  raises: [closedgeneratorexception, reflectionexception]
 - subject:
     method: ReflectionGenerator::getExecutingLine
   signature:
     returnType: int
+  raises: [reflectionexception]
 - subject:
     method: ReflectionGenerator::getFunction
   signature:
     returnType: ReflectionFunctionAbstract
+  raises: []
 - subject:
     method: ReflectionGenerator::getThis
   signature:
     returnType: ?object
+  raises: [reflectionexception]
 - subject:
     method: ReflectionGenerator::getTrace
   signature:
@@ -577,10 +683,12 @@
       type: int
       optional: true
     returnType: array
+  raises: [closedgeneratorexception, reflectionexception]
 - subject:
     method: ReflectionGenerator::isClosed
   signature:
     returnType: bool
+  raises: []
 - subject:
     method: ReflectionObject::__construct
   signature:
@@ -588,14 +696,17 @@
     - name: object
       type: object
     returnType: mixed
+  raises: [reflectionexception]
 - subject:
     method: ReflectionReference::__clone
   signature:
     returnType: void
+  raises: [reflectionexception]
 - subject:
     method: ReflectionReference::__construct
   signature:
     returnType: mixed
+  raises: [reflectionexception]
 - subject:
     method: ReflectionReference::fromArrayElement
   signature:
@@ -605,14 +716,17 @@
     - name: key
       type: int|string
     returnType: ?ReflectionReference
+  raises: [reflectionexception]
 - subject:
     method: ReflectionReference::getId
   signature:
     returnType: string
+  raises: [random\randomexception, reflectionexception]
 - subject:
     method: ReflectionZendExtension::__clone
   signature:
     returnType: void
+  raises: [reflectionexception]
 - subject:
     method: ReflectionZendExtension::__construct
   signature:
@@ -620,30 +734,37 @@
     - name: name
       type: string
     returnType: mixed
+  raises: [reflectionexception]
 - subject:
     method: ReflectionZendExtension::__toString
   signature:
     returnType: string
+  raises: [error]
 - subject:
     method: ReflectionZendExtension::getAuthor
   signature:
     returnType: string
+  raises: [error]
 - subject:
     method: ReflectionZendExtension::getCopyright
   signature:
     returnType: string
+  raises: [error]
 - subject:
     method: ReflectionZendExtension::getName
   signature:
     returnType: string
+  raises: [error]
 - subject:
     method: ReflectionZendExtension::getURL
   signature:
     returnType: string
+  raises: [error]
 - subject:
     method: ReflectionZendExtension::getVersion
   signature:
     returnType: string
+  raises: [error]
 - subject:
     class: reflectionclass
   signature:
@@ -693,6 +814,7 @@
     method: ReflectionClass::__clone
   signature:
     returnType: void
+  raises: [reflectionexception]
 - subject:
     method: ReflectionClass::__construct
   signature:
@@ -700,10 +822,12 @@
     - name: objectOrClass
       type: object|string
     returnType: mixed
+  raises: [reflectionexception]
 - subject:
     method: ReflectionClass::__toString
   signature:
     returnType: string
+  raises: [error, typeerror]
 - subject:
     method: ReflectionClass::getAttributes
   signature:
@@ -715,6 +839,7 @@
       type: int
       optional: true
     returnType: array
+  raises: [error, valueerror]
 - subject:
     method: ReflectionClass::getConstant
   signature:
@@ -722,6 +847,7 @@
     - name: name
       type: string
     returnType: mixed
+  raises: [error, typeerror]
 - subject:
     method: ReflectionClass::getConstants
   signature:
@@ -730,42 +856,52 @@
       type: ?int
       optional: true
     returnType: array
+  raises: [error, typeerror]
 - subject:
     method: ReflectionClass::getConstructor
   signature:
     returnType: ?ReflectionMethod
+  raises: [error]
 - subject:
     method: ReflectionClass::getDefaultProperties
   signature:
     returnType: array
+  raises: [error, typeerror]
 - subject:
     method: ReflectionClass::getDocComment
   signature:
     returnType: string|false
+  raises: [error]
 - subject:
     method: ReflectionClass::getEndLine
   signature:
     returnType: int|false
+  raises: [error]
 - subject:
     method: ReflectionClass::getExtension
   signature:
     returnType: ?ReflectionExtension
+  raises: [error]
 - subject:
     method: ReflectionClass::getExtensionName
   signature:
     returnType: string|false
+  raises: [error]
 - subject:
     method: ReflectionClass::getFileName
   signature:
     returnType: string|false
+  raises: [error]
 - subject:
     method: ReflectionClass::getInterfaceNames
   signature:
     returnType: array
+  raises: [error]
 - subject:
     method: ReflectionClass::getInterfaces
   signature:
     returnType: array
+  raises: [error]
 - subject:
     method: ReflectionClass::getLazyInitializer
   signature:
@@ -773,6 +909,7 @@
     - name: object
       type: object
     returnType: ?callable
+  raises: [error]
 - subject:
     method: ReflectionClass::getMethod
   signature:
@@ -780,6 +917,7 @@
     - name: name
       type: string
     returnType: ReflectionMethod
+  raises: [error, reflectionexception]
 - subject:
     method: ReflectionClass::getMethods
   signature:
@@ -788,22 +926,27 @@
       type: ?int
       optional: true
     returnType: array
+  raises: [error]
 - subject:
     method: ReflectionClass::getModifiers
   signature:
     returnType: int
+  raises: [error]
 - subject:
     method: ReflectionClass::getName
   signature:
     returnType: string
+  raises: [error]
 - subject:
     method: ReflectionClass::getNamespaceName
   signature:
     returnType: string
+  raises: [error]
 - subject:
     method: ReflectionClass::getParentClass
   signature:
     returnType: ReflectionClass|false
+  raises: [error]
 - subject:
     method: ReflectionClass::getProperties
   signature:
@@ -812,6 +955,7 @@
       type: ?int
       optional: true
     returnType: array
+  raises: [error]
 - subject:
     method: ReflectionClass::getProperty
   signature:
@@ -819,6 +963,7 @@
     - name: name
       type: string
     returnType: ReflectionProperty
+  raises: [error, reflectionexception]
 - subject:
     method: ReflectionClass::getReflectionConstant
   signature:
@@ -826,6 +971,7 @@
     - name: name
       type: string
     returnType: ReflectionClassConstant|false
+  raises: [error]
 - subject:
     method: ReflectionClass::getReflectionConstants
   signature:
@@ -834,18 +980,22 @@
       type: ?int
       optional: true
     returnType: array
+  raises: [error]
 - subject:
     method: ReflectionClass::getShortName
   signature:
     returnType: string
+  raises: [error]
 - subject:
     method: ReflectionClass::getStartLine
   signature:
     returnType: int|false
+  raises: [error]
 - subject:
     method: ReflectionClass::getStaticProperties
   signature:
     returnType: array
+  raises: [error, typeerror]
 - subject:
     method: ReflectionClass::getStaticPropertyValue
   signature:
@@ -856,18 +1006,22 @@
       type: mixed
       optional: true
     returnType: mixed
+  raises: [error, reflectionexception, typeerror]
 - subject:
     method: ReflectionClass::getTraitAliases
   signature:
     returnType: array
+  raises: [error]
 - subject:
     method: ReflectionClass::getTraitNames
   signature:
     returnType: array
+  raises: [error]
 - subject:
     method: ReflectionClass::getTraits
   signature:
     returnType: array
+  raises: [error]
 - subject:
     method: ReflectionClass::hasConstant
   signature:
@@ -875,6 +1029,7 @@
     - name: name
       type: string
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionClass::hasMethod
   signature:
@@ -882,6 +1037,7 @@
     - name: name
       type: string
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionClass::hasProperty
   signature:
@@ -889,6 +1045,7 @@
     - name: name
       type: string
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionClass::implementsInterface
   signature:
@@ -896,6 +1053,7 @@
     - name: interface
       type: ReflectionClass|string
     returnType: bool
+  raises: [error, reflectionexception]
 - subject:
     method: ReflectionClass::initializeLazyObject
   signature:
@@ -903,30 +1061,37 @@
     - name: object
       type: object
     returnType: object
+  raises: [error, typeerror]
 - subject:
     method: ReflectionClass::inNamespace
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionClass::isAbstract
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionClass::isAnonymous
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionClass::isCloneable
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionClass::isEnum
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionClass::isFinal
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionClass::isInstance
   signature:
@@ -934,30 +1099,37 @@
     - name: object
       type: object
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionClass::isInstantiable
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionClass::isInterface
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionClass::isInternal
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionClass::isIterable
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionClass::isIterateable
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionClass::isReadOnly
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionClass::isSubclassOf
   signature:
@@ -965,10 +1137,12 @@
     - name: class
       type: ReflectionClass|string
     returnType: bool
+  raises: [error, reflectionexception]
 - subject:
     method: ReflectionClass::isTrait
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionClass::isUninitializedLazyObject
   signature:
@@ -976,10 +1150,12 @@
     - name: object
       type: object
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionClass::isUserDefined
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionClass::markLazyObjectAsInitialized
   signature:
@@ -987,6 +1163,7 @@
     - name: object
       type: object
     returnType: object
+  raises: [error]
 - subject:
     method: ReflectionClass::newInstance
   signature:
@@ -996,6 +1173,7 @@
       optional: true
       variadic: true
     returnType: object
+  raises: [error, reflectionexception]
 - subject:
     method: ReflectionClass::newInstanceArgs
   signature:
@@ -1004,10 +1182,12 @@
       type: array
       optional: true
     returnType: ?object
+  raises: [error, reflectionexception]
 - subject:
     method: ReflectionClass::newInstanceWithoutConstructor
   signature:
     returnType: object
+  raises: [error, reflectionexception]
 - subject:
     method: ReflectionClass::newLazyGhost
   signature:
@@ -1018,6 +1198,7 @@
       type: int
       optional: true
     returnType: object
+  raises: [error, reflectionexception, typeerror]
 - subject:
     method: ReflectionClass::newLazyProxy
   signature:
@@ -1028,6 +1209,7 @@
       type: int
       optional: true
     returnType: object
+  raises: [error, reflectionexception, typeerror]
 - subject:
     method: ReflectionClass::resetAsLazyGhost
   signature:
@@ -1040,6 +1222,7 @@
       type: int
       optional: true
     returnType: void
+  raises: [error, reflectionexception, typeerror]
 - subject:
     method: ReflectionClass::resetAsLazyProxy
   signature:
@@ -1052,6 +1235,7 @@
       type: int
       optional: true
     returnType: void
+  raises: [error, reflectionexception, typeerror]
 - subject:
     method: ReflectionClass::setStaticPropertyValue
   signature:
@@ -1061,6 +1245,7 @@
     - name: value
       type: mixed
     returnType: void
+  raises: [error, reflectionexception, typeerror]
 - subject:
     method: ReflectionFunction::__construct
   signature:
@@ -1068,14 +1253,17 @@
     - name: function
       type: Closure|string
     returnType: mixed
+  raises: [reflectionexception]
 - subject:
     method: ReflectionFunction::__toString
   signature:
     returnType: string
+  raises: [error]
 - subject:
     method: ReflectionFunction::getClosure
   signature:
     returnType: Closure
+  raises: [error]
 - subject:
     method: ReflectionFunction::invoke
   signature:
@@ -1085,6 +1273,7 @@
       optional: true
       variadic: true
     returnType: mixed
+  raises: [error, reflectionexception]
 - subject:
     method: ReflectionFunction::invokeArgs
   signature:
@@ -1092,18 +1281,22 @@
     - name: args
       type: array
     returnType: mixed
+  raises: [error, reflectionexception]
 - subject:
     method: ReflectionFunction::isAnonymous
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionFunction::isDisabled
   signature:
     returnType: bool
+  raises: []
 - subject:
     method: ReflectionIntersectionType::getTypes
   signature:
     returnType: array
+  raises: [error]
 - subject:
     method: ReflectionMethod::__construct
   signature:
@@ -1114,10 +1307,12 @@
       type: ?string
       optional: true
     returnType: mixed
+  raises: [reflectionexception, valueerror]
 - subject:
     method: ReflectionMethod::__toString
   signature:
     returnType: string
+  raises: [error]
 - subject:
     method: ReflectionMethod::createFromMethodName
   signature:
@@ -1125,6 +1320,7 @@
     - name: method
       type: string
     returnType: static
+  raises: [reflectionexception, valueerror]
 - subject:
     method: ReflectionMethod::getClosure
   signature:
@@ -1133,22 +1329,27 @@
       type: ?object
       optional: true
     returnType: Closure
+  raises: [error, reflectionexception, valueerror]
 - subject:
     method: ReflectionMethod::getDeclaringClass
   signature:
     returnType: ReflectionClass
+  raises: [error]
 - subject:
     method: ReflectionMethod::getModifiers
   signature:
     returnType: int
+  raises: [error]
 - subject:
     method: ReflectionMethod::getPrototype
   signature:
     returnType: ReflectionMethod
+  raises: [error, reflectionexception]
 - subject:
     method: ReflectionMethod::hasPrototype
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionMethod::invoke
   signature:
@@ -1160,6 +1361,7 @@
       optional: true
       variadic: true
     returnType: mixed
+  raises: [error, reflectionexception]
 - subject:
     method: ReflectionMethod::invokeArgs
   signature:
@@ -1169,34 +1371,42 @@
     - name: args
       type: array
     returnType: mixed
+  raises: [error, reflectionexception]
 - subject:
     method: ReflectionMethod::isAbstract
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionMethod::isConstructor
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionMethod::isDestructor
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionMethod::isFinal
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionMethod::isPrivate
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionMethod::isProtected
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionMethod::isPublic
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionMethod::setAccessible
   signature:
@@ -1204,18 +1414,22 @@
     - name: accessible
       type: bool
     returnType: void
+  raises: []
 - subject:
     method: ReflectionNamedType::getName
   signature:
     returnType: string
+  raises: [error]
 - subject:
     method: ReflectionNamedType::isBuiltin
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionParameter::__clone
   signature:
     returnType: void
+  raises: [reflectionexception]
 - subject:
     method: ReflectionParameter::__construct
   signature:
@@ -1225,18 +1439,22 @@
     - name: param
       type: int|string
     returnType: mixed
+  raises: [reflectionexception, valueerror]
 - subject:
     method: ReflectionParameter::__toString
   signature:
     returnType: string
+  raises: [error]
 - subject:
     method: ReflectionParameter::allowsNull
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionParameter::canBePassedByValue
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionParameter::getAttributes
   signature:
@@ -1248,78 +1466,97 @@
       type: int
       optional: true
     returnType: array
+  raises: [error, valueerror]
 - subject:
     method: ReflectionParameter::getClass
   signature:
     returnType: ?ReflectionClass
+  raises: [error, reflectionexception]
 - subject:
     method: ReflectionParameter::getDeclaringClass
   signature:
     returnType: ?ReflectionClass
+  raises: [error]
 - subject:
     method: ReflectionParameter::getDeclaringFunction
   signature:
     returnType: ReflectionFunctionAbstract
+  raises: [error]
 - subject:
     method: ReflectionParameter::getDefaultValue
   signature:
     returnType: mixed
+  raises: [arithmeticerror, divisionbyzeroerror, error, reflectionexception, typeerror]
 - subject:
     method: ReflectionParameter::getDefaultValueConstantName
   signature:
     returnType: ?string
+  raises: [arithmeticerror, divisionbyzeroerror, error, reflectionexception, typeerror]
 - subject:
     method: ReflectionParameter::getName
   signature:
     returnType: string
+  raises: [error]
 - subject:
     method: ReflectionParameter::getPosition
   signature:
     returnType: int
+  raises: [error]
 - subject:
     method: ReflectionParameter::getType
   signature:
     returnType: ?ReflectionType
+  raises: [error]
 - subject:
     method: ReflectionParameter::hasType
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionParameter::isArray
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionParameter::isCallable
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionParameter::isDefaultValueAvailable
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionParameter::isDefaultValueConstant
   signature:
     returnType: bool
+  raises: [arithmeticerror, divisionbyzeroerror, error, reflectionexception, typeerror]
 - subject:
     method: ReflectionParameter::isOptional
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionParameter::isPassedByReference
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionParameter::isPromoted
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionParameter::isVariadic
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionProperty::__clone
   signature:
     returnType: void
+  raises: [reflectionexception]
 - subject:
     method: ReflectionProperty::__construct
   signature:
@@ -1329,10 +1566,12 @@
     - name: property
       type: string
     returnType: mixed
+  raises: [reflectionexception]
 - subject:
     method: ReflectionProperty::__toString
   signature:
     returnType: string
+  raises: [error]
 - subject:
     method: ReflectionProperty::getAttributes
   signature:
@@ -1344,18 +1583,22 @@
       type: int
       optional: true
     returnType: array
+  raises: [error, valueerror]
 - subject:
     method: ReflectionProperty::getDeclaringClass
   signature:
     returnType: ReflectionClass
+  raises: [error]
 - subject:
     method: ReflectionProperty::getDefaultValue
   signature:
     returnType: mixed
+  raises: [error, typeerror]
 - subject:
     method: ReflectionProperty::getDocComment
   signature:
     returnType: string|false
+  raises: [error]
 - subject:
     method: ReflectionProperty::getHook
   signature:
@@ -1363,22 +1606,27 @@
     - name: type
       type: PropertyHookType
     returnType: ?ReflectionMethod
+  raises: [error]
 - subject:
     method: ReflectionProperty::getHooks
   signature:
     returnType: array
+  raises: [error]
 - subject:
     method: ReflectionProperty::getMangledName
   signature:
     returnType: string
+  raises: [error]
 - subject:
     method: ReflectionProperty::getModifiers
   signature:
     returnType: int
+  raises: [error]
 - subject:
     method: ReflectionProperty::getName
   signature:
     returnType: string
+  raises: [error]
 - subject:
     method: ReflectionProperty::getRawValue
   signature:
@@ -1386,14 +1634,17 @@
     - name: object
       type: object
     returnType: mixed
+  raises: [error, reflectionexception]
 - subject:
     method: ReflectionProperty::getSettableType
   signature:
     returnType: ?ReflectionType
+  raises: [error]
 - subject:
     method: ReflectionProperty::getType
   signature:
     returnType: ?ReflectionType
+  raises: [error]
 - subject:
     method: ReflectionProperty::getValue
   signature:
@@ -1402,10 +1653,12 @@
       type: ?object
       optional: true
     returnType: mixed
+  raises: [error, reflectionexception, typeerror]
 - subject:
     method: ReflectionProperty::hasDefaultValue
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionProperty::hasHook
   signature:
@@ -1413,30 +1666,37 @@
     - name: type
       type: PropertyHookType
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionProperty::hasHooks
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionProperty::hasType
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionProperty::isAbstract
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionProperty::isDefault
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionProperty::isDynamic
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionProperty::isFinal
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionProperty::isInitialized
   signature:
@@ -1445,6 +1705,7 @@
       type: ?object
       optional: true
     returnType: bool
+  raises: [error, reflectionexception, typeerror]
 - subject:
     method: ReflectionProperty::isLazy
   signature:
@@ -1452,42 +1713,52 @@
     - name: object
       type: object
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionProperty::isPrivate
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionProperty::isPrivateSet
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionProperty::isPromoted
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionProperty::isProtected
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionProperty::isProtectedSet
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionProperty::isPublic
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionProperty::isReadOnly
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionProperty::isStatic
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionProperty::isVirtual
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionProperty::setAccessible
   signature:
@@ -1495,6 +1766,7 @@
     - name: accessible
       type: bool
     returnType: void
+  raises: []
 - subject:
     method: ReflectionProperty::setRawValue
   signature:
@@ -1504,6 +1776,7 @@
     - name: value
       type: mixed
     returnType: void
+  raises: [error, reflectionexception]
 - subject:
     method: ReflectionProperty::setRawValueWithoutLazyInitialization
   signature:
@@ -1513,6 +1786,7 @@
     - name: value
       type: mixed
     returnType: void
+  raises: [error, reflectionexception]
 - subject:
     method: ReflectionProperty::setValue
   signature:
@@ -1523,6 +1797,7 @@
       type: mixed
       optional: true
     returnType: void
+  raises: [error, typeerror]
 - subject:
     method: ReflectionProperty::skipLazyInitialization
   signature:
@@ -1530,19 +1805,24 @@
     - name: object
       type: object
     returnType: void
+  raises: [error, reflectionexception]
 - subject:
     method: ReflectionType::__clone
   signature:
     returnType: void
+  raises: [reflectionexception]
 - subject:
     method: ReflectionType::__toString
   signature:
     returnType: string
+  raises: [error]
 - subject:
     method: ReflectionType::allowsNull
   signature:
     returnType: bool
+  raises: [error]
 - subject:
     method: ReflectionUnionType::getTypes
   signature:
     returnType: array
+  raises: [error]

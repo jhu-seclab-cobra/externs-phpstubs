@@ -7,6 +7,7 @@
     - name: dba
       type: Dba\Connection
     returnType: void
+  raises: [error]
 - subject:
     function: dba_delete
   signature:
@@ -16,6 +17,7 @@
     - name: dba
       type: Dba\Connection
     returnType: bool
+  raises: [error]
 - subject:
     function: dba_exists
   signature:
@@ -25,6 +27,7 @@
     - name: dba
       type: Dba\Connection
     returnType: bool
+  raises: [error]
 - subject:
     function: dba_fetch
   signature:
@@ -37,6 +40,7 @@
       type: mixed
       optional: true
     returnType: string|false
+  raises: [error, valueerror]
 - subject:
     function: dba_firstkey
   signature:
@@ -44,6 +48,7 @@
     - name: dba
       type: Dba\Connection
     returnType: string|false
+  raises: [error]
 - subject:
     function: dba_handlers
   signature:
@@ -52,6 +57,7 @@
       type: bool
       optional: true
     returnType: array
+  raises: []
 - subject:
     function: dba_insert
   signature:
@@ -63,6 +69,7 @@
     - name: dba
       type: Dba\Connection
     returnType: bool
+  raises: [error]
 - subject:
     function: dba_key_split
   signature:
@@ -70,10 +77,12 @@
     - name: key
       type: string|false|null
     returnType: array|false
+  raises: []
 - subject:
     function: dba_list
   signature:
     returnType: array
+  raises: []
 - subject:
     function: dba_nextkey
   signature:
@@ -81,6 +90,7 @@
     - name: dba
       type: Dba\Connection
     returnType: string|false
+  raises: [error]
 - subject:
     function: dba_open
   signature:
@@ -111,6 +121,7 @@
     to: return
   - from: argument(3)
     to: return
+  raises: [valueerror]
 - subject:
     function: dba_optimize
   signature:
@@ -118,6 +129,7 @@
     - name: dba
       type: Dba\Connection
     returnType: bool
+  raises: [error]
 - subject:
     function: dba_popen
   signature:
@@ -148,6 +160,7 @@
     to: return
   - from: argument(3)
     to: return
+  raises: [valueerror]
 - subject:
     function: dba_replace
   signature:
@@ -159,6 +172,7 @@
     - name: dba
       type: Dba\Connection
     returnType: bool
+  raises: [error]
 - subject:
     function: dba_sync
   signature:
@@ -166,6 +180,7 @@
     - name: dba
       type: Dba\Connection
     returnType: bool
+  raises: [error]
 - subject:
     class: dba\connection
   signature:

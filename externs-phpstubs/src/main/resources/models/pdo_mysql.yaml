@@ -9,3 +9,4 @@
     method: Pdo\Mysql::getWarningCount
   signature:
     returnType: int
+  raises: []

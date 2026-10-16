@@ -4,6 +4,7 @@
     function: session_abort
   signature:
     returnType: bool
+  raises: []
 - subject:
     function: session_cache_expire
   signature:
@@ -12,6 +13,7 @@
       type: ?int
       optional: true
     returnType: int|false
+  raises: []
 - subject:
     function: session_cache_limiter
   signature:
@@ -23,10 +25,12 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: session_commit
   signature:
     returnType: bool
+  raises: []
 - subject:
     function: session_create_id
   signature:
@@ -38,6 +42,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [random\randomexception, valueerror]
 - subject:
     function: session_decode
   signature:
@@ -45,22 +50,27 @@
     - name: data
       type: string
     returnType: bool
+  raises: []
 - subject:
     function: session_destroy
   signature:
     returnType: bool
+  raises: []
 - subject:
     function: session_encode
   signature:
     returnType: string|false
+  raises: []
 - subject:
     function: session_gc
   signature:
     returnType: int|false
+  raises: [random\brokenrandomengineerror]
 - subject:
     function: session_get_cookie_params
   signature:
     returnType: array
+  raises: []
 - subject:
     function: session_id
   signature:
@@ -72,6 +82,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: session_is_registered
   signature:
@@ -90,6 +101,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [valueerror]
 - subject:
     function: session_name
   signature:
@@ -101,6 +113,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [valueerror]
 - subject:
     function: session_pgsql_add_error
   signature:
@@ -146,6 +159,7 @@
       type: bool
       optional: true
     returnType: bool
+  raises: [dateerror, error]
 - subject:
     function: session_register
   signature:
@@ -160,10 +174,12 @@
     function: session_register_shutdown
   signature:
     returnType: void
+  raises: []
 - subject:
     function: session_reset
   signature:
     returnType: bool
+  raises: [dateerror, error, random\brokenrandomengineerror, random\randomexception]
 - subject:
     function: session_save_path
   signature:
@@ -175,6 +191,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [valueerror]
 - subject:
     function: session_set_cookie_params
   signature:
@@ -194,6 +211,7 @@
       type: ?bool
       optional: true
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: session_set_save_handler
   signature:
@@ -225,6 +243,7 @@
       type: ?callable
       optional: true
     returnType: bool
+  raises: []
 - subject:
     function: session_start
   signature:
@@ -233,10 +252,12 @@
       type: array
       optional: true
     returnType: bool
+  raises: [dateerror, error, random\brokenrandomengineerror, random\randomexception, typeerror, valueerror]
 - subject:
     function: session_status
   signature:
     returnType: int
+  raises: []
 - subject:
     function: session_unregister
   signature:
@@ -248,10 +269,12 @@
     function: session_unset
   signature:
     returnType: bool
+  raises: []
 - subject:
     function: session_write_close
   signature:
     returnType: bool
+  raises: []
 - subject:
     class: sessionhandler
   signature:
@@ -273,10 +296,12 @@
     method: SessionHandler::close
   signature:
     returnType: bool
+  raises: []
 - subject:
     method: SessionHandler::create_sid
   signature:
     returnType: string
+  raises: [error]
 - subject:
     method: SessionHandler::destroy
   signature:
@@ -284,6 +309,7 @@
     - name: id
       type: string
     returnType: bool
+  raises: []
 - subject:
     method: SessionHandler::gc
   signature:
@@ -291,6 +317,7 @@
     - name: max_lifetime
       type: int
     returnType: int|false
+  raises: []
 - subject:
     method: SessionHandler::open
   signature:
@@ -300,6 +327,7 @@
     - name: name
       type: string
     returnType: bool
+  raises: []
 - subject:
     method: SessionHandler::read
   signature:
@@ -307,6 +335,7 @@
     - name: id
       type: string
     returnType: string|false
+  raises: []
 - subject:
     method: SessionHandler::write
   signature:
@@ -316,6 +345,7 @@
     - name: data
       type: string
     returnType: bool
+  raises: []
 - subject:
     method: SessionHandlerInterface::close
   signature:

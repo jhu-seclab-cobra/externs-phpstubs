@@ -26,10 +26,12 @@
       type: int
       optional: true
     returnType: mixed
+  raises: [valueerror]
 - subject:
     method: SNMP::close
   signature:
     returnType: bool
+  raises: []
 - subject:
     method: SNMP::get
   signature:
@@ -40,14 +42,17 @@
       type: bool
       optional: true
     returnType: mixed
+  raises: [error, snmpexception, typeerror, valueerror]
 - subject:
     method: SNMP::getErrno
   signature:
     returnType: int
+  raises: []
 - subject:
     method: SNMP::getError
   signature:
     returnType: string
+  raises: []
 - subject:
     method: SNMP::getnext
   signature:
@@ -55,6 +60,7 @@
     - name: objectId
       type: array|string
     returnType: mixed
+  raises: [error, snmpexception, typeerror, valueerror]
 - subject:
     method: SNMP::set
   signature:
@@ -66,6 +72,7 @@
     - name: value
       type: array|string
     returnType: bool
+  raises: [error, snmpexception, typeerror, valueerror]
 - subject:
     method: SNMP::setSecurity
   signature:
@@ -91,6 +98,7 @@
       type: string
       optional: true
     returnType: bool
+  raises: [error, valueerror]
 - subject:
     method: SNMP::walk
   signature:
@@ -107,6 +115,7 @@
       type: int
       optional: true
     returnType: array|false
+  raises: [error, snmpexception, typeerror, valueerror]
 - subject:
     function: snmp2_get
   signature:
@@ -129,6 +138,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [error, snmpexception, typeerror, valueerror]
 - subject:
     function: snmp2_getnext
   signature:
@@ -151,6 +161,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [error, snmpexception, typeerror, valueerror]
 - subject:
     function: snmp2_real_walk
   signature:
@@ -171,6 +182,7 @@
   propagation:
   - from: argument(2)
     to: return
+  raises: [error, snmpexception, typeerror, valueerror]
 - subject:
     function: snmp2_set
   signature:
@@ -192,6 +204,7 @@
       type: int
       optional: true
     returnType: bool
+  raises: [error, snmpexception, typeerror, valueerror]
 - subject:
     function: snmp2_walk
   signature:
@@ -212,6 +225,7 @@
   propagation:
   - from: argument(2)
     to: return
+  raises: [error, snmpexception, typeerror, valueerror]
 - subject:
     function: snmp3_get
   signature:
@@ -254,6 +268,7 @@
     to: return
   - from: argument(6)
     to: return
+  raises: [error, snmpexception, typeerror, valueerror]
 - subject:
     function: snmp3_getnext
   signature:
@@ -296,6 +311,7 @@
     to: return
   - from: argument(6)
     to: return
+  raises: [error, snmpexception, typeerror, valueerror]
 - subject:
     function: snmp3_real_walk
   signature:
@@ -326,6 +342,7 @@
   propagation:
   - from: argument(7)
     to: return
+  raises: [error, snmpexception, typeerror, valueerror]
 - subject:
     function: snmp3_set
   signature:
@@ -357,6 +374,7 @@
       type: int
       optional: true
     returnType: bool
+  raises: [error, snmpexception, typeerror, valueerror]
 - subject:
     function: snmp3_walk
   signature:
@@ -387,14 +405,17 @@
   propagation:
   - from: argument(7)
     to: return
+  raises: [error, snmpexception, typeerror, valueerror]
 - subject:
     function: snmp_get_quick_print
   signature:
     returnType: bool
+  raises: []
 - subject:
     function: snmp_get_valueretrieval
   signature:
     returnType: int
+  raises: []
 - subject:
     function: snmp_read_mib
   signature:
@@ -402,6 +423,7 @@
     - name: filename
       type: string
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: snmp_set_enum_print
   signature:
@@ -409,6 +431,7 @@
     - name: enable
       type: bool
     returnType: 'true'
+  raises: []
 - subject:
     function: snmp_set_oid_numeric_print
   signature:
@@ -416,6 +439,7 @@
     - name: format
       type: int
     returnType: 'true'
+  raises: [valueerror]
 - subject:
     function: snmp_set_oid_output_format
   signature:
@@ -423,6 +447,7 @@
     - name: format
       type: int
     returnType: 'true'
+  raises: [valueerror]
 - subject:
     function: snmp_set_quick_print
   signature:
@@ -430,6 +455,7 @@
     - name: enable
       type: bool
     returnType: 'true'
+  raises: []
 - subject:
     function: snmp_set_valueretrieval
   signature:
@@ -437,6 +463,7 @@
     - name: method
       type: int
     returnType: 'true'
+  raises: [valueerror]
 - subject:
     function: snmpget
   signature:
@@ -459,6 +486,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [error, snmpexception, typeerror, valueerror]
 - subject:
     function: snmpgetnext
   signature:
@@ -481,6 +509,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [error, snmpexception, typeerror, valueerror]
 - subject:
     function: snmprealwalk
   signature:
@@ -501,6 +530,7 @@
   propagation:
   - from: argument(2)
     to: return
+  raises: [error, snmpexception, typeerror, valueerror]
 - subject:
     function: snmpset
   signature:
@@ -522,6 +552,7 @@
       type: int
       optional: true
     returnType: bool
+  raises: [error, snmpexception, typeerror, valueerror]
 - subject:
     function: snmpwalk
   signature:
@@ -542,6 +573,7 @@
   propagation:
   - from: argument(2)
     to: return
+  raises: [error, snmpexception, typeerror, valueerror]
 - subject:
     function: snmpwalkoid
   signature:
@@ -562,3 +594,4 @@
   propagation:
   - from: argument(2)
     to: return
+  raises: [error, snmpexception, typeerror, valueerror]

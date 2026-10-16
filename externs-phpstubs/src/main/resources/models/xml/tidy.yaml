@@ -7,6 +7,7 @@
     - name: tidy
       type: tidy
     returnType: int
+  raises: []
 - subject:
     function: tidy_clean_repair
   signature:
@@ -14,6 +15,7 @@
     - name: tidy
       type: tidy
     returnType: bool
+  raises: []
 - subject:
     function: tidy_config_count
   signature:
@@ -21,6 +23,7 @@
     - name: tidy
       type: tidy
     returnType: int
+  raises: []
 - subject:
     function: tidy_diagnose
   signature:
@@ -28,6 +31,7 @@
     - name: tidy
       type: tidy
     returnType: bool
+  raises: []
 - subject:
     function: tidy_error_count
   signature:
@@ -35,6 +39,7 @@
     - name: tidy
       type: tidy
     returnType: int
+  raises: []
 - subject:
     function: tidy_get_body
   signature:
@@ -45,6 +50,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: tidy_get_config
   signature:
@@ -55,6 +61,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: tidy_get_error_buffer
   signature:
@@ -65,6 +72,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: tidy_get_head
   signature:
@@ -75,6 +83,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: tidy_get_html
   signature:
@@ -85,6 +94,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: tidy_get_html_ver
   signature:
@@ -92,6 +102,7 @@
     - name: tidy
       type: tidy
     returnType: int
+  raises: []
 - subject:
     function: tidy_get_opt_doc
   signature:
@@ -106,6 +117,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [valueerror]
 - subject:
     function: tidy_get_output
   signature:
@@ -116,10 +128,12 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: tidy_get_release
   signature:
     returnType: string
+  raises: []
 - subject:
     function: tidy_get_root
   signature:
@@ -130,6 +144,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: tidy_get_status
   signature:
@@ -137,6 +152,7 @@
     - name: tidy
       type: tidy
     returnType: int
+  raises: []
 - subject:
     function: tidy_getopt
   signature:
@@ -146,6 +162,7 @@
     - name: option
       type: string
     returnType: string|int|bool
+  raises: [valueerror]
 - subject:
     function: tidy_is_xhtml
   signature:
@@ -153,6 +170,7 @@
     - name: tidy
       type: tidy
     returnType: bool
+  raises: []
 - subject:
     function: tidy_is_xml
   signature:
@@ -160,6 +178,7 @@
     - name: tidy
       type: tidy
     returnType: bool
+  raises: []
 - subject:
     function: tidy_load_config
   signature:
@@ -194,6 +213,7 @@
     to: return
   - from: argument(3)
     to: return
+  raises: [typeerror, valueerror]
 - subject:
     function: tidy_parse_string
   signature:
@@ -214,6 +234,7 @@
     to: return
   - from: argument(2)
     to: return
+  raises: [typeerror, valueerror]
 - subject:
     function: tidy_repair_file
   signature:
@@ -235,6 +256,7 @@
     to: return
   - from: argument(2)
     to: return
+  raises: [typeerror, valueerror]
 - subject:
     function: tidy_repair_string
   signature:
@@ -253,6 +275,7 @@
     to: return
   - from: argument(2)
     to: return
+  raises: [typeerror, valueerror]
 - subject:
     function: tidy_reset_config
   signature:
@@ -287,6 +310,7 @@
     - name: tidy
       type: tidy
     returnType: int
+  raises: []
 - subject:
     class: tidy
   signature:
@@ -312,26 +336,32 @@
       type: bool
       optional: true
     returnType: mixed
+  raises: [exception, typeerror, valueerror]
 - subject:
     method: tidy::body
   signature:
     returnType: ?tidyNode
+  raises: []
 - subject:
     method: tidy::cleanRepair
   signature:
     returnType: bool
+  raises: []
 - subject:
     method: tidy::diagnose
   signature:
     returnType: bool
+  raises: []
 - subject:
     method: tidy::getConfig
   signature:
     returnType: array
+  raises: []
 - subject:
     method: tidy::getHtmlVer
   signature:
     returnType: int
+  raises: []
 - subject:
     method: tidy::getOpt
   signature:
@@ -339,6 +369,7 @@
     - name: option
       type: string
     returnType: string|int|bool
+  raises: [valueerror]
 - subject:
     method: tidy::getOptDoc
   signature:
@@ -346,30 +377,37 @@
     - name: option
       type: string
     returnType: string|false
+  raises: [valueerror]
 - subject:
     method: tidy::getRelease
   signature:
     returnType: string
+  raises: []
 - subject:
     method: tidy::getStatus
   signature:
     returnType: int
+  raises: []
 - subject:
     method: tidy::head
   signature:
     returnType: ?tidyNode
+  raises: []
 - subject:
     method: tidy::html
   signature:
     returnType: ?tidyNode
+  raises: []
 - subject:
     method: tidy::isXhtml
   signature:
     returnType: bool
+  raises: []
 - subject:
     method: tidy::isXml
   signature:
     returnType: bool
+  raises: []
 - subject:
     method: tidy::parseFile
   signature:
@@ -386,6 +424,7 @@
       type: bool
       optional: true
     returnType: bool
+  raises: [typeerror, valueerror]
 - subject:
     method: tidy::parseString
   signature:
@@ -399,6 +438,7 @@
       type: ?string
       optional: true
     returnType: bool
+  raises: [typeerror, valueerror]
 - subject:
     method: tidy::repairFile
   signature:
@@ -415,6 +455,7 @@
       type: bool
       optional: true
     returnType: string|false
+  raises: [typeerror, valueerror]
 - subject:
     method: tidy::repairString
   signature:
@@ -428,55 +469,69 @@
       type: ?string
       optional: true
     returnType: string|false
+  raises: [typeerror, valueerror]
 - subject:
     method: tidy::root
   signature:
     returnType: ?tidyNode
+  raises: []
 - subject:
     method: tidyNode::__construct
   signature:
     returnType: mixed
+  raises: [error]
 - subject:
     method: tidyNode::getNextSibling
   signature:
     returnType: ?tidyNode
+  raises: []
 - subject:
     method: tidyNode::getParent
   signature:
     returnType: ?tidyNode
+  raises: []
 - subject:
     method: tidyNode::getPreviousSibling
   signature:
     returnType: ?tidyNode
+  raises: []
 - subject:
     method: tidyNode::hasChildren
   signature:
     returnType: bool
+  raises: []
 - subject:
     method: tidyNode::hasSiblings
   signature:
     returnType: bool
+  raises: []
 - subject:
     method: tidyNode::isAsp
   signature:
     returnType: bool
+  raises: []
 - subject:
     method: tidyNode::isComment
   signature:
     returnType: bool
+  raises: []
 - subject:
     method: tidyNode::isHtml
   signature:
     returnType: bool
+  raises: []
 - subject:
     method: tidyNode::isJste
   signature:
     returnType: bool
+  raises: []
 - subject:
     method: tidyNode::isPhp
   signature:
     returnType: bool
+  raises: []
 - subject:
     method: tidyNode::isText
   signature:
     returnType: bool
+  raises: []

@@ -10,34 +10,42 @@
       type: int
       optional: true
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: posix_ctermid
   signature:
     returnType: string|false
+  raises: []
 - subject:
     function: posix_errno
   signature:
     returnType: int
+  raises: []
 - subject:
     function: posix_get_last_error
   signature:
     returnType: int
+  raises: []
 - subject:
     function: posix_getcwd
   signature:
     returnType: string|false
+  raises: []
 - subject:
     function: posix_getegid
   signature:
     returnType: int
+  raises: []
 - subject:
     function: posix_geteuid
   signature:
     returnType: int
+  raises: []
 - subject:
     function: posix_getgid
   signature:
     returnType: int
+  raises: []
 - subject:
     function: posix_getgrgid
   signature:
@@ -45,6 +53,7 @@
     - name: group_id
       type: int
     returnType: array|false
+  raises: []
 - subject:
     function: posix_getgrnam
   signature:
@@ -52,14 +61,17 @@
     - name: name
       type: string
     returnType: array|false
+  raises: []
 - subject:
     function: posix_getgroups
   signature:
     returnType: array|false
+  raises: []
 - subject:
     function: posix_getlogin
   signature:
     returnType: string|false
+  raises: []
 - subject:
     function: posix_getpgid
   signature:
@@ -67,18 +79,22 @@
     - name: process_id
       type: int
     returnType: int|false
+  raises: []
 - subject:
     function: posix_getpgrp
   signature:
     returnType: int
+  raises: []
 - subject:
     function: posix_getpid
   signature:
     returnType: int
+  raises: []
 - subject:
     function: posix_getppid
   signature:
     returnType: int
+  raises: []
 - subject:
     function: posix_getpwnam
   signature:
@@ -86,6 +102,7 @@
     - name: username
       type: string
     returnType: array|false
+  raises: []
 - subject:
     function: posix_getpwuid
   signature:
@@ -93,6 +110,7 @@
     - name: user_id
       type: int
     returnType: array|false
+  raises: []
 - subject:
     function: posix_getrlimit
   signature:
@@ -101,6 +119,7 @@
       type: ?int
       optional: true
     returnType: array|false
+  raises: []
 - subject:
     function: posix_getsid
   signature:
@@ -108,10 +127,12 @@
     - name: process_id
       type: int
     returnType: int|false
+  raises: [valueerror]
 - subject:
     function: posix_getuid
   signature:
     returnType: int
+  raises: []
 - subject:
     function: posix_initgroups
   signature:
@@ -121,6 +142,7 @@
     - name: group_id
       type: int
     returnType: bool
+  raises: []
 - subject:
     function: posix_isatty
   signature:
@@ -128,6 +150,7 @@
     - name: file_descriptor
       type: mixed
     returnType: bool
+  raises: [typeerror]
 - subject:
     function: posix_kill
   signature:
@@ -137,6 +160,7 @@
     - name: signal
       type: int
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: posix_mkfifo
   signature:
@@ -146,6 +170,7 @@
     - name: permissions
       type: int
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: posix_mknod
   signature:
@@ -161,6 +186,7 @@
       type: int
       optional: true
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: posix_setegid
   signature:
@@ -168,6 +194,7 @@
     - name: group_id
       type: int
     returnType: bool
+  raises: []
 - subject:
     function: posix_seteuid
   signature:
@@ -175,6 +202,7 @@
     - name: user_id
       type: int
     returnType: bool
+  raises: []
 - subject:
     function: posix_setgid
   signature:
@@ -182,6 +210,7 @@
     - name: group_id
       type: int
     returnType: bool
+  raises: []
 - subject:
     function: posix_setpgid
   signature:
@@ -191,6 +220,7 @@
     - name: process_group_id
       type: int
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: posix_setrlimit
   signature:
@@ -202,10 +232,12 @@
     - name: hard_limit
       type: int
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: posix_setsid
   signature:
     returnType: int
+  raises: []
 - subject:
     function: posix_setuid
   signature:
@@ -213,6 +245,7 @@
     - name: user_id
       type: int
     returnType: bool
+  raises: []
 - subject:
     function: posix_strerror
   signature:
@@ -220,10 +253,12 @@
     - name: error_code
       type: int
     returnType: string
+  raises: []
 - subject:
     function: posix_times
   signature:
     returnType: array|false
+  raises: []
 - subject:
     function: posix_ttyname
   signature:
@@ -231,10 +266,12 @@
     - name: file_descriptor
       type: mixed
     returnType: string|false
+  raises: [typeerror]
 - subject:
     function: posix_uname
   signature:
     returnType: array|false
+  raises: []
 - subject:
     function: posix_eaccess
   signature:
@@ -245,6 +282,7 @@
       type: int
       optional: true
     returnType: bool
+  raises: [valueerror]
 - subject:
     function: posix_fpathconf
   signature:
@@ -254,6 +292,7 @@
     - name: name
       type: int
     returnType: int|false
+  raises: [typeerror]
 - subject:
     function: posix_pathconf
   signature:
@@ -263,6 +302,7 @@
     - name: name
       type: int
     returnType: int|false
+  raises: [valueerror]
 - subject:
     function: posix_sysconf
   signature:
@@ -270,3 +310,4 @@
     - name: conf_id
       type: int
     returnType: int
+  raises: []

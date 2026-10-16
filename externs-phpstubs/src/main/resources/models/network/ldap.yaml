@@ -10,6 +10,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: ldap_add
   signature:
@@ -24,6 +25,7 @@
       type: ?array
       optional: true
     returnType: bool
+  raises: [error, typeerror, valueerror]
 - subject:
     function: ldap_add_ext
   signature:
@@ -47,6 +49,7 @@
     to: return
   - from: argument(3)
     to: return
+  raises: [error, typeerror, valueerror]
 - subject:
     function: ldap_bind
   signature:
@@ -60,6 +63,7 @@
       type: ?string
       optional: true
     returnType: bool
+  raises: [error, valueerror]
 - subject:
     function: ldap_bind_ext
   signature:
@@ -85,6 +89,7 @@
     to: return
   - from: argument(3)
     to: return
+  raises: [error, typeerror, valueerror]
 - subject:
     function: ldap_close
   signature:
@@ -92,6 +97,7 @@
     - name: ldap
       type: LDAP\Connection
     returnType: bool
+  raises: [error]
 - subject:
     function: ldap_compare
   signature:
@@ -108,6 +114,7 @@
       type: ?array
       optional: true
     returnType: bool|int
+  raises: [error, typeerror, valueerror]
 - subject:
     function: ldap_connect
   signature:
@@ -139,6 +146,7 @@
     to: return
   - from: argument(4)
     to: return
+  raises: [valueerror]
 - subject:
     function: ldap_count_entries
   signature:
@@ -148,6 +156,7 @@
     - name: result
       type: LDAP\Result
     returnType: int
+  raises: [error]
 - subject:
     function: ldap_delete
   signature:
@@ -160,6 +169,7 @@
       type: ?array
       optional: true
     returnType: bool
+  raises: [error, typeerror, valueerror]
 - subject:
     function: ldap_delete_ext
   signature:
@@ -179,6 +189,7 @@
     to: return
   - from: argument(2)
     to: return
+  raises: [error, typeerror, valueerror]
 - subject:
     function: ldap_dn2ufn
   signature:
@@ -189,6 +200,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: [valueerror]
 - subject:
     function: ldap_err2str
   signature:
@@ -196,6 +208,7 @@
     - name: errno
       type: int
     returnType: string
+  raises: []
 - subject:
     function: ldap_errno
   signature:
@@ -203,6 +216,7 @@
     - name: ldap
       type: LDAP\Connection
     returnType: int
+  raises: [error]
 - subject:
     function: ldap_error
   signature:
@@ -210,6 +224,7 @@
     - name: ldap
       type: LDAP\Connection
     returnType: string
+  raises: [error]
 - subject:
     function: ldap_escape
   signature:
@@ -228,6 +243,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [valueerror]
 - subject:
     function: ldap_exop
   signature:
@@ -251,6 +267,7 @@
       optional: true
       byRef: true
     returnType: LDAP\Result|bool
+  raises: [error, typeerror, valueerror]
 - subject:
     function: ldap_exop_passwd
   signature:
@@ -271,6 +288,7 @@
       optional: true
       byRef: true
     returnType: string|bool
+  raises: [error, typeerror]
 - subject:
     function: ldap_exop_refresh
   signature:
@@ -282,6 +300,7 @@
     - name: ttl
       type: int
     returnType: int|false
+  raises: [error]
 - subject:
     function: ldap_exop_whoami
   signature:
@@ -289,6 +308,7 @@
     - name: ldap
       type: LDAP\Connection
     returnType: string|false
+  raises: [error]
 - subject:
     function: ldap_explode_dn
   signature:
@@ -298,6 +318,7 @@
     - name: with_attrib
       type: int
     returnType: array|false
+  raises: [valueerror]
 - subject:
     function: ldap_first_attribute
   signature:
@@ -307,6 +328,7 @@
     - name: entry
       type: LDAP\ResultEntry
     returnType: string|false
+  raises: [error]
 - subject:
     function: ldap_first_entry
   signature:
@@ -321,6 +343,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [error]
 - subject:
     function: ldap_first_reference
   signature:
@@ -335,6 +358,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [error]
 - subject:
     function: ldap_free_result
   signature:
@@ -342,6 +366,7 @@
     - name: result
       type: LDAP\Result
     returnType: bool
+  raises: [error]
 - subject:
     function: ldap_get_attributes
   signature:
@@ -351,6 +376,7 @@
     - name: entry
       type: LDAP\ResultEntry
     returnType: array
+  raises: [error]
 - subject:
     function: ldap_get_dn
   signature:
@@ -360,6 +386,7 @@
     - name: entry
       type: LDAP\ResultEntry
     returnType: string|false
+  raises: [error]
 - subject:
     function: ldap_get_entries
   signature:
@@ -369,6 +396,7 @@
     - name: result
       type: LDAP\Result
     returnType: array|false
+  raises: [error]
 - subject:
     function: ldap_get_option
   signature:
@@ -382,6 +410,7 @@
       optional: true
       byRef: true
     returnType: bool
+  raises: [error, typeerror, valueerror]
 - subject:
     function: ldap_get_values
   signature:
@@ -393,6 +422,7 @@
     - name: attribute
       type: string
     returnType: array|false
+  raises: [error, valueerror]
 - subject:
     function: ldap_get_values_len
   signature:
@@ -404,6 +434,7 @@
     - name: attribute
       type: string
     returnType: array|false
+  raises: [error, valueerror]
 - subject:
     function: ldap_list
   signature:
@@ -452,6 +483,7 @@
     to: return
   - from: argument(8)
     to: return
+  raises: [error, typeerror, valueerror]
 - subject:
     function: ldap_mod_add
   signature:
@@ -466,6 +498,7 @@
       type: ?array
       optional: true
     returnType: bool
+  raises: [error, typeerror, valueerror]
 - subject:
     function: ldap_mod_add_ext
   signature:
@@ -489,6 +522,7 @@
     to: return
   - from: argument(3)
     to: return
+  raises: [error, typeerror, valueerror]
 - subject:
     function: ldap_mod_del
   signature:
@@ -503,6 +537,7 @@
       type: ?array
       optional: true
     returnType: bool
+  raises: [error, typeerror, valueerror]
 - subject:
     function: ldap_mod_del_ext
   signature:
@@ -526,6 +561,7 @@
     to: return
   - from: argument(3)
     to: return
+  raises: [error, typeerror, valueerror]
 - subject:
     function: ldap_mod_replace
   signature:
@@ -540,6 +576,7 @@
       type: ?array
       optional: true
     returnType: bool
+  raises: [error, typeerror, valueerror]
 - subject:
     function: ldap_mod_replace_ext
   signature:
@@ -563,6 +600,7 @@
     to: return
   - from: argument(3)
     to: return
+  raises: [error, typeerror, valueerror]
 - subject:
     function: ldap_modify
   signature:
@@ -577,6 +615,7 @@
       type: ?array
       optional: true
     returnType: bool
+  raises: [error, typeerror, valueerror]
 - subject:
     function: ldap_modify_batch
   signature:
@@ -591,6 +630,7 @@
       type: ?array
       optional: true
     returnType: bool
+  raises: [error, typeerror, valueerror]
 - subject:
     function: ldap_next_attribute
   signature:
@@ -600,6 +640,7 @@
     - name: entry
       type: LDAP\ResultEntry
     returnType: string|false
+  raises: [error]
 - subject:
     function: ldap_next_entry
   signature:
@@ -614,6 +655,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [error]
 - subject:
     function: ldap_next_reference
   signature:
@@ -628,6 +670,7 @@
     to: return
   - from: argument(1)
     to: return
+  raises: [error]
 - subject:
     function: ldap_parse_exop
   signature:
@@ -645,6 +688,7 @@
       optional: true
       byRef: true
     returnType: bool
+  raises: [error, typeerror]
 - subject:
     function: ldap_parse_reference
   signature:
@@ -657,6 +701,7 @@
       type: mixed
       byRef: true
     returnType: bool
+  raises: [error, typeerror]
 - subject:
     function: ldap_parse_result
   signature:
@@ -685,6 +730,7 @@
       optional: true
       byRef: true
     returnType: bool
+  raises: [error, typeerror]
 - subject:
     function: ldap_read
   signature:
@@ -733,6 +779,7 @@
     to: return
   - from: argument(8)
     to: return
+  raises: [error, typeerror, valueerror]
 - subject:
     function: ldap_rename
   signature:
@@ -751,6 +798,7 @@
       type: ?array
       optional: true
     returnType: bool
+  raises: [error, typeerror, valueerror]
 - subject:
     function: ldap_rename_ext
   signature:
@@ -782,6 +830,7 @@
     to: return
   - from: argument(5)
     to: return
+  raises: [error, typeerror, valueerror]
 - subject:
     function: ldap_sasl_bind
   signature:
@@ -810,6 +859,7 @@
       type: ?string
       optional: true
     returnType: bool
+  raises: [error, valueerror]
 - subject:
     function: ldap_search
   signature:
@@ -839,6 +889,7 @@
       type: ?array
       optional: true
     returnType: LDAP\Result|array|false
+  raises: [error, typeerror, valueerror]
 - subject:
     function: ldap_set_option
   signature:
@@ -850,6 +901,7 @@
     - name: value
       type: mixed
     returnType: bool
+  raises: [error, typeerror, valueerror]
 - subject:
     function: ldap_set_rebind_proc
   signature:
@@ -859,6 +911,7 @@
     - name: callback
       type: ?callable
     returnType: bool
+  raises: [error]
 - subject:
     function: ldap_start_tls
   signature:
@@ -866,6 +919,7 @@
     - name: ldap
       type: LDAP\Connection
     returnType: bool
+  raises: [error]
 - subject:
     function: ldap_t61_to_8859
   signature:
@@ -876,6 +930,7 @@
   propagation:
   - from: argument(0)
     to: return
+  raises: []
 - subject:
     function: ldap_unbind
   signature:
@@ -883,6 +938,7 @@
     - name: ldap
       type: LDAP\Connection
     returnType: bool
+  raises: [error]
 - subject:
     class: ldap\connection
   signature:
@@ -910,6 +966,7 @@
       type: int
       optional: true
     returnType: LDAP\Connection|false
+  raises: []
 - subject:
     function: ldap_count_references
   signature:
@@ -919,6 +976,7 @@
     - name: result
       type: LDAP\Result
     returnType: int
+  raises: [error]
 - subject:
     function: ldap_exop_sync
   signature:
@@ -942,3 +1000,4 @@
       optional: true
       byRef: true
     returnType: LDAP\Result|bool
+  raises: [error, typeerror, valueerror]

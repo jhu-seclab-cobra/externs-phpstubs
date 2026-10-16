@@ -11,6 +11,7 @@
     - name: year
       type: int
     returnType: int
+  raises: [valueerror]
 - subject:
     function: cal_from_jd
   signature:
@@ -20,6 +21,7 @@
     - name: calendar
       type: int
     returnType: array
+  raises: [valueerror]
 - subject:
     function: cal_info
   signature:
@@ -28,6 +30,7 @@
       type: int
       optional: true
     returnType: array
+  raises: [valueerror]
 - subject:
     function: cal_to_jd
   signature:
@@ -41,6 +44,7 @@
     - name: year
       type: int
     returnType: int
+  raises: [valueerror]
 - subject:
     function: easter_date
   signature:
@@ -52,6 +56,7 @@
       type: int
       optional: true
     returnType: int
+  raises: [valueerror]
 - subject:
     function: easter_days
   signature:
@@ -63,6 +68,7 @@
       type: int
       optional: true
     returnType: int
+  raises: [valueerror]
 - subject:
     function: frenchtojd
   signature:
@@ -74,6 +80,7 @@
     - name: year
       type: int
     returnType: int
+  raises: []
 - subject:
     function: gregoriantojd
   signature:
@@ -85,6 +92,7 @@
     - name: year
       type: int
     returnType: int
+  raises: []
 - subject:
     function: jddayofweek
   signature:
@@ -95,6 +103,7 @@
       type: int
       optional: true
     returnType: int|string
+  raises: []
 - subject:
     function: jdmonthname
   signature:
@@ -104,6 +113,7 @@
     - name: mode
       type: int
     returnType: string
+  raises: []
 - subject:
     function: jdtofrench
   signature:
@@ -111,6 +121,7 @@
     - name: julian_day
       type: int
     returnType: string
+  raises: []
 - subject:
     function: jdtogregorian
   signature:
@@ -118,6 +129,7 @@
     - name: julian_day
       type: int
     returnType: string
+  raises: []
 - subject:
     function: jdtojewish
   signature:
@@ -131,6 +143,7 @@
       type: int
       optional: true
     returnType: string
+  raises: [valueerror]
 - subject:
     function: jdtojulian
   signature:
@@ -138,6 +151,7 @@
     - name: julian_day
       type: int
     returnType: string
+  raises: []
 - subject:
     function: jdtounix
   signature:
@@ -145,6 +159,7 @@
     - name: julian_day
       type: int
     returnType: int
+  raises: [valueerror]
 - subject:
     function: jewishtojd
   signature:
@@ -156,6 +171,7 @@
     - name: year
       type: int
     returnType: int
+  raises: [valueerror]
 - subject:
     function: juliantojd
   signature:
@@ -167,6 +183,7 @@
     - name: year
       type: int
     returnType: int
+  raises: []
 - subject:
     function: unixtojd
   signature:
@@ -175,3 +192,4 @@
       type: ?int
       optional: true
     returnType: int|false
+  raises: [valueerror]
