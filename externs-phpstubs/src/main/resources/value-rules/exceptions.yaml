@@ -1,0 +1,8 @@
+# Hand-maintained value rules set: value semantics the generated declarations lack or state wrongly.
+# Exceptions (PHP manual: Predefined Exceptions).
+# An entry whose unit differs from the generated one carries the PHP manual reason above it.
+
+# PHP manual: returns the message the constructor stored in the object.
+- subject: {method: Exception::getMessage}
+  returns: str
+  propagation: [{from: this, to: return}]

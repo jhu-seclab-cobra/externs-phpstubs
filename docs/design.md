@@ -93,7 +93,7 @@ models/
 │   ├── keyword.yaml       # 14 keyword functions + class exit, extension "keyword"
 │   ├── scalar.yaml        # classes int, float, string, bool, array, extension "scalar"
 │   └── legacy.yaml        # class resource, extension "legacy"
-├── manual/<extension>.yaml       # hand-declared built-ins the extraction omits: mysqli, pdo, sqlite3, mysql, standard
+├── manual/<extension>.yaml       # hand-declared built-ins the extraction omits: core, mysqli, pdo, sqlite3, mysql, standard
 ├── standard/standard_1..8.yaml   # extension "standard" (split suffix removed)
 └── <category>/<extension>.yaml   # crypto, database, file, image, misc, network, system, text, xml
 vocabulary/

@@ -1,0 +1,46 @@
+# Exception and Error methods the extraction does not emit (the upstream conversion carried no constructor and no Error methods).
+# Hand-maintained; extension provenance "core" comes from this file name. Signatures follow the PHP manual.
+# PHP manual: the constructor stores the message in the object; previous is ?Throwable, which the format spells mixed since it admits no nullable type.
+- subject:
+    method: Error::__construct
+  signature:
+    params:
+      - name: message
+        type: string
+        optional: true
+      - name: code
+        type: int
+        optional: true
+      - name: previous
+        type: mixed
+        optional: true
+    returnType: void
+  propagation:
+    - from: argument(0)
+      to: this
+# PHP manual: returns the message the constructor stored.
+- subject:
+    method: Error::getMessage
+  signature:
+    returnType: string
+  propagation:
+    - from: this
+      to: return
+# PHP manual: the constructor stores the message in the object; previous is ?Throwable, which the format spells mixed since it admits no nullable type.
+- subject:
+    method: Exception::__construct
+  signature:
+    params:
+      - name: message
+        type: string
+        optional: true
+      - name: code
+        type: int
+        optional: true
+      - name: previous
+        type: mixed
+        optional: true
+    returnType: void
+  propagation:
+    - from: argument(0)
+      to: this

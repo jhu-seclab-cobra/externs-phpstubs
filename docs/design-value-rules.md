@@ -25,12 +25,12 @@ fixed by the resource layout. `MODELS`, `TAINT`, `TAINT_RULES`, and `opener`:
 
 ```
 value-rules/
-├── index.txt             # build-generated manifest: the thirteen area documents
+├── index.txt             # build-generated manifest: the fourteen area documents
 ├── provenance.yaml       # producer: externs-phpstubs review against the PHP manual; verification: manual
 ├── strings-transform.yaml, strings-inspect.yaml, strings-format.yaml
 ├── variable.yaml, array.yaml, filesystem.yaml, database.yaml
 ├── execution.yaml, funchand.yaml, encoding.yaml, environment.yaml
-└── math.yaml, datetime.yaml
+└── math.yaml, datetime.yaml, exceptions.yaml
 ```
 
 Every document carries a header naming the set and its PHP manual area.
@@ -44,6 +44,7 @@ directly above the entry it justifies.
 | strings-* | function | length, comparison, search, hashing, transformation, formatting; `echo` and `print` |
 | variable, array | function | conversions, type tests, `isset`, `empty`, `print_r` and `var_export` branches |
 | filesystem, database, execution, funchand, encoding, environment, math, datetime | function | typed results and flow sets by PHP manual area; `eval` |
+| exceptions | method | the message flow from the receiver into the `getMessage` result |
 
 ## Validation Rules
 

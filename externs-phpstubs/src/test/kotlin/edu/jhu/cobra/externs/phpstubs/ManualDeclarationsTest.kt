@@ -16,6 +16,8 @@ import kotlin.test.assertTrue
  *   under `standard` and `mysql`
  * - `manual declarations carry the reviewed value unit` — verifies typed results and query flows
  * - `create_function declares existence without a value unit` — verifies the entry without propagation
+ * - `core document declares the exception message flows` — verifies the constructors store the message in the
+ *   receiver and `Error::getMessage` returns it
  */
 internal class ManualDeclarationsTest {
     @Test
@@ -58,6 +60,18 @@ internal class ManualDeclarationsTest {
         val record = assertNotNull(PhpStubs.function("create_function"))
         assertNotNull(record.signature)
         assertTrue(record.flows.isEmpty())
+    }
+
+    @Test
+    fun `core document declares the exception message flows`() {
+        for (owner in listOf("Exception", "Error")) {
+            val construct = assertNotNull(PhpStubs.method("$owner::__construct"), owner)
+            assertEquals("core", construct.extension, owner)
+            assertEquals(listOf(Port.Argument(0) to Port.Receiver), construct.flows.map { it.from to it.to }, owner)
+        }
+        val message = assertNotNull(PhpStubs.method("Error::getMessage"))
+        assertEquals(ReturnKind.STR, message.returns.single { it.condition == null }.kind)
+        assertEquals(listOf(Port.Receiver to Port.Return), message.flows.map { it.from to it.to })
     }
 
     private fun unitOf(record: BuiltinRecord<*>): Pair<ReturnKind, List<Int>> =

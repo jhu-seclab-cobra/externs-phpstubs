@@ -3,6 +3,7 @@ package edu.jhu.cobra.externs.phpstubs
 import edu.jhu.cobra.commons.phpmodels.ArgPattern
 import edu.jhu.cobra.commons.phpmodels.DocumentSetLoader
 import edu.jhu.cobra.commons.phpmodels.FunctionSubject
+import edu.jhu.cobra.commons.phpmodels.MethodSubject
 import edu.jhu.cobra.commons.phpmodels.ModelEntry
 import edu.jhu.cobra.commons.phpmodels.ModelSubject
 import edu.jhu.cobra.commons.phpmodels.Port
@@ -96,6 +97,10 @@ internal class ValueRulesSetTest {
         assertEquals(
             ValueSemantics(ReturnKind.ANY, listOf(Propagation(from = Port.Argument(0), to = Port.Argument(1)))),
             unitOf("parse_str"),
+        )
+        assertEquals(
+            ValueSemantics(ReturnKind.STR, listOf(Propagation(from = Port.Receiver, to = Port.Return))),
+            unconditional.getValue(MethodSubject("Exception", "getMessage")).body.valueSemantics(),
         )
         assertNull(unconditional[FunctionSubject("crypt")])
         assertNull(unconditional[FunctionSubject("str_increment")])
