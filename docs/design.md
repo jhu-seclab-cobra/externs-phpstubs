@@ -91,7 +91,7 @@ models/
 ├── provenance.yaml        # producers tools/convert_stubs.py v2, then the three php-src tools; verification generated
 ├── core.yaml              # extension "core"
 ├── language/              # hand-declared language constructs
-│   ├── keyword.yaml       # 14 keyword functions + class exit, extension "keyword"
+│   ├── keyword.yaml       # 11 keyword functions + class exit, extension "keyword"
 │   ├── scalar.yaml        # classes int, float, string, bool, array, extension "scalar"
 │   └── legacy.yaml        # class resource, extension "legacy"
 ├── manual/<extension>.yaml       # hand-declared built-ins php-src 8.5.11 lacks: mysql, standard

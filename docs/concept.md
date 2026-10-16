@@ -109,7 +109,7 @@ Runtime:
 - **Name:** Language Construct Entry
 - **Definition:** An entry for a PHP language construct that analyses
   treat as callable or class-like although no extension declares it:
-  keyword constructs (`echo`, `isset`, `exit`, `include`, ...) and scalar
+  keyword constructs (`echo`, `isset`, `empty`, `include`, ...) and scalar
   type names used in class position (`int`, `string`, ...), declared as
   data in the models tree so one load path serves every lookup. The
   `manual/` documents declare, the same way, built-ins the Extraction

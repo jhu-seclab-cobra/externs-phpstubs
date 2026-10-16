@@ -183,11 +183,6 @@ sorted tab-separated line per internal declaration the build reflects.
 - **`Closure::__invoke`.** The engine attaches it to every closure object
   at call time; no stub declares it, so no entry exists and the oracle
   test lists it as the one undeclared reflected callable.
-- **`clone`, `exit`, `die`.** php-src 8.5 declares them as functions of
-  `Zend/` (extension `core`); the hand-declared `language/keyword.yaml`
-  declares them as keyword constructs with the extension `keyword` and
-  other signatures, so no tool rewrites them and the oracle test lists
-  them as the signatures it rejects.
 - **PDO driver methods.** php-src declares `PDO_PGSql_Ext` and
   `PDO_SQLite_Ext` as stub-only pseudo classes whose methods PHP attaches
   to a `PDO` object of that driver; no class registration names their

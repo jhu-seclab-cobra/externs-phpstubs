@@ -28,24 +28,6 @@
         variadic: true
     returnType: mixed
 - subject:
-    function: exit
-  signature:
-    params:
-      - name: arguments
-        type: mixed
-        optional: true
-        variadic: true
-    returnType: mixed
-- subject:
-    function: die
-  signature:
-    params:
-      - name: arguments
-        type: mixed
-        optional: true
-        variadic: true
-    returnType: mixed
-- subject:
     function: isset
   signature:
     params:
@@ -65,15 +47,6 @@
     returnType: mixed
 - subject:
     function: unset
-  signature:
-    params:
-      - name: arguments
-        type: mixed
-        optional: true
-        variadic: true
-    returnType: mixed
-- subject:
-    function: clone
   signature:
     params:
       - name: arguments

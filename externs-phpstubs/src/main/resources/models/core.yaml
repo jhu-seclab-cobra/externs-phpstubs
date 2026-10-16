@@ -2542,3 +2542,32 @@
   signature:
     returnType: ?object
   raises: []
+- subject:
+    function: clone
+  signature:
+    params:
+    - name: object
+      type: object
+    - name: withProperties
+      type: array
+      optional: true
+    returnType: object
+  raises: [error]
+- subject:
+    function: die
+  signature:
+    params:
+    - name: status
+      type: string|int
+      optional: true
+    returnType: never
+  raises: []
+- subject:
+    function: exit
+  signature:
+    params:
+    - name: status
+      type: string|int
+      optional: true
+    returnType: never
+  raises: []

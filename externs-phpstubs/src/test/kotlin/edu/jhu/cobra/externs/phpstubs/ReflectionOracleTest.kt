@@ -13,8 +13,7 @@ import kotlin.test.assertTrue
  *
  * - `every reflected callable is declared` — verifies completeness by function lookup and method lookup over
  *   the declared hierarchy; the one exception is the Open Gap `closure::__invoke`
- * - `every declared signature admits the reflected one` — verifies parameters and return type; the exceptions are
- *   the Open Gap keyword functions `clone`, `die`, and `exit`
+ * - `every declared signature admits the reflected one` — verifies parameters and return type
  * - `every reflected class carries the reflected parent and interfaces` — verifies the parent and the transitive
  *   interface set
  */
@@ -37,7 +36,7 @@ internal class ReflectionOracleTest {
                 .filter { reflected -> declaredSignature(reflected)?.let { !it.admits(reflected) } ?: false }
                 .map { it.subject }
                 .toSet()
-        assertEquals(setOf("clone", "die", "exit"), rejected)
+        assertEquals(emptySet(), rejected)
     }
 
     @Test
