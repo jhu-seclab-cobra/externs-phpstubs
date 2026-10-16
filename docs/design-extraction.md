@@ -9,7 +9,8 @@ rules: [design.md](design.md).
 
 - **Modules:** `tools/php_src.py` (shared reading, placement, and
   writing), `tools/extract_hierarchy.py`, `tools/extract_signatures.py`,
-  `tools/extract_raises.py`; Python 3 standard library only.
+  `tools/extract_raises.py`; Python 3 standard library only. The test
+  oracle `tools/reflect.php` runs on a PHP build, not over php-src.
 - **Relationships:** each tool imports `php_src`; `php_src` imports no tool.
   The tools run in this order, because each reads what the earlier one
   wrote: a method joins its class's document, and a raises element names a
@@ -41,11 +42,20 @@ nothing.
   read off PHP reflection's extension of those declarations).
 - **`generated_documents(models)`** — every document except the
   `HAND_DECLARED` directories (`language`, `manual`) and `provenance.yaml`.
+- **`document_extension(path)`** — the extension a document's placement
+  encodes: its file name, split suffix removed (Extension Provenance,
+  [concept.md](concept.md)).
 - **`placement(models, extension)`** — the document a new entry of an
-  extension joins: the last generated document whose name, split suffix
-  removed, equals the extension (`standard` → `standard/standard_8.yaml`),
-  else a new `models/<extension>.yaml` opened with the generated header
-  naming the tool.
+  extension joins: the last generated document whose
+  `document_extension` equals the extension
+  (`standard` → `standard/standard_8.yaml`), else a new
+  `models/<extension>.yaml` opened with the generated header naming the
+  tool.
+- **`relocate(models, extensions, tool)`** — moves each generated entry
+  whose key `extensions` maps to an extension other than its document's
+  to `placement` of that extension, its text unchanged; a document left
+  without an entry is removed. Every php-src Declaration's entry thus
+  lives in the document of the extension php-src declares it in.
 - **`entries(text)`** — the entry spans of one document: from one
   `- subject:` line to the next; a rewrite replaces lines inside one span
   and leaves every other byte.
@@ -59,8 +69,13 @@ php-src, the interpreter's own declarations (CobraPHP user decision BP-2).
 |-------|--------|
 | `**/*.stub.php` | each class, interface, enum, and trait with its namespace, `extends`, and `implements` names, folded |
 
-- Each generated class entry gets the classifier, parent, and interfaces
-  php-src declares for its name; its other lines stay.
+- Each generated class entry php-src declares is relocated to its
+  extension, then gets the classifier, parent, and interfaces php-src
+  declares for its name; its other lines stay.
+- An enum's interfaces end with `unitenum`, and with `unitenum`,
+  `backedenum` when it declares a backing type: the interfaces the engine
+  appends to every enum (`ENUM_INTERFACES`, `BACKED_ENUM_INTERFACES`,
+  constant tier, read off `zend_enum_add_interfaces` in `Zend/zend_enum.c`).
 - Each php-src class-like declaration no models document declares is
   added to `placement` of its extension.
 - A class php-src does not declare (a PECL class) keeps its entry.
@@ -81,9 +96,14 @@ php-src, the interpreter's own declarations (CobraPHP user decision BP-2).
   the variant that subsumes the other: it admits every call the other
   admits and its return type includes the other's. Neither subsuming
   fails the run.
-- Each generated function or method entry php-src declares gets the
-  subject line and signature block php-src states; its other sections
-  (propagation, raises) stay.
+- Each generated function or method entry php-src declares is relocated
+  to its extension, then gets the subject line and signature block
+  php-src states; its other sections (propagation, raises) stay, except a
+  propagation statement naming an argument position the signature lacks
+  (no variadic parameter): PHP rejects a call passing more arguments
+  than an internal function declares (`ArgumentCountError`), so no value
+  reaches that position. A propagation section left without a statement
+  fails the run.
 - A php-src function no models document declares joins `placement` of its
   extension; a method joins the generated document declaring its class,
   and a class no generated document declares fails the run.
@@ -110,6 +130,28 @@ php-src, the interpreter's own declarations (CobraPHP user decision BP-2).
 - **Fails** when a class expression no rule resolves reaches an entry, or
   when a raises element names a class no generated document declares.
 
+### reflect.php
+
+The test oracle of the generated set: `php tools/reflect.php` on a PHP
+8.5.11 build writes `src/test/resources/reflection/php_8_5_11.tsv`, one
+sorted tab-separated line per internal declaration the build reflects.
+
+| Line | Fields |
+|------|--------|
+| `function` | folded name, return type, parameters |
+| `method` | folded `class::name` of each method the class itself declares, return type, parameters |
+| `class` | folded name, folded parent or `-`, every interface folded, sorted, comma-joined, or `-` |
+
+- A parameter is `<name> <type> <flags>`, the flags drawn from `o`
+  (optional), `r` (by reference), `v` (variadic), `-` for none. An
+  omitted type is `mixed`; a return type falls back to the tentative one.
+- `ReflectionOracleTest` reads the fixture and checks the bundled set:
+  every reflected callable is found by function lookup or by method
+  lookup over the class, its parents, and its interfaces; every declared
+  signature admits the reflected one (the rule a kept variant obeys,
+  `iterable` read as `Traversable|array` as PHP compiles it); every
+  reflected class carries the reflected parent and transitive interfaces.
+
 ## Exception / Error Types
 
 | Failure | When |
@@ -119,6 +161,7 @@ php-src, the interpreter's own declarations (CobraPHP user decision BP-2).
 | Undeclared class | A method's class or a raises element is declared by no generated document |
 | Unresolved class | A class expression no rule resolves reaches an entry's raises |
 | Unknown entry macro | A function entry table uses a macro outside the known set |
+| Propagation without a port | Every propagation statement of an entry names an argument position its php-src signature lacks |
 
 ## Open Gaps
 
@@ -133,3 +176,11 @@ php-src, the interpreter's own declarations (CobraPHP user decision BP-2).
   `zend_generator_get_iterator`, and its section names `error` and
   `typeerror` only. Candidate: resolve such a call to every function
   stored into a field of the same struct type (multi-layer type analysis).
+- **`Closure::__invoke`.** The engine attaches it to every closure object
+  at call time; no stub declares it, so no entry exists and the oracle
+  test lists it as the one undeclared reflected callable.
+- **`clone`, `exit`, `die`.** php-src 8.5 declares them as functions of
+  `Zend/` (extension `core`); the hand-declared `language/keyword.yaml`
+  declares them as keyword constructs with the extension `keyword` and
+  other signatures, so no tool rewrites them and the oracle test lists
+  them as the signatures it rejects.

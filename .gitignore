@@ -63,3 +63,6 @@ cobra.log
 # Task docs are local-only
 todo.md
 *todo*.md
+
+# Python bytecode of the tools
+__pycache__/

@@ -27,8 +27,9 @@ php-src release, beside the upstream stub conversion
   → raises extraction → `models/**` → the merge ([concept-lookup.md](concept-lookup.md)).
 
 **Scope Boundaries**
-- **Owned:** reading php-src, placing a new entry by its extension,
-  rewriting the hierarchy, signature, and raises of a generated entry.
+- **Owned:** reading php-src, placing the entry of every php-src
+  Declaration in the document of its extension, rewriting the hierarchy,
+  signature, and raises of a generated entry.
 - **Not Owned:** the format of a raises section and what it asserts
   (commons-phpmodels `docs/model.md`); value semantics, which the value
   rules set states; the hand-declared `language/` and `manual/` documents.
