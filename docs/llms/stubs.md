@@ -43,7 +43,7 @@ query?.sinks?.single()?.vulnClass == VulnClass.SQLI.id   // true
 
 **`functions`, `classes`, `methods`, `constants`, `classConstants`, `properties`, `variables`** -- `Collection<BuiltinRecord<…>>`.
 
-**`sinks: List<SinkFact>`**, **`sources: List<SourceFact>`**, **`sanitizers: List<SanitizerFact>`**, **`flows: List<FlowFact>`**, **`returns: List<ReturnsFact>`**.
+**`sinks: List<SinkFact>`**, **`sources: List<SourceFact>`**, **`sanitizers: List<SanitizerFact>`**, **`flows: List<FlowFact>`**, **`returns: List<ReturnsFact>`**, **`raises: List<RaisesFact>`**.
 
 **`vocabulary: Vocabulary`**, **`policy: TaintPolicy`** -- Accumulated over every mounted set; `policy.isDangerous(color, category)`.
 
@@ -55,7 +55,7 @@ query?.sinks?.single()?.vulnClass == VulnClass.SQLI.id   // true
 
 ### BuiltinRecord<S : ModelSubject> (data class)
 
-**`subject: S`**, **`extension: String?`** (from the generated document's placement, `standard_3.yaml` -> `standard`; `null` when no generated set declares the subject), **`signature: SignatureInfo?`** (the unconditional signature statement in force), **`returns`, `flows`, `sources`, `sinks`, `sanitizers`** (every fact in force under every condition), **`facts`** (all five in that order). Construction requires a signature or at least one fact, and every fact's `owner == subject`.
+**`subject: S`**, **`extension: String?`** (from the generated document's placement, `standard_3.yaml` -> `standard`; `null` when no generated set declares the subject), **`signature: SignatureInfo?`** (the unconditional signature statement in force), **`returns`, `flows`, `sources`, `sinks`, `sanitizers`, `raises`** (every fact in force under every condition), **`facts`** (all six in that order). Construction requires a signature or at least one fact, and every fact's `owner == subject`.
 
 Typed accessors (top-level extension properties, nullable):
 
@@ -71,7 +71,7 @@ Typed accessors (top-level extension properties, nullable):
 
 Every fact: **`owner: ModelSubject`**, **`condition: ArgPattern?`** (`null` for an unconditional statement; otherwise match it with `condition.matches(args)` -> `true`, `false`, or `null` for undecidable).
 
-**`SinkFact(port: Port.Argument, vulnClass: VulnClassId)`** | **`SourceFact(origins: Set<OriginId>, at: Port.Argument?, keys: List<KeyPattern>?)`** | **`SanitizerFact(categories: Set<VulnClassId>)`** | **`FlowFact(from: Port.Input, to: Port)`** | **`ReturnsFact(kind: ReturnKind)`**.
+**`SinkFact(port: Port.Argument, vulnClass: VulnClassId)`** | **`SourceFact(origins: Set<OriginId>, at: Port.Argument?, keys: List<KeyPattern>?)`** | **`SanitizerFact(categories: Set<VulnClassId>)`** | **`FlowFact(from: Port.Input, to: Port)`** | **`ReturnsFact(kind: ReturnKind)`** | **`RaisesFact(classes: Set<ClassSubject>)`**.
 
 ### VulnClass, Origin (enums)
 
@@ -104,6 +104,7 @@ values.provenance?.verification                    // Verification.MANUAL
 - `strlen` and other value rules subjects carry the manual value unit (`returns: num`), not the generated one: manual outranks generated whatever the position.
 - `filter_var` is five conditional sanitizer facts (`[_, 257]` ... `[_, 520]`) and no unconditional one; `print_r` and `var_export` carry a `[_, true]` returns fact beside the unconditional one. Choose per your undecidable rule.
 - A value unit is `returns` plus the `flows` of the same entry: filter flows by equality with the chosen returns fact's `condition`.
+- `raises` of a generated function or method is computed from the php-src C sources: an empty `classes` set states the call throws none; no `RaisesFact` (`assert`, `Generator::throw`, entries outside php-src) asserts nothing. A class thrown only through a function pointer is missing.
 - Constant values are strings on `typedSignature.value`; the consumer converts.
 - Generated documents are never hand-edited; a correction belongs in `value-rules/` or `taint-rules/`, or in an extension set mounted through `with`.
 - Two lookups built from the same sets hold equal records, not the same instances.
