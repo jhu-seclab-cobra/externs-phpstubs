@@ -43,8 +43,8 @@ directly above the entry it justifies.
 |----------------|---------------|---------|
 | strings-* | function | length, comparison, search, hashing, transformation, formatting; `echo` and `print` |
 | variable, array | function | conversions, type tests, `isset`, `empty`, `print_r` and `var_export` branches |
-| filesystem, database, execution, funchand, encoding, environment, math, datetime | function | typed results and flow sets by PHP manual area; `eval` |
-| exceptions | method | the message flow from the receiver into the `getMessage` result |
+| filesystem, database, execution, funchand, encoding, environment, math, datetime | function, method | typed results and flow sets by PHP manual area; `eval`; the query methods of `mysqli`, `PDO`, `SQLite3` |
+| exceptions | method | the message flow from the constructor's message argument into the receiver, and from the receiver into the `getMessage` result |
 
 ## Validation Rules
 

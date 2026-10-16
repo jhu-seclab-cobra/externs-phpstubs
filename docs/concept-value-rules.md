@@ -91,8 +91,8 @@ merge: models/ (generated) ◄──ranked below── value-rules/ (manual), pe
 
 - **Name:** Corpus Gap
 - **Definition:** A built-in an analysis meets that the generated
-  declarations do not carry: a class whose methods the extraction does not
-  emit, or a function newer or older than the upstream release.
+  declarations do not carry: a function the pinned php-src release no
+  longer declares.
 - **Scope:** excluded from the set; declared in a hand-maintained document
   under `models/manual/` with its PHP-manual signature and flow.
 - **Relationships:** resolved in the models tree (the Extraction Pipeline
@@ -129,9 +129,9 @@ merge: models/ (generated) ◄──ranked below── value-rules/ (manual), pe
 - **Boundary:** `print_r` returns its rendering only when the second
   argument is true. A conditional entry states that case; the
   unconditional entry states a boolean result with no flow.
-- **Interaction:** `mysqli::query` is stated in no value rules document:
-  the extraction carries no `mysqli` methods, so `models/manual/mysqli.yaml`
-  declares its signature and reviewed flow, and the generated set, not this set,
-  serves the unit.
+- **Interaction:** `mysqli::query` takes its signature and raises section
+  from the php-src extraction ([concept-extraction.md](concept-extraction.md));
+  the `database` document states its reviewed flow from the query argument
+  into the result, ranked above the generated unit.
 
 Software structure: [design-value-rules.md](design-value-rules.md).

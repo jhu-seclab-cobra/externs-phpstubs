@@ -58,7 +58,9 @@ format library's: `extern/commons-phpmodels/docs/model.md`,
   owner record and the Condition of the entry it came from, or none: a
   *sink* (port, danger category), a *source* (produced colors, site, key
   patterns), a *sanitizer* (neutralized categories), a *flow* (one
-  propagation pair), a *returns* (the classification). Every Fact of every
+  propagation pair), a *returns* (the classification), a *raises* (the
+  exception classes the subject's own implementation may throw, the whole
+  section in one Fact, so the empty set states it throws none). Every Fact of every
   entry is present; the record ranks none of them against a call.
 - **Built-in Lookup** — The two reading modes over one Merge:
   *exact* — one PHP spelling (`substr`, `mysqli::query`, `PDO`,

@@ -12,7 +12,7 @@ mounts into records. Every type here is internal; the public surface is
 
 - **Classes:** `Mount` (internal data class), `MountSequence` (internal
   class), `Merge` (internal class), `OverrideUnit` (internal enum:
-  `SIGNATURE`, `VALUE`, `SOURCES`, `SINKS`, `SANITIZERS`)
+  `SIGNATURE`, `VALUE`, `SOURCES`, `SINKS`, `SANITIZERS`, `RAISES`)
 - **External types (commons-phpmodels):** `DocumentSetLoader`,
   `DocumentSet`, `Document`, `ResourceOpener`, `CategoryMapping`,
   `ModelEntry`, `PolicyRow`, `Vocabulary`, `TaintPolicy`, `Precedence`,
@@ -57,7 +57,7 @@ returned `null` for is `StubIndexNotFoundException`; any other is
 records built from its result. Built once per set sequence, immutable.
 
 **State/Fields:** `vocabulary`, `policy`, one `LinkedHashMap<Subject, BuiltinRecord>`
-per declaration kind in first-statement order, and the five fact lists in
+per declaration kind in first-statement order, and the six fact lists in
 record order.
 
 **Construction (`Merge.of(mounts: List<Mount>)`):** for each mount in

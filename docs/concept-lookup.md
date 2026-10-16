@@ -30,7 +30,7 @@ decides.
   vocabulary and policy, the taint set and the taint rules set with the
   one mapping that translates them; optionally a consumer's extension sets.
 - **Outputs:** one Built-in Record per PHP name; the returns, flows,
-  sources, sinks, and sanitizers of every record enumerable by kind.
+  sources, sinks, sanitizers, and raises of every record enumerable by kind.
 - **Connections:** sets → Merge → Built-in Lookup → consumers.
 
 **Scope Boundaries**
@@ -52,7 +52,7 @@ value-rules/ (manual) ──────────┤
 canonical vocabulary + policy ──┤──► Merge (manual over generated, per subject / condition / section)
 taint/ ──── mapping ────────────┤                       │
 taint-rules/ ── same mapping ───┘                       ▼
-consumer: PHP name ────────► Built-in Lookup ──► Built-in Record ──► signature, returns, flows, sources, sinks, sanitizers
+consumer: PHP name ────────► Built-in Lookup ──► Built-in Record ──► signature, returns, flows, sources, sinks, sanitizers, raises
 consumer: declaration kind ─► Built-in Lookup ──► every record of that kind, filtered by the consumer
 consumer: fact kind ────────► Built-in Lookup ──► every fact of that kind, each naming its record
 ```
@@ -82,7 +82,7 @@ consumer: fact kind ────────► Built-in Lookup ──► every 
 - **Name:** Built-in Record
 - **Definition:** What the Built-in Lookup answers for one PHP name: the
   extension, the signature, and the facts the merge holds for that subject
-  — returns, flows, sources, sinks, sanitizers — each carrying the
+  — returns, flows, sources, sinks, sanitizers, raises — each carrying the
   condition its entry declared, or none. The same facts are enumerable by
   kind, each naming the record it belongs to.
 - **Scope:** one per subject any set states; a record without a signature

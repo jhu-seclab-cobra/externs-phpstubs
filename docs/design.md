@@ -10,7 +10,8 @@ error types. The lookup surface — merge, records, facts, `PhpStubs` — is in
 ## Design Overview
 
 - **Classes:** `StubResources` (object), `PhpStubs`, `BuiltinRecord<S>`,
-  the five fact types, `Merge`, `Mount` ([design-lookup.md](design-lookup.md))
+  the six fact types, `Merge`, `Mount` ([design-lookup.md](design-lookup.md));
+  the php-src producers ([design-extraction.md](design-extraction.md))
 - **External types (commons-phpmodels):** `DocumentSetLoader`,
   `DocumentSet`, `Document`, `ResourceOpener`, `CategoryMappingLoader`,
   `CategoryMapping`, `ModelEntry`, `ModelSubject` and its seven subtypes,
@@ -87,15 +88,16 @@ duplicate rule per (subject, condition) within one document.
 ```
 models/
 ├── index.txt              # build-generated manifest, sorted relative paths
-├── provenance.yaml        # producers tools/convert_stubs.py v2, tools/extract_hierarchy.py; verification generated
+├── provenance.yaml        # producers tools/convert_stubs.py v2, then the three php-src tools; verification generated
 ├── core.yaml              # extension "core"
 ├── language/              # hand-declared language constructs
 │   ├── keyword.yaml       # 14 keyword functions + class exit, extension "keyword"
 │   ├── scalar.yaml        # classes int, float, string, bool, array, extension "scalar"
 │   └── legacy.yaml        # class resource, extension "legacy"
-├── manual/<extension>.yaml       # hand-declared built-ins the extraction omits: core, mysqli, pdo, sqlite3, mysql, standard
+├── manual/<extension>.yaml       # hand-declared built-ins php-src 8.5.11 lacks: mysql, standard
 ├── standard/standard_1..8.yaml   # extension "standard" (split suffix removed)
-└── <category>/<extension>.yaml   # crypto, database, file, image, misc, network, system, text, xml
+├── <category>/<extension>.yaml   # crypto, database, file, image, misc, network, system, text, xml
+└── <extension>.yaml              # extensions only php-src declares (placement, design-extraction.md)
 vocabulary/
 ├── index.txt              # comment only: the set ships no model document
 ├── provenance.yaml        # producer externs-phpstubs canonical vocabulary; verification manual
@@ -119,28 +121,6 @@ and `psalm-mapping.yaml`; `vocabulary/index.txt` and every other test
 fixture directory ship their own manifest. Set layouts:
 [design-taint.md](design-taint.md), [design-taint-rules.md](design-taint-rules.md),
 [design-value-rules.md](design-value-rules.md).
-
-## Class Hierarchy Extraction
-
-The generated class entries take their classifier, parent, and interfaces
-from php-src, the interpreter's own declarations (CobraPHP user decision
-BP-2). `tools/extract_hierarchy.py` (Python 3, standard library) reads one
-php-src checkout at tag `php-8.5.11` and rewrites the generated documents
-under `models/` in place:
-
-| Input (relative to the php-src root) | Yields |
-|--------------------------------------|--------|
-| `**/*.stub.php` outside test directories | each class, interface, enum, and trait with its namespace, `extends`, and `implements` names, case-folded |
-
-- Each generated class entry gets the classifier, parent, and interfaces
-  php-src declares for its name; every other entry is left byte for byte.
-- A parent or interface name that no models document declares is added
-  to `core.yaml`, beside the other generated class entries, and itself
-  receives its php-src hierarchy, until every named class is declared.
-- A class php-src does not declare (a PECL extension class) keeps its
-  entry unchanged.
-- Arguments: `--php-src <root>`, `--models <models dir>`. Output is
-  deterministic, and a second run over its own output changes nothing.
 
 ## Exception / Error Types
 

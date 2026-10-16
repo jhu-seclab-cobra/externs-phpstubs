@@ -24,7 +24,7 @@ The format, its decoding, and its validation belong to commons-phpmodels.
 - **Inputs:** upstream stub sources, psalm's taint data, and the Argus
   lists (offline); five bundled document sets.
 - **Outputs:** one Built-in Record per PHP name: extension, signature, flows,
-  sources, sinks, and sanitizers in the canonical vocabulary; the same facts enumerable by kind.
+  sources, sinks, sanitizers, and raises in the canonical vocabulary; the same facts enumerable by kind.
 - **Connections:** upstream stubs → extraction → model documents; psalm
   taint data → extraction, Argus lists → review → document sets; all sets
   → [commons-phpmodels decode] → merge → Built-in Lookup → consumers.
@@ -45,7 +45,7 @@ The format, its decoding, and its validation belong to commons-phpmodels.
 ```
 Offline (per upstream release):
     phpstorm-stubs, psalm stubs ──extraction──► models/<category>/<extension>.yaml
-    php-src stubs ──────────────hierarchy───► class entries of models/** (classifier, parent, interfaces)
+    php-src stubs, C sources ───php-src tools► hierarchies, signatures, raises of models/** (concept-extraction.md)
                                                 models/{language,manual}/*.yaml (hand-declared)
     psalm taint data ───────────extraction──► taint/** (document set)
     Argus sink lists ───────────review──────► taint-rules/** (document set)
@@ -113,7 +113,7 @@ Runtime:
   type names used in class position (`int`, `string`, ...), declared as
   data in the models tree so one load path serves every lookup. The
   `manual/` documents declare, the same way, built-ins the Extraction
-  Pipeline cannot produce: methods it omits, functions outside its release.
+  Pipeline cannot produce: functions php-src no longer declares.
 - **Scope:** the closed keyword and scalar-type sets the generated set declares
   today.
 - **Relationships:** a Model Entry like any other; distinguished only by
@@ -139,7 +139,8 @@ Runtime:
   same decoder consumers use. Runs once per upstream release; committed.
 - **Scope:** development tooling, not a runtime dependency; only one
   representation of the corpus exists. The taint extraction is one script
-  in this repository ([concept-taint.md](concept-taint.md)).
+  in this repository ([concept-taint.md](concept-taint.md)); the php-src
+  producers are in [concept-extraction.md](concept-extraction.md).
 - **Relationships:** produces the Generated Layer.
 
 ## 3. Contracts & Flow
@@ -152,7 +153,7 @@ Runtime:
   the format.
 - **With a consumer:** a name lookup returns one Built-in Record or
   nothing. Signature fields and constant values are read as
-  commons-phpmodels types; flows, sources, sinks, and sanitizers are read
+  commons-phpmodels types; flows, sources, sinks, sanitizers, and raises are read
   from the record in the Canonical Vocabulary, conditions attached. The
   consumer holds no set, layer, mapping, or precedence; which set stated a
   fact is answered on request, never required.

@@ -11,7 +11,7 @@ types: [design-merge.md](design-merge.md). Fold algorithm:
 
 - **Classes:** `PhpStubs` (final class; companion delegates to the bundled
   instance), `BuiltinRecord<S>` (data class), `SinkFact`, `SourceFact`,
-  `SanitizerFact`, `FlowFact`, `ReturnsFact` (data classes), `VulnClass`
+  `SanitizerFact`, `FlowFact`, `ReturnsFact`, `RaisesFact` (data classes), `VulnClass`
   and `Origin` (enums); `Merge`, `Mount`, `MountSequence` (internal,
   [design-merge.md](design-merge.md))
 - **Abstract:** `BuiltinLookup` (interface: every read of one merge),
@@ -47,7 +47,7 @@ accumulated vocabulary and policy. Implemented by `PhpStubs` and, by
 delegation, by its companion, so `PhpStubs.function("substr")` and
 `PhpStubs.with(dir).function("substr")` are the same call on two merges.
 
-**Members** (reads of a frozen merge; the five fact lists are built on first read):
+**Members** (reads of a frozen merge; the six fact lists are built on first read):
 
 | Member | Return | Behavior |
 |--------|--------|----------|
@@ -60,7 +60,7 @@ delegation, by its companion, so `PhpStubs.function("substr")` and
 | `variable(name)` | `BuiltinRecord<VariableSubject>?` | `VariableSubject.parse(name)`, map read |
 | `record(subject)` | `BuiltinRecord<ModelSubject>?` | the record of an already built subject |
 | `functions`, `classes`, `methods`, `constants`, `classConstants`, `properties`, `variables` | `Collection<BuiltinRecord<…>>` | every record of the kind, load order |
-| `sinks`, `sources`, `sanitizers`, `flows`, `returns` | `List<…Fact>` | every fact of the kind over every record, load order |
+| `sinks`, `sources`, `sanitizers`, `flows`, `returns`, `raises` | `List<…Fact>` | every fact of the kind over every record, load order |
 | `vocabulary` | `Vocabulary` | accumulated over every mounted set |
 | `policy` | `TaintPolicy` | accumulated over every mounted set |
 
@@ -110,12 +110,12 @@ members only.
 **State/Fields:** `subject: S`, `extension: String?`,
 `signature: SignatureInfo?`, `returns: List<ReturnsFact>`,
 `flows: List<FlowFact>`, `sources: List<SourceFact>`, `sinks: List<SinkFact>`,
-`sanitizers: List<SanitizerFact>`.
+`sanitizers: List<SanitizerFact>`, `raises: List<RaisesFact>`.
 
 **Validation (`init`):** every fact's `owner == subject`; at least one of
 `signature` or a fact present.
 
-### Fact (sealed interface) and its five data classes
+### Fact (sealed interface) and its six data classes
 
 **Responsibility:** One element of one assertion statement, with the record
 it belongs to and the condition it holds under. A consumer matches
@@ -132,6 +132,7 @@ for an unconditional statement).
 | `SanitizerFact` | `categories: Set<VulnClassId>` | one `SanitizerDecl` |
 | `FlowFact` | `from: Port.Input`, `to: Port` | one `Propagation` |
 | `ReturnsFact` | `kind: ReturnKind` | the `returns` section |
+| `RaisesFact` | `classes: Set<ClassSubject>` | the `raises` section, whole: the empty set states the subject throws none |
 
 ### VulnClass, Origin (enums)
 
