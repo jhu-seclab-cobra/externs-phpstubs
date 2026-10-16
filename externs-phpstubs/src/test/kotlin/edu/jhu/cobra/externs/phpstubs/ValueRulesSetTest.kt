@@ -33,6 +33,8 @@ import kotlin.test.assertTrue
  * - `representative units follow the PHP manual` — verifies typed results and flow sets
  * - `character bounds follow the PHP manual` — verifies the copied ports of strtr, str_replace, and substr and
  *   the `/`-free result of basename
+ * - `a character bound beside the generated flows repeats them exactly` — verifies str_replace, strtr, and substr
+ *   differ from the generated unit only by the bound, so a change of the generated flows fails here
  * - `query and exception units apply to the php-src declarations` — verifies the merged records of the query
  *   methods and the exception constructors keep their php-src extension and take the reviewed unit
  */
@@ -121,6 +123,14 @@ internal class ValueRulesSetTest {
         assertEquals(CharacterBound(of = arguments(listOf(1, 2))), unitOf("str_replace").characters)
         assertEquals(CharacterBound(of = arguments(listOf(0))), unitOf("substr").characters)
         assertNull(unitOf("strlen").characters)
+    }
+
+    @Test
+    fun `a character bound beside the generated flows repeats them exactly`() {
+        val units = generated.entries.associate { it.subject to it.body.valueSemantics() }
+        for (name in listOf("str_replace", "strtr", "substr")) {
+            assertEquals(units.getValue(FunctionSubject(name)), unitOf(name).copy(characters = null), name)
+        }
     }
 
     @Test

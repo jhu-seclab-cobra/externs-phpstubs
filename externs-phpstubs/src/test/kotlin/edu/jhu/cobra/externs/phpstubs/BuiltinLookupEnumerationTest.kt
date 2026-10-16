@@ -26,7 +26,7 @@ internal class BuiltinLookupEnumerationTest {
         assertTrue(PhpStubs.classes.isNotEmpty() && PhpStubs.methods.isNotEmpty() && PhpStubs.constants.isNotEmpty())
         assertTrue(PhpStubs.classConstants.isNotEmpty() && PhpStubs.variables.isNotEmpty())
         assertTrue(PhpStubs.sinks.isNotEmpty() && PhpStubs.sources.isNotEmpty() && PhpStubs.sanitizers.isNotEmpty())
-        assertTrue(PhpStubs.flows.isNotEmpty() && PhpStubs.returns.isNotEmpty())
+        assertTrue(PhpStubs.flows.isNotEmpty() && PhpStubs.returns.isNotEmpty() && PhpStubs.characters.isNotEmpty())
         val first = PhpStubs.functions.first()
         assertEquals(first, PhpStubs.function(first.subject.name))
     }
@@ -65,6 +65,7 @@ internal class BuiltinLookupEnumerationTest {
         assertTrue(PhpStubs.sanitizers.all { it in assertNotNull(PhpStubs.record(it.owner)).sanitizers })
         assertTrue(PhpStubs.flows.all { it in assertNotNull(PhpStubs.record(it.owner)).flows })
         assertTrue(PhpStubs.returns.all { it in assertNotNull(PhpStubs.record(it.owner)).returns })
+        assertTrue(PhpStubs.characters.all { it in assertNotNull(PhpStubs.record(it.owner)).characters })
     }
 
     @Test

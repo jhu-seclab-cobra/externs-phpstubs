@@ -1,5 +1,7 @@
 package edu.jhu.cobra.externs.phpstubs
 
+import edu.jhu.cobra.commons.phpmodels.CharacterBound
+import edu.jhu.cobra.commons.phpmodels.CharacterClass
 import edu.jhu.cobra.commons.phpmodels.Port
 import edu.jhu.cobra.commons.phpmodels.ReturnKind
 import edu.jhu.cobra.commons.phpmodels.VulnClassId
@@ -19,6 +21,7 @@ import kotlin.test.assertTrue
  *
  * - `keyword constructs and scalar classes are records` — verifies the language documents load
  * - `a record carries extension, signature, and the value unit in force` — verifies the manual rule outranks
+ * - `a merged record carries the character bound of its value unit` — verifies basename's bound survives the merge
  * - `taint facts speak the canonical vocabulary` — verifies sinks, sanitizers, and conditions after mapping
  * - `taint rules outrank taint for the same key` — verifies the later manual set replaces the generated one
  * - `a lookup over the same mounts holds equal records` — verifies equal statements give equal records
@@ -58,6 +61,13 @@ internal class PhpStubsTest {
                 .last()
                 .variadic,
         )
+    }
+
+    @Test
+    fun `a merged record carries the character bound of its value unit`() {
+        val basename = assertNotNull(PhpStubs.function("basename"))
+        val bound = CharacterBound(of = setOf(Port.Argument(0)), within = CharacterClass("[^/]"))
+        assertEquals(listOf(bound), basename.characters.map { it.bound })
     }
 
     @Test
