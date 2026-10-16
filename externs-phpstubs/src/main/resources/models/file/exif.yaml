@@ -6,15 +6,15 @@
     params:
     - name: filename
       type: string
-    returnType: int
+    returnType: int|false
 - subject:
     function: exif_read_data
   signature:
     params:
     - name: file
-      type: resource
+      type: mixed
     - name: required_sections
-      type: string
+      type: ?string
       optional: true
     - name: as_arrays
       type: bool
@@ -22,30 +22,33 @@
     - name: read_thumbnail
       type: bool
       optional: true
-    returnType: array
+    returnType: array|false
 - subject:
     function: exif_tagname
   signature:
     params:
     - name: index
       type: int
-    returnType: string
+    returnType: string|false
 - subject:
     function: exif_thumbnail
   signature:
     params:
     - name: file
-      type: string
+      type: mixed
     - name: width
-      type: int
+      type: mixed
       optional: true
+      byRef: true
     - name: height
-      type: int
+      type: mixed
       optional: true
+      byRef: true
     - name: image_type
-      type: int
+      type: mixed
       optional: true
-    returnType: string
+      byRef: true
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return

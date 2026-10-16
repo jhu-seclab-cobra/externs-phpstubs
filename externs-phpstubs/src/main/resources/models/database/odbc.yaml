@@ -5,26 +5,26 @@
   signature:
     params:
     - name: odbc
-      type: resource
+      type: Odbc\Connection
     - name: enable
-      type: bool
+      type: ?bool
       optional: true
-    returnType: bool
+    returnType: int|bool
 - subject:
     function: odbc_binmode
   signature:
     params:
     - name: statement
-      type: resource
+      type: Odbc\Result
     - name: mode
       type: int
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: odbc_close
   signature:
     params:
     - name: odbc
-      type: resource
+      type: Odbc\Connection
     returnType: void
 - subject:
     function: odbc_close_all
@@ -35,16 +35,16 @@
   signature:
     params:
     - name: odbc
-      type: resource
+      type: Odbc\Connection
     - name: catalog
-      type: string
+      type: ?string
     - name: schema
       type: string
     - name: table
       type: string
     - name: column
       type: string
-    returnType: resource
+    returnType: Odbc\Result|false
   propagation:
   - from: argument(0)
     to: return
@@ -61,20 +61,20 @@
   signature:
     params:
     - name: odbc
-      type: resource
+      type: Odbc\Connection
     - name: catalog
-      type: string
+      type: ?string
       optional: true
     - name: schema
-      type: string
+      type: ?string
       optional: true
     - name: table
-      type: string
+      type: ?string
       optional: true
     - name: column
-      type: string
+      type: ?string
       optional: true
-    returnType: resource
+    returnType: Odbc\Result|false
   propagation:
   - from: argument(0)
     to: return
@@ -91,7 +91,7 @@
   signature:
     params:
     - name: odbc
-      type: resource
+      type: Odbc\Connection
     returnType: bool
 - subject:
     function: odbc_connect
@@ -100,13 +100,15 @@
     - name: dsn
       type: string
     - name: user
-      type: string
+      type: ?string
+      optional: true
     - name: password
-      type: string
+      type: ?string
+      optional: true
     - name: cursor_option
       type: int
       optional: true
-    returnType: resource
+    returnType: Odbc\Connection|false
   propagation:
   - from: argument(0)
     to: return
@@ -121,26 +123,26 @@
   signature:
     params:
     - name: statement
-      type: resource
-    returnType: string
+      type: Odbc\Result
+    returnType: string|false
 - subject:
     function: odbc_data_source
   signature:
     params:
     - name: odbc
-      type: resource
+      type: Odbc\Connection
     - name: fetch_type
       type: int
-    returnType: array
+    returnType: array|null|false
 - subject:
     function: odbc_do
   signature:
     params:
     - name: odbc
-      type: resource
+      type: Odbc\Connection
     - name: query
       type: string
-    returnType: resource
+    returnType: Odbc\Result|false
   propagation:
   - from: argument(0)
     to: return
@@ -151,7 +153,7 @@
   signature:
     params:
     - name: odbc
-      type: resource
+      type: ?Odbc\Connection
       optional: true
     returnType: string
 - subject:
@@ -159,7 +161,7 @@
   signature:
     params:
     - name: odbc
-      type: resource
+      type: ?Odbc\Connection
       optional: true
     returnType: string
 - subject:
@@ -167,10 +169,10 @@
   signature:
     params:
     - name: odbc
-      type: resource
+      type: Odbc\Connection
     - name: query
       type: string
-    returnType: resource
+    returnType: Odbc\Result|false
   propagation:
   - from: argument(0)
     to: return
@@ -181,7 +183,7 @@
   signature:
     params:
     - name: statement
-      type: resource
+      type: Odbc\Result
     - name: params
       type: array
       optional: true
@@ -191,33 +193,34 @@
   signature:
     params:
     - name: statement
-      type: resource
+      type: Odbc\Result
     - name: row
-      type: int
+      type: ?int
       optional: true
-    returnType: array
+    returnType: array|false
 - subject:
     function: odbc_fetch_into
   signature:
     params:
     - name: statement
-      type: resource
+      type: Odbc\Result
     - name: array
-      type: array
+      type: mixed
+      byRef: true
     - name: row
-      type: int
+      type: ?int
       optional: true
-    returnType: int
+    returnType: int|false
 - subject:
     function: odbc_fetch_object
   signature:
     params:
     - name: statement
-      type: resource
+      type: Odbc\Result
     - name: row
-      type: int
+      type: ?int
       optional: true
-    returnType: mixed
+    returnType: stdClass|false
   propagation:
   - from: argument(0)
     to: return
@@ -228,9 +231,9 @@
   signature:
     params:
     - name: statement
-      type: resource
+      type: Odbc\Result
     - name: row
-      type: int
+      type: ?int
       optional: true
     returnType: bool
 - subject:
@@ -238,63 +241,63 @@
   signature:
     params:
     - name: statement
-      type: resource
+      type: Odbc\Result
     - name: field
       type: int
-    returnType: int
+    returnType: int|false
 - subject:
     function: odbc_field_name
   signature:
     params:
     - name: statement
-      type: resource
+      type: Odbc\Result
     - name: field
       type: int
-    returnType: string
+    returnType: string|false
 - subject:
     function: odbc_field_num
   signature:
     params:
     - name: statement
-      type: resource
+      type: Odbc\Result
     - name: field
       type: string
-    returnType: int
+    returnType: int|false
 - subject:
     function: odbc_field_precision
   signature:
     params:
     - name: statement
-      type: resource
+      type: Odbc\Result
     - name: field
       type: int
-    returnType: int
+    returnType: int|false
 - subject:
     function: odbc_field_scale
   signature:
     params:
     - name: statement
-      type: resource
+      type: Odbc\Result
     - name: field
       type: int
-    returnType: int
+    returnType: int|false
 - subject:
     function: odbc_field_type
   signature:
     params:
     - name: statement
-      type: resource
+      type: Odbc\Result
     - name: field
       type: int
-    returnType: string
+    returnType: string|false
 - subject:
     function: odbc_foreignkeys
   signature:
     params:
     - name: odbc
-      type: resource
+      type: Odbc\Connection
     - name: pk_catalog
-      type: string
+      type: ?string
     - name: pk_schema
       type: string
     - name: pk_table
@@ -305,7 +308,7 @@
       type: string
     - name: fk_table
       type: string
-    returnType: resource
+    returnType: Odbc\Result|false
   propagation:
   - from: argument(0)
     to: return
@@ -326,18 +329,18 @@
   signature:
     params:
     - name: statement
-      type: resource
-    returnType: bool
+      type: Odbc\Result
+    returnType: 'true'
 - subject:
     function: odbc_gettypeinfo
   signature:
     params:
     - name: odbc
-      type: resource
+      type: Odbc\Connection
     - name: data_type
       type: int
       optional: true
-    returnType: resource
+    returnType: Odbc\Result|false
   propagation:
   - from: argument(0)
     to: return
@@ -348,30 +351,30 @@
   signature:
     params:
     - name: statement
-      type: resource
+      type: Odbc\Result
     - name: length
       type: int
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: odbc_next_result
   signature:
     params:
     - name: statement
-      type: resource
+      type: Odbc\Result
     returnType: bool
 - subject:
     function: odbc_num_fields
   signature:
     params:
     - name: statement
-      type: resource
+      type: Odbc\Result
     returnType: int
 - subject:
     function: odbc_num_rows
   signature:
     params:
     - name: statement
-      type: resource
+      type: Odbc\Result
     returnType: int
 - subject:
     function: odbc_pconnect
@@ -380,13 +383,15 @@
     - name: dsn
       type: string
     - name: user
-      type: string
+      type: ?string
+      optional: true
     - name: password
-      type: string
+      type: ?string
+      optional: true
     - name: cursor_option
       type: int
       optional: true
-    returnType: resource
+    returnType: Odbc\Connection|false
   propagation:
   - from: argument(0)
     to: return
@@ -401,10 +406,10 @@
   signature:
     params:
     - name: odbc
-      type: resource
+      type: Odbc\Connection
     - name: query
       type: string
-    returnType: resource
+    returnType: Odbc\Result|false
   propagation:
   - from: argument(0)
     to: return
@@ -415,14 +420,14 @@
   signature:
     params:
     - name: odbc
-      type: resource
+      type: Odbc\Connection
     - name: catalog
-      type: string
+      type: ?string
     - name: schema
       type: string
     - name: table
       type: string
-    returnType: resource
+    returnType: Odbc\Result|false
   propagation:
   - from: argument(0)
     to: return
@@ -437,20 +442,20 @@
   signature:
     params:
     - name: odbc
-      type: resource
+      type: Odbc\Connection
     - name: catalog
-      type: string
+      type: ?string
       optional: true
     - name: schema
-      type: string
+      type: ?string
       optional: true
     - name: procedure
-      type: string
+      type: ?string
       optional: true
     - name: column
-      type: string
+      type: ?string
       optional: true
-    returnType: resource
+    returnType: Odbc\Result|false
   propagation:
   - from: argument(0)
     to: return
@@ -467,17 +472,17 @@
   signature:
     params:
     - name: odbc
-      type: resource
+      type: Odbc\Connection
     - name: catalog
-      type: string
+      type: ?string
       optional: true
     - name: schema
-      type: string
+      type: ?string
       optional: true
     - name: procedure
-      type: string
+      type: ?string
       optional: true
-    returnType: resource
+    returnType: Odbc\Result|false
   propagation:
   - from: argument(0)
     to: return
@@ -492,33 +497,33 @@
   signature:
     params:
     - name: statement
-      type: resource
+      type: Odbc\Result
     - name: field
-      type: int
-    returnType: bool
+      type: string|int
+    returnType: string|bool|null
 - subject:
     function: odbc_result_all
   signature:
     params:
     - name: statement
-      type: resource
+      type: Odbc\Result
     - name: format
       type: string
       optional: true
-    returnType: int
+    returnType: int|false
 - subject:
     function: odbc_rollback
   signature:
     params:
     - name: odbc
-      type: resource
+      type: Odbc\Connection
     returnType: bool
 - subject:
     function: odbc_setoption
   signature:
     params:
     - name: odbc
-      type: resource
+      type: Odbc\Connection|Odbc\Result
     - name: which
       type: int
     - name: option
@@ -531,11 +536,11 @@
   signature:
     params:
     - name: odbc
-      type: resource
+      type: Odbc\Connection
     - name: type
       type: int
     - name: catalog
-      type: string
+      type: ?string
     - name: schema
       type: string
     - name: table
@@ -544,7 +549,7 @@
       type: int
     - name: nullable
       type: int
-    returnType: resource
+    returnType: Odbc\Result|false
   propagation:
   - from: argument(0)
     to: return
@@ -565,9 +570,9 @@
   signature:
     params:
     - name: odbc
-      type: resource
+      type: Odbc\Connection
     - name: catalog
-      type: string
+      type: ?string
     - name: schema
       type: string
     - name: table
@@ -576,7 +581,7 @@
       type: int
     - name: accuracy
       type: int
-    returnType: resource
+    returnType: Odbc\Result|false
   propagation:
   - from: argument(0)
     to: return
@@ -595,14 +600,14 @@
   signature:
     params:
     - name: odbc
-      type: resource
+      type: Odbc\Connection
     - name: catalog
-      type: string
+      type: ?string
     - name: schema
       type: string
     - name: table
       type: string
-    returnType: resource
+    returnType: Odbc\Result|false
   propagation:
   - from: argument(0)
     to: return
@@ -617,20 +622,20 @@
   signature:
     params:
     - name: odbc
-      type: resource
+      type: Odbc\Connection
     - name: catalog
-      type: string
+      type: ?string
       optional: true
     - name: schema
-      type: string
+      type: ?string
       optional: true
     - name: table
-      type: string
+      type: ?string
       optional: true
     - name: types
-      type: string
+      type: ?string
       optional: true
-    returnType: resource
+    returnType: Odbc\Result|false
   propagation:
   - from: argument(0)
     to: return
@@ -642,3 +647,32 @@
     to: return
   - from: argument(4)
     to: return
+- subject:
+    class: odbc\connection
+  signature:
+    classifier: class
+- subject:
+    class: odbc\result
+  signature:
+    classifier: class
+- subject:
+    function: odbc_connection_string_is_quoted
+  signature:
+    params:
+    - name: str
+      type: string
+    returnType: bool
+- subject:
+    function: odbc_connection_string_quote
+  signature:
+    params:
+    - name: str
+      type: string
+    returnType: string
+- subject:
+    function: odbc_connection_string_should_quote
+  signature:
+    params:
+    - name: str
+      type: string
+    returnType: bool

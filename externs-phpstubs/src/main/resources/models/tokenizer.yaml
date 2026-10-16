@@ -1,0 +1,68 @@
+# Generated from php-src stubs by tools/extract_hierarchy.py.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    class: phptoken
+  signature:
+    classifier: class
+    interfaces: [stringable]
+- subject:
+    method: PhpToken::__construct
+  signature:
+    params:
+    - name: id
+      type: int
+    - name: text
+      type: string
+    - name: line
+      type: int
+      optional: true
+    - name: pos
+      type: int
+      optional: true
+    returnType: mixed
+- subject:
+    method: PhpToken::__toString
+  signature:
+    returnType: string
+- subject:
+    method: PhpToken::getTokenName
+  signature:
+    returnType: ?string
+- subject:
+    method: PhpToken::is
+  signature:
+    params:
+    - name: kind
+      type: mixed
+    returnType: bool
+- subject:
+    method: PhpToken::isIgnorable
+  signature:
+    returnType: bool
+- subject:
+    method: PhpToken::tokenize
+  signature:
+    params:
+    - name: code
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    function: token_get_all
+  signature:
+    params:
+    - name: code
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    function: token_name
+  signature:
+    params:
+    - name: id
+      type: int
+    returnType: string

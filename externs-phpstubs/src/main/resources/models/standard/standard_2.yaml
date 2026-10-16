@@ -19,12 +19,14 @@
     - name: command
       type: string
     - name: output
-      type: array
+      type: mixed
       optional: true
+      byRef: true
     - name: result_code
-      type: int
+      type: mixed
       optional: true
-    returnType: string
+      byRef: true
+    returnType: string|false
 - subject:
     function: exp
   signature:
@@ -77,18 +79,12 @@
       type: float
     returnType: float
 - subject:
-    function: extension_loaded
-  signature:
-    params:
-    - name: extension
-      type: string
-    returnType: bool
-- subject:
     function: extract
   signature:
     params:
     - name: array
       type: array
+      byRef: true
     - name: flags
       type: int
       optional: true
@@ -2596,7 +2592,7 @@
   signature:
     params:
     - name: num
-      type: float
+      type: int|float
     returnType: float
 - subject:
     function: flush
@@ -2632,6 +2628,7 @@
     - name: args
       type: mixed
       optional: true
+      variadic: true
     returnType: mixed
   propagation:
   - from: argument(0)
@@ -2655,42 +2652,32 @@
 - subject:
     function: fpm_get_status
   signature:
-    returnType: array
+    returnType: array|false
 - subject:
     function: fprintf
   signature:
     params:
     - name: stream
-      type: resource
+      type: mixed
     - name: format
       type: string
     - name: values
-      type: float
+      type: mixed
       optional: true
+      variadic: true
     returnType: int
 - subject:
     function: fputs
   signature:
     params:
     - name: stream
-      type: resource
+      type: mixed
     - name: data
       type: string
     - name: length
-      type: int
+      type: ?int
       optional: true
-    returnType: int
-- subject:
-    function: frenchtojd
-  signature:
-    params:
-    - name: month
-      type: int
-    - name: day
-      type: int
-    - name: year
-      type: int
-    returnType: int
+    returnType: int|false
 - subject:
     function: fribidi_log2vis
   signature:
@@ -2712,13 +2699,15 @@
   signature:
     params:
     - name: stream
-      type: resource
+      type: mixed
     - name: format
       type: string
     - name: vars
       type: mixed
       optional: true
-    returnType: array
+      byRef: true
+      variadic: true
+    returnType: array|int|false|null
   propagation:
   - from: argument(2)
     to: return
@@ -2732,15 +2721,17 @@
       type: int
       optional: true
     - name: error_code
-      type: int
+      type: mixed
       optional: true
+      byRef: true
     - name: error_message
-      type: string
+      type: mixed
       optional: true
+      byRef: true
     - name: timeout
-      type: float
+      type: ?float
       optional: true
-    returnType: resource
+    returnType: mixed
   propagation:
   - from: argument(0)
     to: return
@@ -2761,59 +2752,6 @@
     - name: project_id
       type: string
     returnType: int
-- subject:
-    function: func_get_arg
-  signature:
-    params:
-    - name: position
-      type: int
-    returnType: mixed
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: func_get_args
-  signature:
-    returnType: array
-- subject:
-    function: func_num_args
-  signature:
-    returnType: int
-- subject:
-    function: function_exists
-  signature:
-    params:
-    - name: function
-      type: string
-    returnType: bool
-- subject:
-    function: gc_collect_cycles
-  signature:
-    returnType: int
-- subject:
-    function: gc_disable
-  signature:
-    returnType: void
-- subject:
-    function: gc_enable
-  signature:
-    returnType: void
-- subject:
-    function: gc_enabled
-  signature:
-    returnType: bool
-- subject:
-    function: gc_mem_caches
-  signature:
-    returnType: int
-- subject:
-    function: gc_status
-  signature:
-    returnType: array
-- subject:
-    function: gd_info
-  signature:
-    returnType: array
 - subject:
     function: gearman_bugreport
   signature:
@@ -4294,49 +4232,23 @@
   signature:
     params:
     - name: user_agent
-      type: string
+      type: ?string
       optional: true
     - name: return_array
       type: bool
       optional: true
-    returnType: array
+    returnType: object|array|false
 - subject:
     function: get_call_stack
   signature:
     returnType: mixed
-- subject:
-    function: get_called_class
-  signature:
-    returnType: string
 - subject:
     function: get_cfg_var
   signature:
     params:
     - name: option
       type: string
-    returnType: array
-- subject:
-    function: get_class
-  signature:
-    params:
-    - name: object
-      type: object
-      optional: true
-    returnType: string
-- subject:
-    function: get_class_methods
-  signature:
-    params:
-    - name: object_or_class
-      type: string
-    returnType: array
-- subject:
-    function: get_class_vars
-  signature:
-    params:
-    - name: class
-      type: string
-    returnType: array
+    returnType: string|array|false
 - subject:
     function: get_current_user
   signature:
@@ -4352,45 +4264,6 @@
   - from: argument(0)
     to: return
 - subject:
-    function: get_declared_classes
-  signature:
-    returnType: array
-- subject:
-    function: get_declared_interfaces
-  signature:
-    returnType: array
-- subject:
-    function: get_declared_traits
-  signature:
-    returnType: array
-- subject:
-    function: get_defined_constants
-  signature:
-    params:
-    - name: categorize
-      type: bool
-      optional: true
-    returnType: array
-- subject:
-    function: get_defined_functions
-  signature:
-    params:
-    - name: exclude_disabled
-      type: bool
-      optional: true
-    returnType: array
-- subject:
-    function: get_defined_vars
-  signature:
-    returnType: array
-- subject:
-    function: get_extension_funcs
-  signature:
-    params:
-    - name: extension
-      type: string
-    returnType: array
-- subject:
     function: get_headers
   signature:
     params:
@@ -4400,9 +4273,9 @@
       type: bool
       optional: true
     - name: context
-      type: resource
+      type: mixed
       optional: true
-    returnType: array
+    returnType: array|false
 - subject:
     function: get_html_translation_table
   signature:
@@ -4420,26 +4293,7 @@
 - subject:
     function: get_include_path
   signature:
-    returnType: string
-- subject:
-    function: get_included_files
-  signature:
-    returnType: array
-- subject:
-    function: get_loaded_extensions
-  signature:
-    params:
-    - name: zend_extensions
-      type: bool
-      optional: true
-    returnType: array
-- subject:
-    function: get_mangled_object_vars
-  signature:
-    params:
-    - name: object
-      type: object
-    returnType: array
+    returnType: string|false
 - subject:
     function: get_meta_tags
   signature:
@@ -4449,51 +4303,7 @@
     - name: use_include_path
       type: bool
       optional: true
-    returnType: array
-- subject:
-    function: get_object_vars
-  signature:
-    params:
-    - name: object
-      type: object
-    returnType: array
-- subject:
-    function: get_parent_class
-  signature:
-    params:
-    - name: object_or_class
-      type: string
-      optional: true
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: get_required_files
-  signature:
-    returnType: array
-- subject:
-    function: get_resource_id
-  signature:
-    params:
-    - name: resource
-      type: resource
-    returnType: int
-- subject:
-    function: get_resource_type
-  signature:
-    params:
-    - name: resource
-      type: resource
-    returnType: string
-- subject:
-    function: get_resources
-  signature:
-    params:
-    - name: type
-      type: string
-      optional: true
-    returnType: array
+    returnType: array|false
 - subject:
     function: getallheaders
   signature:
@@ -4501,18 +4311,18 @@
 - subject:
     function: getcwd
   signature:
-    returnType: string
+    returnType: string|false
 - subject:
     function: getenv
   signature:
     params:
     - name: name
-      type: string
+      type: ?string
       optional: true
     - name: local_only
       type: bool
       optional: true
-    returnType: string
+    returnType: string|array|false
   propagation:
   - from: argument(0)
     to: return
@@ -4522,7 +4332,7 @@
     params:
     - name: ip
       type: string
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -4542,11 +4352,11 @@
     params:
     - name: hostname
       type: string
-    returnType: array
+    returnType: array|false
 - subject:
     function: gethostname
   signature:
-    returnType: string
+    returnType: string|false
 - subject:
     function: getimagesize
   signature:
@@ -4554,9 +4364,10 @@
     - name: filename
       type: string
     - name: image_info
-      type: array
+      type: mixed
       optional: true
-    returnType: array
+      byRef: true
+    returnType: array|false
 - subject:
     function: getimagesizefromstring
   signature:
@@ -4564,16 +4375,17 @@
     - name: string
       type: string
     - name: image_info
-      type: array
+      type: mixed
       optional: true
-    returnType: array
+      byRef: true
+    returnType: array|false
   propagation:
   - from: argument(1)
     to: return
 - subject:
     function: getlastmod
   signature:
-    returnType: int
+    returnType: int|false
 - subject:
     function: getmxrr
   signature:
@@ -4581,27 +4393,29 @@
     - name: hostname
       type: string
     - name: hosts
-      type: array
+      type: mixed
+      byRef: true
     - name: weights
-      type: array
+      type: mixed
       optional: true
+      byRef: true
     returnType: bool
 - subject:
     function: getmygid
   signature:
-    returnType: int
+    returnType: int|false
 - subject:
     function: getmyinode
   signature:
-    returnType: int
+    returnType: int|false
 - subject:
     function: getmypid
   signature:
-    returnType: int
+    returnType: int|false
 - subject:
     function: getmyuid
   signature:
-    returnType: int
+    returnType: int|false
 - subject:
     function: getopt
   signature:
@@ -4612,9 +4426,10 @@
       type: array
       optional: true
     - name: rest_index
-      type: int
+      type: mixed
       optional: true
-    returnType: array
+      byRef: true
+    returnType: array|false
   propagation:
   - from: argument(1)
     to: return
@@ -4624,18 +4439,14 @@
     params:
     - name: protocol
       type: string
-    returnType: int
+    returnType: int|false
 - subject:
     function: getprotobynumber
   signature:
     params:
     - name: protocol
       type: int
-    returnType: string
-- subject:
-    function: getrandmax
-  signature:
-    returnType: int
+    returnType: string|false
 - subject:
     function: getrusage
   signature:
@@ -4643,7 +4454,7 @@
     - name: mode
       type: int
       optional: true
-    returnType: array
+    returnType: array|false
 - subject:
     function: getservbyname
   signature:
@@ -4652,7 +4463,7 @@
       type: string
     - name: protocol
       type: string
-    returnType: int
+    returnType: int|false
 - subject:
     function: getservbyport
   signature:
@@ -4661,7 +4472,7 @@
       type: int
     - name: protocol
       type: string
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(1)
     to: return
@@ -4672,7 +4483,7 @@
     - name: as_float
       type: bool
       optional: true
-    returnType: array
+    returnType: array|float
 - subject:
     function: gettype
   signature:
@@ -4680,19 +4491,6 @@
     - name: value
       type: mixed
     returnType: string
-- subject:
-    function: gmstrftime
-  signature:
-    params:
-    - name: format
-      type: string
-    - name: timestamp
-      type: int
-      optional: true
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
 - subject:
     function: gnupg_adddecryptkey
   signature:
@@ -4908,142 +4706,6 @@
     - name: dirent
       type: string
     returnType: array
-- subject:
-    function: grapheme_extract
-  signature:
-    params:
-    - name: haystack
-      type: string
-    - name: size
-      type: int
-    - name: type
-      type: int
-      optional: true
-    - name: offset
-      type: int
-      optional: true
-    - name: next
-      type: int
-      optional: true
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: grapheme_stripos
-  signature:
-    params:
-    - name: haystack
-      type: string
-    - name: needle
-      type: string
-    - name: offset
-      type: int
-      optional: true
-    returnType: int
-- subject:
-    function: grapheme_stristr
-  signature:
-    params:
-    - name: haystack
-      type: string
-    - name: needle
-      type: string
-    - name: beforeNeedle
-      type: bool
-      optional: true
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: grapheme_strlen
-  signature:
-    params:
-    - name: string
-      type: string
-    returnType: int
-- subject:
-    function: grapheme_strpos
-  signature:
-    params:
-    - name: haystack
-      type: string
-    - name: needle
-      type: string
-    - name: offset
-      type: int
-      optional: true
-    returnType: int
-- subject:
-    function: grapheme_strripos
-  signature:
-    params:
-    - name: haystack
-      type: string
-    - name: needle
-      type: string
-    - name: offset
-      type: int
-      optional: true
-    returnType: int
-- subject:
-    function: grapheme_strrpos
-  signature:
-    params:
-    - name: haystack
-      type: string
-    - name: needle
-      type: string
-    - name: offset
-      type: int
-      optional: true
-    returnType: int
-- subject:
-    function: grapheme_strstr
-  signature:
-    params:
-    - name: haystack
-      type: string
-    - name: needle
-      type: string
-    - name: beforeNeedle
-      type: bool
-      optional: true
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: grapheme_substr
-  signature:
-    params:
-    - name: string
-      type: string
-    - name: offset
-      type: int
-    - name: length
-      type: int
-      optional: true
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: gregoriantojd
-  signature:
-    params:
-    - name: month
-      type: int
-    - name: day
-      type: int
-    - name: year
-      type: int
-    returnType: int
 - subject:
     function: gupnp_context_get_host_ip
   signature:

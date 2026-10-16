@@ -5,51 +5,51 @@
   signature:
     params:
     - name: zip
-      type: resource
+      type: mixed
     returnType: void
 - subject:
     function: zip_entry_close
   signature:
     params:
     - name: zip_entry
-      type: resource
+      type: mixed
     returnType: bool
 - subject:
     function: zip_entry_compressedsize
   signature:
     params:
     - name: zip_entry
-      type: resource
-    returnType: int
+      type: mixed
+    returnType: int|false
 - subject:
     function: zip_entry_compressionmethod
   signature:
     params:
     - name: zip_entry
-      type: resource
-    returnType: string
+      type: mixed
+    returnType: string|false
 - subject:
     function: zip_entry_filesize
   signature:
     params:
     - name: zip_entry
-      type: resource
-    returnType: int
+      type: mixed
+    returnType: int|false
 - subject:
     function: zip_entry_name
   signature:
     params:
     - name: zip_entry
-      type: resource
-    returnType: string
+      type: mixed
+    returnType: string|false
 - subject:
     function: zip_entry_open
   signature:
     params:
     - name: zip_dp
-      type: resource
+      type: mixed
     - name: zip_entry
-      type: resource
+      type: mixed
     - name: mode
       type: string
       optional: true
@@ -59,25 +59,545 @@
   signature:
     params:
     - name: zip_entry
-      type: resource
+      type: mixed
     - name: len
       type: int
       optional: true
-    returnType: string
+    returnType: string|false
 - subject:
     function: zip_open
   signature:
     params:
     - name: filename
       type: string
-    returnType: int
+    returnType: mixed
 - subject:
     function: zip_read
   signature:
     params:
     - name: zip
-      type: resource
-    returnType: resource
+      type: mixed
+    returnType: mixed
   propagation:
   - from: argument(0)
     to: return
+- subject:
+    class: ziparchive
+  signature:
+    classifier: class
+    interfaces: [countable]
+- subject:
+    method: ZipArchive::addEmptyDir
+  signature:
+    params:
+    - name: dirname
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    method: ZipArchive::addFile
+  signature:
+    params:
+    - name: filepath
+      type: string
+    - name: entryname
+      type: string
+      optional: true
+    - name: start
+      type: int
+      optional: true
+    - name: length
+      type: int
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    method: ZipArchive::addFromString
+  signature:
+    params:
+    - name: name
+      type: string
+    - name: content
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    method: ZipArchive::addGlob
+  signature:
+    params:
+    - name: pattern
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    - name: options
+      type: array
+      optional: true
+    returnType: array|false
+- subject:
+    method: ZipArchive::addPattern
+  signature:
+    params:
+    - name: pattern
+      type: string
+    - name: path
+      type: string
+      optional: true
+    - name: options
+      type: array
+      optional: true
+    returnType: array|false
+- subject:
+    method: ZipArchive::clearError
+  signature:
+    returnType: void
+- subject:
+    method: ZipArchive::close
+  signature:
+    returnType: bool
+- subject:
+    method: ZipArchive::count
+  signature:
+    returnType: int
+- subject:
+    method: ZipArchive::deleteIndex
+  signature:
+    params:
+    - name: index
+      type: int
+    returnType: bool
+- subject:
+    method: ZipArchive::deleteName
+  signature:
+    params:
+    - name: name
+      type: string
+    returnType: bool
+- subject:
+    method: ZipArchive::extractTo
+  signature:
+    params:
+    - name: pathto
+      type: string
+    - name: files
+      type: array|string|null
+      optional: true
+    returnType: bool
+- subject:
+    method: ZipArchive::getArchiveComment
+  signature:
+    params:
+    - name: flags
+      type: int
+      optional: true
+    returnType: string|false
+- subject:
+    method: ZipArchive::getArchiveFlag
+  signature:
+    params:
+    - name: flag
+      type: int
+    - name: flags
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    method: ZipArchive::getCommentIndex
+  signature:
+    params:
+    - name: index
+      type: int
+    - name: flags
+      type: int
+      optional: true
+    returnType: string|false
+- subject:
+    method: ZipArchive::getCommentName
+  signature:
+    params:
+    - name: name
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: string|false
+- subject:
+    method: ZipArchive::getExternalAttributesIndex
+  signature:
+    params:
+    - name: index
+      type: int
+    - name: opsys
+      type: mixed
+      byRef: true
+    - name: attr
+      type: mixed
+      byRef: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    method: ZipArchive::getExternalAttributesName
+  signature:
+    params:
+    - name: name
+      type: string
+    - name: opsys
+      type: mixed
+      byRef: true
+    - name: attr
+      type: mixed
+      byRef: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    method: ZipArchive::getFromIndex
+  signature:
+    params:
+    - name: index
+      type: int
+    - name: len
+      type: int
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: string|false
+- subject:
+    method: ZipArchive::getFromName
+  signature:
+    params:
+    - name: name
+      type: string
+    - name: len
+      type: int
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: string|false
+- subject:
+    method: ZipArchive::getNameIndex
+  signature:
+    params:
+    - name: index
+      type: int
+    - name: flags
+      type: int
+      optional: true
+    returnType: string|false
+- subject:
+    method: ZipArchive::getStatusString
+  signature:
+    returnType: string
+- subject:
+    method: ZipArchive::getStream
+  signature:
+    params:
+    - name: name
+      type: string
+    returnType: mixed
+- subject:
+    method: ZipArchive::getStreamIndex
+  signature:
+    params:
+    - name: index
+      type: int
+    - name: flags
+      type: int
+      optional: true
+    returnType: mixed
+- subject:
+    method: ZipArchive::getStreamName
+  signature:
+    params:
+    - name: name
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: mixed
+- subject:
+    method: ZipArchive::isCompressionMethodSupported
+  signature:
+    params:
+    - name: method
+      type: int
+    - name: enc
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    method: ZipArchive::isEncryptionMethodSupported
+  signature:
+    params:
+    - name: method
+      type: int
+    - name: enc
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    method: ZipArchive::locateName
+  signature:
+    params:
+    - name: name
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: int|false
+- subject:
+    method: ZipArchive::open
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool|int
+- subject:
+    method: ZipArchive::registerCancelCallback
+  signature:
+    params:
+    - name: callback
+      type: callable
+    returnType: bool
+- subject:
+    method: ZipArchive::registerProgressCallback
+  signature:
+    params:
+    - name: rate
+      type: float
+    - name: callback
+      type: callable
+    returnType: bool
+- subject:
+    method: ZipArchive::renameIndex
+  signature:
+    params:
+    - name: index
+      type: int
+    - name: new_name
+      type: string
+    returnType: bool
+- subject:
+    method: ZipArchive::renameName
+  signature:
+    params:
+    - name: name
+      type: string
+    - name: new_name
+      type: string
+    returnType: bool
+- subject:
+    method: ZipArchive::replaceFile
+  signature:
+    params:
+    - name: filepath
+      type: string
+    - name: index
+      type: int
+    - name: start
+      type: int
+      optional: true
+    - name: length
+      type: int
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    method: ZipArchive::setArchiveComment
+  signature:
+    params:
+    - name: comment
+      type: string
+    returnType: bool
+- subject:
+    method: ZipArchive::setArchiveFlag
+  signature:
+    params:
+    - name: flag
+      type: int
+    - name: value
+      type: int
+    returnType: bool
+- subject:
+    method: ZipArchive::setCommentIndex
+  signature:
+    params:
+    - name: index
+      type: int
+    - name: comment
+      type: string
+    returnType: bool
+- subject:
+    method: ZipArchive::setCommentName
+  signature:
+    params:
+    - name: name
+      type: string
+    - name: comment
+      type: string
+    returnType: bool
+- subject:
+    method: ZipArchive::setCompressionIndex
+  signature:
+    params:
+    - name: index
+      type: int
+    - name: method
+      type: int
+    - name: compflags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    method: ZipArchive::setCompressionName
+  signature:
+    params:
+    - name: name
+      type: string
+    - name: method
+      type: int
+    - name: compflags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    method: ZipArchive::setEncryptionIndex
+  signature:
+    params:
+    - name: index
+      type: int
+    - name: method
+      type: int
+    - name: password
+      type: ?string
+      optional: true
+    returnType: bool
+- subject:
+    method: ZipArchive::setEncryptionName
+  signature:
+    params:
+    - name: name
+      type: string
+    - name: method
+      type: int
+    - name: password
+      type: ?string
+      optional: true
+    returnType: bool
+- subject:
+    method: ZipArchive::setExternalAttributesIndex
+  signature:
+    params:
+    - name: index
+      type: int
+    - name: opsys
+      type: int
+    - name: attr
+      type: int
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    method: ZipArchive::setExternalAttributesName
+  signature:
+    params:
+    - name: name
+      type: string
+    - name: opsys
+      type: int
+    - name: attr
+      type: int
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    method: ZipArchive::setMtimeIndex
+  signature:
+    params:
+    - name: index
+      type: int
+    - name: timestamp
+      type: int
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    method: ZipArchive::setMtimeName
+  signature:
+    params:
+    - name: name
+      type: string
+    - name: timestamp
+      type: int
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    method: ZipArchive::setPassword
+  signature:
+    params:
+    - name: password
+      type: string
+    returnType: bool
+- subject:
+    method: ZipArchive::statIndex
+  signature:
+    params:
+    - name: index
+      type: int
+    - name: flags
+      type: int
+      optional: true
+    returnType: array|false
+- subject:
+    method: ZipArchive::statName
+  signature:
+    params:
+    - name: name
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: array|false
+- subject:
+    method: ZipArchive::unchangeAll
+  signature:
+    returnType: bool
+- subject:
+    method: ZipArchive::unchangeArchive
+  signature:
+    returnType: bool
+- subject:
+    method: ZipArchive::unchangeIndex
+  signature:
+    params:
+    - name: index
+      type: int
+    returnType: bool
+- subject:
+    method: ZipArchive::unchangeName
+  signature:
+    params:
+    - name: name
+      type: string
+    returnType: bool

@@ -310,14 +310,14 @@
   signature:
     params:
     - name: callback
-      type: mixed
+      type: callable
     returnType: bool
 - subject:
     function: header_remove
   signature:
     params:
     - name: name
-      type: string
+      type: ?string
       optional: true
     returnType: void
 - subject:
@@ -329,11 +329,13 @@
   signature:
     params:
     - name: filename
-      type: string
+      type: mixed
       optional: true
+      byRef: true
     - name: line
-      type: int
+      type: mixed
       optional: true
+      byRef: true
     returnType: bool
 - subject:
     function: hebrev
@@ -354,7 +356,7 @@
     params:
     - name: string
       type: string
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -364,7 +366,7 @@
     params:
     - name: hex_string
       type: string
-    returnType: float
+    returnType: int|float
 - subject:
     function: highlight_file
   signature:
@@ -374,7 +376,7 @@
     - name: return
       type: bool
       optional: true
-    returnType: bool
+    returnType: string|bool
 - subject:
     function: highlight_string
   signature:
@@ -384,7 +386,7 @@
     - name: return
       type: bool
       optional: true
-    returnType: bool
+    returnType: string|true
 - subject:
     function: hrtime
   signature:
@@ -392,7 +394,7 @@
     - name: as_number
       type: bool
       optional: true
-    returnType: array
+    returnType: array|int|float|false
 - subject:
     function: html_entity_decode
   signature:
@@ -403,7 +405,7 @@
       type: int
       optional: true
     - name: encoding
-      type: string
+      type: ?string
       optional: true
     returnType: string
   propagation:
@@ -421,7 +423,7 @@
       type: int
       optional: true
     - name: encoding
-      type: string
+      type: ?string
       optional: true
     - name: double_encode
       type: bool
@@ -437,7 +439,7 @@
       type: int
       optional: true
     - name: encoding
-      type: string
+      type: ?string
       optional: true
     - name: double_encode
       type: bool
@@ -468,12 +470,12 @@
   signature:
     params:
     - name: data
-      type: array
+      type: array|object
     - name: numeric_prefix
       type: string
       optional: true
     - name: arg_separator
-      type: string
+      type: ?string
       optional: true
     - name: encoding_type
       type: int
@@ -942,7 +944,7 @@
     - name: response_code
       type: int
       optional: true
-    returnType: bool
+    returnType: int|bool
 - subject:
     function: http_send_content_disposition
   signature:
@@ -1754,7 +1756,7 @@
     params:
     - name: x
       type: float
-    - name: y
+    - name: 'y'
       type: float
     returnType: float
 - subject:
@@ -2426,24 +2428,6 @@
   - from: argument(2)
     to: return
 - subject:
-    function: iconv
-  signature:
-    params:
-    - name: from_encoding
-      type: string
-    - name: to_encoding
-      type: string
-    - name: string
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-  - from: argument(2)
-    to: return
-- subject:
     function: id3_get_frame_long_name
   signature:
     params:
@@ -2521,60 +2505,12 @@
       optional: true
     returnType: bool
 - subject:
-    function: idate
-  signature:
-    params:
-    - name: format
-      type: string
-    - name: timestamp
-      type: int
-      optional: true
-    returnType: int
-- subject:
     function: idn_strerror
   signature:
     params:
     - name: errorcode
       type: int
     returnType: string
-- subject:
-    function: idn_to_ascii
-  signature:
-    params:
-    - name: domain
-      type: string
-    - name: flags
-      type: int
-      optional: true
-    - name: variant
-      type: int
-      optional: true
-    - name: idna_info
-      type: array
-      optional: true
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: idn_to_utf8
-  signature:
-    params:
-    - name: domain
-      type: string
-    - name: flags
-      type: int
-      optional: true
-    - name: variant
-      type: int
-      optional: true
-    - name: idna_info
-      type: array
-      optional: true
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
 - subject:
     function: ifx_affected_rows
   signature:
@@ -2955,7 +2891,7 @@
   signature:
     params:
     - name: enable
-      type: bool
+      type: ?bool
       optional: true
     returnType: int
 - subject:
@@ -3120,9 +3056,9 @@
   signature:
     params:
     - name: separator
-      type: string
+      type: string|array
     - name: array
-      type: array
+      type: ?array
       optional: true
     returnType: string
   propagation:
@@ -3162,7 +3098,7 @@
     params:
     - name: ip
       type: string
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -3172,55 +3108,9 @@
     params:
     - name: ip
       type: string
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
-    to: return
-- subject:
-    function: inflate_add
-  signature:
-    params:
-    - name: context
-      type: mixed
-    - name: data
-      type: string
-    - name: flush_mode
-      type: int
-      optional: true
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: inflate_get_read_len
-  signature:
-    params:
-    - name: context
-      type: mixed
-    returnType: int
-- subject:
-    function: inflate_get_status
-  signature:
-    params:
-    - name: context
-      type: mixed
-    returnType: int
-- subject:
-    function: inflate_init
-  signature:
-    params:
-    - name: encoding
-      type: int
-    - name: options
-      type: array
-      optional: true
-    returnType: mixed
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
     to: return
 - subject:
     function: ingres_autocommit
@@ -3588,8 +3478,8 @@
     - name: option
       type: string
     - name: value
-      type: string
-    returnType: string
+      type: string|int|float|bool|null
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -3601,7 +3491,7 @@
     params:
     - name: option
       type: string
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -3610,12 +3500,12 @@
   signature:
     params:
     - name: extension
-      type: string
+      type: ?string
       optional: true
     - name: details
       type: bool
       optional: true
-    returnType: array
+    returnType: array|false
 - subject:
     function: ini_restore
   signature:
@@ -3630,8 +3520,8 @@
     - name: option
       type: string
     - name: value
-      type: string
-    returnType: string
+      type: string|int|float|bool|null
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -3685,681 +3575,9 @@
       type: int
     returnType: int
 - subject:
-    function: interface_exists
-  signature:
-    params:
-    - name: interface
-      type: string
-    - name: autoload
-      type: bool
-      optional: true
-    returnType: bool
-- subject:
-    function: intlcal_add
-  signature:
-    params:
-    - name: calendar
-      type: int
-    - name: field
-      type: int
-    - name: value
-      type: int
-    returnType: bool
-- subject:
-    function: intlcal_after
-  signature:
-    params:
-    - name: calendar
-      type: int
-    - name: other
-      type: int
-    returnType: bool
-- subject:
-    function: intlcal_before
-  signature:
-    params:
-    - name: calendar
-      type: int
-    - name: other
-      type: int
-    returnType: bool
-- subject:
-    function: intlcal_clear
-  signature:
-    params:
-    - name: calendar
-      type: int
-    - name: field
-      type: int
-      optional: true
-    returnType: bool
-- subject:
-    function: intlcal_create_instance
-  signature:
-    params:
-    - name: timezone
-      type: mixed
-      optional: true
-    - name: locale
-      type: string
-      optional: true
-    returnType: int
-- subject:
-    function: intlcal_equals
-  signature:
-    params:
-    - name: calendar
-      type: int
-    - name: other
-      type: int
-    returnType: bool
-- subject:
-    function: intlcal_field_difference
-  signature:
-    params:
-    - name: calendar
-      type: int
-    - name: timestamp
-      type: float
-    - name: field
-      type: int
-    returnType: int
-- subject:
-    function: intlcal_from_date_time
-  signature:
-    params:
-    - name: datetime
-      type: mixed
-    - name: locale
-      type: string
-      optional: true
-    returnType: int
-- subject:
-    function: intlcal_get
-  signature:
-    params:
-    - name: calendar
-      type: int
-    - name: field
-      type: int
-    returnType: int
-- subject:
-    function: intlcal_get_actual_maximum
-  signature:
-    params:
-    - name: calendar
-      type: int
-    - name: field
-      type: int
-    returnType: int
-- subject:
-    function: intlcal_get_actual_minimum
-  signature:
-    params:
-    - name: calendar
-      type: int
-    - name: field
-      type: int
-    returnType: int
-- subject:
-    function: intlcal_get_available_locales
-  signature:
-    returnType: array
-- subject:
-    function: intlcal_get_day_of_week_type
-  signature:
-    params:
-    - name: calendar
-      type: int
-    - name: dayOfWeek
-      type: int
-    returnType: int
-- subject:
-    function: intlcal_get_error_code
-  signature:
-    params:
-    - name: calendar
-      type: int
-    returnType: int
-- subject:
-    function: intlcal_get_error_message
-  signature:
-    params:
-    - name: calendar
-      type: int
-    returnType: string
-- subject:
-    function: intlcal_get_first_day_of_week
-  signature:
-    params:
-    - name: calendar
-      type: int
-    returnType: int
-- subject:
-    function: intlcal_get_greatest_minimum
-  signature:
-    params:
-    - name: calendar
-      type: int
-    - name: field
-      type: int
-    returnType: int
-- subject:
-    function: intlcal_get_keyword_values_for_locale
-  signature:
-    params:
-    - name: keyword
-      type: string
-    - name: locale
-      type: string
-    - name: onlyCommon
-      type: bool
-    returnType: int
-- subject:
-    function: intlcal_get_least_maximum
-  signature:
-    params:
-    - name: calendar
-      type: int
-    - name: field
-      type: int
-    returnType: int
-- subject:
-    function: intlcal_get_locale
-  signature:
-    params:
-    - name: calendar
-      type: int
-    - name: type
-      type: int
-    returnType: string
-- subject:
-    function: intlcal_get_maximum
-  signature:
-    params:
-    - name: calendar
-      type: int
-    - name: field
-      type: int
-    returnType: int
-- subject:
-    function: intlcal_get_minimal_days_in_first_week
-  signature:
-    params:
-    - name: calendar
-      type: int
-    returnType: int
-- subject:
-    function: intlcal_get_minimum
-  signature:
-    params:
-    - name: calendar
-      type: int
-    - name: field
-      type: int
-    returnType: int
-- subject:
-    function: intlcal_get_now
-  signature:
-    returnType: float
-- subject:
-    function: intlcal_get_repeated_wall_time_option
-  signature:
-    params:
-    - name: calendar
-      type: int
-    returnType: int
-- subject:
-    function: intlcal_get_skipped_wall_time_option
-  signature:
-    params:
-    - name: calendar
-      type: int
-    returnType: int
-- subject:
-    function: intlcal_get_time
-  signature:
-    params:
-    - name: calendar
-      type: int
-    returnType: float
-- subject:
-    function: intlcal_get_time_zone
-  signature:
-    params:
-    - name: calendar
-      type: int
-    returnType: int
-- subject:
-    function: intlcal_get_type
-  signature:
-    params:
-    - name: calendar
-      type: int
-    returnType: string
-- subject:
-    function: intlcal_get_weekend_transition
-  signature:
-    params:
-    - name: calendar
-      type: int
-    - name: dayOfWeek
-      type: int
-    returnType: int
-- subject:
-    function: intlcal_in_daylight_time
-  signature:
-    params:
-    - name: calendar
-      type: int
-    returnType: bool
-- subject:
-    function: intlcal_is_equivalent_to
-  signature:
-    params:
-    - name: calendar
-      type: int
-    - name: other
-      type: int
-    returnType: bool
-- subject:
-    function: intlcal_is_lenient
-  signature:
-    params:
-    - name: calendar
-      type: int
-    returnType: bool
-- subject:
-    function: intlcal_is_set
-  signature:
-    params:
-    - name: calendar
-      type: int
-    - name: field
-      type: int
-    returnType: bool
-- subject:
-    function: intlcal_is_weekend
-  signature:
-    params:
-    - name: calendar
-      type: int
-    - name: timestamp
-      type: float
-      optional: true
-    returnType: bool
-- subject:
-    function: intlcal_roll
-  signature:
-    params:
-    - name: calendar
-      type: int
-    - name: field
-      type: int
-    - name: value
-      type: mixed
-    returnType: bool
-- subject:
-    function: intlcal_set
-  signature:
-    params:
-    - name: calendar
-      type: int
-    - name: year
-      type: int
-    - name: month
-      type: int
-    - name: dayOfMonth
-      type: int
-      optional: true
-    - name: hour
-      type: int
-      optional: true
-    - name: minute
-      type: int
-      optional: true
-    - name: second
-      type: int
-      optional: true
-    returnType: bool
-- subject:
-    function: intlcal_set_first_day_of_week
-  signature:
-    params:
-    - name: calendar
-      type: int
-    - name: dayOfWeek
-      type: int
-    returnType: bool
-- subject:
-    function: intlcal_set_lenient
-  signature:
-    params:
-    - name: calendar
-      type: int
-    - name: lenient
-      type: bool
-    returnType: bool
-- subject:
-    function: intlcal_set_minimal_days_in_first_week
-  signature:
-    params:
-    - name: calendar
-      type: int
-    - name: days
-      type: int
-    returnType: bool
-- subject:
-    function: intlcal_set_repeated_wall_time_option
-  signature:
-    params:
-    - name: calendar
-      type: int
-    - name: option
-      type: int
-    returnType: bool
-- subject:
-    function: intlcal_set_skipped_wall_time_option
-  signature:
-    params:
-    - name: calendar
-      type: int
-    - name: option
-      type: int
-    returnType: bool
-- subject:
-    function: intlcal_set_time
-  signature:
-    params:
-    - name: calendar
-      type: int
-    - name: timestamp
-      type: float
-    returnType: bool
-- subject:
-    function: intlcal_set_time_zone
-  signature:
-    params:
-    - name: calendar
-      type: int
-    - name: timezone
-      type: mixed
-    returnType: bool
-- subject:
-    function: intlcal_to_date_time
-  signature:
-    params:
-    - name: calendar
-      type: int
-    returnType: mixed
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: intlgregcal_create_instance
-  signature:
-    params:
-    - name: timezoneOrYear
-      type: mixed
-      optional: true
-    - name: localeOrMonth
-      type: int
-      optional: true
-    - name: day
-      type: int
-      optional: true
-    - name: hour
-      type: int
-      optional: true
-    - name: minute
-      type: int
-      optional: true
-    - name: second
-      type: int
-      optional: true
-    returnType: int
-- subject:
-    function: intlgregcal_get_gregorian_change
-  signature:
-    params:
-    - name: calendar
-      type: int
-    returnType: float
-- subject:
-    function: intlgregcal_is_leap_year
-  signature:
-    params:
-    - name: calendar
-      type: int
-    - name: year
-      type: int
-    returnType: bool
-- subject:
-    function: intlgregcal_set_gregorian_change
-  signature:
-    params:
-    - name: calendar
-      type: int
-    - name: timestamp
-      type: float
-    returnType: bool
-- subject:
-    function: intltz_count_equivalent_ids
-  signature:
-    params:
-    - name: timezoneId
-      type: string
-    returnType: int
-- subject:
-    function: intltz_create_default
-  signature:
-    returnType: int
-- subject:
-    function: intltz_create_enumeration
-  signature:
-    params:
-    - name: countryOrRawOffset
-      type: int
-      optional: true
-    returnType: int
-- subject:
-    function: intltz_create_time_zone
-  signature:
-    params:
-    - name: timezoneId
-      type: string
-    returnType: int
-- subject:
-    function: intltz_create_time_zone_id_enumeration
-  signature:
-    params:
-    - name: type
-      type: int
-    - name: region
-      type: string
-      optional: true
-    - name: rawOffset
-      type: int
-      optional: true
-    returnType: int
-- subject:
-    function: intltz_from_date_time_zone
-  signature:
-    params:
-    - name: timezone
-      type: mixed
-    returnType: int
-- subject:
-    function: intltz_get_canonical_id
-  signature:
-    params:
-    - name: timezoneId
-      type: string
-    - name: isSystemId
-      type: bool
-      optional: true
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: intltz_get_display_name
-  signature:
-    params:
-    - name: timezone
-      type: int
-    - name: dst
-      type: bool
-      optional: true
-    - name: style
-      type: int
-      optional: true
-    - name: locale
-      type: string
-      optional: true
-    returnType: string
-  propagation:
-  - from: argument(3)
-    to: return
-- subject:
-    function: intltz_get_dst_savings
-  signature:
-    params:
-    - name: timezone
-      type: int
-    returnType: int
-- subject:
-    function: intltz_get_equivalent_id
-  signature:
-    params:
-    - name: timezoneId
-      type: string
-    - name: offset
-      type: int
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: intltz_get_error_code
-  signature:
-    params:
-    - name: timezone
-      type: int
-    returnType: int
-- subject:
-    function: intltz_get_error_message
-  signature:
-    params:
-    - name: timezone
-      type: int
-    returnType: string
-- subject:
-    function: intltz_get_gmt
-  signature:
-    returnType: int
-- subject:
-    function: intltz_get_id
-  signature:
-    params:
-    - name: timezone
-      type: int
-    returnType: string
-- subject:
-    function: intltz_get_id_for_windows_id
-  signature:
-    params:
-    - name: timezoneId
-      type: string
-    - name: region
-      type: string
-      optional: true
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: intltz_get_offset
-  signature:
-    params:
-    - name: timezone
-      type: int
-    - name: timestamp
-      type: float
-    - name: local
-      type: bool
-    - name: rawOffset
-      type: int
-    - name: dstOffset
-      type: int
-    returnType: bool
-- subject:
-    function: intltz_get_raw_offset
-  signature:
-    params:
-    - name: timezone
-      type: int
-    returnType: int
-- subject:
-    function: intltz_get_region
-  signature:
-    params:
-    - name: timezoneId
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: intltz_get_tz_data_version
-  signature:
-    returnType: string
-- subject:
-    function: intltz_get_unknown
-  signature:
-    returnType: int
-- subject:
-    function: intltz_get_windows_id
-  signature:
-    params:
-    - name: timezoneId
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
     function: intltz_getgmt
   signature:
     returnType: int
-- subject:
-    function: intltz_has_same_rules
-  signature:
-    params:
-    - name: timezone
-      type: int
-    - name: other
-      type: int
-    returnType: bool
-- subject:
-    function: intltz_to_date_time_zone
-  signature:
-    params:
-    - name: timezone
-      type: int
-    returnType: mixed
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: intltz_use_daylight_time
-  signature:
-    params:
-    - name: timezone
-      type: int
-    returnType: bool
 - subject:
     function: intlz_create_default
   signature:
@@ -4380,7 +3598,7 @@
     params:
     - name: ip
       type: string
-    returnType: int
+    returnType: int|false
 - subject:
     function: iptcembed
   signature:
@@ -4392,26 +3610,14 @@
     - name: spool
       type: int
       optional: true
-    returnType: bool
+    returnType: string|bool
 - subject:
     function: iptcparse
   signature:
     params:
     - name: iptc_block
       type: string
-    returnType: array
-- subject:
-    function: is_a
-  signature:
-    params:
-    - name: object_or_class
-      type: mixed
-    - name: class
-      type: string
-    - name: allow_string
-      type: bool
-      optional: true
-    returnType: bool
+    returnType: array|false
 - subject:
     function: is_array
   signature:
@@ -4431,13 +3637,14 @@
   signature:
     params:
     - name: value
-      type: callable
+      type: mixed
     - name: syntax_only
       type: bool
       optional: true
     - name: callable_name
-      type: string
+      type: mixed
       optional: true
+      byRef: true
     returnType: bool
 - subject:
     function: is_countable
@@ -4545,30 +3752,11 @@
       type: mixed
     returnType: bool
 - subject:
-    function: is_soap_fault
-  signature:
-    params:
-    - name: object
-      type: mixed
-    returnType: bool
-- subject:
     function: is_string
   signature:
     params:
     - name: value
       type: mixed
-    returnType: bool
-- subject:
-    function: is_subclass_of
-  signature:
-    params:
-    - name: object_or_class
-      type: object
-    - name: class
-      type: string
-    - name: allow_string
-      type: bool
-      optional: true
     returnType: bool
 - subject:
     function: is_tainted
@@ -4577,38 +3765,6 @@
     - name: string
       type: string
     returnType: bool
-- subject:
-    function: iterator_apply
-  signature:
-    params:
-    - name: iterator
-      type: mixed
-    - name: callback
-      type: mixed
-    - name: args
-      type: array
-      optional: true
-    returnType: int
-- subject:
-    function: iterator_count
-  signature:
-    params:
-    - name: iterator
-      type: mixed
-    returnType: int
-- subject:
-    function: iterator_to_array
-  signature:
-    params:
-    - name: iterator
-      type: mixed
-    - name: preserve_keys
-      type: bool
-      optional: true
-    returnType: array
-  propagation:
-  - from: argument(0)
-    to: return
 - subject:
     function: java_last_exception_clear
   signature:
@@ -4653,77 +3809,6 @@
       type: bool
     returnType: void
 - subject:
-    function: jddayofweek
-  signature:
-    params:
-    - name: julian_day
-      type: int
-    - name: mode
-      type: int
-      optional: true
-    returnType: int
-- subject:
-    function: jdmonthname
-  signature:
-    params:
-    - name: julian_day
-      type: int
-    - name: mode
-      type: int
-    returnType: string
-- subject:
-    function: jdtofrench
-  signature:
-    params:
-    - name: julian_day
-      type: int
-    returnType: string
-- subject:
-    function: jdtogregorian
-  signature:
-    params:
-    - name: julian_day
-      type: int
-    returnType: string
-- subject:
-    function: jdtojewish
-  signature:
-    params:
-    - name: julian_day
-      type: int
-    - name: hebrew
-      type: bool
-      optional: true
-    - name: flags
-      type: int
-      optional: true
-    returnType: string
-- subject:
-    function: jdtojulian
-  signature:
-    params:
-    - name: julian_day
-      type: int
-    returnType: string
-- subject:
-    function: jdtounix
-  signature:
-    params:
-    - name: julian_day
-      type: int
-    returnType: int
-- subject:
-    function: jewishtojd
-  signature:
-    params:
-    - name: month
-      type: int
-    - name: day
-      type: int
-    - name: year
-      type: int
-    returnType: int
-- subject:
     function: jobqueue_license_info
   signature:
     returnType: array
@@ -4732,9 +3817,9 @@
   signature:
     params:
     - name: separator
-      type: string
+      type: string|array
     - name: array
-      type: array
+      type: ?array
       optional: true
     returnType: string
   propagation:
@@ -4753,17 +3838,6 @@
     function: judy_version
   signature:
     returnType: string
-- subject:
-    function: juliantojd
-  signature:
-    params:
-    - name: month
-      type: int
-    - name: day
-      type: int
-    - name: year
-      type: int
-    returnType: int
 - subject:
     function: kadm5_chpass_principal
   signature:
@@ -4874,14 +3948,14 @@
   signature:
     params:
     - name: array
-      type: array
-    returnType: int
+      type: array|object
+    returnType: int|string|null
 - subject:
     function: key_exists
   signature:
     params:
     - name: key
-      type: int
+      type: mixed
     - name: array
       type: array
     returnType: bool
@@ -4891,20 +3965,22 @@
     params:
     - name: array
       type: array
+      byRef: true
     - name: flags
       type: int
       optional: true
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: ksort
   signature:
     params:
     - name: array
       type: array
+      byRef: true
     - name: flags
       type: int
       optional: true
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: lcfirst
   signature:
@@ -4916,17 +3992,13 @@
   - from: argument(0)
     to: return
 - subject:
-    function: lcg_value
-  signature:
-    returnType: float
-- subject:
     function: lchgrp
   signature:
     params:
     - name: filename
       type: string
     - name: group
-      type: int
+      type: string|int
     returnType: bool
 - subject:
     function: lchown
@@ -4935,7 +4007,7 @@
     - name: filename
       type: string
     - name: user
-      type: int
+      type: string|int
     returnType: bool
 - subject:
     function: leak
@@ -4994,7 +4066,7 @@
     params:
     - name: path
       type: string
-    returnType: int
+    returnType: int|false
 - subject:
     function: litespeed_request_headers
   signature:
@@ -5002,136 +4074,4 @@
 - subject:
     function: litespeed_response_headers
   signature:
-    returnType: array
-- subject:
-    function: locale_accept_from_http
-  signature:
-    params:
-    - name: header
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: locale_canonicalize
-  signature:
-    params:
-    - name: locale
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: locale_compose
-  signature:
-    params:
-    - name: subtags
-      type: array
-    returnType: string
-- subject:
-    function: locale_filter_matches
-  signature:
-    params:
-    - name: languageTag
-      type: string
-    - name: locale
-      type: string
-    - name: canonicalize
-      type: bool
-      optional: true
-    returnType: bool
-- subject:
-    function: locale_get_all_variants
-  signature:
-    params:
-    - name: locale
-      type: string
-    returnType: array
-- subject:
-    function: locale_get_default
-  signature:
-    returnType: string
-- subject:
-    function: locale_get_display_language
-  signature:
-    params:
-    - name: locale
-      type: string
-    - name: displayLocale
-      type: string
-      optional: true
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: locale_get_display_name
-  signature:
-    params:
-    - name: locale
-      type: string
-    - name: displayLocale
-      type: string
-      optional: true
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: locale_get_display_region
-  signature:
-    params:
-    - name: locale
-      type: string
-    - name: displayLocale
-      type: string
-      optional: true
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: locale_get_display_script
-  signature:
-    params:
-    - name: locale
-      type: string
-    - name: displayLocale
-      type: string
-      optional: true
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: locale_get_display_variant
-  signature:
-    params:
-    - name: locale
-      type: string
-    - name: displayLocale
-      type: string
-      optional: true
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: locale_get_keywords
-  signature:
-    params:
-    - name: locale
-      type: string
-    returnType: array
+    returnType: array|false

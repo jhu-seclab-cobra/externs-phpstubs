@@ -1,0 +1,216 @@
+# Generated from php-src stubs by tools/extract_hierarchy.py.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    class: xmlreader
+  signature:
+    classifier: class
+- subject:
+    method: XMLReader::close
+  signature:
+    returnType: 'true'
+- subject:
+    method: XMLReader::expand
+  signature:
+    params:
+    - name: baseNode
+      type: ?DOMNode
+      optional: true
+    returnType: DOMNode|false
+- subject:
+    method: XMLReader::fromStream
+  signature:
+    params:
+    - name: stream
+      type: mixed
+    - name: encoding
+      type: ?string
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    - name: documentUri
+      type: ?string
+      optional: true
+    returnType: static
+- subject:
+    method: XMLReader::fromString
+  signature:
+    params:
+    - name: source
+      type: string
+    - name: encoding
+      type: ?string
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: static
+- subject:
+    method: XMLReader::fromUri
+  signature:
+    params:
+    - name: uri
+      type: string
+    - name: encoding
+      type: ?string
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: static
+- subject:
+    method: XMLReader::getAttribute
+  signature:
+    params:
+    - name: name
+      type: string
+    returnType: ?string
+- subject:
+    method: XMLReader::getAttributeNo
+  signature:
+    params:
+    - name: index
+      type: int
+    returnType: ?string
+- subject:
+    method: XMLReader::getAttributeNs
+  signature:
+    params:
+    - name: name
+      type: string
+    - name: namespace
+      type: string
+    returnType: ?string
+- subject:
+    method: XMLReader::getParserProperty
+  signature:
+    params:
+    - name: property
+      type: int
+    returnType: bool
+- subject:
+    method: XMLReader::isValid
+  signature:
+    returnType: bool
+- subject:
+    method: XMLReader::lookupNamespace
+  signature:
+    params:
+    - name: prefix
+      type: string
+    returnType: ?string
+- subject:
+    method: XMLReader::moveToAttribute
+  signature:
+    params:
+    - name: name
+      type: string
+    returnType: bool
+- subject:
+    method: XMLReader::moveToAttributeNo
+  signature:
+    params:
+    - name: index
+      type: int
+    returnType: bool
+- subject:
+    method: XMLReader::moveToAttributeNs
+  signature:
+    params:
+    - name: name
+      type: string
+    - name: namespace
+      type: string
+    returnType: bool
+- subject:
+    method: XMLReader::moveToElement
+  signature:
+    returnType: bool
+- subject:
+    method: XMLReader::moveToFirstAttribute
+  signature:
+    returnType: bool
+- subject:
+    method: XMLReader::moveToNextAttribute
+  signature:
+    returnType: bool
+- subject:
+    method: XMLReader::next
+  signature:
+    params:
+    - name: name
+      type: ?string
+      optional: true
+    returnType: bool
+- subject:
+    method: XMLReader::open
+  signature:
+    params:
+    - name: uri
+      type: string
+    - name: encoding
+      type: ?string
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: mixed
+- subject:
+    method: XMLReader::read
+  signature:
+    returnType: bool
+- subject:
+    method: XMLReader::readInnerXml
+  signature:
+    returnType: string
+- subject:
+    method: XMLReader::readOuterXml
+  signature:
+    returnType: string
+- subject:
+    method: XMLReader::readString
+  signature:
+    returnType: string
+- subject:
+    method: XMLReader::setParserProperty
+  signature:
+    params:
+    - name: property
+      type: int
+    - name: value
+      type: bool
+    returnType: bool
+- subject:
+    method: XMLReader::setRelaxNGSchema
+  signature:
+    params:
+    - name: filename
+      type: ?string
+    returnType: bool
+- subject:
+    method: XMLReader::setRelaxNGSchemaSource
+  signature:
+    params:
+    - name: source
+      type: ?string
+    returnType: bool
+- subject:
+    method: XMLReader::setSchema
+  signature:
+    params:
+    - name: filename
+      type: ?string
+    returnType: bool
+- subject:
+    method: XMLReader::XML
+  signature:
+    params:
+    - name: source
+      type: string
+    - name: encoding
+      type: ?string
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: mixed

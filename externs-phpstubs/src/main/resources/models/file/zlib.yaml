@@ -5,7 +5,7 @@
   signature:
     params:
     - name: stream
-      type: resource
+      type: mixed
     returnType: bool
 - subject:
     function: gzcompress
@@ -19,7 +19,7 @@
     - name: encoding
       type: int
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -32,7 +32,7 @@
     - name: max_length
       type: int
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -48,7 +48,7 @@
     - name: encoding
       type: int
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -64,7 +64,7 @@
     - name: encoding
       type: int
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -73,7 +73,7 @@
   signature:
     params:
     - name: stream
-      type: resource
+      type: mixed
     returnType: bool
 - subject:
     function: gzfile
@@ -82,26 +82,26 @@
     - name: filename
       type: string
     - name: use_include_path
-      type: int
+      type: bool
       optional: true
-    returnType: array
+    returnType: array|false
 - subject:
     function: gzgetc
   signature:
     params:
     - name: stream
-      type: resource
-    returnType: string
+      type: mixed
+    returnType: string|false
 - subject:
     function: gzgets
   signature:
     params:
     - name: stream
-      type: resource
+      type: mixed
     - name: length
-      type: int
+      type: ?int
       optional: true
-    returnType: string
+    returnType: string|false
 - subject:
     function: gzinflate
   signature:
@@ -111,7 +111,7 @@
     - name: max_length
       type: int
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -124,9 +124,9 @@
     - name: mode
       type: string
     - name: use_include_path
-      type: int
+      type: bool
       optional: true
-    returnType: resource
+    returnType: mixed
   propagation:
   - from: argument(0)
     to: return
@@ -139,42 +139,42 @@
   signature:
     params:
     - name: stream
-      type: resource
+      type: mixed
     returnType: int
 - subject:
     function: gzputs
   signature:
     params:
     - name: stream
-      type: resource
+      type: mixed
     - name: data
       type: string
     - name: length
-      type: int
+      type: ?int
       optional: true
-    returnType: int
+    returnType: int|false
 - subject:
     function: gzread
   signature:
     params:
     - name: stream
-      type: resource
+      type: mixed
     - name: length
       type: int
-    returnType: string
+    returnType: string|false
 - subject:
     function: gzrewind
   signature:
     params:
     - name: stream
-      type: resource
+      type: mixed
     returnType: bool
 - subject:
     function: gzseek
   signature:
     params:
     - name: stream
-      type: resource
+      type: mixed
     - name: offset
       type: int
     - name: whence
@@ -186,8 +186,8 @@
   signature:
     params:
     - name: stream
-      type: resource
-    returnType: int
+      type: mixed
+    returnType: int|false
 - subject:
     function: gzuncompress
   signature:
@@ -197,7 +197,7 @@
     - name: max_length
       type: int
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -206,10 +206,150 @@
   signature:
     params:
     - name: stream
-      type: resource
+      type: mixed
     - name: data
       type: string
     - name: length
+      type: ?int
+      optional: true
+    returnType: int|false
+- subject:
+    class: deflatecontext
+  signature:
+    classifier: class
+- subject:
+    class: inflatecontext
+  signature:
+    classifier: class
+- subject:
+    function: deflate_add
+  signature:
+    params:
+    - name: context
+      type: DeflateContext
+    - name: data
+      type: string
+    - name: flush_mode
       type: int
       optional: true
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: deflate_init
+  signature:
+    params:
+    - name: encoding
+      type: int
+    - name: options
+      type: array|object
+      optional: true
+    returnType: DeflateContext|false
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: inflate_add
+  signature:
+    params:
+    - name: context
+      type: InflateContext
+    - name: data
+      type: string
+    - name: flush_mode
+      type: int
+      optional: true
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: inflate_get_read_len
+  signature:
+    params:
+    - name: context
+      type: InflateContext
     returnType: int
+- subject:
+    function: inflate_get_status
+  signature:
+    params:
+    - name: context
+      type: InflateContext
+    returnType: int
+- subject:
+    function: inflate_init
+  signature:
+    params:
+    - name: encoding
+      type: int
+    - name: options
+      type: array|object
+      optional: true
+    returnType: InflateContext|false
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: ob_gzhandler
+  signature:
+    params:
+    - name: data
+      type: string
+    - name: flags
+      type: int
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: readgzfile
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: use_include_path
+      type: bool
+      optional: true
+    returnType: int|false
+- subject:
+    function: zlib_decode
+  signature:
+    params:
+    - name: data
+      type: string
+    - name: max_length
+      type: int
+      optional: true
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: zlib_encode
+  signature:
+    params:
+    - name: data
+      type: string
+    - name: encoding
+      type: int
+    - name: level
+      type: int
+      optional: true
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: zlib_get_coding_type
+  signature:
+    returnType: string|false

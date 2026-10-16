@@ -1,0 +1,118 @@
+# Generated from php-src stubs by tools/extract_hierarchy.py.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    class: pdo\sqlite
+  signature:
+    classifier: class
+    parent: pdo
+- subject:
+    class: pdo_sqlite_ext
+  signature:
+    classifier: class
+- subject:
+    method: Pdo\Sqlite::createAggregate
+  signature:
+    params:
+    - name: name
+      type: string
+    - name: step
+      type: callable
+    - name: finalize
+      type: callable
+    - name: numArgs
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    method: Pdo\Sqlite::createCollation
+  signature:
+    params:
+    - name: name
+      type: string
+    - name: callback
+      type: callable
+    returnType: bool
+- subject:
+    method: Pdo\Sqlite::createFunction
+  signature:
+    params:
+    - name: function_name
+      type: string
+    - name: callback
+      type: callable
+    - name: num_args
+      type: int
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    method: Pdo\Sqlite::loadExtension
+  signature:
+    params:
+    - name: name
+      type: string
+    returnType: void
+- subject:
+    method: Pdo\Sqlite::openBlob
+  signature:
+    params:
+    - name: table
+      type: string
+    - name: column
+      type: string
+    - name: rowid
+      type: int
+    - name: dbname
+      type: ?string
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: mixed
+- subject:
+    method: Pdo\Sqlite::setAuthorizer
+  signature:
+    params:
+    - name: callback
+      type: ?callable
+    returnType: void
+- subject:
+    method: PDO_SQLite_Ext::sqliteCreateAggregate
+  signature:
+    params:
+    - name: name
+      type: string
+    - name: step
+      type: callable
+    - name: finalize
+      type: callable
+    - name: numArgs
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    method: PDO_SQLite_Ext::sqliteCreateCollation
+  signature:
+    params:
+    - name: name
+      type: string
+    - name: callback
+      type: callable
+    returnType: bool
+- subject:
+    method: PDO_SQLite_Ext::sqliteCreateFunction
+  signature:
+    params:
+    - name: name
+      type: string
+    - name: callback
+      type: callable
+    - name: numArgs
+      type: int
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool

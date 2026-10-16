@@ -1,0 +1,110 @@
+# Generated from php-src stubs by tools/extract_hierarchy.py.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    class: xsltprocessor
+  signature:
+    classifier: class
+- subject:
+    method: XSLTProcessor::getParameter
+  signature:
+    params:
+    - name: namespace
+      type: string
+    - name: name
+      type: string
+    returnType: string|false
+- subject:
+    method: XSLTProcessor::getSecurityPrefs
+  signature:
+    returnType: int
+- subject:
+    method: XSLTProcessor::hasExsltSupport
+  signature:
+    returnType: bool
+- subject:
+    method: XSLTProcessor::importStylesheet
+  signature:
+    params:
+    - name: stylesheet
+      type: object
+    returnType: bool
+- subject:
+    method: XSLTProcessor::registerPHPFunctionNS
+  signature:
+    params:
+    - name: namespaceURI
+      type: string
+    - name: name
+      type: string
+    - name: callable
+      type: callable
+    returnType: void
+- subject:
+    method: XSLTProcessor::registerPHPFunctions
+  signature:
+    params:
+    - name: functions
+      type: array|string|null
+      optional: true
+    returnType: void
+- subject:
+    method: XSLTProcessor::removeParameter
+  signature:
+    params:
+    - name: namespace
+      type: string
+    - name: name
+      type: string
+    returnType: bool
+- subject:
+    method: XSLTProcessor::setParameter
+  signature:
+    params:
+    - name: namespace
+      type: string
+    - name: name
+      type: array|string
+    - name: value
+      type: ?string
+      optional: true
+    returnType: bool
+- subject:
+    method: XSLTProcessor::setProfiling
+  signature:
+    params:
+    - name: filename
+      type: ?string
+    returnType: 'true'
+- subject:
+    method: XSLTProcessor::setSecurityPrefs
+  signature:
+    params:
+    - name: preferences
+      type: int
+    returnType: int
+- subject:
+    method: XSLTProcessor::transformToDoc
+  signature:
+    params:
+    - name: document
+      type: object
+    - name: returnClass
+      type: ?string
+      optional: true
+    returnType: object|false
+- subject:
+    method: XSLTProcessor::transformToUri
+  signature:
+    params:
+    - name: document
+      type: object
+    - name: uri
+      type: string
+    returnType: int
+- subject:
+    method: XSLTProcessor::transformToXml
+  signature:
+    params:
+    - name: document
+      type: object
+    returnType: string|null|false

@@ -35,7 +35,7 @@ import java.nio.file.Path
 
 // One record per built-in: extension, signature, and every fact in force
 val strlen = PhpStubs.function("strlen")
-strlen?.extension                            // "standard"
+strlen?.extension                            // "core"
 strlen?.callableSignature?.returnType        // DeclaredType("int")
 strlen?.returns?.single()?.kind              // ReturnKind.NUM (value rules outrank the generated unit)
 strlen?.flows                                // [FlowFact(argument(0) -> return)]

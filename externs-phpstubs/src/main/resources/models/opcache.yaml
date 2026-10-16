@@ -1,0 +1,56 @@
+# Generated from php-src stubs by tools/extract_signatures.py.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: opcache_is_script_cached_in_file_cache
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: bool
+- subject:
+    function: opcache_jit_blacklist
+  signature:
+    params:
+    - name: closure
+      type: Closure
+    returnType: void
+- subject:
+    function: opcache_compile_file
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: bool
+- subject:
+    function: opcache_get_configuration
+  signature:
+    returnType: array|false
+- subject:
+    function: opcache_get_status
+  signature:
+    params:
+    - name: include_scripts
+      type: bool
+      optional: true
+    returnType: array|false
+- subject:
+    function: opcache_invalidate
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: force
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: opcache_is_script_cached
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: bool
+- subject:
+    function: opcache_reset
+  signature:
+    returnType: bool

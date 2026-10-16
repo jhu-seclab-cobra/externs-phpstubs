@@ -1,0 +1,947 @@
+# Generated from php-src stubs by tools/extract_hierarchy.py.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    class: phar
+  signature:
+    classifier: class
+    parent: recursivedirectoryiterator
+    interfaces: [countable, arrayaccess]
+- subject:
+    class: phardata
+  signature:
+    classifier: class
+    parent: recursivedirectoryiterator
+    interfaces: [countable, arrayaccess]
+- subject:
+    class: pharexception
+  signature:
+    classifier: class
+    parent: exception
+- subject:
+    class: pharfileinfo
+  signature:
+    classifier: class
+    parent: splfileinfo
+- subject:
+    method: Phar::__construct
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    - name: alias
+      type: ?string
+      optional: true
+    returnType: mixed
+- subject:
+    method: Phar::__destruct
+  signature:
+    returnType: mixed
+- subject:
+    method: Phar::addEmptyDir
+  signature:
+    params:
+    - name: directory
+      type: string
+    returnType: void
+- subject:
+    method: Phar::addFile
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: localName
+      type: ?string
+      optional: true
+    returnType: void
+- subject:
+    method: Phar::addFromString
+  signature:
+    params:
+    - name: localName
+      type: string
+    - name: contents
+      type: string
+    returnType: void
+- subject:
+    method: Phar::apiVersion
+  signature:
+    returnType: string
+- subject:
+    method: Phar::buildFromDirectory
+  signature:
+    params:
+    - name: directory
+      type: string
+    - name: pattern
+      type: string
+      optional: true
+    returnType: array
+- subject:
+    method: Phar::buildFromIterator
+  signature:
+    params:
+    - name: iterator
+      type: Traversable
+    - name: baseDirectory
+      type: ?string
+      optional: true
+    returnType: array
+- subject:
+    method: Phar::canCompress
+  signature:
+    params:
+    - name: compression
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    method: Phar::canWrite
+  signature:
+    returnType: bool
+- subject:
+    method: Phar::compress
+  signature:
+    params:
+    - name: compression
+      type: int
+    - name: extension
+      type: ?string
+      optional: true
+    returnType: ?Phar
+- subject:
+    method: Phar::compressFiles
+  signature:
+    params:
+    - name: compression
+      type: int
+    returnType: void
+- subject:
+    method: Phar::convertToData
+  signature:
+    params:
+    - name: format
+      type: ?int
+      optional: true
+    - name: compression
+      type: ?int
+      optional: true
+    - name: extension
+      type: ?string
+      optional: true
+    returnType: ?PharData
+- subject:
+    method: Phar::convertToExecutable
+  signature:
+    params:
+    - name: format
+      type: ?int
+      optional: true
+    - name: compression
+      type: ?int
+      optional: true
+    - name: extension
+      type: ?string
+      optional: true
+    returnType: ?Phar
+- subject:
+    method: Phar::copy
+  signature:
+    params:
+    - name: from
+      type: string
+    - name: to
+      type: string
+    returnType: 'true'
+- subject:
+    method: Phar::count
+  signature:
+    params:
+    - name: mode
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    method: Phar::createDefaultStub
+  signature:
+    params:
+    - name: index
+      type: ?string
+      optional: true
+    - name: webIndex
+      type: ?string
+      optional: true
+    returnType: string
+- subject:
+    method: Phar::decompress
+  signature:
+    params:
+    - name: extension
+      type: ?string
+      optional: true
+    returnType: ?Phar
+- subject:
+    method: Phar::decompressFiles
+  signature:
+    returnType: 'true'
+- subject:
+    method: Phar::delete
+  signature:
+    params:
+    - name: localName
+      type: string
+    returnType: 'true'
+- subject:
+    method: Phar::delMetadata
+  signature:
+    returnType: 'true'
+- subject:
+    method: Phar::extractTo
+  signature:
+    params:
+    - name: directory
+      type: string
+    - name: files
+      type: array|string|null
+      optional: true
+    - name: overwrite
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    method: Phar::getAlias
+  signature:
+    returnType: ?string
+- subject:
+    method: Phar::getMetadata
+  signature:
+    params:
+    - name: unserializeOptions
+      type: array
+      optional: true
+    returnType: mixed
+- subject:
+    method: Phar::getModified
+  signature:
+    returnType: bool
+- subject:
+    method: Phar::getPath
+  signature:
+    returnType: string
+- subject:
+    method: Phar::getSignature
+  signature:
+    returnType: array|false
+- subject:
+    method: Phar::getStub
+  signature:
+    returnType: string
+- subject:
+    method: Phar::getSupportedCompression
+  signature:
+    returnType: array
+- subject:
+    method: Phar::getSupportedSignatures
+  signature:
+    returnType: array
+- subject:
+    method: Phar::getVersion
+  signature:
+    returnType: string
+- subject:
+    method: Phar::hasMetadata
+  signature:
+    returnType: bool
+- subject:
+    method: Phar::interceptFileFuncs
+  signature:
+    returnType: void
+- subject:
+    method: Phar::isBuffering
+  signature:
+    returnType: bool
+- subject:
+    method: Phar::isCompressed
+  signature:
+    returnType: int|false
+- subject:
+    method: Phar::isFileFormat
+  signature:
+    params:
+    - name: format
+      type: int
+    returnType: bool
+- subject:
+    method: Phar::isValidPharFilename
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: executable
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    method: Phar::isWritable
+  signature:
+    returnType: bool
+- subject:
+    method: Phar::loadPhar
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: alias
+      type: ?string
+      optional: true
+    returnType: bool
+- subject:
+    method: Phar::mapPhar
+  signature:
+    params:
+    - name: alias
+      type: ?string
+      optional: true
+    - name: offset
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    method: Phar::mount
+  signature:
+    params:
+    - name: pharPath
+      type: string
+    - name: externalPath
+      type: string
+    returnType: void
+- subject:
+    method: Phar::mungServer
+  signature:
+    params:
+    - name: variables
+      type: array
+    returnType: void
+- subject:
+    method: Phar::offsetExists
+  signature:
+    params:
+    - name: localName
+      type: mixed
+    returnType: bool
+- subject:
+    method: Phar::offsetGet
+  signature:
+    params:
+    - name: localName
+      type: mixed
+    returnType: SplFileInfo
+- subject:
+    method: Phar::offsetSet
+  signature:
+    params:
+    - name: localName
+      type: mixed
+    - name: value
+      type: mixed
+    returnType: void
+- subject:
+    method: Phar::offsetUnset
+  signature:
+    params:
+    - name: localName
+      type: mixed
+    returnType: void
+- subject:
+    method: Phar::running
+  signature:
+    params:
+    - name: returnPhar
+      type: bool
+      optional: true
+    returnType: string
+- subject:
+    method: Phar::setAlias
+  signature:
+    params:
+    - name: alias
+      type: string
+    returnType: 'true'
+- subject:
+    method: Phar::setDefaultStub
+  signature:
+    params:
+    - name: index
+      type: ?string
+      optional: true
+    - name: webIndex
+      type: ?string
+      optional: true
+    returnType: 'true'
+- subject:
+    method: Phar::setMetadata
+  signature:
+    params:
+    - name: metadata
+      type: mixed
+    returnType: void
+- subject:
+    method: Phar::setSignatureAlgorithm
+  signature:
+    params:
+    - name: algo
+      type: int
+    - name: privateKey
+      type: ?string
+      optional: true
+    returnType: void
+- subject:
+    method: Phar::setStub
+  signature:
+    params:
+    - name: stub
+      type: mixed
+    - name: length
+      type: int
+      optional: true
+    returnType: 'true'
+- subject:
+    method: Phar::startBuffering
+  signature:
+    returnType: void
+- subject:
+    method: Phar::stopBuffering
+  signature:
+    returnType: void
+- subject:
+    method: Phar::unlinkArchive
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: 'true'
+- subject:
+    method: Phar::webPhar
+  signature:
+    params:
+    - name: alias
+      type: ?string
+      optional: true
+    - name: index
+      type: ?string
+      optional: true
+    - name: fileNotFoundScript
+      type: ?string
+      optional: true
+    - name: mimeTypes
+      type: array
+      optional: true
+    - name: rewrite
+      type: ?callable
+      optional: true
+    returnType: void
+- subject:
+    method: PharData::__construct
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    - name: alias
+      type: ?string
+      optional: true
+    - name: format
+      type: int
+      optional: true
+    returnType: mixed
+- subject:
+    method: PharData::__destruct
+  signature:
+    returnType: mixed
+- subject:
+    method: PharData::addEmptyDir
+  signature:
+    params:
+    - name: directory
+      type: string
+    returnType: void
+- subject:
+    method: PharData::addFile
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: localName
+      type: ?string
+      optional: true
+    returnType: void
+- subject:
+    method: PharData::addFromString
+  signature:
+    params:
+    - name: localName
+      type: string
+    - name: contents
+      type: string
+    returnType: void
+- subject:
+    method: PharData::apiVersion
+  signature:
+    returnType: string
+- subject:
+    method: PharData::buildFromDirectory
+  signature:
+    params:
+    - name: directory
+      type: string
+    - name: pattern
+      type: string
+      optional: true
+    returnType: array
+- subject:
+    method: PharData::buildFromIterator
+  signature:
+    params:
+    - name: iterator
+      type: Traversable
+    - name: baseDirectory
+      type: ?string
+      optional: true
+    returnType: array
+- subject:
+    method: PharData::canCompress
+  signature:
+    params:
+    - name: compression
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    method: PharData::canWrite
+  signature:
+    returnType: bool
+- subject:
+    method: PharData::compress
+  signature:
+    params:
+    - name: compression
+      type: int
+    - name: extension
+      type: ?string
+      optional: true
+    returnType: ?PharData
+- subject:
+    method: PharData::compressFiles
+  signature:
+    params:
+    - name: compression
+      type: int
+    returnType: void
+- subject:
+    method: PharData::convertToData
+  signature:
+    params:
+    - name: format
+      type: ?int
+      optional: true
+    - name: compression
+      type: ?int
+      optional: true
+    - name: extension
+      type: ?string
+      optional: true
+    returnType: ?PharData
+- subject:
+    method: PharData::convertToExecutable
+  signature:
+    params:
+    - name: format
+      type: ?int
+      optional: true
+    - name: compression
+      type: ?int
+      optional: true
+    - name: extension
+      type: ?string
+      optional: true
+    returnType: ?Phar
+- subject:
+    method: PharData::copy
+  signature:
+    params:
+    - name: from
+      type: string
+    - name: to
+      type: string
+    returnType: 'true'
+- subject:
+    method: PharData::count
+  signature:
+    params:
+    - name: mode
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    method: PharData::createDefaultStub
+  signature:
+    params:
+    - name: index
+      type: ?string
+      optional: true
+    - name: webIndex
+      type: ?string
+      optional: true
+    returnType: string
+- subject:
+    method: PharData::decompress
+  signature:
+    params:
+    - name: extension
+      type: ?string
+      optional: true
+    returnType: ?PharData
+- subject:
+    method: PharData::decompressFiles
+  signature:
+    returnType: 'true'
+- subject:
+    method: PharData::delete
+  signature:
+    params:
+    - name: localName
+      type: string
+    returnType: 'true'
+- subject:
+    method: PharData::delMetadata
+  signature:
+    returnType: 'true'
+- subject:
+    method: PharData::extractTo
+  signature:
+    params:
+    - name: directory
+      type: string
+    - name: files
+      type: array|string|null
+      optional: true
+    - name: overwrite
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    method: PharData::getAlias
+  signature:
+    returnType: ?string
+- subject:
+    method: PharData::getMetadata
+  signature:
+    params:
+    - name: unserializeOptions
+      type: array
+      optional: true
+    returnType: mixed
+- subject:
+    method: PharData::getModified
+  signature:
+    returnType: bool
+- subject:
+    method: PharData::getPath
+  signature:
+    returnType: string
+- subject:
+    method: PharData::getSignature
+  signature:
+    returnType: array|false
+- subject:
+    method: PharData::getStub
+  signature:
+    returnType: string
+- subject:
+    method: PharData::getSupportedCompression
+  signature:
+    returnType: array
+- subject:
+    method: PharData::getSupportedSignatures
+  signature:
+    returnType: array
+- subject:
+    method: PharData::getVersion
+  signature:
+    returnType: string
+- subject:
+    method: PharData::hasMetadata
+  signature:
+    returnType: bool
+- subject:
+    method: PharData::interceptFileFuncs
+  signature:
+    returnType: void
+- subject:
+    method: PharData::isBuffering
+  signature:
+    returnType: bool
+- subject:
+    method: PharData::isCompressed
+  signature:
+    returnType: int|false
+- subject:
+    method: PharData::isFileFormat
+  signature:
+    params:
+    - name: format
+      type: int
+    returnType: bool
+- subject:
+    method: PharData::isValidPharFilename
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: executable
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    method: PharData::isWritable
+  signature:
+    returnType: bool
+- subject:
+    method: PharData::loadPhar
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: alias
+      type: ?string
+      optional: true
+    returnType: bool
+- subject:
+    method: PharData::mapPhar
+  signature:
+    params:
+    - name: alias
+      type: ?string
+      optional: true
+    - name: offset
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    method: PharData::mount
+  signature:
+    params:
+    - name: pharPath
+      type: string
+    - name: externalPath
+      type: string
+    returnType: void
+- subject:
+    method: PharData::mungServer
+  signature:
+    params:
+    - name: variables
+      type: array
+    returnType: void
+- subject:
+    method: PharData::offsetExists
+  signature:
+    params:
+    - name: localName
+      type: mixed
+    returnType: bool
+- subject:
+    method: PharData::offsetGet
+  signature:
+    params:
+    - name: localName
+      type: mixed
+    returnType: SplFileInfo
+- subject:
+    method: PharData::offsetSet
+  signature:
+    params:
+    - name: localName
+      type: mixed
+    - name: value
+      type: mixed
+    returnType: void
+- subject:
+    method: PharData::offsetUnset
+  signature:
+    params:
+    - name: localName
+      type: mixed
+    returnType: void
+- subject:
+    method: PharData::running
+  signature:
+    params:
+    - name: returnPhar
+      type: bool
+      optional: true
+    returnType: string
+- subject:
+    method: PharData::setAlias
+  signature:
+    params:
+    - name: alias
+      type: string
+    returnType: bool
+- subject:
+    method: PharData::setDefaultStub
+  signature:
+    params:
+    - name: index
+      type: ?string
+      optional: true
+    - name: webIndex
+      type: ?string
+      optional: true
+    returnType: bool
+- subject:
+    method: PharData::setMetadata
+  signature:
+    params:
+    - name: metadata
+      type: mixed
+    returnType: void
+- subject:
+    method: PharData::setSignatureAlgorithm
+  signature:
+    params:
+    - name: algo
+      type: int
+    - name: privateKey
+      type: ?string
+      optional: true
+    returnType: void
+- subject:
+    method: PharData::setStub
+  signature:
+    params:
+    - name: stub
+      type: mixed
+    - name: length
+      type: int
+      optional: true
+    returnType: 'true'
+- subject:
+    method: PharData::startBuffering
+  signature:
+    returnType: void
+- subject:
+    method: PharData::stopBuffering
+  signature:
+    returnType: void
+- subject:
+    method: PharData::unlinkArchive
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: 'true'
+- subject:
+    method: PharData::webPhar
+  signature:
+    params:
+    - name: alias
+      type: ?string
+      optional: true
+    - name: index
+      type: ?string
+      optional: true
+    - name: fileNotFoundScript
+      type: ?string
+      optional: true
+    - name: mimeTypes
+      type: array
+      optional: true
+    - name: rewrite
+      type: ?callable
+      optional: true
+    returnType: void
+- subject:
+    method: PharFileInfo::__construct
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: mixed
+- subject:
+    method: PharFileInfo::__destruct
+  signature:
+    returnType: mixed
+- subject:
+    method: PharFileInfo::chmod
+  signature:
+    params:
+    - name: perms
+      type: int
+    returnType: void
+- subject:
+    method: PharFileInfo::compress
+  signature:
+    params:
+    - name: compression
+      type: int
+    returnType: 'true'
+- subject:
+    method: PharFileInfo::decompress
+  signature:
+    returnType: 'true'
+- subject:
+    method: PharFileInfo::delMetadata
+  signature:
+    returnType: 'true'
+- subject:
+    method: PharFileInfo::getCompressedSize
+  signature:
+    returnType: int
+- subject:
+    method: PharFileInfo::getContent
+  signature:
+    returnType: string
+- subject:
+    method: PharFileInfo::getCRC32
+  signature:
+    returnType: int
+- subject:
+    method: PharFileInfo::getMetadata
+  signature:
+    params:
+    - name: unserializeOptions
+      type: array
+      optional: true
+    returnType: mixed
+- subject:
+    method: PharFileInfo::getPharFlags
+  signature:
+    returnType: int
+- subject:
+    method: PharFileInfo::hasMetadata
+  signature:
+    returnType: bool
+- subject:
+    method: PharFileInfo::isCompressed
+  signature:
+    params:
+    - name: compression
+      type: ?int
+      optional: true
+    returnType: bool
+- subject:
+    method: PharFileInfo::isCRCChecked
+  signature:
+    returnType: bool
+- subject:
+    method: PharFileInfo::setMetadata
+  signature:
+    params:
+    - name: metadata
+      type: mixed
+    returnType: void

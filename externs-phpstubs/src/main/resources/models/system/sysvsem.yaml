@@ -5,7 +5,7 @@
   signature:
     params:
     - name: semaphore
-      type: mixed
+      type: SysvSemaphore
     - name: non_blocking
       type: bool
       optional: true
@@ -25,7 +25,7 @@
     - name: auto_release
       type: bool
       optional: true
-    returnType: mixed
+    returnType: SysvSemaphore|false
   propagation:
   - from: argument(0)
     to: return
@@ -40,12 +40,16 @@
   signature:
     params:
     - name: semaphore
-      type: mixed
+      type: SysvSemaphore
     returnType: bool
 - subject:
     function: sem_remove
   signature:
     params:
     - name: semaphore
-      type: mixed
+      type: SysvSemaphore
     returnType: bool
+- subject:
+    class: sysvsemaphore
+  signature:
+    classifier: class

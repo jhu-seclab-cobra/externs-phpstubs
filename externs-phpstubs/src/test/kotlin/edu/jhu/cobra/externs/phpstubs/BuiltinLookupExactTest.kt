@@ -57,7 +57,7 @@ internal class BuiltinLookupExactTest {
     fun `method lookup accepts both spellings and needs the owner`() {
         val record = assertNotNull(PhpStubs.method("Exception::getCode"))
         assertSame(record, PhpStubs.method("exception", "getcode"))
-        assertEquals("int", record.callableSignature!!.returnType.toString())
+        assertEquals("mixed", record.callableSignature!!.returnType.toString())
         assertNull(PhpStubs.method("ArrayObject::getCode"))
         assertFailsWith<IllegalArgumentException> { PhpStubs.method("getCode") }
     }

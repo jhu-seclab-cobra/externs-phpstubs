@@ -5,7 +5,7 @@
   signature:
     params:
     - name: input_type
-      type: mixed
+      type: int
     - name: var_name
       type: string
     returnType: bool
@@ -15,20 +15,20 @@
     params:
     - name: name
       type: string
-    returnType: int
+    returnType: int|false
 - subject:
     function: filter_input
   signature:
     params:
     - name: type
-      type: mixed
+      type: int
     - name: var_name
       type: string
     - name: filter
       type: int
       optional: true
     - name: options
-      type: array
+      type: array|int
       optional: true
     returnType: mixed
 - subject:
@@ -36,14 +36,14 @@
   signature:
     params:
     - name: type
-      type: mixed
+      type: int
     - name: options
-      type: array
+      type: array|int
       optional: true
     - name: add_empty
       type: bool
       optional: true
-    returnType: array
+    returnType: array|false|null
   propagation:
   - from: argument(0)
     to: return
@@ -63,7 +63,7 @@
       type: int
       optional: true
     - name: options
-      type: array
+      type: array|int
       optional: true
     returnType: mixed
 - subject:
@@ -73,14 +73,24 @@
     - name: array
       type: array
     - name: options
-      type: array
+      type: array|int
       optional: true
     - name: add_empty
       type: bool
       optional: true
-    returnType: array
+    returnType: array|false|null
   propagation:
   - from: argument(0)
     to: return
   - from: argument(1)
     to: return
+- subject:
+    class: filter\filterexception
+  signature:
+    classifier: class
+    parent: exception
+- subject:
+    class: filter\filterfailedexception
+  signature:
+    classifier: class
+    parent: filter\filterexception

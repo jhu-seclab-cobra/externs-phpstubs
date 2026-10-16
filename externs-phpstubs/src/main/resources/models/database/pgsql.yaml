@@ -5,21 +5,21 @@
   signature:
     params:
     - name: result
-      type: resource
+      type: PgSql\Result
     returnType: int
 - subject:
     function: pg_cancel_query
   signature:
     params:
     - name: connection
-      type: resource
+      type: PgSql\Connection
     returnType: bool
 - subject:
     function: pg_client_encoding
   signature:
     params:
     - name: connection
-      type: resource
+      type: ?PgSql\Connection
       optional: true
     returnType: string
 - subject:
@@ -27,7 +27,7 @@
   signature:
     params:
     - name: connection
-      type: mixed
+      type: ?PgSql\Connection
       optional: true
     returnType: string
   propagation:
@@ -38,15 +38,15 @@
   signature:
     params:
     - name: connection
-      type: resource
+      type: ?PgSql\Connection
       optional: true
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: pg_cmdtuples
   signature:
     params:
     - name: result
-      type: mixed
+      type: PgSql\Result
     returnType: int
 - subject:
     function: pg_connect
@@ -57,7 +57,7 @@
     - name: flags
       type: int
       optional: true
-    returnType: resource
+    returnType: PgSql\Connection|false
   propagation:
   - from: argument(0)
     to: return
@@ -68,42 +68,42 @@
   signature:
     params:
     - name: connection
-      type: resource
+      type: PgSql\Connection
     returnType: int
 - subject:
     function: pg_connection_busy
   signature:
     params:
     - name: connection
-      type: resource
+      type: PgSql\Connection
     returnType: bool
 - subject:
     function: pg_connection_reset
   signature:
     params:
     - name: connection
-      type: resource
+      type: PgSql\Connection
     returnType: bool
 - subject:
     function: pg_connection_status
   signature:
     params:
     - name: connection
-      type: resource
+      type: PgSql\Connection
     returnType: int
 - subject:
     function: pg_consume_input
   signature:
     params:
     - name: connection
-      type: resource
+      type: PgSql\Connection
     returnType: bool
 - subject:
     function: pg_convert
   signature:
     params:
     - name: connection
-      type: resource
+      type: PgSql\Connection
     - name: table_name
       type: string
     - name: values
@@ -111,7 +111,7 @@
     - name: flags
       type: int
       optional: true
-    returnType: array
+    returnType: array|false
   propagation:
   - from: argument(2)
     to: return
@@ -120,11 +120,11 @@
   signature:
     params:
     - name: connection
-      type: resource
+      type: PgSql\Connection
     - name: table_name
       type: string
     - name: rows
-      type: array
+      type: array|Traversable
     - name: separator
       type: string
       optional: true
@@ -137,7 +137,7 @@
   signature:
     params:
     - name: connection
-      type: resource
+      type: PgSql\Connection
     - name: table_name
       type: string
     - name: separator
@@ -146,13 +146,13 @@
     - name: null_as
       type: string
       optional: true
-    returnType: array
+    returnType: array|false
 - subject:
     function: pg_dbname
   signature:
     params:
     - name: connection
-      type: resource
+      type: ?PgSql\Connection
       optional: true
     returnType: string
 - subject:
@@ -160,7 +160,7 @@
   signature:
     params:
     - name: connection
-      type: resource
+      type: PgSql\Connection
     - name: table_name
       type: string
     - name: conditions
@@ -168,13 +168,13 @@
     - name: flags
       type: int
       optional: true
-    returnType: bool
+    returnType: string|bool
 - subject:
     function: pg_end_copy
   signature:
     params:
     - name: connection
-      type: resource
+      type: ?PgSql\Connection
       optional: true
     returnType: bool
 - subject:
@@ -182,7 +182,7 @@
   signature:
     params:
     - name: connection
-      type: mixed
+      type: ?PgSql\Connection
       optional: true
     returnType: string
   propagation:
@@ -193,7 +193,7 @@
   signature:
     params:
     - name: connection
-      type: resource
+      type: mixed
     - name: string
       type: string
       optional: true
@@ -206,27 +206,27 @@
   signature:
     params:
     - name: connection
-      type: resource
+      type: mixed
     - name: string
       type: string
       optional: true
-    returnType: string
+    returnType: string|false
 - subject:
     function: pg_escape_literal
   signature:
     params:
     - name: connection
-      type: resource
+      type: mixed
     - name: string
       type: string
       optional: true
-    returnType: string
+    returnType: string|false
 - subject:
     function: pg_escape_string
   signature:
     params:
     - name: connection
-      type: resource
+      type: mixed
     - name: string
       type: string
       optional: true
@@ -236,23 +236,23 @@
   signature:
     params:
     - name: connection
-      type: resource
+      type: mixed
     - name: query
       type: string
       optional: true
-    returnType: resource
+    returnType: PgSql\Result|false
 - subject:
     function: pg_execute
   signature:
     params:
     - name: connection
-      type: resource
+      type: mixed
     - name: statement_name
-      type: string
+      type: mixed
     - name: params
       type: array
       optional: true
-    returnType: resource
+    returnType: PgSql\Result|false
   propagation:
   - from: argument(0)
     to: return
@@ -265,7 +265,7 @@
   signature:
     params:
     - name: result
-      type: resource
+      type: PgSql\Result
     - name: mode
       type: int
       optional: true
@@ -275,7 +275,7 @@
   signature:
     params:
     - name: result
-      type: resource
+      type: PgSql\Result
     - name: field
       type: int
       optional: true
@@ -285,32 +285,32 @@
   signature:
     params:
     - name: result
-      type: resource
+      type: PgSql\Result
     - name: row
-      type: int
+      type: ?int
       optional: true
     - name: mode
       type: int
       optional: true
-    returnType: array
+    returnType: array|false
 - subject:
     function: pg_fetch_assoc
   signature:
     params:
     - name: result
-      type: resource
+      type: PgSql\Result
     - name: row
-      type: int
+      type: ?int
       optional: true
-    returnType: array
+    returnType: array|false
 - subject:
     function: pg_fetch_object
   signature:
     params:
     - name: result
-      type: resource
+      type: PgSql\Result
     - name: row
-      type: int
+      type: ?int
       optional: true
     - name: class
       type: string
@@ -318,7 +318,7 @@
     - name: constructor_args
       type: array
       optional: true
-    returnType: object
+    returnType: object|false
   propagation:
   - from: argument(0)
     to: return
@@ -333,44 +333,44 @@
   signature:
     params:
     - name: result
-      type: resource
+      type: PgSql\Result
     - name: row
-      type: int
+      type: mixed
     - name: field
-      type: int
+      type: string|int
       optional: true
-    returnType: string
+    returnType: string|false|null
 - subject:
     function: pg_fetch_row
   signature:
     params:
     - name: result
-      type: resource
+      type: PgSql\Result
     - name: row
-      type: int
+      type: ?int
       optional: true
     - name: mode
       type: int
       optional: true
-    returnType: array
+    returnType: array|false
 - subject:
     function: pg_field_is_null
   signature:
     params:
     - name: result
-      type: resource
+      type: PgSql\Result
     - name: row
-      type: int
+      type: mixed
     - name: field
-      type: int
+      type: string|int
       optional: true
-    returnType: int
+    returnType: int|false
 - subject:
     function: pg_field_name
   signature:
     params:
     - name: result
-      type: resource
+      type: PgSql\Result
     - name: field
       type: int
     returnType: string
@@ -379,7 +379,7 @@
   signature:
     params:
     - name: result
-      type: resource
+      type: PgSql\Result
     - name: field
       type: string
     returnType: int
@@ -388,19 +388,19 @@
   signature:
     params:
     - name: result
-      type: resource
+      type: PgSql\Result
     - name: row
-      type: int
+      type: mixed
     - name: field
-      type: int
+      type: string|int
       optional: true
-    returnType: int
+    returnType: int|false
 - subject:
     function: pg_field_size
   signature:
     params:
     - name: result
-      type: resource
+      type: PgSql\Result
     - name: field
       type: int
     returnType: int
@@ -409,19 +409,19 @@
   signature:
     params:
     - name: result
-      type: resource
+      type: PgSql\Result
     - name: field
       type: int
     - name: oid_only
       type: bool
       optional: true
-    returnType: int
+    returnType: string|int|false
 - subject:
     function: pg_field_type
   signature:
     params:
     - name: result
-      type: resource
+      type: PgSql\Result
     - name: field
       type: int
     returnType: string
@@ -430,28 +430,28 @@
   signature:
     params:
     - name: result
-      type: resource
+      type: PgSql\Result
     - name: field
       type: int
-    returnType: int
+    returnType: string|int
 - subject:
     function: pg_fieldisnull
   signature:
     params:
     - name: result
-      type: mixed
+      type: PgSql\Result
     - name: row
       type: mixed
     - name: field
-      type: int
+      type: string|int
       optional: true
-    returnType: int
+    returnType: int|false
 - subject:
     function: pg_fieldname
   signature:
     params:
     - name: result
-      type: mixed
+      type: PgSql\Result
     - name: field
       type: int
     returnType: string
@@ -463,7 +463,7 @@
   signature:
     params:
     - name: result
-      type: mixed
+      type: PgSql\Result
     - name: field
       type: string
     returnType: int
@@ -472,19 +472,19 @@
   signature:
     params:
     - name: result
-      type: mixed
+      type: PgSql\Result
     - name: row
       type: mixed
     - name: field
-      type: int
+      type: string|int
       optional: true
-    returnType: int
+    returnType: int|false
 - subject:
     function: pg_fieldsize
   signature:
     params:
     - name: result
-      type: mixed
+      type: PgSql\Result
     - name: field
       type: int
     returnType: int
@@ -493,7 +493,7 @@
   signature:
     params:
     - name: result
-      type: mixed
+      type: PgSql\Result
     - name: field
       type: int
     returnType: string
@@ -505,46 +505,46 @@
   signature:
     params:
     - name: connection
-      type: resource
-    returnType: bool
+      type: PgSql\Connection
+    returnType: int|bool
 - subject:
     function: pg_free_result
   signature:
     params:
     - name: result
-      type: resource
+      type: PgSql\Result
     returnType: bool
 - subject:
     function: pg_freeresult
   signature:
     params:
     - name: result
-      type: mixed
+      type: PgSql\Result
     returnType: bool
 - subject:
     function: pg_get_notify
   signature:
     params:
     - name: connection
-      type: resource
+      type: PgSql\Connection
     - name: mode
       type: int
       optional: true
-    returnType: array
+    returnType: array|false
 - subject:
     function: pg_get_pid
   signature:
     params:
     - name: connection
-      type: resource
+      type: PgSql\Connection
     returnType: int
 - subject:
     function: pg_get_result
   signature:
     params:
     - name: connection
-      type: resource
-    returnType: resource
+      type: PgSql\Connection
+    returnType: PgSql\Result|false
   propagation:
   - from: argument(0)
     to: return
@@ -553,14 +553,14 @@
   signature:
     params:
     - name: result
-      type: mixed
-    returnType: int
+      type: PgSql\Result
+    returnType: string|int|false
 - subject:
     function: pg_host
   signature:
     params:
     - name: connection
-      type: resource
+      type: ?PgSql\Connection
       optional: true
     returnType: string
 - subject:
@@ -568,7 +568,7 @@
   signature:
     params:
     - name: connection
-      type: resource
+      type: PgSql\Connection
     - name: table_name
       type: string
     - name: values
@@ -576,7 +576,7 @@
     - name: flags
       type: int
       optional: true
-    returnType: resource
+    returnType: PgSql\Result|string|bool
   propagation:
   - from: argument(0)
     to: return
@@ -591,7 +591,7 @@
   signature:
     params:
     - name: connection
-      type: resource
+      type: ?PgSql\Connection
       optional: true
     returnType: string
 - subject:
@@ -599,47 +599,47 @@
   signature:
     params:
     - name: connection
-      type: resource
+      type: PgSql\Connection
     - name: mode
       type: int
       optional: true
-    returnType: array
+    returnType: array|string|bool
 - subject:
     function: pg_last_oid
   signature:
     params:
     - name: result
-      type: resource
-    returnType: int
+      type: PgSql\Result
+    returnType: string|int|false
 - subject:
     function: pg_lo_close
   signature:
     params:
     - name: lob
-      type: resource
+      type: PgSql\Lob
     returnType: bool
 - subject:
     function: pg_lo_create
   signature:
     params:
     - name: connection
-      type: resource
+      type: mixed
       optional: true
     - name: oid
-      type: int
+      type: mixed
       optional: true
-    returnType: int
+    returnType: string|int|false
 - subject:
     function: pg_lo_export
   signature:
     params:
     - name: connection
-      type: resource
+      type: mixed
     - name: oid
-      type: int
+      type: mixed
       optional: true
     - name: filename
-      type: string
+      type: mixed
       optional: true
     returnType: bool
 - subject:
@@ -647,27 +647,27 @@
   signature:
     params:
     - name: connection
-      type: resource
+      type: mixed
     - name: filename
-      type: string
+      type: mixed
       optional: true
     - name: oid
-      type: int
+      type: mixed
       optional: true
-    returnType: int
+    returnType: string|int|false
 - subject:
     function: pg_lo_open
   signature:
     params:
     - name: connection
-      type: resource
+      type: mixed
     - name: oid
-      type: int
+      type: mixed
       optional: true
     - name: mode
       type: string
       optional: true
-    returnType: resource
+    returnType: PgSql\Lob|false
   propagation:
   - from: argument(0)
     to: return
@@ -680,24 +680,24 @@
   signature:
     params:
     - name: lob
-      type: resource
+      type: PgSql\Lob
     - name: length
       type: int
       optional: true
-    returnType: string
+    returnType: string|false
 - subject:
     function: pg_lo_read_all
   signature:
     params:
     - name: lob
-      type: resource
+      type: PgSql\Lob
     returnType: int
 - subject:
     function: pg_lo_seek
   signature:
     params:
     - name: lob
-      type: resource
+      type: PgSql\Lob
     - name: offset
       type: int
     - name: whence
@@ -709,14 +709,14 @@
   signature:
     params:
     - name: lob
-      type: resource
+      type: PgSql\Lob
     returnType: int
 - subject:
     function: pg_lo_truncate
   signature:
     params:
     - name: lob
-      type: resource
+      type: PgSql\Lob
     - name: size
       type: int
     returnType: bool
@@ -725,9 +725,9 @@
   signature:
     params:
     - name: connection
-      type: resource
+      type: mixed
     - name: oid
-      type: int
+      type: mixed
       optional: true
     returnType: bool
 - subject:
@@ -735,19 +735,19 @@
   signature:
     params:
     - name: lob
-      type: resource
+      type: PgSql\Lob
     - name: data
       type: string
     - name: length
-      type: int
+      type: ?int
       optional: true
-    returnType: int
+    returnType: int|false
 - subject:
     function: pg_loclose
   signature:
     params:
     - name: lob
-      type: mixed
+      type: PgSql\Lob
     returnType: bool
 - subject:
     function: pg_locreate
@@ -759,7 +759,7 @@
     - name: oid
       type: mixed
       optional: true
-    returnType: int
+    returnType: string|int|false
 - subject:
     function: pg_loexport
   signature:
@@ -785,7 +785,7 @@
     - name: oid
       type: mixed
       optional: true
-    returnType: int
+    returnType: string|int|false
 - subject:
     function: pg_loopen
   signature:
@@ -798,7 +798,7 @@
     - name: mode
       type: string
       optional: true
-    returnType: mixed
+    returnType: PgSql\Lob|false
   propagation:
   - from: argument(0)
     to: return
@@ -811,11 +811,11 @@
   signature:
     params:
     - name: lob
-      type: mixed
+      type: PgSql\Lob
     - name: length
       type: int
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -824,7 +824,7 @@
   signature:
     params:
     - name: lob
-      type: mixed
+      type: PgSql\Lob
     returnType: int
 - subject:
     function: pg_lounlink
@@ -841,59 +841,59 @@
   signature:
     params:
     - name: lob
-      type: mixed
+      type: PgSql\Lob
     - name: data
       type: string
     - name: length
-      type: int
+      type: ?int
       optional: true
-    returnType: int
+    returnType: int|false
 - subject:
     function: pg_meta_data
   signature:
     params:
     - name: connection
-      type: resource
+      type: PgSql\Connection
     - name: table_name
       type: string
     - name: extended
       type: bool
       optional: true
-    returnType: array
+    returnType: array|false
 - subject:
     function: pg_num_fields
   signature:
     params:
     - name: result
-      type: resource
+      type: PgSql\Result
     returnType: int
 - subject:
     function: pg_num_rows
   signature:
     params:
     - name: result
-      type: resource
+      type: PgSql\Result
     returnType: int
 - subject:
     function: pg_numfields
   signature:
     params:
     - name: result
-      type: mixed
+      type: PgSql\Result
     returnType: int
 - subject:
     function: pg_numrows
   signature:
     params:
     - name: result
-      type: mixed
+      type: PgSql\Result
     returnType: int
 - subject:
     function: pg_options
   signature:
     params:
     - name: connection
-      type: resource
+      type: ?PgSql\Connection
       optional: true
     returnType: string
 - subject:
@@ -901,11 +901,11 @@
   signature:
     params:
     - name: connection
-      type: resource
+      type: mixed
     - name: name
       type: string
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(1)
     to: return
@@ -918,7 +918,7 @@
     - name: flags
       type: int
       optional: true
-    returnType: resource
+    returnType: PgSql\Connection|false
   propagation:
   - from: argument(0)
     to: return
@@ -929,7 +929,7 @@
   signature:
     params:
     - name: connection
-      type: resource
+      type: ?PgSql\Connection
       optional: true
     returnType: bool
 - subject:
@@ -937,7 +937,7 @@
   signature:
     params:
     - name: connection
-      type: resource
+      type: ?PgSql\Connection
       optional: true
     returnType: string
 - subject:
@@ -945,19 +945,19 @@
   signature:
     params:
     - name: connection
-      type: resource
+      type: mixed
     - name: statement_name
       type: string
     - name: query
       type: string
       optional: true
-    returnType: resource
+    returnType: PgSql\Result|false
 - subject:
     function: pg_put_line
   signature:
     params:
     - name: connection
-      type: resource
+      type: mixed
     - name: query
       type: string
       optional: true
@@ -967,35 +967,35 @@
   signature:
     params:
     - name: connection
-      type: resource
+      type: mixed
     - name: query
       type: string
       optional: true
-    returnType: resource
+    returnType: PgSql\Result|false
 - subject:
     function: pg_query_params
   signature:
     params:
     - name: connection
-      type: resource
+      type: mixed
     - name: query
-      type: string
+      type: mixed
     - name: params
       type: array
       optional: true
-    returnType: resource
+    returnType: PgSql\Result|false
 - subject:
     function: pg_result
   signature:
     params:
     - name: result
-      type: mixed
+      type: PgSql\Result
     - name: row
       type: mixed
     - name: field
-      type: int
+      type: string|int
       optional: true
-    returnType: string
+    returnType: string|false|null
   propagation:
   - from: argument(0)
     to: return
@@ -1006,23 +1006,23 @@
   signature:
     params:
     - name: result
-      type: resource
-    returnType: string
+      type: PgSql\Result
+    returnType: string|false
 - subject:
     function: pg_result_error_field
   signature:
     params:
     - name: result
-      type: resource
+      type: PgSql\Result
     - name: field_code
       type: int
-    returnType: string
+    returnType: string|false|null
 - subject:
     function: pg_result_seek
   signature:
     params:
     - name: result
-      type: resource
+      type: PgSql\Result
     - name: row
       type: int
     returnType: bool
@@ -1031,28 +1031,29 @@
   signature:
     params:
     - name: result
-      type: resource
+      type: PgSql\Result
     - name: mode
       type: int
       optional: true
-    returnType: int
+    returnType: string|int
 - subject:
     function: pg_select
   signature:
     params:
     - name: connection
-      type: resource
+      type: PgSql\Connection
     - name: table_name
       type: string
     - name: conditions
       type: array
+      optional: true
     - name: flags
       type: int
       optional: true
     - name: mode
       type: int
       optional: true
-    returnType: array
+    returnType: array|string|false
   propagation:
   - from: argument(2)
     to: return
@@ -1061,49 +1062,49 @@
   signature:
     params:
     - name: connection
-      type: resource
+      type: PgSql\Connection
     - name: statement_name
       type: string
     - name: params
       type: array
-    returnType: bool
+    returnType: int|bool
 - subject:
     function: pg_send_prepare
   signature:
     params:
     - name: connection
-      type: resource
+      type: PgSql\Connection
     - name: statement_name
       type: string
     - name: query
       type: string
-    returnType: bool
+    returnType: int|bool
 - subject:
     function: pg_send_query
   signature:
     params:
     - name: connection
-      type: resource
+      type: PgSql\Connection
     - name: query
       type: string
-    returnType: bool
+    returnType: int|bool
 - subject:
     function: pg_send_query_params
   signature:
     params:
     - name: connection
-      type: resource
+      type: PgSql\Connection
     - name: query
       type: string
     - name: params
       type: array
-    returnType: bool
+    returnType: int|bool
 - subject:
     function: pg_set_client_encoding
   signature:
     params:
     - name: connection
-      type: resource
+      type: mixed
     - name: encoding
       type: string
       optional: true
@@ -1113,11 +1114,11 @@
   signature:
     params:
     - name: connection
-      type: resource
+      type: mixed
     - name: verbosity
       type: int
       optional: true
-    returnType: int
+    returnType: int|false
 - subject:
     function: pg_setclientencoding
   signature:
@@ -1133,8 +1134,8 @@
   signature:
     params:
     - name: connection
-      type: resource
-    returnType: resource
+      type: PgSql\Connection
+    returnType: mixed
   propagation:
   - from: argument(0)
     to: return
@@ -1148,7 +1149,10 @@
       type: string
       optional: true
     - name: connection
-      type: resource
+      type: ?PgSql\Connection
+      optional: true
+    - name: trace_mode
+      type: int
       optional: true
     returnType: bool
 - subject:
@@ -1156,14 +1160,14 @@
   signature:
     params:
     - name: connection
-      type: resource
+      type: PgSql\Connection
     returnType: int
 - subject:
     function: pg_tty
   signature:
     params:
     - name: connection
-      type: resource
+      type: ?PgSql\Connection
       optional: true
     returnType: string
 - subject:
@@ -1181,15 +1185,15 @@
   signature:
     params:
     - name: connection
-      type: resource
+      type: ?PgSql\Connection
       optional: true
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: pg_update
   signature:
     params:
     - name: connection
-      type: resource
+      type: PgSql\Connection
     - name: table_name
       type: string
     - name: values
@@ -1199,12 +1203,118 @@
     - name: flags
       type: int
       optional: true
-    returnType: bool
+    returnType: string|bool
 - subject:
     function: pg_version
   signature:
     params:
     - name: connection
-      type: resource
+      type: ?PgSql\Connection
       optional: true
     returnType: array
+- subject:
+    class: pgsql\connection
+  signature:
+    classifier: class
+- subject:
+    class: pgsql\lob
+  signature:
+    classifier: class
+- subject:
+    class: pgsql\result
+  signature:
+    classifier: class
+- subject:
+    function: pg_change_password
+  signature:
+    params:
+    - name: connection
+      type: PgSql\Connection
+    - name: user
+      type: string
+    - name: password
+      type: string
+    returnType: bool
+- subject:
+    function: pg_close_stmt
+  signature:
+    params:
+    - name: connection
+      type: Pgsql\Connection
+    - name: statement_name
+      type: string
+    returnType: PgSql\Result|false
+- subject:
+    function: pg_jit
+  signature:
+    params:
+    - name: connection
+      type: ?PgSql\Connection
+      optional: true
+    returnType: array
+- subject:
+    function: pg_put_copy_data
+  signature:
+    params:
+    - name: connection
+      type: PgSql\Connection
+    - name: cmd
+      type: string
+    returnType: int
+- subject:
+    function: pg_put_copy_end
+  signature:
+    params:
+    - name: connection
+      type: PgSql\Connection
+    - name: error
+      type: ?string
+      optional: true
+    returnType: int
+- subject:
+    function: pg_result_memory_size
+  signature:
+    params:
+    - name: result
+      type: PgSql\Result
+    returnType: int
+- subject:
+    function: pg_service
+  signature:
+    params:
+    - name: connection
+      type: ?PgSql\Connection
+      optional: true
+    returnType: string
+- subject:
+    function: pg_set_chunked_rows_size
+  signature:
+    params:
+    - name: connection
+      type: PgSql\Connection
+    - name: size
+      type: int
+    returnType: bool
+- subject:
+    function: pg_set_error_context_visibility
+  signature:
+    params:
+    - name: connection
+      type: PgSql\Connection
+    - name: visibility
+      type: int
+    returnType: int
+- subject:
+    function: pg_socket_poll
+  signature:
+    params:
+    - name: socket
+      type: mixed
+    - name: read
+      type: int
+    - name: write
+      type: int
+    - name: timeout
+      type: int
+      optional: true
+    returnType: int

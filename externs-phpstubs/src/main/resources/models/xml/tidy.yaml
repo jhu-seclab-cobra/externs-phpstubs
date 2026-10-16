@@ -5,43 +5,43 @@
   signature:
     params:
     - name: tidy
-      type: mixed
+      type: tidy
     returnType: int
 - subject:
     function: tidy_clean_repair
   signature:
     params:
     - name: tidy
-      type: mixed
+      type: tidy
     returnType: bool
 - subject:
     function: tidy_config_count
   signature:
     params:
     - name: tidy
-      type: mixed
+      type: tidy
     returnType: int
 - subject:
     function: tidy_diagnose
   signature:
     params:
     - name: tidy
-      type: mixed
+      type: tidy
     returnType: bool
 - subject:
     function: tidy_error_count
   signature:
     params:
     - name: tidy
-      type: mixed
+      type: tidy
     returnType: int
 - subject:
     function: tidy_get_body
   signature:
     params:
     - name: tidy
-      type: mixed
-    returnType: mixed
+      type: tidy
+    returnType: ?tidyNode
   propagation:
   - from: argument(0)
     to: return
@@ -50,7 +50,7 @@
   signature:
     params:
     - name: tidy
-      type: mixed
+      type: tidy
     returnType: array
   propagation:
   - from: argument(0)
@@ -60,8 +60,8 @@
   signature:
     params:
     - name: tidy
-      type: mixed
-    returnType: string
+      type: tidy
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -70,8 +70,8 @@
   signature:
     params:
     - name: tidy
-      type: mixed
-    returnType: mixed
+      type: tidy
+    returnType: ?tidyNode
   propagation:
   - from: argument(0)
     to: return
@@ -80,8 +80,8 @@
   signature:
     params:
     - name: tidy
-      type: mixed
-    returnType: mixed
+      type: tidy
+    returnType: ?tidyNode
   propagation:
   - from: argument(0)
     to: return
@@ -90,17 +90,17 @@
   signature:
     params:
     - name: tidy
-      type: mixed
+      type: tidy
     returnType: int
 - subject:
     function: tidy_get_opt_doc
   signature:
     params:
     - name: tidy
-      type: mixed
+      type: tidy
     - name: option
       type: string
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -111,7 +111,7 @@
   signature:
     params:
     - name: tidy
-      type: mixed
+      type: tidy
     returnType: string
   propagation:
   - from: argument(0)
@@ -125,8 +125,8 @@
   signature:
     params:
     - name: tidy
-      type: mixed
-    returnType: mixed
+      type: tidy
+    returnType: ?tidyNode
   propagation:
   - from: argument(0)
     to: return
@@ -135,30 +135,30 @@
   signature:
     params:
     - name: tidy
-      type: mixed
+      type: tidy
     returnType: int
 - subject:
     function: tidy_getopt
   signature:
     params:
     - name: tidy
-      type: mixed
+      type: tidy
     - name: option
       type: string
-    returnType: bool
+    returnType: string|int|bool
 - subject:
     function: tidy_is_xhtml
   signature:
     params:
     - name: tidy
-      type: mixed
+      type: tidy
     returnType: bool
 - subject:
     function: tidy_is_xml
   signature:
     params:
     - name: tidy
-      type: mixed
+      type: tidy
     returnType: bool
 - subject:
     function: tidy_load_config
@@ -176,15 +176,15 @@
     - name: filename
       type: string
     - name: config
-      type: array
+      type: array|string|null
       optional: true
     - name: encoding
-      type: string
+      type: ?string
       optional: true
     - name: useIncludePath
       type: bool
       optional: true
-    returnType: mixed
+    returnType: tidy|false
   propagation:
   - from: argument(0)
     to: return
@@ -201,12 +201,12 @@
     - name: string
       type: string
     - name: config
-      type: array
+      type: array|string|null
       optional: true
     - name: encoding
-      type: string
+      type: ?string
       optional: true
-    returnType: mixed
+    returnType: tidy|false
   propagation:
   - from: argument(0)
     to: return
@@ -221,15 +221,15 @@
     - name: filename
       type: string
     - name: config
-      type: array
+      type: array|string|null
       optional: true
     - name: encoding
-      type: string
+      type: ?string
       optional: true
     - name: useIncludePath
       type: bool
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -242,12 +242,12 @@
     - name: string
       type: string
     - name: config
-      type: array
+      type: array|string|null
       optional: true
     - name: encoding
-      type: string
+      type: ?string
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -285,5 +285,198 @@
   signature:
     params:
     - name: tidy
-      type: mixed
+      type: tidy
     returnType: int
+- subject:
+    class: tidy
+  signature:
+    classifier: class
+- subject:
+    class: tidynode
+  signature:
+    classifier: class
+- subject:
+    method: tidy::__construct
+  signature:
+    params:
+    - name: filename
+      type: ?string
+      optional: true
+    - name: config
+      type: array|string|null
+      optional: true
+    - name: encoding
+      type: ?string
+      optional: true
+    - name: useIncludePath
+      type: bool
+      optional: true
+    returnType: mixed
+- subject:
+    method: tidy::body
+  signature:
+    returnType: ?tidyNode
+- subject:
+    method: tidy::cleanRepair
+  signature:
+    returnType: bool
+- subject:
+    method: tidy::diagnose
+  signature:
+    returnType: bool
+- subject:
+    method: tidy::getConfig
+  signature:
+    returnType: array
+- subject:
+    method: tidy::getHtmlVer
+  signature:
+    returnType: int
+- subject:
+    method: tidy::getOpt
+  signature:
+    params:
+    - name: option
+      type: string
+    returnType: string|int|bool
+- subject:
+    method: tidy::getOptDoc
+  signature:
+    params:
+    - name: option
+      type: string
+    returnType: string|false
+- subject:
+    method: tidy::getRelease
+  signature:
+    returnType: string
+- subject:
+    method: tidy::getStatus
+  signature:
+    returnType: int
+- subject:
+    method: tidy::head
+  signature:
+    returnType: ?tidyNode
+- subject:
+    method: tidy::html
+  signature:
+    returnType: ?tidyNode
+- subject:
+    method: tidy::isXhtml
+  signature:
+    returnType: bool
+- subject:
+    method: tidy::isXml
+  signature:
+    returnType: bool
+- subject:
+    method: tidy::parseFile
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: config
+      type: array|string|null
+      optional: true
+    - name: encoding
+      type: ?string
+      optional: true
+    - name: useIncludePath
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    method: tidy::parseString
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: config
+      type: array|string|null
+      optional: true
+    - name: encoding
+      type: ?string
+      optional: true
+    returnType: bool
+- subject:
+    method: tidy::repairFile
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: config
+      type: array|string|null
+      optional: true
+    - name: encoding
+      type: ?string
+      optional: true
+    - name: useIncludePath
+      type: bool
+      optional: true
+    returnType: string|false
+- subject:
+    method: tidy::repairString
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: config
+      type: array|string|null
+      optional: true
+    - name: encoding
+      type: ?string
+      optional: true
+    returnType: string|false
+- subject:
+    method: tidy::root
+  signature:
+    returnType: ?tidyNode
+- subject:
+    method: tidyNode::__construct
+  signature:
+    returnType: mixed
+- subject:
+    method: tidyNode::getNextSibling
+  signature:
+    returnType: ?tidyNode
+- subject:
+    method: tidyNode::getParent
+  signature:
+    returnType: ?tidyNode
+- subject:
+    method: tidyNode::getPreviousSibling
+  signature:
+    returnType: ?tidyNode
+- subject:
+    method: tidyNode::hasChildren
+  signature:
+    returnType: bool
+- subject:
+    method: tidyNode::hasSiblings
+  signature:
+    returnType: bool
+- subject:
+    method: tidyNode::isAsp
+  signature:
+    returnType: bool
+- subject:
+    method: tidyNode::isComment
+  signature:
+    returnType: bool
+- subject:
+    method: tidyNode::isHtml
+  signature:
+    returnType: bool
+- subject:
+    method: tidyNode::isJste
+  signature:
+    returnType: bool
+- subject:
+    method: tidyNode::isPhp
+  signature:
+    returnType: bool
+- subject:
+    method: tidyNode::isText
+  signature:
+    returnType: bool

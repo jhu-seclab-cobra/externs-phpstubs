@@ -2,6 +2,18 @@
 # Exceptions (PHP manual: Predefined Exceptions).
 # An entry whose unit differs from the generated one carries the PHP manual reason above it.
 
+# PHP manual: the constructor stores the message in the object.
+- subject: {method: Error::__construct}
+  returns: any
+  propagation: [{from: argument(0), to: this}]
+# PHP manual: returns the message the constructor stored in the object.
+- subject: {method: Error::getMessage}
+  returns: str
+  propagation: [{from: this, to: return}]
+# PHP manual: the constructor stores the message in the object.
+- subject: {method: Exception::__construct}
+  returns: any
+  propagation: [{from: argument(0), to: this}]
 # PHP manual: returns the message the constructor stored in the object.
 - subject: {method: Exception::getMessage}
   returns: str

@@ -5,19 +5,20 @@
   signature:
     params:
     - name: ftp
-      type: resource
+      type: FTP\Connection
     - name: size
       type: int
     - name: response
-      type: string
+      type: mixed
       optional: true
+      byRef: true
     returnType: bool
 - subject:
     function: ftp_append
   signature:
     params:
     - name: ftp
-      type: resource
+      type: FTP\Connection
     - name: remote_filename
       type: string
     - name: local_filename
@@ -31,14 +32,14 @@
   signature:
     params:
     - name: ftp
-      type: resource
+      type: FTP\Connection
     returnType: bool
 - subject:
     function: ftp_chdir
   signature:
     params:
     - name: ftp
-      type: resource
+      type: FTP\Connection
     - name: directory
       type: string
     returnType: bool
@@ -47,18 +48,18 @@
   signature:
     params:
     - name: ftp
-      type: resource
+      type: FTP\Connection
     - name: permissions
       type: int
     - name: filename
       type: string
-    returnType: int
+    returnType: int|false
 - subject:
     function: ftp_close
   signature:
     params:
     - name: ftp
-      type: resource
+      type: FTP\Connection
     returnType: bool
 - subject:
     function: ftp_connect
@@ -72,7 +73,7 @@
     - name: timeout
       type: int
       optional: true
-    returnType: resource
+    returnType: FTP\Connection|false
   propagation:
   - from: argument(0)
     to: return
@@ -85,7 +86,7 @@
   signature:
     params:
     - name: ftp
-      type: resource
+      type: FTP\Connection
     - name: filename
       type: string
     returnType: bool
@@ -94,7 +95,7 @@
   signature:
     params:
     - name: ftp
-      type: resource
+      type: FTP\Connection
     - name: command
       type: string
     returnType: bool
@@ -103,9 +104,9 @@
   signature:
     params:
     - name: ftp
-      type: resource
+      type: FTP\Connection
     - name: stream
-      type: resource
+      type: mixed
     - name: remote_filename
       type: string
     - name: mode
@@ -120,11 +121,11 @@
   signature:
     params:
     - name: ftp
-      type: resource
+      type: FTP\Connection
     - name: remote_filename
       type: string
     - name: stream
-      type: resource
+      type: mixed
     - name: mode
       type: int
       optional: true
@@ -137,7 +138,7 @@
   signature:
     params:
     - name: ftp
-      type: resource
+      type: FTP\Connection
     - name: local_filename
       type: string
     - name: remote_filename
@@ -154,16 +155,16 @@
   signature:
     params:
     - name: ftp
-      type: resource
+      type: FTP\Connection
     - name: option
       type: int
-    returnType: int
+    returnType: int|bool
 - subject:
     function: ftp_login
   signature:
     params:
     - name: ftp
-      type: resource
+      type: FTP\Connection
     - name: username
       type: string
     - name: password
@@ -174,7 +175,7 @@
   signature:
     params:
     - name: ftp
-      type: resource
+      type: FTP\Connection
     - name: filename
       type: string
     returnType: int
@@ -183,10 +184,10 @@
   signature:
     params:
     - name: ftp
-      type: resource
+      type: FTP\Connection
     - name: directory
       type: string
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(1)
     to: return
@@ -195,25 +196,25 @@
   signature:
     params:
     - name: ftp
-      type: resource
+      type: FTP\Connection
     - name: directory
       type: string
-    returnType: array
+    returnType: array|false
 - subject:
     function: ftp_nb_continue
   signature:
     params:
     - name: ftp
-      type: resource
+      type: FTP\Connection
     returnType: int
 - subject:
     function: ftp_nb_fget
   signature:
     params:
     - name: ftp
-      type: resource
+      type: FTP\Connection
     - name: stream
-      type: resource
+      type: mixed
     - name: remote_filename
       type: string
     - name: mode
@@ -228,11 +229,11 @@
   signature:
     params:
     - name: ftp
-      type: resource
+      type: FTP\Connection
     - name: remote_filename
       type: string
     - name: stream
-      type: resource
+      type: mixed
     - name: mode
       type: int
       optional: true
@@ -245,7 +246,7 @@
   signature:
     params:
     - name: ftp
-      type: resource
+      type: FTP\Connection
     - name: local_filename
       type: string
     - name: remote_filename
@@ -256,13 +257,13 @@
     - name: offset
       type: int
       optional: true
-    returnType: int
+    returnType: int|false
 - subject:
     function: ftp_nb_put
   signature:
     params:
     - name: ftp
-      type: resource
+      type: FTP\Connection
     - name: remote_filename
       type: string
     - name: local_filename
@@ -273,22 +274,22 @@
     - name: offset
       type: int
       optional: true
-    returnType: int
+    returnType: int|false
 - subject:
     function: ftp_nlist
   signature:
     params:
     - name: ftp
-      type: resource
+      type: FTP\Connection
     - name: directory
       type: string
-    returnType: array
+    returnType: array|false
 - subject:
     function: ftp_pasv
   signature:
     params:
     - name: ftp
-      type: resource
+      type: FTP\Connection
     - name: enable
       type: bool
     returnType: bool
@@ -297,7 +298,7 @@
   signature:
     params:
     - name: ftp
-      type: resource
+      type: FTP\Connection
     - name: remote_filename
       type: string
     - name: local_filename
@@ -314,42 +315,42 @@
   signature:
     params:
     - name: ftp
-      type: resource
-    returnType: string
+      type: FTP\Connection
+    returnType: string|false
 - subject:
     function: ftp_quit
   signature:
     params:
     - name: ftp
-      type: resource
+      type: FTP\Connection
     returnType: bool
 - subject:
     function: ftp_raw
   signature:
     params:
     - name: ftp
-      type: resource
+      type: FTP\Connection
     - name: command
       type: string
-    returnType: array
+    returnType: ?array
 - subject:
     function: ftp_rawlist
   signature:
     params:
     - name: ftp
-      type: resource
+      type: FTP\Connection
     - name: directory
       type: string
     - name: recursive
       type: bool
       optional: true
-    returnType: array
+    returnType: array|false
 - subject:
     function: ftp_rename
   signature:
     params:
     - name: ftp
-      type: resource
+      type: FTP\Connection
     - name: from
       type: string
     - name: to
@@ -360,7 +361,7 @@
   signature:
     params:
     - name: ftp
-      type: resource
+      type: FTP\Connection
     - name: directory
       type: string
     returnType: bool
@@ -369,18 +370,18 @@
   signature:
     params:
     - name: ftp
-      type: resource
+      type: FTP\Connection
     - name: option
       type: int
     - name: value
       type: mixed
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: ftp_site
   signature:
     params:
     - name: ftp
-      type: resource
+      type: FTP\Connection
     - name: command
       type: string
     returnType: bool
@@ -389,7 +390,7 @@
   signature:
     params:
     - name: ftp
-      type: resource
+      type: FTP\Connection
     - name: filename
       type: string
     returnType: int
@@ -405,7 +406,7 @@
     - name: timeout
       type: int
       optional: true
-    returnType: resource
+    returnType: FTP\Connection|false
   propagation:
   - from: argument(0)
     to: return
@@ -418,5 +419,9 @@
   signature:
     params:
     - name: ftp
-      type: resource
-    returnType: string
+      type: FTP\Connection
+    returnType: string|false
+- subject:
+    class: ftp\connection
+  signature:
+    classifier: class

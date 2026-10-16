@@ -5,44 +5,45 @@
   signature:
     params:
     - name: dba
-      type: resource
+      type: Dba\Connection
     returnType: void
 - subject:
     function: dba_delete
   signature:
     params:
     - name: key
-      type: array
+      type: string|array
     - name: dba
-      type: resource
+      type: Dba\Connection
     returnType: bool
 - subject:
     function: dba_exists
   signature:
     params:
     - name: key
-      type: array
+      type: string|array
     - name: dba
-      type: resource
+      type: Dba\Connection
     returnType: bool
 - subject:
     function: dba_fetch
   signature:
     params:
     - name: key
-      type: array
-    - name: skip
-      type: int
+      type: string|array
     - name: dba
-      type: resource
-    returnType: string
+      type: mixed
+    - name: skip
+      type: mixed
+      optional: true
+    returnType: string|false
 - subject:
     function: dba_firstkey
   signature:
     params:
     - name: dba
-      type: resource
-    returnType: string
+      type: Dba\Connection
+    returnType: string|false
 - subject:
     function: dba_handlers
   signature:
@@ -56,19 +57,19 @@
   signature:
     params:
     - name: key
-      type: array
+      type: string|array
     - name: value
       type: string
     - name: dba
-      type: resource
+      type: Dba\Connection
     returnType: bool
 - subject:
     function: dba_key_split
   signature:
     params:
     - name: key
-      type: string
-    returnType: array
+      type: string|false|null
+    returnType: array|false
 - subject:
     function: dba_list
   signature:
@@ -78,8 +79,8 @@
   signature:
     params:
     - name: dba
-      type: resource
-    returnType: string
+      type: Dba\Connection
+    returnType: string|false
 - subject:
     function: dba_open
   signature:
@@ -89,12 +90,18 @@
     - name: mode
       type: string
     - name: handler
-      type: string
+      type: ?string
       optional: true
-    - name: handler_params
-      type: string
+    - name: permission
+      type: int
       optional: true
-    returnType: resource
+    - name: map_size
+      type: int
+      optional: true
+    - name: flags
+      type: ?int
+      optional: true
+    returnType: Dba\Connection|false
   propagation:
   - from: argument(0)
     to: return
@@ -109,7 +116,7 @@
   signature:
     params:
     - name: dba
-      type: resource
+      type: Dba\Connection
     returnType: bool
 - subject:
     function: dba_popen
@@ -120,12 +127,18 @@
     - name: mode
       type: string
     - name: handler
-      type: string
+      type: ?string
       optional: true
-    - name: handler_params
-      type: string
+    - name: permission
+      type: int
       optional: true
-    returnType: resource
+    - name: map_size
+      type: int
+      optional: true
+    - name: flags
+      type: ?int
+      optional: true
+    returnType: Dba\Connection|false
   propagation:
   - from: argument(0)
     to: return
@@ -140,16 +153,20 @@
   signature:
     params:
     - name: key
-      type: array
+      type: string|array
     - name: value
       type: string
     - name: dba
-      type: resource
+      type: Dba\Connection
     returnType: bool
 - subject:
     function: dba_sync
   signature:
     params:
     - name: dba
-      type: resource
+      type: Dba\Connection
     returnType: bool
+- subject:
+    class: dba\connection
+  signature:
+    classifier: class

@@ -199,10 +199,6 @@
   - from: argument(2)
     to: return
 - subject:
-    function: pdo_drivers
-  signature:
-    returnType: array
-- subject:
     function: pfsockopen
   signature:
     params:
@@ -212,15 +208,17 @@
       type: int
       optional: true
     - name: error_code
-      type: int
+      type: mixed
       optional: true
+      byRef: true
     - name: error_message
-      type: string
+      type: mixed
       optional: true
+      byRef: true
     - name: timeout
-      type: float
+      type: ?float
       optional: true
-    returnType: resource
+    returnType: mixed
   propagation:
   - from: argument(0)
     to: return
@@ -245,11 +243,11 @@
 - subject:
     function: php_ini_loaded_file
   signature:
-    returnType: string
+    returnType: string|false
 - subject:
     function: php_ini_scanned_files
   signature:
-    returnType: string
+    returnType: string|false
 - subject:
     function: php_logo_guid
   signature:
@@ -257,7 +255,7 @@
 - subject:
     function: php_sapi_name
   signature:
-    returnType: string
+    returnType: string|false
 - subject:
     function: php_strip_whitespace
   signature:
@@ -283,7 +281,7 @@
     - name: flags
       type: int
       optional: true
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: phpdbg_break_file
   signature:
@@ -333,7 +331,7 @@
     - name: options
       type: array
       optional: true
-    returnType: array
+    returnType: ?array
   propagation:
   - from: argument(0)
     to: return
@@ -343,8 +341,7 @@
     params:
     - name: context
       type: string
-      optional: true
-    returnType: mixed
+    returnType: string|bool
   propagation:
   - from: argument(0)
     to: return
@@ -377,15 +374,15 @@
     - name: flags
       type: int
       optional: true
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: phpversion
   signature:
     params:
     - name: extension
-      type: string
+      type: ?string
       optional: true
-    returnType: string
+    returnType: string|false
 - subject:
     function: pi
   signature:
@@ -398,13 +395,13 @@
       type: string
     - name: mode
       type: string
-    returnType: resource
+    returnType: mixed
 - subject:
     function: pos
   signature:
     params:
     - name: array
-      type: array
+      type: array|object
     returnType: mixed
   propagation:
   - from: argument(0)
@@ -414,16 +411,17 @@
   signature:
     params:
     - name: num
-      type: float
+      type: mixed
     - name: exponent
-      type: float
-    returnType: float
+      type: mixed
+    returnType: int|float|object
 - subject:
     function: prev
   signature:
     params:
     - name: array
-      type: array
+      type: array|object
+      byRef: true
     returnType: mixed
   propagation:
   - from: argument(0)
@@ -437,7 +435,7 @@
     - name: return
       type: bool
       optional: true
-    returnType: string
+    returnType: string|true
   propagation:
   - from: argument(0)
     to: return
@@ -448,22 +446,23 @@
     - name: format
       type: string
     - name: values
-      type: float
+      type: mixed
       optional: true
+      variadic: true
     returnType: int
 - subject:
     function: proc_close
   signature:
     params:
     - name: process
-      type: resource
+      type: mixed
     returnType: int
 - subject:
     function: proc_get_status
   signature:
     params:
     - name: process
-      type: resource
+      type: mixed
     returnType: array
 - subject:
     function: proc_nice
@@ -477,39 +476,31 @@
   signature:
     params:
     - name: command
-      type: array
+      type: array|string
     - name: descriptor_spec
       type: array
     - name: pipes
-      type: array
+      type: mixed
+      byRef: true
     - name: cwd
-      type: string
+      type: ?string
       optional: true
     - name: env_vars
-      type: array
+      type: ?array
       optional: true
     - name: options
-      type: array
+      type: ?array
       optional: true
-    returnType: resource
+    returnType: mixed
 - subject:
     function: proc_terminate
   signature:
     params:
     - name: process
-      type: resource
+      type: mixed
     - name: signal
       type: int
       optional: true
-    returnType: bool
-- subject:
-    function: property_exists
-  signature:
-    params:
-    - name: object_or_class
-      type: object
-    - name: property
-      type: string
     returnType: bool
 - subject:
     function: ps_add_bookmark
@@ -2205,42 +2196,15 @@
       type: resource
     returnType: string
 - subject:
-    function: rand
-  signature:
-    params:
-    - name: min
-      type: int
-      optional: true
-    - name: max
-      type: int
-      optional: true
-    returnType: int
-- subject:
-    function: random_bytes
-  signature:
-    params:
-    - name: length
-      type: int
-    returnType: string
-- subject:
-    function: random_int
-  signature:
-    params:
-    - name: min
-      type: int
-    - name: max
-      type: int
-    returnType: int
-- subject:
     function: range
   signature:
     params:
     - name: start
-      type: float
+      type: string|int|float
     - name: end
-      type: float
+      type: string|int|float
     - name: step
-      type: float
+      type: int|float
       optional: true
     returnType: array
 - subject:
@@ -2353,19 +2317,9 @@
   signature:
     params:
     - name: dir_handle
-      type: resource
+      type: mixed
       optional: true
-    returnType: string
-- subject:
-    function: readgzfile
-  signature:
-    params:
-    - name: filename
-      type: string
-    - name: use_include_path
-      type: int
-      optional: true
-    returnType: int
+    returnType: string|false
 - subject:
     function: recode
   signature:
@@ -2425,117 +2379,43 @@
     - name: args
       type: mixed
       optional: true
-    returnType: bool
+      variadic: true
+    returnType: void
 - subject:
     function: register_tick_function
   signature:
     params:
     - name: callback
-      type: mixed
+      type: callable
     - name: args
       type: mixed
       optional: true
+      variadic: true
     returnType: bool
 - subject:
     function: reset
   signature:
     params:
     - name: array
-      type: array
+      type: array|object
+      byRef: true
     returnType: mixed
   propagation:
   - from: argument(0)
     to: return
-- subject:
-    function: resourcebundle_count
-  signature:
-    params:
-    - name: bundle
-      type: mixed
-    returnType: int
-- subject:
-    function: resourcebundle_create
-  signature:
-    params:
-    - name: locale
-      type: string
-    - name: bundle
-      type: string
-    - name: fallback
-      type: bool
-      optional: true
-    returnType: mixed
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-  - from: argument(2)
-    to: return
-- subject:
-    function: resourcebundle_get
-  signature:
-    params:
-    - name: bundle
-      type: mixed
-    - name: index
-      type: int
-    - name: fallback
-      type: bool
-      optional: true
-    returnType: mixed
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-  - from: argument(2)
-    to: return
-- subject:
-    function: resourcebundle_get_error_code
-  signature:
-    params:
-    - name: bundle
-      type: mixed
-    returnType: int
-- subject:
-    function: resourcebundle_get_error_message
-  signature:
-    params:
-    - name: bundle
-      type: mixed
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: resourcebundle_locales
-  signature:
-    params:
-    - name: bundle
-      type: string
-    returnType: array
-- subject:
-    function: restore_error_handler
-  signature:
-    returnType: bool
-- subject:
-    function: restore_exception_handler
-  signature:
-    returnType: bool
 - subject:
     function: rewind
   signature:
     params:
     - name: stream
-      type: resource
+      type: mixed
     returnType: bool
 - subject:
     function: rewinddir
   signature:
     params:
     - name: dir_handle
-      type: resource
+      type: mixed
       optional: true
     returnType: void
 - subject:
@@ -2543,12 +2423,12 @@
   signature:
     params:
     - name: num
-      type: float
+      type: int|float
     - name: precision
       type: int
       optional: true
     - name: mode
-      type: int
+      type: int|RoundingMode
       optional: true
     returnType: float
 - subject:
@@ -2774,10 +2654,11 @@
     params:
     - name: array
       type: array
+      byRef: true
     - name: flags
       type: int
       optional: true
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: rtrim
   signature:
@@ -3237,12 +3118,12 @@
   signature:
     params:
     - name: in_codepage
-      type: int
+      type: int|string
     - name: out_codepage
-      type: int
+      type: int|string
     - name: subject
       type: string
-    returnType: string
+    returnType: ?string
   propagation:
   - from: argument(2)
     to: return
@@ -3270,9 +3151,9 @@
   signature:
     params:
     - name: stream
-      type: resource
+      type: mixed
     - name: enable
-      type: bool
+      type: ?bool
       optional: true
     returnType: bool
 - subject:
@@ -3294,36 +3175,11 @@
   - from: argument(0)
     to: return
 - subject:
-    function: set_error_handler
-  signature:
-    params:
-    - name: callback
-      type: mixed
-    - name: error_levels
-      type: int
-      optional: true
-    returnType: mixed
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: set_exception_handler
-  signature:
-    params:
-    - name: callback
-      type: mixed
-    returnType: mixed
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
     function: set_file_buffer
   signature:
     params:
     - name: stream
-      type: resource
+      type: mixed
     - name: size
       type: int
     returnType: int
@@ -3333,7 +3189,7 @@
     params:
     - name: include_path
       type: string
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -3361,7 +3217,7 @@
       type: string
       optional: true
     - name: expires_or_options
-      type: int
+      type: array|int
       optional: true
     - name: path
       type: string
@@ -3415,9 +3271,10 @@
     - name: locales
       type: mixed
     - name: rest
-      type: string
+      type: mixed
       optional: true
-    returnType: string
+      variadic: true
+    returnType: string|false
   propagation:
   - from: argument(1)
     to: return
@@ -3440,7 +3297,7 @@
       type: string
       optional: true
     - name: expires_or_options
-      type: int
+      type: array|int
       optional: true
     - name: path
       type: string
@@ -3482,6 +3339,7 @@
     params:
     - name: var
       type: mixed
+      byRef: true
     - name: type
       type: string
     returnType: bool
@@ -3504,7 +3362,7 @@
     - name: binary
       type: bool
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -3540,75 +3398,7 @@
     params:
     - name: command
       type: string
-    returnType: string
-- subject:
-    function: shmop_close
-  signature:
-    params:
-    - name: shmop
-      type: mixed
-    returnType: void
-- subject:
-    function: shmop_delete
-  signature:
-    params:
-    - name: shmop
-      type: mixed
-    returnType: bool
-- subject:
-    function: shmop_open
-  signature:
-    params:
-    - name: key
-      type: int
-    - name: mode
-      type: string
-    - name: permissions
-      type: int
-    - name: size
-      type: int
-    returnType: mixed
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-  - from: argument(2)
-    to: return
-  - from: argument(3)
-    to: return
-- subject:
-    function: shmop_read
-  signature:
-    params:
-    - name: shmop
-      type: mixed
-    - name: offset
-      type: int
-    - name: size
-      type: int
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: shmop_size
-  signature:
-    params:
-    - name: shmop
-      type: mixed
-    returnType: int
-- subject:
-    function: shmop_write
-  signature:
-    params:
-    - name: shmop
-      type: mixed
-    - name: data
-      type: string
-    - name: offset
-      type: int
-    returnType: int
+    returnType: string|false|null
 - subject:
     function: show_source
   signature:
@@ -3618,14 +3408,15 @@
     - name: return
       type: bool
       optional: true
-    returnType: bool
+    returnType: string|bool
 - subject:
     function: shuffle
   signature:
     params:
     - name: array
       type: array
-    returnType: bool
+      byRef: true
+    returnType: 'true'
 - subject:
     function: signeurlpaiement
   signature:
@@ -3649,8 +3440,9 @@
     - name: string2
       type: string
     - name: percent
-      type: float
+      type: mixed
       optional: true
+      byRef: true
     returnType: int
 - subject:
     function: sin
@@ -3671,7 +3463,7 @@
   signature:
     params:
     - name: value
-      type: mixed
+      type: Countable|array
     - name: mode
       type: int
       optional: true
@@ -3683,1476 +3475,6 @@
     - name: seconds
       type: int
     returnType: int
-- subject:
-    function: snmp2_get
-  signature:
-    params:
-    - name: hostname
-      type: string
-    - name: community
-      type: string
-    - name: object_id
-      type: array
-    - name: timeout
-      type: int
-      optional: true
-    - name: retries
-      type: int
-      optional: true
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: snmp2_getnext
-  signature:
-    params:
-    - name: hostname
-      type: string
-    - name: community
-      type: string
-    - name: object_id
-      type: array
-    - name: timeout
-      type: int
-      optional: true
-    - name: retries
-      type: int
-      optional: true
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: snmp2_real_walk
-  signature:
-    params:
-    - name: hostname
-      type: string
-    - name: community
-      type: string
-    - name: object_id
-      type: array
-    - name: timeout
-      type: int
-      optional: true
-    - name: retries
-      type: int
-      optional: true
-    returnType: array
-  propagation:
-  - from: argument(2)
-    to: return
-- subject:
-    function: snmp2_set
-  signature:
-    params:
-    - name: hostname
-      type: string
-    - name: community
-      type: string
-    - name: object_id
-      type: array
-    - name: type
-      type: array
-    - name: value
-      type: array
-    - name: timeout
-      type: int
-      optional: true
-    - name: retries
-      type: int
-      optional: true
-    returnType: bool
-- subject:
-    function: snmp2_walk
-  signature:
-    params:
-    - name: hostname
-      type: string
-    - name: community
-      type: string
-    - name: object_id
-      type: array
-    - name: timeout
-      type: int
-      optional: true
-    - name: retries
-      type: int
-      optional: true
-    returnType: array
-  propagation:
-  - from: argument(2)
-    to: return
-- subject:
-    function: snmp3_get
-  signature:
-    params:
-    - name: hostname
-      type: string
-    - name: security_name
-      type: string
-    - name: security_level
-      type: string
-    - name: auth_protocol
-      type: string
-    - name: auth_passphrase
-      type: string
-    - name: privacy_protocol
-      type: string
-    - name: privacy_passphrase
-      type: string
-    - name: object_id
-      type: array
-    - name: timeout
-      type: int
-      optional: true
-    - name: retries
-      type: int
-      optional: true
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-  - from: argument(2)
-    to: return
-  - from: argument(3)
-    to: return
-  - from: argument(4)
-    to: return
-  - from: argument(5)
-    to: return
-  - from: argument(6)
-    to: return
-- subject:
-    function: snmp3_getnext
-  signature:
-    params:
-    - name: hostname
-      type: string
-    - name: security_name
-      type: string
-    - name: security_level
-      type: string
-    - name: auth_protocol
-      type: string
-    - name: auth_passphrase
-      type: string
-    - name: privacy_protocol
-      type: string
-    - name: privacy_passphrase
-      type: string
-    - name: object_id
-      type: array
-    - name: timeout
-      type: int
-      optional: true
-    - name: retries
-      type: int
-      optional: true
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-  - from: argument(2)
-    to: return
-  - from: argument(3)
-    to: return
-  - from: argument(4)
-    to: return
-  - from: argument(5)
-    to: return
-  - from: argument(6)
-    to: return
-- subject:
-    function: snmp3_real_walk
-  signature:
-    params:
-    - name: hostname
-      type: string
-    - name: security_name
-      type: string
-    - name: security_level
-      type: string
-    - name: auth_protocol
-      type: string
-    - name: auth_passphrase
-      type: string
-    - name: privacy_protocol
-      type: string
-    - name: privacy_passphrase
-      type: string
-    - name: object_id
-      type: array
-    - name: timeout
-      type: int
-      optional: true
-    - name: retries
-      type: int
-      optional: true
-    returnType: array
-  propagation:
-  - from: argument(7)
-    to: return
-- subject:
-    function: snmp3_set
-  signature:
-    params:
-    - name: hostname
-      type: string
-    - name: security_name
-      type: string
-    - name: security_level
-      type: string
-    - name: auth_protocol
-      type: string
-    - name: auth_passphrase
-      type: string
-    - name: privacy_protocol
-      type: string
-    - name: privacy_passphrase
-      type: string
-    - name: object_id
-      type: array
-    - name: type
-      type: array
-    - name: value
-      type: array
-    - name: timeout
-      type: int
-      optional: true
-    - name: retries
-      type: int
-      optional: true
-    returnType: bool
-- subject:
-    function: snmp3_walk
-  signature:
-    params:
-    - name: hostname
-      type: string
-    - name: security_name
-      type: string
-    - name: security_level
-      type: string
-    - name: auth_protocol
-      type: string
-    - name: auth_passphrase
-      type: string
-    - name: privacy_protocol
-      type: string
-    - name: privacy_passphrase
-      type: string
-    - name: object_id
-      type: array
-    - name: timeout
-      type: int
-      optional: true
-    - name: retries
-      type: int
-      optional: true
-    returnType: array
-  propagation:
-  - from: argument(7)
-    to: return
-- subject:
-    function: snmp_get_quick_print
-  signature:
-    returnType: bool
-- subject:
-    function: snmp_get_valueretrieval
-  signature:
-    returnType: int
-- subject:
-    function: snmp_read_mib
-  signature:
-    params:
-    - name: filename
-      type: string
-    returnType: bool
-- subject:
-    function: snmp_set_enum_print
-  signature:
-    params:
-    - name: enable
-      type: bool
-    returnType: bool
-- subject:
-    function: snmp_set_oid_numeric_print
-  signature:
-    params:
-    - name: format
-      type: int
-    returnType: bool
-- subject:
-    function: snmp_set_oid_output_format
-  signature:
-    params:
-    - name: format
-      type: int
-    returnType: bool
-- subject:
-    function: snmp_set_quick_print
-  signature:
-    params:
-    - name: enable
-      type: bool
-    returnType: bool
-- subject:
-    function: snmp_set_valueretrieval
-  signature:
-    params:
-    - name: method
-      type: int
-    returnType: bool
-- subject:
-    function: snmpget
-  signature:
-    params:
-    - name: hostname
-      type: string
-    - name: community
-      type: string
-    - name: object_id
-      type: array
-    - name: timeout
-      type: int
-      optional: true
-    - name: retries
-      type: int
-      optional: true
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: snmpgetnext
-  signature:
-    params:
-    - name: hostname
-      type: string
-    - name: community
-      type: string
-    - name: object_id
-      type: array
-    - name: timeout
-      type: int
-      optional: true
-    - name: retries
-      type: int
-      optional: true
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: snmprealwalk
-  signature:
-    params:
-    - name: hostname
-      type: string
-    - name: community
-      type: string
-    - name: object_id
-      type: array
-    - name: timeout
-      type: int
-      optional: true
-    - name: retries
-      type: int
-      optional: true
-    returnType: array
-  propagation:
-  - from: argument(2)
-    to: return
-- subject:
-    function: snmpset
-  signature:
-    params:
-    - name: hostname
-      type: string
-    - name: community
-      type: string
-    - name: object_id
-      type: array
-    - name: type
-      type: array
-    - name: value
-      type: array
-    - name: timeout
-      type: int
-      optional: true
-    - name: retries
-      type: int
-      optional: true
-    returnType: bool
-- subject:
-    function: snmpwalk
-  signature:
-    params:
-    - name: hostname
-      type: string
-    - name: community
-      type: string
-    - name: object_id
-      type: array
-    - name: timeout
-      type: int
-      optional: true
-    - name: retries
-      type: int
-      optional: true
-    returnType: array
-  propagation:
-  - from: argument(2)
-    to: return
-- subject:
-    function: snmpwalkoid
-  signature:
-    params:
-    - name: hostname
-      type: string
-    - name: community
-      type: string
-    - name: object_id
-      type: array
-    - name: timeout
-      type: int
-      optional: true
-    - name: retries
-      type: int
-      optional: true
-    returnType: array
-  propagation:
-  - from: argument(2)
-    to: return
-- subject:
-    function: sodium_add
-  signature:
-    params:
-    - name: string1
-      type: string
-    - name: string2
-      type: string
-    returnType: void
-- subject:
-    function: sodium_base642bin
-  signature:
-    params:
-    - name: string
-      type: string
-    - name: id
-      type: int
-    - name: ignore
-      type: string
-      optional: true
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(2)
-    to: return
-- subject:
-    function: sodium_bin2base64
-  signature:
-    params:
-    - name: string
-      type: string
-    - name: id
-      type: int
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: sodium_bin2hex
-  signature:
-    params:
-    - name: string
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: sodium_compare
-  signature:
-    params:
-    - name: string1
-      type: string
-    - name: string2
-      type: string
-    returnType: int
-- subject:
-    function: sodium_crypto_aead_aes256gcm_decrypt
-  signature:
-    params:
-    - name: ciphertext
-      type: string
-    - name: additional_data
-      type: string
-    - name: nonce
-      type: string
-    - name: key
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-  - from: argument(2)
-    to: return
-  - from: argument(3)
-    to: return
-- subject:
-    function: sodium_crypto_aead_aes256gcm_encrypt
-  signature:
-    params:
-    - name: message
-      type: string
-    - name: additional_data
-      type: string
-    - name: nonce
-      type: string
-    - name: key
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-  - from: argument(2)
-    to: return
-  - from: argument(3)
-    to: return
-- subject:
-    function: sodium_crypto_aead_aes256gcm_is_available
-  signature:
-    returnType: bool
-- subject:
-    function: sodium_crypto_aead_aes256gcm_keygen
-  signature:
-    returnType: string
-- subject:
-    function: sodium_crypto_aead_chacha20poly1305_decrypt
-  signature:
-    params:
-    - name: ciphertext
-      type: string
-    - name: additional_data
-      type: string
-    - name: nonce
-      type: string
-    - name: key
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-  - from: argument(2)
-    to: return
-  - from: argument(3)
-    to: return
-- subject:
-    function: sodium_crypto_aead_chacha20poly1305_encrypt
-  signature:
-    params:
-    - name: message
-      type: string
-    - name: additional_data
-      type: string
-    - name: nonce
-      type: string
-    - name: key
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-  - from: argument(2)
-    to: return
-  - from: argument(3)
-    to: return
-- subject:
-    function: sodium_crypto_aead_chacha20poly1305_ietf_decrypt
-  signature:
-    params:
-    - name: ciphertext
-      type: string
-    - name: additional_data
-      type: string
-    - name: nonce
-      type: string
-    - name: key
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-  - from: argument(2)
-    to: return
-  - from: argument(3)
-    to: return
-- subject:
-    function: sodium_crypto_aead_chacha20poly1305_ietf_encrypt
-  signature:
-    params:
-    - name: message
-      type: string
-    - name: additional_data
-      type: string
-    - name: nonce
-      type: string
-    - name: key
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-  - from: argument(2)
-    to: return
-  - from: argument(3)
-    to: return
-- subject:
-    function: sodium_crypto_aead_chacha20poly1305_ietf_keygen
-  signature:
-    returnType: string
-- subject:
-    function: sodium_crypto_aead_chacha20poly1305_keygen
-  signature:
-    returnType: string
-- subject:
-    function: sodium_crypto_aead_xchacha20poly1305_ietf_decrypt
-  signature:
-    params:
-    - name: ciphertext
-      type: string
-    - name: additional_data
-      type: string
-    - name: nonce
-      type: string
-    - name: key
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-  - from: argument(2)
-    to: return
-  - from: argument(3)
-    to: return
-- subject:
-    function: sodium_crypto_aead_xchacha20poly1305_ietf_encrypt
-  signature:
-    params:
-    - name: message
-      type: string
-    - name: additional_data
-      type: string
-    - name: nonce
-      type: string
-    - name: key
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-  - from: argument(2)
-    to: return
-  - from: argument(3)
-    to: return
-- subject:
-    function: sodium_crypto_aead_xchacha20poly1305_ietf_keygen
-  signature:
-    returnType: string
-- subject:
-    function: sodium_crypto_auth
-  signature:
-    params:
-    - name: message
-      type: string
-    - name: key
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: sodium_crypto_auth_keygen
-  signature:
-    returnType: string
-- subject:
-    function: sodium_crypto_auth_verify
-  signature:
-    params:
-    - name: mac
-      type: string
-    - name: message
-      type: string
-    - name: key
-      type: string
-    returnType: bool
-- subject:
-    function: sodium_crypto_box
-  signature:
-    params:
-    - name: message
-      type: string
-    - name: nonce
-      type: string
-    - name: key_pair
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-  - from: argument(2)
-    to: return
-- subject:
-    function: sodium_crypto_box_keypair
-  signature:
-    returnType: string
-- subject:
-    function: sodium_crypto_box_keypair_from_secretkey_and_publickey
-  signature:
-    params:
-    - name: secret_key
-      type: string
-    - name: public_key
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: sodium_crypto_box_open
-  signature:
-    params:
-    - name: ciphertext
-      type: string
-    - name: nonce
-      type: string
-    - name: key_pair
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-  - from: argument(2)
-    to: return
-- subject:
-    function: sodium_crypto_box_publickey
-  signature:
-    params:
-    - name: key_pair
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: sodium_crypto_box_publickey_from_secretkey
-  signature:
-    params:
-    - name: secret_key
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: sodium_crypto_box_seal
-  signature:
-    params:
-    - name: message
-      type: string
-    - name: public_key
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: sodium_crypto_box_seal_open
-  signature:
-    params:
-    - name: ciphertext
-      type: string
-    - name: key_pair
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: sodium_crypto_box_secretkey
-  signature:
-    params:
-    - name: key_pair
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: sodium_crypto_box_seed_keypair
-  signature:
-    params:
-    - name: seed
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: sodium_crypto_generichash
-  signature:
-    params:
-    - name: message
-      type: string
-    - name: key
-      type: string
-      optional: true
-    - name: length
-      type: int
-      optional: true
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: sodium_crypto_generichash_final
-  signature:
-    params:
-    - name: state
-      type: string
-    - name: length
-      type: int
-      optional: true
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: sodium_crypto_generichash_init
-  signature:
-    params:
-    - name: key
-      type: string
-      optional: true
-    - name: length
-      type: int
-      optional: true
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: sodium_crypto_generichash_keygen
-  signature:
-    returnType: string
-- subject:
-    function: sodium_crypto_generichash_update
-  signature:
-    params:
-    - name: state
-      type: string
-    - name: message
-      type: string
-    returnType: bool
-- subject:
-    function: sodium_crypto_kdf_derive_from_key
-  signature:
-    params:
-    - name: subkey_length
-      type: int
-    - name: subkey_id
-      type: int
-    - name: context
-      type: string
-    - name: key
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(2)
-    to: return
-  - from: argument(3)
-    to: return
-- subject:
-    function: sodium_crypto_kdf_keygen
-  signature:
-    returnType: string
-- subject:
-    function: sodium_crypto_kx_client_session_keys
-  signature:
-    params:
-    - name: client_key_pair
-      type: string
-    - name: server_key
-      type: string
-    returnType: array
-- subject:
-    function: sodium_crypto_kx_keypair
-  signature:
-    returnType: string
-- subject:
-    function: sodium_crypto_kx_publickey
-  signature:
-    params:
-    - name: key_pair
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: sodium_crypto_kx_secretkey
-  signature:
-    params:
-    - name: key_pair
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: sodium_crypto_kx_seed_keypair
-  signature:
-    params:
-    - name: seed
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: sodium_crypto_kx_server_session_keys
-  signature:
-    params:
-    - name: server_key_pair
-      type: string
-    - name: client_key
-      type: string
-    returnType: array
-- subject:
-    function: sodium_crypto_pwhash
-  signature:
-    params:
-    - name: length
-      type: int
-    - name: password
-      type: string
-    - name: salt
-      type: string
-    - name: opslimit
-      type: int
-    - name: memlimit
-      type: int
-    - name: algo
-      type: int
-      optional: true
-    returnType: string
-  propagation:
-  - from: argument(1)
-    to: return
-  - from: argument(2)
-    to: return
-- subject:
-    function: sodium_crypto_pwhash_scryptsalsa208sha256
-  signature:
-    params:
-    - name: length
-      type: int
-    - name: password
-      type: string
-    - name: salt
-      type: string
-    - name: opslimit
-      type: int
-    - name: memlimit
-      type: int
-    returnType: string
-  propagation:
-  - from: argument(1)
-    to: return
-  - from: argument(2)
-    to: return
-- subject:
-    function: sodium_crypto_pwhash_scryptsalsa208sha256_str
-  signature:
-    params:
-    - name: password
-      type: string
-    - name: opslimit
-      type: int
-    - name: memlimit
-      type: int
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: sodium_crypto_pwhash_scryptsalsa208sha256_str_verify
-  signature:
-    params:
-    - name: hash
-      type: string
-    - name: password
-      type: string
-    returnType: bool
-- subject:
-    function: sodium_crypto_pwhash_str
-  signature:
-    params:
-    - name: password
-      type: string
-    - name: opslimit
-      type: int
-    - name: memlimit
-      type: int
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: sodium_crypto_pwhash_str_needs_rehash
-  signature:
-    params:
-    - name: password
-      type: string
-    - name: opslimit
-      type: int
-    - name: memlimit
-      type: int
-    returnType: bool
-- subject:
-    function: sodium_crypto_pwhash_str_verify
-  signature:
-    params:
-    - name: hash
-      type: string
-    - name: password
-      type: string
-    returnType: bool
-- subject:
-    function: sodium_crypto_scalarmult
-  signature:
-    params:
-    - name: n
-      type: string
-    - name: p
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: sodium_crypto_scalarmult_base
-  signature:
-    params:
-    - name: secret_key
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: sodium_crypto_secretbox
-  signature:
-    params:
-    - name: message
-      type: string
-    - name: nonce
-      type: string
-    - name: key
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-  - from: argument(2)
-    to: return
-- subject:
-    function: sodium_crypto_secretbox_keygen
-  signature:
-    returnType: string
-- subject:
-    function: sodium_crypto_secretbox_open
-  signature:
-    params:
-    - name: ciphertext
-      type: string
-    - name: nonce
-      type: string
-    - name: key
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-  - from: argument(2)
-    to: return
-- subject:
-    function: sodium_crypto_secretstream_xchacha20poly1305_init_pull
-  signature:
-    params:
-    - name: header
-      type: string
-    - name: key
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: sodium_crypto_secretstream_xchacha20poly1305_init_push
-  signature:
-    params:
-    - name: key
-      type: string
-    returnType: array
-- subject:
-    function: sodium_crypto_secretstream_xchacha20poly1305_keygen
-  signature:
-    returnType: string
-- subject:
-    function: sodium_crypto_secretstream_xchacha20poly1305_pull
-  signature:
-    params:
-    - name: state
-      type: string
-    - name: ciphertext
-      type: string
-    - name: additional_data
-      type: string
-      optional: true
-    returnType: array
-- subject:
-    function: sodium_crypto_secretstream_xchacha20poly1305_push
-  signature:
-    params:
-    - name: state
-      type: string
-    - name: message
-      type: string
-    - name: additional_data
-      type: string
-      optional: true
-    - name: tag
-      type: int
-      optional: true
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-  - from: argument(2)
-    to: return
-- subject:
-    function: sodium_crypto_secretstream_xchacha20poly1305_rekey
-  signature:
-    params:
-    - name: state
-      type: string
-    returnType: void
-- subject:
-    function: sodium_crypto_shorthash
-  signature:
-    params:
-    - name: message
-      type: string
-    - name: key
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: sodium_crypto_shorthash_keygen
-  signature:
-    returnType: string
-- subject:
-    function: sodium_crypto_sign
-  signature:
-    params:
-    - name: message
-      type: string
-    - name: secret_key
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: sodium_crypto_sign_detached
-  signature:
-    params:
-    - name: message
-      type: string
-    - name: secret_key
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: sodium_crypto_sign_ed25519_pk_to_curve25519
-  signature:
-    params:
-    - name: public_key
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: sodium_crypto_sign_ed25519_sk_to_curve25519
-  signature:
-    params:
-    - name: secret_key
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: sodium_crypto_sign_keypair
-  signature:
-    returnType: string
-- subject:
-    function: sodium_crypto_sign_keypair_from_secretkey_and_publickey
-  signature:
-    params:
-    - name: secret_key
-      type: string
-    - name: public_key
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: sodium_crypto_sign_open
-  signature:
-    params:
-    - name: signed_message
-      type: string
-    - name: public_key
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: sodium_crypto_sign_publickey
-  signature:
-    params:
-    - name: key_pair
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: sodium_crypto_sign_publickey_from_secretkey
-  signature:
-    params:
-    - name: secret_key
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: sodium_crypto_sign_secretkey
-  signature:
-    params:
-    - name: key_pair
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: sodium_crypto_sign_seed_keypair
-  signature:
-    params:
-    - name: seed
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: sodium_crypto_sign_verify_detached
-  signature:
-    params:
-    - name: signature
-      type: string
-    - name: message
-      type: string
-    - name: public_key
-      type: string
-    returnType: bool
-- subject:
-    function: sodium_crypto_stream
-  signature:
-    params:
-    - name: length
-      type: int
-    - name: nonce
-      type: string
-    - name: key
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(1)
-    to: return
-  - from: argument(2)
-    to: return
-- subject:
-    function: sodium_crypto_stream_keygen
-  signature:
-    returnType: string
-- subject:
-    function: sodium_crypto_stream_xor
-  signature:
-    params:
-    - name: message
-      type: string
-    - name: nonce
-      type: string
-    - name: key
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-  - from: argument(2)
-    to: return
-- subject:
-    function: sodium_hex2bin
-  signature:
-    params:
-    - name: string
-      type: string
-    - name: ignore
-      type: string
-      optional: true
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: sodium_increment
-  signature:
-    params:
-    - name: string
-      type: string
-    returnType: void
-- subject:
-    function: sodium_memcmp
-  signature:
-    params:
-    - name: string1
-      type: string
-    - name: string2
-      type: string
-    returnType: int
-- subject:
-    function: sodium_memzero
-  signature:
-    params:
-    - name: string
-      type: string
-    returnType: void
-- subject:
-    function: sodium_pad
-  signature:
-    params:
-    - name: string
-      type: string
-    - name: block_size
-      type: int
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: sodium_unpad
-  signature:
-    params:
-    - name: string
-      type: string
-    - name: block_size
-      type: int
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
 - subject:
     function: solid_fetch_prev
   signature:
@@ -5170,10 +3492,11 @@
     params:
     - name: array
       type: array
+      byRef: true
     - name: flags
       type: int
       optional: true
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: soundex
   signature:
@@ -5191,7 +3514,7 @@
     - name: format
       type: string
     - name: values
-      type: float
+      type: mixed
       optional: true
       variadic: true
     returnType: string

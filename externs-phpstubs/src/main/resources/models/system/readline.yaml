@@ -5,9 +5,9 @@
   signature:
     params:
     - name: prompt
-      type: string
+      type: ?string
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -17,7 +17,7 @@
     params:
     - name: prompt
       type: string
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: readline_callback_handler_install
   signature:
@@ -26,7 +26,7 @@
       type: string
     - name: callback
       type: callable
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: readline_callback_handler_remove
   signature:
@@ -38,23 +38,23 @@
 - subject:
     function: readline_clear_history
   signature:
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: readline_completion_function
   signature:
     params:
     - name: callback
-      type: mixed
+      type: callable
     returnType: bool
 - subject:
     function: readline_info
   signature:
     params:
     - name: var_name
-      type: string
+      type: ?string
       optional: true
     - name: value
-      type: bool
+      type: mixed
       optional: true
     returnType: mixed
   propagation:
@@ -75,7 +75,7 @@
   signature:
     params:
     - name: filename
-      type: string
+      type: ?string
       optional: true
     returnType: bool
 - subject:
@@ -87,6 +87,6 @@
   signature:
     params:
     - name: filename
-      type: string
+      type: ?string
       optional: true
     returnType: bool

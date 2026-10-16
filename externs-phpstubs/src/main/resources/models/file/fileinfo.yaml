@@ -5,16 +5,16 @@
   signature:
     params:
     - name: finfo
-      type: resource
+      type: finfo
     - name: string
       type: string
     - name: flags
       type: int
       optional: true
     - name: context
-      type: resource
+      type: mixed
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(1)
     to: return
@@ -23,23 +23,23 @@
   signature:
     params:
     - name: finfo
-      type: resource
-    returnType: bool
+      type: finfo
+    returnType: 'true'
 - subject:
     function: finfo_file
   signature:
     params:
     - name: finfo
-      type: resource
+      type: finfo
     - name: filename
       type: string
     - name: flags
       type: int
       optional: true
     - name: context
-      type: resource
+      type: mixed
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(1)
     to: return
@@ -51,9 +51,9 @@
       type: int
       optional: true
     - name: magic_database
-      type: string
+      type: ?string
       optional: true
-    returnType: resource
+    returnType: finfo|false
   propagation:
   - from: argument(0)
     to: return
@@ -64,14 +64,62 @@
   signature:
     params:
     - name: finfo
-      type: resource
+      type: finfo
     - name: flags
       type: int
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: mime_content_type
   signature:
     params:
     - name: filename
-      type: resource
-    returnType: string
+      type: mixed
+    returnType: string|false
+- subject:
+    class: finfo
+  signature:
+    classifier: class
+- subject:
+    method: finfo::__construct
+  signature:
+    params:
+    - name: flags
+      type: int
+      optional: true
+    - name: magic_database
+      type: ?string
+      optional: true
+    returnType: mixed
+- subject:
+    method: finfo::buffer
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    - name: context
+      type: mixed
+      optional: true
+    returnType: string|false
+- subject:
+    method: finfo::file
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    - name: context
+      type: mixed
+      optional: true
+    returnType: string|false
+- subject:
+    method: finfo::set_flags
+  signature:
+    params:
+    - name: flags
+      type: int
+    returnType: 'true'

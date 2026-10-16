@@ -6,41 +6,41 @@
     params:
     - name: error_code
       type: int
-    returnType: string
+    returnType: ?string
 - subject:
     function: xml_get_current_byte_index
   signature:
     params:
     - name: parser
-      type: mixed
+      type: XMLParser
     returnType: int
 - subject:
     function: xml_get_current_column_number
   signature:
     params:
     - name: parser
-      type: mixed
+      type: XMLParser
     returnType: int
 - subject:
     function: xml_get_current_line_number
   signature:
     params:
     - name: parser
-      type: mixed
+      type: XMLParser
     returnType: int
 - subject:
     function: xml_get_error_code
   signature:
     params:
     - name: parser
-      type: mixed
+      type: XMLParser
     returnType: int
 - subject:
     function: xml_parse
   signature:
     params:
     - name: parser
-      type: mixed
+      type: XMLParser
     - name: data
       type: string
     - name: is_final
@@ -52,23 +52,25 @@
   signature:
     params:
     - name: parser
-      type: mixed
+      type: XMLParser
     - name: data
       type: string
     - name: values
-      type: array
+      type: mixed
+      byRef: true
     - name: index
-      type: array
+      type: mixed
       optional: true
-    returnType: int
+      byRef: true
+    returnType: int|false
 - subject:
     function: xml_parser_create
   signature:
     params:
     - name: encoding
-      type: string
+      type: ?string
       optional: true
-    returnType: mixed
+    returnType: XMLParser
   propagation:
   - from: argument(0)
     to: return
@@ -77,12 +79,12 @@
   signature:
     params:
     - name: encoding
-      type: string
+      type: ?string
       optional: true
     - name: separator
       type: string
       optional: true
-    returnType: mixed
+    returnType: XMLParser
   propagation:
   - from: argument(0)
     to: return
@@ -93,23 +95,23 @@
   signature:
     params:
     - name: parser
-      type: mixed
+      type: XMLParser
     returnType: bool
 - subject:
     function: xml_parser_get_option
   signature:
     params:
     - name: parser
-      type: mixed
+      type: XMLParser
     - name: option
       type: int
-    returnType: int
+    returnType: string|int|bool
 - subject:
     function: xml_parser_set_option
   signature:
     params:
     - name: parser
-      type: mixed
+      type: XMLParser
     - name: option
       type: int
     - name: value
@@ -120,90 +122,94 @@
   signature:
     params:
     - name: parser
-      type: mixed
+      type: XMLParser
     - name: handler
-      type: callable
-    returnType: bool
+      type: callable|string|null
+    returnType: 'true'
 - subject:
     function: xml_set_default_handler
   signature:
     params:
     - name: parser
-      type: mixed
+      type: XMLParser
     - name: handler
-      type: callable
-    returnType: bool
+      type: callable|string|null
+    returnType: 'true'
 - subject:
     function: xml_set_element_handler
   signature:
     params:
     - name: parser
-      type: mixed
+      type: XMLParser
     - name: start_handler
-      type: callable
+      type: callable|string|null
     - name: end_handler
-      type: callable
-    returnType: bool
+      type: callable|string|null
+    returnType: 'true'
 - subject:
     function: xml_set_end_namespace_decl_handler
   signature:
     params:
     - name: parser
-      type: mixed
+      type: XMLParser
     - name: handler
-      type: callable
-    returnType: bool
+      type: callable|string|null
+    returnType: 'true'
 - subject:
     function: xml_set_external_entity_ref_handler
   signature:
     params:
     - name: parser
-      type: mixed
+      type: XMLParser
     - name: handler
-      type: callable
-    returnType: bool
+      type: callable|string|null
+    returnType: 'true'
 - subject:
     function: xml_set_notation_decl_handler
   signature:
     params:
     - name: parser
-      type: mixed
+      type: XMLParser
     - name: handler
-      type: callable
-    returnType: bool
+      type: callable|string|null
+    returnType: 'true'
 - subject:
     function: xml_set_object
   signature:
     params:
     - name: parser
-      type: mixed
+      type: XMLParser
     - name: object
       type: object
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: xml_set_processing_instruction_handler
   signature:
     params:
     - name: parser
-      type: mixed
+      type: XMLParser
     - name: handler
-      type: callable
-    returnType: bool
+      type: callable|string|null
+    returnType: 'true'
 - subject:
     function: xml_set_start_namespace_decl_handler
   signature:
     params:
     - name: parser
-      type: mixed
+      type: XMLParser
     - name: handler
-      type: callable
-    returnType: bool
+      type: callable|string|null
+    returnType: 'true'
 - subject:
     function: xml_set_unparsed_entity_decl_handler
   signature:
     params:
     - name: parser
-      type: mixed
+      type: XMLParser
     - name: handler
-      type: callable
-    returnType: bool
+      type: callable|string|null
+    returnType: 'true'
+- subject:
+    class: xmlparser
+  signature:
+    classifier: class

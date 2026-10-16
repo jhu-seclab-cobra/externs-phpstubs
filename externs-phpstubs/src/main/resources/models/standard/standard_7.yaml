@@ -2745,107 +2745,6 @@
   - from: argument(0)
     to: return
 - subject:
-    function: trait_exists
-  signature:
-    params:
-    - name: trait
-      type: string
-    - name: autoload
-      type: bool
-      optional: true
-    returnType: bool
-- subject:
-    function: transliterator_create
-  signature:
-    params:
-    - name: id
-      type: string
-    - name: direction
-      type: int
-      optional: true
-    returnType: mixed
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: transliterator_create_from_rules
-  signature:
-    params:
-    - name: rules
-      type: string
-    - name: direction
-      type: int
-      optional: true
-    returnType: mixed
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: transliterator_create_inverse
-  signature:
-    params:
-    - name: transliterator
-      type: mixed
-    returnType: mixed
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: transliterator_get_error_code
-  signature:
-    params:
-    - name: transliterator
-      type: mixed
-    returnType: int
-- subject:
-    function: transliterator_get_error_message
-  signature:
-    params:
-    - name: transliterator
-      type: mixed
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: transliterator_list_ids
-  signature:
-    returnType: array
-- subject:
-    function: transliterator_transliterate
-  signature:
-    params:
-    - name: transliterator
-      type: mixed
-    - name: string
-      type: string
-    - name: start
-      type: int
-      optional: true
-    - name: end
-      type: int
-      optional: true
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: trigger_error
-  signature:
-    params:
-    - name: message
-      type: string
-    - name: error_level
-      type: mixed
-      optional: true
-    returnType: bool
-- subject:
     function: trim
   signature:
     params:
@@ -2864,9 +2763,10 @@
     params:
     - name: array
       type: array
+      byRef: true
     - name: callback
-      type: mixed
-    returnType: bool
+      type: callable
+    returnType: 'true'
 - subject:
     function: ucfirst
   signature:
@@ -3135,15 +3035,16 @@
     params:
     - name: array
       type: array
+      byRef: true
     - name: callback
-      type: mixed
-    returnType: bool
+      type: callable
+    returnType: 'true'
 - subject:
     function: umask
   signature:
     params:
     - name: mask
-      type: int
+      type: ?int
       optional: true
     returnType: int
 - subject:
@@ -3161,14 +3062,6 @@
   - from: argument(0)
     to: return
 - subject:
-    function: unixtojd
-  signature:
-    params:
-    - name: timestamp
-      type: int
-      optional: true
-    returnType: int
-- subject:
     function: unpack
   signature:
     params:
@@ -3179,7 +3072,7 @@
     - name: offset
       type: int
       optional: true
-    returnType: array
+    returnType: array|false
   propagation:
   - from: argument(1)
     to: return
@@ -3517,24 +3410,6 @@
       type: string
     returnType: string
 - subject:
-    function: use_soap_error_handler
-  signature:
-    params:
-    - name: enable
-      type: bool
-      optional: true
-    returnType: bool
-- subject:
-    function: user_error
-  signature:
-    params:
-    - name: message
-      type: string
-    - name: error_level
-      type: int
-      optional: true
-    returnType: bool
-- subject:
     function: usleep
   signature:
     params:
@@ -3547,9 +3422,10 @@
     params:
     - name: array
       type: array
+      byRef: true
     - name: callback
-      type: mixed
-    returnType: bool
+      type: callable
+    returnType: 'true'
 - subject:
     function: utf8_decode
   signature:
@@ -5687,6 +5563,7 @@
     - name: values
       type: mixed
       optional: true
+      variadic: true
     returnType: void
 - subject:
     function: var_export
@@ -5697,326 +5574,9 @@
     - name: return
       type: bool
       optional: true
-    returnType: string
+    returnType: ?string
   propagation:
   - from: argument(0)
-    to: return
-- subject:
-    function: variant_abs
-  signature:
-    params:
-    - name: value
-      type: mixed
-    returnType: mixed
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: variant_add
-  signature:
-    params:
-    - name: left
-      type: mixed
-    - name: right
-      type: mixed
-    returnType: mixed
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: variant_and
-  signature:
-    params:
-    - name: left
-      type: mixed
-    - name: right
-      type: mixed
-    returnType: mixed
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: variant_cast
-  signature:
-    params:
-    - name: variant
-      type: mixed
-    - name: type
-      type: int
-    returnType: mixed
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: variant_cat
-  signature:
-    params:
-    - name: left
-      type: mixed
-    - name: right
-      type: mixed
-    returnType: mixed
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: variant_cmp
-  signature:
-    params:
-    - name: left
-      type: mixed
-    - name: right
-      type: mixed
-    - name: locale_id
-      type: int
-      optional: true
-    - name: flags
-      type: int
-      optional: true
-    returnType: int
-- subject:
-    function: variant_date_from_timestamp
-  signature:
-    params:
-    - name: timestamp
-      type: int
-    returnType: mixed
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: variant_date_to_timestamp
-  signature:
-    params:
-    - name: variant
-      type: mixed
-    returnType: int
-- subject:
-    function: variant_div
-  signature:
-    params:
-    - name: left
-      type: mixed
-    - name: right
-      type: mixed
-    returnType: mixed
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: variant_eqv
-  signature:
-    params:
-    - name: left
-      type: mixed
-    - name: right
-      type: mixed
-    returnType: mixed
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: variant_fix
-  signature:
-    params:
-    - name: value
-      type: mixed
-    returnType: mixed
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: variant_get_type
-  signature:
-    params:
-    - name: variant
-      type: mixed
-    returnType: int
-- subject:
-    function: variant_idiv
-  signature:
-    params:
-    - name: left
-      type: mixed
-    - name: right
-      type: mixed
-    returnType: mixed
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: variant_imp
-  signature:
-    params:
-    - name: left
-      type: mixed
-    - name: right
-      type: mixed
-    returnType: mixed
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: variant_int
-  signature:
-    params:
-    - name: value
-      type: mixed
-    returnType: mixed
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: variant_mod
-  signature:
-    params:
-    - name: left
-      type: mixed
-    - name: right
-      type: mixed
-    returnType: mixed
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: variant_mul
-  signature:
-    params:
-    - name: left
-      type: mixed
-    - name: right
-      type: mixed
-    returnType: mixed
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: variant_neg
-  signature:
-    params:
-    - name: value
-      type: mixed
-    returnType: mixed
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: variant_not
-  signature:
-    params:
-    - name: value
-      type: mixed
-    returnType: mixed
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: variant_or
-  signature:
-    params:
-    - name: left
-      type: mixed
-    - name: right
-      type: mixed
-    returnType: mixed
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: variant_pow
-  signature:
-    params:
-    - name: left
-      type: mixed
-    - name: right
-      type: mixed
-    returnType: mixed
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: variant_round
-  signature:
-    params:
-    - name: value
-      type: mixed
-    - name: decimals
-      type: int
-    returnType: mixed
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: variant_set
-  signature:
-    params:
-    - name: variant
-      type: object
-    - name: value
-      type: mixed
-    returnType: void
-- subject:
-    function: variant_set_type
-  signature:
-    params:
-    - name: variant
-      type: object
-    - name: type
-      type: int
-    returnType: void
-- subject:
-    function: variant_sub
-  signature:
-    params:
-    - name: left
-      type: mixed
-    - name: right
-      type: mixed
-    returnType: mixed
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: variant_xor
-  signature:
-    params:
-    - name: left
-      type: mixed
-    - name: right
-      type: mixed
-    returnType: mixed
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
     to: return
 - subject:
     function: version_compare
@@ -6027,14 +5587,15 @@
     - name: version2
       type: string
     - name: operator
-      type: mixed
-    returnType: bool
+      type: ?string
+      optional: true
+    returnType: int|bool
 - subject:
     function: vfprintf
   signature:
     params:
     - name: stream
-      type: resource
+      type: mixed
     - name: format
       type: string
     - name: values

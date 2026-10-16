@@ -1,0 +1,318 @@
+# Generated from php-src stubs by tools/extract_hierarchy.py.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    class: pdorow
+  signature:
+    classifier: class
+- subject:
+    class: pdo
+  signature:
+    classifier: class
+- subject:
+    class: pdostatement
+  signature:
+    classifier: class
+    interfaces: [iteratoraggregate]
+- subject:
+    class: pdoexception
+  signature:
+    classifier: class
+    parent: runtimeexception
+- subject:
+    function: pdo_drivers
+  signature:
+    returnType: array
+- subject:
+    method: PDO::__construct
+  signature:
+    params:
+    - name: dsn
+      type: string
+    - name: username
+      type: ?string
+      optional: true
+    - name: password
+      type: ?string
+      optional: true
+    - name: options
+      type: ?array
+      optional: true
+    returnType: mixed
+- subject:
+    method: PDO::beginTransaction
+  signature:
+    returnType: bool
+- subject:
+    method: PDO::commit
+  signature:
+    returnType: bool
+- subject:
+    method: PDO::connect
+  signature:
+    params:
+    - name: dsn
+      type: string
+    - name: username
+      type: ?string
+      optional: true
+    - name: password
+      type: ?string
+      optional: true
+    - name: options
+      type: ?array
+      optional: true
+    returnType: static
+- subject:
+    method: PDO::errorCode
+  signature:
+    returnType: ?string
+- subject:
+    method: PDO::errorInfo
+  signature:
+    returnType: array
+- subject:
+    method: PDO::exec
+  signature:
+    params:
+    - name: statement
+      type: string
+    returnType: int|false
+- subject:
+    method: PDO::getAttribute
+  signature:
+    params:
+    - name: attribute
+      type: int
+    returnType: mixed
+- subject:
+    method: PDO::getAvailableDrivers
+  signature:
+    returnType: array
+- subject:
+    method: PDO::inTransaction
+  signature:
+    returnType: bool
+- subject:
+    method: PDO::lastInsertId
+  signature:
+    params:
+    - name: name
+      type: ?string
+      optional: true
+    returnType: string|false
+- subject:
+    method: PDO::prepare
+  signature:
+    params:
+    - name: query
+      type: string
+    - name: options
+      type: array
+      optional: true
+    returnType: PDOStatement|false
+- subject:
+    method: PDO::query
+  signature:
+    params:
+    - name: query
+      type: string
+    - name: fetchMode
+      type: ?int
+      optional: true
+    - name: fetchModeArgs
+      type: mixed
+      optional: true
+      variadic: true
+    returnType: PDOStatement|false
+- subject:
+    method: PDO::quote
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: type
+      type: int
+      optional: true
+    returnType: string|false
+- subject:
+    method: PDO::rollBack
+  signature:
+    returnType: bool
+- subject:
+    method: PDO::setAttribute
+  signature:
+    params:
+    - name: attribute
+      type: int
+    - name: value
+      type: mixed
+    returnType: bool
+- subject:
+    method: PDOStatement::bindColumn
+  signature:
+    params:
+    - name: column
+      type: string|int
+    - name: var
+      type: mixed
+      byRef: true
+    - name: type
+      type: int
+      optional: true
+    - name: maxLength
+      type: int
+      optional: true
+    - name: driverOptions
+      type: mixed
+      optional: true
+    returnType: bool
+- subject:
+    method: PDOStatement::bindParam
+  signature:
+    params:
+    - name: param
+      type: string|int
+    - name: var
+      type: mixed
+      byRef: true
+    - name: type
+      type: int
+      optional: true
+    - name: maxLength
+      type: int
+      optional: true
+    - name: driverOptions
+      type: mixed
+      optional: true
+    returnType: bool
+- subject:
+    method: PDOStatement::bindValue
+  signature:
+    params:
+    - name: param
+      type: string|int
+    - name: value
+      type: mixed
+    - name: type
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    method: PDOStatement::closeCursor
+  signature:
+    returnType: bool
+- subject:
+    method: PDOStatement::columnCount
+  signature:
+    returnType: int
+- subject:
+    method: PDOStatement::debugDumpParams
+  signature:
+    returnType: ?bool
+- subject:
+    method: PDOStatement::errorCode
+  signature:
+    returnType: ?string
+- subject:
+    method: PDOStatement::errorInfo
+  signature:
+    returnType: array
+- subject:
+    method: PDOStatement::execute
+  signature:
+    params:
+    - name: params
+      type: ?array
+      optional: true
+    returnType: bool
+- subject:
+    method: PDOStatement::fetch
+  signature:
+    params:
+    - name: mode
+      type: int
+      optional: true
+    - name: cursorOrientation
+      type: int
+      optional: true
+    - name: cursorOffset
+      type: int
+      optional: true
+    returnType: mixed
+- subject:
+    method: PDOStatement::fetchAll
+  signature:
+    params:
+    - name: mode
+      type: int
+      optional: true
+    - name: args
+      type: mixed
+      optional: true
+      variadic: true
+    returnType: array
+- subject:
+    method: PDOStatement::fetchColumn
+  signature:
+    params:
+    - name: column
+      type: int
+      optional: true
+    returnType: mixed
+- subject:
+    method: PDOStatement::fetchObject
+  signature:
+    params:
+    - name: class
+      type: ?string
+      optional: true
+    - name: constructorArgs
+      type: array
+      optional: true
+    returnType: object|false
+- subject:
+    method: PDOStatement::getAttribute
+  signature:
+    params:
+    - name: name
+      type: int
+    returnType: mixed
+- subject:
+    method: PDOStatement::getColumnMeta
+  signature:
+    params:
+    - name: column
+      type: int
+    returnType: array|false
+- subject:
+    method: PDOStatement::getIterator
+  signature:
+    returnType: Iterator
+- subject:
+    method: PDOStatement::nextRowset
+  signature:
+    returnType: bool
+- subject:
+    method: PDOStatement::rowCount
+  signature:
+    returnType: int
+- subject:
+    method: PDOStatement::setAttribute
+  signature:
+    params:
+    - name: attribute
+      type: int
+    - name: value
+      type: mixed
+    returnType: bool
+- subject:
+    method: PDOStatement::setFetchMode
+  signature:
+    params:
+    - name: mode
+      type: int
+    - name: args
+      type: mixed
+      optional: true
+      variadic: true
+    returnType: 'true'

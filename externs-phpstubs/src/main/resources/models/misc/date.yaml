@@ -18,7 +18,7 @@
     - name: format
       type: string
     - name: timestamp
-      type: int
+      type: ?int
       optional: true
     returnType: string
 - subject:
@@ -26,10 +26,10 @@
   signature:
     params:
     - name: object
-      type: mixed
+      type: DateTime
     - name: interval
-      type: mixed
-    returnType: mixed
+      type: DateInterval
+    returnType: DateTime
   propagation:
   - from: argument(0)
     to: return
@@ -43,9 +43,9 @@
       type: string
       optional: true
     - name: timezone
-      type: mixed
+      type: ?DateTimeZone
       optional: true
-    returnType: mixed
+    returnType: DateTime|false
   propagation:
   - from: argument(0)
     to: return
@@ -60,9 +60,9 @@
     - name: datetime
       type: string
     - name: timezone
-      type: mixed
+      type: ?DateTimeZone
       optional: true
-    returnType: mixed
+    returnType: DateTime|false
   propagation:
   - from: argument(0)
     to: return
@@ -78,9 +78,9 @@
       type: string
       optional: true
     - name: timezone
-      type: mixed
+      type: ?DateTimeZone
       optional: true
-    returnType: mixed
+    returnType: DateTimeImmutable|false
   propagation:
   - from: argument(0)
     to: return
@@ -95,9 +95,9 @@
     - name: datetime
       type: string
     - name: timezone
-      type: mixed
+      type: ?DateTimeZone
       optional: true
-    returnType: mixed
+    returnType: DateTimeImmutable|false
   propagation:
   - from: argument(0)
     to: return
@@ -110,14 +110,14 @@
   signature:
     params:
     - name: object
-      type: mixed
+      type: DateTime
     - name: year
       type: int
     - name: month
       type: int
     - name: day
       type: int
-    returnType: mixed
+    returnType: DateTime
   propagation:
   - from: argument(0)
     to: return
@@ -143,13 +143,13 @@
   signature:
     params:
     - name: baseObject
-      type: mixed
+      type: DateTimeInterface
     - name: targetObject
-      type: mixed
+      type: DateTimeInterface
     - name: absolute
       type: bool
       optional: true
-    returnType: mixed
+    returnType: DateInterval
   propagation:
   - from: argument(0)
     to: return
@@ -162,7 +162,7 @@
   signature:
     params:
     - name: object
-      type: mixed
+      type: DateTimeInterface
     - name: format
       type: string
     returnType: string
@@ -174,14 +174,14 @@
 - subject:
     function: date_get_last_errors
   signature:
-    returnType: array
+    returnType: array|false
 - subject:
     function: date_interval_create_from_date_string
   signature:
     params:
     - name: datetime
       type: string
-    returnType: mixed
+    returnType: DateInterval|false
   propagation:
   - from: argument(0)
     to: return
@@ -190,7 +190,7 @@
   signature:
     params:
     - name: object
-      type: mixed
+      type: DateInterval
     - name: format
       type: string
     returnType: string
@@ -204,7 +204,7 @@
   signature:
     params:
     - name: object
-      type: mixed
+      type: DateTime
     - name: year
       type: int
     - name: week
@@ -212,7 +212,7 @@
     - name: dayOfWeek
       type: int
       optional: true
-    returnType: mixed
+    returnType: DateTime
   propagation:
   - from: argument(0)
     to: return
@@ -227,10 +227,10 @@
   signature:
     params:
     - name: object
-      type: mixed
+      type: DateTime
     - name: modifier
       type: string
-    returnType: mixed
+    returnType: DateTime|false
   propagation:
   - from: argument(0)
     to: return
@@ -241,7 +241,7 @@
   signature:
     params:
     - name: object
-      type: mixed
+      type: DateTimeInterface
     returnType: int
 - subject:
     function: date_parse
@@ -264,10 +264,10 @@
   signature:
     params:
     - name: object
-      type: mixed
+      type: DateTime
     - name: interval
-      type: mixed
-    returnType: mixed
+      type: DateInterval
+    returnType: DateTime
   propagation:
   - from: argument(0)
     to: return
@@ -294,18 +294,18 @@
       type: int
       optional: true
     - name: latitude
-      type: float
+      type: ?float
       optional: true
     - name: longitude
-      type: float
+      type: ?float
       optional: true
     - name: zenith
-      type: float
+      type: ?float
       optional: true
     - name: utcOffset
-      type: float
+      type: ?float
       optional: true
-    returnType: float
+    returnType: string|int|float|false
 - subject:
     function: date_sunset
   signature:
@@ -316,24 +316,24 @@
       type: int
       optional: true
     - name: latitude
-      type: float
+      type: ?float
       optional: true
     - name: longitude
-      type: float
+      type: ?float
       optional: true
     - name: zenith
-      type: float
+      type: ?float
       optional: true
     - name: utcOffset
-      type: float
+      type: ?float
       optional: true
-    returnType: float
+    returnType: string|int|float|false
 - subject:
     function: date_time_set
   signature:
     params:
     - name: object
-      type: mixed
+      type: DateTime
     - name: hour
       type: int
     - name: minute
@@ -344,7 +344,7 @@
     - name: microsecond
       type: int
       optional: true
-    returnType: mixed
+    returnType: DateTime
   propagation:
   - from: argument(0)
     to: return
@@ -361,17 +361,17 @@
   signature:
     params:
     - name: object
-      type: mixed
+      type: DateTimeInterface
     returnType: int
 - subject:
     function: date_timestamp_set
   signature:
     params:
     - name: object
-      type: mixed
+      type: DateTime
     - name: timestamp
       type: int
-    returnType: mixed
+    returnType: DateTime
   propagation:
   - from: argument(0)
     to: return
@@ -382,8 +382,8 @@
   signature:
     params:
     - name: object
-      type: mixed
-    returnType: mixed
+      type: DateTimeInterface
+    returnType: DateTimeZone|false
   propagation:
   - from: argument(0)
     to: return
@@ -392,211 +392,21 @@
   signature:
     params:
     - name: object
-      type: mixed
+      type: DateTime
     - name: timezone
-      type: mixed
-    returnType: mixed
+      type: DateTimeZone
+    returnType: DateTime
   propagation:
   - from: argument(0)
     to: return
   - from: argument(1)
     to: return
 - subject:
-    function: datefmt_create
-  signature:
-    params:
-    - name: locale
-      type: string
-    - name: dateType
-      type: int
-    - name: timeType
-      type: int
-    - name: timezone
-      type: mixed
-      optional: true
-    - name: calendar
-      type: int
-      optional: true
-    - name: pattern
-      type: string
-      optional: true
-    returnType: int
-- subject:
-    function: datefmt_format
-  signature:
-    params:
-    - name: formatter
-      type: int
-    - name: datetime
-      type: mixed
-    returnType: string
-  propagation:
-  - from: argument(1)
-    to: return
-- subject:
-    function: datefmt_format_object
-  signature:
-    params:
-    - name: datetime
-      type: object
-    - name: format
-      type: mixed
-      optional: true
-    - name: locale
-      type: string
-      optional: true
-    returnType: string
-  propagation:
-  - from: argument(1)
-    to: return
-  - from: argument(2)
-    to: return
-- subject:
-    function: datefmt_get_calendar
-  signature:
-    params:
-    - name: formatter
-      type: int
-    returnType: int
-- subject:
-    function: datefmt_get_calendar_object
-  signature:
-    params:
-    - name: formatter
-      type: int
-    returnType: int
-- subject:
-    function: datefmt_get_datetype
-  signature:
-    params:
-    - name: formatter
-      type: int
-    returnType: int
-- subject:
-    function: datefmt_get_error_code
-  signature:
-    params:
-    - name: formatter
-      type: int
-    returnType: int
-- subject:
-    function: datefmt_get_error_message
-  signature:
-    params:
-    - name: formatter
-      type: int
-    returnType: string
-- subject:
-    function: datefmt_get_locale
-  signature:
-    params:
-    - name: formatter
-      type: int
-    - name: type
-      type: int
-      optional: true
-    returnType: string
-- subject:
-    function: datefmt_get_pattern
-  signature:
-    params:
-    - name: formatter
-      type: int
-    returnType: string
-- subject:
-    function: datefmt_get_timetype
-  signature:
-    params:
-    - name: formatter
-      type: int
-    returnType: int
-- subject:
-    function: datefmt_get_timezone
-  signature:
-    params:
-    - name: formatter
-      type: int
-    returnType: int
-- subject:
-    function: datefmt_get_timezone_id
-  signature:
-    params:
-    - name: formatter
-      type: int
-    returnType: string
-- subject:
-    function: datefmt_is_lenient
-  signature:
-    params:
-    - name: formatter
-      type: int
-    returnType: bool
-- subject:
-    function: datefmt_localtime
-  signature:
-    params:
-    - name: formatter
-      type: int
-    - name: string
-      type: string
-    - name: offset
-      type: int
-      optional: true
-    returnType: array
-- subject:
-    function: datefmt_parse
-  signature:
-    params:
-    - name: formatter
-      type: int
-    - name: string
-      type: string
-    - name: offset
-      type: int
-      optional: true
-    returnType: float
-- subject:
-    function: datefmt_set_calendar
-  signature:
-    params:
-    - name: formatter
-      type: int
-    - name: calendar
-      type: int
-    returnType: bool
-- subject:
-    function: datefmt_set_lenient
-  signature:
-    params:
-    - name: formatter
-      type: int
-    - name: lenient
-      type: bool
-    returnType: void
-- subject:
-    function: datefmt_set_pattern
-  signature:
-    params:
-    - name: formatter
-      type: int
-    - name: pattern
-      type: string
-    returnType: bool
-- subject:
-    function: datefmt_set_timezone
-  signature:
-    params:
-    - name: formatter
-      type: int
-    - name: timezone
-      type: mixed
-    returnType: mixed
-- subject:
     function: getdate
   signature:
     params:
     - name: timestamp
-      type: int
+      type: ?int
       optional: true
     returnType: array
 - subject:
@@ -606,7 +416,7 @@
     - name: format
       type: string
     - name: timestamp
-      type: int
+      type: ?int
       optional: true
     returnType: string
   propagation:
@@ -619,29 +429,21 @@
     - name: hour
       type: int
     - name: minute
-      type: int
+      type: ?int
       optional: true
     - name: second
-      type: int
+      type: ?int
       optional: true
     - name: month
-      type: int
+      type: ?int
       optional: true
     - name: day
-      type: int
+      type: ?int
       optional: true
     - name: year
-      type: int
+      type: ?int
       optional: true
-    returnType: int
-- subject:
-    function: microtime
-  signature:
-    params:
-    - name: as_float
-      type: bool
-      optional: true
-    returnType: string
+    returnType: int|false
 - subject:
     function: mktime
   signature:
@@ -649,21 +451,21 @@
     - name: hour
       type: int
     - name: minute
-      type: int
+      type: ?int
       optional: true
     - name: second
-      type: int
+      type: ?int
       optional: true
     - name: month
-      type: int
+      type: ?int
       optional: true
     - name: day
-      type: int
+      type: ?int
       optional: true
     - name: year
-      type: int
+      type: ?int
       optional: true
-    returnType: int
+    returnType: int|false
 - subject:
     function: strftime
   signature:
@@ -671,9 +473,9 @@
     - name: format
       type: string
     - name: timestamp
-      type: int
+      type: ?int
       optional: true
-    returnType: string
+    returnType: string|false
 - subject:
     function: strtotime
   signature:
@@ -681,29 +483,13 @@
     - name: datetime
       type: string
     - name: baseTimestamp
-      type: int
+      type: ?int
       optional: true
-    returnType: int
+    returnType: int|false
 - subject:
     function: time
   signature:
     returnType: int
-- subject:
-    function: time_nanosleep
-  signature:
-    params:
-    - name: seconds
-      type: int
-    - name: nanoseconds
-      type: int
-    returnType: array
-- subject:
-    function: time_sleep_until
-  signature:
-    params:
-    - name: timestamp
-      type: float
-    returnType: bool
 - subject:
     function: timezone_abbreviations_list
   signature:
@@ -716,7 +502,7 @@
       type: int
       optional: true
     - name: countryCode
-      type: string
+      type: ?string
       optional: true
     returnType: array
 - subject:
@@ -724,8 +510,8 @@
   signature:
     params:
     - name: object
-      type: mixed
-    returnType: array
+      type: DateTimeZone
+    returnType: array|false
   propagation:
   - from: argument(0)
     to: return
@@ -741,7 +527,7 @@
     - name: isDST
       type: int
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -750,7 +536,7 @@
   signature:
     params:
     - name: object
-      type: mixed
+      type: DateTimeZone
     returnType: string
   propagation:
   - from: argument(0)
@@ -760,9 +546,9 @@
   signature:
     params:
     - name: object
-      type: mixed
+      type: DateTimeZone
     - name: datetime
-      type: mixed
+      type: DateTimeInterface
     returnType: int
 - subject:
     function: timezone_open
@@ -770,7 +556,7 @@
     params:
     - name: timezone
       type: string
-    returnType: mixed
+    returnType: DateTimeZone|false
   propagation:
   - from: argument(0)
     to: return
@@ -779,14 +565,14 @@
   signature:
     params:
     - name: object
-      type: mixed
+      type: DateTimeZone
     - name: timestampBegin
       type: int
       optional: true
     - name: timestampEnd
       type: int
       optional: true
-    returnType: array
+    returnType: array|false
   propagation:
   - from: argument(0)
     to: return
@@ -794,3 +580,704 @@
     function: timezone_version_get
   signature:
     returnType: string
+- subject:
+    class: dateerror
+  signature:
+    classifier: class
+    parent: error
+- subject:
+    class: dateexception
+  signature:
+    classifier: class
+    parent: exception
+- subject:
+    class: dateinvalidoperationexception
+  signature:
+    classifier: class
+    parent: dateexception
+- subject:
+    class: dateinvalidtimezoneexception
+  signature:
+    classifier: class
+    parent: dateexception
+- subject:
+    class: datemalformedintervalstringexception
+  signature:
+    classifier: class
+    parent: dateexception
+- subject:
+    class: datemalformedperiodstringexception
+  signature:
+    classifier: class
+    parent: dateexception
+- subject:
+    class: datemalformedstringexception
+  signature:
+    classifier: class
+    parent: dateexception
+- subject:
+    class: dateobjecterror
+  signature:
+    classifier: class
+    parent: dateerror
+- subject:
+    class: daterangeerror
+  signature:
+    classifier: class
+    parent: dateerror
+- subject:
+    class: datetime
+  signature:
+    classifier: class
+    interfaces: [datetimeinterface]
+- subject:
+    class: datetimeimmutable
+  signature:
+    classifier: class
+    interfaces: [datetimeinterface]
+- subject:
+    class: datetimeinterface
+  signature:
+    classifier: interface
+- subject:
+    class: datetimezone
+  signature:
+    classifier: class
+- subject:
+    class: dateinterval
+  signature:
+    classifier: class
+- subject:
+    class: dateperiod
+  signature:
+    classifier: class
+    interfaces: [iteratoraggregate]
+- subject:
+    function: gmstrftime
+  signature:
+    params:
+    - name: format
+      type: string
+    - name: timestamp
+      type: ?int
+      optional: true
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: idate
+  signature:
+    params:
+    - name: format
+      type: string
+    - name: timestamp
+      type: ?int
+      optional: true
+    returnType: int|false
+- subject:
+    function: localtime
+  signature:
+    params:
+    - name: timestamp
+      type: ?int
+      optional: true
+    - name: associative
+      type: bool
+      optional: true
+    returnType: array
+- subject:
+    method: DateInterval::__construct
+  signature:
+    params:
+    - name: duration
+      type: string
+    returnType: mixed
+- subject:
+    method: DateInterval::__serialize
+  signature:
+    returnType: array
+- subject:
+    method: DateInterval::__set_state
+  signature:
+    params:
+    - name: array
+      type: array
+    returnType: DateInterval
+- subject:
+    method: DateInterval::__unserialize
+  signature:
+    params:
+    - name: data
+      type: array
+    returnType: void
+- subject:
+    method: DateInterval::__wakeup
+  signature:
+    returnType: void
+- subject:
+    method: DateInterval::createFromDateString
+  signature:
+    params:
+    - name: datetime
+      type: string
+    returnType: DateInterval
+- subject:
+    method: DateInterval::format
+  signature:
+    params:
+    - name: format
+      type: string
+    returnType: string
+- subject:
+    method: DatePeriod::__construct
+  signature:
+    params:
+    - name: start
+      type: mixed
+    - name: interval
+      type: mixed
+      optional: true
+    - name: end
+      type: mixed
+      optional: true
+    - name: options
+      type: mixed
+      optional: true
+    returnType: mixed
+- subject:
+    method: DatePeriod::__serialize
+  signature:
+    returnType: array
+- subject:
+    method: DatePeriod::__set_state
+  signature:
+    params:
+    - name: array
+      type: array
+    returnType: DatePeriod
+- subject:
+    method: DatePeriod::__unserialize
+  signature:
+    params:
+    - name: data
+      type: array
+    returnType: void
+- subject:
+    method: DatePeriod::__wakeup
+  signature:
+    returnType: void
+- subject:
+    method: DatePeriod::createFromISO8601String
+  signature:
+    params:
+    - name: specification
+      type: string
+    - name: options
+      type: int
+      optional: true
+    returnType: static
+- subject:
+    method: DatePeriod::getDateInterval
+  signature:
+    returnType: DateInterval
+- subject:
+    method: DatePeriod::getEndDate
+  signature:
+    returnType: ?DateTimeInterface
+- subject:
+    method: DatePeriod::getIterator
+  signature:
+    returnType: Iterator
+- subject:
+    method: DatePeriod::getRecurrences
+  signature:
+    returnType: ?int
+- subject:
+    method: DatePeriod::getStartDate
+  signature:
+    returnType: DateTimeInterface
+- subject:
+    method: DateTime::__construct
+  signature:
+    params:
+    - name: datetime
+      type: string
+      optional: true
+    - name: timezone
+      type: ?DateTimeZone
+      optional: true
+    returnType: mixed
+- subject:
+    method: DateTime::__serialize
+  signature:
+    returnType: array
+- subject:
+    method: DateTime::__set_state
+  signature:
+    params:
+    - name: array
+      type: array
+    returnType: DateTime
+- subject:
+    method: DateTime::__unserialize
+  signature:
+    params:
+    - name: data
+      type: array
+    returnType: void
+- subject:
+    method: DateTime::__wakeup
+  signature:
+    returnType: void
+- subject:
+    method: DateTime::add
+  signature:
+    params:
+    - name: interval
+      type: DateInterval
+    returnType: DateTime
+- subject:
+    method: DateTime::createFromFormat
+  signature:
+    params:
+    - name: format
+      type: string
+    - name: datetime
+      type: string
+    - name: timezone
+      type: ?DateTimeZone
+      optional: true
+    returnType: DateTime|false
+- subject:
+    method: DateTime::createFromImmutable
+  signature:
+    params:
+    - name: object
+      type: DateTimeImmutable
+    returnType: static
+- subject:
+    method: DateTime::createFromInterface
+  signature:
+    params:
+    - name: object
+      type: DateTimeInterface
+    returnType: DateTime
+- subject:
+    method: DateTime::createFromTimestamp
+  signature:
+    params:
+    - name: timestamp
+      type: int|float
+    returnType: static
+- subject:
+    method: DateTime::diff
+  signature:
+    params:
+    - name: targetObject
+      type: DateTimeInterface
+    - name: absolute
+      type: bool
+      optional: true
+    returnType: DateInterval
+- subject:
+    method: DateTime::format
+  signature:
+    params:
+    - name: format
+      type: string
+    returnType: string
+- subject:
+    method: DateTime::getLastErrors
+  signature:
+    returnType: array|false
+- subject:
+    method: DateTime::getMicrosecond
+  signature:
+    returnType: int
+- subject:
+    method: DateTime::getOffset
+  signature:
+    returnType: int
+- subject:
+    method: DateTime::getTimestamp
+  signature:
+    returnType: int
+- subject:
+    method: DateTime::getTimezone
+  signature:
+    returnType: DateTimeZone|false
+- subject:
+    method: DateTime::modify
+  signature:
+    params:
+    - name: modifier
+      type: string
+    returnType: DateTime
+- subject:
+    method: DateTime::setDate
+  signature:
+    params:
+    - name: year
+      type: int
+    - name: month
+      type: int
+    - name: day
+      type: int
+    returnType: DateTime
+- subject:
+    method: DateTime::setISODate
+  signature:
+    params:
+    - name: year
+      type: int
+    - name: week
+      type: int
+    - name: dayOfWeek
+      type: int
+      optional: true
+    returnType: DateTime
+- subject:
+    method: DateTime::setMicrosecond
+  signature:
+    params:
+    - name: microsecond
+      type: int
+    returnType: static
+- subject:
+    method: DateTime::setTime
+  signature:
+    params:
+    - name: hour
+      type: int
+    - name: minute
+      type: int
+    - name: second
+      type: int
+      optional: true
+    - name: microsecond
+      type: int
+      optional: true
+    returnType: DateTime
+- subject:
+    method: DateTime::setTimestamp
+  signature:
+    params:
+    - name: timestamp
+      type: int
+    returnType: DateTime
+- subject:
+    method: DateTime::setTimezone
+  signature:
+    params:
+    - name: timezone
+      type: DateTimeZone
+    returnType: DateTime
+- subject:
+    method: DateTime::sub
+  signature:
+    params:
+    - name: interval
+      type: DateInterval
+    returnType: DateTime
+- subject:
+    method: DateTimeImmutable::__construct
+  signature:
+    params:
+    - name: datetime
+      type: string
+      optional: true
+    - name: timezone
+      type: ?DateTimeZone
+      optional: true
+    returnType: mixed
+- subject:
+    method: DateTimeImmutable::__serialize
+  signature:
+    returnType: array
+- subject:
+    method: DateTimeImmutable::__set_state
+  signature:
+    params:
+    - name: array
+      type: array
+    returnType: DateTimeImmutable
+- subject:
+    method: DateTimeImmutable::__unserialize
+  signature:
+    params:
+    - name: data
+      type: array
+    returnType: void
+- subject:
+    method: DateTimeImmutable::__wakeup
+  signature:
+    returnType: void
+- subject:
+    method: DateTimeImmutable::add
+  signature:
+    params:
+    - name: interval
+      type: DateInterval
+    returnType: DateTimeImmutable
+- subject:
+    method: DateTimeImmutable::createFromFormat
+  signature:
+    params:
+    - name: format
+      type: string
+    - name: datetime
+      type: string
+    - name: timezone
+      type: ?DateTimeZone
+      optional: true
+    returnType: DateTimeImmutable|false
+- subject:
+    method: DateTimeImmutable::createFromInterface
+  signature:
+    params:
+    - name: object
+      type: DateTimeInterface
+    returnType: DateTimeImmutable
+- subject:
+    method: DateTimeImmutable::createFromMutable
+  signature:
+    params:
+    - name: object
+      type: DateTime
+    returnType: static
+- subject:
+    method: DateTimeImmutable::createFromTimestamp
+  signature:
+    params:
+    - name: timestamp
+      type: int|float
+    returnType: static
+- subject:
+    method: DateTimeImmutable::diff
+  signature:
+    params:
+    - name: targetObject
+      type: DateTimeInterface
+    - name: absolute
+      type: bool
+      optional: true
+    returnType: DateInterval
+- subject:
+    method: DateTimeImmutable::format
+  signature:
+    params:
+    - name: format
+      type: string
+    returnType: string
+- subject:
+    method: DateTimeImmutable::getLastErrors
+  signature:
+    returnType: array|false
+- subject:
+    method: DateTimeImmutable::getMicrosecond
+  signature:
+    returnType: int
+- subject:
+    method: DateTimeImmutable::getOffset
+  signature:
+    returnType: int
+- subject:
+    method: DateTimeImmutable::getTimestamp
+  signature:
+    returnType: int
+- subject:
+    method: DateTimeImmutable::getTimezone
+  signature:
+    returnType: DateTimeZone|false
+- subject:
+    method: DateTimeImmutable::modify
+  signature:
+    params:
+    - name: modifier
+      type: string
+    returnType: DateTimeImmutable
+- subject:
+    method: DateTimeImmutable::setDate
+  signature:
+    params:
+    - name: year
+      type: int
+    - name: month
+      type: int
+    - name: day
+      type: int
+    returnType: DateTimeImmutable
+- subject:
+    method: DateTimeImmutable::setISODate
+  signature:
+    params:
+    - name: year
+      type: int
+    - name: week
+      type: int
+    - name: dayOfWeek
+      type: int
+      optional: true
+    returnType: DateTimeImmutable
+- subject:
+    method: DateTimeImmutable::setMicrosecond
+  signature:
+    params:
+    - name: microsecond
+      type: int
+    returnType: static
+- subject:
+    method: DateTimeImmutable::setTime
+  signature:
+    params:
+    - name: hour
+      type: int
+    - name: minute
+      type: int
+    - name: second
+      type: int
+      optional: true
+    - name: microsecond
+      type: int
+      optional: true
+    returnType: DateTimeImmutable
+- subject:
+    method: DateTimeImmutable::setTimestamp
+  signature:
+    params:
+    - name: timestamp
+      type: int
+    returnType: DateTimeImmutable
+- subject:
+    method: DateTimeImmutable::setTimezone
+  signature:
+    params:
+    - name: timezone
+      type: DateTimeZone
+    returnType: DateTimeImmutable
+- subject:
+    method: DateTimeImmutable::sub
+  signature:
+    params:
+    - name: interval
+      type: DateInterval
+    returnType: DateTimeImmutable
+- subject:
+    method: DateTimeInterface::__serialize
+  signature:
+    returnType: array
+- subject:
+    method: DateTimeInterface::__unserialize
+  signature:
+    params:
+    - name: data
+      type: array
+    returnType: void
+- subject:
+    method: DateTimeInterface::__wakeup
+  signature:
+    returnType: void
+- subject:
+    method: DateTimeInterface::diff
+  signature:
+    params:
+    - name: targetObject
+      type: DateTimeInterface
+    - name: absolute
+      type: bool
+      optional: true
+    returnType: DateInterval
+- subject:
+    method: DateTimeInterface::format
+  signature:
+    params:
+    - name: format
+      type: string
+    returnType: string
+- subject:
+    method: DateTimeInterface::getMicrosecond
+  signature:
+    returnType: int
+- subject:
+    method: DateTimeInterface::getOffset
+  signature:
+    returnType: int
+- subject:
+    method: DateTimeInterface::getTimestamp
+  signature:
+    returnType: int
+- subject:
+    method: DateTimeInterface::getTimezone
+  signature:
+    returnType: DateTimeZone|false
+- subject:
+    method: DateTimeZone::__construct
+  signature:
+    params:
+    - name: timezone
+      type: string
+    returnType: mixed
+- subject:
+    method: DateTimeZone::__serialize
+  signature:
+    returnType: array
+- subject:
+    method: DateTimeZone::__set_state
+  signature:
+    params:
+    - name: array
+      type: array
+    returnType: DateTimeZone
+- subject:
+    method: DateTimeZone::__unserialize
+  signature:
+    params:
+    - name: data
+      type: array
+    returnType: void
+- subject:
+    method: DateTimeZone::__wakeup
+  signature:
+    returnType: void
+- subject:
+    method: DateTimeZone::getLocation
+  signature:
+    returnType: array|false
+- subject:
+    method: DateTimeZone::getName
+  signature:
+    returnType: string
+- subject:
+    method: DateTimeZone::getOffset
+  signature:
+    params:
+    - name: datetime
+      type: DateTimeInterface
+    returnType: int
+- subject:
+    method: DateTimeZone::getTransitions
+  signature:
+    params:
+    - name: timestampBegin
+      type: int
+      optional: true
+    - name: timestampEnd
+      type: int
+      optional: true
+    returnType: array|false
+- subject:
+    method: DateTimeZone::listAbbreviations
+  signature:
+    returnType: array
+- subject:
+    method: DateTimeZone::listIdentifiers
+  signature:
+    params:
+    - name: timezoneGroup
+      type: int
+      optional: true
+    - name: countryCode
+      type: ?string
+      optional: true
+    returnType: array

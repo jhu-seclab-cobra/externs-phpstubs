@@ -23,8 +23,16 @@
 - subject: {function: htmlspecialchars}
   returns: str
   propagation: [{from: argument(0), to: return}]
+# PHP manual: returns the string decremented by one in its alphanumeric sequence.
+- subject: {function: str_decrement}
+  returns: str
+  propagation: [{from: argument(0), to: return}]
 - subject: {function: str_getcsv}
   returns: any
+  propagation: [{from: argument(0), to: return}]
+# PHP manual: returns the string incremented by one in its alphanumeric sequence.
+- subject: {function: str_increment}
+  returns: str
   propagation: [{from: argument(0), to: return}]
 # PHP manual: alias of strstr; the result is a portion of haystack.
 - subject: {function: strchr}

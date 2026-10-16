@@ -1,0 +1,74 @@
+# Generated from php-src stubs by tools/extract_hierarchy.py.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    class: shmop
+  signature:
+    classifier: class
+- subject:
+    function: shmop_close
+  signature:
+    params:
+    - name: shmop
+      type: Shmop
+    returnType: void
+- subject:
+    function: shmop_delete
+  signature:
+    params:
+    - name: shmop
+      type: Shmop
+    returnType: bool
+- subject:
+    function: shmop_open
+  signature:
+    params:
+    - name: key
+      type: int
+    - name: mode
+      type: string
+    - name: permissions
+      type: int
+    - name: size
+      type: int
+    returnType: Shmop|false
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: shmop_read
+  signature:
+    params:
+    - name: shmop
+      type: Shmop
+    - name: offset
+      type: int
+    - name: size
+      type: int
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: shmop_size
+  signature:
+    params:
+    - name: shmop
+      type: Shmop
+    returnType: int
+- subject:
+    function: shmop_write
+  signature:
+    params:
+    - name: shmop
+      type: Shmop
+    - name: data
+      type: string
+    - name: offset
+      type: int
+    returnType: int

@@ -5,18 +5,19 @@
   signature:
     params:
     - name: pattern
-      type: array
+      type: string|array
     - name: replacement
-      type: array
+      type: string|array
     - name: subject
-      type: array
+      type: string|array
     - name: limit
       type: int
       optional: true
     - name: count
-      type: int
+      type: mixed
       optional: true
-    returnType: array
+      byRef: true
+    returnType: string|array|null
   propagation:
   - from: argument(0)
     to: return
@@ -35,7 +36,7 @@
     - name: flags
       type: int
       optional: true
-    returnType: array
+    returnType: array|false
   propagation:
   - from: argument(1)
     to: return
@@ -56,15 +57,16 @@
     - name: subject
       type: string
     - name: matches
-      type: array
-      optional: true
-    - name: flags
       type: mixed
+      optional: true
+      byRef: true
+    - name: flags
+      type: int
       optional: true
     - name: offset
       type: int
       optional: true
-    returnType: mixed
+    returnType: int|false
 - subject:
     function: preg_match_all
   signature:
@@ -74,15 +76,16 @@
     - name: subject
       type: string
     - name: matches
-      type: array
+      type: mixed
       optional: true
+      byRef: true
     - name: flags
       type: int
       optional: true
     - name: offset
       type: int
       optional: true
-    returnType: int
+    returnType: int|false
 - subject:
     function: preg_quote
   signature:
@@ -90,7 +93,7 @@
     - name: str
       type: string
     - name: delimiter
-      type: string
+      type: ?string
       optional: true
     returnType: string
   propagation:
@@ -103,18 +106,19 @@
   signature:
     params:
     - name: pattern
-      type: array
+      type: string|array
     - name: replacement
-      type: array
+      type: string|array
     - name: subject
-      type: array
+      type: string|array
     - name: limit
       type: int
       optional: true
     - name: count
-      type: int
+      type: mixed
       optional: true
-    returnType: array
+      byRef: true
+    returnType: string|array|null
   propagation:
   - from: argument(0)
     to: return
@@ -127,21 +131,22 @@
   signature:
     params:
     - name: pattern
-      type: array
+      type: string|array
     - name: callback
-      type: mixed
+      type: callable
     - name: subject
-      type: string
+      type: string|array
     - name: limit
       type: int
       optional: true
     - name: count
-      type: int
+      type: mixed
       optional: true
+      byRef: true
     - name: flags
       type: int
       optional: true
-    returnType: string
+    returnType: string|array|null
   propagation:
   - from: argument(1)
     to: return
@@ -154,17 +159,18 @@
     - name: pattern
       type: array
     - name: subject
-      type: string
+      type: string|array
     - name: limit
       type: int
       optional: true
     - name: count
-      type: int
+      type: mixed
       optional: true
+      byRef: true
     - name: flags
       type: int
       optional: true
-    returnType: string
+    returnType: string|array|null
   propagation:
   - from: argument(1)
     to: return
@@ -182,4 +188,4 @@
     - name: flags
       type: int
       optional: true
-    returnType: array
+    returnType: array|false

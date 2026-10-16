@@ -5,7 +5,7 @@
   signature:
     params:
     - name: bz
-      type: resource
+      type: mixed
     returnType: bool
 - subject:
     function: bzcompress
@@ -19,7 +19,7 @@
     - name: work_factor
       type: int
       optional: true
-    returnType: int
+    returnType: string|int
 - subject:
     function: bzdecompress
   signature:
@@ -29,44 +29,44 @@
     - name: use_less_memory
       type: bool
       optional: true
-    returnType: int
+    returnType: string|int|false
 - subject:
     function: bzerrno
   signature:
     params:
     - name: bz
-      type: resource
+      type: mixed
     returnType: int
 - subject:
     function: bzerror
   signature:
     params:
     - name: bz
-      type: resource
+      type: mixed
     returnType: array
 - subject:
     function: bzerrstr
   signature:
     params:
     - name: bz
-      type: resource
+      type: mixed
     returnType: string
 - subject:
     function: bzflush
   signature:
     params:
     - name: bz
-      type: resource
+      type: mixed
     returnType: bool
 - subject:
     function: bzopen
   signature:
     params:
     - name: file
-      type: resource
+      type: mixed
     - name: mode
       type: string
-    returnType: resource
+    returnType: mixed
   propagation:
   - from: argument(0)
     to: return
@@ -77,20 +77,20 @@
   signature:
     params:
     - name: bz
-      type: resource
+      type: mixed
     - name: length
       type: int
       optional: true
-    returnType: string
+    returnType: string|false
 - subject:
     function: bzwrite
   signature:
     params:
     - name: bz
-      type: resource
+      type: mixed
     - name: data
       type: string
     - name: length
-      type: int
+      type: ?int
       optional: true
-    returnType: int
+    returnType: int|false

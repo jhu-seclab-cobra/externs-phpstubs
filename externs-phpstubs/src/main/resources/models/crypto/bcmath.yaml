@@ -9,7 +9,7 @@
     - name: num2
       type: string
     - name: scale
-      type: int
+      type: ?int
       optional: true
     returnType: string
   propagation:
@@ -26,7 +26,7 @@
     - name: num2
       type: string
     - name: scale
-      type: int
+      type: ?int
       optional: true
     returnType: int
 - subject:
@@ -38,7 +38,7 @@
     - name: num2
       type: string
     - name: scale
-      type: int
+      type: ?int
       optional: true
     returnType: string
   propagation:
@@ -55,7 +55,7 @@
     - name: num2
       type: string
     - name: scale
-      type: int
+      type: ?int
       optional: true
     returnType: string
   propagation:
@@ -72,7 +72,7 @@
     - name: num2
       type: string
     - name: scale
-      type: int
+      type: ?int
       optional: true
     returnType: string
   propagation:
@@ -89,7 +89,7 @@
     - name: exponent
       type: string
     - name: scale
-      type: int
+      type: ?int
       optional: true
     returnType: string
   propagation:
@@ -108,7 +108,7 @@
     - name: modulus
       type: string
     - name: scale
-      type: int
+      type: ?int
       optional: true
     returnType: string
   propagation:
@@ -123,7 +123,7 @@
   signature:
     params:
     - name: scale
-      type: int
+      type: ?int
       optional: true
     returnType: int
 - subject:
@@ -133,7 +133,7 @@
     - name: num
       type: string
     - name: scale
-      type: int
+      type: ?int
       optional: true
     returnType: string
   propagation:
@@ -148,7 +148,7 @@
     - name: num2
       type: string
     - name: scale
-      type: int
+      type: ?int
       optional: true
     returnType: string
   propagation:
@@ -156,3 +156,188 @@
     to: return
   - from: argument(1)
     to: return
+- subject:
+    class: bcmath\number
+  signature:
+    classifier: class
+    interfaces: [stringable]
+- subject:
+    function: bcceil
+  signature:
+    params:
+    - name: num
+      type: string
+    returnType: string
+- subject:
+    function: bcdivmod
+  signature:
+    params:
+    - name: num1
+      type: string
+    - name: num2
+      type: string
+    - name: scale
+      type: ?int
+      optional: true
+    returnType: array
+- subject:
+    function: bcfloor
+  signature:
+    params:
+    - name: num
+      type: string
+    returnType: string
+- subject:
+    function: bcround
+  signature:
+    params:
+    - name: num
+      type: string
+    - name: precision
+      type: int
+      optional: true
+    - name: mode
+      type: RoundingMode
+      optional: true
+    returnType: string
+- subject:
+    method: BcMath\Number::__construct
+  signature:
+    params:
+    - name: num
+      type: string|int
+    returnType: mixed
+- subject:
+    method: BcMath\Number::__serialize
+  signature:
+    returnType: array
+- subject:
+    method: BcMath\Number::__toString
+  signature:
+    returnType: string
+- subject:
+    method: BcMath\Number::__unserialize
+  signature:
+    params:
+    - name: data
+      type: array
+    returnType: void
+- subject:
+    method: BcMath\Number::add
+  signature:
+    params:
+    - name: num
+      type: BcMath\Number|string|int
+    - name: scale
+      type: ?int
+      optional: true
+    returnType: BcMath\Number
+- subject:
+    method: BcMath\Number::ceil
+  signature:
+    returnType: BcMath\Number
+- subject:
+    method: BcMath\Number::compare
+  signature:
+    params:
+    - name: num
+      type: BcMath\Number|string|int
+    - name: scale
+      type: ?int
+      optional: true
+    returnType: int
+- subject:
+    method: BcMath\Number::div
+  signature:
+    params:
+    - name: num
+      type: BcMath\Number|string|int
+    - name: scale
+      type: ?int
+      optional: true
+    returnType: BcMath\Number
+- subject:
+    method: BcMath\Number::divmod
+  signature:
+    params:
+    - name: num
+      type: BcMath\Number|string|int
+    - name: scale
+      type: ?int
+      optional: true
+    returnType: array
+- subject:
+    method: BcMath\Number::floor
+  signature:
+    returnType: BcMath\Number
+- subject:
+    method: BcMath\Number::mod
+  signature:
+    params:
+    - name: num
+      type: BcMath\Number|string|int
+    - name: scale
+      type: ?int
+      optional: true
+    returnType: BcMath\Number
+- subject:
+    method: BcMath\Number::mul
+  signature:
+    params:
+    - name: num
+      type: BcMath\Number|string|int
+    - name: scale
+      type: ?int
+      optional: true
+    returnType: BcMath\Number
+- subject:
+    method: BcMath\Number::pow
+  signature:
+    params:
+    - name: exponent
+      type: BcMath\Number|string|int
+    - name: scale
+      type: ?int
+      optional: true
+    returnType: BcMath\Number
+- subject:
+    method: BcMath\Number::powmod
+  signature:
+    params:
+    - name: exponent
+      type: BcMath\Number|string|int
+    - name: modulus
+      type: BcMath\Number|string|int
+    - name: scale
+      type: ?int
+      optional: true
+    returnType: BcMath\Number
+- subject:
+    method: BcMath\Number::round
+  signature:
+    params:
+    - name: precision
+      type: int
+      optional: true
+    - name: mode
+      type: RoundingMode
+      optional: true
+    returnType: BcMath\Number
+- subject:
+    method: BcMath\Number::sqrt
+  signature:
+    params:
+    - name: scale
+      type: ?int
+      optional: true
+    returnType: BcMath\Number
+- subject:
+    method: BcMath\Number::sub
+  signature:
+    params:
+    - name: num
+      type: BcMath\Number|string|int
+    - name: scale
+      type: ?int
+      optional: true
+    returnType: BcMath\Number

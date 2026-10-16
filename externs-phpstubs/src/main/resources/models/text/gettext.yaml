@@ -7,8 +7,9 @@
     - name: domain
       type: string
     - name: directory
-      type: string
-    returnType: string
+      type: ?string
+      optional: true
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -59,8 +60,92 @@
   signature:
     params:
     - name: domain
+      type: ?string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: _
+  signature:
+    params:
+    - name: message
       type: string
     returnType: string
   propagation:
   - from: argument(0)
+    to: return
+- subject:
+    function: bind_textdomain_codeset
+  signature:
+    params:
+    - name: domain
+      type: string
+    - name: codeset
+      type: ?string
+      optional: true
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: dcgettext
+  signature:
+    params:
+    - name: domain
+      type: string
+    - name: message
+      type: string
+    - name: category
+      type: int
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: dcngettext
+  signature:
+    params:
+    - name: domain
+      type: string
+    - name: singular
+      type: string
+    - name: plural
+      type: string
+    - name: count
+      type: int
+    - name: category
+      type: int
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: dngettext
+  signature:
+    params:
+    - name: domain
+      type: string
+    - name: singular
+      type: string
+    - name: plural
+      type: string
+    - name: count
+      type: int
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
     to: return

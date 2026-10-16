@@ -7,7 +7,7 @@
     - name: type
       type: string
       optional: true
-    returnType: array
+    returnType: array|string|false
 - subject:
     function: iconv_mime_decode
   signature:
@@ -18,9 +18,9 @@
       type: int
       optional: true
     - name: encoding
-      type: string
+      type: ?string
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -36,9 +36,9 @@
       type: int
       optional: true
     - name: encoding
-      type: string
+      type: ?string
       optional: true
-    returnType: array
+    returnType: array|false
 - subject:
     function: iconv_mime_encode
   signature:
@@ -50,7 +50,7 @@
     - name: options
       type: array
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -72,9 +72,9 @@
     - name: string
       type: string
     - name: encoding
-      type: string
+      type: ?string
       optional: true
-    returnType: int
+    returnType: int|false
 - subject:
     function: iconv_strpos
   signature:
@@ -87,9 +87,9 @@
       type: int
       optional: true
     - name: encoding
-      type: string
+      type: ?string
       optional: true
-    returnType: int
+    returnType: int|false
 - subject:
     function: iconv_strrpos
   signature:
@@ -99,9 +99,9 @@
     - name: needle
       type: string
     - name: encoding
-      type: string
+      type: ?string
       optional: true
-    returnType: int
+    returnType: int|false
 - subject:
     function: iconv_substr
   signature:
@@ -111,14 +111,32 @@
     - name: offset
       type: int
     - name: length
-      type: int
+      type: ?int
       optional: true
     - name: encoding
-      type: string
+      type: ?string
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
   - from: argument(3)
+    to: return
+- subject:
+    function: iconv
+  signature:
+    params:
+    - name: from_encoding
+      type: string
+    - name: to_encoding
+      type: string
+    - name: string
+      type: string
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
     to: return

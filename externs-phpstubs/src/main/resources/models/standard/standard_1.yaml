@@ -1,16 +1,6 @@
 # Generated from stubs/standard/standard_1.yaml by tools/convert_stubs.py v2.
 # Do not hand-edit; corrections belong in a higher configuration layer.
 - subject:
-    function: _
-  signature:
-    params:
-    - name: message
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
     function: __halt_compiler
   signature:
     returnType: void
@@ -52,8 +42,8 @@
   signature:
     params:
     - name: num
-      type: int
-    returnType: int
+      type: int|float
+    returnType: int|float
 - subject:
     function: accelerator_get_configuration
   signature:
@@ -118,7 +108,7 @@
 - subject:
     function: apache_child_terminate
   signature:
-    returnType: bool
+    returnType: void
 - subject:
     function: apache_get_modules
   signature:
@@ -126,7 +116,7 @@
 - subject:
     function: apache_get_version
   signature:
-    returnType: string
+    returnType: string|false
 - subject:
     function: apache_getenv
   signature:
@@ -136,7 +126,7 @@
     - name: walk_to_top
       type: bool
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -146,7 +136,7 @@
     params:
     - name: filename
       type: string
-    returnType: object
+    returnType: object|false
   propagation:
   - from: argument(0)
     to: return
@@ -157,9 +147,9 @@
     - name: note_name
       type: string
     - name: note_value
-      type: string
+      type: ?string
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -176,7 +166,7 @@
 - subject:
     function: apache_response_headers
   signature:
-    returnType: array
+    returnType: array|false
 - subject:
     function: apache_setenv
   signature:
@@ -331,9 +321,9 @@
     - name: array
       type: array
     - name: column_key
-      type: int
+      type: int|string|null
     - name: index_key
-      type: int
+      type: int|string|null
       optional: true
     returnType: array
   propagation:
@@ -369,6 +359,7 @@
     - name: arrays
       type: array
       optional: true
+      variadic: true
     returnType: array
   propagation:
   - from: argument(0)
@@ -384,6 +375,7 @@
     - name: arrays
       type: array
       optional: true
+      variadic: true
     returnType: array
   propagation:
   - from: argument(0)
@@ -399,6 +391,7 @@
     - name: arrays
       type: array
       optional: true
+      variadic: true
     returnType: array
   propagation:
   - from: argument(0)
@@ -412,8 +405,9 @@
     - name: array
       type: array
     - name: rest
-      type: array
+      type: mixed
       optional: true
+      variadic: true
     returnType: array
   propagation:
   - from: argument(0)
@@ -427,8 +421,9 @@
     - name: array
       type: array
     - name: rest
-      type: array
+      type: mixed
       optional: true
+      variadic: true
     returnType: array
   propagation:
   - from: argument(0)
@@ -470,7 +465,7 @@
     - name: array
       type: array
     - name: callback
-      type: mixed
+      type: ?callable
       optional: true
     - name: mode
       type: int
@@ -498,6 +493,7 @@
     - name: arrays
       type: array
       optional: true
+      variadic: true
     returnType: array
   propagation:
   - from: argument(0)
@@ -513,6 +509,7 @@
     - name: arrays
       type: array
       optional: true
+      variadic: true
     returnType: array
   propagation:
   - from: argument(0)
@@ -528,6 +525,7 @@
     - name: arrays
       type: array
       optional: true
+      variadic: true
     returnType: array
   propagation:
   - from: argument(0)
@@ -541,8 +539,9 @@
     - name: array
       type: array
     - name: rest
-      type: array
+      type: mixed
       optional: true
+      variadic: true
     returnType: array
   propagation:
   - from: argument(0)
@@ -556,8 +555,9 @@
     - name: array
       type: array
     - name: rest
-      type: array
+      type: mixed
       optional: true
+      variadic: true
     returnType: array
   propagation:
   - from: argument(0)
@@ -569,7 +569,7 @@
   signature:
     params:
     - name: key
-      type: int
+      type: mixed
     - name: array
       type: array
     returnType: bool
@@ -579,14 +579,14 @@
     params:
     - name: array
       type: array
-    returnType: int
+    returnType: int|string|null
 - subject:
     function: array_key_last
   signature:
     params:
     - name: array
       type: array
-    returnType: int
+    returnType: int|string|null
 - subject:
     function: array_keys
   signature:
@@ -608,12 +608,13 @@
   signature:
     params:
     - name: callback
-      type: callable
+      type: ?callable
     - name: array
       type: array
     - name: arrays
       type: array
       optional: true
+      variadic: true
     returnType: array
   propagation:
   - from: argument(1)
@@ -639,6 +640,7 @@
     - name: arrays
       type: array
       optional: true
+      variadic: true
     returnType: array
   propagation:
   - from: argument(0)
@@ -648,11 +650,14 @@
   signature:
     params:
     - name: array
-      type: array
+      type: mixed
+      byRef: true
     - name: rest
-      type: array
+      type: mixed
       optional: true
-    returnType: bool
+      byRef: true
+      variadic: true
+    returnType: 'true'
 - subject:
     function: array_pad
   signature:
@@ -675,6 +680,7 @@
     params:
     - name: array
       type: array
+      byRef: true
     returnType: mixed
   propagation:
   - from: argument(0)
@@ -685,16 +691,18 @@
     params:
     - name: array
       type: array
-    returnType: float
+    returnType: int|float
 - subject:
     function: array_push
   signature:
     params:
     - name: array
       type: array
+      byRef: true
     - name: values
       type: mixed
       optional: true
+      variadic: true
     returnType: int
 - subject:
     function: array_rand
@@ -705,7 +713,7 @@
     - name: num
       type: int
       optional: true
-    returnType: array
+    returnType: int|string|array
   propagation:
   - from: argument(0)
     to: return
@@ -716,7 +724,7 @@
     - name: array
       type: array
     - name: callback
-      type: mixed
+      type: callable
     - name: initial
       type: mixed
       optional: true
@@ -737,6 +745,7 @@
     - name: replacements
       type: array
       optional: true
+      variadic: true
     returnType: array
   propagation:
   - from: argument(0)
@@ -752,6 +761,7 @@
     - name: replacements
       type: array
       optional: true
+      variadic: true
     returnType: array
   propagation:
   - from: argument(0)
@@ -782,13 +792,14 @@
     - name: strict
       type: bool
       optional: true
-    returnType: int
+    returnType: int|string|false
 - subject:
     function: array_shift
   signature:
     params:
     - name: array
       type: array
+      byRef: true
     returnType: mixed
   propagation:
   - from: argument(0)
@@ -802,7 +813,7 @@
     - name: offset
       type: int
     - name: length
-      type: int
+      type: ?int
       optional: true
     - name: preserve_keys
       type: bool
@@ -817,13 +828,14 @@
     params:
     - name: array
       type: array
+      byRef: true
     - name: offset
       type: int
     - name: length
-      type: int
+      type: ?int
       optional: true
     - name: replacement
-      type: array
+      type: mixed
       optional: true
     returnType: array
   propagation:
@@ -837,7 +849,7 @@
     params:
     - name: array
       type: array
-    returnType: float
+    returnType: int|float
 - subject:
     function: array_udiff
   signature:
@@ -845,8 +857,9 @@
     - name: array
       type: array
     - name: rest
-      type: array
+      type: mixed
       optional: true
+      variadic: true
     returnType: array
   propagation:
   - from: argument(0)
@@ -860,8 +873,9 @@
     - name: array
       type: array
     - name: rest
-      type: array
+      type: mixed
       optional: true
+      variadic: true
     returnType: array
   propagation:
   - from: argument(0)
@@ -874,12 +888,10 @@
     params:
     - name: array
       type: array
-    - name: arr2
-      type: array
-    - name: value_compare_func
+    - name: rest
       type: mixed
-    - name: key_compare_func
-      type: mixed
+      optional: true
+      variadic: true
     returnType: array
   propagation:
   - from: argument(0)
@@ -897,8 +909,9 @@
     - name: array
       type: array
     - name: rest
-      type: array
+      type: mixed
       optional: true
+      variadic: true
     returnType: array
   propagation:
   - from: argument(0)
@@ -912,8 +925,9 @@
     - name: array
       type: array
     - name: rest
-      type: array
+      type: mixed
       optional: true
+      variadic: true
     returnType: array
   propagation:
   - from: argument(0)
@@ -926,12 +940,10 @@
     params:
     - name: array
       type: array
-    - name: arr2
-      type: array
-    - name: value_compare_func
+    - name: rest
       type: mixed
-    - name: key_compare_func
-      type: mixed
+      optional: true
+      variadic: true
     returnType: array
   propagation:
   - from: argument(0)
@@ -961,9 +973,11 @@
     params:
     - name: array
       type: array
+      byRef: true
     - name: values
       type: mixed
       optional: true
+      variadic: true
     returnType: int
 - subject:
     function: array_values
@@ -980,35 +994,38 @@
   signature:
     params:
     - name: array
-      type: array
+      type: array|object
+      byRef: true
     - name: callback
       type: callable
     - name: arg
       type: mixed
       optional: true
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: array_walk_recursive
   signature:
     params:
     - name: array
-      type: array
+      type: array|object
+      byRef: true
     - name: callback
       type: callable
     - name: arg
       type: mixed
       optional: true
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: arsort
   signature:
     params:
     - name: array
       type: array
+      byRef: true
     - name: flags
       type: int
       optional: true
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: asin
   signature:
@@ -1029,18 +1046,19 @@
     params:
     - name: array
       type: array
+      byRef: true
     - name: flags
       type: int
       optional: true
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: assert
   signature:
     params:
     - name: assertion
-      type: bool
-    - name: description
       type: mixed
+    - name: description
+      type: Throwable|string|null
       optional: true
     returnType: bool
 - subject:
@@ -1128,7 +1146,7 @@
     function: atan2
   signature:
     params:
-    - name: y
+    - name: 'y'
       type: float
     - name: x
       type: float
@@ -1149,7 +1167,7 @@
     - name: strict
       type: bool
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -1374,26 +1392,12 @@
   - from: argument(0)
     to: return
 - subject:
-    function: bind_textdomain_codeset
-  signature:
-    params:
-    - name: domain
-      type: string
-    - name: codeset
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
     function: bindec
   signature:
     params:
     - name: binary_string
       type: string
-    returnType: float
+    returnType: int|float
 - subject:
     function: birdstep_autocommit
   signature:
@@ -1537,47 +1541,6 @@
   - from: argument(0)
     to: return
 - subject:
-    function: cal_days_in_month
-  signature:
-    params:
-    - name: calendar
-      type: int
-    - name: month
-      type: int
-    - name: year
-      type: int
-    returnType: int
-- subject:
-    function: cal_from_jd
-  signature:
-    params:
-    - name: julian_day
-      type: int
-    - name: calendar
-      type: int
-    returnType: array
-- subject:
-    function: cal_info
-  signature:
-    params:
-    - name: calendar
-      type: int
-      optional: true
-    returnType: array
-- subject:
-    function: cal_to_jd
-  signature:
-    params:
-    - name: calendar
-      type: int
-    - name: month
-      type: int
-    - name: day
-      type: int
-    - name: year
-      type: int
-    returnType: int
-- subject:
     function: calcul_hmac
   signature:
     params:
@@ -1638,6 +1601,7 @@
     - name: args
       type: mixed
       optional: true
+      variadic: true
     returnType: mixed
   propagation:
   - from: argument(0)
@@ -1705,7 +1669,7 @@
   signature:
     params:
     - name: num
-      type: float
+      type: int|float
     returnType: float
 - subject:
     function: chdb_create
@@ -1778,58 +1742,6 @@
   propagation:
   - from: argument(0)
     to: return
-- subject:
-    function: class_alias
-  signature:
-    params:
-    - name: class
-      type: string
-    - name: alias
-      type: string
-    - name: autoload
-      type: bool
-      optional: true
-    returnType: bool
-- subject:
-    function: class_exists
-  signature:
-    params:
-    - name: class
-      type: string
-    - name: autoload
-      type: bool
-      optional: true
-    returnType: bool
-- subject:
-    function: class_implements
-  signature:
-    params:
-    - name: object_or_class
-      type: object
-    - name: autoload
-      type: bool
-      optional: true
-    returnType: array
-- subject:
-    function: class_parents
-  signature:
-    params:
-    - name: object_or_class
-      type: object
-    - name: autoload
-      type: bool
-      optional: true
-    returnType: array
-- subject:
-    function: class_uses
-  signature:
-    params:
-    - name: object_or_class
-      type: object
-    - name: autoload
-      type: bool
-      optional: true
-    returnType: array
 - subject:
     function: classkit_import
   signature:
@@ -1917,7 +1829,7 @@
 - subject:
     function: cli_get_process_title
   signature:
-    returnType: string
+    returnType: ?string
 - subject:
     function: cli_set_process_title
   signature:
@@ -1930,13 +1842,13 @@
   signature:
     params:
     - name: dir_handle
-      type: resource
+      type: mixed
       optional: true
     returnType: void
 - subject:
     function: closelog
   signature:
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: co\\defer
   signature:
@@ -1978,210 +1890,15 @@
   - from: argument(1)
     to: return
 - subject:
-    function: collator_asort
-  signature:
-    params:
-    - name: object
-      type: mixed
-    - name: array
-      type: array
-    - name: flags
-      type: int
-      optional: true
-    returnType: bool
-- subject:
-    function: collator_compare
-  signature:
-    params:
-    - name: object
-      type: mixed
-    - name: string1
-      type: string
-    - name: string2
-      type: string
-    returnType: int
-- subject:
-    function: collator_create
-  signature:
-    params:
-    - name: locale
-      type: string
-    returnType: mixed
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: collator_get_attribute
-  signature:
-    params:
-    - name: object
-      type: mixed
-    - name: attribute
-      type: int
-    returnType: int
-- subject:
-    function: collator_get_error_code
-  signature:
-    params:
-    - name: object
-      type: mixed
-    returnType: int
-- subject:
-    function: collator_get_error_message
-  signature:
-    params:
-    - name: object
-      type: mixed
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: collator_get_locale
-  signature:
-    params:
-    - name: object
-      type: mixed
-    - name: type
-      type: int
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: collator_get_sort_key
-  signature:
-    params:
-    - name: object
-      type: mixed
-    - name: string
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: collator_get_strength
-  signature:
-    params:
-    - name: object
-      type: mixed
-    returnType: int
-- subject:
-    function: collator_set_attribute
-  signature:
-    params:
-    - name: object
-      type: mixed
-    - name: attribute
-      type: int
-    - name: value
-      type: int
-    returnType: bool
-- subject:
-    function: collator_set_strength
-  signature:
-    params:
-    - name: object
-      type: mixed
-    - name: strength
-      type: int
-    returnType: bool
-- subject:
-    function: collator_sort
-  signature:
-    params:
-    - name: object
-      type: mixed
-    - name: array
-      type: array
-    - name: flags
-      type: int
-      optional: true
-    returnType: bool
-- subject:
-    function: collator_sort_with_sort_keys
-  signature:
-    params:
-    - name: object
-      type: mixed
-    - name: array
-      type: array
-    returnType: bool
-- subject:
     function: com_addref
   signature:
     returnType: mixed
-- subject:
-    function: com_create_guid
-  signature:
-    returnType: string
-- subject:
-    function: com_event_sink
-  signature:
-    params:
-    - name: variant
-      type: mixed
-    - name: sink_object
-      type: object
-    - name: sink_interface
-      type: mixed
-      optional: true
-    returnType: bool
-- subject:
-    function: com_get_active_object
-  signature:
-    params:
-    - name: prog_id
-      type: string
-    - name: codepage
-      type: int
-      optional: true
-    returnType: mixed
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
 - subject:
     function: com_isenum
   signature:
     params:
     - name: com_module
       type: mixed
-    returnType: bool
-- subject:
-    function: com_load_typelib
-  signature:
-    params:
-    - name: typelib_name
-      type: string
-    - name: case_insensitive
-      type: bool
-      optional: true
-    returnType: bool
-- subject:
-    function: com_message_pump
-  signature:
-    params:
-    - name: timeout_milliseconds
-      type: int
-      optional: true
-    returnType: bool
-- subject:
-    function: com_print_typeinfo
-  signature:
-    params:
-    - name: variant
-      type: object
-    - name: dispatch_interface
-      type: string
-      optional: true
-    - name: display_sink
-      type: bool
-      optional: true
     returnType: bool
 - subject:
     function: commonmark\\parse
@@ -2277,9 +1994,9 @@
   signature:
     params:
     - name: var_name
-      type: array
+      type: mixed
     - name: var_names
-      type: array
+      type: mixed
       optional: true
       variadic: true
     returnType: array
@@ -2350,7 +2067,7 @@
     params:
     - name: string
       type: string
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -2508,7 +2225,7 @@
   signature:
     params:
     - name: value
-      type: mixed
+      type: Countable|array
     - name: mode
       type: int
       optional: true
@@ -2520,9 +2237,9 @@
     - name: string
       type: string
     - name: mode
-      type: mixed
+      type: int
       optional: true
-    returnType: array
+    returnType: array|string
   propagation:
   - from: argument(1)
     to: return
@@ -2587,7 +2304,7 @@
   signature:
     params:
     - name: array
-      type: array
+      type: array|object
     returnType: mixed
   propagation:
   - from: argument(0)
@@ -3374,44 +3091,6 @@
       type: string
     returnType: bool
 - subject:
-    function: dcgettext
-  signature:
-    params:
-    - name: domain
-      type: string
-    - name: message
-      type: string
-    - name: category
-      type: int
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: dcngettext
-  signature:
-    params:
-    - name: domain
-      type: string
-    - name: singular
-      type: string
-    - name: plural
-      type: string
-    - name: count
-      type: int
-    - name: category
-      type: int
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-  - from: argument(2)
-    to: return
-- subject:
     function: deaggregate
   signature:
     params:
@@ -3427,28 +3106,6 @@
   - from: argument(1)
     to: return
 - subject:
-    function: debug_backtrace
-  signature:
-    params:
-    - name: options
-      type: int
-      optional: true
-    - name: limit
-      type: int
-      optional: true
-    returnType: array
-- subject:
-    function: debug_print_backtrace
-  signature:
-    params:
-    - name: options
-      type: int
-      optional: true
-    - name: limit
-      type: int
-      optional: true
-    returnType: void
-- subject:
     function: debug_zval_dump
   signature:
     params:
@@ -3457,6 +3114,7 @@
     - name: values
       type: mixed
       optional: true
+      variadic: true
     returnType: void
 - subject:
     function: debugger_connect
@@ -3507,60 +3165,9 @@
       type: callable
     returnType: void
 - subject:
-    function: define
-  signature:
-    params:
-    - name: constant_name
-      type: string
-    - name: value
-      type: array
-    - name: case_insensitive
-      type: bool
-      optional: true
-    returnType: bool
-- subject:
     function: define_syslog_variables
   signature:
     returnType: void
-- subject:
-    function: defined
-  signature:
-    params:
-    - name: constant_name
-      type: string
-    returnType: bool
-- subject:
-    function: deflate_add
-  signature:
-    params:
-    - name: context
-      type: mixed
-    - name: data
-      type: string
-    - name: flush_mode
-      type: int
-      optional: true
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: deflate_init
-  signature:
-    params:
-    - name: encoding
-      type: int
-    - name: options
-      type: array
-      optional: true
-    returnType: mixed
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
 - subject:
     function: deg2rad
   signature:
@@ -3679,9 +3286,9 @@
     - name: directory
       type: string
     - name: context
-      type: resource
+      type: mixed
       optional: true
-    returnType: mixed
+    returnType: Directory|false
   propagation:
   - from: argument(0)
     to: return
@@ -3693,21 +3300,21 @@
     params:
     - name: directory
       type: string
-    returnType: float
+    returnType: float|false
 - subject:
     function: disk_total_space
   signature:
     params:
     - name: directory
       type: string
-    returnType: float
+    returnType: float|false
 - subject:
     function: diskfreespace
   signature:
     params:
     - name: directory
       type: string
-    returnType: float
+    returnType: float|false
 - subject:
     function: display_disabled_function
   signature:
@@ -3719,26 +3326,6 @@
     - name: extension_filename
       type: string
     returnType: bool
-- subject:
-    function: dngettext
-  signature:
-    params:
-    - name: domain
-      type: string
-    - name: singular
-      type: string
-    - name: plural
-      type: string
-    - name: count
-      type: int
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-  - from: argument(2)
-    to: return
 - subject:
     function: dns_check_record
   signature:
@@ -3756,10 +3343,12 @@
     - name: hostname
       type: string
     - name: hosts
-      type: array
+      type: mixed
+      byRef: true
     - name: weights
-      type: array
+      type: mixed
       optional: true
+      byRef: true
     returnType: bool
 - subject:
     function: dns_get_record
@@ -3771,15 +3360,17 @@
       type: int
       optional: true
     - name: authoritative_name_servers
-      type: array
+      type: mixed
       optional: true
+      byRef: true
     - name: additional_records
-      type: array
+      type: mixed
       optional: true
+      byRef: true
     - name: raw
       type: bool
       optional: true
-    returnType: array
+    returnType: array|false
   propagation:
   - from: argument(2)
     to: return
@@ -3824,16 +3415,6 @@
     - name: options
       type: int
     returnType: int
-- subject:
-    function: dom_import_simplexml
-  signature:
-    params:
-    - name: node
-      type: mixed
-    returnType: mixed
-  propagation:
-  - from: argument(0)
-    to: return
 - subject:
     function: dom_xpath_evaluate
   signature:
@@ -4001,28 +3582,6 @@
     - name: value
       type: mixed
     returnType: float
-- subject:
-    function: easter_date
-  signature:
-    params:
-    - name: year
-      type: int
-      optional: true
-    - name: mode
-      type: int
-      optional: true
-    returnType: int
-- subject:
-    function: easter_days
-  signature:
-    params:
-    - name: year
-      type: int
-      optional: true
-    - name: mode
-      type: int
-      optional: true
-    returnType: int
 - subject:
     function: eio_busy
   signature:
@@ -5281,221 +4840,12 @@
   - from: argument(6)
     to: return
 - subject:
-    function: enchant_broker_describe
-  signature:
-    params:
-    - name: broker
-      type: mixed
-    returnType: array
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: enchant_broker_dict_exists
-  signature:
-    params:
-    - name: broker
-      type: mixed
-    - name: tag
-      type: string
-    returnType: bool
-- subject:
-    function: enchant_broker_free
-  signature:
-    params:
-    - name: broker
-      type: mixed
-    returnType: bool
-- subject:
-    function: enchant_broker_free_dict
-  signature:
-    params:
-    - name: dictionary
-      type: mixed
-    returnType: bool
-- subject:
-    function: enchant_broker_get_dict_path
-  signature:
-    params:
-    - name: broker
-      type: mixed
-    - name: type
-      type: int
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: enchant_broker_get_error
-  signature:
-    params:
-    - name: broker
-      type: mixed
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: enchant_broker_init
-  signature:
-    returnType: mixed
-- subject:
-    function: enchant_broker_list_dicts
-  signature:
-    params:
-    - name: broker
-      type: mixed
-    returnType: array
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: enchant_broker_request_dict
-  signature:
-    params:
-    - name: broker
-      type: mixed
-    - name: tag
-      type: string
-    returnType: mixed
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: enchant_broker_request_pwl_dict
-  signature:
-    params:
-    - name: broker
-      type: mixed
-    - name: filename
-      type: string
-    returnType: mixed
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: enchant_broker_set_dict_path
-  signature:
-    params:
-    - name: broker
-      type: mixed
-    - name: type
-      type: int
-    - name: path
-      type: string
-    returnType: bool
-- subject:
-    function: enchant_broker_set_ordering
-  signature:
-    params:
-    - name: broker
-      type: mixed
-    - name: tag
-      type: string
-    - name: ordering
-      type: string
-    returnType: bool
-- subject:
-    function: enchant_dict_add_to_personal
-  signature:
-    params:
-    - name: dictionary
-      type: mixed
-    - name: word
-      type: string
-    returnType: void
-- subject:
-    function: enchant_dict_add_to_session
-  signature:
-    params:
-    - name: dictionary
-      type: mixed
-    - name: word
-      type: string
-    returnType: void
-- subject:
-    function: enchant_dict_check
-  signature:
-    params:
-    - name: dictionary
-      type: mixed
-    - name: word
-      type: string
-    returnType: bool
-- subject:
-    function: enchant_dict_describe
-  signature:
-    params:
-    - name: dictionary
-      type: mixed
-    returnType: array
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: enchant_dict_get_error
-  signature:
-    params:
-    - name: dictionary
-      type: mixed
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: enchant_dict_is_in_session
-  signature:
-    params:
-    - name: dictionary
-      type: mixed
-    - name: word
-      type: string
-    returnType: bool
-- subject:
-    function: enchant_dict_quick_check
-  signature:
-    params:
-    - name: dictionary
-      type: mixed
-    - name: word
-      type: string
-    - name: suggestions
-      type: array
-      optional: true
-    returnType: bool
-- subject:
-    function: enchant_dict_store_replacement
-  signature:
-    params:
-    - name: dictionary
-      type: mixed
-    - name: misspelled
-      type: string
-    - name: correct
-      type: string
-    returnType: void
-- subject:
-    function: enchant_dict_suggest
-  signature:
-    params:
-    - name: dictionary
-      type: mixed
-    - name: word
-      type: string
-    returnType: array
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
     function: end
   signature:
     params:
     - name: array
-      type: array
+      type: array|object
+      byRef: true
     returnType: mixed
   propagation:
   - from: argument(0)
@@ -5507,7 +4857,7 @@
 - subject:
     function: error_get_last
   signature:
-    returnType: array
+    returnType: ?array
 - subject:
     function: error_log
   signature:
@@ -5518,20 +4868,12 @@
       type: int
       optional: true
     - name: destination
-      type: string
+      type: ?string
       optional: true
     - name: additional_headers
-      type: string
+      type: ?string
       optional: true
     returnType: bool
-- subject:
-    function: error_reporting
-  signature:
-    params:
-    - name: error_level
-      type: int
-      optional: true
-    returnType: int
 - subject:
     function: escapeshellarg
   signature:

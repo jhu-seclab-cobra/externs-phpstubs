@@ -5,8 +5,8 @@
   signature:
     params:
     - name: socket
-      type: mixed
-    returnType: mixed
+      type: Socket
+    returnType: Socket|false
   propagation:
   - from: argument(0)
     to: return
@@ -15,8 +15,8 @@
   signature:
     params:
     - name: address
-      type: mixed
-    returnType: mixed
+      type: AddressInfo
+    returnType: Socket|false
   propagation:
   - from: argument(0)
     to: return
@@ -25,8 +25,8 @@
   signature:
     params:
     - name: address
-      type: mixed
-    returnType: mixed
+      type: AddressInfo
+    returnType: Socket|false
   propagation:
   - from: argument(0)
     to: return
@@ -35,7 +35,7 @@
   signature:
     params:
     - name: address
-      type: mixed
+      type: AddressInfo
     returnType: array
   propagation:
   - from: argument(0)
@@ -47,12 +47,12 @@
     - name: host
       type: string
     - name: service
-      type: string
+      type: ?string
       optional: true
     - name: hints
       type: array
       optional: true
-    returnType: array
+    returnType: array|false
   propagation:
   - from: argument(2)
     to: return
@@ -61,7 +61,7 @@
   signature:
     params:
     - name: socket
-      type: mixed
+      type: Socket
     - name: address
       type: string
     - name: port
@@ -73,7 +73,7 @@
   signature:
     params:
     - name: socket
-      type: mixed
+      type: ?Socket
       optional: true
     returnType: void
 - subject:
@@ -81,7 +81,7 @@
   signature:
     params:
     - name: socket
-      type: mixed
+      type: Socket
     returnType: void
 - subject:
     function: socket_cmsg_space
@@ -94,17 +94,17 @@
     - name: num
       type: int
       optional: true
-    returnType: int
+    returnType: ?int
 - subject:
     function: socket_connect
   signature:
     params:
     - name: socket
-      type: mixed
+      type: Socket
     - name: address
       type: string
     - name: port
-      type: int
+      type: ?int
       optional: true
     returnType: bool
 - subject:
@@ -117,7 +117,7 @@
       type: int
     - name: protocol
       type: int
-    returnType: mixed
+    returnType: Socket|false
   propagation:
   - from: argument(0)
     to: return
@@ -134,7 +134,7 @@
     - name: backlog
       type: int
       optional: true
-    returnType: mixed
+    returnType: Socket|false
   propagation:
   - from: argument(0)
     to: return
@@ -151,15 +151,16 @@
     - name: protocol
       type: int
     - name: pair
-      type: array
+      type: mixed
+      byRef: true
     returnType: bool
 - subject:
     function: socket_export_stream
   signature:
     params:
     - name: socket
-      type: mixed
-    returnType: resource
+      type: Socket
+    returnType: mixed
   propagation:
   - from: argument(0)
     to: return
@@ -168,22 +169,12 @@
   signature:
     params:
     - name: socket
-      type: mixed
+      type: Socket
     - name: level
       type: int
     - name: option
       type: int
-    returnType: array
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: socket_get_status
-  signature:
-    params:
-    - name: stream
-      type: mixed
-    returnType: array
+    returnType: array|int|false
   propagation:
   - from: argument(0)
     to: return
@@ -192,12 +183,12 @@
   signature:
     params:
     - name: socket
-      type: mixed
+      type: Socket
     - name: level
       type: int
     - name: option
       type: int
-    returnType: array
+    returnType: array|int|false
   propagation:
   - from: argument(0)
     to: return
@@ -206,32 +197,36 @@
   signature:
     params:
     - name: socket
-      type: mixed
+      type: Socket
     - name: address
-      type: string
+      type: mixed
+      byRef: true
     - name: port
-      type: int
+      type: mixed
       optional: true
+      byRef: true
     returnType: bool
 - subject:
     function: socket_getsockname
   signature:
     params:
     - name: socket
-      type: mixed
+      type: Socket
     - name: address
-      type: string
+      type: mixed
+      byRef: true
     - name: port
-      type: int
+      type: mixed
       optional: true
+      byRef: true
     returnType: bool
 - subject:
     function: socket_import_stream
   signature:
     params:
     - name: stream
-      type: resource
-    returnType: mixed
+      type: mixed
+    returnType: Socket|false
   propagation:
   - from: argument(0)
     to: return
@@ -240,7 +235,7 @@
   signature:
     params:
     - name: socket
-      type: mixed
+      type: ?Socket
       optional: true
     returnType: int
 - subject:
@@ -248,7 +243,7 @@
   signature:
     params:
     - name: socket
-      type: mixed
+      type: Socket
     - name: backlog
       type: int
       optional: true
@@ -258,13 +253,13 @@
   signature:
     params:
     - name: socket
-      type: mixed
+      type: Socket
     - name: length
       type: int
     - name: mode
       type: int
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -273,91 +268,99 @@
   signature:
     params:
     - name: socket
-      type: mixed
+      type: Socket
     - name: data
-      type: string
+      type: mixed
+      byRef: true
     - name: length
       type: int
     - name: flags
       type: int
-    returnType: int
+    returnType: int|false
 - subject:
     function: socket_recvfrom
   signature:
     params:
     - name: socket
-      type: mixed
+      type: Socket
     - name: data
-      type: string
+      type: mixed
+      byRef: true
     - name: length
       type: int
     - name: flags
       type: int
     - name: address
-      type: string
+      type: mixed
+      byRef: true
     - name: port
-      type: int
+      type: mixed
       optional: true
-    returnType: int
+      byRef: true
+    returnType: int|false
 - subject:
     function: socket_recvmsg
   signature:
     params:
     - name: socket
-      type: mixed
+      type: Socket
     - name: message
       type: array
+      byRef: true
     - name: flags
       type: int
       optional: true
-    returnType: int
+    returnType: int|false
 - subject:
     function: socket_select
   signature:
     params:
-    - name: rw read
-      type: array
-    - name: rw write
-      type: array
-    - name: rw except
-      type: array
+    - name: read
+      type: ?array
+      byRef: true
+    - name: write
+      type: ?array
+      byRef: true
+    - name: except
+      type: ?array
+      byRef: true
     - name: seconds
-      type: int
+      type: ?int
     - name: microseconds
       type: int
       optional: true
-    returnType: int
+    returnType: int|false
 - subject:
     function: socket_send
   signature:
     params:
     - name: socket
-      type: mixed
+      type: Socket
     - name: data
       type: string
     - name: length
       type: int
     - name: flags
       type: int
-    returnType: int
+    returnType: int|false
 - subject:
     function: socket_sendmsg
   signature:
     params:
     - name: socket
-      type: mixed
+      type: Socket
     - name: message
       type: array
     - name: flags
       type: int
       optional: true
-    returnType: int
+    returnType: int|false
 - subject:
     function: socket_sendto
   signature:
     params:
     - name: socket
-      type: mixed
+      type: Socket
     - name: data
       type: string
     - name: length
@@ -367,76 +370,55 @@
     - name: address
       type: string
     - name: port
-      type: int
+      type: ?int
       optional: true
-    returnType: int
+    returnType: int|false
 - subject:
     function: socket_set_block
   signature:
     params:
     - name: socket
-      type: mixed
-    returnType: bool
-- subject:
-    function: socket_set_blocking
-  signature:
-    params:
-    - name: stream
-      type: mixed
-    - name: enable
-      type: bool
+      type: Socket
     returnType: bool
 - subject:
     function: socket_set_nonblock
   signature:
     params:
     - name: socket
-      type: mixed
+      type: Socket
     returnType: bool
 - subject:
     function: socket_set_option
   signature:
     params:
     - name: socket
-      type: mixed
+      type: Socket
     - name: level
       type: int
     - name: option
       type: int
     - name: value
-      type: array
-    returnType: bool
-- subject:
-    function: socket_set_timeout
-  signature:
-    params:
-    - name: stream
-      type: resource
-    - name: seconds
-      type: int
-    - name: microseconds
-      type: int
-      optional: true
+      type: mixed
     returnType: bool
 - subject:
     function: socket_setopt
   signature:
     params:
     - name: socket
-      type: mixed
+      type: Socket
     - name: level
       type: int
     - name: option
       type: int
     - name: value
-      type: array
+      type: mixed
     returnType: bool
 - subject:
     function: socket_shutdown
   signature:
     params:
     - name: socket
-      type: mixed
+      type: Socket
     - name: mode
       type: int
       optional: true
@@ -453,22 +435,22 @@
   signature:
     params:
     - name: socket
-      type: mixed
+      type: Socket
     - name: data
       type: string
     - name: length
-      type: int
+      type: ?int
       optional: true
-    returnType: int
+    returnType: int|false
 - subject:
     function: socket_wsaprotocol_info_export
   signature:
     params:
     - name: socket
-      type: mixed
+      type: Socket
     - name: process_id
       type: int
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -478,7 +460,7 @@
     params:
     - name: info_id
       type: string
-    returnType: mixed
+    returnType: Socket|false
   propagation:
   - from: argument(0)
     to: return
@@ -488,4 +470,19 @@
     params:
     - name: info_id
       type: string
+    returnType: bool
+- subject:
+    class: addressinfo
+  signature:
+    classifier: class
+- subject:
+    class: socket
+  signature:
+    classifier: class
+- subject:
+    function: socket_atmark
+  signature:
+    params:
+    - name: socket
+      type: Socket
     returnType: bool

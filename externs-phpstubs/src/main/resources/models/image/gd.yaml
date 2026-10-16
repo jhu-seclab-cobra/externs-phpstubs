@@ -1,34 +1,17 @@
 # Generated from stubs/image/gd.yaml by tools/convert_stubs.py v2.
 # Do not hand-edit; corrections belong in a higher configuration layer.
 - subject:
-    function: image_type_to_extension
-  signature:
-    params:
-    - name: image_type
-      type: int
-    - name: include_dot
-      type: bool
-      optional: true
-    returnType: string
-- subject:
-    function: image_type_to_mime_type
-  signature:
-    params:
-    - name: image_type
-      type: int
-    returnType: string
-- subject:
     function: imageaffine
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: affine
       type: array
     - name: clip
-      type: array
+      type: ?array
       optional: true
-    returnType: mixed
+    returnType: GdImage|false
   propagation:
   - from: argument(0)
     to: return
@@ -44,7 +27,7 @@
       type: array
     - name: matrix2
       type: array
-    returnType: array
+    returnType: array|false
   propagation:
   - from: argument(0)
     to: return
@@ -57,8 +40,8 @@
     - name: type
       type: int
     - name: options
-      type: array
-    returnType: array
+      type: mixed
+    returnType: array|false
   propagation:
   - from: argument(1)
     to: return
@@ -67,25 +50,25 @@
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: enable
       type: bool
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: imageantialias
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: enable
       type: bool
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: imagearc
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: center_x
       type: int
     - name: center_y
@@ -100,15 +83,15 @@
       type: int
     - name: color
       type: int
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: imagebmp
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: file
-      type: resource
+      type: mixed
       optional: true
     - name: compressed
       type: bool
@@ -119,54 +102,54 @@
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: font
-      type: int
+      type: GdFont|int
     - name: x
       type: int
-    - name: y
+    - name: 'y'
       type: int
     - name: char
       type: string
     - name: color
       type: int
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: imagecharup
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: font
-      type: int
+      type: GdFont|int
     - name: x
       type: int
-    - name: y
+    - name: 'y'
       type: int
     - name: char
       type: string
     - name: color
       type: int
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: imagecolorallocate
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: red
       type: int
     - name: green
       type: int
     - name: blue
       type: int
-    returnType: int
+    returnType: int|false
 - subject:
     function: imagecolorallocatealpha
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: red
       type: int
     - name: green
@@ -175,24 +158,24 @@
       type: int
     - name: alpha
       type: int
-    returnType: int
+    returnType: int|false
 - subject:
     function: imagecolorat
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: x
       type: int
-    - name: y
+    - name: 'y'
       type: int
-    returnType: int
+    returnType: int|false
 - subject:
     function: imagecolorclosest
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: red
       type: int
     - name: green
@@ -205,7 +188,7 @@
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: red
       type: int
     - name: green
@@ -220,7 +203,7 @@
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: red
       type: int
     - name: green
@@ -233,16 +216,16 @@
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: color
       type: int
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: imagecolorexact
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: red
       type: int
     - name: green
@@ -255,7 +238,7 @@
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: red
       type: int
     - name: green
@@ -270,16 +253,16 @@
   signature:
     params:
     - name: image1
-      type: mixed
+      type: GdImage
     - name: image2
-      type: mixed
-    returnType: bool
+      type: GdImage
+    returnType: 'true'
 - subject:
     function: imagecolorresolve
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: red
       type: int
     - name: green
@@ -292,7 +275,7 @@
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: red
       type: int
     - name: green
@@ -307,7 +290,7 @@
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: color
       type: int
     - name: red
@@ -319,13 +302,13 @@
     - name: alpha
       type: int
       optional: true
-    returnType: mixed
+    returnType: false|null
 - subject:
     function: imagecolorsforindex
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: color
       type: int
     returnType: array
@@ -337,16 +320,16 @@
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     returnType: int
 - subject:
     function: imagecolortransparent
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: color
-      type: int
+      type: ?int
       optional: true
     returnType: int
 - subject:
@@ -354,7 +337,7 @@
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: matrix
       type: array
     - name: divisor
@@ -367,9 +350,9 @@
   signature:
     params:
     - name: dst_image
-      type: mixed
+      type: GdImage
     - name: src_image
-      type: mixed
+      type: GdImage
     - name: dst_x
       type: int
     - name: dst_y
@@ -382,15 +365,15 @@
       type: int
     - name: src_height
       type: int
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: imagecopymerge
   signature:
     params:
     - name: dst_image
-      type: mixed
+      type: GdImage
     - name: src_image
-      type: mixed
+      type: GdImage
     - name: dst_x
       type: int
     - name: dst_y
@@ -405,15 +388,15 @@
       type: int
     - name: pct
       type: int
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: imagecopymergegray
   signature:
     params:
     - name: dst_image
-      type: mixed
+      type: GdImage
     - name: src_image
-      type: mixed
+      type: GdImage
     - name: dst_x
       type: int
     - name: dst_y
@@ -428,15 +411,15 @@
       type: int
     - name: pct
       type: int
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: imagecopyresampled
   signature:
     params:
     - name: dst_image
-      type: mixed
+      type: GdImage
     - name: src_image
-      type: mixed
+      type: GdImage
     - name: dst_x
       type: int
     - name: dst_y
@@ -453,15 +436,15 @@
       type: int
     - name: src_height
       type: int
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: imagecopyresized
   signature:
     params:
     - name: dst_image
-      type: mixed
+      type: GdImage
     - name: src_image
-      type: mixed
+      type: GdImage
     - name: dst_x
       type: int
     - name: dst_y
@@ -478,7 +461,7 @@
       type: int
     - name: src_height
       type: int
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: imagecreate
   signature:
@@ -487,7 +470,7 @@
       type: int
     - name: height
       type: int
-    returnType: mixed
+    returnType: GdImage|false
   propagation:
   - from: argument(0)
     to: return
@@ -499,7 +482,7 @@
     params:
     - name: filename
       type: string
-    returnType: mixed
+    returnType: GdImage|false
   propagation:
   - from: argument(0)
     to: return
@@ -509,7 +492,7 @@
     params:
     - name: filename
       type: string
-    returnType: mixed
+    returnType: GdImage|false
   propagation:
   - from: argument(0)
     to: return
@@ -519,7 +502,7 @@
     params:
     - name: filename
       type: string
-    returnType: mixed
+    returnType: GdImage|false
   propagation:
   - from: argument(0)
     to: return
@@ -531,13 +514,13 @@
       type: string
     - name: x
       type: int
-    - name: y
+    - name: 'y'
       type: int
     - name: width
       type: int
     - name: height
       type: int
-    returnType: mixed
+    returnType: GdImage|false
   propagation:
   - from: argument(0)
     to: return
@@ -555,7 +538,7 @@
     params:
     - name: filename
       type: string
-    returnType: mixed
+    returnType: GdImage|false
   propagation:
   - from: argument(0)
     to: return
@@ -565,7 +548,7 @@
     params:
     - name: filename
       type: string
-    returnType: mixed
+    returnType: GdImage|false
   propagation:
   - from: argument(0)
     to: return
@@ -575,7 +558,7 @@
     params:
     - name: filename
       type: string
-    returnType: mixed
+    returnType: GdImage|false
   propagation:
   - from: argument(0)
     to: return
@@ -585,7 +568,7 @@
     params:
     - name: data
       type: string
-    returnType: mixed
+    returnType: GdImage|false
   propagation:
   - from: argument(0)
     to: return
@@ -595,7 +578,7 @@
     params:
     - name: filename
       type: string
-    returnType: mixed
+    returnType: GdImage|false
   propagation:
   - from: argument(0)
     to: return
@@ -605,7 +588,7 @@
     params:
     - name: filename
       type: string
-    returnType: mixed
+    returnType: GdImage|false
   propagation:
   - from: argument(0)
     to: return
@@ -615,7 +598,7 @@
     params:
     - name: filename
       type: string
-    returnType: mixed
+    returnType: GdImage|false
   propagation:
   - from: argument(0)
     to: return
@@ -625,7 +608,7 @@
     params:
     - name: filename
       type: string
-    returnType: mixed
+    returnType: GdImage|false
   propagation:
   - from: argument(0)
     to: return
@@ -635,7 +618,7 @@
     params:
     - name: filename
       type: string
-    returnType: mixed
+    returnType: GdImage|false
   propagation:
   - from: argument(0)
     to: return
@@ -647,7 +630,7 @@
       type: int
     - name: height
       type: int
-    returnType: mixed
+    returnType: GdImage|false
   propagation:
   - from: argument(0)
     to: return
@@ -658,10 +641,10 @@
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: rectangle
       type: array
-    returnType: mixed
+    returnType: GdImage|false
   propagation:
   - from: argument(0)
     to: return
@@ -672,7 +655,7 @@
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: mode
       type: int
       optional: true
@@ -682,7 +665,7 @@
     - name: color
       type: int
       optional: true
-    returnType: mixed
+    returnType: GdImage|false
   propagation:
   - from: argument(0)
     to: return
@@ -697,7 +680,7 @@
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: x1
       type: int
     - name: y1
@@ -708,20 +691,20 @@
       type: int
     - name: color
       type: int
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: imagedestroy
   signature:
     params:
     - name: image
-      type: mixed
-    returnType: bool
+      type: GdImage
+    returnType: 'true'
 - subject:
     function: imageellipse
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: center_x
       type: int
     - name: center_y
@@ -732,26 +715,26 @@
       type: int
     - name: color
       type: int
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: imagefill
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: x
       type: int
-    - name: y
+    - name: 'y'
       type: int
     - name: color
       type: int
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: imagefilledarc
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: center_x
       type: int
     - name: center_y
@@ -768,13 +751,13 @@
       type: int
     - name: style
       type: int
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: imagefilledellipse
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: center_x
       type: int
     - name: center_y
@@ -785,19 +768,19 @@
       type: int
     - name: color
       type: int
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: imagefilledpolygon
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: points
       type: array
     - name: num_points_or_color
       type: int
     - name: color
-      type: int
+      type: ?int
       optional: true
     returnType: bool
 - subject:
@@ -805,7 +788,7 @@
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: x1
       type: int
     - name: y1
@@ -816,56 +799,57 @@
       type: int
     - name: color
       type: int
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: imagefilltoborder
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: x
       type: int
-    - name: y
+    - name: 'y'
       type: int
     - name: border_color
       type: int
     - name: color
       type: int
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: imagefilter
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: filter
       type: int
     - name: args
-      type: array
+      type: mixed
       optional: true
+      variadic: true
     returnType: bool
 - subject:
     function: imageflip
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: mode
       type: int
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: imagefontheight
   signature:
     params:
     - name: font
-      type: int
+      type: GdFont|int
     returnType: int
 - subject:
     function: imagefontwidth
   signature:
     params:
     - name: font
-      type: int
+      type: GdFont|int
     returnType: int
 - subject:
     function: imageftbbox
@@ -882,7 +866,7 @@
     - name: options
       type: array
       optional: true
-    returnType: array
+    returnType: array|false
   propagation:
   - from: argument(4)
     to: return
@@ -891,14 +875,14 @@
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: size
       type: float
     - name: angle
       type: float
     - name: x
       type: int
-    - name: y
+    - name: 'y'
       type: int
     - name: color
       type: int
@@ -909,7 +893,7 @@
     - name: options
       type: array
       optional: true
-    returnType: array
+    returnType: array|false
   propagation:
   - from: argument(0)
     to: return
@@ -920,20 +904,20 @@
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: input_gamma
       type: float
     - name: output_gamma
       type: float
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: imagegd
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: file
-      type: string
+      type: ?string
       optional: true
     returnType: bool
 - subject:
@@ -941,9 +925,9 @@
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: file
-      type: string
+      type: ?string
       optional: true
     - name: chunk_size
       type: int
@@ -957,7 +941,7 @@
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     returnType: array
   propagation:
   - from: argument(0)
@@ -967,22 +951,22 @@
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     returnType: int
 - subject:
     function: imagegif
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: file
-      type: resource
+      type: mixed
       optional: true
     returnType: bool
 - subject:
     function: imagegrabscreen
   signature:
-    returnType: mixed
+    returnType: GdImage|false
 - subject:
     function: imagegrabwindow
   signature:
@@ -990,9 +974,9 @@
     - name: handle
       type: int
     - name: client_area
-      type: int
+      type: bool
       optional: true
-    returnType: mixed
+    returnType: GdImage|false
   propagation:
   - from: argument(0)
     to: return
@@ -1003,9 +987,9 @@
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: enable
-      type: bool
+      type: ?bool
       optional: true
     returnType: bool
 - subject:
@@ -1013,16 +997,16 @@
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     returnType: bool
 - subject:
     function: imagejpeg
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: file
-      type: resource
+      type: mixed
       optional: true
     - name: quality
       type: int
@@ -1033,16 +1017,16 @@
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: effect
       type: int
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: imageline
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: x1
       type: int
     - name: y1
@@ -1053,26 +1037,26 @@
       type: int
     - name: color
       type: int
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: imageloadfont
   signature:
     params:
     - name: filename
       type: string
-    returnType: int
+    returnType: GdFont|false
 - subject:
     function: imageopenpolygon
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: points
       type: array
     - name: num_points_or_color
       type: int
     - name: color
-      type: int
+      type: ?int
       optional: true
     returnType: bool
 - subject:
@@ -1080,25 +1064,25 @@
   signature:
     params:
     - name: dst
-      type: mixed
+      type: GdImage
     - name: src
-      type: mixed
+      type: GdImage
     returnType: void
 - subject:
     function: imagepalettetotruecolor
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     returnType: bool
 - subject:
     function: imagepng
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: file
-      type: resource
+      type: mixed
       optional: true
     - name: quality
       type: int
@@ -1112,13 +1096,13 @@
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: points
       type: array
     - name: num_points_or_color
       type: int
     - name: color
-      type: int
+      type: ?int
       optional: true
     returnType: bool
 - subject:
@@ -1126,7 +1110,7 @@
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: x1
       type: int
     - name: y1
@@ -1137,20 +1121,20 @@
       type: int
     - name: color
       type: int
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: imageresolution
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: resolution_x
-      type: int
+      type: ?int
       optional: true
     - name: resolution_y
-      type: int
+      type: ?int
       optional: true
-    returnType: array
+    returnType: array|true
   propagation:
   - from: argument(0)
     to: return
@@ -1159,15 +1143,12 @@
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: angle
       type: float
     - name: background_color
       type: int
-    - name: ignore_transparent
-      type: bool
-      optional: true
-    returnType: mixed
+    returnType: GdImage|false
   propagation:
   - from: argument(0)
     to: return
@@ -1175,23 +1156,21 @@
     to: return
   - from: argument(2)
     to: return
-  - from: argument(3)
-    to: return
 - subject:
     function: imagesavealpha
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: enable
       type: bool
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: imagescale
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: width
       type: int
     - name: height
@@ -1200,7 +1179,7 @@
     - name: mode
       type: int
       optional: true
-    returnType: mixed
+    returnType: GdImage|false
   propagation:
   - from: argument(0)
     to: return
@@ -1215,16 +1194,16 @@
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: brush
-      type: mixed
-    returnType: bool
+      type: GdImage
+    returnType: 'true'
 - subject:
     function: imagesetclip
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: x1
       type: int
     - name: y1
@@ -1233,13 +1212,13 @@
       type: int
     - name: y2
       type: int
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: imagesetinterpolation
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: method
       type: int
       optional: true
@@ -1249,20 +1228,20 @@
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: x
       type: int
-    - name: y
+    - name: 'y'
       type: int
     - name: color
       type: int
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: imagesetstyle
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: style
       type: array
     returnType: bool
@@ -1271,73 +1250,73 @@
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: thickness
       type: int
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: imagesettile
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: tile
-      type: mixed
-    returnType: bool
+      type: GdImage
+    returnType: 'true'
 - subject:
     function: imagestring
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: font
-      type: int
+      type: GdFont|int
     - name: x
       type: int
-    - name: y
+    - name: 'y'
       type: int
     - name: string
       type: string
     - name: color
       type: int
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: imagestringup
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: font
-      type: int
+      type: GdFont|int
     - name: x
       type: int
-    - name: y
+    - name: 'y'
       type: int
     - name: string
       type: string
     - name: color
       type: int
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: imagesx
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     returnType: int
 - subject:
     function: imagesy
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     returnType: int
 - subject:
     function: imagetruecolortopalette
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: dither
       type: bool
     - name: num_colors
@@ -1358,7 +1337,7 @@
     - name: options
       type: array
       optional: true
-    returnType: array
+    returnType: array|false
   propagation:
   - from: argument(4)
     to: return
@@ -1367,14 +1346,14 @@
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: size
       type: float
     - name: angle
       type: float
     - name: x
       type: int
-    - name: y
+    - name: 'y'
       type: int
     - name: color
       type: int
@@ -1385,7 +1364,7 @@
     - name: options
       type: array
       optional: true
-    returnType: array
+    returnType: array|false
   propagation:
   - from: argument(0)
     to: return
@@ -1400,12 +1379,12 @@
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: file
-      type: resource
+      type: mixed
       optional: true
     - name: foreground_color
-      type: int
+      type: ?int
       optional: true
     returnType: bool
 - subject:
@@ -1413,9 +1392,9 @@
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: file
-      type: resource
+      type: mixed
       optional: true
     - name: quality
       type: int
@@ -1426,10 +1405,45 @@
   signature:
     params:
     - name: image
-      type: mixed
+      type: GdImage
     - name: filename
-      type: string
+      type: ?string
     - name: foreground_color
+      type: ?int
+      optional: true
+    returnType: bool
+- subject:
+    class: gdfont
+  signature:
+    classifier: class
+- subject:
+    function: imageavif
+  signature:
+    params:
+    - name: image
+      type: GdImage
+    - name: file
+      type: mixed
+      optional: true
+    - name: quality
+      type: int
+      optional: true
+    - name: speed
       type: int
       optional: true
     returnType: bool
+- subject:
+    function: imagecreatefromavif
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: GdImage|false
+- subject:
+    class: gdimage
+  signature:
+    classifier: class
+- subject:
+    function: gd_info
+  signature:
+    returnType: array

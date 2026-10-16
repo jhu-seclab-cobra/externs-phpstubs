@@ -5,75 +5,75 @@
   signature:
     params:
     - name: text
-      type: int
+      type: mixed
     returnType: bool
 - subject:
     function: ctype_alpha
   signature:
     params:
     - name: text
-      type: int
+      type: mixed
     returnType: bool
 - subject:
     function: ctype_cntrl
   signature:
     params:
     - name: text
-      type: int
+      type: mixed
     returnType: bool
 - subject:
     function: ctype_digit
   signature:
     params:
     - name: text
-      type: int
+      type: mixed
     returnType: bool
 - subject:
     function: ctype_graph
   signature:
     params:
     - name: text
-      type: int
+      type: mixed
     returnType: bool
 - subject:
     function: ctype_lower
   signature:
     params:
     - name: text
-      type: int
+      type: mixed
     returnType: bool
 - subject:
     function: ctype_print
   signature:
     params:
     - name: text
-      type: int
+      type: mixed
     returnType: bool
 - subject:
     function: ctype_punct
   signature:
     params:
     - name: text
-      type: int
+      type: mixed
     returnType: bool
 - subject:
     function: ctype_space
   signature:
     params:
     - name: text
-      type: int
+      type: mixed
     returnType: bool
 - subject:
     function: ctype_upper
   signature:
     params:
     - name: text
-      type: int
+      type: mixed
     returnType: bool
 - subject:
     function: ctype_xdigit
   signature:
     params:
     - name: text
-      type: int
+      type: mixed
     returnType: bool

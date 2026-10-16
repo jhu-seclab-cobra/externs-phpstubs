@@ -12,7 +12,8 @@ import kotlin.test.assertTrue
 
 /**
  * Tests for [StubResources]: the bundled roots and the opener over a root. The shipped sets themselves:
- * [TaintSetTest], [TaintRulesSetTest], [ValueRulesSetTest], [VocabularySetTest], [ManualDeclarationsTest].
+ * [TaintSetTest], [TaintRulesSetTest], [ValueRulesSetTest], [VocabularySetTest], [ManualDeclarationsTest],
+ * [ClassHierarchyTest], [ReflectionOracleTest].
  *
  * - `roots name the bundled set directories` — verifies the six constants against the documented layout
  * - `opener resolves a shipped resource` — verifies a present path yields a stream under [StubResources.MODELS]

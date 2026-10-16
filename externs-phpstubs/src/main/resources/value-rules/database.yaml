@@ -1,5 +1,5 @@
 # Hand-maintained value rules set: value semantics the generated declarations lack or state wrongly.
-# Database access (PHP manual: MySQLi, PostgreSQL).
+# Database access (PHP manual: MySQLi, PDO, PostgreSQL, SQLite3).
 # An entry whose unit differs from the generated one carries the PHP manual reason above it.
 
 # PHP manual: returns bool; the generated declaration's bool return type is confirmed.
@@ -24,3 +24,31 @@
 - subject: {function: pg_send_query}
   returns: any
   propagation: [{from: argument(1), to: return}]
+# PHP manual: returns the affected row count or false.
+- subject: {method: PDO::exec}
+  returns: any
+  propagation: [{from: argument(0), to: return}]
+# PHP manual: returns a PDOStatement or false.
+- subject: {method: PDO::query}
+  returns: any
+  propagation: [{from: argument(0), to: return}]
+# PHP manual: returns bool.
+- subject: {method: SQLite3::exec}
+  returns: bool
+  propagation: [{from: argument(0), to: return}]
+# PHP manual: returns an SQLite3Result or false.
+- subject: {method: SQLite3::query}
+  returns: any
+  propagation: [{from: argument(0), to: return}]
+# PHP manual: returns bool.
+- subject: {method: mysqli::multi_query}
+  returns: bool
+  propagation: [{from: argument(0), to: return}]
+# PHP manual: returns a mysqli_result, true, or false depending on the query.
+- subject: {method: mysqli::query}
+  returns: any
+  propagation: [{from: argument(0), to: return}]
+# PHP manual: returns bool.
+- subject: {method: mysqli::real_query}
+  returns: bool
+  propagation: [{from: argument(0), to: return}]

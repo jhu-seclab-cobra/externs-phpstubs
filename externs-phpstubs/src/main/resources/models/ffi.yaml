@@ -1,0 +1,258 @@
+# Generated from php-src stubs by tools/extract_hierarchy.py.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    class: ffi
+  signature:
+    classifier: class
+- subject:
+    class: ffi\cdata
+  signature:
+    classifier: class
+- subject:
+    class: ffi\ctype
+  signature:
+    classifier: class
+- subject:
+    class: ffi\exception
+  signature:
+    classifier: class
+    parent: error
+- subject:
+    class: ffi\parserexception
+  signature:
+    classifier: class
+    parent: ffi\exception
+- subject:
+    method: FFI::addr
+  signature:
+    params:
+    - name: ptr
+      type: FFI\CData
+      byRef: true
+    returnType: FFI\CData
+- subject:
+    method: FFI::alignof
+  signature:
+    params:
+    - name: ptr
+      type: FFI\CData|FFI\CType
+      byRef: true
+    returnType: int
+- subject:
+    method: FFI::arrayType
+  signature:
+    params:
+    - name: type
+      type: FFI\CType
+    - name: dimensions
+      type: array
+    returnType: FFI\CType
+- subject:
+    method: FFI::cast
+  signature:
+    params:
+    - name: type
+      type: FFI\CType|string
+    - name: ptr
+      type: mixed
+      byRef: true
+    returnType: FFI\CData
+- subject:
+    method: FFI::cdef
+  signature:
+    params:
+    - name: code
+      type: string
+      optional: true
+    - name: lib
+      type: ?string
+      optional: true
+    returnType: FFI
+- subject:
+    method: FFI::free
+  signature:
+    params:
+    - name: ptr
+      type: FFI\CData
+      byRef: true
+    returnType: void
+- subject:
+    method: FFI::isNull
+  signature:
+    params:
+    - name: ptr
+      type: FFI\CData
+      byRef: true
+    returnType: bool
+- subject:
+    method: FFI::load
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: ?FFI
+- subject:
+    method: FFI::memcmp
+  signature:
+    params:
+    - name: ptr1
+      type: mixed
+      byRef: true
+    - name: ptr2
+      type: mixed
+      byRef: true
+    - name: size
+      type: int
+    returnType: int
+- subject:
+    method: FFI::memcpy
+  signature:
+    params:
+    - name: to
+      type: FFI\CData
+      byRef: true
+    - name: from
+      type: mixed
+      byRef: true
+    - name: size
+      type: int
+    returnType: void
+- subject:
+    method: FFI::memset
+  signature:
+    params:
+    - name: ptr
+      type: FFI\CData
+      byRef: true
+    - name: value
+      type: int
+    - name: size
+      type: int
+    returnType: void
+- subject:
+    method: FFI::new
+  signature:
+    params:
+    - name: type
+      type: FFI\CType|string
+    - name: owned
+      type: bool
+      optional: true
+    - name: persistent
+      type: bool
+      optional: true
+    returnType: FFI\CData
+- subject:
+    method: FFI::scope
+  signature:
+    params:
+    - name: name
+      type: string
+    returnType: FFI
+- subject:
+    method: FFI::sizeof
+  signature:
+    params:
+    - name: ptr
+      type: FFI\CData|FFI\CType
+      byRef: true
+    returnType: int
+- subject:
+    method: FFI::string
+  signature:
+    params:
+    - name: ptr
+      type: FFI\CData
+      byRef: true
+    - name: size
+      type: ?int
+      optional: true
+    returnType: string
+- subject:
+    method: FFI::type
+  signature:
+    params:
+    - name: type
+      type: string
+    returnType: FFI\CType
+- subject:
+    method: FFI::typeof
+  signature:
+    params:
+    - name: ptr
+      type: FFI\CData
+      byRef: true
+    returnType: FFI\CType
+- subject:
+    method: FFI\CType::getAlignment
+  signature:
+    returnType: int
+- subject:
+    method: FFI\CType::getArrayElementType
+  signature:
+    returnType: FFI\CType
+- subject:
+    method: FFI\CType::getArrayLength
+  signature:
+    returnType: int
+- subject:
+    method: FFI\CType::getAttributes
+  signature:
+    returnType: int
+- subject:
+    method: FFI\CType::getEnumKind
+  signature:
+    returnType: int
+- subject:
+    method: FFI\CType::getFuncABI
+  signature:
+    returnType: int
+- subject:
+    method: FFI\CType::getFuncParameterCount
+  signature:
+    returnType: int
+- subject:
+    method: FFI\CType::getFuncParameterType
+  signature:
+    params:
+    - name: index
+      type: int
+    returnType: FFI\CType
+- subject:
+    method: FFI\CType::getFuncReturnType
+  signature:
+    returnType: FFI\CType
+- subject:
+    method: FFI\CType::getKind
+  signature:
+    returnType: int
+- subject:
+    method: FFI\CType::getName
+  signature:
+    returnType: string
+- subject:
+    method: FFI\CType::getPointerType
+  signature:
+    returnType: FFI\CType
+- subject:
+    method: FFI\CType::getSize
+  signature:
+    returnType: int
+- subject:
+    method: FFI\CType::getStructFieldNames
+  signature:
+    returnType: array
+- subject:
+    method: FFI\CType::getStructFieldOffset
+  signature:
+    params:
+    - name: name
+      type: string
+    returnType: int
+- subject:
+    method: FFI\CType::getStructFieldType
+  signature:
+    params:
+    - name: name
+      type: string
+    returnType: FFI\CType

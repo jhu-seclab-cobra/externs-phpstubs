@@ -46,71 +46,6 @@
     classifier: class
     parent: error
 - subject:
-    class: runtimeexception
-  signature:
-    classifier: class
-    parent: exception
-- subject:
-    class: logicexception
-  signature:
-    classifier: class
-    parent: exception
-- subject:
-    class: invalidargumentexception
-  signature:
-    classifier: class
-    parent: logicexception
-- subject:
-    class: outofrangeexception
-  signature:
-    classifier: class
-    parent: logicexception
-- subject:
-    class: outofboundsexception
-  signature:
-    classifier: class
-    parent: runtimeexception
-- subject:
-    class: overflowexception
-  signature:
-    classifier: class
-    parent: runtimeexception
-- subject:
-    class: underflowexception
-  signature:
-    classifier: class
-    parent: runtimeexception
-- subject:
-    class: unexpectedvalueexception
-  signature:
-    classifier: class
-    parent: runtimeexception
-- subject:
-    class: badmethodcallexception
-  signature:
-    classifier: class
-    parent: badfunctioncallexception
-- subject:
-    class: badfunctioncallexception
-  signature:
-    classifier: class
-    parent: logicexception
-- subject:
-    class: domainexception
-  signature:
-    classifier: class
-    parent: logicexception
-- subject:
-    class: lengthexception
-  signature:
-    classifier: class
-    parent: logicexception
-- subject:
-    class: rangeexception
-  signature:
-    classifier: class
-    parent: runtimeexception
-- subject:
     class: stdclass
   signature:
     classifier: class
@@ -172,303 +107,6 @@
   signature:
     classifier: interface
 - subject:
-    class: jsonserializable
-  signature:
-    classifier: interface
-- subject:
-    class: arrayobject
-  signature:
-    classifier: class
-    interfaces: [iteratoraggregate, arrayaccess, serializable, countable]
-- subject:
-    class: arrayiterator
-  signature:
-    classifier: class
-    interfaces: [seekableiterator, arrayaccess, serializable, countable]
-- subject:
-    class: splfileinfo
-  signature:
-    classifier: class
-    interfaces: [stringable]
-- subject:
-    class: splfileobject
-  signature:
-    classifier: class
-    parent: splfileinfo
-    interfaces: [recursiveiterator, seekableiterator]
-- subject:
-    class: splfixedarray
-  signature:
-    classifier: class
-    interfaces: [iteratoraggregate, arrayaccess, countable, jsonserializable]
-- subject:
-    class: splstack
-  signature:
-    classifier: class
-    parent: spldoublylinkedlist
-- subject:
-    class: splqueue
-  signature:
-    classifier: class
-    parent: spldoublylinkedlist
-- subject:
-    class: splheap
-  signature:
-    classifier: class
-    interfaces: [iterator, countable]
-- subject:
-    class: splpriorityqueue
-  signature:
-    classifier: class
-    interfaces: [iterator, countable]
-- subject:
-    class: splobjectstorage
-  signature:
-    classifier: class
-    interfaces: [countable, seekableiterator, serializable, arrayaccess]
-- subject:
-    class: directoryiterator
-  signature:
-    classifier: class
-    parent: splfileinfo
-    interfaces: [seekableiterator]
-- subject:
-    class: recursivedirectoryiterator
-  signature:
-    classifier: class
-    parent: filesystemiterator
-    interfaces: [recursiveiterator]
-- subject:
-    class: datetime
-  signature:
-    classifier: class
-    interfaces: [datetimeinterface]
-- subject:
-    class: datetimeimmutable
-  signature:
-    classifier: class
-    interfaces: [datetimeinterface]
-- subject:
-    class: datetimeinterface
-  signature:
-    classifier: interface
-- subject:
-    class: datetimezone
-  signature:
-    classifier: class
-- subject:
-    class: dateinterval
-  signature:
-    classifier: class
-- subject:
-    class: dateperiod
-  signature:
-    classifier: class
-    interfaces: [iteratoraggregate]
-- subject:
-    class: pdo
-  signature:
-    classifier: class
-- subject:
-    class: pdostatement
-  signature:
-    classifier: class
-    interfaces: [iteratoraggregate]
-- subject:
-    class: pdoexception
-  signature:
-    classifier: class
-    parent: runtimeexception
-- subject:
-    class: mysqli
-  signature:
-    classifier: class
-- subject:
-    class: mysqli_result
-  signature:
-    classifier: class
-    interfaces: [iteratoraggregate]
-- subject:
-    class: mysqli_stmt
-  signature:
-    classifier: class
-- subject:
-    class: mysqli_driver
-  signature:
-    classifier: class
-- subject:
-    class: curlhandle
-  signature:
-    classifier: class
-- subject:
-    class: curlmultihandle
-  signature:
-    classifier: class
-- subject:
-    class: curlsharehandle
-  signature:
-    classifier: class
-- subject:
-    class: reflectionclass
-  signature:
-    classifier: class
-    interfaces: [reflector]
-- subject:
-    class: reflectionmethod
-  signature:
-    classifier: class
-    parent: reflectionfunctionabstract
-- subject:
-    class: reflectionfunction
-  signature:
-    classifier: class
-    parent: reflectionfunctionabstract
-- subject:
-    class: reflectionproperty
-  signature:
-    classifier: class
-    interfaces: [reflector]
-- subject:
-    class: reflectionparameter
-  signature:
-    classifier: class
-    interfaces: [reflector]
-- subject:
-    class: reflectiontype
-  signature:
-    classifier: class
-    interfaces: [stringable]
-- subject:
-    class: reflectionnamedtype
-  signature:
-    classifier: class
-    parent: reflectiontype
-- subject:
-    class: reflectionuniontype
-  signature:
-    classifier: class
-    parent: reflectiontype
-- subject:
-    class: reflectionintersectiontype
-  signature:
-    classifier: class
-    parent: reflectiontype
-- subject:
-    class: domnode
-  signature:
-    classifier: class
-- subject:
-    class: domdocument
-  signature:
-    classifier: class
-    parent: domnode
-    interfaces: [domparentnode]
-- subject:
-    class: domelement
-  signature:
-    classifier: class
-    parent: domnode
-    interfaces: [domparentnode, domchildnode]
-- subject:
-    class: domnodelist
-  signature:
-    classifier: class
-    interfaces: [iteratoraggregate, countable]
-- subject:
-    class: domattr
-  signature:
-    classifier: class
-    parent: domnode
-- subject:
-    class: domtext
-  signature:
-    classifier: class
-    parent: domcharacterdata
-- subject:
-    class: domcomment
-  signature:
-    classifier: class
-    parent: domcharacterdata
-- subject:
-    class: simplexmlelement
-  signature:
-    classifier: class
-    interfaces: [stringable, countable, recursiveiterator]
-- subject:
-    class: xmlreader
-  signature:
-    classifier: class
-- subject:
-    class: xmlwriter
-  signature:
-    classifier: class
-- subject:
-    class: intldateformatter
-  signature:
-    classifier: class
-- subject:
-    class: numberformatter
-  signature:
-    classifier: class
-- subject:
-    class: collator
-  signature:
-    classifier: class
-- subject:
-    class: messageformatter
-  signature:
-    classifier: class
-- subject:
-    class: locale
-  signature:
-    classifier: class
-- subject:
-    class: normalizer
-  signature:
-    classifier: class
-- subject:
-    class: resourcebundle
-  signature:
-    classifier: class
-    interfaces: [iteratoraggregate, countable]
-- subject:
-    class: transliterator
-  signature:
-    classifier: class
-- subject:
-    class: spoofchecker
-  signature:
-    classifier: class
-- subject:
-    class: intlcalendar
-  signature:
-    classifier: class
-- subject:
-    class: intltimezone
-  signature:
-    classifier: class
-- subject:
-    class: gdimage
-  signature:
-    classifier: class
-- subject:
-    class: sqlite3
-  signature:
-    classifier: class
-- subject:
-    class: sqlite3stmt
-  signature:
-    classifier: class
-- subject:
-    class: sqlite3result
-  signature:
-    classifier: class
-- subject:
-    class: ziparchive
-  signature:
-    classifier: class
-    interfaces: [countable]
-- subject:
     class: redis
   signature:
     classifier: class
@@ -489,26 +127,13 @@
   signature:
     classifier: class
 - subject:
-    class: soapclient
-  signature:
-    classifier: class
-- subject:
-    class: soapserver
-  signature:
-    classifier: class
-- subject:
-    class: soapfault
-  signature:
-    classifier: class
-    parent: exception
-- subject:
     method: Exception::getMessage
   signature:
     returnType: string
 - subject:
     method: Exception::getCode
   signature:
-    returnType: int
+    returnType: mixed
 - subject:
     class_constant: Exception::SEVERITY_ERROR
   signature:
@@ -1727,46 +1352,1058 @@
     type: int
     value: '3'
 - subject:
-    class: domcharacterdata
+    class: allowdynamicproperties
   signature:
     classifier: class
-    parent: domnode
-    interfaces: [domchildnode]
 - subject:
-    class: domchildnode
-  signature:
-    classifier: interface
-- subject:
-    class: domparentnode
-  signature:
-    classifier: interface
-- subject:
-    class: filesystemiterator
+    class: attribute
   signature:
     classifier: class
-    parent: directoryiterator
 - subject:
-    class: recursiveiterator
+    class: backedenum
   signature:
     classifier: interface
+    interfaces: [unitenum]
+- subject:
+    class: closedgeneratorexception
+  signature:
+    classifier: class
+    parent: exception
+- subject:
+    class: delayedtargetvalidation
+  signature:
+    classifier: class
+- subject:
+    class: deprecated
+  signature:
+    classifier: class
+- subject:
+    class: errorexception
+  signature:
+    classifier: class
+    parent: exception
+- subject:
+    class: fibererror
+  signature:
+    classifier: class
+    parent: error
+- subject:
+    class: internaliterator
+  signature:
+    classifier: class
     interfaces: [iterator]
 - subject:
-    class: reflectionfunctionabstract
+    class: nodiscard
   signature:
     classifier: class
-    interfaces: [reflector]
 - subject:
-    class: reflector
-  signature:
-    classifier: interface
-    interfaces: [stringable]
-- subject:
-    class: seekableiterator
-  signature:
-    classifier: interface
-    interfaces: [iterator]
-- subject:
-    class: spldoublylinkedlist
+    class: override
   signature:
     classifier: class
-    interfaces: [iterator, countable, arrayaccess, serializable]
+- subject:
+    class: requestparsebodyexception
+  signature:
+    classifier: class
+    parent: exception
+- subject:
+    class: returntypewillchange
+  signature:
+    classifier: class
+- subject:
+    class: sensitiveparameter
+  signature:
+    classifier: class
+- subject:
+    class: sensitiveparametervalue
+  signature:
+    classifier: class
+- subject:
+    class: unhandledmatcherror
+  signature:
+    classifier: class
+    parent: error
+- subject:
+    class: unitenum
+  signature:
+    classifier: interface
+- subject:
+    function: class_alias
+  signature:
+    params:
+    - name: class
+      type: string
+    - name: alias
+      type: string
+    - name: autoload
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: class_exists
+  signature:
+    params:
+    - name: class
+      type: string
+    - name: autoload
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: debug_backtrace
+  signature:
+    params:
+    - name: options
+      type: int
+      optional: true
+    - name: limit
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    function: debug_print_backtrace
+  signature:
+    params:
+    - name: options
+      type: int
+      optional: true
+    - name: limit
+      type: int
+      optional: true
+    returnType: void
+- subject:
+    function: define
+  signature:
+    params:
+    - name: constant_name
+      type: string
+    - name: value
+      type: mixed
+    - name: case_insensitive
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: defined
+  signature:
+    params:
+    - name: constant_name
+      type: string
+    returnType: bool
+- subject:
+    function: error_reporting
+  signature:
+    params:
+    - name: error_level
+      type: ?int
+      optional: true
+    returnType: int
+- subject:
+    function: extension_loaded
+  signature:
+    params:
+    - name: extension
+      type: string
+    returnType: bool
+- subject:
+    function: func_get_arg
+  signature:
+    params:
+    - name: position
+      type: int
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: func_get_args
+  signature:
+    returnType: array
+- subject:
+    function: func_num_args
+  signature:
+    returnType: int
+- subject:
+    function: function_exists
+  signature:
+    params:
+    - name: function
+      type: string
+    returnType: bool
+- subject:
+    function: gc_collect_cycles
+  signature:
+    returnType: int
+- subject:
+    function: gc_disable
+  signature:
+    returnType: void
+- subject:
+    function: gc_enable
+  signature:
+    returnType: void
+- subject:
+    function: gc_enabled
+  signature:
+    returnType: bool
+- subject:
+    function: gc_mem_caches
+  signature:
+    returnType: int
+- subject:
+    function: gc_status
+  signature:
+    returnType: array
+- subject:
+    function: get_called_class
+  signature:
+    returnType: string
+- subject:
+    function: get_class
+  signature:
+    params:
+    - name: object
+      type: object
+      optional: true
+    returnType: string
+- subject:
+    function: get_class_methods
+  signature:
+    params:
+    - name: object_or_class
+      type: object|string
+    returnType: array
+- subject:
+    function: get_class_vars
+  signature:
+    params:
+    - name: class
+      type: string
+    returnType: array
+- subject:
+    function: get_declared_classes
+  signature:
+    returnType: array
+- subject:
+    function: get_declared_interfaces
+  signature:
+    returnType: array
+- subject:
+    function: get_declared_traits
+  signature:
+    returnType: array
+- subject:
+    function: get_defined_constants
+  signature:
+    params:
+    - name: categorize
+      type: bool
+      optional: true
+    returnType: array
+- subject:
+    function: get_defined_functions
+  signature:
+    params:
+    - name: exclude_disabled
+      type: bool
+      optional: true
+    returnType: array
+- subject:
+    function: get_defined_vars
+  signature:
+    returnType: array
+- subject:
+    function: get_extension_funcs
+  signature:
+    params:
+    - name: extension
+      type: string
+    returnType: array|false
+- subject:
+    function: get_included_files
+  signature:
+    returnType: array
+- subject:
+    function: get_loaded_extensions
+  signature:
+    params:
+    - name: zend_extensions
+      type: bool
+      optional: true
+    returnType: array
+- subject:
+    function: get_mangled_object_vars
+  signature:
+    params:
+    - name: object
+      type: object
+    returnType: array
+- subject:
+    function: get_object_vars
+  signature:
+    params:
+    - name: object
+      type: object
+    returnType: array
+- subject:
+    function: get_parent_class
+  signature:
+    params:
+    - name: object_or_class
+      type: object|string
+      optional: true
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: get_required_files
+  signature:
+    returnType: array
+- subject:
+    function: get_resource_id
+  signature:
+    params:
+    - name: resource
+      type: mixed
+    returnType: int
+- subject:
+    function: get_resource_type
+  signature:
+    params:
+    - name: resource
+      type: mixed
+    returnType: string
+- subject:
+    function: get_resources
+  signature:
+    params:
+    - name: type
+      type: ?string
+      optional: true
+    returnType: array
+- subject:
+    function: interface_exists
+  signature:
+    params:
+    - name: interface
+      type: string
+    - name: autoload
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: is_a
+  signature:
+    params:
+    - name: object_or_class
+      type: mixed
+    - name: class
+      type: string
+    - name: allow_string
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: is_subclass_of
+  signature:
+    params:
+    - name: object_or_class
+      type: mixed
+    - name: class
+      type: string
+    - name: allow_string
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: method_exists
+  signature:
+    params:
+    - name: object_or_class
+      type: mixed
+    - name: method
+      type: string
+    returnType: bool
+- subject:
+    function: property_exists
+  signature:
+    params:
+    - name: object_or_class
+      type: mixed
+    - name: property
+      type: string
+    returnType: bool
+- subject:
+    function: restore_error_handler
+  signature:
+    returnType: 'true'
+- subject:
+    function: restore_exception_handler
+  signature:
+    returnType: 'true'
+- subject:
+    function: set_error_handler
+  signature:
+    params:
+    - name: callback
+      type: ?callable
+    - name: error_levels
+      type: int
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: set_exception_handler
+  signature:
+    params:
+    - name: callback
+      type: ?callable
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: strcasecmp
+  signature:
+    params:
+    - name: string1
+      type: string
+    - name: string2
+      type: string
+    returnType: int
+- subject:
+    function: strcmp
+  signature:
+    params:
+    - name: string1
+      type: string
+    - name: string2
+      type: string
+    returnType: int
+- subject:
+    function: strlen
+  signature:
+    params:
+    - name: string
+      type: string
+    returnType: int
+- subject:
+    function: strncasecmp
+  signature:
+    params:
+    - name: string1
+      type: string
+    - name: string2
+      type: string
+    - name: length
+      type: int
+    returnType: int
+- subject:
+    function: strncmp
+  signature:
+    params:
+    - name: string1
+      type: string
+    - name: string2
+      type: string
+    - name: length
+      type: int
+    returnType: int
+- subject:
+    function: trait_exists
+  signature:
+    params:
+    - name: trait
+      type: string
+    - name: autoload
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: trigger_error
+  signature:
+    params:
+    - name: message
+      type: string
+    - name: error_level
+      type: int
+      optional: true
+    returnType: 'true'
+- subject:
+    function: user_error
+  signature:
+    params:
+    - name: message
+      type: string
+    - name: error_level
+      type: int
+      optional: true
+    returnType: 'true'
+- subject:
+    function: zend_thread_id
+  signature:
+    returnType: int
+- subject:
+    function: zend_version
+  signature:
+    returnType: string
+- subject:
+    function: enum_exists
+  signature:
+    params:
+    - name: enum
+      type: string
+    - name: autoload
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: get_error_handler
+  signature:
+    returnType: ?callable
+- subject:
+    function: get_exception_handler
+  signature:
+    returnType: ?callable
+- subject:
+    method: AllowDynamicProperties::__construct
+  signature:
+    returnType: mixed
+- subject:
+    method: ArrayAccess::offsetExists
+  signature:
+    params:
+    - name: offset
+      type: mixed
+    returnType: bool
+- subject:
+    method: ArrayAccess::offsetGet
+  signature:
+    params:
+    - name: offset
+      type: mixed
+    returnType: mixed
+- subject:
+    method: ArrayAccess::offsetSet
+  signature:
+    params:
+    - name: offset
+      type: mixed
+    - name: value
+      type: mixed
+    returnType: void
+- subject:
+    method: ArrayAccess::offsetUnset
+  signature:
+    params:
+    - name: offset
+      type: mixed
+    returnType: void
+- subject:
+    method: Attribute::__construct
+  signature:
+    params:
+    - name: flags
+      type: int
+      optional: true
+    returnType: mixed
+- subject:
+    method: BackedEnum::from
+  signature:
+    params:
+    - name: value
+      type: int|string
+    returnType: static
+- subject:
+    method: BackedEnum::tryFrom
+  signature:
+    params:
+    - name: value
+      type: int|string
+    returnType: ?static
+- subject:
+    method: Closure::__construct
+  signature:
+    returnType: mixed
+- subject:
+    method: Closure::bind
+  signature:
+    params:
+    - name: closure
+      type: Closure
+    - name: newThis
+      type: ?object
+    - name: newScope
+      type: object|string|null
+      optional: true
+    returnType: ?Closure
+- subject:
+    method: Closure::bindTo
+  signature:
+    params:
+    - name: newThis
+      type: ?object
+    - name: newScope
+      type: object|string|null
+      optional: true
+    returnType: ?Closure
+- subject:
+    method: Closure::call
+  signature:
+    params:
+    - name: newThis
+      type: object
+    - name: args
+      type: mixed
+      optional: true
+      variadic: true
+    returnType: mixed
+- subject:
+    method: Closure::fromCallable
+  signature:
+    params:
+    - name: callback
+      type: callable
+    returnType: Closure
+- subject:
+    method: Closure::getCurrent
+  signature:
+    returnType: Closure
+- subject:
+    method: Countable::count
+  signature:
+    returnType: int
+- subject:
+    method: Deprecated::__construct
+  signature:
+    params:
+    - name: message
+      type: ?string
+      optional: true
+    - name: since
+      type: ?string
+      optional: true
+    returnType: mixed
+- subject:
+    method: Error::__clone
+  signature:
+    returnType: void
+- subject:
+    method: Error::__construct
+  signature:
+    params:
+    - name: message
+      type: string
+      optional: true
+    - name: code
+      type: int
+      optional: true
+    - name: previous
+      type: ?Throwable
+      optional: true
+    returnType: mixed
+- subject:
+    method: Error::__toString
+  signature:
+    returnType: string
+- subject:
+    method: Error::__wakeup
+  signature:
+    returnType: void
+- subject:
+    method: Error::getCode
+  signature:
+    returnType: mixed
+- subject:
+    method: Error::getFile
+  signature:
+    returnType: string
+- subject:
+    method: Error::getLine
+  signature:
+    returnType: int
+- subject:
+    method: Error::getMessage
+  signature:
+    returnType: string
+- subject:
+    method: Error::getPrevious
+  signature:
+    returnType: ?Throwable
+- subject:
+    method: Error::getTrace
+  signature:
+    returnType: array
+- subject:
+    method: Error::getTraceAsString
+  signature:
+    returnType: string
+- subject:
+    method: ErrorException::__construct
+  signature:
+    params:
+    - name: message
+      type: string
+      optional: true
+    - name: code
+      type: int
+      optional: true
+    - name: severity
+      type: int
+      optional: true
+    - name: filename
+      type: ?string
+      optional: true
+    - name: line
+      type: ?int
+      optional: true
+    - name: previous
+      type: ?Throwable
+      optional: true
+    returnType: mixed
+- subject:
+    method: ErrorException::getSeverity
+  signature:
+    returnType: int
+- subject:
+    method: Exception::__clone
+  signature:
+    returnType: void
+- subject:
+    method: Exception::__construct
+  signature:
+    params:
+    - name: message
+      type: string
+      optional: true
+    - name: code
+      type: int
+      optional: true
+    - name: previous
+      type: ?Throwable
+      optional: true
+    returnType: mixed
+- subject:
+    method: Exception::__toString
+  signature:
+    returnType: string
+- subject:
+    method: Exception::__wakeup
+  signature:
+    returnType: void
+- subject:
+    method: Exception::getFile
+  signature:
+    returnType: string
+- subject:
+    method: Exception::getLine
+  signature:
+    returnType: int
+- subject:
+    method: Exception::getPrevious
+  signature:
+    returnType: ?Throwable
+- subject:
+    method: Exception::getTrace
+  signature:
+    returnType: array
+- subject:
+    method: Exception::getTraceAsString
+  signature:
+    returnType: string
+- subject:
+    method: Fiber::__construct
+  signature:
+    params:
+    - name: callback
+      type: callable
+    returnType: mixed
+- subject:
+    method: Fiber::getCurrent
+  signature:
+    returnType: ?Fiber
+- subject:
+    method: Fiber::getReturn
+  signature:
+    returnType: mixed
+- subject:
+    method: Fiber::isRunning
+  signature:
+    returnType: bool
+- subject:
+    method: Fiber::isStarted
+  signature:
+    returnType: bool
+- subject:
+    method: Fiber::isSuspended
+  signature:
+    returnType: bool
+- subject:
+    method: Fiber::isTerminated
+  signature:
+    returnType: bool
+- subject:
+    method: Fiber::resume
+  signature:
+    params:
+    - name: value
+      type: mixed
+      optional: true
+    returnType: mixed
+- subject:
+    method: Fiber::start
+  signature:
+    params:
+    - name: args
+      type: mixed
+      optional: true
+      variadic: true
+    returnType: mixed
+- subject:
+    method: Fiber::suspend
+  signature:
+    params:
+    - name: value
+      type: mixed
+      optional: true
+    returnType: mixed
+- subject:
+    method: Fiber::throw
+  signature:
+    params:
+    - name: exception
+      type: Throwable
+    returnType: mixed
+- subject:
+    method: FiberError::__construct
+  signature:
+    returnType: mixed
+- subject:
+    method: Generator::__debugInfo
+  signature:
+    returnType: array
+- subject:
+    method: Generator::current
+  signature:
+    returnType: mixed
+- subject:
+    method: Generator::getReturn
+  signature:
+    returnType: mixed
+- subject:
+    method: Generator::key
+  signature:
+    returnType: mixed
+- subject:
+    method: Generator::next
+  signature:
+    returnType: void
+- subject:
+    method: Generator::rewind
+  signature:
+    returnType: void
+- subject:
+    method: Generator::send
+  signature:
+    params:
+    - name: value
+      type: mixed
+    returnType: mixed
+- subject:
+    method: Generator::throw
+  signature:
+    params:
+    - name: exception
+      type: Throwable
+    returnType: mixed
+- subject:
+    method: Generator::valid
+  signature:
+    returnType: bool
+- subject:
+    method: InternalIterator::__construct
+  signature:
+    returnType: mixed
+- subject:
+    method: InternalIterator::current
+  signature:
+    returnType: mixed
+- subject:
+    method: InternalIterator::key
+  signature:
+    returnType: mixed
+- subject:
+    method: InternalIterator::next
+  signature:
+    returnType: void
+- subject:
+    method: InternalIterator::rewind
+  signature:
+    returnType: void
+- subject:
+    method: InternalIterator::valid
+  signature:
+    returnType: bool
+- subject:
+    method: Iterator::current
+  signature:
+    returnType: mixed
+- subject:
+    method: Iterator::key
+  signature:
+    returnType: mixed
+- subject:
+    method: Iterator::next
+  signature:
+    returnType: void
+- subject:
+    method: Iterator::rewind
+  signature:
+    returnType: void
+- subject:
+    method: Iterator::valid
+  signature:
+    returnType: bool
+- subject:
+    method: IteratorAggregate::getIterator
+  signature:
+    returnType: Traversable
+- subject:
+    method: NoDiscard::__construct
+  signature:
+    params:
+    - name: message
+      type: ?string
+      optional: true
+    returnType: mixed
+- subject:
+    method: Override::__construct
+  signature:
+    returnType: mixed
+- subject:
+    method: ReturnTypeWillChange::__construct
+  signature:
+    returnType: mixed
+- subject:
+    method: SensitiveParameter::__construct
+  signature:
+    returnType: mixed
+- subject:
+    method: SensitiveParameterValue::__construct
+  signature:
+    params:
+    - name: value
+      type: mixed
+    returnType: mixed
+- subject:
+    method: SensitiveParameterValue::__debugInfo
+  signature:
+    returnType: array
+- subject:
+    method: SensitiveParameterValue::getValue
+  signature:
+    returnType: mixed
+- subject:
+    method: Serializable::serialize
+  signature:
+    returnType: mixed
+- subject:
+    method: Serializable::unserialize
+  signature:
+    params:
+    - name: data
+      type: string
+    returnType: mixed
+- subject:
+    method: Stringable::__toString
+  signature:
+    returnType: string
+- subject:
+    method: Throwable::getCode
+  signature:
+    returnType: mixed
+- subject:
+    method: Throwable::getFile
+  signature:
+    returnType: string
+- subject:
+    method: Throwable::getLine
+  signature:
+    returnType: int
+- subject:
+    method: Throwable::getMessage
+  signature:
+    returnType: string
+- subject:
+    method: Throwable::getPrevious
+  signature:
+    returnType: ?Throwable
+- subject:
+    method: Throwable::getTrace
+  signature:
+    returnType: array
+- subject:
+    method: Throwable::getTraceAsString
+  signature:
+    returnType: string
+- subject:
+    method: UnitEnum::cases
+  signature:
+    returnType: array
+- subject:
+    method: WeakMap::count
+  signature:
+    returnType: int
+- subject:
+    method: WeakMap::getIterator
+  signature:
+    returnType: Iterator
+- subject:
+    method: WeakMap::offsetExists
+  signature:
+    params:
+    - name: object
+      type: mixed
+    returnType: bool
+- subject:
+    method: WeakMap::offsetGet
+  signature:
+    params:
+    - name: object
+      type: mixed
+    returnType: mixed
+- subject:
+    method: WeakMap::offsetSet
+  signature:
+    params:
+    - name: object
+      type: mixed
+    - name: value
+      type: mixed
+    returnType: void
+- subject:
+    method: WeakMap::offsetUnset
+  signature:
+    params:
+    - name: object
+      type: mixed
+    returnType: void
+- subject:
+    method: WeakReference::__construct
+  signature:
+    returnType: mixed
+- subject:
+    method: WeakReference::create
+  signature:
+    params:
+    - name: object
+      type: object
+    returnType: WeakReference
+- subject:
+    method: WeakReference::get
+  signature:
+    returnType: ?object

@@ -11,6 +11,9 @@
     - name: binary
       type: bool
       optional: true
+    - name: options
+      type: array
+      optional: true
     returnType: string
 - subject:
     function: hash_algos
@@ -21,8 +24,8 @@
   signature:
     params:
     - name: context
-      type: mixed
-    returnType: mixed
+      type: HashContext
+    returnType: HashContext
   propagation:
   - from: argument(0)
     to: return
@@ -46,7 +49,10 @@
     - name: binary
       type: bool
       optional: true
-    returnType: string
+    - name: options
+      type: array
+      optional: true
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -57,7 +63,7 @@
   signature:
     params:
     - name: context
-      type: mixed
+      type: HashContext
     - name: binary
       type: bool
       optional: true
@@ -130,7 +136,7 @@
     - name: binary
       type: bool
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -150,7 +156,10 @@
     - name: key
       type: string
       optional: true
-    returnType: mixed
+    - name: options
+      type: array
+      optional: true
+    returnType: HashContext
   propagation:
   - from: argument(0)
     to: return
@@ -176,6 +185,9 @@
     - name: binary
       type: bool
       optional: true
+    - name: options
+      type: array
+      optional: true
     returnType: string
   propagation:
   - from: argument(0)
@@ -189,20 +201,20 @@
   signature:
     params:
     - name: context
-      type: mixed
+      type: HashContext
     - name: data
       type: string
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: hash_update_file
   signature:
     params:
     - name: context
-      type: mixed
+      type: HashContext
     - name: filename
       type: string
     - name: stream_context
-      type: resource
+      type: mixed
       optional: true
     returnType: bool
 - subject:
@@ -210,10 +222,86 @@
   signature:
     params:
     - name: context
-      type: mixed
+      type: HashContext
     - name: stream
-      type: resource
+      type: mixed
     - name: length
       type: int
       optional: true
     returnType: int
+- subject:
+    class: hashcontext
+  signature:
+    classifier: class
+- subject:
+    method: HashContext::__construct
+  signature:
+    returnType: mixed
+- subject:
+    method: HashContext::__debugInfo
+  signature:
+    returnType: array
+- subject:
+    method: HashContext::__serialize
+  signature:
+    returnType: array
+- subject:
+    method: HashContext::__unserialize
+  signature:
+    params:
+    - name: data
+      type: array
+    returnType: void
+- subject:
+    function: mhash
+  signature:
+    params:
+    - name: algo
+      type: int
+    - name: data
+      type: string
+    - name: key
+      type: ?string
+      optional: true
+    returnType: string|false
+  propagation:
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: mhash_count
+  signature:
+    returnType: int
+- subject:
+    function: mhash_get_block_size
+  signature:
+    params:
+    - name: algo
+      type: int
+    returnType: int|false
+- subject:
+    function: mhash_get_hash_name
+  signature:
+    params:
+    - name: algo
+      type: int
+    returnType: string|false
+- subject:
+    function: mhash_keygen_s2k
+  signature:
+    params:
+    - name: algo
+      type: int
+    - name: password
+      type: string
+    - name: salt
+      type: string
+    - name: length
+      type: int
+    returnType: string|false
+  propagation:
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return

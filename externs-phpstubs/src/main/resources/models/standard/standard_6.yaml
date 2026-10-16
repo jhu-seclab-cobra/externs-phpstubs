@@ -363,17 +363,6 @@
       type: float
     returnType: float
 - subject:
-    function: srand
-  signature:
-    params:
-    - name: seed
-      type: int
-      optional: true
-    - name: mode
-      type: int
-      optional: true
-    returnType: void
-- subject:
     function: sscanf
   signature:
     params:
@@ -382,9 +371,11 @@
     - name: format
       type: string
     - name: vars
-      type: float
+      type: mixed
       optional: true
-    returnType: int
+      byRef: true
+      variadic: true
+    returnType: array|int|null
 - subject:
     function: ssdeep_fuzzy_compare
   signature:
@@ -873,7 +864,7 @@
     params:
     - name: filename
       type: string
-    returnType: array
+    returnType: array|false
 - subject:
     function: stats_absolute_deviation
   signature:
@@ -1833,15 +1824,16 @@
   signature:
     params:
     - name: search
-      type: string
+      type: array|string
     - name: replace
-      type: string
+      type: array|string
     - name: subject
-      type: string
+      type: string|array
     - name: count
-      type: int
+      type: mixed
       optional: true
-    returnType: string
+      byRef: true
+    returnType: string|array
   propagation:
   - from: argument(0)
     to: return
@@ -1884,15 +1876,16 @@
   signature:
     params:
     - name: search
-      type: string
+      type: array|string
     - name: replace
-      type: string
+      type: array|string
     - name: subject
-      type: string
+      type: string|array
     - name: count
-      type: int
+      type: mixed
       optional: true
-    returnType: string
+      byRef: true
+    returnType: string|array
   propagation:
   - from: argument(0)
     to: return
@@ -1955,21 +1948,12 @@
       type: int
       optional: true
     - name: characters
-      type: string
+      type: ?string
       optional: true
-    returnType: array
+    returnType: array|int
   propagation:
   - from: argument(0)
     to: return
-- subject:
-    function: strcasecmp
-  signature:
-    params:
-    - name: string1
-      type: string
-    - name: string2
-      type: string
-    returnType: int
 - subject:
     function: strchr
   signature:
@@ -1981,21 +1965,12 @@
     - name: before_needle
       type: bool
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
   - from: argument(1)
     to: return
-- subject:
-    function: strcmp
-  signature:
-    params:
-    - name: string1
-      type: string
-    - name: string2
-      type: string
-    returnType: int
 - subject:
     function: strcoll
   signature:
@@ -2017,7 +1992,7 @@
       type: int
       optional: true
     - name: length
-      type: int
+      type: ?int
       optional: true
     returnType: int
 - subject:
@@ -2027,7 +2002,7 @@
     - name: string
       type: string
     - name: allowed_tags
-      type: array
+      type: array|string|null
       optional: true
     returnType: string
 - subject:
@@ -2051,7 +2026,7 @@
     - name: offset
       type: int
       optional: true
-    returnType: int
+    returnType: int|false
 - subject:
     function: stripslashes
   signature:
@@ -2073,19 +2048,12 @@
     - name: before_needle
       type: bool
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
   - from: argument(1)
     to: return
-- subject:
-    function: strlen
-  signature:
-    params:
-    - name: string
-      type: string
-    returnType: int
 - subject:
     function: strnatcasecmp
   signature:
@@ -2105,28 +2073,6 @@
       type: string
     returnType: int
 - subject:
-    function: strncasecmp
-  signature:
-    params:
-    - name: string1
-      type: string
-    - name: string2
-      type: string
-    - name: length
-      type: int
-    returnType: int
-- subject:
-    function: strncmp
-  signature:
-    params:
-    - name: string1
-      type: string
-    - name: string2
-      type: string
-    - name: length
-      type: int
-    returnType: int
-- subject:
     function: strpbrk
   signature:
     params:
@@ -2134,7 +2080,7 @@
       type: string
     - name: characters
       type: string
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -2151,7 +2097,7 @@
     - name: offset
       type: int
       optional: true
-    returnType: int
+    returnType: int|false
 - subject:
     function: strptime
   signature:
@@ -2160,7 +2106,7 @@
       type: string
     - name: format
       type: string
-    returnType: array
+    returnType: array|false
 - subject:
     function: strrchr
   signature:
@@ -2169,7 +2115,10 @@
       type: string
     - name: needle
       type: string
-    returnType: string
+    - name: before_needle
+      type: bool
+      optional: true
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -2196,7 +2145,7 @@
     - name: offset
       type: int
       optional: true
-    returnType: int
+    returnType: int|false
 - subject:
     function: strrpos
   signature:
@@ -2208,7 +2157,7 @@
     - name: offset
       type: int
       optional: true
-    returnType: int
+    returnType: int|false
 - subject:
     function: strspn
   signature:
@@ -2221,7 +2170,7 @@
       type: int
       optional: true
     - name: length
-      type: int
+      type: ?int
       optional: true
     returnType: int
 - subject:
@@ -2235,7 +2184,7 @@
     - name: before_needle
       type: bool
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -2248,9 +2197,9 @@
     - name: string
       type: string
     - name: token
-      type: string
+      type: ?string
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -2283,9 +2232,9 @@
     - name: string
       type: string
     - name: from
-      type: string
+      type: string|array
     - name: to
-      type: string
+      type: ?string
       optional: true
     returnType: string
   propagation:
@@ -2314,7 +2263,7 @@
     - name: offset
       type: int
     - name: length
-      type: int
+      type: ?int
       optional: true
     returnType: string
   propagation:
@@ -2331,7 +2280,7 @@
     - name: offset
       type: int
     - name: length
-      type: int
+      type: ?int
       optional: true
     - name: case_insensitive
       type: bool
@@ -2349,7 +2298,7 @@
       type: int
       optional: true
     - name: length
-      type: int
+      type: ?int
       optional: true
     returnType: int
 - subject:
@@ -2357,15 +2306,15 @@
   signature:
     params:
     - name: string
-      type: string
+      type: array|string
     - name: replace
-      type: array
+      type: array|string
     - name: offset
-      type: array
+      type: array|int
     - name: length
-      type: array
+      type: array|int|null
       optional: true
-    returnType: string
+    returnType: string|array
   propagation:
   - from: argument(0)
     to: return
@@ -5650,7 +5599,7 @@
 - subject:
     function: sys_getloadavg
   signature:
-    returnType: array
+    returnType: array|false
 - subject:
     function: syslog
   signature:
@@ -5659,7 +5608,7 @@
       type: int
     - name: message
       type: string
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: system
   signature:
@@ -5667,9 +5616,10 @@
     - name: command
       type: string
     - name: result_code
-      type: int
+      type: mixed
       optional: true
-    returnType: string
+      byRef: true
+    returnType: string|false
 - subject:
     function: taint
   signature:
@@ -5710,33 +5660,16 @@
       optional: true
     returnType: bool
 - subject:
-    function: token_get_all
-  signature:
-    params:
-    - name: code
-      type: string
-    - name: flags
-      type: int
-      optional: true
-    returnType: array
-- subject:
-    function: token_name
-  signature:
-    params:
-    - name: id
-      type: int
-    returnType: string
-- subject:
     function: touch
   signature:
     params:
     - name: filename
       type: string
     - name: mtime
-      type: int
+      type: ?int
       optional: true
     - name: atime
-      type: int
+      type: ?int
       optional: true
     returnType: bool
 - subject:

@@ -1,0 +1,11 @@
+# Generated from php-src stubs by tools/extract_hierarchy.py.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    class: pdo\mysql
+  signature:
+    classifier: class
+    parent: pdo
+- subject:
+    method: Pdo\Mysql::getWarningCount
+  signature:
+    returnType: int

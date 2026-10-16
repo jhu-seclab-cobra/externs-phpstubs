@@ -7,7 +7,7 @@
     - name: json
       type: string
     - name: associative
-      type: bool
+      type: ?bool
       optional: true
     - name: depth
       type: int
@@ -31,7 +31,7 @@
     - name: depth
       type: int
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -43,3 +43,29 @@
     function: json_last_error_msg
   signature:
     returnType: string
+- subject:
+    class: jsonexception
+  signature:
+    classifier: class
+    parent: exception
+- subject:
+    function: json_validate
+  signature:
+    params:
+    - name: json
+      type: string
+    - name: depth
+      type: int
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    class: jsonserializable
+  signature:
+    classifier: interface
+- subject:
+    method: JsonSerializable::jsonSerialize
+  signature:
+    returnType: mixed

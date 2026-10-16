@@ -7,7 +7,7 @@
     - name: class
       type: string
     - name: file_extensions
-      type: string
+      type: ?string
       optional: true
     returnType: void
 - subject:
@@ -22,7 +22,7 @@
   signature:
     params:
     - name: file_extensions
-      type: string
+      type: ?string
       optional: true
     returnType: string
   propagation:
@@ -37,7 +37,7 @@
   signature:
     params:
     - name: callback
-      type: mixed
+      type: ?callable
       optional: true
     - name: throw
       type: bool
@@ -51,7 +51,7 @@
   signature:
     params:
     - name: callback
-      type: mixed
+      type: callable
     returnType: bool
 - subject:
     function: spl_classes
@@ -71,3 +71,2442 @@
     - name: object
       type: object
     returnType: int
+- subject:
+    class: appenditerator
+  signature:
+    classifier: class
+    parent: iteratoriterator
+- subject:
+    class: cachingiterator
+  signature:
+    classifier: class
+    parent: iteratoriterator
+    interfaces: [arrayaccess, countable, stringable]
+- subject:
+    class: callbackfilteriterator
+  signature:
+    classifier: class
+    parent: filteriterator
+- subject:
+    class: emptyiterator
+  signature:
+    classifier: class
+    interfaces: [iterator]
+- subject:
+    class: filesystemiterator
+  signature:
+    classifier: class
+    parent: directoryiterator
+- subject:
+    class: filteriterator
+  signature:
+    classifier: class
+    parent: iteratoriterator
+- subject:
+    class: globiterator
+  signature:
+    classifier: class
+    parent: filesystemiterator
+    interfaces: [countable]
+- subject:
+    class: infiniteiterator
+  signature:
+    classifier: class
+    parent: iteratoriterator
+- subject:
+    class: iteratoriterator
+  signature:
+    classifier: class
+    interfaces: [outeriterator]
+- subject:
+    class: limititerator
+  signature:
+    classifier: class
+    parent: iteratoriterator
+- subject:
+    class: multipleiterator
+  signature:
+    classifier: class
+    interfaces: [iterator]
+- subject:
+    class: norewinditerator
+  signature:
+    classifier: class
+    parent: iteratoriterator
+- subject:
+    class: outeriterator
+  signature:
+    classifier: interface
+    interfaces: [iterator]
+- subject:
+    class: parentiterator
+  signature:
+    classifier: class
+    parent: recursivefilteriterator
+- subject:
+    class: recursivearrayiterator
+  signature:
+    classifier: class
+    parent: arrayiterator
+    interfaces: [recursiveiterator]
+- subject:
+    class: recursivecachingiterator
+  signature:
+    classifier: class
+    parent: cachingiterator
+    interfaces: [recursiveiterator]
+- subject:
+    class: recursivecallbackfilteriterator
+  signature:
+    classifier: class
+    parent: callbackfilteriterator
+    interfaces: [recursiveiterator]
+- subject:
+    class: recursivefilteriterator
+  signature:
+    classifier: class
+    parent: filteriterator
+    interfaces: [recursiveiterator]
+- subject:
+    class: recursiveiterator
+  signature:
+    classifier: interface
+    interfaces: [iterator]
+- subject:
+    class: recursiveiteratoriterator
+  signature:
+    classifier: class
+    interfaces: [outeriterator]
+- subject:
+    class: recursiveregexiterator
+  signature:
+    classifier: class
+    parent: regexiterator
+    interfaces: [recursiveiterator]
+- subject:
+    class: recursivetreeiterator
+  signature:
+    classifier: class
+    parent: recursiveiteratoriterator
+- subject:
+    class: regexiterator
+  signature:
+    classifier: class
+    parent: filteriterator
+- subject:
+    class: seekableiterator
+  signature:
+    classifier: interface
+    interfaces: [iterator]
+- subject:
+    class: spldoublylinkedlist
+  signature:
+    classifier: class
+    interfaces: [iterator, countable, arrayaccess, serializable]
+- subject:
+    class: splmaxheap
+  signature:
+    classifier: class
+    parent: splheap
+- subject:
+    class: splminheap
+  signature:
+    classifier: class
+    parent: splheap
+- subject:
+    class: splobserver
+  signature:
+    classifier: interface
+- subject:
+    class: splsubject
+  signature:
+    classifier: interface
+- subject:
+    class: spltempfileobject
+  signature:
+    classifier: class
+    parent: splfileobject
+- subject:
+    method: AppendIterator::__construct
+  signature:
+    returnType: mixed
+- subject:
+    method: AppendIterator::append
+  signature:
+    params:
+    - name: iterator
+      type: Iterator
+    returnType: void
+- subject:
+    method: AppendIterator::current
+  signature:
+    returnType: mixed
+- subject:
+    method: AppendIterator::getArrayIterator
+  signature:
+    returnType: ArrayIterator
+- subject:
+    method: AppendIterator::getIteratorIndex
+  signature:
+    returnType: ?int
+- subject:
+    method: AppendIterator::next
+  signature:
+    returnType: void
+- subject:
+    method: AppendIterator::rewind
+  signature:
+    returnType: void
+- subject:
+    method: AppendIterator::valid
+  signature:
+    returnType: bool
+- subject:
+    method: CachingIterator::__construct
+  signature:
+    params:
+    - name: iterator
+      type: Iterator
+    - name: flags
+      type: int
+      optional: true
+    returnType: mixed
+- subject:
+    method: CachingIterator::__toString
+  signature:
+    returnType: string
+- subject:
+    method: CachingIterator::count
+  signature:
+    returnType: int
+- subject:
+    method: CachingIterator::getCache
+  signature:
+    returnType: array
+- subject:
+    method: CachingIterator::getFlags
+  signature:
+    returnType: int
+- subject:
+    method: CachingIterator::hasNext
+  signature:
+    returnType: bool
+- subject:
+    method: CachingIterator::next
+  signature:
+    returnType: void
+- subject:
+    method: CachingIterator::offsetExists
+  signature:
+    params:
+    - name: key
+      type: mixed
+    returnType: bool
+- subject:
+    method: CachingIterator::offsetGet
+  signature:
+    params:
+    - name: key
+      type: mixed
+    returnType: mixed
+- subject:
+    method: CachingIterator::offsetSet
+  signature:
+    params:
+    - name: key
+      type: mixed
+    - name: value
+      type: mixed
+    returnType: void
+- subject:
+    method: CachingIterator::offsetUnset
+  signature:
+    params:
+    - name: key
+      type: mixed
+    returnType: void
+- subject:
+    method: CachingIterator::rewind
+  signature:
+    returnType: void
+- subject:
+    method: CachingIterator::setFlags
+  signature:
+    params:
+    - name: flags
+      type: int
+    returnType: void
+- subject:
+    method: CachingIterator::valid
+  signature:
+    returnType: bool
+- subject:
+    method: CallbackFilterIterator::__construct
+  signature:
+    params:
+    - name: iterator
+      type: Iterator
+    - name: callback
+      type: callable
+    returnType: mixed
+- subject:
+    method: CallbackFilterIterator::accept
+  signature:
+    returnType: bool
+- subject:
+    method: EmptyIterator::current
+  signature:
+    returnType: never
+- subject:
+    method: EmptyIterator::key
+  signature:
+    returnType: never
+- subject:
+    method: EmptyIterator::next
+  signature:
+    returnType: void
+- subject:
+    method: EmptyIterator::rewind
+  signature:
+    returnType: void
+- subject:
+    method: EmptyIterator::valid
+  signature:
+    returnType: 'false'
+- subject:
+    method: FilesystemIterator::__construct
+  signature:
+    params:
+    - name: directory
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: mixed
+- subject:
+    method: FilesystemIterator::current
+  signature:
+    returnType: string|SplFileInfo|FilesystemIterator
+- subject:
+    method: FilesystemIterator::getFlags
+  signature:
+    returnType: int
+- subject:
+    method: FilesystemIterator::key
+  signature:
+    returnType: string
+- subject:
+    method: FilesystemIterator::rewind
+  signature:
+    returnType: void
+- subject:
+    method: FilesystemIterator::setFlags
+  signature:
+    params:
+    - name: flags
+      type: int
+    returnType: void
+- subject:
+    method: FilterIterator::__construct
+  signature:
+    params:
+    - name: iterator
+      type: Iterator
+    returnType: mixed
+- subject:
+    method: FilterIterator::accept
+  signature:
+    returnType: bool
+- subject:
+    method: FilterIterator::next
+  signature:
+    returnType: void
+- subject:
+    method: FilterIterator::rewind
+  signature:
+    returnType: void
+- subject:
+    method: GlobIterator::__construct
+  signature:
+    params:
+    - name: pattern
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: mixed
+- subject:
+    method: GlobIterator::count
+  signature:
+    returnType: int
+- subject:
+    method: InfiniteIterator::__construct
+  signature:
+    params:
+    - name: iterator
+      type: Iterator
+    returnType: mixed
+- subject:
+    method: InfiniteIterator::next
+  signature:
+    returnType: void
+- subject:
+    method: IteratorIterator::__construct
+  signature:
+    params:
+    - name: iterator
+      type: Traversable
+    - name: class
+      type: ?string
+      optional: true
+    returnType: mixed
+- subject:
+    method: IteratorIterator::current
+  signature:
+    returnType: mixed
+- subject:
+    method: IteratorIterator::getInnerIterator
+  signature:
+    returnType: ?Iterator
+- subject:
+    method: IteratorIterator::key
+  signature:
+    returnType: mixed
+- subject:
+    method: IteratorIterator::next
+  signature:
+    returnType: void
+- subject:
+    method: IteratorIterator::rewind
+  signature:
+    returnType: void
+- subject:
+    method: IteratorIterator::valid
+  signature:
+    returnType: bool
+- subject:
+    method: LimitIterator::__construct
+  signature:
+    params:
+    - name: iterator
+      type: Iterator
+    - name: offset
+      type: int
+      optional: true
+    - name: limit
+      type: int
+      optional: true
+    returnType: mixed
+- subject:
+    method: LimitIterator::getPosition
+  signature:
+    returnType: int
+- subject:
+    method: LimitIterator::next
+  signature:
+    returnType: void
+- subject:
+    method: LimitIterator::rewind
+  signature:
+    returnType: void
+- subject:
+    method: LimitIterator::seek
+  signature:
+    params:
+    - name: offset
+      type: int
+    returnType: int
+- subject:
+    method: LimitIterator::valid
+  signature:
+    returnType: bool
+- subject:
+    method: MultipleIterator::__construct
+  signature:
+    params:
+    - name: flags
+      type: int
+      optional: true
+    returnType: mixed
+- subject:
+    method: MultipleIterator::__debugInfo
+  signature:
+    returnType: array
+- subject:
+    method: MultipleIterator::attachIterator
+  signature:
+    params:
+    - name: iterator
+      type: Iterator
+    - name: info
+      type: string|int|null
+      optional: true
+    returnType: void
+- subject:
+    method: MultipleIterator::containsIterator
+  signature:
+    params:
+    - name: iterator
+      type: Iterator
+    returnType: bool
+- subject:
+    method: MultipleIterator::countIterators
+  signature:
+    returnType: int
+- subject:
+    method: MultipleIterator::current
+  signature:
+    returnType: array
+- subject:
+    method: MultipleIterator::detachIterator
+  signature:
+    params:
+    - name: iterator
+      type: Iterator
+    returnType: void
+- subject:
+    method: MultipleIterator::getFlags
+  signature:
+    returnType: int
+- subject:
+    method: MultipleIterator::key
+  signature:
+    returnType: array
+- subject:
+    method: MultipleIterator::next
+  signature:
+    returnType: void
+- subject:
+    method: MultipleIterator::rewind
+  signature:
+    returnType: void
+- subject:
+    method: MultipleIterator::setFlags
+  signature:
+    params:
+    - name: flags
+      type: int
+    returnType: void
+- subject:
+    method: MultipleIterator::valid
+  signature:
+    returnType: bool
+- subject:
+    method: NoRewindIterator::__construct
+  signature:
+    params:
+    - name: iterator
+      type: Iterator
+    returnType: mixed
+- subject:
+    method: NoRewindIterator::current
+  signature:
+    returnType: mixed
+- subject:
+    method: NoRewindIterator::key
+  signature:
+    returnType: mixed
+- subject:
+    method: NoRewindIterator::next
+  signature:
+    returnType: void
+- subject:
+    method: NoRewindIterator::rewind
+  signature:
+    returnType: void
+- subject:
+    method: NoRewindIterator::valid
+  signature:
+    returnType: bool
+- subject:
+    method: OuterIterator::getInnerIterator
+  signature:
+    returnType: ?Iterator
+- subject:
+    method: ParentIterator::__construct
+  signature:
+    params:
+    - name: iterator
+      type: RecursiveIterator
+    returnType: mixed
+- subject:
+    method: ParentIterator::accept
+  signature:
+    returnType: bool
+- subject:
+    method: RecursiveArrayIterator::getChildren
+  signature:
+    returnType: ?RecursiveArrayIterator
+- subject:
+    method: RecursiveArrayIterator::hasChildren
+  signature:
+    returnType: bool
+- subject:
+    method: RecursiveCachingIterator::__construct
+  signature:
+    params:
+    - name: iterator
+      type: Iterator
+    - name: flags
+      type: int
+      optional: true
+    returnType: mixed
+- subject:
+    method: RecursiveCachingIterator::getChildren
+  signature:
+    returnType: ?RecursiveCachingIterator
+- subject:
+    method: RecursiveCachingIterator::hasChildren
+  signature:
+    returnType: bool
+- subject:
+    method: RecursiveCallbackFilterIterator::__construct
+  signature:
+    params:
+    - name: iterator
+      type: RecursiveIterator
+    - name: callback
+      type: callable
+    returnType: mixed
+- subject:
+    method: RecursiveCallbackFilterIterator::getChildren
+  signature:
+    returnType: RecursiveCallbackFilterIterator
+- subject:
+    method: RecursiveCallbackFilterIterator::hasChildren
+  signature:
+    returnType: bool
+- subject:
+    method: RecursiveFilterIterator::__construct
+  signature:
+    params:
+    - name: iterator
+      type: RecursiveIterator
+    returnType: mixed
+- subject:
+    method: RecursiveFilterIterator::getChildren
+  signature:
+    returnType: ?RecursiveFilterIterator
+- subject:
+    method: RecursiveFilterIterator::hasChildren
+  signature:
+    returnType: bool
+- subject:
+    method: RecursiveIterator::getChildren
+  signature:
+    returnType: ?RecursiveIterator
+- subject:
+    method: RecursiveIterator::hasChildren
+  signature:
+    returnType: bool
+- subject:
+    method: RecursiveIteratorIterator::__construct
+  signature:
+    params:
+    - name: iterator
+      type: Traversable
+    - name: mode
+      type: int
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: mixed
+- subject:
+    method: RecursiveIteratorIterator::beginChildren
+  signature:
+    returnType: void
+- subject:
+    method: RecursiveIteratorIterator::beginIteration
+  signature:
+    returnType: void
+- subject:
+    method: RecursiveIteratorIterator::callGetChildren
+  signature:
+    returnType: ?RecursiveIterator
+- subject:
+    method: RecursiveIteratorIterator::callHasChildren
+  signature:
+    returnType: bool
+- subject:
+    method: RecursiveIteratorIterator::current
+  signature:
+    returnType: mixed
+- subject:
+    method: RecursiveIteratorIterator::endChildren
+  signature:
+    returnType: void
+- subject:
+    method: RecursiveIteratorIterator::endIteration
+  signature:
+    returnType: void
+- subject:
+    method: RecursiveIteratorIterator::getDepth
+  signature:
+    returnType: int
+- subject:
+    method: RecursiveIteratorIterator::getInnerIterator
+  signature:
+    returnType: RecursiveIterator
+- subject:
+    method: RecursiveIteratorIterator::getMaxDepth
+  signature:
+    returnType: int|false
+- subject:
+    method: RecursiveIteratorIterator::getSubIterator
+  signature:
+    params:
+    - name: level
+      type: ?int
+      optional: true
+    returnType: ?RecursiveIterator
+- subject:
+    method: RecursiveIteratorIterator::key
+  signature:
+    returnType: mixed
+- subject:
+    method: RecursiveIteratorIterator::next
+  signature:
+    returnType: void
+- subject:
+    method: RecursiveIteratorIterator::nextElement
+  signature:
+    returnType: void
+- subject:
+    method: RecursiveIteratorIterator::rewind
+  signature:
+    returnType: void
+- subject:
+    method: RecursiveIteratorIterator::setMaxDepth
+  signature:
+    params:
+    - name: maxDepth
+      type: int
+      optional: true
+    returnType: void
+- subject:
+    method: RecursiveIteratorIterator::valid
+  signature:
+    returnType: bool
+- subject:
+    method: RecursiveRegexIterator::__construct
+  signature:
+    params:
+    - name: iterator
+      type: RecursiveIterator
+    - name: pattern
+      type: string
+    - name: mode
+      type: int
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    - name: pregFlags
+      type: int
+      optional: true
+    returnType: mixed
+- subject:
+    method: RecursiveRegexIterator::accept
+  signature:
+    returnType: bool
+- subject:
+    method: RecursiveRegexIterator::getChildren
+  signature:
+    returnType: RecursiveRegexIterator
+- subject:
+    method: RecursiveRegexIterator::hasChildren
+  signature:
+    returnType: bool
+- subject:
+    method: RecursiveTreeIterator::__construct
+  signature:
+    params:
+    - name: iterator
+      type: RecursiveIterator|IteratorAggregate
+    - name: flags
+      type: int
+      optional: true
+    - name: cachingIteratorFlags
+      type: int
+      optional: true
+    - name: mode
+      type: int
+      optional: true
+    returnType: mixed
+- subject:
+    method: RecursiveTreeIterator::current
+  signature:
+    returnType: mixed
+- subject:
+    method: RecursiveTreeIterator::getEntry
+  signature:
+    returnType: string
+- subject:
+    method: RecursiveTreeIterator::getPostfix
+  signature:
+    returnType: string
+- subject:
+    method: RecursiveTreeIterator::getPrefix
+  signature:
+    returnType: string
+- subject:
+    method: RecursiveTreeIterator::key
+  signature:
+    returnType: mixed
+- subject:
+    method: RecursiveTreeIterator::setPostfix
+  signature:
+    params:
+    - name: postfix
+      type: string
+    returnType: void
+- subject:
+    method: RecursiveTreeIterator::setPrefixPart
+  signature:
+    params:
+    - name: part
+      type: int
+    - name: value
+      type: string
+    returnType: void
+- subject:
+    method: RegexIterator::__construct
+  signature:
+    params:
+    - name: iterator
+      type: Iterator
+    - name: pattern
+      type: string
+    - name: mode
+      type: int
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    - name: pregFlags
+      type: int
+      optional: true
+    returnType: mixed
+- subject:
+    method: RegexIterator::accept
+  signature:
+    returnType: bool
+- subject:
+    method: RegexIterator::getFlags
+  signature:
+    returnType: int
+- subject:
+    method: RegexIterator::getMode
+  signature:
+    returnType: int
+- subject:
+    method: RegexIterator::getPregFlags
+  signature:
+    returnType: int
+- subject:
+    method: RegexIterator::getRegex
+  signature:
+    returnType: string
+- subject:
+    method: RegexIterator::setFlags
+  signature:
+    params:
+    - name: flags
+      type: int
+    returnType: void
+- subject:
+    method: RegexIterator::setMode
+  signature:
+    params:
+    - name: mode
+      type: int
+    returnType: void
+- subject:
+    method: RegexIterator::setPregFlags
+  signature:
+    params:
+    - name: pregFlags
+      type: int
+    returnType: void
+- subject:
+    method: SeekableIterator::seek
+  signature:
+    params:
+    - name: offset
+      type: int
+    returnType: void
+- subject:
+    method: SplDoublyLinkedList::__debugInfo
+  signature:
+    returnType: array
+- subject:
+    method: SplDoublyLinkedList::__serialize
+  signature:
+    returnType: array
+- subject:
+    method: SplDoublyLinkedList::__unserialize
+  signature:
+    params:
+    - name: data
+      type: array
+    returnType: void
+- subject:
+    method: SplDoublyLinkedList::add
+  signature:
+    params:
+    - name: index
+      type: int
+    - name: value
+      type: mixed
+    returnType: void
+- subject:
+    method: SplDoublyLinkedList::bottom
+  signature:
+    returnType: mixed
+- subject:
+    method: SplDoublyLinkedList::count
+  signature:
+    returnType: int
+- subject:
+    method: SplDoublyLinkedList::current
+  signature:
+    returnType: mixed
+- subject:
+    method: SplDoublyLinkedList::getIteratorMode
+  signature:
+    returnType: int
+- subject:
+    method: SplDoublyLinkedList::isEmpty
+  signature:
+    returnType: bool
+- subject:
+    method: SplDoublyLinkedList::key
+  signature:
+    returnType: int
+- subject:
+    method: SplDoublyLinkedList::next
+  signature:
+    returnType: void
+- subject:
+    method: SplDoublyLinkedList::offsetExists
+  signature:
+    params:
+    - name: index
+      type: mixed
+    returnType: bool
+- subject:
+    method: SplDoublyLinkedList::offsetGet
+  signature:
+    params:
+    - name: index
+      type: mixed
+    returnType: mixed
+- subject:
+    method: SplDoublyLinkedList::offsetSet
+  signature:
+    params:
+    - name: index
+      type: mixed
+    - name: value
+      type: mixed
+    returnType: void
+- subject:
+    method: SplDoublyLinkedList::offsetUnset
+  signature:
+    params:
+    - name: index
+      type: mixed
+    returnType: void
+- subject:
+    method: SplDoublyLinkedList::pop
+  signature:
+    returnType: mixed
+- subject:
+    method: SplDoublyLinkedList::prev
+  signature:
+    returnType: void
+- subject:
+    method: SplDoublyLinkedList::push
+  signature:
+    params:
+    - name: value
+      type: mixed
+    returnType: void
+- subject:
+    method: SplDoublyLinkedList::rewind
+  signature:
+    returnType: void
+- subject:
+    method: SplDoublyLinkedList::serialize
+  signature:
+    returnType: string
+- subject:
+    method: SplDoublyLinkedList::setIteratorMode
+  signature:
+    params:
+    - name: mode
+      type: int
+    returnType: int
+- subject:
+    method: SplDoublyLinkedList::shift
+  signature:
+    returnType: mixed
+- subject:
+    method: SplDoublyLinkedList::top
+  signature:
+    returnType: mixed
+- subject:
+    method: SplDoublyLinkedList::unserialize
+  signature:
+    params:
+    - name: data
+      type: string
+    returnType: void
+- subject:
+    method: SplDoublyLinkedList::unshift
+  signature:
+    params:
+    - name: value
+      type: mixed
+    returnType: void
+- subject:
+    method: SplDoublyLinkedList::valid
+  signature:
+    returnType: bool
+- subject:
+    method: SplMaxHeap::compare
+  signature:
+    params:
+    - name: value1
+      type: mixed
+    - name: value2
+      type: mixed
+    returnType: int
+- subject:
+    method: SplMinHeap::compare
+  signature:
+    params:
+    - name: value1
+      type: mixed
+    - name: value2
+      type: mixed
+    returnType: int
+- subject:
+    method: SplObserver::update
+  signature:
+    params:
+    - name: subject
+      type: SplSubject
+    returnType: void
+- subject:
+    method: SplSubject::attach
+  signature:
+    params:
+    - name: observer
+      type: SplObserver
+    returnType: void
+- subject:
+    method: SplSubject::detach
+  signature:
+    params:
+    - name: observer
+      type: SplObserver
+    returnType: void
+- subject:
+    method: SplSubject::notify
+  signature:
+    returnType: void
+- subject:
+    method: SplTempFileObject::__construct
+  signature:
+    params:
+    - name: maxMemory
+      type: int
+      optional: true
+    returnType: mixed
+- subject:
+    class: runtimeexception
+  signature:
+    classifier: class
+    parent: exception
+- subject:
+    class: logicexception
+  signature:
+    classifier: class
+    parent: exception
+- subject:
+    class: invalidargumentexception
+  signature:
+    classifier: class
+    parent: logicexception
+- subject:
+    class: outofrangeexception
+  signature:
+    classifier: class
+    parent: logicexception
+- subject:
+    class: outofboundsexception
+  signature:
+    classifier: class
+    parent: runtimeexception
+- subject:
+    class: overflowexception
+  signature:
+    classifier: class
+    parent: runtimeexception
+- subject:
+    class: underflowexception
+  signature:
+    classifier: class
+    parent: runtimeexception
+- subject:
+    class: unexpectedvalueexception
+  signature:
+    classifier: class
+    parent: runtimeexception
+- subject:
+    class: badmethodcallexception
+  signature:
+    classifier: class
+    parent: badfunctioncallexception
+- subject:
+    class: badfunctioncallexception
+  signature:
+    classifier: class
+    parent: logicexception
+- subject:
+    class: domainexception
+  signature:
+    classifier: class
+    parent: logicexception
+- subject:
+    class: lengthexception
+  signature:
+    classifier: class
+    parent: logicexception
+- subject:
+    class: rangeexception
+  signature:
+    classifier: class
+    parent: runtimeexception
+- subject:
+    class: arrayobject
+  signature:
+    classifier: class
+    interfaces: [iteratoraggregate, arrayaccess, serializable, countable]
+- subject:
+    class: arrayiterator
+  signature:
+    classifier: class
+    interfaces: [seekableiterator, arrayaccess, serializable, countable]
+- subject:
+    class: splfileinfo
+  signature:
+    classifier: class
+    interfaces: [stringable]
+- subject:
+    class: splfileobject
+  signature:
+    classifier: class
+    parent: splfileinfo
+    interfaces: [recursiveiterator, seekableiterator]
+- subject:
+    class: splfixedarray
+  signature:
+    classifier: class
+    interfaces: [iteratoraggregate, arrayaccess, countable, jsonserializable]
+- subject:
+    class: splstack
+  signature:
+    classifier: class
+    parent: spldoublylinkedlist
+- subject:
+    class: splqueue
+  signature:
+    classifier: class
+    parent: spldoublylinkedlist
+- subject:
+    class: splheap
+  signature:
+    classifier: class
+    interfaces: [iterator, countable]
+- subject:
+    class: splpriorityqueue
+  signature:
+    classifier: class
+    interfaces: [iterator, countable]
+- subject:
+    class: splobjectstorage
+  signature:
+    classifier: class
+    interfaces: [countable, seekableiterator, serializable, arrayaccess]
+- subject:
+    class: directoryiterator
+  signature:
+    classifier: class
+    parent: splfileinfo
+    interfaces: [seekableiterator]
+- subject:
+    class: recursivedirectoryiterator
+  signature:
+    classifier: class
+    parent: filesystemiterator
+    interfaces: [recursiveiterator]
+- subject:
+    function: class_implements
+  signature:
+    params:
+    - name: object_or_class
+      type: mixed
+    - name: autoload
+      type: bool
+      optional: true
+    returnType: array|false
+- subject:
+    function: class_parents
+  signature:
+    params:
+    - name: object_or_class
+      type: mixed
+    - name: autoload
+      type: bool
+      optional: true
+    returnType: array|false
+- subject:
+    function: class_uses
+  signature:
+    params:
+    - name: object_or_class
+      type: mixed
+    - name: autoload
+      type: bool
+      optional: true
+    returnType: array|false
+- subject:
+    function: iterator_apply
+  signature:
+    params:
+    - name: iterator
+      type: Traversable
+    - name: callback
+      type: callable
+    - name: args
+      type: ?array
+      optional: true
+    returnType: int
+- subject:
+    function: iterator_count
+  signature:
+    params:
+    - name: iterator
+      type: iterable
+    returnType: int
+- subject:
+    function: iterator_to_array
+  signature:
+    params:
+    - name: iterator
+      type: iterable
+    - name: preserve_keys
+      type: bool
+      optional: true
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    method: ArrayIterator::__construct
+  signature:
+    params:
+    - name: array
+      type: array|object
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: mixed
+- subject:
+    method: ArrayIterator::__debugInfo
+  signature:
+    returnType: array
+- subject:
+    method: ArrayIterator::__serialize
+  signature:
+    returnType: array
+- subject:
+    method: ArrayIterator::__unserialize
+  signature:
+    params:
+    - name: data
+      type: array
+    returnType: void
+- subject:
+    method: ArrayIterator::append
+  signature:
+    params:
+    - name: value
+      type: mixed
+    returnType: void
+- subject:
+    method: ArrayIterator::asort
+  signature:
+    params:
+    - name: flags
+      type: int
+      optional: true
+    returnType: 'true'
+- subject:
+    method: ArrayIterator::count
+  signature:
+    returnType: int
+- subject:
+    method: ArrayIterator::current
+  signature:
+    returnType: mixed
+- subject:
+    method: ArrayIterator::getArrayCopy
+  signature:
+    returnType: array
+- subject:
+    method: ArrayIterator::getFlags
+  signature:
+    returnType: int
+- subject:
+    method: ArrayIterator::key
+  signature:
+    returnType: string|int|null
+- subject:
+    method: ArrayIterator::ksort
+  signature:
+    params:
+    - name: flags
+      type: int
+      optional: true
+    returnType: 'true'
+- subject:
+    method: ArrayIterator::natcasesort
+  signature:
+    returnType: 'true'
+- subject:
+    method: ArrayIterator::natsort
+  signature:
+    returnType: 'true'
+- subject:
+    method: ArrayIterator::next
+  signature:
+    returnType: void
+- subject:
+    method: ArrayIterator::offsetExists
+  signature:
+    params:
+    - name: key
+      type: mixed
+    returnType: bool
+- subject:
+    method: ArrayIterator::offsetGet
+  signature:
+    params:
+    - name: key
+      type: mixed
+    returnType: mixed
+- subject:
+    method: ArrayIterator::offsetSet
+  signature:
+    params:
+    - name: key
+      type: mixed
+    - name: value
+      type: mixed
+    returnType: void
+- subject:
+    method: ArrayIterator::offsetUnset
+  signature:
+    params:
+    - name: key
+      type: mixed
+    returnType: void
+- subject:
+    method: ArrayIterator::rewind
+  signature:
+    returnType: void
+- subject:
+    method: ArrayIterator::seek
+  signature:
+    params:
+    - name: offset
+      type: int
+    returnType: void
+- subject:
+    method: ArrayIterator::serialize
+  signature:
+    returnType: string
+- subject:
+    method: ArrayIterator::setFlags
+  signature:
+    params:
+    - name: flags
+      type: int
+    returnType: void
+- subject:
+    method: ArrayIterator::uasort
+  signature:
+    params:
+    - name: callback
+      type: callable
+    returnType: 'true'
+- subject:
+    method: ArrayIterator::uksort
+  signature:
+    params:
+    - name: callback
+      type: callable
+    returnType: 'true'
+- subject:
+    method: ArrayIterator::unserialize
+  signature:
+    params:
+    - name: data
+      type: string
+    returnType: void
+- subject:
+    method: ArrayIterator::valid
+  signature:
+    returnType: bool
+- subject:
+    method: ArrayObject::__construct
+  signature:
+    params:
+    - name: array
+      type: array|object
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    - name: iteratorClass
+      type: string
+      optional: true
+    returnType: mixed
+- subject:
+    method: ArrayObject::__debugInfo
+  signature:
+    returnType: array
+- subject:
+    method: ArrayObject::__serialize
+  signature:
+    returnType: array
+- subject:
+    method: ArrayObject::__unserialize
+  signature:
+    params:
+    - name: data
+      type: array
+    returnType: void
+- subject:
+    method: ArrayObject::append
+  signature:
+    params:
+    - name: value
+      type: mixed
+    returnType: void
+- subject:
+    method: ArrayObject::asort
+  signature:
+    params:
+    - name: flags
+      type: int
+      optional: true
+    returnType: 'true'
+- subject:
+    method: ArrayObject::count
+  signature:
+    returnType: int
+- subject:
+    method: ArrayObject::exchangeArray
+  signature:
+    params:
+    - name: array
+      type: array|object
+    returnType: array
+- subject:
+    method: ArrayObject::getArrayCopy
+  signature:
+    returnType: array
+- subject:
+    method: ArrayObject::getFlags
+  signature:
+    returnType: int
+- subject:
+    method: ArrayObject::getIterator
+  signature:
+    returnType: Iterator
+- subject:
+    method: ArrayObject::getIteratorClass
+  signature:
+    returnType: string
+- subject:
+    method: ArrayObject::ksort
+  signature:
+    params:
+    - name: flags
+      type: int
+      optional: true
+    returnType: 'true'
+- subject:
+    method: ArrayObject::natcasesort
+  signature:
+    returnType: 'true'
+- subject:
+    method: ArrayObject::natsort
+  signature:
+    returnType: 'true'
+- subject:
+    method: ArrayObject::offsetExists
+  signature:
+    params:
+    - name: key
+      type: mixed
+    returnType: bool
+- subject:
+    method: ArrayObject::offsetGet
+  signature:
+    params:
+    - name: key
+      type: mixed
+    returnType: mixed
+- subject:
+    method: ArrayObject::offsetSet
+  signature:
+    params:
+    - name: key
+      type: mixed
+    - name: value
+      type: mixed
+    returnType: void
+- subject:
+    method: ArrayObject::offsetUnset
+  signature:
+    params:
+    - name: key
+      type: mixed
+    returnType: void
+- subject:
+    method: ArrayObject::serialize
+  signature:
+    returnType: string
+- subject:
+    method: ArrayObject::setFlags
+  signature:
+    params:
+    - name: flags
+      type: int
+    returnType: void
+- subject:
+    method: ArrayObject::setIteratorClass
+  signature:
+    params:
+    - name: iteratorClass
+      type: string
+    returnType: void
+- subject:
+    method: ArrayObject::uasort
+  signature:
+    params:
+    - name: callback
+      type: callable
+    returnType: 'true'
+- subject:
+    method: ArrayObject::uksort
+  signature:
+    params:
+    - name: callback
+      type: callable
+    returnType: 'true'
+- subject:
+    method: ArrayObject::unserialize
+  signature:
+    params:
+    - name: data
+      type: string
+    returnType: void
+- subject:
+    method: DirectoryIterator::__construct
+  signature:
+    params:
+    - name: directory
+      type: string
+    returnType: mixed
+- subject:
+    method: DirectoryIterator::__toString
+  signature:
+    returnType: string
+- subject:
+    method: DirectoryIterator::current
+  signature:
+    returnType: mixed
+- subject:
+    method: DirectoryIterator::getBasename
+  signature:
+    params:
+    - name: suffix
+      type: string
+      optional: true
+    returnType: string
+- subject:
+    method: DirectoryIterator::getExtension
+  signature:
+    returnType: string
+- subject:
+    method: DirectoryIterator::getFilename
+  signature:
+    returnType: string
+- subject:
+    method: DirectoryIterator::isDot
+  signature:
+    returnType: bool
+- subject:
+    method: DirectoryIterator::key
+  signature:
+    returnType: mixed
+- subject:
+    method: DirectoryIterator::next
+  signature:
+    returnType: void
+- subject:
+    method: DirectoryIterator::rewind
+  signature:
+    returnType: void
+- subject:
+    method: DirectoryIterator::seek
+  signature:
+    params:
+    - name: offset
+      type: int
+    returnType: void
+- subject:
+    method: DirectoryIterator::valid
+  signature:
+    returnType: bool
+- subject:
+    method: RecursiveDirectoryIterator::__construct
+  signature:
+    params:
+    - name: directory
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: mixed
+- subject:
+    method: RecursiveDirectoryIterator::getChildren
+  signature:
+    returnType: RecursiveDirectoryIterator
+- subject:
+    method: RecursiveDirectoryIterator::getSubPath
+  signature:
+    returnType: string
+- subject:
+    method: RecursiveDirectoryIterator::getSubPathname
+  signature:
+    returnType: string
+- subject:
+    method: RecursiveDirectoryIterator::hasChildren
+  signature:
+    params:
+    - name: allowLinks
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    method: SplFileInfo::__construct
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: mixed
+- subject:
+    method: SplFileInfo::__debugInfo
+  signature:
+    returnType: array
+- subject:
+    method: SplFileInfo::__toString
+  signature:
+    returnType: string
+- subject:
+    method: SplFileInfo::_bad_state_ex
+  signature:
+    returnType: void
+- subject:
+    method: SplFileInfo::getATime
+  signature:
+    returnType: int|false
+- subject:
+    method: SplFileInfo::getBasename
+  signature:
+    params:
+    - name: suffix
+      type: string
+      optional: true
+    returnType: string
+- subject:
+    method: SplFileInfo::getCTime
+  signature:
+    returnType: int|false
+- subject:
+    method: SplFileInfo::getExtension
+  signature:
+    returnType: string
+- subject:
+    method: SplFileInfo::getFileInfo
+  signature:
+    params:
+    - name: class
+      type: ?string
+      optional: true
+    returnType: SplFileInfo
+- subject:
+    method: SplFileInfo::getFilename
+  signature:
+    returnType: string
+- subject:
+    method: SplFileInfo::getGroup
+  signature:
+    returnType: int|false
+- subject:
+    method: SplFileInfo::getInode
+  signature:
+    returnType: int|false
+- subject:
+    method: SplFileInfo::getLinkTarget
+  signature:
+    returnType: string|false
+- subject:
+    method: SplFileInfo::getMTime
+  signature:
+    returnType: int|false
+- subject:
+    method: SplFileInfo::getOwner
+  signature:
+    returnType: int|false
+- subject:
+    method: SplFileInfo::getPath
+  signature:
+    returnType: string
+- subject:
+    method: SplFileInfo::getPathInfo
+  signature:
+    params:
+    - name: class
+      type: ?string
+      optional: true
+    returnType: ?SplFileInfo
+- subject:
+    method: SplFileInfo::getPathname
+  signature:
+    returnType: string
+- subject:
+    method: SplFileInfo::getPerms
+  signature:
+    returnType: int|false
+- subject:
+    method: SplFileInfo::getRealPath
+  signature:
+    returnType: string|false
+- subject:
+    method: SplFileInfo::getSize
+  signature:
+    returnType: int|false
+- subject:
+    method: SplFileInfo::getType
+  signature:
+    returnType: string|false
+- subject:
+    method: SplFileInfo::isDir
+  signature:
+    returnType: bool
+- subject:
+    method: SplFileInfo::isExecutable
+  signature:
+    returnType: bool
+- subject:
+    method: SplFileInfo::isFile
+  signature:
+    returnType: bool
+- subject:
+    method: SplFileInfo::isLink
+  signature:
+    returnType: bool
+- subject:
+    method: SplFileInfo::isReadable
+  signature:
+    returnType: bool
+- subject:
+    method: SplFileInfo::isWritable
+  signature:
+    returnType: bool
+- subject:
+    method: SplFileInfo::openFile
+  signature:
+    params:
+    - name: mode
+      type: string
+      optional: true
+    - name: useIncludePath
+      type: bool
+      optional: true
+    - name: context
+      type: mixed
+      optional: true
+    returnType: SplFileObject
+- subject:
+    method: SplFileInfo::setFileClass
+  signature:
+    params:
+    - name: class
+      type: string
+      optional: true
+    returnType: void
+- subject:
+    method: SplFileInfo::setInfoClass
+  signature:
+    params:
+    - name: class
+      type: string
+      optional: true
+    returnType: void
+- subject:
+    method: SplFileObject::__construct
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: mode
+      type: string
+      optional: true
+    - name: useIncludePath
+      type: bool
+      optional: true
+    - name: context
+      type: mixed
+      optional: true
+    returnType: mixed
+- subject:
+    method: SplFileObject::__toString
+  signature:
+    returnType: string
+- subject:
+    method: SplFileObject::current
+  signature:
+    returnType: string|array|false
+- subject:
+    method: SplFileObject::eof
+  signature:
+    returnType: bool
+- subject:
+    method: SplFileObject::fflush
+  signature:
+    returnType: bool
+- subject:
+    method: SplFileObject::fgetc
+  signature:
+    returnType: string|false
+- subject:
+    method: SplFileObject::fgetcsv
+  signature:
+    params:
+    - name: separator
+      type: string
+      optional: true
+    - name: enclosure
+      type: string
+      optional: true
+    - name: escape
+      type: string
+      optional: true
+    returnType: array|false
+- subject:
+    method: SplFileObject::fgets
+  signature:
+    returnType: string
+- subject:
+    method: SplFileObject::flock
+  signature:
+    params:
+    - name: operation
+      type: int
+    - name: wouldBlock
+      type: mixed
+      optional: true
+      byRef: true
+    returnType: bool
+- subject:
+    method: SplFileObject::fpassthru
+  signature:
+    returnType: int
+- subject:
+    method: SplFileObject::fputcsv
+  signature:
+    params:
+    - name: fields
+      type: array
+    - name: separator
+      type: string
+      optional: true
+    - name: enclosure
+      type: string
+      optional: true
+    - name: escape
+      type: string
+      optional: true
+    - name: eol
+      type: string
+      optional: true
+    returnType: int|false
+- subject:
+    method: SplFileObject::fread
+  signature:
+    params:
+    - name: length
+      type: int
+    returnType: string|false
+- subject:
+    method: SplFileObject::fscanf
+  signature:
+    params:
+    - name: format
+      type: string
+    - name: vars
+      type: mixed
+      optional: true
+      byRef: true
+      variadic: true
+    returnType: array|int|null
+- subject:
+    method: SplFileObject::fseek
+  signature:
+    params:
+    - name: offset
+      type: int
+    - name: whence
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    method: SplFileObject::fstat
+  signature:
+    returnType: array
+- subject:
+    method: SplFileObject::ftell
+  signature:
+    returnType: int|false
+- subject:
+    method: SplFileObject::ftruncate
+  signature:
+    params:
+    - name: size
+      type: int
+    returnType: bool
+- subject:
+    method: SplFileObject::fwrite
+  signature:
+    params:
+    - name: data
+      type: string
+    - name: length
+      type: ?int
+      optional: true
+    returnType: int|false
+- subject:
+    method: SplFileObject::getChildren
+  signature:
+    returnType: 'null'
+- subject:
+    method: SplFileObject::getCsvControl
+  signature:
+    returnType: array
+- subject:
+    method: SplFileObject::getCurrentLine
+  signature:
+    returnType: string
+- subject:
+    method: SplFileObject::getFlags
+  signature:
+    returnType: int
+- subject:
+    method: SplFileObject::getMaxLineLen
+  signature:
+    returnType: int
+- subject:
+    method: SplFileObject::hasChildren
+  signature:
+    returnType: 'false'
+- subject:
+    method: SplFileObject::key
+  signature:
+    returnType: int
+- subject:
+    method: SplFileObject::next
+  signature:
+    returnType: void
+- subject:
+    method: SplFileObject::rewind
+  signature:
+    returnType: void
+- subject:
+    method: SplFileObject::seek
+  signature:
+    params:
+    - name: line
+      type: int
+    returnType: void
+- subject:
+    method: SplFileObject::setCsvControl
+  signature:
+    params:
+    - name: separator
+      type: string
+      optional: true
+    - name: enclosure
+      type: string
+      optional: true
+    - name: escape
+      type: string
+      optional: true
+    returnType: void
+- subject:
+    method: SplFileObject::setFlags
+  signature:
+    params:
+    - name: flags
+      type: int
+    returnType: void
+- subject:
+    method: SplFileObject::setMaxLineLen
+  signature:
+    params:
+    - name: maxLength
+      type: int
+    returnType: void
+- subject:
+    method: SplFileObject::valid
+  signature:
+    returnType: bool
+- subject:
+    method: SplFixedArray::__construct
+  signature:
+    params:
+    - name: size
+      type: int
+      optional: true
+    returnType: mixed
+- subject:
+    method: SplFixedArray::__serialize
+  signature:
+    returnType: array
+- subject:
+    method: SplFixedArray::__unserialize
+  signature:
+    params:
+    - name: data
+      type: array
+    returnType: void
+- subject:
+    method: SplFixedArray::__wakeup
+  signature:
+    returnType: void
+- subject:
+    method: SplFixedArray::count
+  signature:
+    returnType: int
+- subject:
+    method: SplFixedArray::fromArray
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: preserveKeys
+      type: bool
+      optional: true
+    returnType: SplFixedArray
+- subject:
+    method: SplFixedArray::getIterator
+  signature:
+    returnType: Iterator
+- subject:
+    method: SplFixedArray::getSize
+  signature:
+    returnType: int
+- subject:
+    method: SplFixedArray::jsonSerialize
+  signature:
+    returnType: array
+- subject:
+    method: SplFixedArray::offsetExists
+  signature:
+    params:
+    - name: index
+      type: mixed
+    returnType: bool
+- subject:
+    method: SplFixedArray::offsetGet
+  signature:
+    params:
+    - name: index
+      type: mixed
+    returnType: mixed
+- subject:
+    method: SplFixedArray::offsetSet
+  signature:
+    params:
+    - name: index
+      type: mixed
+    - name: value
+      type: mixed
+    returnType: void
+- subject:
+    method: SplFixedArray::offsetUnset
+  signature:
+    params:
+    - name: index
+      type: mixed
+    returnType: void
+- subject:
+    method: SplFixedArray::setSize
+  signature:
+    params:
+    - name: size
+      type: int
+    returnType: 'true'
+- subject:
+    method: SplFixedArray::toArray
+  signature:
+    returnType: array
+- subject:
+    method: SplHeap::__debugInfo
+  signature:
+    returnType: array
+- subject:
+    method: SplHeap::__serialize
+  signature:
+    returnType: array
+- subject:
+    method: SplHeap::__unserialize
+  signature:
+    params:
+    - name: data
+      type: array
+    returnType: void
+- subject:
+    method: SplHeap::compare
+  signature:
+    params:
+    - name: value1
+      type: mixed
+    - name: value2
+      type: mixed
+    returnType: int
+- subject:
+    method: SplHeap::count
+  signature:
+    returnType: int
+- subject:
+    method: SplHeap::current
+  signature:
+    returnType: mixed
+- subject:
+    method: SplHeap::extract
+  signature:
+    returnType: mixed
+- subject:
+    method: SplHeap::insert
+  signature:
+    params:
+    - name: value
+      type: mixed
+    returnType: 'true'
+- subject:
+    method: SplHeap::isCorrupted
+  signature:
+    returnType: bool
+- subject:
+    method: SplHeap::isEmpty
+  signature:
+    returnType: bool
+- subject:
+    method: SplHeap::key
+  signature:
+    returnType: int
+- subject:
+    method: SplHeap::next
+  signature:
+    returnType: void
+- subject:
+    method: SplHeap::recoverFromCorruption
+  signature:
+    returnType: 'true'
+- subject:
+    method: SplHeap::rewind
+  signature:
+    returnType: void
+- subject:
+    method: SplHeap::top
+  signature:
+    returnType: mixed
+- subject:
+    method: SplHeap::valid
+  signature:
+    returnType: bool
+- subject:
+    method: SplObjectStorage::__debugInfo
+  signature:
+    returnType: array
+- subject:
+    method: SplObjectStorage::__serialize
+  signature:
+    returnType: array
+- subject:
+    method: SplObjectStorage::__unserialize
+  signature:
+    params:
+    - name: data
+      type: array
+    returnType: void
+- subject:
+    method: SplObjectStorage::addAll
+  signature:
+    params:
+    - name: storage
+      type: SplObjectStorage
+    returnType: int
+- subject:
+    method: SplObjectStorage::attach
+  signature:
+    params:
+    - name: object
+      type: object
+    - name: info
+      type: mixed
+      optional: true
+    returnType: void
+- subject:
+    method: SplObjectStorage::contains
+  signature:
+    params:
+    - name: object
+      type: object
+    returnType: bool
+- subject:
+    method: SplObjectStorage::count
+  signature:
+    params:
+    - name: mode
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    method: SplObjectStorage::current
+  signature:
+    returnType: object
+- subject:
+    method: SplObjectStorage::detach
+  signature:
+    params:
+    - name: object
+      type: object
+    returnType: void
+- subject:
+    method: SplObjectStorage::getHash
+  signature:
+    params:
+    - name: object
+      type: object
+    returnType: string
+- subject:
+    method: SplObjectStorage::getInfo
+  signature:
+    returnType: mixed
+- subject:
+    method: SplObjectStorage::key
+  signature:
+    returnType: int
+- subject:
+    method: SplObjectStorage::next
+  signature:
+    returnType: void
+- subject:
+    method: SplObjectStorage::offsetExists
+  signature:
+    params:
+    - name: object
+      type: mixed
+    returnType: bool
+- subject:
+    method: SplObjectStorage::offsetGet
+  signature:
+    params:
+    - name: object
+      type: mixed
+    returnType: mixed
+- subject:
+    method: SplObjectStorage::offsetSet
+  signature:
+    params:
+    - name: object
+      type: mixed
+    - name: info
+      type: mixed
+      optional: true
+    returnType: void
+- subject:
+    method: SplObjectStorage::offsetUnset
+  signature:
+    params:
+    - name: object
+      type: mixed
+    returnType: void
+- subject:
+    method: SplObjectStorage::removeAll
+  signature:
+    params:
+    - name: storage
+      type: SplObjectStorage
+    returnType: int
+- subject:
+    method: SplObjectStorage::removeAllExcept
+  signature:
+    params:
+    - name: storage
+      type: SplObjectStorage
+    returnType: int
+- subject:
+    method: SplObjectStorage::rewind
+  signature:
+    returnType: void
+- subject:
+    method: SplObjectStorage::seek
+  signature:
+    params:
+    - name: offset
+      type: int
+    returnType: void
+- subject:
+    method: SplObjectStorage::serialize
+  signature:
+    returnType: string
+- subject:
+    method: SplObjectStorage::setInfo
+  signature:
+    params:
+    - name: info
+      type: mixed
+    returnType: void
+- subject:
+    method: SplObjectStorage::unserialize
+  signature:
+    params:
+    - name: data
+      type: string
+    returnType: void
+- subject:
+    method: SplObjectStorage::valid
+  signature:
+    returnType: bool
+- subject:
+    method: SplPriorityQueue::__debugInfo
+  signature:
+    returnType: array
+- subject:
+    method: SplPriorityQueue::__serialize
+  signature:
+    returnType: array
+- subject:
+    method: SplPriorityQueue::__unserialize
+  signature:
+    params:
+    - name: data
+      type: array
+    returnType: void
+- subject:
+    method: SplPriorityQueue::compare
+  signature:
+    params:
+    - name: priority1
+      type: mixed
+    - name: priority2
+      type: mixed
+    returnType: int
+- subject:
+    method: SplPriorityQueue::count
+  signature:
+    returnType: int
+- subject:
+    method: SplPriorityQueue::current
+  signature:
+    returnType: mixed
+- subject:
+    method: SplPriorityQueue::extract
+  signature:
+    returnType: mixed
+- subject:
+    method: SplPriorityQueue::getExtractFlags
+  signature:
+    returnType: int
+- subject:
+    method: SplPriorityQueue::insert
+  signature:
+    params:
+    - name: value
+      type: mixed
+    - name: priority
+      type: mixed
+    returnType: 'true'
+- subject:
+    method: SplPriorityQueue::isCorrupted
+  signature:
+    returnType: bool
+- subject:
+    method: SplPriorityQueue::isEmpty
+  signature:
+    returnType: bool
+- subject:
+    method: SplPriorityQueue::key
+  signature:
+    returnType: int
+- subject:
+    method: SplPriorityQueue::next
+  signature:
+    returnType: void
+- subject:
+    method: SplPriorityQueue::recoverFromCorruption
+  signature:
+    returnType: 'true'
+- subject:
+    method: SplPriorityQueue::rewind
+  signature:
+    returnType: void
+- subject:
+    method: SplPriorityQueue::setExtractFlags
+  signature:
+    params:
+    - name: flags
+      type: int
+    returnType: int
+- subject:
+    method: SplPriorityQueue::top
+  signature:
+    returnType: mixed
+- subject:
+    method: SplPriorityQueue::valid
+  signature:
+    returnType: bool
+- subject:
+    method: SplQueue::dequeue
+  signature:
+    returnType: mixed
+- subject:
+    method: SplQueue::enqueue
+  signature:
+    params:
+    - name: value
+      type: mixed
+    returnType: void

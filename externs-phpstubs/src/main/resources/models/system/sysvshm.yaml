@@ -7,12 +7,12 @@
     - name: key
       type: int
     - name: size
-      type: int
+      type: ?int
       optional: true
     - name: permissions
       type: int
       optional: true
-    returnType: mixed
+    returnType: SysvSharedMemory|false
   propagation:
   - from: argument(0)
     to: return
@@ -25,14 +25,14 @@
   signature:
     params:
     - name: shm
-      type: mixed
-    returnType: bool
+      type: SysvSharedMemory
+    returnType: 'true'
 - subject:
     function: shm_get_var
   signature:
     params:
     - name: shm
-      type: mixed
+      type: SysvSharedMemory
     - name: key
       type: int
     returnType: mixed
@@ -46,7 +46,7 @@
   signature:
     params:
     - name: shm
-      type: mixed
+      type: SysvSharedMemory
     - name: key
       type: int
     returnType: bool
@@ -55,7 +55,7 @@
   signature:
     params:
     - name: shm
-      type: mixed
+      type: SysvSharedMemory
     - name: key
       type: int
     - name: value
@@ -66,14 +66,18 @@
   signature:
     params:
     - name: shm
-      type: mixed
+      type: SysvSharedMemory
     returnType: bool
 - subject:
     function: shm_remove_var
   signature:
     params:
     - name: shm
-      type: mixed
+      type: SysvSharedMemory
     - name: key
       type: int
     returnType: bool
+- subject:
+    class: sysvsharedmemory
+  signature:
+    classifier: class

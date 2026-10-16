@@ -8,39 +8,17 @@ import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 /**
- * Tests for the hand-declared documents under `models/manual/`: built-ins the extraction does not produce.
+ * Tests for the hand-declared documents under `models/manual/`: built-ins php-src 8.5.11 does not declare.
  *
- * - `manual documents declare the query methods the extraction omits` — verifies the seven methods carry their
- *   owner's extension
- * - `manual documents declare functions outside the upstream release` — verifies PHP 8.3 and removed functions
- *   under `standard` and `mysql`
- * - `manual declarations carry the reviewed value unit` — verifies typed results and query flows
+ * - `manual documents declare functions removed before PHP 8` — verifies the removed functions under `standard`
+ *   and `mysql`
+ * - `manual declarations carry the reviewed value unit` — verifies the typed result and flows of `money_format`
  * - `create_function declares existence without a value unit` — verifies the entry without propagation
- * - `core document declares the exception message flows` — verifies the constructors store the message in the
- *   receiver and `Error::getMessage` returns it
  */
 internal class ManualDeclarationsTest {
     @Test
-    fun `manual documents declare the query methods the extraction omits`() {
-        val expected =
-            mapOf(
-                "mysqli::query" to "mysqli",
-                "mysqli::multi_query" to "mysqli",
-                "mysqli::real_query" to "mysqli",
-                "PDO::query" to "pdo",
-                "PDO::exec" to "pdo",
-                "SQLite3::query" to "sqlite3",
-                "SQLite3::exec" to "sqlite3",
-            )
-        for ((spelling, extension) in expected) {
-            assertEquals(extension, assertNotNull(PhpStubs.method(spelling), spelling).extension, spelling)
-        }
-    }
-
-    @Test
-    fun `manual documents declare functions outside the upstream release`() {
-        val standard = listOf("str_decrement", "str_increment", "hebrevc", "convert_cyr_string", "money_format", "each")
-        for (name in standard) {
+    fun `manual documents declare functions removed before PHP 8`() {
+        for (name in listOf("hebrevc", "convert_cyr_string", "money_format", "each", "create_function")) {
             assertEquals("standard", assertNotNull(PhpStubs.function(name), name).extension, name)
         }
         assertEquals("mysql", assertNotNull(PhpStubs.function("mysql_query")).extension)
@@ -48,11 +26,12 @@ internal class ManualDeclarationsTest {
 
     @Test
     fun `manual declarations carry the reviewed value unit`() {
-        assertEquals(ReturnKind.ANY to listOf(0), unitOf(PhpStubs.method("mysqli::query")!!))
-        assertEquals(ReturnKind.BOOL to listOf(0), unitOf(PhpStubs.method("mysqli::multi_query")!!))
-        assertEquals(ReturnKind.BOOL to listOf(0), unitOf(PhpStubs.method("SQLite3::exec")!!))
-        assertEquals(ReturnKind.STR to listOf(0), unitOf(PhpStubs.function("str_increment")!!))
-        assertEquals(ReturnKind.STR to listOf(0, 1), unitOf(PhpStubs.function("money_format")!!))
+        val record = assertNotNull(PhpStubs.function("money_format"))
+        assertEquals(ReturnKind.STR, record.returns.single { it.condition == null }.kind)
+        assertEquals(
+            listOf(Port.Argument(0), Port.Argument(1)),
+            record.flows.filter { it.condition == null && it.to == Port.Return }.map { it.from },
+        )
     }
 
     @Test
@@ -61,20 +40,4 @@ internal class ManualDeclarationsTest {
         assertNotNull(record.signature)
         assertTrue(record.flows.isEmpty())
     }
-
-    @Test
-    fun `core document declares the exception message flows`() {
-        for (owner in listOf("Exception", "Error")) {
-            val construct = assertNotNull(PhpStubs.method("$owner::__construct"), owner)
-            assertEquals("core", construct.extension, owner)
-            assertEquals(listOf(Port.Argument(0) to Port.Receiver), construct.flows.map { it.from to it.to }, owner)
-        }
-        val message = assertNotNull(PhpStubs.method("Error::getMessage"))
-        assertEquals(ReturnKind.STR, message.returns.single { it.condition == null }.kind)
-        assertEquals(listOf(Port.Receiver to Port.Return), message.flows.map { it.from to it.to })
-    }
-
-    private fun unitOf(record: BuiltinRecord<*>): Pair<ReturnKind, List<Int>> =
-        record.returns.single { it.condition == null }.kind to
-            record.flows.filter { it.condition == null && it.to == Port.Return }.map { (it.from as Port.Argument).position }
 }

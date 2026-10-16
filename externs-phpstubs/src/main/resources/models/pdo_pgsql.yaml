@@ -1,0 +1,237 @@
+# Generated from php-src stubs by tools/extract_hierarchy.py.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    class: pdo\pgsql
+  signature:
+    classifier: class
+    parent: pdo
+- subject:
+    class: pdo_pgsql_ext
+  signature:
+    classifier: class
+- subject:
+    method: Pdo\Pgsql::copyFromArray
+  signature:
+    params:
+    - name: tableName
+      type: string
+    - name: rows
+      type: array
+    - name: separator
+      type: string
+      optional: true
+    - name: nullAs
+      type: string
+      optional: true
+    - name: fields
+      type: ?string
+      optional: true
+    returnType: bool
+- subject:
+    method: Pdo\Pgsql::copyFromFile
+  signature:
+    params:
+    - name: tableName
+      type: string
+    - name: filename
+      type: string
+    - name: separator
+      type: string
+      optional: true
+    - name: nullAs
+      type: string
+      optional: true
+    - name: fields
+      type: ?string
+      optional: true
+    returnType: bool
+- subject:
+    method: Pdo\Pgsql::copyToArray
+  signature:
+    params:
+    - name: tableName
+      type: string
+    - name: separator
+      type: string
+      optional: true
+    - name: nullAs
+      type: string
+      optional: true
+    - name: fields
+      type: ?string
+      optional: true
+    returnType: array|false
+- subject:
+    method: Pdo\Pgsql::copyToFile
+  signature:
+    params:
+    - name: tableName
+      type: string
+    - name: filename
+      type: string
+    - name: separator
+      type: string
+      optional: true
+    - name: nullAs
+      type: string
+      optional: true
+    - name: fields
+      type: ?string
+      optional: true
+    returnType: bool
+- subject:
+    method: Pdo\Pgsql::escapeIdentifier
+  signature:
+    params:
+    - name: input
+      type: string
+    returnType: string
+- subject:
+    method: Pdo\Pgsql::getNotify
+  signature:
+    params:
+    - name: fetchMode
+      type: int
+      optional: true
+    - name: timeoutMilliseconds
+      type: int
+      optional: true
+    returnType: array|false
+- subject:
+    method: Pdo\Pgsql::getPid
+  signature:
+    returnType: int
+- subject:
+    method: Pdo\Pgsql::lobCreate
+  signature:
+    returnType: string|false
+- subject:
+    method: Pdo\Pgsql::lobOpen
+  signature:
+    params:
+    - name: oid
+      type: string
+    - name: mode
+      type: string
+      optional: true
+    returnType: mixed
+- subject:
+    method: Pdo\Pgsql::lobUnlink
+  signature:
+    params:
+    - name: oid
+      type: string
+    returnType: bool
+- subject:
+    method: Pdo\Pgsql::setNoticeCallback
+  signature:
+    params:
+    - name: callback
+      type: ?callable
+    returnType: void
+- subject:
+    method: PDO_PGSql_Ext::pgsqlCopyFromArray
+  signature:
+    params:
+    - name: tableName
+      type: string
+    - name: rows
+      type: array|Traversable
+    - name: separator
+      type: string
+      optional: true
+    - name: nullAs
+      type: string
+      optional: true
+    - name: fields
+      type: ?string
+      optional: true
+    returnType: bool
+- subject:
+    method: PDO_PGSql_Ext::pgsqlCopyFromFile
+  signature:
+    params:
+    - name: tableName
+      type: string
+    - name: filename
+      type: string
+    - name: separator
+      type: string
+      optional: true
+    - name: nullAs
+      type: string
+      optional: true
+    - name: fields
+      type: ?string
+      optional: true
+    returnType: bool
+- subject:
+    method: PDO_PGSql_Ext::pgsqlCopyToArray
+  signature:
+    params:
+    - name: tableName
+      type: string
+    - name: separator
+      type: string
+      optional: true
+    - name: nullAs
+      type: string
+      optional: true
+    - name: fields
+      type: ?string
+      optional: true
+    returnType: array|false
+- subject:
+    method: PDO_PGSql_Ext::pgsqlCopyToFile
+  signature:
+    params:
+    - name: tableName
+      type: string
+    - name: filename
+      type: string
+    - name: separator
+      type: string
+      optional: true
+    - name: nullAs
+      type: string
+      optional: true
+    - name: fields
+      type: ?string
+      optional: true
+    returnType: bool
+- subject:
+    method: PDO_PGSql_Ext::pgsqlGetNotify
+  signature:
+    params:
+    - name: fetchMode
+      type: int
+      optional: true
+    - name: timeoutMilliseconds
+      type: int
+      optional: true
+    returnType: array|false
+- subject:
+    method: PDO_PGSql_Ext::pgsqlGetPid
+  signature:
+    returnType: int
+- subject:
+    method: PDO_PGSql_Ext::pgsqlLOBCreate
+  signature:
+    returnType: string|false
+- subject:
+    method: PDO_PGSql_Ext::pgsqlLOBOpen
+  signature:
+    params:
+    - name: oid
+      type: string
+    - name: mode
+      type: string
+      optional: true
+    returnType: mixed
+- subject:
+    method: PDO_PGSql_Ext::pgsqlLOBUnlink
+  signature:
+    params:
+    - name: oid
+      type: string
+    returnType: bool

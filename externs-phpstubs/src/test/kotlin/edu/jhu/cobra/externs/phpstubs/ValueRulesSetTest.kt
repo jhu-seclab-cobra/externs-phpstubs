@@ -29,6 +29,8 @@ import kotlin.test.assertTrue
  * - `no value rules unit repeats the generated unit` — verifies each unconditional unit differs from the generated one
  * - `mode-switching subjects carry a conditional entry and an unconditional one` — verifies print_r and var_export
  * - `representative units follow the PHP manual` — verifies typed results and flow sets
+ * - `query and exception units apply to the php-src declarations` — verifies the merged records of the query
+ *   methods and the exception constructors keep their php-src extension and take the reviewed unit
  */
 internal class ValueRulesSetTest {
     private val rules by lazy { DocumentSetLoader.load(StubResources.opener(StubResources.VALUE_RULES)) }
@@ -58,6 +60,7 @@ internal class ValueRulesSetTest {
             assertNull(entry.body.sources, "${entry.subject}")
             assertNull(entry.body.sinks, "${entry.subject}")
             assertNull(entry.body.sanitizers, "${entry.subject}")
+            assertNull(entry.body.raises, "${entry.subject}")
         }
     }
 
@@ -103,7 +106,35 @@ internal class ValueRulesSetTest {
             unconditional.getValue(MethodSubject("Exception", "getMessage")).body.valueSemantics(),
         )
         assertNull(unconditional[FunctionSubject("crypt")])
-        assertNull(unconditional[FunctionSubject("str_increment")])
+        assertEquals(ValueSemantics(ReturnKind.STR, listOf(argumentToReturn(0))), unitOf("str_increment"))
+    }
+
+    @Test
+    fun `query and exception units apply to the php-src declarations`() {
+        val queries =
+            mapOf(
+                "mysqli::query" to ("mysqli" to ReturnKind.ANY),
+                "mysqli::multi_query" to ("mysqli" to ReturnKind.BOOL),
+                "mysqli::real_query" to ("mysqli" to ReturnKind.BOOL),
+                "PDO::query" to ("pdo" to ReturnKind.ANY),
+                "PDO::exec" to ("pdo" to ReturnKind.ANY),
+                "SQLite3::query" to ("sqlite3" to ReturnKind.ANY),
+                "SQLite3::exec" to ("sqlite3" to ReturnKind.BOOL),
+            )
+        for ((spelling, expected) in queries) {
+            val record = assertNotNull(PhpStubs.method(spelling), spelling)
+            assertEquals(expected.first, record.extension, spelling)
+            assertEquals(expected.second, record.returns.single { it.condition == null }.kind, spelling)
+            assertEquals(listOf(Port.Argument(0) to Port.Return), record.flows.map { it.from to it.to }, spelling)
+        }
+        for (owner in listOf("Exception", "Error")) {
+            val construct = assertNotNull(PhpStubs.method("$owner::__construct"), owner)
+            assertEquals("core", construct.extension, owner)
+            assertEquals(listOf(Port.Argument(0) to Port.Receiver), construct.flows.map { it.from to it.to }, owner)
+            val message = assertNotNull(PhpStubs.method("$owner::getMessage"), owner)
+            assertEquals(ReturnKind.STR, message.returns.single { it.condition == null }.kind, owner)
+            assertEquals(listOf(Port.Receiver to Port.Return), message.flows.map { it.from to it.to }, owner)
+        }
     }
 
     private fun unitOf(name: String): ValueSemantics = unconditional.getValue(FunctionSubject(name)).body.valueSemantics()!!

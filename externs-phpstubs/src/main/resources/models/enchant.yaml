@@ -1,0 +1,257 @@
+# Generated from php-src stubs by tools/extract_hierarchy.py.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    class: enchantbroker
+  signature:
+    classifier: class
+- subject:
+    class: enchantdictionary
+  signature:
+    classifier: class
+- subject:
+    function: enchant_dict_add
+  signature:
+    params:
+    - name: dictionary
+      type: EnchantDictionary
+    - name: word
+      type: string
+    returnType: void
+- subject:
+    function: enchant_dict_is_added
+  signature:
+    params:
+    - name: dictionary
+      type: EnchantDictionary
+    - name: word
+      type: string
+    returnType: bool
+- subject:
+    function: enchant_dict_remove
+  signature:
+    params:
+    - name: dictionary
+      type: EnchantDictionary
+    - name: word
+      type: string
+    returnType: void
+- subject:
+    function: enchant_dict_remove_from_session
+  signature:
+    params:
+    - name: dictionary
+      type: EnchantDictionary
+    - name: word
+      type: string
+    returnType: void
+- subject:
+    function: enchant_broker_describe
+  signature:
+    params:
+    - name: broker
+      type: EnchantBroker
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: enchant_broker_dict_exists
+  signature:
+    params:
+    - name: broker
+      type: EnchantBroker
+    - name: tag
+      type: string
+    returnType: bool
+- subject:
+    function: enchant_broker_free
+  signature:
+    params:
+    - name: broker
+      type: EnchantBroker
+    returnType: bool
+- subject:
+    function: enchant_broker_free_dict
+  signature:
+    params:
+    - name: dictionary
+      type: EnchantDictionary
+    returnType: bool
+- subject:
+    function: enchant_broker_get_dict_path
+  signature:
+    params:
+    - name: broker
+      type: EnchantBroker
+    - name: type
+      type: int
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: enchant_broker_get_error
+  signature:
+    params:
+    - name: broker
+      type: EnchantBroker
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: enchant_broker_init
+  signature:
+    returnType: EnchantBroker|false
+- subject:
+    function: enchant_broker_list_dicts
+  signature:
+    params:
+    - name: broker
+      type: EnchantBroker
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: enchant_broker_request_dict
+  signature:
+    params:
+    - name: broker
+      type: EnchantBroker
+    - name: tag
+      type: string
+    returnType: EnchantDictionary|false
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: enchant_broker_request_pwl_dict
+  signature:
+    params:
+    - name: broker
+      type: EnchantBroker
+    - name: filename
+      type: string
+    returnType: EnchantDictionary|false
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: enchant_broker_set_dict_path
+  signature:
+    params:
+    - name: broker
+      type: EnchantBroker
+    - name: type
+      type: int
+    - name: path
+      type: string
+    returnType: bool
+- subject:
+    function: enchant_broker_set_ordering
+  signature:
+    params:
+    - name: broker
+      type: EnchantBroker
+    - name: tag
+      type: string
+    - name: ordering
+      type: string
+    returnType: bool
+- subject:
+    function: enchant_dict_add_to_personal
+  signature:
+    params:
+    - name: dictionary
+      type: EnchantDictionary
+    - name: word
+      type: string
+    returnType: void
+- subject:
+    function: enchant_dict_add_to_session
+  signature:
+    params:
+    - name: dictionary
+      type: EnchantDictionary
+    - name: word
+      type: string
+    returnType: void
+- subject:
+    function: enchant_dict_check
+  signature:
+    params:
+    - name: dictionary
+      type: EnchantDictionary
+    - name: word
+      type: string
+    returnType: bool
+- subject:
+    function: enchant_dict_describe
+  signature:
+    params:
+    - name: dictionary
+      type: EnchantDictionary
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: enchant_dict_get_error
+  signature:
+    params:
+    - name: dictionary
+      type: EnchantDictionary
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: enchant_dict_is_in_session
+  signature:
+    params:
+    - name: dictionary
+      type: EnchantDictionary
+    - name: word
+      type: string
+    returnType: bool
+- subject:
+    function: enchant_dict_quick_check
+  signature:
+    params:
+    - name: dictionary
+      type: EnchantDictionary
+    - name: word
+      type: string
+    - name: suggestions
+      type: mixed
+      optional: true
+      byRef: true
+    returnType: bool
+- subject:
+    function: enchant_dict_store_replacement
+  signature:
+    params:
+    - name: dictionary
+      type: EnchantDictionary
+    - name: misspelled
+      type: string
+    - name: correct
+      type: string
+    returnType: void
+- subject:
+    function: enchant_dict_suggest
+  signature:
+    params:
+    - name: dictionary
+      type: EnchantDictionary
+    - name: word
+      type: string
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return

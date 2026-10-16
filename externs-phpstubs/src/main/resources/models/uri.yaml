@@ -1,0 +1,413 @@
+# Generated from php-src stubs by tools/extract_hierarchy.py.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    class: uri\invaliduriexception
+  signature:
+    classifier: class
+    parent: uri\uriexception
+- subject:
+    class: uri\rfc3986\uri
+  signature:
+    classifier: class
+- subject:
+    class: uri\uricomparisonmode
+  signature:
+    classifier: enum
+    interfaces: [unitenum]
+- subject:
+    class: uri\urierror
+  signature:
+    classifier: class
+    parent: error
+- subject:
+    class: uri\uriexception
+  signature:
+    classifier: class
+    parent: exception
+- subject:
+    class: uri\whatwg\invalidurlexception
+  signature:
+    classifier: class
+    parent: uri\invaliduriexception
+- subject:
+    class: uri\whatwg\url
+  signature:
+    classifier: class
+- subject:
+    class: uri\whatwg\urlvalidationerror
+  signature:
+    classifier: class
+- subject:
+    class: uri\whatwg\urlvalidationerrortype
+  signature:
+    classifier: enum
+    interfaces: [unitenum]
+- subject:
+    method: Uri\Rfc3986\Uri::__construct
+  signature:
+    params:
+    - name: uri
+      type: string
+    - name: baseUrl
+      type: ?Uri\Rfc3986\Uri
+      optional: true
+    returnType: mixed
+- subject:
+    method: Uri\Rfc3986\Uri::__debugInfo
+  signature:
+    returnType: array
+- subject:
+    method: Uri\Rfc3986\Uri::__serialize
+  signature:
+    returnType: array
+- subject:
+    method: Uri\Rfc3986\Uri::__unserialize
+  signature:
+    params:
+    - name: data
+      type: array
+    returnType: void
+- subject:
+    method: Uri\Rfc3986\Uri::equals
+  signature:
+    params:
+    - name: uri
+      type: Uri\Rfc3986\Uri
+    - name: comparisonMode
+      type: Uri\UriComparisonMode
+      optional: true
+    returnType: bool
+- subject:
+    method: Uri\Rfc3986\Uri::getFragment
+  signature:
+    returnType: ?string
+- subject:
+    method: Uri\Rfc3986\Uri::getHost
+  signature:
+    returnType: ?string
+- subject:
+    method: Uri\Rfc3986\Uri::getPassword
+  signature:
+    returnType: ?string
+- subject:
+    method: Uri\Rfc3986\Uri::getPath
+  signature:
+    returnType: string
+- subject:
+    method: Uri\Rfc3986\Uri::getPort
+  signature:
+    returnType: ?int
+- subject:
+    method: Uri\Rfc3986\Uri::getQuery
+  signature:
+    returnType: ?string
+- subject:
+    method: Uri\Rfc3986\Uri::getRawFragment
+  signature:
+    returnType: ?string
+- subject:
+    method: Uri\Rfc3986\Uri::getRawHost
+  signature:
+    returnType: ?string
+- subject:
+    method: Uri\Rfc3986\Uri::getRawPassword
+  signature:
+    returnType: ?string
+- subject:
+    method: Uri\Rfc3986\Uri::getRawPath
+  signature:
+    returnType: string
+- subject:
+    method: Uri\Rfc3986\Uri::getRawQuery
+  signature:
+    returnType: ?string
+- subject:
+    method: Uri\Rfc3986\Uri::getRawScheme
+  signature:
+    returnType: ?string
+- subject:
+    method: Uri\Rfc3986\Uri::getRawUserInfo
+  signature:
+    returnType: ?string
+- subject:
+    method: Uri\Rfc3986\Uri::getRawUsername
+  signature:
+    returnType: ?string
+- subject:
+    method: Uri\Rfc3986\Uri::getScheme
+  signature:
+    returnType: ?string
+- subject:
+    method: Uri\Rfc3986\Uri::getUserInfo
+  signature:
+    returnType: ?string
+- subject:
+    method: Uri\Rfc3986\Uri::getUsername
+  signature:
+    returnType: ?string
+- subject:
+    method: Uri\Rfc3986\Uri::parse
+  signature:
+    params:
+    - name: uri
+      type: string
+    - name: baseUrl
+      type: ?Uri\Rfc3986\Uri
+      optional: true
+    returnType: ?static
+- subject:
+    method: Uri\Rfc3986\Uri::resolve
+  signature:
+    params:
+    - name: uri
+      type: string
+    returnType: static
+- subject:
+    method: Uri\Rfc3986\Uri::toRawString
+  signature:
+    returnType: string
+- subject:
+    method: Uri\Rfc3986\Uri::toString
+  signature:
+    returnType: string
+- subject:
+    method: Uri\Rfc3986\Uri::withFragment
+  signature:
+    params:
+    - name: fragment
+      type: ?string
+    returnType: static
+- subject:
+    method: Uri\Rfc3986\Uri::withHost
+  signature:
+    params:
+    - name: host
+      type: ?string
+    returnType: static
+- subject:
+    method: Uri\Rfc3986\Uri::withPath
+  signature:
+    params:
+    - name: path
+      type: string
+    returnType: static
+- subject:
+    method: Uri\Rfc3986\Uri::withPort
+  signature:
+    params:
+    - name: port
+      type: ?int
+    returnType: static
+- subject:
+    method: Uri\Rfc3986\Uri::withQuery
+  signature:
+    params:
+    - name: query
+      type: ?string
+    returnType: static
+- subject:
+    method: Uri\Rfc3986\Uri::withScheme
+  signature:
+    params:
+    - name: scheme
+      type: ?string
+    returnType: static
+- subject:
+    method: Uri\Rfc3986\Uri::withUserInfo
+  signature:
+    params:
+    - name: userinfo
+      type: ?string
+    returnType: static
+- subject:
+    method: Uri\WhatWg\InvalidUrlException::__construct
+  signature:
+    params:
+    - name: message
+      type: string
+      optional: true
+    - name: errors
+      type: array
+      optional: true
+    - name: code
+      type: int
+      optional: true
+    - name: previous
+      type: ?Throwable
+      optional: true
+    returnType: mixed
+- subject:
+    method: Uri\WhatWg\Url::__construct
+  signature:
+    params:
+    - name: uri
+      type: string
+    - name: baseUrl
+      type: ?Uri\WhatWg\Url
+      optional: true
+    - name: softErrors
+      type: mixed
+      optional: true
+      byRef: true
+    returnType: mixed
+- subject:
+    method: Uri\WhatWg\Url::__debugInfo
+  signature:
+    returnType: array
+- subject:
+    method: Uri\WhatWg\Url::__serialize
+  signature:
+    returnType: array
+- subject:
+    method: Uri\WhatWg\Url::__unserialize
+  signature:
+    params:
+    - name: data
+      type: array
+    returnType: void
+- subject:
+    method: Uri\WhatWg\Url::equals
+  signature:
+    params:
+    - name: url
+      type: Uri\WhatWg\Url
+    - name: comparisonMode
+      type: Uri\UriComparisonMode
+      optional: true
+    returnType: bool
+- subject:
+    method: Uri\WhatWg\Url::getAsciiHost
+  signature:
+    returnType: ?string
+- subject:
+    method: Uri\WhatWg\Url::getFragment
+  signature:
+    returnType: ?string
+- subject:
+    method: Uri\WhatWg\Url::getPassword
+  signature:
+    returnType: ?string
+- subject:
+    method: Uri\WhatWg\Url::getPath
+  signature:
+    returnType: string
+- subject:
+    method: Uri\WhatWg\Url::getPort
+  signature:
+    returnType: ?int
+- subject:
+    method: Uri\WhatWg\Url::getQuery
+  signature:
+    returnType: ?string
+- subject:
+    method: Uri\WhatWg\Url::getScheme
+  signature:
+    returnType: string
+- subject:
+    method: Uri\WhatWg\Url::getUnicodeHost
+  signature:
+    returnType: ?string
+- subject:
+    method: Uri\WhatWg\Url::getUsername
+  signature:
+    returnType: ?string
+- subject:
+    method: Uri\WhatWg\Url::parse
+  signature:
+    params:
+    - name: uri
+      type: string
+    - name: baseUrl
+      type: ?Uri\WhatWg\Url
+      optional: true
+    - name: errors
+      type: mixed
+      optional: true
+      byRef: true
+    returnType: ?static
+- subject:
+    method: Uri\WhatWg\Url::resolve
+  signature:
+    params:
+    - name: uri
+      type: string
+    - name: softErrors
+      type: mixed
+      optional: true
+      byRef: true
+    returnType: static
+- subject:
+    method: Uri\WhatWg\Url::toAsciiString
+  signature:
+    returnType: string
+- subject:
+    method: Uri\WhatWg\Url::toUnicodeString
+  signature:
+    returnType: string
+- subject:
+    method: Uri\WhatWg\Url::withFragment
+  signature:
+    params:
+    - name: fragment
+      type: ?string
+    returnType: static
+- subject:
+    method: Uri\WhatWg\Url::withHost
+  signature:
+    params:
+    - name: host
+      type: ?string
+    returnType: static
+- subject:
+    method: Uri\WhatWg\Url::withPassword
+  signature:
+    params:
+    - name: password
+      type: ?string
+    returnType: static
+- subject:
+    method: Uri\WhatWg\Url::withPath
+  signature:
+    params:
+    - name: path
+      type: string
+    returnType: static
+- subject:
+    method: Uri\WhatWg\Url::withPort
+  signature:
+    params:
+    - name: port
+      type: ?int
+    returnType: static
+- subject:
+    method: Uri\WhatWg\Url::withQuery
+  signature:
+    params:
+    - name: query
+      type: ?string
+    returnType: static
+- subject:
+    method: Uri\WhatWg\Url::withScheme
+  signature:
+    params:
+    - name: scheme
+      type: string
+    returnType: static
+- subject:
+    method: Uri\WhatWg\Url::withUsername
+  signature:
+    params:
+    - name: username
+      type: ?string
+    returnType: static
+- subject:
+    method: Uri\WhatWg\UrlValidationError::__construct
+  signature:
+    params:
+    - name: context
+      type: string
+    - name: type
+      type: Uri\WhatWg\UrlValidationErrorType
+    - name: failure
+      type: bool
+    returnType: mixed

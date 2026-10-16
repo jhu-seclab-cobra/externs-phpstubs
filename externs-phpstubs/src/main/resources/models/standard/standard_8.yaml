@@ -1317,46 +1317,1406 @@
       optional: true
     returnType: bool
 - subject:
-    function: zend_thread_id
-  signature:
-    returnType: int
-- subject:
-    function: zend_version
-  signature:
-    returnType: string
-- subject:
-    function: zlib_decode
-  signature:
-    params:
-    - name: data
-      type: string
-    - name: max_length
-      type: int
-      optional: true
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: zlib_encode
-  signature:
-    params:
-    - name: data
-      type: string
-    - name: encoding
-      type: int
-    - name: level
-      type: int
-      optional: true
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: zlib_get_coding_type
-  signature:
-    returnType: string
-- subject:
     function: zookeeper_dispatch
   signature:
     returnType: void
+- subject:
+    class: __php_incomplete_class
+  signature:
+    classifier: class
+- subject:
+    class: assertionerror
+  signature:
+    classifier: class
+    parent: error
+- subject:
+    class: directory
+  signature:
+    classifier: class
+- subject:
+    class: php_user_filter
+  signature:
+    classifier: class
+- subject:
+    class: roundingmode
+  signature:
+    classifier: enum
+    interfaces: [unitenum]
+- subject:
+    class: streambucket
+  signature:
+    classifier: class
+- subject:
+    function: array_all
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: callback
+      type: callable
+    returnType: bool
+- subject:
+    function: array_any
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: callback
+      type: callable
+    returnType: bool
+- subject:
+    function: array_find
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: callback
+      type: callable
+    returnType: mixed
+- subject:
+    function: array_find_key
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: callback
+      type: callable
+    returnType: mixed
+- subject:
+    function: array_first
+  signature:
+    params:
+    - name: array
+      type: array
+    returnType: mixed
+- subject:
+    function: array_is_list
+  signature:
+    params:
+    - name: array
+      type: array
+    returnType: bool
+- subject:
+    function: array_last
+  signature:
+    params:
+    - name: array
+      type: array
+    returnType: mixed
+- subject:
+    function: config_get_hash
+  signature:
+    returnType: array
+- subject:
+    function: fdatasync
+  signature:
+    params:
+    - name: stream
+      type: mixed
+    returnType: bool
+- subject:
+    function: fpow
+  signature:
+    params:
+    - name: num
+      type: float
+    - name: exponent
+      type: float
+    returnType: float
+- subject:
+    function: fsync
+  signature:
+    params:
+    - name: stream
+      type: mixed
+    returnType: bool
+- subject:
+    function: http_clear_last_response_headers
+  signature:
+    returnType: void
+- subject:
+    function: http_get_last_response_headers
+  signature:
+    returnType: ?array
+- subject:
+    function: ini_parse_quantity
+  signature:
+    params:
+    - name: shorthand
+      type: string
+    returnType: int
+- subject:
+    function: litespeed_finish_request
+  signature:
+    returnType: bool
+- subject:
+    function: memory_reset_peak_usage
+  signature:
+    returnType: void
+- subject:
+    function: request_parse_body
+  signature:
+    params:
+    - name: options
+      type: ?array
+      optional: true
+    returnType: array
+- subject:
+    function: sapi_windows_generate_ctrl_event
+  signature:
+    params:
+    - name: event
+      type: int
+    - name: pid
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: sapi_windows_set_ctrl_handler
+  signature:
+    params:
+    - name: handler
+      type: ?callable
+    - name: add
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: str_decrement
+  signature:
+    params:
+    - name: string
+      type: string
+    returnType: string
+- subject:
+    function: str_increment
+  signature:
+    params:
+    - name: string
+      type: string
+    returnType: string
+- subject:
+    function: stream_context_set_options
+  signature:
+    params:
+    - name: context
+      type: mixed
+    - name: options
+      type: array
+    returnType: 'true'
+- subject:
+    method: Directory::close
+  signature:
+    returnType: void
+- subject:
+    method: Directory::read
+  signature:
+    returnType: string|false
+- subject:
+    method: Directory::rewind
+  signature:
+    returnType: void
+- subject:
+    method: php_user_filter::filter
+  signature:
+    params:
+    - name: in
+      type: mixed
+    - name: out
+      type: mixed
+    - name: consumed
+      type: mixed
+      byRef: true
+    - name: closing
+      type: bool
+    returnType: int
+- subject:
+    method: php_user_filter::onClose
+  signature:
+    returnType: void
+- subject:
+    method: php_user_filter::onCreate
+  signature:
+    returnType: bool
+- subject:
+    function: basename
+  signature:
+    params:
+    - name: path
+      type: string
+    - name: suffix
+      type: string
+      optional: true
+    returnType: string
+- subject:
+    function: chgrp
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: group
+      type: string|int
+    returnType: bool
+- subject:
+    function: chmod
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: permissions
+      type: int
+    returnType: bool
+- subject:
+    function: chown
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: user
+      type: string|int
+    returnType: bool
+- subject:
+    function: copy
+  signature:
+    params:
+    - name: from
+      type: string
+    - name: to
+      type: string
+    - name: context
+      type: mixed
+      optional: true
+    returnType: bool
+- subject:
+    function: dirname
+  signature:
+    params:
+    - name: path
+      type: string
+    - name: levels
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: fclose
+  signature:
+    params:
+    - name: stream
+      type: mixed
+    returnType: bool
+- subject:
+    function: feof
+  signature:
+    params:
+    - name: stream
+      type: mixed
+    returnType: bool
+- subject:
+    function: fflush
+  signature:
+    params:
+    - name: stream
+      type: mixed
+    returnType: bool
+- subject:
+    function: fgetc
+  signature:
+    params:
+    - name: stream
+      type: mixed
+    returnType: string|false
+- subject:
+    function: fgetcsv
+  signature:
+    params:
+    - name: stream
+      type: mixed
+    - name: length
+      type: ?int
+      optional: true
+    - name: separator
+      type: string
+      optional: true
+    - name: enclosure
+      type: string
+      optional: true
+    - name: escape
+      type: string
+      optional: true
+    returnType: array|false
+- subject:
+    function: fgets
+  signature:
+    params:
+    - name: stream
+      type: mixed
+    - name: length
+      type: ?int
+      optional: true
+    returnType: string|false
+- subject:
+    function: file
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    - name: context
+      type: mixed
+      optional: true
+    returnType: array|false
+- subject:
+    function: file_exists
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: bool
+- subject:
+    function: file_get_contents
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: use_include_path
+      type: bool
+      optional: true
+    - name: context
+      type: mixed
+      optional: true
+    - name: offset
+      type: int
+      optional: true
+    - name: length
+      type: ?int
+      optional: true
+    returnType: string|false
+- subject:
+    function: file_put_contents
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: data
+      type: mixed
+    - name: flags
+      type: int
+      optional: true
+    - name: context
+      type: mixed
+      optional: true
+    returnType: int|false
+- subject:
+    function: fileatime
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: int|false
+- subject:
+    function: filectime
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: int|false
+- subject:
+    function: filegroup
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: int|false
+- subject:
+    function: fileinode
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: int|false
+- subject:
+    function: filemtime
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: int|false
+- subject:
+    function: fileowner
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: int|false
+- subject:
+    function: fileperms
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: int|false
+- subject:
+    function: filesize
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: int|false
+- subject:
+    function: filetype
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: flock
+  signature:
+    params:
+    - name: stream
+      type: mixed
+    - name: operation
+      type: int
+    - name: would_block
+      type: mixed
+      optional: true
+      byRef: true
+    returnType: bool
+- subject:
+    function: fopen
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: mode
+      type: string
+    - name: use_include_path
+      type: bool
+      optional: true
+    - name: context
+      type: mixed
+      optional: true
+    returnType: mixed
+- subject:
+    function: fpassthru
+  signature:
+    params:
+    - name: stream
+      type: mixed
+    returnType: int
+- subject:
+    function: fputcsv
+  signature:
+    params:
+    - name: stream
+      type: mixed
+    - name: fields
+      type: array
+    - name: separator
+      type: string
+      optional: true
+    - name: enclosure
+      type: string
+      optional: true
+    - name: escape
+      type: string
+      optional: true
+    - name: eol
+      type: string
+      optional: true
+    returnType: int|false
+- subject:
+    function: fread
+  signature:
+    params:
+    - name: stream
+      type: mixed
+    - name: length
+      type: int
+    returnType: string|false
+- subject:
+    function: fseek
+  signature:
+    params:
+    - name: stream
+      type: mixed
+    - name: offset
+      type: int
+    - name: whence
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: fstat
+  signature:
+    params:
+    - name: stream
+      type: mixed
+    returnType: array|false
+- subject:
+    function: ftell
+  signature:
+    params:
+    - name: stream
+      type: mixed
+    returnType: int|false
+- subject:
+    function: ftruncate
+  signature:
+    params:
+    - name: stream
+      type: mixed
+    - name: size
+      type: int
+    returnType: bool
+- subject:
+    function: fwrite
+  signature:
+    params:
+    - name: stream
+      type: mixed
+    - name: data
+      type: string
+    - name: length
+      type: ?int
+      optional: true
+    returnType: int|false
+- subject:
+    function: glob
+  signature:
+    params:
+    - name: pattern
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: array|false
+- subject:
+    function: is_dir
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: bool
+- subject:
+    function: is_executable
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: bool
+- subject:
+    function: is_file
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: bool
+- subject:
+    function: is_link
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: bool
+- subject:
+    function: is_readable
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: bool
+- subject:
+    function: is_uploaded_file
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: bool
+- subject:
+    function: is_writable
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: bool
+- subject:
+    function: is_writeable
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: bool
+- subject:
+    function: mkdir
+  signature:
+    params:
+    - name: directory
+      type: string
+    - name: permissions
+      type: int
+      optional: true
+    - name: recursive
+      type: bool
+      optional: true
+    - name: context
+      type: mixed
+      optional: true
+    returnType: bool
+- subject:
+    function: move_uploaded_file
+  signature:
+    params:
+    - name: from
+      type: string
+    - name: to
+      type: string
+    returnType: bool
+- subject:
+    function: opendir
+  signature:
+    params:
+    - name: directory
+      type: string
+    - name: context
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: pathinfo
+  signature:
+    params:
+    - name: path
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: array|string
+- subject:
+    function: readfile
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: use_include_path
+      type: bool
+      optional: true
+    - name: context
+      type: mixed
+      optional: true
+    returnType: int|false
+- subject:
+    function: readlink
+  signature:
+    params:
+    - name: path
+      type: string
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: realpath
+  signature:
+    params:
+    - name: path
+      type: string
+    returnType: string|false
+- subject:
+    function: realpath_cache_get
+  signature:
+    returnType: array
+- subject:
+    function: realpath_cache_size
+  signature:
+    returnType: int
+- subject:
+    function: rename
+  signature:
+    params:
+    - name: from
+      type: string
+    - name: to
+      type: string
+    - name: context
+      type: mixed
+      optional: true
+    returnType: bool
+- subject:
+    function: rmdir
+  signature:
+    params:
+    - name: directory
+      type: string
+    - name: context
+      type: mixed
+      optional: true
+    returnType: bool
+- subject:
+    function: scandir
+  signature:
+    params:
+    - name: directory
+      type: string
+    - name: sorting_order
+      type: int
+      optional: true
+    - name: context
+      type: mixed
+      optional: true
+    returnType: array|false
+- subject:
+    function: tempnam
+  signature:
+    params:
+    - name: directory
+      type: string
+    - name: prefix
+      type: string
+    returnType: string|false
+- subject:
+    function: tmpfile
+  signature:
+    returnType: mixed
+- subject:
+    function: unlink
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: context
+      type: mixed
+      optional: true
+    returnType: bool
+- subject:
+    function: image_type_to_extension
+  signature:
+    params:
+    - name: image_type
+      type: int
+    - name: include_dot
+      type: bool
+      optional: true
+    returnType: string|false
+- subject:
+    function: image_type_to_mime_type
+  signature:
+    params:
+    - name: image_type
+      type: int
+    returnType: string
+- subject:
+    function: microtime
+  signature:
+    params:
+    - name: as_float
+      type: bool
+      optional: true
+    returnType: string|float
+- subject:
+    function: time_nanosleep
+  signature:
+    params:
+    - name: seconds
+      type: int
+    - name: nanoseconds
+      type: int
+    returnType: array|bool
+- subject:
+    function: time_sleep_until
+  signature:
+    params:
+    - name: timestamp
+      type: float
+    returnType: bool
+- subject:
+    function: socket_get_status
+  signature:
+    params:
+    - name: stream
+      type: mixed
+    returnType: array
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: socket_set_blocking
+  signature:
+    params:
+    - name: stream
+      type: mixed
+    - name: enable
+      type: bool
+    returnType: bool
+- subject:
+    function: socket_set_timeout
+  signature:
+    params:
+    - name: stream
+      type: mixed
+    - name: seconds
+      type: int
+    - name: microseconds
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: stream_bucket_append
+  signature:
+    params:
+    - name: brigade
+      type: mixed
+    - name: bucket
+      type: StreamBucket
+    returnType: void
+- subject:
+    function: stream_bucket_make_writeable
+  signature:
+    params:
+    - name: brigade
+      type: mixed
+    returnType: ?StreamBucket
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: stream_bucket_new
+  signature:
+    params:
+    - name: stream
+      type: mixed
+    - name: buffer
+      type: string
+    returnType: StreamBucket
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: stream_bucket_prepend
+  signature:
+    params:
+    - name: brigade
+      type: mixed
+    - name: bucket
+      type: StreamBucket
+    returnType: void
+- subject:
+    function: stream_context_create
+  signature:
+    params:
+    - name: options
+      type: ?array
+      optional: true
+    - name: params
+      type: ?array
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: stream_context_get_default
+  signature:
+    params:
+    - name: options
+      type: ?array
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: stream_context_get_options
+  signature:
+    params:
+    - name: stream_or_context
+      type: mixed
+    returnType: array
+- subject:
+    function: stream_context_get_params
+  signature:
+    params:
+    - name: context
+      type: mixed
+    returnType: array
+- subject:
+    function: stream_context_set_default
+  signature:
+    params:
+    - name: options
+      type: array
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: stream_context_set_option
+  signature:
+    params:
+    - name: context
+      type: mixed
+    - name: wrapper_or_options
+      type: array|string
+    - name: option_name
+      type: ?string
+      optional: true
+    - name: value
+      type: mixed
+      optional: true
+    returnType: 'true'
+- subject:
+    function: stream_context_set_params
+  signature:
+    params:
+    - name: context
+      type: mixed
+    - name: params
+      type: array
+    returnType: 'true'
+- subject:
+    function: stream_copy_to_stream
+  signature:
+    params:
+    - name: from
+      type: mixed
+    - name: to
+      type: mixed
+    - name: length
+      type: ?int
+      optional: true
+    - name: offset
+      type: int
+      optional: true
+    returnType: int|false
+- subject:
+    function: stream_filter_append
+  signature:
+    params:
+    - name: stream
+      type: mixed
+    - name: filter_name
+      type: string
+    - name: mode
+      type: int
+      optional: true
+    - name: params
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: stream_filter_prepend
+  signature:
+    params:
+    - name: stream
+      type: mixed
+    - name: filter_name
+      type: string
+    - name: mode
+      type: int
+      optional: true
+    - name: params
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: stream_filter_register
+  signature:
+    params:
+    - name: filter_name
+      type: string
+    - name: class
+      type: string
+    returnType: bool
+- subject:
+    function: stream_filter_remove
+  signature:
+    params:
+    - name: stream_filter
+      type: mixed
+    returnType: bool
+- subject:
+    function: stream_get_contents
+  signature:
+    params:
+    - name: stream
+      type: mixed
+    - name: length
+      type: ?int
+      optional: true
+    - name: offset
+      type: int
+      optional: true
+    returnType: string|false
+- subject:
+    function: stream_get_filters
+  signature:
+    returnType: array
+- subject:
+    function: stream_get_line
+  signature:
+    params:
+    - name: stream
+      type: mixed
+    - name: length
+      type: int
+    - name: ending
+      type: string
+      optional: true
+    returnType: string|false
+  propagation:
+  - from: argument(2)
+    to: return
+- subject:
+    function: stream_get_meta_data
+  signature:
+    params:
+    - name: stream
+      type: mixed
+    returnType: array
+- subject:
+    function: stream_get_transports
+  signature:
+    returnType: array
+- subject:
+    function: stream_get_wrappers
+  signature:
+    returnType: array
+- subject:
+    function: stream_is_local
+  signature:
+    params:
+    - name: stream
+      type: mixed
+    returnType: bool
+- subject:
+    function: stream_isatty
+  signature:
+    params:
+    - name: stream
+      type: mixed
+    returnType: bool
+- subject:
+    function: stream_register_wrapper
+  signature:
+    params:
+    - name: protocol
+      type: string
+    - name: class
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: stream_resolve_include_path
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: stream_select
+  signature:
+    params:
+    - name: read
+      type: ?array
+      byRef: true
+    - name: write
+      type: ?array
+      byRef: true
+    - name: except
+      type: ?array
+      byRef: true
+    - name: seconds
+      type: ?int
+    - name: microseconds
+      type: ?int
+      optional: true
+    returnType: int|false
+- subject:
+    function: stream_set_blocking
+  signature:
+    params:
+    - name: stream
+      type: mixed
+    - name: enable
+      type: bool
+    returnType: bool
+- subject:
+    function: stream_set_chunk_size
+  signature:
+    params:
+    - name: stream
+      type: mixed
+    - name: size
+      type: int
+    returnType: int
+- subject:
+    function: stream_set_read_buffer
+  signature:
+    params:
+    - name: stream
+      type: mixed
+    - name: size
+      type: int
+    returnType: int
+- subject:
+    function: stream_set_timeout
+  signature:
+    params:
+    - name: stream
+      type: mixed
+    - name: seconds
+      type: int
+    - name: microseconds
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: stream_set_write_buffer
+  signature:
+    params:
+    - name: stream
+      type: mixed
+    - name: size
+      type: int
+    returnType: int
+- subject:
+    function: stream_socket_accept
+  signature:
+    params:
+    - name: socket
+      type: mixed
+    - name: timeout
+      type: ?float
+      optional: true
+    - name: peer_name
+      type: mixed
+      optional: true
+      byRef: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: stream_socket_client
+  signature:
+    params:
+    - name: address
+      type: string
+    - name: error_code
+      type: mixed
+      optional: true
+      byRef: true
+    - name: error_message
+      type: mixed
+      optional: true
+      byRef: true
+    - name: timeout
+      type: ?float
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    - name: context
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+  - from: argument(5)
+    to: return
+- subject:
+    function: stream_socket_enable_crypto
+  signature:
+    params:
+    - name: stream
+      type: mixed
+    - name: enable
+      type: bool
+    - name: crypto_method
+      type: ?int
+      optional: true
+    - name: session_stream
+      type: mixed
+      optional: true
+    returnType: int|bool
+- subject:
+    function: stream_socket_get_name
+  signature:
+    params:
+    - name: socket
+      type: mixed
+    - name: remote
+      type: bool
+    returnType: string|false
+- subject:
+    function: stream_socket_pair
+  signature:
+    params:
+    - name: domain
+      type: int
+    - name: type
+      type: int
+    - name: protocol
+      type: int
+    returnType: array|false
+- subject:
+    function: stream_socket_recvfrom
+  signature:
+    params:
+    - name: socket
+      type: mixed
+    - name: length
+      type: int
+    - name: flags
+      type: int
+      optional: true
+    - name: address
+      type: mixed
+      optional: true
+      byRef: true
+    returnType: string|false
+  propagation:
+  - from: argument(3)
+    to: return
+- subject:
+    function: stream_socket_sendto
+  signature:
+    params:
+    - name: socket
+      type: mixed
+    - name: data
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    - name: address
+      type: string
+      optional: true
+    returnType: int|false
+- subject:
+    function: stream_socket_server
+  signature:
+    params:
+    - name: address
+      type: string
+    - name: error_code
+      type: mixed
+      optional: true
+      byRef: true
+    - name: error_message
+      type: mixed
+      optional: true
+      byRef: true
+    - name: flags
+      type: int
+      optional: true
+    - name: context
+      type: mixed
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+- subject:
+    function: stream_socket_shutdown
+  signature:
+    params:
+    - name: stream
+      type: mixed
+    - name: mode
+      type: int
+    returnType: bool
+- subject:
+    function: stream_supports_lock
+  signature:
+    params:
+    - name: stream
+      type: mixed
+    returnType: bool
+- subject:
+    function: stream_wrapper_register
+  signature:
+    params:
+    - name: protocol
+      type: string
+    - name: class
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: stream_wrapper_restore
+  signature:
+    params:
+    - name: protocol
+      type: string
+    returnType: bool
+- subject:
+    function: stream_wrapper_unregister
+  signature:
+    params:
+    - name: protocol
+      type: string
+    returnType: bool

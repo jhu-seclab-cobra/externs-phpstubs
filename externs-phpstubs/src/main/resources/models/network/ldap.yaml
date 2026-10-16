@@ -6,7 +6,7 @@
     params:
     - name: value
       type: string
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -15,13 +15,13 @@
   signature:
     params:
     - name: ldap
-      type: resource
+      type: LDAP\Connection
     - name: dn
       type: string
     - name: entry
       type: array
     - name: controls
-      type: array
+      type: ?array
       optional: true
     returnType: bool
 - subject:
@@ -29,15 +29,15 @@
   signature:
     params:
     - name: ldap
-      type: resource
+      type: LDAP\Connection
     - name: dn
       type: string
     - name: entry
       type: array
     - name: controls
-      type: array
+      type: ?array
       optional: true
-    returnType: resource
+    returnType: LDAP\Result|false
   propagation:
   - from: argument(0)
     to: return
@@ -52,12 +52,12 @@
   signature:
     params:
     - name: ldap
-      type: resource
+      type: LDAP\Connection
     - name: dn
-      type: string
+      type: ?string
       optional: true
     - name: password
-      type: string
+      type: ?string
       optional: true
     returnType: bool
 - subject:
@@ -65,17 +65,17 @@
   signature:
     params:
     - name: ldap
-      type: resource
+      type: LDAP\Connection
     - name: dn
-      type: string
+      type: ?string
       optional: true
     - name: password
-      type: string
+      type: ?string
       optional: true
     - name: controls
-      type: array
+      type: ?array
       optional: true
-    returnType: resource
+    returnType: LDAP\Result|false
   propagation:
   - from: argument(0)
     to: return
@@ -90,14 +90,14 @@
   signature:
     params:
     - name: ldap
-      type: resource
+      type: LDAP\Connection
     returnType: bool
 - subject:
     function: ldap_compare
   signature:
     params:
     - name: ldap
-      type: resource
+      type: LDAP\Connection
     - name: dn
       type: string
     - name: attribute
@@ -105,15 +105,15 @@
     - name: value
       type: string
     - name: controls
-      type: array
+      type: ?array
       optional: true
-    returnType: bool
+    returnType: bool|int
 - subject:
     function: ldap_connect
   signature:
     params:
     - name: uri
-      type: string
+      type: ?string
       optional: true
     - name: port
       type: int
@@ -127,7 +127,7 @@
     - name: auth_mode
       type: int
       optional: true
-    returnType: resource
+    returnType: LDAP\Connection|false
   propagation:
   - from: argument(0)
     to: return
@@ -144,20 +144,20 @@
   signature:
     params:
     - name: ldap
-      type: resource
+      type: LDAP\Connection
     - name: result
-      type: resource
+      type: LDAP\Result
     returnType: int
 - subject:
     function: ldap_delete
   signature:
     params:
     - name: ldap
-      type: resource
+      type: LDAP\Connection
     - name: dn
       type: string
     - name: controls
-      type: array
+      type: ?array
       optional: true
     returnType: bool
 - subject:
@@ -165,13 +165,13 @@
   signature:
     params:
     - name: ldap
-      type: resource
+      type: LDAP\Connection
     - name: dn
       type: string
     - name: controls
-      type: array
+      type: ?array
       optional: true
-    returnType: resource
+    returnType: LDAP\Result|false
   propagation:
   - from: argument(0)
     to: return
@@ -185,7 +185,7 @@
     params:
     - name: dn
       type: string
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -201,14 +201,14 @@
   signature:
     params:
     - name: ldap
-      type: resource
+      type: LDAP\Connection
     returnType: int
 - subject:
     function: ldap_error
   signature:
     params:
     - name: ldap
-      type: resource
+      type: LDAP\Connection
     returnType: string
 - subject:
     function: ldap_escape
@@ -233,28 +233,30 @@
   signature:
     params:
     - name: ldap
-      type: resource
+      type: LDAP\Connection
     - name: request_oid
       type: string
     - name: request_data
-      type: string
+      type: ?string
       optional: true
     - name: controls
-      type: array
+      type: ?array
       optional: true
     - name: response_data
-      type: string
+      type: mixed
       optional: true
+      byRef: true
     - name: response_oid
-      type: string
+      type: mixed
       optional: true
-    returnType: bool
+      byRef: true
+    returnType: LDAP\Result|bool
 - subject:
     function: ldap_exop_passwd
   signature:
     params:
     - name: ldap
-      type: resource
+      type: LDAP\Connection
     - name: user
       type: string
       optional: true
@@ -265,27 +267,28 @@
       type: string
       optional: true
     - name: controls
-      type: array
+      type: mixed
       optional: true
-    returnType: bool
+      byRef: true
+    returnType: string|bool
 - subject:
     function: ldap_exop_refresh
   signature:
     params:
     - name: ldap
-      type: resource
+      type: LDAP\Connection
     - name: dn
       type: string
     - name: ttl
       type: int
-    returnType: int
+    returnType: int|false
 - subject:
     function: ldap_exop_whoami
   signature:
     params:
     - name: ldap
-      type: resource
-    returnType: string
+      type: LDAP\Connection
+    returnType: string|false
 - subject:
     function: ldap_explode_dn
   signature:
@@ -294,25 +297,25 @@
       type: string
     - name: with_attrib
       type: int
-    returnType: array
+    returnType: array|false
 - subject:
     function: ldap_first_attribute
   signature:
     params:
     - name: ldap
-      type: resource
+      type: LDAP\Connection
     - name: entry
-      type: resource
-    returnType: string
+      type: LDAP\ResultEntry
+    returnType: string|false
 - subject:
     function: ldap_first_entry
   signature:
     params:
     - name: ldap
-      type: resource
+      type: LDAP\Connection
     - name: result
-      type: resource
-    returnType: resource
+      type: LDAP\Result
+    returnType: LDAP\ResultEntry|false
   propagation:
   - from: argument(0)
     to: return
@@ -323,10 +326,10 @@
   signature:
     params:
     - name: ldap
-      type: resource
+      type: LDAP\Connection
     - name: result
-      type: resource
-    returnType: resource
+      type: LDAP\Result
+    returnType: LDAP\ResultEntry|false
   propagation:
   - from: argument(0)
     to: return
@@ -336,80 +339,81 @@
     function: ldap_free_result
   signature:
     params:
-    - name: ldap
-      type: resource
+    - name: result
+      type: LDAP\Result
     returnType: bool
 - subject:
     function: ldap_get_attributes
   signature:
     params:
     - name: ldap
-      type: resource
+      type: LDAP\Connection
     - name: entry
-      type: resource
+      type: LDAP\ResultEntry
     returnType: array
 - subject:
     function: ldap_get_dn
   signature:
     params:
     - name: ldap
-      type: resource
+      type: LDAP\Connection
     - name: entry
-      type: resource
-    returnType: string
+      type: LDAP\ResultEntry
+    returnType: string|false
 - subject:
     function: ldap_get_entries
   signature:
     params:
     - name: ldap
-      type: resource
+      type: LDAP\Connection
     - name: result
-      type: resource
-    returnType: array
+      type: LDAP\Result
+    returnType: array|false
 - subject:
     function: ldap_get_option
   signature:
     params:
     - name: ldap
-      type: resource
+      type: ?LDAP\Connection
     - name: option
       type: int
     - name: value
-      type: array
+      type: mixed
       optional: true
+      byRef: true
     returnType: bool
 - subject:
     function: ldap_get_values
   signature:
     params:
     - name: ldap
-      type: resource
+      type: LDAP\Connection
     - name: entry
-      type: resource
+      type: LDAP\ResultEntry
     - name: attribute
       type: string
-    returnType: array
+    returnType: array|false
 - subject:
     function: ldap_get_values_len
   signature:
     params:
     - name: ldap
-      type: resource
+      type: LDAP\Connection
     - name: entry
-      type: resource
+      type: LDAP\ResultEntry
     - name: attribute
       type: string
-    returnType: array
+    returnType: array|false
 - subject:
     function: ldap_list
   signature:
     params:
     - name: ldap
-      type: array
+      type: mixed
     - name: base
-      type: array
+      type: array|string
     - name: filter
-      type: array
+      type: array|string
     - name: attributes
       type: array
       optional: true
@@ -426,9 +430,9 @@
       type: int
       optional: true
     - name: controls
-      type: array
+      type: ?array
       optional: true
-    returnType: resource
+    returnType: LDAP\Result|array|false
   propagation:
   - from: argument(0)
     to: return
@@ -453,13 +457,13 @@
   signature:
     params:
     - name: ldap
-      type: resource
+      type: LDAP\Connection
     - name: dn
       type: string
     - name: entry
       type: array
     - name: controls
-      type: array
+      type: ?array
       optional: true
     returnType: bool
 - subject:
@@ -467,15 +471,15 @@
   signature:
     params:
     - name: ldap
-      type: resource
+      type: LDAP\Connection
     - name: dn
       type: string
     - name: entry
       type: array
     - name: controls
-      type: array
+      type: ?array
       optional: true
-    returnType: resource
+    returnType: LDAP\Result|false
   propagation:
   - from: argument(0)
     to: return
@@ -490,13 +494,13 @@
   signature:
     params:
     - name: ldap
-      type: resource
+      type: LDAP\Connection
     - name: dn
       type: string
     - name: entry
       type: array
     - name: controls
-      type: array
+      type: ?array
       optional: true
     returnType: bool
 - subject:
@@ -504,15 +508,15 @@
   signature:
     params:
     - name: ldap
-      type: resource
+      type: LDAP\Connection
     - name: dn
       type: string
     - name: entry
       type: array
     - name: controls
-      type: array
+      type: ?array
       optional: true
-    returnType: resource
+    returnType: LDAP\Result|false
   propagation:
   - from: argument(0)
     to: return
@@ -527,13 +531,13 @@
   signature:
     params:
     - name: ldap
-      type: resource
+      type: LDAP\Connection
     - name: dn
       type: string
     - name: entry
       type: array
     - name: controls
-      type: array
+      type: ?array
       optional: true
     returnType: bool
 - subject:
@@ -541,15 +545,15 @@
   signature:
     params:
     - name: ldap
-      type: resource
+      type: LDAP\Connection
     - name: dn
       type: string
     - name: entry
       type: array
     - name: controls
-      type: array
+      type: ?array
       optional: true
-    returnType: resource
+    returnType: LDAP\Result|false
   propagation:
   - from: argument(0)
     to: return
@@ -564,13 +568,13 @@
   signature:
     params:
     - name: ldap
-      type: resource
+      type: LDAP\Connection
     - name: dn
       type: string
     - name: entry
       type: array
     - name: controls
-      type: array
+      type: ?array
       optional: true
     returnType: bool
 - subject:
@@ -578,13 +582,13 @@
   signature:
     params:
     - name: ldap
-      type: resource
+      type: LDAP\Connection
     - name: dn
       type: string
     - name: modifications_info
       type: array
     - name: controls
-      type: array
+      type: ?array
       optional: true
     returnType: bool
 - subject:
@@ -592,19 +596,19 @@
   signature:
     params:
     - name: ldap
-      type: resource
+      type: LDAP\Connection
     - name: entry
-      type: resource
-    returnType: string
+      type: LDAP\ResultEntry
+    returnType: string|false
 - subject:
     function: ldap_next_entry
   signature:
     params:
     - name: ldap
-      type: resource
+      type: LDAP\Connection
     - name: entry
-      type: resource
-    returnType: resource
+      type: LDAP\ResultEntry
+    returnType: LDAP\ResultEntry|false
   propagation:
   - from: argument(0)
     to: return
@@ -615,10 +619,10 @@
   signature:
     params:
     - name: ldap
-      type: resource
+      type: LDAP\Connection
     - name: entry
-      type: resource
-    returnType: resource
+      type: LDAP\ResultEntry
+    returnType: LDAP\ResultEntry|false
   propagation:
   - from: argument(0)
     to: return
@@ -629,60 +633,68 @@
   signature:
     params:
     - name: ldap
-      type: resource
+      type: LDAP\Connection
     - name: result
-      type: resource
+      type: LDAP\Result
     - name: response_data
-      type: string
+      type: mixed
       optional: true
+      byRef: true
     - name: response_oid
-      type: string
+      type: mixed
       optional: true
+      byRef: true
     returnType: bool
 - subject:
     function: ldap_parse_reference
   signature:
     params:
     - name: ldap
-      type: resource
+      type: LDAP\Connection
     - name: entry
-      type: resource
+      type: LDAP\ResultEntry
     - name: referrals
-      type: array
+      type: mixed
+      byRef: true
     returnType: bool
 - subject:
     function: ldap_parse_result
   signature:
     params:
     - name: ldap
-      type: resource
+      type: LDAP\Connection
     - name: result
-      type: resource
+      type: LDAP\Result
     - name: error_code
-      type: int
+      type: mixed
+      byRef: true
     - name: matched_dn
-      type: string
+      type: mixed
       optional: true
+      byRef: true
     - name: error_message
-      type: string
+      type: mixed
       optional: true
+      byRef: true
     - name: referrals
-      type: array
+      type: mixed
       optional: true
+      byRef: true
     - name: controls
-      type: array
+      type: mixed
       optional: true
+      byRef: true
     returnType: bool
 - subject:
     function: ldap_read
   signature:
     params:
     - name: ldap
-      type: array
+      type: mixed
     - name: base
-      type: array
+      type: array|string
     - name: filter
-      type: array
+      type: array|string
     - name: attributes
       type: array
       optional: true
@@ -699,9 +711,9 @@
       type: int
       optional: true
     - name: controls
-      type: array
+      type: ?array
       optional: true
-    returnType: resource
+    returnType: LDAP\Result|array|false
   propagation:
   - from: argument(0)
     to: return
@@ -726,7 +738,7 @@
   signature:
     params:
     - name: ldap
-      type: resource
+      type: LDAP\Connection
     - name: dn
       type: string
     - name: new_rdn
@@ -736,7 +748,7 @@
     - name: delete_old_rdn
       type: bool
     - name: controls
-      type: array
+      type: ?array
       optional: true
     returnType: bool
 - subject:
@@ -744,7 +756,7 @@
   signature:
     params:
     - name: ldap
-      type: resource
+      type: LDAP\Connection
     - name: dn
       type: string
     - name: new_rdn
@@ -754,9 +766,9 @@
     - name: delete_old_rdn
       type: bool
     - name: controls
-      type: array
+      type: ?array
       optional: true
-    returnType: resource
+    returnType: LDAP\Result|false
   propagation:
   - from: argument(0)
     to: return
@@ -775,27 +787,27 @@
   signature:
     params:
     - name: ldap
-      type: resource
+      type: LDAP\Connection
     - name: dn
-      type: string
+      type: ?string
       optional: true
     - name: password
-      type: string
+      type: ?string
       optional: true
     - name: mech
-      type: string
+      type: ?string
       optional: true
     - name: realm
-      type: string
+      type: ?string
       optional: true
     - name: authc_id
-      type: string
+      type: ?string
       optional: true
     - name: authz_id
-      type: string
+      type: ?string
       optional: true
     - name: props
-      type: string
+      type: ?string
       optional: true
     returnType: bool
 - subject:
@@ -803,11 +815,11 @@
   signature:
     params:
     - name: ldap
-      type: array
+      type: mixed
     - name: base
-      type: array
+      type: array|string
     - name: filter
-      type: array
+      type: array|string
     - name: attributes
       type: array
       optional: true
@@ -824,15 +836,15 @@
       type: int
       optional: true
     - name: controls
-      type: array
+      type: ?array
       optional: true
-    returnType: array
+    returnType: LDAP\Result|array|false
 - subject:
     function: ldap_set_option
   signature:
     params:
     - name: ldap
-      type: resource
+      type: ?LDAP\Connection
     - name: option
       type: int
     - name: value
@@ -843,16 +855,16 @@
   signature:
     params:
     - name: ldap
-      type: resource
+      type: LDAP\Connection
     - name: callback
-      type: callable
+      type: ?callable
     returnType: bool
 - subject:
     function: ldap_start_tls
   signature:
     params:
     - name: ldap
-      type: resource
+      type: LDAP\Connection
     returnType: bool
 - subject:
     function: ldap_t61_to_8859
@@ -860,7 +872,7 @@
     params:
     - name: value
       type: string
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -869,5 +881,64 @@
   signature:
     params:
     - name: ldap
-      type: resource
+      type: LDAP\Connection
     returnType: bool
+- subject:
+    class: ldap\connection
+  signature:
+    classifier: class
+- subject:
+    class: ldap\result
+  signature:
+    classifier: class
+- subject:
+    class: ldap\resultentry
+  signature:
+    classifier: class
+- subject:
+    function: ldap_connect_wallet
+  signature:
+    params:
+    - name: uri
+      type: ?string
+      optional: true
+    - name: wallet
+      type: string
+    - name: password
+      type: string
+    - name: auth_mode
+      type: int
+      optional: true
+    returnType: LDAP\Connection|false
+- subject:
+    function: ldap_count_references
+  signature:
+    params:
+    - name: ldap
+      type: LDAP\Connection
+    - name: result
+      type: LDAP\Result
+    returnType: int
+- subject:
+    function: ldap_exop_sync
+  signature:
+    params:
+    - name: ldap
+      type: LDAP\Connection
+    - name: request_oid
+      type: string
+    - name: request_data
+      type: ?string
+      optional: true
+    - name: controls
+      type: ?array
+      optional: true
+    - name: response_data
+      type: mixed
+      optional: true
+      byRef: true
+    - name: response_oid
+      type: mixed
+      optional: true
+      byRef: true
+    returnType: LDAP\Result|bool

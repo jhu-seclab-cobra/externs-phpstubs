@@ -1,0 +1,343 @@
+# Generated from php-src stubs by tools/extract_hierarchy.py.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    class: sqlite3exception
+  signature:
+    classifier: class
+    parent: exception
+- subject:
+    class: sqlite3
+  signature:
+    classifier: class
+- subject:
+    class: sqlite3stmt
+  signature:
+    classifier: class
+- subject:
+    class: sqlite3result
+  signature:
+    classifier: class
+- subject:
+    method: SQLite3::__construct
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    - name: encryptionKey
+      type: string
+      optional: true
+    returnType: mixed
+- subject:
+    method: SQLite3::backup
+  signature:
+    params:
+    - name: destination
+      type: SQLite3
+    - name: sourceDatabase
+      type: string
+      optional: true
+    - name: destinationDatabase
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    method: SQLite3::busyTimeout
+  signature:
+    params:
+    - name: milliseconds
+      type: int
+    returnType: bool
+- subject:
+    method: SQLite3::changes
+  signature:
+    returnType: int
+- subject:
+    method: SQLite3::close
+  signature:
+    returnType: bool
+- subject:
+    method: SQLite3::createAggregate
+  signature:
+    params:
+    - name: name
+      type: string
+    - name: stepCallback
+      type: callable
+    - name: finalCallback
+      type: callable
+    - name: argCount
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    method: SQLite3::createCollation
+  signature:
+    params:
+    - name: name
+      type: string
+    - name: callback
+      type: callable
+    returnType: bool
+- subject:
+    method: SQLite3::createFunction
+  signature:
+    params:
+    - name: name
+      type: string
+    - name: callback
+      type: callable
+    - name: argCount
+      type: int
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    method: SQLite3::enableExceptions
+  signature:
+    params:
+    - name: enable
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    method: SQLite3::enableExtendedResultCodes
+  signature:
+    params:
+    - name: enable
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    method: SQLite3::escapeString
+  signature:
+    params:
+    - name: string
+      type: string
+    returnType: string
+- subject:
+    method: SQLite3::exec
+  signature:
+    params:
+    - name: query
+      type: string
+    returnType: bool
+- subject:
+    method: SQLite3::lastErrorCode
+  signature:
+    returnType: int
+- subject:
+    method: SQLite3::lastErrorMsg
+  signature:
+    returnType: string
+- subject:
+    method: SQLite3::lastExtendedErrorCode
+  signature:
+    returnType: int
+- subject:
+    method: SQLite3::lastInsertRowID
+  signature:
+    returnType: int
+- subject:
+    method: SQLite3::loadExtension
+  signature:
+    params:
+    - name: name
+      type: string
+    returnType: bool
+- subject:
+    method: SQLite3::open
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    - name: encryptionKey
+      type: string
+      optional: true
+    returnType: void
+- subject:
+    method: SQLite3::openBlob
+  signature:
+    params:
+    - name: table
+      type: string
+    - name: column
+      type: string
+    - name: rowid
+      type: int
+    - name: database
+      type: string
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: mixed
+- subject:
+    method: SQLite3::prepare
+  signature:
+    params:
+    - name: query
+      type: string
+    returnType: SQLite3Stmt|false
+- subject:
+    method: SQLite3::query
+  signature:
+    params:
+    - name: query
+      type: string
+    returnType: SQLite3Result|false
+- subject:
+    method: SQLite3::querySingle
+  signature:
+    params:
+    - name: query
+      type: string
+    - name: entireRow
+      type: bool
+      optional: true
+    returnType: mixed
+- subject:
+    method: SQLite3::setAuthorizer
+  signature:
+    params:
+    - name: callback
+      type: ?callable
+    returnType: bool
+- subject:
+    method: SQLite3::version
+  signature:
+    returnType: array
+- subject:
+    method: SQLite3Result::__construct
+  signature:
+    returnType: mixed
+- subject:
+    method: SQLite3Result::columnName
+  signature:
+    params:
+    - name: column
+      type: int
+    returnType: string|false
+- subject:
+    method: SQLite3Result::columnType
+  signature:
+    params:
+    - name: column
+      type: int
+    returnType: int|false
+- subject:
+    method: SQLite3Result::fetchAll
+  signature:
+    params:
+    - name: mode
+      type: int
+      optional: true
+    returnType: array|false
+- subject:
+    method: SQLite3Result::fetchArray
+  signature:
+    params:
+    - name: mode
+      type: int
+      optional: true
+    returnType: array|false
+- subject:
+    method: SQLite3Result::finalize
+  signature:
+    returnType: 'true'
+- subject:
+    method: SQLite3Result::numColumns
+  signature:
+    returnType: int
+- subject:
+    method: SQLite3Result::reset
+  signature:
+    returnType: bool
+- subject:
+    method: SQLite3Stmt::__construct
+  signature:
+    params:
+    - name: sqlite3
+      type: SQLite3
+    - name: query
+      type: string
+    returnType: mixed
+- subject:
+    method: SQLite3Stmt::bindParam
+  signature:
+    params:
+    - name: param
+      type: string|int
+    - name: var
+      type: mixed
+      byRef: true
+    - name: type
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    method: SQLite3Stmt::bindValue
+  signature:
+    params:
+    - name: param
+      type: string|int
+    - name: value
+      type: mixed
+    - name: type
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    method: SQLite3Stmt::busy
+  signature:
+    returnType: bool
+- subject:
+    method: SQLite3Stmt::clear
+  signature:
+    returnType: bool
+- subject:
+    method: SQLite3Stmt::close
+  signature:
+    returnType: 'true'
+- subject:
+    method: SQLite3Stmt::execute
+  signature:
+    returnType: SQLite3Result|false
+- subject:
+    method: SQLite3Stmt::explain
+  signature:
+    returnType: int
+- subject:
+    method: SQLite3Stmt::getSQL
+  signature:
+    params:
+    - name: expand
+      type: bool
+      optional: true
+    returnType: string|false
+- subject:
+    method: SQLite3Stmt::paramCount
+  signature:
+    returnType: int
+- subject:
+    method: SQLite3Stmt::readOnly
+  signature:
+    returnType: bool
+- subject:
+    method: SQLite3Stmt::reset
+  signature:
+    returnType: bool
+- subject:
+    method: SQLite3Stmt::setExplain
+  signature:
+    params:
+    - name: mode
+      type: int
+    returnType: bool

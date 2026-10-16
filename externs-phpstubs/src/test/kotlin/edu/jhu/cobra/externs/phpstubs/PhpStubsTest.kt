@@ -47,7 +47,7 @@ internal class PhpStubsTest {
     @Test
     fun `a record carries extension, signature, and the value unit in force`() {
         val strlen = assertNotNull(PhpStubs.function("strlen"))
-        assertEquals("standard", strlen.extension)
+        assertEquals("core", strlen.extension)
         assertEquals("int", assertNotNull(strlen.callableSignature).returnType.toString())
         assertEquals(ReturnKind.NUM, strlen.returns.single().kind)
         assertEquals(listOf(Port.Argument(0) to Port.Return), strlen.flows.map { it.from to it.to })
@@ -94,7 +94,7 @@ internal class PhpStubsTest {
         assertNull(added.extension)
         assertNotNull(added.callableSignature)
         assertEquals(VulnClassId("sqli"), added.sinks.single().vulnClass)
-        assertEquals("standard", extended.function("strlen")!!.extension)
+        assertEquals("core", extended.function("strlen")!!.extension)
         assertNull(PhpStubs.function("extension_only"))
         assertEquals(
             ReturnKind.NUM,

@@ -13,7 +13,7 @@
 - subject:
     function: posix_ctermid
   signature:
-    returnType: string
+    returnType: string|false
 - subject:
     function: posix_errno
   signature:
@@ -25,7 +25,7 @@
 - subject:
     function: posix_getcwd
   signature:
-    returnType: string
+    returnType: string|false
 - subject:
     function: posix_getegid
   signature:
@@ -44,29 +44,29 @@
     params:
     - name: group_id
       type: int
-    returnType: array
+    returnType: array|false
 - subject:
     function: posix_getgrnam
   signature:
     params:
     - name: name
       type: string
-    returnType: array
+    returnType: array|false
 - subject:
     function: posix_getgroups
   signature:
-    returnType: array
+    returnType: array|false
 - subject:
     function: posix_getlogin
   signature:
-    returnType: string
+    returnType: string|false
 - subject:
     function: posix_getpgid
   signature:
     params:
     - name: process_id
       type: int
-    returnType: int
+    returnType: int|false
 - subject:
     function: posix_getpgrp
   signature:
@@ -85,25 +85,29 @@
     params:
     - name: username
       type: string
-    returnType: array
+    returnType: array|false
 - subject:
     function: posix_getpwuid
   signature:
     params:
     - name: user_id
       type: int
-    returnType: array
+    returnType: array|false
 - subject:
     function: posix_getrlimit
   signature:
-    returnType: array
+    params:
+    - name: resource
+      type: ?int
+      optional: true
+    returnType: array|false
 - subject:
     function: posix_getsid
   signature:
     params:
     - name: process_id
       type: int
-    returnType: int
+    returnType: int|false
 - subject:
     function: posix_getuid
   signature:
@@ -122,7 +126,7 @@
   signature:
     params:
     - name: file_descriptor
-      type: int
+      type: mixed
     returnType: bool
 - subject:
     function: posix_kill
@@ -219,15 +223,50 @@
 - subject:
     function: posix_times
   signature:
-    returnType: array
+    returnType: array|false
 - subject:
     function: posix_ttyname
   signature:
     params:
     - name: file_descriptor
-      type: int
-    returnType: string
+      type: mixed
+    returnType: string|false
 - subject:
     function: posix_uname
   signature:
-    returnType: array
+    returnType: array|false
+- subject:
+    function: posix_eaccess
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: posix_fpathconf
+  signature:
+    params:
+    - name: file_descriptor
+      type: mixed
+    - name: name
+      type: int
+    returnType: int|false
+- subject:
+    function: posix_pathconf
+  signature:
+    params:
+    - name: path
+      type: string
+    - name: name
+      type: int
+    returnType: int|false
+- subject:
+    function: posix_sysconf
+  signature:
+    params:
+    - name: conf_id
+      type: int
+    returnType: int

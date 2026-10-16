@@ -12,7 +12,7 @@
   signature:
     params:
     - name: enable
-      type: bool
+      type: ?bool
       optional: true
     returnType: bool
 - subject:
@@ -31,7 +31,7 @@
     - name: env_vars
       type: array
       optional: true
-    returnType: bool
+    returnType: 'false'
 - subject:
     function: pcntl_fork
   signature:
@@ -45,12 +45,12 @@
   signature:
     params:
     - name: process_id
-      type: int
+      type: ?int
       optional: true
     - name: mode
       type: int
       optional: true
-    returnType: int
+    returnType: int|false
 - subject:
     function: pcntl_setpriority
   signature:
@@ -58,7 +58,7 @@
     - name: priority
       type: int
     - name: process_id
-      type: int
+      type: ?int
       optional: true
     - name: mode
       type: int
@@ -86,7 +86,7 @@
     params:
     - name: signal
       type: int
-    returnType: int
+    returnType: mixed
 - subject:
     function: pcntl_sigprocmask
   signature:
@@ -96,8 +96,9 @@
     - name: signals
       type: array
     - name: old_signals
-      type: array
+      type: mixed
       optional: true
+      byRef: true
     returnType: bool
 - subject:
     function: pcntl_sigtimedwait
@@ -106,15 +107,16 @@
     - name: signals
       type: array
     - name: info
-      type: array
+      type: mixed
       optional: true
+      byRef: true
     - name: seconds
       type: int
       optional: true
     - name: nanoseconds
       type: int
       optional: true
-    returnType: int
+    returnType: int|false
 - subject:
     function: pcntl_sigwaitinfo
   signature:
@@ -122,9 +124,10 @@
     - name: signals
       type: array
     - name: info
-      type: array
+      type: mixed
       optional: true
-    returnType: int
+      byRef: true
+    returnType: int|false
 - subject:
     function: pcntl_strerror
   signature:
@@ -144,13 +147,15 @@
   signature:
     params:
     - name: status
-      type: int
+      type: mixed
+      byRef: true
     - name: flags
       type: int
       optional: true
     - name: resource_usage
-      type: array
+      type: mixed
       optional: true
+      byRef: true
     returnType: int
 - subject:
     function: pcntl_waitpid
@@ -159,13 +164,15 @@
     - name: process_id
       type: int
     - name: status
-      type: int
+      type: mixed
+      byRef: true
     - name: flags
       type: int
       optional: true
     - name: resource_usage
-      type: array
+      type: mixed
       optional: true
+      byRef: true
     returnType: int
 - subject:
     function: pcntl_wexitstatus
@@ -173,7 +180,7 @@
     params:
     - name: status
       type: int
-    returnType: int
+    returnType: int|false
 - subject:
     function: pcntl_wifexited
   signature:
@@ -201,11 +208,108 @@
     params:
     - name: status
       type: int
-    returnType: int
+    returnType: int|false
 - subject:
     function: pcntl_wtermsig
   signature:
     params:
     - name: status
       type: int
+    returnType: int|false
+- subject:
+    class: pcntl\qosclass
+  signature:
+    classifier: enum
+    interfaces: [unitenum]
+- subject:
+    function: pcntl_forkx
+  signature:
+    params:
+    - name: flags
+      type: int
     returnType: int
+- subject:
+    function: pcntl_getcpu
+  signature:
+    returnType: int
+- subject:
+    function: pcntl_getcpuaffinity
+  signature:
+    params:
+    - name: process_id
+      type: ?int
+      optional: true
+    returnType: array|false
+- subject:
+    function: pcntl_getqos_class
+  signature:
+    returnType: Pcntl\QosClass
+- subject:
+    function: pcntl_rfork
+  signature:
+    params:
+    - name: flags
+      type: int
+    - name: signal
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: pcntl_setcpuaffinity
+  signature:
+    params:
+    - name: process_id
+      type: ?int
+      optional: true
+    - name: cpu_ids
+      type: array
+      optional: true
+    returnType: bool
+- subject:
+    function: pcntl_setns
+  signature:
+    params:
+    - name: process_id
+      type: ?int
+      optional: true
+    - name: nstype
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: pcntl_setqos_class
+  signature:
+    params:
+    - name: qos_class
+      type: Pcntl\QosClass
+      optional: true
+    returnType: void
+- subject:
+    function: pcntl_waitid
+  signature:
+    params:
+    - name: idtype
+      type: int
+      optional: true
+    - name: id
+      type: ?int
+      optional: true
+    - name: info
+      type: mixed
+      optional: true
+      byRef: true
+    - name: flags
+      type: int
+      optional: true
+    - name: resource_usage
+      type: mixed
+      optional: true
+      byRef: true
+    returnType: bool
+- subject:
+    function: pcntl_wifcontinued
+  signature:
+    params:
+    - name: status
+      type: int
+    returnType: bool

@@ -8,11 +8,12 @@ import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 /**
- * Tests for the php-src hierarchy of the generated class entries (design.md, Class Hierarchy Extraction).
+ * Tests for the php-src hierarchy of the generated class entries (design-extraction.md, extract_hierarchy.py).
  *
  * - `exception classes declare their php-src parent` — verifies the SPL and engine exception chains
  * - `interfaces carry the interface classifier and their parents` — verifies Throwable and Iterator
  * - `classes declare their php-src interfaces` — verifies Exception, Error, and ArrayObject
+ * - `enums implement the engine's enum interfaces` — verifies a pure and a backed enum
  * - `every named parent and interface is a declared class` — verifies the closure over the set
  * - `a class php-src does not declare keeps no hierarchy` — verifies a PECL class
  */
@@ -52,6 +53,14 @@ internal class ClassHierarchyTest {
             listOf("iteratoraggregate", "arrayaccess", "serializable", "countable"),
             signatureOf("ArrayObject").interfaces,
         )
+    }
+
+    @Test
+    fun `enums implement the engine's enum interfaces`() {
+        val pure = signatureOf("RoundingMode")
+        assertEquals(Classifier.ENUM, pure.classifier)
+        assertEquals(listOf("unitenum"), pure.interfaces)
+        assertEquals(listOf("unitenum", "backedenum"), signatureOf("PropertyHookType").interfaces)
     }
 
     @Test

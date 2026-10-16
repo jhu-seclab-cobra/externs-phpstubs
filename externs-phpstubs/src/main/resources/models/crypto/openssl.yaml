@@ -6,7 +6,7 @@
     params:
     - name: cipher_algo
       type: string
-    returnType: int
+    returnType: int|false
 - subject:
     function: openssl_cms_decrypt
   signature:
@@ -35,7 +35,7 @@
     - name: certificate
       type: mixed
     - name: headers
-      type: array
+      type: ?array
     - name: flags
       type: int
       optional: true
@@ -43,7 +43,7 @@
       type: int
       optional: true
     - name: cipher_algo
-      type: int
+      type: string|int
       optional: true
     returnType: bool
 - subject:
@@ -54,6 +54,7 @@
       type: string
     - name: certificates
       type: mixed
+      byRef: true
     returnType: bool
 - subject:
     function: openssl_cms_sign
@@ -64,11 +65,11 @@
     - name: output_filename
       type: string
     - name: certificate
-      type: mixed
+      type: OpenSSLCertificate|string
     - name: private_key
       type: mixed
     - name: headers
-      type: array
+      type: ?array
     - name: flags
       type: int
       optional: true
@@ -76,7 +77,7 @@
       type: int
       optional: true
     - name: untrusted_certificates_filename
-      type: string
+      type: ?string
       optional: true
     returnType: bool
 - subject:
@@ -89,22 +90,22 @@
       type: int
       optional: true
     - name: certificates
-      type: string
+      type: ?string
       optional: true
     - name: ca_info
       type: array
       optional: true
     - name: untrusted_certificates_filename
-      type: string
+      type: ?string
       optional: true
     - name: content
-      type: string
+      type: ?string
       optional: true
     - name: pk7
-      type: string
+      type: ?string
       optional: true
     - name: sigfile
-      type: string
+      type: ?string
       optional: true
     - name: encoding
       type: int
@@ -115,9 +116,10 @@
   signature:
     params:
     - name: csr
-      type: mixed
+      type: OpenSSLCertificateSigningRequest|string
     - name: output
-      type: string
+      type: mixed
+      byRef: true
     - name: no_text
       type: bool
       optional: true
@@ -127,7 +129,7 @@
   signature:
     params:
     - name: csr
-      type: mixed
+      type: OpenSSLCertificateSigningRequest|string
     - name: output_filename
       type: string
     - name: no_text
@@ -139,11 +141,11 @@
   signature:
     params:
     - name: csr
-      type: mixed
+      type: OpenSSLCertificateSigningRequest|string
     - name: short_names
       type: bool
       optional: true
-    returnType: mixed
+    returnType: OpenSSLAsymmetricKey|false
   propagation:
   - from: argument(0)
     to: return
@@ -154,11 +156,11 @@
   signature:
     params:
     - name: csr
-      type: mixed
+      type: OpenSSLCertificateSigningRequest|string
     - name: short_names
       type: bool
       optional: true
-    returnType: array
+    returnType: array|false
   propagation:
   - from: argument(0)
     to: return
@@ -170,13 +172,14 @@
       type: array
     - name: private_key
       type: mixed
+      byRef: true
     - name: options
-      type: array
+      type: ?array
       optional: true
     - name: extra_attributes
-      type: array
+      type: ?array
       optional: true
-    returnType: mixed
+    returnType: OpenSSLCertificateSigningRequest|bool
   propagation:
   - from: argument(0)
     to: return
@@ -191,20 +194,23 @@
   signature:
     params:
     - name: csr
-      type: mixed
+      type: OpenSSLCertificateSigningRequest|string
     - name: ca_certificate
-      type: mixed
+      type: OpenSSLCertificate|string|null
     - name: private_key
       type: mixed
     - name: days
       type: int
     - name: options
-      type: array
+      type: ?array
       optional: true
     - name: serial
       type: int
       optional: true
-    returnType: mixed
+    - name: serial_hex
+      type: ?string
+      optional: true
+    returnType: OpenSSLCertificate|false
   propagation:
   - from: argument(0)
     to: return
@@ -235,12 +241,12 @@
       type: string
       optional: true
     - name: tag
-      type: string
+      type: ?string
       optional: true
     - name: aad
       type: string
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -261,8 +267,8 @@
     - name: public_key
       type: string
     - name: private_key
-      type: mixed
-    returnType: string
+      type: OpenSSLAsymmetricKey
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -279,7 +285,7 @@
     - name: binary
       type: bool
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -302,15 +308,16 @@
       type: string
       optional: true
     - name: tag
-      type: string
+      type: mixed
       optional: true
+      byRef: true
     - name: aad
       type: string
       optional: true
     - name: tag_length
       type: int
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -327,13 +334,13 @@
 - subject:
     function: openssl_error_string
   signature:
-    returnType: string
+    returnType: string|false
 - subject:
     function: openssl_free_key
   signature:
     params:
     - name: key
-      type: mixed
+      type: OpenSSLAsymmetricKey
     returnType: void
 - subject:
     function: openssl_get_cert_locations
@@ -350,7 +357,7 @@
 - subject:
     function: openssl_get_curve_names
   signature:
-    returnType: array
+    returnType: array|false
 - subject:
     function: openssl_get_md_methods
   signature:
@@ -366,9 +373,9 @@
     - name: private_key
       type: mixed
     - name: passphrase
-      type: string
+      type: ?string
       optional: true
-    returnType: mixed
+    returnType: OpenSSLAsymmetricKey|false
   propagation:
   - from: argument(0)
     to: return
@@ -380,7 +387,7 @@
     params:
     - name: public_key
       type: mixed
-    returnType: mixed
+    returnType: OpenSSLAsymmetricKey|false
   propagation:
   - from: argument(0)
     to: return
@@ -391,7 +398,8 @@
     - name: data
       type: string
     - name: output
-      type: string
+      type: mixed
+      byRef: true
     - name: encrypted_key
       type: string
     - name: private_key
@@ -399,7 +407,7 @@
     - name: cipher_algo
       type: string
     - name: iv
-      type: string
+      type: ?string
       optional: true
     returnType: bool
 - subject:
@@ -417,7 +425,7 @@
     - name: digest_algo
       type: string
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -430,9 +438,10 @@
   signature:
     params:
     - name: certificate
-      type: mixed
+      type: OpenSSLCertificate|string
     - name: output
-      type: string
+      type: mixed
+      byRef: true
     - name: private_key
       type: mixed
     - name: passphrase
@@ -446,7 +455,7 @@
   signature:
     params:
     - name: certificate
-      type: mixed
+      type: OpenSSLCertificate|string
     - name: output_filename
       type: string
     - name: private_key
@@ -464,7 +473,8 @@
     - name: pkcs12
       type: string
     - name: certificates
-      type: array
+      type: mixed
+      byRef: true
     - name: passphrase
       type: string
     returnType: bool
@@ -493,7 +503,7 @@
     - name: certificate
       type: mixed
     - name: headers
-      type: array
+      type: ?array
     - name: flags
       type: int
       optional: true
@@ -508,7 +518,8 @@
     - name: data
       type: string
     - name: certificates
-      type: array
+      type: mixed
+      byRef: true
     returnType: bool
 - subject:
     function: openssl_pkcs7_sign
@@ -519,16 +530,16 @@
     - name: output_filename
       type: string
     - name: certificate
-      type: mixed
+      type: OpenSSLCertificate|string
     - name: private_key
       type: mixed
     - name: headers
-      type: array
+      type: ?array
     - name: flags
       type: int
       optional: true
     - name: untrusted_certificates_filename
-      type: string
+      type: ?string
       optional: true
     returnType: bool
 - subject:
@@ -540,21 +551,21 @@
     - name: flags
       type: int
     - name: signers_certificates_filename
-      type: string
+      type: ?string
       optional: true
     - name: ca_info
       type: array
       optional: true
     - name: untrusted_certificates_filename
-      type: string
+      type: ?string
       optional: true
     - name: content
-      type: string
+      type: ?string
       optional: true
     - name: output_filename
-      type: string
+      type: ?string
       optional: true
-    returnType: bool
+    returnType: bool|int
 - subject:
     function: openssl_pkey_derive
   signature:
@@ -566,7 +577,7 @@
     - name: key_length
       type: int
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -579,12 +590,13 @@
     - name: key
       type: mixed
     - name: output
-      type: string
+      type: mixed
+      byRef: true
     - name: passphrase
-      type: string
+      type: ?string
       optional: true
     - name: options
-      type: array
+      type: ?array
       optional: true
     returnType: bool
 - subject:
@@ -596,10 +608,10 @@
     - name: output_filename
       type: string
     - name: passphrase
-      type: string
+      type: ?string
       optional: true
     - name: options
-      type: array
+      type: ?array
       optional: true
     returnType: bool
 - subject:
@@ -607,15 +619,15 @@
   signature:
     params:
     - name: key
-      type: mixed
+      type: OpenSSLAsymmetricKey
     returnType: void
 - subject:
     function: openssl_pkey_get_details
   signature:
     params:
     - name: key
-      type: mixed
-    returnType: array
+      type: OpenSSLAsymmetricKey
+    returnType: array|false
   propagation:
   - from: argument(0)
     to: return
@@ -626,9 +638,9 @@
     - name: private_key
       type: mixed
     - name: passphrase
-      type: string
+      type: ?string
       optional: true
-    returnType: mixed
+    returnType: OpenSSLAsymmetricKey|false
   propagation:
   - from: argument(0)
     to: return
@@ -640,7 +652,7 @@
     params:
     - name: public_key
       type: mixed
-    returnType: mixed
+    returnType: OpenSSLAsymmetricKey|false
   propagation:
   - from: argument(0)
     to: return
@@ -649,9 +661,9 @@
   signature:
     params:
     - name: options
-      type: array
+      type: ?array
       optional: true
-    returnType: mixed
+    returnType: OpenSSLAsymmetricKey|false
   propagation:
   - from: argument(0)
     to: return
@@ -662,11 +674,15 @@
     - name: data
       type: string
     - name: decrypted_data
-      type: string
+      type: mixed
+      byRef: true
     - name: private_key
       type: mixed
     - name: padding
       type: int
+      optional: true
+    - name: digest_algo
+      type: ?string
       optional: true
     returnType: bool
 - subject:
@@ -676,7 +692,8 @@
     - name: data
       type: string
     - name: encrypted_data
-      type: string
+      type: mixed
+      byRef: true
     - name: private_key
       type: mixed
     - name: padding
@@ -690,7 +707,8 @@
     - name: data
       type: string
     - name: decrypted_data
-      type: string
+      type: mixed
+      byRef: true
     - name: public_key
       type: mixed
     - name: padding
@@ -704,11 +722,15 @@
     - name: data
       type: string
     - name: encrypted_data
-      type: string
+      type: mixed
+      byRef: true
     - name: public_key
       type: mixed
     - name: padding
       type: int
+      optional: true
+    - name: digest_algo
+      type: ?string
       optional: true
     returnType: bool
 - subject:
@@ -718,8 +740,9 @@
     - name: length
       type: int
     - name: strong_result
-      type: bool
+      type: mixed
       optional: true
+      byRef: true
     returnType: string
 - subject:
     function: openssl_seal
@@ -728,17 +751,20 @@
     - name: data
       type: string
     - name: sealed_data
-      type: string
+      type: mixed
+      byRef: true
     - name: encrypted_keys
-      type: array
+      type: mixed
+      byRef: true
     - name: public_key
       type: array
     - name: cipher_algo
       type: string
     - name: iv
-      type: string
+      type: mixed
       optional: true
-    returnType: int
+      byRef: true
+    returnType: int|false
 - subject:
     function: openssl_sign
   signature:
@@ -746,10 +772,14 @@
     - name: data
       type: string
     - name: signature
-      type: string
+      type: mixed
+      byRef: true
     - name: private_key
       type: mixed
     - name: algorithm
+      type: string|int
+      optional: true
+    - name: padding
       type: int
       optional: true
     returnType: bool
@@ -759,7 +789,7 @@
     params:
     - name: spki
       type: string
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -769,7 +799,7 @@
     params:
     - name: spki
       type: string
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -778,13 +808,13 @@
   signature:
     params:
     - name: private_key
-      type: mixed
+      type: OpenSSLAsymmetricKey
     - name: challenge
       type: string
     - name: digest_algo
       type: int
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -808,9 +838,12 @@
     - name: public_key
       type: mixed
     - name: algorithm
+      type: string|int
+      optional: true
+    - name: padding
       type: int
       optional: true
-    returnType: mixed
+    returnType: int|false
   propagation:
   - from: argument(0)
     to: return
@@ -825,7 +858,7 @@
   signature:
     params:
     - name: certificate
-      type: mixed
+      type: OpenSSLCertificate|string
     - name: private_key
       type: mixed
     returnType: bool
@@ -834,24 +867,25 @@
   signature:
     params:
     - name: certificate
-      type: mixed
+      type: OpenSSLCertificate|string
     - name: purpose
       type: int
     - name: ca_info
       type: array
       optional: true
     - name: untrusted_certificates_file
-      type: string
+      type: ?string
       optional: true
-    returnType: bool
+    returnType: bool|int
 - subject:
     function: openssl_x509_export
   signature:
     params:
     - name: certificate
-      type: mixed
+      type: OpenSSLCertificate|string
     - name: output
-      type: string
+      type: mixed
+      byRef: true
     - name: no_text
       type: bool
       optional: true
@@ -861,7 +895,7 @@
   signature:
     params:
     - name: certificate
-      type: mixed
+      type: OpenSSLCertificate|string
     - name: output_filename
       type: string
     - name: no_text
@@ -873,14 +907,14 @@
   signature:
     params:
     - name: certificate
-      type: mixed
+      type: OpenSSLCertificate|string
     - name: digest_algo
       type: string
       optional: true
     - name: binary
       type: bool
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -891,18 +925,18 @@
   signature:
     params:
     - name: certificate
-      type: mixed
+      type: OpenSSLCertificate
     returnType: void
 - subject:
     function: openssl_x509_parse
   signature:
     params:
     - name: certificate
-      type: mixed
+      type: OpenSSLCertificate|string
     - name: short_names
       type: bool
       optional: true
-    returnType: array
+    returnType: array|false
   propagation:
   - from: argument(0)
     to: return
@@ -911,8 +945,8 @@
   signature:
     params:
     - name: certificate
-      type: mixed
-    returnType: mixed
+      type: OpenSSLCertificate|string
+    returnType: OpenSSLCertificate|false
   propagation:
   - from: argument(0)
     to: return
@@ -921,7 +955,49 @@
   signature:
     params:
     - name: certificate
-      type: mixed
+      type: OpenSSLCertificate|string
     - name: public_key
       type: mixed
     returnType: int
+- subject:
+    class: opensslasymmetrickey
+  signature:
+    classifier: class
+- subject:
+    class: opensslcertificate
+  signature:
+    classifier: class
+- subject:
+    class: opensslcertificatesigningrequest
+  signature:
+    classifier: class
+- subject:
+    function: openssl_cipher_key_length
+  signature:
+    params:
+    - name: cipher_algo
+      type: string
+    returnType: int|false
+- subject:
+    function: openssl_password_hash
+  signature:
+    params:
+    - name: algo
+      type: string
+    - name: password
+      type: string
+    - name: options
+      type: array
+      optional: true
+    returnType: string
+- subject:
+    function: openssl_password_verify
+  signature:
+    params:
+    - name: algo
+      type: string
+    - name: password
+      type: string
+    - name: hash
+      type: string
+    returnType: bool

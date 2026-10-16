@@ -1,83 +1,8 @@
 # Generated from stubs/standard/standard_4.yaml by tools/convert_stubs.py v2.
 # Do not hand-edit; corrections belong in a higher configuration layer.
 - subject:
-    function: locale_get_primary_language
-  signature:
-    params:
-    - name: locale
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: locale_get_region
-  signature:
-    params:
-    - name: locale
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: locale_get_script
-  signature:
-    params:
-    - name: locale
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: locale_lookup
-  signature:
-    params:
-    - name: languageTag
-      type: array
-    - name: locale
-      type: string
-    - name: canonicalize
-      type: bool
-      optional: true
-    - name: defaultLocale
-      type: string
-      optional: true
-    returnType: string
-  propagation:
-  - from: argument(1)
-    to: return
-  - from: argument(3)
-    to: return
-- subject:
-    function: locale_parse
-  signature:
-    params:
-    - name: locale
-      type: string
-    returnType: array
-- subject:
-    function: locale_set_default
-  signature:
-    params:
-    - name: locale
-      type: string
-    returnType: bool
-- subject:
     function: localeconv
   signature:
-    returnType: array
-- subject:
-    function: localtime
-  signature:
-    params:
-    - name: timestamp
-      type: int
-      optional: true
-    - name: associative
-      type: bool
-      optional: true
     returnType: array
 - subject:
     function: log
@@ -116,7 +41,7 @@
     params:
     - name: filename
       type: string
-    returnType: array
+    returnType: array|false
 - subject:
     function: ltrim
   signature:
@@ -172,7 +97,7 @@
     - name: message
       type: string
     - name: additional_headers
-      type: array
+      type: array|string
       optional: true
     - name: additional_params
       type: string
@@ -315,7 +240,11 @@
   signature:
     params:
     - name: value
-      type: array
+      type: mixed
+    - name: values
+      type: mixed
+      optional: true
+      variadic: true
     returnType: mixed
 - subject:
     function: md5
@@ -336,7 +265,7 @@
     - name: binary
       type: bool
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -716,73 +645,15 @@
   - from: argument(0)
     to: return
 - subject:
-    function: method_exists
-  signature:
-    params:
-    - name: object_or_class
-      type: string
-    - name: method
-      type: string
-    returnType: bool
-- subject:
-    function: mhash
-  signature:
-    params:
-    - name: algo
-      type: int
-    - name: data
-      type: string
-    - name: key
-      type: string
-      optional: true
-    returnType: string
-  propagation:
-  - from: argument(1)
-    to: return
-  - from: argument(2)
-    to: return
-- subject:
-    function: mhash_count
-  signature:
-    returnType: int
-- subject:
-    function: mhash_get_block_size
-  signature:
-    params:
-    - name: algo
-      type: int
-    returnType: int
-- subject:
-    function: mhash_get_hash_name
-  signature:
-    params:
-    - name: algo
-      type: int
-    returnType: string
-- subject:
-    function: mhash_keygen_s2k
-  signature:
-    params:
-    - name: algo
-      type: int
-    - name: password
-      type: string
-    - name: salt
-      type: string
-    - name: length
-      type: int
-    returnType: string
-  propagation:
-  - from: argument(1)
-    to: return
-  - from: argument(2)
-    to: return
-- subject:
     function: min
   signature:
     params:
     - name: value
-      type: array
+      type: mixed
+    - name: values
+      type: mixed
+      optional: true
+      variadic: true
     returnType: mixed
 - subject:
     function: ming_keypress
@@ -1443,117 +1314,6 @@
       type: int
     returnType: int
 - subject:
-    function: msgfmt_create
-  signature:
-    params:
-    - name: locale
-      type: string
-    - name: pattern
-      type: string
-    returnType: mixed
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: msgfmt_format
-  signature:
-    params:
-    - name: formatter
-      type: mixed
-    - name: values
-      type: array
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: msgfmt_format_message
-  signature:
-    params:
-    - name: locale
-      type: string
-    - name: pattern
-      type: string
-    - name: values
-      type: array
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-- subject:
-    function: msgfmt_get_error_code
-  signature:
-    params:
-    - name: formatter
-      type: mixed
-    returnType: int
-- subject:
-    function: msgfmt_get_error_message
-  signature:
-    params:
-    - name: formatter
-      type: mixed
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: msgfmt_get_locale
-  signature:
-    params:
-    - name: formatter
-      type: mixed
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: msgfmt_get_pattern
-  signature:
-    params:
-    - name: formatter
-      type: mixed
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: msgfmt_parse
-  signature:
-    params:
-    - name: formatter
-      type: mixed
-    - name: string
-      type: string
-    returnType: array
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: msgfmt_parse_message
-  signature:
-    params:
-    - name: locale
-      type: string
-    - name: pattern
-      type: string
-    - name: message
-      type: string
-    returnType: array
-- subject:
-    function: msgfmt_set_pattern
-  signature:
-    params:
-    - name: formatter
-      type: mixed
-    - name: pattern
-      type: string
-    returnType: bool
-- subject:
     function: msql_affected_rows
   signature:
     params:
@@ -1844,32 +1604,6 @@
       type: resource
       optional: true
     returnType: bool
-- subject:
-    function: mt_getrandmax
-  signature:
-    returnType: int
-- subject:
-    function: mt_rand
-  signature:
-    params:
-    - name: min
-      type: int
-      optional: true
-    - name: max
-      type: int
-      optional: true
-    returnType: int
-- subject:
-    function: mt_srand
-  signature:
-    params:
-    - name: seed
-      type: int
-      optional: true
-    - name: mode
-      type: int
-      optional: true
-    returnType: void
 - subject:
     function: mysql_xdevapi\\getsession
   signature:
@@ -2170,18 +1904,20 @@
     params:
     - name: array
       type: array
-    returnType: bool
+      byRef: true
+    returnType: 'true'
 - subject:
     function: natsort
   signature:
     params:
     - name: array
       type: array
-    returnType: bool
+      byRef: true
+    returnType: 'true'
 - subject:
     function: net_get_interfaces
   signature:
-    returnType: array
+    returnType: array|false
 - subject:
     function: newrelic_add_custom_parameter
   signature:
@@ -2342,7 +2078,8 @@
   signature:
     params:
     - name: array
-      type: array
+      type: array|object
+      byRef: true
     returnType: mixed
   propagation:
   - from: argument(0)
@@ -2366,43 +2103,7 @@
     params:
     - name: item
       type: int
-    returnType: string
-- subject:
-    function: normalizer_get_raw_decomposition
-  signature:
-    params:
-    - name: string
-      type: string
-    - name: form
-      type: int
-      optional: true
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: normalizer_is_normalized
-  signature:
-    params:
-    - name: string
-      type: string
-    - name: form
-      type: int
-      optional: true
-    returnType: bool
-- subject:
-    function: normalizer_normalize
-  signature:
-    params:
-    - name: string
-      type: string
-    - name: form
-      type: int
-      optional: true
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
+    returnType: string|false
 - subject:
     function: notes_body
   signature:
@@ -2578,209 +2279,15 @@
       type: int
       optional: true
     - name: decimal_separator
-      type: string
+      type: ?string
       optional: true
     - name: thousands_separator
-      type: string
+      type: ?string
       optional: true
     returnType: string
   propagation:
   - from: argument(0)
     to: return
-- subject:
-    function: numfmt_create
-  signature:
-    params:
-    - name: locale
-      type: string
-    - name: style
-      type: int
-    - name: pattern
-      type: string
-      optional: true
-    returnType: mixed
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(1)
-    to: return
-  - from: argument(2)
-    to: return
-- subject:
-    function: numfmt_format
-  signature:
-    params:
-    - name: formatter
-      type: mixed
-    - name: num
-      type: float
-    - name: type
-      type: int
-      optional: true
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: numfmt_format_currency
-  signature:
-    params:
-    - name: formatter
-      type: mixed
-    - name: amount
-      type: float
-    - name: currency
-      type: string
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-  - from: argument(2)
-    to: return
-- subject:
-    function: numfmt_get_attribute
-  signature:
-    params:
-    - name: formatter
-      type: mixed
-    - name: attribute
-      type: int
-    returnType: float
-- subject:
-    function: numfmt_get_error_code
-  signature:
-    params:
-    - name: formatter
-      type: mixed
-    returnType: int
-- subject:
-    function: numfmt_get_error_message
-  signature:
-    params:
-    - name: formatter
-      type: mixed
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: numfmt_get_locale
-  signature:
-    params:
-    - name: formatter
-      type: mixed
-    - name: type
-      type: int
-      optional: true
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: numfmt_get_pattern
-  signature:
-    params:
-    - name: formatter
-      type: mixed
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: numfmt_get_symbol
-  signature:
-    params:
-    - name: formatter
-      type: mixed
-    - name: symbol
-      type: int
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: numfmt_get_text_attribute
-  signature:
-    params:
-    - name: formatter
-      type: mixed
-    - name: attribute
-      type: int
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: numfmt_parse
-  signature:
-    params:
-    - name: formatter
-      type: mixed
-    - name: string
-      type: string
-    - name: type
-      type: int
-      optional: true
-    - name: offset
-      type: int
-      optional: true
-    returnType: float
-- subject:
-    function: numfmt_parse_currency
-  signature:
-    params:
-    - name: formatter
-      type: mixed
-    - name: string
-      type: string
-    - name: currency
-      type: string
-    - name: offset
-      type: int
-      optional: true
-    returnType: float
-- subject:
-    function: numfmt_set_attribute
-  signature:
-    params:
-    - name: formatter
-      type: mixed
-    - name: attribute
-      type: int
-    - name: value
-      type: float
-    returnType: bool
-- subject:
-    function: numfmt_set_pattern
-  signature:
-    params:
-    - name: formatter
-      type: mixed
-    - name: pattern
-      type: string
-    returnType: bool
-- subject:
-    function: numfmt_set_symbol
-  signature:
-    params:
-    - name: formatter
-      type: mixed
-    - name: symbol
-      type: int
-    - name: value
-      type: string
-    returnType: bool
-- subject:
-    function: numfmt_set_text_attribute
-  signature:
-    params:
-    - name: formatter
-      type: mixed
-    - name: attribute
-      type: int
-    - name: value
-      type: string
-    returnType: bool
 - subject:
     function: oauth_get_sbs
   signature:
@@ -2850,19 +2357,19 @@
 - subject:
     function: ob_get_clean
   signature:
-    returnType: string
+    returnType: string|false
 - subject:
     function: ob_get_contents
   signature:
-    returnType: string
+    returnType: string|false
 - subject:
     function: ob_get_flush
   signature:
-    returnType: string
+    returnType: string|false
 - subject:
     function: ob_get_length
   signature:
-    returnType: int
+    returnType: int|false
 - subject:
     function: ob_get_level
   signature:
@@ -2875,18 +2382,6 @@
       type: bool
       optional: true
     returnType: array
-- subject:
-    function: ob_gzhandler
-  signature:
-    params:
-    - name: data
-      type: string
-    - name: flags
-      type: int
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
 - subject:
     function: ob_iconv_handler
   signature:
@@ -2928,7 +2423,7 @@
   signature:
     params:
     - name: callback
-      type: array
+      type: mixed
       optional: true
     - name: chunk_size
       type: int
@@ -2979,47 +2474,7 @@
     params:
     - name: octal_string
       type: string
-    returnType: float
-- subject:
-    function: opcache_compile_file
-  signature:
-    params:
-    - name: filename
-      type: string
-    returnType: bool
-- subject:
-    function: opcache_get_configuration
-  signature:
-    returnType: array
-- subject:
-    function: opcache_get_status
-  signature:
-    params:
-    - name: include_scripts
-      type: bool
-      optional: true
-    returnType: array
-- subject:
-    function: opcache_invalidate
-  signature:
-    params:
-    - name: filename
-      type: string
-    - name: force
-      type: bool
-      optional: true
-    returnType: bool
-- subject:
-    function: opcache_is_script_cached
-  signature:
-    params:
-    - name: filename
-      type: string
-    returnType: bool
-- subject:
-    function: opcache_reset
-  signature:
-    returnType: bool
+    returnType: int|float
 - subject:
     function: openal_buffer_create
   signature:
@@ -3229,7 +2684,7 @@
       type: int
     - name: facility
       type: int
-    returnType: bool
+    returnType: 'true'
 - subject:
     function: ord
   signature:
@@ -3377,6 +2832,7 @@
     - name: values
       type: mixed
       optional: true
+      variadic: true
     returnType: string
   propagation:
   - from: argument(0)
@@ -3393,7 +2849,7 @@
     - name: scanner_mode
       type: int
       optional: true
-    returnType: array
+    returnType: array|false
 - subject:
     function: parse_ini_string
   signature:
@@ -3406,7 +2862,7 @@
     - name: scanner_mode
       type: int
       optional: true
-    returnType: array
+    returnType: array|false
 - subject:
     function: parse_str
   signature:
@@ -3414,7 +2870,8 @@
     - name: string
       type: string
     - name: result
-      type: array
+      type: mixed
+      byRef: true
     returnType: void
 - subject:
     function: parse_url
@@ -3425,7 +2882,7 @@
     - name: component
       type: int
       optional: true
-    returnType: array
+    returnType: int|string|array|null|false
 - subject:
     function: parsekit_compile_file
   signature:
@@ -3475,9 +2932,10 @@
     - name: command
       type: string
     - name: result_code
-      type: int
+      type: mixed
       optional: true
-    returnType: bool
+      byRef: true
+    returnType: false|null
 - subject:
     function: password_algos
   signature:
@@ -3496,7 +2954,7 @@
     - name: password
       type: string
     - name: algo
-      type: int
+      type: string|int|null
     - name: options
       type: array
       optional: true
@@ -3520,7 +2978,7 @@
     - name: hash
       type: string
     - name: algo
-      type: int
+      type: string|int|null
     - name: options
       type: array
       optional: true
@@ -3539,7 +2997,7 @@
   signature:
     params:
     - name: handle
-      type: resource
+      type: mixed
     returnType: int
 - subject:
     function: pcnlt_sigwaitinfo

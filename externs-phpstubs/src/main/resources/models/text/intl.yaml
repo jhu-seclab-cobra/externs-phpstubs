@@ -22,3 +22,4305 @@
     - name: errorCode
       type: int
     returnType: bool
+- subject:
+    class: intlbreakiterator
+  signature:
+    classifier: class
+    interfaces: [iteratoraggregate]
+- subject:
+    class: intlchar
+  signature:
+    classifier: class
+- subject:
+    class: intlcodepointbreakiterator
+  signature:
+    classifier: class
+    parent: intlbreakiterator
+- subject:
+    class: intldatepatterngenerator
+  signature:
+    classifier: class
+- subject:
+    class: intlexception
+  signature:
+    classifier: class
+    parent: exception
+- subject:
+    class: intlgregoriancalendar
+  signature:
+    classifier: class
+    parent: intlcalendar
+- subject:
+    class: intliterator
+  signature:
+    classifier: class
+    interfaces: [iterator]
+- subject:
+    class: intllistformatter
+  signature:
+    classifier: class
+- subject:
+    class: intlpartsiterator
+  signature:
+    classifier: class
+    parent: intliterator
+- subject:
+    class: intlrulebasedbreakiterator
+  signature:
+    classifier: class
+    parent: intlbreakiterator
+- subject:
+    class: uconverter
+  signature:
+    classifier: class
+- subject:
+    function: grapheme_levenshtein
+  signature:
+    params:
+    - name: string1
+      type: string
+    - name: string2
+      type: string
+    - name: insertion_cost
+      type: int
+      optional: true
+    - name: replacement_cost
+      type: int
+      optional: true
+    - name: deletion_cost
+      type: int
+      optional: true
+    - name: locale
+      type: string
+      optional: true
+    returnType: int|false
+- subject:
+    function: grapheme_str_split
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: length
+      type: int
+      optional: true
+    returnType: array|false
+- subject:
+    function: intltz_get_iana_id
+  signature:
+    params:
+    - name: timezoneId
+      type: string
+    returnType: string|false
+- subject:
+    function: locale_add_likely_subtags
+  signature:
+    params:
+    - name: locale
+      type: string
+    returnType: string|false
+- subject:
+    function: locale_is_right_to_left
+  signature:
+    params:
+    - name: locale
+      type: string
+    returnType: bool
+- subject:
+    function: locale_minimize_subtags
+  signature:
+    params:
+    - name: locale
+      type: string
+    returnType: string|false
+- subject:
+    method: IntlBreakIterator::__construct
+  signature:
+    returnType: mixed
+- subject:
+    method: IntlBreakIterator::createCharacterInstance
+  signature:
+    params:
+    - name: locale
+      type: ?string
+      optional: true
+    returnType: ?IntlBreakIterator
+- subject:
+    method: IntlBreakIterator::createCodePointInstance
+  signature:
+    returnType: IntlCodePointBreakIterator
+- subject:
+    method: IntlBreakIterator::createLineInstance
+  signature:
+    params:
+    - name: locale
+      type: ?string
+      optional: true
+    returnType: ?IntlBreakIterator
+- subject:
+    method: IntlBreakIterator::createSentenceInstance
+  signature:
+    params:
+    - name: locale
+      type: ?string
+      optional: true
+    returnType: ?IntlBreakIterator
+- subject:
+    method: IntlBreakIterator::createTitleInstance
+  signature:
+    params:
+    - name: locale
+      type: ?string
+      optional: true
+    returnType: ?IntlBreakIterator
+- subject:
+    method: IntlBreakIterator::createWordInstance
+  signature:
+    params:
+    - name: locale
+      type: ?string
+      optional: true
+    returnType: ?IntlBreakIterator
+- subject:
+    method: IntlBreakIterator::current
+  signature:
+    returnType: int
+- subject:
+    method: IntlBreakIterator::first
+  signature:
+    returnType: int
+- subject:
+    method: IntlBreakIterator::following
+  signature:
+    params:
+    - name: offset
+      type: int
+    returnType: int
+- subject:
+    method: IntlBreakIterator::getErrorCode
+  signature:
+    returnType: int
+- subject:
+    method: IntlBreakIterator::getErrorMessage
+  signature:
+    returnType: string
+- subject:
+    method: IntlBreakIterator::getIterator
+  signature:
+    returnType: Iterator
+- subject:
+    method: IntlBreakIterator::getLocale
+  signature:
+    params:
+    - name: type
+      type: int
+    returnType: string|false
+- subject:
+    method: IntlBreakIterator::getPartsIterator
+  signature:
+    params:
+    - name: type
+      type: string
+      optional: true
+    returnType: IntlPartsIterator
+- subject:
+    method: IntlBreakIterator::getText
+  signature:
+    returnType: ?string
+- subject:
+    method: IntlBreakIterator::isBoundary
+  signature:
+    params:
+    - name: offset
+      type: int
+    returnType: bool
+- subject:
+    method: IntlBreakIterator::last
+  signature:
+    returnType: int
+- subject:
+    method: IntlBreakIterator::next
+  signature:
+    params:
+    - name: offset
+      type: ?int
+      optional: true
+    returnType: int
+- subject:
+    method: IntlBreakIterator::preceding
+  signature:
+    params:
+    - name: offset
+      type: int
+    returnType: int
+- subject:
+    method: IntlBreakIterator::previous
+  signature:
+    returnType: int
+- subject:
+    method: IntlBreakIterator::setText
+  signature:
+    params:
+    - name: text
+      type: string
+    returnType: bool
+- subject:
+    method: IntlChar::charAge
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    returnType: ?array
+- subject:
+    method: IntlChar::charDigitValue
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    returnType: ?int
+- subject:
+    method: IntlChar::charDirection
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    returnType: ?int
+- subject:
+    method: IntlChar::charFromName
+  signature:
+    params:
+    - name: name
+      type: string
+    - name: type
+      type: int
+      optional: true
+    returnType: ?int
+- subject:
+    method: IntlChar::charMirror
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    returnType: int|string|null
+- subject:
+    method: IntlChar::charName
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    - name: type
+      type: int
+      optional: true
+    returnType: ?string
+- subject:
+    method: IntlChar::charType
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    returnType: ?int
+- subject:
+    method: IntlChar::chr
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    returnType: ?string
+- subject:
+    method: IntlChar::digit
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    - name: base
+      type: int
+      optional: true
+    returnType: int|false|null
+- subject:
+    method: IntlChar::enumCharNames
+  signature:
+    params:
+    - name: start
+      type: int|string
+    - name: end
+      type: int|string
+    - name: callback
+      type: callable
+    - name: type
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    method: IntlChar::enumCharTypes
+  signature:
+    params:
+    - name: callback
+      type: callable
+    returnType: void
+- subject:
+    method: IntlChar::foldCase
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    - name: options
+      type: int
+      optional: true
+    returnType: int|string|null
+- subject:
+    method: IntlChar::forDigit
+  signature:
+    params:
+    - name: digit
+      type: int
+    - name: base
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    method: IntlChar::getBidiPairedBracket
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    returnType: int|string|null
+- subject:
+    method: IntlChar::getBlockCode
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    returnType: ?int
+- subject:
+    method: IntlChar::getCombiningClass
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    returnType: ?int
+- subject:
+    method: IntlChar::getFC_NFKC_Closure
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    returnType: string|false|null
+- subject:
+    method: IntlChar::getIntPropertyMaxValue
+  signature:
+    params:
+    - name: property
+      type: int
+    returnType: int
+- subject:
+    method: IntlChar::getIntPropertyMinValue
+  signature:
+    params:
+    - name: property
+      type: int
+    returnType: int
+- subject:
+    method: IntlChar::getIntPropertyValue
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    - name: property
+      type: int
+    returnType: ?int
+- subject:
+    method: IntlChar::getNumericValue
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    returnType: ?float
+- subject:
+    method: IntlChar::getPropertyEnum
+  signature:
+    params:
+    - name: alias
+      type: string
+    returnType: int
+- subject:
+    method: IntlChar::getPropertyName
+  signature:
+    params:
+    - name: property
+      type: int
+    - name: type
+      type: int
+      optional: true
+    returnType: string|false
+- subject:
+    method: IntlChar::getPropertyValueEnum
+  signature:
+    params:
+    - name: property
+      type: int
+    - name: name
+      type: string
+    returnType: int
+- subject:
+    method: IntlChar::getPropertyValueName
+  signature:
+    params:
+    - name: property
+      type: int
+    - name: value
+      type: int
+    - name: type
+      type: int
+      optional: true
+    returnType: string|false
+- subject:
+    method: IntlChar::getUnicodeVersion
+  signature:
+    returnType: array
+- subject:
+    method: IntlChar::hasBinaryProperty
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    - name: property
+      type: int
+    returnType: ?bool
+- subject:
+    method: IntlChar::isalnum
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    returnType: ?bool
+- subject:
+    method: IntlChar::isalpha
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    returnType: ?bool
+- subject:
+    method: IntlChar::isbase
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    returnType: ?bool
+- subject:
+    method: IntlChar::isblank
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    returnType: ?bool
+- subject:
+    method: IntlChar::iscntrl
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    returnType: ?bool
+- subject:
+    method: IntlChar::isdefined
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    returnType: ?bool
+- subject:
+    method: IntlChar::isdigit
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    returnType: ?bool
+- subject:
+    method: IntlChar::isgraph
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    returnType: ?bool
+- subject:
+    method: IntlChar::isIDIgnorable
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    returnType: ?bool
+- subject:
+    method: IntlChar::isIDPart
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    returnType: ?bool
+- subject:
+    method: IntlChar::isIDStart
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    returnType: ?bool
+- subject:
+    method: IntlChar::isISOControl
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    returnType: ?bool
+- subject:
+    method: IntlChar::isJavaIDPart
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    returnType: ?bool
+- subject:
+    method: IntlChar::isJavaIDStart
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    returnType: ?bool
+- subject:
+    method: IntlChar::isJavaSpaceChar
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    returnType: ?bool
+- subject:
+    method: IntlChar::islower
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    returnType: ?bool
+- subject:
+    method: IntlChar::isMirrored
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    returnType: ?bool
+- subject:
+    method: IntlChar::isprint
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    returnType: ?bool
+- subject:
+    method: IntlChar::ispunct
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    returnType: ?bool
+- subject:
+    method: IntlChar::isspace
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    returnType: ?bool
+- subject:
+    method: IntlChar::istitle
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    returnType: ?bool
+- subject:
+    method: IntlChar::isUAlphabetic
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    returnType: ?bool
+- subject:
+    method: IntlChar::isULowercase
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    returnType: ?bool
+- subject:
+    method: IntlChar::isupper
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    returnType: ?bool
+- subject:
+    method: IntlChar::isUUppercase
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    returnType: ?bool
+- subject:
+    method: IntlChar::isUWhiteSpace
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    returnType: ?bool
+- subject:
+    method: IntlChar::isWhitespace
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    returnType: ?bool
+- subject:
+    method: IntlChar::isxdigit
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    returnType: ?bool
+- subject:
+    method: IntlChar::ord
+  signature:
+    params:
+    - name: character
+      type: int|string
+    returnType: ?int
+- subject:
+    method: IntlChar::tolower
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    returnType: int|string|null
+- subject:
+    method: IntlChar::totitle
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    returnType: int|string|null
+- subject:
+    method: IntlChar::toupper
+  signature:
+    params:
+    - name: codepoint
+      type: int|string
+    returnType: int|string|null
+- subject:
+    method: IntlCodePointBreakIterator::getLastCodePoint
+  signature:
+    returnType: int
+- subject:
+    method: IntlDatePatternGenerator::__construct
+  signature:
+    params:
+    - name: locale
+      type: ?string
+      optional: true
+    returnType: mixed
+- subject:
+    method: IntlDatePatternGenerator::create
+  signature:
+    params:
+    - name: locale
+      type: ?string
+      optional: true
+    returnType: ?IntlDatePatternGenerator
+- subject:
+    method: IntlDatePatternGenerator::getBestPattern
+  signature:
+    params:
+    - name: skeleton
+      type: string
+    returnType: string|false
+- subject:
+    method: IntlGregorianCalendar::__construct
+  signature:
+    params:
+    - name: timezoneOrYear
+      type: mixed
+      optional: true
+    - name: localeOrMonth
+      type: mixed
+      optional: true
+    - name: day
+      type: mixed
+      optional: true
+    - name: hour
+      type: mixed
+      optional: true
+    - name: minute
+      type: mixed
+      optional: true
+    - name: second
+      type: mixed
+      optional: true
+    returnType: mixed
+- subject:
+    method: IntlGregorianCalendar::createFromDate
+  signature:
+    params:
+    - name: year
+      type: int
+    - name: month
+      type: int
+    - name: dayOfMonth
+      type: int
+    returnType: static
+- subject:
+    method: IntlGregorianCalendar::createFromDateTime
+  signature:
+    params:
+    - name: year
+      type: int
+    - name: month
+      type: int
+    - name: dayOfMonth
+      type: int
+    - name: hour
+      type: int
+    - name: minute
+      type: int
+    - name: second
+      type: ?int
+      optional: true
+    returnType: static
+- subject:
+    method: IntlGregorianCalendar::getGregorianChange
+  signature:
+    returnType: float
+- subject:
+    method: IntlGregorianCalendar::isLeapYear
+  signature:
+    params:
+    - name: year
+      type: int
+    returnType: bool
+- subject:
+    method: IntlGregorianCalendar::setGregorianChange
+  signature:
+    params:
+    - name: timestamp
+      type: float
+    returnType: bool
+- subject:
+    method: IntlIterator::current
+  signature:
+    returnType: mixed
+- subject:
+    method: IntlIterator::key
+  signature:
+    returnType: mixed
+- subject:
+    method: IntlIterator::next
+  signature:
+    returnType: void
+- subject:
+    method: IntlIterator::rewind
+  signature:
+    returnType: void
+- subject:
+    method: IntlIterator::valid
+  signature:
+    returnType: bool
+- subject:
+    method: IntlListFormatter::__construct
+  signature:
+    params:
+    - name: locale
+      type: string
+    - name: type
+      type: int
+      optional: true
+    - name: width
+      type: int
+      optional: true
+    returnType: mixed
+- subject:
+    method: IntlListFormatter::format
+  signature:
+    params:
+    - name: strings
+      type: array
+    returnType: string|false
+- subject:
+    method: IntlListFormatter::getErrorCode
+  signature:
+    returnType: int
+- subject:
+    method: IntlListFormatter::getErrorMessage
+  signature:
+    returnType: string
+- subject:
+    method: IntlPartsIterator::getBreakIterator
+  signature:
+    returnType: IntlBreakIterator
+- subject:
+    method: IntlPartsIterator::getRuleStatus
+  signature:
+    returnType: int
+- subject:
+    method: IntlRuleBasedBreakIterator::__construct
+  signature:
+    params:
+    - name: rules
+      type: string
+    - name: compiled
+      type: bool
+      optional: true
+    returnType: mixed
+- subject:
+    method: IntlRuleBasedBreakIterator::getBinaryRules
+  signature:
+    returnType: string|false
+- subject:
+    method: IntlRuleBasedBreakIterator::getRules
+  signature:
+    returnType: string|false
+- subject:
+    method: IntlRuleBasedBreakIterator::getRuleStatus
+  signature:
+    returnType: int
+- subject:
+    method: IntlRuleBasedBreakIterator::getRuleStatusVec
+  signature:
+    returnType: array|false
+- subject:
+    method: UConverter::__construct
+  signature:
+    params:
+    - name: destination_encoding
+      type: ?string
+      optional: true
+    - name: source_encoding
+      type: ?string
+      optional: true
+    returnType: mixed
+- subject:
+    method: UConverter::convert
+  signature:
+    params:
+    - name: str
+      type: string
+    - name: reverse
+      type: bool
+      optional: true
+    returnType: string|false
+- subject:
+    method: UConverter::fromUCallback
+  signature:
+    params:
+    - name: reason
+      type: int
+    - name: source
+      type: array
+    - name: codePoint
+      type: int
+    - name: error
+      type: mixed
+      byRef: true
+    returnType: string|int|array|null
+- subject:
+    method: UConverter::getAliases
+  signature:
+    params:
+    - name: name
+      type: string
+    returnType: array|false|null
+- subject:
+    method: UConverter::getAvailable
+  signature:
+    returnType: array
+- subject:
+    method: UConverter::getDestinationEncoding
+  signature:
+    returnType: string|false|null
+- subject:
+    method: UConverter::getDestinationType
+  signature:
+    returnType: int|false|null
+- subject:
+    method: UConverter::getErrorCode
+  signature:
+    returnType: int
+- subject:
+    method: UConverter::getErrorMessage
+  signature:
+    returnType: ?string
+- subject:
+    method: UConverter::getSourceEncoding
+  signature:
+    returnType: string|false|null
+- subject:
+    method: UConverter::getSourceType
+  signature:
+    returnType: int|false|null
+- subject:
+    method: UConverter::getStandards
+  signature:
+    returnType: ?array
+- subject:
+    method: UConverter::getSubstChars
+  signature:
+    returnType: string|false|null
+- subject:
+    method: UConverter::reasonText
+  signature:
+    params:
+    - name: reason
+      type: int
+    returnType: string
+- subject:
+    method: UConverter::setDestinationEncoding
+  signature:
+    params:
+    - name: encoding
+      type: string
+    returnType: bool
+- subject:
+    method: UConverter::setSourceEncoding
+  signature:
+    params:
+    - name: encoding
+      type: string
+    returnType: bool
+- subject:
+    method: UConverter::setSubstChars
+  signature:
+    params:
+    - name: chars
+      type: string
+    returnType: bool
+- subject:
+    method: UConverter::toUCallback
+  signature:
+    params:
+    - name: reason
+      type: int
+    - name: source
+      type: string
+    - name: codeUnits
+      type: string
+    - name: error
+      type: mixed
+      byRef: true
+    returnType: string|int|array|null
+- subject:
+    method: UConverter::transcode
+  signature:
+    params:
+    - name: str
+      type: string
+    - name: toEncoding
+      type: string
+    - name: fromEncoding
+      type: string
+    - name: options
+      type: ?array
+      optional: true
+    returnType: string|false
+- subject:
+    class: intldateformatter
+  signature:
+    classifier: class
+- subject:
+    class: numberformatter
+  signature:
+    classifier: class
+- subject:
+    class: collator
+  signature:
+    classifier: class
+- subject:
+    class: messageformatter
+  signature:
+    classifier: class
+- subject:
+    class: locale
+  signature:
+    classifier: class
+- subject:
+    class: normalizer
+  signature:
+    classifier: class
+- subject:
+    class: resourcebundle
+  signature:
+    classifier: class
+    interfaces: [iteratoraggregate, countable]
+- subject:
+    class: transliterator
+  signature:
+    classifier: class
+- subject:
+    class: spoofchecker
+  signature:
+    classifier: class
+- subject:
+    class: intlcalendar
+  signature:
+    classifier: class
+- subject:
+    class: intltimezone
+  signature:
+    classifier: class
+- subject:
+    function: datefmt_create
+  signature:
+    params:
+    - name: locale
+      type: ?string
+    - name: dateType
+      type: int
+      optional: true
+    - name: timeType
+      type: int
+      optional: true
+    - name: timezone
+      type: IntlTimeZone|DateTimeZone|string|null
+      optional: true
+    - name: calendar
+      type: IntlCalendar|int|null
+      optional: true
+    - name: pattern
+      type: ?string
+      optional: true
+    returnType: ?IntlDateFormatter
+- subject:
+    function: datefmt_format
+  signature:
+    params:
+    - name: formatter
+      type: IntlDateFormatter
+    - name: datetime
+      type: mixed
+    returnType: string|false
+  propagation:
+  - from: argument(1)
+    to: return
+- subject:
+    function: datefmt_format_object
+  signature:
+    params:
+    - name: datetime
+      type: mixed
+    - name: format
+      type: mixed
+      optional: true
+    - name: locale
+      type: ?string
+      optional: true
+    returnType: string|false
+  propagation:
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: datefmt_get_calendar
+  signature:
+    params:
+    - name: formatter
+      type: IntlDateFormatter
+    returnType: int|false
+- subject:
+    function: datefmt_get_calendar_object
+  signature:
+    params:
+    - name: formatter
+      type: IntlDateFormatter
+    returnType: IntlCalendar|false|null
+- subject:
+    function: datefmt_get_datetype
+  signature:
+    params:
+    - name: formatter
+      type: IntlDateFormatter
+    returnType: int|false
+- subject:
+    function: datefmt_get_error_code
+  signature:
+    params:
+    - name: formatter
+      type: IntlDateFormatter
+    returnType: int
+- subject:
+    function: datefmt_get_error_message
+  signature:
+    params:
+    - name: formatter
+      type: IntlDateFormatter
+    returnType: string
+- subject:
+    function: datefmt_get_locale
+  signature:
+    params:
+    - name: formatter
+      type: IntlDateFormatter
+    - name: type
+      type: int
+      optional: true
+    returnType: string|false
+- subject:
+    function: datefmt_get_pattern
+  signature:
+    params:
+    - name: formatter
+      type: IntlDateFormatter
+    returnType: string|false
+- subject:
+    function: datefmt_get_timetype
+  signature:
+    params:
+    - name: formatter
+      type: IntlDateFormatter
+    returnType: int|false
+- subject:
+    function: datefmt_get_timezone
+  signature:
+    params:
+    - name: formatter
+      type: IntlDateFormatter
+    returnType: IntlTimeZone|false
+- subject:
+    function: datefmt_get_timezone_id
+  signature:
+    params:
+    - name: formatter
+      type: IntlDateFormatter
+    returnType: string|false
+- subject:
+    function: datefmt_is_lenient
+  signature:
+    params:
+    - name: formatter
+      type: IntlDateFormatter
+    returnType: bool
+- subject:
+    function: datefmt_localtime
+  signature:
+    params:
+    - name: formatter
+      type: IntlDateFormatter
+    - name: string
+      type: string
+    - name: offset
+      type: mixed
+      optional: true
+      byRef: true
+    returnType: array|false
+- subject:
+    function: datefmt_parse
+  signature:
+    params:
+    - name: formatter
+      type: IntlDateFormatter
+    - name: string
+      type: string
+    - name: offset
+      type: mixed
+      optional: true
+      byRef: true
+    returnType: int|float|false
+- subject:
+    function: datefmt_set_calendar
+  signature:
+    params:
+    - name: formatter
+      type: IntlDateFormatter
+    - name: calendar
+      type: IntlCalendar|int|null
+    returnType: bool
+- subject:
+    function: datefmt_set_lenient
+  signature:
+    params:
+    - name: formatter
+      type: IntlDateFormatter
+    - name: lenient
+      type: bool
+    returnType: void
+- subject:
+    function: datefmt_set_pattern
+  signature:
+    params:
+    - name: formatter
+      type: IntlDateFormatter
+    - name: pattern
+      type: string
+    returnType: bool
+- subject:
+    function: datefmt_set_timezone
+  signature:
+    params:
+    - name: formatter
+      type: IntlDateFormatter
+    - name: timezone
+      type: IntlTimeZone|DateTimeZone|string|null
+    returnType: bool
+- subject:
+    function: collator_asort
+  signature:
+    params:
+    - name: object
+      type: Collator
+    - name: array
+      type: array
+      byRef: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: collator_compare
+  signature:
+    params:
+    - name: object
+      type: Collator
+    - name: string1
+      type: string
+    - name: string2
+      type: string
+    returnType: int|false
+- subject:
+    function: collator_create
+  signature:
+    params:
+    - name: locale
+      type: string
+    returnType: ?Collator
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: collator_get_attribute
+  signature:
+    params:
+    - name: object
+      type: Collator
+    - name: attribute
+      type: int
+    returnType: int|false
+- subject:
+    function: collator_get_error_code
+  signature:
+    params:
+    - name: object
+      type: Collator
+    returnType: int|false
+- subject:
+    function: collator_get_error_message
+  signature:
+    params:
+    - name: object
+      type: Collator
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: collator_get_locale
+  signature:
+    params:
+    - name: object
+      type: Collator
+    - name: type
+      type: int
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: collator_get_sort_key
+  signature:
+    params:
+    - name: object
+      type: Collator
+    - name: string
+      type: string
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: collator_get_strength
+  signature:
+    params:
+    - name: object
+      type: Collator
+    returnType: int
+- subject:
+    function: collator_set_attribute
+  signature:
+    params:
+    - name: object
+      type: Collator
+    - name: attribute
+      type: int
+    - name: value
+      type: int
+    returnType: bool
+- subject:
+    function: collator_set_strength
+  signature:
+    params:
+    - name: object
+      type: Collator
+    - name: strength
+      type: int
+    returnType: 'true'
+- subject:
+    function: collator_sort
+  signature:
+    params:
+    - name: object
+      type: Collator
+    - name: array
+      type: array
+      byRef: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: collator_sort_with_sort_keys
+  signature:
+    params:
+    - name: object
+      type: Collator
+    - name: array
+      type: array
+      byRef: true
+    returnType: bool
+- subject:
+    function: grapheme_extract
+  signature:
+    params:
+    - name: haystack
+      type: string
+    - name: size
+      type: int
+    - name: type
+      type: int
+      optional: true
+    - name: offset
+      type: int
+      optional: true
+    - name: next
+      type: mixed
+      optional: true
+      byRef: true
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: grapheme_stripos
+  signature:
+    params:
+    - name: haystack
+      type: string
+    - name: needle
+      type: string
+    - name: offset
+      type: int
+      optional: true
+    - name: locale
+      type: string
+      optional: true
+    returnType: int|false
+- subject:
+    function: grapheme_stristr
+  signature:
+    params:
+    - name: haystack
+      type: string
+    - name: needle
+      type: string
+    - name: beforeNeedle
+      type: bool
+      optional: true
+    - name: locale
+      type: string
+      optional: true
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: grapheme_strlen
+  signature:
+    params:
+    - name: string
+      type: string
+    returnType: int|false|null
+- subject:
+    function: grapheme_strpos
+  signature:
+    params:
+    - name: haystack
+      type: string
+    - name: needle
+      type: string
+    - name: offset
+      type: int
+      optional: true
+    - name: locale
+      type: string
+      optional: true
+    returnType: int|false
+- subject:
+    function: grapheme_strripos
+  signature:
+    params:
+    - name: haystack
+      type: string
+    - name: needle
+      type: string
+    - name: offset
+      type: int
+      optional: true
+    - name: locale
+      type: string
+      optional: true
+    returnType: int|false
+- subject:
+    function: grapheme_strrpos
+  signature:
+    params:
+    - name: haystack
+      type: string
+    - name: needle
+      type: string
+    - name: offset
+      type: int
+      optional: true
+    - name: locale
+      type: string
+      optional: true
+    returnType: int|false
+- subject:
+    function: grapheme_strstr
+  signature:
+    params:
+    - name: haystack
+      type: string
+    - name: needle
+      type: string
+    - name: beforeNeedle
+      type: bool
+      optional: true
+    - name: locale
+      type: string
+      optional: true
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: grapheme_substr
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: offset
+      type: int
+    - name: length
+      type: ?int
+      optional: true
+    - name: locale
+      type: string
+      optional: true
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: idn_to_ascii
+  signature:
+    params:
+    - name: domain
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    - name: variant
+      type: int
+      optional: true
+    - name: idna_info
+      type: mixed
+      optional: true
+      byRef: true
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: idn_to_utf8
+  signature:
+    params:
+    - name: domain
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    - name: variant
+      type: int
+      optional: true
+    - name: idna_info
+      type: mixed
+      optional: true
+      byRef: true
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: intlcal_add
+  signature:
+    params:
+    - name: calendar
+      type: IntlCalendar
+    - name: field
+      type: int
+    - name: value
+      type: int
+    returnType: bool
+- subject:
+    function: intlcal_after
+  signature:
+    params:
+    - name: calendar
+      type: IntlCalendar
+    - name: other
+      type: IntlCalendar
+    returnType: bool
+- subject:
+    function: intlcal_before
+  signature:
+    params:
+    - name: calendar
+      type: IntlCalendar
+    - name: other
+      type: IntlCalendar
+    returnType: bool
+- subject:
+    function: intlcal_clear
+  signature:
+    params:
+    - name: calendar
+      type: IntlCalendar
+    - name: field
+      type: ?int
+      optional: true
+    returnType: 'true'
+- subject:
+    function: intlcal_create_instance
+  signature:
+    params:
+    - name: timezone
+      type: IntlTimeZone|DateTimeZone|string|null
+      optional: true
+    - name: locale
+      type: ?string
+      optional: true
+    returnType: ?IntlCalendar
+- subject:
+    function: intlcal_equals
+  signature:
+    params:
+    - name: calendar
+      type: IntlCalendar
+    - name: other
+      type: IntlCalendar
+    returnType: bool
+- subject:
+    function: intlcal_field_difference
+  signature:
+    params:
+    - name: calendar
+      type: IntlCalendar
+    - name: timestamp
+      type: float
+    - name: field
+      type: int
+    returnType: int|false
+- subject:
+    function: intlcal_from_date_time
+  signature:
+    params:
+    - name: datetime
+      type: DateTime|string
+    - name: locale
+      type: ?string
+      optional: true
+    returnType: ?IntlCalendar
+- subject:
+    function: intlcal_get
+  signature:
+    params:
+    - name: calendar
+      type: IntlCalendar
+    - name: field
+      type: int
+    returnType: int|false
+- subject:
+    function: intlcal_get_actual_maximum
+  signature:
+    params:
+    - name: calendar
+      type: IntlCalendar
+    - name: field
+      type: int
+    returnType: int|false
+- subject:
+    function: intlcal_get_actual_minimum
+  signature:
+    params:
+    - name: calendar
+      type: IntlCalendar
+    - name: field
+      type: int
+    returnType: int|false
+- subject:
+    function: intlcal_get_available_locales
+  signature:
+    returnType: array
+- subject:
+    function: intlcal_get_day_of_week_type
+  signature:
+    params:
+    - name: calendar
+      type: IntlCalendar
+    - name: dayOfWeek
+      type: int
+    returnType: int|false
+- subject:
+    function: intlcal_get_error_code
+  signature:
+    params:
+    - name: calendar
+      type: IntlCalendar
+    returnType: int|false
+- subject:
+    function: intlcal_get_error_message
+  signature:
+    params:
+    - name: calendar
+      type: IntlCalendar
+    returnType: string|false
+- subject:
+    function: intlcal_get_first_day_of_week
+  signature:
+    params:
+    - name: calendar
+      type: IntlCalendar
+    returnType: int|false
+- subject:
+    function: intlcal_get_greatest_minimum
+  signature:
+    params:
+    - name: calendar
+      type: IntlCalendar
+    - name: field
+      type: int
+    returnType: int|false
+- subject:
+    function: intlcal_get_keyword_values_for_locale
+  signature:
+    params:
+    - name: keyword
+      type: string
+    - name: locale
+      type: string
+    - name: onlyCommon
+      type: bool
+    returnType: IntlIterator|false
+- subject:
+    function: intlcal_get_least_maximum
+  signature:
+    params:
+    - name: calendar
+      type: IntlCalendar
+    - name: field
+      type: int
+    returnType: int|false
+- subject:
+    function: intlcal_get_locale
+  signature:
+    params:
+    - name: calendar
+      type: IntlCalendar
+    - name: type
+      type: int
+    returnType: string|false
+- subject:
+    function: intlcal_get_maximum
+  signature:
+    params:
+    - name: calendar
+      type: IntlCalendar
+    - name: field
+      type: int
+    returnType: int|false
+- subject:
+    function: intlcal_get_minimal_days_in_first_week
+  signature:
+    params:
+    - name: calendar
+      type: IntlCalendar
+    returnType: int|false
+- subject:
+    function: intlcal_get_minimum
+  signature:
+    params:
+    - name: calendar
+      type: IntlCalendar
+    - name: field
+      type: int
+    returnType: int|false
+- subject:
+    function: intlcal_get_now
+  signature:
+    returnType: float
+- subject:
+    function: intlcal_get_repeated_wall_time_option
+  signature:
+    params:
+    - name: calendar
+      type: IntlCalendar
+    returnType: int
+- subject:
+    function: intlcal_get_skipped_wall_time_option
+  signature:
+    params:
+    - name: calendar
+      type: IntlCalendar
+    returnType: int
+- subject:
+    function: intlcal_get_time
+  signature:
+    params:
+    - name: calendar
+      type: IntlCalendar
+    returnType: float|false
+- subject:
+    function: intlcal_get_time_zone
+  signature:
+    params:
+    - name: calendar
+      type: IntlCalendar
+    returnType: IntlTimeZone|false
+- subject:
+    function: intlcal_get_type
+  signature:
+    params:
+    - name: calendar
+      type: IntlCalendar
+    returnType: string
+- subject:
+    function: intlcal_get_weekend_transition
+  signature:
+    params:
+    - name: calendar
+      type: IntlCalendar
+    - name: dayOfWeek
+      type: int
+    returnType: int|false
+- subject:
+    function: intlcal_in_daylight_time
+  signature:
+    params:
+    - name: calendar
+      type: IntlCalendar
+    returnType: bool
+- subject:
+    function: intlcal_is_equivalent_to
+  signature:
+    params:
+    - name: calendar
+      type: IntlCalendar
+    - name: other
+      type: IntlCalendar
+    returnType: bool
+- subject:
+    function: intlcal_is_lenient
+  signature:
+    params:
+    - name: calendar
+      type: IntlCalendar
+    returnType: bool
+- subject:
+    function: intlcal_is_set
+  signature:
+    params:
+    - name: calendar
+      type: IntlCalendar
+    - name: field
+      type: int
+    returnType: bool
+- subject:
+    function: intlcal_is_weekend
+  signature:
+    params:
+    - name: calendar
+      type: IntlCalendar
+    - name: timestamp
+      type: ?float
+      optional: true
+    returnType: bool
+- subject:
+    function: intlcal_roll
+  signature:
+    params:
+    - name: calendar
+      type: IntlCalendar
+    - name: field
+      type: int
+    - name: value
+      type: mixed
+    returnType: bool
+- subject:
+    function: intlcal_set
+  signature:
+    params:
+    - name: calendar
+      type: IntlCalendar
+    - name: year
+      type: int
+    - name: month
+      type: int
+    - name: dayOfMonth
+      type: int
+      optional: true
+    - name: hour
+      type: int
+      optional: true
+    - name: minute
+      type: int
+      optional: true
+    - name: second
+      type: int
+      optional: true
+    returnType: 'true'
+- subject:
+    function: intlcal_set_first_day_of_week
+  signature:
+    params:
+    - name: calendar
+      type: IntlCalendar
+    - name: dayOfWeek
+      type: int
+    returnType: 'true'
+- subject:
+    function: intlcal_set_lenient
+  signature:
+    params:
+    - name: calendar
+      type: IntlCalendar
+    - name: lenient
+      type: bool
+    returnType: 'true'
+- subject:
+    function: intlcal_set_minimal_days_in_first_week
+  signature:
+    params:
+    - name: calendar
+      type: IntlCalendar
+    - name: days
+      type: int
+    returnType: 'true'
+- subject:
+    function: intlcal_set_repeated_wall_time_option
+  signature:
+    params:
+    - name: calendar
+      type: IntlCalendar
+    - name: option
+      type: int
+    returnType: 'true'
+- subject:
+    function: intlcal_set_skipped_wall_time_option
+  signature:
+    params:
+    - name: calendar
+      type: IntlCalendar
+    - name: option
+      type: int
+    returnType: 'true'
+- subject:
+    function: intlcal_set_time
+  signature:
+    params:
+    - name: calendar
+      type: IntlCalendar
+    - name: timestamp
+      type: float
+    returnType: bool
+- subject:
+    function: intlcal_set_time_zone
+  signature:
+    params:
+    - name: calendar
+      type: IntlCalendar
+    - name: timezone
+      type: IntlTimeZone|DateTimeZone|string|null
+    returnType: bool
+- subject:
+    function: intlcal_to_date_time
+  signature:
+    params:
+    - name: calendar
+      type: IntlCalendar
+    returnType: DateTime|false
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: intlgregcal_create_instance
+  signature:
+    params:
+    - name: timezoneOrYear
+      type: mixed
+      optional: true
+    - name: localeOrMonth
+      type: mixed
+      optional: true
+    - name: day
+      type: mixed
+      optional: true
+    - name: hour
+      type: mixed
+      optional: true
+    - name: minute
+      type: mixed
+      optional: true
+    - name: second
+      type: mixed
+      optional: true
+    returnType: ?IntlGregorianCalendar
+- subject:
+    function: intlgregcal_get_gregorian_change
+  signature:
+    params:
+    - name: calendar
+      type: IntlGregorianCalendar
+    returnType: float
+- subject:
+    function: intlgregcal_is_leap_year
+  signature:
+    params:
+    - name: calendar
+      type: IntlGregorianCalendar
+    - name: year
+      type: int
+    returnType: bool
+- subject:
+    function: intlgregcal_set_gregorian_change
+  signature:
+    params:
+    - name: calendar
+      type: IntlGregorianCalendar
+    - name: timestamp
+      type: float
+    returnType: bool
+- subject:
+    function: intltz_count_equivalent_ids
+  signature:
+    params:
+    - name: timezoneId
+      type: string
+    returnType: int|false
+- subject:
+    function: intltz_create_default
+  signature:
+    returnType: IntlTimeZone
+- subject:
+    function: intltz_create_enumeration
+  signature:
+    params:
+    - name: countryOrRawOffset
+      type: string|int|null
+      optional: true
+    returnType: IntlIterator|false
+- subject:
+    function: intltz_create_time_zone
+  signature:
+    params:
+    - name: timezoneId
+      type: string
+    returnType: ?IntlTimeZone
+- subject:
+    function: intltz_create_time_zone_id_enumeration
+  signature:
+    params:
+    - name: type
+      type: int
+    - name: region
+      type: ?string
+      optional: true
+    - name: rawOffset
+      type: ?int
+      optional: true
+    returnType: IntlIterator|false
+- subject:
+    function: intltz_from_date_time_zone
+  signature:
+    params:
+    - name: timezone
+      type: DateTimeZone
+    returnType: ?IntlTimeZone
+- subject:
+    function: intltz_get_canonical_id
+  signature:
+    params:
+    - name: timezoneId
+      type: string
+    - name: isSystemId
+      type: mixed
+      optional: true
+      byRef: true
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: intltz_get_display_name
+  signature:
+    params:
+    - name: timezone
+      type: IntlTimeZone
+    - name: dst
+      type: bool
+      optional: true
+    - name: style
+      type: int
+      optional: true
+    - name: locale
+      type: ?string
+      optional: true
+    returnType: string|false
+  propagation:
+  - from: argument(3)
+    to: return
+- subject:
+    function: intltz_get_dst_savings
+  signature:
+    params:
+    - name: timezone
+      type: IntlTimeZone
+    returnType: int
+- subject:
+    function: intltz_get_equivalent_id
+  signature:
+    params:
+    - name: timezoneId
+      type: string
+    - name: offset
+      type: int
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: intltz_get_error_code
+  signature:
+    params:
+    - name: timezone
+      type: IntlTimeZone
+    returnType: int|false
+- subject:
+    function: intltz_get_error_message
+  signature:
+    params:
+    - name: timezone
+      type: IntlTimeZone
+    returnType: string|false
+- subject:
+    function: intltz_get_gmt
+  signature:
+    returnType: IntlTimeZone
+- subject:
+    function: intltz_get_id
+  signature:
+    params:
+    - name: timezone
+      type: IntlTimeZone
+    returnType: string|false
+- subject:
+    function: intltz_get_id_for_windows_id
+  signature:
+    params:
+    - name: timezoneId
+      type: string
+    - name: region
+      type: ?string
+      optional: true
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: intltz_get_offset
+  signature:
+    params:
+    - name: timezone
+      type: IntlTimeZone
+    - name: timestamp
+      type: float
+    - name: local
+      type: bool
+    - name: rawOffset
+      type: mixed
+      byRef: true
+    - name: dstOffset
+      type: mixed
+      byRef: true
+    returnType: bool
+- subject:
+    function: intltz_get_raw_offset
+  signature:
+    params:
+    - name: timezone
+      type: IntlTimeZone
+    returnType: int
+- subject:
+    function: intltz_get_region
+  signature:
+    params:
+    - name: timezoneId
+      type: string
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: intltz_get_tz_data_version
+  signature:
+    returnType: string|false
+- subject:
+    function: intltz_get_unknown
+  signature:
+    returnType: IntlTimeZone
+- subject:
+    function: intltz_get_windows_id
+  signature:
+    params:
+    - name: timezoneId
+      type: string
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: intltz_has_same_rules
+  signature:
+    params:
+    - name: timezone
+      type: IntlTimeZone
+    - name: other
+      type: IntlTimeZone
+    returnType: bool
+- subject:
+    function: intltz_to_date_time_zone
+  signature:
+    params:
+    - name: timezone
+      type: IntlTimeZone
+    returnType: DateTimeZone|false
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: intltz_use_daylight_time
+  signature:
+    params:
+    - name: timezone
+      type: IntlTimeZone
+    returnType: bool
+- subject:
+    function: locale_accept_from_http
+  signature:
+    params:
+    - name: header
+      type: string
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: locale_canonicalize
+  signature:
+    params:
+    - name: locale
+      type: string
+    returnType: ?string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: locale_compose
+  signature:
+    params:
+    - name: subtags
+      type: array
+    returnType: string|false
+- subject:
+    function: locale_filter_matches
+  signature:
+    params:
+    - name: languageTag
+      type: string
+    - name: locale
+      type: string
+    - name: canonicalize
+      type: bool
+      optional: true
+    returnType: ?bool
+- subject:
+    function: locale_get_all_variants
+  signature:
+    params:
+    - name: locale
+      type: string
+    returnType: ?array
+- subject:
+    function: locale_get_default
+  signature:
+    returnType: string
+- subject:
+    function: locale_get_display_language
+  signature:
+    params:
+    - name: locale
+      type: string
+    - name: displayLocale
+      type: ?string
+      optional: true
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: locale_get_display_name
+  signature:
+    params:
+    - name: locale
+      type: string
+    - name: displayLocale
+      type: ?string
+      optional: true
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: locale_get_display_region
+  signature:
+    params:
+    - name: locale
+      type: string
+    - name: displayLocale
+      type: ?string
+      optional: true
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: locale_get_display_script
+  signature:
+    params:
+    - name: locale
+      type: string
+    - name: displayLocale
+      type: ?string
+      optional: true
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: locale_get_display_variant
+  signature:
+    params:
+    - name: locale
+      type: string
+    - name: displayLocale
+      type: ?string
+      optional: true
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: locale_get_keywords
+  signature:
+    params:
+    - name: locale
+      type: string
+    returnType: array|false|null
+- subject:
+    function: locale_get_primary_language
+  signature:
+    params:
+    - name: locale
+      type: string
+    returnType: ?string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: locale_get_region
+  signature:
+    params:
+    - name: locale
+      type: string
+    returnType: ?string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: locale_get_script
+  signature:
+    params:
+    - name: locale
+      type: string
+    returnType: ?string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: locale_lookup
+  signature:
+    params:
+    - name: languageTag
+      type: array
+    - name: locale
+      type: string
+    - name: canonicalize
+      type: bool
+      optional: true
+    - name: defaultLocale
+      type: ?string
+      optional: true
+    returnType: ?string
+  propagation:
+  - from: argument(1)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: locale_parse
+  signature:
+    params:
+    - name: locale
+      type: string
+    returnType: ?array
+- subject:
+    function: locale_set_default
+  signature:
+    params:
+    - name: locale
+      type: string
+    returnType: 'true'
+- subject:
+    function: msgfmt_create
+  signature:
+    params:
+    - name: locale
+      type: string
+    - name: pattern
+      type: string
+    returnType: ?MessageFormatter
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: msgfmt_format
+  signature:
+    params:
+    - name: formatter
+      type: MessageFormatter
+    - name: values
+      type: array
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: msgfmt_format_message
+  signature:
+    params:
+    - name: locale
+      type: string
+    - name: pattern
+      type: string
+    - name: values
+      type: array
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: msgfmt_get_error_code
+  signature:
+    params:
+    - name: formatter
+      type: MessageFormatter
+    returnType: int
+- subject:
+    function: msgfmt_get_error_message
+  signature:
+    params:
+    - name: formatter
+      type: MessageFormatter
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: msgfmt_get_locale
+  signature:
+    params:
+    - name: formatter
+      type: MessageFormatter
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: msgfmt_get_pattern
+  signature:
+    params:
+    - name: formatter
+      type: MessageFormatter
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: msgfmt_parse
+  signature:
+    params:
+    - name: formatter
+      type: MessageFormatter
+    - name: string
+      type: string
+    returnType: array|false
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: msgfmt_parse_message
+  signature:
+    params:
+    - name: locale
+      type: string
+    - name: pattern
+      type: string
+    - name: message
+      type: string
+    returnType: array|false
+- subject:
+    function: msgfmt_set_pattern
+  signature:
+    params:
+    - name: formatter
+      type: MessageFormatter
+    - name: pattern
+      type: string
+    returnType: bool
+- subject:
+    function: normalizer_get_raw_decomposition
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: form
+      type: int
+      optional: true
+    returnType: ?string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: normalizer_is_normalized
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: form
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: normalizer_normalize
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: form
+      type: int
+      optional: true
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: numfmt_create
+  signature:
+    params:
+    - name: locale
+      type: string
+    - name: style
+      type: int
+    - name: pattern
+      type: ?string
+      optional: true
+    returnType: ?NumberFormatter
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: numfmt_format
+  signature:
+    params:
+    - name: formatter
+      type: NumberFormatter
+    - name: num
+      type: int|float
+    - name: type
+      type: int
+      optional: true
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: numfmt_format_currency
+  signature:
+    params:
+    - name: formatter
+      type: NumberFormatter
+    - name: amount
+      type: float
+    - name: currency
+      type: string
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: numfmt_get_attribute
+  signature:
+    params:
+    - name: formatter
+      type: NumberFormatter
+    - name: attribute
+      type: int
+    returnType: int|float|false
+- subject:
+    function: numfmt_get_error_code
+  signature:
+    params:
+    - name: formatter
+      type: NumberFormatter
+    returnType: int
+- subject:
+    function: numfmt_get_error_message
+  signature:
+    params:
+    - name: formatter
+      type: NumberFormatter
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: numfmt_get_locale
+  signature:
+    params:
+    - name: formatter
+      type: NumberFormatter
+    - name: type
+      type: int
+      optional: true
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: numfmt_get_pattern
+  signature:
+    params:
+    - name: formatter
+      type: NumberFormatter
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: numfmt_get_symbol
+  signature:
+    params:
+    - name: formatter
+      type: NumberFormatter
+    - name: symbol
+      type: int
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: numfmt_get_text_attribute
+  signature:
+    params:
+    - name: formatter
+      type: NumberFormatter
+    - name: attribute
+      type: int
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: numfmt_parse
+  signature:
+    params:
+    - name: formatter
+      type: NumberFormatter
+    - name: string
+      type: string
+    - name: type
+      type: int
+      optional: true
+    - name: offset
+      type: mixed
+      optional: true
+      byRef: true
+    returnType: int|float|false
+- subject:
+    function: numfmt_parse_currency
+  signature:
+    params:
+    - name: formatter
+      type: NumberFormatter
+    - name: string
+      type: string
+    - name: currency
+      type: mixed
+      byRef: true
+    - name: offset
+      type: mixed
+      optional: true
+      byRef: true
+    returnType: float|false
+- subject:
+    function: numfmt_set_attribute
+  signature:
+    params:
+    - name: formatter
+      type: NumberFormatter
+    - name: attribute
+      type: int
+    - name: value
+      type: int|float
+    returnType: bool
+- subject:
+    function: numfmt_set_pattern
+  signature:
+    params:
+    - name: formatter
+      type: NumberFormatter
+    - name: pattern
+      type: string
+    returnType: bool
+- subject:
+    function: numfmt_set_symbol
+  signature:
+    params:
+    - name: formatter
+      type: NumberFormatter
+    - name: symbol
+      type: int
+    - name: value
+      type: string
+    returnType: bool
+- subject:
+    function: numfmt_set_text_attribute
+  signature:
+    params:
+    - name: formatter
+      type: NumberFormatter
+    - name: attribute
+      type: int
+    - name: value
+      type: string
+    returnType: bool
+- subject:
+    function: resourcebundle_count
+  signature:
+    params:
+    - name: bundle
+      type: ResourceBundle
+    returnType: int
+- subject:
+    function: resourcebundle_create
+  signature:
+    params:
+    - name: locale
+      type: ?string
+    - name: bundle
+      type: ?string
+    - name: fallback
+      type: bool
+      optional: true
+    returnType: ?ResourceBundle
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: resourcebundle_get
+  signature:
+    params:
+    - name: bundle
+      type: ResourceBundle
+    - name: index
+      type: string|int
+    - name: fallback
+      type: bool
+      optional: true
+    returnType: ResourceBundle|array|string|int|null
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: resourcebundle_get_error_code
+  signature:
+    params:
+    - name: bundle
+      type: ResourceBundle
+    returnType: int
+- subject:
+    function: resourcebundle_get_error_message
+  signature:
+    params:
+    - name: bundle
+      type: ResourceBundle
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: resourcebundle_locales
+  signature:
+    params:
+    - name: bundle
+      type: string
+    returnType: array|false
+- subject:
+    function: transliterator_create
+  signature:
+    params:
+    - name: id
+      type: string
+    - name: direction
+      type: int
+      optional: true
+    returnType: ?Transliterator
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: transliterator_create_from_rules
+  signature:
+    params:
+    - name: rules
+      type: string
+    - name: direction
+      type: int
+      optional: true
+    returnType: ?Transliterator
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: transliterator_create_inverse
+  signature:
+    params:
+    - name: transliterator
+      type: Transliterator
+    returnType: ?Transliterator
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: transliterator_get_error_code
+  signature:
+    params:
+    - name: transliterator
+      type: Transliterator
+    returnType: int
+- subject:
+    function: transliterator_get_error_message
+  signature:
+    params:
+    - name: transliterator
+      type: Transliterator
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: transliterator_list_ids
+  signature:
+    returnType: array|false
+- subject:
+    function: transliterator_transliterate
+  signature:
+    params:
+    - name: transliterator
+      type: Transliterator|string
+    - name: string
+      type: string
+    - name: start
+      type: int
+      optional: true
+    - name: end
+      type: int
+      optional: true
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    method: Collator::__construct
+  signature:
+    params:
+    - name: locale
+      type: string
+    returnType: mixed
+- subject:
+    method: Collator::asort
+  signature:
+    params:
+    - name: array
+      type: array
+      byRef: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    method: Collator::compare
+  signature:
+    params:
+    - name: string1
+      type: string
+    - name: string2
+      type: string
+    returnType: int|false
+- subject:
+    method: Collator::create
+  signature:
+    params:
+    - name: locale
+      type: string
+    returnType: ?Collator
+- subject:
+    method: Collator::getAttribute
+  signature:
+    params:
+    - name: attribute
+      type: int
+    returnType: int|false
+- subject:
+    method: Collator::getErrorCode
+  signature:
+    returnType: int|false
+- subject:
+    method: Collator::getErrorMessage
+  signature:
+    returnType: string|false
+- subject:
+    method: Collator::getLocale
+  signature:
+    params:
+    - name: type
+      type: int
+    returnType: string|false
+- subject:
+    method: Collator::getSortKey
+  signature:
+    params:
+    - name: string
+      type: string
+    returnType: string|false
+- subject:
+    method: Collator::getStrength
+  signature:
+    returnType: int
+- subject:
+    method: Collator::setAttribute
+  signature:
+    params:
+    - name: attribute
+      type: int
+    - name: value
+      type: int
+    returnType: bool
+- subject:
+    method: Collator::setStrength
+  signature:
+    params:
+    - name: strength
+      type: int
+    returnType: 'true'
+- subject:
+    method: Collator::sort
+  signature:
+    params:
+    - name: array
+      type: array
+      byRef: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    method: Collator::sortWithSortKeys
+  signature:
+    params:
+    - name: array
+      type: array
+      byRef: true
+    returnType: bool
+- subject:
+    method: IntlCalendar::__construct
+  signature:
+    returnType: mixed
+- subject:
+    method: IntlCalendar::add
+  signature:
+    params:
+    - name: field
+      type: int
+    - name: value
+      type: int
+    returnType: bool
+- subject:
+    method: IntlCalendar::after
+  signature:
+    params:
+    - name: other
+      type: IntlCalendar
+    returnType: bool
+- subject:
+    method: IntlCalendar::before
+  signature:
+    params:
+    - name: other
+      type: IntlCalendar
+    returnType: bool
+- subject:
+    method: IntlCalendar::clear
+  signature:
+    params:
+    - name: field
+      type: ?int
+      optional: true
+    returnType: 'true'
+- subject:
+    method: IntlCalendar::createInstance
+  signature:
+    params:
+    - name: timezone
+      type: IntlTimeZone|DateTimeZone|string|null
+      optional: true
+    - name: locale
+      type: ?string
+      optional: true
+    returnType: ?IntlCalendar
+- subject:
+    method: IntlCalendar::equals
+  signature:
+    params:
+    - name: other
+      type: IntlCalendar
+    returnType: bool
+- subject:
+    method: IntlCalendar::fieldDifference
+  signature:
+    params:
+    - name: timestamp
+      type: float
+    - name: field
+      type: int
+    returnType: int|false
+- subject:
+    method: IntlCalendar::fromDateTime
+  signature:
+    params:
+    - name: datetime
+      type: DateTime|string
+    - name: locale
+      type: ?string
+      optional: true
+    returnType: ?IntlCalendar
+- subject:
+    method: IntlCalendar::get
+  signature:
+    params:
+    - name: field
+      type: int
+    returnType: int|false
+- subject:
+    method: IntlCalendar::getActualMaximum
+  signature:
+    params:
+    - name: field
+      type: int
+    returnType: int|false
+- subject:
+    method: IntlCalendar::getActualMinimum
+  signature:
+    params:
+    - name: field
+      type: int
+    returnType: int|false
+- subject:
+    method: IntlCalendar::getAvailableLocales
+  signature:
+    returnType: array
+- subject:
+    method: IntlCalendar::getDayOfWeekType
+  signature:
+    params:
+    - name: dayOfWeek
+      type: int
+    returnType: int|false
+- subject:
+    method: IntlCalendar::getErrorCode
+  signature:
+    returnType: int|false
+- subject:
+    method: IntlCalendar::getErrorMessage
+  signature:
+    returnType: string|false
+- subject:
+    method: IntlCalendar::getFirstDayOfWeek
+  signature:
+    returnType: int|false
+- subject:
+    method: IntlCalendar::getGreatestMinimum
+  signature:
+    params:
+    - name: field
+      type: int
+    returnType: int|false
+- subject:
+    method: IntlCalendar::getKeywordValuesForLocale
+  signature:
+    params:
+    - name: keyword
+      type: string
+    - name: locale
+      type: string
+    - name: onlyCommon
+      type: bool
+    returnType: IntlIterator|false
+- subject:
+    method: IntlCalendar::getLeastMaximum
+  signature:
+    params:
+    - name: field
+      type: int
+    returnType: int|false
+- subject:
+    method: IntlCalendar::getLocale
+  signature:
+    params:
+    - name: type
+      type: int
+    returnType: string|false
+- subject:
+    method: IntlCalendar::getMaximum
+  signature:
+    params:
+    - name: field
+      type: int
+    returnType: int|false
+- subject:
+    method: IntlCalendar::getMinimalDaysInFirstWeek
+  signature:
+    returnType: int|false
+- subject:
+    method: IntlCalendar::getMinimum
+  signature:
+    params:
+    - name: field
+      type: int
+    returnType: int|false
+- subject:
+    method: IntlCalendar::getNow
+  signature:
+    returnType: float
+- subject:
+    method: IntlCalendar::getRepeatedWallTimeOption
+  signature:
+    returnType: int
+- subject:
+    method: IntlCalendar::getSkippedWallTimeOption
+  signature:
+    returnType: int
+- subject:
+    method: IntlCalendar::getTime
+  signature:
+    returnType: float|false
+- subject:
+    method: IntlCalendar::getTimeZone
+  signature:
+    returnType: IntlTimeZone|false
+- subject:
+    method: IntlCalendar::getType
+  signature:
+    returnType: string
+- subject:
+    method: IntlCalendar::getWeekendTransition
+  signature:
+    params:
+    - name: dayOfWeek
+      type: int
+    returnType: int|false
+- subject:
+    method: IntlCalendar::inDaylightTime
+  signature:
+    returnType: bool
+- subject:
+    method: IntlCalendar::isEquivalentTo
+  signature:
+    params:
+    - name: other
+      type: IntlCalendar
+    returnType: bool
+- subject:
+    method: IntlCalendar::isLenient
+  signature:
+    returnType: bool
+- subject:
+    method: IntlCalendar::isSet
+  signature:
+    params:
+    - name: field
+      type: int
+    returnType: bool
+- subject:
+    method: IntlCalendar::isWeekend
+  signature:
+    params:
+    - name: timestamp
+      type: ?float
+      optional: true
+    returnType: bool
+- subject:
+    method: IntlCalendar::roll
+  signature:
+    params:
+    - name: field
+      type: int
+    - name: value
+      type: mixed
+    returnType: bool
+- subject:
+    method: IntlCalendar::set
+  signature:
+    params:
+    - name: year
+      type: int
+    - name: month
+      type: int
+    - name: dayOfMonth
+      type: int
+      optional: true
+    - name: hour
+      type: int
+      optional: true
+    - name: minute
+      type: int
+      optional: true
+    - name: second
+      type: int
+      optional: true
+    returnType: 'true'
+- subject:
+    method: IntlCalendar::setDate
+  signature:
+    params:
+    - name: year
+      type: int
+    - name: month
+      type: int
+    - name: dayOfMonth
+      type: int
+    returnType: void
+- subject:
+    method: IntlCalendar::setDateTime
+  signature:
+    params:
+    - name: year
+      type: int
+    - name: month
+      type: int
+    - name: dayOfMonth
+      type: int
+    - name: hour
+      type: int
+    - name: minute
+      type: int
+    - name: second
+      type: ?int
+      optional: true
+    returnType: void
+- subject:
+    method: IntlCalendar::setFirstDayOfWeek
+  signature:
+    params:
+    - name: dayOfWeek
+      type: int
+    returnType: 'true'
+- subject:
+    method: IntlCalendar::setLenient
+  signature:
+    params:
+    - name: lenient
+      type: bool
+    returnType: 'true'
+- subject:
+    method: IntlCalendar::setMinimalDaysInFirstWeek
+  signature:
+    params:
+    - name: days
+      type: int
+    returnType: 'true'
+- subject:
+    method: IntlCalendar::setRepeatedWallTimeOption
+  signature:
+    params:
+    - name: option
+      type: int
+    returnType: 'true'
+- subject:
+    method: IntlCalendar::setSkippedWallTimeOption
+  signature:
+    params:
+    - name: option
+      type: int
+    returnType: 'true'
+- subject:
+    method: IntlCalendar::setTime
+  signature:
+    params:
+    - name: timestamp
+      type: float
+    returnType: bool
+- subject:
+    method: IntlCalendar::setTimeZone
+  signature:
+    params:
+    - name: timezone
+      type: IntlTimeZone|DateTimeZone|string|null
+    returnType: bool
+- subject:
+    method: IntlCalendar::toDateTime
+  signature:
+    returnType: DateTime|false
+- subject:
+    method: IntlDateFormatter::__construct
+  signature:
+    params:
+    - name: locale
+      type: ?string
+    - name: dateType
+      type: int
+      optional: true
+    - name: timeType
+      type: int
+      optional: true
+    - name: timezone
+      type: IntlTimeZone|DateTimeZone|string|null
+      optional: true
+    - name: calendar
+      type: mixed
+      optional: true
+    - name: pattern
+      type: ?string
+      optional: true
+    returnType: mixed
+- subject:
+    method: IntlDateFormatter::create
+  signature:
+    params:
+    - name: locale
+      type: ?string
+    - name: dateType
+      type: int
+      optional: true
+    - name: timeType
+      type: int
+      optional: true
+    - name: timezone
+      type: IntlTimeZone|DateTimeZone|string|null
+      optional: true
+    - name: calendar
+      type: IntlCalendar|int|null
+      optional: true
+    - name: pattern
+      type: ?string
+      optional: true
+    returnType: ?IntlDateFormatter
+- subject:
+    method: IntlDateFormatter::format
+  signature:
+    params:
+    - name: datetime
+      type: mixed
+    returnType: string|false
+- subject:
+    method: IntlDateFormatter::formatObject
+  signature:
+    params:
+    - name: datetime
+      type: mixed
+    - name: format
+      type: mixed
+      optional: true
+    - name: locale
+      type: ?string
+      optional: true
+    returnType: string|false
+- subject:
+    method: IntlDateFormatter::getCalendar
+  signature:
+    returnType: int|false
+- subject:
+    method: IntlDateFormatter::getCalendarObject
+  signature:
+    returnType: IntlCalendar|false|null
+- subject:
+    method: IntlDateFormatter::getDateType
+  signature:
+    returnType: int|false
+- subject:
+    method: IntlDateFormatter::getErrorCode
+  signature:
+    returnType: int
+- subject:
+    method: IntlDateFormatter::getErrorMessage
+  signature:
+    returnType: string
+- subject:
+    method: IntlDateFormatter::getLocale
+  signature:
+    params:
+    - name: type
+      type: int
+      optional: true
+    returnType: string|false
+- subject:
+    method: IntlDateFormatter::getPattern
+  signature:
+    returnType: string|false
+- subject:
+    method: IntlDateFormatter::getTimeType
+  signature:
+    returnType: int|false
+- subject:
+    method: IntlDateFormatter::getTimeZone
+  signature:
+    returnType: IntlTimeZone|false
+- subject:
+    method: IntlDateFormatter::getTimeZoneId
+  signature:
+    returnType: string|false
+- subject:
+    method: IntlDateFormatter::isLenient
+  signature:
+    returnType: bool
+- subject:
+    method: IntlDateFormatter::localtime
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: offset
+      type: mixed
+      optional: true
+      byRef: true
+    returnType: array|false
+- subject:
+    method: IntlDateFormatter::parse
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: offset
+      type: mixed
+      optional: true
+      byRef: true
+    returnType: int|float|false
+- subject:
+    method: IntlDateFormatter::parseToCalendar
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: offset
+      type: mixed
+      optional: true
+      byRef: true
+    returnType: int|float|false
+- subject:
+    method: IntlDateFormatter::setCalendar
+  signature:
+    params:
+    - name: calendar
+      type: IntlCalendar|int|null
+    returnType: bool
+- subject:
+    method: IntlDateFormatter::setLenient
+  signature:
+    params:
+    - name: lenient
+      type: bool
+    returnType: void
+- subject:
+    method: IntlDateFormatter::setPattern
+  signature:
+    params:
+    - name: pattern
+      type: string
+    returnType: bool
+- subject:
+    method: IntlDateFormatter::setTimeZone
+  signature:
+    params:
+    - name: timezone
+      type: IntlTimeZone|DateTimeZone|string|null
+    returnType: bool
+- subject:
+    method: IntlTimeZone::__construct
+  signature:
+    returnType: mixed
+- subject:
+    method: IntlTimeZone::countEquivalentIDs
+  signature:
+    params:
+    - name: timezoneId
+      type: string
+    returnType: int|false
+- subject:
+    method: IntlTimeZone::createDefault
+  signature:
+    returnType: IntlTimeZone
+- subject:
+    method: IntlTimeZone::createEnumeration
+  signature:
+    params:
+    - name: countryOrRawOffset
+      type: string|int|null
+      optional: true
+    returnType: IntlIterator|false
+- subject:
+    method: IntlTimeZone::createTimeZone
+  signature:
+    params:
+    - name: timezoneId
+      type: string
+    returnType: ?IntlTimeZone
+- subject:
+    method: IntlTimeZone::createTimeZoneIDEnumeration
+  signature:
+    params:
+    - name: type
+      type: int
+    - name: region
+      type: ?string
+      optional: true
+    - name: rawOffset
+      type: ?int
+      optional: true
+    returnType: IntlIterator|false
+- subject:
+    method: IntlTimeZone::fromDateTimeZone
+  signature:
+    params:
+    - name: timezone
+      type: DateTimeZone
+    returnType: ?IntlTimeZone
+- subject:
+    method: IntlTimeZone::getCanonicalID
+  signature:
+    params:
+    - name: timezoneId
+      type: string
+    - name: isSystemId
+      type: mixed
+      optional: true
+      byRef: true
+    returnType: string|false
+- subject:
+    method: IntlTimeZone::getDisplayName
+  signature:
+    params:
+    - name: dst
+      type: bool
+      optional: true
+    - name: style
+      type: int
+      optional: true
+    - name: locale
+      type: ?string
+      optional: true
+    returnType: string|false
+- subject:
+    method: IntlTimeZone::getDSTSavings
+  signature:
+    returnType: int
+- subject:
+    method: IntlTimeZone::getEquivalentID
+  signature:
+    params:
+    - name: timezoneId
+      type: string
+    - name: offset
+      type: int
+    returnType: string|false
+- subject:
+    method: IntlTimeZone::getErrorCode
+  signature:
+    returnType: int|false
+- subject:
+    method: IntlTimeZone::getErrorMessage
+  signature:
+    returnType: string|false
+- subject:
+    method: IntlTimeZone::getGMT
+  signature:
+    returnType: IntlTimeZone
+- subject:
+    method: IntlTimeZone::getIanaID
+  signature:
+    params:
+    - name: timezoneId
+      type: string
+    returnType: string|false
+- subject:
+    method: IntlTimeZone::getID
+  signature:
+    returnType: string|false
+- subject:
+    method: IntlTimeZone::getIDForWindowsID
+  signature:
+    params:
+    - name: timezoneId
+      type: string
+    - name: region
+      type: ?string
+      optional: true
+    returnType: string|false
+- subject:
+    method: IntlTimeZone::getOffset
+  signature:
+    params:
+    - name: timestamp
+      type: float
+    - name: local
+      type: bool
+    - name: rawOffset
+      type: mixed
+      byRef: true
+    - name: dstOffset
+      type: mixed
+      byRef: true
+    returnType: bool
+- subject:
+    method: IntlTimeZone::getRawOffset
+  signature:
+    returnType: int
+- subject:
+    method: IntlTimeZone::getRegion
+  signature:
+    params:
+    - name: timezoneId
+      type: string
+    returnType: string|false
+- subject:
+    method: IntlTimeZone::getTZDataVersion
+  signature:
+    returnType: string|false
+- subject:
+    method: IntlTimeZone::getUnknown
+  signature:
+    returnType: IntlTimeZone
+- subject:
+    method: IntlTimeZone::getWindowsID
+  signature:
+    params:
+    - name: timezoneId
+      type: string
+    returnType: string|false
+- subject:
+    method: IntlTimeZone::hasSameRules
+  signature:
+    params:
+    - name: other
+      type: IntlTimeZone
+    returnType: bool
+- subject:
+    method: IntlTimeZone::toDateTimeZone
+  signature:
+    returnType: DateTimeZone|false
+- subject:
+    method: IntlTimeZone::useDaylightTime
+  signature:
+    returnType: bool
+- subject:
+    method: Locale::acceptFromHttp
+  signature:
+    params:
+    - name: header
+      type: string
+    returnType: string|false
+- subject:
+    method: Locale::addLikelySubtags
+  signature:
+    params:
+    - name: locale
+      type: string
+    returnType: string|false
+- subject:
+    method: Locale::canonicalize
+  signature:
+    params:
+    - name: locale
+      type: string
+    returnType: ?string
+- subject:
+    method: Locale::composeLocale
+  signature:
+    params:
+    - name: subtags
+      type: array
+    returnType: string|false
+- subject:
+    method: Locale::filterMatches
+  signature:
+    params:
+    - name: languageTag
+      type: string
+    - name: locale
+      type: string
+    - name: canonicalize
+      type: bool
+      optional: true
+    returnType: ?bool
+- subject:
+    method: Locale::getAllVariants
+  signature:
+    params:
+    - name: locale
+      type: string
+    returnType: ?array
+- subject:
+    method: Locale::getDefault
+  signature:
+    returnType: string
+- subject:
+    method: Locale::getDisplayLanguage
+  signature:
+    params:
+    - name: locale
+      type: string
+    - name: displayLocale
+      type: ?string
+      optional: true
+    returnType: string|false
+- subject:
+    method: Locale::getDisplayName
+  signature:
+    params:
+    - name: locale
+      type: string
+    - name: displayLocale
+      type: ?string
+      optional: true
+    returnType: string|false
+- subject:
+    method: Locale::getDisplayRegion
+  signature:
+    params:
+    - name: locale
+      type: string
+    - name: displayLocale
+      type: ?string
+      optional: true
+    returnType: string|false
+- subject:
+    method: Locale::getDisplayScript
+  signature:
+    params:
+    - name: locale
+      type: string
+    - name: displayLocale
+      type: ?string
+      optional: true
+    returnType: string|false
+- subject:
+    method: Locale::getDisplayVariant
+  signature:
+    params:
+    - name: locale
+      type: string
+    - name: displayLocale
+      type: ?string
+      optional: true
+    returnType: string|false
+- subject:
+    method: Locale::getKeywords
+  signature:
+    params:
+    - name: locale
+      type: string
+    returnType: array|false|null
+- subject:
+    method: Locale::getPrimaryLanguage
+  signature:
+    params:
+    - name: locale
+      type: string
+    returnType: ?string
+- subject:
+    method: Locale::getRegion
+  signature:
+    params:
+    - name: locale
+      type: string
+    returnType: ?string
+- subject:
+    method: Locale::getScript
+  signature:
+    params:
+    - name: locale
+      type: string
+    returnType: ?string
+- subject:
+    method: Locale::isRightToLeft
+  signature:
+    params:
+    - name: locale
+      type: string
+    returnType: bool
+- subject:
+    method: Locale::lookup
+  signature:
+    params:
+    - name: languageTag
+      type: array
+    - name: locale
+      type: string
+    - name: canonicalize
+      type: bool
+      optional: true
+    - name: defaultLocale
+      type: ?string
+      optional: true
+    returnType: ?string
+- subject:
+    method: Locale::minimizeSubtags
+  signature:
+    params:
+    - name: locale
+      type: string
+    returnType: string|false
+- subject:
+    method: Locale::parseLocale
+  signature:
+    params:
+    - name: locale
+      type: string
+    returnType: ?array
+- subject:
+    method: Locale::setDefault
+  signature:
+    params:
+    - name: locale
+      type: string
+    returnType: 'true'
+- subject:
+    method: MessageFormatter::__construct
+  signature:
+    params:
+    - name: locale
+      type: string
+    - name: pattern
+      type: string
+    returnType: mixed
+- subject:
+    method: MessageFormatter::create
+  signature:
+    params:
+    - name: locale
+      type: string
+    - name: pattern
+      type: string
+    returnType: ?MessageFormatter
+- subject:
+    method: MessageFormatter::format
+  signature:
+    params:
+    - name: values
+      type: array
+    returnType: string|false
+- subject:
+    method: MessageFormatter::formatMessage
+  signature:
+    params:
+    - name: locale
+      type: string
+    - name: pattern
+      type: string
+    - name: values
+      type: array
+    returnType: string|false
+- subject:
+    method: MessageFormatter::getErrorCode
+  signature:
+    returnType: int
+- subject:
+    method: MessageFormatter::getErrorMessage
+  signature:
+    returnType: string
+- subject:
+    method: MessageFormatter::getLocale
+  signature:
+    returnType: string
+- subject:
+    method: MessageFormatter::getPattern
+  signature:
+    returnType: string|false
+- subject:
+    method: MessageFormatter::parse
+  signature:
+    params:
+    - name: string
+      type: string
+    returnType: array|false
+- subject:
+    method: MessageFormatter::parseMessage
+  signature:
+    params:
+    - name: locale
+      type: string
+    - name: pattern
+      type: string
+    - name: message
+      type: string
+    returnType: array|false
+- subject:
+    method: MessageFormatter::setPattern
+  signature:
+    params:
+    - name: pattern
+      type: string
+    returnType: bool
+- subject:
+    method: Normalizer::getRawDecomposition
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: form
+      type: int
+      optional: true
+    returnType: ?string
+- subject:
+    method: Normalizer::isNormalized
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: form
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    method: Normalizer::normalize
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: form
+      type: int
+      optional: true
+    returnType: string|false
+- subject:
+    method: NumberFormatter::__construct
+  signature:
+    params:
+    - name: locale
+      type: string
+    - name: style
+      type: int
+    - name: pattern
+      type: ?string
+      optional: true
+    returnType: mixed
+- subject:
+    method: NumberFormatter::create
+  signature:
+    params:
+    - name: locale
+      type: string
+    - name: style
+      type: int
+    - name: pattern
+      type: ?string
+      optional: true
+    returnType: ?NumberFormatter
+- subject:
+    method: NumberFormatter::format
+  signature:
+    params:
+    - name: num
+      type: int|float
+    - name: type
+      type: int
+      optional: true
+    returnType: string|false
+- subject:
+    method: NumberFormatter::formatCurrency
+  signature:
+    params:
+    - name: amount
+      type: float
+    - name: currency
+      type: string
+    returnType: string|false
+- subject:
+    method: NumberFormatter::getAttribute
+  signature:
+    params:
+    - name: attribute
+      type: int
+    returnType: int|float|false
+- subject:
+    method: NumberFormatter::getErrorCode
+  signature:
+    returnType: int
+- subject:
+    method: NumberFormatter::getErrorMessage
+  signature:
+    returnType: string
+- subject:
+    method: NumberFormatter::getLocale
+  signature:
+    params:
+    - name: type
+      type: int
+      optional: true
+    returnType: string|false
+- subject:
+    method: NumberFormatter::getPattern
+  signature:
+    returnType: string|false
+- subject:
+    method: NumberFormatter::getSymbol
+  signature:
+    params:
+    - name: symbol
+      type: int
+    returnType: string|false
+- subject:
+    method: NumberFormatter::getTextAttribute
+  signature:
+    params:
+    - name: attribute
+      type: int
+    returnType: string|false
+- subject:
+    method: NumberFormatter::parse
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: type
+      type: int
+      optional: true
+    - name: offset
+      type: mixed
+      optional: true
+      byRef: true
+    returnType: int|float|false
+- subject:
+    method: NumberFormatter::parseCurrency
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: currency
+      type: mixed
+      byRef: true
+    - name: offset
+      type: mixed
+      optional: true
+      byRef: true
+    returnType: float|false
+- subject:
+    method: NumberFormatter::setAttribute
+  signature:
+    params:
+    - name: attribute
+      type: int
+    - name: value
+      type: int|float
+    returnType: bool
+- subject:
+    method: NumberFormatter::setPattern
+  signature:
+    params:
+    - name: pattern
+      type: string
+    returnType: bool
+- subject:
+    method: NumberFormatter::setSymbol
+  signature:
+    params:
+    - name: symbol
+      type: int
+    - name: value
+      type: string
+    returnType: bool
+- subject:
+    method: NumberFormatter::setTextAttribute
+  signature:
+    params:
+    - name: attribute
+      type: int
+    - name: value
+      type: string
+    returnType: bool
+- subject:
+    method: ResourceBundle::__construct
+  signature:
+    params:
+    - name: locale
+      type: ?string
+    - name: bundle
+      type: ?string
+    - name: fallback
+      type: bool
+      optional: true
+    returnType: mixed
+- subject:
+    method: ResourceBundle::count
+  signature:
+    returnType: int
+- subject:
+    method: ResourceBundle::create
+  signature:
+    params:
+    - name: locale
+      type: ?string
+    - name: bundle
+      type: ?string
+    - name: fallback
+      type: bool
+      optional: true
+    returnType: ?ResourceBundle
+- subject:
+    method: ResourceBundle::get
+  signature:
+    params:
+    - name: index
+      type: string|int
+    - name: fallback
+      type: bool
+      optional: true
+    returnType: ResourceBundle|array|string|int|null
+- subject:
+    method: ResourceBundle::getErrorCode
+  signature:
+    returnType: int
+- subject:
+    method: ResourceBundle::getErrorMessage
+  signature:
+    returnType: string
+- subject:
+    method: ResourceBundle::getIterator
+  signature:
+    returnType: Iterator
+- subject:
+    method: ResourceBundle::getLocales
+  signature:
+    params:
+    - name: bundle
+      type: string
+    returnType: array|false
+- subject:
+    method: Spoofchecker::__construct
+  signature:
+    returnType: mixed
+- subject:
+    method: Spoofchecker::areConfusable
+  signature:
+    params:
+    - name: string1
+      type: string
+    - name: string2
+      type: string
+    - name: errorCode
+      type: mixed
+      optional: true
+      byRef: true
+    returnType: bool
+- subject:
+    method: Spoofchecker::isSuspicious
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: errorCode
+      type: mixed
+      optional: true
+      byRef: true
+    returnType: bool
+- subject:
+    method: Spoofchecker::setAllowedChars
+  signature:
+    params:
+    - name: pattern
+      type: string
+    - name: patternOptions
+      type: int
+      optional: true
+    returnType: void
+- subject:
+    method: Spoofchecker::setAllowedLocales
+  signature:
+    params:
+    - name: locales
+      type: string
+    returnType: void
+- subject:
+    method: Spoofchecker::setChecks
+  signature:
+    params:
+    - name: checks
+      type: int
+    returnType: void
+- subject:
+    method: Spoofchecker::setRestrictionLevel
+  signature:
+    params:
+    - name: level
+      type: int
+    returnType: void
+- subject:
+    method: Transliterator::__construct
+  signature:
+    returnType: mixed
+- subject:
+    method: Transliterator::create
+  signature:
+    params:
+    - name: id
+      type: string
+    - name: direction
+      type: int
+      optional: true
+    returnType: ?Transliterator
+- subject:
+    method: Transliterator::createFromRules
+  signature:
+    params:
+    - name: rules
+      type: string
+    - name: direction
+      type: int
+      optional: true
+    returnType: ?Transliterator
+- subject:
+    method: Transliterator::createInverse
+  signature:
+    returnType: ?Transliterator
+- subject:
+    method: Transliterator::getErrorCode
+  signature:
+    returnType: int
+- subject:
+    method: Transliterator::getErrorMessage
+  signature:
+    returnType: string
+- subject:
+    method: Transliterator::listIDs
+  signature:
+    returnType: array|false
+- subject:
+    method: Transliterator::transliterate
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: start
+      type: int
+      optional: true
+    - name: end
+      type: int
+      optional: true
+    returnType: string|false

@@ -1,0 +1,2731 @@
+# Generated from php-src stubs by tools/extract_hierarchy.py.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    class: dom\adjacentposition
+  signature:
+    classifier: enum
+    interfaces: [unitenum, backedenum]
+- subject:
+    class: dom\attr
+  signature:
+    classifier: class
+    parent: dom\node
+- subject:
+    class: dom\cdatasection
+  signature:
+    classifier: class
+    parent: dom\text
+- subject:
+    class: dom\characterdata
+  signature:
+    classifier: class
+    parent: dom\node
+    interfaces: [dom\childnode]
+- subject:
+    class: dom\childnode
+  signature:
+    classifier: interface
+- subject:
+    class: dom\comment
+  signature:
+    classifier: class
+    parent: dom\characterdata
+- subject:
+    class: dom\document
+  signature:
+    classifier: class
+    parent: dom\node
+    interfaces: [dom\parentnode]
+- subject:
+    class: dom\documentfragment
+  signature:
+    classifier: class
+    parent: dom\node
+    interfaces: [dom\parentnode]
+- subject:
+    class: dom\documenttype
+  signature:
+    classifier: class
+    parent: dom\node
+    interfaces: [dom\childnode]
+- subject:
+    class: dom\dtdnamednodemap
+  signature:
+    classifier: class
+    interfaces: [iteratoraggregate, countable]
+- subject:
+    class: dom\element
+  signature:
+    classifier: class
+    parent: dom\node
+    interfaces: [dom\parentnode, dom\childnode]
+- subject:
+    class: dom\entity
+  signature:
+    classifier: class
+    parent: dom\node
+- subject:
+    class: dom\entityreference
+  signature:
+    classifier: class
+    parent: dom\node
+- subject:
+    class: dom\htmlcollection
+  signature:
+    classifier: class
+    interfaces: [iteratoraggregate, countable]
+- subject:
+    class: dom\htmldocument
+  signature:
+    classifier: class
+    parent: dom\document
+- subject:
+    class: dom\htmlelement
+  signature:
+    classifier: class
+    parent: dom\element
+- subject:
+    class: dom\implementation
+  signature:
+    classifier: class
+- subject:
+    class: dom\namednodemap
+  signature:
+    classifier: class
+    interfaces: [iteratoraggregate, countable]
+- subject:
+    class: dom\namespaceinfo
+  signature:
+    classifier: class
+- subject:
+    class: dom\node
+  signature:
+    classifier: class
+- subject:
+    class: dom\nodelist
+  signature:
+    classifier: class
+    interfaces: [iteratoraggregate, countable]
+- subject:
+    class: dom\notation
+  signature:
+    classifier: class
+    parent: dom\node
+- subject:
+    class: dom\parentnode
+  signature:
+    classifier: interface
+- subject:
+    class: dom\processinginstruction
+  signature:
+    classifier: class
+    parent: dom\characterdata
+- subject:
+    class: dom\text
+  signature:
+    classifier: class
+    parent: dom\characterdata
+- subject:
+    class: dom\tokenlist
+  signature:
+    classifier: class
+    interfaces: [iteratoraggregate, countable]
+- subject:
+    class: dom\xmldocument
+  signature:
+    classifier: class
+    parent: dom\document
+- subject:
+    class: dom\xpath
+  signature:
+    classifier: class
+- subject:
+    class: domcdatasection
+  signature:
+    classifier: class
+    parent: domtext
+- subject:
+    class: domcharacterdata
+  signature:
+    classifier: class
+    parent: domnode
+    interfaces: [domchildnode]
+- subject:
+    class: domchildnode
+  signature:
+    classifier: interface
+- subject:
+    class: domdocumentfragment
+  signature:
+    classifier: class
+    parent: domnode
+    interfaces: [domparentnode]
+- subject:
+    class: domdocumenttype
+  signature:
+    classifier: class
+    parent: domnode
+- subject:
+    class: domentity
+  signature:
+    classifier: class
+    parent: domnode
+- subject:
+    class: domentityreference
+  signature:
+    classifier: class
+    parent: domnode
+- subject:
+    class: domexception
+  signature:
+    classifier: class
+    parent: exception
+- subject:
+    class: domimplementation
+  signature:
+    classifier: class
+- subject:
+    class: domnamednodemap
+  signature:
+    classifier: class
+    interfaces: [iteratoraggregate, countable]
+- subject:
+    class: domnamespacenode
+  signature:
+    classifier: class
+- subject:
+    class: domnotation
+  signature:
+    classifier: class
+    parent: domnode
+- subject:
+    class: domparentnode
+  signature:
+    classifier: interface
+- subject:
+    class: domprocessinginstruction
+  signature:
+    classifier: class
+    parent: domnode
+- subject:
+    class: domxpath
+  signature:
+    classifier: class
+- subject:
+    function: Dom\import_simplexml
+  signature:
+    params:
+    - name: node
+      type: object
+    returnType: Dom\Attr|Dom\Element
+- subject:
+    method: Dom\Attr::isId
+  signature:
+    returnType: bool
+- subject:
+    method: Dom\Attr::rename
+  signature:
+    params:
+    - name: namespaceURI
+      type: ?string
+    - name: qualifiedName
+      type: string
+    returnType: void
+- subject:
+    method: Dom\CharacterData::after
+  signature:
+    params:
+    - name: nodes
+      type: Dom\Node|string
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: Dom\CharacterData::appendData
+  signature:
+    params:
+    - name: data
+      type: string
+    returnType: void
+- subject:
+    method: Dom\CharacterData::before
+  signature:
+    params:
+    - name: nodes
+      type: Dom\Node|string
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: Dom\CharacterData::deleteData
+  signature:
+    params:
+    - name: offset
+      type: int
+    - name: count
+      type: int
+    returnType: void
+- subject:
+    method: Dom\CharacterData::insertData
+  signature:
+    params:
+    - name: offset
+      type: int
+    - name: data
+      type: string
+    returnType: void
+- subject:
+    method: Dom\CharacterData::remove
+  signature:
+    returnType: void
+- subject:
+    method: Dom\CharacterData::replaceData
+  signature:
+    params:
+    - name: offset
+      type: int
+    - name: count
+      type: int
+    - name: data
+      type: string
+    returnType: void
+- subject:
+    method: Dom\CharacterData::replaceWith
+  signature:
+    params:
+    - name: nodes
+      type: Dom\Node|string
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: Dom\CharacterData::substringData
+  signature:
+    params:
+    - name: offset
+      type: int
+    - name: count
+      type: int
+    returnType: string
+- subject:
+    method: Dom\ChildNode::after
+  signature:
+    params:
+    - name: nodes
+      type: Dom\Node|string
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: Dom\ChildNode::before
+  signature:
+    params:
+    - name: nodes
+      type: Dom\Node|string
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: Dom\ChildNode::remove
+  signature:
+    returnType: void
+- subject:
+    method: Dom\ChildNode::replaceWith
+  signature:
+    params:
+    - name: nodes
+      type: Dom\Node|string
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: Dom\Document::adoptNode
+  signature:
+    params:
+    - name: node
+      type: Dom\Node
+    returnType: Dom\Node
+- subject:
+    method: Dom\Document::append
+  signature:
+    params:
+    - name: nodes
+      type: Dom\Node|string
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: Dom\Document::createAttribute
+  signature:
+    params:
+    - name: localName
+      type: string
+    returnType: Dom\Attr
+- subject:
+    method: Dom\Document::createAttributeNS
+  signature:
+    params:
+    - name: namespace
+      type: ?string
+    - name: qualifiedName
+      type: string
+    returnType: Dom\Attr
+- subject:
+    method: Dom\Document::createCDATASection
+  signature:
+    params:
+    - name: data
+      type: string
+    returnType: Dom\CDATASection
+- subject:
+    method: Dom\Document::createComment
+  signature:
+    params:
+    - name: data
+      type: string
+    returnType: Dom\Comment
+- subject:
+    method: Dom\Document::createDocumentFragment
+  signature:
+    returnType: Dom\DocumentFragment
+- subject:
+    method: Dom\Document::createElement
+  signature:
+    params:
+    - name: localName
+      type: string
+    returnType: Dom\Element
+- subject:
+    method: Dom\Document::createElementNS
+  signature:
+    params:
+    - name: namespace
+      type: ?string
+    - name: qualifiedName
+      type: string
+    returnType: Dom\Element
+- subject:
+    method: Dom\Document::createProcessingInstruction
+  signature:
+    params:
+    - name: target
+      type: string
+    - name: data
+      type: string
+    returnType: Dom\ProcessingInstruction
+- subject:
+    method: Dom\Document::createTextNode
+  signature:
+    params:
+    - name: data
+      type: string
+    returnType: Dom\Text
+- subject:
+    method: Dom\Document::getElementById
+  signature:
+    params:
+    - name: elementId
+      type: string
+    returnType: ?Dom\Element
+- subject:
+    method: Dom\Document::getElementsByClassName
+  signature:
+    params:
+    - name: classNames
+      type: string
+    returnType: Dom\HTMLCollection
+- subject:
+    method: Dom\Document::getElementsByTagName
+  signature:
+    params:
+    - name: qualifiedName
+      type: string
+    returnType: Dom\HTMLCollection
+- subject:
+    method: Dom\Document::getElementsByTagNameNS
+  signature:
+    params:
+    - name: namespace
+      type: ?string
+    - name: localName
+      type: string
+    returnType: Dom\HTMLCollection
+- subject:
+    method: Dom\Document::importLegacyNode
+  signature:
+    params:
+    - name: node
+      type: DOMNode
+    - name: deep
+      type: bool
+      optional: true
+    returnType: Dom\Node
+- subject:
+    method: Dom\Document::importNode
+  signature:
+    params:
+    - name: node
+      type: ?Dom\Node
+    - name: deep
+      type: bool
+      optional: true
+    returnType: Dom\Node
+- subject:
+    method: Dom\Document::prepend
+  signature:
+    params:
+    - name: nodes
+      type: Dom\Node|string
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: Dom\Document::querySelector
+  signature:
+    params:
+    - name: selectors
+      type: string
+    returnType: ?Dom\Element
+- subject:
+    method: Dom\Document::querySelectorAll
+  signature:
+    params:
+    - name: selectors
+      type: string
+    returnType: Dom\NodeList
+- subject:
+    method: Dom\Document::registerNodeClass
+  signature:
+    params:
+    - name: baseClass
+      type: string
+    - name: extendedClass
+      type: ?string
+    returnType: void
+- subject:
+    method: Dom\Document::relaxNgValidate
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: bool
+- subject:
+    method: Dom\Document::relaxNgValidateSource
+  signature:
+    params:
+    - name: source
+      type: string
+    returnType: bool
+- subject:
+    method: Dom\Document::replaceChildren
+  signature:
+    params:
+    - name: nodes
+      type: Dom\Node|string
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: Dom\Document::schemaValidate
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    method: Dom\Document::schemaValidateSource
+  signature:
+    params:
+    - name: source
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    method: Dom\DocumentFragment::append
+  signature:
+    params:
+    - name: nodes
+      type: Dom\Node|string
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: Dom\DocumentFragment::appendXml
+  signature:
+    params:
+    - name: data
+      type: string
+    returnType: bool
+- subject:
+    method: Dom\DocumentFragment::prepend
+  signature:
+    params:
+    - name: nodes
+      type: Dom\Node|string
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: Dom\DocumentFragment::querySelector
+  signature:
+    params:
+    - name: selectors
+      type: string
+    returnType: ?Dom\Element
+- subject:
+    method: Dom\DocumentFragment::querySelectorAll
+  signature:
+    params:
+    - name: selectors
+      type: string
+    returnType: Dom\NodeList
+- subject:
+    method: Dom\DocumentFragment::replaceChildren
+  signature:
+    params:
+    - name: nodes
+      type: Dom\Node|string
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: Dom\DocumentType::after
+  signature:
+    params:
+    - name: nodes
+      type: Dom\Node|string
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: Dom\DocumentType::before
+  signature:
+    params:
+    - name: nodes
+      type: Dom\Node|string
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: Dom\DocumentType::remove
+  signature:
+    returnType: void
+- subject:
+    method: Dom\DocumentType::replaceWith
+  signature:
+    params:
+    - name: nodes
+      type: Dom\Node|string
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: Dom\DtdNamedNodeMap::count
+  signature:
+    returnType: int
+- subject:
+    method: Dom\DtdNamedNodeMap::getIterator
+  signature:
+    returnType: Iterator
+- subject:
+    method: Dom\DtdNamedNodeMap::getNamedItem
+  signature:
+    params:
+    - name: qualifiedName
+      type: string
+    returnType: Dom\Entity|Dom\Notation|null
+- subject:
+    method: Dom\DtdNamedNodeMap::getNamedItemNS
+  signature:
+    params:
+    - name: namespace
+      type: ?string
+    - name: localName
+      type: string
+    returnType: Dom\Entity|Dom\Notation|null
+- subject:
+    method: Dom\DtdNamedNodeMap::item
+  signature:
+    params:
+    - name: index
+      type: int
+    returnType: Dom\Entity|Dom\Notation|null
+- subject:
+    method: Dom\Element::after
+  signature:
+    params:
+    - name: nodes
+      type: Dom\Node|string
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: Dom\Element::append
+  signature:
+    params:
+    - name: nodes
+      type: Dom\Node|string
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: Dom\Element::before
+  signature:
+    params:
+    - name: nodes
+      type: Dom\Node|string
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: Dom\Element::closest
+  signature:
+    params:
+    - name: selectors
+      type: string
+    returnType: ?Dom\Element
+- subject:
+    method: Dom\Element::getAttribute
+  signature:
+    params:
+    - name: qualifiedName
+      type: string
+    returnType: ?string
+- subject:
+    method: Dom\Element::getAttributeNames
+  signature:
+    returnType: array
+- subject:
+    method: Dom\Element::getAttributeNode
+  signature:
+    params:
+    - name: qualifiedName
+      type: string
+    returnType: ?Dom\Attr
+- subject:
+    method: Dom\Element::getAttributeNodeNS
+  signature:
+    params:
+    - name: namespace
+      type: ?string
+    - name: localName
+      type: string
+    returnType: ?Dom\Attr
+- subject:
+    method: Dom\Element::getAttributeNS
+  signature:
+    params:
+    - name: namespace
+      type: ?string
+    - name: localName
+      type: string
+    returnType: ?string
+- subject:
+    method: Dom\Element::getDescendantNamespaces
+  signature:
+    returnType: array
+- subject:
+    method: Dom\Element::getElementsByClassName
+  signature:
+    params:
+    - name: classNames
+      type: string
+    returnType: Dom\HTMLCollection
+- subject:
+    method: Dom\Element::getElementsByTagName
+  signature:
+    params:
+    - name: qualifiedName
+      type: string
+    returnType: Dom\HTMLCollection
+- subject:
+    method: Dom\Element::getElementsByTagNameNS
+  signature:
+    params:
+    - name: namespace
+      type: ?string
+    - name: localName
+      type: string
+    returnType: Dom\HTMLCollection
+- subject:
+    method: Dom\Element::getInScopeNamespaces
+  signature:
+    returnType: array
+- subject:
+    method: Dom\Element::hasAttribute
+  signature:
+    params:
+    - name: qualifiedName
+      type: string
+    returnType: bool
+- subject:
+    method: Dom\Element::hasAttributeNS
+  signature:
+    params:
+    - name: namespace
+      type: ?string
+    - name: localName
+      type: string
+    returnType: bool
+- subject:
+    method: Dom\Element::hasAttributes
+  signature:
+    returnType: bool
+- subject:
+    method: Dom\Element::insertAdjacentElement
+  signature:
+    params:
+    - name: where
+      type: Dom\AdjacentPosition
+    - name: element
+      type: Dom\Element
+    returnType: ?Dom\Element
+- subject:
+    method: Dom\Element::insertAdjacentHTML
+  signature:
+    params:
+    - name: where
+      type: Dom\AdjacentPosition
+    - name: string
+      type: string
+    returnType: void
+- subject:
+    method: Dom\Element::insertAdjacentText
+  signature:
+    params:
+    - name: where
+      type: Dom\AdjacentPosition
+    - name: data
+      type: string
+    returnType: void
+- subject:
+    method: Dom\Element::matches
+  signature:
+    params:
+    - name: selectors
+      type: string
+    returnType: bool
+- subject:
+    method: Dom\Element::prepend
+  signature:
+    params:
+    - name: nodes
+      type: Dom\Node|string
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: Dom\Element::querySelector
+  signature:
+    params:
+    - name: selectors
+      type: string
+    returnType: ?Dom\Element
+- subject:
+    method: Dom\Element::querySelectorAll
+  signature:
+    params:
+    - name: selectors
+      type: string
+    returnType: Dom\NodeList
+- subject:
+    method: Dom\Element::remove
+  signature:
+    returnType: void
+- subject:
+    method: Dom\Element::removeAttribute
+  signature:
+    params:
+    - name: qualifiedName
+      type: string
+    returnType: void
+- subject:
+    method: Dom\Element::removeAttributeNode
+  signature:
+    params:
+    - name: attr
+      type: Dom\Attr
+    returnType: Dom\Attr
+- subject:
+    method: Dom\Element::removeAttributeNS
+  signature:
+    params:
+    - name: namespace
+      type: ?string
+    - name: localName
+      type: string
+    returnType: void
+- subject:
+    method: Dom\Element::rename
+  signature:
+    params:
+    - name: namespaceURI
+      type: ?string
+    - name: qualifiedName
+      type: string
+    returnType: void
+- subject:
+    method: Dom\Element::replaceChildren
+  signature:
+    params:
+    - name: nodes
+      type: Dom\Node|string
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: Dom\Element::replaceWith
+  signature:
+    params:
+    - name: nodes
+      type: Dom\Node|string
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: Dom\Element::setAttribute
+  signature:
+    params:
+    - name: qualifiedName
+      type: string
+    - name: value
+      type: string
+    returnType: void
+- subject:
+    method: Dom\Element::setAttributeNode
+  signature:
+    params:
+    - name: attr
+      type: Dom\Attr
+    returnType: ?Dom\Attr
+- subject:
+    method: Dom\Element::setAttributeNodeNS
+  signature:
+    params:
+    - name: attr
+      type: Dom\Attr
+    returnType: ?Dom\Attr
+- subject:
+    method: Dom\Element::setAttributeNS
+  signature:
+    params:
+    - name: namespace
+      type: ?string
+    - name: qualifiedName
+      type: string
+    - name: value
+      type: string
+    returnType: void
+- subject:
+    method: Dom\Element::setIdAttribute
+  signature:
+    params:
+    - name: qualifiedName
+      type: string
+    - name: isId
+      type: bool
+    returnType: void
+- subject:
+    method: Dom\Element::setIdAttributeNode
+  signature:
+    params:
+    - name: attr
+      type: Dom\Attr
+    - name: isId
+      type: bool
+    returnType: void
+- subject:
+    method: Dom\Element::setIdAttributeNS
+  signature:
+    params:
+    - name: namespace
+      type: ?string
+    - name: qualifiedName
+      type: string
+    - name: isId
+      type: bool
+    returnType: void
+- subject:
+    method: Dom\Element::toggleAttribute
+  signature:
+    params:
+    - name: qualifiedName
+      type: string
+    - name: force
+      type: ?bool
+      optional: true
+    returnType: bool
+- subject:
+    method: Dom\HTMLCollection::count
+  signature:
+    returnType: int
+- subject:
+    method: Dom\HTMLCollection::getIterator
+  signature:
+    returnType: Iterator
+- subject:
+    method: Dom\HTMLCollection::item
+  signature:
+    params:
+    - name: index
+      type: int
+    returnType: ?Dom\Element
+- subject:
+    method: Dom\HTMLCollection::namedItem
+  signature:
+    params:
+    - name: key
+      type: string
+    returnType: ?Dom\Element
+- subject:
+    method: Dom\HTMLDocument::createEmpty
+  signature:
+    params:
+    - name: encoding
+      type: string
+      optional: true
+    returnType: Dom\HTMLDocument
+- subject:
+    method: Dom\HTMLDocument::createFromFile
+  signature:
+    params:
+    - name: path
+      type: string
+    - name: options
+      type: int
+      optional: true
+    - name: overrideEncoding
+      type: ?string
+      optional: true
+    returnType: Dom\HTMLDocument
+- subject:
+    method: Dom\HTMLDocument::createFromString
+  signature:
+    params:
+    - name: source
+      type: string
+    - name: options
+      type: int
+      optional: true
+    - name: overrideEncoding
+      type: ?string
+      optional: true
+    returnType: Dom\HTMLDocument
+- subject:
+    method: Dom\HTMLDocument::debugGetTemplateCount
+  signature:
+    returnType: int
+- subject:
+    method: Dom\HTMLDocument::saveHtml
+  signature:
+    params:
+    - name: node
+      type: ?Dom\Node
+      optional: true
+    returnType: string
+- subject:
+    method: Dom\HTMLDocument::saveHtmlFile
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: int|false
+- subject:
+    method: Dom\HTMLDocument::saveXml
+  signature:
+    params:
+    - name: node
+      type: ?Dom\Node
+      optional: true
+    - name: options
+      type: int
+      optional: true
+    returnType: string|false
+- subject:
+    method: Dom\HTMLDocument::saveXmlFile
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: options
+      type: int
+      optional: true
+    returnType: int|false
+- subject:
+    method: Dom\Implementation::createDocument
+  signature:
+    params:
+    - name: namespace
+      type: ?string
+    - name: qualifiedName
+      type: string
+    - name: doctype
+      type: ?Dom\DocumentType
+      optional: true
+    returnType: Dom\XMLDocument
+- subject:
+    method: Dom\Implementation::createDocumentType
+  signature:
+    params:
+    - name: qualifiedName
+      type: string
+    - name: publicId
+      type: string
+    - name: systemId
+      type: string
+    returnType: Dom\DocumentType
+- subject:
+    method: Dom\Implementation::createHTMLDocument
+  signature:
+    params:
+    - name: title
+      type: ?string
+      optional: true
+    returnType: Dom\HTMLDocument
+- subject:
+    method: Dom\NamedNodeMap::count
+  signature:
+    returnType: int
+- subject:
+    method: Dom\NamedNodeMap::getIterator
+  signature:
+    returnType: Iterator
+- subject:
+    method: Dom\NamedNodeMap::getNamedItem
+  signature:
+    params:
+    - name: qualifiedName
+      type: string
+    returnType: ?Dom\Attr
+- subject:
+    method: Dom\NamedNodeMap::getNamedItemNS
+  signature:
+    params:
+    - name: namespace
+      type: ?string
+    - name: localName
+      type: string
+    returnType: ?Dom\Attr
+- subject:
+    method: Dom\NamedNodeMap::item
+  signature:
+    params:
+    - name: index
+      type: int
+    returnType: ?Dom\Attr
+- subject:
+    method: Dom\NamespaceInfo::__construct
+  signature:
+    returnType: mixed
+- subject:
+    method: Dom\Node::__construct
+  signature:
+    returnType: mixed
+- subject:
+    method: Dom\Node::__sleep
+  signature:
+    returnType: array
+- subject:
+    method: Dom\Node::__wakeup
+  signature:
+    returnType: void
+- subject:
+    method: Dom\Node::appendChild
+  signature:
+    params:
+    - name: node
+      type: Dom\Node
+    returnType: Dom\Node
+- subject:
+    method: Dom\Node::C14N
+  signature:
+    params:
+    - name: exclusive
+      type: bool
+      optional: true
+    - name: withComments
+      type: bool
+      optional: true
+    - name: xpath
+      type: ?array
+      optional: true
+    - name: nsPrefixes
+      type: ?array
+      optional: true
+    returnType: string|false
+- subject:
+    method: Dom\Node::C14NFile
+  signature:
+    params:
+    - name: uri
+      type: string
+    - name: exclusive
+      type: bool
+      optional: true
+    - name: withComments
+      type: bool
+      optional: true
+    - name: xpath
+      type: ?array
+      optional: true
+    - name: nsPrefixes
+      type: ?array
+      optional: true
+    returnType: int|false
+- subject:
+    method: Dom\Node::cloneNode
+  signature:
+    params:
+    - name: deep
+      type: bool
+      optional: true
+    returnType: Dom\Node
+- subject:
+    method: Dom\Node::compareDocumentPosition
+  signature:
+    params:
+    - name: other
+      type: Dom\Node
+    returnType: int
+- subject:
+    method: Dom\Node::contains
+  signature:
+    params:
+    - name: other
+      type: ?Dom\Node
+    returnType: bool
+- subject:
+    method: Dom\Node::getLineNo
+  signature:
+    returnType: int
+- subject:
+    method: Dom\Node::getNodePath
+  signature:
+    returnType: string
+- subject:
+    method: Dom\Node::getRootNode
+  signature:
+    params:
+    - name: options
+      type: array
+      optional: true
+    returnType: Dom\Node
+- subject:
+    method: Dom\Node::hasChildNodes
+  signature:
+    returnType: bool
+- subject:
+    method: Dom\Node::insertBefore
+  signature:
+    params:
+    - name: node
+      type: Dom\Node
+    - name: child
+      type: ?Dom\Node
+    returnType: Dom\Node
+- subject:
+    method: Dom\Node::isDefaultNamespace
+  signature:
+    params:
+    - name: namespace
+      type: ?string
+    returnType: bool
+- subject:
+    method: Dom\Node::isEqualNode
+  signature:
+    params:
+    - name: otherNode
+      type: ?Dom\Node
+    returnType: bool
+- subject:
+    method: Dom\Node::isSameNode
+  signature:
+    params:
+    - name: otherNode
+      type: ?Dom\Node
+    returnType: bool
+- subject:
+    method: Dom\Node::lookupNamespaceURI
+  signature:
+    params:
+    - name: prefix
+      type: ?string
+    returnType: ?string
+- subject:
+    method: Dom\Node::lookupPrefix
+  signature:
+    params:
+    - name: namespace
+      type: ?string
+    returnType: ?string
+- subject:
+    method: Dom\Node::normalize
+  signature:
+    returnType: void
+- subject:
+    method: Dom\Node::removeChild
+  signature:
+    params:
+    - name: child
+      type: Dom\Node
+    returnType: Dom\Node
+- subject:
+    method: Dom\Node::replaceChild
+  signature:
+    params:
+    - name: node
+      type: Dom\Node
+    - name: child
+      type: Dom\Node
+    returnType: Dom\Node
+- subject:
+    method: Dom\NodeList::count
+  signature:
+    returnType: int
+- subject:
+    method: Dom\NodeList::getIterator
+  signature:
+    returnType: Iterator
+- subject:
+    method: Dom\NodeList::item
+  signature:
+    params:
+    - name: index
+      type: int
+    returnType: ?Dom\Node
+- subject:
+    method: Dom\ParentNode::append
+  signature:
+    params:
+    - name: nodes
+      type: Dom\Node|string
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: Dom\ParentNode::prepend
+  signature:
+    params:
+    - name: nodes
+      type: Dom\Node|string
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: Dom\ParentNode::querySelector
+  signature:
+    params:
+    - name: selectors
+      type: string
+    returnType: ?Dom\Element
+- subject:
+    method: Dom\ParentNode::querySelectorAll
+  signature:
+    params:
+    - name: selectors
+      type: string
+    returnType: Dom\NodeList
+- subject:
+    method: Dom\ParentNode::replaceChildren
+  signature:
+    params:
+    - name: nodes
+      type: Dom\Node|string
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: Dom\Text::splitText
+  signature:
+    params:
+    - name: offset
+      type: int
+    returnType: Dom\Text
+- subject:
+    method: Dom\TokenList::__construct
+  signature:
+    returnType: mixed
+- subject:
+    method: Dom\TokenList::add
+  signature:
+    params:
+    - name: tokens
+      type: string
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: Dom\TokenList::contains
+  signature:
+    params:
+    - name: token
+      type: string
+    returnType: bool
+- subject:
+    method: Dom\TokenList::count
+  signature:
+    returnType: int
+- subject:
+    method: Dom\TokenList::getIterator
+  signature:
+    returnType: Iterator
+- subject:
+    method: Dom\TokenList::item
+  signature:
+    params:
+    - name: index
+      type: int
+    returnType: ?string
+- subject:
+    method: Dom\TokenList::remove
+  signature:
+    params:
+    - name: tokens
+      type: string
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: Dom\TokenList::replace
+  signature:
+    params:
+    - name: token
+      type: string
+    - name: newToken
+      type: string
+    returnType: bool
+- subject:
+    method: Dom\TokenList::supports
+  signature:
+    params:
+    - name: token
+      type: string
+    returnType: bool
+- subject:
+    method: Dom\TokenList::toggle
+  signature:
+    params:
+    - name: token
+      type: string
+    - name: force
+      type: ?bool
+      optional: true
+    returnType: bool
+- subject:
+    method: Dom\XMLDocument::createEmpty
+  signature:
+    params:
+    - name: version
+      type: string
+      optional: true
+    - name: encoding
+      type: string
+      optional: true
+    returnType: Dom\XMLDocument
+- subject:
+    method: Dom\XMLDocument::createEntityReference
+  signature:
+    params:
+    - name: name
+      type: string
+    returnType: Dom\EntityReference
+- subject:
+    method: Dom\XMLDocument::createFromFile
+  signature:
+    params:
+    - name: path
+      type: string
+    - name: options
+      type: int
+      optional: true
+    - name: overrideEncoding
+      type: ?string
+      optional: true
+    returnType: Dom\XMLDocument
+- subject:
+    method: Dom\XMLDocument::createFromString
+  signature:
+    params:
+    - name: source
+      type: string
+    - name: options
+      type: int
+      optional: true
+    - name: overrideEncoding
+      type: ?string
+      optional: true
+    returnType: Dom\XMLDocument
+- subject:
+    method: Dom\XMLDocument::saveXml
+  signature:
+    params:
+    - name: node
+      type: ?Dom\Node
+      optional: true
+    - name: options
+      type: int
+      optional: true
+    returnType: string|false
+- subject:
+    method: Dom\XMLDocument::saveXmlFile
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: options
+      type: int
+      optional: true
+    returnType: int|false
+- subject:
+    method: Dom\XMLDocument::validate
+  signature:
+    returnType: bool
+- subject:
+    method: Dom\XMLDocument::xinclude
+  signature:
+    params:
+    - name: options
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    method: Dom\XPath::__construct
+  signature:
+    params:
+    - name: document
+      type: Dom\Document
+    - name: registerNodeNS
+      type: bool
+      optional: true
+    returnType: mixed
+- subject:
+    method: Dom\XPath::evaluate
+  signature:
+    params:
+    - name: expression
+      type: string
+    - name: contextNode
+      type: ?Dom\Node
+      optional: true
+    - name: registerNodeNS
+      type: bool
+      optional: true
+    returnType: null|bool|float|string|Dom\NodeList
+- subject:
+    method: Dom\XPath::query
+  signature:
+    params:
+    - name: expression
+      type: string
+    - name: contextNode
+      type: ?Dom\Node
+      optional: true
+    - name: registerNodeNS
+      type: bool
+      optional: true
+    returnType: Dom\NodeList
+- subject:
+    method: Dom\XPath::quote
+  signature:
+    params:
+    - name: str
+      type: string
+    returnType: string
+- subject:
+    method: Dom\XPath::registerNamespace
+  signature:
+    params:
+    - name: prefix
+      type: string
+    - name: namespace
+      type: string
+    returnType: bool
+- subject:
+    method: Dom\XPath::registerPhpFunctionNS
+  signature:
+    params:
+    - name: namespaceURI
+      type: string
+    - name: name
+      type: string
+    - name: callable
+      type: callable
+    returnType: void
+- subject:
+    method: Dom\XPath::registerPhpFunctions
+  signature:
+    params:
+    - name: restrict
+      type: string|array|null
+      optional: true
+    returnType: void
+- subject:
+    method: DOMCdataSection::__construct
+  signature:
+    params:
+    - name: data
+      type: string
+    returnType: mixed
+- subject:
+    method: DOMCharacterData::after
+  signature:
+    params:
+    - name: nodes
+      type: mixed
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: DOMCharacterData::appendData
+  signature:
+    params:
+    - name: data
+      type: string
+    returnType: 'true'
+- subject:
+    method: DOMCharacterData::before
+  signature:
+    params:
+    - name: nodes
+      type: mixed
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: DOMCharacterData::deleteData
+  signature:
+    params:
+    - name: offset
+      type: int
+    - name: count
+      type: int
+    returnType: bool
+- subject:
+    method: DOMCharacterData::insertData
+  signature:
+    params:
+    - name: offset
+      type: int
+    - name: data
+      type: string
+    returnType: bool
+- subject:
+    method: DOMCharacterData::remove
+  signature:
+    returnType: void
+- subject:
+    method: DOMCharacterData::replaceData
+  signature:
+    params:
+    - name: offset
+      type: int
+    - name: count
+      type: int
+    - name: data
+      type: string
+    returnType: bool
+- subject:
+    method: DOMCharacterData::replaceWith
+  signature:
+    params:
+    - name: nodes
+      type: mixed
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: DOMCharacterData::substringData
+  signature:
+    params:
+    - name: offset
+      type: int
+    - name: count
+      type: int
+    returnType: mixed
+- subject:
+    method: DOMChildNode::after
+  signature:
+    params:
+    - name: nodes
+      type: mixed
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: DOMChildNode::before
+  signature:
+    params:
+    - name: nodes
+      type: mixed
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: DOMChildNode::remove
+  signature:
+    returnType: void
+- subject:
+    method: DOMChildNode::replaceWith
+  signature:
+    params:
+    - name: nodes
+      type: mixed
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: DOMDocumentFragment::__construct
+  signature:
+    returnType: mixed
+- subject:
+    method: DOMDocumentFragment::append
+  signature:
+    params:
+    - name: nodes
+      type: mixed
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: DOMDocumentFragment::appendXML
+  signature:
+    params:
+    - name: data
+      type: string
+    returnType: bool
+- subject:
+    method: DOMDocumentFragment::prepend
+  signature:
+    params:
+    - name: nodes
+      type: mixed
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: DOMDocumentFragment::replaceChildren
+  signature:
+    params:
+    - name: nodes
+      type: mixed
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: DOMEntityReference::__construct
+  signature:
+    params:
+    - name: name
+      type: string
+    returnType: mixed
+- subject:
+    method: DOMImplementation::createDocument
+  signature:
+    params:
+    - name: namespace
+      type: ?string
+      optional: true
+    - name: qualifiedName
+      type: string
+      optional: true
+    - name: doctype
+      type: ?DOMDocumentType
+      optional: true
+    returnType: DOMDocument
+- subject:
+    method: DOMImplementation::createDocumentType
+  signature:
+    params:
+    - name: qualifiedName
+      type: string
+    - name: publicId
+      type: string
+      optional: true
+    - name: systemId
+      type: string
+      optional: true
+    returnType: mixed
+- subject:
+    method: DOMImplementation::hasFeature
+  signature:
+    params:
+    - name: feature
+      type: string
+    - name: version
+      type: string
+    returnType: bool
+- subject:
+    method: DOMNamedNodeMap::count
+  signature:
+    returnType: int
+- subject:
+    method: DOMNamedNodeMap::getIterator
+  signature:
+    returnType: Iterator
+- subject:
+    method: DOMNamedNodeMap::getNamedItem
+  signature:
+    params:
+    - name: qualifiedName
+      type: string
+    returnType: ?DOMNode
+- subject:
+    method: DOMNamedNodeMap::getNamedItemNS
+  signature:
+    params:
+    - name: namespace
+      type: ?string
+    - name: localName
+      type: string
+    returnType: ?DOMNode
+- subject:
+    method: DOMNamedNodeMap::item
+  signature:
+    params:
+    - name: index
+      type: int
+    returnType: ?DOMNode
+- subject:
+    method: DOMNameSpaceNode::__sleep
+  signature:
+    returnType: array
+- subject:
+    method: DOMNameSpaceNode::__wakeup
+  signature:
+    returnType: void
+- subject:
+    method: DOMParentNode::append
+  signature:
+    params:
+    - name: nodes
+      type: mixed
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: DOMParentNode::prepend
+  signature:
+    params:
+    - name: nodes
+      type: mixed
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: DOMParentNode::replaceChildren
+  signature:
+    params:
+    - name: nodes
+      type: mixed
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: DOMProcessingInstruction::__construct
+  signature:
+    params:
+    - name: name
+      type: string
+    - name: value
+      type: string
+      optional: true
+    returnType: mixed
+- subject:
+    method: DOMXPath::__construct
+  signature:
+    params:
+    - name: document
+      type: DOMDocument
+    - name: registerNodeNS
+      type: bool
+      optional: true
+    returnType: mixed
+- subject:
+    method: DOMXPath::evaluate
+  signature:
+    params:
+    - name: expression
+      type: string
+    - name: contextNode
+      type: ?DOMNode
+      optional: true
+    - name: registerNodeNS
+      type: bool
+      optional: true
+    returnType: mixed
+- subject:
+    method: DOMXPath::query
+  signature:
+    params:
+    - name: expression
+      type: string
+    - name: contextNode
+      type: ?DOMNode
+      optional: true
+    - name: registerNodeNS
+      type: bool
+      optional: true
+    returnType: mixed
+- subject:
+    method: DOMXPath::quote
+  signature:
+    params:
+    - name: str
+      type: string
+    returnType: string
+- subject:
+    method: DOMXPath::registerNamespace
+  signature:
+    params:
+    - name: prefix
+      type: string
+    - name: namespace
+      type: string
+    returnType: bool
+- subject:
+    method: DOMXPath::registerPhpFunctionNS
+  signature:
+    params:
+    - name: namespaceURI
+      type: string
+    - name: name
+      type: string
+    - name: callable
+      type: callable
+    returnType: void
+- subject:
+    method: DOMXPath::registerPhpFunctions
+  signature:
+    params:
+    - name: restrict
+      type: string|array|null
+      optional: true
+    returnType: void
+- subject:
+    class: domnode
+  signature:
+    classifier: class
+- subject:
+    class: domdocument
+  signature:
+    classifier: class
+    parent: domnode
+    interfaces: [domparentnode]
+- subject:
+    class: domelement
+  signature:
+    classifier: class
+    parent: domnode
+    interfaces: [domparentnode, domchildnode]
+- subject:
+    class: domnodelist
+  signature:
+    classifier: class
+    interfaces: [iteratoraggregate, countable]
+- subject:
+    class: domattr
+  signature:
+    classifier: class
+    parent: domnode
+- subject:
+    class: domtext
+  signature:
+    classifier: class
+    parent: domcharacterdata
+- subject:
+    class: domcomment
+  signature:
+    classifier: class
+    parent: domcharacterdata
+- subject:
+    function: dom_import_simplexml
+  signature:
+    params:
+    - name: node
+      type: object
+    returnType: DOMAttr|DOMElement
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    method: DOMAttr::__construct
+  signature:
+    params:
+    - name: name
+      type: string
+    - name: value
+      type: string
+      optional: true
+    returnType: mixed
+- subject:
+    method: DOMAttr::isId
+  signature:
+    returnType: bool
+- subject:
+    method: DOMComment::__construct
+  signature:
+    params:
+    - name: data
+      type: string
+      optional: true
+    returnType: mixed
+- subject:
+    method: DOMDocument::__construct
+  signature:
+    params:
+    - name: version
+      type: string
+      optional: true
+    - name: encoding
+      type: string
+      optional: true
+    returnType: mixed
+- subject:
+    method: DOMDocument::adoptNode
+  signature:
+    params:
+    - name: node
+      type: DOMNode
+    returnType: DOMNode|false
+- subject:
+    method: DOMDocument::append
+  signature:
+    params:
+    - name: nodes
+      type: mixed
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: DOMDocument::createAttribute
+  signature:
+    params:
+    - name: localName
+      type: string
+    returnType: mixed
+- subject:
+    method: DOMDocument::createAttributeNS
+  signature:
+    params:
+    - name: namespace
+      type: ?string
+    - name: qualifiedName
+      type: string
+    returnType: mixed
+- subject:
+    method: DOMDocument::createCDATASection
+  signature:
+    params:
+    - name: data
+      type: string
+    returnType: mixed
+- subject:
+    method: DOMDocument::createComment
+  signature:
+    params:
+    - name: data
+      type: string
+    returnType: DOMComment
+- subject:
+    method: DOMDocument::createDocumentFragment
+  signature:
+    returnType: DOMDocumentFragment
+- subject:
+    method: DOMDocument::createElement
+  signature:
+    params:
+    - name: localName
+      type: string
+    - name: value
+      type: string
+      optional: true
+    returnType: mixed
+- subject:
+    method: DOMDocument::createElementNS
+  signature:
+    params:
+    - name: namespace
+      type: ?string
+    - name: qualifiedName
+      type: string
+    - name: value
+      type: string
+      optional: true
+    returnType: mixed
+- subject:
+    method: DOMDocument::createEntityReference
+  signature:
+    params:
+    - name: name
+      type: string
+    returnType: mixed
+- subject:
+    method: DOMDocument::createProcessingInstruction
+  signature:
+    params:
+    - name: target
+      type: string
+    - name: data
+      type: string
+      optional: true
+    returnType: mixed
+- subject:
+    method: DOMDocument::createTextNode
+  signature:
+    params:
+    - name: data
+      type: string
+    returnType: DOMText
+- subject:
+    method: DOMDocument::getElementById
+  signature:
+    params:
+    - name: elementId
+      type: string
+    returnType: ?DOMElement
+- subject:
+    method: DOMDocument::getElementsByTagName
+  signature:
+    params:
+    - name: qualifiedName
+      type: string
+    returnType: DOMNodeList
+- subject:
+    method: DOMDocument::getElementsByTagNameNS
+  signature:
+    params:
+    - name: namespace
+      type: ?string
+    - name: localName
+      type: string
+    returnType: DOMNodeList
+- subject:
+    method: DOMDocument::importNode
+  signature:
+    params:
+    - name: node
+      type: DOMNode
+    - name: deep
+      type: bool
+      optional: true
+    returnType: mixed
+- subject:
+    method: DOMDocument::load
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: options
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    method: DOMDocument::loadHTML
+  signature:
+    params:
+    - name: source
+      type: string
+    - name: options
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    method: DOMDocument::loadHTMLFile
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: options
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    method: DOMDocument::loadXML
+  signature:
+    params:
+    - name: source
+      type: string
+    - name: options
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    method: DOMDocument::normalizeDocument
+  signature:
+    returnType: void
+- subject:
+    method: DOMDocument::prepend
+  signature:
+    params:
+    - name: nodes
+      type: mixed
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: DOMDocument::registerNodeClass
+  signature:
+    params:
+    - name: baseClass
+      type: string
+    - name: extendedClass
+      type: ?string
+    returnType: 'true'
+- subject:
+    method: DOMDocument::relaxNGValidate
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: bool
+- subject:
+    method: DOMDocument::relaxNGValidateSource
+  signature:
+    params:
+    - name: source
+      type: string
+    returnType: bool
+- subject:
+    method: DOMDocument::replaceChildren
+  signature:
+    params:
+    - name: nodes
+      type: mixed
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: DOMDocument::save
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: options
+      type: int
+      optional: true
+    returnType: int|false
+- subject:
+    method: DOMDocument::saveHTML
+  signature:
+    params:
+    - name: node
+      type: ?DOMNode
+      optional: true
+    returnType: string|false
+- subject:
+    method: DOMDocument::saveHTMLFile
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: int|false
+- subject:
+    method: DOMDocument::saveXML
+  signature:
+    params:
+    - name: node
+      type: ?DOMNode
+      optional: true
+    - name: options
+      type: int
+      optional: true
+    returnType: string|false
+- subject:
+    method: DOMDocument::schemaValidate
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    method: DOMDocument::schemaValidateSource
+  signature:
+    params:
+    - name: source
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    method: DOMDocument::validate
+  signature:
+    returnType: bool
+- subject:
+    method: DOMDocument::xinclude
+  signature:
+    params:
+    - name: options
+      type: int
+      optional: true
+    returnType: int|false
+- subject:
+    method: DOMElement::__construct
+  signature:
+    params:
+    - name: qualifiedName
+      type: string
+    - name: value
+      type: ?string
+      optional: true
+    - name: namespace
+      type: string
+      optional: true
+    returnType: mixed
+- subject:
+    method: DOMElement::after
+  signature:
+    params:
+    - name: nodes
+      type: mixed
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: DOMElement::append
+  signature:
+    params:
+    - name: nodes
+      type: mixed
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: DOMElement::before
+  signature:
+    params:
+    - name: nodes
+      type: mixed
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: DOMElement::getAttribute
+  signature:
+    params:
+    - name: qualifiedName
+      type: string
+    returnType: string
+- subject:
+    method: DOMElement::getAttributeNames
+  signature:
+    returnType: array
+- subject:
+    method: DOMElement::getAttributeNode
+  signature:
+    params:
+    - name: qualifiedName
+      type: string
+    returnType: mixed
+- subject:
+    method: DOMElement::getAttributeNodeNS
+  signature:
+    params:
+    - name: namespace
+      type: ?string
+    - name: localName
+      type: string
+    returnType: mixed
+- subject:
+    method: DOMElement::getAttributeNS
+  signature:
+    params:
+    - name: namespace
+      type: ?string
+    - name: localName
+      type: string
+    returnType: string
+- subject:
+    method: DOMElement::getElementsByTagName
+  signature:
+    params:
+    - name: qualifiedName
+      type: string
+    returnType: DOMNodeList
+- subject:
+    method: DOMElement::getElementsByTagNameNS
+  signature:
+    params:
+    - name: namespace
+      type: ?string
+    - name: localName
+      type: string
+    returnType: DOMNodeList
+- subject:
+    method: DOMElement::hasAttribute
+  signature:
+    params:
+    - name: qualifiedName
+      type: string
+    returnType: bool
+- subject:
+    method: DOMElement::hasAttributeNS
+  signature:
+    params:
+    - name: namespace
+      type: ?string
+    - name: localName
+      type: string
+    returnType: bool
+- subject:
+    method: DOMElement::insertAdjacentElement
+  signature:
+    params:
+    - name: where
+      type: string
+    - name: element
+      type: DOMElement
+    returnType: ?DOMElement
+- subject:
+    method: DOMElement::insertAdjacentText
+  signature:
+    params:
+    - name: where
+      type: string
+    - name: data
+      type: string
+    returnType: void
+- subject:
+    method: DOMElement::prepend
+  signature:
+    params:
+    - name: nodes
+      type: mixed
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: DOMElement::remove
+  signature:
+    returnType: void
+- subject:
+    method: DOMElement::removeAttribute
+  signature:
+    params:
+    - name: qualifiedName
+      type: string
+    returnType: bool
+- subject:
+    method: DOMElement::removeAttributeNode
+  signature:
+    params:
+    - name: attr
+      type: DOMAttr
+    returnType: mixed
+- subject:
+    method: DOMElement::removeAttributeNS
+  signature:
+    params:
+    - name: namespace
+      type: ?string
+    - name: localName
+      type: string
+    returnType: void
+- subject:
+    method: DOMElement::replaceChildren
+  signature:
+    params:
+    - name: nodes
+      type: mixed
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: DOMElement::replaceWith
+  signature:
+    params:
+    - name: nodes
+      type: mixed
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: DOMElement::setAttribute
+  signature:
+    params:
+    - name: qualifiedName
+      type: string
+    - name: value
+      type: string
+    returnType: mixed
+- subject:
+    method: DOMElement::setAttributeNode
+  signature:
+    params:
+    - name: attr
+      type: DOMAttr
+    returnType: mixed
+- subject:
+    method: DOMElement::setAttributeNodeNS
+  signature:
+    params:
+    - name: attr
+      type: DOMAttr
+    returnType: mixed
+- subject:
+    method: DOMElement::setAttributeNS
+  signature:
+    params:
+    - name: namespace
+      type: ?string
+    - name: qualifiedName
+      type: string
+    - name: value
+      type: string
+    returnType: void
+- subject:
+    method: DOMElement::setIdAttribute
+  signature:
+    params:
+    - name: qualifiedName
+      type: string
+    - name: isId
+      type: bool
+    returnType: void
+- subject:
+    method: DOMElement::setIdAttributeNode
+  signature:
+    params:
+    - name: attr
+      type: DOMAttr
+    - name: isId
+      type: bool
+    returnType: void
+- subject:
+    method: DOMElement::setIdAttributeNS
+  signature:
+    params:
+    - name: namespace
+      type: string
+    - name: qualifiedName
+      type: string
+    - name: isId
+      type: bool
+    returnType: void
+- subject:
+    method: DOMElement::toggleAttribute
+  signature:
+    params:
+    - name: qualifiedName
+      type: string
+    - name: force
+      type: ?bool
+      optional: true
+    returnType: bool
+- subject:
+    method: DOMNode::__sleep
+  signature:
+    returnType: array
+- subject:
+    method: DOMNode::__wakeup
+  signature:
+    returnType: void
+- subject:
+    method: DOMNode::appendChild
+  signature:
+    params:
+    - name: node
+      type: DOMNode
+    returnType: mixed
+- subject:
+    method: DOMNode::C14N
+  signature:
+    params:
+    - name: exclusive
+      type: bool
+      optional: true
+    - name: withComments
+      type: bool
+      optional: true
+    - name: xpath
+      type: ?array
+      optional: true
+    - name: nsPrefixes
+      type: ?array
+      optional: true
+    returnType: string|false
+- subject:
+    method: DOMNode::C14NFile
+  signature:
+    params:
+    - name: uri
+      type: string
+    - name: exclusive
+      type: bool
+      optional: true
+    - name: withComments
+      type: bool
+      optional: true
+    - name: xpath
+      type: ?array
+      optional: true
+    - name: nsPrefixes
+      type: ?array
+      optional: true
+    returnType: int|false
+- subject:
+    method: DOMNode::cloneNode
+  signature:
+    params:
+    - name: deep
+      type: bool
+      optional: true
+    returnType: mixed
+- subject:
+    method: DOMNode::compareDocumentPosition
+  signature:
+    params:
+    - name: other
+      type: DOMNode
+    returnType: int
+- subject:
+    method: DOMNode::contains
+  signature:
+    params:
+    - name: other
+      type: DOMNode|DOMNameSpaceNode|null
+    returnType: bool
+- subject:
+    method: DOMNode::getLineNo
+  signature:
+    returnType: int
+- subject:
+    method: DOMNode::getNodePath
+  signature:
+    returnType: ?string
+- subject:
+    method: DOMNode::getRootNode
+  signature:
+    params:
+    - name: options
+      type: ?array
+      optional: true
+    returnType: DOMNode
+- subject:
+    method: DOMNode::hasAttributes
+  signature:
+    returnType: bool
+- subject:
+    method: DOMNode::hasChildNodes
+  signature:
+    returnType: bool
+- subject:
+    method: DOMNode::insertBefore
+  signature:
+    params:
+    - name: node
+      type: DOMNode
+    - name: child
+      type: ?DOMNode
+      optional: true
+    returnType: mixed
+- subject:
+    method: DOMNode::isDefaultNamespace
+  signature:
+    params:
+    - name: namespace
+      type: string
+    returnType: bool
+- subject:
+    method: DOMNode::isEqualNode
+  signature:
+    params:
+    - name: otherNode
+      type: ?DOMNode
+    returnType: bool
+- subject:
+    method: DOMNode::isSameNode
+  signature:
+    params:
+    - name: otherNode
+      type: DOMNode
+    returnType: bool
+- subject:
+    method: DOMNode::isSupported
+  signature:
+    params:
+    - name: feature
+      type: string
+    - name: version
+      type: string
+    returnType: bool
+- subject:
+    method: DOMNode::lookupNamespaceURI
+  signature:
+    params:
+    - name: prefix
+      type: ?string
+    returnType: ?string
+- subject:
+    method: DOMNode::lookupPrefix
+  signature:
+    params:
+    - name: namespace
+      type: string
+    returnType: ?string
+- subject:
+    method: DOMNode::normalize
+  signature:
+    returnType: void
+- subject:
+    method: DOMNode::removeChild
+  signature:
+    params:
+    - name: child
+      type: DOMNode
+    returnType: mixed
+- subject:
+    method: DOMNode::replaceChild
+  signature:
+    params:
+    - name: node
+      type: DOMNode
+    - name: child
+      type: DOMNode
+    returnType: mixed
+- subject:
+    method: DOMNodeList::count
+  signature:
+    returnType: int
+- subject:
+    method: DOMNodeList::getIterator
+  signature:
+    returnType: Iterator
+- subject:
+    method: DOMNodeList::item
+  signature:
+    params:
+    - name: index
+      type: int
+    returnType: mixed
+- subject:
+    method: DOMText::__construct
+  signature:
+    params:
+    - name: data
+      type: string
+      optional: true
+    returnType: mixed
+- subject:
+    method: DOMText::isElementContentWhitespace
+  signature:
+    returnType: bool
+- subject:
+    method: DOMText::isWhitespaceInElementContent
+  signature:
+    returnType: bool
+- subject:
+    method: DOMText::splitText
+  signature:
+    params:
+    - name: offset
+      type: int
+    returnType: mixed

@@ -39,7 +39,7 @@ import edu.jhu.cobra.externs.phpstubs.VulnClass
 import edu.jhu.cobra.externs.phpstubs.callableSignature
 
 val strlen = PhpStubs.function("strlen")                 // BuiltinRecord<FunctionSubject>?
-strlen?.extension                                        // "standard"
+strlen?.extension                                        // "core"
 strlen?.callableSignature?.returnType                    // DeclaredType("int")
 strlen?.returns?.single()?.kind                          // ReturnKind.NUM
 val query = PhpStubs.method("mysqli::query")             // BuiltinRecord<MethodSubject>?

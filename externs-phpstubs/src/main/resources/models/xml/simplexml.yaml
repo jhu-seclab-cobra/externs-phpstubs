@@ -5,11 +5,11 @@
   signature:
     params:
     - name: node
-      type: mixed
+      type: object
     - name: class_name
-      type: string
+      type: ?string
       optional: true
-    returnType: mixed
+    returnType: ?SimpleXMLElement
   propagation:
   - from: argument(0)
     to: return
@@ -22,7 +22,7 @@
     - name: filename
       type: string
     - name: class_name
-      type: string
+      type: ?string
       optional: true
     - name: options
       type: int
@@ -33,7 +33,7 @@
     - name: is_prefix
       type: bool
       optional: true
-    returnType: mixed
+    returnType: SimpleXMLElement|false
   propagation:
   - from: argument(0)
     to: return
@@ -52,7 +52,7 @@
     - name: data
       type: string
     - name: class_name
-      type: string
+      type: ?string
       optional: true
     - name: options
       type: int
@@ -63,7 +63,7 @@
     - name: is_prefix
       type: bool
       optional: true
-    returnType: mixed
+    returnType: SimpleXMLElement|false
   propagation:
   - from: argument(0)
     to: return
@@ -75,3 +75,174 @@
     to: return
   - from: argument(4)
     to: return
+- subject:
+    class: simplexmliterator
+  signature:
+    classifier: class
+    parent: simplexmlelement
+- subject:
+    class: simplexmlelement
+  signature:
+    classifier: class
+    interfaces: [stringable, countable, recursiveiterator]
+- subject:
+    method: SimpleXMLElement::__construct
+  signature:
+    params:
+    - name: data
+      type: string
+    - name: options
+      type: int
+      optional: true
+    - name: dataIsURL
+      type: bool
+      optional: true
+    - name: namespaceOrPrefix
+      type: string
+      optional: true
+    - name: isPrefix
+      type: bool
+      optional: true
+    returnType: mixed
+- subject:
+    method: SimpleXMLElement::__debugInfo
+  signature:
+    returnType: ?array
+- subject:
+    method: SimpleXMLElement::__toString
+  signature:
+    returnType: string
+- subject:
+    method: SimpleXMLElement::addAttribute
+  signature:
+    params:
+    - name: qualifiedName
+      type: string
+    - name: value
+      type: string
+    - name: namespace
+      type: ?string
+      optional: true
+    returnType: void
+- subject:
+    method: SimpleXMLElement::addChild
+  signature:
+    params:
+    - name: qualifiedName
+      type: string
+    - name: value
+      type: ?string
+      optional: true
+    - name: namespace
+      type: ?string
+      optional: true
+    returnType: ?SimpleXMLElement
+- subject:
+    method: SimpleXMLElement::asXML
+  signature:
+    params:
+    - name: filename
+      type: ?string
+      optional: true
+    returnType: string|bool
+- subject:
+    method: SimpleXMLElement::attributes
+  signature:
+    params:
+    - name: namespaceOrPrefix
+      type: ?string
+      optional: true
+    - name: isPrefix
+      type: bool
+      optional: true
+    returnType: ?SimpleXMLElement
+- subject:
+    method: SimpleXMLElement::children
+  signature:
+    params:
+    - name: namespaceOrPrefix
+      type: ?string
+      optional: true
+    - name: isPrefix
+      type: bool
+      optional: true
+    returnType: ?SimpleXMLElement
+- subject:
+    method: SimpleXMLElement::count
+  signature:
+    returnType: int
+- subject:
+    method: SimpleXMLElement::current
+  signature:
+    returnType: SimpleXMLElement
+- subject:
+    method: SimpleXMLElement::getChildren
+  signature:
+    returnType: ?SimpleXMLElement
+- subject:
+    method: SimpleXMLElement::getDocNamespaces
+  signature:
+    params:
+    - name: recursive
+      type: bool
+      optional: true
+    - name: fromRoot
+      type: bool
+      optional: true
+    returnType: array|false
+- subject:
+    method: SimpleXMLElement::getName
+  signature:
+    returnType: string
+- subject:
+    method: SimpleXMLElement::getNamespaces
+  signature:
+    params:
+    - name: recursive
+      type: bool
+      optional: true
+    returnType: array
+- subject:
+    method: SimpleXMLElement::hasChildren
+  signature:
+    returnType: bool
+- subject:
+    method: SimpleXMLElement::key
+  signature:
+    returnType: string
+- subject:
+    method: SimpleXMLElement::next
+  signature:
+    returnType: void
+- subject:
+    method: SimpleXMLElement::registerXPathNamespace
+  signature:
+    params:
+    - name: prefix
+      type: string
+    - name: namespace
+      type: string
+    returnType: bool
+- subject:
+    method: SimpleXMLElement::rewind
+  signature:
+    returnType: void
+- subject:
+    method: SimpleXMLElement::saveXML
+  signature:
+    params:
+    - name: filename
+      type: ?string
+      optional: true
+    returnType: string|bool
+- subject:
+    method: SimpleXMLElement::valid
+  signature:
+    returnType: bool
+- subject:
+    method: SimpleXMLElement::xpath
+  signature:
+    params:
+    - name: expression
+      type: string
+    returnType: array|null|false

@@ -1,0 +1,1548 @@
+# Generated from php-src stubs by tools/extract_hierarchy.py.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    class: propertyhooktype
+  signature:
+    classifier: enum
+    interfaces: [unitenum, backedenum]
+- subject:
+    class: reflection
+  signature:
+    classifier: class
+- subject:
+    class: reflectionattribute
+  signature:
+    classifier: class
+    interfaces: [reflector]
+- subject:
+    class: reflectionclassconstant
+  signature:
+    classifier: class
+    interfaces: [reflector]
+- subject:
+    class: reflectionconstant
+  signature:
+    classifier: class
+    interfaces: [reflector]
+- subject:
+    class: reflectionenum
+  signature:
+    classifier: class
+    parent: reflectionclass
+- subject:
+    class: reflectionenumbackedcase
+  signature:
+    classifier: class
+    parent: reflectionenumunitcase
+- subject:
+    class: reflectionenumunitcase
+  signature:
+    classifier: class
+    parent: reflectionclassconstant
+- subject:
+    class: reflectionexception
+  signature:
+    classifier: class
+    parent: exception
+- subject:
+    class: reflectionextension
+  signature:
+    classifier: class
+    interfaces: [reflector]
+- subject:
+    class: reflectionfiber
+  signature:
+    classifier: class
+- subject:
+    class: reflectionfunctionabstract
+  signature:
+    classifier: class
+    interfaces: [reflector]
+- subject:
+    class: reflectiongenerator
+  signature:
+    classifier: class
+- subject:
+    class: reflectionobject
+  signature:
+    classifier: class
+    parent: reflectionclass
+- subject:
+    class: reflectionreference
+  signature:
+    classifier: class
+- subject:
+    class: reflectionzendextension
+  signature:
+    classifier: class
+    interfaces: [reflector]
+- subject:
+    class: reflector
+  signature:
+    classifier: interface
+    interfaces: [stringable]
+- subject:
+    method: Reflection::getModifierNames
+  signature:
+    params:
+    - name: modifiers
+      type: int
+    returnType: array
+- subject:
+    method: ReflectionAttribute::__clone
+  signature:
+    returnType: void
+- subject:
+    method: ReflectionAttribute::__construct
+  signature:
+    returnType: mixed
+- subject:
+    method: ReflectionAttribute::__toString
+  signature:
+    returnType: string
+- subject:
+    method: ReflectionAttribute::getArguments
+  signature:
+    returnType: array
+- subject:
+    method: ReflectionAttribute::getName
+  signature:
+    returnType: string
+- subject:
+    method: ReflectionAttribute::getTarget
+  signature:
+    returnType: int
+- subject:
+    method: ReflectionAttribute::isRepeated
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionAttribute::newInstance
+  signature:
+    returnType: object
+- subject:
+    method: ReflectionClassConstant::__clone
+  signature:
+    returnType: void
+- subject:
+    method: ReflectionClassConstant::__construct
+  signature:
+    params:
+    - name: class
+      type: object|string
+    - name: constant
+      type: string
+    returnType: mixed
+- subject:
+    method: ReflectionClassConstant::__toString
+  signature:
+    returnType: string
+- subject:
+    method: ReflectionClassConstant::getAttributes
+  signature:
+    params:
+    - name: name
+      type: ?string
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    method: ReflectionClassConstant::getDeclaringClass
+  signature:
+    returnType: ReflectionClass
+- subject:
+    method: ReflectionClassConstant::getDocComment
+  signature:
+    returnType: string|false
+- subject:
+    method: ReflectionClassConstant::getModifiers
+  signature:
+    returnType: int
+- subject:
+    method: ReflectionClassConstant::getName
+  signature:
+    returnType: string
+- subject:
+    method: ReflectionClassConstant::getType
+  signature:
+    returnType: ?ReflectionType
+- subject:
+    method: ReflectionClassConstant::getValue
+  signature:
+    returnType: mixed
+- subject:
+    method: ReflectionClassConstant::hasType
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionClassConstant::isDeprecated
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionClassConstant::isEnumCase
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionClassConstant::isFinal
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionClassConstant::isPrivate
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionClassConstant::isProtected
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionClassConstant::isPublic
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionConstant::__construct
+  signature:
+    params:
+    - name: name
+      type: string
+    returnType: mixed
+- subject:
+    method: ReflectionConstant::__toString
+  signature:
+    returnType: string
+- subject:
+    method: ReflectionConstant::getAttributes
+  signature:
+    params:
+    - name: name
+      type: ?string
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    method: ReflectionConstant::getExtension
+  signature:
+    returnType: ?ReflectionExtension
+- subject:
+    method: ReflectionConstant::getExtensionName
+  signature:
+    returnType: string|false
+- subject:
+    method: ReflectionConstant::getFileName
+  signature:
+    returnType: string|false
+- subject:
+    method: ReflectionConstant::getName
+  signature:
+    returnType: string
+- subject:
+    method: ReflectionConstant::getNamespaceName
+  signature:
+    returnType: string
+- subject:
+    method: ReflectionConstant::getShortName
+  signature:
+    returnType: string
+- subject:
+    method: ReflectionConstant::getValue
+  signature:
+    returnType: mixed
+- subject:
+    method: ReflectionConstant::isDeprecated
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionEnum::__construct
+  signature:
+    params:
+    - name: objectOrClass
+      type: object|string
+    returnType: mixed
+- subject:
+    method: ReflectionEnum::getBackingType
+  signature:
+    returnType: ?ReflectionNamedType
+- subject:
+    method: ReflectionEnum::getCase
+  signature:
+    params:
+    - name: name
+      type: string
+    returnType: ReflectionEnumUnitCase
+- subject:
+    method: ReflectionEnum::getCases
+  signature:
+    returnType: array
+- subject:
+    method: ReflectionEnum::hasCase
+  signature:
+    params:
+    - name: name
+      type: string
+    returnType: bool
+- subject:
+    method: ReflectionEnum::isBacked
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionEnumBackedCase::__construct
+  signature:
+    params:
+    - name: class
+      type: object|string
+    - name: constant
+      type: string
+    returnType: mixed
+- subject:
+    method: ReflectionEnumBackedCase::getBackingValue
+  signature:
+    returnType: int|string
+- subject:
+    method: ReflectionEnumUnitCase::__construct
+  signature:
+    params:
+    - name: class
+      type: object|string
+    - name: constant
+      type: string
+    returnType: mixed
+- subject:
+    method: ReflectionEnumUnitCase::getEnum
+  signature:
+    returnType: ReflectionEnum
+- subject:
+    method: ReflectionEnumUnitCase::getValue
+  signature:
+    returnType: UnitEnum
+- subject:
+    method: ReflectionExtension::__clone
+  signature:
+    returnType: void
+- subject:
+    method: ReflectionExtension::__construct
+  signature:
+    params:
+    - name: name
+      type: string
+    returnType: mixed
+- subject:
+    method: ReflectionExtension::__toString
+  signature:
+    returnType: string
+- subject:
+    method: ReflectionExtension::getClasses
+  signature:
+    returnType: array
+- subject:
+    method: ReflectionExtension::getClassNames
+  signature:
+    returnType: array
+- subject:
+    method: ReflectionExtension::getConstants
+  signature:
+    returnType: array
+- subject:
+    method: ReflectionExtension::getDependencies
+  signature:
+    returnType: array
+- subject:
+    method: ReflectionExtension::getFunctions
+  signature:
+    returnType: array
+- subject:
+    method: ReflectionExtension::getINIEntries
+  signature:
+    returnType: array
+- subject:
+    method: ReflectionExtension::getName
+  signature:
+    returnType: string
+- subject:
+    method: ReflectionExtension::getVersion
+  signature:
+    returnType: ?string
+- subject:
+    method: ReflectionExtension::info
+  signature:
+    returnType: void
+- subject:
+    method: ReflectionExtension::isPersistent
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionExtension::isTemporary
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionFiber::__construct
+  signature:
+    params:
+    - name: fiber
+      type: Fiber
+    returnType: mixed
+- subject:
+    method: ReflectionFiber::getCallable
+  signature:
+    returnType: callable
+- subject:
+    method: ReflectionFiber::getExecutingFile
+  signature:
+    returnType: ?string
+- subject:
+    method: ReflectionFiber::getExecutingLine
+  signature:
+    returnType: ?int
+- subject:
+    method: ReflectionFiber::getFiber
+  signature:
+    returnType: Fiber
+- subject:
+    method: ReflectionFiber::getTrace
+  signature:
+    params:
+    - name: options
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    method: ReflectionFunctionAbstract::__clone
+  signature:
+    returnType: void
+- subject:
+    method: ReflectionFunctionAbstract::getAttributes
+  signature:
+    params:
+    - name: name
+      type: ?string
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    method: ReflectionFunctionAbstract::getClosureCalledClass
+  signature:
+    returnType: ?ReflectionClass
+- subject:
+    method: ReflectionFunctionAbstract::getClosureScopeClass
+  signature:
+    returnType: ?ReflectionClass
+- subject:
+    method: ReflectionFunctionAbstract::getClosureThis
+  signature:
+    returnType: ?object
+- subject:
+    method: ReflectionFunctionAbstract::getClosureUsedVariables
+  signature:
+    returnType: array
+- subject:
+    method: ReflectionFunctionAbstract::getDocComment
+  signature:
+    returnType: string|false
+- subject:
+    method: ReflectionFunctionAbstract::getEndLine
+  signature:
+    returnType: int|false
+- subject:
+    method: ReflectionFunctionAbstract::getExtension
+  signature:
+    returnType: ?ReflectionExtension
+- subject:
+    method: ReflectionFunctionAbstract::getExtensionName
+  signature:
+    returnType: string|false
+- subject:
+    method: ReflectionFunctionAbstract::getFileName
+  signature:
+    returnType: string|false
+- subject:
+    method: ReflectionFunctionAbstract::getName
+  signature:
+    returnType: string
+- subject:
+    method: ReflectionFunctionAbstract::getNamespaceName
+  signature:
+    returnType: string
+- subject:
+    method: ReflectionFunctionAbstract::getNumberOfParameters
+  signature:
+    returnType: int
+- subject:
+    method: ReflectionFunctionAbstract::getNumberOfRequiredParameters
+  signature:
+    returnType: int
+- subject:
+    method: ReflectionFunctionAbstract::getParameters
+  signature:
+    returnType: array
+- subject:
+    method: ReflectionFunctionAbstract::getReturnType
+  signature:
+    returnType: ?ReflectionType
+- subject:
+    method: ReflectionFunctionAbstract::getShortName
+  signature:
+    returnType: string
+- subject:
+    method: ReflectionFunctionAbstract::getStartLine
+  signature:
+    returnType: int|false
+- subject:
+    method: ReflectionFunctionAbstract::getStaticVariables
+  signature:
+    returnType: array
+- subject:
+    method: ReflectionFunctionAbstract::getTentativeReturnType
+  signature:
+    returnType: ?ReflectionType
+- subject:
+    method: ReflectionFunctionAbstract::hasReturnType
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionFunctionAbstract::hasTentativeReturnType
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionFunctionAbstract::inNamespace
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionFunctionAbstract::isClosure
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionFunctionAbstract::isDeprecated
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionFunctionAbstract::isGenerator
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionFunctionAbstract::isInternal
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionFunctionAbstract::isStatic
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionFunctionAbstract::isUserDefined
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionFunctionAbstract::isVariadic
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionFunctionAbstract::returnsReference
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionGenerator::__construct
+  signature:
+    params:
+    - name: generator
+      type: Generator
+    returnType: mixed
+- subject:
+    method: ReflectionGenerator::getExecutingFile
+  signature:
+    returnType: string
+- subject:
+    method: ReflectionGenerator::getExecutingGenerator
+  signature:
+    returnType: Generator
+- subject:
+    method: ReflectionGenerator::getExecutingLine
+  signature:
+    returnType: int
+- subject:
+    method: ReflectionGenerator::getFunction
+  signature:
+    returnType: ReflectionFunctionAbstract
+- subject:
+    method: ReflectionGenerator::getThis
+  signature:
+    returnType: ?object
+- subject:
+    method: ReflectionGenerator::getTrace
+  signature:
+    params:
+    - name: options
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    method: ReflectionGenerator::isClosed
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionObject::__construct
+  signature:
+    params:
+    - name: object
+      type: object
+    returnType: mixed
+- subject:
+    method: ReflectionReference::__clone
+  signature:
+    returnType: void
+- subject:
+    method: ReflectionReference::__construct
+  signature:
+    returnType: mixed
+- subject:
+    method: ReflectionReference::fromArrayElement
+  signature:
+    params:
+    - name: array
+      type: array
+    - name: key
+      type: int|string
+    returnType: ?ReflectionReference
+- subject:
+    method: ReflectionReference::getId
+  signature:
+    returnType: string
+- subject:
+    method: ReflectionZendExtension::__clone
+  signature:
+    returnType: void
+- subject:
+    method: ReflectionZendExtension::__construct
+  signature:
+    params:
+    - name: name
+      type: string
+    returnType: mixed
+- subject:
+    method: ReflectionZendExtension::__toString
+  signature:
+    returnType: string
+- subject:
+    method: ReflectionZendExtension::getAuthor
+  signature:
+    returnType: string
+- subject:
+    method: ReflectionZendExtension::getCopyright
+  signature:
+    returnType: string
+- subject:
+    method: ReflectionZendExtension::getName
+  signature:
+    returnType: string
+- subject:
+    method: ReflectionZendExtension::getURL
+  signature:
+    returnType: string
+- subject:
+    method: ReflectionZendExtension::getVersion
+  signature:
+    returnType: string
+- subject:
+    class: reflectionclass
+  signature:
+    classifier: class
+    interfaces: [reflector]
+- subject:
+    class: reflectionmethod
+  signature:
+    classifier: class
+    parent: reflectionfunctionabstract
+- subject:
+    class: reflectionfunction
+  signature:
+    classifier: class
+    parent: reflectionfunctionabstract
+- subject:
+    class: reflectionproperty
+  signature:
+    classifier: class
+    interfaces: [reflector]
+- subject:
+    class: reflectionparameter
+  signature:
+    classifier: class
+    interfaces: [reflector]
+- subject:
+    class: reflectiontype
+  signature:
+    classifier: class
+    interfaces: [stringable]
+- subject:
+    class: reflectionnamedtype
+  signature:
+    classifier: class
+    parent: reflectiontype
+- subject:
+    class: reflectionuniontype
+  signature:
+    classifier: class
+    parent: reflectiontype
+- subject:
+    class: reflectionintersectiontype
+  signature:
+    classifier: class
+    parent: reflectiontype
+- subject:
+    method: ReflectionClass::__clone
+  signature:
+    returnType: void
+- subject:
+    method: ReflectionClass::__construct
+  signature:
+    params:
+    - name: objectOrClass
+      type: object|string
+    returnType: mixed
+- subject:
+    method: ReflectionClass::__toString
+  signature:
+    returnType: string
+- subject:
+    method: ReflectionClass::getAttributes
+  signature:
+    params:
+    - name: name
+      type: ?string
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    method: ReflectionClass::getConstant
+  signature:
+    params:
+    - name: name
+      type: string
+    returnType: mixed
+- subject:
+    method: ReflectionClass::getConstants
+  signature:
+    params:
+    - name: filter
+      type: ?int
+      optional: true
+    returnType: array
+- subject:
+    method: ReflectionClass::getConstructor
+  signature:
+    returnType: ?ReflectionMethod
+- subject:
+    method: ReflectionClass::getDefaultProperties
+  signature:
+    returnType: array
+- subject:
+    method: ReflectionClass::getDocComment
+  signature:
+    returnType: string|false
+- subject:
+    method: ReflectionClass::getEndLine
+  signature:
+    returnType: int|false
+- subject:
+    method: ReflectionClass::getExtension
+  signature:
+    returnType: ?ReflectionExtension
+- subject:
+    method: ReflectionClass::getExtensionName
+  signature:
+    returnType: string|false
+- subject:
+    method: ReflectionClass::getFileName
+  signature:
+    returnType: string|false
+- subject:
+    method: ReflectionClass::getInterfaceNames
+  signature:
+    returnType: array
+- subject:
+    method: ReflectionClass::getInterfaces
+  signature:
+    returnType: array
+- subject:
+    method: ReflectionClass::getLazyInitializer
+  signature:
+    params:
+    - name: object
+      type: object
+    returnType: ?callable
+- subject:
+    method: ReflectionClass::getMethod
+  signature:
+    params:
+    - name: name
+      type: string
+    returnType: ReflectionMethod
+- subject:
+    method: ReflectionClass::getMethods
+  signature:
+    params:
+    - name: filter
+      type: ?int
+      optional: true
+    returnType: array
+- subject:
+    method: ReflectionClass::getModifiers
+  signature:
+    returnType: int
+- subject:
+    method: ReflectionClass::getName
+  signature:
+    returnType: string
+- subject:
+    method: ReflectionClass::getNamespaceName
+  signature:
+    returnType: string
+- subject:
+    method: ReflectionClass::getParentClass
+  signature:
+    returnType: ReflectionClass|false
+- subject:
+    method: ReflectionClass::getProperties
+  signature:
+    params:
+    - name: filter
+      type: ?int
+      optional: true
+    returnType: array
+- subject:
+    method: ReflectionClass::getProperty
+  signature:
+    params:
+    - name: name
+      type: string
+    returnType: ReflectionProperty
+- subject:
+    method: ReflectionClass::getReflectionConstant
+  signature:
+    params:
+    - name: name
+      type: string
+    returnType: ReflectionClassConstant|false
+- subject:
+    method: ReflectionClass::getReflectionConstants
+  signature:
+    params:
+    - name: filter
+      type: ?int
+      optional: true
+    returnType: array
+- subject:
+    method: ReflectionClass::getShortName
+  signature:
+    returnType: string
+- subject:
+    method: ReflectionClass::getStartLine
+  signature:
+    returnType: int|false
+- subject:
+    method: ReflectionClass::getStaticProperties
+  signature:
+    returnType: array
+- subject:
+    method: ReflectionClass::getStaticPropertyValue
+  signature:
+    params:
+    - name: name
+      type: string
+    - name: default
+      type: mixed
+      optional: true
+    returnType: mixed
+- subject:
+    method: ReflectionClass::getTraitAliases
+  signature:
+    returnType: array
+- subject:
+    method: ReflectionClass::getTraitNames
+  signature:
+    returnType: array
+- subject:
+    method: ReflectionClass::getTraits
+  signature:
+    returnType: array
+- subject:
+    method: ReflectionClass::hasConstant
+  signature:
+    params:
+    - name: name
+      type: string
+    returnType: bool
+- subject:
+    method: ReflectionClass::hasMethod
+  signature:
+    params:
+    - name: name
+      type: string
+    returnType: bool
+- subject:
+    method: ReflectionClass::hasProperty
+  signature:
+    params:
+    - name: name
+      type: string
+    returnType: bool
+- subject:
+    method: ReflectionClass::implementsInterface
+  signature:
+    params:
+    - name: interface
+      type: ReflectionClass|string
+    returnType: bool
+- subject:
+    method: ReflectionClass::initializeLazyObject
+  signature:
+    params:
+    - name: object
+      type: object
+    returnType: object
+- subject:
+    method: ReflectionClass::inNamespace
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionClass::isAbstract
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionClass::isAnonymous
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionClass::isCloneable
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionClass::isEnum
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionClass::isFinal
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionClass::isInstance
+  signature:
+    params:
+    - name: object
+      type: object
+    returnType: bool
+- subject:
+    method: ReflectionClass::isInstantiable
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionClass::isInterface
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionClass::isInternal
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionClass::isIterable
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionClass::isIterateable
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionClass::isReadOnly
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionClass::isSubclassOf
+  signature:
+    params:
+    - name: class
+      type: ReflectionClass|string
+    returnType: bool
+- subject:
+    method: ReflectionClass::isTrait
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionClass::isUninitializedLazyObject
+  signature:
+    params:
+    - name: object
+      type: object
+    returnType: bool
+- subject:
+    method: ReflectionClass::isUserDefined
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionClass::markLazyObjectAsInitialized
+  signature:
+    params:
+    - name: object
+      type: object
+    returnType: object
+- subject:
+    method: ReflectionClass::newInstance
+  signature:
+    params:
+    - name: args
+      type: mixed
+      optional: true
+      variadic: true
+    returnType: object
+- subject:
+    method: ReflectionClass::newInstanceArgs
+  signature:
+    params:
+    - name: args
+      type: array
+      optional: true
+    returnType: ?object
+- subject:
+    method: ReflectionClass::newInstanceWithoutConstructor
+  signature:
+    returnType: object
+- subject:
+    method: ReflectionClass::newLazyGhost
+  signature:
+    params:
+    - name: initializer
+      type: callable
+    - name: options
+      type: int
+      optional: true
+    returnType: object
+- subject:
+    method: ReflectionClass::newLazyProxy
+  signature:
+    params:
+    - name: factory
+      type: callable
+    - name: options
+      type: int
+      optional: true
+    returnType: object
+- subject:
+    method: ReflectionClass::resetAsLazyGhost
+  signature:
+    params:
+    - name: object
+      type: object
+    - name: initializer
+      type: callable
+    - name: options
+      type: int
+      optional: true
+    returnType: void
+- subject:
+    method: ReflectionClass::resetAsLazyProxy
+  signature:
+    params:
+    - name: object
+      type: object
+    - name: factory
+      type: callable
+    - name: options
+      type: int
+      optional: true
+    returnType: void
+- subject:
+    method: ReflectionClass::setStaticPropertyValue
+  signature:
+    params:
+    - name: name
+      type: string
+    - name: value
+      type: mixed
+    returnType: void
+- subject:
+    method: ReflectionFunction::__construct
+  signature:
+    params:
+    - name: function
+      type: Closure|string
+    returnType: mixed
+- subject:
+    method: ReflectionFunction::__toString
+  signature:
+    returnType: string
+- subject:
+    method: ReflectionFunction::getClosure
+  signature:
+    returnType: Closure
+- subject:
+    method: ReflectionFunction::invoke
+  signature:
+    params:
+    - name: args
+      type: mixed
+      optional: true
+      variadic: true
+    returnType: mixed
+- subject:
+    method: ReflectionFunction::invokeArgs
+  signature:
+    params:
+    - name: args
+      type: array
+    returnType: mixed
+- subject:
+    method: ReflectionFunction::isAnonymous
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionFunction::isDisabled
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionIntersectionType::getTypes
+  signature:
+    returnType: array
+- subject:
+    method: ReflectionMethod::__construct
+  signature:
+    params:
+    - name: objectOrMethod
+      type: object|string
+    - name: method
+      type: ?string
+      optional: true
+    returnType: mixed
+- subject:
+    method: ReflectionMethod::__toString
+  signature:
+    returnType: string
+- subject:
+    method: ReflectionMethod::createFromMethodName
+  signature:
+    params:
+    - name: method
+      type: string
+    returnType: static
+- subject:
+    method: ReflectionMethod::getClosure
+  signature:
+    params:
+    - name: object
+      type: ?object
+      optional: true
+    returnType: Closure
+- subject:
+    method: ReflectionMethod::getDeclaringClass
+  signature:
+    returnType: ReflectionClass
+- subject:
+    method: ReflectionMethod::getModifiers
+  signature:
+    returnType: int
+- subject:
+    method: ReflectionMethod::getPrototype
+  signature:
+    returnType: ReflectionMethod
+- subject:
+    method: ReflectionMethod::hasPrototype
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionMethod::invoke
+  signature:
+    params:
+    - name: object
+      type: ?object
+    - name: args
+      type: mixed
+      optional: true
+      variadic: true
+    returnType: mixed
+- subject:
+    method: ReflectionMethod::invokeArgs
+  signature:
+    params:
+    - name: object
+      type: ?object
+    - name: args
+      type: array
+    returnType: mixed
+- subject:
+    method: ReflectionMethod::isAbstract
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionMethod::isConstructor
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionMethod::isDestructor
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionMethod::isFinal
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionMethod::isPrivate
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionMethod::isProtected
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionMethod::isPublic
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionMethod::setAccessible
+  signature:
+    params:
+    - name: accessible
+      type: bool
+    returnType: void
+- subject:
+    method: ReflectionNamedType::getName
+  signature:
+    returnType: string
+- subject:
+    method: ReflectionNamedType::isBuiltin
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionParameter::__clone
+  signature:
+    returnType: void
+- subject:
+    method: ReflectionParameter::__construct
+  signature:
+    params:
+    - name: function
+      type: mixed
+    - name: param
+      type: int|string
+    returnType: mixed
+- subject:
+    method: ReflectionParameter::__toString
+  signature:
+    returnType: string
+- subject:
+    method: ReflectionParameter::allowsNull
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionParameter::canBePassedByValue
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionParameter::getAttributes
+  signature:
+    params:
+    - name: name
+      type: ?string
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    method: ReflectionParameter::getClass
+  signature:
+    returnType: ?ReflectionClass
+- subject:
+    method: ReflectionParameter::getDeclaringClass
+  signature:
+    returnType: ?ReflectionClass
+- subject:
+    method: ReflectionParameter::getDeclaringFunction
+  signature:
+    returnType: ReflectionFunctionAbstract
+- subject:
+    method: ReflectionParameter::getDefaultValue
+  signature:
+    returnType: mixed
+- subject:
+    method: ReflectionParameter::getDefaultValueConstantName
+  signature:
+    returnType: ?string
+- subject:
+    method: ReflectionParameter::getName
+  signature:
+    returnType: string
+- subject:
+    method: ReflectionParameter::getPosition
+  signature:
+    returnType: int
+- subject:
+    method: ReflectionParameter::getType
+  signature:
+    returnType: ?ReflectionType
+- subject:
+    method: ReflectionParameter::hasType
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionParameter::isArray
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionParameter::isCallable
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionParameter::isDefaultValueAvailable
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionParameter::isDefaultValueConstant
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionParameter::isOptional
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionParameter::isPassedByReference
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionParameter::isPromoted
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionParameter::isVariadic
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionProperty::__clone
+  signature:
+    returnType: void
+- subject:
+    method: ReflectionProperty::__construct
+  signature:
+    params:
+    - name: class
+      type: object|string
+    - name: property
+      type: string
+    returnType: mixed
+- subject:
+    method: ReflectionProperty::__toString
+  signature:
+    returnType: string
+- subject:
+    method: ReflectionProperty::getAttributes
+  signature:
+    params:
+    - name: name
+      type: ?string
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    method: ReflectionProperty::getDeclaringClass
+  signature:
+    returnType: ReflectionClass
+- subject:
+    method: ReflectionProperty::getDefaultValue
+  signature:
+    returnType: mixed
+- subject:
+    method: ReflectionProperty::getDocComment
+  signature:
+    returnType: string|false
+- subject:
+    method: ReflectionProperty::getHook
+  signature:
+    params:
+    - name: type
+      type: PropertyHookType
+    returnType: ?ReflectionMethod
+- subject:
+    method: ReflectionProperty::getHooks
+  signature:
+    returnType: array
+- subject:
+    method: ReflectionProperty::getMangledName
+  signature:
+    returnType: string
+- subject:
+    method: ReflectionProperty::getModifiers
+  signature:
+    returnType: int
+- subject:
+    method: ReflectionProperty::getName
+  signature:
+    returnType: string
+- subject:
+    method: ReflectionProperty::getRawValue
+  signature:
+    params:
+    - name: object
+      type: object
+    returnType: mixed
+- subject:
+    method: ReflectionProperty::getSettableType
+  signature:
+    returnType: ?ReflectionType
+- subject:
+    method: ReflectionProperty::getType
+  signature:
+    returnType: ?ReflectionType
+- subject:
+    method: ReflectionProperty::getValue
+  signature:
+    params:
+    - name: object
+      type: ?object
+      optional: true
+    returnType: mixed
+- subject:
+    method: ReflectionProperty::hasDefaultValue
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionProperty::hasHook
+  signature:
+    params:
+    - name: type
+      type: PropertyHookType
+    returnType: bool
+- subject:
+    method: ReflectionProperty::hasHooks
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionProperty::hasType
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionProperty::isAbstract
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionProperty::isDefault
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionProperty::isDynamic
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionProperty::isFinal
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionProperty::isInitialized
+  signature:
+    params:
+    - name: object
+      type: ?object
+      optional: true
+    returnType: bool
+- subject:
+    method: ReflectionProperty::isLazy
+  signature:
+    params:
+    - name: object
+      type: object
+    returnType: bool
+- subject:
+    method: ReflectionProperty::isPrivate
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionProperty::isPrivateSet
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionProperty::isPromoted
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionProperty::isProtected
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionProperty::isProtectedSet
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionProperty::isPublic
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionProperty::isReadOnly
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionProperty::isStatic
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionProperty::isVirtual
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionProperty::setAccessible
+  signature:
+    params:
+    - name: accessible
+      type: bool
+    returnType: void
+- subject:
+    method: ReflectionProperty::setRawValue
+  signature:
+    params:
+    - name: object
+      type: object
+    - name: value
+      type: mixed
+    returnType: void
+- subject:
+    method: ReflectionProperty::setRawValueWithoutLazyInitialization
+  signature:
+    params:
+    - name: object
+      type: object
+    - name: value
+      type: mixed
+    returnType: void
+- subject:
+    method: ReflectionProperty::setValue
+  signature:
+    params:
+    - name: objectOrValue
+      type: mixed
+    - name: value
+      type: mixed
+      optional: true
+    returnType: void
+- subject:
+    method: ReflectionProperty::skipLazyInitialization
+  signature:
+    params:
+    - name: object
+      type: object
+    returnType: void
+- subject:
+    method: ReflectionType::__clone
+  signature:
+    returnType: void
+- subject:
+    method: ReflectionType::__toString
+  signature:
+    returnType: string
+- subject:
+    method: ReflectionType::allowsNull
+  signature:
+    returnType: bool
+- subject:
+    method: ReflectionUnionType::getTypes
+  signature:
+    returnType: array

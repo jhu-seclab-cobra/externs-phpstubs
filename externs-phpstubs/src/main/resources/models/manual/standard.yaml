@@ -1,27 +1,5 @@
-# Standard-extension functions newer (PHP 8.3) or older (removed before PHP 8.0) than the upstream release.
+# Standard-extension functions removed before PHP 8.0, so php-src 8.5.11 declares none of them.
 # Hand-maintained; extension provenance "standard" comes from this file name. Signatures follow the PHP manual.
-# PHP manual (8.3): returns the string decremented by one in its alphanumeric sequence.
-- subject:
-    function: str_decrement
-  signature:
-    params:
-      - name: string
-        type: string
-    returnType: string
-  propagation:
-    - from: argument(0)
-      to: return
-# PHP manual (8.3): returns the string incremented by one in its alphanumeric sequence.
-- subject:
-    function: str_increment
-  signature:
-    params:
-      - name: string
-        type: string
-    returnType: string
-  propagation:
-    - from: argument(0)
-      to: return
 # PHP manual (removed 8.0): returns the text with line breaks converted; the text reaches the result.
 - subject:
     function: hebrevc

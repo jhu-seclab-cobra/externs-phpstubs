@@ -1,0 +1,323 @@
+# Generated from php-src stubs by tools/extract_hierarchy.py.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    class: soap\sdl
+  signature:
+    classifier: class
+- subject:
+    class: soap\url
+  signature:
+    classifier: class
+- subject:
+    class: soapheader
+  signature:
+    classifier: class
+- subject:
+    class: soapparam
+  signature:
+    classifier: class
+- subject:
+    class: soapvar
+  signature:
+    classifier: class
+- subject:
+    method: SoapHeader::__construct
+  signature:
+    params:
+    - name: namespace
+      type: string
+    - name: name
+      type: string
+    - name: data
+      type: mixed
+      optional: true
+    - name: mustUnderstand
+      type: bool
+      optional: true
+    - name: actor
+      type: string|int|null
+      optional: true
+    returnType: mixed
+- subject:
+    method: SoapParam::__construct
+  signature:
+    params:
+    - name: data
+      type: mixed
+    - name: name
+      type: string
+    returnType: mixed
+- subject:
+    method: SoapVar::__construct
+  signature:
+    params:
+    - name: data
+      type: mixed
+    - name: encoding
+      type: ?int
+    - name: typeName
+      type: ?string
+      optional: true
+    - name: typeNamespace
+      type: ?string
+      optional: true
+    - name: nodeName
+      type: ?string
+      optional: true
+    - name: nodeNamespace
+      type: ?string
+      optional: true
+    returnType: mixed
+- subject:
+    class: soapclient
+  signature:
+    classifier: class
+- subject:
+    class: soapserver
+  signature:
+    classifier: class
+- subject:
+    class: soapfault
+  signature:
+    classifier: class
+    parent: exception
+- subject:
+    function: is_soap_fault
+  signature:
+    params:
+    - name: object
+      type: mixed
+    returnType: bool
+- subject:
+    function: use_soap_error_handler
+  signature:
+    params:
+    - name: enable
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    method: SoapClient::__call
+  signature:
+    params:
+    - name: name
+      type: string
+    - name: args
+      type: array
+    returnType: mixed
+- subject:
+    method: SoapClient::__construct
+  signature:
+    params:
+    - name: wsdl
+      type: ?string
+    - name: options
+      type: array
+      optional: true
+    returnType: mixed
+- subject:
+    method: SoapClient::__doRequest
+  signature:
+    params:
+    - name: request
+      type: string
+    - name: location
+      type: string
+    - name: action
+      type: string
+    - name: version
+      type: int
+    - name: oneWay
+      type: bool
+      optional: true
+    - name: uriParserClass
+      type: ?string
+      optional: true
+    returnType: ?string
+- subject:
+    method: SoapClient::__getCookies
+  signature:
+    returnType: array
+- subject:
+    method: SoapClient::__getFunctions
+  signature:
+    returnType: ?array
+- subject:
+    method: SoapClient::__getLastRequest
+  signature:
+    returnType: ?string
+- subject:
+    method: SoapClient::__getLastRequestHeaders
+  signature:
+    returnType: ?string
+- subject:
+    method: SoapClient::__getLastResponse
+  signature:
+    returnType: ?string
+- subject:
+    method: SoapClient::__getLastResponseHeaders
+  signature:
+    returnType: ?string
+- subject:
+    method: SoapClient::__getTypes
+  signature:
+    returnType: ?array
+- subject:
+    method: SoapClient::__setCookie
+  signature:
+    params:
+    - name: name
+      type: string
+    - name: value
+      type: ?string
+      optional: true
+    returnType: void
+- subject:
+    method: SoapClient::__setLocation
+  signature:
+    params:
+    - name: location
+      type: ?string
+      optional: true
+    returnType: ?string
+- subject:
+    method: SoapClient::__setSoapHeaders
+  signature:
+    params:
+    - name: headers
+      type: mixed
+      optional: true
+    returnType: bool
+- subject:
+    method: SoapClient::__soapCall
+  signature:
+    params:
+    - name: name
+      type: string
+    - name: args
+      type: array
+    - name: options
+      type: ?array
+      optional: true
+    - name: inputHeaders
+      type: mixed
+      optional: true
+    - name: outputHeaders
+      type: mixed
+      optional: true
+      byRef: true
+    returnType: mixed
+- subject:
+    method: SoapFault::__construct
+  signature:
+    params:
+    - name: code
+      type: array|string|null
+    - name: string
+      type: string
+    - name: actor
+      type: ?string
+      optional: true
+    - name: details
+      type: mixed
+      optional: true
+    - name: name
+      type: ?string
+      optional: true
+    - name: headerFault
+      type: mixed
+      optional: true
+    - name: lang
+      type: string
+      optional: true
+    returnType: mixed
+- subject:
+    method: SoapFault::__toString
+  signature:
+    returnType: string
+- subject:
+    method: SoapServer::__construct
+  signature:
+    params:
+    - name: wsdl
+      type: ?string
+    - name: options
+      type: array
+      optional: true
+    returnType: mixed
+- subject:
+    method: SoapServer::__getLastResponse
+  signature:
+    returnType: ?string
+- subject:
+    method: SoapServer::addFunction
+  signature:
+    params:
+    - name: functions
+      type: mixed
+    returnType: void
+- subject:
+    method: SoapServer::addSoapHeader
+  signature:
+    params:
+    - name: header
+      type: SoapHeader
+    returnType: void
+- subject:
+    method: SoapServer::fault
+  signature:
+    params:
+    - name: code
+      type: string
+    - name: string
+      type: string
+    - name: actor
+      type: string
+      optional: true
+    - name: details
+      type: mixed
+      optional: true
+    - name: name
+      type: string
+      optional: true
+    - name: lang
+      type: string
+      optional: true
+    returnType: void
+- subject:
+    method: SoapServer::getFunctions
+  signature:
+    returnType: array
+- subject:
+    method: SoapServer::handle
+  signature:
+    params:
+    - name: request
+      type: ?string
+      optional: true
+    returnType: void
+- subject:
+    method: SoapServer::setClass
+  signature:
+    params:
+    - name: class
+      type: string
+    - name: args
+      type: mixed
+      optional: true
+      variadic: true
+    returnType: void
+- subject:
+    method: SoapServer::setObject
+  signature:
+    params:
+    - name: object
+      type: object
+    returnType: void
+- subject:
+    method: SoapServer::setPersistence
+  signature:
+    params:
+    - name: mode
+      type: int
+    returnType: void

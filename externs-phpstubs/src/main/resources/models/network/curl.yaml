@@ -5,15 +5,15 @@
   signature:
     params:
     - name: handle
-      type: mixed
+      type: CurlHandle
     returnType: void
 - subject:
     function: curl_copy_handle
   signature:
     params:
     - name: handle
-      type: mixed
-    returnType: mixed
+      type: CurlHandle
+    returnType: CurlHandle|false
   propagation:
   - from: argument(0)
     to: return
@@ -22,14 +22,14 @@
   signature:
     params:
     - name: handle
-      type: mixed
+      type: CurlHandle
     returnType: int
 - subject:
     function: curl_error
   signature:
     params:
     - name: handle
-      type: mixed
+      type: CurlHandle
     returnType: string
   propagation:
   - from: argument(0)
@@ -39,10 +39,10 @@
   signature:
     params:
     - name: handle
-      type: mixed
+      type: CurlHandle
     - name: string
       type: string
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -53,8 +53,8 @@
   signature:
     params:
     - name: handle
-      type: mixed
-    returnType: bool
+      type: CurlHandle
+    returnType: string|bool
 - subject:
     function: curl_file_create
   signature:
@@ -62,12 +62,12 @@
     - name: filename
       type: string
     - name: mime_type
-      type: string
+      type: ?string
       optional: true
     - name: posted_filename
-      type: string
+      type: ?string
       optional: true
-    returnType: mixed
+    returnType: CURLFile
   propagation:
   - from: argument(0)
     to: return
@@ -80,9 +80,9 @@
   signature:
     params:
     - name: handle
-      type: mixed
+      type: CurlHandle
     - name: option
-      type: int
+      type: ?int
       optional: true
     returnType: mixed
   propagation:
@@ -95,48 +95,49 @@
   signature:
     params:
     - name: url
-      type: string
+      type: ?string
       optional: true
-    returnType: mixed
+    returnType: CurlHandle|false
 - subject:
     function: curl_multi_add_handle
   signature:
     params:
     - name: multi_handle
-      type: mixed
+      type: CurlMultiHandle
     - name: handle
-      type: mixed
+      type: CurlHandle
     returnType: int
 - subject:
     function: curl_multi_close
   signature:
     params:
     - name: multi_handle
-      type: mixed
+      type: CurlMultiHandle
     returnType: void
 - subject:
     function: curl_multi_errno
   signature:
     params:
     - name: multi_handle
-      type: mixed
+      type: CurlMultiHandle
     returnType: int
 - subject:
     function: curl_multi_exec
   signature:
     params:
     - name: multi_handle
-      type: mixed
+      type: CurlMultiHandle
     - name: still_running
-      type: int
+      type: mixed
+      byRef: true
     returnType: int
 - subject:
     function: curl_multi_getcontent
   signature:
     params:
     - name: handle
-      type: mixed
-    returnType: string
+      type: CurlHandle
+    returnType: ?string
   propagation:
   - from: argument(0)
     to: return
@@ -145,33 +146,34 @@
   signature:
     params:
     - name: multi_handle
-      type: mixed
+      type: CurlMultiHandle
     - name: queued_messages
-      type: int
+      type: mixed
       optional: true
-    returnType: array
+      byRef: true
+    returnType: array|false
   propagation:
   - from: argument(0)
     to: return
 - subject:
     function: curl_multi_init
   signature:
-    returnType: mixed
+    returnType: CurlMultiHandle
 - subject:
     function: curl_multi_remove_handle
   signature:
     params:
     - name: multi_handle
-      type: mixed
+      type: CurlMultiHandle
     - name: handle
-      type: mixed
+      type: CurlHandle
     returnType: int
 - subject:
     function: curl_multi_select
   signature:
     params:
     - name: multi_handle
-      type: mixed
+      type: CurlMultiHandle
     - name: timeout
       type: float
       optional: true
@@ -181,7 +183,7 @@
   signature:
     params:
     - name: multi_handle
-      type: mixed
+      type: CurlMultiHandle
     - name: option
       type: int
     - name: value
@@ -193,13 +195,13 @@
     params:
     - name: error_code
       type: int
-    returnType: string
+    returnType: ?string
 - subject:
     function: curl_pause
   signature:
     params:
     - name: handle
-      type: mixed
+      type: CurlHandle
     - name: flags
       type: int
     returnType: int
@@ -208,25 +210,25 @@
   signature:
     params:
     - name: handle
-      type: mixed
+      type: CurlHandle
     returnType: void
 - subject:
     function: curl_setopt
   signature:
     params:
     - name: handle
-      type: mixed
+      type: CurlHandle
     - name: option
       type: int
     - name: value
-      type: callable
+      type: mixed
     returnType: bool
 - subject:
     function: curl_setopt_array
   signature:
     params:
     - name: handle
-      type: mixed
+      type: CurlHandle
     - name: options
       type: array
     returnType: bool
@@ -235,25 +237,25 @@
   signature:
     params:
     - name: share_handle
-      type: mixed
+      type: CurlShareHandle
     returnType: void
 - subject:
     function: curl_share_errno
   signature:
     params:
     - name: share_handle
-      type: mixed
+      type: CurlShareHandle
     returnType: int
 - subject:
     function: curl_share_init
   signature:
-    returnType: mixed
+    returnType: CurlShareHandle
 - subject:
     function: curl_share_setopt
   signature:
     params:
     - name: share_handle
-      type: mixed
+      type: CurlShareHandle
     - name: option
       type: int
     - name: value
@@ -265,23 +267,23 @@
     params:
     - name: error_code
       type: int
-    returnType: string
+    returnType: ?string
 - subject:
     function: curl_strerror
   signature:
     params:
     - name: error_code
       type: int
-    returnType: string
+    returnType: ?string
 - subject:
     function: curl_unescape
   signature:
     params:
     - name: handle
-      type: mixed
+      type: CurlHandle
     - name: string
       type: string
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -290,4 +292,100 @@
 - subject:
     function: curl_version
   signature:
+    returnType: array|false
+- subject:
+    class: curlfile
+  signature:
+    classifier: class
+- subject:
+    class: curlsharepersistenthandle
+  signature:
+    classifier: class
+- subject:
+    class: curlstringfile
+  signature:
+    classifier: class
+- subject:
+    function: curl_multi_get_handles
+  signature:
+    params:
+    - name: multi_handle
+      type: CurlMultiHandle
     returnType: array
+- subject:
+    function: curl_share_init_persistent
+  signature:
+    params:
+    - name: share_options
+      type: array
+    returnType: CurlSharePersistentHandle
+- subject:
+    function: curl_upkeep
+  signature:
+    params:
+    - name: handle
+      type: CurlHandle
+    returnType: bool
+- subject:
+    method: CURLFile::__construct
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: mime_type
+      type: ?string
+      optional: true
+    - name: posted_filename
+      type: ?string
+      optional: true
+    returnType: mixed
+- subject:
+    method: CURLFile::getFilename
+  signature:
+    returnType: string
+- subject:
+    method: CURLFile::getMimeType
+  signature:
+    returnType: string
+- subject:
+    method: CURLFile::getPostFilename
+  signature:
+    returnType: string
+- subject:
+    method: CURLFile::setMimeType
+  signature:
+    params:
+    - name: mime_type
+      type: string
+    returnType: void
+- subject:
+    method: CURLFile::setPostFilename
+  signature:
+    params:
+    - name: posted_filename
+      type: string
+    returnType: void
+- subject:
+    method: CURLStringFile::__construct
+  signature:
+    params:
+    - name: data
+      type: string
+    - name: postname
+      type: string
+    - name: mime
+      type: string
+      optional: true
+    returnType: mixed
+- subject:
+    class: curlhandle
+  signature:
+    classifier: class
+- subject:
+    class: curlmultihandle
+  signature:
+    classifier: class
+- subject:
+    class: curlsharehandle
+  signature:
+    classifier: class

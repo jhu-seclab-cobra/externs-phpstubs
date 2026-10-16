@@ -9,17 +9,17 @@
   signature:
     params:
     - name: value
-      type: int
+      type: ?int
       optional: true
-    returnType: int
+    returnType: int|false
 - subject:
     function: session_cache_limiter
   signature:
     params:
     - name: value
-      type: string
+      type: ?string
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -34,7 +34,7 @@
     - name: prefix
       type: string
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -52,11 +52,11 @@
 - subject:
     function: session_encode
   signature:
-    returnType: string
+    returnType: string|false
 - subject:
     function: session_gc
   signature:
-    returnType: int
+    returnType: int|false
 - subject:
     function: session_get_cookie_params
   signature:
@@ -66,9 +66,9 @@
   signature:
     params:
     - name: id
-      type: string
+      type: ?string
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -84,9 +84,9 @@
   signature:
     params:
     - name: module
-      type: string
+      type: ?string
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -95,9 +95,9 @@
   signature:
     params:
     - name: name
-      type: string
+      type: ?string
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -169,9 +169,9 @@
   signature:
     params:
     - name: path
-      type: string
+      type: ?string
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -180,18 +180,18 @@
   signature:
     params:
     - name: lifetime_or_options
-      type: int
+      type: array|int
     - name: path
-      type: string
+      type: ?string
       optional: true
     - name: domain
-      type: string
+      type: ?string
       optional: true
     - name: secure
-      type: bool
+      type: ?bool
       optional: true
     - name: httponly
-      type: bool
+      type: ?bool
       optional: true
     returnType: bool
 - subject:
@@ -204,25 +204,25 @@
       type: mixed
       optional: true
     - name: read
-      type: mixed
+      type: callable
       optional: true
     - name: write
-      type: mixed
+      type: callable
       optional: true
     - name: destroy
-      type: mixed
+      type: callable
       optional: true
     - name: gc
-      type: mixed
+      type: callable
       optional: true
     - name: create_sid
-      type: mixed
+      type: ?callable
       optional: true
     - name: validate_sid
-      type: mixed
+      type: ?callable
       optional: true
     - name: update_timestamp
-      type: mixed
+      type: ?callable
       optional: true
     returnType: bool
 - subject:
@@ -251,4 +251,131 @@
 - subject:
     function: session_write_close
   signature:
+    returnType: bool
+- subject:
+    class: sessionhandler
+  signature:
+    classifier: class
+    interfaces: [sessionhandlerinterface, sessionidinterface]
+- subject:
+    class: sessionhandlerinterface
+  signature:
+    classifier: interface
+- subject:
+    class: sessionidinterface
+  signature:
+    classifier: interface
+- subject:
+    class: sessionupdatetimestamphandlerinterface
+  signature:
+    classifier: interface
+- subject:
+    method: SessionHandler::close
+  signature:
+    returnType: bool
+- subject:
+    method: SessionHandler::create_sid
+  signature:
+    returnType: string
+- subject:
+    method: SessionHandler::destroy
+  signature:
+    params:
+    - name: id
+      type: string
+    returnType: bool
+- subject:
+    method: SessionHandler::gc
+  signature:
+    params:
+    - name: max_lifetime
+      type: int
+    returnType: int|false
+- subject:
+    method: SessionHandler::open
+  signature:
+    params:
+    - name: path
+      type: string
+    - name: name
+      type: string
+    returnType: bool
+- subject:
+    method: SessionHandler::read
+  signature:
+    params:
+    - name: id
+      type: string
+    returnType: string|false
+- subject:
+    method: SessionHandler::write
+  signature:
+    params:
+    - name: id
+      type: string
+    - name: data
+      type: string
+    returnType: bool
+- subject:
+    method: SessionHandlerInterface::close
+  signature:
+    returnType: bool
+- subject:
+    method: SessionHandlerInterface::destroy
+  signature:
+    params:
+    - name: id
+      type: string
+    returnType: bool
+- subject:
+    method: SessionHandlerInterface::gc
+  signature:
+    params:
+    - name: max_lifetime
+      type: int
+    returnType: int|false
+- subject:
+    method: SessionHandlerInterface::open
+  signature:
+    params:
+    - name: path
+      type: string
+    - name: name
+      type: string
+    returnType: bool
+- subject:
+    method: SessionHandlerInterface::read
+  signature:
+    params:
+    - name: id
+      type: string
+    returnType: string|false
+- subject:
+    method: SessionHandlerInterface::write
+  signature:
+    params:
+    - name: id
+      type: string
+    - name: data
+      type: string
+    returnType: bool
+- subject:
+    method: SessionIdInterface::create_sid
+  signature:
+    returnType: string
+- subject:
+    method: SessionUpdateTimestampHandlerInterface::updateTimestamp
+  signature:
+    params:
+    - name: id
+      type: string
+    - name: data
+      type: string
+    returnType: bool
+- subject:
+    method: SessionUpdateTimestampHandlerInterface::validateId
+  signature:
+    params:
+    - name: id
+      type: string
     returnType: bool

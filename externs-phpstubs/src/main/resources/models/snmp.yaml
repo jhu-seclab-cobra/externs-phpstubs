@@ -1,0 +1,564 @@
+# Generated from php-src stubs by tools/extract_hierarchy.py.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    class: snmp
+  signature:
+    classifier: class
+- subject:
+    class: snmpexception
+  signature:
+    classifier: class
+    parent: runtimeexception
+- subject:
+    method: SNMP::__construct
+  signature:
+    params:
+    - name: version
+      type: int
+    - name: hostname
+      type: string
+    - name: community
+      type: string
+    - name: timeout
+      type: int
+      optional: true
+    - name: retries
+      type: int
+      optional: true
+    returnType: mixed
+- subject:
+    method: SNMP::close
+  signature:
+    returnType: bool
+- subject:
+    method: SNMP::get
+  signature:
+    params:
+    - name: objectId
+      type: array|string
+    - name: preserveKeys
+      type: bool
+      optional: true
+    returnType: mixed
+- subject:
+    method: SNMP::getErrno
+  signature:
+    returnType: int
+- subject:
+    method: SNMP::getError
+  signature:
+    returnType: string
+- subject:
+    method: SNMP::getnext
+  signature:
+    params:
+    - name: objectId
+      type: array|string
+    returnType: mixed
+- subject:
+    method: SNMP::set
+  signature:
+    params:
+    - name: objectId
+      type: array|string
+    - name: type
+      type: array|string
+    - name: value
+      type: array|string
+    returnType: bool
+- subject:
+    method: SNMP::setSecurity
+  signature:
+    params:
+    - name: securityLevel
+      type: string
+    - name: authProtocol
+      type: string
+      optional: true
+    - name: authPassphrase
+      type: string
+      optional: true
+    - name: privacyProtocol
+      type: string
+      optional: true
+    - name: privacyPassphrase
+      type: string
+      optional: true
+    - name: contextName
+      type: string
+      optional: true
+    - name: contextEngineId
+      type: string
+      optional: true
+    returnType: bool
+- subject:
+    method: SNMP::walk
+  signature:
+    params:
+    - name: objectId
+      type: array|string
+    - name: suffixAsKey
+      type: bool
+      optional: true
+    - name: maxRepetitions
+      type: int
+      optional: true
+    - name: nonRepeaters
+      type: int
+      optional: true
+    returnType: array|false
+- subject:
+    function: snmp2_get
+  signature:
+    params:
+    - name: hostname
+      type: string
+    - name: community
+      type: string
+    - name: object_id
+      type: array|string
+    - name: timeout
+      type: int
+      optional: true
+    - name: retries
+      type: int
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: snmp2_getnext
+  signature:
+    params:
+    - name: hostname
+      type: string
+    - name: community
+      type: string
+    - name: object_id
+      type: array|string
+    - name: timeout
+      type: int
+      optional: true
+    - name: retries
+      type: int
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: snmp2_real_walk
+  signature:
+    params:
+    - name: hostname
+      type: string
+    - name: community
+      type: string
+    - name: object_id
+      type: array|string
+    - name: timeout
+      type: int
+      optional: true
+    - name: retries
+      type: int
+      optional: true
+    returnType: array|false
+  propagation:
+  - from: argument(2)
+    to: return
+- subject:
+    function: snmp2_set
+  signature:
+    params:
+    - name: hostname
+      type: string
+    - name: community
+      type: string
+    - name: object_id
+      type: array|string
+    - name: type
+      type: array|string
+    - name: value
+      type: array|string
+    - name: timeout
+      type: int
+      optional: true
+    - name: retries
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: snmp2_walk
+  signature:
+    params:
+    - name: hostname
+      type: string
+    - name: community
+      type: string
+    - name: object_id
+      type: array|string
+    - name: timeout
+      type: int
+      optional: true
+    - name: retries
+      type: int
+      optional: true
+    returnType: array|false
+  propagation:
+  - from: argument(2)
+    to: return
+- subject:
+    function: snmp3_get
+  signature:
+    params:
+    - name: hostname
+      type: string
+    - name: security_name
+      type: string
+    - name: security_level
+      type: string
+    - name: auth_protocol
+      type: string
+    - name: auth_passphrase
+      type: string
+    - name: privacy_protocol
+      type: string
+    - name: privacy_passphrase
+      type: string
+    - name: object_id
+      type: array|string
+    - name: timeout
+      type: int
+      optional: true
+    - name: retries
+      type: int
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+  - from: argument(5)
+    to: return
+  - from: argument(6)
+    to: return
+- subject:
+    function: snmp3_getnext
+  signature:
+    params:
+    - name: hostname
+      type: string
+    - name: security_name
+      type: string
+    - name: security_level
+      type: string
+    - name: auth_protocol
+      type: string
+    - name: auth_passphrase
+      type: string
+    - name: privacy_protocol
+      type: string
+    - name: privacy_passphrase
+      type: string
+    - name: object_id
+      type: array|string
+    - name: timeout
+      type: int
+      optional: true
+    - name: retries
+      type: int
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+  - from: argument(4)
+    to: return
+  - from: argument(5)
+    to: return
+  - from: argument(6)
+    to: return
+- subject:
+    function: snmp3_real_walk
+  signature:
+    params:
+    - name: hostname
+      type: string
+    - name: security_name
+      type: string
+    - name: security_level
+      type: string
+    - name: auth_protocol
+      type: string
+    - name: auth_passphrase
+      type: string
+    - name: privacy_protocol
+      type: string
+    - name: privacy_passphrase
+      type: string
+    - name: object_id
+      type: array|string
+    - name: timeout
+      type: int
+      optional: true
+    - name: retries
+      type: int
+      optional: true
+    returnType: array|false
+  propagation:
+  - from: argument(7)
+    to: return
+- subject:
+    function: snmp3_set
+  signature:
+    params:
+    - name: hostname
+      type: string
+    - name: security_name
+      type: string
+    - name: security_level
+      type: string
+    - name: auth_protocol
+      type: string
+    - name: auth_passphrase
+      type: string
+    - name: privacy_protocol
+      type: string
+    - name: privacy_passphrase
+      type: string
+    - name: object_id
+      type: array|string
+    - name: type
+      type: array|string
+    - name: value
+      type: array|string
+    - name: timeout
+      type: int
+      optional: true
+    - name: retries
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: snmp3_walk
+  signature:
+    params:
+    - name: hostname
+      type: string
+    - name: security_name
+      type: string
+    - name: security_level
+      type: string
+    - name: auth_protocol
+      type: string
+    - name: auth_passphrase
+      type: string
+    - name: privacy_protocol
+      type: string
+    - name: privacy_passphrase
+      type: string
+    - name: object_id
+      type: array|string
+    - name: timeout
+      type: int
+      optional: true
+    - name: retries
+      type: int
+      optional: true
+    returnType: array|false
+  propagation:
+  - from: argument(7)
+    to: return
+- subject:
+    function: snmp_get_quick_print
+  signature:
+    returnType: bool
+- subject:
+    function: snmp_get_valueretrieval
+  signature:
+    returnType: int
+- subject:
+    function: snmp_read_mib
+  signature:
+    params:
+    - name: filename
+      type: string
+    returnType: bool
+- subject:
+    function: snmp_set_enum_print
+  signature:
+    params:
+    - name: enable
+      type: bool
+    returnType: 'true'
+- subject:
+    function: snmp_set_oid_numeric_print
+  signature:
+    params:
+    - name: format
+      type: int
+    returnType: 'true'
+- subject:
+    function: snmp_set_oid_output_format
+  signature:
+    params:
+    - name: format
+      type: int
+    returnType: 'true'
+- subject:
+    function: snmp_set_quick_print
+  signature:
+    params:
+    - name: enable
+      type: bool
+    returnType: 'true'
+- subject:
+    function: snmp_set_valueretrieval
+  signature:
+    params:
+    - name: method
+      type: int
+    returnType: 'true'
+- subject:
+    function: snmpget
+  signature:
+    params:
+    - name: hostname
+      type: string
+    - name: community
+      type: string
+    - name: object_id
+      type: array|string
+    - name: timeout
+      type: int
+      optional: true
+    - name: retries
+      type: int
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: snmpgetnext
+  signature:
+    params:
+    - name: hostname
+      type: string
+    - name: community
+      type: string
+    - name: object_id
+      type: array|string
+    - name: timeout
+      type: int
+      optional: true
+    - name: retries
+      type: int
+      optional: true
+    returnType: mixed
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: snmprealwalk
+  signature:
+    params:
+    - name: hostname
+      type: string
+    - name: community
+      type: string
+    - name: object_id
+      type: array|string
+    - name: timeout
+      type: int
+      optional: true
+    - name: retries
+      type: int
+      optional: true
+    returnType: array|false
+  propagation:
+  - from: argument(2)
+    to: return
+- subject:
+    function: snmpset
+  signature:
+    params:
+    - name: hostname
+      type: string
+    - name: community
+      type: string
+    - name: object_id
+      type: array|string
+    - name: type
+      type: array|string
+    - name: value
+      type: array|string
+    - name: timeout
+      type: int
+      optional: true
+    - name: retries
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: snmpwalk
+  signature:
+    params:
+    - name: hostname
+      type: string
+    - name: community
+      type: string
+    - name: object_id
+      type: array|string
+    - name: timeout
+      type: int
+      optional: true
+    - name: retries
+      type: int
+      optional: true
+    returnType: array|false
+  propagation:
+  - from: argument(2)
+    to: return
+- subject:
+    function: snmpwalkoid
+  signature:
+    params:
+    - name: hostname
+      type: string
+    - name: community
+      type: string
+    - name: object_id
+      type: array|string
+    - name: timeout
+      type: int
+      optional: true
+    - name: retries
+      type: int
+      optional: true
+    returnType: array|false
+  propagation:
+  - from: argument(2)
+    to: return

@@ -5,10 +5,10 @@
   signature:
     params:
     - name: value
-      type: array
+      type: array|string|null
       optional: true
     - name: encoding
-      type: string
+      type: ?string
       optional: true
     returnType: bool
 - subject:
@@ -18,9 +18,9 @@
     - name: codepoint
       type: int
     - name: encoding
-      type: string
+      type: ?string
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(1)
     to: return
@@ -33,7 +33,7 @@
     - name: mode
       type: int
     - name: encoding
-      type: string
+      type: ?string
       optional: true
     returnType: string
   propagation:
@@ -46,13 +46,13 @@
   signature:
     params:
     - name: string
-      type: string
+      type: array|string
     - name: to_encoding
       type: string
     - name: from_encoding
-      type: array
+      type: array|string|null
       optional: true
-    returnType: string
+    returnType: array|string|false
   propagation:
   - from: argument(0)
     to: return
@@ -66,7 +66,7 @@
       type: string
       optional: true
     - name: encoding
-      type: string
+      type: ?string
       optional: true
     returnType: string
   propagation:
@@ -83,13 +83,16 @@
     - name: to_encoding
       type: string
     - name: from_encoding
-      type: array
+      type: array|string
     - name: var
-      type: array
-    - name: None
-      type: array
+      type: mixed
+      byRef: true
+    - name: vars
+      type: mixed
       optional: true
-    returnType: string
+      byRef: true
+      variadic: true
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -112,7 +115,7 @@
     - name: map
       type: array
     - name: encoding
-      type: string
+      type: ?string
       optional: true
     returnType: string
   propagation:
@@ -127,12 +130,12 @@
     - name: string
       type: string
     - name: encodings
-      type: array
+      type: array|string|null
       optional: true
     - name: strict
       type: bool
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -141,9 +144,9 @@
   signature:
     params:
     - name: encoding
-      type: array
+      type: array|string|null
       optional: true
-    returnType: bool
+    returnType: array|bool
 - subject:
     function: mb_encode_mimeheader
   signature:
@@ -151,10 +154,10 @@
     - name: string
       type: string
     - name: charset
-      type: string
+      type: ?string
       optional: true
     - name: transfer_encoding
-      type: string
+      type: ?string
       optional: true
     - name: newline
       type: string
@@ -181,7 +184,7 @@
     - name: map
       type: array
     - name: encoding
-      type: string
+      type: ?string
       optional: true
     - name: hex
       type: bool
@@ -208,8 +211,9 @@
     - name: string
       type: string
     - name: matches
-      type: array
+      type: mixed
       optional: true
+      byRef: true
     returnType: bool
 - subject:
     function: mb_ereg_match
@@ -220,7 +224,7 @@
     - name: string
       type: string
     - name: options
-      type: string
+      type: ?string
       optional: true
     returnType: bool
 - subject:
@@ -234,9 +238,9 @@
     - name: string
       type: string
     - name: options
-      type: string
+      type: ?string
       optional: true
-    returnType: string
+    returnType: string|false|null
   propagation:
   - from: argument(0)
     to: return
@@ -257,9 +261,9 @@
     - name: string
       type: string
     - name: options
-      type: string
+      type: ?string
       optional: true
-    returnType: string
+    returnType: string|false|null
   propagation:
   - from: argument(0)
     to: return
@@ -272,10 +276,10 @@
   signature:
     params:
     - name: pattern
-      type: string
+      type: ?string
       optional: true
     - name: options
-      type: string
+      type: ?string
       optional: true
     returnType: bool
 - subject:
@@ -285,7 +289,7 @@
 - subject:
     function: mb_ereg_search_getregs
   signature:
-    returnType: array
+    returnType: array|false
 - subject:
     function: mb_ereg_search_init
   signature:
@@ -293,10 +297,10 @@
     - name: string
       type: string
     - name: pattern
-      type: string
+      type: ?string
       optional: true
     - name: options
-      type: string
+      type: ?string
       optional: true
     returnType: bool
 - subject:
@@ -304,23 +308,23 @@
   signature:
     params:
     - name: pattern
-      type: string
+      type: ?string
       optional: true
     - name: options
-      type: string
+      type: ?string
       optional: true
-    returnType: array
+    returnType: array|false
 - subject:
     function: mb_ereg_search_regs
   signature:
     params:
     - name: pattern
-      type: string
+      type: ?string
       optional: true
     - name: options
-      type: string
+      type: ?string
       optional: true
-    returnType: array
+    returnType: array|false
 - subject:
     function: mb_ereg_search_setpos
   signature:
@@ -337,8 +341,9 @@
     - name: string
       type: string
     - name: matches
-      type: array
+      type: mixed
       optional: true
+      byRef: true
     returnType: bool
 - subject:
     function: mb_eregi_replace
@@ -351,9 +356,9 @@
     - name: string
       type: string
     - name: options
-      type: string
+      type: ?string
       optional: true
-    returnType: string
+    returnType: string|false|null
   propagation:
   - from: argument(0)
     to: return
@@ -370,39 +375,39 @@
     - name: type
       type: string
       optional: true
-    returnType: array
+    returnType: array|string|int|false|null
 - subject:
     function: mb_http_input
   signature:
     params:
     - name: type
-      type: string
+      type: ?string
       optional: true
-    returnType: array
+    returnType: array|string|false
 - subject:
     function: mb_http_output
   signature:
     params:
     - name: encoding
-      type: string
+      type: ?string
       optional: true
-    returnType: bool
+    returnType: string|bool
 - subject:
     function: mb_internal_encoding
   signature:
     params:
     - name: encoding
-      type: string
+      type: ?string
       optional: true
-    returnType: bool
+    returnType: string|bool
 - subject:
     function: mb_language
   signature:
     params:
     - name: language
-      type: string
+      type: ?string
       optional: true
-    returnType: bool
+    returnType: string|bool
 - subject:
     function: mb_list_encodings
   signature:
@@ -414,9 +419,9 @@
     - name: string
       type: string
     - name: encoding
-      type: string
+      type: ?string
       optional: true
-    returnType: int
+    returnType: int|false
 - subject:
     function: mb_output_handler
   signature:
@@ -436,7 +441,8 @@
     - name: string
       type: string
     - name: result
-      type: array
+      type: mixed
+      byRef: true
     returnType: bool
 - subject:
     function: mb_preferred_mime_name
@@ -444,7 +450,7 @@
     params:
     - name: encoding
       type: string
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -453,15 +459,15 @@
   signature:
     params:
     - name: encoding
-      type: string
+      type: ?string
       optional: true
-    returnType: bool
+    returnType: string|bool
 - subject:
     function: mb_regex_set_options
   signature:
     params:
     - name: options
-      type: string
+      type: ?string
       optional: true
     returnType: string
   propagation:
@@ -474,7 +480,7 @@
     - name: string
       type: string
     - name: encoding
-      type: string
+      type: ?string
       optional: true
     returnType: string
   propagation:
@@ -493,10 +499,10 @@
     - name: message
       type: string
     - name: additional_headers
-      type: array
+      type: array|string
       optional: true
     - name: additional_params
-      type: string
+      type: ?string
       optional: true
     returnType: bool
 - subject:
@@ -510,7 +516,7 @@
     - name: limit
       type: int
       optional: true
-    returnType: array
+    returnType: array|false
 - subject:
     function: mb_str_split
   signature:
@@ -521,7 +527,7 @@
       type: int
       optional: true
     - name: encoding
-      type: string
+      type: ?string
       optional: true
     returnType: array
 - subject:
@@ -533,10 +539,10 @@
     - name: start
       type: int
     - name: length
-      type: int
+      type: ?int
       optional: true
     - name: encoding
-      type: string
+      type: ?string
       optional: true
     returnType: string
   propagation:
@@ -558,7 +564,7 @@
       type: string
       optional: true
     - name: encoding
-      type: string
+      type: ?string
       optional: true
     returnType: string
   propagation:
@@ -580,9 +586,9 @@
       type: int
       optional: true
     - name: encoding
-      type: string
+      type: ?string
       optional: true
-    returnType: int
+    returnType: int|false
 - subject:
     function: mb_stristr
   signature:
@@ -595,9 +601,9 @@
       type: bool
       optional: true
     - name: encoding
-      type: string
+      type: ?string
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -612,7 +618,7 @@
     - name: string
       type: string
     - name: encoding
-      type: string
+      type: ?string
       optional: true
     returnType: int
 - subject:
@@ -627,9 +633,9 @@
       type: int
       optional: true
     - name: encoding
-      type: string
+      type: ?string
       optional: true
-    returnType: int
+    returnType: int|false
 - subject:
     function: mb_strrchr
   signature:
@@ -642,9 +648,9 @@
       type: bool
       optional: true
     - name: encoding
-      type: string
+      type: ?string
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -664,9 +670,9 @@
       type: bool
       optional: true
     - name: encoding
-      type: string
+      type: ?string
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -686,9 +692,9 @@
       type: int
       optional: true
     - name: encoding
-      type: string
+      type: ?string
       optional: true
-    returnType: int
+    returnType: int|false
 - subject:
     function: mb_strrpos
   signature:
@@ -701,9 +707,9 @@
       type: int
       optional: true
     - name: encoding
-      type: string
+      type: ?string
       optional: true
-    returnType: int
+    returnType: int|false
 - subject:
     function: mb_strstr
   signature:
@@ -716,9 +722,9 @@
       type: bool
       optional: true
     - name: encoding
-      type: string
+      type: ?string
       optional: true
-    returnType: string
+    returnType: string|false
   propagation:
   - from: argument(0)
     to: return
@@ -733,7 +739,7 @@
     - name: string
       type: string
     - name: encoding
-      type: string
+      type: ?string
       optional: true
     returnType: string
   propagation:
@@ -746,7 +752,7 @@
     - name: string
       type: string
     - name: encoding
-      type: string
+      type: ?string
       optional: true
     returnType: string
   propagation:
@@ -759,7 +765,7 @@
     - name: string
       type: string
     - name: encoding
-      type: string
+      type: ?string
       optional: true
     returnType: int
 - subject:
@@ -767,9 +773,9 @@
   signature:
     params:
     - name: substitute_character
-      type: int
+      type: string|int|null
       optional: true
-    returnType: bool
+    returnType: string|int|bool
 - subject:
     function: mb_substr
   signature:
@@ -779,10 +785,10 @@
     - name: start
       type: int
     - name: length
-      type: int
+      type: ?int
       optional: true
     - name: encoding
-      type: string
+      type: ?string
       optional: true
     returnType: string
   propagation:
@@ -797,6 +803,83 @@
     - name: needle
       type: string
     - name: encoding
-      type: string
+      type: ?string
       optional: true
     returnType: int
+- subject:
+    function: mb_lcfirst
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: encoding
+      type: ?string
+      optional: true
+    returnType: string
+- subject:
+    function: mb_ltrim
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: characters
+      type: ?string
+      optional: true
+    - name: encoding
+      type: ?string
+      optional: true
+    returnType: string
+- subject:
+    function: mb_rtrim
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: characters
+      type: ?string
+      optional: true
+    - name: encoding
+      type: ?string
+      optional: true
+    returnType: string
+- subject:
+    function: mb_str_pad
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: length
+      type: int
+    - name: pad_string
+      type: string
+      optional: true
+    - name: pad_type
+      type: int
+      optional: true
+    - name: encoding
+      type: ?string
+      optional: true
+    returnType: string
+- subject:
+    function: mb_trim
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: characters
+      type: ?string
+      optional: true
+    - name: encoding
+      type: ?string
+      optional: true
+    returnType: string
+- subject:
+    function: mb_ucfirst
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: encoding
+      type: ?string
+      optional: true
+    returnType: string

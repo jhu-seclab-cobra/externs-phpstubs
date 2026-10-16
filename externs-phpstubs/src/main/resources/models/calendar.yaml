@@ -1,0 +1,177 @@
+# Generated from php-src stubs by tools/extract_signatures.py.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    function: cal_days_in_month
+  signature:
+    params:
+    - name: calendar
+      type: int
+    - name: month
+      type: int
+    - name: year
+      type: int
+    returnType: int
+- subject:
+    function: cal_from_jd
+  signature:
+    params:
+    - name: julian_day
+      type: int
+    - name: calendar
+      type: int
+    returnType: array
+- subject:
+    function: cal_info
+  signature:
+    params:
+    - name: calendar
+      type: int
+      optional: true
+    returnType: array
+- subject:
+    function: cal_to_jd
+  signature:
+    params:
+    - name: calendar
+      type: int
+    - name: month
+      type: int
+    - name: day
+      type: int
+    - name: year
+      type: int
+    returnType: int
+- subject:
+    function: easter_date
+  signature:
+    params:
+    - name: year
+      type: ?int
+      optional: true
+    - name: mode
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: easter_days
+  signature:
+    params:
+    - name: year
+      type: ?int
+      optional: true
+    - name: mode
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: frenchtojd
+  signature:
+    params:
+    - name: month
+      type: int
+    - name: day
+      type: int
+    - name: year
+      type: int
+    returnType: int
+- subject:
+    function: gregoriantojd
+  signature:
+    params:
+    - name: month
+      type: int
+    - name: day
+      type: int
+    - name: year
+      type: int
+    returnType: int
+- subject:
+    function: jddayofweek
+  signature:
+    params:
+    - name: julian_day
+      type: int
+    - name: mode
+      type: int
+      optional: true
+    returnType: int|string
+- subject:
+    function: jdmonthname
+  signature:
+    params:
+    - name: julian_day
+      type: int
+    - name: mode
+      type: int
+    returnType: string
+- subject:
+    function: jdtofrench
+  signature:
+    params:
+    - name: julian_day
+      type: int
+    returnType: string
+- subject:
+    function: jdtogregorian
+  signature:
+    params:
+    - name: julian_day
+      type: int
+    returnType: string
+- subject:
+    function: jdtojewish
+  signature:
+    params:
+    - name: julian_day
+      type: int
+    - name: hebrew
+      type: bool
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: string
+- subject:
+    function: jdtojulian
+  signature:
+    params:
+    - name: julian_day
+      type: int
+    returnType: string
+- subject:
+    function: jdtounix
+  signature:
+    params:
+    - name: julian_day
+      type: int
+    returnType: int
+- subject:
+    function: jewishtojd
+  signature:
+    params:
+    - name: month
+      type: int
+    - name: day
+      type: int
+    - name: year
+      type: int
+    returnType: int
+- subject:
+    function: juliantojd
+  signature:
+    params:
+    - name: month
+      type: int
+    - name: day
+      type: int
+    - name: year
+      type: int
+    returnType: int
+- subject:
+    function: unixtojd
+  signature:
+    params:
+    - name: timestamp
+      type: ?int
+      optional: true
+    returnType: int|false

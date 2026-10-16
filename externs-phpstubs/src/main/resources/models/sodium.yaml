@@ -1,0 +1,1240 @@
+# Generated from php-src stubs by tools/extract_hierarchy.py.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    class: sodiumexception
+  signature:
+    classifier: class
+    parent: exception
+- subject:
+    function: sodium_crypto_aead_aegis128l_decrypt
+  signature:
+    params:
+    - name: ciphertext
+      type: string
+    - name: additional_data
+      type: string
+    - name: nonce
+      type: string
+    - name: key
+      type: string
+    returnType: string|false
+- subject:
+    function: sodium_crypto_aead_aegis128l_encrypt
+  signature:
+    params:
+    - name: message
+      type: string
+    - name: additional_data
+      type: string
+    - name: nonce
+      type: string
+    - name: key
+      type: string
+    returnType: string
+- subject:
+    function: sodium_crypto_aead_aegis128l_keygen
+  signature:
+    returnType: string
+- subject:
+    function: sodium_crypto_aead_aegis256_decrypt
+  signature:
+    params:
+    - name: ciphertext
+      type: string
+    - name: additional_data
+      type: string
+    - name: nonce
+      type: string
+    - name: key
+      type: string
+    returnType: string|false
+- subject:
+    function: sodium_crypto_aead_aegis256_encrypt
+  signature:
+    params:
+    - name: message
+      type: string
+    - name: additional_data
+      type: string
+    - name: nonce
+      type: string
+    - name: key
+      type: string
+    returnType: string
+- subject:
+    function: sodium_crypto_aead_aegis256_keygen
+  signature:
+    returnType: string
+- subject:
+    function: sodium_crypto_core_ristretto255_add
+  signature:
+    params:
+    - name: p
+      type: string
+    - name: q
+      type: string
+    returnType: string
+- subject:
+    function: sodium_crypto_core_ristretto255_from_hash
+  signature:
+    params:
+    - name: s
+      type: string
+    returnType: string
+- subject:
+    function: sodium_crypto_core_ristretto255_is_valid_point
+  signature:
+    params:
+    - name: s
+      type: string
+    returnType: bool
+- subject:
+    function: sodium_crypto_core_ristretto255_random
+  signature:
+    returnType: string
+- subject:
+    function: sodium_crypto_core_ristretto255_scalar_add
+  signature:
+    params:
+    - name: x
+      type: string
+    - name: 'y'
+      type: string
+    returnType: string
+- subject:
+    function: sodium_crypto_core_ristretto255_scalar_complement
+  signature:
+    params:
+    - name: s
+      type: string
+    returnType: string
+- subject:
+    function: sodium_crypto_core_ristretto255_scalar_invert
+  signature:
+    params:
+    - name: s
+      type: string
+    returnType: string
+- subject:
+    function: sodium_crypto_core_ristretto255_scalar_mul
+  signature:
+    params:
+    - name: x
+      type: string
+    - name: 'y'
+      type: string
+    returnType: string
+- subject:
+    function: sodium_crypto_core_ristretto255_scalar_negate
+  signature:
+    params:
+    - name: s
+      type: string
+    returnType: string
+- subject:
+    function: sodium_crypto_core_ristretto255_scalar_random
+  signature:
+    returnType: string
+- subject:
+    function: sodium_crypto_core_ristretto255_scalar_reduce
+  signature:
+    params:
+    - name: s
+      type: string
+    returnType: string
+- subject:
+    function: sodium_crypto_core_ristretto255_scalar_sub
+  signature:
+    params:
+    - name: x
+      type: string
+    - name: 'y'
+      type: string
+    returnType: string
+- subject:
+    function: sodium_crypto_core_ristretto255_sub
+  signature:
+    params:
+    - name: p
+      type: string
+    - name: q
+      type: string
+    returnType: string
+- subject:
+    function: sodium_crypto_scalarmult_ristretto255
+  signature:
+    params:
+    - name: 'n'
+      type: string
+    - name: p
+      type: string
+    returnType: string
+- subject:
+    function: sodium_crypto_scalarmult_ristretto255_base
+  signature:
+    params:
+    - name: 'n'
+      type: string
+    returnType: string
+- subject:
+    function: sodium_crypto_stream_xchacha20
+  signature:
+    params:
+    - name: length
+      type: int
+    - name: nonce
+      type: string
+    - name: key
+      type: string
+    returnType: string
+- subject:
+    function: sodium_crypto_stream_xchacha20_keygen
+  signature:
+    returnType: string
+- subject:
+    function: sodium_crypto_stream_xchacha20_xor
+  signature:
+    params:
+    - name: message
+      type: string
+    - name: nonce
+      type: string
+    - name: key
+      type: string
+    returnType: string
+- subject:
+    function: sodium_crypto_stream_xchacha20_xor_ic
+  signature:
+    params:
+    - name: message
+      type: string
+    - name: nonce
+      type: string
+    - name: counter
+      type: int
+    - name: key
+      type: string
+    returnType: string
+- subject:
+    function: sodium_add
+  signature:
+    params:
+    - name: string1
+      type: string
+      byRef: true
+    - name: string2
+      type: string
+    returnType: void
+- subject:
+    function: sodium_base642bin
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: id
+      type: int
+    - name: ignore
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: sodium_bin2base64
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: id
+      type: int
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: sodium_bin2hex
+  signature:
+    params:
+    - name: string
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: sodium_compare
+  signature:
+    params:
+    - name: string1
+      type: string
+    - name: string2
+      type: string
+    returnType: int
+- subject:
+    function: sodium_crypto_aead_aes256gcm_decrypt
+  signature:
+    params:
+    - name: ciphertext
+      type: string
+    - name: additional_data
+      type: string
+    - name: nonce
+      type: string
+    - name: key
+      type: string
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: sodium_crypto_aead_aes256gcm_encrypt
+  signature:
+    params:
+    - name: message
+      type: string
+    - name: additional_data
+      type: string
+    - name: nonce
+      type: string
+    - name: key
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: sodium_crypto_aead_aes256gcm_is_available
+  signature:
+    returnType: bool
+- subject:
+    function: sodium_crypto_aead_aes256gcm_keygen
+  signature:
+    returnType: string
+- subject:
+    function: sodium_crypto_aead_chacha20poly1305_decrypt
+  signature:
+    params:
+    - name: ciphertext
+      type: string
+    - name: additional_data
+      type: string
+    - name: nonce
+      type: string
+    - name: key
+      type: string
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: sodium_crypto_aead_chacha20poly1305_encrypt
+  signature:
+    params:
+    - name: message
+      type: string
+    - name: additional_data
+      type: string
+    - name: nonce
+      type: string
+    - name: key
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: sodium_crypto_aead_chacha20poly1305_ietf_decrypt
+  signature:
+    params:
+    - name: ciphertext
+      type: string
+    - name: additional_data
+      type: string
+    - name: nonce
+      type: string
+    - name: key
+      type: string
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: sodium_crypto_aead_chacha20poly1305_ietf_encrypt
+  signature:
+    params:
+    - name: message
+      type: string
+    - name: additional_data
+      type: string
+    - name: nonce
+      type: string
+    - name: key
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: sodium_crypto_aead_chacha20poly1305_ietf_keygen
+  signature:
+    returnType: string
+- subject:
+    function: sodium_crypto_aead_chacha20poly1305_keygen
+  signature:
+    returnType: string
+- subject:
+    function: sodium_crypto_aead_xchacha20poly1305_ietf_decrypt
+  signature:
+    params:
+    - name: ciphertext
+      type: string
+    - name: additional_data
+      type: string
+    - name: nonce
+      type: string
+    - name: key
+      type: string
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: sodium_crypto_aead_xchacha20poly1305_ietf_encrypt
+  signature:
+    params:
+    - name: message
+      type: string
+    - name: additional_data
+      type: string
+    - name: nonce
+      type: string
+    - name: key
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: sodium_crypto_aead_xchacha20poly1305_ietf_keygen
+  signature:
+    returnType: string
+- subject:
+    function: sodium_crypto_auth
+  signature:
+    params:
+    - name: message
+      type: string
+    - name: key
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: sodium_crypto_auth_keygen
+  signature:
+    returnType: string
+- subject:
+    function: sodium_crypto_auth_verify
+  signature:
+    params:
+    - name: mac
+      type: string
+    - name: message
+      type: string
+    - name: key
+      type: string
+    returnType: bool
+- subject:
+    function: sodium_crypto_box
+  signature:
+    params:
+    - name: message
+      type: string
+    - name: nonce
+      type: string
+    - name: key_pair
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: sodium_crypto_box_keypair
+  signature:
+    returnType: string
+- subject:
+    function: sodium_crypto_box_keypair_from_secretkey_and_publickey
+  signature:
+    params:
+    - name: secret_key
+      type: string
+    - name: public_key
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: sodium_crypto_box_open
+  signature:
+    params:
+    - name: ciphertext
+      type: string
+    - name: nonce
+      type: string
+    - name: key_pair
+      type: string
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: sodium_crypto_box_publickey
+  signature:
+    params:
+    - name: key_pair
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: sodium_crypto_box_publickey_from_secretkey
+  signature:
+    params:
+    - name: secret_key
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: sodium_crypto_box_seal
+  signature:
+    params:
+    - name: message
+      type: string
+    - name: public_key
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: sodium_crypto_box_seal_open
+  signature:
+    params:
+    - name: ciphertext
+      type: string
+    - name: key_pair
+      type: string
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: sodium_crypto_box_secretkey
+  signature:
+    params:
+    - name: key_pair
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: sodium_crypto_box_seed_keypair
+  signature:
+    params:
+    - name: seed
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: sodium_crypto_generichash
+  signature:
+    params:
+    - name: message
+      type: string
+    - name: key
+      type: string
+      optional: true
+    - name: length
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: sodium_crypto_generichash_final
+  signature:
+    params:
+    - name: state
+      type: string
+      byRef: true
+    - name: length
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: sodium_crypto_generichash_init
+  signature:
+    params:
+    - name: key
+      type: string
+      optional: true
+    - name: length
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: sodium_crypto_generichash_keygen
+  signature:
+    returnType: string
+- subject:
+    function: sodium_crypto_generichash_update
+  signature:
+    params:
+    - name: state
+      type: string
+      byRef: true
+    - name: message
+      type: string
+    returnType: 'true'
+- subject:
+    function: sodium_crypto_kdf_derive_from_key
+  signature:
+    params:
+    - name: subkey_length
+      type: int
+    - name: subkey_id
+      type: int
+    - name: context
+      type: string
+    - name: key
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+- subject:
+    function: sodium_crypto_kdf_keygen
+  signature:
+    returnType: string
+- subject:
+    function: sodium_crypto_kx_client_session_keys
+  signature:
+    params:
+    - name: client_key_pair
+      type: string
+    - name: server_key
+      type: string
+    returnType: array
+- subject:
+    function: sodium_crypto_kx_keypair
+  signature:
+    returnType: string
+- subject:
+    function: sodium_crypto_kx_publickey
+  signature:
+    params:
+    - name: key_pair
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: sodium_crypto_kx_secretkey
+  signature:
+    params:
+    - name: key_pair
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: sodium_crypto_kx_seed_keypair
+  signature:
+    params:
+    - name: seed
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: sodium_crypto_kx_server_session_keys
+  signature:
+    params:
+    - name: server_key_pair
+      type: string
+    - name: client_key
+      type: string
+    returnType: array
+- subject:
+    function: sodium_crypto_pwhash
+  signature:
+    params:
+    - name: length
+      type: int
+    - name: password
+      type: string
+    - name: salt
+      type: string
+    - name: opslimit
+      type: int
+    - name: memlimit
+      type: int
+    - name: algo
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: sodium_crypto_pwhash_scryptsalsa208sha256
+  signature:
+    params:
+    - name: length
+      type: int
+    - name: password
+      type: string
+    - name: salt
+      type: string
+    - name: opslimit
+      type: int
+    - name: memlimit
+      type: int
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: sodium_crypto_pwhash_scryptsalsa208sha256_str
+  signature:
+    params:
+    - name: password
+      type: string
+    - name: opslimit
+      type: int
+    - name: memlimit
+      type: int
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: sodium_crypto_pwhash_scryptsalsa208sha256_str_verify
+  signature:
+    params:
+    - name: hash
+      type: string
+    - name: password
+      type: string
+    returnType: bool
+- subject:
+    function: sodium_crypto_pwhash_str
+  signature:
+    params:
+    - name: password
+      type: string
+    - name: opslimit
+      type: int
+    - name: memlimit
+      type: int
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: sodium_crypto_pwhash_str_needs_rehash
+  signature:
+    params:
+    - name: password
+      type: string
+    - name: opslimit
+      type: int
+    - name: memlimit
+      type: int
+    returnType: bool
+- subject:
+    function: sodium_crypto_pwhash_str_verify
+  signature:
+    params:
+    - name: hash
+      type: string
+    - name: password
+      type: string
+    returnType: bool
+- subject:
+    function: sodium_crypto_scalarmult
+  signature:
+    params:
+    - name: 'n'
+      type: string
+    - name: p
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: sodium_crypto_scalarmult_base
+  signature:
+    params:
+    - name: secret_key
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: sodium_crypto_secretbox
+  signature:
+    params:
+    - name: message
+      type: string
+    - name: nonce
+      type: string
+    - name: key
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: sodium_crypto_secretbox_keygen
+  signature:
+    returnType: string
+- subject:
+    function: sodium_crypto_secretbox_open
+  signature:
+    params:
+    - name: ciphertext
+      type: string
+    - name: nonce
+      type: string
+    - name: key
+      type: string
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: sodium_crypto_secretstream_xchacha20poly1305_init_pull
+  signature:
+    params:
+    - name: header
+      type: string
+    - name: key
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: sodium_crypto_secretstream_xchacha20poly1305_init_push
+  signature:
+    params:
+    - name: key
+      type: string
+    returnType: array
+- subject:
+    function: sodium_crypto_secretstream_xchacha20poly1305_keygen
+  signature:
+    returnType: string
+- subject:
+    function: sodium_crypto_secretstream_xchacha20poly1305_pull
+  signature:
+    params:
+    - name: state
+      type: string
+      byRef: true
+    - name: ciphertext
+      type: string
+    - name: additional_data
+      type: string
+      optional: true
+    returnType: array|false
+- subject:
+    function: sodium_crypto_secretstream_xchacha20poly1305_push
+  signature:
+    params:
+    - name: state
+      type: string
+      byRef: true
+    - name: message
+      type: string
+    - name: additional_data
+      type: string
+      optional: true
+    - name: tag
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: sodium_crypto_secretstream_xchacha20poly1305_rekey
+  signature:
+    params:
+    - name: state
+      type: string
+      byRef: true
+    returnType: void
+- subject:
+    function: sodium_crypto_shorthash
+  signature:
+    params:
+    - name: message
+      type: string
+    - name: key
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: sodium_crypto_shorthash_keygen
+  signature:
+    returnType: string
+- subject:
+    function: sodium_crypto_sign
+  signature:
+    params:
+    - name: message
+      type: string
+    - name: secret_key
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: sodium_crypto_sign_detached
+  signature:
+    params:
+    - name: message
+      type: string
+    - name: secret_key
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: sodium_crypto_sign_ed25519_pk_to_curve25519
+  signature:
+    params:
+    - name: public_key
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: sodium_crypto_sign_ed25519_sk_to_curve25519
+  signature:
+    params:
+    - name: secret_key
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: sodium_crypto_sign_keypair
+  signature:
+    returnType: string
+- subject:
+    function: sodium_crypto_sign_keypair_from_secretkey_and_publickey
+  signature:
+    params:
+    - name: secret_key
+      type: string
+    - name: public_key
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: sodium_crypto_sign_open
+  signature:
+    params:
+    - name: signed_message
+      type: string
+    - name: public_key
+      type: string
+    returnType: string|false
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: sodium_crypto_sign_publickey
+  signature:
+    params:
+    - name: key_pair
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: sodium_crypto_sign_publickey_from_secretkey
+  signature:
+    params:
+    - name: secret_key
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: sodium_crypto_sign_secretkey
+  signature:
+    params:
+    - name: key_pair
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: sodium_crypto_sign_seed_keypair
+  signature:
+    params:
+    - name: seed
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: sodium_crypto_sign_verify_detached
+  signature:
+    params:
+    - name: signature
+      type: string
+    - name: message
+      type: string
+    - name: public_key
+      type: string
+    returnType: bool
+- subject:
+    function: sodium_crypto_stream
+  signature:
+    params:
+    - name: length
+      type: int
+    - name: nonce
+      type: string
+    - name: key
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: sodium_crypto_stream_keygen
+  signature:
+    returnType: string
+- subject:
+    function: sodium_crypto_stream_xor
+  signature:
+    params:
+    - name: message
+      type: string
+    - name: nonce
+      type: string
+    - name: key
+      type: string
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+- subject:
+    function: sodium_hex2bin
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: ignore
+      type: string
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: sodium_increment
+  signature:
+    params:
+    - name: string
+      type: string
+      byRef: true
+    returnType: void
+- subject:
+    function: sodium_memcmp
+  signature:
+    params:
+    - name: string1
+      type: string
+    - name: string2
+      type: string
+    returnType: int
+- subject:
+    function: sodium_memzero
+  signature:
+    params:
+    - name: string
+      type: string
+      byRef: true
+    returnType: void
+- subject:
+    function: sodium_pad
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: block_size
+      type: int
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: sodium_unpad
+  signature:
+    params:
+    - name: string
+      type: string
+    - name: block_size
+      type: int
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return

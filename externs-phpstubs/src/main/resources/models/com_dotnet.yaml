@@ -1,0 +1,504 @@
+# Generated from php-src stubs by tools/extract_hierarchy.py.
+# Do not hand-edit; corrections belong in a higher configuration layer.
+- subject:
+    class: com
+  signature:
+    classifier: class
+    parent: variant
+- subject:
+    class: com_exception
+  signature:
+    classifier: class
+    parent: exception
+- subject:
+    class: com_safearray_proxy
+  signature:
+    classifier: class
+- subject:
+    class: compersisthelper
+  signature:
+    classifier: class
+- subject:
+    class: dotnet
+  signature:
+    classifier: class
+    parent: variant
+- subject:
+    class: variant
+  signature:
+    classifier: class
+- subject:
+    method: com::__construct
+  signature:
+    params:
+    - name: module_name
+      type: string
+    - name: server_name
+      type: array|string|null
+      optional: true
+    - name: codepage
+      type: int
+      optional: true
+    - name: typelib
+      type: string
+      optional: true
+    returnType: mixed
+- subject:
+    method: COMPersistHelper::__construct
+  signature:
+    params:
+    - name: variant
+      type: ?variant
+      optional: true
+    returnType: mixed
+- subject:
+    method: COMPersistHelper::GetCurFileName
+  signature:
+    returnType: string|false
+- subject:
+    method: COMPersistHelper::GetMaxStreamSize
+  signature:
+    returnType: int
+- subject:
+    method: COMPersistHelper::InitNew
+  signature:
+    returnType: bool
+- subject:
+    method: COMPersistHelper::LoadFromFile
+  signature:
+    params:
+    - name: filename
+      type: string
+    - name: flags
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    method: COMPersistHelper::LoadFromStream
+  signature:
+    params:
+    - name: stream
+      type: mixed
+    returnType: bool
+- subject:
+    method: COMPersistHelper::SaveToFile
+  signature:
+    params:
+    - name: filename
+      type: ?string
+    - name: remember
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    method: COMPersistHelper::SaveToStream
+  signature:
+    params:
+    - name: stream
+      type: mixed
+    returnType: bool
+- subject:
+    method: dotnet::__construct
+  signature:
+    params:
+    - name: assembly_name
+      type: string
+    - name: datatype_name
+      type: string
+    - name: codepage
+      type: int
+      optional: true
+    returnType: mixed
+- subject:
+    method: variant::__construct
+  signature:
+    params:
+    - name: value
+      type: mixed
+      optional: true
+    - name: type
+      type: int
+      optional: true
+    - name: codepage
+      type: int
+      optional: true
+    returnType: mixed
+- subject:
+    function: com_create_guid
+  signature:
+    returnType: string|false
+- subject:
+    function: com_event_sink
+  signature:
+    params:
+    - name: variant
+      type: variant
+    - name: sink_object
+      type: object
+    - name: sink_interface
+      type: array|string|null
+      optional: true
+    returnType: bool
+- subject:
+    function: com_get_active_object
+  signature:
+    params:
+    - name: prog_id
+      type: string
+    - name: codepage
+      type: ?int
+      optional: true
+    returnType: variant
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: com_load_typelib
+  signature:
+    params:
+    - name: typelib
+      type: string
+    - name: case_insensitive
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: com_message_pump
+  signature:
+    params:
+    - name: timeout_milliseconds
+      type: int
+      optional: true
+    returnType: bool
+- subject:
+    function: com_print_typeinfo
+  signature:
+    params:
+    - name: variant
+      type: variant|string
+    - name: dispatch_interface
+      type: ?string
+      optional: true
+    - name: display_sink
+      type: bool
+      optional: true
+    returnType: bool
+- subject:
+    function: variant_abs
+  signature:
+    params:
+    - name: value
+      type: mixed
+    returnType: variant
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: variant_add
+  signature:
+    params:
+    - name: left
+      type: mixed
+    - name: right
+      type: mixed
+    returnType: variant
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: variant_and
+  signature:
+    params:
+    - name: left
+      type: mixed
+    - name: right
+      type: mixed
+    returnType: variant
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: variant_cast
+  signature:
+    params:
+    - name: variant
+      type: variant
+    - name: type
+      type: int
+    returnType: variant
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: variant_cat
+  signature:
+    params:
+    - name: left
+      type: mixed
+    - name: right
+      type: mixed
+    returnType: variant
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: variant_cmp
+  signature:
+    params:
+    - name: left
+      type: mixed
+    - name: right
+      type: mixed
+    - name: locale_id
+      type: int
+      optional: true
+    - name: flags
+      type: int
+      optional: true
+    returnType: int
+- subject:
+    function: variant_date_from_timestamp
+  signature:
+    params:
+    - name: timestamp
+      type: int
+    returnType: variant
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: variant_date_to_timestamp
+  signature:
+    params:
+    - name: variant
+      type: variant
+    returnType: ?int
+- subject:
+    function: variant_div
+  signature:
+    params:
+    - name: left
+      type: mixed
+    - name: right
+      type: mixed
+    returnType: variant
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: variant_eqv
+  signature:
+    params:
+    - name: left
+      type: mixed
+    - name: right
+      type: mixed
+    returnType: variant
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: variant_fix
+  signature:
+    params:
+    - name: value
+      type: mixed
+    returnType: variant
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: variant_get_type
+  signature:
+    params:
+    - name: variant
+      type: variant
+    returnType: int
+- subject:
+    function: variant_idiv
+  signature:
+    params:
+    - name: left
+      type: mixed
+    - name: right
+      type: mixed
+    returnType: variant
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: variant_imp
+  signature:
+    params:
+    - name: left
+      type: mixed
+    - name: right
+      type: mixed
+    returnType: variant
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: variant_int
+  signature:
+    params:
+    - name: value
+      type: mixed
+    returnType: variant
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: variant_mod
+  signature:
+    params:
+    - name: left
+      type: mixed
+    - name: right
+      type: mixed
+    returnType: variant
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: variant_mul
+  signature:
+    params:
+    - name: left
+      type: mixed
+    - name: right
+      type: mixed
+    returnType: variant
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: variant_neg
+  signature:
+    params:
+    - name: value
+      type: mixed
+    returnType: variant
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: variant_not
+  signature:
+    params:
+    - name: value
+      type: mixed
+    returnType: variant
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: variant_or
+  signature:
+    params:
+    - name: left
+      type: mixed
+    - name: right
+      type: mixed
+    returnType: variant
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: variant_pow
+  signature:
+    params:
+    - name: left
+      type: mixed
+    - name: right
+      type: mixed
+    returnType: variant
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: variant_round
+  signature:
+    params:
+    - name: value
+      type: mixed
+    - name: decimals
+      type: int
+    returnType: ?variant
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: variant_set
+  signature:
+    params:
+    - name: variant
+      type: variant
+    - name: value
+      type: mixed
+    returnType: void
+- subject:
+    function: variant_set_type
+  signature:
+    params:
+    - name: variant
+      type: variant
+    - name: type
+      type: int
+    returnType: void
+- subject:
+    function: variant_sub
+  signature:
+    params:
+    - name: left
+      type: mixed
+    - name: right
+      type: mixed
+    returnType: variant
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+- subject:
+    function: variant_xor
+  signature:
+    params:
+    - name: left
+      type: mixed
+    - name: right
+      type: mixed
+    returnType: variant
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return

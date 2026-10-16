@@ -19,26 +19,34 @@
 - subject:
     function: libxml_get_last_error
   signature:
-    returnType: mixed
+    returnType: LibXMLError|false
 - subject:
     function: libxml_set_external_entity_loader
   signature:
     params:
     - name: resolver_function
-      type: mixed
-    returnType: bool
+      type: ?callable
+    returnType: 'true'
 - subject:
     function: libxml_set_streams_context
   signature:
     params:
     - name: context
-      type: resource
+      type: mixed
     returnType: void
 - subject:
     function: libxml_use_internal_errors
   signature:
     params:
     - name: use_errors
-      type: bool
+      type: ?bool
       optional: true
     returnType: bool
+- subject:
+    class: libxmlerror
+  signature:
+    classifier: class
+- subject:
+    function: libxml_get_external_entity_loader
+  signature:
+    returnType: ?callable
