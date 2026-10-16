@@ -2,9 +2,11 @@
 # Filesystem (PHP manual: Filesystem).
 # An entry whose unit differs from the generated one carries the PHP manual reason above it.
 
+# PHP manual: the result is the trailing name component of path, which holds no `/`.
 - subject: {function: basename}
   returns: str
   propagation: [{from: argument(0), to: return}]
+  characters: {of: [argument(0)], within: "[^/]"}
 - subject: {function: fgets}
   returns: str
 - subject: {function: file_exists}

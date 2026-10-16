@@ -11,7 +11,7 @@ precedence are defined in commons-phpmodels `docs/concept-provenance.md`.
 
 **Problem Statement**
 The generated declarations carry a value-semantics unit (returns with
-propagation) only where psalm annotates a flow. For most built-ins no
+propagation and optionally characters) only where psalm annotates a flow. For most built-ins no
 annotation exists, so a consumer falls back to its conservative default:
 an untyped result that every argument influences. Where an annotation
 exists it is sometimes wider or narrower than the flow the PHP manual
@@ -50,7 +50,7 @@ each unit override the generated one for its subject.
 hand review against models/ and the PHP manual ──────────────► value-rules/
                                                                     ├── index.txt
                                                                     ├── provenance.yaml  (manual)
-                                                                    └── <area>.yaml      (returns + propagation only)
+                                                                    └── <area>.yaml      (value-semantics units only)
 merge: models/ (generated) ◄──ranked below── value-rules/ (manual), per subject and unit
 ```
 
@@ -59,8 +59,8 @@ merge: models/ (generated) ◄──ranked below── value-rules/ (manual), pe
 - **Name:** Value Rules Document Set
 - **Definition:** The bundled hand-maintained document set whose every
   entry is a signature-less model asserting exactly one value-semantics
-  unit: a returns classification and the exhaustive flow set into the
-  result. Its provenance declares it manually verified.
+  unit: a returns classification, the exhaustive flow set into the
+  result, and optionally the bytes the result may hold. Its provenance declares it manually verified.
 - **Scope:** built-ins whose generated entry has no unit, whose generated
   unit the PHP manual contradicts, and mode-switching built-ins that need
   a conditional entry. Nothing a generated entry already states correctly.

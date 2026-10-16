@@ -1,6 +1,8 @@
 package edu.jhu.cobra.externs.phpstubs
 
 import edu.jhu.cobra.commons.phpmodels.ArgPattern
+import edu.jhu.cobra.commons.phpmodels.CharacterBound
+import edu.jhu.cobra.commons.phpmodels.CharacterClass
 import edu.jhu.cobra.commons.phpmodels.DocumentSetLoader
 import edu.jhu.cobra.commons.phpmodels.FunctionSubject
 import edu.jhu.cobra.commons.phpmodels.MethodSubject
@@ -29,6 +31,8 @@ import kotlin.test.assertTrue
  * - `no value rules unit repeats the generated unit` — verifies each unconditional unit differs from the generated one
  * - `mode-switching subjects carry a conditional entry and an unconditional one` — verifies print_r and var_export
  * - `representative units follow the PHP manual` — verifies typed results and flow sets
+ * - `character bounds follow the PHP manual` — verifies the copied ports of strtr, str_replace, and substr and
+ *   the `/`-free result of basename
  * - `query and exception units apply to the php-src declarations` — verifies the merged records of the query
  *   methods and the exception constructors keep their php-src extension and take the reviewed unit
  */
@@ -107,6 +111,16 @@ internal class ValueRulesSetTest {
         )
         assertNull(unconditional[FunctionSubject("crypt")])
         assertEquals(ValueSemantics(ReturnKind.STR, listOf(argumentToReturn(0))), unitOf("str_increment"))
+    }
+
+    @Test
+    fun `character bounds follow the PHP manual`() {
+        val arguments = { positions: List<Int> -> positions.map(Port::Argument).toSet() }
+        assertEquals(CharacterBound(of = arguments(listOf(0)), within = CharacterClass("[^/]")), unitOf("basename").characters)
+        assertEquals(CharacterBound(of = arguments(listOf(0, 1, 2))), unitOf("strtr").characters)
+        assertEquals(CharacterBound(of = arguments(listOf(1, 2))), unitOf("str_replace").characters)
+        assertEquals(CharacterBound(of = arguments(listOf(0))), unitOf("substr").characters)
+        assertNull(unitOf("strlen").characters)
     }
 
     @Test

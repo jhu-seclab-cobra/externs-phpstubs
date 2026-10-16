@@ -34,6 +34,11 @@
 - subject: {function: str_increment}
   returns: str
   propagation: [{from: argument(0), to: return}]
+# PHP manual: the result copies bytes of subject and of replace only; search only selects what is replaced.
+- subject: {function: str_replace}
+  returns: any
+  propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}, {from: argument(2), to: return}]
+  characters: {of: [argument(1), argument(2)]}
 # PHP manual: alias of strstr; the result is a portion of haystack.
 - subject: {function: strchr}
   returns: str
@@ -61,6 +66,16 @@
 - subject: {function: strtok}
   returns: str
   propagation: [{from: argument(0), to: return}]
+# PHP manual: the result copies bytes of string and of the replacements, which from (an array) or to holds.
+- subject: {function: strtr}
+  returns: str
+  propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}, {from: argument(2), to: return}]
+  characters: {of: [argument(0), argument(1), argument(2)]}
+# PHP manual: the result is a portion of string.
+- subject: {function: substr}
+  returns: str
+  propagation: [{from: argument(0), to: return}]
+  characters: {of: [argument(0)]}
 # PHP manual: the result splices replace into string, so both contents reach the result.
 - subject: {function: substr_replace}
   returns: str

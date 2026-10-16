@@ -35,7 +35,7 @@ value-rules/
 
 Every document carries a header naming the set and its PHP manual area.
 Entries are flat: `subject`, optional `when`, `returns`, optional
-`propagation`. Entries are sorted by subject spelling; a conditional entry
+`propagation`, optional `characters`. Entries are sorted by subject spelling; a conditional entry
 precedes the unconditional entry of its subject. A review reason is a `#` comment line
 directly above the entry it justifies.
 
