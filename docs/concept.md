@@ -45,6 +45,7 @@ The format, its decoding, and its validation belong to commons-phpmodels.
 ```
 Offline (per upstream release):
     phpstorm-stubs, psalm stubs ──extraction──► models/<category>/<extension>.yaml
+    php-src stubs ──────────────hierarchy───► class entries of models/** (classifier, parent, interfaces)
                                                 models/{language,manual}/*.yaml (hand-declared)
     psalm taint data ───────────extraction──► taint/** (document set)
     Argus sink lists ───────────review──────► taint-rules/** (document set)

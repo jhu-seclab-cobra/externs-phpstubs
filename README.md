@@ -97,11 +97,11 @@ val extended = PhpStubs.with(Path.of("models/site-rules"))
 | 3 | `taint/` | psalm's sinks, sanitizers, sources in psalm's names, translated by the psalm mapping | generated |
 | 4 | `taint-rules/` | Hand-maintained sinks (Argus lists), escapes, and sources psalm lacks, translated by the same mapping | manual |
 
-The merge keeps one statement per (subject, condition, unit); a higher-ranked provenance wins (`Precedence.DEFAULT`: manual over generated), and among equal ranks the later position wins. A unit is replaced whole; a set that omits a unit leaves the earlier statement in force. Each set also loads on its own through commons-phpmodels `DocumentSetLoader.load(StubResources.opener(root), context, mapping)`; the taint set is regenerated from a psalm checkout by `tools/extract_taint.py --psalm <root> --out externs-phpstubs/src/main/resources/taint`.
+The merge keeps one statement per (subject, condition, unit); a higher-ranked provenance wins (`Precedence.DEFAULT`: manual over generated), and among equal ranks the later position wins. A unit is replaced whole; a set that omits a unit leaves the earlier statement in force. Each set also loads on its own through commons-phpmodels `DocumentSetLoader.load(StubResources.opener(root), context, mapping)`; the taint set is regenerated from a psalm checkout by `tools/extract_taint.py --psalm <root> --out externs-phpstubs/src/main/resources/taint`. The classifier, parent, and interfaces of the generated class entries are rewritten from a php-src checkout by `tools/extract_hierarchy.py --php-src <root> --models externs-phpstubs/src/main/resources/models`.
 
 ## Background
 
-Model documents derived from [JetBrains/phpstorm-stubs](https://github.com/JetBrains/phpstorm-stubs) (signatures, Apache-2.0) and [vimeo/psalm](https://github.com/vimeo/psalm) (dataflow annotations and taint data, MIT), emitted in the [commons-phpmodels](https://github.com/jhu-seclab-cobra/commons-phpmodels) format. Language constructs (`echo`, `isset`, `int`, ...) are declared as data under `models/language/`; built-ins the extraction does not produce are hand-declared under `models/manual/`.
+Model documents derived from [JetBrains/phpstorm-stubs](https://github.com/JetBrains/phpstorm-stubs) (signatures, Apache-2.0) [vimeo/psalm](https://github.com/vimeo/psalm) (dataflow annotations and taint data, MIT), and [php/php-src](https://github.com/php/php-src) stubs (class hierarchy, PHP License), emitted in the [commons-phpmodels](https://github.com/jhu-seclab-cobra/commons-phpmodels) format. Language constructs (`echo`, `isset`, `int`, ...) are declared as data under `models/language/`; built-ins the extraction does not produce are hand-declared under `models/manual/`.
 
 ## Documentation
 
@@ -110,7 +110,7 @@ Model documents derived from [JetBrains/phpstorm-stubs](https://github.com/JetBr
 - [Lookup Model](docs/model-lookup.md) -- bundled sets, merge order, statements in force, records and facts
 - [Merge Algorithm](docs/spec-merge.md) -- folding the mounted sets into one statement per subject, condition, and unit
 - [Taint Concepts](docs/concept-taint.md) -- the taint document set in psalm's names and its extraction
-- [Design](docs/design.md) -- resource roots, merge order, corpus rules, exception types
+- [Design](docs/design.md) -- resource roots, merge order, corpus rules, class hierarchy extraction, exception types
 - [Lookup Design](docs/design-lookup.md) -- `BuiltinLookup`, `PhpStubs`, `BuiltinRecord`, fact types, canonical enums
 - [Merge Design](docs/design-merge.md) -- `Mount`, `MountSequence`, `Merge`
 - [Taint Design](docs/design-taint.md) -- `StubResources`, taint resource layout, extraction script

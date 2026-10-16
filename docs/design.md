@@ -87,7 +87,7 @@ duplicate rule per (subject, condition) within one document.
 ```
 models/
 ├── index.txt              # build-generated manifest, sorted relative paths
-├── provenance.yaml        # producer tools/convert_stubs.py v2; verification generated
+├── provenance.yaml        # producers tools/convert_stubs.py v2, tools/extract_hierarchy.py; verification generated
 ├── core.yaml              # extension "core"
 ├── language/              # hand-declared language constructs
 │   ├── keyword.yaml       # 14 keyword functions + class exit, extension "keyword"
@@ -119,6 +119,28 @@ and `psalm-mapping.yaml`; `vocabulary/index.txt` and every other test
 fixture directory ship their own manifest. Set layouts:
 [design-taint.md](design-taint.md), [design-taint-rules.md](design-taint-rules.md),
 [design-value-rules.md](design-value-rules.md).
+
+## Class Hierarchy Extraction
+
+The generated class entries take their classifier, parent, and interfaces
+from php-src, the interpreter's own declarations (CobraPHP user decision
+BP-2). `tools/extract_hierarchy.py` (Python 3, standard library) reads one
+php-src checkout at tag `php-8.5.11` and rewrites the generated documents
+under `models/` in place:
+
+| Input (relative to the php-src root) | Yields |
+|--------------------------------------|--------|
+| `**/*.stub.php` outside test directories | each class, interface, enum, and trait with its namespace, `extends`, and `implements` names, case-folded |
+
+- Each generated class entry gets the classifier, parent, and interfaces
+  php-src declares for its name; every other entry is left byte for byte.
+- A parent or interface name that no models document declares is added
+  to `core.yaml`, beside the other generated class entries, and itself
+  receives its php-src hierarchy, until every named class is declared.
+- A class php-src does not declare (a PECL extension class) keeps its
+  entry unchanged.
+- Arguments: `--php-src <root>`, `--models <models dir>`. Output is
+  deterministic, and a second run over its own output changes nothing.
 
 ## Exception / Error Types
 

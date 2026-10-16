@@ -4,90 +4,112 @@
     class: exception
   signature:
     classifier: class
+    interfaces: [throwable]
 - subject:
     class: error
   signature:
     classifier: class
+    interfaces: [throwable]
 - subject:
     class: typeerror
   signature:
     classifier: class
+    parent: error
 - subject:
     class: valueerror
   signature:
     classifier: class
+    parent: error
 - subject:
     class: argumentcounterror
   signature:
     classifier: class
+    parent: typeerror
 - subject:
     class: arithmeticerror
   signature:
     classifier: class
+    parent: error
 - subject:
     class: divisionbyzeroerror
   signature:
     classifier: class
+    parent: arithmeticerror
 - subject:
     class: parseerror
   signature:
     classifier: class
+    parent: compileerror
 - subject:
     class: compileerror
   signature:
     classifier: class
+    parent: error
 - subject:
     class: runtimeexception
   signature:
     classifier: class
+    parent: exception
 - subject:
     class: logicexception
   signature:
     classifier: class
+    parent: exception
 - subject:
     class: invalidargumentexception
   signature:
     classifier: class
+    parent: logicexception
 - subject:
     class: outofrangeexception
   signature:
     classifier: class
+    parent: logicexception
 - subject:
     class: outofboundsexception
   signature:
     classifier: class
+    parent: runtimeexception
 - subject:
     class: overflowexception
   signature:
     classifier: class
+    parent: runtimeexception
 - subject:
     class: underflowexception
   signature:
     classifier: class
+    parent: runtimeexception
 - subject:
     class: unexpectedvalueexception
   signature:
     classifier: class
+    parent: runtimeexception
 - subject:
     class: badmethodcallexception
   signature:
     classifier: class
+    parent: badfunctioncallexception
 - subject:
     class: badfunctioncallexception
   signature:
     classifier: class
+    parent: logicexception
 - subject:
     class: domainexception
   signature:
     classifier: class
+    parent: logicexception
 - subject:
     class: lengthexception
   signature:
     classifier: class
+    parent: logicexception
 - subject:
     class: rangeexception
   signature:
     classifier: class
+    parent: runtimeexception
 - subject:
     class: stdclass
   signature:
@@ -100,6 +122,7 @@
     class: generator
   signature:
     classifier: class
+    interfaces: [iterator]
 - subject:
     class: fiber
   signature:
@@ -112,102 +135,123 @@
     class: weakmap
   signature:
     classifier: class
+    interfaces: [arrayaccess, countable, iteratoraggregate]
 - subject:
     class: stringable
   signature:
-    classifier: class
+    classifier: interface
 - subject:
     class: throwable
   signature:
-    classifier: class
+    classifier: interface
+    interfaces: [stringable]
 - subject:
     class: serializable
   signature:
-    classifier: class
+    classifier: interface
 - subject:
     class: traversable
   signature:
-    classifier: class
+    classifier: interface
 - subject:
     class: iterator
   signature:
-    classifier: class
+    classifier: interface
+    interfaces: [traversable]
 - subject:
     class: iteratoraggregate
   signature:
-    classifier: class
+    classifier: interface
+    interfaces: [traversable]
 - subject:
     class: arrayaccess
   signature:
-    classifier: class
+    classifier: interface
 - subject:
     class: countable
   signature:
-    classifier: class
+    classifier: interface
 - subject:
     class: jsonserializable
   signature:
-    classifier: class
+    classifier: interface
 - subject:
     class: arrayobject
   signature:
     classifier: class
+    interfaces: [iteratoraggregate, arrayaccess, serializable, countable]
 - subject:
     class: arrayiterator
   signature:
     classifier: class
+    interfaces: [seekableiterator, arrayaccess, serializable, countable]
 - subject:
     class: splfileinfo
   signature:
     classifier: class
+    interfaces: [stringable]
 - subject:
     class: splfileobject
   signature:
     classifier: class
+    parent: splfileinfo
+    interfaces: [recursiveiterator, seekableiterator]
 - subject:
     class: splfixedarray
   signature:
     classifier: class
+    interfaces: [iteratoraggregate, arrayaccess, countable, jsonserializable]
 - subject:
     class: splstack
   signature:
     classifier: class
+    parent: spldoublylinkedlist
 - subject:
     class: splqueue
   signature:
     classifier: class
+    parent: spldoublylinkedlist
 - subject:
     class: splheap
   signature:
     classifier: class
+    interfaces: [iterator, countable]
 - subject:
     class: splpriorityqueue
   signature:
     classifier: class
+    interfaces: [iterator, countable]
 - subject:
     class: splobjectstorage
   signature:
     classifier: class
+    interfaces: [countable, seekableiterator, serializable, arrayaccess]
 - subject:
     class: directoryiterator
   signature:
     classifier: class
+    parent: splfileinfo
+    interfaces: [seekableiterator]
 - subject:
     class: recursivedirectoryiterator
   signature:
     classifier: class
+    parent: filesystemiterator
+    interfaces: [recursiveiterator]
 - subject:
     class: datetime
   signature:
     classifier: class
+    interfaces: [datetimeinterface]
 - subject:
     class: datetimeimmutable
   signature:
     classifier: class
+    interfaces: [datetimeinterface]
 - subject:
     class: datetimeinterface
   signature:
-    classifier: class
+    classifier: interface
 - subject:
     class: datetimezone
   signature:
@@ -220,6 +264,7 @@
     class: dateperiod
   signature:
     classifier: class
+    interfaces: [iteratoraggregate]
 - subject:
     class: pdo
   signature:
@@ -228,10 +273,12 @@
     class: pdostatement
   signature:
     classifier: class
+    interfaces: [iteratoraggregate]
 - subject:
     class: pdoexception
   signature:
     classifier: class
+    parent: runtimeexception
 - subject:
     class: mysqli
   signature:
@@ -240,6 +287,7 @@
     class: mysqli_result
   signature:
     classifier: class
+    interfaces: [iteratoraggregate]
 - subject:
     class: mysqli_stmt
   signature:
@@ -264,38 +312,47 @@
     class: reflectionclass
   signature:
     classifier: class
+    interfaces: [reflector]
 - subject:
     class: reflectionmethod
   signature:
     classifier: class
+    parent: reflectionfunctionabstract
 - subject:
     class: reflectionfunction
   signature:
     classifier: class
+    parent: reflectionfunctionabstract
 - subject:
     class: reflectionproperty
   signature:
     classifier: class
+    interfaces: [reflector]
 - subject:
     class: reflectionparameter
   signature:
     classifier: class
+    interfaces: [reflector]
 - subject:
     class: reflectiontype
   signature:
     classifier: class
+    interfaces: [stringable]
 - subject:
     class: reflectionnamedtype
   signature:
     classifier: class
+    parent: reflectiontype
 - subject:
     class: reflectionuniontype
   signature:
     classifier: class
+    parent: reflectiontype
 - subject:
     class: reflectionintersectiontype
   signature:
     classifier: class
+    parent: reflectiontype
 - subject:
     class: domnode
   signature:
@@ -304,30 +361,39 @@
     class: domdocument
   signature:
     classifier: class
+    parent: domnode
+    interfaces: [domparentnode]
 - subject:
     class: domelement
   signature:
     classifier: class
+    parent: domnode
+    interfaces: [domparentnode, domchildnode]
 - subject:
     class: domnodelist
   signature:
     classifier: class
+    interfaces: [iteratoraggregate, countable]
 - subject:
     class: domattr
   signature:
     classifier: class
+    parent: domnode
 - subject:
     class: domtext
   signature:
     classifier: class
+    parent: domcharacterdata
 - subject:
     class: domcomment
   signature:
     classifier: class
+    parent: domcharacterdata
 - subject:
     class: simplexmlelement
   signature:
     classifier: class
+    interfaces: [stringable, countable, recursiveiterator]
 - subject:
     class: xmlreader
   signature:
@@ -364,6 +430,7 @@
     class: resourcebundle
   signature:
     classifier: class
+    interfaces: [iteratoraggregate, countable]
 - subject:
     class: transliterator
   signature:
@@ -400,6 +467,7 @@
     class: ziparchive
   signature:
     classifier: class
+    interfaces: [countable]
 - subject:
     class: redis
   signature:
@@ -432,6 +500,7 @@
     class: soapfault
   signature:
     classifier: class
+    parent: exception
 - subject:
     method: Exception::getMessage
   signature:
@@ -1657,3 +1726,47 @@
   signature:
     type: int
     value: '3'
+- subject:
+    class: domcharacterdata
+  signature:
+    classifier: class
+    parent: domnode
+    interfaces: [domchildnode]
+- subject:
+    class: domchildnode
+  signature:
+    classifier: interface
+- subject:
+    class: domparentnode
+  signature:
+    classifier: interface
+- subject:
+    class: filesystemiterator
+  signature:
+    classifier: class
+    parent: directoryiterator
+- subject:
+    class: recursiveiterator
+  signature:
+    classifier: interface
+    interfaces: [iterator]
+- subject:
+    class: reflectionfunctionabstract
+  signature:
+    classifier: class
+    interfaces: [reflector]
+- subject:
+    class: reflector
+  signature:
+    classifier: interface
+    interfaces: [stringable]
+- subject:
+    class: seekableiterator
+  signature:
+    classifier: interface
+    interfaces: [iterator]
+- subject:
+    class: spldoublylinkedlist
+  signature:
+    classifier: class
+    interfaces: [iterator, countable, arrayaccess, serializable]
