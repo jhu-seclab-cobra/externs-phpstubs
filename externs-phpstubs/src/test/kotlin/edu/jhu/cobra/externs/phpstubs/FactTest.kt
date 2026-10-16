@@ -1,6 +1,7 @@
 package edu.jhu.cobra.externs.phpstubs
 
 import edu.jhu.cobra.commons.phpmodels.ArgPattern
+import edu.jhu.cobra.commons.phpmodels.ClassSubject
 import edu.jhu.cobra.commons.phpmodels.FunctionSubject
 import edu.jhu.cobra.commons.phpmodels.OriginId
 import edu.jhu.cobra.commons.phpmodels.Port
@@ -20,6 +21,8 @@ import kotlin.test.assertNull
  * - `a source fact keeps its site and key patterns` — verifies the by-reference source shape
  * - `a source fact at the result has no site` — verifies the result-site source shape
  * - `a returns fact and its flow facts come from one value unit` — verifies the classification and the ports
+ * - `a raises fact holds the whole class set` — verifies one fact per raises statement
+ * - `an empty raises section is a fact` — verifies the statement that a call throws none
  */
 internal class FactTest {
     private val f = FunctionSubject("f")
@@ -73,5 +76,21 @@ internal class FactTest {
         assertEquals(ReturnsFact(f, null, ReturnKind.STR), record.returns.single())
         assertEquals(listOf(Port.Argument(0), Port.Argument(1)), record.flows.map { it.from })
         assertEquals(listOf<Port>(Port.Return, Port.Return), record.flows.map { it.to })
+    }
+
+    @Test
+    fun `a raises fact holds the whole class set`() {
+        val document = "- subject: {function: f}\n  raises: [valueerror, \\jsonexception]\n"
+        val record = Merge.of(listOf(TestSets.mount(0, Verification.MANUAL, document))).records.getValue(f)
+        val classes = setOf(ClassSubject("valueerror"), ClassSubject("jsonexception"))
+        assertEquals(RaisesFact(f, null, classes), record.raises.single())
+    }
+
+    @Test
+    fun `an empty raises section is a fact`() {
+        val document = "- subject: {function: f}\n  raises: []\n"
+        val record = Merge.of(listOf(TestSets.mount(0, Verification.MANUAL, document))).records.getValue(f)
+        assertEquals(RaisesFact(f, null, emptySet()), record.raises.single())
+        assertEquals(record.raises, record.facts)
     }
 }

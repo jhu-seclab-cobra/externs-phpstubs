@@ -25,6 +25,7 @@ import kotlin.test.assertTrue
  * - `statements under different conditions coexist` — verifies conditions partition a unit
  * - `a conditional statement never replaces an unconditional one across ranks` — verifies the partition holds under rank
  * - `a unit is replaced whole and other units stay in force` — verifies per-unit replacement
+ * - `a raises statement is replaced only by another raises statement` — verifies the raises unit
  * - `the extension follows the signature statement` — verifies a value override keeps the generated extension
  * - `a signature-only statement yields a record without facts` — verifies a declaration is a record
  * - `a conditional entry declaring a signature fails the merge` — verifies the signature invariant
@@ -123,6 +124,18 @@ internal class MergeTest {
         assertEquals(Port.Argument(0), record.flows.single().from)
         assertEquals(VulnClassId("sqli"), record.sinks.single().vulnClass)
         assertEquals("standard", record.extension)
+    }
+
+    @Test
+    fun `a raises statement is replaced only by another raises statement`() {
+        val base = TestSets.mount(0, Verification.GENERATED, "$generated\n  raises: [valueerror]\n", extension = "standard")
+        val value = TestSets.mount(1, Verification.MANUAL, "- subject: {function: f}\n  returns: str\n")
+        val kept = Merge.of(listOf(base, value)).functions.getValue(f)
+        assertEquals(setOf(ClassSubject("valueerror")), kept.raises.single().classes)
+        val none = TestSets.mount(2, Verification.MANUAL, "- subject: {function: f}\n  raises: []\n")
+        val replaced = Merge.of(listOf(base, value, none)).functions.getValue(f)
+        assertEquals(emptySet(), replaced.raises.single().classes)
+        assertEquals(ReturnKind.STR, replaced.returns.single().kind)
     }
 
     @Test

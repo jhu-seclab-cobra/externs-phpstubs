@@ -16,8 +16,8 @@ import edu.jhu.cobra.commons.phpmodels.VariableSubject
 import edu.jhu.cobra.commons.phpmodels.Vocabulary
 import java.util.EnumMap
 
-/** The five override units one entry can state; a statement is replaced whole per unit. */
-internal enum class OverrideUnit { SIGNATURE, VALUE, SOURCES, SINKS, SANITIZERS }
+/** The six override units one entry can state; a statement is replaced whole per unit. */
+internal enum class OverrideUnit { SIGNATURE, VALUE, SOURCES, SINKS, SANITIZERS, RAISES }
 
 /** One entry as mounted: its set's position and verification rank, and its extension when derived. */
 private data class Mounted(
@@ -38,7 +38,7 @@ private typealias Slots = LinkedHashMap<ArgPattern?, EnumMap<OverrideUnit, State
 /**
  * The fold of every mount into one statement per (subject, condition, unit) key, and the records built
  * from it. Built once per mount sequence and immutable: one map per declaration kind in first-statement
- * order, and the five fact lists in record order.
+ * order, and the six fact lists in record order.
  */
 internal class Merge private constructor(
     val vocabulary: Vocabulary,
@@ -60,6 +60,7 @@ internal class Merge private constructor(
     val sanitizers: List<SanitizerFact> by lazy { all.values.flatMap { it.sanitizers } }
     val flows: List<FlowFact> by lazy { all.values.flatMap { it.flows } }
     val returns: List<ReturnsFact> by lazy { all.values.flatMap { it.returns } }
+    val raises: List<RaisesFact> by lazy { all.values.flatMap { it.raises } }
 
     // Builds the record once per subject and stores it under its own kind and under the shared map.
     private fun add(
@@ -97,6 +98,7 @@ internal class Merge private constructor(
                 sources = facts.sources,
                 sinks = facts.sinks,
                 sanitizers = facts.sanitizers,
+                raises = facts.raises,
             )
         all[subject] = record
         return record
@@ -108,6 +110,7 @@ internal class Merge private constructor(
         val sources = ArrayList<SourceFact>()
         val sinks = ArrayList<SinkFact>()
         val sanitizers = ArrayList<SanitizerFact>()
+        val raises = ArrayList<RaisesFact>()
 
         fun add(
             owner: ModelSubject,
@@ -136,6 +139,10 @@ internal class Merge private constructor(
 
                 OverrideUnit.SANITIZERS -> {
                     body.sanitizers.orEmpty().mapTo(sanitizers) { SanitizerFact(owner, condition, it.categories) }
+                }
+
+                OverrideUnit.RAISES -> {
+                    raises += RaisesFact(owner, condition, body.raises!!)
                 }
             }
         }
@@ -190,6 +197,7 @@ internal class Merge private constructor(
                 OverrideUnit.SOURCES.takeIf { entry.body.sources != null },
                 OverrideUnit.SINKS.takeIf { entry.body.sinks != null },
                 OverrideUnit.SANITIZERS.takeIf { entry.body.sanitizers != null },
+                OverrideUnit.RAISES.takeIf { entry.body.raises != null },
             )
     }
 }
