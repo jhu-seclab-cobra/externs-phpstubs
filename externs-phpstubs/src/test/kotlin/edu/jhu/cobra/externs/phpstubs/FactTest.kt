@@ -1,6 +1,7 @@
 package edu.jhu.cobra.externs.phpstubs
 
 import edu.jhu.cobra.commons.phpmodels.ArgPattern
+import edu.jhu.cobra.commons.phpmodels.CharacterBound
 import edu.jhu.cobra.commons.phpmodels.CharacterClass
 import edu.jhu.cobra.commons.phpmodels.ClassSubject
 import edu.jhu.cobra.commons.phpmodels.FunctionSubject
@@ -86,7 +87,7 @@ internal class FactTest {
             "- subject: {function: f}\n  returns: str\n  propagation: [{from: argument(0), to: return}]\n" +
                 "  characters: {of: [argument(0)], within: \"[^/]\"}\n"
         val record = Merge.of(listOf(TestSets.mount(0, Verification.MANUAL, document))).records.getValue(f)
-        val bound = CharactersFact(f, null, setOf(Port.Argument(0)), CharacterClass("[^/]"))
+        val bound = CharactersFact(f, null, CharacterBound(setOf(Port.Argument(0)), CharacterClass("[^/]")))
         assertEquals(bound, record.characters.single())
     }
 

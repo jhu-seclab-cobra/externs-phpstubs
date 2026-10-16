@@ -1,7 +1,7 @@
 package edu.jhu.cobra.externs.phpstubs
 
 import edu.jhu.cobra.commons.phpmodels.ArgPattern
-import edu.jhu.cobra.commons.phpmodels.CharacterClass
+import edu.jhu.cobra.commons.phpmodels.CharacterBound
 import edu.jhu.cobra.commons.phpmodels.ClassSubject
 import edu.jhu.cobra.commons.phpmodels.KeyPattern
 import edu.jhu.cobra.commons.phpmodels.ModelSubject
@@ -62,12 +62,14 @@ public data class ReturnsFact(
     val kind: ReturnKind,
 ) : Fact
 
-/** The bytes a call's result may hold: bytes of the [of] ports, bytes of the [within] class, or both. */
+/**
+ * The bytes a call's result may hold: every result byte is a byte of a [CharacterBound.of] port's value and a
+ * member of [CharacterBound.within]; a null field of the bound states no bound of its kind.
+ */
 public data class CharactersFact(
     override val owner: ModelSubject,
     override val condition: ArgPattern?,
-    val of: Set<Port.Argument>?,
-    val within: CharacterClass?,
+    val bound: CharacterBound,
 ) : Fact
 
 /** The exception classes a call may throw; the empty set states it throws none. */

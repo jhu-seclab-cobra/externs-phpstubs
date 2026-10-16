@@ -83,7 +83,7 @@ val extended = PhpStubs.with(Path.of("models/site-rules"))
 
 **`BuiltinRecord<S>`** -- `(subject, extension: String?, signature: SignatureInfo?, returns, flows, characters, sources, sinks, sanitizers, raises)`. Typed accessors: `callableSignature` (function, method), `classSignature` (class), `typedSignature` (constant, class constant), `propertySignature` (property). `extension` is the PHP extension of the generated declaration, `null` for a subject only a hand-maintained set states.
 
-**`Fact`** -- `SinkFact(port, vulnClass)`, `SourceFact(origins, at, keys)`, `SanitizerFact(categories)`, `FlowFact(from, to)`, `CharactersFact(of, within)`, `ReturnsFact(kind)`, `RaisesFact(classes)`; each carries `owner` and `condition: ArgPattern?`. A `RaisesFact` with no classes states the call throws none; a record without one asserts nothing about throws. The record ranks nothing: a consumer matches each condition against its call arguments and applies its own rule to an undecidable outcome.
+**`Fact`** -- `SinkFact(port, vulnClass)`, `SourceFact(origins, at, keys)`, `SanitizerFact(categories)`, `FlowFact(from, to)`, `CharactersFact(bound)`, `ReturnsFact(kind)`, `RaisesFact(classes)`; each carries `owner` and `condition: ArgPattern?`. A `RaisesFact` with no classes states the call throws none; a record without one asserts nothing about throws. The record ranks nothing: a consumer matches each condition against its call arguments and applies its own rule to an undecidable outcome.
 
 **`VulnClass`**, **`Origin`** -- enum constants for the canonical vocabulary (`sqli`, `cmdi`, `codei`, `xss`, `headeri`, `ssrf`, `pathtrav`, `fileinc`, `deser`, `callablei`, `ldapi`, `xpathi`; `user-input`, `external-input`).
 

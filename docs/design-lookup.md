@@ -133,7 +133,7 @@ for an unconditional statement).
 | `SourceFact` | `origins: Set<OriginId>`, `at: Port.Argument?`, `keys: List<KeyPattern>?` | one `SourceDecl` |
 | `SanitizerFact` | `categories: Set<VulnClassId>` | one `SanitizerDecl` |
 | `FlowFact` | `from: Port.Input`, `to: Port` | one `Propagation` |
-| `CharactersFact` | `of: Set<Port.Argument>?`, `within: CharacterClass?` | the `characters` section, whole: the bytes the result may hold |
+| `CharactersFact` | `bound: CharacterBound` | the `characters` section, whole: the bytes the result may hold; the bound keeps its at-least-one-field invariant |
 | `ReturnsFact` | `kind: ReturnKind` | the `returns` section |
 | `RaisesFact` | `classes: Set<ClassSubject>` | the `raises` section, whole: the empty set states the subject throws none |
 

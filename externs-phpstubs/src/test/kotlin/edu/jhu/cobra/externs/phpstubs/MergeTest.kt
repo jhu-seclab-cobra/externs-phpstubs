@@ -134,7 +134,7 @@ internal class MergeTest {
                 "  characters: {of: [argument(0)]}\n"
         val base = TestSets.mount(0, Verification.GENERATED, document)
         val bounded = Merge.of(listOf(base)).functions.getValue(f)
-        assertEquals(setOf(Port.Argument(0)), bounded.characters.single().of)
+        assertEquals(setOf(Port.Argument(0)), bounded.characters.single().bound.of)
         val value = TestSets.mount(1, Verification.MANUAL, "- subject: {function: f}\n  returns: str\n")
         val replaced = Merge.of(listOf(base, value)).functions.getValue(f)
         assertTrue(replaced.characters.isEmpty())

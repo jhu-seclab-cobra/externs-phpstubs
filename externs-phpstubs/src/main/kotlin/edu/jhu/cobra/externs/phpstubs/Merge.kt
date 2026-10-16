@@ -130,7 +130,7 @@ internal class Merge private constructor(
                 OverrideUnit.VALUE -> {
                     returns += ReturnsFact(owner, condition, body.returns!!)
                     body.propagation.orEmpty().mapTo(flows) { FlowFact(owner, condition, it.from, it.to) }
-                    body.characters?.let { characters += CharactersFact(owner, condition, it.of, it.within) }
+                    body.characters?.let { characters += CharactersFact(owner, condition, it) }
                 }
 
                 OverrideUnit.SOURCES -> {
