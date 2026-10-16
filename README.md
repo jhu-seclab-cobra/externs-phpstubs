@@ -2,7 +2,7 @@
 
 > PHP built-in lookup for static analysis: declarations, value semantics, and taint facts in one record per built-in.
 
-Lookup of PHP built-in functions, classes, methods, constants, properties, and predefined variables by their PHP spelling. Each record merges the generated declarations (extension, signature), the hand-maintained value rules, psalm's taint data, and the hand-maintained taint rules into one `BuiltinRecord`: the signature in force plus every sink, source, sanitizer, flow, returns, and raises fact, each tagged with the argument condition it holds under. Taint facts speak one canonical vocabulary; a consumer holds no set, mapping, or precedence.
+Lookup of PHP built-in functions, classes, methods, constants, properties, and predefined variables by their PHP spelling. Each record merges the generated declarations (extension, signature), the hand-maintained value rules, psalm's taint data, and the hand-maintained taint rules into one `BuiltinRecord`: the signature in force plus every sink, source, sanitizer, flow, characters, returns, and raises fact, each tagged with the argument condition it holds under. Taint facts speak one canonical vocabulary; a consumer holds no set, mapping, or precedence.
 
 [![codecov](https://codecov.io/gh/jhu-seclab-cobra/externs-phpstubs/branch/main/graph/badge.svg)](https://codecov.io/gh/jhu-seclab-cobra/externs-phpstubs)
 ![Kotlin JVM](https://img.shields.io/badge/Kotlin%20JVM-2.4.20%20%7C%20JVM%2021%2B-blue?logo=kotlin)
@@ -76,14 +76,14 @@ val extended = PhpStubs.with(Path.of("models/site-rules"))
 | `variable(name)` | `BuiltinRecord<VariableSubject>?` |
 | `record(subject)` | `BuiltinRecord<ModelSubject>?` |
 | `functions`, `classes`, `methods`, `constants`, `classConstants`, `properties`, `variables` | `Collection<BuiltinRecord<…>>` in first-statement order |
-| `sinks`, `sources`, `sanitizers`, `flows`, `returns`, `raises` | `List<…Fact>` in record order |
+| `sinks`, `sources`, `sanitizers`, `flows`, `characters`, `returns`, `raises` | `List<…Fact>` in record order |
 | `vocabulary`, `policy` | `Vocabulary`, `TaintPolicy` accumulated over every mounted set |
 
 **`PhpStubs`** -- one `BuiltinLookup` over one merge. The companion is the lookup over the bundled sets, built on first access and shared. `with(vararg roots: String)`, `with(vararg dirs: Path)`, and `plus` build a second lookup that mounts extension sets after the bundled ones, in order; a set without `provenance.yaml` mounts as manual.
 
-**`BuiltinRecord<S>`** -- `(subject, extension: String?, signature: SignatureInfo?, returns, flows, sources, sinks, sanitizers, raises)`. Typed accessors: `callableSignature` (function, method), `classSignature` (class), `typedSignature` (constant, class constant), `propertySignature` (property). `extension` is the PHP extension of the generated declaration, `null` for a subject only a hand-maintained set states.
+**`BuiltinRecord<S>`** -- `(subject, extension: String?, signature: SignatureInfo?, returns, flows, characters, sources, sinks, sanitizers, raises)`. Typed accessors: `callableSignature` (function, method), `classSignature` (class), `typedSignature` (constant, class constant), `propertySignature` (property). `extension` is the PHP extension of the generated declaration, `null` for a subject only a hand-maintained set states.
 
-**`Fact`** -- `SinkFact(port, vulnClass)`, `SourceFact(origins, at, keys)`, `SanitizerFact(categories)`, `FlowFact(from, to)`, `ReturnsFact(kind)`, `RaisesFact(classes)`; each carries `owner` and `condition: ArgPattern?`. A `RaisesFact` with no classes states the call throws none; a record without one asserts nothing about throws. The record ranks nothing: a consumer matches each condition against its call arguments and applies its own rule to an undecidable outcome.
+**`Fact`** -- `SinkFact(port, vulnClass)`, `SourceFact(origins, at, keys)`, `SanitizerFact(categories)`, `FlowFact(from, to)`, `CharactersFact(of, within)`, `ReturnsFact(kind)`, `RaisesFact(classes)`; each carries `owner` and `condition: ArgPattern?`. A `RaisesFact` with no classes states the call throws none; a record without one asserts nothing about throws. The record ranks nothing: a consumer matches each condition against its call arguments and applies its own rule to an undecidable outcome.
 
 **`VulnClass`**, **`Origin`** -- enum constants for the canonical vocabulary (`sqli`, `cmdi`, `codei`, `xss`, `headeri`, `ssrf`, `pathtrav`, `fileinc`, `deser`, `callablei`, `ldapi`, `xpathi`; `user-input`, `external-input`).
 

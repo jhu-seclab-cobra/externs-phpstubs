@@ -99,6 +99,8 @@ public class PhpStubs internal constructor(
 
     override val flows: List<FlowFact> get() = merge.flows
 
+    override val characters: List<CharactersFact> get() = merge.characters
+
     override val returns: List<ReturnsFact> get() = merge.returns
     override val raises: List<RaisesFact> get() = merge.raises
 

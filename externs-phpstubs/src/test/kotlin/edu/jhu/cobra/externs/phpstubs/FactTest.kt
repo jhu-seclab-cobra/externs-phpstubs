@@ -1,6 +1,7 @@
 package edu.jhu.cobra.externs.phpstubs
 
 import edu.jhu.cobra.commons.phpmodels.ArgPattern
+import edu.jhu.cobra.commons.phpmodels.CharacterClass
 import edu.jhu.cobra.commons.phpmodels.ClassSubject
 import edu.jhu.cobra.commons.phpmodels.FunctionSubject
 import edu.jhu.cobra.commons.phpmodels.OriginId
@@ -21,6 +22,7 @@ import kotlin.test.assertNull
  * - `a source fact keeps its site and key patterns` — verifies the by-reference source shape
  * - `a source fact at the result has no site` — verifies the result-site source shape
  * - `a returns fact and its flow facts come from one value unit` — verifies the classification and the ports
+ * - `a characters fact comes from the value unit` — verifies the bound is read with returns and flows
  * - `a raises fact holds the whole class set` — verifies one fact per raises statement
  * - `an empty raises section is a fact` — verifies the statement that a call throws none
  */
@@ -76,6 +78,16 @@ internal class FactTest {
         assertEquals(ReturnsFact(f, null, ReturnKind.STR), record.returns.single())
         assertEquals(listOf(Port.Argument(0), Port.Argument(1)), record.flows.map { it.from })
         assertEquals(listOf<Port>(Port.Return, Port.Return), record.flows.map { it.to })
+    }
+
+    @Test
+    fun `a characters fact comes from the value unit`() {
+        val document =
+            "- subject: {function: f}\n  returns: str\n  propagation: [{from: argument(0), to: return}]\n" +
+                "  characters: {of: [argument(0)], within: \"[^/]\"}\n"
+        val record = Merge.of(listOf(TestSets.mount(0, Verification.MANUAL, document))).records.getValue(f)
+        val bound = CharactersFact(f, null, setOf(Port.Argument(0)), CharacterClass("[^/]"))
+        assertEquals(bound, record.characters.single())
     }
 
     @Test

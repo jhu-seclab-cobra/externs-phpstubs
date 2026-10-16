@@ -57,7 +57,7 @@ returned `null` for is `StubIndexNotFoundException`; any other is
 records built from its result. Built once per set sequence, immutable.
 
 **State/Fields:** `vocabulary`, `policy`, one `LinkedHashMap<Subject, BuiltinRecord>`
-per declaration kind in first-statement order, and the six fact lists in
+per declaration kind in first-statement order, and the seven fact lists in
 record order.
 
 **Construction (`Merge.of(mounts: List<Mount>)`):** for each mount in

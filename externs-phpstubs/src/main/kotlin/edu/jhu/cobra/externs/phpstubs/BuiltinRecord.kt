@@ -23,6 +23,7 @@ import edu.jhu.cobra.commons.phpmodels.SignatureInfo.TypedSignature
  * @property signature The unconditional signature statement in force, or null for a fact-only record.
  * @property returns Every returns fact, in statement order.
  * @property flows Every flow fact, in statement order.
+ * @property characters Every characters fact, in statement order.
  * @property sources Every source fact, in statement order.
  * @property sinks Every sink fact, in statement order.
  * @property sanitizers Every sanitizer fact, in statement order.
@@ -35,14 +36,15 @@ public data class BuiltinRecord<out S : ModelSubject>(
     val signature: SignatureInfo?,
     val returns: List<ReturnsFact>,
     val flows: List<FlowFact>,
+    val characters: List<CharactersFact>,
     val sources: List<SourceFact>,
     val sinks: List<SinkFact>,
     val sanitizers: List<SanitizerFact>,
     val raises: List<RaisesFact>,
 ) {
-    /** Every fact of the record: returns, flows, sources, sinks, sanitizers, then raises. */
+    /** Every fact of the record: returns, flows, characters, sources, sinks, sanitizers, then raises. */
     val facts: List<Fact>
-        get() = returns + flows + sources + sinks + sanitizers + raises
+        get() = returns + flows + characters + sources + sinks + sanitizers + raises
 
     init {
         val declared = facts

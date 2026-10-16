@@ -10,7 +10,7 @@ error types. The lookup surface — merge, records, facts, `PhpStubs` — is in
 ## Design Overview
 
 - **Classes:** `StubResources` (object), `PhpStubs`, `BuiltinRecord<S>`,
-  the six fact types, `Merge`, `Mount` ([design-lookup.md](design-lookup.md));
+  the seven fact types, `Merge`, `Mount` ([design-lookup.md](design-lookup.md));
   the php-src producers ([design-extraction.md](design-extraction.md))
 - **External types (commons-phpmodels):** `DocumentSetLoader`,
   `DocumentSet`, `Document`, `ResourceOpener`, `CategoryMappingLoader`,

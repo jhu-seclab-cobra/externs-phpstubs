@@ -96,6 +96,9 @@ public interface BuiltinLookup {
     /** Every flow fact over every record, in record then statement order. */
     public val flows: List<FlowFact>
 
+    /** Every characters fact over every record, in record then statement order. */
+    public val characters: List<CharactersFact>
+
     /** Every returns fact over every record, in record then statement order. */
     public val returns: List<ReturnsFact>
 

@@ -25,6 +25,7 @@ import kotlin.test.assertTrue
  * - `statements under different conditions coexist` — verifies conditions partition a unit
  * - `a conditional statement never replaces an unconditional one across ranks` — verifies the partition holds under rank
  * - `a unit is replaced whole and other units stay in force` — verifies per-unit replacement
+ * - `a value statement without characters replaces the bound` — verifies characters belong to the value unit
  * - `a raises statement is replaced only by another raises statement` — verifies the raises unit
  * - `the extension follows the signature statement` — verifies a value override keeps the generated extension
  * - `a signature-only statement yields a record without facts` — verifies a declaration is a record
@@ -124,6 +125,20 @@ internal class MergeTest {
         assertEquals(Port.Argument(0), record.flows.single().from)
         assertEquals(VulnClassId("sqli"), record.sinks.single().vulnClass)
         assertEquals("standard", record.extension)
+    }
+
+    @Test
+    fun `a value statement without characters replaces the bound`() {
+        val document =
+            "- subject: {function: f}\n  returns: str\n  propagation: [{from: argument(0), to: return}]\n" +
+                "  characters: {of: [argument(0)]}\n"
+        val base = TestSets.mount(0, Verification.GENERATED, document)
+        val bounded = Merge.of(listOf(base)).functions.getValue(f)
+        assertEquals(setOf(Port.Argument(0)), bounded.characters.single().of)
+        val value = TestSets.mount(1, Verification.MANUAL, "- subject: {function: f}\n  returns: str\n")
+        val replaced = Merge.of(listOf(base, value)).functions.getValue(f)
+        assertTrue(replaced.characters.isEmpty())
+        assertTrue(replaced.flows.isEmpty())
     }
 
     @Test

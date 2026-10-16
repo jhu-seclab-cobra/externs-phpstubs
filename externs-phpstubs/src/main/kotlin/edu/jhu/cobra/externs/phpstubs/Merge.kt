@@ -38,7 +38,7 @@ private typealias Slots = LinkedHashMap<ArgPattern?, EnumMap<OverrideUnit, State
 /**
  * The fold of every mount into one statement per (subject, condition, unit) key, and the records built
  * from it. Built once per mount sequence and immutable: one map per declaration kind in first-statement
- * order, and the six fact lists in record order.
+ * order, and the seven fact lists in record order.
  */
 internal class Merge private constructor(
     val vocabulary: Vocabulary,
@@ -59,6 +59,7 @@ internal class Merge private constructor(
     val sources: List<SourceFact> by lazy { all.values.flatMap { it.sources } }
     val sanitizers: List<SanitizerFact> by lazy { all.values.flatMap { it.sanitizers } }
     val flows: List<FlowFact> by lazy { all.values.flatMap { it.flows } }
+    val characters: List<CharactersFact> by lazy { all.values.flatMap { it.characters } }
     val returns: List<ReturnsFact> by lazy { all.values.flatMap { it.returns } }
     val raises: List<RaisesFact> by lazy { all.values.flatMap { it.raises } }
 
@@ -95,6 +96,7 @@ internal class Merge private constructor(
                 signature = signed?.entry?.signature,
                 returns = facts.returns,
                 flows = facts.flows,
+                characters = facts.characters,
                 sources = facts.sources,
                 sinks = facts.sinks,
                 sanitizers = facts.sanitizers,
@@ -107,6 +109,7 @@ internal class Merge private constructor(
     private class FactLists {
         val returns = ArrayList<ReturnsFact>()
         val flows = ArrayList<FlowFact>()
+        val characters = ArrayList<CharactersFact>()
         val sources = ArrayList<SourceFact>()
         val sinks = ArrayList<SinkFact>()
         val sanitizers = ArrayList<SanitizerFact>()
@@ -127,6 +130,7 @@ internal class Merge private constructor(
                 OverrideUnit.VALUE -> {
                     returns += ReturnsFact(owner, condition, body.returns!!)
                     body.propagation.orEmpty().mapTo(flows) { FlowFact(owner, condition, it.from, it.to) }
+                    body.characters?.let { characters += CharactersFact(owner, condition, it.of, it.within) }
                 }
 
                 OverrideUnit.SOURCES -> {

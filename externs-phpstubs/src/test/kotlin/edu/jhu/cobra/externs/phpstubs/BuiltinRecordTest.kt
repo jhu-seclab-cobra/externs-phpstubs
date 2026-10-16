@@ -92,5 +92,17 @@ internal class BuiltinRecordTest {
         subject: S,
         signature: SignatureInfo?,
         returns: List<ReturnsFact> = emptyList(),
-    ): BuiltinRecord<S> = BuiltinRecord(subject, null, signature, returns, emptyList(), emptyList(), emptyList(), emptyList(), emptyList())
+    ): BuiltinRecord<S> =
+        BuiltinRecord(
+            subject = subject,
+            extension = null,
+            signature = signature,
+            returns = returns,
+            flows = emptyList(),
+            characters = emptyList(),
+            sources = emptyList(),
+            sinks = emptyList(),
+            sanitizers = emptyList(),
+            raises = emptyList(),
+        )
 }

@@ -11,7 +11,8 @@ types: [design-merge.md](design-merge.md). Fold algorithm:
 
 - **Classes:** `PhpStubs` (final class; companion delegates to the bundled
   instance), `BuiltinRecord<S>` (data class), `SinkFact`, `SourceFact`,
-  `SanitizerFact`, `FlowFact`, `ReturnsFact`, `RaisesFact` (data classes), `VulnClass`
+  `SanitizerFact`, `FlowFact`, `CharactersFact`, `ReturnsFact`, `RaisesFact` (data classes),
+  `VulnClass`
   and `Origin` (enums); `Merge`, `Mount`, `MountSequence` (internal,
   [design-merge.md](design-merge.md))
 - **Abstract:** `BuiltinLookup` (interface: every read of one merge),
@@ -20,7 +21,7 @@ types: [design-merge.md](design-merge.md). Fold algorithm:
   `DocumentSet`, `ResourceOpener`, `CategoryMappingLoader`,
   `CategoryMapping`, `ModelEntry`, `ModelSubject` and its seven subtypes,
   `ArgPattern`, `SignatureInfo` and its four subtypes, `SinkDecl`,
-  `SourceDecl`, `SanitizerDecl`, `Propagation`, `ReturnKind`, `Vocabulary`,
+  `SourceDecl`, `SanitizerDecl`, `Propagation`, `CharacterClass`, `ReturnKind`, `Vocabulary`,
   `TaintPolicy`, `VulnClassId`, `OriginId`, `Precedence`, `Verification`
 - **Relationships:** `PhpStubs` holds one `Merge`; `Merge` folds `Mount`s
   (one per set, in Merge Order) into records; a `BuiltinRecord` owns its
@@ -47,7 +48,7 @@ accumulated vocabulary and policy. Implemented by `PhpStubs` and, by
 delegation, by its companion, so `PhpStubs.function("substr")` and
 `PhpStubs.with(dir).function("substr")` are the same call on two merges.
 
-**Members** (reads of a frozen merge; the six fact lists are built on first read):
+**Members** (reads of a frozen merge; the seven fact lists are built on first read):
 
 | Member | Return | Behavior |
 |--------|--------|----------|
@@ -109,13 +110,14 @@ members only.
 
 **State/Fields:** `subject: S`, `extension: String?`,
 `signature: SignatureInfo?`, `returns: List<ReturnsFact>`,
-`flows: List<FlowFact>`, `sources: List<SourceFact>`, `sinks: List<SinkFact>`,
+`flows: List<FlowFact>`, `characters: List<CharactersFact>`,
+`sources: List<SourceFact>`, `sinks: List<SinkFact>`,
 `sanitizers: List<SanitizerFact>`, `raises: List<RaisesFact>`.
 
 **Validation (`init`):** every fact's `owner == subject`; at least one of
 `signature` or a fact present.
 
-### Fact (sealed interface) and its six data classes
+### Fact (sealed interface) and its seven data classes
 
 **Responsibility:** One element of one assertion statement, with the record
 it belongs to and the condition it holds under. A consumer matches
@@ -131,6 +133,7 @@ for an unconditional statement).
 | `SourceFact` | `origins: Set<OriginId>`, `at: Port.Argument?`, `keys: List<KeyPattern>?` | one `SourceDecl` |
 | `SanitizerFact` | `categories: Set<VulnClassId>` | one `SanitizerDecl` |
 | `FlowFact` | `from: Port.Input`, `to: Port` | one `Propagation` |
+| `CharactersFact` | `of: Set<Port.Argument>?`, `within: CharacterClass?` | the `characters` section, whole: the bytes the result may hold |
 | `ReturnsFact` | `kind: ReturnKind` | the `returns` section |
 | `RaisesFact` | `classes: Set<ClassSubject>` | the `raises` section, whole: the empty set states the subject throws none |
 
