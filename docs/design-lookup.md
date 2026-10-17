@@ -12,7 +12,7 @@ types: [design-merge.md](design-merge.md). Fold algorithm:
 - **Classes:** `PhpStubs` (final class; companion delegates to the bundled
   instance), `BuiltinRecord<S>` (data class), `SinkFact`, `SourceFact`,
   `SanitizerFact`, `FlowFact`, `CharactersFact`, `ReturnsFact`, `ThrowsFact` (data classes),
-  `VulnType` and `SourceKind` (enums); `Merge`, `Mount`, `MountSequence` (internal,
+  `VulnType` and `SourceKind` (enums); `SetMerge`, `Mount`, `MountSequence` (internal,
   [design-merge.md](design-merge.md))
 - **Abstract:** `BuiltinLookup` (interface: every read of one merge),
   `Fact` (sealed interface)
@@ -22,15 +22,15 @@ types: [design-merge.md](design-merge.md). Fold algorithm:
   `ArgPattern`, `SignatureInfo` and its four subtypes, `SinkDecl`,
   `SourceDecl`, `SanitizerDecl`, `ArgumentCheck`, `Propagation`, `CharacterClass`,
   `ReturnKind`, `Vocabulary`, `TaintPolicy`, `VulnTypeId`, `SourceKindId`, `Precedence`, `Verification`
-- **Relationships:** `PhpStubs` holds one `Merge`; `Merge` folds `Mount`s
-  (one per set, in Merge Order) into records; a `BuiltinRecord` owns its
+- **Relationships:** `PhpStubs` holds one `SetMerge`; `SetMerge` folds `Mount`s
+  (one per set, in Mount Order) into records; a `BuiltinRecord` owns its
   `Fact`s; every `Fact` names its owner subject and its condition. The
   companion holds the bundled `PhpStubs`; `with` builds a second one from
   the bundled mounts plus consumer set mounts. All arrows one-way into the
   format library.
 - **Exceptions:** [design.md](design.md) Exception / Error Types.
 - **Dependency roles:** Facade: `PhpStubs`. Contract: `BuiltinLookup`.
-  Aggregate: `Merge`. Data holders: `BuiltinRecord`, the facts.
+  Aggregate: `SetMerge`. Data holders: `BuiltinRecord`, the facts.
   Decoder and validator: commons-phpmodels.
 
 Package `edu.jhu.cobra.externs.phpstubs`, `explicitApi()`. commons-phpmodels
@@ -71,16 +71,16 @@ enumeration.
 
 ### PhpStubs (final class)
 
-**Responsibility:** One `BuiltinLookup` over one `Merge`, plus the
+**Responsibility:** One `BuiltinLookup` over one `SetMerge`, plus the
 construction of merges. The bundled merge is built once when the class
 initializes and shared; every extension merge is a new instance.
 
 **Constructor (internal):** `PhpStubs(mounts: List<Mount>)`; the instance
-holds its mounts (so `with` can extend them) and `Merge.of(mounts)`.
+holds its mounts (so `with` can extend them) and `SetMerge.of(mounts)`.
 
 **Companion:** `companion object : BuiltinLookup by bundled`, where
 `bundled` is a top-level private `PhpStubs` over the mounts a
-`MountSequence` builds in [design.md](design.md) Merge Order (the psalm
+`MountSequence` builds in [design.md](design.md) Mount Order (the psalm
 mapping read once from `StubResources.PSALM_MAPPING`). The constructor is
 internal, not private, because a top-level value cannot call a private
 constructor, and the companion cannot be referenced during its own

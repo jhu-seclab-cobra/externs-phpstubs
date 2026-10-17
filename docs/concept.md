@@ -121,7 +121,7 @@ Runtime:
   its PHP Extension.
 
 - **Name:** Lookup Surface
-- **Definition:** The Canonical Vocabulary, Merge, `BuiltinRecord`, and
+- **Definition:** The Canonical Vocabulary, Set Merge, `BuiltinRecord`, and
   `BuiltinLookup` ([concept-lookup.md](concept-lookup.md)): how the sets
   merge and how a consumer reads them.
 - **Relationships:** built over the bundled document sets.
@@ -171,11 +171,11 @@ Runtime:
 4. Register — insert entries into per-kind maps keyed by subject; two
    documents declaring the same subject is a generated-set defect and fails the
    load naming both documents.
-5. Merge — fold the generated set, then the value rules
+5. Fold — fold the generated set, then the value rules
    set, the Canonical Vocabulary, and the two translated taint sets, into
    the entry in force per subject, condition, and unit.
 6. Answer — resolve a PHP name to a subject and read its record from the
-   merge; enumerate a declaration kind or a fact kind across it.
+   Set Merge; enumerate a declaration kind or a fact kind across it.
 
 ## 4. Scenarios
 

@@ -11,7 +11,7 @@ set: [design-taint.md](design-taint.md).
   `DocumentSet`, `VocabularyMapping`, `Vocabulary`
 - **Relationships:** `PhpStubs` mounts the set at position 4 under
   `PSALM_MAPPING` against the accumulated canonical vocabulary
-  ([design.md](design.md) Merge Order).
+  ([design.md](design.md) Mount Order).
 - **Exceptions:** none of its own.
 
 ## Class / Type Specifications

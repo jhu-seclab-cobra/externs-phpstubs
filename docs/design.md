@@ -1,7 +1,7 @@
 # PHP Stubs — Design
 
 The data side of the library: the resource roots, the five bundled sets and
-their fixed Merge Order, the generated-set rules, and the
+their fixed Mount Order, the generated-set rules, and the
 error types. The lookup surface — merge, records, facts, `PhpStubs` — is in
 [design-lookup.md](design-lookup.md). Concepts: [concept.md](concept.md),
 [concept-lookup.md](concept-lookup.md). Domain semantics:
@@ -10,7 +10,7 @@ error types. The lookup surface — merge, records, facts, `PhpStubs` — is in
 ## Design Overview
 
 - **Classes:** `StubResources` (object), `PhpStubs`, `BuiltinRecord<S>`,
-  the seven fact types, `Merge`, `Mount` ([design-lookup.md](design-lookup.md));
+  the seven fact types, `SetMerge`, `Mount` ([design-lookup.md](design-lookup.md));
   the php-src producers ([design-extraction.md](design-extraction.md))
 - **External types (commons-phpmodels):** `DocumentSetLoader`,
   `DocumentSet`, `Document`, `ResourceOpener`, `VocabularyMappingLoader`,
@@ -18,10 +18,10 @@ error types. The lookup surface — merge, records, facts, `PhpStubs` — is in
   `ArgPattern`, `SignatureInfo` and its four subtypes, `Vocabulary`,
   `TaintPolicy`, `Precedence`, `Verification`
 - **Relationships:** `StubResources` names the roots and opens them;
-  `PhpStubs` mounts the bundled roots in Merge Order through
+  `PhpStubs` mounts the bundled roots in Mount Order through
   `DocumentSetLoader` (the psalm mapping decoded once by
   `VocabularyMappingLoader` and applied to the two psalm-named sets) and
-  folds them in `Merge`. One-way: facade → merge → format library.
+  folds them in `SetMerge`. One-way: facade → `SetMerge` → format library.
 - **Exceptions:** `StubIndexNotFoundException`, `StubIndexInvalidException`
   (both extend `RuntimeException`).
 - **Dependency roles:** Resource roots and opener: `StubResources`.
@@ -51,7 +51,7 @@ this repository's build.
   `Class.getResourceAsStream`; returns `null` for an absent resource.
   `MountSequence` records absences to raise `StubIndexNotFoundException`.
 
-### Merge Order (private `bundledMounts()` of `PhpStubs.kt`)
+### Mount Order (private `bundledMounts()` of `PhpStubs.kt`)
 
 The bundled mounts, in this order, each with its mapping:
 

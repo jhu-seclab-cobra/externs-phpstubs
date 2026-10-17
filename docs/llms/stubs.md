@@ -39,7 +39,7 @@ query?.sinkFacts?.single()?.vulnType == VulnType.SQLI.id   // true
 
 **`record(subject: ModelSubject): BuiltinRecord<ModelSubject>?`** -- An already built subject.
 
-**Enumeration** (records in Merge Order of each subject's first mounted entry; facts in record order, then condition, unit and document order):
+**Enumeration** (records in Mount Order of each subject's first mounted entry; facts in record order, then condition, unit and document order):
 
 **`functions`, `classes`, `methods`, `constants`, `classConstants`, `properties`, `variables`** -- `Collection<BuiltinRecord<…>>`.
 
@@ -79,7 +79,7 @@ Every fact: **`owner: ModelSubject`**, **`condition: ArgPattern?`** (`null` for 
 
 ### StubResources (object)
 
-**`MODELS`** (`/models/`, generated set), **`VALUE_RULES`** (`/value-rules/`, manual value units), **`VOCABULARY`** (`/vocabulary/`, the canonical vocabulary and policy, manual), **`TAINT`** (`/taint/`, psalm's data in psalm's names, generated), **`TAINT_RULES`** (`/taint-rules/`, manual additions in psalm's names, adds `xpath` and `external`), **`PSALM_MAPPING`** (`/vocabulary/psalm-mapping.yaml`). Merge order is that listing. **`opener(root: String): ResourceOpener`** -- `root + path` on this module's classpath; trailing slash optional; `null` for an absent path.
+**`MODELS`** (`/models/`, generated set), **`VALUE_RULES`** (`/value-rules/`, manual value units), **`VOCABULARY`** (`/vocabulary/`, the canonical vocabulary and policy, manual), **`TAINT`** (`/taint/`, psalm's data in psalm's names, generated), **`TAINT_RULES`** (`/taint-rules/`, manual additions in psalm's names, adds `xpath` and `external`), **`PSALM_MAPPING`** (`/vocabulary/psalm-mapping.yaml`). Mount order is that listing. **`opener(root: String): ResourceOpener`** -- `root + path` on this module's classpath; trailing slash optional; `null` for an absent path.
 
 ```kotlin
 val canonical = DocumentSetLoader.load(StubResources.opener(StubResources.VOCABULARY)).vocabulary

@@ -17,10 +17,10 @@ import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 /**
- * Tests for [Merge]: the fold of mounts into the entry in force per (subject, condition, unit) key.
+ * Tests for [SetMerge]: the fold of mounts into the entry in force per (subject, condition, unit) key.
  *
- * - `a manual entry outranks a later generated one` — verifies rank beats merge order
- * - `among equal ranks the later mount wins` — verifies merge order breaks a rank tie
+ * - `a manual entry outranks a later generated one` — verifies rank beats mount order
+ * - `among equal ranks the later mount wins` — verifies mount order breaks a rank tie
  * - `within one set the later document wins the same key` — verifies document order inside a set
  * - `entries under different conditions coexist` — verifies conditions partition a unit
  * - `a conditional entry never replaces an unconditional one across ranks` — verifies the partition holds under rank
@@ -36,7 +36,7 @@ import kotlin.test.assertTrue
  * - `fact lists follow record order then condition order` — verifies enumeration determinism
  * - `equal mount lists merge into equal records` — verifies the fold is a function of its input
  */
-internal class MergeTest {
+internal class SetMergeTest {
     private val f = FunctionSubject("f")
 
     private val generated =
@@ -50,7 +50,7 @@ internal class MergeTest {
     fun `a manual entry outranks a later generated one`() {
         val manual = TestSets.mount(0, Verification.MANUAL, "- subject: {function: f}\n  returns: str\n")
         val later = TestSets.mount(1, Verification.GENERATED, generated, extension = "standard")
-        val record = Merge.of(listOf(manual, later)).functions.getValue(f)
+        val record = SetMerge.of(listOf(manual, later)).functions.getValue(f)
         assertEquals(ReturnKind.STR, record.returns.single().kind)
         assertEquals("standard", record.extension)
     }
@@ -59,14 +59,14 @@ internal class MergeTest {
     fun `among equal ranks the later mount wins`() {
         val first = TestSets.mount(0, Verification.MANUAL, "- subject: {function: f}\n  returns: str\n")
         val second = TestSets.mount(1, Verification.MANUAL, "- subject: {function: f}\n  returns: num\n")
-        val record = Merge.of(listOf(first, second)).functions.getValue(f)
+        val record = SetMerge.of(listOf(first, second)).functions.getValue(f)
         assertEquals(ReturnKind.NUM, record.returns.single().kind)
     }
 
     @Test
     fun `within one set the later document wins the same key`() {
         val root = "/set-two-documents/"
-        val merge = Merge.of(MountSequence().mount(root, StubResources.opener(root)).toList())
+        val merge = SetMerge.of(MountSequence().mount(root, StubResources.opener(root)).toList())
         assertEquals(
             ReturnKind.NUM,
             merge.functions
@@ -87,7 +87,7 @@ internal class MergeTest {
               when: [_, 1]
               returns: num
             """.trimIndent()
-        val record = Merge.of(listOf(TestSets.mount(0, Verification.MANUAL, document))).functions.getValue(f)
+        val record = SetMerge.of(listOf(TestSets.mount(0, Verification.MANUAL, document))).functions.getValue(f)
         assertEquals(listOf(null, ArgPattern(listOf(null, IntVal(1)))), record.returns.map { it.condition })
         assertEquals(listOf(ReturnKind.STR, ReturnKind.NUM), record.returns.map { it.kind })
     }
@@ -103,7 +103,7 @@ internal class MergeTest {
             """.trimIndent()
         val base = TestSets.mount(0, Verification.GENERATED, valued, extension = "standard")
         val conditional = TestSets.mount(1, Verification.MANUAL, "- subject: {function: f}\n  when: [1]\n  returns: num\n")
-        val record = Merge.of(listOf(base, conditional)).functions.getValue(f)
+        val record = SetMerge.of(listOf(base, conditional)).functions.getValue(f)
         val condition = ArgPattern(listOf(IntVal(1)))
         assertEquals(listOf(null, condition), record.returns.map { it.condition })
         assertEquals(listOf(ReturnKind.NUM, ReturnKind.NUM), record.returns.map { it.kind })
@@ -120,7 +120,7 @@ internal class MergeTest {
                 Verification.MANUAL,
                 "- subject: {function: f}\n  returns: str\n  propagation: [{from: argument(0), to: return}]\n",
             )
-        val record = Merge.of(listOf(base, override)).functions.getValue(f)
+        val record = SetMerge.of(listOf(base, override)).functions.getValue(f)
         assertEquals(ReturnKind.STR, record.returns.single().kind)
         assertEquals(Port.Argument(0), record.flows.single().from)
         assertEquals(VulnTypeId("sqli"), record.sinkFacts.single().vulnType)
@@ -133,7 +133,7 @@ internal class MergeTest {
             "- subject: {function: f}\n  returns: str\n  propagation: [{from: argument(0), to: return}]\n" +
                 "  characters: {of: [argument(0)]}\n"
         val base = TestSets.mount(0, Verification.GENERATED, document)
-        val bounded = Merge.of(listOf(base)).functions.getValue(f)
+        val bounded = SetMerge.of(listOf(base)).functions.getValue(f)
         assertEquals(
             setOf(Port.Argument(0)),
             bounded.characters
@@ -141,7 +141,7 @@ internal class MergeTest {
                 .bound.of,
         )
         val value = TestSets.mount(1, Verification.MANUAL, "- subject: {function: f}\n  returns: str\n")
-        val replaced = Merge.of(listOf(base, value)).functions.getValue(f)
+        val replaced = SetMerge.of(listOf(base, value)).functions.getValue(f)
         assertTrue(replaced.characters.isEmpty())
         assertTrue(replaced.flows.isEmpty())
     }
@@ -150,10 +150,10 @@ internal class MergeTest {
     fun `a throws entry is replaced only by another throws entry`() {
         val base = TestSets.mount(0, Verification.GENERATED, "$generated\n  throws: [valueerror]\n", extension = "standard")
         val value = TestSets.mount(1, Verification.MANUAL, "- subject: {function: f}\n  returns: str\n")
-        val kept = Merge.of(listOf(base, value)).functions.getValue(f)
+        val kept = SetMerge.of(listOf(base, value)).functions.getValue(f)
         assertEquals(setOf(ClassSubject("valueerror")), kept.throws.single().classes)
         val none = TestSets.mount(2, Verification.MANUAL, "- subject: {function: f}\n  throws: []\n")
-        val replaced = Merge.of(listOf(base, value, none)).functions.getValue(f)
+        val replaced = SetMerge.of(listOf(base, value, none)).functions.getValue(f)
         assertEquals(emptySet(), replaced.throws.single().classes)
         assertEquals(ReturnKind.STR, replaced.returns.single().kind)
     }
@@ -168,7 +168,7 @@ internal class MergeTest {
                 "- subject: {function: f}\n  signature: {params: [{name: a, type: string}], returnType: string}\n" +
                     "  propagation: [{from: argument(0), to: return}]\n",
             )
-        val record = Merge.of(listOf(base, signed)).functions.getValue(f)
+        val record = SetMerge.of(listOf(base, signed)).functions.getValue(f)
         assertNull(record.extension)
         assertEquals(ReturnKind.STR, record.returns.single().kind)
     }
@@ -176,7 +176,7 @@ internal class MergeTest {
     @Test
     fun `a signature-only entry yields a record without facts`() {
         val document = "- subject: {class: K}\n  signature: {classifier: class}\n"
-        val record = Merge.of(listOf(TestSets.mount(0, Verification.MANUAL, document))).classes.getValue(ClassSubject("K"))
+        val record = SetMerge.of(listOf(TestSets.mount(0, Verification.MANUAL, document))).classes.getValue(ClassSubject("K"))
         assertNotNull(record.signature)
         assertTrue(record.facts.isEmpty())
     }
@@ -185,13 +185,13 @@ internal class MergeTest {
     fun `a conditional entry declaring a signature fails the merge`() {
         val document = "- subject: {function: f}\n  when: [1]\n  signature: {params: [{name: a, type: int}], returnType: int}\n"
         val mount = TestSets.mount(0, Verification.MANUAL, document)
-        val failure = assertFailsWith<StubIndexInvalidException> { Merge.of(listOf(mount)) }
+        val failure = assertFailsWith<StubIndexInvalidException> { SetMerge.of(listOf(mount)) }
         assertTrue("signature" in failure.message!!)
     }
 
     @Test
     fun `an empty mount list yields an empty merge`() {
-        val merge = Merge.of(emptyList())
+        val merge = SetMerge.of(emptyList())
         assertTrue(merge.records.isEmpty())
         assertTrue(merge.sinkFacts.isEmpty())
         assertTrue(merge.vocabulary.vulnTypes.isEmpty())
@@ -201,7 +201,7 @@ internal class MergeTest {
     fun `vocabulary and policy accumulate over every mount`() {
         val first = TestSets.mount(0, Verification.MANUAL, "- subject: {function: f}\n  returns: str\n")
         val second = TestSets.mount(1, Verification.MANUAL, "- subject: {function: g}\n  returns: str\n", vocabulary = null)
-        val merge = Merge.of(listOf(first, second))
+        val merge = SetMerge.of(listOf(first, second))
         assertEquals(setOf(VulnTypeId("sqli"), VulnTypeId("xss")), merge.vocabulary.vulnTypes.keys)
         assertEquals(listOf(f, FunctionSubject("g")), merge.functions.keys.toList())
     }
@@ -217,7 +217,7 @@ internal class MergeTest {
             - subject: {constant: C}
               signature: {type: int, value: '1'}
             """.trimIndent()
-        val merge = Merge.of(listOf(TestSets.mount(0, Verification.MANUAL, document)))
+        val merge = SetMerge.of(listOf(TestSets.mount(0, Verification.MANUAL, document)))
         assertEquals(setOf<Any>(f), merge.functions.keys)
         assertEquals(setOf<Any>(ClassSubject("K")), merge.classes.keys)
         assertEquals(setOf<Any>(ConstantSubject("C")), merge.constants.keys)
@@ -237,7 +237,7 @@ internal class MergeTest {
             - subject: {function: g}
               sinks: [{port: argument(0), vulnType: sqli}]
             """.trimIndent()
-        val merge = Merge.of(listOf(TestSets.mount(0, Verification.MANUAL, document)))
+        val merge = SetMerge.of(listOf(TestSets.mount(0, Verification.MANUAL, document)))
         val g = FunctionSubject("g")
         assertEquals(listOf(g, g, f), merge.sinkFacts.map { it.owner })
         assertEquals(
@@ -257,6 +257,6 @@ internal class MergeTest {
                 TestSets.mount(1, Verification.MANUAL, "- subject: {function: f}\n  returns: str\n"),
             )
         }
-        assertEquals(Merge.of(mounts()).records, Merge.of(mounts()).records)
+        assertEquals(SetMerge.of(mounts()).records, SetMerge.of(mounts()).records)
     }
 }

@@ -1,7 +1,7 @@
 # PHP Stubs — Lookup Domain Model
 
 Domain semantics of `BuiltinLookup`: the sets this library merges, the
-vocabulary they end in, the merge, and the records a consumer reads by PHP
+vocabulary they end in, the Set Merge, and the records a consumer reads by PHP
 name. The format entities — Model, Matching Subject, Signature, Section,
 Override Unit, Condition, Conditional Entry, Unconditional Entry, Source
 Kind, Vulnerability Type, Document Set, Set Provenance, Precedence — are the
@@ -29,25 +29,26 @@ format library's: `extern/commons-phpmodels/docs/model.md`,
   or to *discarded* for a kind with no canonical meaning (`has_quotes`,
   `cookie`, `user_secret`, `system_secret`). Applied at the merge to both
   sets; a consumer never sees a psalm name.
-- **Merge Order** — The fixed mount order of the Bundled Sets: generated
-  declarations, value rules, Canonical Vocabulary, taint (mapped), taint
-  rules (mapped). Fixed by this library; a consumer neither reorders nor
-  omits a set.
+- **Mount Order** — The position order of every mounted set: the Bundled
+  Sets first, in a fixed order (generated declarations, value rules,
+  Canonical Vocabulary, taint (mapped), taint rules (mapped)), then the
+  Consumer Sets in the order supplied. The bundled prefix is fixed by this
+  library; a consumer neither reorders nor omits a Bundled Set.
 - **Consumer Set** — A document set a consumer supplies beside the
   bundled ones: a directory or classpath root holding a manifest. Mounted
   after every Bundled Set, in the order supplied; a set without provenance
   mounts as manual. Its names are Canonical Vocabulary names or its own
   vocabulary additions; it carries no mapping.
-- **Merge** — The map from every (subject, condition, unit) key stated by
+- **Set Merge** — The map from every (subject, condition, unit) key stated by
   any mounted set to the entry in force for it, with the Set Provenance
-  rank and Merge Order position of the set that stated it. Built once per
+  rank and Mount Order position of the set that stated it. Built once per
   set sequence and never changed. Two entries stating the same key
   compete; an entry with a different condition never competes.
 - **PHP Extension** — The PHP extension a declaration belongs to, derived from
   the generated document's placement (`mysqli`, `standard`, `keyword`,
   `scalar`, ...). A subject declared only by a non-generated set has no
   PHP Extension.
-- **`BuiltinRecord`** — One subject the Merge holds any entry in force for:
+- **`BuiltinRecord`** — One subject the Set Merge holds any entry in force for:
   its PHP spelling, its PHP Extension, its signature when an unconditional
   signature is in force, and its Facts. Existence condition: the
   subject is keyed after the merge. Identity is the subject. One record
@@ -62,7 +63,7 @@ format library's: `extern/commons-phpmodels/docs/model.md`,
   exception classes the subject's own implementation may throw, the whole
   section in one Fact, so the empty set states it throws none). Every Fact of every
   entry is present; the record ranks none of them against a call.
-- **`BuiltinLookup`** — The two reading modes over one Merge:
+- **`BuiltinLookup`** — The two reading modes over one Set Merge:
   *exact* — one PHP spelling (`substr`, `mysqli::query`, `PDO`,
   `PHP_INT_MAX`, `PDO::ATTR_ERRMODE`), or owner and name apart, to at most
   one record; *enumeration* — every record of one declaration kind, or
@@ -73,10 +74,10 @@ format library's: `extern/commons-phpmodels/docs/model.md`,
 
 | From | To | Relation | Cardinality | Meaning |
 |------|----|----------|-------------|---------|
-| `BuiltinLookup` | Merge | reads | 1:1 | One merge per lookup; bundled or bundled plus consumer sets |
-| Merge | Bundled Set | folds | 1:5 | In Merge Order, under the default Precedence |
-| Merge | Consumer Set | folds | 1:N | After the bundled sets, in supplied order |
-| Merge | entry in force | holds | 1:N | Exactly one per (subject, condition, unit) key stated by any set |
+| `BuiltinLookup` | Set Merge | reads | 1:1 | One Set Merge per lookup; bundled or bundled plus consumer sets |
+| Set Merge | Bundled Set | folds | 1:5 | In Mount Order, under the default Precedence |
+| Set Merge | Consumer Set | folds | 1:N | After the bundled sets, in supplied order |
+| Set Merge | entry in force | holds | 1:N | Exactly one per (subject, condition, unit) key stated by any set |
 | Psalm Mapping | Bundled Set | translates | 1:2 | The taint set and the taint rules set |
 | Canonical Vocabulary | Fact | names | 1:N | Every vulnerability type and source kind a fact carries |
 | `BuiltinRecord` | Matching Subject | identifies | 1:1 | PHP spelling folded per kind |
@@ -93,7 +94,7 @@ Two entries stating the same (subject, condition, unit) key:
 | Comparison | In force |
 |------------|----------|
 | Set Provenance ranks differ | The higher rank (manual over generated) |
-| Ranks equal, Merge Order positions differ | The later position |
+| Ranks equal, Mount Order positions differ | The later position |
 | Same document, same key | Load failure (the format's per-document duplicate rule) |
 | Same set, different documents, same key | The later document (the generated set: load failure, generated-set rule) |
 
@@ -120,10 +121,10 @@ Two entries stating the same (subject, condition, unit) key:
   any Consumer Set; every mapping target is one of its names.
 - No psalm name survives the merge: every kind of the two psalm-named sets
   is mapped or discarded, and a discarded-only element is dropped.
-- Merge Order is fixed and complete: the five bundled sets, once each, in
+- The bundled prefix of Mount Order is fixed and complete: the five bundled sets, once each, in
   the stated order, under the default Precedence.
-- The entry in force is replaced whole per key, never merged with the one
-  it replaces; a later set that omits a unit leaves the earlier entry in
+- The entry in force is replaced whole per key, never combined with the
+  one it replaces; a later set that omits a unit leaves the earlier entry in
   force for that unit.
 - Conditions partition the entries of one subject and unit: a
   conditional entry never replaces an unconditional one, and the
@@ -135,8 +136,8 @@ Two entries stating the same (subject, condition, unit) key:
   library and compared whole; no suffix, prefix, or case-insensitive match
   exists in the lookup.
 - Enumeration order is deterministic, so a consumer's "first match" is:
-  records in Merge Order of each subject's first mounted entry, whatever
-  its rank; facts in record order, then conditions in Merge Order of their
+  records in Mount Order of each subject's first mounted entry, whatever
+  its rank; facts in record order, then conditions in Mount Order of their
   first entry, then Override Unit order, then document order.
 - A Fact always names its owner; a fact never exists apart from a record.
 - The value rules set corrects only subjects the generated set declares,
@@ -160,7 +161,7 @@ Two entries stating the same (subject, condition, unit) key:
 - **With consumer sets.** A Consumer Set is written in the
   Canonical Vocabulary (plus its own additions) and mounts after the
   bundled sets, so its manual declarations replace generated ones and
-  outrank bundled manual ones by later Merge Order.
+  outrank bundled manual ones by later Mount Order.
 
 Rationale: [concept-lookup.md](concept-lookup.md). Software structure:
 [design-lookup.md](design-lookup.md).

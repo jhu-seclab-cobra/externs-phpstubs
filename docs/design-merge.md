@@ -2,34 +2,34 @@
 
 Software structure of the mount and merge machinery behind
 `BuiltinLookup`: how each document set becomes a `Mount`, how a `MountSequence`
-threads the vocabulary and classifies failures, and how `Merge` folds the
+threads the vocabulary and classifies failures, and how `SetMerge` folds the
 mounts into records. Every type here is internal; the public surface is
 [design-lookup.md](design-lookup.md). Fold algorithm:
-[spec-merge.md](spec-merge.md). Merge Order and generated-set rules:
+[spec-merge.md](spec-merge.md). Mount Order and generated-set rules:
 [design.md](design.md).
 
 ## Design Overview
 
 - **Classes:** `Mount` (internal data class), `MountSequence` (internal
-  class), `Merge` (internal class), `OverrideUnit` (internal enum:
+  class), `SetMerge` (internal class), `OverrideUnit` (internal enum:
   `SIGNATURE`, `VALUE`, `SOURCES`, `SINKS`, `SANITIZERS`, `THROWS`)
 - **External types (commons-phpmodels):** `DocumentSetLoader`,
   `DocumentSet`, `Document`, `ResourceOpener`, `VocabularyMapping`,
   `ModelEntry`, `PolicyRow`, `Vocabulary`, `TaintPolicy`, `Precedence`,
   `Verification`, `DocumentSetException`
 - **Relationships:** `MountSequence` produces `Mount`s in position order;
-  `Merge.of` consumes them and builds one `BuiltinRecord` per subject.
-  `PhpStubs` owns one mount list and one `Merge`.
+  `SetMerge.of` consumes them and builds one `BuiltinRecord` per subject.
+  `PhpStubs` owns one mount list and one `SetMerge`.
 - **Exceptions:** `StubIndexNotFoundException`, `StubIndexInvalidException`
   ([design.md](design.md) Exception / Error Types).
 - **Dependency roles:** Builder: `MountSequence`. Data holder: `Mount`.
-  Aggregate: `Merge`.
+  Aggregate: `SetMerge`.
 
 ## Class / Type Specifications
 
 ### Mount (internal data class)
 
-**Responsibility:** One set as mounted: its position in Merge Order, its
+**Responsibility:** One set as mounted: its position in Mount Order, its
 verification, the vocabulary and policy rows it declares, and its entries,
 each paired with the extension its document path yields (`.yaml` removed,
 trailing `_<digits>` removed) for the generated set and `null` for every
@@ -51,16 +51,16 @@ rules and derives PHP extensions. A failure naming a path the opener
 returned `null` for is `StubIndexNotFoundException`; any other is
 `StubIndexInvalidException` with the cause attached.
 
-### Merge (internal class)
+### SetMerge (internal class)
 
 **Responsibility:** The fold of [spec-merge.md](spec-merge.md) and the
 records built from its result. Built once per set sequence, immutable.
 
 **State/Fields:** `vocabulary`, `policy`, one `LinkedHashMap<Subject, BuiltinRecord>`
-per declaration kind in Merge Order of each subject's first mounted entry,
+per declaration kind in Mount Order of each subject's first mounted entry,
 whatever its rank, and the seven fact lists in record order.
 
-**Construction (`Merge.of(mounts: List<Mount>)`):** for each mount in
+**Construction (`SetMerge.of(mounts: List<Mount>)`):** for each mount in
 position order and each entry: key = (subject, condition); per unit the
 entry declares, the entry in force is replaced when the new entry's
 verification ranks at least equal under `Precedence.DEFAULT` (equal rank,
@@ -72,7 +72,7 @@ conditional entry declaring a signature is `StubIndexInvalidException`.
 entry in force for the signature unit, or `null`; the facts are every
 element of every entry in force under every condition of that subject, each
 tagged with its condition. Within a subject, facts follow conditions in
-Merge Order of their first entry, then Override Unit order, then document
+Mount Order of their first entry, then Override Unit order, then document
 order.
 
 ## Validation Rules
@@ -82,5 +82,5 @@ order.
   without one mounts as `MANUAL`.
 - The generated-set rules and PHP extension derivation apply to exactly the mount
   flagged as the generated set.
-- `Merge.records` holds every subject any mount states, and each subject
+- `SetMerge.records` holds every subject any mount states, and each subject
   appears in exactly one kind map.

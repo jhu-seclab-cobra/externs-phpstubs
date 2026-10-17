@@ -2,7 +2,7 @@
 
 The classpath roots, the opener consumers and the loader share, and the
 layout of the generated taint document set. Concepts:
-[concept-taint.md](concept-taint.md). Resource roots and merge order: [design.md](design.md).
+[concept-taint.md](concept-taint.md). Resource roots and mount order: [design.md](design.md).
 
 ## Design Overview
 

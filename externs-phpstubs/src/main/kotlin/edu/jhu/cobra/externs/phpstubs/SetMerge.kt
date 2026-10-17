@@ -32,10 +32,10 @@ private typealias Slots = LinkedHashMap<ArgPattern?, EnumMap<OverrideUnit, Mount
 
 /**
  * The fold of every mount into the entry in force for each (subject, condition, unit) key, and the records
- * built from it. Built once per mount sequence and immutable: one map per declaration kind in Merge Order of
+ * built from it. Built once per mount sequence and immutable: one map per declaration kind in Mount Order of
  * each subject's first mounted entry, whatever its rank, and the seven fact lists in record order.
  */
-internal class Merge private constructor(
+internal class SetMerge private constructor(
     val vocabulary: Vocabulary,
     val policy: TaintPolicy,
 ) {
@@ -158,7 +158,7 @@ internal class Merge private constructor(
         fun of(
             mounts: List<Mount>,
             precedence: Precedence = Precedence.DEFAULT,
-        ): Merge {
+        ): SetMerge {
             var vocabulary = Vocabulary.EMPTY
             val rows = ArrayList<PolicyRow>()
             val mounted = ArrayList<Mounted>()
@@ -168,7 +168,7 @@ internal class Merge private constructor(
                 val rank = precedence.rank(mount.verification)
                 mount.entries.mapTo(mounted) { (entry, extension) -> Mounted(mount.position, rank, entry, extension) }
             }
-            val merge = Merge(vocabulary, TaintPolicy(rows))
+            val merge = SetMerge(vocabulary, TaintPolicy(rows))
             for ((subject, slots) in fold(mounted)) merge.add(subject, slots)
             return merge
         }

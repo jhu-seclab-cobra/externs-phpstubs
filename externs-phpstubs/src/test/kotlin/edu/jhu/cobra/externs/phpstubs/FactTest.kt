@@ -35,7 +35,7 @@ internal class FactTest {
     @Test
     fun `an unconditional entry yields facts without a condition`() {
         val document = "- subject: {function: f}\n  sinks: [{port: argument(1), vulnType: xss}]\n"
-        val record = Merge.of(listOf(TestSets.mount(0, Verification.MANUAL, document))).records.getValue(f)
+        val record = SetMerge.of(listOf(TestSets.mount(0, Verification.MANUAL, document))).records.getValue(f)
         assertEquals(SinkFact(f, null, Port.Argument(1), VulnTypeId("xss")), record.sinkFacts.single())
     }
 
@@ -49,7 +49,7 @@ internal class FactTest {
               returns: str
               propagation: [{from: argument(0), to: return}]
             """.trimIndent()
-        val record = Merge.of(listOf(TestSets.mount(0, Verification.MANUAL, document))).records.getValue(f)
+        val record = SetMerge.of(listOf(TestSets.mount(0, Verification.MANUAL, document))).records.getValue(f)
         val condition = ArgPattern(listOf(BoolVal(true)))
         assertEquals(SanitizerFact(f, condition, setOf(VulnTypeId("sqli")), null), record.sanitizerFacts.single())
         assertEquals(condition, record.returns.single().condition)
@@ -60,7 +60,7 @@ internal class FactTest {
     fun `a sanitizer fact keeps its check`() {
         val document =
             "- subject: {function: f}\n  sanitizers: [{check: {argument: argument(0), accepts: true, within: '[0-9]'}}]\n"
-        val record = Merge.of(listOf(TestSets.mount(0, Verification.MANUAL, document))).records.getValue(f)
+        val record = SetMerge.of(listOf(TestSets.mount(0, Verification.MANUAL, document))).records.getValue(f)
         val check = ArgumentCheck(Port.Argument(0), BoolVal(true), CharacterClass("[0-9]"))
         assertEquals(SanitizerFact(f, null, emptySet(), check), record.sanitizerFacts.single())
     }
@@ -68,7 +68,7 @@ internal class FactTest {
     @Test
     fun `a source fact keeps its site and key patterns`() {
         val document = "- subject: {function: f}\n  sources: [{sourceKinds: [user-input], at: argument(1)}]\n"
-        val record = Merge.of(listOf(TestSets.mount(0, Verification.MANUAL, document))).records.getValue(f)
+        val record = SetMerge.of(listOf(TestSets.mount(0, Verification.MANUAL, document))).records.getValue(f)
         val source = record.sourceFacts.single()
         assertEquals(setOf(SourceKindId("user-input")), source.sourceKinds)
         assertEquals(Port.Argument(1), source.at)
@@ -78,7 +78,7 @@ internal class FactTest {
     @Test
     fun `a source fact at the result has no site`() {
         val document = "- subject: {function: f}\n  sources: [{sourceKinds: [user-input]}]\n"
-        val record = Merge.of(listOf(TestSets.mount(0, Verification.MANUAL, document))).records.getValue(f)
+        val record = SetMerge.of(listOf(TestSets.mount(0, Verification.MANUAL, document))).records.getValue(f)
         assertEquals(SourceFact(f, null, setOf(SourceKindId("user-input")), null, null), record.sourceFacts.single())
     }
 
@@ -86,7 +86,7 @@ internal class FactTest {
     fun `a returns fact and its flow facts come from one value unit`() {
         val document =
             "- subject: {function: f}\n  returns: str\n  propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]\n"
-        val record = Merge.of(listOf(TestSets.mount(0, Verification.MANUAL, document))).records.getValue(f)
+        val record = SetMerge.of(listOf(TestSets.mount(0, Verification.MANUAL, document))).records.getValue(f)
         assertEquals(ReturnsFact(f, null, ReturnKind.STR), record.returns.single())
         assertEquals(listOf(Port.Argument(0), Port.Argument(1)), record.flows.map { it.from })
         assertEquals(listOf<Port>(Port.Return, Port.Return), record.flows.map { it.to })
@@ -97,7 +97,7 @@ internal class FactTest {
         val document =
             "- subject: {function: f}\n  returns: str\n  propagation: [{from: argument(0), to: return}]\n" +
                 "  characters: {of: [argument(0)], within: \"[^/]\"}\n"
-        val record = Merge.of(listOf(TestSets.mount(0, Verification.MANUAL, document))).records.getValue(f)
+        val record = SetMerge.of(listOf(TestSets.mount(0, Verification.MANUAL, document))).records.getValue(f)
         val bound = CharactersFact(f, null, CharacterBound(setOf(Port.Argument(0)), CharacterClass("[^/]")))
         assertEquals(bound, record.characters.single())
     }
@@ -105,7 +105,7 @@ internal class FactTest {
     @Test
     fun `a throws fact holds the whole class set`() {
         val document = "- subject: {function: f}\n  throws: [valueerror, \\jsonexception]\n"
-        val record = Merge.of(listOf(TestSets.mount(0, Verification.MANUAL, document))).records.getValue(f)
+        val record = SetMerge.of(listOf(TestSets.mount(0, Verification.MANUAL, document))).records.getValue(f)
         val classes = setOf(ClassSubject("valueerror"), ClassSubject("jsonexception"))
         assertEquals(ThrowsFact(f, null, classes), record.throws.single())
     }
@@ -113,7 +113,7 @@ internal class FactTest {
     @Test
     fun `an empty throws section is a fact`() {
         val document = "- subject: {function: f}\n  throws: []\n"
-        val record = Merge.of(listOf(TestSets.mount(0, Verification.MANUAL, document))).records.getValue(f)
+        val record = SetMerge.of(listOf(TestSets.mount(0, Verification.MANUAL, document))).records.getValue(f)
         assertEquals(ThrowsFact(f, null, emptySet()), record.throws.single())
         assertEquals(record.throws, record.facts)
     }

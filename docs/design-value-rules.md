@@ -10,7 +10,7 @@ opener and the taint set: [design-taint.md](design-taint.md).
 - **External types (commons-phpmodels):** `DocumentSetLoader`,
   `DocumentSet`, `SetProvenance`, `Verification`
 - **Relationships:** `PhpStubs` mounts the set at position 1, unmapped
-  ([design.md](design.md) Merge Order).
+  ([design.md](design.md) Mount Order).
 - **Exceptions:** none of its own.
 
 ## Class / Type Specifications

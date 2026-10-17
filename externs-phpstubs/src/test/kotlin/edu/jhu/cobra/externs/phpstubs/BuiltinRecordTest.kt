@@ -79,7 +79,7 @@ internal class BuiltinRecordTest {
     @Test
     fun `member accessors narrow the method, class constant, and property signatures`() {
         val root = "/models-test/"
-        val merge = Merge.of(MountSequence().mount(root, StubResources.opener(root)).toList())
+        val merge = SetMerge.of(MountSequence().mount(root, StubResources.opener(root)).toList())
         val method = merge.methods.getValue(MethodSubject("Exception", "getCode"))
         assertEquals("int", assertNotNull(method.callableSignature).returnType.toString())
         val constant = merge.classConstants.getValue(ClassConstantSubject("Exception", "SEVERITY_ERROR"))

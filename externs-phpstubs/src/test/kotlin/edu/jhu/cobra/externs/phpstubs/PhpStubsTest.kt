@@ -16,7 +16,7 @@ import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 /**
- * Tests for [PhpStubs]: the bundled merge in Merge Order and the construction of extension merges through
+ * Tests for [PhpStubs]: the bundled merge in Mount Order and the construction of consumer set merges through
  * [PhpStubs.with] and [PhpStubs.plus]. The read surface: [BuiltinLookupExactTest], [BuiltinLookupEnumerationTest].
  *
  * - `keyword constructs and scalar classes are records` — verifies the language documents load

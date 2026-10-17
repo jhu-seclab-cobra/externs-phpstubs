@@ -75,7 +75,7 @@ val extended = PhpStubs.with(Path.of("models/site-rules"))
 | `property(spelling)`, `property(owner, name)` | `BuiltinRecord<PropertySubject>?` |
 | `variable(name)` | `BuiltinRecord<VariableSubject>?` |
 | `record(subject)` | `BuiltinRecord<ModelSubject>?` |
-| `functions`, `classes`, `methods`, `constants`, `classConstants`, `properties`, `variables` | `Collection<BuiltinRecord<…>>` in Merge Order of each subject's first mounted entry |
+| `functions`, `classes`, `methods`, `constants`, `classConstants`, `properties`, `variables` | `Collection<BuiltinRecord<…>>` in Mount Order of each subject's first mounted entry |
 | `sinkFacts`, `sourceFacts`, `sanitizerFacts`, `flows`, `characters`, `returns`, `throws` | `List<…Fact>` in record order |
 | `vocabulary`, `policy` | `Vocabulary`, `TaintPolicy` accumulated over every mounted set |
 
@@ -89,7 +89,7 @@ val extended = PhpStubs.with(Path.of("models/site-rules"))
 
 **`StubResources`** -- classpath roots of the five bundled sets, `MODELS`, `VALUE_RULES`, `VOCABULARY`, `TAINT`, `TAINT_RULES`, the `PSALM_MAPPING` document, and `opener(root)`.
 
-## Bundled Sets and Merge Order
+## Bundled Sets and Mount Order
 
 | Position | Root | Content | Provenance |
 |----------|------|---------|------------|
@@ -109,15 +109,15 @@ Model documents derived from [JetBrains/phpstorm-stubs](https://github.com/JetBr
 
 - [Concepts](docs/concept.md) -- generated layer over commons-phpmodels, PHP extension placement, lookup semantics
 - [Lookup Concepts](docs/concept-lookup.md) -- canonical vocabulary, the merge, `BuiltinRecord` and `BuiltinLookup`
-- [Lookup Model](docs/model-lookup.md) -- bundled sets, merge order, entries in force, records and facts
+- [Lookup Model](docs/model-lookup.md) -- bundled sets, mount order, entries in force, records and facts
 - [Merge Algorithm](docs/spec-merge.md) -- folding the mounted sets into the entry in force per subject, condition, and unit
 - [Taint Concepts](docs/concept-taint.md) -- the taint document set in psalm's names and its extraction
-- [Design](docs/design.md) -- resource roots, merge order, generated-set rules, exception types
+- [Design](docs/design.md) -- resource roots, mount order, generated-set rules, exception types
 - [Extraction Concepts](docs/concept-extraction.md) -- extraction from php-src: declarations, Handlers, Raises Summary
 - [Extraction Design](docs/design-extraction.md) -- the php-src producers of hierarchy, signatures, and throws
 - [Throws Algorithm](docs/spec-throws.md) -- computing the throws section from the php-src C sources
 - [Lookup Design](docs/design-lookup.md) -- `BuiltinLookup`, `PhpStubs`, `BuiltinRecord`, fact types, canonical enums
-- [Merge Design](docs/design-merge.md) -- `Mount`, `MountSequence`, `Merge`
+- [Merge Design](docs/design-merge.md) -- `Mount`, `MountSequence`, `SetMerge`
 - [Taint Design](docs/design-taint.md) -- `StubResources`, taint resource layout, extraction script
 - [Taint Rules Concepts](docs/concept-taint-rules.md) -- the hand-maintained taint rules document set and its contracts
 - [Taint Rules Design](docs/design-taint-rules.md) -- rules resource layout, validation and maintenance rules

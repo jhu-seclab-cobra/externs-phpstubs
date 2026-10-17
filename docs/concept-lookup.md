@@ -32,12 +32,12 @@ decides.
 - **Outputs:** one `BuiltinRecord` per PHP name; the returns, flows,
   source facts, sink facts, sanitizer facts, and throws of every record
   enumerable by kind.
-- **Connections:** sets → Merge → `BuiltinLookup` → consumers.
+- **Connections:** sets → Set Merge → `BuiltinLookup` → consumers.
 
 **Scope Boundaries**
-- **Owned:** the Canonical Vocabulary, the mapping onto it, the merge
-  order and the merge itself (which set's entry is in force per
-  subject, condition, and unit), the exact lookup by PHP spelling, and
+- **Owned:** the Canonical Vocabulary, the mapping onto it, the mount
+  order and the Set Merge (which set's entry is in force per subject,
+  condition, and unit), the exact lookup by PHP spelling, and
   enumeration by declaration kind and by fact kind. Any looser match is the
   consumer's filter over an enumeration, never a rule here.
 - **Not Owned:** the format and its decoding (commons-phpmodels); deciding
@@ -50,7 +50,7 @@ decides.
 ```
 generated set ──────────────────┐
 value-rules/ (manual) ──────────┤
-canonical vocabulary + policy ──┤──► Merge (manual over generated, per subject / condition / section)
+canonical vocabulary + policy ──┤──► Set Merge (manual over generated, per subject / condition / unit)
 taint/ ──── mapping ────────────┤                       │
 taint-rules/ ── same mapping ───┘                       ▼
 consumer: PHP name ────────► BuiltinLookup ────► BuiltinRecord ────► signature, returns, flows, sourceFacts, sinkFacts, sanitizerFacts, throws
@@ -69,9 +69,9 @@ consumer: fact kind ────────► BuiltinLookup ────► ev
 - **Scope:** every vulnerability type and source kind any shipped set states.
 - **Relationships:** context of the merge; the names every fact is in.
 
-- **Name:** Merge
-- **Definition:** Folding the sets, in this library's fixed order, into the
-  entry in force per (subject, condition, unit): a manual set's entry
+- **Name:** Set Merge
+- **Definition:** The result of folding the sets, in mount order, into
+  the entry in force per (subject, condition, unit): a manual set's entry
   outranks a generated one; among equals the later mounted wins. Two
   entries for one subject with different conditions state two keys, both
   kept. Built once, lazily; internal.
@@ -88,7 +88,7 @@ consumer: fact kind ────────► BuiltinLookup ────► ev
   are enumerable by kind, each naming the record it belongs to.
 - **Scope:** one per subject any set states; a record without a signature
   is a fact-only record (taint-only function, predefined variable).
-- **Relationships:** read from the Merge; identified by its Subject.
+- **Relationships:** read from the Set Merge; identified by its Subject.
 
 - **Name:** `BuiltinLookup`
 - **Definition:** The entry point consumers use. An exact lookup asks for
@@ -99,7 +99,7 @@ consumer: fact kind ────────► BuiltinLookup ────► ev
   fact of one fact kind, for the consumer to filter by its own rule.
 - **Scope:** exact lookup by name; enumeration by declaration kind and by
   fact kind. Consumer sets give a second lookup beside the bundled one.
-- **Relationships:** reads the Merge; answers consumer queries.
+- **Relationships:** reads the Set Merge; answers consumer queries.
 
 ## 3. Contracts & Flow
 
@@ -121,7 +121,8 @@ consumer: fact kind ────────► BuiltinLookup ────► ev
   own additions; without a provenance document it ranks as manual.
 
 **Internal Processing Flow**
-1. Merge — decode each set in order, fold by rank then order, build once.
+1. Fold — decode each set in order, fold by rank then order into the Set
+   Merge, build once.
 2. Resolve — parse the lookup name into a Subject through the format
    library's creators, so folding is decided once.
 3. Read — take the subject's entries in force; the record exposes each section's
@@ -168,5 +169,14 @@ consumer: fact kind ────────► BuiltinLookup ────► ev
   "declaration in force" (a third sense of declaration); a separate
   `EntryInForce` type with a named "first-entry order"; "unit in force"
   (overloads unit).
+- **Choice (T4d-U3, agent decision):** the result map is the Set Merge
+  (`SetMerge`), and the position order of every mounted set is the mount
+  order, the word `Mount.position` and `MountSequence` already carry. In
+  CobraPHP bare "merge" names only a merge node, and CobraPHP calls this
+  result "the merge of the sets"; Set Merge is that phrase as a compound.
+- **Rejected:** keeping `Merge` (one sense inside this library, but a
+  second concept for the CobraPHP word); "set override" (clashes with
+  PHP `#[\Override]` and with Override Unit); "model index" (clashes with
+  the `index.txt` manifest).
 
 Software structure: [design-lookup.md](design-lookup.md).

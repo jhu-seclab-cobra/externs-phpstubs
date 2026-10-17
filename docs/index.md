@@ -8,11 +8,11 @@
 | [concept-taint.md](concept-taint.md) | The taint document set in psalm's names, its extraction, and its translation at the merge |
 | [concept-taint-rules.md](concept-taint-rules.md) | The hand-maintained taint rules document set: Argus sink facts, added sanitizer facts and source facts, vocabulary additions |
 | [concept-value-rules.md](concept-value-rules.md) | The hand-maintained value rules set: value units beyond the generated declarations, generated-set gaps |
-| [model-lookup.md](model-lookup.md) | Bundled sets, canonical vocabulary, psalm mapping, merge order, merge, consumer sets, `BuiltinRecord`, Fact with condition, `BuiltinLookup` |
-| [design.md](design.md) | `StubResources`, merge order, generated-set rules, resource layout, exception types |
+| [model-lookup.md](model-lookup.md) | Bundled sets, canonical vocabulary, psalm mapping, mount order, set merge, consumer sets, `BuiltinRecord`, Fact with condition, `BuiltinLookup` |
+| [design.md](design.md) | `StubResources`, mount order, generated-set rules, resource layout, exception types |
 | [design-extraction.md](design-extraction.md) | `php_src` and the php-src producers: hierarchy, signature, and throws extraction |
 | [design-lookup.md](design-lookup.md) | `BuiltinLookup`, `PhpStubs`, `BuiltinRecord`, fact types, canonical enums |
-| [design-merge.md](design-merge.md) | `Mount`, `MountSequence`, `Merge`: set mounting, failure classification, the fold |
+| [design-merge.md](design-merge.md) | `Mount`, `MountSequence`, `SetMerge`: set mounting, failure classification, the fold |
 | [design-taint.md](design-taint.md) | `StubResources`, taint resource layout, extraction script inputs and validation rules |
 | [design-taint-rules.md](design-taint-rules.md) | `StubResources.TAINT_RULES`, rules resource layout, validation and maintenance rules |
 | [design-value-rules.md](design-value-rules.md) | `StubResources.VALUE_RULES`, value rules resource layout, validation and maintenance rules |

@@ -15,7 +15,7 @@ import edu.jhu.cobra.commons.phpmodels.VocabularyMapping
 import java.io.InputStream
 
 /**
- * One document set as mounted: its position in merge order, its verification kind, the vocabulary and
+ * One document set as mounted: its position in mount order, its verification kind, the vocabulary and
  * policy rows it declares, and its entries, each paired with the PHP extension its document path yields
  * for the generated set and null for every other set.
  */

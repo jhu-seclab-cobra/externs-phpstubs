@@ -63,25 +63,25 @@ public interface BuiltinLookup {
     /** The record of an already built [subject], or null. */
     public fun record(subject: ModelSubject): BuiltinRecord<ModelSubject>?
 
-    /** Every function record, in Merge Order of its subject's first mounted entry. */
+    /** Every function record, in Mount Order of its subject's first mounted entry. */
     public val functions: Collection<BuiltinRecord<FunctionSubject>>
 
-    /** Every class record, in Merge Order of its subject's first mounted entry. */
+    /** Every class record, in Mount Order of its subject's first mounted entry. */
     public val classes: Collection<BuiltinRecord<ClassSubject>>
 
-    /** Every method record, in Merge Order of its subject's first mounted entry. */
+    /** Every method record, in Mount Order of its subject's first mounted entry. */
     public val methods: Collection<BuiltinRecord<MethodSubject>>
 
-    /** Every global constant record, in Merge Order of its subject's first mounted entry. */
+    /** Every global constant record, in Mount Order of its subject's first mounted entry. */
     public val constants: Collection<BuiltinRecord<ConstantSubject>>
 
-    /** Every class constant record, in Merge Order of its subject's first mounted entry. */
+    /** Every class constant record, in Mount Order of its subject's first mounted entry. */
     public val classConstants: Collection<BuiltinRecord<ClassConstantSubject>>
 
-    /** Every property record, in Merge Order of its subject's first mounted entry. */
+    /** Every property record, in Mount Order of its subject's first mounted entry. */
     public val properties: Collection<BuiltinRecord<PropertySubject>>
 
-    /** Every predefined variable record, in Merge Order of its subject's first mounted entry. */
+    /** Every predefined variable record, in Mount Order of its subject's first mounted entry. */
     public val variables: Collection<BuiltinRecord<VariableSubject>>
 
     /** Every sink fact over every record, in record order, then condition, unit and document order. */
