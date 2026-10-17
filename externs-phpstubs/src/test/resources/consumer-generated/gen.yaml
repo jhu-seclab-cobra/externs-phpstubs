@@ -1,4 +1,4 @@
-# Test fixture: an extension set with generated provenance; its strlen unit loses to the bundled manual one.
+# Test fixture: a consumer set with generated provenance; its strlen unit loses to the bundled manual one.
 - subject:
     function: strlen
   returns: str

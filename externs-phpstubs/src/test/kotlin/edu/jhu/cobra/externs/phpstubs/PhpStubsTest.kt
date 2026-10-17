@@ -25,14 +25,14 @@ import kotlin.test.assertTrue
  * - `taint facts speak the canonical vocabulary` — verifies sinks, sanitizers, and conditions after mapping
  * - `taint rules outrank taint for the same key` — verifies the later manual set replaces the generated one
  * - `a lookup over the same mounts holds equal records` — verifies equal statements give equal records
- * - `with mounts a classpath extension set after the bundled ones` — verifies override and addition
- * - `an extension set without provenance mounts as manual` — verifies it replaces a bundled manual statement
- * - `an extension set with generated provenance loses to a bundled manual statement` — verifies rank over order
- * - `later extension roots override earlier ones` — verifies supplied order among extension sets
+ * - `with mounts a classpath consumer set after the bundled ones` — verifies override and addition
+ * - `a consumer set without provenance mounts as manual` — verifies it replaces a bundled manual statement
+ * - `a consumer set with generated provenance loses to a bundled manual statement` — verifies rank over order
+ * - `later consumer roots override earlier ones` — verifies supplied order among consumer sets
  * - `plus chains like with` — verifies the operator form
- * - `with mounts a directory extension set` — verifies the filesystem opener
- * - `an extension set failure surfaces from the mounting call` — verifies error classification
- * - `a directory extension set names the absent document` — verifies absence under the filesystem opener
+ * - `with mounts a directory consumer set` — verifies the filesystem opener
+ * - `a consumer set failure surfaces from the mounting call` — verifies error classification
+ * - `a directory consumer set names the absent document` — verifies absence under the filesystem opener
  */
 internal class PhpStubsTest {
     @Test
@@ -91,21 +91,21 @@ internal class PhpStubsTest {
 
     @Test
     fun `a lookup over the same mounts holds equal records`() {
-        val extended = PhpStubs.with("/extension-test/")
+        val extended = PhpStubs.with("/consumer-test/")
         assertEquals(PhpStubs.function("substr"), extended.function("substr"))
         assertEquals(PhpStubs.method("mysqli::query"), extended.method("mysqli::query"))
-        assertEquals(extended.function("extension_only"), PhpStubs.with("/extension-test/").function("extension_only"))
+        assertEquals(extended.function("consumer_only"), PhpStubs.with("/consumer-test/").function("consumer_only"))
     }
 
     @Test
-    fun `with mounts a classpath extension set after the bundled ones`() {
-        val extended = PhpStubs.with("/extension-test/")
-        val added = assertNotNull(extended.function("extension_only"))
+    fun `with mounts a classpath consumer set after the bundled ones`() {
+        val extended = PhpStubs.with("/consumer-test/")
+        val added = assertNotNull(extended.function("consumer_only"))
         assertNull(added.extension)
         assertNotNull(added.callableSignature)
         assertEquals(VulnTypeId("sqli"), added.sinkFacts.single().vulnType)
         assertEquals("core", extended.function("strlen")!!.extension)
-        assertNull(PhpStubs.function("extension_only"))
+        assertNull(PhpStubs.function("consumer_only"))
         assertEquals(
             ReturnKind.NUM,
             PhpStubs
@@ -117,37 +117,37 @@ internal class PhpStubsTest {
     }
 
     @Test
-    fun `an extension set without provenance mounts as manual`() {
-        val extended = PhpStubs.with("/extension-test/")
+    fun `a consumer set without provenance mounts as manual`() {
+        val extended = PhpStubs.with("/consumer-test/")
         assertEquals(ReturnKind.STR, assertNotNull(extended.function("strlen")).returns.single().kind)
     }
 
     @Test
-    fun `an extension set with generated provenance loses to a bundled manual statement`() {
-        val extended = PhpStubs.with("/extension-generated/")
+    fun `a consumer set with generated provenance loses to a bundled manual statement`() {
+        val extended = PhpStubs.with("/consumer-generated/")
         assertEquals(ReturnKind.NUM, assertNotNull(extended.function("strlen")).returns.single().kind)
         assertNull(assertNotNull(extended.function("extension_generated_only")).extension)
     }
 
     @Test
-    fun `later extension roots override earlier ones`() {
-        val forward = PhpStubs.with("/extension-test/", "/extension-second/")
+    fun `later consumer roots override earlier ones`() {
+        val forward = PhpStubs.with("/consumer-test/", "/consumer-second/")
         assertEquals(ReturnKind.ANY, assertNotNull(forward.function("strlen")).returns.single().kind)
-        val reverse = PhpStubs.with("/extension-second/", "/extension-test/")
+        val reverse = PhpStubs.with("/consumer-second/", "/consumer-test/")
         assertEquals(ReturnKind.STR, assertNotNull(reverse.function("strlen")).returns.single().kind)
     }
 
     @Test
     fun `plus chains like with`() {
-        val chained = PhpStubs + "/extension-test/" + "/extension-second/"
-        val together = PhpStubs.with("/extension-test/", "/extension-second/")
+        val chained = PhpStubs + "/consumer-test/" + "/consumer-second/"
+        val together = PhpStubs.with("/consumer-test/", "/consumer-second/")
         assertEquals(together.function("strlen"), chained.function("strlen"))
-        assertEquals(together.function("extension_only"), chained.function("extension_only"))
-        assertEquals(together.function("extension_only"), (PhpStubs + "/extension-test/").function("extension_only"))
+        assertEquals(together.function("consumer_only"), chained.function("consumer_only"))
+        assertEquals(together.function("consumer_only"), (PhpStubs + "/consumer-test/").function("consumer_only"))
     }
 
     @Test
-    fun `with mounts a directory extension set`(
+    fun `with mounts a directory consumer set`(
         @TempDir dir: Path,
     ) {
         Files.writeString(dir.resolve("index.txt"), "dir.yaml\n")
@@ -157,7 +157,7 @@ internal class PhpStubsTest {
     }
 
     @Test
-    fun `an extension set failure surfaces from the mounting call`(
+    fun `a consumer set failure surfaces from the mounting call`(
         @TempDir dir: Path,
     ) {
         assertTrue(assertFailsWith<StubIndexNotFoundException> { PhpStubs.with(dir) }.message!!.endsWith("$dir/index.txt"))
@@ -167,7 +167,7 @@ internal class PhpStubsTest {
     }
 
     @Test
-    fun `a directory extension set names the absent document`(
+    fun `a directory consumer set names the absent document`(
         @TempDir dir: Path,
     ) {
         Files.writeString(dir.resolve("index.txt"), "absent.yaml\n")

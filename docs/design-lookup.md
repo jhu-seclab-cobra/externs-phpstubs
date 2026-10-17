@@ -96,7 +96,7 @@ members only.
   opened relative to each directory, mounted the same way.
 - `operator fun plus(root: String): PhpStubs`, `operator fun plus(dir: Path): PhpStubs`
   — `with` of one root.
-- **Behavior:** every extension set decodes through
+- **Behavior:** every consumer set decodes through
   `DocumentSetLoader.load(opener, vocabulary, mapping = null)` against the
   vocabulary accumulated so far; a set without `provenance.yaml` mounts as
   `Verification.MANUAL`. The receiver is unchanged.
@@ -143,7 +143,7 @@ consumer filters without spelling a string: `VulnType.SQLI.id` is
 `VulnTypeId("sqli")`; `SourceKind.USER_INPUT.id` is `SourceKindId("user-input")`.
 Twelve and two constants, each holding its `id`. A repository test asserts
 the bundled vocabulary document declares exactly these names; a vulnerability
-type an extension set adds has no enum constant and is compared by `VulnTypeId`.
+type a consumer set adds has no enum constant and is compared by `VulnTypeId`.
 
 ## Function Specifications
 

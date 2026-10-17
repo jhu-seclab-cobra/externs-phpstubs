@@ -156,9 +156,9 @@ Runtime:
   nothing. Signature fields and constant values are read as
   commons-phpmodels types; flows, source facts, sink facts, sanitizer facts,
   and throws are read from the record in the Canonical Vocabulary,
-  conditions attached. The consumer holds no set, mapping, or
-  precedence; which set stated a fact is answered on request, never
-  required.
+  conditions attached. The consumer holds no merge state: no loaded
+  set, mapping, or precedence; which set stated a fact is answered on
+  request, never required.
 - **With the Extraction Pipeline:** generated documents are reproducible
   from the same upstream versions; a re-run yields identical files.
 

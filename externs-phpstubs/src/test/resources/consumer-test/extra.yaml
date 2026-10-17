@@ -1,6 +1,6 @@
-# Test fixture: an extension set in the canonical vocabulary, mounted after the bundled sets.
+# Test fixture: a consumer set in the canonical vocabulary, mounted after the bundled sets.
 - subject:
-    function: extension_only
+    function: consumer_only
   signature:
     params:
       - {name: value, type: string}

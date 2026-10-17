@@ -1,0 +1,4 @@
+# Test fixture: a second consumer set restating the strlen value unit, mounted after consumer-test.
+- subject:
+    function: strlen
+  returns: any

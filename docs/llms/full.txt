@@ -2,7 +2,7 @@
 
 > Read-only Kotlin lookup of PHP builtins: one `BuiltinRecord` per function, class, method, constant, class constant, property, or predefined variable, merging the generated set, the value rules, psalm's taint data, and the taint rules into the signature in force plus every fact, each tagged with its argument condition, in one canonical vocabulary.
 
-`PhpStubs` is the entry point: its companion is the lookup over the bundled sets; `PhpStubs.with(...)` builds a lookup that also mounts extension sets. Lookup names go through the commons-phpmodels subject creators: functions, classes, and methods fold case and drop a leading `\`; constants keep their case.
+`PhpStubs` is the entry point: its companion is the lookup over the bundled sets; `PhpStubs.with(...)` builds a lookup that also mounts consumer sets. Lookup names go through the commons-phpmodels subject creators: functions, classes, and methods fold case and drop a leading `\`; constants keep their case.
 
 ## Instructions for Agents
 
@@ -14,7 +14,7 @@
 - Taint facts speak the canonical vocabulary only: `VulnType` (`sqli`, `cmdi`, `codei`, `xss`, `headeri`, `ssrf`, `pathtrav`, `fileinc`, `deser`, `callablei`, `ldapi`, `xpathi`) and `SourceKind` (`user-input`, `external-input`). No psalm name survives the merge.
 - Enumerate with `PhpStubs.functions`, `classes`, `methods`, `constants`, `classConstants`, `properties`, `variables` (records) or `sinkFacts`, `sourceFacts`, `sanitizerFacts`, `flows`, `returns`, `throws` (facts); a match looser than exact is your filter over an enumeration.
 - The merge keeps one statement per (subject, condition, unit); manual sets outrank generated ones, later position wins among equal ranks, and a unit is replaced whole. Merge order: `models/`, `value-rules/`, `vocabulary/`, `taint/`, `taint-rules/`.
-- `PhpStubs.with(Path)` / `with("/classpath/root/")` / `PhpStubs + root` mounts extension sets after the bundled ones; a set without `provenance.yaml` is manual. The bundled lookup is unchanged.
+- `PhpStubs.with(Path)` / `with("/classpath/root/")` / `PhpStubs + root` mounts consumer sets after the bundled ones; a set without `provenance.yaml` is manual. The bundled lookup is unchanged.
 - Every bundled set also loads alone through `DocumentSetLoader.load(StubResources.opener(root), context, mapping)`; `StubResources.VOCABULARY` and `StubResources.PSALM_MAPPING` give the context and mapping the taint sets need.
 - Errors: `StubIndexNotFoundException` (absent manifest or document), `StubIndexInvalidException` (malformed set, generated-set rule, conditional signature, bundled set without provenance).
 
@@ -81,7 +81,7 @@ query?.sinkFacts?.single()?.vulnType == VulnType.SQLI.id   // true
 
 **`PhpStubs.<any BuiltinLookup member>`** -- The bundled merge, built on first access and shared.
 
-**`with(vararg roots: String): PhpStubs`**, **`with(vararg dirs: Path): PhpStubs`**, **`plus(root)`, `plus(dir)`** -- A new lookup mounting the extension sets after this lookup's sets, in order; each decodes against the vocabulary accumulated so far; no `provenance.yaml` means manual. The receiver is unchanged. Also on the companion.
+**`with(vararg roots: String): PhpStubs`**, **`with(vararg dirs: Path): PhpStubs`**, **`plus(root)`, `plus(dir)`** -- A new lookup mounting the consumer sets after this lookup's sets, in order; each decodes against the vocabulary accumulated so far; no `provenance.yaml` means manual. The receiver is unchanged. Also on the companion.
 
 ### BuiltinRecord<S : ModelSubject> (data class)
 
@@ -105,7 +105,7 @@ Every fact: **`owner: ModelSubject`**, **`condition: ArgPattern?`** (`null` for 
 
 ### VulnType, SourceKind (enums)
 
-**`VulnType.SQLI.id`** ... -- `VulnTypeId` per canonical vulnerability type: `sqli`, `cmdi`, `codei`, `xss`, `headeri`, `ssrf`, `pathtrav`, `fileinc`, `deser`, `callablei`, `ldapi`, `xpathi`. **`SourceKind.USER_INPUT.id`**, **`SourceKind.EXTERNAL_INPUT.id`** -- `SourceKindId("user-input")`, `SourceKindId("external-input")`. A vulnerability type an extension set adds has no constant.
+**`VulnType.SQLI.id`** ... -- `VulnTypeId` per canonical vulnerability type: `sqli`, `cmdi`, `codei`, `xss`, `headeri`, `ssrf`, `pathtrav`, `fileinc`, `deser`, `callablei`, `ldapi`, `xpathi`. **`SourceKind.USER_INPUT.id`**, **`SourceKind.EXTERNAL_INPUT.id`** -- `SourceKindId("user-input")`, `SourceKindId("external-input")`. A vulnerability type a consumer set adds has no constant.
 
 ### StubResources (object)
 
@@ -136,5 +136,5 @@ values.provenance?.verification                    // Verification.MANUAL
 - A value unit is `returns` plus the `flows` and `characters` of the same entry: filter both by equality with the chosen returns fact's `condition`.
 - `throws` of a generated function or method is computed from the php-src C sources: an empty `classes` set states the call throws none; no `ThrowsFact` (`assert`, `Generator::throw`, entries outside php-src) asserts nothing. A class thrown only through a function pointer is missing.
 - Constant values are strings on `typedSignature.value`; the consumer converts.
-- Generated documents are never hand-edited; a correction belongs in `value-rules/` or `taint-rules/`, or in an extension set mounted through `with`.
+- Generated documents are never hand-edited; a correction belongs in `value-rules/` or `taint-rules/`, or in a consumer set mounted through `with`.
 - Two lookups built from the same sets hold equal records, not the same instances.

@@ -4,7 +4,7 @@ import edu.jhu.cobra.commons.phpmodels.VulnTypeId
 
 /**
  * The vulnerability types of the canonical vocabulary, one constant per name `vocabulary/vocabulary.yaml`
- * declares, so a consumer filters facts without spelling a string. A vulnerability type an extension set adds has
+ * declares, so a consumer filters facts without spelling a string. A vulnerability type a consumer set adds has
  * no constant and is compared by its [VulnTypeId].
  *
  * @property id The interned identifier the vocabulary document declares.

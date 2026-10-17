@@ -25,7 +25,7 @@ import kotlin.test.assertSame
  * - `constant lookup strips the leading slash and rejects a member spelling` — verifies the spelling boundary
  * - `a constant record carries its typed signature and extension` — verifies value and type reach the consumer
  * - `class constant lookup accepts both spellings` — verifies the qualified and split forms
- * - `property lookup accepts both spellings` — verifies the qualified and split forms over an extension set
+ * - `property lookup accepts both spellings` — verifies the qualified and split forms over a consumer set
  * - `variable lookup spells the dollar prefix` — verifies the predefined variable kind
  * - `predefined variables are records with source facts` — verifies the mapped taint sources
  * - `record answers an already built subject` — verifies the subject-keyed lookup
@@ -94,7 +94,7 @@ internal class BuiltinLookupExactTest {
 
     @Test
     fun `property lookup accepts both spellings`() {
-        val extended = PhpStubs.with("/extension-test/")
+        val extended = PhpStubs.with("/consumer-test/")
         val record = assertNotNull(extended.property("Exception::\$message"))
         assertSame(record, extended.property("Exception", "message"))
         assertNotNull(record.propertySignature)

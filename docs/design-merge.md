@@ -45,7 +45,7 @@ other set.
 `DocumentSetLoader.load(opener, accumulated vocabulary, mapping)` and
 classifying failures. `mount(root, open, mapping, fallback, generated)`:
 `fallback` is the verification of a set without `provenance.yaml` (`MANUAL`
-for extension sets, `null` for bundled sets, where absence is
+for consumer sets, `null` for bundled sets, where absence is
 `StubIndexInvalidException`); `generated = true` applies the generated-set
 rules and derives PHP extensions. A failure naming a path the opener
 returned `null` for is `StubIndexNotFoundException`; any other is
@@ -77,7 +77,7 @@ first-statement order; element order is document order.
 ## Validation Rules
 
 - Every mount's position equals its index in the sequence.
-- A bundled set without `provenance.yaml` never mounts; an extension set
+- A bundled set without `provenance.yaml` never mounts; a consumer set
   without one mounts as `MANUAL`.
 - The generated-set rules and PHP extension derivation apply to exactly the mount
   flagged as the generated set.

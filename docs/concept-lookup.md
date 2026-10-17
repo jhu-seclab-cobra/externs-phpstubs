@@ -28,7 +28,7 @@ decides.
 **Data Flow**
 - **Inputs:** the generated set, the value rules set, the canonical
   vocabulary and policy, the taint set and the taint rules set with the
-  one mapping that translates them; optionally a consumer's extension sets.
+  one mapping that translates them; optionally consumer sets.
 - **Outputs:** one `BuiltinRecord` per PHP name; the returns, flows,
   source facts, sink facts, sanitizer facts, and throws of every record
   enumerable by kind.
@@ -76,7 +76,7 @@ consumer: fact kind ────────► BuiltinLookup ────► ev
   entries for one subject with different conditions are two statements,
   both kept. Built once, lazily; internal.
 - **Scope:** the Generated Layer, the value rules set, the Canonical
-  Vocabulary, the taint set, the taint rules set, then extension sets.
+  Vocabulary, the taint set, the taint rules set, then consumer sets.
 - **Relationships:** consumes commons-phpmodels document sets; read by the
   `BuiltinLookup`.
 
@@ -98,7 +98,7 @@ consumer: fact kind ────────► BuiltinLookup ────► ev
   An enumeration yields every record of one declaration kind, or every
   fact of one fact kind, for the consumer to filter by its own rule.
 - **Scope:** exact lookup by name; enumeration by declaration kind and by
-  fact kind. Extension sets give a second lookup beside the bundled one.
+  fact kind. Consumer sets give a second lookup beside the bundled one.
 - **Relationships:** reads the Merge; answers consumer queries.
 
 ## 3. Contracts & Flow
@@ -114,7 +114,7 @@ consumer: fact kind ────────► BuiltinLookup ────► ev
   error. Every fact is returned with its condition; the consumer matches
   the condition against the call's arguments with the format library's one
   matching operation and applies its own rule to an undecidable outcome.
-- **With extension sets:** a consumer that ships its own document set
+- **With consumer sets:** a consumer that ships its own document set
   obtains a second lookup over the bundled sets plus its own, mounted
   after them, from a directory or classpath root. The set follows the
   document-set convention and names only the Canonical Vocabulary or its
@@ -144,9 +144,19 @@ consumer: fact kind ────────► BuiltinLookup ────► ev
   and five sanitizers each conditioned on the second argument being one
   filter constant. The consumer keeps the ones whose condition matches
   its call; this library ranks nothing among them.
-- **Extension:** a framework team ships `laravel-sinks/` with a sinks
+- **Consumer set:** a framework team ships `laravel-sinks/` with a sinks
   document for `DB::raw`. The consumer builds a lookup over the bundled
   sets plus that directory; `DB::raw` answers as a sink, every bundled
   builtin answers as before.
+
+## 5. Rationale and Rejected Alternatives
+
+- **Choice (T4d-U4, agent decision):** a set the consumer mounts through
+  `PhpStubs.with` or `plus` is a Consumer Set, paired with Bundled Set by
+  who supplies it, so "extension" names only the PHP extension of a
+  declaration, as the PHP manual and php-src use it.
+- **Rejected:** "extension set" (a second sense of extension); "stub set"
+  (names the bundled sets too); "supplied set", "third-party set",
+  "overlay set", "user-supplied set"; renaming `with` and `plus`.
 
 Software structure: [design-lookup.md](design-lookup.md).

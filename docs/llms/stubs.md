@@ -51,7 +51,7 @@ query?.sinkFacts?.single()?.vulnType == VulnType.SQLI.id   // true
 
 **`PhpStubs.<any BuiltinLookup member>`** -- The bundled merge, built on first access and shared.
 
-**`with(vararg roots: String): PhpStubs`**, **`with(vararg dirs: Path): PhpStubs`**, **`plus(root)`, `plus(dir)`** -- A new lookup mounting the extension sets after this lookup's sets, in order; each decodes against the vocabulary accumulated so far; no `provenance.yaml` means manual. The receiver is unchanged. Also on the companion.
+**`with(vararg roots: String): PhpStubs`**, **`with(vararg dirs: Path): PhpStubs`**, **`plus(root)`, `plus(dir)`** -- A new lookup mounting the consumer sets after this lookup's sets, in order; each decodes against the vocabulary accumulated so far; no `provenance.yaml` means manual. The receiver is unchanged. Also on the companion.
 
 ### BuiltinRecord<S : ModelSubject> (data class)
 
@@ -75,7 +75,7 @@ Every fact: **`owner: ModelSubject`**, **`condition: ArgPattern?`** (`null` for 
 
 ### VulnType, SourceKind (enums)
 
-**`VulnType.SQLI.id`** ... -- `VulnTypeId` per canonical vulnerability type: `sqli`, `cmdi`, `codei`, `xss`, `headeri`, `ssrf`, `pathtrav`, `fileinc`, `deser`, `callablei`, `ldapi`, `xpathi`. **`SourceKind.USER_INPUT.id`**, **`SourceKind.EXTERNAL_INPUT.id`** -- `SourceKindId("user-input")`, `SourceKindId("external-input")`. A vulnerability type an extension set adds has no constant.
+**`VulnType.SQLI.id`** ... -- `VulnTypeId` per canonical vulnerability type: `sqli`, `cmdi`, `codei`, `xss`, `headeri`, `ssrf`, `pathtrav`, `fileinc`, `deser`, `callablei`, `ldapi`, `xpathi`. **`SourceKind.USER_INPUT.id`**, **`SourceKind.EXTERNAL_INPUT.id`** -- `SourceKindId("user-input")`, `SourceKindId("external-input")`. A vulnerability type a consumer set adds has no constant.
 
 ### StubResources (object)
 
@@ -106,5 +106,5 @@ values.provenance?.verification                    // Verification.MANUAL
 - A value unit is `returns` plus the `flows` and `characters` of the same entry: filter both by equality with the chosen returns fact's `condition`.
 - `throws` of a generated function or method is computed from the php-src C sources: an empty `classes` set states the call throws none; no `ThrowsFact` (`assert`, `Generator::throw`, entries outside php-src) asserts nothing. A class thrown only through a function pointer is missing.
 - Constant values are strings on `typedSignature.value`; the consumer converts.
-- Generated documents are never hand-edited; a correction belongs in `value-rules/` or `taint-rules/`, or in an extension set mounted through `with`.
+- Generated documents are never hand-edited; a correction belongs in `value-rules/` or `taint-rules/`, or in a consumer set mounted through `with`.
 - Two lookups built from the same sets hold equal records, not the same instances.

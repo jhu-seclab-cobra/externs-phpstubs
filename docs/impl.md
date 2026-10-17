@@ -27,7 +27,7 @@
 
 - Generated-set probe (2026-09-01): all 58 generated documents decode against commons-phpmodels HEAD, 5,680 entries (5,327 functions, 108 classes, 2 methods, 242 constants, 1 class constant).
 - `index.txt` under `models/`, `taint/`, `taint-rules/`, `value-rules/` and `models-test/` is written by Gradle `processResources` / `processTestResources`; `vocabulary/index.txt` and every other test fixture directory keep a hand-written manifest.
-- Generated documents (`models/**` except `models/language/` and `models/manual/`) are never hand-edited; a correction belongs in `value-rules/`, `taint-rules/`, or an extension set.
+- Generated documents (`models/**` except `models/language/` and `models/manual/`) are never hand-edited; a correction belongs in `value-rules/`, `taint-rules/`, or a consumer set.
 - Generated documents carry no language-construct subject: the keyword document owns `echo`, `empty`, `eval`, `isset`, `print`, `unset`, and the loader's duplicate rule rejects a second declaration. The extraction pipeline excludes those names on its next run (removed from `standard_1/3/5/7.yaml` on 2026-09-01).
 - `shell_exec` is a `standard` function, not a language construct; the former hardcoded keyword set listed it and the keyword document does not.
 - Performance tests are excluded by default: `./gradlew test -Pperformance`.

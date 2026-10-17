@@ -35,7 +35,7 @@ private fun bundledMounts(): List<Mount> {
 /**
  * One [BuiltinLookup] over one merge of document sets. The companion is the lookup over the bundled sets,
  * so `PhpStubs.function("substr")` reads the bundled merge; [with] and [plus] build a second lookup that
- * mounts extension sets after the bundled ones, leaving the receiver unchanged.
+ * mounts consumer sets after the bundled ones, leaving the receiver unchanged.
  *
  * Every bundled-set error surfaces on the first access to this class; an extension-set error surfaces
  * from the call that mounts it.
@@ -109,7 +109,7 @@ public class PhpStubs internal constructor(
     override val policy: TaintPolicy get() = merge.policy
 
     /**
-     * A lookup that mounts the extension sets under the classpath [roots], in order, after this lookup's sets.
+     * A lookup that mounts the consumer sets under the classpath [roots], in order, after this lookup's sets.
      *
      * @param roots Classpath directories each holding a manifest; a set without `provenance.yaml` mounts as manual.
      * @throws StubIndexNotFoundException If a manifest or a listed document is absent.
@@ -118,7 +118,7 @@ public class PhpStubs internal constructor(
     public fun with(vararg roots: String): PhpStubs = extend(roots.map { StubResources.normalize(it) to StubResources.opener(it) })
 
     /**
-     * A lookup that mounts the extension sets under the filesystem [dirs], in order, after this lookup's sets.
+     * A lookup that mounts the consumer sets under the filesystem [dirs], in order, after this lookup's sets.
      *
      * @param dirs Directories each holding a manifest; a set without `provenance.yaml` mounts as manual.
      * @throws StubIndexNotFoundException If a manifest or a listed document is absent.

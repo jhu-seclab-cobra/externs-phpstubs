@@ -1,6 +1,6 @@
 # PHP Stubs — Merge Algorithm
 
-Folding the bundled sets, and any extension sets, into the Merge the
+Folding the bundled sets, and any consumer sets, into the Merge the
 `BuiltinLookup` reads. Entity vocabulary: [model-lookup.md](model-lookup.md);
 format entities: commons-phpmodels `docs/model.md`, `model-conditions.md`,
 `model-sets.md`.
@@ -80,7 +80,7 @@ key's condition.
   Statement is in force whatever the mount order.
 - Two manual sets stating the same key: the later mounted is in force.
   Among the bundled sets this makes taint rules override taint, and among
-  extension sets the later supplied override the earlier.
+  consumer sets the later supplied override the earlier.
 - An empty list of sets merges into an empty result; every lookup answers
   no record.
 

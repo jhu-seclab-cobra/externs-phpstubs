@@ -94,7 +94,7 @@ internal class MountTest {
 
     @Test
     fun `a set with provenance mounts under its declared verification`() {
-        val root = "/extension-generated/"
+        val root = "/consumer-generated/"
         val mount = MountSequence().mount(root, StubResources.opener(root)).toList().single()
         assertEquals(Verification.GENERATED, mount.verification)
     }

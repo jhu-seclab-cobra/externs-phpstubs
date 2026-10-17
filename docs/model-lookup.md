@@ -33,7 +33,7 @@ format library's: `extern/commons-phpmodels/docs/model.md`,
   declarations, value rules, Canonical Vocabulary, taint (mapped), taint
   rules (mapped). Fixed by this library; a consumer neither reorders nor
   omits a set.
-- **Extension Set** — A document set a consumer supplies beside the
+- **Consumer Set** — A document set a consumer supplies beside the
   bundled ones: a directory or classpath root holding a manifest. Mounted
   after every Bundled Set, in the order supplied; a set without provenance
   mounts as manual. Its names are Canonical Vocabulary names or its own
@@ -77,7 +77,7 @@ format library's: `extern/commons-phpmodels/docs/model.md`,
 |------|----|----------|-------------|---------|
 | `BuiltinLookup` | Merge | reads | 1:1 | One merge per lookup; bundled or bundled plus extensions |
 | Merge | Bundled Set | folds | 1:5 | In Merge Order, under the default Precedence |
-| Merge | Extension Set | folds | 1:N | After the bundled sets, in supplied order |
+| Merge | Consumer Set | folds | 1:N | After the bundled sets, in supplied order |
 | Merge | Statement | holds | 1:N | Exactly one per (subject, condition, unit) key stated by any set |
 | Psalm Mapping | Bundled Set | translates | 1:2 | The taint set and the taint rules set |
 | Canonical Vocabulary | Fact | names | 1:N | Every vulnerability type and source kind a fact carries |
@@ -108,7 +108,7 @@ Two Statements with the same (subject, condition, unit) key:
 | Built | exact lookup, subject absent | no record; not a failure |
 | Built | exact lookup, name not a PHP spelling | argument error |
 | Built | enumeration | every record or fact of the kind, in first-statement order |
-| Built | extension sets supplied | a second merge: bundled sets then extensions; the bundled merge unchanged |
+| Built | consumer sets supplied | a second merge: bundled sets then consumer sets; the bundled merge unchanged |
 
 ## Invariants
 
@@ -119,7 +119,7 @@ Two Statements with the same (subject, condition, unit) key:
 - The signature Statement is unconditional: a conditional entry that
   declares a signature is a load failure.
 - The Canonical Vocabulary is mounted before the mapped sets and before
-  any Extension Set; every mapping target is one of its names.
+  any Consumer Set; every mapping target is one of its names.
 - No psalm name survives the merge: every kind of the two psalm-named sets
   is mapped or discarded, and a discarded-only element is dropped.
 - Merge Order is fixed and complete: the five bundled sets, once each, in
@@ -130,7 +130,7 @@ Two Statements with the same (subject, condition, unit) key:
 - Conditions partition the Statements of one subject and unit: a
   conditional Statement never replaces an unconditional one, and the
   reverse never happens.
-- An Extension Set never precedes a Bundled Set and never changes the
+- A Consumer Set never precedes a Bundled Set and never changes the
   bundled merge; two lookups built from the same sets in the same order
   give equal records.
 - Exact lookup is exact: the spelling is folded per kind by the format
@@ -153,10 +153,11 @@ Two Statements with the same (subject, condition, unit) key:
   is declared in that set's vocabulary document and given a mapping row;
   an unmapped kind fails the merge.
 - **With consumers.** A consumer names a builtin by its PHP spelling and
-  reads a record; it holds no set, mapping, vocabulary, or precedence.
+  reads a record; it holds no merge state: no loaded set, mapping,
+  vocabulary, or precedence.
   Call Arguments are the consumer's conversion; the consumer matches each
   Fact's Condition and applies its own rule to an undecidable outcome.
-- **With extension producers.** An Extension Set is written in the
+- **With consumer sets.** A Consumer Set is written in the
   Canonical Vocabulary (plus its own additions) and mounts after the
   bundled sets, so its manual declarations replace generated ones and
   outrank bundled manual ones by later Merge Order.
