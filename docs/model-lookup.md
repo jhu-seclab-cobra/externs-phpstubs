@@ -45,12 +45,12 @@ format library's: `extern/commons-phpmodels/docs/model.md`,
   any mounted set to the one Statement in force for it. Built once per set
   sequence and frozen. Two Statements with the same key compete; a
   Statement with a different condition never competes.
-- **Extension** — The PHP extension a declaration belongs to, derived from
+- **PHP Extension** — The PHP extension a declaration belongs to, derived from
   the generated document's placement (`mysqli`, `standard`, `keyword`,
   `scalar`, ...). A subject declared only by a non-generated set has no
-  Extension.
+  PHP Extension.
 - **`BuiltinRecord`** — One subject the Merge holds any Statement for:
-  its PHP spelling, its Extension, its signature when an unconditional
+  its PHP spelling, its PHP Extension, its signature when an unconditional
   signature Statement is in force, and its Facts. Existence condition: the
   subject is keyed after the merge. Identity is the subject. One record
   kind per subject kind: function, method, class, constant, class
@@ -82,7 +82,7 @@ format library's: `extern/commons-phpmodels/docs/model.md`,
 | Psalm Mapping | Bundled Set | translates | 1:2 | The taint set and the taint rules set |
 | Canonical Vocabulary | Fact | names | 1:N | Every vulnerability type and source kind a fact carries |
 | `BuiltinRecord` | Matching Subject | identifies | 1:1 | PHP spelling folded per kind |
-| `BuiltinRecord` | Extension | belongs to | N:0..1 | From the generated set's document placement |
+| `BuiltinRecord` | PHP Extension | belongs to | N:0..1 | From the generated set's document placement |
 | `BuiltinRecord` | Fact | owns | 1:N | Every fact names the record it was read from |
 | Fact | Condition | carries | N:0..1 | The condition of the entry that stated it |
 

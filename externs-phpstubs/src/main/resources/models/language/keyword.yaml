@@ -1,5 +1,5 @@
 # PHP language constructs that analyses treat as callable or class-like.
-# Hand-maintained; extension provenance "keyword" comes from this file name.
+# Hand-maintained; PHP extension "keyword" comes from this file name.
 - subject:
     function: echo
   signature:

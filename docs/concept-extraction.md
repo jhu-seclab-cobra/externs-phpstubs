@@ -57,7 +57,7 @@ php-src (release tag)
 - **Scope:** every stub outside test directories and the extension
   skeleton.
 - **Relationships:** read by the Hierarchy and Signature Extractions;
-  placed by its Extension Provenance ([concept.md](concept.md)).
+  placed by its PHP Extension ([concept.md](concept.md)).
 
 - **Name:** Handler
 - **Definition:** The C function the interpreter calls for one builtin,

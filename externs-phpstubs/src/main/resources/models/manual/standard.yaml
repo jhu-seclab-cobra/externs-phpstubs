@@ -1,5 +1,5 @@
 # Standard-extension functions removed before PHP 8.0, so php-src 8.5.11 declares none of them.
-# Hand-maintained; extension provenance "standard" comes from this file name. Signatures follow the PHP manual.
+# Hand-maintained; PHP extension "standard" comes from this file name. Signatures follow the PHP manual.
 # PHP manual (removed 8.0): returns the text with line breaks converted; the text reaches the result.
 - subject:
     function: hebrevc

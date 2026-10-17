@@ -43,7 +43,7 @@ nothing.
 - **`generated_documents(models)`** — every document except the
   `HAND_DECLARED` directories (`language`, `manual`) and `provenance.yaml`.
 - **`document_extension(path)`** — the extension a document's placement
-  encodes: its file name, split suffix removed (Extension Provenance,
+  encodes: its file name, split suffix removed (PHP Extension,
   [concept.md](concept.md)).
 - **`placement(models, extension)`** — the document a new entry of an
   extension joins: the last generated document whose

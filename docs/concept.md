@@ -32,7 +32,7 @@ The format, its decoding, and its validation belong to commons-phpmodels.
 
 **Scope Boundaries**
 - **Owned:** the generated model documents, the language-construct
-  document, extension provenance, document discovery, the
+  document, PHP extension placement, document discovery, the
   taint sets in psalm's names, the value rules set, every shipped set's
   provenance, the Canonical Vocabulary, the merge, and `BuiltinLookup`.
 - **Not Owned:** the model format, the document-set convention, their
@@ -95,7 +95,7 @@ Runtime:
   is mounted whole as the first set of the merge and carries the extension
   each `BuiltinRecord` reports.
 
-- **Name:** Extension Provenance
+- **Name:** PHP Extension
 - **Definition:** The PHP extension that provides a declaration
   (`standard`, `mysqli`, `core`). The model format does not carry it: it
   is a property of where a declaration comes from, not a statement about
@@ -118,7 +118,7 @@ Runtime:
 - **Scope:** the closed keyword and scalar-type sets the generated set declares
   today.
 - **Relationships:** a Model Entry like any other; distinguished only by
-  its Extension Provenance.
+  its PHP Extension.
 
 - **Name:** Lookup Surface
 - **Definition:** The Canonical Vocabulary, Merge, `BuiltinRecord`, and
@@ -132,7 +132,7 @@ Runtime:
   directory, so packaging in a jar and in a directory behave identically.
 - **Scope:** one manifest per resource tree.
 - **Relationships:** enumerates the documents of one set;
-  its layout defines Extension Provenance.
+  its layout defines each entry's PHP Extension.
 
 - **Name:** Extraction Pipeline
 - **Definition:** The offline producer: parses upstream sources and emits
@@ -166,7 +166,7 @@ Runtime:
 1. Discover — read the Document Manifest.
 2. Decode — pass each document to the commons-phpmodels loader; a decode
    failure names the document.
-3. Attribute — derive the Extension Provenance from the document's
+3. Attribute — derive the PHP Extension from the document's
    placement and attach it to each entry.
 4. Register — insert entries into per-kind maps keyed by subject; two
    documents declaring the same subject is a generated-set defect and fails the

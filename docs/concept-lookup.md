@@ -3,7 +3,7 @@
 Extends [concept.md](concept.md) with what this library does beyond
 shipping data: merging its sets into one body of facts and answering
 lookups by PHP name. Model Entry, Subject, Generated Layer,
-and Extension Provenance are defined there; Model, Section, Condition,
+and PHP Extension are defined there; Model, Section, Condition,
 Document Set, Set Provenance, and Verification in commons-phpmodels
 `docs/concept.md` and `concept-provenance.md`.
 

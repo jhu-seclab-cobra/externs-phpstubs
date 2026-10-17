@@ -107,7 +107,7 @@ Model documents derived from [JetBrains/phpstorm-stubs](https://github.com/JetBr
 
 ## Documentation
 
-- [Concepts](docs/concept.md) -- generated layer over commons-phpmodels, extension provenance, lookup semantics
+- [Concepts](docs/concept.md) -- generated layer over commons-phpmodels, PHP extension placement, lookup semantics
 - [Lookup Concepts](docs/concept-lookup.md) -- canonical vocabulary, the merge, `BuiltinRecord` and `BuiltinLookup`
 - [Lookup Model](docs/model-lookup.md) -- bundled sets, merge order, statements in force, records and facts
 - [Merge Algorithm](docs/spec-merge.md) -- folding the mounted sets into one statement per subject, condition, and unit

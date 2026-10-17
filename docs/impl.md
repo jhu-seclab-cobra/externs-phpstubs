@@ -39,7 +39,7 @@
 
 ## Design-Specific
 
-### Extension provenance
+### PHP extension placement
 
 - Derived at load from the document file name: `standard_3.yaml` → `standard`; `language/keyword.yaml` → `keyword`. The model format carries no extension field.
 - Former synthetic extension spellings `Scalar` and `Core` (for class `exit`) become `scalar` and `keyword`, following the document names.
