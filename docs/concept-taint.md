@@ -19,7 +19,7 @@ vocabulary happens once, at this library's merge.
 **System Role**
 The taint document set is the second generated artifact of this library:
 a classpath root laid out by the commons-phpmodels document-set convention,
-merged by this library into its Built-in Records under its own category mapping
+merged by this library into its Built-in Records under its own vocabulary mapping
 onto the Canonical Vocabulary ([concept.md](concept.md)).
 
 **Data Flow**
@@ -107,7 +107,7 @@ merge: set loader(taint/, canonical vocabulary, mapping) ─► entries in canon
   start (every bundled set loads on the first access to the lookup).
 - **With the merge:** this library opens the set at its root constant and
   loads it through the set loader with the Canonical Vocabulary as context
-  and a category mapping that lists every psalm kind and the source kind
+  and a vocabulary mapping that lists every psalm kind and the source kind
   `input`. Names the mapping omits are dropped by the format library;
   nothing is dropped here.
 

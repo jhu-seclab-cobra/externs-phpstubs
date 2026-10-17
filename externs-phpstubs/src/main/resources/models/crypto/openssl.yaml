@@ -7,7 +7,7 @@
     - name: cipher_algo
       type: string
     returnType: int|false
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: openssl_cms_decrypt
   signature:
@@ -25,7 +25,7 @@
       type: int
       optional: true
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: openssl_cms_encrypt
   signature:
@@ -48,7 +48,7 @@
       type: string|int
       optional: true
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: openssl_cms_read
   signature:
@@ -59,7 +59,7 @@
       type: mixed
       byRef: true
     returnType: bool
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: openssl_cms_sign
   signature:
@@ -84,7 +84,7 @@
       type: ?string
       optional: true
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: openssl_cms_verify
   signature:
@@ -116,7 +116,7 @@
       type: int
       optional: true
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: openssl_csr_export
   signature:
@@ -130,7 +130,7 @@
       type: bool
       optional: true
     returnType: bool
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: openssl_csr_export_to_file
   signature:
@@ -143,7 +143,7 @@
       type: bool
       optional: true
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: openssl_csr_get_public_key
   signature:
@@ -159,7 +159,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: openssl_csr_get_subject
   signature:
@@ -173,7 +173,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: openssl_csr_new
   signature:
@@ -199,7 +199,7 @@
     to: return
   - from: argument(3)
     to: return
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: openssl_csr_sign
   signature:
@@ -235,7 +235,7 @@
     to: return
   - from: argument(5)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: openssl_decrypt
   signature:
@@ -272,7 +272,7 @@
     to: return
   - from: argument(6)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: openssl_dh_compute_key
   signature:
@@ -287,7 +287,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: openssl_digest
   signature:
@@ -305,7 +305,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: openssl_encrypt
   signature:
@@ -346,12 +346,12 @@
     to: return
   - from: argument(6)
     to: return
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: openssl_error_string
   signature:
     returnType: string|false
-  raises: []
+  throws: []
 - subject:
     function: openssl_free_key
   signature:
@@ -359,12 +359,12 @@
     - name: key
       type: OpenSSLAsymmetricKey
     returnType: void
-  raises: []
+  throws: []
 - subject:
     function: openssl_get_cert_locations
   signature:
     returnType: array
-  raises: []
+  throws: []
 - subject:
     function: openssl_get_cipher_methods
   signature:
@@ -373,12 +373,12 @@
       type: bool
       optional: true
     returnType: array
-  raises: []
+  throws: []
 - subject:
     function: openssl_get_curve_names
   signature:
     returnType: array|false
-  raises: []
+  throws: []
 - subject:
     function: openssl_get_md_methods
   signature:
@@ -387,7 +387,7 @@
       type: bool
       optional: true
     returnType: array
-  raises: []
+  throws: []
 - subject:
     function: openssl_get_privatekey
   signature:
@@ -403,7 +403,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: openssl_get_publickey
   signature:
@@ -414,7 +414,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: openssl_open
   signature:
@@ -434,7 +434,7 @@
       type: ?string
       optional: true
     returnType: bool
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: openssl_pbkdf2
   signature:
@@ -458,7 +458,7 @@
     to: return
   - from: argument(4)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: openssl_pkcs12_export
   signature:
@@ -476,7 +476,7 @@
       type: array
       optional: true
     returnType: bool
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: openssl_pkcs12_export_to_file
   signature:
@@ -493,7 +493,7 @@
       type: array
       optional: true
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: openssl_pkcs12_read
   signature:
@@ -506,7 +506,7 @@
     - name: passphrase
       type: string
     returnType: bool
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: openssl_pkcs7_decrypt
   signature:
@@ -521,7 +521,7 @@
       type: mixed
       optional: true
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: openssl_pkcs7_encrypt
   signature:
@@ -541,7 +541,7 @@
       type: int
       optional: true
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: openssl_pkcs7_read
   signature:
@@ -552,7 +552,7 @@
       type: mixed
       byRef: true
     returnType: bool
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: openssl_pkcs7_sign
   signature:
@@ -574,7 +574,7 @@
       type: ?string
       optional: true
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: openssl_pkcs7_verify
   signature:
@@ -599,7 +599,7 @@
       type: ?string
       optional: true
     returnType: bool|int
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: openssl_pkey_derive
   signature:
@@ -617,7 +617,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: openssl_pkey_export
   signature:
@@ -634,7 +634,7 @@
       type: ?array
       optional: true
     returnType: bool
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: openssl_pkey_export_to_file
   signature:
@@ -650,7 +650,7 @@
       type: ?array
       optional: true
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: openssl_pkey_free
   signature:
@@ -658,7 +658,7 @@
     - name: key
       type: OpenSSLAsymmetricKey
     returnType: void
-  raises: []
+  throws: []
 - subject:
     function: openssl_pkey_get_details
   signature:
@@ -669,7 +669,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: openssl_pkey_get_private
   signature:
@@ -685,7 +685,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: openssl_pkey_get_public
   signature:
@@ -696,7 +696,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: openssl_pkey_new
   signature:
@@ -708,7 +708,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: openssl_private_decrypt
   signature:
@@ -727,7 +727,7 @@
       type: ?string
       optional: true
     returnType: bool
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: openssl_private_encrypt
   signature:
@@ -743,7 +743,7 @@
       type: int
       optional: true
     returnType: bool
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: openssl_public_decrypt
   signature:
@@ -759,7 +759,7 @@
       type: int
       optional: true
     returnType: bool
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: openssl_public_encrypt
   signature:
@@ -778,7 +778,7 @@
       type: ?string
       optional: true
     returnType: bool
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: openssl_random_pseudo_bytes
   signature:
@@ -790,7 +790,7 @@
       optional: true
       byRef: true
     returnType: string
-  raises: [error, exception, typeerror, valueerror]
+  throws: [error, exception, typeerror, valueerror]
 - subject:
     function: openssl_seal
   signature:
@@ -812,7 +812,7 @@
       optional: true
       byRef: true
     returnType: int|false
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: openssl_sign
   signature:
@@ -831,7 +831,7 @@
       type: int
       optional: true
     returnType: bool
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: openssl_spki_export
   signature:
@@ -842,7 +842,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: openssl_spki_export_challenge
   signature:
@@ -853,7 +853,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: openssl_spki_new
   signature:
@@ -871,7 +871,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: openssl_spki_verify
   signature:
@@ -879,7 +879,7 @@
     - name: spki
       type: string
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: openssl_verify
   signature:
@@ -906,7 +906,7 @@
     to: return
   - from: argument(3)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: openssl_x509_check_private_key
   signature:
@@ -916,7 +916,7 @@
     - name: private_key
       type: mixed
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: openssl_x509_checkpurpose
   signature:
@@ -932,7 +932,7 @@
       type: ?string
       optional: true
     returnType: bool|int
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: openssl_x509_export
   signature:
@@ -946,7 +946,7 @@
       type: bool
       optional: true
     returnType: bool
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: openssl_x509_export_to_file
   signature:
@@ -959,7 +959,7 @@
       type: bool
       optional: true
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: openssl_x509_fingerprint
   signature:
@@ -978,7 +978,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: openssl_x509_free
   signature:
@@ -986,7 +986,7 @@
     - name: certificate
       type: OpenSSLCertificate
     returnType: void
-  raises: []
+  throws: []
 - subject:
     function: openssl_x509_parse
   signature:
@@ -1000,7 +1000,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: openssl_x509_read
   signature:
@@ -1011,7 +1011,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: openssl_x509_verify
   signature:
@@ -1021,7 +1021,7 @@
     - name: public_key
       type: mixed
     returnType: int
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     class: opensslasymmetrickey
   signature:
@@ -1041,7 +1041,7 @@
     - name: cipher_algo
       type: string
     returnType: int|false
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: openssl_password_hash
   signature:
@@ -1054,7 +1054,7 @@
       type: array
       optional: true
     returnType: string
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: openssl_password_verify
   signature:
@@ -1066,4 +1066,4 @@
     - name: hash
       type: string
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]

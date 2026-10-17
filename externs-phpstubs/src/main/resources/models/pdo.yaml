@@ -22,7 +22,7 @@
     function: pdo_drivers
   signature:
     returnType: array
-  raises: []
+  throws: []
 - subject:
     method: PDO::__construct
   signature:
@@ -39,17 +39,17 @@
       type: ?array
       optional: true
     returnType: mixed
-  raises: [pdoexception, typeerror, valueerror]
+  throws: [pdoexception, typeerror, valueerror]
 - subject:
     method: PDO::beginTransaction
   signature:
     returnType: bool
-  raises: [pdoexception]
+  throws: [pdoexception]
 - subject:
     method: PDO::commit
   signature:
     returnType: bool
-  raises: [pdoexception]
+  throws: [pdoexception]
 - subject:
     method: PDO::connect
   signature:
@@ -66,17 +66,17 @@
       type: ?array
       optional: true
     returnType: static
-  raises: [pdoexception, typeerror, valueerror]
+  throws: [pdoexception, typeerror, valueerror]
 - subject:
     method: PDO::errorCode
   signature:
     returnType: ?string
-  raises: []
+  throws: []
 - subject:
     method: PDO::errorInfo
   signature:
     returnType: array
-  raises: []
+  throws: []
 - subject:
     method: PDO::exec
   signature:
@@ -84,7 +84,7 @@
     - name: statement
       type: string
     returnType: int|false
-  raises: [pdoexception, valueerror]
+  throws: [pdoexception, valueerror]
 - subject:
     method: PDO::getAttribute
   signature:
@@ -92,17 +92,17 @@
     - name: attribute
       type: int
     returnType: mixed
-  raises: [pdoexception]
+  throws: [pdoexception]
 - subject:
     method: PDO::getAvailableDrivers
   signature:
     returnType: array
-  raises: []
+  throws: []
 - subject:
     method: PDO::inTransaction
   signature:
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     method: PDO::lastInsertId
   signature:
@@ -111,7 +111,7 @@
       type: ?string
       optional: true
     returnType: string|false
-  raises: [pdoexception]
+  throws: [pdoexception]
 - subject:
     method: PDO::prepare
   signature:
@@ -122,7 +122,7 @@
       type: array
       optional: true
     returnType: PDOStatement|false
-  raises: [error, pdoexception, typeerror, valueerror]
+  throws: [error, pdoexception, typeerror, valueerror]
 - subject:
     method: PDO::query
   signature:
@@ -137,7 +137,7 @@
       optional: true
       variadic: true
     returnType: PDOStatement|false
-  raises: [argumentcounterror, error, pdoexception, typeerror, valueerror]
+  throws: [argumentcounterror, error, pdoexception, typeerror, valueerror]
 - subject:
     method: PDO::quote
   signature:
@@ -148,12 +148,12 @@
       type: int
       optional: true
     returnType: string|false
-  raises: [pdoexception]
+  throws: [pdoexception]
 - subject:
     method: PDO::rollBack
   signature:
     returnType: bool
-  raises: [pdoexception]
+  throws: [pdoexception]
 - subject:
     method: PDO::setAttribute
   signature:
@@ -163,7 +163,7 @@
     - name: value
       type: mixed
     returnType: bool
-  raises: [pdoexception, typeerror, valueerror]
+  throws: [pdoexception, typeerror, valueerror]
 - subject:
     method: PDOStatement::bindColumn
   signature:
@@ -183,7 +183,7 @@
       type: mixed
       optional: true
     returnType: bool
-  raises: [pdoexception, valueerror]
+  throws: [pdoexception, valueerror]
 - subject:
     method: PDOStatement::bindParam
   signature:
@@ -203,7 +203,7 @@
       type: mixed
       optional: true
     returnType: bool
-  raises: [pdoexception, valueerror]
+  throws: [pdoexception, valueerror]
 - subject:
     method: PDOStatement::bindValue
   signature:
@@ -216,32 +216,32 @@
       type: int
       optional: true
     returnType: bool
-  raises: [pdoexception, valueerror]
+  throws: [pdoexception, valueerror]
 - subject:
     method: PDOStatement::closeCursor
   signature:
     returnType: bool
-  raises: [pdoexception]
+  throws: [pdoexception]
 - subject:
     method: PDOStatement::columnCount
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     method: PDOStatement::debugDumpParams
   signature:
     returnType: ?bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: PDOStatement::errorCode
   signature:
     returnType: ?string
-  raises: []
+  throws: []
 - subject:
     method: PDOStatement::errorInfo
   signature:
     returnType: array
-  raises: []
+  throws: []
 - subject:
     method: PDOStatement::execute
   signature:
@@ -250,7 +250,7 @@
       type: ?array
       optional: true
     returnType: bool
-  raises: [pdoexception]
+  throws: [pdoexception]
 - subject:
     method: PDOStatement::fetch
   signature:
@@ -265,7 +265,7 @@
       type: int
       optional: true
     returnType: mixed
-  raises: [pdoexception, typeerror, valueerror]
+  throws: [pdoexception, typeerror, valueerror]
 - subject:
     method: PDOStatement::fetchAll
   signature:
@@ -278,7 +278,7 @@
       optional: true
       variadic: true
     returnType: array
-  raises: [argumentcounterror, error, pdoexception, typeerror, valueerror]
+  throws: [argumentcounterror, error, pdoexception, typeerror, valueerror]
 - subject:
     method: PDOStatement::fetchColumn
   signature:
@@ -287,7 +287,7 @@
       type: int
       optional: true
     returnType: mixed
-  raises: [pdoexception, typeerror, valueerror]
+  throws: [pdoexception, typeerror, valueerror]
 - subject:
     method: PDOStatement::fetchObject
   signature:
@@ -299,7 +299,7 @@
       type: array
       optional: true
     returnType: object|false
-  raises: [pdoexception, typeerror, valueerror]
+  throws: [pdoexception, typeerror, valueerror]
 - subject:
     method: PDOStatement::getAttribute
   signature:
@@ -307,7 +307,7 @@
     - name: name
       type: int
     returnType: mixed
-  raises: [pdoexception]
+  throws: [pdoexception]
 - subject:
     method: PDOStatement::getColumnMeta
   signature:
@@ -315,22 +315,22 @@
     - name: column
       type: int
     returnType: array|false
-  raises: [pdoexception, valueerror]
+  throws: [pdoexception, valueerror]
 - subject:
     method: PDOStatement::getIterator
   signature:
     returnType: Iterator
-  raises: []
+  throws: []
 - subject:
     method: PDOStatement::nextRowset
   signature:
     returnType: bool
-  raises: [pdoexception]
+  throws: [pdoexception]
 - subject:
     method: PDOStatement::rowCount
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     method: PDOStatement::setAttribute
   signature:
@@ -340,7 +340,7 @@
     - name: value
       type: mixed
     returnType: bool
-  raises: [pdoexception]
+  throws: [pdoexception]
 - subject:
     method: PDOStatement::setFetchMode
   signature:
@@ -352,4 +352,4 @@
       optional: true
       variadic: true
     returnType: 'true'
-  raises: [argumentcounterror, error, typeerror, valueerror]
+  throws: [argumentcounterror, error, typeerror, valueerror]

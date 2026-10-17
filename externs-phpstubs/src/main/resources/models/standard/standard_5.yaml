@@ -230,7 +230,7 @@
     to: return
   - from: argument(4)
     to: return
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: php_check_syntax
   signature:
@@ -245,12 +245,12 @@
     function: php_ini_loaded_file
   signature:
     returnType: string|false
-  raises: []
+  throws: []
 - subject:
     function: php_ini_scanned_files
   signature:
     returnType: string|false
-  raises: []
+  throws: []
 - subject:
     function: php_logo_guid
   signature:
@@ -259,7 +259,7 @@
     function: php_sapi_name
   signature:
     returnType: string|false
-  raises: []
+  throws: []
 - subject:
     function: php_strip_whitespace
   signature:
@@ -270,7 +270,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: php_uname
   signature:
@@ -279,7 +279,7 @@
       type: string
       optional: true
     returnType: string
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: phpcredits
   signature:
@@ -288,7 +288,7 @@
       type: int
       optional: true
     returnType: 'true'
-  raises: [error]
+  throws: [error]
 - subject:
     function: phpdbg_break_file
   signature:
@@ -298,7 +298,7 @@
     - name: line
       type: int
     returnType: void
-  raises: []
+  throws: []
 - subject:
     function: phpdbg_break_function
   signature:
@@ -306,7 +306,7 @@
     - name: function
       type: string
     returnType: void
-  raises: []
+  throws: []
 - subject:
     function: phpdbg_break_method
   signature:
@@ -316,17 +316,17 @@
     - name: method
       type: string
     returnType: void
-  raises: []
+  throws: []
 - subject:
     function: phpdbg_break_next
   signature:
     returnType: void
-  raises: []
+  throws: []
 - subject:
     function: phpdbg_clear
   signature:
     returnType: void
-  raises: []
+  throws: []
 - subject:
     function: phpdbg_color
   signature:
@@ -336,7 +336,7 @@
     - name: color
       type: string
     returnType: void
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: phpdbg_end_oplog
   signature:
@@ -348,7 +348,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: phpdbg_exec
   signature:
@@ -359,7 +359,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: phpdbg_get_executable
   signature:
@@ -371,7 +371,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: phpdbg_prompt
   signature:
@@ -379,12 +379,12 @@
     - name: string
       type: string
     returnType: void
-  raises: []
+  throws: []
 - subject:
     function: phpdbg_start_oplog
   signature:
     returnType: void
-  raises: []
+  throws: []
 - subject:
     function: phpinfo
   signature:
@@ -393,7 +393,7 @@
       type: int
       optional: true
     returnType: 'true'
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     function: phpversion
   signature:
@@ -402,12 +402,12 @@
       type: ?string
       optional: true
     returnType: string|false
-  raises: []
+  throws: []
 - subject:
     function: pi
   signature:
     returnType: float
-  raises: []
+  throws: []
 - subject:
     function: popen
   signature:
@@ -417,7 +417,7 @@
     - name: mode
       type: string
     returnType: mixed
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: pos
   signature:
@@ -428,7 +428,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: pow
   signature:
@@ -438,7 +438,7 @@
     - name: exponent
       type: mixed
     returnType: int|float|object
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     function: prev
   signature:
@@ -450,7 +450,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: print_r
   signature:
@@ -464,7 +464,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     function: printf
   signature:
@@ -476,7 +476,7 @@
       optional: true
       variadic: true
     returnType: int
-  raises: [argumentcounterror, error, valueerror]
+  throws: [argumentcounterror, error, valueerror]
 - subject:
     function: proc_close
   signature:
@@ -484,7 +484,7 @@
     - name: process
       type: mixed
     returnType: int
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     function: proc_get_status
   signature:
@@ -492,7 +492,7 @@
     - name: process
       type: mixed
     returnType: array
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     function: proc_nice
   signature:
@@ -500,7 +500,7 @@
     - name: priority
       type: int
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: proc_open
   signature:
@@ -522,7 +522,7 @@
       type: ?array
       optional: true
     returnType: mixed
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: proc_terminate
   signature:
@@ -533,7 +533,7 @@
       type: int
       optional: true
     returnType: bool
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     function: ps_add_bookmark
   signature:
@@ -1664,7 +1664,7 @@
     - name: assignment
       type: string
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: px_close
   signature:
@@ -1930,7 +1930,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: quoted_printable_encode
   signature:
@@ -1941,7 +1941,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: quotemeta
   signature:
@@ -1952,7 +1952,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: rad2deg
   signature:
@@ -1960,7 +1960,7 @@
     - name: num
       type: float
     returnType: float
-  raises: []
+  throws: []
 - subject:
     function: radius_acct_open
   signature:
@@ -2244,7 +2244,7 @@
       type: int|float
       optional: true
     returnType: array
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: rar_allow_broken_set
   signature:
@@ -2343,7 +2343,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: rawurlencode
   signature:
@@ -2351,7 +2351,7 @@
     - name: string
       type: string
     returnType: string
-  raises: []
+  throws: []
 - subject:
     function: readdir
   signature:
@@ -2360,7 +2360,7 @@
       type: mixed
       optional: true
     returnType: string|false
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     function: recode
   signature:
@@ -2422,7 +2422,7 @@
       optional: true
       variadic: true
     returnType: void
-  raises: []
+  throws: []
 - subject:
     function: register_tick_function
   signature:
@@ -2434,7 +2434,7 @@
       optional: true
       variadic: true
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: reset
   signature:
@@ -2446,7 +2446,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: rewind
   signature:
@@ -2454,7 +2454,7 @@
     - name: stream
       type: mixed
     returnType: bool
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     function: rewinddir
   signature:
@@ -2463,7 +2463,7 @@
       type: mixed
       optional: true
     returnType: void
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     function: round
   signature:
@@ -2477,7 +2477,7 @@
       type: int|RoundingMode
       optional: true
     returnType: float
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: rpm_close
   signature:
@@ -2706,7 +2706,7 @@
       type: int
       optional: true
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     function: rtrim
   signature:
@@ -2720,7 +2720,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: runkit7_constant_add
   signature:
@@ -3176,7 +3176,7 @@
   propagation:
   - from: argument(2)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: sapi_windows_cp_get
   signature:
@@ -3185,12 +3185,12 @@
       type: string
       optional: true
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: sapi_windows_cp_is_utf8
   signature:
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: sapi_windows_cp_set
   signature:
@@ -3198,7 +3198,7 @@
     - name: codepage
       type: int
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: sapi_windows_vt100_support
   signature:
@@ -3209,7 +3209,7 @@
       type: ?bool
       optional: true
     returnType: bool
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     function: seaslog_get_author
   signature:
@@ -3228,7 +3228,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error, exception, typeerror]
+  throws: [error, exception, typeerror]
 - subject:
     function: set_file_buffer
   signature:
@@ -3238,7 +3238,7 @@
     - name: size
       type: int
     returnType: int
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     function: set_include_path
   signature:
@@ -3249,7 +3249,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: set_magic_quotes_runtime
   signature:
@@ -3264,7 +3264,7 @@
     - name: seconds
       type: int
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: setcookie
   signature:
@@ -3290,7 +3290,7 @@
       type: bool
       optional: true
     returnType: bool
-  raises: [argumentcounterror, valueerror]
+  throws: [argumentcounterror, valueerror]
 - subject:
     function: setleftfill
   signature:
@@ -3339,7 +3339,7 @@
     to: return
   - from: argument(2)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: setproctitle
   signature:
@@ -3372,7 +3372,7 @@
       type: bool
       optional: true
     returnType: bool
-  raises: [argumentcounterror, valueerror]
+  throws: [argumentcounterror, valueerror]
 - subject:
     function: setrightfill
   signature:
@@ -3404,7 +3404,7 @@
     - name: type
       type: string
     returnType: bool
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: sha1
   signature:
@@ -3415,7 +3415,7 @@
       type: bool
       optional: true
     returnType: string
-  raises: []
+  throws: []
 - subject:
     function: sha1_file
   signature:
@@ -3429,7 +3429,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: sha256
   signature:
@@ -3463,7 +3463,7 @@
     - name: command
       type: string
     returnType: string|false|null
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: show_source
   signature:
@@ -3474,7 +3474,7 @@
       type: bool
       optional: true
     returnType: string|bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: shuffle
   signature:
@@ -3483,7 +3483,7 @@
       type: array
       byRef: true
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     function: signeurlpaiement
   signature:
@@ -3511,7 +3511,7 @@
       optional: true
       byRef: true
     returnType: int
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     function: sin
   signature:
@@ -3519,7 +3519,7 @@
     - name: num
       type: float
     returnType: float
-  raises: []
+  throws: []
 - subject:
     function: sinh
   signature:
@@ -3527,7 +3527,7 @@
     - name: num
       type: float
     returnType: float
-  raises: []
+  throws: []
 - subject:
     function: sizeof
   signature:
@@ -3538,7 +3538,7 @@
       type: int
       optional: true
     returnType: int
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: sleep
   signature:
@@ -3546,7 +3546,7 @@
     - name: seconds
       type: int
     returnType: int
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: solid_fetch_prev
   signature:
@@ -3569,7 +3569,7 @@
       type: int
       optional: true
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     function: soundex
   signature:
@@ -3580,7 +3580,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: sprintf
   signature:
@@ -3601,7 +3601,7 @@
     to: return
   - from: argument(3)
     to: return
-  raises: [argumentcounterror, error, valueerror]
+  throws: [argumentcounterror, error, valueerror]
 - subject:
     function: sqlite_array_query
   signature:

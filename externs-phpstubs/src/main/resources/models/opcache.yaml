@@ -7,7 +7,7 @@
     - name: filename
       type: string
     returnType: bool
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     function: opcache_jit_blacklist
   signature:
@@ -15,7 +15,7 @@
     - name: closure
       type: Closure
     returnType: void
-  raises: []
+  throws: []
 - subject:
     function: opcache_compile_file
   signature:
@@ -23,12 +23,12 @@
     - name: filename
       type: string
     returnType: bool
-  raises: [arithmeticerror, divisionbyzeroerror, error, typeerror, valueerror]
+  throws: [arithmeticerror, divisionbyzeroerror, error, typeerror, valueerror]
 - subject:
     function: opcache_get_configuration
   signature:
     returnType: array|false
-  raises: []
+  throws: []
 - subject:
     function: opcache_get_status
   signature:
@@ -37,7 +37,7 @@
       type: bool
       optional: true
     returnType: array|false
-  raises: []
+  throws: []
 - subject:
     function: opcache_invalidate
   signature:
@@ -48,7 +48,7 @@
       type: bool
       optional: true
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: opcache_is_script_cached
   signature:
@@ -56,9 +56,9 @@
     - name: filename
       type: string
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: opcache_reset
   signature:
     returnType: bool
-  raises: []
+  throws: []

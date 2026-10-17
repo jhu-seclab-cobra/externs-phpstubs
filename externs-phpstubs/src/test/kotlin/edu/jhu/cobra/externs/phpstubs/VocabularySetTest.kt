@@ -1,8 +1,8 @@
 package edu.jhu.cobra.externs.phpstubs
 
-import edu.jhu.cobra.commons.phpmodels.CategoryMappingLoader
 import edu.jhu.cobra.commons.phpmodels.DocumentSetLoader
 import edu.jhu.cobra.commons.phpmodels.Verification
+import edu.jhu.cobra.commons.phpmodels.VocabularyMappingLoader
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
@@ -39,7 +39,7 @@ internal class VocabularySetTest {
 
     @Test
     fun `the psalm mapping leaves no psalm name in a mapped set`() {
-        val mapping = VocabularySetTest::class.java.getResourceAsStream(StubResources.PSALM_MAPPING)!!.use(CategoryMappingLoader::load)
+        val mapping = VocabularySetTest::class.java.getResourceAsStream(StubResources.PSALM_MAPPING)!!.use(VocabularyMappingLoader::load)
         val canonical = VulnType.entries.map { it.id }.toSet()
         val sourceKinds = SourceKind.entries.map { it.id }.toSet()
         for (root in listOf(StubResources.TAINT, StubResources.TAINT_RULES)) {

@@ -8,7 +8,7 @@
     method: XMLReader::close
   signature:
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     method: XMLReader::expand
   signature:
@@ -17,7 +17,7 @@
       type: ?DOMNode
       optional: true
     returnType: DOMNode|false
-  raises: [error]
+  throws: [error]
 - subject:
     method: XMLReader::fromStream
   signature:
@@ -34,7 +34,7 @@
       type: ?string
       optional: true
     returnType: static
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     method: XMLReader::fromString
   signature:
@@ -48,7 +48,7 @@
       type: int
       optional: true
     returnType: static
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     method: XMLReader::fromUri
   signature:
@@ -62,7 +62,7 @@
       type: int
       optional: true
     returnType: static
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     method: XMLReader::getAttribute
   signature:
@@ -70,7 +70,7 @@
     - name: name
       type: string
     returnType: ?string
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: XMLReader::getAttributeNo
   signature:
@@ -78,7 +78,7 @@
     - name: index
       type: int
     returnType: ?string
-  raises: []
+  throws: []
 - subject:
     method: XMLReader::getAttributeNs
   signature:
@@ -88,7 +88,7 @@
     - name: namespace
       type: string
     returnType: ?string
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: XMLReader::getParserProperty
   signature:
@@ -96,12 +96,12 @@
     - name: property
       type: int
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     method: XMLReader::isValid
   signature:
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     method: XMLReader::lookupNamespace
   signature:
@@ -109,7 +109,7 @@
     - name: prefix
       type: string
     returnType: ?string
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: XMLReader::moveToAttribute
   signature:
@@ -117,7 +117,7 @@
     - name: name
       type: string
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: XMLReader::moveToAttributeNo
   signature:
@@ -125,7 +125,7 @@
     - name: index
       type: int
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     method: XMLReader::moveToAttributeNs
   signature:
@@ -135,22 +135,22 @@
     - name: namespace
       type: string
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: XMLReader::moveToElement
   signature:
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     method: XMLReader::moveToFirstAttribute
   signature:
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     method: XMLReader::moveToNextAttribute
   signature:
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     method: XMLReader::next
   signature:
@@ -159,7 +159,7 @@
       type: ?string
       optional: true
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: XMLReader::open
   signature:
@@ -173,27 +173,27 @@
       type: int
       optional: true
     returnType: mixed
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     method: XMLReader::read
   signature:
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: XMLReader::readInnerXml
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     method: XMLReader::readOuterXml
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     method: XMLReader::readString
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     method: XMLReader::setParserProperty
   signature:
@@ -203,7 +203,7 @@
     - name: value
       type: bool
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     method: XMLReader::setRelaxNGSchema
   signature:
@@ -211,7 +211,7 @@
     - name: filename
       type: ?string
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     method: XMLReader::setRelaxNGSchemaSource
   signature:
@@ -219,7 +219,7 @@
     - name: source
       type: ?string
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     method: XMLReader::setSchema
   signature:
@@ -227,7 +227,7 @@
     - name: filename
       type: ?string
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     method: XMLReader::XML
   signature:
@@ -241,4 +241,4 @@
       type: int
       optional: true
     returnType: mixed
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]

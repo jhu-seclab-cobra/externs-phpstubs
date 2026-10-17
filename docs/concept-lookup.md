@@ -63,7 +63,7 @@ consumer: fact kind ────────► Built-in Lookup ──► every 
 - **Definition:** This library's own names for vulnerability types (SQL
   injection, command injection, ...) and source kinds (user input,
   external input), with the policy rows over them. The psalm-named sets
-  are translated into it by one category mapping this library ships and
+  are translated into it by one vocabulary mapping this library ships and
   applies at the merge; a consumer never sees psalm's names.
 - **Scope:** every vulnerability type and source kind any shipped set states.
 - **Relationships:** context of the merge; the names every fact is in.

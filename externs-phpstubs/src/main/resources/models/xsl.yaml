@@ -13,17 +13,17 @@
     - name: name
       type: string
     returnType: string|false
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: XSLTProcessor::getSecurityPrefs
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     method: XSLTProcessor::hasExsltSupport
   signature:
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     method: XSLTProcessor::importStylesheet
   signature:
@@ -31,7 +31,7 @@
     - name: stylesheet
       type: object
     returnType: bool
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     method: XSLTProcessor::registerPHPFunctionNS
   signature:
@@ -43,7 +43,7 @@
     - name: callable
       type: callable
     returnType: void
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: XSLTProcessor::registerPHPFunctions
   signature:
@@ -52,7 +52,7 @@
       type: array|string|null
       optional: true
     returnType: void
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     method: XSLTProcessor::removeParameter
   signature:
@@ -62,7 +62,7 @@
     - name: name
       type: string
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: XSLTProcessor::setParameter
   signature:
@@ -75,7 +75,7 @@
       type: ?string
       optional: true
     returnType: bool
-  raises: [typeerror, valueerror]
+  throws: [typeerror, valueerror]
 - subject:
     method: XSLTProcessor::setProfiling
   signature:
@@ -83,7 +83,7 @@
     - name: filename
       type: ?string
     returnType: 'true'
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: XSLTProcessor::setSecurityPrefs
   signature:
@@ -91,7 +91,7 @@
     - name: preferences
       type: int
     returnType: int
-  raises: []
+  throws: []
 - subject:
     method: XSLTProcessor::transformToDoc
   signature:
@@ -102,7 +102,7 @@
       type: ?string
       optional: true
     returnType: object|false
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: XSLTProcessor::transformToUri
   signature:
@@ -112,7 +112,7 @@
     - name: uri
       type: string
     returnType: int
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     method: XSLTProcessor::transformToXml
   signature:
@@ -120,4 +120,4 @@
     - name: document
       type: object
     returnType: string|null|false
-  raises: [error, typeerror]
+  throws: [error, typeerror]

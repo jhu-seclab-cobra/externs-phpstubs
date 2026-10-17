@@ -19,7 +19,7 @@
     to: return
   - from: argument(2)
     to: return
-  raises: [typeerror, valueerror]
+  throws: [typeerror, valueerror]
 - subject:
     function: imageaffinematrixconcat
   signature:
@@ -34,7 +34,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [typeerror, valueerror]
+  throws: [typeerror, valueerror]
 - subject:
     function: imageaffinematrixget
   signature:
@@ -47,7 +47,7 @@
   propagation:
   - from: argument(1)
     to: return
-  raises: [typeerror, valueerror]
+  throws: [typeerror, valueerror]
 - subject:
     function: imagealphablending
   signature:
@@ -57,7 +57,7 @@
     - name: enable
       type: bool
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     function: imageantialias
   signature:
@@ -67,7 +67,7 @@
     - name: enable
       type: bool
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     function: imagearc
   signature:
@@ -89,7 +89,7 @@
     - name: color
       type: int
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     function: imagebmp
   signature:
@@ -103,7 +103,7 @@
       type: bool
       optional: true
     returnType: bool
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: imagechar
   signature:
@@ -121,7 +121,7 @@
     - name: color
       type: int
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     function: imagecharup
   signature:
@@ -139,7 +139,7 @@
     - name: color
       type: int
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     function: imagecolorallocate
   signature:
@@ -153,7 +153,7 @@
     - name: blue
       type: int
     returnType: int|false
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagecolorallocatealpha
   signature:
@@ -169,7 +169,7 @@
     - name: alpha
       type: int
     returnType: int|false
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagecolorat
   signature:
@@ -181,7 +181,7 @@
     - name: 'y'
       type: int
     returnType: int|false
-  raises: []
+  throws: []
 - subject:
     function: imagecolorclosest
   signature:
@@ -195,7 +195,7 @@
     - name: blue
       type: int
     returnType: int
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagecolorclosestalpha
   signature:
@@ -211,7 +211,7 @@
     - name: alpha
       type: int
     returnType: int
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagecolorclosesthwb
   signature:
@@ -225,7 +225,7 @@
     - name: blue
       type: int
     returnType: int
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagecolordeallocate
   signature:
@@ -235,7 +235,7 @@
     - name: color
       type: int
     returnType: 'true'
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagecolorexact
   signature:
@@ -249,7 +249,7 @@
     - name: blue
       type: int
     returnType: int
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagecolorexactalpha
   signature:
@@ -265,7 +265,7 @@
     - name: alpha
       type: int
     returnType: int
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagecolormatch
   signature:
@@ -275,7 +275,7 @@
     - name: image2
       type: GdImage
     returnType: 'true'
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagecolorresolve
   signature:
@@ -289,7 +289,7 @@
     - name: blue
       type: int
     returnType: int
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagecolorresolvealpha
   signature:
@@ -305,7 +305,7 @@
     - name: alpha
       type: int
     returnType: int
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagecolorset
   signature:
@@ -324,7 +324,7 @@
       type: int
       optional: true
     returnType: false|null
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagecolorsforindex
   signature:
@@ -337,7 +337,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagecolorstotal
   signature:
@@ -345,7 +345,7 @@
     - name: image
       type: GdImage
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: imagecolortransparent
   signature:
@@ -356,7 +356,7 @@
       type: ?int
       optional: true
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: imageconvolution
   signature:
@@ -370,7 +370,7 @@
     - name: offset
       type: float
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagecopy
   signature:
@@ -392,7 +392,7 @@
     - name: src_height
       type: int
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     function: imagecopymerge
   signature:
@@ -416,7 +416,7 @@
     - name: pct
       type: int
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     function: imagecopymergegray
   signature:
@@ -440,7 +440,7 @@
     - name: pct
       type: int
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     function: imagecopyresampled
   signature:
@@ -466,7 +466,7 @@
     - name: src_height
       type: int
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     function: imagecopyresized
   signature:
@@ -492,7 +492,7 @@
     - name: src_height
       type: int
     returnType: 'true'
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagecreate
   signature:
@@ -507,7 +507,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagecreatefrombmp
   signature:
@@ -518,7 +518,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagecreatefromgd
   signature:
@@ -529,7 +529,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagecreatefromgd2
   signature:
@@ -540,7 +540,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagecreatefromgd2part
   signature:
@@ -567,7 +567,7 @@
     to: return
   - from: argument(4)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagecreatefromgif
   signature:
@@ -578,7 +578,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagecreatefromjpeg
   signature:
@@ -589,7 +589,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagecreatefrompng
   signature:
@@ -600,7 +600,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagecreatefromstring
   signature:
@@ -611,7 +611,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagecreatefromtga
   signature:
@@ -622,7 +622,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagecreatefromwbmp
   signature:
@@ -633,7 +633,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagecreatefromwebp
   signature:
@@ -644,7 +644,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagecreatefromxbm
   signature:
@@ -655,7 +655,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagecreatefromxpm
   signature:
@@ -666,7 +666,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagecreatetruecolor
   signature:
@@ -681,7 +681,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagecrop
   signature:
@@ -696,7 +696,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagecropauto
   signature:
@@ -722,7 +722,7 @@
     to: return
   - from: argument(3)
     to: return
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: imagedashedline
   signature:
@@ -740,7 +740,7 @@
     - name: color
       type: int
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     function: imagedestroy
   signature:
@@ -748,7 +748,7 @@
     - name: image
       type: GdImage
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     function: imageellipse
   signature:
@@ -766,7 +766,7 @@
     - name: color
       type: int
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     function: imagefill
   signature:
@@ -780,7 +780,7 @@
     - name: color
       type: int
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     function: imagefilledarc
   signature:
@@ -804,7 +804,7 @@
     - name: style
       type: int
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     function: imagefilledellipse
   signature:
@@ -822,7 +822,7 @@
     - name: color
       type: int
     returnType: 'true'
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagefilledpolygon
   signature:
@@ -837,7 +837,7 @@
       type: ?int
       optional: true
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagefilledrectangle
   signature:
@@ -855,7 +855,7 @@
     - name: color
       type: int
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     function: imagefilltoborder
   signature:
@@ -871,7 +871,7 @@
     - name: color
       type: int
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     function: imagefilter
   signature:
@@ -885,7 +885,7 @@
       optional: true
       variadic: true
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imageflip
   signature:
@@ -895,7 +895,7 @@
     - name: mode
       type: int
     returnType: 'true'
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagefontheight
   signature:
@@ -903,7 +903,7 @@
     - name: font
       type: GdFont|int
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: imagefontwidth
   signature:
@@ -911,7 +911,7 @@
     - name: font
       type: GdFont|int
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: imageftbbox
   signature:
@@ -931,7 +931,7 @@
   propagation:
   - from: argument(4)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagefttext
   signature:
@@ -961,7 +961,7 @@
     to: return
   - from: argument(8)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagegammacorrect
   signature:
@@ -973,7 +973,7 @@
     - name: output_gamma
       type: float
     returnType: 'true'
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagegd
   signature:
@@ -984,7 +984,7 @@
       type: ?string
       optional: true
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: imagegd2
   signature:
@@ -1001,7 +1001,7 @@
       type: int
       optional: true
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: imagegetclip
   signature:
@@ -1012,7 +1012,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: imagegetinterpolation
   signature:
@@ -1020,7 +1020,7 @@
     - name: image
       type: GdImage
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: imagegif
   signature:
@@ -1031,12 +1031,12 @@
       type: mixed
       optional: true
     returnType: bool
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: imagegrabscreen
   signature:
     returnType: GdImage|false
-  raises: []
+  throws: []
 - subject:
     function: imagegrabwindow
   signature:
@@ -1052,7 +1052,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: imageinterlace
   signature:
@@ -1063,7 +1063,7 @@
       type: ?bool
       optional: true
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: imageistruecolor
   signature:
@@ -1071,7 +1071,7 @@
     - name: image
       type: GdImage
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: imagejpeg
   signature:
@@ -1085,7 +1085,7 @@
       type: int
       optional: true
     returnType: bool
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: imagelayereffect
   signature:
@@ -1095,7 +1095,7 @@
     - name: effect
       type: int
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     function: imageline
   signature:
@@ -1113,7 +1113,7 @@
     - name: color
       type: int
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     function: imageloadfont
   signature:
@@ -1121,7 +1121,7 @@
     - name: filename
       type: string
     returnType: GdFont|false
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imageopenpolygon
   signature:
@@ -1136,7 +1136,7 @@
       type: ?int
       optional: true
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagepalettecopy
   signature:
@@ -1146,7 +1146,7 @@
     - name: src
       type: GdImage
     returnType: void
-  raises: []
+  throws: []
 - subject:
     function: imagepalettetotruecolor
   signature:
@@ -1154,7 +1154,7 @@
     - name: image
       type: GdImage
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: imagepng
   signature:
@@ -1171,7 +1171,7 @@
       type: int
       optional: true
     returnType: bool
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: imagepolygon
   signature:
@@ -1186,7 +1186,7 @@
       type: ?int
       optional: true
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagerectangle
   signature:
@@ -1204,7 +1204,7 @@
     - name: color
       type: int
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     function: imageresolution
   signature:
@@ -1221,7 +1221,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagerotate
   signature:
@@ -1240,7 +1240,7 @@
     to: return
   - from: argument(2)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagesavealpha
   signature:
@@ -1250,7 +1250,7 @@
     - name: enable
       type: bool
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     function: imagescale
   signature:
@@ -1275,7 +1275,7 @@
     to: return
   - from: argument(3)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagesetbrush
   signature:
@@ -1285,7 +1285,7 @@
     - name: brush
       type: GdImage
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     function: imagesetclip
   signature:
@@ -1301,7 +1301,7 @@
     - name: y2
       type: int
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     function: imagesetinterpolation
   signature:
@@ -1312,7 +1312,7 @@
       type: int
       optional: true
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: imagesetpixel
   signature:
@@ -1326,7 +1326,7 @@
     - name: color
       type: int
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     function: imagesetstyle
   signature:
@@ -1336,7 +1336,7 @@
     - name: style
       type: array
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagesetthickness
   signature:
@@ -1346,7 +1346,7 @@
     - name: thickness
       type: int
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     function: imagesettile
   signature:
@@ -1356,7 +1356,7 @@
     - name: tile
       type: GdImage
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     function: imagestring
   signature:
@@ -1374,7 +1374,7 @@
     - name: color
       type: int
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     function: imagestringup
   signature:
@@ -1392,7 +1392,7 @@
     - name: color
       type: int
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     function: imagesx
   signature:
@@ -1400,7 +1400,7 @@
     - name: image
       type: GdImage
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: imagesy
   signature:
@@ -1408,7 +1408,7 @@
     - name: image
       type: GdImage
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: imagetruecolortopalette
   signature:
@@ -1420,7 +1420,7 @@
     - name: num_colors
       type: int
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagettfbbox
   signature:
@@ -1440,7 +1440,7 @@
   propagation:
   - from: argument(4)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagettftext
   signature:
@@ -1470,12 +1470,12 @@
     to: return
   - from: argument(8)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: imagetypes
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: imagewbmp
   signature:
@@ -1489,7 +1489,7 @@
       type: ?int
       optional: true
     returnType: bool
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: imagewebp
   signature:
@@ -1503,7 +1503,7 @@
       type: int
       optional: true
     returnType: bool
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: imagexbm
   signature:
@@ -1516,7 +1516,7 @@
       type: ?int
       optional: true
     returnType: bool
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     class: gdfont
   signature:
@@ -1537,7 +1537,7 @@
       type: int
       optional: true
     returnType: bool
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: imagecreatefromavif
   signature:
@@ -1545,7 +1545,7 @@
     - name: filename
       type: string
     returnType: GdImage|false
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     class: gdimage
   signature:
@@ -1554,4 +1554,4 @@
     function: gd_info
   signature:
     returnType: array
-  raises: []
+  throws: []

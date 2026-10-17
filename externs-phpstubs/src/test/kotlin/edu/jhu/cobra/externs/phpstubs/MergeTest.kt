@@ -148,11 +148,11 @@ internal class MergeTest {
 
     @Test
     fun `a raises statement is replaced only by another raises statement`() {
-        val base = TestSets.mount(0, Verification.GENERATED, "$generated\n  raises: [valueerror]\n", extension = "standard")
+        val base = TestSets.mount(0, Verification.GENERATED, "$generated\n  throws: [valueerror]\n", extension = "standard")
         val value = TestSets.mount(1, Verification.MANUAL, "- subject: {function: f}\n  returns: str\n")
         val kept = Merge.of(listOf(base, value)).functions.getValue(f)
         assertEquals(setOf(ClassSubject("valueerror")), kept.raises.single().classes)
-        val none = TestSets.mount(2, Verification.MANUAL, "- subject: {function: f}\n  raises: []\n")
+        val none = TestSets.mount(2, Verification.MANUAL, "- subject: {function: f}\n  throws: []\n")
         val replaced = Merge.of(listOf(base, value, none)).functions.getValue(f)
         assertEquals(emptySet(), replaced.raises.single().classes)
         assertEquals(ReturnKind.STR, replaced.returns.single().kind)

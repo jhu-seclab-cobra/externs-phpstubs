@@ -68,17 +68,17 @@
       type: int
       optional: true
     returnType: mixed
-  raises: [random\randomexception, valueerror]
+  throws: [random\randomexception, valueerror]
 - subject:
     method: Random\Engine\Mt19937::__debugInfo
   signature:
     returnType: array
-  raises: [error, exception, typeerror]
+  throws: [error, exception, typeerror]
 - subject:
     method: Random\Engine\Mt19937::__serialize
   signature:
     returnType: array
-  raises: [error, exception, typeerror]
+  throws: [error, exception, typeerror]
 - subject:
     method: Random\Engine\Mt19937::__unserialize
   signature:
@@ -86,12 +86,12 @@
     - name: data
       type: array
     returnType: void
-  raises: [error, exception, typeerror]
+  throws: [error, exception, typeerror]
 - subject:
     method: Random\Engine\Mt19937::generate
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     method: Random\Engine\PcgOneseq128XslRr64::__construct
   signature:
@@ -100,17 +100,17 @@
       type: string|int|null
       optional: true
     returnType: mixed
-  raises: [random\randomexception, valueerror]
+  throws: [random\randomexception, valueerror]
 - subject:
     method: Random\Engine\PcgOneseq128XslRr64::__debugInfo
   signature:
     returnType: array
-  raises: [error, exception, typeerror]
+  throws: [error, exception, typeerror]
 - subject:
     method: Random\Engine\PcgOneseq128XslRr64::__serialize
   signature:
     returnType: array
-  raises: [error, exception, typeerror]
+  throws: [error, exception, typeerror]
 - subject:
     method: Random\Engine\PcgOneseq128XslRr64::__unserialize
   signature:
@@ -118,12 +118,12 @@
     - name: data
       type: array
     returnType: void
-  raises: [error, exception, typeerror]
+  throws: [error, exception, typeerror]
 - subject:
     method: Random\Engine\PcgOneseq128XslRr64::generate
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     method: Random\Engine\PcgOneseq128XslRr64::jump
   signature:
@@ -131,12 +131,12 @@
     - name: advance
       type: int
     returnType: void
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: Random\Engine\Secure::generate
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     method: Random\Engine\Xoshiro256StarStar::__construct
   signature:
@@ -145,17 +145,17 @@
       type: string|int|null
       optional: true
     returnType: mixed
-  raises: [random\randomexception, valueerror]
+  throws: [random\randomexception, valueerror]
 - subject:
     method: Random\Engine\Xoshiro256StarStar::__debugInfo
   signature:
     returnType: array
-  raises: [error, exception, typeerror]
+  throws: [error, exception, typeerror]
 - subject:
     method: Random\Engine\Xoshiro256StarStar::__serialize
   signature:
     returnType: array
-  raises: [error, exception, typeerror]
+  throws: [error, exception, typeerror]
 - subject:
     method: Random\Engine\Xoshiro256StarStar::__unserialize
   signature:
@@ -163,22 +163,22 @@
     - name: data
       type: array
     returnType: void
-  raises: [error, exception, typeerror]
+  throws: [error, exception, typeerror]
 - subject:
     method: Random\Engine\Xoshiro256StarStar::generate
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     method: Random\Engine\Xoshiro256StarStar::jump
   signature:
     returnType: void
-  raises: []
+  throws: []
 - subject:
     method: Random\Engine\Xoshiro256StarStar::jumpLong
   signature:
     returnType: void
-  raises: []
+  throws: []
 - subject:
     method: Random\Randomizer::__construct
   signature:
@@ -187,12 +187,12 @@
       type: ?Random\Engine
       optional: true
     returnType: mixed
-  raises: []
+  throws: []
 - subject:
     method: Random\Randomizer::__serialize
   signature:
     returnType: array
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: Random\Randomizer::__unserialize
   signature:
@@ -200,7 +200,7 @@
     - name: data
       type: array
     returnType: void
-  raises: [error, exception, typeerror]
+  throws: [error, exception, typeerror]
 - subject:
     method: Random\Randomizer::getBytes
   signature:
@@ -208,7 +208,7 @@
     - name: length
       type: int
     returnType: string
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: Random\Randomizer::getBytesFromString
   signature:
@@ -218,7 +218,7 @@
     - name: length
       type: int
     returnType: string
-  raises: [random\brokenrandomengineerror, valueerror]
+  throws: [random\brokenrandomengineerror, valueerror]
 - subject:
     method: Random\Randomizer::getFloat
   signature:
@@ -231,7 +231,7 @@
       type: Random\IntervalBoundary
       optional: true
     returnType: float
-  raises: [random\brokenrandomengineerror, valueerror]
+  throws: [random\brokenrandomengineerror, valueerror]
 - subject:
     method: Random\Randomizer::getInt
   signature:
@@ -241,17 +241,17 @@
     - name: max
       type: int
     returnType: int
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: Random\Randomizer::nextFloat
   signature:
     returnType: float
-  raises: []
+  throws: []
 - subject:
     method: Random\Randomizer::nextInt
   signature:
     returnType: int
-  raises: [random\randomexception]
+  throws: [random\randomexception]
 - subject:
     method: Random\Randomizer::pickArrayKeys
   signature:
@@ -261,7 +261,7 @@
     - name: num
       type: int
     returnType: array
-  raises: [random\brokenrandomengineerror, valueerror]
+  throws: [random\brokenrandomengineerror, valueerror]
 - subject:
     method: Random\Randomizer::shuffleArray
   signature:
@@ -269,7 +269,7 @@
     - name: array
       type: array
     returnType: array
-  raises: []
+  throws: []
 - subject:
     method: Random\Randomizer::shuffleBytes
   signature:
@@ -277,22 +277,22 @@
     - name: bytes
       type: string
     returnType: string
-  raises: []
+  throws: []
 - subject:
     function: getrandmax
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: lcg_value
   signature:
     returnType: float
-  raises: []
+  throws: []
 - subject:
     function: mt_getrandmax
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: mt_rand
   signature:
@@ -304,7 +304,7 @@
       type: int
       optional: true
     returnType: int
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: mt_srand
   signature:
@@ -316,7 +316,7 @@
       type: int
       optional: true
     returnType: void
-  raises: []
+  throws: []
 - subject:
     function: rand
   signature:
@@ -328,7 +328,7 @@
       type: int
       optional: true
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: random_bytes
   signature:
@@ -336,7 +336,7 @@
     - name: length
       type: int
     returnType: string
-  raises: [random\randomexception, valueerror]
+  throws: [random\randomexception, valueerror]
 - subject:
     function: random_int
   signature:
@@ -346,7 +346,7 @@
     - name: max
       type: int
     returnType: int
-  raises: [random\randomexception, valueerror]
+  throws: [random\randomexception, valueerror]
 - subject:
     function: srand
   signature:
@@ -358,4 +358,4 @@
       type: int
       optional: true
     returnType: void
-  raises: []
+  throws: []

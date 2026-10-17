@@ -27,7 +27,7 @@
       type: ?string
       optional: true
     returnType: bool
-  raises: [pdoexception]
+  throws: [pdoexception]
 - subject:
     method: Pdo\Pgsql::copyFromFile
   signature:
@@ -46,7 +46,7 @@
       type: ?string
       optional: true
     returnType: bool
-  raises: [pdoexception, valueerror]
+  throws: [pdoexception, valueerror]
 - subject:
     method: Pdo\Pgsql::copyToArray
   signature:
@@ -63,7 +63,7 @@
       type: ?string
       optional: true
     returnType: array|false
-  raises: [pdoexception]
+  throws: [pdoexception]
 - subject:
     method: Pdo\Pgsql::copyToFile
   signature:
@@ -82,7 +82,7 @@
       type: ?string
       optional: true
     returnType: bool
-  raises: [pdoexception, valueerror]
+  throws: [pdoexception, valueerror]
 - subject:
     method: Pdo\Pgsql::escapeIdentifier
   signature:
@@ -90,7 +90,7 @@
     - name: input
       type: string
     returnType: string
-  raises: [error, pdoexception]
+  throws: [error, pdoexception]
 - subject:
     method: Pdo\Pgsql::getNotify
   signature:
@@ -102,17 +102,17 @@
       type: int
       optional: true
     returnType: array|false
-  raises: [pdoexception, valueerror]
+  throws: [pdoexception, valueerror]
 - subject:
     method: Pdo\Pgsql::getPid
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     method: Pdo\Pgsql::lobCreate
   signature:
     returnType: string|false
-  raises: [pdoexception]
+  throws: [pdoexception]
 - subject:
     method: Pdo\Pgsql::lobOpen
   signature:
@@ -123,7 +123,7 @@
       type: string
       optional: true
     returnType: mixed
-  raises: [pdoexception]
+  throws: [pdoexception]
 - subject:
     method: Pdo\Pgsql::lobUnlink
   signature:
@@ -131,7 +131,7 @@
     - name: oid
       type: string
     returnType: bool
-  raises: [pdoexception]
+  throws: [pdoexception]
 - subject:
     method: Pdo\Pgsql::setNoticeCallback
   signature:
@@ -139,7 +139,7 @@
     - name: callback
       type: ?callable
     returnType: void
-  raises: [error]
+  throws: [error]
 - subject:
     method: PDO_PGSql_Ext::pgsqlCopyFromArray
   signature:

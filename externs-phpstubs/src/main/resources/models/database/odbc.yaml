@@ -10,7 +10,7 @@
       type: ?bool
       optional: true
     returnType: int|bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: odbc_binmode
   signature:
@@ -20,7 +20,7 @@
     - name: mode
       type: int
     returnType: 'true'
-  raises: [error]
+  throws: [error]
 - subject:
     function: odbc_close
   signature:
@@ -28,12 +28,12 @@
     - name: odbc
       type: Odbc\Connection
     returnType: void
-  raises: [error]
+  throws: [error]
 - subject:
     function: odbc_close_all
   signature:
     returnType: void
-  raises: []
+  throws: []
 - subject:
     function: odbc_columnprivileges
   signature:
@@ -60,7 +60,7 @@
     to: return
   - from: argument(4)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: odbc_columns
   signature:
@@ -91,7 +91,7 @@
     to: return
   - from: argument(4)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: odbc_commit
   signature:
@@ -99,7 +99,7 @@
     - name: odbc
       type: Odbc\Connection
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: odbc_connect
   signature:
@@ -125,7 +125,7 @@
     to: return
   - from: argument(3)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: odbc_cursor
   signature:
@@ -133,7 +133,7 @@
     - name: statement
       type: Odbc\Result
     returnType: string|false
-  raises: [error]
+  throws: [error]
 - subject:
     function: odbc_data_source
   signature:
@@ -143,7 +143,7 @@
     - name: fetch_type
       type: int
     returnType: array|null|false
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: odbc_do
   signature:
@@ -158,7 +158,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: odbc_error
   signature:
@@ -167,7 +167,7 @@
       type: ?Odbc\Connection
       optional: true
     returnType: string
-  raises: [error]
+  throws: [error]
 - subject:
     function: odbc_errormsg
   signature:
@@ -176,7 +176,7 @@
       type: ?Odbc\Connection
       optional: true
     returnType: string
-  raises: [error]
+  throws: [error]
 - subject:
     function: odbc_exec
   signature:
@@ -191,7 +191,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: odbc_execute
   signature:
@@ -202,7 +202,7 @@
       type: array
       optional: true
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: odbc_fetch_array
   signature:
@@ -213,7 +213,7 @@
       type: ?int
       optional: true
     returnType: array|false
-  raises: [error]
+  throws: [error]
 - subject:
     function: odbc_fetch_into
   signature:
@@ -227,7 +227,7 @@
       type: ?int
       optional: true
     returnType: int|false
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     function: odbc_fetch_object
   signature:
@@ -243,7 +243,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     function: odbc_fetch_row
   signature:
@@ -254,7 +254,7 @@
       type: ?int
       optional: true
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: odbc_field_len
   signature:
@@ -264,7 +264,7 @@
     - name: field
       type: int
     returnType: int|false
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: odbc_field_name
   signature:
@@ -274,7 +274,7 @@
     - name: field
       type: int
     returnType: string|false
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: odbc_field_num
   signature:
@@ -284,7 +284,7 @@
     - name: field
       type: string
     returnType: int|false
-  raises: [error]
+  throws: [error]
 - subject:
     function: odbc_field_precision
   signature:
@@ -294,7 +294,7 @@
     - name: field
       type: int
     returnType: int|false
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: odbc_field_scale
   signature:
@@ -304,7 +304,7 @@
     - name: field
       type: int
     returnType: int|false
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: odbc_field_type
   signature:
@@ -314,7 +314,7 @@
     - name: field
       type: int
     returnType: string|false
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: odbc_foreignkeys
   signature:
@@ -349,7 +349,7 @@
     to: return
   - from: argument(6)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: odbc_free_result
   signature:
@@ -357,7 +357,7 @@
     - name: statement
       type: Odbc\Result
     returnType: 'true'
-  raises: [error]
+  throws: [error]
 - subject:
     function: odbc_gettypeinfo
   signature:
@@ -373,7 +373,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: odbc_longreadlen
   signature:
@@ -383,7 +383,7 @@
     - name: length
       type: int
     returnType: 'true'
-  raises: [error]
+  throws: [error]
 - subject:
     function: odbc_next_result
   signature:
@@ -391,7 +391,7 @@
     - name: statement
       type: Odbc\Result
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: odbc_num_fields
   signature:
@@ -399,7 +399,7 @@
     - name: statement
       type: Odbc\Result
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     function: odbc_num_rows
   signature:
@@ -407,7 +407,7 @@
     - name: statement
       type: Odbc\Result
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     function: odbc_pconnect
   signature:
@@ -433,7 +433,7 @@
     to: return
   - from: argument(3)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: odbc_prepare
   signature:
@@ -448,7 +448,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: odbc_primarykeys
   signature:
@@ -471,7 +471,7 @@
     to: return
   - from: argument(3)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: odbc_procedurecolumns
   signature:
@@ -502,7 +502,7 @@
     to: return
   - from: argument(4)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: odbc_procedures
   signature:
@@ -528,7 +528,7 @@
     to: return
   - from: argument(3)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: odbc_result
   signature:
@@ -538,7 +538,7 @@
     - name: field
       type: string|int
     returnType: string|bool|null
-  raises: [error]
+  throws: [error]
 - subject:
     function: odbc_result_all
   signature:
@@ -549,7 +549,7 @@
       type: string
       optional: true
     returnType: int|false
-  raises: [error]
+  throws: [error]
 - subject:
     function: odbc_rollback
   signature:
@@ -557,7 +557,7 @@
     - name: odbc
       type: Odbc\Connection
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: odbc_setoption
   signature:
@@ -571,7 +571,7 @@
     - name: value
       type: int
     returnType: bool
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: odbc_specialcolumns
   signature:
@@ -606,7 +606,7 @@
     to: return
   - from: argument(6)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: odbc_statistics
   signature:
@@ -637,7 +637,7 @@
     to: return
   - from: argument(5)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: odbc_tableprivileges
   signature:
@@ -660,7 +660,7 @@
     to: return
   - from: argument(3)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: odbc_tables
   signature:
@@ -691,7 +691,7 @@
     to: return
   - from: argument(4)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     class: odbc\connection
   signature:
@@ -707,7 +707,7 @@
     - name: str
       type: string
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: odbc_connection_string_quote
   signature:
@@ -715,7 +715,7 @@
     - name: str
       type: string
     returnType: string
-  raises: []
+  throws: []
 - subject:
     function: odbc_connection_string_should_quote
   signature:
@@ -723,4 +723,4 @@
     - name: str
       type: string
     returnType: bool
-  raises: []
+  throws: []

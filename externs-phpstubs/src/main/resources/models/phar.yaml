@@ -35,12 +35,12 @@
       type: ?string
       optional: true
     returnType: mixed
-  raises: [badmethodcallexception, unexpectedvalueexception, valueerror]
+  throws: [badmethodcallexception, unexpectedvalueexception, valueerror]
 - subject:
     method: Phar::__destruct
   signature:
     returnType: mixed
-  raises: []
+  throws: []
 - subject:
     method: Phar::addEmptyDir
   signature:
@@ -48,7 +48,7 @@
     - name: directory
       type: string
     returnType: void
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, valueerror]
 - subject:
     method: Phar::addFile
   signature:
@@ -59,7 +59,7 @@
       type: ?string
       optional: true
     returnType: void
-  raises: [badmethodcallexception, error, exception, pharexception, runtimeexception, typeerror, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, runtimeexception, typeerror, valueerror]
 - subject:
     method: Phar::addFromString
   signature:
@@ -69,12 +69,12 @@
     - name: contents
       type: string
     returnType: void
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, valueerror]
 - subject:
     method: Phar::apiVersion
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     method: Phar::buildFromDirectory
   signature:
@@ -85,7 +85,7 @@
       type: string
       optional: true
     returnType: array
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
 - subject:
     method: Phar::buildFromIterator
   signature:
@@ -96,7 +96,7 @@
       type: ?string
       optional: true
     returnType: array
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
 - subject:
     method: Phar::canCompress
   signature:
@@ -105,12 +105,12 @@
       type: int
       optional: true
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     method: Phar::canWrite
   signature:
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     method: Phar::compress
   signature:
@@ -121,7 +121,7 @@
       type: ?string
       optional: true
     returnType: ?Phar
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
 - subject:
     method: Phar::compressFiles
   signature:
@@ -129,7 +129,7 @@
     - name: compression
       type: int
     returnType: void
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, valueerror]
 - subject:
     method: Phar::convertToData
   signature:
@@ -144,7 +144,7 @@
       type: ?string
       optional: true
     returnType: ?PharData
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
 - subject:
     method: Phar::convertToExecutable
   signature:
@@ -159,7 +159,7 @@
       type: ?string
       optional: true
     returnType: ?Phar
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
 - subject:
     method: Phar::copy
   signature:
@@ -169,7 +169,7 @@
     - name: to
       type: string
     returnType: 'true'
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
 - subject:
     method: Phar::count
   signature:
@@ -178,7 +178,7 @@
       type: int
       optional: true
     returnType: int
-  raises: [badmethodcallexception]
+  throws: [badmethodcallexception]
 - subject:
     method: Phar::createDefaultStub
   signature:
@@ -190,7 +190,7 @@
       type: ?string
       optional: true
     returnType: string
-  raises: [pharexception, valueerror]
+  throws: [pharexception, valueerror]
 - subject:
     method: Phar::decompress
   signature:
@@ -199,12 +199,12 @@
       type: ?string
       optional: true
     returnType: ?Phar
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
 - subject:
     method: Phar::decompressFiles
   signature:
     returnType: 'true'
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, valueerror]
 - subject:
     method: Phar::delete
   signature:
@@ -212,12 +212,12 @@
     - name: localName
       type: string
     returnType: 'true'
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
 - subject:
     method: Phar::delMetadata
   signature:
     returnType: 'true'
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, valueerror]
 - subject:
     method: Phar::extractTo
   signature:
@@ -231,12 +231,12 @@
       type: bool
       optional: true
     returnType: bool
-  raises: [badmethodcallexception, invalidargumentexception, pharexception, runtimeexception, valueerror]
+  throws: [badmethodcallexception, invalidargumentexception, pharexception, runtimeexception, valueerror]
 - subject:
     method: Phar::getAlias
   signature:
     returnType: ?string
-  raises: [badmethodcallexception]
+  throws: [badmethodcallexception]
 - subject:
     method: Phar::getMetadata
   signature:
@@ -245,62 +245,62 @@
       type: array
       optional: true
     returnType: mixed
-  raises: [badmethodcallexception, typeerror, valueerror]
+  throws: [badmethodcallexception, typeerror, valueerror]
 - subject:
     method: Phar::getModified
   signature:
     returnType: bool
-  raises: [badmethodcallexception]
+  throws: [badmethodcallexception]
 - subject:
     method: Phar::getPath
   signature:
     returnType: string
-  raises: [badmethodcallexception]
+  throws: [badmethodcallexception]
 - subject:
     method: Phar::getSignature
   signature:
     returnType: array|false
-  raises: [badmethodcallexception]
+  throws: [badmethodcallexception]
 - subject:
     method: Phar::getStub
   signature:
     returnType: string
-  raises: [badmethodcallexception, runtimeexception, unexpectedvalueexception, valueerror]
+  throws: [badmethodcallexception, runtimeexception, unexpectedvalueexception, valueerror]
 - subject:
     method: Phar::getSupportedCompression
   signature:
     returnType: array
-  raises: []
+  throws: []
 - subject:
     method: Phar::getSupportedSignatures
   signature:
     returnType: array
-  raises: []
+  throws: []
 - subject:
     method: Phar::getVersion
   signature:
     returnType: string
-  raises: [badmethodcallexception]
+  throws: [badmethodcallexception]
 - subject:
     method: Phar::hasMetadata
   signature:
     returnType: bool
-  raises: [badmethodcallexception]
+  throws: [badmethodcallexception]
 - subject:
     method: Phar::interceptFileFuncs
   signature:
     returnType: void
-  raises: []
+  throws: []
 - subject:
     method: Phar::isBuffering
   signature:
     returnType: bool
-  raises: [badmethodcallexception]
+  throws: [badmethodcallexception]
 - subject:
     method: Phar::isCompressed
   signature:
     returnType: int|false
-  raises: [badmethodcallexception]
+  throws: [badmethodcallexception]
 - subject:
     method: Phar::isFileFormat
   signature:
@@ -308,7 +308,7 @@
     - name: format
       type: int
     returnType: bool
-  raises: [badmethodcallexception, pharexception]
+  throws: [badmethodcallexception, pharexception]
 - subject:
     method: Phar::isValidPharFilename
   signature:
@@ -319,12 +319,12 @@
       type: bool
       optional: true
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: Phar::isWritable
   signature:
     returnType: bool
-  raises: [badmethodcallexception]
+  throws: [badmethodcallexception]
 - subject:
     method: Phar::loadPhar
   signature:
@@ -335,7 +335,7 @@
       type: ?string
       optional: true
     returnType: bool
-  raises: [pharexception, valueerror]
+  throws: [pharexception, valueerror]
 - subject:
     method: Phar::mapPhar
   signature:
@@ -347,7 +347,7 @@
       type: int
       optional: true
     returnType: bool
-  raises: [pharexception, valueerror]
+  throws: [pharexception, valueerror]
 - subject:
     method: Phar::mount
   signature:
@@ -357,7 +357,7 @@
     - name: externalPath
       type: string
     returnType: void
-  raises: [pharexception, valueerror]
+  throws: [pharexception, valueerror]
 - subject:
     method: Phar::mungServer
   signature:
@@ -365,7 +365,7 @@
     - name: variables
       type: array
     returnType: void
-  raises: [pharexception]
+  throws: [pharexception]
 - subject:
     method: Phar::offsetExists
   signature:
@@ -373,7 +373,7 @@
     - name: localName
       type: mixed
     returnType: bool
-  raises: [badmethodcallexception, valueerror]
+  throws: [badmethodcallexception, valueerror]
 - subject:
     method: Phar::offsetGet
   signature:
@@ -381,7 +381,7 @@
     - name: localName
       type: mixed
     returnType: SplFileInfo
-  raises: [badmethodcallexception, error, typeerror, valueerror]
+  throws: [badmethodcallexception, error, typeerror, valueerror]
 - subject:
     method: Phar::offsetSet
   signature:
@@ -391,7 +391,7 @@
     - name: value
       type: mixed
     returnType: void
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, valueerror]
 - subject:
     method: Phar::offsetUnset
   signature:
@@ -399,7 +399,7 @@
     - name: localName
       type: mixed
     returnType: void
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, valueerror]
 - subject:
     method: Phar::running
   signature:
@@ -408,7 +408,7 @@
       type: bool
       optional: true
     returnType: string
-  raises: []
+  throws: []
 - subject:
     method: Phar::setAlias
   signature:
@@ -416,7 +416,7 @@
     - name: alias
       type: string
     returnType: 'true'
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
 - subject:
     method: Phar::setDefaultStub
   signature:
@@ -428,7 +428,7 @@
       type: ?string
       optional: true
     returnType: 'true'
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
 - subject:
     method: Phar::setMetadata
   signature:
@@ -436,7 +436,7 @@
     - name: metadata
       type: mixed
     returnType: void
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, valueerror]
 - subject:
     method: Phar::setSignatureAlgorithm
   signature:
@@ -447,7 +447,7 @@
       type: ?string
       optional: true
     returnType: void
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
 - subject:
     method: Phar::setStub
   signature:
@@ -458,17 +458,17 @@
       type: int
       optional: true
     returnType: 'true'
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
 - subject:
     method: Phar::startBuffering
   signature:
     returnType: void
-  raises: [badmethodcallexception]
+  throws: [badmethodcallexception]
 - subject:
     method: Phar::stopBuffering
   signature:
     returnType: void
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
 - subject:
     method: Phar::unlinkArchive
   signature:
@@ -476,7 +476,7 @@
     - name: filename
       type: string
     returnType: 'true'
-  raises: [pharexception, valueerror]
+  throws: [pharexception, valueerror]
 - subject:
     method: Phar::webPhar
   signature:
@@ -497,7 +497,7 @@
       type: ?callable
       optional: true
     returnType: void
-  raises: [error, pharexception, valueerror]
+  throws: [error, pharexception, valueerror]
 - subject:
     method: PharData::__construct
   signature:
@@ -514,12 +514,12 @@
       type: int
       optional: true
     returnType: mixed
-  raises: [badmethodcallexception, unexpectedvalueexception, valueerror]
+  throws: [badmethodcallexception, unexpectedvalueexception, valueerror]
 - subject:
     method: PharData::__destruct
   signature:
     returnType: mixed
-  raises: []
+  throws: []
 - subject:
     method: PharData::addEmptyDir
   signature:
@@ -527,7 +527,7 @@
     - name: directory
       type: string
     returnType: void
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, valueerror]
 - subject:
     method: PharData::addFile
   signature:
@@ -538,7 +538,7 @@
       type: ?string
       optional: true
     returnType: void
-  raises: [badmethodcallexception, error, exception, pharexception, runtimeexception, typeerror, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, runtimeexception, typeerror, valueerror]
 - subject:
     method: PharData::addFromString
   signature:
@@ -548,12 +548,12 @@
     - name: contents
       type: string
     returnType: void
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, valueerror]
 - subject:
     method: PharData::apiVersion
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     method: PharData::buildFromDirectory
   signature:
@@ -564,7 +564,7 @@
       type: string
       optional: true
     returnType: array
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
 - subject:
     method: PharData::buildFromIterator
   signature:
@@ -575,7 +575,7 @@
       type: ?string
       optional: true
     returnType: array
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
 - subject:
     method: PharData::canCompress
   signature:
@@ -584,12 +584,12 @@
       type: int
       optional: true
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     method: PharData::canWrite
   signature:
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     method: PharData::compress
   signature:
@@ -600,7 +600,7 @@
       type: ?string
       optional: true
     returnType: ?PharData
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
 - subject:
     method: PharData::compressFiles
   signature:
@@ -608,7 +608,7 @@
     - name: compression
       type: int
     returnType: void
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, valueerror]
 - subject:
     method: PharData::convertToData
   signature:
@@ -623,7 +623,7 @@
       type: ?string
       optional: true
     returnType: ?PharData
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
 - subject:
     method: PharData::convertToExecutable
   signature:
@@ -638,7 +638,7 @@
       type: ?string
       optional: true
     returnType: ?Phar
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
 - subject:
     method: PharData::copy
   signature:
@@ -648,7 +648,7 @@
     - name: to
       type: string
     returnType: 'true'
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
 - subject:
     method: PharData::count
   signature:
@@ -657,7 +657,7 @@
       type: int
       optional: true
     returnType: int
-  raises: [badmethodcallexception]
+  throws: [badmethodcallexception]
 - subject:
     method: PharData::createDefaultStub
   signature:
@@ -669,7 +669,7 @@
       type: ?string
       optional: true
     returnType: string
-  raises: [pharexception, valueerror]
+  throws: [pharexception, valueerror]
 - subject:
     method: PharData::decompress
   signature:
@@ -678,12 +678,12 @@
       type: ?string
       optional: true
     returnType: ?PharData
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
 - subject:
     method: PharData::decompressFiles
   signature:
     returnType: 'true'
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, valueerror]
 - subject:
     method: PharData::delete
   signature:
@@ -691,12 +691,12 @@
     - name: localName
       type: string
     returnType: 'true'
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
 - subject:
     method: PharData::delMetadata
   signature:
     returnType: 'true'
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, valueerror]
 - subject:
     method: PharData::extractTo
   signature:
@@ -710,12 +710,12 @@
       type: bool
       optional: true
     returnType: bool
-  raises: [badmethodcallexception, invalidargumentexception, pharexception, runtimeexception, valueerror]
+  throws: [badmethodcallexception, invalidargumentexception, pharexception, runtimeexception, valueerror]
 - subject:
     method: PharData::getAlias
   signature:
     returnType: ?string
-  raises: [badmethodcallexception]
+  throws: [badmethodcallexception]
 - subject:
     method: PharData::getMetadata
   signature:
@@ -724,62 +724,62 @@
       type: array
       optional: true
     returnType: mixed
-  raises: [badmethodcallexception, typeerror, valueerror]
+  throws: [badmethodcallexception, typeerror, valueerror]
 - subject:
     method: PharData::getModified
   signature:
     returnType: bool
-  raises: [badmethodcallexception]
+  throws: [badmethodcallexception]
 - subject:
     method: PharData::getPath
   signature:
     returnType: string
-  raises: [badmethodcallexception]
+  throws: [badmethodcallexception]
 - subject:
     method: PharData::getSignature
   signature:
     returnType: array|false
-  raises: [badmethodcallexception]
+  throws: [badmethodcallexception]
 - subject:
     method: PharData::getStub
   signature:
     returnType: string
-  raises: [badmethodcallexception, runtimeexception, unexpectedvalueexception, valueerror]
+  throws: [badmethodcallexception, runtimeexception, unexpectedvalueexception, valueerror]
 - subject:
     method: PharData::getSupportedCompression
   signature:
     returnType: array
-  raises: []
+  throws: []
 - subject:
     method: PharData::getSupportedSignatures
   signature:
     returnType: array
-  raises: []
+  throws: []
 - subject:
     method: PharData::getVersion
   signature:
     returnType: string
-  raises: [badmethodcallexception]
+  throws: [badmethodcallexception]
 - subject:
     method: PharData::hasMetadata
   signature:
     returnType: bool
-  raises: [badmethodcallexception]
+  throws: [badmethodcallexception]
 - subject:
     method: PharData::interceptFileFuncs
   signature:
     returnType: void
-  raises: []
+  throws: []
 - subject:
     method: PharData::isBuffering
   signature:
     returnType: bool
-  raises: [badmethodcallexception]
+  throws: [badmethodcallexception]
 - subject:
     method: PharData::isCompressed
   signature:
     returnType: int|false
-  raises: [badmethodcallexception]
+  throws: [badmethodcallexception]
 - subject:
     method: PharData::isFileFormat
   signature:
@@ -787,7 +787,7 @@
     - name: format
       type: int
     returnType: bool
-  raises: [badmethodcallexception, pharexception]
+  throws: [badmethodcallexception, pharexception]
 - subject:
     method: PharData::isValidPharFilename
   signature:
@@ -798,12 +798,12 @@
       type: bool
       optional: true
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: PharData::isWritable
   signature:
     returnType: bool
-  raises: [badmethodcallexception]
+  throws: [badmethodcallexception]
 - subject:
     method: PharData::loadPhar
   signature:
@@ -814,7 +814,7 @@
       type: ?string
       optional: true
     returnType: bool
-  raises: [pharexception, valueerror]
+  throws: [pharexception, valueerror]
 - subject:
     method: PharData::mapPhar
   signature:
@@ -826,7 +826,7 @@
       type: int
       optional: true
     returnType: bool
-  raises: [pharexception, valueerror]
+  throws: [pharexception, valueerror]
 - subject:
     method: PharData::mount
   signature:
@@ -836,7 +836,7 @@
     - name: externalPath
       type: string
     returnType: void
-  raises: [pharexception, valueerror]
+  throws: [pharexception, valueerror]
 - subject:
     method: PharData::mungServer
   signature:
@@ -844,7 +844,7 @@
     - name: variables
       type: array
     returnType: void
-  raises: [pharexception]
+  throws: [pharexception]
 - subject:
     method: PharData::offsetExists
   signature:
@@ -852,7 +852,7 @@
     - name: localName
       type: mixed
     returnType: bool
-  raises: [badmethodcallexception, valueerror]
+  throws: [badmethodcallexception, valueerror]
 - subject:
     method: PharData::offsetGet
   signature:
@@ -860,7 +860,7 @@
     - name: localName
       type: mixed
     returnType: SplFileInfo
-  raises: [badmethodcallexception, error, typeerror, valueerror]
+  throws: [badmethodcallexception, error, typeerror, valueerror]
 - subject:
     method: PharData::offsetSet
   signature:
@@ -870,7 +870,7 @@
     - name: value
       type: mixed
     returnType: void
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, valueerror]
 - subject:
     method: PharData::offsetUnset
   signature:
@@ -878,7 +878,7 @@
     - name: localName
       type: mixed
     returnType: void
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, valueerror]
 - subject:
     method: PharData::running
   signature:
@@ -887,7 +887,7 @@
       type: bool
       optional: true
     returnType: string
-  raises: []
+  throws: []
 - subject:
     method: PharData::setAlias
   signature:
@@ -895,7 +895,7 @@
     - name: alias
       type: string
     returnType: bool
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
 - subject:
     method: PharData::setDefaultStub
   signature:
@@ -907,7 +907,7 @@
       type: ?string
       optional: true
     returnType: bool
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
 - subject:
     method: PharData::setMetadata
   signature:
@@ -915,7 +915,7 @@
     - name: metadata
       type: mixed
     returnType: void
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, valueerror]
 - subject:
     method: PharData::setSignatureAlgorithm
   signature:
@@ -926,7 +926,7 @@
       type: ?string
       optional: true
     returnType: void
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
 - subject:
     method: PharData::setStub
   signature:
@@ -937,17 +937,17 @@
       type: int
       optional: true
     returnType: 'true'
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
 - subject:
     method: PharData::startBuffering
   signature:
     returnType: void
-  raises: [badmethodcallexception]
+  throws: [badmethodcallexception]
 - subject:
     method: PharData::stopBuffering
   signature:
     returnType: void
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
 - subject:
     method: PharData::unlinkArchive
   signature:
@@ -955,7 +955,7 @@
     - name: filename
       type: string
     returnType: 'true'
-  raises: [pharexception, valueerror]
+  throws: [pharexception, valueerror]
 - subject:
     method: PharData::webPhar
   signature:
@@ -976,7 +976,7 @@
       type: ?callable
       optional: true
     returnType: void
-  raises: [error, pharexception, valueerror]
+  throws: [error, pharexception, valueerror]
 - subject:
     method: PharFileInfo::__construct
   signature:
@@ -984,12 +984,12 @@
     - name: filename
       type: string
     returnType: mixed
-  raises: [badmethodcallexception, runtimeexception, valueerror]
+  throws: [badmethodcallexception, runtimeexception, valueerror]
 - subject:
     method: PharFileInfo::__destruct
   signature:
     returnType: mixed
-  raises: []
+  throws: []
 - subject:
     method: PharFileInfo::chmod
   signature:
@@ -997,7 +997,7 @@
     - name: perms
       type: int
     returnType: void
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, valueerror]
 - subject:
     method: PharFileInfo::compress
   signature:
@@ -1005,32 +1005,32 @@
     - name: compression
       type: int
     returnType: 'true'
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, valueerror]
 - subject:
     method: PharFileInfo::decompress
   signature:
     returnType: 'true'
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, valueerror]
 - subject:
     method: PharFileInfo::delMetadata
   signature:
     returnType: 'true'
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, valueerror]
 - subject:
     method: PharFileInfo::getCompressedSize
   signature:
     returnType: int
-  raises: [badmethodcallexception]
+  throws: [badmethodcallexception]
 - subject:
     method: PharFileInfo::getContent
   signature:
     returnType: string
-  raises: [badmethodcallexception, valueerror]
+  throws: [badmethodcallexception, valueerror]
 - subject:
     method: PharFileInfo::getCRC32
   signature:
     returnType: int
-  raises: [badmethodcallexception]
+  throws: [badmethodcallexception]
 - subject:
     method: PharFileInfo::getMetadata
   signature:
@@ -1039,17 +1039,17 @@
       type: array
       optional: true
     returnType: mixed
-  raises: [badmethodcallexception, typeerror, valueerror]
+  throws: [badmethodcallexception, typeerror, valueerror]
 - subject:
     method: PharFileInfo::getPharFlags
   signature:
     returnType: int
-  raises: [badmethodcallexception]
+  throws: [badmethodcallexception]
 - subject:
     method: PharFileInfo::hasMetadata
   signature:
     returnType: bool
-  raises: [badmethodcallexception]
+  throws: [badmethodcallexception]
 - subject:
     method: PharFileInfo::isCompressed
   signature:
@@ -1058,12 +1058,12 @@
       type: ?int
       optional: true
     returnType: bool
-  raises: [badmethodcallexception]
+  throws: [badmethodcallexception]
 - subject:
     method: PharFileInfo::isCRCChecked
   signature:
     returnType: bool
-  raises: [badmethodcallexception]
+  throws: [badmethodcallexception]
 - subject:
     method: PharFileInfo::setMetadata
   signature:
@@ -1071,4 +1071,4 @@
     - name: metadata
       type: mixed
     returnType: void
-  raises: [badmethodcallexception, error, exception, pharexception, typeerror, valueerror]
+  throws: [badmethodcallexception, error, exception, pharexception, typeerror, valueerror]

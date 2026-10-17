@@ -8,7 +8,7 @@ layout of the generated taint document set. Concepts:
 
 - **Classes:** `StubResources` (object)
 - **External types (commons-phpmodels):** `ResourceOpener`,
-  `DocumentSetLoader`, `DocumentSet`, `CategoryMapping`, `Vocabulary`
+  `DocumentSetLoader`, `DocumentSet`, `VocabularyMapping`, `Vocabulary`
 - **Relationships:** `StubResources` creates `ResourceOpener` instances;
   the bundled `MountSequence` opens every set root through `StubResources`
   and passes the opener to `DocumentSetLoader`. One-way; `StubResources`

@@ -130,12 +130,12 @@
     method: Exception::getMessage
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     method: Exception::getCode
   signature:
     returnType: mixed
-  raises: []
+  throws: []
 - subject:
     class_constant: Exception::SEVERITY_ERROR
   signature:
@@ -1440,7 +1440,7 @@
       type: bool
       optional: true
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: class_exists
   signature:
@@ -1451,7 +1451,7 @@
       type: bool
       optional: true
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: debug_backtrace
   signature:
@@ -1463,7 +1463,7 @@
       type: int
       optional: true
     returnType: array
-  raises: []
+  throws: []
 - subject:
     function: debug_print_backtrace
   signature:
@@ -1475,7 +1475,7 @@
       type: int
       optional: true
     returnType: void
-  raises: []
+  throws: []
 - subject:
     function: define
   signature:
@@ -1488,7 +1488,7 @@
       type: bool
       optional: true
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: defined
   signature:
@@ -1496,7 +1496,7 @@
     - name: constant_name
       type: string
     returnType: bool
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     function: error_reporting
   signature:
@@ -1505,7 +1505,7 @@
       type: ?int
       optional: true
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: extension_loaded
   signature:
@@ -1513,7 +1513,7 @@
     - name: extension
       type: string
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: func_get_arg
   signature:
@@ -1524,17 +1524,17 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: func_get_args
   signature:
     returnType: array
-  raises: [error]
+  throws: [error]
 - subject:
     function: func_num_args
   signature:
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     function: function_exists
   signature:
@@ -1542,42 +1542,42 @@
     - name: function
       type: string
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: gc_collect_cycles
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: gc_disable
   signature:
     returnType: void
-  raises: []
+  throws: []
 - subject:
     function: gc_enable
   signature:
     returnType: void
-  raises: []
+  throws: []
 - subject:
     function: gc_enabled
   signature:
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: gc_mem_caches
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: gc_status
   signature:
     returnType: array
-  raises: []
+  throws: []
 - subject:
     function: get_called_class
   signature:
     returnType: string
-  raises: [error]
+  throws: [error]
 - subject:
     function: get_class
   signature:
@@ -1586,7 +1586,7 @@
       type: object
       optional: true
     returnType: string
-  raises: [error]
+  throws: [error]
 - subject:
     function: get_class_methods
   signature:
@@ -1594,7 +1594,7 @@
     - name: object_or_class
       type: object|string
     returnType: array
-  raises: []
+  throws: []
 - subject:
     function: get_class_vars
   signature:
@@ -1602,22 +1602,22 @@
     - name: class
       type: string
     returnType: array
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     function: get_declared_classes
   signature:
     returnType: array
-  raises: []
+  throws: []
 - subject:
     function: get_declared_interfaces
   signature:
     returnType: array
-  raises: []
+  throws: []
 - subject:
     function: get_declared_traits
   signature:
     returnType: array
-  raises: []
+  throws: []
 - subject:
     function: get_defined_constants
   signature:
@@ -1626,7 +1626,7 @@
       type: bool
       optional: true
     returnType: array
-  raises: []
+  throws: []
 - subject:
     function: get_defined_functions
   signature:
@@ -1635,12 +1635,12 @@
       type: bool
       optional: true
     returnType: array
-  raises: []
+  throws: []
 - subject:
     function: get_defined_vars
   signature:
     returnType: array
-  raises: [error]
+  throws: [error]
 - subject:
     function: get_extension_funcs
   signature:
@@ -1648,12 +1648,12 @@
     - name: extension
       type: string
     returnType: array|false
-  raises: []
+  throws: []
 - subject:
     function: get_included_files
   signature:
     returnType: array
-  raises: []
+  throws: []
 - subject:
     function: get_loaded_extensions
   signature:
@@ -1662,7 +1662,7 @@
       type: bool
       optional: true
     returnType: array
-  raises: []
+  throws: []
 - subject:
     function: get_mangled_object_vars
   signature:
@@ -1670,7 +1670,7 @@
     - name: object
       type: object
     returnType: array
-  raises: []
+  throws: []
 - subject:
     function: get_object_vars
   signature:
@@ -1678,7 +1678,7 @@
     - name: object
       type: object
     returnType: array
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     function: get_parent_class
   signature:
@@ -1690,12 +1690,12 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: get_required_files
   signature:
     returnType: array
-  raises: []
+  throws: []
 - subject:
     function: get_resource_id
   signature:
@@ -1703,7 +1703,7 @@
     - name: resource
       type: mixed
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: get_resource_type
   signature:
@@ -1711,7 +1711,7 @@
     - name: resource
       type: mixed
     returnType: string
-  raises: []
+  throws: []
 - subject:
     function: get_resources
   signature:
@@ -1720,7 +1720,7 @@
       type: ?string
       optional: true
     returnType: array
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: interface_exists
   signature:
@@ -1731,7 +1731,7 @@
       type: bool
       optional: true
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: is_a
   signature:
@@ -1744,7 +1744,7 @@
       type: bool
       optional: true
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: is_subclass_of
   signature:
@@ -1757,7 +1757,7 @@
       type: bool
       optional: true
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: method_exists
   signature:
@@ -1767,7 +1767,7 @@
     - name: method
       type: string
     returnType: bool
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     function: property_exists
   signature:
@@ -1777,17 +1777,17 @@
     - name: property
       type: string
     returnType: bool
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     function: restore_error_handler
   signature:
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     function: restore_exception_handler
   signature:
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     function: set_error_handler
   signature:
@@ -1803,7 +1803,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: set_exception_handler
   signature:
@@ -1814,7 +1814,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: strcasecmp
   signature:
@@ -1824,7 +1824,7 @@
     - name: string2
       type: string
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: strcmp
   signature:
@@ -1834,7 +1834,7 @@
     - name: string2
       type: string
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: strlen
   signature:
@@ -1842,7 +1842,7 @@
     - name: string
       type: string
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: strncasecmp
   signature:
@@ -1854,7 +1854,7 @@
     - name: length
       type: int
     returnType: int
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: strncmp
   signature:
@@ -1866,7 +1866,7 @@
     - name: length
       type: int
     returnType: int
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: trait_exists
   signature:
@@ -1877,7 +1877,7 @@
       type: bool
       optional: true
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: trigger_error
   signature:
@@ -1888,7 +1888,7 @@
       type: int
       optional: true
     returnType: 'true'
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: user_error
   signature:
@@ -1899,17 +1899,17 @@
       type: int
       optional: true
     returnType: 'true'
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: zend_thread_id
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: zend_version
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     function: enum_exists
   signature:
@@ -1920,22 +1920,22 @@
       type: bool
       optional: true
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: get_error_handler
   signature:
     returnType: ?callable
-  raises: []
+  throws: []
 - subject:
     function: get_exception_handler
   signature:
     returnType: ?callable
-  raises: []
+  throws: []
 - subject:
     method: AllowDynamicProperties::__construct
   signature:
     returnType: mixed
-  raises: []
+  throws: []
 - subject:
     method: ArrayAccess::offsetExists
   signature:
@@ -1974,7 +1974,7 @@
       type: int
       optional: true
     returnType: mixed
-  raises: []
+  throws: []
 - subject:
     method: BackedEnum::from
   signature:
@@ -1993,7 +1993,7 @@
     method: Closure::__construct
   signature:
     returnType: mixed
-  raises: [error]
+  throws: [error]
 - subject:
     method: Closure::bind
   signature:
@@ -2006,7 +2006,7 @@
       type: object|string|null
       optional: true
     returnType: ?Closure
-  raises: []
+  throws: []
 - subject:
     method: Closure::bindTo
   signature:
@@ -2017,7 +2017,7 @@
       type: object|string|null
       optional: true
     returnType: ?Closure
-  raises: []
+  throws: []
 - subject:
     method: Closure::call
   signature:
@@ -2029,7 +2029,7 @@
       optional: true
       variadic: true
     returnType: mixed
-  raises: []
+  throws: []
 - subject:
     method: Closure::fromCallable
   signature:
@@ -2037,12 +2037,12 @@
     - name: callback
       type: callable
     returnType: Closure
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: Closure::getCurrent
   signature:
     returnType: Closure
-  raises: [error]
+  throws: [error]
 - subject:
     method: Countable::count
   signature:
@@ -2058,12 +2058,12 @@
       type: ?string
       optional: true
     returnType: mixed
-  raises: []
+  throws: []
 - subject:
     method: Error::__clone
   signature:
     returnType: void
-  raises: [exception]
+  throws: [exception]
 - subject:
     method: Error::__construct
   signature:
@@ -2078,52 +2078,52 @@
       type: ?Throwable
       optional: true
     returnType: mixed
-  raises: []
+  throws: []
 - subject:
     method: Error::__toString
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     method: Error::__wakeup
   signature:
     returnType: void
-  raises: []
+  throws: []
 - subject:
     method: Error::getCode
   signature:
     returnType: mixed
-  raises: []
+  throws: []
 - subject:
     method: Error::getFile
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     method: Error::getLine
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     method: Error::getMessage
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     method: Error::getPrevious
   signature:
     returnType: ?Throwable
-  raises: []
+  throws: []
 - subject:
     method: Error::getTrace
   signature:
     returnType: array
-  raises: []
+  throws: []
 - subject:
     method: Error::getTraceAsString
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     method: ErrorException::__construct
   signature:
@@ -2147,17 +2147,17 @@
       type: ?Throwable
       optional: true
     returnType: mixed
-  raises: []
+  throws: []
 - subject:
     method: ErrorException::getSeverity
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     method: Exception::__clone
   signature:
     returnType: void
-  raises: [exception]
+  throws: [exception]
 - subject:
     method: Exception::__construct
   signature:
@@ -2172,42 +2172,42 @@
       type: ?Throwable
       optional: true
     returnType: mixed
-  raises: []
+  throws: []
 - subject:
     method: Exception::__toString
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     method: Exception::__wakeup
   signature:
     returnType: void
-  raises: []
+  throws: []
 - subject:
     method: Exception::getFile
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     method: Exception::getLine
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     method: Exception::getPrevious
   signature:
     returnType: ?Throwable
-  raises: []
+  throws: []
 - subject:
     method: Exception::getTrace
   signature:
     returnType: array
-  raises: []
+  throws: []
 - subject:
     method: Exception::getTraceAsString
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     method: Fiber::__construct
   signature:
@@ -2215,37 +2215,37 @@
     - name: callback
       type: callable
     returnType: mixed
-  raises: [fibererror]
+  throws: [fibererror]
 - subject:
     method: Fiber::getCurrent
   signature:
     returnType: ?Fiber
-  raises: []
+  throws: []
 - subject:
     method: Fiber::getReturn
   signature:
     returnType: mixed
-  raises: [fibererror]
+  throws: [fibererror]
 - subject:
     method: Fiber::isRunning
   signature:
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     method: Fiber::isStarted
   signature:
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     method: Fiber::isSuspended
   signature:
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     method: Fiber::isTerminated
   signature:
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     method: Fiber::resume
   signature:
@@ -2254,7 +2254,7 @@
       type: mixed
       optional: true
     returnType: mixed
-  raises: [fibererror]
+  throws: [fibererror]
 - subject:
     method: Fiber::start
   signature:
@@ -2264,7 +2264,7 @@
       optional: true
       variadic: true
     returnType: mixed
-  raises: [exception, fibererror]
+  throws: [exception, fibererror]
 - subject:
     method: Fiber::suspend
   signature:
@@ -2273,7 +2273,7 @@
       type: mixed
       optional: true
     returnType: mixed
-  raises: [fibererror]
+  throws: [fibererror]
 - subject:
     method: Fiber::throw
   signature:
@@ -2281,42 +2281,42 @@
     - name: exception
       type: Throwable
     returnType: mixed
-  raises: [fibererror]
+  throws: [fibererror]
 - subject:
     method: FiberError::__construct
   signature:
     returnType: mixed
-  raises: [error]
+  throws: [error]
 - subject:
     method: Generator::__debugInfo
   signature:
     returnType: array
-  raises: []
+  throws: []
 - subject:
     method: Generator::current
   signature:
     returnType: mixed
-  raises: [closedgeneratorexception]
+  throws: [closedgeneratorexception]
 - subject:
     method: Generator::getReturn
   signature:
     returnType: mixed
-  raises: [exception]
+  throws: [exception]
 - subject:
     method: Generator::key
   signature:
     returnType: mixed
-  raises: [closedgeneratorexception]
+  throws: [closedgeneratorexception]
 - subject:
     method: Generator::next
   signature:
     returnType: void
-  raises: []
+  throws: []
 - subject:
     method: Generator::rewind
   signature:
     returnType: void
-  raises: [exception]
+  throws: [exception]
 - subject:
     method: Generator::send
   signature:
@@ -2324,7 +2324,7 @@
     - name: value
       type: mixed
     returnType: mixed
-  raises: [closedgeneratorexception]
+  throws: [closedgeneratorexception]
 - subject:
     method: Generator::throw
   signature:
@@ -2336,37 +2336,37 @@
     method: Generator::valid
   signature:
     returnType: bool
-  raises: [closedgeneratorexception]
+  throws: [closedgeneratorexception]
 - subject:
     method: InternalIterator::__construct
   signature:
     returnType: mixed
-  raises: [error]
+  throws: [error]
 - subject:
     method: InternalIterator::current
   signature:
     returnType: mixed
-  raises: [error]
+  throws: [error]
 - subject:
     method: InternalIterator::key
   signature:
     returnType: mixed
-  raises: [error]
+  throws: [error]
 - subject:
     method: InternalIterator::next
   signature:
     returnType: void
-  raises: [error]
+  throws: [error]
 - subject:
     method: InternalIterator::rewind
   signature:
     returnType: void
-  raises: [error]
+  throws: [error]
 - subject:
     method: InternalIterator::valid
   signature:
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: Iterator::current
   signature:
@@ -2399,22 +2399,22 @@
       type: ?string
       optional: true
     returnType: mixed
-  raises: []
+  throws: []
 - subject:
     method: Override::__construct
   signature:
     returnType: mixed
-  raises: []
+  throws: []
 - subject:
     method: ReturnTypeWillChange::__construct
   signature:
     returnType: mixed
-  raises: []
+  throws: []
 - subject:
     method: SensitiveParameter::__construct
   signature:
     returnType: mixed
-  raises: []
+  throws: []
 - subject:
     method: SensitiveParameterValue::__construct
   signature:
@@ -2422,17 +2422,17 @@
     - name: value
       type: mixed
     returnType: mixed
-  raises: []
+  throws: []
 - subject:
     method: SensitiveParameterValue::__debugInfo
   signature:
     returnType: array
-  raises: []
+  throws: []
 - subject:
     method: SensitiveParameterValue::getValue
   signature:
     returnType: mixed
-  raises: []
+  throws: []
 - subject:
     method: Serializable::serialize
   signature:
@@ -2484,12 +2484,12 @@
     method: WeakMap::count
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     method: WeakMap::getIterator
   signature:
     returnType: Iterator
-  raises: []
+  throws: []
 - subject:
     method: WeakMap::offsetExists
   signature:
@@ -2497,7 +2497,7 @@
     - name: object
       type: mixed
     returnType: bool
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     method: WeakMap::offsetGet
   signature:
@@ -2505,7 +2505,7 @@
     - name: object
       type: mixed
     returnType: mixed
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: WeakMap::offsetSet
   signature:
@@ -2515,7 +2515,7 @@
     - name: value
       type: mixed
     returnType: void
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: WeakMap::offsetUnset
   signature:
@@ -2523,12 +2523,12 @@
     - name: object
       type: mixed
     returnType: void
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     method: WeakReference::__construct
   signature:
     returnType: mixed
-  raises: [error]
+  throws: [error]
 - subject:
     method: WeakReference::create
   signature:
@@ -2536,12 +2536,12 @@
     - name: object
       type: object
     returnType: WeakReference
-  raises: []
+  throws: []
 - subject:
     method: WeakReference::get
   signature:
     returnType: ?object
-  raises: []
+  throws: []
 - subject:
     function: clone
   signature:
@@ -2552,7 +2552,7 @@
       type: array
       optional: true
     returnType: object
-  raises: [error]
+  throws: [error]
 - subject:
     function: die
   signature:
@@ -2561,7 +2561,7 @@
       type: string|int
       optional: true
     returnType: never
-  raises: []
+  throws: []
 - subject:
     function: exit
   signature:
@@ -2570,4 +2570,4 @@
       type: string|int
       optional: true
     returnType: never
-  raises: []
+  throws: []

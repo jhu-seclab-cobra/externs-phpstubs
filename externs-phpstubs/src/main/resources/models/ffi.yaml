@@ -30,7 +30,7 @@
       type: FFI\CData
       byRef: true
     returnType: FFI\CData
-  raises: [ffi\exception]
+  throws: [ffi\exception]
 - subject:
     method: FFI::alignof
   signature:
@@ -39,7 +39,7 @@
       type: FFI\CData|FFI\CType
       byRef: true
     returnType: int
-  raises: [ffi\exception]
+  throws: [ffi\exception]
 - subject:
     method: FFI::arrayType
   signature:
@@ -49,7 +49,7 @@
     - name: dimensions
       type: array
     returnType: FFI\CType
-  raises: [ffi\exception]
+  throws: [ffi\exception]
 - subject:
     method: FFI::cast
   signature:
@@ -60,7 +60,7 @@
       type: mixed
       byRef: true
     returnType: FFI\CData
-  raises: [error, ffi\exception, ffi\parserexception]
+  throws: [error, ffi\exception, ffi\parserexception]
 - subject:
     method: FFI::cdef
   signature:
@@ -72,7 +72,7 @@
       type: ?string
       optional: true
     returnType: FFI
-  raises: [ffi\exception, ffi\parserexception]
+  throws: [ffi\exception, ffi\parserexception]
 - subject:
     method: FFI::free
   signature:
@@ -81,7 +81,7 @@
       type: FFI\CData
       byRef: true
     returnType: void
-  raises: [ffi\exception]
+  throws: [ffi\exception]
 - subject:
     method: FFI::isNull
   signature:
@@ -90,7 +90,7 @@
       type: FFI\CData
       byRef: true
     returnType: bool
-  raises: [ffi\exception]
+  throws: [ffi\exception]
 - subject:
     method: FFI::load
   signature:
@@ -98,7 +98,7 @@
     - name: filename
       type: string
     returnType: ?FFI
-  raises: [ffi\exception, ffi\parserexception]
+  throws: [ffi\exception, ffi\parserexception]
 - subject:
     method: FFI::memcmp
   signature:
@@ -112,7 +112,7 @@
     - name: size
       type: int
     returnType: int
-  raises: [ffi\exception]
+  throws: [ffi\exception]
 - subject:
     method: FFI::memcpy
   signature:
@@ -126,7 +126,7 @@
     - name: size
       type: int
     returnType: void
-  raises: [ffi\exception]
+  throws: [ffi\exception]
 - subject:
     method: FFI::memset
   signature:
@@ -139,7 +139,7 @@
     - name: size
       type: int
     returnType: void
-  raises: [ffi\exception]
+  throws: [ffi\exception]
 - subject:
     method: FFI::new
   signature:
@@ -153,7 +153,7 @@
       type: bool
       optional: true
     returnType: FFI\CData
-  raises: [ffi\exception, ffi\parserexception]
+  throws: [ffi\exception, ffi\parserexception]
 - subject:
     method: FFI::scope
   signature:
@@ -161,7 +161,7 @@
     - name: name
       type: string
     returnType: FFI
-  raises: [ffi\exception]
+  throws: [ffi\exception]
 - subject:
     method: FFI::sizeof
   signature:
@@ -170,7 +170,7 @@
       type: FFI\CData|FFI\CType
       byRef: true
     returnType: int
-  raises: [ffi\exception]
+  throws: [ffi\exception]
 - subject:
     method: FFI::string
   signature:
@@ -182,7 +182,7 @@
       type: ?int
       optional: true
     returnType: string
-  raises: [ffi\exception]
+  throws: [ffi\exception]
 - subject:
     method: FFI::type
   signature:
@@ -190,7 +190,7 @@
     - name: type
       type: string
     returnType: FFI\CType
-  raises: [ffi\exception, ffi\parserexception]
+  throws: [ffi\exception, ffi\parserexception]
 - subject:
     method: FFI::typeof
   signature:
@@ -199,42 +199,42 @@
       type: FFI\CData
       byRef: true
     returnType: FFI\CType
-  raises: [ffi\exception]
+  throws: [ffi\exception]
 - subject:
     method: FFI\CType::getAlignment
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     method: FFI\CType::getArrayElementType
   signature:
     returnType: FFI\CType
-  raises: [ffi\exception]
+  throws: [ffi\exception]
 - subject:
     method: FFI\CType::getArrayLength
   signature:
     returnType: int
-  raises: [ffi\exception]
+  throws: [ffi\exception]
 - subject:
     method: FFI\CType::getAttributes
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     method: FFI\CType::getEnumKind
   signature:
     returnType: int
-  raises: [ffi\exception]
+  throws: [ffi\exception]
 - subject:
     method: FFI\CType::getFuncABI
   signature:
     returnType: int
-  raises: [ffi\exception]
+  throws: [ffi\exception]
 - subject:
     method: FFI\CType::getFuncParameterCount
   signature:
     returnType: int
-  raises: [ffi\exception]
+  throws: [ffi\exception]
 - subject:
     method: FFI\CType::getFuncParameterType
   signature:
@@ -242,37 +242,37 @@
     - name: index
       type: int
     returnType: FFI\CType
-  raises: [ffi\exception]
+  throws: [ffi\exception]
 - subject:
     method: FFI\CType::getFuncReturnType
   signature:
     returnType: FFI\CType
-  raises: [ffi\exception]
+  throws: [ffi\exception]
 - subject:
     method: FFI\CType::getKind
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     method: FFI\CType::getName
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     method: FFI\CType::getPointerType
   signature:
     returnType: FFI\CType
-  raises: [ffi\exception]
+  throws: [ffi\exception]
 - subject:
     method: FFI\CType::getSize
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     method: FFI\CType::getStructFieldNames
   signature:
     returnType: array
-  raises: [ffi\exception]
+  throws: [ffi\exception]
 - subject:
     method: FFI\CType::getStructFieldOffset
   signature:
@@ -280,7 +280,7 @@
     - name: name
       type: string
     returnType: int
-  raises: [ffi\exception]
+  throws: [ffi\exception]
 - subject:
     method: FFI\CType::getStructFieldType
   signature:
@@ -288,4 +288,4 @@
     - name: name
       type: string
     returnType: FFI\CType
-  raises: [ffi\exception]
+  throws: [ffi\exception]

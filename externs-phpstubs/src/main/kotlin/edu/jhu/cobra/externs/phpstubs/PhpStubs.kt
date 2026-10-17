@@ -1,6 +1,5 @@
 package edu.jhu.cobra.externs.phpstubs
 
-import edu.jhu.cobra.commons.phpmodels.CategoryMappingLoader
 import edu.jhu.cobra.commons.phpmodels.ClassConstantSubject
 import edu.jhu.cobra.commons.phpmodels.ClassSubject
 import edu.jhu.cobra.commons.phpmodels.ConstantSubject
@@ -12,6 +11,7 @@ import edu.jhu.cobra.commons.phpmodels.ResourceOpener
 import edu.jhu.cobra.commons.phpmodels.TaintPolicy
 import edu.jhu.cobra.commons.phpmodels.VariableSubject
 import edu.jhu.cobra.commons.phpmodels.Vocabulary
+import edu.jhu.cobra.commons.phpmodels.VocabularyMappingLoader
 import java.nio.file.Files
 import java.nio.file.Path
 
@@ -21,7 +21,7 @@ private val bundled: PhpStubs = PhpStubs(bundledMounts())
 // Merge order: generated declarations, value rules, canonical vocabulary, taint (mapped), taint rules (mapped).
 private fun bundledMounts(): List<Mount> {
     val mapping =
-        StubResources::class.java.getResourceAsStream(StubResources.PSALM_MAPPING)?.use(CategoryMappingLoader::load)
+        StubResources::class.java.getResourceAsStream(StubResources.PSALM_MAPPING)?.use(VocabularyMappingLoader::load)
             ?: throw StubIndexNotFoundException(StubResources.PSALM_MAPPING)
     return MountSequence()
         .mount(StubResources.MODELS, StubResources.opener(StubResources.MODELS), fallback = null, corpus = true)

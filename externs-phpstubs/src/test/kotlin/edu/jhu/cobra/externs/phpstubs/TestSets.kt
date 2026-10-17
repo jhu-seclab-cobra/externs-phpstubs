@@ -1,11 +1,11 @@
 package edu.jhu.cobra.externs.phpstubs
 
-import edu.jhu.cobra.commons.phpmodels.CategoryMapping
 import edu.jhu.cobra.commons.phpmodels.DocumentSet
 import edu.jhu.cobra.commons.phpmodels.DocumentSetLoader
 import edu.jhu.cobra.commons.phpmodels.ResourceOpener
 import edu.jhu.cobra.commons.phpmodels.Verification
 import edu.jhu.cobra.commons.phpmodels.Vocabulary
+import edu.jhu.cobra.commons.phpmodels.VocabularyMapping
 
 /** In-memory document sets for the merge and mount tests: one YAML document plus an optional vocabulary. */
 internal object TestSets {
@@ -26,7 +26,7 @@ sourceKinds:
         document: String,
         vocabulary: String? = VOCABULARY,
         context: Vocabulary = Vocabulary.EMPTY,
-        mapping: CategoryMapping? = null,
+        mapping: VocabularyMapping? = null,
     ): DocumentSet {
         val files = listOfNotNull("index.txt" to "models.yaml\n", "models.yaml" to document, vocabulary?.let { "vocabulary.yaml" to it })
         return DocumentSetLoader.load(opener(*files.toTypedArray()), context, mapping)

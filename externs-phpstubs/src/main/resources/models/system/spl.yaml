@@ -10,7 +10,7 @@
       type: ?string
       optional: true
     returnType: void
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: spl_autoload_call
   signature:
@@ -18,7 +18,7 @@
     - name: class
       type: string
     returnType: void
-  raises: []
+  throws: []
 - subject:
     function: spl_autoload_extensions
   signature:
@@ -30,12 +30,12 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: spl_autoload_functions
   signature:
     returnType: array
-  raises: []
+  throws: []
 - subject:
     function: spl_autoload_register
   signature:
@@ -50,7 +50,7 @@
       type: bool
       optional: true
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: spl_autoload_unregister
   signature:
@@ -58,12 +58,12 @@
     - name: callback
       type: callable
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: spl_classes
   signature:
     returnType: array
-  raises: []
+  throws: []
 - subject:
     function: spl_object_hash
   signature:
@@ -71,7 +71,7 @@
     - name: object
       type: object
     returnType: string
-  raises: []
+  throws: []
 - subject:
     function: spl_object_id
   signature:
@@ -79,7 +79,7 @@
     - name: object
       type: object
     returnType: int
-  raises: []
+  throws: []
 - subject:
     class: appenditerator
   signature:
@@ -239,7 +239,7 @@
     method: AppendIterator::__construct
   signature:
     returnType: mixed
-  raises: [badmethodcallexception, invalidargumentexception, logicexception, valueerror]
+  throws: [badmethodcallexception, invalidargumentexception, logicexception, valueerror]
 - subject:
     method: AppendIterator::append
   signature:
@@ -247,37 +247,37 @@
     - name: iterator
       type: Iterator
     returnType: void
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: AppendIterator::current
   signature:
     returnType: mixed
-  raises: [error]
+  throws: [error]
 - subject:
     method: AppendIterator::getArrayIterator
   signature:
     returnType: ArrayIterator
-  raises: [error]
+  throws: [error]
 - subject:
     method: AppendIterator::getIteratorIndex
   signature:
     returnType: ?int
-  raises: [badmethodcallexception, error, typeerror]
+  throws: [badmethodcallexception, error, typeerror]
 - subject:
     method: AppendIterator::next
   signature:
     returnType: void
-  raises: [error]
+  throws: [error]
 - subject:
     method: AppendIterator::rewind
   signature:
     returnType: void
-  raises: [error]
+  throws: [error]
 - subject:
     method: AppendIterator::valid
   signature:
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: CachingIterator::__construct
   signature:
@@ -288,37 +288,37 @@
       type: int
       optional: true
     returnType: mixed
-  raises: [badmethodcallexception, invalidargumentexception, logicexception, valueerror]
+  throws: [badmethodcallexception, invalidargumentexception, logicexception, valueerror]
 - subject:
     method: CachingIterator::__toString
   signature:
     returnType: string
-  raises: [badmethodcallexception, error]
+  throws: [badmethodcallexception, error]
 - subject:
     method: CachingIterator::count
   signature:
     returnType: int
-  raises: [badmethodcallexception, error]
+  throws: [badmethodcallexception, error]
 - subject:
     method: CachingIterator::getCache
   signature:
     returnType: array
-  raises: [badmethodcallexception, error]
+  throws: [badmethodcallexception, error]
 - subject:
     method: CachingIterator::getFlags
   signature:
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     method: CachingIterator::hasNext
   signature:
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: CachingIterator::next
   signature:
     returnType: void
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: CachingIterator::offsetExists
   signature:
@@ -326,7 +326,7 @@
     - name: key
       type: mixed
     returnType: bool
-  raises: [badmethodcallexception, error]
+  throws: [badmethodcallexception, error]
 - subject:
     method: CachingIterator::offsetGet
   signature:
@@ -334,7 +334,7 @@
     - name: key
       type: mixed
     returnType: mixed
-  raises: [badmethodcallexception, error]
+  throws: [badmethodcallexception, error]
 - subject:
     method: CachingIterator::offsetSet
   signature:
@@ -344,7 +344,7 @@
     - name: value
       type: mixed
     returnType: void
-  raises: [badmethodcallexception, error]
+  throws: [badmethodcallexception, error]
 - subject:
     method: CachingIterator::offsetUnset
   signature:
@@ -352,12 +352,12 @@
     - name: key
       type: mixed
     returnType: void
-  raises: [badmethodcallexception, error]
+  throws: [badmethodcallexception, error]
 - subject:
     method: CachingIterator::rewind
   signature:
     returnType: void
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: CachingIterator::setFlags
   signature:
@@ -365,12 +365,12 @@
     - name: flags
       type: int
     returnType: void
-  raises: [error, invalidargumentexception, valueerror]
+  throws: [error, invalidargumentexception, valueerror]
 - subject:
     method: CachingIterator::valid
   signature:
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: CallbackFilterIterator::__construct
   signature:
@@ -380,37 +380,37 @@
     - name: callback
       type: callable
     returnType: mixed
-  raises: [badmethodcallexception, invalidargumentexception, logicexception, valueerror]
+  throws: [badmethodcallexception, invalidargumentexception, logicexception, valueerror]
 - subject:
     method: CallbackFilterIterator::accept
   signature:
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: EmptyIterator::current
   signature:
     returnType: never
-  raises: [badmethodcallexception]
+  throws: [badmethodcallexception]
 - subject:
     method: EmptyIterator::key
   signature:
     returnType: never
-  raises: [badmethodcallexception]
+  throws: [badmethodcallexception]
 - subject:
     method: EmptyIterator::next
   signature:
     returnType: void
-  raises: []
+  throws: []
 - subject:
     method: EmptyIterator::rewind
   signature:
     returnType: void
-  raises: []
+  throws: []
 - subject:
     method: EmptyIterator::valid
   signature:
     returnType: 'false'
-  raises: []
+  throws: []
 - subject:
     method: FilesystemIterator::__construct
   signature:
@@ -421,27 +421,27 @@
       type: int
       optional: true
     returnType: mixed
-  raises: [error, unexpectedvalueexception, valueerror]
+  throws: [error, unexpectedvalueexception, valueerror]
 - subject:
     method: FilesystemIterator::current
   signature:
     returnType: string|SplFileInfo|FilesystemIterator
-  raises: [error, logicexception, runtimeexception, typeerror, valueerror]
+  throws: [error, logicexception, runtimeexception, typeerror, valueerror]
 - subject:
     method: FilesystemIterator::getFlags
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     method: FilesystemIterator::key
   signature:
     returnType: string
-  raises: [error]
+  throws: [error]
 - subject:
     method: FilesystemIterator::rewind
   signature:
     returnType: void
-  raises: []
+  throws: []
 - subject:
     method: FilesystemIterator::setFlags
   signature:
@@ -449,7 +449,7 @@
     - name: flags
       type: int
     returnType: void
-  raises: []
+  throws: []
 - subject:
     method: FilterIterator::__construct
   signature:
@@ -457,7 +457,7 @@
     - name: iterator
       type: Iterator
     returnType: mixed
-  raises: [badmethodcallexception, invalidargumentexception, logicexception, valueerror]
+  throws: [badmethodcallexception, invalidargumentexception, logicexception, valueerror]
 - subject:
     method: FilterIterator::accept
   signature:
@@ -466,12 +466,12 @@
     method: FilterIterator::next
   signature:
     returnType: void
-  raises: [error]
+  throws: [error]
 - subject:
     method: FilterIterator::rewind
   signature:
     returnType: void
-  raises: [error]
+  throws: [error]
 - subject:
     method: GlobIterator::__construct
   signature:
@@ -482,12 +482,12 @@
       type: int
       optional: true
     returnType: mixed
-  raises: [error, unexpectedvalueexception, valueerror]
+  throws: [error, unexpectedvalueexception, valueerror]
 - subject:
     method: GlobIterator::count
   signature:
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     method: InfiniteIterator::__construct
   signature:
@@ -495,12 +495,12 @@
     - name: iterator
       type: Iterator
     returnType: mixed
-  raises: [badmethodcallexception, invalidargumentexception, logicexception, valueerror]
+  throws: [badmethodcallexception, invalidargumentexception, logicexception, valueerror]
 - subject:
     method: InfiniteIterator::next
   signature:
     returnType: void
-  raises: [error]
+  throws: [error]
 - subject:
     method: IteratorIterator::__construct
   signature:
@@ -511,37 +511,37 @@
       type: ?string
       optional: true
     returnType: mixed
-  raises: [badmethodcallexception, invalidargumentexception, logicexception, valueerror]
+  throws: [badmethodcallexception, invalidargumentexception, logicexception, valueerror]
 - subject:
     method: IteratorIterator::current
   signature:
     returnType: mixed
-  raises: [error]
+  throws: [error]
 - subject:
     method: IteratorIterator::getInnerIterator
   signature:
     returnType: ?Iterator
-  raises: [error]
+  throws: [error]
 - subject:
     method: IteratorIterator::key
   signature:
     returnType: mixed
-  raises: [error]
+  throws: [error]
 - subject:
     method: IteratorIterator::next
   signature:
     returnType: void
-  raises: [error]
+  throws: [error]
 - subject:
     method: IteratorIterator::rewind
   signature:
     returnType: void
-  raises: [error]
+  throws: [error]
 - subject:
     method: IteratorIterator::valid
   signature:
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: LimitIterator::__construct
   signature:
@@ -555,22 +555,22 @@
       type: int
       optional: true
     returnType: mixed
-  raises: [badmethodcallexception, invalidargumentexception, logicexception, valueerror]
+  throws: [badmethodcallexception, invalidargumentexception, logicexception, valueerror]
 - subject:
     method: LimitIterator::getPosition
   signature:
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     method: LimitIterator::next
   signature:
     returnType: void
-  raises: [error]
+  throws: [error]
 - subject:
     method: LimitIterator::rewind
   signature:
     returnType: void
-  raises: [error, outofboundsexception]
+  throws: [error, outofboundsexception]
 - subject:
     method: LimitIterator::seek
   signature:
@@ -578,12 +578,12 @@
     - name: offset
       type: int
     returnType: int
-  raises: [error, outofboundsexception]
+  throws: [error, outofboundsexception]
 - subject:
     method: LimitIterator::valid
   signature:
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: MultipleIterator::__construct
   signature:
@@ -592,12 +592,12 @@
       type: int
       optional: true
     returnType: mixed
-  raises: []
+  throws: []
 - subject:
     method: MultipleIterator::__debugInfo
   signature:
     returnType: array
-  raises: []
+  throws: []
 - subject:
     method: MultipleIterator::attachIterator
   signature:
@@ -608,7 +608,7 @@
       type: string|int|null
       optional: true
     returnType: void
-  raises: [error, invalidargumentexception, typeerror]
+  throws: [error, invalidargumentexception, typeerror]
 - subject:
     method: MultipleIterator::containsIterator
   signature:
@@ -616,17 +616,17 @@
     - name: iterator
       type: Iterator
     returnType: bool
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     method: MultipleIterator::countIterators
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     method: MultipleIterator::current
   signature:
     returnType: array
-  raises: [invalidargumentexception, runtimeexception]
+  throws: [invalidargumentexception, runtimeexception]
 - subject:
     method: MultipleIterator::detachIterator
   signature:
@@ -634,27 +634,27 @@
     - name: iterator
       type: Iterator
     returnType: void
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     method: MultipleIterator::getFlags
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     method: MultipleIterator::key
   signature:
     returnType: array
-  raises: [invalidargumentexception, runtimeexception]
+  throws: [invalidargumentexception, runtimeexception]
 - subject:
     method: MultipleIterator::next
   signature:
     returnType: void
-  raises: []
+  throws: []
 - subject:
     method: MultipleIterator::rewind
   signature:
     returnType: void
-  raises: []
+  throws: []
 - subject:
     method: MultipleIterator::setFlags
   signature:
@@ -662,12 +662,12 @@
     - name: flags
       type: int
     returnType: void
-  raises: []
+  throws: []
 - subject:
     method: MultipleIterator::valid
   signature:
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     method: NoRewindIterator::__construct
   signature:
@@ -675,32 +675,32 @@
     - name: iterator
       type: Iterator
     returnType: mixed
-  raises: [badmethodcallexception, invalidargumentexception, logicexception, valueerror]
+  throws: [badmethodcallexception, invalidargumentexception, logicexception, valueerror]
 - subject:
     method: NoRewindIterator::current
   signature:
     returnType: mixed
-  raises: [error]
+  throws: [error]
 - subject:
     method: NoRewindIterator::key
   signature:
     returnType: mixed
-  raises: [error]
+  throws: [error]
 - subject:
     method: NoRewindIterator::next
   signature:
     returnType: void
-  raises: [error]
+  throws: [error]
 - subject:
     method: NoRewindIterator::rewind
   signature:
     returnType: void
-  raises: []
+  throws: []
 - subject:
     method: NoRewindIterator::valid
   signature:
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: OuterIterator::getInnerIterator
   signature:
@@ -712,22 +712,22 @@
     - name: iterator
       type: RecursiveIterator
     returnType: mixed
-  raises: [badmethodcallexception, invalidargumentexception, logicexception, valueerror]
+  throws: [badmethodcallexception, invalidargumentexception, logicexception, valueerror]
 - subject:
     method: ParentIterator::accept
   signature:
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: RecursiveArrayIterator::getChildren
   signature:
     returnType: ?RecursiveArrayIterator
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: RecursiveArrayIterator::hasChildren
   signature:
     returnType: bool
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: RecursiveCachingIterator::__construct
   signature:
@@ -738,17 +738,17 @@
       type: int
       optional: true
     returnType: mixed
-  raises: [badmethodcallexception, invalidargumentexception, logicexception, valueerror]
+  throws: [badmethodcallexception, invalidargumentexception, logicexception, valueerror]
 - subject:
     method: RecursiveCachingIterator::getChildren
   signature:
     returnType: ?RecursiveCachingIterator
-  raises: [error]
+  throws: [error]
 - subject:
     method: RecursiveCachingIterator::hasChildren
   signature:
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: RecursiveCallbackFilterIterator::__construct
   signature:
@@ -758,17 +758,17 @@
     - name: callback
       type: callable
     returnType: mixed
-  raises: [badmethodcallexception, invalidargumentexception, logicexception, valueerror]
+  throws: [badmethodcallexception, invalidargumentexception, logicexception, valueerror]
 - subject:
     method: RecursiveCallbackFilterIterator::getChildren
   signature:
     returnType: RecursiveCallbackFilterIterator
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: RecursiveCallbackFilterIterator::hasChildren
   signature:
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: RecursiveFilterIterator::__construct
   signature:
@@ -776,17 +776,17 @@
     - name: iterator
       type: RecursiveIterator
     returnType: mixed
-  raises: [badmethodcallexception, invalidargumentexception, logicexception, valueerror]
+  throws: [badmethodcallexception, invalidargumentexception, logicexception, valueerror]
 - subject:
     method: RecursiveFilterIterator::getChildren
   signature:
     returnType: ?RecursiveFilterIterator
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: RecursiveFilterIterator::hasChildren
   signature:
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: RecursiveIterator::getChildren
   signature:
@@ -808,57 +808,57 @@
       type: int
       optional: true
     returnType: mixed
-  raises: [error, invalidargumentexception, logicexception, typeerror]
+  throws: [error, invalidargumentexception, logicexception, typeerror]
 - subject:
     method: RecursiveIteratorIterator::beginChildren
   signature:
     returnType: void
-  raises: []
+  throws: []
 - subject:
     method: RecursiveIteratorIterator::beginIteration
   signature:
     returnType: void
-  raises: []
+  throws: []
 - subject:
     method: RecursiveIteratorIterator::callGetChildren
   signature:
     returnType: ?RecursiveIterator
-  raises: [error]
+  throws: [error]
 - subject:
     method: RecursiveIteratorIterator::callHasChildren
   signature:
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: RecursiveIteratorIterator::current
   signature:
     returnType: mixed
-  raises: [error]
+  throws: [error]
 - subject:
     method: RecursiveIteratorIterator::endChildren
   signature:
     returnType: void
-  raises: []
+  throws: []
 - subject:
     method: RecursiveIteratorIterator::endIteration
   signature:
     returnType: void
-  raises: []
+  throws: []
 - subject:
     method: RecursiveIteratorIterator::getDepth
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     method: RecursiveIteratorIterator::getInnerIterator
   signature:
     returnType: RecursiveIterator
-  raises: [error]
+  throws: [error]
 - subject:
     method: RecursiveIteratorIterator::getMaxDepth
   signature:
     returnType: int|false
-  raises: []
+  throws: []
 - subject:
     method: RecursiveIteratorIterator::getSubIterator
   signature:
@@ -867,27 +867,27 @@
       type: ?int
       optional: true
     returnType: ?RecursiveIterator
-  raises: [error]
+  throws: [error]
 - subject:
     method: RecursiveIteratorIterator::key
   signature:
     returnType: mixed
-  raises: [error]
+  throws: [error]
 - subject:
     method: RecursiveIteratorIterator::next
   signature:
     returnType: void
-  raises: [error, unexpectedvalueexception]
+  throws: [error, unexpectedvalueexception]
 - subject:
     method: RecursiveIteratorIterator::nextElement
   signature:
     returnType: void
-  raises: []
+  throws: []
 - subject:
     method: RecursiveIteratorIterator::rewind
   signature:
     returnType: void
-  raises: [error, unexpectedvalueexception]
+  throws: [error, unexpectedvalueexception]
 - subject:
     method: RecursiveIteratorIterator::setMaxDepth
   signature:
@@ -896,12 +896,12 @@
       type: int
       optional: true
     returnType: void
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: RecursiveIteratorIterator::valid
   signature:
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     method: RecursiveRegexIterator::__construct
   signature:
@@ -920,22 +920,22 @@
       type: int
       optional: true
     returnType: mixed
-  raises: [badmethodcallexception, invalidargumentexception, logicexception, valueerror]
+  throws: [badmethodcallexception, invalidargumentexception, logicexception, valueerror]
 - subject:
     method: RecursiveRegexIterator::accept
   signature:
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: RecursiveRegexIterator::getChildren
   signature:
     returnType: RecursiveRegexIterator
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: RecursiveRegexIterator::hasChildren
   signature:
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: RecursiveTreeIterator::__construct
   signature:
@@ -952,32 +952,32 @@
       type: int
       optional: true
     returnType: mixed
-  raises: [error, invalidargumentexception, logicexception, typeerror]
+  throws: [error, invalidargumentexception, logicexception, typeerror]
 - subject:
     method: RecursiveTreeIterator::current
   signature:
     returnType: mixed
-  raises: [error]
+  throws: [error]
 - subject:
     method: RecursiveTreeIterator::getEntry
   signature:
     returnType: string
-  raises: [error]
+  throws: [error]
 - subject:
     method: RecursiveTreeIterator::getPostfix
   signature:
     returnType: string
-  raises: [error]
+  throws: [error]
 - subject:
     method: RecursiveTreeIterator::getPrefix
   signature:
     returnType: string
-  raises: [error]
+  throws: [error]
 - subject:
     method: RecursiveTreeIterator::key
   signature:
     returnType: mixed
-  raises: [error]
+  throws: [error]
 - subject:
     method: RecursiveTreeIterator::setPostfix
   signature:
@@ -985,7 +985,7 @@
     - name: postfix
       type: string
     returnType: void
-  raises: []
+  throws: []
 - subject:
     method: RecursiveTreeIterator::setPrefixPart
   signature:
@@ -995,7 +995,7 @@
     - name: value
       type: string
     returnType: void
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: RegexIterator::__construct
   signature:
@@ -1014,32 +1014,32 @@
       type: int
       optional: true
     returnType: mixed
-  raises: [badmethodcallexception, invalidargumentexception, logicexception, valueerror]
+  throws: [badmethodcallexception, invalidargumentexception, logicexception, valueerror]
 - subject:
     method: RegexIterator::accept
   signature:
     returnType: bool
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     method: RegexIterator::getFlags
   signature:
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     method: RegexIterator::getMode
   signature:
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     method: RegexIterator::getPregFlags
   signature:
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     method: RegexIterator::getRegex
   signature:
     returnType: string
-  raises: [error]
+  throws: [error]
 - subject:
     method: RegexIterator::setFlags
   signature:
@@ -1047,7 +1047,7 @@
     - name: flags
       type: int
     returnType: void
-  raises: [error]
+  throws: [error]
 - subject:
     method: RegexIterator::setMode
   signature:
@@ -1055,7 +1055,7 @@
     - name: mode
       type: int
     returnType: void
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     method: RegexIterator::setPregFlags
   signature:
@@ -1063,7 +1063,7 @@
     - name: pregFlags
       type: int
     returnType: void
-  raises: [error]
+  throws: [error]
 - subject:
     method: SeekableIterator::seek
   signature:
@@ -1075,12 +1075,12 @@
     method: SplDoublyLinkedList::__debugInfo
   signature:
     returnType: array
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: SplDoublyLinkedList::__serialize
   signature:
     returnType: array
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: SplDoublyLinkedList::__unserialize
   signature:
@@ -1088,7 +1088,7 @@
     - name: data
       type: array
     returnType: void
-  raises: [error, typeerror, unexpectedvalueexception]
+  throws: [error, typeerror, unexpectedvalueexception]
 - subject:
     method: SplDoublyLinkedList::add
   signature:
@@ -1098,42 +1098,42 @@
     - name: value
       type: mixed
     returnType: void
-  raises: [outofrangeexception]
+  throws: [outofrangeexception]
 - subject:
     method: SplDoublyLinkedList::bottom
   signature:
     returnType: mixed
-  raises: [runtimeexception]
+  throws: [runtimeexception]
 - subject:
     method: SplDoublyLinkedList::count
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     method: SplDoublyLinkedList::current
   signature:
     returnType: mixed
-  raises: []
+  throws: []
 - subject:
     method: SplDoublyLinkedList::getIteratorMode
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     method: SplDoublyLinkedList::isEmpty
   signature:
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     method: SplDoublyLinkedList::key
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     method: SplDoublyLinkedList::next
   signature:
     returnType: void
-  raises: []
+  throws: []
 - subject:
     method: SplDoublyLinkedList::offsetExists
   signature:
@@ -1141,7 +1141,7 @@
     - name: index
       type: mixed
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     method: SplDoublyLinkedList::offsetGet
   signature:
@@ -1149,7 +1149,7 @@
     - name: index
       type: mixed
     returnType: mixed
-  raises: [outofrangeexception]
+  throws: [outofrangeexception]
 - subject:
     method: SplDoublyLinkedList::offsetSet
   signature:
@@ -1159,7 +1159,7 @@
     - name: value
       type: mixed
     returnType: void
-  raises: [outofrangeexception]
+  throws: [outofrangeexception]
 - subject:
     method: SplDoublyLinkedList::offsetUnset
   signature:
@@ -1167,17 +1167,17 @@
     - name: index
       type: mixed
     returnType: void
-  raises: [outofrangeexception]
+  throws: [outofrangeexception]
 - subject:
     method: SplDoublyLinkedList::pop
   signature:
     returnType: mixed
-  raises: [runtimeexception]
+  throws: [runtimeexception]
 - subject:
     method: SplDoublyLinkedList::prev
   signature:
     returnType: void
-  raises: []
+  throws: []
 - subject:
     method: SplDoublyLinkedList::push
   signature:
@@ -1185,17 +1185,17 @@
     - name: value
       type: mixed
     returnType: void
-  raises: []
+  throws: []
 - subject:
     method: SplDoublyLinkedList::rewind
   signature:
     returnType: void
-  raises: []
+  throws: []
 - subject:
     method: SplDoublyLinkedList::serialize
   signature:
     returnType: string
-  raises: [error, exception, typeerror]
+  throws: [error, exception, typeerror]
 - subject:
     method: SplDoublyLinkedList::setIteratorMode
   signature:
@@ -1203,17 +1203,17 @@
     - name: mode
       type: int
     returnType: int
-  raises: [runtimeexception]
+  throws: [runtimeexception]
 - subject:
     method: SplDoublyLinkedList::shift
   signature:
     returnType: mixed
-  raises: [runtimeexception]
+  throws: [runtimeexception]
 - subject:
     method: SplDoublyLinkedList::top
   signature:
     returnType: mixed
-  raises: [runtimeexception]
+  throws: [runtimeexception]
 - subject:
     method: SplDoublyLinkedList::unserialize
   signature:
@@ -1221,7 +1221,7 @@
     - name: data
       type: string
     returnType: void
-  raises: [unexpectedvalueexception]
+  throws: [unexpectedvalueexception]
 - subject:
     method: SplDoublyLinkedList::unshift
   signature:
@@ -1229,12 +1229,12 @@
     - name: value
       type: mixed
     returnType: void
-  raises: []
+  throws: []
 - subject:
     method: SplDoublyLinkedList::valid
   signature:
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     method: SplMaxHeap::compare
   signature:
@@ -1244,7 +1244,7 @@
     - name: value2
       type: mixed
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     method: SplMinHeap::compare
   signature:
@@ -1254,7 +1254,7 @@
     - name: value2
       type: mixed
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     method: SplObserver::update
   signature:
@@ -1288,7 +1288,7 @@
       type: int
       optional: true
     returnType: mixed
-  raises: [error, logicexception, runtimeexception, typeerror, valueerror]
+  throws: [error, logicexception, runtimeexception, typeerror, valueerror]
 - subject:
     class: runtimeexception
   signature:
@@ -1427,7 +1427,7 @@
       type: bool
       optional: true
     returnType: array|false
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     function: class_parents
   signature:
@@ -1438,7 +1438,7 @@
       type: bool
       optional: true
     returnType: array|false
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     function: class_uses
   signature:
@@ -1449,7 +1449,7 @@
       type: bool
       optional: true
     returnType: array|false
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     function: iterator_apply
   signature:
@@ -1462,7 +1462,7 @@
       type: ?array
       optional: true
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: iterator_count
   signature:
@@ -1470,7 +1470,7 @@
     - name: iterator
       type: iterable
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: iterator_to_array
   signature:
@@ -1484,7 +1484,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: ArrayIterator::__construct
   signature:
@@ -1496,17 +1496,17 @@
       type: int
       optional: true
     returnType: mixed
-  raises: [error, invalidargumentexception]
+  throws: [error, invalidargumentexception]
 - subject:
     method: ArrayIterator::__debugInfo
   signature:
     returnType: array
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: ArrayIterator::__serialize
   signature:
     returnType: array
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: ArrayIterator::__unserialize
   signature:
@@ -1514,7 +1514,7 @@
     - name: data
       type: array
     returnType: void
-  raises: [error, invalidargumentexception, typeerror, unexpectedvalueexception]
+  throws: [error, invalidargumentexception, typeerror, unexpectedvalueexception]
 - subject:
     method: ArrayIterator::append
   signature:
@@ -1522,7 +1522,7 @@
     - name: value
       type: mixed
     returnType: void
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: ArrayIterator::asort
   signature:
@@ -1531,32 +1531,32 @@
       type: int
       optional: true
     returnType: 'true'
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: ArrayIterator::count
   signature:
     returnType: int
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: ArrayIterator::current
   signature:
     returnType: mixed
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: ArrayIterator::getArrayCopy
   signature:
     returnType: array
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: ArrayIterator::getFlags
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     method: ArrayIterator::key
   signature:
     returnType: string|int|null
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: ArrayIterator::ksort
   signature:
@@ -1565,22 +1565,22 @@
       type: int
       optional: true
     returnType: 'true'
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: ArrayIterator::natcasesort
   signature:
     returnType: 'true'
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: ArrayIterator::natsort
   signature:
     returnType: 'true'
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: ArrayIterator::next
   signature:
     returnType: void
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: ArrayIterator::offsetExists
   signature:
@@ -1588,7 +1588,7 @@
     - name: key
       type: mixed
     returnType: bool
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: ArrayIterator::offsetGet
   signature:
@@ -1596,7 +1596,7 @@
     - name: key
       type: mixed
     returnType: mixed
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: ArrayIterator::offsetSet
   signature:
@@ -1606,7 +1606,7 @@
     - name: value
       type: mixed
     returnType: void
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: ArrayIterator::offsetUnset
   signature:
@@ -1614,12 +1614,12 @@
     - name: key
       type: mixed
     returnType: void
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: ArrayIterator::rewind
   signature:
     returnType: void
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: ArrayIterator::seek
   signature:
@@ -1627,12 +1627,12 @@
     - name: offset
       type: int
     returnType: void
-  raises: [error, outofboundsexception, typeerror]
+  throws: [error, outofboundsexception, typeerror]
 - subject:
     method: ArrayIterator::serialize
   signature:
     returnType: string
-  raises: [error, exception, typeerror]
+  throws: [error, exception, typeerror]
 - subject:
     method: ArrayIterator::setFlags
   signature:
@@ -1640,7 +1640,7 @@
     - name: flags
       type: int
     returnType: void
-  raises: []
+  throws: []
 - subject:
     method: ArrayIterator::uasort
   signature:
@@ -1648,7 +1648,7 @@
     - name: callback
       type: callable
     returnType: 'true'
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: ArrayIterator::uksort
   signature:
@@ -1656,7 +1656,7 @@
     - name: callback
       type: callable
     returnType: 'true'
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: ArrayIterator::unserialize
   signature:
@@ -1664,12 +1664,12 @@
     - name: data
       type: string
     returnType: void
-  raises: [error, invalidargumentexception, typeerror, unexpectedvalueexception]
+  throws: [error, invalidargumentexception, typeerror, unexpectedvalueexception]
 - subject:
     method: ArrayIterator::valid
   signature:
     returnType: bool
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: ArrayObject::__construct
   signature:
@@ -1684,17 +1684,17 @@
       type: string
       optional: true
     returnType: mixed
-  raises: [error, invalidargumentexception, typeerror]
+  throws: [error, invalidargumentexception, typeerror]
 - subject:
     method: ArrayObject::__debugInfo
   signature:
     returnType: array
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: ArrayObject::__serialize
   signature:
     returnType: array
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: ArrayObject::__unserialize
   signature:
@@ -1702,7 +1702,7 @@
     - name: data
       type: array
     returnType: void
-  raises: [error, invalidargumentexception, typeerror, unexpectedvalueexception]
+  throws: [error, invalidargumentexception, typeerror, unexpectedvalueexception]
 - subject:
     method: ArrayObject::append
   signature:
@@ -1710,7 +1710,7 @@
     - name: value
       type: mixed
     returnType: void
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: ArrayObject::asort
   signature:
@@ -1719,12 +1719,12 @@
       type: int
       optional: true
     returnType: 'true'
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: ArrayObject::count
   signature:
     returnType: int
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: ArrayObject::exchangeArray
   signature:
@@ -1732,27 +1732,27 @@
     - name: array
       type: array|object
     returnType: array
-  raises: [error, invalidargumentexception, typeerror]
+  throws: [error, invalidargumentexception, typeerror]
 - subject:
     method: ArrayObject::getArrayCopy
   signature:
     returnType: array
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: ArrayObject::getFlags
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     method: ArrayObject::getIterator
   signature:
     returnType: Iterator
-  raises: []
+  throws: []
 - subject:
     method: ArrayObject::getIteratorClass
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     method: ArrayObject::ksort
   signature:
@@ -1761,17 +1761,17 @@
       type: int
       optional: true
     returnType: 'true'
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: ArrayObject::natcasesort
   signature:
     returnType: 'true'
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: ArrayObject::natsort
   signature:
     returnType: 'true'
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: ArrayObject::offsetExists
   signature:
@@ -1779,7 +1779,7 @@
     - name: key
       type: mixed
     returnType: bool
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: ArrayObject::offsetGet
   signature:
@@ -1787,7 +1787,7 @@
     - name: key
       type: mixed
     returnType: mixed
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: ArrayObject::offsetSet
   signature:
@@ -1797,7 +1797,7 @@
     - name: value
       type: mixed
     returnType: void
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: ArrayObject::offsetUnset
   signature:
@@ -1805,12 +1805,12 @@
     - name: key
       type: mixed
     returnType: void
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: ArrayObject::serialize
   signature:
     returnType: string
-  raises: [error, exception, typeerror]
+  throws: [error, exception, typeerror]
 - subject:
     method: ArrayObject::setFlags
   signature:
@@ -1818,7 +1818,7 @@
     - name: flags
       type: int
     returnType: void
-  raises: []
+  throws: []
 - subject:
     method: ArrayObject::setIteratorClass
   signature:
@@ -1826,7 +1826,7 @@
     - name: iteratorClass
       type: string
     returnType: void
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     method: ArrayObject::uasort
   signature:
@@ -1834,7 +1834,7 @@
     - name: callback
       type: callable
     returnType: 'true'
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: ArrayObject::uksort
   signature:
@@ -1842,7 +1842,7 @@
     - name: callback
       type: callable
     returnType: 'true'
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: ArrayObject::unserialize
   signature:
@@ -1850,7 +1850,7 @@
     - name: data
       type: string
     returnType: void
-  raises: [error, invalidargumentexception, typeerror, unexpectedvalueexception]
+  throws: [error, invalidargumentexception, typeerror, unexpectedvalueexception]
 - subject:
     method: DirectoryIterator::__construct
   signature:
@@ -1858,17 +1858,17 @@
     - name: directory
       type: string
     returnType: mixed
-  raises: [error, unexpectedvalueexception, valueerror]
+  throws: [error, unexpectedvalueexception, valueerror]
 - subject:
     method: DirectoryIterator::__toString
   signature:
     returnType: string
-  raises: [error]
+  throws: [error]
 - subject:
     method: DirectoryIterator::current
   signature:
     returnType: mixed
-  raises: [error]
+  throws: [error]
 - subject:
     method: DirectoryIterator::getBasename
   signature:
@@ -1877,37 +1877,37 @@
       type: string
       optional: true
     returnType: string
-  raises: [error]
+  throws: [error]
 - subject:
     method: DirectoryIterator::getExtension
   signature:
     returnType: string
-  raises: [error]
+  throws: [error]
 - subject:
     method: DirectoryIterator::getFilename
   signature:
     returnType: string
-  raises: [error]
+  throws: [error]
 - subject:
     method: DirectoryIterator::isDot
   signature:
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: DirectoryIterator::key
   signature:
     returnType: mixed
-  raises: [error]
+  throws: [error]
 - subject:
     method: DirectoryIterator::next
   signature:
     returnType: void
-  raises: [error]
+  throws: [error]
 - subject:
     method: DirectoryIterator::rewind
   signature:
     returnType: void
-  raises: [error]
+  throws: [error]
 - subject:
     method: DirectoryIterator::seek
   signature:
@@ -1915,12 +1915,12 @@
     - name: offset
       type: int
     returnType: void
-  raises: [error, outofboundsexception]
+  throws: [error, outofboundsexception]
 - subject:
     method: DirectoryIterator::valid
   signature:
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: RecursiveDirectoryIterator::__construct
   signature:
@@ -1931,22 +1931,22 @@
       type: int
       optional: true
     returnType: mixed
-  raises: [error, unexpectedvalueexception, valueerror]
+  throws: [error, unexpectedvalueexception, valueerror]
 - subject:
     method: RecursiveDirectoryIterator::getChildren
   signature:
     returnType: RecursiveDirectoryIterator
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: RecursiveDirectoryIterator::getSubPath
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     method: RecursiveDirectoryIterator::getSubPathname
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     method: RecursiveDirectoryIterator::hasChildren
   signature:
@@ -1955,7 +1955,7 @@
       type: bool
       optional: true
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: SplFileInfo::__construct
   signature:
@@ -1963,27 +1963,27 @@
     - name: filename
       type: string
     returnType: mixed
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: SplFileInfo::__debugInfo
   signature:
     returnType: array
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: SplFileInfo::__toString
   signature:
     returnType: string
-  raises: [error]
+  throws: [error]
 - subject:
     method: SplFileInfo::_bad_state_ex
   signature:
     returnType: void
-  raises: [error]
+  throws: [error]
 - subject:
     method: SplFileInfo::getATime
   signature:
     returnType: int|false
-  raises: [error, runtimeexception]
+  throws: [error, runtimeexception]
 - subject:
     method: SplFileInfo::getBasename
   signature:
@@ -1992,17 +1992,17 @@
       type: string
       optional: true
     returnType: string
-  raises: [error]
+  throws: [error]
 - subject:
     method: SplFileInfo::getCTime
   signature:
     returnType: int|false
-  raises: [error, runtimeexception]
+  throws: [error, runtimeexception]
 - subject:
     method: SplFileInfo::getExtension
   signature:
     returnType: string
-  raises: [error]
+  throws: [error]
 - subject:
     method: SplFileInfo::getFileInfo
   signature:
@@ -2011,42 +2011,42 @@
       type: ?string
       optional: true
     returnType: SplFileInfo
-  raises: [error, logicexception, runtimeexception, typeerror, valueerror]
+  throws: [error, logicexception, runtimeexception, typeerror, valueerror]
 - subject:
     method: SplFileInfo::getFilename
   signature:
     returnType: string
-  raises: [error]
+  throws: [error]
 - subject:
     method: SplFileInfo::getGroup
   signature:
     returnType: int|false
-  raises: [error, runtimeexception]
+  throws: [error, runtimeexception]
 - subject:
     method: SplFileInfo::getInode
   signature:
     returnType: int|false
-  raises: [error, runtimeexception]
+  throws: [error, runtimeexception]
 - subject:
     method: SplFileInfo::getLinkTarget
   signature:
     returnType: string|false
-  raises: [error, runtimeexception, valueerror]
+  throws: [error, runtimeexception, valueerror]
 - subject:
     method: SplFileInfo::getMTime
   signature:
     returnType: int|false
-  raises: [error, runtimeexception]
+  throws: [error, runtimeexception]
 - subject:
     method: SplFileInfo::getOwner
   signature:
     returnType: int|false
-  raises: [error, runtimeexception]
+  throws: [error, runtimeexception]
 - subject:
     method: SplFileInfo::getPath
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     method: SplFileInfo::getPathInfo
   signature:
@@ -2055,62 +2055,62 @@
       type: ?string
       optional: true
     returnType: ?SplFileInfo
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: SplFileInfo::getPathname
   signature:
     returnType: string
-  raises: [error]
+  throws: [error]
 - subject:
     method: SplFileInfo::getPerms
   signature:
     returnType: int|false
-  raises: [error, runtimeexception]
+  throws: [error, runtimeexception]
 - subject:
     method: SplFileInfo::getRealPath
   signature:
     returnType: string|false
-  raises: [error]
+  throws: [error]
 - subject:
     method: SplFileInfo::getSize
   signature:
     returnType: int|false
-  raises: [error, runtimeexception]
+  throws: [error, runtimeexception]
 - subject:
     method: SplFileInfo::getType
   signature:
     returnType: string|false
-  raises: [error, runtimeexception]
+  throws: [error, runtimeexception]
 - subject:
     method: SplFileInfo::isDir
   signature:
     returnType: bool
-  raises: [error, runtimeexception]
+  throws: [error, runtimeexception]
 - subject:
     method: SplFileInfo::isExecutable
   signature:
     returnType: bool
-  raises: [error, runtimeexception]
+  throws: [error, runtimeexception]
 - subject:
     method: SplFileInfo::isFile
   signature:
     returnType: bool
-  raises: [error, runtimeexception]
+  throws: [error, runtimeexception]
 - subject:
     method: SplFileInfo::isLink
   signature:
     returnType: bool
-  raises: [error, runtimeexception]
+  throws: [error, runtimeexception]
 - subject:
     method: SplFileInfo::isReadable
   signature:
     returnType: bool
-  raises: [error, runtimeexception]
+  throws: [error, runtimeexception]
 - subject:
     method: SplFileInfo::isWritable
   signature:
     returnType: bool
-  raises: [error, runtimeexception]
+  throws: [error, runtimeexception]
 - subject:
     method: SplFileInfo::openFile
   signature:
@@ -2125,7 +2125,7 @@
       type: mixed
       optional: true
     returnType: SplFileObject
-  raises: [error, logicexception, runtimeexception, typeerror, valueerror]
+  throws: [error, logicexception, runtimeexception, typeerror, valueerror]
 - subject:
     method: SplFileInfo::setFileClass
   signature:
@@ -2134,7 +2134,7 @@
       type: string
       optional: true
     returnType: void
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     method: SplFileInfo::setInfoClass
   signature:
@@ -2143,7 +2143,7 @@
       type: string
       optional: true
     returnType: void
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     method: SplFileObject::__construct
   signature:
@@ -2160,32 +2160,32 @@
       type: mixed
       optional: true
     returnType: mixed
-  raises: [error, logicexception, runtimeexception, typeerror, valueerror]
+  throws: [error, logicexception, runtimeexception, typeerror, valueerror]
 - subject:
     method: SplFileObject::__toString
   signature:
     returnType: string
-  raises: [error, runtimeexception, typeerror]
+  throws: [error, runtimeexception, typeerror]
 - subject:
     method: SplFileObject::current
   signature:
     returnType: string|array|false
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: SplFileObject::eof
   signature:
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: SplFileObject::fflush
   signature:
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: SplFileObject::fgetc
   signature:
     returnType: string|false
-  raises: [error]
+  throws: [error]
 - subject:
     method: SplFileObject::fgetcsv
   signature:
@@ -2200,12 +2200,12 @@
       type: string
       optional: true
     returnType: array|false
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     method: SplFileObject::fgets
   signature:
     returnType: string
-  raises: [error, runtimeexception]
+  throws: [error, runtimeexception]
 - subject:
     method: SplFileObject::flock
   signature:
@@ -2217,12 +2217,12 @@
       optional: true
       byRef: true
     returnType: bool
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     method: SplFileObject::fpassthru
   signature:
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     method: SplFileObject::fputcsv
   signature:
@@ -2242,7 +2242,7 @@
       type: string
       optional: true
     returnType: int|false
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     method: SplFileObject::fread
   signature:
@@ -2250,7 +2250,7 @@
     - name: length
       type: int
     returnType: string|false
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     method: SplFileObject::fscanf
   signature:
@@ -2263,7 +2263,7 @@
       byRef: true
       variadic: true
     returnType: array|int|null
-  raises: [error, runtimeexception, typeerror, valueerror]
+  throws: [error, runtimeexception, typeerror, valueerror]
 - subject:
     method: SplFileObject::fseek
   signature:
@@ -2274,17 +2274,17 @@
       type: int
       optional: true
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     method: SplFileObject::fstat
   signature:
     returnType: array
-  raises: [error]
+  throws: [error]
 - subject:
     method: SplFileObject::ftell
   signature:
     returnType: int|false
-  raises: [error]
+  throws: [error]
 - subject:
     method: SplFileObject::ftruncate
   signature:
@@ -2292,7 +2292,7 @@
     - name: size
       type: int
     returnType: bool
-  raises: [error, logicexception, valueerror]
+  throws: [error, logicexception, valueerror]
 - subject:
     method: SplFileObject::fwrite
   signature:
@@ -2303,52 +2303,52 @@
       type: ?int
       optional: true
     returnType: int|false
-  raises: [error]
+  throws: [error]
 - subject:
     method: SplFileObject::getChildren
   signature:
     returnType: 'null'
-  raises: []
+  throws: []
 - subject:
     method: SplFileObject::getCsvControl
   signature:
     returnType: array
-  raises: []
+  throws: []
 - subject:
     method: SplFileObject::getCurrentLine
   signature:
     returnType: string
-  raises: [error, runtimeexception]
+  throws: [error, runtimeexception]
 - subject:
     method: SplFileObject::getFlags
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     method: SplFileObject::getMaxLineLen
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     method: SplFileObject::hasChildren
   signature:
     returnType: 'false'
-  raises: []
+  throws: []
 - subject:
     method: SplFileObject::key
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     method: SplFileObject::next
   signature:
     returnType: void
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: SplFileObject::rewind
   signature:
     returnType: void
-  raises: [error, runtimeexception, typeerror]
+  throws: [error, runtimeexception, typeerror]
 - subject:
     method: SplFileObject::seek
   signature:
@@ -2356,7 +2356,7 @@
     - name: line
       type: int
     returnType: void
-  raises: [error, runtimeexception, typeerror, valueerror]
+  throws: [error, runtimeexception, typeerror, valueerror]
 - subject:
     method: SplFileObject::setCsvControl
   signature:
@@ -2371,7 +2371,7 @@
       type: string
       optional: true
     returnType: void
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: SplFileObject::setFlags
   signature:
@@ -2379,7 +2379,7 @@
     - name: flags
       type: int
     returnType: void
-  raises: []
+  throws: []
 - subject:
     method: SplFileObject::setMaxLineLen
   signature:
@@ -2387,12 +2387,12 @@
     - name: maxLength
       type: int
     returnType: void
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: SplFileObject::valid
   signature:
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     method: SplFixedArray::__construct
   signature:
@@ -2401,12 +2401,12 @@
       type: int
       optional: true
     returnType: mixed
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: SplFixedArray::__serialize
   signature:
     returnType: array
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: SplFixedArray::__unserialize
   signature:
@@ -2414,17 +2414,17 @@
     - name: data
       type: array
     returnType: void
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: SplFixedArray::__wakeup
   signature:
     returnType: void
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: SplFixedArray::count
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     method: SplFixedArray::fromArray
   signature:
@@ -2435,22 +2435,22 @@
       type: bool
       optional: true
     returnType: SplFixedArray
-  raises: [invalidargumentexception]
+  throws: [invalidargumentexception]
 - subject:
     method: SplFixedArray::getIterator
   signature:
     returnType: Iterator
-  raises: []
+  throws: []
 - subject:
     method: SplFixedArray::getSize
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     method: SplFixedArray::jsonSerialize
   signature:
     returnType: array
-  raises: []
+  throws: []
 - subject:
     method: SplFixedArray::offsetExists
   signature:
@@ -2458,7 +2458,7 @@
     - name: index
       type: mixed
     returnType: bool
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: SplFixedArray::offsetGet
   signature:
@@ -2466,7 +2466,7 @@
     - name: index
       type: mixed
     returnType: mixed
-  raises: [error, outofboundsexception, typeerror]
+  throws: [error, outofboundsexception, typeerror]
 - subject:
     method: SplFixedArray::offsetSet
   signature:
@@ -2476,7 +2476,7 @@
     - name: value
       type: mixed
     returnType: void
-  raises: [error, outofboundsexception, typeerror]
+  throws: [error, outofboundsexception, typeerror]
 - subject:
     method: SplFixedArray::offsetUnset
   signature:
@@ -2484,7 +2484,7 @@
     - name: index
       type: mixed
     returnType: void
-  raises: [error, outofboundsexception, typeerror]
+  throws: [error, outofboundsexception, typeerror]
 - subject:
     method: SplFixedArray::setSize
   signature:
@@ -2492,22 +2492,22 @@
     - name: size
       type: int
     returnType: 'true'
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: SplFixedArray::toArray
   signature:
     returnType: array
-  raises: []
+  throws: []
 - subject:
     method: SplHeap::__debugInfo
   signature:
     returnType: array
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: SplHeap::__serialize
   signature:
     returnType: array
-  raises: [error, runtimeexception, typeerror]
+  throws: [error, runtimeexception, typeerror]
 - subject:
     method: SplHeap::__unserialize
   signature:
@@ -2515,7 +2515,7 @@
     - name: data
       type: array
     returnType: void
-  raises: [error, exception, runtimeexception, typeerror]
+  throws: [error, exception, runtimeexception, typeerror]
 - subject:
     method: SplHeap::compare
   signature:
@@ -2529,17 +2529,17 @@
     method: SplHeap::count
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     method: SplHeap::current
   signature:
     returnType: mixed
-  raises: []
+  throws: []
 - subject:
     method: SplHeap::extract
   signature:
     returnType: mixed
-  raises: [runtimeexception]
+  throws: [runtimeexception]
 - subject:
     method: SplHeap::insert
   signature:
@@ -2547,57 +2547,57 @@
     - name: value
       type: mixed
     returnType: 'true'
-  raises: [runtimeexception]
+  throws: [runtimeexception]
 - subject:
     method: SplHeap::isCorrupted
   signature:
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     method: SplHeap::isEmpty
   signature:
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     method: SplHeap::key
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     method: SplHeap::next
   signature:
     returnType: void
-  raises: [runtimeexception]
+  throws: [runtimeexception]
 - subject:
     method: SplHeap::recoverFromCorruption
   signature:
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     method: SplHeap::rewind
   signature:
     returnType: void
-  raises: []
+  throws: []
 - subject:
     method: SplHeap::top
   signature:
     returnType: mixed
-  raises: [runtimeexception]
+  throws: [runtimeexception]
 - subject:
     method: SplHeap::valid
   signature:
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     method: SplObjectStorage::__debugInfo
   signature:
     returnType: array
-  raises: []
+  throws: []
 - subject:
     method: SplObjectStorage::__serialize
   signature:
     returnType: array
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: SplObjectStorage::__unserialize
   signature:
@@ -2605,7 +2605,7 @@
     - name: data
       type: array
     returnType: void
-  raises: [error, typeerror, unexpectedvalueexception]
+  throws: [error, typeerror, unexpectedvalueexception]
 - subject:
     method: SplObjectStorage::addAll
   signature:
@@ -2613,7 +2613,7 @@
     - name: storage
       type: SplObjectStorage
     returnType: int
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     method: SplObjectStorage::attach
   signature:
@@ -2624,7 +2624,7 @@
       type: mixed
       optional: true
     returnType: void
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     method: SplObjectStorage::contains
   signature:
@@ -2632,7 +2632,7 @@
     - name: object
       type: object
     returnType: bool
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     method: SplObjectStorage::count
   signature:
@@ -2641,12 +2641,12 @@
       type: int
       optional: true
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     method: SplObjectStorage::current
   signature:
     returnType: object
-  raises: [runtimeexception]
+  throws: [runtimeexception]
 - subject:
     method: SplObjectStorage::detach
   signature:
@@ -2654,7 +2654,7 @@
     - name: object
       type: object
     returnType: void
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     method: SplObjectStorage::getHash
   signature:
@@ -2662,22 +2662,22 @@
     - name: object
       type: object
     returnType: string
-  raises: []
+  throws: []
 - subject:
     method: SplObjectStorage::getInfo
   signature:
     returnType: mixed
-  raises: []
+  throws: []
 - subject:
     method: SplObjectStorage::key
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     method: SplObjectStorage::next
   signature:
     returnType: void
-  raises: []
+  throws: []
 - subject:
     method: SplObjectStorage::offsetExists
   signature:
@@ -2685,7 +2685,7 @@
     - name: object
       type: mixed
     returnType: bool
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     method: SplObjectStorage::offsetGet
   signature:
@@ -2693,7 +2693,7 @@
     - name: object
       type: mixed
     returnType: mixed
-  raises: [typeerror, unexpectedvalueexception]
+  throws: [typeerror, unexpectedvalueexception]
 - subject:
     method: SplObjectStorage::offsetSet
   signature:
@@ -2704,7 +2704,7 @@
       type: mixed
       optional: true
     returnType: void
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     method: SplObjectStorage::offsetUnset
   signature:
@@ -2712,7 +2712,7 @@
     - name: object
       type: mixed
     returnType: void
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     method: SplObjectStorage::removeAll
   signature:
@@ -2720,7 +2720,7 @@
     - name: storage
       type: SplObjectStorage
     returnType: int
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     method: SplObjectStorage::removeAllExcept
   signature:
@@ -2728,12 +2728,12 @@
     - name: storage
       type: SplObjectStorage
     returnType: int
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     method: SplObjectStorage::rewind
   signature:
     returnType: void
-  raises: []
+  throws: []
 - subject:
     method: SplObjectStorage::seek
   signature:
@@ -2741,12 +2741,12 @@
     - name: offset
       type: int
     returnType: void
-  raises: [outofboundsexception]
+  throws: [outofboundsexception]
 - subject:
     method: SplObjectStorage::serialize
   signature:
     returnType: string
-  raises: [error, exception, typeerror]
+  throws: [error, exception, typeerror]
 - subject:
     method: SplObjectStorage::setInfo
   signature:
@@ -2754,7 +2754,7 @@
     - name: info
       type: mixed
     returnType: void
-  raises: []
+  throws: []
 - subject:
     method: SplObjectStorage::unserialize
   signature:
@@ -2762,22 +2762,22 @@
     - name: data
       type: string
     returnType: void
-  raises: [error, typeerror, unexpectedvalueexception]
+  throws: [error, typeerror, unexpectedvalueexception]
 - subject:
     method: SplObjectStorage::valid
   signature:
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     method: SplPriorityQueue::__debugInfo
   signature:
     returnType: array
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: SplPriorityQueue::__serialize
   signature:
     returnType: array
-  raises: [error, runtimeexception, typeerror]
+  throws: [error, runtimeexception, typeerror]
 - subject:
     method: SplPriorityQueue::__unserialize
   signature:
@@ -2785,7 +2785,7 @@
     - name: data
       type: array
     returnType: void
-  raises: [error, exception, runtimeexception, typeerror]
+  throws: [error, exception, runtimeexception, typeerror]
 - subject:
     method: SplPriorityQueue::compare
   signature:
@@ -2795,27 +2795,27 @@
     - name: priority2
       type: mixed
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     method: SplPriorityQueue::count
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     method: SplPriorityQueue::current
   signature:
     returnType: mixed
-  raises: []
+  throws: []
 - subject:
     method: SplPriorityQueue::extract
   signature:
     returnType: mixed
-  raises: [runtimeexception]
+  throws: [runtimeexception]
 - subject:
     method: SplPriorityQueue::getExtractFlags
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     method: SplPriorityQueue::insert
   signature:
@@ -2825,37 +2825,37 @@
     - name: priority
       type: mixed
     returnType: 'true'
-  raises: [error, runtimeexception]
+  throws: [error, runtimeexception]
 - subject:
     method: SplPriorityQueue::isCorrupted
   signature:
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     method: SplPriorityQueue::isEmpty
   signature:
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     method: SplPriorityQueue::key
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     method: SplPriorityQueue::next
   signature:
     returnType: void
-  raises: [runtimeexception]
+  throws: [runtimeexception]
 - subject:
     method: SplPriorityQueue::recoverFromCorruption
   signature:
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     method: SplPriorityQueue::rewind
   signature:
     returnType: void
-  raises: []
+  throws: []
 - subject:
     method: SplPriorityQueue::setExtractFlags
   signature:
@@ -2863,22 +2863,22 @@
     - name: flags
       type: int
     returnType: int
-  raises: [runtimeexception]
+  throws: [runtimeexception]
 - subject:
     method: SplPriorityQueue::top
   signature:
     returnType: mixed
-  raises: [runtimeexception]
+  throws: [runtimeexception]
 - subject:
     method: SplPriorityQueue::valid
   signature:
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     method: SplQueue::dequeue
   signature:
     returnType: mixed
-  raises: [runtimeexception]
+  throws: [runtimeexception]
 - subject:
     method: SplQueue::enqueue
   signature:
@@ -2886,4 +2886,4 @@
     - name: value
       type: mixed
     returnType: void
-  raises: []
+  throws: []

@@ -83,7 +83,7 @@ Every fact: **`owner: ModelSubject`**, **`condition: ArgPattern?`** (`null` for 
 
 ```kotlin
 val canonical = DocumentSetLoader.load(StubResources.opener(StubResources.VOCABULARY)).vocabulary
-val mapping = StubResources::class.java.getResourceAsStream(StubResources.PSALM_MAPPING)!!.use(CategoryMappingLoader::load)
+val mapping = StubResources::class.java.getResourceAsStream(StubResources.PSALM_MAPPING)!!.use(VocabularyMappingLoader::load)
 val taint = DocumentSetLoader.load(StubResources.opener(StubResources.TAINT), canonical, mapping)
 val values = DocumentSetLoader.load(StubResources.opener(StubResources.VALUE_RULES))
 values.provenance?.verification                    // Verification.MANUAL

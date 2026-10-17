@@ -24,7 +24,7 @@ import php_src
 
 TOOL = "tools/extract_raises.py"
 CALLABLE_KINDS = ("function", "method")
-RAISES_LINE = re.compile(r"^  raises: .*\n", re.M)
+RAISES_LINE = re.compile(r"^  throws: .*\n", re.M)
 # The C and C++ sources of php-src; intl and others implement builtins in C++.
 SOURCE_SUFFIXES = (".c", ".h", ".cpp", ".cc")
 
@@ -959,7 +959,7 @@ def with_raises(entry, raises):
     """The entry text with its raises line replaced: the classes of its Handlers, or none."""
     text = RAISES_LINE.sub("", entry.text)
     found = raises.get(entry.key()) if entry.kind in CALLABLE_KINDS else None
-    return text if found is None else text + f"  raises: [{', '.join(found)}]\n"
+    return text if found is None else text + f"  throws: [{', '.join(found)}]\n"
 
 
 def main():

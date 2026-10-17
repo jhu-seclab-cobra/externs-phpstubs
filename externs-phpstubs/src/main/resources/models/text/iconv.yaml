@@ -8,7 +8,7 @@
       type: string
       optional: true
     returnType: array|string|false
-  raises: []
+  throws: []
 - subject:
     function: iconv_mime_decode
   signature:
@@ -27,7 +27,7 @@
     to: return
   - from: argument(2)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: iconv_mime_decode_headers
   signature:
@@ -41,7 +41,7 @@
       type: ?string
       optional: true
     returnType: array|false
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: iconv_mime_encode
   signature:
@@ -59,7 +59,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: iconv_set_encoding
   signature:
@@ -69,7 +69,7 @@
     - name: encoding
       type: string
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: iconv_strlen
   signature:
@@ -80,7 +80,7 @@
       type: ?string
       optional: true
     returnType: int|false
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: iconv_strpos
   signature:
@@ -96,7 +96,7 @@
       type: ?string
       optional: true
     returnType: int|false
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: iconv_strrpos
   signature:
@@ -109,7 +109,7 @@
       type: ?string
       optional: true
     returnType: int|false
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: iconv_substr
   signature:
@@ -130,7 +130,7 @@
     to: return
   - from: argument(3)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: iconv
   signature:
@@ -149,4 +149,4 @@
     to: return
   - from: argument(2)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]

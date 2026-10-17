@@ -66,7 +66,7 @@ internal class ValueRulesSetTest {
             assertNull(entry.body.sources, "${entry.subject}")
             assertNull(entry.body.sinks, "${entry.subject}")
             assertNull(entry.body.sanitizers, "${entry.subject}")
-            assertNull(entry.body.raises, "${entry.subject}")
+            assertNull(entry.body.throws, "${entry.subject}")
         }
     }
 

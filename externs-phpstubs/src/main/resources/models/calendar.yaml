@@ -11,7 +11,7 @@
     - name: year
       type: int
     returnType: int
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: cal_from_jd
   signature:
@@ -21,7 +21,7 @@
     - name: calendar
       type: int
     returnType: array
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: cal_info
   signature:
@@ -30,7 +30,7 @@
       type: int
       optional: true
     returnType: array
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: cal_to_jd
   signature:
@@ -44,7 +44,7 @@
     - name: year
       type: int
     returnType: int
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: easter_date
   signature:
@@ -56,7 +56,7 @@
       type: int
       optional: true
     returnType: int
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: easter_days
   signature:
@@ -68,7 +68,7 @@
       type: int
       optional: true
     returnType: int
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: frenchtojd
   signature:
@@ -80,7 +80,7 @@
     - name: year
       type: int
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: gregoriantojd
   signature:
@@ -92,7 +92,7 @@
     - name: year
       type: int
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: jddayofweek
   signature:
@@ -103,7 +103,7 @@
       type: int
       optional: true
     returnType: int|string
-  raises: []
+  throws: []
 - subject:
     function: jdmonthname
   signature:
@@ -113,7 +113,7 @@
     - name: mode
       type: int
     returnType: string
-  raises: []
+  throws: []
 - subject:
     function: jdtofrench
   signature:
@@ -121,7 +121,7 @@
     - name: julian_day
       type: int
     returnType: string
-  raises: []
+  throws: []
 - subject:
     function: jdtogregorian
   signature:
@@ -129,7 +129,7 @@
     - name: julian_day
       type: int
     returnType: string
-  raises: []
+  throws: []
 - subject:
     function: jdtojewish
   signature:
@@ -143,7 +143,7 @@
       type: int
       optional: true
     returnType: string
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: jdtojulian
   signature:
@@ -151,7 +151,7 @@
     - name: julian_day
       type: int
     returnType: string
-  raises: []
+  throws: []
 - subject:
     function: jdtounix
   signature:
@@ -159,7 +159,7 @@
     - name: julian_day
       type: int
     returnType: int
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: jewishtojd
   signature:
@@ -171,7 +171,7 @@
     - name: year
       type: int
     returnType: int
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: juliantojd
   signature:
@@ -183,7 +183,7 @@
     - name: year
       type: int
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: unixtojd
   signature:
@@ -192,4 +192,4 @@
       type: ?int
       optional: true
     returnType: int|false
-  raises: [valueerror]
+  throws: [valueerror]

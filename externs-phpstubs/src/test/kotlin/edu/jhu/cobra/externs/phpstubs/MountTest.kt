@@ -1,8 +1,8 @@
 package edu.jhu.cobra.externs.phpstubs
 
-import edu.jhu.cobra.commons.phpmodels.CategoryMappingLoader
 import edu.jhu.cobra.commons.phpmodels.FunctionSubject
 import edu.jhu.cobra.commons.phpmodels.Verification
+import edu.jhu.cobra.commons.phpmodels.VocabularyMappingLoader
 import edu.jhu.cobra.commons.phpmodels.VulnTypeId
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -148,7 +148,7 @@ internal class MountTest {
 
     @Test
     fun `a mapped mount translates psalm names into the context vocabulary`() {
-        val mapping = MountTest::class.java.getResourceAsStream(StubResources.PSALM_MAPPING)!!.use(CategoryMappingLoader::load)
+        val mapping = MountTest::class.java.getResourceAsStream(StubResources.PSALM_MAPPING)!!.use(VocabularyMappingLoader::load)
         val mounts =
             MountSequence()
                 .mount(StubResources.VOCABULARY, StubResources.opener(StubResources.VOCABULARY))

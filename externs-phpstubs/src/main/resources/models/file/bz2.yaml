@@ -7,7 +7,7 @@
     - name: bz
       type: mixed
     returnType: bool
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     function: bzcompress
   signature:
@@ -21,7 +21,7 @@
       type: int
       optional: true
     returnType: string|int
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: bzdecompress
   signature:
@@ -32,7 +32,7 @@
       type: bool
       optional: true
     returnType: string|int|false
-  raises: []
+  throws: []
 - subject:
     function: bzerrno
   signature:
@@ -40,7 +40,7 @@
     - name: bz
       type: mixed
     returnType: int
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     function: bzerror
   signature:
@@ -48,7 +48,7 @@
     - name: bz
       type: mixed
     returnType: array
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     function: bzerrstr
   signature:
@@ -56,7 +56,7 @@
     - name: bz
       type: mixed
     returnType: string
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     function: bzflush
   signature:
@@ -64,7 +64,7 @@
     - name: bz
       type: mixed
     returnType: bool
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     function: bzopen
   signature:
@@ -79,7 +79,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [typeerror, valueerror]
+  throws: [typeerror, valueerror]
 - subject:
     function: bzread
   signature:
@@ -90,7 +90,7 @@
       type: int
       optional: true
     returnType: string|false
-  raises: [typeerror, valueerror]
+  throws: [typeerror, valueerror]
 - subject:
     function: bzwrite
   signature:
@@ -103,4 +103,4 @@
       type: ?int
       optional: true
     returnType: int|false
-  raises: [typeerror]
+  throws: [typeerror]

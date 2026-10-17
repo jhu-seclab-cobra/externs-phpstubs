@@ -1,7 +1,6 @@
 package edu.jhu.cobra.externs.phpstubs
 
 import edu.jhu.cobra.commons.phpmodels.ArgumentCheck
-import edu.jhu.cobra.commons.phpmodels.CategoryMappingLoader
 import edu.jhu.cobra.commons.phpmodels.CharacterClass
 import edu.jhu.cobra.commons.phpmodels.DeclaredType
 import edu.jhu.cobra.commons.phpmodels.DocumentSetLoader
@@ -13,6 +12,7 @@ import edu.jhu.cobra.commons.phpmodels.Port
 import edu.jhu.cobra.commons.phpmodels.SourceKindId
 import edu.jhu.cobra.commons.phpmodels.VariableSubject
 import edu.jhu.cobra.commons.phpmodels.VocabularyException
+import edu.jhu.cobra.commons.phpmodels.VocabularyMappingLoader
 import edu.jhu.cobra.commons.phpmodels.VulnTypeId
 import edu.jhu.cobra.commons.value.BoolVal
 import kotlin.test.Test
@@ -143,7 +143,7 @@ internal class TaintRulesSetTest {
     @Test
     fun `the psalm mapping translates the additions`() {
         val context = DocumentSetLoader.load(StubResources.opener(StubResources.VOCABULARY)).vocabulary
-        val mapping = TaintRulesSetTest::class.java.getResourceAsStream(StubResources.PSALM_MAPPING)!!.use(CategoryMappingLoader::load)
+        val mapping = TaintRulesSetTest::class.java.getResourceAsStream(StubResources.PSALM_MAPPING)!!.use(VocabularyMappingLoader::load)
         val mapped = DocumentSetLoader.load(StubResources.opener(StubResources.TAINT_RULES), context, mapping)
         val bySubject = mapped.entries.filter { it.condition == null }.associateBy { it.subject }
         assertEquals(setOf(Port.Argument(0) to "xpathi"), sinksOf(bySubject.getValue(MethodSubject("DOMXPath", "query"))))

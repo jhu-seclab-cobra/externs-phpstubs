@@ -14,7 +14,7 @@ mounts into records. Every type here is internal; the public surface is
   class), `Merge` (internal class), `OverrideUnit` (internal enum:
   `SIGNATURE`, `VALUE`, `SOURCES`, `SINKS`, `SANITIZERS`, `RAISES`)
 - **External types (commons-phpmodels):** `DocumentSetLoader`,
-  `DocumentSet`, `Document`, `ResourceOpener`, `CategoryMapping`,
+  `DocumentSet`, `Document`, `ResourceOpener`, `VocabularyMapping`,
   `ModelEntry`, `PolicyRow`, `Vocabulary`, `TaintPolicy`, `Precedence`,
   `Verification`, `DocumentSetException`
 - **Relationships:** `MountSequence` produces `Mount`s in position order;

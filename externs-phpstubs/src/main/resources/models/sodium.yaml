@@ -18,7 +18,7 @@
     - name: key
       type: string
     returnType: string|false
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_aead_aegis128l_encrypt
   signature:
@@ -32,12 +32,12 @@
     - name: key
       type: string
     returnType: string
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_aead_aegis128l_keygen
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     function: sodium_crypto_aead_aegis256_decrypt
   signature:
@@ -51,7 +51,7 @@
     - name: key
       type: string
     returnType: string|false
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_aead_aegis256_encrypt
   signature:
@@ -65,12 +65,12 @@
     - name: key
       type: string
     returnType: string
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_aead_aegis256_keygen
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     function: sodium_crypto_core_ristretto255_add
   signature:
@@ -80,7 +80,7 @@
     - name: q
       type: string
     returnType: string
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_core_ristretto255_from_hash
   signature:
@@ -88,7 +88,7 @@
     - name: s
       type: string
     returnType: string
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_core_ristretto255_is_valid_point
   signature:
@@ -96,12 +96,12 @@
     - name: s
       type: string
     returnType: bool
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_core_ristretto255_random
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     function: sodium_crypto_core_ristretto255_scalar_add
   signature:
@@ -111,7 +111,7 @@
     - name: 'y'
       type: string
     returnType: string
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_core_ristretto255_scalar_complement
   signature:
@@ -119,7 +119,7 @@
     - name: s
       type: string
     returnType: string
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_core_ristretto255_scalar_invert
   signature:
@@ -127,7 +127,7 @@
     - name: s
       type: string
     returnType: string
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_core_ristretto255_scalar_mul
   signature:
@@ -137,7 +137,7 @@
     - name: 'y'
       type: string
     returnType: string
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_core_ristretto255_scalar_negate
   signature:
@@ -145,12 +145,12 @@
     - name: s
       type: string
     returnType: string
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_core_ristretto255_scalar_random
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     function: sodium_crypto_core_ristretto255_scalar_reduce
   signature:
@@ -158,7 +158,7 @@
     - name: s
       type: string
     returnType: string
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_core_ristretto255_scalar_sub
   signature:
@@ -168,7 +168,7 @@
     - name: 'y'
       type: string
     returnType: string
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_core_ristretto255_sub
   signature:
@@ -178,7 +178,7 @@
     - name: q
       type: string
     returnType: string
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_scalarmult_ristretto255
   signature:
@@ -188,7 +188,7 @@
     - name: p
       type: string
     returnType: string
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_scalarmult_ristretto255_base
   signature:
@@ -196,7 +196,7 @@
     - name: 'n'
       type: string
     returnType: string
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_stream_xchacha20
   signature:
@@ -208,12 +208,12 @@
     - name: key
       type: string
     returnType: string
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_stream_xchacha20_keygen
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     function: sodium_crypto_stream_xchacha20_xor
   signature:
@@ -225,7 +225,7 @@
     - name: key
       type: string
     returnType: string
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_stream_xchacha20_xor_ic
   signature:
@@ -239,7 +239,7 @@
     - name: key
       type: string
     returnType: string
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_add
   signature:
@@ -250,7 +250,7 @@
     - name: string2
       type: string
     returnType: void
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_base642bin
   signature:
@@ -268,7 +268,7 @@
     to: return
   - from: argument(2)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_bin2base64
   signature:
@@ -281,7 +281,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_bin2hex
   signature:
@@ -292,7 +292,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_compare
   signature:
@@ -302,7 +302,7 @@
     - name: string2
       type: string
     returnType: int
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_aead_aes256gcm_decrypt
   signature:
@@ -325,7 +325,7 @@
     to: return
   - from: argument(3)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_aead_aes256gcm_encrypt
   signature:
@@ -348,17 +348,17 @@
     to: return
   - from: argument(3)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_aead_aes256gcm_is_available
   signature:
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: sodium_crypto_aead_aes256gcm_keygen
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     function: sodium_crypto_aead_chacha20poly1305_decrypt
   signature:
@@ -381,7 +381,7 @@
     to: return
   - from: argument(3)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_aead_chacha20poly1305_encrypt
   signature:
@@ -404,7 +404,7 @@
     to: return
   - from: argument(3)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_aead_chacha20poly1305_ietf_decrypt
   signature:
@@ -427,7 +427,7 @@
     to: return
   - from: argument(3)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_aead_chacha20poly1305_ietf_encrypt
   signature:
@@ -450,17 +450,17 @@
     to: return
   - from: argument(3)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_aead_chacha20poly1305_ietf_keygen
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     function: sodium_crypto_aead_chacha20poly1305_keygen
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     function: sodium_crypto_aead_xchacha20poly1305_ietf_decrypt
   signature:
@@ -483,7 +483,7 @@
     to: return
   - from: argument(3)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_aead_xchacha20poly1305_ietf_encrypt
   signature:
@@ -506,12 +506,12 @@
     to: return
   - from: argument(3)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_aead_xchacha20poly1305_ietf_keygen
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     function: sodium_crypto_auth
   signature:
@@ -526,12 +526,12 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_auth_keygen
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     function: sodium_crypto_auth_verify
   signature:
@@ -543,7 +543,7 @@
     - name: key
       type: string
     returnType: bool
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_box
   signature:
@@ -562,12 +562,12 @@
     to: return
   - from: argument(2)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_box_keypair
   signature:
     returnType: string
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_box_keypair_from_secretkey_and_publickey
   signature:
@@ -582,7 +582,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_box_open
   signature:
@@ -601,7 +601,7 @@
     to: return
   - from: argument(2)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_box_publickey
   signature:
@@ -612,7 +612,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_box_publickey_from_secretkey
   signature:
@@ -623,7 +623,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_box_seal
   signature:
@@ -638,7 +638,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_box_seal_open
   signature:
@@ -653,7 +653,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_box_secretkey
   signature:
@@ -664,7 +664,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_box_seed_keypair
   signature:
@@ -675,7 +675,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_generichash
   signature:
@@ -694,7 +694,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_generichash_final
   signature:
@@ -709,7 +709,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_generichash_init
   signature:
@@ -724,12 +724,12 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_generichash_keygen
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     function: sodium_crypto_generichash_update
   signature:
@@ -740,7 +740,7 @@
     - name: message
       type: string
     returnType: 'true'
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_kdf_derive_from_key
   signature:
@@ -759,12 +759,12 @@
     to: return
   - from: argument(3)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_kdf_keygen
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     function: sodium_crypto_kx_client_session_keys
   signature:
@@ -774,12 +774,12 @@
     - name: server_key
       type: string
     returnType: array
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_kx_keypair
   signature:
     returnType: string
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_kx_publickey
   signature:
@@ -790,7 +790,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_kx_secretkey
   signature:
@@ -801,7 +801,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_kx_seed_keypair
   signature:
@@ -812,7 +812,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_kx_server_session_keys
   signature:
@@ -822,7 +822,7 @@
     - name: client_key
       type: string
     returnType: array
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_pwhash
   signature:
@@ -846,7 +846,7 @@
     to: return
   - from: argument(2)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_pwhash_scryptsalsa208sha256
   signature:
@@ -867,7 +867,7 @@
     to: return
   - from: argument(2)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_pwhash_scryptsalsa208sha256_str
   signature:
@@ -882,7 +882,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_pwhash_scryptsalsa208sha256_str_verify
   signature:
@@ -892,7 +892,7 @@
     - name: password
       type: string
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: sodium_crypto_pwhash_str
   signature:
@@ -907,7 +907,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_pwhash_str_needs_rehash
   signature:
@@ -919,7 +919,7 @@
     - name: memlimit
       type: int
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: sodium_crypto_pwhash_str_verify
   signature:
@@ -929,7 +929,7 @@
     - name: password
       type: string
     returnType: bool
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_scalarmult
   signature:
@@ -944,7 +944,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_scalarmult_base
   signature:
@@ -955,7 +955,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_secretbox
   signature:
@@ -974,12 +974,12 @@
     to: return
   - from: argument(2)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_secretbox_keygen
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     function: sodium_crypto_secretbox_open
   signature:
@@ -998,7 +998,7 @@
     to: return
   - from: argument(2)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_secretstream_xchacha20poly1305_init_pull
   signature:
@@ -1013,7 +1013,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_secretstream_xchacha20poly1305_init_push
   signature:
@@ -1021,12 +1021,12 @@
     - name: key
       type: string
     returnType: array
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_secretstream_xchacha20poly1305_keygen
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     function: sodium_crypto_secretstream_xchacha20poly1305_pull
   signature:
@@ -1040,7 +1040,7 @@
       type: string
       optional: true
     returnType: array|false
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_secretstream_xchacha20poly1305_push
   signature:
@@ -1064,7 +1064,7 @@
     to: return
   - from: argument(2)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_secretstream_xchacha20poly1305_rekey
   signature:
@@ -1073,7 +1073,7 @@
       type: string
       byRef: true
     returnType: void
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_shorthash
   signature:
@@ -1088,12 +1088,12 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_shorthash_keygen
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     function: sodium_crypto_sign
   signature:
@@ -1108,7 +1108,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_sign_detached
   signature:
@@ -1123,7 +1123,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_sign_ed25519_pk_to_curve25519
   signature:
@@ -1134,7 +1134,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_sign_ed25519_sk_to_curve25519
   signature:
@@ -1145,12 +1145,12 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_sign_keypair
   signature:
     returnType: string
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_sign_keypair_from_secretkey_and_publickey
   signature:
@@ -1165,7 +1165,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_sign_open
   signature:
@@ -1180,7 +1180,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_sign_publickey
   signature:
@@ -1191,7 +1191,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_sign_publickey_from_secretkey
   signature:
@@ -1202,7 +1202,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_sign_secretkey
   signature:
@@ -1213,7 +1213,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_sign_seed_keypair
   signature:
@@ -1224,7 +1224,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_sign_verify_detached
   signature:
@@ -1236,7 +1236,7 @@
     - name: public_key
       type: string
     returnType: bool
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_stream
   signature:
@@ -1253,12 +1253,12 @@
     to: return
   - from: argument(2)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_crypto_stream_keygen
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     function: sodium_crypto_stream_xor
   signature:
@@ -1277,7 +1277,7 @@
     to: return
   - from: argument(2)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_hex2bin
   signature:
@@ -1293,7 +1293,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_increment
   signature:
@@ -1302,7 +1302,7 @@
       type: string
       byRef: true
     returnType: void
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_memcmp
   signature:
@@ -1312,7 +1312,7 @@
     - name: string2
       type: string
     returnType: int
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_memzero
   signature:
@@ -1321,7 +1321,7 @@
       type: string
       byRef: true
     returnType: void
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_pad
   signature:
@@ -1334,7 +1334,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]
 - subject:
     function: sodium_unpad
   signature:
@@ -1347,4 +1347,4 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [sodiumexception]
+  throws: [sodiumexception]

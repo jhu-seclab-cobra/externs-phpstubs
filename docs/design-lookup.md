@@ -17,8 +17,8 @@ types: [design-merge.md](design-merge.md). Fold algorithm:
 - **Abstract:** `BuiltinLookup` (interface: every read of one merge),
   `Fact` (sealed interface)
 - **External types (commons-phpmodels):** `DocumentSetLoader`,
-  `DocumentSet`, `ResourceOpener`, `CategoryMappingLoader`,
-  `CategoryMapping`, `ModelEntry`, `ModelSubject` and its seven subtypes,
+  `DocumentSet`, `ResourceOpener`, `VocabularyMappingLoader`,
+  `VocabularyMapping`, `ModelEntry`, `ModelSubject` and its seven subtypes,
   `ArgPattern`, `SignatureInfo` and its four subtypes, `SinkDecl`,
   `SourceDecl`, `SanitizerDecl`, `ArgumentCheck`, `Propagation`, `CharacterClass`,
   `ReturnKind`, `Vocabulary`, `TaintPolicy`, `VulnTypeId`, `SourceKindId`, `Precedence`, `Verification`

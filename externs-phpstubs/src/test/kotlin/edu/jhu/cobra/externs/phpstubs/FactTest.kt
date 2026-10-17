@@ -104,7 +104,7 @@ internal class FactTest {
 
     @Test
     fun `a raises fact holds the whole class set`() {
-        val document = "- subject: {function: f}\n  raises: [valueerror, \\jsonexception]\n"
+        val document = "- subject: {function: f}\n  throws: [valueerror, \\jsonexception]\n"
         val record = Merge.of(listOf(TestSets.mount(0, Verification.MANUAL, document))).records.getValue(f)
         val classes = setOf(ClassSubject("valueerror"), ClassSubject("jsonexception"))
         assertEquals(RaisesFact(f, null, classes), record.raises.single())
@@ -112,7 +112,7 @@ internal class FactTest {
 
     @Test
     fun `an empty raises section is a fact`() {
-        val document = "- subject: {function: f}\n  raises: []\n"
+        val document = "- subject: {function: f}\n  throws: []\n"
         val record = Merge.of(listOf(TestSets.mount(0, Verification.MANUAL, document))).records.getValue(f)
         assertEquals(RaisesFact(f, null, emptySet()), record.raises.single())
         assertEquals(record.raises, record.facts)

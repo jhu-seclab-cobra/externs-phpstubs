@@ -7,7 +7,7 @@
     - name: filename
       type: string
     returnType: int|false
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: exif_read_data
   signature:
@@ -24,7 +24,7 @@
       type: bool
       optional: true
     returnType: array|false
-  raises: [typeerror, valueerror]
+  throws: [typeerror, valueerror]
 - subject:
     function: exif_tagname
   signature:
@@ -32,7 +32,7 @@
     - name: index
       type: int
     returnType: string|false
-  raises: []
+  throws: []
 - subject:
     function: exif_thumbnail
   signature:
@@ -55,4 +55,4 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]

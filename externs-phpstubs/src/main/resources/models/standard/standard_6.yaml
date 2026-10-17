@@ -362,7 +362,7 @@
     - name: num
       type: float
     returnType: float
-  raises: []
+  throws: []
 - subject:
     function: sscanf
   signature:
@@ -377,7 +377,7 @@
       byRef: true
       variadic: true
     returnType: array|int|null
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: ssdeep_fuzzy_compare
   signature:
@@ -867,7 +867,7 @@
     - name: filename
       type: string
     returnType: array|false
-  raises: []
+  throws: []
 - subject:
     function: stats_absolute_deviation
   signature:
@@ -1794,7 +1794,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: str_ends_with
   signature:
@@ -1807,7 +1807,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: str_getcsv
   signature:
@@ -1824,7 +1824,7 @@
       type: string
       optional: true
     returnType: array
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: str_ireplace
   signature:
@@ -1847,7 +1847,7 @@
     to: return
   - from: argument(2)
     to: return
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     function: str_pad
   signature:
@@ -1866,7 +1866,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: str_repeat
   signature:
@@ -1879,7 +1879,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: str_replace
   signature:
@@ -1902,7 +1902,7 @@
     to: return
   - from: argument(2)
     to: return
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     function: str_rot13
   signature:
@@ -1913,7 +1913,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: str_shuffle
   signature:
@@ -1924,7 +1924,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: str_split
   signature:
@@ -1938,7 +1938,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: str_starts_with
   signature:
@@ -1951,7 +1951,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: str_word_count
   signature:
@@ -1968,7 +1968,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: strchr
   signature:
@@ -1986,7 +1986,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: strcoll
   signature:
@@ -1996,7 +1996,7 @@
     - name: string2
       type: string
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: strcspn
   signature:
@@ -2012,7 +2012,7 @@
       type: ?int
       optional: true
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: strip_tags
   signature:
@@ -2023,7 +2023,7 @@
       type: array|string|null
       optional: true
     returnType: string
-  raises: []
+  throws: []
 - subject:
     function: stripcslashes
   signature:
@@ -2034,7 +2034,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: stripos
   signature:
@@ -2047,7 +2047,7 @@
       type: int
       optional: true
     returnType: int|false
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: stripslashes
   signature:
@@ -2058,7 +2058,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: stristr
   signature:
@@ -2076,7 +2076,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: strnatcasecmp
   signature:
@@ -2086,7 +2086,7 @@
     - name: string2
       type: string
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: strnatcmp
   signature:
@@ -2096,7 +2096,7 @@
     - name: string2
       type: string
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: strpbrk
   signature:
@@ -2111,7 +2111,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: strpos
   signature:
@@ -2124,7 +2124,7 @@
       type: int
       optional: true
     returnType: int|false
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: strptime
   signature:
@@ -2134,7 +2134,7 @@
     - name: format
       type: string
     returnType: array|false
-  raises: []
+  throws: []
 - subject:
     function: strrchr
   signature:
@@ -2152,7 +2152,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: strrev
   signature:
@@ -2163,7 +2163,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: strripos
   signature:
@@ -2176,7 +2176,7 @@
       type: int
       optional: true
     returnType: int|false
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: strrpos
   signature:
@@ -2189,7 +2189,7 @@
       type: int
       optional: true
     returnType: int|false
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: strspn
   signature:
@@ -2205,7 +2205,7 @@
       type: ?int
       optional: true
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: strstr
   signature:
@@ -2223,7 +2223,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: strtok
   signature:
@@ -2239,7 +2239,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: strtolower
   signature:
@@ -2250,7 +2250,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: strtoupper
   signature:
@@ -2261,7 +2261,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: strtr
   signature:
@@ -2281,7 +2281,7 @@
     to: return
   - from: argument(2)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: strval
   signature:
@@ -2292,7 +2292,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: substr
   signature:
@@ -2308,7 +2308,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: substr_compare
   signature:
@@ -2326,7 +2326,7 @@
       type: bool
       optional: true
     returnType: int
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: substr_count
   signature:
@@ -2342,7 +2342,7 @@
       type: ?int
       optional: true
     returnType: int
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: substr_replace
   signature:
@@ -2360,7 +2360,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     function: suhosin_encrypt_cookie
   signature:
@@ -5635,17 +5635,17 @@
     - name: link
       type: string
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: sys_get_temp_dir
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     function: sys_getloadavg
   signature:
     returnType: array|false
-  raises: []
+  throws: []
 - subject:
     function: syslog
   signature:
@@ -5655,7 +5655,7 @@
     - name: message
       type: string
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     function: system
   signature:
@@ -5667,7 +5667,7 @@
       optional: true
       byRef: true
     returnType: string|false
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: taint
   signature:
@@ -5685,7 +5685,7 @@
     - name: num
       type: float
     returnType: float
-  raises: []
+  throws: []
 - subject:
     function: tanh
   signature:
@@ -5693,7 +5693,7 @@
     - name: num
       type: float
     returnType: float
-  raises: []
+  throws: []
 - subject:
     function: tcpwrap_check
   signature:
@@ -5722,7 +5722,7 @@
       type: ?int
       optional: true
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: trader_acos
   signature:

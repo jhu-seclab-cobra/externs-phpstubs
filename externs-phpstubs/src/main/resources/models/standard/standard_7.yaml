@@ -2757,7 +2757,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: uasort
   signature:
@@ -2768,7 +2768,7 @@
     - name: callback
       type: callable
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     function: ucfirst
   signature:
@@ -2779,7 +2779,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: ucwords
   signature:
@@ -2793,7 +2793,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: udm_add_search_limit
   signature:
@@ -3043,7 +3043,7 @@
     - name: callback
       type: callable
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     function: umask
   signature:
@@ -3052,7 +3052,7 @@
       type: ?int
       optional: true
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: uniqid
   signature:
@@ -3067,7 +3067,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: unpack
   signature:
@@ -3083,7 +3083,7 @@
   propagation:
   - from: argument(1)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: unregister_tick_function
   signature:
@@ -3091,7 +3091,7 @@
     - name: callback
       type: callable
     returnType: void
-  raises: [error]
+  throws: [error]
 - subject:
     function: unserialize
   signature:
@@ -3102,7 +3102,7 @@
       type: array
       optional: true
     returnType: mixed
-  raises: [typeerror, valueerror]
+  throws: [typeerror, valueerror]
 - subject:
     function: untaint
   signature:
@@ -3412,7 +3412,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: urlencode
   signature:
@@ -3420,7 +3420,7 @@
     - name: string
       type: string
     returnType: string
-  raises: []
+  throws: []
 - subject:
     function: usleep
   signature:
@@ -3428,7 +3428,7 @@
     - name: microseconds
       type: int
     returnType: void
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: usort
   signature:
@@ -3439,7 +3439,7 @@
     - name: callback
       type: callable
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     function: utf8_decode
   signature:
@@ -3450,7 +3450,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: utf8_encode
   signature:
@@ -3461,7 +3461,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: uv_accept
   signature:
@@ -5581,7 +5581,7 @@
       optional: true
       variadic: true
     returnType: void
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     function: var_export
   signature:
@@ -5595,7 +5595,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     function: version_compare
   signature:
@@ -5608,7 +5608,7 @@
       type: ?string
       optional: true
     returnType: int|bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: vfprintf
   signature:
@@ -5620,7 +5620,7 @@
     - name: values
       type: array
     returnType: int
-  raises: [argumentcounterror, error, typeerror, valueerror]
+  throws: [argumentcounterror, error, typeerror, valueerror]
 - subject:
     function: virtual
   signature:
@@ -5628,7 +5628,7 @@
     - name: uri
       type: string
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: vpopmail_add_alias_domain
   signature:
@@ -5813,7 +5813,7 @@
     - name: values
       type: array
     returnType: int
-  raises: [argumentcounterror, error, valueerror]
+  throws: [argumentcounterror, error, valueerror]
 - subject:
     function: vsprintf
   signature:
@@ -5826,7 +5826,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [argumentcounterror, error, valueerror]
+  throws: [argumentcounterror, error, valueerror]
 - subject:
     function: w32api_deftype
   signature:
@@ -6306,7 +6306,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: xattr_get
   signature:

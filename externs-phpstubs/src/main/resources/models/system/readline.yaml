@@ -11,7 +11,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: readline_add_history
   signature:
@@ -19,7 +19,7 @@
     - name: prompt
       type: string
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     function: readline_callback_handler_install
   signature:
@@ -29,22 +29,22 @@
     - name: callback
       type: callable
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     function: readline_callback_handler_remove
   signature:
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: readline_callback_read_char
   signature:
     returnType: void
-  raises: []
+  throws: []
 - subject:
     function: readline_clear_history
   signature:
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     function: readline_completion_function
   signature:
@@ -52,7 +52,7 @@
     - name: callback
       type: callable
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: readline_info
   signature:
@@ -69,17 +69,17 @@
     to: return
   - from: argument(1)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: readline_list_history
   signature:
     returnType: array
-  raises: []
+  throws: []
 - subject:
     function: readline_on_new_line
   signature:
     returnType: void
-  raises: []
+  throws: []
 - subject:
     function: readline_read_history
   signature:
@@ -88,12 +88,12 @@
       type: ?string
       optional: true
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: readline_redisplay
   signature:
     returnType: void
-  raises: []
+  throws: []
 - subject:
     function: readline_write_history
   signature:
@@ -102,4 +102,4 @@
       type: ?string
       optional: true
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]

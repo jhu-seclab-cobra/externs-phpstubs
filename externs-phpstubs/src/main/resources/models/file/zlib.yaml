@@ -7,7 +7,7 @@
     - name: stream
       type: mixed
     returnType: bool
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     function: gzcompress
   signature:
@@ -24,7 +24,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: gzdecode
   signature:
@@ -38,7 +38,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: gzdeflate
   signature:
@@ -55,7 +55,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: gzencode
   signature:
@@ -72,7 +72,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: gzeof
   signature:
@@ -80,7 +80,7 @@
     - name: stream
       type: mixed
     returnType: bool
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     function: gzfile
   signature:
@@ -91,7 +91,7 @@
       type: bool
       optional: true
     returnType: array|false
-  raises: [typeerror, valueerror]
+  throws: [typeerror, valueerror]
 - subject:
     function: gzgetc
   signature:
@@ -99,7 +99,7 @@
     - name: stream
       type: mixed
     returnType: string|false
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     function: gzgets
   signature:
@@ -110,7 +110,7 @@
       type: ?int
       optional: true
     returnType: string|false
-  raises: [typeerror, valueerror]
+  throws: [typeerror, valueerror]
 - subject:
     function: gzinflate
   signature:
@@ -124,7 +124,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: gzopen
   signature:
@@ -144,7 +144,7 @@
     to: return
   - from: argument(2)
     to: return
-  raises: [typeerror, valueerror]
+  throws: [typeerror, valueerror]
 - subject:
     function: gzpassthru
   signature:
@@ -152,7 +152,7 @@
     - name: stream
       type: mixed
     returnType: int
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     function: gzputs
   signature:
@@ -165,7 +165,7 @@
       type: ?int
       optional: true
     returnType: int|false
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     function: gzread
   signature:
@@ -175,7 +175,7 @@
     - name: length
       type: int
     returnType: string|false
-  raises: [typeerror, valueerror]
+  throws: [typeerror, valueerror]
 - subject:
     function: gzrewind
   signature:
@@ -183,7 +183,7 @@
     - name: stream
       type: mixed
     returnType: bool
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     function: gzseek
   signature:
@@ -196,7 +196,7 @@
       type: int
       optional: true
     returnType: int
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     function: gztell
   signature:
@@ -204,7 +204,7 @@
     - name: stream
       type: mixed
     returnType: int|false
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     function: gzuncompress
   signature:
@@ -218,7 +218,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: gzwrite
   signature:
@@ -231,7 +231,7 @@
       type: ?int
       optional: true
     returnType: int|false
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     class: deflatecontext
   signature:
@@ -257,7 +257,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: deflate_init
   signature:
@@ -273,7 +273,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [typeerror, valueerror]
+  throws: [typeerror, valueerror]
 - subject:
     function: inflate_add
   signature:
@@ -291,7 +291,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: inflate_get_read_len
   signature:
@@ -299,7 +299,7 @@
     - name: context
       type: InflateContext
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: inflate_get_status
   signature:
@@ -307,7 +307,7 @@
     - name: context
       type: InflateContext
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: inflate_init
   signature:
@@ -323,7 +323,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [typeerror, valueerror]
+  throws: [typeerror, valueerror]
 - subject:
     function: ob_gzhandler
   signature:
@@ -336,7 +336,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: readgzfile
   signature:
@@ -347,7 +347,7 @@
       type: bool
       optional: true
     returnType: int|false
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: zlib_decode
   signature:
@@ -361,7 +361,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: zlib_encode
   signature:
@@ -377,9 +377,9 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: zlib_get_coding_type
   signature:
     returnType: string|false
-  raises: []
+  throws: []

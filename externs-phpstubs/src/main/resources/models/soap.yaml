@@ -38,7 +38,7 @@
       type: string|int|null
       optional: true
     returnType: mixed
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: SoapParam::__construct
   signature:
@@ -48,7 +48,7 @@
     - name: name
       type: string
     returnType: mixed
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: SoapVar::__construct
   signature:
@@ -70,7 +70,7 @@
       type: ?string
       optional: true
     returnType: mixed
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     class: soapclient
   signature:
@@ -91,7 +91,7 @@
     - name: object
       type: mixed
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: use_soap_error_handler
   signature:
@@ -100,7 +100,7 @@
       type: bool
       optional: true
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     method: SoapClient::__call
   signature:
@@ -110,7 +110,7 @@
     - name: args
       type: array
     returnType: mixed
-  raises: [soapfault]
+  throws: [soapfault]
 - subject:
     method: SoapClient::__construct
   signature:
@@ -121,7 +121,7 @@
       type: array
       optional: true
     returnType: mixed
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     method: SoapClient::__doRequest
   signature:
@@ -141,42 +141,42 @@
       type: ?string
       optional: true
     returnType: ?string
-  raises: [random\randomexception, typeerror, valueerror]
+  throws: [random\randomexception, typeerror, valueerror]
 - subject:
     method: SoapClient::__getCookies
   signature:
     returnType: array
-  raises: []
+  throws: []
 - subject:
     method: SoapClient::__getFunctions
   signature:
     returnType: ?array
-  raises: []
+  throws: []
 - subject:
     method: SoapClient::__getLastRequest
   signature:
     returnType: ?string
-  raises: []
+  throws: []
 - subject:
     method: SoapClient::__getLastRequestHeaders
   signature:
     returnType: ?string
-  raises: []
+  throws: []
 - subject:
     method: SoapClient::__getLastResponse
   signature:
     returnType: ?string
-  raises: []
+  throws: []
 - subject:
     method: SoapClient::__getLastResponseHeaders
   signature:
     returnType: ?string
-  raises: []
+  throws: []
 - subject:
     method: SoapClient::__getTypes
   signature:
     returnType: ?array
-  raises: []
+  throws: []
 - subject:
     method: SoapClient::__setCookie
   signature:
@@ -187,7 +187,7 @@
       type: ?string
       optional: true
     returnType: void
-  raises: []
+  throws: []
 - subject:
     method: SoapClient::__setLocation
   signature:
@@ -196,7 +196,7 @@
       type: ?string
       optional: true
     returnType: ?string
-  raises: []
+  throws: []
 - subject:
     method: SoapClient::__setSoapHeaders
   signature:
@@ -205,7 +205,7 @@
       type: mixed
       optional: true
     returnType: bool
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     method: SoapClient::__soapCall
   signature:
@@ -225,7 +225,7 @@
       optional: true
       byRef: true
     returnType: mixed
-  raises: [error, soapfault, typeerror]
+  throws: [error, soapfault, typeerror]
 - subject:
     method: SoapFault::__construct
   signature:
@@ -250,12 +250,12 @@
       type: string
       optional: true
     returnType: mixed
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: SoapFault::__toString
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     method: SoapServer::__construct
   signature:
@@ -266,12 +266,12 @@
       type: array
       optional: true
     returnType: mixed
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     method: SoapServer::__getLastResponse
   signature:
     returnType: ?string
-  raises: [error]
+  throws: [error]
 - subject:
     method: SoapServer::addFunction
   signature:
@@ -279,7 +279,7 @@
     - name: functions
       type: mixed
     returnType: void
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     method: SoapServer::addSoapHeader
   signature:
@@ -287,7 +287,7 @@
     - name: header
       type: SoapHeader
     returnType: void
-  raises: [error]
+  throws: [error]
 - subject:
     method: SoapServer::fault
   signature:
@@ -309,12 +309,12 @@
       type: string
       optional: true
     returnType: void
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     method: SoapServer::getFunctions
   signature:
     returnType: array
-  raises: [error]
+  throws: [error]
 - subject:
     method: SoapServer::handle
   signature:
@@ -323,7 +323,7 @@
       type: ?string
       optional: true
     returnType: void
-  raises: [dateerror, error, random\brokenrandomengineerror, random\randomexception, typeerror, valueerror]
+  throws: [dateerror, error, random\brokenrandomengineerror, random\randomexception, typeerror, valueerror]
 - subject:
     method: SoapServer::setClass
   signature:
@@ -335,7 +335,7 @@
       optional: true
       variadic: true
     returnType: void
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: SoapServer::setObject
   signature:
@@ -343,7 +343,7 @@
     - name: object
       type: object
     returnType: void
-  raises: [error]
+  throws: [error]
 - subject:
     method: SoapServer::setPersistence
   signature:
@@ -351,4 +351,4 @@
     - name: mode
       type: int
     returnType: void
-  raises: [error, valueerror]
+  throws: [error, valueerror]

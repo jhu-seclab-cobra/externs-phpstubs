@@ -52,17 +52,17 @@
       type: ?Uri\Rfc3986\Uri
       optional: true
     returnType: mixed
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: Uri\Rfc3986\Uri::__debugInfo
   signature:
     returnType: array
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: Uri\Rfc3986\Uri::__serialize
   signature:
     returnType: array
-  raises: [uri\urierror]
+  throws: [uri\urierror]
 - subject:
     method: Uri\Rfc3986\Uri::__unserialize
   signature:
@@ -70,7 +70,7 @@
     - name: data
       type: array
     returnType: void
-  raises: [error, exception]
+  throws: [error, exception]
 - subject:
     method: Uri\Rfc3986\Uri::equals
   signature:
@@ -81,92 +81,92 @@
       type: Uri\UriComparisonMode
       optional: true
     returnType: bool
-  raises: [uri\urierror]
+  throws: [uri\urierror]
 - subject:
     method: Uri\Rfc3986\Uri::getFragment
   signature:
     returnType: ?string
-  raises: [uri\urierror]
+  throws: [uri\urierror]
 - subject:
     method: Uri\Rfc3986\Uri::getHost
   signature:
     returnType: ?string
-  raises: [uri\urierror]
+  throws: [uri\urierror]
 - subject:
     method: Uri\Rfc3986\Uri::getPassword
   signature:
     returnType: ?string
-  raises: [uri\urierror]
+  throws: [uri\urierror]
 - subject:
     method: Uri\Rfc3986\Uri::getPath
   signature:
     returnType: string
-  raises: [uri\urierror]
+  throws: [uri\urierror]
 - subject:
     method: Uri\Rfc3986\Uri::getPort
   signature:
     returnType: ?int
-  raises: [uri\urierror]
+  throws: [uri\urierror]
 - subject:
     method: Uri\Rfc3986\Uri::getQuery
   signature:
     returnType: ?string
-  raises: [uri\urierror]
+  throws: [uri\urierror]
 - subject:
     method: Uri\Rfc3986\Uri::getRawFragment
   signature:
     returnType: ?string
-  raises: [uri\urierror]
+  throws: [uri\urierror]
 - subject:
     method: Uri\Rfc3986\Uri::getRawHost
   signature:
     returnType: ?string
-  raises: [uri\urierror]
+  throws: [uri\urierror]
 - subject:
     method: Uri\Rfc3986\Uri::getRawPassword
   signature:
     returnType: ?string
-  raises: [uri\urierror]
+  throws: [uri\urierror]
 - subject:
     method: Uri\Rfc3986\Uri::getRawPath
   signature:
     returnType: string
-  raises: [uri\urierror]
+  throws: [uri\urierror]
 - subject:
     method: Uri\Rfc3986\Uri::getRawQuery
   signature:
     returnType: ?string
-  raises: [uri\urierror]
+  throws: [uri\urierror]
 - subject:
     method: Uri\Rfc3986\Uri::getRawScheme
   signature:
     returnType: ?string
-  raises: [uri\urierror]
+  throws: [uri\urierror]
 - subject:
     method: Uri\Rfc3986\Uri::getRawUserInfo
   signature:
     returnType: ?string
-  raises: [error]
+  throws: [error]
 - subject:
     method: Uri\Rfc3986\Uri::getRawUsername
   signature:
     returnType: ?string
-  raises: [uri\urierror]
+  throws: [uri\urierror]
 - subject:
     method: Uri\Rfc3986\Uri::getScheme
   signature:
     returnType: ?string
-  raises: [uri\urierror]
+  throws: [uri\urierror]
 - subject:
     method: Uri\Rfc3986\Uri::getUserInfo
   signature:
     returnType: ?string
-  raises: [error]
+  throws: [error]
 - subject:
     method: Uri\Rfc3986\Uri::getUsername
   signature:
     returnType: ?string
-  raises: [uri\urierror]
+  throws: [uri\urierror]
 - subject:
     method: Uri\Rfc3986\Uri::parse
   signature:
@@ -177,7 +177,7 @@
       type: ?Uri\Rfc3986\Uri
       optional: true
     returnType: ?static
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: Uri\Rfc3986\Uri::resolve
   signature:
@@ -185,17 +185,17 @@
     - name: uri
       type: string
     returnType: static
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: Uri\Rfc3986\Uri::toRawString
   signature:
     returnType: string
-  raises: [uri\urierror]
+  throws: [uri\urierror]
 - subject:
     method: Uri\Rfc3986\Uri::toString
   signature:
     returnType: string
-  raises: [uri\urierror]
+  throws: [uri\urierror]
 - subject:
     method: Uri\Rfc3986\Uri::withFragment
   signature:
@@ -203,7 +203,7 @@
     - name: fragment
       type: ?string
     returnType: static
-  raises: [error]
+  throws: [error]
 - subject:
     method: Uri\Rfc3986\Uri::withHost
   signature:
@@ -211,7 +211,7 @@
     - name: host
       type: ?string
     returnType: static
-  raises: [error]
+  throws: [error]
 - subject:
     method: Uri\Rfc3986\Uri::withPath
   signature:
@@ -219,7 +219,7 @@
     - name: path
       type: string
     returnType: static
-  raises: [error]
+  throws: [error]
 - subject:
     method: Uri\Rfc3986\Uri::withPort
   signature:
@@ -227,7 +227,7 @@
     - name: port
       type: ?int
     returnType: static
-  raises: [error]
+  throws: [error]
 - subject:
     method: Uri\Rfc3986\Uri::withQuery
   signature:
@@ -235,7 +235,7 @@
     - name: query
       type: ?string
     returnType: static
-  raises: [error]
+  throws: [error]
 - subject:
     method: Uri\Rfc3986\Uri::withScheme
   signature:
@@ -243,7 +243,7 @@
     - name: scheme
       type: ?string
     returnType: static
-  raises: [error]
+  throws: [error]
 - subject:
     method: Uri\Rfc3986\Uri::withUserInfo
   signature:
@@ -251,7 +251,7 @@
     - name: userinfo
       type: ?string
     returnType: static
-  raises: [uri\invaliduriexception, uri\urierror]
+  throws: [uri\invaliduriexception, uri\urierror]
 - subject:
     method: Uri\WhatWg\InvalidUrlException::__construct
   signature:
@@ -269,7 +269,7 @@
       type: ?Throwable
       optional: true
     returnType: mixed
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: Uri\WhatWg\Url::__construct
   signature:
@@ -284,17 +284,17 @@
       optional: true
       byRef: true
     returnType: mixed
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: Uri\WhatWg\Url::__debugInfo
   signature:
     returnType: array
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: Uri\WhatWg\Url::__serialize
   signature:
     returnType: array
-  raises: [uri\urierror]
+  throws: [uri\urierror]
 - subject:
     method: Uri\WhatWg\Url::__unserialize
   signature:
@@ -302,7 +302,7 @@
     - name: data
       type: array
     returnType: void
-  raises: [error, exception]
+  throws: [error, exception]
 - subject:
     method: Uri\WhatWg\Url::equals
   signature:
@@ -313,52 +313,52 @@
       type: Uri\UriComparisonMode
       optional: true
     returnType: bool
-  raises: [uri\urierror]
+  throws: [uri\urierror]
 - subject:
     method: Uri\WhatWg\Url::getAsciiHost
   signature:
     returnType: ?string
-  raises: [uri\urierror]
+  throws: [uri\urierror]
 - subject:
     method: Uri\WhatWg\Url::getFragment
   signature:
     returnType: ?string
-  raises: [uri\urierror]
+  throws: [uri\urierror]
 - subject:
     method: Uri\WhatWg\Url::getPassword
   signature:
     returnType: ?string
-  raises: [uri\urierror]
+  throws: [uri\urierror]
 - subject:
     method: Uri\WhatWg\Url::getPath
   signature:
     returnType: string
-  raises: [uri\urierror]
+  throws: [uri\urierror]
 - subject:
     method: Uri\WhatWg\Url::getPort
   signature:
     returnType: ?int
-  raises: [uri\urierror]
+  throws: [uri\urierror]
 - subject:
     method: Uri\WhatWg\Url::getQuery
   signature:
     returnType: ?string
-  raises: [uri\urierror]
+  throws: [uri\urierror]
 - subject:
     method: Uri\WhatWg\Url::getScheme
   signature:
     returnType: string
-  raises: [uri\urierror]
+  throws: [uri\urierror]
 - subject:
     method: Uri\WhatWg\Url::getUnicodeHost
   signature:
     returnType: ?string
-  raises: [uri\urierror]
+  throws: [uri\urierror]
 - subject:
     method: Uri\WhatWg\Url::getUsername
   signature:
     returnType: ?string
-  raises: [uri\urierror]
+  throws: [uri\urierror]
 - subject:
     method: Uri\WhatWg\Url::parse
   signature:
@@ -373,7 +373,7 @@
       optional: true
       byRef: true
     returnType: ?static
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: Uri\WhatWg\Url::resolve
   signature:
@@ -385,17 +385,17 @@
       optional: true
       byRef: true
     returnType: static
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: Uri\WhatWg\Url::toAsciiString
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     method: Uri\WhatWg\Url::toUnicodeString
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     method: Uri\WhatWg\Url::withFragment
   signature:
@@ -403,7 +403,7 @@
     - name: fragment
       type: ?string
     returnType: static
-  raises: [error]
+  throws: [error]
 - subject:
     method: Uri\WhatWg\Url::withHost
   signature:
@@ -411,7 +411,7 @@
     - name: host
       type: ?string
     returnType: static
-  raises: [error]
+  throws: [error]
 - subject:
     method: Uri\WhatWg\Url::withPassword
   signature:
@@ -419,7 +419,7 @@
     - name: password
       type: ?string
     returnType: static
-  raises: [error]
+  throws: [error]
 - subject:
     method: Uri\WhatWg\Url::withPath
   signature:
@@ -427,7 +427,7 @@
     - name: path
       type: string
     returnType: static
-  raises: [error]
+  throws: [error]
 - subject:
     method: Uri\WhatWg\Url::withPort
   signature:
@@ -435,7 +435,7 @@
     - name: port
       type: ?int
     returnType: static
-  raises: [error]
+  throws: [error]
 - subject:
     method: Uri\WhatWg\Url::withQuery
   signature:
@@ -443,7 +443,7 @@
     - name: query
       type: ?string
     returnType: static
-  raises: [error]
+  throws: [error]
 - subject:
     method: Uri\WhatWg\Url::withScheme
   signature:
@@ -451,7 +451,7 @@
     - name: scheme
       type: string
     returnType: static
-  raises: [error]
+  throws: [error]
 - subject:
     method: Uri\WhatWg\Url::withUsername
   signature:
@@ -459,7 +459,7 @@
     - name: username
       type: ?string
     returnType: static
-  raises: [error]
+  throws: [error]
 - subject:
     method: Uri\WhatWg\UrlValidationError::__construct
   signature:
@@ -471,4 +471,4 @@
     - name: failure
       type: bool
     returnType: mixed
-  raises: []
+  throws: []

@@ -20,17 +20,17 @@
       type: int
       optional: true
     returnType: mixed
-  raises: []
+  throws: []
 - subject:
     method: PhpToken::__toString
   signature:
     returnType: string
-  raises: [error]
+  throws: [error]
 - subject:
     method: PhpToken::getTokenName
   signature:
     returnType: ?string
-  raises: [error]
+  throws: [error]
 - subject:
     method: PhpToken::is
   signature:
@@ -38,12 +38,12 @@
     - name: kind
       type: mixed
     returnType: bool
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: PhpToken::isIgnorable
   signature:
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: PhpToken::tokenize
   signature:
@@ -54,7 +54,7 @@
       type: int
       optional: true
     returnType: array
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     function: token_get_all
   signature:
@@ -65,7 +65,7 @@
       type: int
       optional: true
     returnType: array
-  raises: []
+  throws: []
 - subject:
     function: token_name
   signature:
@@ -73,4 +73,4 @@
     - name: id
       type: int
     returnType: string
-  raises: []
+  throws: []

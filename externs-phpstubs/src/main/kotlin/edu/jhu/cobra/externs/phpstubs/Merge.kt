@@ -148,7 +148,7 @@ internal class Merge private constructor(
                 }
 
                 OverrideUnit.RAISES -> {
-                    raises += RaisesFact(owner, condition, body.raises!!)
+                    raises += RaisesFact(owner, condition, body.throws!!)
                 }
             }
         }
@@ -203,7 +203,7 @@ internal class Merge private constructor(
                 OverrideUnit.SOURCES.takeIf { entry.body.sources != null },
                 OverrideUnit.SINKS.takeIf { entry.body.sinks != null },
                 OverrideUnit.SANITIZERS.takeIf { entry.body.sanitizers != null },
-                OverrideUnit.RAISES.takeIf { entry.body.raises != null },
+                OverrideUnit.RAISES.takeIf { entry.body.throws != null },
             )
     }
 }

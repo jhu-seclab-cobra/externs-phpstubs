@@ -15,7 +15,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     function: simplexml_load_file
   signature:
@@ -46,7 +46,7 @@
     to: return
   - from: argument(4)
     to: return
-  raises: [typeerror, valueerror]
+  throws: [typeerror, valueerror]
 - subject:
     function: simplexml_load_string
   signature:
@@ -77,7 +77,7 @@
     to: return
   - from: argument(4)
     to: return
-  raises: [typeerror, valueerror]
+  throws: [typeerror, valueerror]
 - subject:
     class: simplexmliterator
   signature:
@@ -107,17 +107,17 @@
       type: bool
       optional: true
     returnType: mixed
-  raises: [exception]
+  throws: [exception]
 - subject:
     method: SimpleXMLElement::__debugInfo
   signature:
     returnType: ?array
-  raises: [error]
+  throws: [error]
 - subject:
     method: SimpleXMLElement::__toString
   signature:
     returnType: string
-  raises: [error]
+  throws: [error]
 - subject:
     method: SimpleXMLElement::addAttribute
   signature:
@@ -130,7 +130,7 @@
       type: ?string
       optional: true
     returnType: void
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     method: SimpleXMLElement::addChild
   signature:
@@ -144,7 +144,7 @@
       type: ?string
       optional: true
     returnType: ?SimpleXMLElement
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     method: SimpleXMLElement::asXML
   signature:
@@ -153,7 +153,7 @@
       type: ?string
       optional: true
     returnType: string|bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     method: SimpleXMLElement::attributes
   signature:
@@ -165,7 +165,7 @@
       type: bool
       optional: true
     returnType: ?SimpleXMLElement
-  raises: [error]
+  throws: [error]
 - subject:
     method: SimpleXMLElement::children
   signature:
@@ -177,22 +177,22 @@
       type: bool
       optional: true
     returnType: ?SimpleXMLElement
-  raises: [error]
+  throws: [error]
 - subject:
     method: SimpleXMLElement::count
   signature:
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     method: SimpleXMLElement::current
   signature:
     returnType: SimpleXMLElement
-  raises: [error]
+  throws: [error]
 - subject:
     method: SimpleXMLElement::getChildren
   signature:
     returnType: ?SimpleXMLElement
-  raises: []
+  throws: []
 - subject:
     method: SimpleXMLElement::getDocNamespaces
   signature:
@@ -204,12 +204,12 @@
       type: bool
       optional: true
     returnType: array|false
-  raises: [error]
+  throws: [error]
 - subject:
     method: SimpleXMLElement::getName
   signature:
     returnType: string
-  raises: [error]
+  throws: [error]
 - subject:
     method: SimpleXMLElement::getNamespaces
   signature:
@@ -218,22 +218,22 @@
       type: bool
       optional: true
     returnType: array
-  raises: [error]
+  throws: [error]
 - subject:
     method: SimpleXMLElement::hasChildren
   signature:
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: SimpleXMLElement::key
   signature:
     returnType: string
-  raises: [error]
+  throws: [error]
 - subject:
     method: SimpleXMLElement::next
   signature:
     returnType: void
-  raises: [error]
+  throws: [error]
 - subject:
     method: SimpleXMLElement::registerXPathNamespace
   signature:
@@ -243,12 +243,12 @@
     - name: namespace
       type: string
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: SimpleXMLElement::rewind
   signature:
     returnType: void
-  raises: [error]
+  throws: [error]
 - subject:
     method: SimpleXMLElement::saveXML
   signature:
@@ -257,12 +257,12 @@
       type: ?string
       optional: true
     returnType: string|bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     method: SimpleXMLElement::valid
   signature:
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     method: SimpleXMLElement::xpath
   signature:
@@ -270,4 +270,4 @@
     - name: expression
       type: string
     returnType: array|null|false
-  raises: [error]
+  throws: [error]

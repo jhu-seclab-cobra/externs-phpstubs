@@ -9,7 +9,7 @@
     - name: var_name
       type: string
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: filter_id
   signature:
@@ -17,7 +17,7 @@
     - name: name
       type: string
     returnType: int|false
-  raises: []
+  throws: []
 - subject:
     function: filter_input
   signature:
@@ -33,7 +33,7 @@
       type: array|int
       optional: true
     returnType: mixed
-  raises: [filter\filterfailedexception, valueerror]
+  throws: [filter\filterfailedexception, valueerror]
 - subject:
     function: filter_input_array
   signature:
@@ -52,12 +52,12 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [filter\filterfailedexception, typeerror, valueerror]
+  throws: [filter\filterfailedexception, typeerror, valueerror]
 - subject:
     function: filter_list
   signature:
     returnType: array
-  raises: []
+  throws: []
 - subject:
     function: filter_var
   signature:
@@ -71,7 +71,7 @@
       type: array|int
       optional: true
     returnType: mixed
-  raises: [filter\filterfailedexception, valueerror]
+  throws: [filter\filterfailedexception, valueerror]
 - subject:
     function: filter_var_array
   signature:
@@ -90,7 +90,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [filter\filterfailedexception, typeerror, valueerror]
+  throws: [filter\filterfailedexception, typeerror, valueerror]
 - subject:
     class: filter\filterexception
   signature:

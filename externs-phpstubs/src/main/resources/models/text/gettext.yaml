@@ -15,7 +15,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: dgettext
   signature:
@@ -30,7 +30,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: gettext
   signature:
@@ -41,7 +41,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: ngettext
   signature:
@@ -58,7 +58,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: textdomain
   signature:
@@ -70,7 +70,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: _
   signature:
@@ -81,7 +81,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: bind_textdomain_codeset
   signature:
@@ -97,7 +97,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: dcgettext
   signature:
@@ -114,7 +114,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: dcngettext
   signature:
@@ -137,7 +137,7 @@
     to: return
   - from: argument(2)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: dngettext
   signature:
@@ -158,4 +158,4 @@
     to: return
   - from: argument(2)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]

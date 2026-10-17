@@ -7,7 +7,7 @@
     - name: text
       type: mixed
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: ctype_alpha
   signature:
@@ -15,7 +15,7 @@
     - name: text
       type: mixed
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: ctype_cntrl
   signature:
@@ -23,7 +23,7 @@
     - name: text
       type: mixed
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: ctype_digit
   signature:
@@ -31,7 +31,7 @@
     - name: text
       type: mixed
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: ctype_graph
   signature:
@@ -39,7 +39,7 @@
     - name: text
       type: mixed
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: ctype_lower
   signature:
@@ -47,7 +47,7 @@
     - name: text
       type: mixed
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: ctype_print
   signature:
@@ -55,7 +55,7 @@
     - name: text
       type: mixed
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: ctype_punct
   signature:
@@ -63,7 +63,7 @@
     - name: text
       type: mixed
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: ctype_space
   signature:
@@ -71,7 +71,7 @@
     - name: text
       type: mixed
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: ctype_upper
   signature:
@@ -79,7 +79,7 @@
     - name: text
       type: mixed
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: ctype_xdigit
   signature:
@@ -87,4 +87,4 @@
     - name: text
       type: mixed
     returnType: bool
-  raises: []
+  throws: []

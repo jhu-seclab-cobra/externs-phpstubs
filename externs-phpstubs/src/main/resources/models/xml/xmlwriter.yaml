@@ -7,7 +7,7 @@
     - name: writer
       type: XMLWriter
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: xmlwriter_end_cdata
   signature:
@@ -15,7 +15,7 @@
     - name: writer
       type: XMLWriter
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: xmlwriter_end_comment
   signature:
@@ -23,7 +23,7 @@
     - name: writer
       type: XMLWriter
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: xmlwriter_end_document
   signature:
@@ -31,7 +31,7 @@
     - name: writer
       type: XMLWriter
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: xmlwriter_end_dtd
   signature:
@@ -39,7 +39,7 @@
     - name: writer
       type: XMLWriter
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: xmlwriter_end_dtd_attlist
   signature:
@@ -47,7 +47,7 @@
     - name: writer
       type: XMLWriter
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: xmlwriter_end_dtd_element
   signature:
@@ -55,7 +55,7 @@
     - name: writer
       type: XMLWriter
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: xmlwriter_end_dtd_entity
   signature:
@@ -63,7 +63,7 @@
     - name: writer
       type: XMLWriter
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: xmlwriter_end_element
   signature:
@@ -71,7 +71,7 @@
     - name: writer
       type: XMLWriter
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: xmlwriter_end_pi
   signature:
@@ -79,7 +79,7 @@
     - name: writer
       type: XMLWriter
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: xmlwriter_flush
   signature:
@@ -90,7 +90,7 @@
       type: bool
       optional: true
     returnType: string|int
-  raises: [error]
+  throws: [error]
 - subject:
     function: xmlwriter_full_end_element
   signature:
@@ -98,12 +98,12 @@
     - name: writer
       type: XMLWriter
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: xmlwriter_open_memory
   signature:
     returnType: XMLWriter|false
-  raises: []
+  throws: []
 - subject:
     function: xmlwriter_open_uri
   signature:
@@ -114,7 +114,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: xmlwriter_output_memory
   signature:
@@ -128,7 +128,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: xmlwriter_set_indent
   signature:
@@ -138,7 +138,7 @@
     - name: enable
       type: bool
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: xmlwriter_set_indent_string
   signature:
@@ -148,7 +148,7 @@
     - name: indentation
       type: string
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: xmlwriter_start_attribute
   signature:
@@ -158,7 +158,7 @@
     - name: name
       type: string
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: xmlwriter_start_attribute_ns
   signature:
@@ -172,7 +172,7 @@
     - name: namespace
       type: ?string
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: xmlwriter_start_cdata
   signature:
@@ -180,7 +180,7 @@
     - name: writer
       type: XMLWriter
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: xmlwriter_start_comment
   signature:
@@ -188,7 +188,7 @@
     - name: writer
       type: XMLWriter
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: xmlwriter_start_document
   signature:
@@ -205,7 +205,7 @@
       type: ?string
       optional: true
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: xmlwriter_start_dtd
   signature:
@@ -221,7 +221,7 @@
       type: ?string
       optional: true
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: xmlwriter_start_dtd_attlist
   signature:
@@ -231,7 +231,7 @@
     - name: name
       type: string
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: xmlwriter_start_dtd_element
   signature:
@@ -241,7 +241,7 @@
     - name: qualifiedName
       type: string
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: xmlwriter_start_dtd_entity
   signature:
@@ -253,7 +253,7 @@
     - name: isParam
       type: bool
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: xmlwriter_start_element
   signature:
@@ -263,7 +263,7 @@
     - name: name
       type: string
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: xmlwriter_start_element_ns
   signature:
@@ -277,7 +277,7 @@
     - name: namespace
       type: ?string
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: xmlwriter_start_pi
   signature:
@@ -287,7 +287,7 @@
     - name: target
       type: string
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: xmlwriter_text
   signature:
@@ -297,7 +297,7 @@
     - name: content
       type: string
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: xmlwriter_write_attribute
   signature:
@@ -309,7 +309,7 @@
     - name: value
       type: string
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: xmlwriter_write_attribute_ns
   signature:
@@ -325,7 +325,7 @@
     - name: value
       type: string
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: xmlwriter_write_cdata
   signature:
@@ -335,7 +335,7 @@
     - name: content
       type: string
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: xmlwriter_write_comment
   signature:
@@ -345,7 +345,7 @@
     - name: content
       type: string
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: xmlwriter_write_dtd
   signature:
@@ -364,7 +364,7 @@
       type: ?string
       optional: true
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: xmlwriter_write_dtd_attlist
   signature:
@@ -376,7 +376,7 @@
     - name: content
       type: string
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: xmlwriter_write_dtd_element
   signature:
@@ -388,7 +388,7 @@
     - name: content
       type: string
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: xmlwriter_write_dtd_entity
   signature:
@@ -412,7 +412,7 @@
       type: ?string
       optional: true
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: xmlwriter_write_element
   signature:
@@ -425,7 +425,7 @@
       type: ?string
       optional: true
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: xmlwriter_write_element_ns
   signature:
@@ -442,7 +442,7 @@
       type: ?string
       optional: true
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: xmlwriter_write_pi
   signature:
@@ -454,7 +454,7 @@
     - name: content
       type: string
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: xmlwriter_write_raw
   signature:
@@ -464,7 +464,7 @@
     - name: content
       type: string
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     class: xmlwriter
   signature:
@@ -473,52 +473,52 @@
     method: XMLWriter::endAttribute
   signature:
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: XMLWriter::endCdata
   signature:
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: XMLWriter::endComment
   signature:
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: XMLWriter::endDocument
   signature:
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: XMLWriter::endDtd
   signature:
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: XMLWriter::endDtdAttlist
   signature:
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: XMLWriter::endDtdElement
   signature:
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: XMLWriter::endDtdEntity
   signature:
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: XMLWriter::endElement
   signature:
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: XMLWriter::endPi
   signature:
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: XMLWriter::flush
   signature:
@@ -527,17 +527,17 @@
       type: bool
       optional: true
     returnType: string|int
-  raises: [error]
+  throws: [error]
 - subject:
     method: XMLWriter::fullEndElement
   signature:
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: XMLWriter::openMemory
   signature:
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     method: XMLWriter::openUri
   signature:
@@ -545,7 +545,7 @@
     - name: uri
       type: string
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: XMLWriter::outputMemory
   signature:
@@ -554,7 +554,7 @@
       type: bool
       optional: true
     returnType: string
-  raises: [error]
+  throws: [error]
 - subject:
     method: XMLWriter::setIndent
   signature:
@@ -562,7 +562,7 @@
     - name: enable
       type: bool
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: XMLWriter::setIndentString
   signature:
@@ -570,7 +570,7 @@
     - name: indentation
       type: string
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     method: XMLWriter::startAttribute
   signature:
@@ -578,7 +578,7 @@
     - name: name
       type: string
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     method: XMLWriter::startAttributeNs
   signature:
@@ -590,17 +590,17 @@
     - name: namespace
       type: ?string
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     method: XMLWriter::startCdata
   signature:
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: XMLWriter::startComment
   signature:
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: XMLWriter::startDocument
   signature:
@@ -615,7 +615,7 @@
       type: ?string
       optional: true
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     method: XMLWriter::startDtd
   signature:
@@ -629,7 +629,7 @@
       type: ?string
       optional: true
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: XMLWriter::startDtdAttlist
   signature:
@@ -637,7 +637,7 @@
     - name: name
       type: string
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     method: XMLWriter::startDtdElement
   signature:
@@ -645,7 +645,7 @@
     - name: qualifiedName
       type: string
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     method: XMLWriter::startDtdEntity
   signature:
@@ -655,7 +655,7 @@
     - name: isParam
       type: bool
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     method: XMLWriter::startElement
   signature:
@@ -663,7 +663,7 @@
     - name: name
       type: string
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     method: XMLWriter::startElementNs
   signature:
@@ -675,7 +675,7 @@
     - name: namespace
       type: ?string
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     method: XMLWriter::startPi
   signature:
@@ -683,7 +683,7 @@
     - name: target
       type: string
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     method: XMLWriter::text
   signature:
@@ -691,12 +691,12 @@
     - name: content
       type: string
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     method: XMLWriter::toMemory
   signature:
     returnType: static
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: XMLWriter::toStream
   signature:
@@ -704,7 +704,7 @@
     - name: stream
       type: mixed
     returnType: static
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     method: XMLWriter::toUri
   signature:
@@ -712,7 +712,7 @@
     - name: uri
       type: string
     returnType: static
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     method: XMLWriter::writeAttribute
   signature:
@@ -722,7 +722,7 @@
     - name: value
       type: string
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     method: XMLWriter::writeAttributeNs
   signature:
@@ -736,7 +736,7 @@
     - name: value
       type: string
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     method: XMLWriter::writeCdata
   signature:
@@ -744,7 +744,7 @@
     - name: content
       type: string
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     method: XMLWriter::writeComment
   signature:
@@ -752,7 +752,7 @@
     - name: content
       type: string
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     method: XMLWriter::writeDtd
   signature:
@@ -769,7 +769,7 @@
       type: ?string
       optional: true
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: XMLWriter::writeDtdAttlist
   signature:
@@ -779,7 +779,7 @@
     - name: content
       type: string
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     method: XMLWriter::writeDtdElement
   signature:
@@ -789,7 +789,7 @@
     - name: content
       type: string
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     method: XMLWriter::writeDtdEntity
   signature:
@@ -811,7 +811,7 @@
       type: ?string
       optional: true
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     method: XMLWriter::writeElement
   signature:
@@ -822,7 +822,7 @@
       type: ?string
       optional: true
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     method: XMLWriter::writeElementNs
   signature:
@@ -837,7 +837,7 @@
       type: ?string
       optional: true
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     method: XMLWriter::writePi
   signature:
@@ -847,7 +847,7 @@
     - name: content
       type: string
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     method: XMLWriter::writeRaw
   signature:
@@ -855,4 +855,4 @@
     - name: content
       type: string
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]

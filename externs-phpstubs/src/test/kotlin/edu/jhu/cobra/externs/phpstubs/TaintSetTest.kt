@@ -1,6 +1,5 @@
 package edu.jhu.cobra.externs.phpstubs
 
-import edu.jhu.cobra.commons.phpmodels.CategoryMappingLoader
 import edu.jhu.cobra.commons.phpmodels.DocumentSetLoader
 import edu.jhu.cobra.commons.phpmodels.FunctionSubject
 import edu.jhu.cobra.commons.phpmodels.MethodSubject
@@ -10,6 +9,7 @@ import edu.jhu.cobra.commons.phpmodels.Port
 import edu.jhu.cobra.commons.phpmodels.SourceKindId
 import edu.jhu.cobra.commons.phpmodels.VariableSubject
 import edu.jhu.cobra.commons.phpmodels.Vocabulary
+import edu.jhu.cobra.commons.phpmodels.VocabularyMappingLoader
 import edu.jhu.cobra.commons.phpmodels.VulnTypeId
 import edu.jhu.cobra.commons.value.IntVal
 import kotlin.test.Test
@@ -106,7 +106,7 @@ internal class TaintSetTest {
     @Test
     fun `the psalm mapping translates the taint set into the canonical vocabulary`() {
         val context = DocumentSetLoader.load(StubResources.opener(StubResources.VOCABULARY)).vocabulary
-        val mapping = TaintSetTest::class.java.getResourceAsStream(StubResources.PSALM_MAPPING)!!.use(CategoryMappingLoader::load)
+        val mapping = TaintSetTest::class.java.getResourceAsStream(StubResources.PSALM_MAPPING)!!.use(VocabularyMappingLoader::load)
         val mapped = DocumentSetLoader.load(StubResources.opener(StubResources.TAINT), context, mapping)
         assertEquals(Vocabulary.EMPTY, mapped.vocabulary)
         assertEquals(SourceKindId("user-input"), mapped.policy.single().sourceKind)

@@ -7,7 +7,7 @@
     - name: seconds
       type: int
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: pcntl_async_signals
   signature:
@@ -16,12 +16,12 @@
       type: ?bool
       optional: true
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: pcntl_errno
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: pcntl_exec
   signature:
@@ -35,17 +35,17 @@
       type: array
       optional: true
     returnType: 'false'
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: pcntl_fork
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: pcntl_get_last_error
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: pcntl_getpriority
   signature:
@@ -57,7 +57,7 @@
       type: int
       optional: true
     returnType: int|false
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: pcntl_setpriority
   signature:
@@ -71,7 +71,7 @@
       type: int
       optional: true
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: pcntl_signal
   signature:
@@ -84,12 +84,12 @@
       type: bool
       optional: true
     returnType: bool
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: pcntl_signal_dispatch
   signature:
     returnType: bool
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     function: pcntl_signal_get_handler
   signature:
@@ -97,7 +97,7 @@
     - name: signal
       type: int
     returnType: mixed
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: pcntl_sigprocmask
   signature:
@@ -111,7 +111,7 @@
       optional: true
       byRef: true
     returnType: bool
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: pcntl_sigtimedwait
   signature:
@@ -129,7 +129,7 @@
       type: int
       optional: true
     returnType: int|false
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: pcntl_sigwaitinfo
   signature:
@@ -141,7 +141,7 @@
       optional: true
       byRef: true
     returnType: int|false
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: pcntl_strerror
   signature:
@@ -149,7 +149,7 @@
     - name: error_code
       type: int
     returnType: string
-  raises: []
+  throws: []
 - subject:
     function: pcntl_unshare
   signature:
@@ -157,7 +157,7 @@
     - name: flags
       type: int
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: pcntl_wait
   signature:
@@ -173,7 +173,7 @@
       optional: true
       byRef: true
     returnType: int
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     function: pcntl_waitpid
   signature:
@@ -191,7 +191,7 @@
       optional: true
       byRef: true
     returnType: int
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     function: pcntl_wexitstatus
   signature:
@@ -199,7 +199,7 @@
     - name: status
       type: int
     returnType: int|false
-  raises: []
+  throws: []
 - subject:
     function: pcntl_wifexited
   signature:
@@ -207,7 +207,7 @@
     - name: status
       type: int
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: pcntl_wifsignaled
   signature:
@@ -215,7 +215,7 @@
     - name: status
       type: int
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: pcntl_wifstopped
   signature:
@@ -223,7 +223,7 @@
     - name: status
       type: int
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: pcntl_wstopsig
   signature:
@@ -231,7 +231,7 @@
     - name: status
       type: int
     returnType: int|false
-  raises: []
+  throws: []
 - subject:
     function: pcntl_wtermsig
   signature:
@@ -239,7 +239,7 @@
     - name: status
       type: int
     returnType: int|false
-  raises: []
+  throws: []
 - subject:
     class: pcntl\qosclass
   signature:
@@ -252,12 +252,12 @@
     - name: flags
       type: int
     returnType: int
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: pcntl_getcpu
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: pcntl_getcpuaffinity
   signature:
@@ -266,12 +266,12 @@
       type: ?int
       optional: true
     returnType: array|false
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: pcntl_getqos_class
   signature:
     returnType: Pcntl\QosClass
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     function: pcntl_rfork
   signature:
@@ -282,7 +282,7 @@
       type: int
       optional: true
     returnType: int
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: pcntl_setcpuaffinity
   signature:
@@ -294,7 +294,7 @@
       type: array
       optional: true
     returnType: bool
-  raises: [typeerror, valueerror]
+  throws: [typeerror, valueerror]
 - subject:
     function: pcntl_setns
   signature:
@@ -306,7 +306,7 @@
       type: int
       optional: true
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: pcntl_setqos_class
   signature:
@@ -315,7 +315,7 @@
       type: Pcntl\QosClass
       optional: true
     returnType: void
-  raises: [error]
+  throws: [error]
 - subject:
     function: pcntl_waitid
   signature:
@@ -338,7 +338,7 @@
       optional: true
       byRef: true
     returnType: bool
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     function: pcntl_wifcontinued
   signature:
@@ -346,4 +346,4 @@
     - name: status
       type: int
     returnType: bool
-  raises: []
+  throws: []

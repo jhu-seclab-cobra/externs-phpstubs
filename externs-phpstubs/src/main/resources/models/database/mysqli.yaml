@@ -7,7 +7,7 @@
     - name: mysql
       type: mysqli
     returnType: int|string
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_autocommit
   signature:
@@ -17,7 +17,7 @@
     - name: enable
       type: bool
     returnType: bool
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     function: mysqli_begin_transaction
   signature:
@@ -31,7 +31,7 @@
       type: ?string
       optional: true
     returnType: bool
-  raises: [error, mysqli_sql_exception, valueerror]
+  throws: [error, mysqli_sql_exception, valueerror]
 - subject:
     function: mysqli_change_user
   signature:
@@ -45,7 +45,7 @@
     - name: database
       type: ?string
     returnType: bool
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     function: mysqli_character_set_name
   signature:
@@ -56,7 +56,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_close
   signature:
@@ -64,7 +64,7 @@
     - name: mysql
       type: mysqli
     returnType: 'true'
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_commit
   signature:
@@ -78,7 +78,7 @@
       type: ?string
       optional: true
     returnType: bool
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     function: mysqli_connect
   signature:
@@ -115,17 +115,17 @@
     to: return
   - from: argument(5)
     to: return
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     function: mysqli_connect_errno
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: mysqli_connect_error
   signature:
     returnType: ?string
-  raises: []
+  throws: []
 - subject:
     function: mysqli_data_seek
   signature:
@@ -135,7 +135,7 @@
     - name: offset
       type: int
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: mysqli_debug
   signature:
@@ -143,7 +143,7 @@
     - name: options
       type: string
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     function: mysqli_disable_reads_from_master
   signature:
@@ -165,7 +165,7 @@
     - name: mysql
       type: mysqli
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_embedded_server_end
   signature:
@@ -202,7 +202,7 @@
     - name: mysql
       type: mysqli
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_error
   signature:
@@ -213,7 +213,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_error_list
   signature:
@@ -224,7 +224,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_escape_string
   signature:
@@ -239,7 +239,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_execute
   signature:
@@ -250,7 +250,7 @@
       type: ?array
       optional: true
     returnType: bool
-  raises: [error, mysqli_sql_exception, valueerror]
+  throws: [error, mysqli_sql_exception, valueerror]
 - subject:
     function: mysqli_fetch_all
   signature:
@@ -266,7 +266,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [error, mysqli_sql_exception, valueerror]
+  throws: [error, mysqli_sql_exception, valueerror]
 - subject:
     function: mysqli_fetch_array
   signature:
@@ -282,7 +282,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [error, mysqli_sql_exception, valueerror]
+  throws: [error, mysqli_sql_exception, valueerror]
 - subject:
     function: mysqli_fetch_assoc
   signature:
@@ -293,7 +293,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error, mysqli_sql_exception, valueerror]
+  throws: [error, mysqli_sql_exception, valueerror]
 - subject:
     function: mysqli_fetch_field
   signature:
@@ -304,7 +304,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_fetch_field_direct
   signature:
@@ -319,7 +319,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: mysqli_fetch_fields
   signature:
@@ -330,7 +330,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_fetch_lengths
   signature:
@@ -341,7 +341,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_fetch_object
   signature:
@@ -362,7 +362,7 @@
     to: return
   - from: argument(2)
     to: return
-  raises: [error, mysqli_sql_exception, typeerror, valueerror]
+  throws: [error, mysqli_sql_exception, typeerror, valueerror]
 - subject:
     function: mysqli_fetch_row
   signature:
@@ -373,7 +373,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error, mysqli_sql_exception, valueerror]
+  throws: [error, mysqli_sql_exception, valueerror]
 - subject:
     function: mysqli_field_count
   signature:
@@ -381,7 +381,7 @@
     - name: mysql
       type: mysqli
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_field_seek
   signature:
@@ -391,7 +391,7 @@
     - name: index
       type: int
     returnType: 'true'
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: mysqli_field_tell
   signature:
@@ -399,7 +399,7 @@
     - name: result
       type: mysqli_result
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_free_result
   signature:
@@ -407,7 +407,7 @@
     - name: result
       type: mysqli_result
     returnType: void
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_get_cache_stats
   signature:
@@ -422,7 +422,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_get_client_info
   signature:
@@ -434,17 +434,17 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: mysqli_get_client_stats
   signature:
     returnType: array
-  raises: []
+  throws: []
 - subject:
     function: mysqli_get_client_version
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: mysqli_get_connection_stats
   signature:
@@ -455,7 +455,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_get_host_info
   signature:
@@ -466,12 +466,12 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_get_links_stats
   signature:
     returnType: array
-  raises: []
+  throws: []
 - subject:
     function: mysqli_get_proto_info
   signature:
@@ -479,7 +479,7 @@
     - name: mysql
       type: mysqli
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_get_server_info
   signature:
@@ -490,7 +490,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_get_server_version
   signature:
@@ -498,7 +498,7 @@
     - name: mysql
       type: mysqli
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_get_warnings
   signature:
@@ -509,7 +509,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_info
   signature:
@@ -520,12 +520,12 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_init
   signature:
     returnType: mysqli|false
-  raises: []
+  throws: []
 - subject:
     function: mysqli_insert_id
   signature:
@@ -533,7 +533,7 @@
     - name: mysql
       type: mysqli
     returnType: int|string
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_kill
   signature:
@@ -543,7 +543,7 @@
     - name: process_id
       type: int
     returnType: bool
-  raises: [error, mysqli_sql_exception, valueerror]
+  throws: [error, mysqli_sql_exception, valueerror]
 - subject:
     function: mysqli_link_construct
   signature:
@@ -564,7 +564,7 @@
     - name: mysql
       type: mysqli
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_multi_query
   signature:
@@ -574,7 +574,7 @@
     - name: query
       type: string
     returnType: bool
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     function: mysqli_next_result
   signature:
@@ -582,7 +582,7 @@
     - name: mysql
       type: mysqli
     returnType: bool
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     function: mysqli_num_fields
   signature:
@@ -590,7 +590,7 @@
     - name: result
       type: mysqli_result
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_num_rows
   signature:
@@ -598,7 +598,7 @@
     - name: result
       type: mysqli_result
     returnType: int|string
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_options
   signature:
@@ -610,7 +610,7 @@
     - name: value
       type: mixed
     returnType: bool
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     function: mysqli_ping
   signature:
@@ -618,7 +618,7 @@
     - name: mysql
       type: mysqli
     returnType: bool
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     function: mysqli_poll
   signature:
@@ -638,7 +638,7 @@
       type: int
       optional: true
     returnType: int|false
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: mysqli_prepare
   signature:
@@ -648,7 +648,7 @@
     - name: query
       type: string
     returnType: mysqli_stmt|false
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     function: mysqli_query
   signature:
@@ -661,7 +661,7 @@
       type: int
       optional: true
     returnType: mysqli_result|bool
-  raises: [error, mysqli_sql_exception, valueerror]
+  throws: [error, mysqli_sql_exception, valueerror]
 - subject:
     function: mysqli_real_connect
   signature:
@@ -690,7 +690,7 @@
       type: int
       optional: true
     returnType: bool
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     function: mysqli_real_escape_string
   signature:
@@ -700,7 +700,7 @@
     - name: string
       type: string
     returnType: string
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_real_query
   signature:
@@ -710,7 +710,7 @@
     - name: query
       type: string
     returnType: bool
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     function: mysqli_reap_async_query
   signature:
@@ -721,7 +721,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     function: mysqli_refresh
   signature:
@@ -731,7 +731,7 @@
     - name: flags
       type: int
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_release_savepoint
   signature:
@@ -741,7 +741,7 @@
     - name: name
       type: string
     returnType: bool
-  raises: [error, mysqli_sql_exception, valueerror]
+  throws: [error, mysqli_sql_exception, valueerror]
 - subject:
     function: mysqli_report
   signature:
@@ -749,7 +749,7 @@
     - name: flags
       type: int
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     function: mysqli_rollback
   signature:
@@ -763,7 +763,7 @@
       type: ?string
       optional: true
     returnType: bool
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     function: mysqli_rpl_parse_enabled
   signature:
@@ -796,7 +796,7 @@
     - name: name
       type: string
     returnType: bool
-  raises: [error, mysqli_sql_exception, valueerror]
+  throws: [error, mysqli_sql_exception, valueerror]
 - subject:
     function: mysqli_savepoint_libmysql
   signature:
@@ -810,7 +810,7 @@
     - name: database
       type: string
     returnType: bool
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     function: mysqli_send_query
   signature:
@@ -829,7 +829,7 @@
     - name: charset
       type: string
     returnType: bool
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     function: mysqli_set_local_infile_default
   signature:
@@ -857,7 +857,7 @@
     - name: value
       type: mixed
     returnType: bool
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     function: mysqli_slave_query
   signature:
@@ -877,7 +877,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_ssl_set
   signature:
@@ -895,7 +895,7 @@
     - name: cipher_algos
       type: ?string
     returnType: 'true'
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_stat
   signature:
@@ -906,7 +906,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_stmt_affected_rows
   signature:
@@ -914,7 +914,7 @@
     - name: statement
       type: mysqli_stmt
     returnType: int|string
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_stmt_attr_get
   signature:
@@ -924,7 +924,7 @@
     - name: attribute
       type: int
     returnType: int
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: mysqli_stmt_attr_set
   signature:
@@ -936,7 +936,7 @@
     - name: value
       type: int
     returnType: bool
-  raises: [error, mysqli_sql_exception, valueerror]
+  throws: [error, mysqli_sql_exception, valueerror]
 - subject:
     function: mysqli_stmt_bind_param
   signature:
@@ -951,7 +951,7 @@
       byRef: true
       variadic: true
     returnType: bool
-  raises: [argumentcounterror, error, mysqli_sql_exception, valueerror]
+  throws: [argumentcounterror, error, mysqli_sql_exception, valueerror]
 - subject:
     function: mysqli_stmt_bind_result
   signature:
@@ -964,7 +964,7 @@
       byRef: true
       variadic: true
     returnType: bool
-  raises: [argumentcounterror, error]
+  throws: [argumentcounterror, error]
 - subject:
     function: mysqli_stmt_close
   signature:
@@ -972,7 +972,7 @@
     - name: statement
       type: mysqli_stmt
     returnType: 'true'
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_stmt_data_seek
   signature:
@@ -982,7 +982,7 @@
     - name: offset
       type: int
     returnType: void
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: mysqli_stmt_errno
   signature:
@@ -990,7 +990,7 @@
     - name: statement
       type: mysqli_stmt
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_stmt_error
   signature:
@@ -1001,7 +1001,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_stmt_error_list
   signature:
@@ -1012,7 +1012,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_stmt_execute
   signature:
@@ -1023,7 +1023,7 @@
       type: ?array
       optional: true
     returnType: bool
-  raises: [error, mysqli_sql_exception, valueerror]
+  throws: [error, mysqli_sql_exception, valueerror]
 - subject:
     function: mysqli_stmt_fetch
   signature:
@@ -1031,7 +1031,7 @@
     - name: statement
       type: mysqli_stmt
     returnType: ?bool
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     function: mysqli_stmt_field_count
   signature:
@@ -1039,7 +1039,7 @@
     - name: statement
       type: mysqli_stmt
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_stmt_free_result
   signature:
@@ -1047,7 +1047,7 @@
     - name: statement
       type: mysqli_stmt
     returnType: void
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_stmt_get_result
   signature:
@@ -1058,7 +1058,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     function: mysqli_stmt_get_warnings
   signature:
@@ -1069,7 +1069,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_stmt_init
   signature:
@@ -1080,7 +1080,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_stmt_insert_id
   signature:
@@ -1091,7 +1091,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_stmt_more_results
   signature:
@@ -1099,7 +1099,7 @@
     - name: statement
       type: mysqli_stmt
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_stmt_next_result
   signature:
@@ -1107,7 +1107,7 @@
     - name: statement
       type: mysqli_stmt
     returnType: bool
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     function: mysqli_stmt_num_rows
   signature:
@@ -1115,7 +1115,7 @@
     - name: statement
       type: mysqli_stmt
     returnType: int|string
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_stmt_param_count
   signature:
@@ -1123,7 +1123,7 @@
     - name: statement
       type: mysqli_stmt
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_stmt_prepare
   signature:
@@ -1133,7 +1133,7 @@
     - name: query
       type: string
     returnType: bool
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     function: mysqli_stmt_reset
   signature:
@@ -1141,7 +1141,7 @@
     - name: statement
       type: mysqli_stmt
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_stmt_result_metadata
   signature:
@@ -1152,7 +1152,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     function: mysqli_stmt_send_long_data
   signature:
@@ -1164,7 +1164,7 @@
     - name: data
       type: string
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: mysqli_stmt_sqlstate
   signature:
@@ -1175,7 +1175,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_stmt_store_result
   signature:
@@ -1183,7 +1183,7 @@
     - name: statement
       type: mysqli_stmt
     returnType: bool
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     function: mysqli_store_result
   signature:
@@ -1199,7 +1199,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     function: mysqli_thread_id
   signature:
@@ -1207,12 +1207,12 @@
     - name: mysql
       type: mysqli
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     function: mysqli_thread_safe
   signature:
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: mysqli_use_result
   signature:
@@ -1223,7 +1223,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     function: mysqli_warning_count
   signature:
@@ -1231,7 +1231,7 @@
     - name: mysql
       type: mysqli
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     class: mysqli_sql_exception
   signature:
@@ -1253,7 +1253,7 @@
       type: ?array
       optional: true
     returnType: mysqli_result|bool
-  raises: [error, mysqli_sql_exception, valueerror]
+  throws: [error, mysqli_sql_exception, valueerror]
 - subject:
     function: mysqli_fetch_column
   signature:
@@ -1264,22 +1264,22 @@
       type: int
       optional: true
     returnType: null|int|float|string|false
-  raises: [error, mysqli_sql_exception, valueerror]
+  throws: [error, mysqli_sql_exception, valueerror]
 - subject:
     method: mysqli_sql_exception::getSqlState
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     method: mysqli_warning::__construct
   signature:
     returnType: mixed
-  raises: [error]
+  throws: [error]
 - subject:
     method: mysqli_warning::next
   signature:
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     class: mysqli
   signature:
@@ -1320,7 +1320,7 @@
       type: ?string
       optional: true
     returnType: mixed
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     method: mysqli::autocommit
   signature:
@@ -1328,7 +1328,7 @@
     - name: enable
       type: bool
     returnType: bool
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     method: mysqli::begin_transaction
   signature:
@@ -1340,7 +1340,7 @@
       type: ?string
       optional: true
     returnType: bool
-  raises: [error, mysqli_sql_exception, valueerror]
+  throws: [error, mysqli_sql_exception, valueerror]
 - subject:
     method: mysqli::change_user
   signature:
@@ -1352,17 +1352,17 @@
     - name: database
       type: ?string
     returnType: bool
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     method: mysqli::character_set_name
   signature:
     returnType: string
-  raises: [error]
+  throws: [error]
 - subject:
     method: mysqli::close
   signature:
     returnType: 'true'
-  raises: [error]
+  throws: [error]
 - subject:
     method: mysqli::commit
   signature:
@@ -1374,7 +1374,7 @@
       type: ?string
       optional: true
     returnType: bool
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     method: mysqli::connect
   signature:
@@ -1398,7 +1398,7 @@
       type: ?string
       optional: true
     returnType: bool
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     method: mysqli::debug
   signature:
@@ -1406,12 +1406,12 @@
     - name: options
       type: string
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     method: mysqli::dump_debug_info
   signature:
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: mysqli::escape_string
   signature:
@@ -1419,7 +1419,7 @@
     - name: string
       type: string
     returnType: string
-  raises: [error]
+  throws: [error]
 - subject:
     method: mysqli::execute_query
   signature:
@@ -1430,37 +1430,37 @@
       type: ?array
       optional: true
     returnType: mysqli_result|bool
-  raises: [error, mysqli_sql_exception, valueerror]
+  throws: [error, mysqli_sql_exception, valueerror]
 - subject:
     method: mysqli::get_charset
   signature:
     returnType: ?object
-  raises: [error]
+  throws: [error]
 - subject:
     method: mysqli::get_client_info
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     method: mysqli::get_connection_stats
   signature:
     returnType: array
-  raises: [error]
+  throws: [error]
 - subject:
     method: mysqli::get_server_info
   signature:
     returnType: string
-  raises: [error]
+  throws: [error]
 - subject:
     method: mysqli::get_warnings
   signature:
     returnType: mysqli_warning|false
-  raises: [error]
+  throws: [error]
 - subject:
     method: mysqli::init
   signature:
     returnType: mixed
-  raises: []
+  throws: []
 - subject:
     method: mysqli::kill
   signature:
@@ -1468,12 +1468,12 @@
     - name: process_id
       type: int
     returnType: bool
-  raises: [error, mysqli_sql_exception, valueerror]
+  throws: [error, mysqli_sql_exception, valueerror]
 - subject:
     method: mysqli::more_results
   signature:
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: mysqli::multi_query
   signature:
@@ -1481,12 +1481,12 @@
     - name: query
       type: string
     returnType: bool
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     method: mysqli::next_result
   signature:
     returnType: bool
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     method: mysqli::options
   signature:
@@ -1496,12 +1496,12 @@
     - name: value
       type: mixed
     returnType: bool
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     method: mysqli::ping
   signature:
     returnType: bool
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     method: mysqli::poll
   signature:
@@ -1521,7 +1521,7 @@
       type: int
       optional: true
     returnType: int|false
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     method: mysqli::prepare
   signature:
@@ -1529,7 +1529,7 @@
     - name: query
       type: string
     returnType: mysqli_stmt|false
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     method: mysqli::query
   signature:
@@ -1540,7 +1540,7 @@
       type: int
       optional: true
     returnType: mysqli_result|bool
-  raises: [error, mysqli_sql_exception, valueerror]
+  throws: [error, mysqli_sql_exception, valueerror]
 - subject:
     method: mysqli::real_connect
   signature:
@@ -1567,7 +1567,7 @@
       type: int
       optional: true
     returnType: bool
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     method: mysqli::real_escape_string
   signature:
@@ -1575,7 +1575,7 @@
     - name: string
       type: string
     returnType: string
-  raises: [error]
+  throws: [error]
 - subject:
     method: mysqli::real_query
   signature:
@@ -1583,12 +1583,12 @@
     - name: query
       type: string
     returnType: bool
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     method: mysqli::reap_async_query
   signature:
     returnType: mysqli_result|bool
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     method: mysqli::refresh
   signature:
@@ -1596,7 +1596,7 @@
     - name: flags
       type: int
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: mysqli::release_savepoint
   signature:
@@ -1604,7 +1604,7 @@
     - name: name
       type: string
     returnType: bool
-  raises: [error, mysqli_sql_exception, valueerror]
+  throws: [error, mysqli_sql_exception, valueerror]
 - subject:
     method: mysqli::rollback
   signature:
@@ -1616,7 +1616,7 @@
       type: ?string
       optional: true
     returnType: bool
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     method: mysqli::savepoint
   signature:
@@ -1624,7 +1624,7 @@
     - name: name
       type: string
     returnType: bool
-  raises: [error, mysqli_sql_exception, valueerror]
+  throws: [error, mysqli_sql_exception, valueerror]
 - subject:
     method: mysqli::select_db
   signature:
@@ -1632,7 +1632,7 @@
     - name: database
       type: string
     returnType: bool
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     method: mysqli::set_charset
   signature:
@@ -1640,7 +1640,7 @@
     - name: charset
       type: string
     returnType: bool
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     method: mysqli::set_opt
   signature:
@@ -1650,7 +1650,7 @@
     - name: value
       type: mixed
     returnType: bool
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     method: mysqli::ssl_set
   signature:
@@ -1666,17 +1666,17 @@
     - name: cipher_algos
       type: ?string
     returnType: 'true'
-  raises: [error]
+  throws: [error]
 - subject:
     method: mysqli::stat
   signature:
     returnType: string|false
-  raises: [error]
+  throws: [error]
 - subject:
     method: mysqli::stmt_init
   signature:
     returnType: mysqli_stmt|false
-  raises: [error]
+  throws: [error]
 - subject:
     method: mysqli::store_result
   signature:
@@ -1685,17 +1685,17 @@
       type: int
       optional: true
     returnType: mysqli_result|false
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     method: mysqli::thread_safe
   signature:
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     method: mysqli::use_result
   signature:
     returnType: mysqli_result|false
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     method: mysqli_result::__construct
   signature:
@@ -1706,12 +1706,12 @@
       type: int
       optional: true
     returnType: mixed
-  raises: [error, mysqli_sql_exception, valueerror]
+  throws: [error, mysqli_sql_exception, valueerror]
 - subject:
     method: mysqli_result::close
   signature:
     returnType: void
-  raises: [error]
+  throws: [error]
 - subject:
     method: mysqli_result::data_seek
   signature:
@@ -1719,7 +1719,7 @@
     - name: offset
       type: int
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     method: mysqli_result::fetch_all
   signature:
@@ -1728,7 +1728,7 @@
       type: int
       optional: true
     returnType: array
-  raises: [error, mysqli_sql_exception, valueerror]
+  throws: [error, mysqli_sql_exception, valueerror]
 - subject:
     method: mysqli_result::fetch_array
   signature:
@@ -1737,12 +1737,12 @@
       type: int
       optional: true
     returnType: array|null|false
-  raises: [error, mysqli_sql_exception, valueerror]
+  throws: [error, mysqli_sql_exception, valueerror]
 - subject:
     method: mysqli_result::fetch_assoc
   signature:
     returnType: array|null|false
-  raises: [error, mysqli_sql_exception, valueerror]
+  throws: [error, mysqli_sql_exception, valueerror]
 - subject:
     method: mysqli_result::fetch_column
   signature:
@@ -1751,12 +1751,12 @@
       type: int
       optional: true
     returnType: null|int|float|string|false
-  raises: [error, mysqli_sql_exception, valueerror]
+  throws: [error, mysqli_sql_exception, valueerror]
 - subject:
     method: mysqli_result::fetch_field
   signature:
     returnType: object|false
-  raises: [error]
+  throws: [error]
 - subject:
     method: mysqli_result::fetch_field_direct
   signature:
@@ -1764,12 +1764,12 @@
     - name: index
       type: int
     returnType: object|false
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     method: mysqli_result::fetch_fields
   signature:
     returnType: array
-  raises: [error]
+  throws: [error]
 - subject:
     method: mysqli_result::fetch_object
   signature:
@@ -1781,12 +1781,12 @@
       type: array
       optional: true
     returnType: object|null|false
-  raises: [error, mysqli_sql_exception, typeerror, valueerror]
+  throws: [error, mysqli_sql_exception, typeerror, valueerror]
 - subject:
     method: mysqli_result::fetch_row
   signature:
     returnType: array|null|false
-  raises: [error, mysqli_sql_exception, valueerror]
+  throws: [error, mysqli_sql_exception, valueerror]
 - subject:
     method: mysqli_result::field_seek
   signature:
@@ -1794,22 +1794,22 @@
     - name: index
       type: int
     returnType: 'true'
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     method: mysqli_result::free
   signature:
     returnType: void
-  raises: [error]
+  throws: [error]
 - subject:
     method: mysqli_result::free_result
   signature:
     returnType: void
-  raises: [error]
+  throws: [error]
 - subject:
     method: mysqli_result::getIterator
   signature:
     returnType: Iterator
-  raises: []
+  throws: []
 - subject:
     method: mysqli_stmt::__construct
   signature:
@@ -1820,7 +1820,7 @@
       type: ?string
       optional: true
     returnType: mixed
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     method: mysqli_stmt::attr_get
   signature:
@@ -1828,7 +1828,7 @@
     - name: attribute
       type: int
     returnType: int
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     method: mysqli_stmt::attr_set
   signature:
@@ -1838,7 +1838,7 @@
     - name: value
       type: int
     returnType: bool
-  raises: [error, mysqli_sql_exception, valueerror]
+  throws: [error, mysqli_sql_exception, valueerror]
 - subject:
     method: mysqli_stmt::bind_param
   signature:
@@ -1851,7 +1851,7 @@
       byRef: true
       variadic: true
     returnType: bool
-  raises: [argumentcounterror, error, mysqli_sql_exception, valueerror]
+  throws: [argumentcounterror, error, mysqli_sql_exception, valueerror]
 - subject:
     method: mysqli_stmt::bind_result
   signature:
@@ -1862,12 +1862,12 @@
       byRef: true
       variadic: true
     returnType: bool
-  raises: [argumentcounterror, error]
+  throws: [argumentcounterror, error]
 - subject:
     method: mysqli_stmt::close
   signature:
     returnType: 'true'
-  raises: [error]
+  throws: [error]
 - subject:
     method: mysqli_stmt::data_seek
   signature:
@@ -1875,7 +1875,7 @@
     - name: offset
       type: int
     returnType: void
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     method: mysqli_stmt::execute
   signature:
@@ -1884,42 +1884,42 @@
       type: ?array
       optional: true
     returnType: bool
-  raises: [error, mysqli_sql_exception, valueerror]
+  throws: [error, mysqli_sql_exception, valueerror]
 - subject:
     method: mysqli_stmt::fetch
   signature:
     returnType: ?bool
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     method: mysqli_stmt::free_result
   signature:
     returnType: void
-  raises: [error]
+  throws: [error]
 - subject:
     method: mysqli_stmt::get_result
   signature:
     returnType: mysqli_result|false
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     method: mysqli_stmt::get_warnings
   signature:
     returnType: mysqli_warning|false
-  raises: [error]
+  throws: [error]
 - subject:
     method: mysqli_stmt::more_results
   signature:
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: mysqli_stmt::next_result
   signature:
     returnType: bool
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     method: mysqli_stmt::num_rows
   signature:
     returnType: int|string
-  raises: [error]
+  throws: [error]
 - subject:
     method: mysqli_stmt::prepare
   signature:
@@ -1927,17 +1927,17 @@
     - name: query
       type: string
     returnType: bool
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     method: mysqli_stmt::reset
   signature:
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     method: mysqli_stmt::result_metadata
   signature:
     returnType: mysqli_result|false
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]
 - subject:
     method: mysqli_stmt::send_long_data
   signature:
@@ -1947,9 +1947,9 @@
     - name: data
       type: string
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     method: mysqli_stmt::store_result
   signature:
     returnType: bool
-  raises: [error, mysqli_sql_exception]
+  throws: [error, mysqli_sql_exception]

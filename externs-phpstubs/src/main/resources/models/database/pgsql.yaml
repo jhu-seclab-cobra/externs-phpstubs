@@ -7,7 +7,7 @@
     - name: result
       type: PgSql\Result
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_cancel_query
   signature:
@@ -15,7 +15,7 @@
     - name: connection
       type: PgSql\Connection
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_client_encoding
   signature:
@@ -24,7 +24,7 @@
       type: ?PgSql\Connection
       optional: true
     returnType: string
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_clientencoding
   signature:
@@ -36,7 +36,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_close
   signature:
@@ -45,7 +45,7 @@
       type: ?PgSql\Connection
       optional: true
     returnType: 'true'
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_cmdtuples
   signature:
@@ -53,7 +53,7 @@
     - name: result
       type: PgSql\Result
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_connect
   signature:
@@ -69,7 +69,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: pg_connect_poll
   signature:
@@ -77,7 +77,7 @@
     - name: connection
       type: PgSql\Connection
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_connection_busy
   signature:
@@ -85,7 +85,7 @@
     - name: connection
       type: PgSql\Connection
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_connection_reset
   signature:
@@ -93,7 +93,7 @@
     - name: connection
       type: PgSql\Connection
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_connection_status
   signature:
@@ -101,7 +101,7 @@
     - name: connection
       type: PgSql\Connection
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_consume_input
   signature:
@@ -109,7 +109,7 @@
     - name: connection
       type: PgSql\Connection
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_convert
   signature:
@@ -127,7 +127,7 @@
   propagation:
   - from: argument(2)
     to: return
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: pg_copy_from
   signature:
@@ -145,7 +145,7 @@
       type: string
       optional: true
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: pg_copy_to
   signature:
@@ -161,7 +161,7 @@
       type: string
       optional: true
     returnType: array|false
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: pg_dbname
   signature:
@@ -170,7 +170,7 @@
       type: ?PgSql\Connection
       optional: true
     returnType: string
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_delete
   signature:
@@ -185,7 +185,7 @@
       type: int
       optional: true
     returnType: string|bool
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: pg_end_copy
   signature:
@@ -194,7 +194,7 @@
       type: ?PgSql\Connection
       optional: true
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_errormessage
   signature:
@@ -206,7 +206,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_escape_bytea
   signature:
@@ -220,7 +220,7 @@
   propagation:
   - from: argument(1)
     to: return
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: pg_escape_identifier
   signature:
@@ -231,7 +231,7 @@
       type: string
       optional: true
     returnType: string|false
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_escape_literal
   signature:
@@ -242,7 +242,7 @@
       type: string
       optional: true
     returnType: string|false
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_escape_string
   signature:
@@ -253,7 +253,7 @@
       type: string
       optional: true
     returnType: string
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: pg_exec
   signature:
@@ -264,7 +264,7 @@
       type: string
       optional: true
     returnType: PgSql\Result|false
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_execute
   signature:
@@ -284,7 +284,7 @@
     to: return
   - from: argument(2)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_fetch_all
   signature:
@@ -295,7 +295,7 @@
       type: int
       optional: true
     returnType: array
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: pg_fetch_all_columns
   signature:
@@ -306,7 +306,7 @@
       type: int
       optional: true
     returnType: array
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: pg_fetch_array
   signature:
@@ -320,7 +320,7 @@
       type: int
       optional: true
     returnType: array|false
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: pg_fetch_assoc
   signature:
@@ -331,7 +331,7 @@
       type: ?int
       optional: true
     returnType: array|false
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: pg_fetch_object
   signature:
@@ -357,7 +357,7 @@
     to: return
   - from: argument(3)
     to: return
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: pg_fetch_result
   signature:
@@ -370,7 +370,7 @@
       type: string|int
       optional: true
     returnType: string|false|null
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: pg_fetch_row
   signature:
@@ -384,7 +384,7 @@
       type: int
       optional: true
     returnType: array|false
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: pg_field_is_null
   signature:
@@ -397,7 +397,7 @@
       type: string|int
       optional: true
     returnType: int|false
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: pg_field_name
   signature:
@@ -407,7 +407,7 @@
     - name: field
       type: int
     returnType: string
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: pg_field_num
   signature:
@@ -417,7 +417,7 @@
     - name: field
       type: string
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_field_prtlen
   signature:
@@ -430,7 +430,7 @@
       type: string|int
       optional: true
     returnType: int|false
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: pg_field_size
   signature:
@@ -440,7 +440,7 @@
     - name: field
       type: int
     returnType: int
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: pg_field_table
   signature:
@@ -453,7 +453,7 @@
       type: bool
       optional: true
     returnType: string|int|false
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: pg_field_type
   signature:
@@ -463,7 +463,7 @@
     - name: field
       type: int
     returnType: string
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: pg_field_type_oid
   signature:
@@ -473,7 +473,7 @@
     - name: field
       type: int
     returnType: string|int
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: pg_fieldisnull
   signature:
@@ -486,7 +486,7 @@
       type: string|int
       optional: true
     returnType: int|false
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: pg_fieldname
   signature:
@@ -499,7 +499,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: pg_fieldnum
   signature:
@@ -509,7 +509,7 @@
     - name: field
       type: string
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_fieldprtlen
   signature:
@@ -522,7 +522,7 @@
       type: string|int
       optional: true
     returnType: int|false
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: pg_fieldsize
   signature:
@@ -532,7 +532,7 @@
     - name: field
       type: int
     returnType: int
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: pg_fieldtype
   signature:
@@ -545,7 +545,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: pg_flush
   signature:
@@ -553,7 +553,7 @@
     - name: connection
       type: PgSql\Connection
     returnType: int|bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_free_result
   signature:
@@ -561,7 +561,7 @@
     - name: result
       type: PgSql\Result
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_freeresult
   signature:
@@ -569,7 +569,7 @@
     - name: result
       type: PgSql\Result
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_get_notify
   signature:
@@ -580,7 +580,7 @@
       type: int
       optional: true
     returnType: array|false
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: pg_get_pid
   signature:
@@ -588,7 +588,7 @@
     - name: connection
       type: PgSql\Connection
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_get_result
   signature:
@@ -599,7 +599,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_getlastoid
   signature:
@@ -607,7 +607,7 @@
     - name: result
       type: PgSql\Result
     returnType: string|int|false
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_host
   signature:
@@ -616,7 +616,7 @@
       type: ?PgSql\Connection
       optional: true
     returnType: string
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_insert
   signature:
@@ -640,7 +640,7 @@
     to: return
   - from: argument(3)
     to: return
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: pg_last_error
   signature:
@@ -649,7 +649,7 @@
       type: ?PgSql\Connection
       optional: true
     returnType: string
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_last_notice
   signature:
@@ -660,7 +660,7 @@
       type: int
       optional: true
     returnType: array|string|bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: pg_last_oid
   signature:
@@ -668,7 +668,7 @@
     - name: result
       type: PgSql\Result
     returnType: string|int|false
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_lo_close
   signature:
@@ -676,7 +676,7 @@
     - name: lob
       type: PgSql\Lob
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_lo_create
   signature:
@@ -688,7 +688,7 @@
       type: mixed
       optional: true
     returnType: string|int|false
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: pg_lo_export
   signature:
@@ -702,7 +702,7 @@
       type: mixed
       optional: true
     returnType: bool
-  raises: [argumentcounterror, error, valueerror]
+  throws: [argumentcounterror, error, valueerror]
 - subject:
     function: pg_lo_import
   signature:
@@ -716,7 +716,7 @@
       type: mixed
       optional: true
     returnType: string|int|false
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: pg_lo_open
   signature:
@@ -737,7 +737,7 @@
     to: return
   - from: argument(2)
     to: return
-  raises: [argumentcounterror, error, valueerror]
+  throws: [argumentcounterror, error, valueerror]
 - subject:
     function: pg_lo_read
   signature:
@@ -748,7 +748,7 @@
       type: int
       optional: true
     returnType: string|false
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: pg_lo_read_all
   signature:
@@ -756,7 +756,7 @@
     - name: lob
       type: PgSql\Lob
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_lo_seek
   signature:
@@ -769,7 +769,7 @@
       type: int
       optional: true
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: pg_lo_tell
   signature:
@@ -777,7 +777,7 @@
     - name: lob
       type: PgSql\Lob
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_lo_truncate
   signature:
@@ -787,7 +787,7 @@
     - name: size
       type: int
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_lo_unlink
   signature:
@@ -798,7 +798,7 @@
       type: mixed
       optional: true
     returnType: bool
-  raises: [argumentcounterror, error, valueerror]
+  throws: [argumentcounterror, error, valueerror]
 - subject:
     function: pg_lo_write
   signature:
@@ -811,7 +811,7 @@
       type: ?int
       optional: true
     returnType: int|false
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: pg_loclose
   signature:
@@ -819,7 +819,7 @@
     - name: lob
       type: PgSql\Lob
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_locreate
   signature:
@@ -831,7 +831,7 @@
       type: mixed
       optional: true
     returnType: string|int|false
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: pg_loexport
   signature:
@@ -845,7 +845,7 @@
       type: mixed
       optional: true
     returnType: bool
-  raises: [argumentcounterror, error, valueerror]
+  throws: [argumentcounterror, error, valueerror]
 - subject:
     function: pg_loimport
   signature:
@@ -859,7 +859,7 @@
       type: mixed
       optional: true
     returnType: string|int|false
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: pg_loopen
   signature:
@@ -880,7 +880,7 @@
     to: return
   - from: argument(2)
     to: return
-  raises: [argumentcounterror, error, valueerror]
+  throws: [argumentcounterror, error, valueerror]
 - subject:
     function: pg_loread
   signature:
@@ -894,7 +894,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: pg_loreadall
   signature:
@@ -902,7 +902,7 @@
     - name: lob
       type: PgSql\Lob
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_lounlink
   signature:
@@ -913,7 +913,7 @@
       type: mixed
       optional: true
     returnType: bool
-  raises: [argumentcounterror, error, valueerror]
+  throws: [argumentcounterror, error, valueerror]
 - subject:
     function: pg_lowrite
   signature:
@@ -926,7 +926,7 @@
       type: ?int
       optional: true
     returnType: int|false
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: pg_meta_data
   signature:
@@ -939,7 +939,7 @@
       type: bool
       optional: true
     returnType: array|false
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: pg_num_fields
   signature:
@@ -947,7 +947,7 @@
     - name: result
       type: PgSql\Result
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_num_rows
   signature:
@@ -955,7 +955,7 @@
     - name: result
       type: PgSql\Result
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_numfields
   signature:
@@ -963,7 +963,7 @@
     - name: result
       type: PgSql\Result
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_numrows
   signature:
@@ -971,7 +971,7 @@
     - name: result
       type: PgSql\Result
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_options
   signature:
@@ -980,7 +980,7 @@
       type: ?PgSql\Connection
       optional: true
     returnType: string
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_parameter_status
   signature:
@@ -994,7 +994,7 @@
   propagation:
   - from: argument(1)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_pconnect
   signature:
@@ -1010,7 +1010,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: pg_ping
   signature:
@@ -1019,7 +1019,7 @@
       type: ?PgSql\Connection
       optional: true
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_port
   signature:
@@ -1028,7 +1028,7 @@
       type: ?PgSql\Connection
       optional: true
     returnType: string
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_prepare
   signature:
@@ -1041,7 +1041,7 @@
       type: string
       optional: true
     returnType: PgSql\Result|false
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_put_line
   signature:
@@ -1052,7 +1052,7 @@
       type: string
       optional: true
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_query
   signature:
@@ -1063,7 +1063,7 @@
       type: string
       optional: true
     returnType: PgSql\Result|false
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_query_params
   signature:
@@ -1076,7 +1076,7 @@
       type: array
       optional: true
     returnType: PgSql\Result|false
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_result
   signature:
@@ -1094,7 +1094,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: pg_result_error
   signature:
@@ -1102,7 +1102,7 @@
     - name: result
       type: PgSql\Result
     returnType: string|false
-  raises: []
+  throws: []
 - subject:
     function: pg_result_error_field
   signature:
@@ -1112,7 +1112,7 @@
     - name: field_code
       type: int
     returnType: string|false|null
-  raises: []
+  throws: []
 - subject:
     function: pg_result_seek
   signature:
@@ -1122,7 +1122,7 @@
     - name: row
       type: int
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_result_status
   signature:
@@ -1133,7 +1133,7 @@
       type: int
       optional: true
     returnType: string|int
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: pg_select
   signature:
@@ -1155,7 +1155,7 @@
   propagation:
   - from: argument(2)
     to: return
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: pg_send_execute
   signature:
@@ -1167,7 +1167,7 @@
     - name: params
       type: array
     returnType: int|bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_send_prepare
   signature:
@@ -1179,7 +1179,7 @@
     - name: query
       type: string
     returnType: int|bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_send_query
   signature:
@@ -1189,7 +1189,7 @@
     - name: query
       type: string
     returnType: int|bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_send_query_params
   signature:
@@ -1201,7 +1201,7 @@
     - name: params
       type: array
     returnType: int|bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_set_client_encoding
   signature:
@@ -1212,7 +1212,7 @@
       type: string
       optional: true
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_set_error_verbosity
   signature:
@@ -1223,7 +1223,7 @@
       type: int
       optional: true
     returnType: int|false
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_setclientencoding
   signature:
@@ -1234,7 +1234,7 @@
       type: string
       optional: true
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_socket
   signature:
@@ -1245,7 +1245,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_trace
   signature:
@@ -1262,7 +1262,7 @@
       type: int
       optional: true
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: pg_transaction_status
   signature:
@@ -1270,7 +1270,7 @@
     - name: connection
       type: PgSql\Connection
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_tty
   signature:
@@ -1279,7 +1279,7 @@
       type: ?PgSql\Connection
       optional: true
     returnType: string
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_unescape_bytea
   signature:
@@ -1290,7 +1290,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: pg_untrace
   signature:
@@ -1299,7 +1299,7 @@
       type: ?PgSql\Connection
       optional: true
     returnType: 'true'
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_update
   signature:
@@ -1316,7 +1316,7 @@
       type: int
       optional: true
     returnType: string|bool
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: pg_version
   signature:
@@ -1325,7 +1325,7 @@
       type: ?PgSql\Connection
       optional: true
     returnType: array
-  raises: [error]
+  throws: [error]
 - subject:
     class: pgsql\connection
   signature:
@@ -1349,7 +1349,7 @@
     - name: password
       type: string
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: pg_close_stmt
   signature:
@@ -1359,7 +1359,7 @@
     - name: statement_name
       type: string
     returnType: PgSql\Result|false
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: pg_jit
   signature:
@@ -1368,7 +1368,7 @@
       type: ?PgSql\Connection
       optional: true
     returnType: array
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_put_copy_data
   signature:
@@ -1378,7 +1378,7 @@
     - name: cmd
       type: string
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_put_copy_end
   signature:
@@ -1389,7 +1389,7 @@
       type: ?string
       optional: true
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_result_memory_size
   signature:
@@ -1397,7 +1397,7 @@
     - name: result
       type: PgSql\Result
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_service
   signature:
@@ -1406,7 +1406,7 @@
       type: ?PgSql\Connection
       optional: true
     returnType: string
-  raises: [error]
+  throws: [error]
 - subject:
     function: pg_set_chunked_rows_size
   signature:
@@ -1416,7 +1416,7 @@
     - name: size
       type: int
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: pg_set_error_context_visibility
   signature:
@@ -1426,7 +1426,7 @@
     - name: visibility
       type: int
     returnType: int
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: pg_socket_poll
   signature:
@@ -1441,4 +1441,4 @@
       type: int
       optional: true
     returnType: int
-  raises: [typeerror]
+  throws: [typeerror]

@@ -13,14 +13,14 @@ error types. The lookup surface — merge, records, facts, `PhpStubs` — is in
   the seven fact types, `Merge`, `Mount` ([design-lookup.md](design-lookup.md));
   the php-src producers ([design-extraction.md](design-extraction.md))
 - **External types (commons-phpmodels):** `DocumentSetLoader`,
-  `DocumentSet`, `Document`, `ResourceOpener`, `CategoryMappingLoader`,
-  `CategoryMapping`, `ModelEntry`, `ModelSubject` and its seven subtypes,
+  `DocumentSet`, `Document`, `ResourceOpener`, `VocabularyMappingLoader`,
+  `VocabularyMapping`, `ModelEntry`, `ModelSubject` and its seven subtypes,
   `ArgPattern`, `SignatureInfo` and its four subtypes, `Vocabulary`,
   `TaintPolicy`, `Precedence`, `Verification`
 - **Relationships:** `StubResources` names the roots and opens them;
   `PhpStubs` mounts the bundled roots in Merge Order through
   `DocumentSetLoader` (the psalm mapping decoded once by
-  `CategoryMappingLoader` and applied to the two psalm-named sets) and
+  `VocabularyMappingLoader` and applied to the two psalm-named sets) and
   folds them in `Merge`. One-way: facade → merge → format library.
 - **Exceptions:** `StubIndexNotFoundException`, `StubIndexInvalidException`
   (both extend `RuntimeException`).

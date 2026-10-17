@@ -10,7 +10,7 @@
       type: bool
       optional: true
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: sem_get
   signature:
@@ -36,7 +36,7 @@
     to: return
   - from: argument(3)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: sem_release
   signature:
@@ -44,7 +44,7 @@
     - name: semaphore
       type: SysvSemaphore
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: sem_remove
   signature:
@@ -52,7 +52,7 @@
     - name: semaphore
       type: SysvSemaphore
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     class: sysvsemaphore
   signature:

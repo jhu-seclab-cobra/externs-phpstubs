@@ -7,7 +7,7 @@
     - name: zip
       type: mixed
     returnType: void
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     function: zip_entry_close
   signature:
@@ -15,7 +15,7 @@
     - name: zip_entry
       type: mixed
     returnType: bool
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     function: zip_entry_compressedsize
   signature:
@@ -23,7 +23,7 @@
     - name: zip_entry
       type: mixed
     returnType: int|false
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     function: zip_entry_compressionmethod
   signature:
@@ -31,7 +31,7 @@
     - name: zip_entry
       type: mixed
     returnType: string|false
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     function: zip_entry_filesize
   signature:
@@ -39,7 +39,7 @@
     - name: zip_entry
       type: mixed
     returnType: int|false
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     function: zip_entry_name
   signature:
@@ -47,7 +47,7 @@
     - name: zip_entry
       type: mixed
     returnType: string|false
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     function: zip_entry_open
   signature:
@@ -60,7 +60,7 @@
       type: string
       optional: true
     returnType: bool
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     function: zip_entry_read
   signature:
@@ -71,7 +71,7 @@
       type: int
       optional: true
     returnType: string|false
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     function: zip_open
   signature:
@@ -79,7 +79,7 @@
     - name: filename
       type: string
     returnType: mixed
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: zip_read
   signature:
@@ -90,7 +90,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     class: ziparchive
   signature:
@@ -106,7 +106,7 @@
       type: int
       optional: true
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: ZipArchive::addFile
   signature:
@@ -126,7 +126,7 @@
       type: int
       optional: true
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: ZipArchive::addFromString
   signature:
@@ -139,7 +139,7 @@
       type: int
       optional: true
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: ZipArchive::addGlob
   signature:
@@ -153,7 +153,7 @@
       type: array
       optional: true
     returnType: array|false
-  raises: [typeerror, valueerror]
+  throws: [typeerror, valueerror]
 - subject:
     method: ZipArchive::addPattern
   signature:
@@ -167,22 +167,22 @@
       type: array
       optional: true
     returnType: array|false
-  raises: [typeerror, valueerror]
+  throws: [typeerror, valueerror]
 - subject:
     method: ZipArchive::clearError
   signature:
     returnType: void
-  raises: []
+  throws: []
 - subject:
     method: ZipArchive::close
   signature:
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: ZipArchive::count
   signature:
     returnType: int
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: ZipArchive::deleteIndex
   signature:
@@ -190,7 +190,7 @@
     - name: index
       type: int
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: ZipArchive::deleteName
   signature:
@@ -198,7 +198,7 @@
     - name: name
       type: string
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: ZipArchive::extractTo
   signature:
@@ -209,7 +209,7 @@
       type: array|string|null
       optional: true
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: ZipArchive::getArchiveComment
   signature:
@@ -218,7 +218,7 @@
       type: int
       optional: true
     returnType: string|false
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: ZipArchive::getArchiveFlag
   signature:
@@ -229,7 +229,7 @@
       type: int
       optional: true
     returnType: int
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: ZipArchive::getCommentIndex
   signature:
@@ -240,7 +240,7 @@
       type: int
       optional: true
     returnType: string|false
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: ZipArchive::getCommentName
   signature:
@@ -251,7 +251,7 @@
       type: int
       optional: true
     returnType: string|false
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: ZipArchive::getExternalAttributesIndex
   signature:
@@ -268,7 +268,7 @@
       type: int
       optional: true
     returnType: bool
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     method: ZipArchive::getExternalAttributesName
   signature:
@@ -285,7 +285,7 @@
       type: int
       optional: true
     returnType: bool
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     method: ZipArchive::getFromIndex
   signature:
@@ -299,7 +299,7 @@
       type: int
       optional: true
     returnType: string|false
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: ZipArchive::getFromName
   signature:
@@ -313,7 +313,7 @@
       type: int
       optional: true
     returnType: string|false
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: ZipArchive::getNameIndex
   signature:
@@ -324,12 +324,12 @@
       type: int
       optional: true
     returnType: string|false
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: ZipArchive::getStatusString
   signature:
     returnType: string
-  raises: []
+  throws: []
 - subject:
     method: ZipArchive::getStream
   signature:
@@ -337,7 +337,7 @@
     - name: name
       type: string
     returnType: mixed
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: ZipArchive::getStreamIndex
   signature:
@@ -348,7 +348,7 @@
       type: int
       optional: true
     returnType: mixed
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: ZipArchive::getStreamName
   signature:
@@ -359,7 +359,7 @@
       type: int
       optional: true
     returnType: mixed
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: ZipArchive::isCompressionMethodSupported
   signature:
@@ -370,7 +370,7 @@
       type: bool
       optional: true
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     method: ZipArchive::isEncryptionMethodSupported
   signature:
@@ -381,7 +381,7 @@
       type: bool
       optional: true
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     method: ZipArchive::locateName
   signature:
@@ -392,7 +392,7 @@
       type: int
       optional: true
     returnType: int|false
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: ZipArchive::open
   signature:
@@ -403,7 +403,7 @@
       type: int
       optional: true
     returnType: bool|int
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: ZipArchive::registerCancelCallback
   signature:
@@ -411,7 +411,7 @@
     - name: callback
       type: callable
     returnType: bool
-  raises: [typeerror, valueerror]
+  throws: [typeerror, valueerror]
 - subject:
     method: ZipArchive::registerProgressCallback
   signature:
@@ -421,7 +421,7 @@
     - name: callback
       type: callable
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: ZipArchive::renameIndex
   signature:
@@ -431,7 +431,7 @@
     - name: new_name
       type: string
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: ZipArchive::renameName
   signature:
@@ -441,7 +441,7 @@
     - name: new_name
       type: string
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: ZipArchive::replaceFile
   signature:
@@ -460,7 +460,7 @@
       type: int
       optional: true
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: ZipArchive::setArchiveComment
   signature:
@@ -468,7 +468,7 @@
     - name: comment
       type: string
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: ZipArchive::setArchiveFlag
   signature:
@@ -478,7 +478,7 @@
     - name: value
       type: int
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: ZipArchive::setCommentIndex
   signature:
@@ -488,7 +488,7 @@
     - name: comment
       type: string
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: ZipArchive::setCommentName
   signature:
@@ -498,7 +498,7 @@
     - name: comment
       type: string
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: ZipArchive::setCompressionIndex
   signature:
@@ -511,7 +511,7 @@
       type: int
       optional: true
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: ZipArchive::setCompressionName
   signature:
@@ -524,7 +524,7 @@
       type: int
       optional: true
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: ZipArchive::setEncryptionIndex
   signature:
@@ -537,7 +537,7 @@
       type: ?string
       optional: true
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: ZipArchive::setEncryptionName
   signature:
@@ -550,7 +550,7 @@
       type: ?string
       optional: true
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: ZipArchive::setExternalAttributesIndex
   signature:
@@ -565,7 +565,7 @@
       type: int
       optional: true
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: ZipArchive::setExternalAttributesName
   signature:
@@ -580,7 +580,7 @@
       type: int
       optional: true
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: ZipArchive::setMtimeIndex
   signature:
@@ -593,7 +593,7 @@
       type: int
       optional: true
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: ZipArchive::setMtimeName
   signature:
@@ -606,7 +606,7 @@
       type: int
       optional: true
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: ZipArchive::setPassword
   signature:
@@ -614,7 +614,7 @@
     - name: password
       type: string
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: ZipArchive::statIndex
   signature:
@@ -625,7 +625,7 @@
       type: int
       optional: true
     returnType: array|false
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: ZipArchive::statName
   signature:
@@ -636,17 +636,17 @@
       type: int
       optional: true
     returnType: array|false
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: ZipArchive::unchangeAll
   signature:
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: ZipArchive::unchangeArchive
   signature:
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: ZipArchive::unchangeIndex
   signature:
@@ -654,7 +654,7 @@
     - name: index
       type: int
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     method: ZipArchive::unchangeName
   signature:
@@ -662,4 +662,4 @@
     - name: name
       type: string
     returnType: bool
-  raises: [valueerror]
+  throws: [valueerror]

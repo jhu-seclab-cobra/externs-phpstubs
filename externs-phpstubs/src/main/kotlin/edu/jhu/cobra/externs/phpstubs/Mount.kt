@@ -1,6 +1,5 @@
 package edu.jhu.cobra.externs.phpstubs
 
-import edu.jhu.cobra.commons.phpmodels.CategoryMapping
 import edu.jhu.cobra.commons.phpmodels.Document
 import edu.jhu.cobra.commons.phpmodels.DocumentSet
 import edu.jhu.cobra.commons.phpmodels.DocumentSetException
@@ -12,6 +11,7 @@ import edu.jhu.cobra.commons.phpmodels.ResourceOpener
 import edu.jhu.cobra.commons.phpmodels.VariableSubject
 import edu.jhu.cobra.commons.phpmodels.Verification
 import edu.jhu.cobra.commons.phpmodels.Vocabulary
+import edu.jhu.cobra.commons.phpmodels.VocabularyMapping
 import java.io.InputStream
 
 /**
@@ -46,14 +46,14 @@ internal class MountSequence(
      *
      * @param label The root the failure messages name.
      * @param open The opener over the set's root.
-     * @param mapping The category mapping the set decodes under, or null for a set in canonical names.
+     * @param mapping The vocabulary mapping the set decodes under, or null for a set in canonical names.
      * @param fallback The verification of a set without `provenance.yaml`, or null when one is required.
      * @param corpus True for the generated declaration set: the corpus rules apply and extensions derive.
      */
     fun mount(
         label: String,
         open: ResourceOpener,
-        mapping: CategoryMapping? = null,
+        mapping: VocabularyMapping? = null,
         fallback: Verification? = Verification.MANUAL,
         corpus: Boolean = false,
     ): MountSequence {
@@ -70,7 +70,7 @@ internal class MountSequence(
     private fun loadSet(
         label: String,
         open: ResourceOpener,
-        mapping: CategoryMapping?,
+        mapping: VocabularyMapping?,
     ): DocumentSet {
         val opener = RecordingOpener(open)
         return try {

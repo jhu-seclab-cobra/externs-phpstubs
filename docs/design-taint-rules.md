@@ -8,7 +8,7 @@ set: [design-taint.md](design-taint.md).
 
 - **Classes:** `StubResources` (object; the `TAINT_RULES` constant only)
 - **External types (commons-phpmodels):** `DocumentSetLoader`,
-  `DocumentSet`, `CategoryMapping`, `Vocabulary`
+  `DocumentSet`, `VocabularyMapping`, `Vocabulary`
 - **Relationships:** `PhpStubs` mounts the set at position 4 under
   `PSALM_MAPPING` against the accumulated canonical vocabulary
   ([design.md](design.md) Merge Order).

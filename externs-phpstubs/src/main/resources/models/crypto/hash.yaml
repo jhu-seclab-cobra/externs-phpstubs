@@ -15,12 +15,12 @@
       type: array
       optional: true
     returnType: string
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: hash_algos
   signature:
     returnType: array
-  raises: []
+  throws: []
 - subject:
     function: hash_copy
   signature:
@@ -31,7 +31,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     function: hash_equals
   signature:
@@ -41,7 +41,7 @@
     - name: user_string
       type: string
     returnType: bool
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     function: hash_file
   signature:
@@ -62,7 +62,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: hash_final
   signature:
@@ -76,7 +76,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     function: hash_hkdf
   signature:
@@ -104,7 +104,7 @@
     to: return
   - from: argument(4)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: hash_hmac
   signature:
@@ -126,12 +126,12 @@
     to: return
   - from: argument(2)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: hash_hmac_algos
   signature:
     returnType: array
-  raises: []
+  throws: []
 - subject:
     function: hash_hmac_file
   signature:
@@ -153,7 +153,7 @@
     to: return
   - from: argument(2)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: hash_init
   signature:
@@ -177,7 +177,7 @@
     to: return
   - from: argument(2)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: hash_pbkdf2
   signature:
@@ -207,7 +207,7 @@
     to: return
   - from: argument(2)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: hash_update
   signature:
@@ -217,7 +217,7 @@
     - name: data
       type: string
     returnType: 'true'
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     function: hash_update_file
   signature:
@@ -230,7 +230,7 @@
       type: mixed
       optional: true
     returnType: bool
-  raises: [typeerror, valueerror]
+  throws: [typeerror, valueerror]
 - subject:
     function: hash_update_stream
   signature:
@@ -243,7 +243,7 @@
       type: int
       optional: true
     returnType: int
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     class: hashcontext
   signature:
@@ -252,17 +252,17 @@
     method: HashContext::__construct
   signature:
     returnType: mixed
-  raises: [error]
+  throws: [error]
 - subject:
     method: HashContext::__debugInfo
   signature:
     returnType: array
-  raises: []
+  throws: []
 - subject:
     method: HashContext::__serialize
   signature:
     returnType: array
-  raises: [error, exception, typeerror]
+  throws: [error, exception, typeerror]
 - subject:
     method: HashContext::__unserialize
   signature:
@@ -270,7 +270,7 @@
     - name: data
       type: array
     returnType: void
-  raises: [error, exception, typeerror]
+  throws: [error, exception, typeerror]
 - subject:
     function: mhash
   signature:
@@ -288,12 +288,12 @@
     to: return
   - from: argument(2)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: mhash_count
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: mhash_get_block_size
   signature:
@@ -301,7 +301,7 @@
     - name: algo
       type: int
     returnType: int|false
-  raises: []
+  throws: []
 - subject:
     function: mhash_get_hash_name
   signature:
@@ -309,7 +309,7 @@
     - name: algo
       type: int
     returnType: string|false
-  raises: []
+  throws: []
 - subject:
     function: mhash_keygen_s2k
   signature:
@@ -328,4 +328,4 @@
     to: return
   - from: argument(2)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]

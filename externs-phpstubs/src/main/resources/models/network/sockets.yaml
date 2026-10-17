@@ -10,7 +10,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: socket_addrinfo_bind
   signature:
@@ -21,7 +21,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: socket_addrinfo_connect
   signature:
@@ -32,7 +32,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: socket_addrinfo_explain
   signature:
@@ -43,7 +43,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: socket_addrinfo_lookup
   signature:
@@ -60,7 +60,7 @@
   propagation:
   - from: argument(2)
     to: return
-  raises: [typeerror, valueerror]
+  throws: [typeerror, valueerror]
 - subject:
     function: socket_bind
   signature:
@@ -73,7 +73,7 @@
       type: int
       optional: true
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: socket_clear_error
   signature:
@@ -82,7 +82,7 @@
       type: ?Socket
       optional: true
     returnType: void
-  raises: [error]
+  throws: [error]
 - subject:
     function: socket_close
   signature:
@@ -90,7 +90,7 @@
     - name: socket
       type: Socket
     returnType: void
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     function: socket_cmsg_space
   signature:
@@ -103,7 +103,7 @@
       type: int
       optional: true
     returnType: ?int
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: socket_connect
   signature:
@@ -116,7 +116,7 @@
       type: ?int
       optional: true
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: socket_create
   signature:
@@ -135,7 +135,7 @@
     to: return
   - from: argument(2)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: socket_create_listen
   signature:
@@ -151,7 +151,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: socket_create_pair
   signature:
@@ -166,7 +166,7 @@
       type: mixed
       byRef: true
     returnType: bool
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: socket_export_stream
   signature:
@@ -177,7 +177,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: socket_get_option
   signature:
@@ -192,7 +192,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: socket_getopt
   signature:
@@ -207,7 +207,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: socket_getpeername
   signature:
@@ -222,7 +222,7 @@
       optional: true
       byRef: true
     returnType: bool
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: socket_getsockname
   signature:
@@ -237,7 +237,7 @@
       optional: true
       byRef: true
     returnType: bool
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: socket_import_stream
   signature:
@@ -248,7 +248,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     function: socket_last_error
   signature:
@@ -257,7 +257,7 @@
       type: ?Socket
       optional: true
     returnType: int
-  raises: [error]
+  throws: [error]
 - subject:
     function: socket_listen
   signature:
@@ -268,7 +268,7 @@
       type: int
       optional: true
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: socket_read
   signature:
@@ -284,7 +284,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: socket_recv
   signature:
@@ -299,7 +299,7 @@
     - name: flags
       type: int
     returnType: int|false
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     function: socket_recvfrom
   signature:
@@ -321,7 +321,7 @@
       optional: true
       byRef: true
     returnType: int|false
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: socket_recvmsg
   signature:
@@ -335,7 +335,7 @@
       type: int
       optional: true
     returnType: int|false
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: socket_select
   signature:
@@ -355,7 +355,7 @@
       type: int
       optional: true
     returnType: int|false
-  raises: [typeerror, valueerror]
+  throws: [typeerror, valueerror]
 - subject:
     function: socket_send
   signature:
@@ -369,7 +369,7 @@
     - name: flags
       type: int
     returnType: int|false
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: socket_sendmsg
   signature:
@@ -382,7 +382,7 @@
       type: int
       optional: true
     returnType: int|false
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: socket_sendto
   signature:
@@ -401,7 +401,7 @@
       type: ?int
       optional: true
     returnType: int|false
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: socket_set_block
   signature:
@@ -409,7 +409,7 @@
     - name: socket
       type: Socket
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: socket_set_nonblock
   signature:
@@ -417,7 +417,7 @@
     - name: socket
       type: Socket
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: socket_set_option
   signature:
@@ -431,7 +431,7 @@
     - name: value
       type: mixed
     returnType: bool
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: socket_setopt
   signature:
@@ -445,7 +445,7 @@
     - name: value
       type: mixed
     returnType: bool
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: socket_shutdown
   signature:
@@ -456,7 +456,7 @@
       type: int
       optional: true
     returnType: bool
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: socket_strerror
   signature:
@@ -464,7 +464,7 @@
     - name: error_code
       type: int
     returnType: string
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: socket_write
   signature:
@@ -477,7 +477,7 @@
       type: ?int
       optional: true
     returnType: int|false
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: socket_wsaprotocol_info_export
   signature:
@@ -490,7 +490,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error]
+  throws: [error]
 - subject:
     function: socket_wsaprotocol_info_import
   signature:
@@ -501,7 +501,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: socket_wsaprotocol_info_release
   signature:
@@ -509,7 +509,7 @@
     - name: info_id
       type: string
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     class: addressinfo
   signature:
@@ -525,4 +525,4 @@
     - name: socket
       type: Socket
     returnType: bool
-  raises: [error]
+  throws: [error]

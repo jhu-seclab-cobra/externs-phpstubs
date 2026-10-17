@@ -4,7 +4,7 @@
     function: localeconv
   signature:
     returnType: array
-  raises: []
+  throws: []
 - subject:
     function: log
   signature:
@@ -15,7 +15,7 @@
       type: float
       optional: true
     returnType: float
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: log10
   signature:
@@ -23,7 +23,7 @@
     - name: num
       type: float
     returnType: float
-  raises: []
+  throws: []
 - subject:
     function: log1p
   signature:
@@ -31,7 +31,7 @@
     - name: num
       type: float
     returnType: float
-  raises: []
+  throws: []
 - subject:
     function: long2ip
   signature:
@@ -39,7 +39,7 @@
     - name: ip
       type: int
     returnType: string
-  raises: []
+  throws: []
 - subject:
     function: lstat
   signature:
@@ -47,7 +47,7 @@
     - name: filename
       type: string
     returnType: array|false
-  raises: []
+  throws: []
 - subject:
     function: ltrim
   signature:
@@ -61,7 +61,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: lzf_compress
   signature:
@@ -110,7 +110,7 @@
       type: string
       optional: true
     returnType: bool
-  raises: [dateerror, typeerror, valueerror]
+  throws: [dateerror, typeerror, valueerror]
 - subject:
     function: mailparse_determine_best_xfer_encoding
   signature:
@@ -254,7 +254,7 @@
       optional: true
       variadic: true
     returnType: mixed
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: md5
   signature:
@@ -265,7 +265,7 @@
       type: bool
       optional: true
     returnType: string
-  raises: []
+  throws: []
 - subject:
     function: md5_file
   signature:
@@ -279,7 +279,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: mdecrypt_generic
   signature:
@@ -634,7 +634,7 @@
       type: bool
       optional: true
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: memory_get_usage
   signature:
@@ -643,7 +643,7 @@
       type: bool
       optional: true
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: metaphone
   signature:
@@ -657,7 +657,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: min
   signature:
@@ -669,7 +669,7 @@
       optional: true
       variadic: true
     returnType: mixed
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: ming_keypress
   signature:
@@ -1921,7 +1921,7 @@
       type: array
       byRef: true
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     function: natsort
   signature:
@@ -1930,12 +1930,12 @@
       type: array
       byRef: true
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     function: net_get_interfaces
   signature:
     returnType: array|false
-  raises: []
+  throws: []
 - subject:
     function: newrelic_add_custom_parameter
   signature:
@@ -2102,7 +2102,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: nl2br
   signature:
@@ -2116,7 +2116,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: nl_langinfo
   signature:
@@ -2124,7 +2124,7 @@
     - name: item
       type: int
     returnType: string|false
-  raises: []
+  throws: []
 - subject:
     function: notes_body
   signature:
@@ -2309,7 +2309,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: oauth_get_sbs
   signature:
@@ -2340,7 +2340,7 @@
     function: ob_clean
   signature:
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: ob_deflatehandler
   signature:
@@ -2357,12 +2357,12 @@
     function: ob_end_clean
   signature:
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: ob_end_flush
   signature:
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: ob_etaghandler
   signature:
@@ -2379,32 +2379,32 @@
     function: ob_flush
   signature:
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: ob_get_clean
   signature:
     returnType: string|false
-  raises: [error]
+  throws: [error]
 - subject:
     function: ob_get_contents
   signature:
     returnType: string|false
-  raises: []
+  throws: []
 - subject:
     function: ob_get_flush
   signature:
     returnType: string|false
-  raises: [error]
+  throws: [error]
 - subject:
     function: ob_get_length
   signature:
     returnType: int|false
-  raises: []
+  throws: []
 - subject:
     function: ob_get_level
   signature:
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: ob_get_status
   signature:
@@ -2413,7 +2413,7 @@
       type: bool
       optional: true
     returnType: array
-  raises: []
+  throws: []
 - subject:
     function: ob_iconv_handler
   signature:
@@ -2434,7 +2434,7 @@
       type: bool
       optional: true
     returnType: void
-  raises: []
+  throws: []
 - subject:
     function: ob_inflatehandler
   signature:
@@ -2451,7 +2451,7 @@
     function: ob_list_handlers
   signature:
     returnType: array
-  raises: []
+  throws: []
 - subject:
     function: ob_start
   signature:
@@ -2466,7 +2466,7 @@
       type: int
       optional: true
     returnType: bool
-  raises: [error]
+  throws: [error]
 - subject:
     function: ob_tidyhandler
   signature:
@@ -2510,7 +2510,7 @@
     - name: octal_string
       type: string
     returnType: int|float
-  raises: []
+  throws: []
 - subject:
     function: openal_buffer_create
   signature:
@@ -2721,7 +2721,7 @@
     - name: facility
       type: int
     returnType: 'true'
-  raises: []
+  throws: []
 - subject:
     function: ord
   signature:
@@ -2729,7 +2729,7 @@
     - name: character
       type: string
     returnType: int
-  raises: []
+  throws: []
 - subject:
     function: output_add_rewrite_var
   signature:
@@ -2739,7 +2739,7 @@
     - name: value
       type: string
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: output_cache_disable
   signature:
@@ -2841,7 +2841,7 @@
     function: output_reset_rewrite_vars
   signature:
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: overload
   signature:
@@ -2877,7 +2877,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: parse_ini_file
   signature:
@@ -2891,7 +2891,7 @@
       type: int
       optional: true
     returnType: array|false
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: parse_ini_string
   signature:
@@ -2905,7 +2905,7 @@
       type: int
       optional: true
     returnType: array|false
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     function: parse_str
   signature:
@@ -2916,7 +2916,7 @@
       type: mixed
       byRef: true
     returnType: void
-  raises: [error, typeerror]
+  throws: [error, typeerror]
 - subject:
     function: parse_url
   signature:
@@ -2927,7 +2927,7 @@
       type: int
       optional: true
     returnType: int|string|array|null|false
-  raises: [valueerror]
+  throws: [valueerror]
 - subject:
     function: parsekit_compile_file
   signature:
@@ -2981,12 +2981,12 @@
       optional: true
       byRef: true
     returnType: false|null
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: password_algos
   signature:
     returnType: array
-  raises: []
+  throws: []
 - subject:
     function: password_get_info
   signature:
@@ -2994,7 +2994,7 @@
     - name: hash
       type: string
     returnType: array
-  raises: []
+  throws: []
 - subject:
     function: password_hash
   signature:
@@ -3010,7 +3010,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: [error, valueerror]
+  throws: [error, valueerror]
 - subject:
     function: password_make_salt
   signature:
@@ -3032,7 +3032,7 @@
       type: array
       optional: true
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: password_verify
   signature:
@@ -3042,7 +3042,7 @@
     - name: hash
       type: string
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: pclose
   signature:
@@ -3050,7 +3050,7 @@
     - name: handle
       type: mixed
     returnType: int
-  raises: [typeerror]
+  throws: [typeerror]
 - subject:
     function: pcnlt_sigwaitinfo
   signature:

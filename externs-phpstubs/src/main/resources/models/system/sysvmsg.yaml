@@ -15,7 +15,7 @@
     to: return
   - from: argument(1)
     to: return
-  raises: []
+  throws: []
 - subject:
     function: msg_queue_exists
   signature:
@@ -23,7 +23,7 @@
     - name: key
       type: int
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: msg_receive
   signature:
@@ -51,7 +51,7 @@
       optional: true
       byRef: true
     returnType: bool
-  raises: [error, typeerror, valueerror]
+  throws: [error, typeerror, valueerror]
 - subject:
     function: msg_remove_queue
   signature:
@@ -59,7 +59,7 @@
     - name: queue
       type: SysvMessageQueue
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: msg_send
   signature:
@@ -81,7 +81,7 @@
       optional: true
       byRef: true
     returnType: bool
-  raises: [error, exception, typeerror]
+  throws: [error, exception, typeerror]
 - subject:
     function: msg_set_queue
   signature:
@@ -91,7 +91,7 @@
     - name: data
       type: array
     returnType: bool
-  raises: []
+  throws: []
 - subject:
     function: msg_stat_queue
   signature:
@@ -102,7 +102,7 @@
   propagation:
   - from: argument(0)
     to: return
-  raises: []
+  throws: []
 - subject:
     class: sysvmessagequeue
   signature:
