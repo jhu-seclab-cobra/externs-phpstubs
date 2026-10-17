@@ -13,7 +13,7 @@ precedence are defined in commons-phpmodels `docs/concept-provenance.md`.
 The generated declarations carry a value unit (returns with
 propagation and optionally characters) only where psalm annotates a flow. For most builtins no
 annotation exists, so a consumer falls back to its conservative default:
-an untyped result that every argument influences. Where an annotation
+an unknown value of any type that every argument influences. Where an annotation
 exists it is sometimes wider or narrower than the flow the PHP manual
 supports. The corrections are consumer-independent facts about PHP
 builtins, so they belong beside the generated declarations, where every
@@ -41,7 +41,7 @@ each unit override the generated one for its subject.
   generated one, and the classpath root constant that names it.
 - **Not Owned:** taint sections (the taint sets), the generated unit it
   overrides, the merge ([concept-lookup.md](concept-lookup.md)), the
-  consumer's conservative default, and the consumer's compute overlay.
+  consumer's conservative default, and the consumer's value summary.
 
 ## 2. Concepts
 
@@ -125,7 +125,8 @@ merge: models/ (generated) ◄──ranked below── value-rules/ (manual), pe
 
 - **Typical:** `strlen` has a signature and no flow annotation. The set
   states `returns: num` with the first argument flowing to the result; the
-  consumer's result is a typed unknown instead of an untyped one.
+  consumer's value summary is an unknown value of the declared return type
+  instead of an unknown value of any type.
 - **Boundary:** `print_r` returns its rendering only when the second
   argument is true. A conditional entry states that case; the
   unconditional entry states a boolean result with no flow.
