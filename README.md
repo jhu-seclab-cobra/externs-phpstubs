@@ -113,7 +113,7 @@ Model documents derived from [JetBrains/phpstorm-stubs](https://github.com/JetBr
 - [Merge Algorithm](docs/spec-merge.md) -- folding the mounted sets into the entry in force per subject, condition, and unit
 - [Taint Concepts](docs/concept-taint.md) -- the taint document set in psalm's names and its extraction
 - [Design](docs/design.md) -- resource roots, mount order, generated-set rules, exception types
-- [Extraction Concepts](docs/concept-extraction.md) -- extraction from php-src: declarations, Handlers, Raises Summary
+- [Extraction Concepts](docs/concept-extraction.md) -- extraction from php-src: declarations, Handlers, Procedure Summary
 - [Extraction Design](docs/design-extraction.md) -- the php-src producers of hierarchy, signatures, and throws
 - [Throws Algorithm](docs/spec-throws.md) -- computing the throws section from the php-src C sources
 - [Lookup Design](docs/design-lookup.md) -- `BuiltinLookup`, `PhpStubs`, `BuiltinRecord`, fact types, canonical enums

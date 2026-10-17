@@ -43,7 +43,7 @@ php-src (release tag)
   **/*.stub.php ──────► Signature Extraction ──► function and method entries (params, returnType)
   *_arginfo.h  ───┐
   **/*.{c,h,cpp,cc}┴──► Throws Extraction ───► throws section of each implemented callable entry
-                         (handlers → call graph → Raises Summary per C function, boundaries cut)
+                         (handlers → call graph → Procedure Summary per C function, boundaries cut)
 ```
 
 **Core Concepts**
@@ -67,7 +67,7 @@ php-src (release tag)
   abstract method has none.
 - **Relationships:** the roots of the Throws Extraction.
 
-- **Name:** Raises Summary
+- **Name:** Procedure Summary
 - **Definition:** What one C function may contribute to a builtin's
   throws section: the exception classes it may throw, each with the
   parameter tests it is guarded by, plus the classes it creates into a
@@ -76,7 +76,7 @@ php-src (release tag)
 - **Scope:** every C function and function-like macro reachable from a
   Handler; computed by [spec-throws.md](spec-throws.md).
 - **Relationships:** a Handler's throws section is the union of the
-  classes its Raises Summary names.
+  classes its Procedure Summary names.
 
 - **Name:** Boundary Call
 - **Definition:** A call whose exceptions the throws section excludes by the
@@ -84,7 +84,7 @@ php-src (release tag)
   diagnostic, and a value conversion. The analysis does not enter it; a
   binding specifier that checks a value beyond its declared type still
   contributes the class it throws.
-- **Relationships:** cuts the call graph the Raises Summary is computed
+- **Relationships:** cuts the call graph the Procedure Summary is computed
   over.
 
 ## 3. Contracts & Flow

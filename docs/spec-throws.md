@@ -2,11 +2,11 @@
 
 Computing the throws section of every implemented builtin from the php-src
 C sources. Concepts: [concept-extraction.md](concept-extraction.md)
-(Handler, Raises Summary, Boundary Call). Tool structure and tables:
+(Handler, Procedure Summary, Boundary Call). Tool structure and tables:
 [design-extraction.md](design-extraction.md). What a throws section
 asserts: commons-phpmodels `docs/model.md`.
 
-## Algorithm: Raises Summary Fixpoint
+## Algorithm: Procedure Summary Fixpoint
 
 ### Problem
 
@@ -22,7 +22,7 @@ set; a call through a function pointer is not followed
 A *summary element* is one of `class(C)`, `class_param(i, default)` (the
 class entry the caller passes as parameter `i`), `object_param(i)` (the
 object the caller passes), or `open`, each with a guard set of
-`(parameter, truth)` pairs. A Raises Summary is `(throws: summary elements,
+`(parameter, truth)` pairs. A Procedure Summary is `(throws: summary elements,
 creates: parameter → class summary elements, returns: class summary
 elements)`.
 
@@ -113,8 +113,8 @@ call with unknown arguments, so a callback the body registers is entered.
 ### Complexity
 
 - Reading: O(S) over the source size S. Per component iteration:
-  O(c · t) over its calls c and the summary elements t per callee summary.
-  Iterations per component are bounded by the number of distinct guarded
-  summary elements, O(T · 2^P) for the summary elements T and guard pairs P
-  per summary; components are typically single definitions, so the run is
-  close to linear in the call graph.
+  O(c · t) over its calls c and the summary elements t per callee's
+  Procedure Summary. Iterations per component are bounded by the number of
+  distinct guarded summary elements, O(T · 2^P) for the summary elements T
+  and guard pairs P per summary; components are typically single
+  definitions, so the run is close to linear in the call graph.

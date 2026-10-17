@@ -4,7 +4,7 @@
 |------|-------|
 | [concept.md](concept.md) | Problem statement, data-side concepts over commons-phpmodels, extension provenance, scenarios |
 | [concept-lookup.md](concept-lookup.md) | Canonical vocabulary, the merge, `BuiltinRecord` and `BuiltinLookup` by PHP name |
-| [concept-extraction.md](concept-extraction.md) | Extraction from php-src: declarations, Handlers, Raises Summary, Boundary Call |
+| [concept-extraction.md](concept-extraction.md) | Extraction from php-src: declarations, Handlers, Procedure Summary, Boundary Call |
 | [concept-taint.md](concept-taint.md) | The taint document set in psalm's names, its extraction, and its translation at the merge |
 | [concept-taint-rules.md](concept-taint-rules.md) | The hand-maintained taint rules document set: Argus sink facts, added sanitizer facts and source facts, vocabulary additions |
 | [concept-value-rules.md](concept-value-rules.md) | The hand-maintained value rules set: value units beyond the generated declarations, generated-set gaps |
@@ -17,7 +17,7 @@
 | [design-taint-rules.md](design-taint-rules.md) | `StubResources.TAINT_RULES`, rules resource layout, validation and maintenance rules |
 | [design-value-rules.md](design-value-rules.md) | `StubResources.VALUE_RULES`, value rules resource layout, validation and maintenance rules |
 | [spec-merge.md](spec-merge.md) | Folding the mounted sets into the entry in force per subject, condition, and unit |
-| [spec-throws.md](spec-throws.md) | Computing the throws section from the php-src C sources: the Raises Summary fixpoint |
+| [spec-throws.md](spec-throws.md) | Computing the throws section from the php-src C sources: the Procedure Summary fixpoint |
 | [impl.md](impl.md) | commons-phpmodels API findings, version constraints, extension and set provenance, variadic, taint-extraction, and value rules review notes |
 | [performance.md](performance.md) | Load-time and lookup benchmark procedure and baselines |
 | [llms.txt](llms.txt) | Agent-facing L0 index (llmstxt.org format) |
