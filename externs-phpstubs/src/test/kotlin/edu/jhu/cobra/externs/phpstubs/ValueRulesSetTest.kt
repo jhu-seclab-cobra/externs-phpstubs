@@ -11,7 +11,7 @@ import edu.jhu.cobra.commons.phpmodels.ModelSubject
 import edu.jhu.cobra.commons.phpmodels.Port
 import edu.jhu.cobra.commons.phpmodels.Propagation
 import edu.jhu.cobra.commons.phpmodels.ReturnKind
-import edu.jhu.cobra.commons.phpmodels.ValueSemantics
+import edu.jhu.cobra.commons.phpmodels.ValueUnit
 import edu.jhu.cobra.commons.phpmodels.Verification
 import edu.jhu.cobra.commons.value.BoolVal
 import kotlin.test.Test
@@ -79,9 +79,9 @@ internal class ValueRulesSetTest {
 
     @Test
     fun `no value rules unit repeats the generated unit`() {
-        val units = generated.entries.associate { it.subject to it.body.valueSemantics() }
+        val units = generated.entries.associate { it.subject to it.body.valueUnit() }
         for ((subject, entry) in unconditional) {
-            assertNotEquals(units.getValue(subject), entry.body.valueSemantics(), "$subject")
+            assertNotEquals(units.getValue(subject), entry.body.valueUnit(), "$subject")
         }
     }
 
@@ -92,27 +92,27 @@ internal class ValueRulesSetTest {
             assertEquals(2, branches.size, name)
             val conditional = branches.single { it.condition != null }
             assertEquals(ArgPattern(listOf(null, BoolVal(true))), conditional.condition)
-            assertEquals(ValueSemantics(ReturnKind.STR, listOf(argumentToReturn(0))), conditional.body.valueSemantics())
+            assertEquals(ValueUnit(ReturnKind.STR, listOf(argumentToReturn(0))), conditional.body.valueUnit())
             assertNull(branches.single { it.condition == null }.body.propagation, name)
         }
     }
 
     @Test
     fun `representative units follow the PHP manual`() {
-        assertEquals(ValueSemantics(ReturnKind.NUM, listOf(argumentToReturn(0))), unitOf("strlen"))
-        assertEquals(ValueSemantics(ReturnKind.STR, emptyList()), unitOf("getenv"))
-        assertEquals(ValueSemantics(ReturnKind.STR, listOf(argumentToReturn(0))), unitOf("strstr"))
-        assertEquals(ValueSemantics(ReturnKind.NUM, emptyList()), unitOf("print"))
+        assertEquals(ValueUnit(ReturnKind.NUM, listOf(argumentToReturn(0))), unitOf("strlen"))
+        assertEquals(ValueUnit(ReturnKind.STR, emptyList()), unitOf("getenv"))
+        assertEquals(ValueUnit(ReturnKind.STR, listOf(argumentToReturn(0))), unitOf("strstr"))
+        assertEquals(ValueUnit(ReturnKind.NUM, emptyList()), unitOf("print"))
         assertEquals(
-            ValueSemantics(ReturnKind.ANY, listOf(Propagation(from = Port.Argument(0), to = Port.Argument(1)))),
+            ValueUnit(ReturnKind.ANY, listOf(Propagation(from = Port.Argument(0), to = Port.Argument(1)))),
             unitOf("parse_str"),
         )
         assertEquals(
-            ValueSemantics(ReturnKind.STR, listOf(Propagation(from = Port.Receiver, to = Port.Return))),
-            unconditional.getValue(MethodSubject("Exception", "getMessage")).body.valueSemantics(),
+            ValueUnit(ReturnKind.STR, listOf(Propagation(from = Port.Receiver, to = Port.Return))),
+            unconditional.getValue(MethodSubject("Exception", "getMessage")).body.valueUnit(),
         )
         assertNull(unconditional[FunctionSubject("crypt")])
-        assertEquals(ValueSemantics(ReturnKind.STR, listOf(argumentToReturn(0))), unitOf("str_increment"))
+        assertEquals(ValueUnit(ReturnKind.STR, listOf(argumentToReturn(0))), unitOf("str_increment"))
     }
 
     @Test
@@ -127,7 +127,7 @@ internal class ValueRulesSetTest {
 
     @Test
     fun `a character bound beside the generated flows repeats them exactly`() {
-        val units = generated.entries.associate { it.subject to it.body.valueSemantics() }
+        val units = generated.entries.associate { it.subject to it.body.valueUnit() }
         for (name in listOf("str_replace", "strtr", "substr")) {
             assertEquals(units.getValue(FunctionSubject(name)), unitOf(name).copy(characters = null), name)
         }
@@ -161,7 +161,7 @@ internal class ValueRulesSetTest {
         }
     }
 
-    private fun unitOf(name: String): ValueSemantics = unconditional.getValue(FunctionSubject(name)).body.valueSemantics()!!
+    private fun unitOf(name: String): ValueUnit = unconditional.getValue(FunctionSubject(name)).body.valueUnit()!!
 
     private fun argumentToReturn(position: Int): Propagation = Propagation(from = Port.Argument(position), to = Port.Return)
 }
