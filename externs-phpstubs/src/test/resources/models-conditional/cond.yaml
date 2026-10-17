@@ -1,4 +1,4 @@
-# Test fixture: a generated-corpus entry that declares a condition, which the corpus rules reject.
+# Test fixture: a generated-set entry that declares a condition, which the generated-set rules reject.
 - subject:
     function: cond_func
   when: [1]

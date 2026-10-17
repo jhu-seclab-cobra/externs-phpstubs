@@ -5,7 +5,7 @@ Lookup: how each document set becomes a `Mount`, how a `MountSequence`
 threads the vocabulary and classifies failures, and how `Merge` folds the
 mounts into records. Every type here is internal; the public surface is
 [design-lookup.md](design-lookup.md). Fold algorithm:
-[spec-merge.md](spec-merge.md). Merge Order and corpus rules:
+[spec-merge.md](spec-merge.md). Merge Order and generated-set rules:
 [design.md](design.md).
 
 ## Design Overview
@@ -43,11 +43,11 @@ other set.
 
 **Responsibility:** Builds mounts in order, decoding each set through
 `DocumentSetLoader.load(opener, accumulated vocabulary, mapping)` and
-classifying failures. `mount(root, open, mapping, fallback, corpus)`:
+classifying failures. `mount(root, open, mapping, fallback, generated)`:
 `fallback` is the verification of a set without `provenance.yaml` (`MANUAL`
 for extension sets, `null` for bundled sets, where absence is
-`StubIndexInvalidException`); `corpus = true` applies the generated set's
-corpus rules and derives extensions. A failure naming a path the opener
+`StubIndexInvalidException`); `generated = true` applies the generated-set
+rules and derives PHP extensions. A failure naming a path the opener
 returned `null` for is `StubIndexNotFoundException`; any other is
 `StubIndexInvalidException` with the cause attached.
 
@@ -79,7 +79,7 @@ first-statement order; element order is document order.
 - Every mount's position equals its index in the sequence.
 - A bundled set without `provenance.yaml` never mounts; an extension set
   without one mounts as `MANUAL`.
-- The corpus rules and extension derivation apply to exactly the mount
-  flagged as the generated corpus.
+- The generated-set rules and PHP extension derivation apply to exactly the mount
+  flagged as the generated set.
 - `Merge.records` holds every subject any mount states, and each subject
   appears in exactly one kind map.

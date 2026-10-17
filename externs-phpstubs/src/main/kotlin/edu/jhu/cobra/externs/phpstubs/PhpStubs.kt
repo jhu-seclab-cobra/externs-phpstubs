@@ -24,7 +24,7 @@ private fun bundledMounts(): List<Mount> {
         StubResources::class.java.getResourceAsStream(StubResources.PSALM_MAPPING)?.use(VocabularyMappingLoader::load)
             ?: throw StubIndexNotFoundException(StubResources.PSALM_MAPPING)
     return MountSequence()
-        .mount(StubResources.MODELS, StubResources.opener(StubResources.MODELS), fallback = null, corpus = true)
+        .mount(StubResources.MODELS, StubResources.opener(StubResources.MODELS), fallback = null, generated = true)
         .mount(StubResources.VALUE_RULES, StubResources.opener(StubResources.VALUE_RULES), fallback = null)
         .mount(StubResources.VOCABULARY, StubResources.opener(StubResources.VOCABULARY), fallback = null)
         .mount(StubResources.TAINT, StubResources.opener(StubResources.TAINT), mapping, fallback = null)

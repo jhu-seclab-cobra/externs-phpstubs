@@ -11,14 +11,14 @@ import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 /**
- * Tests for [MountSequence]: set mounting, the corpus rules of the generated set, and failure classification.
+ * Tests for [MountSequence]: set mounting, the generated-set rules, and failure classification.
  *
- * - `a corpus mount derives the extension from the document path` — verifies placement and the split suffix
+ * - `a generated-set mount derives the extension from the document path` — verifies placement and the split suffix
  * - `extensionOf strips the document suffix and the split index only` — verifies the derivation over path shapes
- * - `a corpus rejects a variable subject` — verifies the first corpus rule
- * - `a corpus rejects an entry without a signature` — verifies the second corpus rule
- * - `a corpus rejects a conditional entry` — verifies the second corpus rule's condition half
- * - `a corpus rejects a subject declared by two documents` — verifies the third rule names both documents
+ * - `the generated set rejects a variable subject` — verifies the first generated-set rule
+ * - `the generated set rejects an entry without a signature` — verifies the second generated-set rule
+ * - `the generated set rejects a conditional entry` — verifies the second generated-set rule's condition half
+ * - `the generated set rejects a subject declared by two documents` — verifies the third rule names both documents
  * - `a set without provenance mounts as the fallback or fails` — verifies bundled versus extension handling
  * - `a set with provenance mounts under its declared verification` — verifies the fallback is not applied
  * - `an absent manifest or document is not found` — verifies absence classification
@@ -30,11 +30,11 @@ import kotlin.test.assertTrue
  */
 internal class MountTest {
     @Test
-    fun `a corpus mount derives the extension from the document path`() {
+    fun `a generated-set mount derives the extension from the document path`() {
         val mounts =
-            corpus(
+            generatedSet(
                 "/models-test/",
-            ).mount("/models-split/", StubResources.opener("/models-split/"), fallback = GEN, corpus = true).toList()
+            ).mount("/models-split/", StubResources.opener("/models-split/"), fallback = GEN, generated = true).toList()
         val extensions = mounts.flatMap { it.entries }.associate { (entry, extension) -> entry.subject to extension }
         assertEquals("standard", extensions[FunctionSubject("strlen")])
         assertEquals("keyword", extensions[FunctionSubject("echo")])
@@ -56,27 +56,27 @@ internal class MountTest {
     }
 
     @Test
-    fun `a corpus rejects a variable subject`() {
-        val failure = assertFailsWith<StubIndexInvalidException> { corpus("/models-variable/") }
+    fun `the generated set rejects a variable subject`() {
+        val failure = assertFailsWith<StubIndexInvalidException> { generatedSet("/models-variable/") }
         assertTrue("variable" in failure.message!!)
     }
 
     @Test
-    fun `a corpus rejects an entry without a signature`() {
-        val failure = assertFailsWith<StubIndexInvalidException> { corpus("/models-nosignature/") }
+    fun `the generated set rejects an entry without a signature`() {
+        val failure = assertFailsWith<StubIndexInvalidException> { generatedSet("/models-nosignature/") }
         assertTrue("no signature" in failure.message!!)
     }
 
     @Test
-    fun `a corpus rejects a conditional entry`() {
-        val failure = assertFailsWith<StubIndexInvalidException> { corpus("/models-conditional/") }
+    fun `the generated set rejects a conditional entry`() {
+        val failure = assertFailsWith<StubIndexInvalidException> { generatedSet("/models-conditional/") }
         assertTrue("condition" in failure.message!!)
         assertTrue("cond_func" in failure.message!!)
     }
 
     @Test
-    fun `a corpus rejects a subject declared by two documents`() {
-        val failure = assertFailsWith<StubIndexInvalidException> { corpus("/models-duplicate/") }
+    fun `the generated set rejects a subject declared by two documents`() {
+        val failure = assertFailsWith<StubIndexInvalidException> { generatedSet("/models-duplicate/") }
         assertTrue("first.yaml" in failure.message!! && "second.yaml" in failure.message!!)
     }
 
@@ -101,21 +101,23 @@ internal class MountTest {
 
     @Test
     fun `an absent manifest or document is not found`() {
-        assertTrue(assertFailsWith<StubIndexNotFoundException> { corpus("/absent-root/") }.message!!.endsWith("/absent-root/index.txt"))
-        val missing = assertFailsWith<StubIndexNotFoundException> { corpus("/models-missing-file/") }
+        assertTrue(
+            assertFailsWith<StubIndexNotFoundException> { generatedSet("/absent-root/") }.message!!.endsWith("/absent-root/index.txt"),
+        )
+        val missing = assertFailsWith<StubIndexNotFoundException> { generatedSet("/models-missing-file/") }
         assertTrue(missing.message!!.endsWith("/models-missing-file/absent.yaml"))
     }
 
     @Test
     fun `a malformed document is invalid with its cause`() {
-        val failure = assertFailsWith<StubIndexInvalidException> { corpus("/models-invalid/") }
+        val failure = assertFailsWith<StubIndexInvalidException> { generatedSet("/models-invalid/") }
         assertTrue("/models-invalid/bad.yaml" in failure.message!!)
         assertNotNull(failure.cause)
     }
 
     @Test
     fun `a manifest listing a document twice is invalid`() {
-        assertFailsWith<StubIndexInvalidException> { corpus("/models-doubled/") }
+        assertFailsWith<StubIndexInvalidException> { generatedSet("/models-doubled/") }
     }
 
     @Test
@@ -170,7 +172,8 @@ internal class MountTest {
 
     private fun files(document: String) = arrayOf("index.txt" to "models.yaml\n", "models.yaml" to document)
 
-    private fun corpus(root: String): MountSequence = MountSequence().mount(root, StubResources.opener(root), fallback = GEN, corpus = true)
+    private fun generatedSet(root: String): MountSequence =
+        MountSequence().mount(root, StubResources.opener(root), fallback = GEN, generated = true)
 
     private companion object {
         val GEN = Verification.GENERATED

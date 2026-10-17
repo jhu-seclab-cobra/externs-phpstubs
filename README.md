@@ -112,7 +112,7 @@ Model documents derived from [JetBrains/phpstorm-stubs](https://github.com/JetBr
 - [Lookup Model](docs/model-lookup.md) -- bundled sets, merge order, statements in force, records and facts
 - [Merge Algorithm](docs/spec-merge.md) -- folding the mounted sets into one statement per subject, condition, and unit
 - [Taint Concepts](docs/concept-taint.md) -- the taint document set in psalm's names and its extraction
-- [Design](docs/design.md) -- resource roots, merge order, corpus rules, exception types
+- [Design](docs/design.md) -- resource roots, merge order, generated-set rules, exception types
 - [Extraction Concepts](docs/concept-extraction.md) -- extraction from php-src: declarations, Handlers, Raises Summary
 - [Extraction Design](docs/design-extraction.md) -- the php-src producers of hierarchy, signatures, and throws
 - [Throws Algorithm](docs/spec-throws.md) -- computing the throws section from the php-src C sources
@@ -121,7 +121,7 @@ Model documents derived from [JetBrains/phpstorm-stubs](https://github.com/JetBr
 - [Taint Design](docs/design-taint.md) -- `StubResources`, taint resource layout, extraction script
 - [Taint Rules Concepts](docs/concept-taint-rules.md) -- the hand-maintained taint rules document set and its contracts
 - [Taint Rules Design](docs/design-taint-rules.md) -- rules resource layout, validation and maintenance rules
-- [Value Rules Concepts](docs/concept-value-rules.md) -- the hand-maintained value rules set, review reasons, corpus gaps
+- [Value Rules Concepts](docs/concept-value-rules.md) -- the hand-maintained value rules set, review reasons, generated-set gaps
 - [Value Rules Design](docs/design-value-rules.md) -- value rules resource layout, validation and maintenance rules
 - [Implementation Notes](docs/impl.md) -- commons-phpmodels API findings, developer instructions
 - [Performance](docs/performance.md) -- lookup benchmark procedure and baselines

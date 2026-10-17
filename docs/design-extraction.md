@@ -2,7 +2,7 @@
 
 The offline producers that rewrite the generated declaration set from
 php-src. Concepts: [concept-extraction.md](concept-extraction.md). Throws
-algorithm: [spec-throws.md](spec-throws.md). Resource layout and corpus
+algorithm: [spec-throws.md](spec-throws.md). Resource layout and generated-set
 rules: [design.md](design.md).
 
 ## Design Overview

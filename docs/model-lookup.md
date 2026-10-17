@@ -97,7 +97,7 @@ Two Statements with the same (subject, condition, unit) key:
 | Set Provenance ranks differ | The higher rank (manual over generated) |
 | Ranks equal, Merge Order positions differ | The later position |
 | Same document, same key | Load failure (the format's per-document duplicate rule) |
-| Same set, different documents, same key | The later document (the generated set: load failure, corpus rule) |
+| Same set, different documents, same key | The later document (the generated set: load failure, generated-set rule) |
 
 ### Lookup
 

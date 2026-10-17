@@ -49,6 +49,6 @@ internal class ExceptionsTest {
 
     @Test
     fun `StubIndexInvalidException cause is null when detected directly`() {
-        assertNull(StubIndexInvalidException("corpus rule").cause)
+        assertNull(StubIndexInvalidException("generated-set rule").cause)
     }
 }

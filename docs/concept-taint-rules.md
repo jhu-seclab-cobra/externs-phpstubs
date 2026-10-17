@@ -23,7 +23,7 @@ written by hand, kept in psalm's names, and merged after the taint set
 under the same mapping into this library's Built-in Records.
 
 **Data Flow**
-- **Inputs:** the Argus sink lists, the psalm kind names, and the corpus
+- **Inputs:** the Argus sink lists, the psalm kind names, and the list
   of built-in names this library declares (offline, reviewed by hand).
 - **Outputs:** one document set: manifest, vocabulary additions, policy
   rows, and the sink, sanitizer, and source documents.
@@ -45,7 +45,7 @@ under the same mapping into this library's Built-in Records.
 ```
 Argus sink lists ──review──┐
 psalm kind names ──────────┼──► taint-rules/
-built-in name corpus ──────┘    ├── index.txt
+built-in name list ────────┘    ├── index.txt
                                 ├── vocabulary.yaml   (+ xpath, + external)
                                 ├── policy.yaml       (input → xpath; external → every kind)
                                 ├── sinks.yaml
@@ -61,7 +61,7 @@ merge: set loader(taint/, …) then set loader(taint-rules/, taint vocabulary, m
   assertions psalm does not state, in the commons-phpmodels format and in
   psalm's kind names plus two additions of its own.
 - **Scope:** sinks from the Argus lists that the format can express, the
-  escapes and sources those lists and the built-in corpus imply, the
+  escapes and sources those lists and the built-in name list imply, the
   checks of the type predicates and character checks psalm lacks, and
   nothing psalm already states identically.
 - **Relationships:** loaded over the Taint Document Set's vocabulary;

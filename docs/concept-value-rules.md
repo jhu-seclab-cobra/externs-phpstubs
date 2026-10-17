@@ -89,7 +89,7 @@ merge: models/ (generated) ◄──ranked below── value-rules/ (manual), pe
 - **Relationships:** documents a Value Rule; a rule the manual confirms as
   already generated correctly is dropped, not annotated.
 
-- **Name:** Corpus Gap
+- **Name:** Generated-Set Gap
 - **Definition:** A built-in an analysis meets that the generated
   declarations do not carry: a function the pinned php-src release no
   longer declares.
@@ -111,10 +111,10 @@ merge: models/ (generated) ◄──ranked below── value-rules/ (manual), pe
 
 **Internal Processing Flow**
 1. Classify — compare each migrated rule with the generated entry: no
-   generated unit, differing unit, conditional entry, or Corpus Gap.
+   generated unit, differing unit, conditional entry, or Generated-Set Gap.
 2. Review — check every differing or type-widened rule against the PHP
    manual: keep it with a Review Reason, correct it with a Review Reason,
-   or drop it when the manual confirms the generated unit. A Corpus Gap
+   or drop it when the manual confirms the generated unit. A Generated-Set Gap
    becomes a declaration under `models/manual/`.
 3. Emit — write the provenance and one document per PHP manual area,
    subjects sorted, conditional entries before the unconditional one.

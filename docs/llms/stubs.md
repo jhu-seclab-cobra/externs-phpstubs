@@ -93,7 +93,7 @@ values.provenance?.verification                    // Verification.MANUAL
 
 **`StubIndexNotFoundException`** -- `index.txt` or a listed document is absent; the message names the resource path.
 
-**`StubIndexInvalidException`** -- A set fails to decode (cause attached), a bundled set lacks `provenance.yaml`, a generated entry breaks a corpus rule (variable subject, no signature, duplicate subject across documents), or a conditional entry declares a signature.
+**`StubIndexInvalidException`** -- A set fails to decode (cause attached), a bundled set lacks `provenance.yaml`, a generated entry breaks a generated-set rule (variable subject, no signature, duplicate subject across documents), or a conditional entry declares a signature.
 
 **`IllegalArgumentException`** -- A lookup name is not a PHP spelling of the kind; a `BuiltinRecord` is built empty or with a foreign fact.
 

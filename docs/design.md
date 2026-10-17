@@ -1,7 +1,7 @@
 # PHP Stubs — Design
 
 The data side of the library: the resource roots, the five bundled sets and
-their fixed Merge Order, the corpus rules on the generated set, and the
+their fixed Merge Order, the generated-set rules, and the
 error types. The lookup surface — merge, records, facts, `PhpStubs` — is in
 [design-lookup.md](design-lookup.md). Concepts: [concept.md](concept.md),
 [concept-lookup.md](concept-lookup.md). Domain semantics:
@@ -68,7 +68,7 @@ positions; a set's own `vocabulary.yaml` merges after it decodes and its
 `policy.yaml` rows append. A bundled set without `provenance.yaml` is a
 packaging fault, not a default.
 
-**Corpus rules on the generated set** (position 0; each violation is a
+**Generated-set rules** (position 0; each violation is a
 `StubIndexInvalidException` naming the document and subject):
 - No entry has a `VariableSubject`; predefined variables are not stubs.
 - Every entry declares a `signature` and no condition.
@@ -127,7 +127,7 @@ fixture directory ship their own manifest. Set layouts:
 | Exception | When raised |
 |-----------|-------------|
 | `StubIndexNotFoundException(resource)` | `index.txt`, a listed document, or the psalm mapping resource is not on the classpath or under an extension directory |
-| `StubIndexInvalidException(reason, cause?)` | The set load or merge fails for any other reason (commons-phpmodels cause attached), a bundled set ships without `provenance.yaml`, a corpus rule is violated, or a conditional entry declares a signature |
+| `StubIndexInvalidException(reason, cause?)` | The set load or merge fails for any other reason (commons-phpmodels cause attached), a bundled set ships without `provenance.yaml`, a generated-set rule is violated, or a conditional entry declares a signature |
 | `IllegalArgumentException` | A lookup name is not a PHP identifier spelling (raised by the commons-phpmodels subject creator) |
 
 Every bundled-set error surfaces on first access to `PhpStubs`; an
@@ -139,7 +139,7 @@ extension-set error surfaces from the `with` call that mounts it.
   arity against the parameter list and the condition's positions, declared
   types, vocabulary references, mapping totality — is commons-phpmodels'
   and is not repeated here.
-- The corpus rules run over the generated set before the fold; a violation
+- The generated-set rules run over the generated set before the fold; a violation
   fails the whole load.
 - Duplicate detection compares subjects, so `Exception` and `exception`
   collide (folded kind) while `TRUE` and `true` do not (sensitive kind).

@@ -48,20 +48,20 @@ internal class MountSequence(
      * @param open The opener over the set's root.
      * @param mapping The vocabulary mapping the set decodes under, or null for a set in canonical names.
      * @param fallback The verification of a set without `provenance.yaml`, or null when one is required.
-     * @param corpus True for the generated declaration set: the corpus rules apply and extensions derive.
+     * @param generated True for the generated set: the generated-set rules apply and PHP extensions derive.
      */
     fun mount(
         root: String,
         open: ResourceOpener,
         mapping: VocabularyMapping? = null,
         fallback: Verification? = Verification.MANUAL,
-        corpus: Boolean = false,
+        generated: Boolean = false,
     ): MountSequence {
         val set = loadSet(root, open, mapping)
         val verification =
             set.provenance?.verification ?: fallback
                 ?: throw StubIndexInvalidException("$root: bundled set declares no provenance")
-        val entries = if (corpus) corpusEntries(root, set.documents) else set.entries.map { it to null }
+        val entries = if (generated) generatedEntries(root, set.documents) else set.entries.map { it to null }
         mounts += Mount(mounts.size, verification, set.vocabulary, set.policy, entries)
         vocabulary = vocabulary.merge(set.vocabulary)
         return this
@@ -94,8 +94,8 @@ internal class MountSequence(
         }
     }
 
-    // The corpus rules of the generated set: no variable, every entry signed and unconditional, one document per subject.
-    private fun corpusEntries(
+    // The generated-set rules: no variable, every entry signed and unconditional, one document per subject.
+    private fun generatedEntries(
         root: String,
         documents: List<Document>,
     ): List<Pair<ModelEntry, String?>> {
@@ -105,7 +105,7 @@ internal class MountSequence(
             val path = root + document.path
             val extension = extensionOf(document.path)
             for (entry in document.entries) {
-                requireCorpusEntry(path, entry)
+                requireGeneratedEntry(path, entry)
                 declaredIn.put(entry.subject, path)?.let { previous ->
                     throw StubIndexInvalidException("Duplicate subject '${entry.subject}' declared in $previous and $path")
                 }
@@ -115,7 +115,7 @@ internal class MountSequence(
         return entries
     }
 
-    private fun requireCorpusEntry(
+    private fun requireGeneratedEntry(
         path: String,
         entry: ModelEntry,
     ) {

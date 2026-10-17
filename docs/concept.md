@@ -138,7 +138,7 @@ Runtime:
   documents directly in the commons-phpmodels format, verified against the
   same decoder consumers use. Runs once per upstream release; committed.
 - **Scope:** development tooling, not a runtime dependency; only one
-  representation of the corpus exists. The taint extraction is one script
+  representation of the generated set exists. The taint extraction is one script
   in this repository ([concept-taint.md](concept-taint.md)); the php-src
   producers are in [concept-extraction.md](concept-extraction.md).
 - **Relationships:** produces the Generated Layer.
@@ -167,7 +167,7 @@ Runtime:
 3. Attribute — derive the Extension Provenance from the document's
    placement and attach it to each entry.
 4. Register — insert entries into per-kind maps keyed by subject; two
-   documents declaring the same subject is a corpus defect and fails the
+   documents declaring the same subject is a generated-set defect and fails the
    load naming both documents.
 5. Merge — fold the generated set, then the value rules
    set, the Canonical Vocabulary, and the two translated taint sets, into
