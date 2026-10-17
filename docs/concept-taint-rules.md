@@ -76,15 +76,6 @@ merge: set loader(taint/, …) then set loader(taint-rules/, taint vocabulary, m
 - **Relationships:** declared in the set's vocabulary, enabled by its
   policy rows, translated by the library's mapping like a Psalm Kind.
 
-- **Name:** Widened Entry
-- **Definition:** A taint rules entry for a subject and section the taint set
-  also states. Because the merge replaces one section per subject at a
-  time, the entry restates every point of psalm's section and adds its
-  own; it is a strict superset, never a rewrite.
-- **Scope:** sinks only in the shipped set; nine subjects.
-- **Relationships:** a Taint Entry; validated against the Taint Document
-  Set by this repository's tests.
-
 - **Name:** Receiver-triggered Sink
 - **Definition:** A dangerous operation the Argus lists attribute to the
   object a method is called on rather than to an argument, such as the
@@ -99,7 +90,11 @@ merge: set loader(taint/, …) then set loader(taint-rules/, taint vocabulary, m
 - **With the taint document set:** the taint rules set decodes only over the
   taint set's vocabulary; every Psalm Kind it names is declared there. No
   entry equals the taint set's entry for the same subject, condition, and
-  section.
+  section. A taint rules entry for a subject and section the taint set
+  also states restates every point of psalm's section and adds its own:
+  the merge replaces one section per subject at a time, so the entry is a
+  strict superset, never a rewrite. The shipped set has nine such
+  entries, all sinks.
 - **With the merge:** this library loads the set with the same psalm
   mapping as the taint set, extended by the two Vocabulary Additions.
   Mounting it after the taint set makes each taint rules section override
@@ -112,7 +107,7 @@ merge: set loader(taint/, …) then set loader(taint-rules/, taint vocabulary, m
 3. Emit — write the vocabulary additions, the policy rows, and the three
    documents sorted by subject.
 4. Verify — the repository test loads the set over the taint vocabulary
-   and asserts the shape, non-repetition, and widening rules.
+   and asserts the shape, non-repetition, and superset rules.
 
 ## 4. Scenarios
 

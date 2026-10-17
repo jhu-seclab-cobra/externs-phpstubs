@@ -31,7 +31,7 @@ import kotlin.test.assertTrue
  * - `taint rules set declares its own additions` — verifies the xpath kind, the external source kind, and the policy rows
  * - `every taint rules entry is an unsigned entry with exactly one taint section` — verifies the shape rule
  * - `no rules unit repeats a taint unit` — verifies each (subject, condition, section) differs from the taint set's
- * - `a taint rules sink over a taint subject widens psalm's ports` — verifies restated entries are strict supersets
+ * - `a taint rules sink over a taint subject adds to psalm's ports` — verifies restated entries are strict supersets
  * - `sinks follow the Argus lists` — verifies representative sinks per vulnerability type
  * - `checks state type predicates and character checks` — verifies the type set, the class, and the covered kinds of representative checks
  * - `sanitizers and sources name the added escapes and source kinds` — verifies representative entries
@@ -84,7 +84,7 @@ internal class TaintRulesSetTest {
     }
 
     @Test
-    fun `a taint rules sink over a taint subject widens psalm's ports`() {
+    fun `a taint rules sink over a taint subject adds to psalm's ports`() {
         val psalm = taint.entries.filter { it.body.sinks != null }.associateBy { it.subject }
         val restated = unconditional.values.filter { it.body.sinks != null && psalm[it.subject] != null }
         assertTrue(restated.isNotEmpty())

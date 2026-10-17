@@ -29,7 +29,7 @@ taint-rules/
 ├── provenance.yaml    # producer externs-phpstubs review of the Argus sink lists; verification manual
 ├── vocabulary.yaml    # additions only: kind `xpath`, source kind `external`
 ├── policy.yaml        # input enables xpath; external enables every input kind and xpath
-├── sinks.yaml         # Argus sink facts the format expresses; widened psalm subjects restate psalm's points
+├── sinks.yaml         # Argus sink facts the format expresses; an entry for a psalm subject restates psalm's points and adds its own
 ├── sanitizers.yaml    # sanitizer facts psalm lacks: shell, html, sql, file, value-typing sanitizer facts for every kind; checks
 └── sources.yaml       # `input` for request data psalm does not taint; `external` for environment and stored data
 ```

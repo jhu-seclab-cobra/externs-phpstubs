@@ -1,7 +1,7 @@
 # Hand-maintained taint set in psalm's names, mounted after the generated taint set.
 # Sinks follow Jahanshahi & Egele, "Argus: All your (PHP) Injection-sinks are belong to us"
 # (USENIX Security 2024), Table 5 and the artifact run, plus the curated lists shipped with it;
-# an entry for a subject the taint set already names restates psalm's ports and widens them.
+# an entry for a subject the taint set already names restates psalm's ports and adds its own.
 # Receiver-triggered sinks (methods with no path argument) are not expressible and are omitted.
 - subject:
     function: array_filter
