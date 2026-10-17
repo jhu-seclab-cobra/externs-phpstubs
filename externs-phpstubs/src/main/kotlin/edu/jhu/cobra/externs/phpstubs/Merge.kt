@@ -16,7 +16,7 @@ import edu.jhu.cobra.commons.phpmodels.VariableSubject
 import edu.jhu.cobra.commons.phpmodels.Vocabulary
 import java.util.EnumMap
 
-/** The six override units one entry can state; a statement is replaced whole per unit. */
+/** The six override units one entry can state; an entry's unit is replaced whole. */
 internal enum class OverrideUnit { SIGNATURE, VALUE, SOURCES, SINKS, SANITIZERS, THROWS }
 
 /** One entry as mounted: its set's position and verification rank, and its extension when derived. */
@@ -27,18 +27,13 @@ private data class Mounted(
     val extension: String?,
 )
 
-/** The entry whose unit is in force for one (subject, condition, unit) key, with its extension. */
-private data class Statement(
-    val entry: ModelEntry,
-    val extension: String?,
-)
-
-private typealias Slots = LinkedHashMap<ArgPattern?, EnumMap<OverrideUnit, Statement>>
+// Per condition and unit, the mounted entry in force.
+private typealias Slots = LinkedHashMap<ArgPattern?, EnumMap<OverrideUnit, Mounted>>
 
 /**
- * The fold of every mount into one statement per (subject, condition, unit) key, and the records built
- * from it. Built once per mount sequence and immutable: one map per declaration kind in first-statement
- * order, and the seven fact lists in record order.
+ * The fold of every mount into the entry in force for each (subject, condition, unit) key, and the records
+ * built from it. Built once per mount sequence and immutable: one map per declaration kind in Merge Order of
+ * each subject's first mounted entry, whatever its rank, and the seven fact lists in record order.
  */
 internal class Merge private constructor(
     val vocabulary: Vocabulary,
@@ -79,7 +74,7 @@ internal class Merge private constructor(
         }
     }
 
-    // Assembles one record: the unconditional signature, then every fact of every statement per condition.
+    // Assembles one record: the unconditional signature, then every fact of every entry in force per condition.
     private fun <S : ModelSubject> record(
         subject: S,
         slots: Slots,
@@ -87,7 +82,7 @@ internal class Merge private constructor(
         val signed = slots[null]?.get(OverrideUnit.SIGNATURE)
         val facts = FactLists()
         for ((condition, units) in slots) {
-            for ((unit, statement) in units) facts.add(subject, condition, unit, statement.entry)
+            for ((unit, item) in units) facts.add(subject, condition, unit, item.entry)
         }
         val record =
             BuiltinRecord(
@@ -156,7 +151,7 @@ internal class Merge private constructor(
 
     companion object {
         /**
-         * Folds [mounts] in position order under [precedence]: per key the highest-ranked statement is in
+         * Folds [mounts] in position order under [precedence]: per key the highest-ranked entry is in
          * force and, among equal ranks, the later mounted. A conditional entry declaring a signature is
          * [StubIndexInvalidException].
          */
@@ -178,22 +173,22 @@ internal class Merge private constructor(
             return merge
         }
 
-        // Subjects and conditions keep first-statement order; statements are written weakest first so the last write wins.
+        // Subjects and conditions keep the order of their first entry; entries are written weakest first so the last write wins.
         private fun fold(mounted: List<Mounted>): Map<ModelSubject, Slots> {
-            val statements = LinkedHashMap<ModelSubject, Slots>()
+            val inForce = LinkedHashMap<ModelSubject, Slots>()
             for (item in mounted) {
                 val entry = item.entry
                 if (entry.condition != null && entry.signature != null) {
                     throw StubIndexInvalidException("Conditional entry for '${entry.subject}' declares a signature")
                 }
-                statements.getOrPut(entry.subject) { Slots() }.getOrPut(entry.condition) { EnumMap(OverrideUnit::class.java) }
+                inForce.getOrPut(entry.subject) { Slots() }.getOrPut(entry.condition) { EnumMap(OverrideUnit::class.java) }
             }
             val weakestFirst = compareByDescending<Mounted> { it.rank }.thenBy { it.position }
             for (item in mounted.sortedWith(weakestFirst)) {
-                val slots = statements.getValue(item.entry.subject).getValue(item.entry.condition)
-                for (unit in declaredUnits(item.entry)) slots[unit] = Statement(item.entry, item.extension)
+                val slots = inForce.getValue(item.entry.subject).getValue(item.entry.condition)
+                for (unit in declaredUnits(item.entry)) slots[unit] = item
             }
-            return statements
+            return inForce
         }
 
         private fun declaredUnits(entry: ModelEntry): List<OverrideUnit> =

@@ -38,24 +38,22 @@ format library's: `extern/commons-phpmodels/docs/model.md`,
   after every Bundled Set, in the order supplied; a set without provenance
   mounts as manual. Its names are Canonical Vocabulary names or its own
   vocabulary additions; it carries no mapping.
-- **Statement** — One entry's content for one Override Unit, keyed by
-  (subject, condition, unit), together with the Set Provenance of the set
-  that stated it and that set's position in Merge Order.
 - **Merge** — The map from every (subject, condition, unit) key stated by
-  any mounted set to the one Statement in force for it. Built once per set
-  sequence and never changed. Two Statements with the same key compete; a
-  Statement with a different condition never competes.
+  any mounted set to the entry in force for it, with the Set Provenance
+  rank and Merge Order position of the set that stated it. Built once per
+  set sequence and never changed. Two entries stating the same key
+  compete; an entry with a different condition never competes.
 - **PHP Extension** — The PHP extension a declaration belongs to, derived from
   the generated document's placement (`mysqli`, `standard`, `keyword`,
   `scalar`, ...). A subject declared only by a non-generated set has no
   PHP Extension.
-- **`BuiltinRecord`** — One subject the Merge holds any Statement for:
+- **`BuiltinRecord`** — One subject the Merge holds any entry in force for:
   its PHP spelling, its PHP Extension, its signature when an unconditional
-  signature Statement is in force, and its Facts. Existence condition: the
+  signature is in force, and its Facts. Existence condition: the
   subject is keyed after the merge. Identity is the subject. One record
   kind per subject kind: function, method, class, constant, class
   constant, property, predefined variable.
-- **Fact** — One element of a record's assertion Statements, carrying its
+- **Fact** — One element of an assertion unit of a record's entries in force, carrying its
   owner record and the Condition of the entry it came from, or none: a
   *sink* (port, vulnerability type), a *source* (produced source kinds,
   site, key patterns), a *sanitizer* (neutralized vulnerability types), a *flow* (one
@@ -78,7 +76,7 @@ format library's: `extern/commons-phpmodels/docs/model.md`,
 | `BuiltinLookup` | Merge | reads | 1:1 | One merge per lookup; bundled or bundled plus consumer sets |
 | Merge | Bundled Set | folds | 1:5 | In Merge Order, under the default Precedence |
 | Merge | Consumer Set | folds | 1:N | After the bundled sets, in supplied order |
-| Merge | Statement | holds | 1:N | Exactly one per (subject, condition, unit) key stated by any set |
+| Merge | entry in force | holds | 1:N | Exactly one per (subject, condition, unit) key stated by any set |
 | Psalm Mapping | Bundled Set | translates | 1:2 | The taint set and the taint rules set |
 | Canonical Vocabulary | Fact | names | 1:N | Every vulnerability type and source kind a fact carries |
 | `BuiltinRecord` | Matching Subject | identifies | 1:1 | PHP spelling folded per kind |
@@ -88,9 +86,9 @@ format library's: `extern/commons-phpmodels/docs/model.md`,
 
 ## State Model
 
-### Statement in Force
+### Entry in Force
 
-Two Statements with the same (subject, condition, unit) key:
+Two entries stating the same (subject, condition, unit) key:
 
 | Comparison | In force |
 |------------|----------|
@@ -107,7 +105,7 @@ Two Statements with the same (subject, condition, unit) key:
 | Built | exact lookup, subject exists | one record |
 | Built | exact lookup, subject absent | no record; not a failure |
 | Built | exact lookup, name not a PHP spelling | argument error |
-| Built | enumeration | every record or fact of the kind, in first-statement order |
+| Built | enumeration | every record or fact of the kind, in enumeration order (Invariants) |
 | Built | consumer sets supplied | a second merge: bundled sets then consumer sets; the bundled merge unchanged |
 
 ## Invariants
@@ -116,7 +114,7 @@ Two Statements with the same (subject, condition, unit) key:
   builtin is a record whose signature is in force, and the generated set
   declares one on every entry. A predefined-variable record never holds a
   signature.
-- The signature Statement is unconditional: a conditional entry that
+- The signature in force is unconditional: a conditional entry that
   declares a signature is a load failure.
 - The Canonical Vocabulary is mounted before the mapped sets and before
   any Consumer Set; every mapping target is one of its names.
@@ -124,11 +122,11 @@ Two Statements with the same (subject, condition, unit) key:
   is mapped or discarded, and a discarded-only element is dropped.
 - Merge Order is fixed and complete: the five bundled sets, once each, in
   the stated order, under the default Precedence.
-- A Statement is replaced whole per key, never merged with the one it
-  replaces; a later set that omits a unit leaves the earlier Statement in
+- The entry in force is replaced whole per key, never merged with the one
+  it replaces; a later set that omits a unit leaves the earlier entry in
   force for that unit.
-- Conditions partition the Statements of one subject and unit: a
-  conditional Statement never replaces an unconditional one, and the
+- Conditions partition the entries of one subject and unit: a
+  conditional entry never replaces an unconditional one, and the
   reverse never happens.
 - A Consumer Set never precedes a Bundled Set and never changes the
   bundled merge; two lookups built from the same sets in the same order
@@ -136,8 +134,10 @@ Two Statements with the same (subject, condition, unit) key:
 - Exact lookup is exact: the spelling is folded per kind by the format
   library and compared whole; no suffix, prefix, or case-insensitive match
   exists in the lookup.
-- Enumeration order is first-statement order, so a consumer's "first match"
-  is deterministic.
+- Enumeration order is deterministic, so a consumer's "first match" is:
+  records in Merge Order of each subject's first mounted entry, whatever
+  its rank; facts in record order, then conditions in Merge Order of their
+  first entry, then Override Unit order, then document order.
 - A Fact always names its owner; a fact never exists apart from a record.
 - The value rules set corrects only subjects the generated set declares,
   and never repeats a value unit the generated set already states.

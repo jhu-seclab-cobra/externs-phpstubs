@@ -36,8 +36,8 @@ decides.
 
 **Scope Boundaries**
 - **Owned:** the Canonical Vocabulary, the mapping onto it, the merge
-  order and the merge itself (which set's statement is in force per
-  subject, condition, and section), the exact lookup by PHP spelling, and
+  order and the merge itself (which set's entry is in force per
+  subject, condition, and unit), the exact lookup by PHP spelling, and
   enumeration by declaration kind and by fact kind. Any looser match is the
   consumer's filter over an enumeration, never a rule here.
 - **Not Owned:** the format and its decoding (commons-phpmodels); deciding
@@ -70,11 +70,11 @@ consumer: fact kind ────────► BuiltinLookup ────► ev
 - **Relationships:** context of the merge; the names every fact is in.
 
 - **Name:** Merge
-- **Definition:** Folding the sets, in this library's fixed order, into one
-  statement per (subject, condition, section): a manual set's statement
+- **Definition:** Folding the sets, in this library's fixed order, into the
+  entry in force per (subject, condition, unit): a manual set's entry
   outranks a generated one; among equals the later mounted wins. Two
-  entries for one subject with different conditions are two statements,
-  both kept. Built once, lazily; internal.
+  entries for one subject with different conditions state two keys, both
+  kept. Built once, lazily; internal.
 - **Scope:** the Generated Layer, the value rules set, the Canonical
   Vocabulary, the taint set, the taint rules set, then consumer sets.
 - **Relationships:** consumes commons-phpmodels document sets; read by the
@@ -124,7 +124,7 @@ consumer: fact kind ────────► BuiltinLookup ────► ev
 1. Merge — decode each set in order, fold by rank then order, build once.
 2. Resolve — parse the lookup name into a Subject through the format
    library's creators, so folding is decided once.
-3. Read — take the subject's statements; the record exposes each section's
+3. Read — take the subject's entries in force; the record exposes each section's
    facts with their conditions.
 4. Enumerate — walk every subject and yield the records of one declaration
    kind, or the facts of one fact kind, each with its record.
@@ -158,5 +158,15 @@ consumer: fact kind ────────► BuiltinLookup ────► ev
 - **Rejected:** "extension set" (a second sense of extension); "stub set"
   (names the bundled sets too); "supplied set", "third-party set",
   "overlay set", "user-supplied set"; renaming `with` and `plus`.
+- **Choice (T4d-U9, agent decision):** the merge result for one
+  (subject, condition, unit) key is "the entry in force", the format
+  library's phrase; the fold stores the mounted entry itself, and the
+  enumeration order is stated as a plain clause (mount order of the first
+  entry, whatever its rank), with no order name.
+- **Rejected:** "Statement" (collides with the PHP statement and the PHP
+  manual's `PDOStatement` and `mysqli_stmt`, and adds no meaning);
+  "declaration in force" (a third sense of declaration); a separate
+  `EntryInForce` type with a named "first-entry order"; "unit in force"
+  (overloads unit).
 
 Software structure: [design-lookup.md](design-lookup.md).

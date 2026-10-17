@@ -20,14 +20,14 @@ import edu.jhu.cobra.commons.phpmodels.SignatureInfo.TypedSignature
  * @param S The subject kind, so a lookup result exposes its identity fields without a cast.
  * @property subject The declaration the record identifies.
  * @property extension The PHP extension of the generated entry, or null when no generated set declares it.
- * @property signature The unconditional signature statement in force, or null for a fact-only record.
- * @property returns Every returns fact, in statement order.
- * @property flows Every flow fact, in statement order.
- * @property characters Every characters fact, in statement order.
- * @property sourceFacts Every source fact, in statement order.
- * @property sinkFacts Every sink fact, in statement order.
- * @property sanitizerFacts Every sanitizer fact, in statement order.
- * @property throws Every throws fact, in statement order.
+ * @property signature The signature of the unconditional entry in force, or null for a fact-only record.
+ * @property returns Every returns fact, in condition, unit and document order.
+ * @property flows Every flow fact, in condition, unit and document order.
+ * @property characters Every characters fact, in condition, unit and document order.
+ * @property sourceFacts Every source fact, in condition, unit and document order.
+ * @property sinkFacts Every sink fact, in condition, unit and document order.
+ * @property sanitizerFacts Every sanitizer fact, in condition, unit and document order.
+ * @property throws Every throws fact, in condition, unit and document order.
  * @throws IllegalArgumentException If a fact names another owner or the record asserts nothing.
  */
 public data class BuiltinRecord<out S : ModelSubject>(

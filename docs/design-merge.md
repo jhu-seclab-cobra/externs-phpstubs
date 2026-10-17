@@ -57,22 +57,23 @@ returned `null` for is `StubIndexNotFoundException`; any other is
 records built from its result. Built once per set sequence, immutable.
 
 **State/Fields:** `vocabulary`, `policy`, one `LinkedHashMap<Subject, BuiltinRecord>`
-per declaration kind in first-statement order, and the seven fact lists in
-record order.
+per declaration kind in Merge Order of each subject's first mounted entry,
+whatever its rank, and the seven fact lists in record order.
 
 **Construction (`Merge.of(mounts: List<Mount>)`):** for each mount in
 position order and each entry: key = (subject, condition); per unit the
-entry declares, the statement in force is replaced when the new statement's
+entry declares, the entry in force is replaced when the new entry's
 verification ranks at least equal under `Precedence.DEFAULT` (equal rank,
 later position wins; lower rank never replaces). The extension of a record
-is the extension of the statement in force for its signature unit. A
+is the extension of the entry in force for its signature unit. A
 conditional entry declaring a signature is `StubIndexInvalidException`.
 
-**Record assembly:** per subject, the signature is the unconditional
-signature statement or `null`; the facts are every element of every
-statement in force under every condition of that subject, each tagged with
-its condition. Statement order within a subject is condition
-first-statement order; element order is document order.
+**Record assembly:** per subject, the signature is that of the unconditional
+entry in force for the signature unit, or `null`; the facts are every
+element of every entry in force under every condition of that subject, each
+tagged with its condition. Within a subject, facts follow conditions in
+Merge Order of their first entry, then Override Unit order, then document
+order.
 
 ## Validation Rules
 

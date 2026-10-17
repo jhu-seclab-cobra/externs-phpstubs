@@ -24,10 +24,10 @@ import kotlin.test.assertTrue
  * - `a merged record carries the character bound of its value unit` — verifies basename's bound survives the merge
  * - `taint facts speak the canonical vocabulary` — verifies sinks, sanitizers, and conditions after mapping
  * - `taint rules outrank taint for the same key` — verifies the later manual set replaces the generated one
- * - `a lookup over the same mounts holds equal records` — verifies equal statements give equal records
+ * - `a lookup over the same mounts holds equal records` — verifies equal entries in force give equal records
  * - `with mounts a classpath consumer set after the bundled ones` — verifies override and addition
- * - `a consumer set without provenance mounts as manual` — verifies it replaces a bundled manual statement
- * - `a consumer set with generated provenance loses to a bundled manual statement` — verifies rank over order
+ * - `a consumer set without provenance mounts as manual` — verifies it replaces a bundled manual entry
+ * - `a consumer set with generated provenance loses to a bundled manual entry` — verifies rank over order
  * - `later consumer roots override earlier ones` — verifies supplied order among consumer sets
  * - `plus chains like with` — verifies the operator form
  * - `with mounts a directory consumer set` — verifies the filesystem opener
@@ -123,7 +123,7 @@ internal class PhpStubsTest {
     }
 
     @Test
-    fun `a consumer set with generated provenance loses to a bundled manual statement`() {
+    fun `a consumer set with generated provenance loses to a bundled manual entry`() {
         val extended = PhpStubs.with("/consumer-generated/")
         assertEquals(ReturnKind.NUM, assertNotNull(extended.function("strlen")).returns.single().kind)
         assertNull(assertNotNull(extended.function("extension_generated_only")).extension)

@@ -13,13 +13,15 @@ Input: an ordered list of document sets, each already decoded and verified
 by the format library's set loader (entries, accumulated vocabulary,
 policy, set provenance; a mapped set arrives translated into the Canonical
 Vocabulary), and the default Precedence over verification kinds. Output:
-the accumulated vocabulary, the policy matrix, and one Statement per
-(subject, condition, unit) key stated by any set — six units: signature,
-value (returns with propagation and characters), sources, sinks, sanitizers, throws — each
-Statement remembering the set that stated it. Correctness: per key the
-highest-ranked set's Statement is in force and, among equal ranks, the
-later mounted; a Statement never replaces one with a different key; the
-result is immutable and equal for equal inputs.
+the accumulated vocabulary, the policy matrix, and the entry in force for
+each (subject, condition, unit) key stated by any set — six units:
+signature, value (returns with propagation and characters), sources,
+sinks, sanitizers, throws — each with the rank and position of the set
+that stated it, keys ordered by the mount order of their subject's and
+condition's first entry. Correctness: per key the highest-ranked set's
+entry is in force and, among equal ranks, the later mounted; an entry is
+in force only for the keys it states; the result is immutable and equal
+for equal inputs.
 
 ### Steps
 
@@ -32,17 +34,19 @@ merge(sets, precedence):
         rank = rank(precedence, set.provenance.verification or precedence.default)
         for entry in set.entries:
             mounted.append((position, rank, entry))
-    statements = fold(mounted)
-    return read_only(vocab, matrix(rows), statements)
+    inForce = fold(mounted)
+    return read_only(vocab, matrix(rows), inForce)
 
 fold(mounted):
-    statements = {}                                    # (subject, condition, unit) → Statement
+    inForce = {}                                       # subject → condition → unit → (e, rank, position)
+    for (position, rank, e) in mounted, in order:      # slots in mount order of the first entry
+        require e.condition = none or e.signature = none   # conditional signature → failure
+        add slot inForce[e.subject][e.condition] if absent
     for (position, rank, e) in mounted
             sorted by rank ascending, then position ascending, stable:
-        require e.condition = none or e.signature = none   # conditional signature → failure
         for unit in declaredUnits(e):
-            statements[(e.subject, e.condition, unit)] = Statement(e[unit], rank, position)
-    return statements                                  # the last write per key is in force
+            inForce[e.subject][e.condition][unit] = (e, rank, position)
+    return inForce                                     # the last write per key is in force
 
 declaredUnits(e):
     { signature  if e.signature declared
@@ -61,11 +65,12 @@ set's load. Every format rule — subject spellings, ports, sections,
 conditions, signatures, arity, mapping translation and the dropping of
 elements left without a name — is applied there and not restated here.
 
-Reading a record from `statements` is a key scan: the record of subject
-`s` exists when any key starts with `s`; its signature is the
-`(s, none, signature)` Statement or none; its Facts are the
-elements of every Statement whose key starts with `s`, each carrying that
-key's condition.
+Reading a record from `inForce` is a key scan: the record of subject `s`
+exists when any key starts with `s`; its signature is that of the entry in
+force for `(s, none, signature)`, or none; its Facts are the elements of
+every entry in force for a key that starts with `s`, each carrying that
+key's condition, in condition order, then unit order (signature, value,
+sources, sinks, sanitizers, throws), then document order.
 
 ### Edge Cases
 
@@ -77,7 +82,7 @@ key's condition.
 - A set without a provenance document mounts at the precedence's default
   rank, manual under the default precedence.
 - The generated set and a manual set stating the same key: the manual
-  Statement is in force whatever the mount order.
+  entry is in force whatever the mount order.
 - Two manual sets stating the same key: the later mounted is in force.
   Among the bundled sets this makes taint rules override taint, and among
   consumer sets the later supplied override the earlier.
@@ -86,20 +91,22 @@ key's condition.
 
 ### Invariants
 
-- After the sort, Statements are written in non-decreasing (rank, position)
+- After the sort, entries are written in non-decreasing (rank, position)
   order, so the last write per key is the one the correctness condition
   names.
+- The first pass fixes the order of subjects and conditions; the second
+  pass never adds a slot, so the entry in force never moves a record.
 - Writing one key leaves every other key untouched; a subject's other
   units and other conditions are never read during a write.
 - Subjects are compared by the format's identity (folded per kind), the
   same identity a lookup key carries.
 - The same sets in the same order under the same precedence merge into
-  equal Statements.
+  equal entries in force.
 
 ### Termination
 
-- Finitely many sets, each with finitely many entries. One sort and one
-  linear pass, no fixpoint.
+- Finitely many sets, each with finitely many entries. One linear pass,
+  one sort and one more linear pass, no fixpoint.
 
 ### Complexity
 

@@ -26,8 +26,8 @@ import kotlin.test.assertNull
  * - `a source fact at the result has no site` — verifies the result-site source shape
  * - `a returns fact and its flow facts come from one value unit` — verifies the classification and the ports
  * - `a characters fact comes from the value unit` — verifies the bound is read with returns and flows
- * - `a throws fact holds the whole class set` — verifies one fact per throws statement
- * - `an empty throws section is a fact` — verifies the statement that a call throws none
+ * - `a throws fact holds the whole class set` — verifies one fact per throws unit
+ * - `an empty throws section is a fact` — verifies the assertion that a call throws none
  */
 internal class FactTest {
     private val f = FunctionSubject("f")

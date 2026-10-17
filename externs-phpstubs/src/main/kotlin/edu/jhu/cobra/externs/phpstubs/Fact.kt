@@ -12,7 +12,7 @@ import edu.jhu.cobra.commons.phpmodels.SourceKindId
 import edu.jhu.cobra.commons.phpmodels.VulnTypeId
 
 /**
- * One element of one assertion statement in force for a builtin, with the record it belongs to and the
+ * One element of one assertion unit of an entry in force for a builtin, with the record it belongs to and the
  * condition it holds under. A consumer matches [condition] against its own call arguments through
  * [ArgPattern.matches] and applies its own rule to an undecidable outcome; the library ranks nothing.
  */
@@ -20,7 +20,7 @@ public sealed interface Fact {
     /** The subject of the record this fact was read from. */
     public val owner: ModelSubject
 
-    /** The condition of the entry that stated this fact, or null for an unconditional statement. */
+    /** The condition of the entry that stated this fact, or null for an unconditional entry. */
     public val condition: ArgPattern?
 }
 

@@ -92,8 +92,8 @@ php-src (release tag)
 **Data Contracts**
 - **With commons-phpmodels:** every written entry decodes under the
   format; a throws element is a class name the generated set declares.
-- **With the merge:** a generated entry's throws section is the generated
-  statement of the throws unit; a manual set states a correction as its
+- **With the merge:** a generated entry's throws section states the
+  throws unit of that entry; a manual set states a correction as its
   own entry, never as an edit of a generated document.
 - **With php-src:** one release tag per run; the same tag over the same
   documents yields identical files, and a second run changes nothing.

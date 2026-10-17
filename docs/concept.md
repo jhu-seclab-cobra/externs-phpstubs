@@ -173,7 +173,7 @@ Runtime:
    load naming both documents.
 5. Merge — fold the generated set, then the value rules
    set, the Canonical Vocabulary, and the two translated taint sets, into
-   one statement per subject, condition, and section.
+   the entry in force per subject, condition, and unit.
 6. Answer — resolve a PHP name to a subject and read its record from the
    merge; enumerate a declaration kind or a fact kind across it.
 
@@ -189,9 +189,9 @@ Runtime:
 - **Interaction:** a consumer asks the record of `mysqli::query` for
   its sinks and receives one sink of the canonical SQL injection vulnerability type
   at the first argument, translated from psalm's `sql`. It asks `strlen`
-  for its flow and receives the value rules statement, the signature and
+  for its flow and receives the value rules entry's flow, the signature and
   extension staying the generated set's. The sets meet per subject, condition,
-  and section in this library's merge, never in the consumer.
+  and unit in this library's merge, never in the consumer.
 
 Lookup: [concept-lookup.md](concept-lookup.md). Sets: [concept-taint.md](concept-taint.md), [concept-taint-rules.md](concept-taint-rules.md), [concept-value-rules.md](concept-value-rules.md).
 Software structure: [design.md](design.md). Format semantics: commons-phpmodels `docs/model-declarations.md`.

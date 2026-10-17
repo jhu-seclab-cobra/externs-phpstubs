@@ -115,7 +115,7 @@ merge: set loader(taint/, canonical vocabulary, mapping) ─► entries in canon
 1. Extract — read psalm's dictionary, stub annotations, and source rule.
 2. Normalize — spell subjects in PHP identity form, resolve parameter
    names to argument positions from the stub signature, merge duplicate
-   statements.
+   assertions.
 3. Emit — write the vocabulary, the policy, the three documents, sorted
    by subject, each with a producer header naming the psalm release.
 4. Verify — the repository test loads the set through the set loader

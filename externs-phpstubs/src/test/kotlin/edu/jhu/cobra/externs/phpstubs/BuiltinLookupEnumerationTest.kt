@@ -12,7 +12,7 @@ import kotlin.test.assertTrue
  * every record of one declaration kind, every fact of one fact kind, and the accumulated vocabulary and policy.
  * Exact lookups: [BuiltinLookupExactTest].
  *
- * - `enumerations cover every kind in first-statement order` — verifies the collections and fact lists
+ * - `enumerations cover every kind in mount order of the first entry` — verifies the collections and fact lists
  * - `constant enumerations are non-empty and keyed by subject` — verifies bulk access
  * - `every enumerated record is reachable by exact lookup of its subject` — verifies the kind maps and the shared map agree
  * - `every enumerated fact belongs to the record that owns it` — verifies fact lists are built over the records
@@ -21,7 +21,7 @@ import kotlin.test.assertTrue
  */
 internal class BuiltinLookupEnumerationTest {
     @Test
-    fun `enumerations cover every kind in first-statement order`() {
+    fun `enumerations cover every kind in mount order of the first entry`() {
         assertTrue(PhpStubs.functions.size > 5000)
         assertTrue(PhpStubs.classes.isNotEmpty() && PhpStubs.methods.isNotEmpty() && PhpStubs.constants.isNotEmpty())
         assertTrue(PhpStubs.classConstants.isNotEmpty() && PhpStubs.variables.isNotEmpty())

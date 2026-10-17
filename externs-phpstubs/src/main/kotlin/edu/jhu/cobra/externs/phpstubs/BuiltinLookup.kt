@@ -63,46 +63,46 @@ public interface BuiltinLookup {
     /** The record of an already built [subject], or null. */
     public fun record(subject: ModelSubject): BuiltinRecord<ModelSubject>?
 
-    /** Every function record, in first-statement order. */
+    /** Every function record, in Merge Order of its subject's first mounted entry. */
     public val functions: Collection<BuiltinRecord<FunctionSubject>>
 
-    /** Every class record, in first-statement order. */
+    /** Every class record, in Merge Order of its subject's first mounted entry. */
     public val classes: Collection<BuiltinRecord<ClassSubject>>
 
-    /** Every method record, in first-statement order. */
+    /** Every method record, in Merge Order of its subject's first mounted entry. */
     public val methods: Collection<BuiltinRecord<MethodSubject>>
 
-    /** Every global constant record, in first-statement order. */
+    /** Every global constant record, in Merge Order of its subject's first mounted entry. */
     public val constants: Collection<BuiltinRecord<ConstantSubject>>
 
-    /** Every class constant record, in first-statement order. */
+    /** Every class constant record, in Merge Order of its subject's first mounted entry. */
     public val classConstants: Collection<BuiltinRecord<ClassConstantSubject>>
 
-    /** Every property record, in first-statement order. */
+    /** Every property record, in Merge Order of its subject's first mounted entry. */
     public val properties: Collection<BuiltinRecord<PropertySubject>>
 
-    /** Every predefined variable record, in first-statement order. */
+    /** Every predefined variable record, in Merge Order of its subject's first mounted entry. */
     public val variables: Collection<BuiltinRecord<VariableSubject>>
 
-    /** Every sink fact over every record, in record then statement order. */
+    /** Every sink fact over every record, in record order, then condition, unit and document order. */
     public val sinkFacts: List<SinkFact>
 
-    /** Every source fact over every record, in record then statement order. */
+    /** Every source fact over every record, in record order, then condition, unit and document order. */
     public val sourceFacts: List<SourceFact>
 
-    /** Every sanitizer fact over every record, in record then statement order. */
+    /** Every sanitizer fact over every record, in record order, then condition, unit and document order. */
     public val sanitizerFacts: List<SanitizerFact>
 
-    /** Every flow fact over every record, in record then statement order. */
+    /** Every flow fact over every record, in record order, then condition, unit and document order. */
     public val flows: List<FlowFact>
 
-    /** Every characters fact over every record, in record then statement order. */
+    /** Every characters fact over every record, in record order, then condition, unit and document order. */
     public val characters: List<CharactersFact>
 
-    /** Every returns fact over every record, in record then statement order. */
+    /** Every returns fact over every record, in record order, then condition, unit and document order. */
     public val returns: List<ReturnsFact>
 
-    /** Every throws fact over every record, in record then statement order. */
+    /** Every throws fact over every record, in record order, then condition, unit and document order. */
     public val throws: List<ThrowsFact>
 
     /** The vocabulary accumulated over every mounted set. */

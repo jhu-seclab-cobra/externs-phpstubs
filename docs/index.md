@@ -16,7 +16,7 @@
 | [design-taint.md](design-taint.md) | `StubResources`, taint resource layout, extraction script inputs and validation rules |
 | [design-taint-rules.md](design-taint-rules.md) | `StubResources.TAINT_RULES`, rules resource layout, validation and maintenance rules |
 | [design-value-rules.md](design-value-rules.md) | `StubResources.VALUE_RULES`, value rules resource layout, validation and maintenance rules |
-| [spec-merge.md](spec-merge.md) | Folding the mounted sets into one statement per subject, condition, and unit |
+| [spec-merge.md](spec-merge.md) | Folding the mounted sets into the entry in force per subject, condition, and unit |
 | [spec-throws.md](spec-throws.md) | Computing the throws section from the php-src C sources: the Raises Summary fixpoint |
 | [impl.md](impl.md) | commons-phpmodels API findings, version constraints, extension and set provenance, variadic, taint-extraction, and value rules review notes |
 | [performance.md](performance.md) | Load-time and lookup benchmark procedure and baselines |

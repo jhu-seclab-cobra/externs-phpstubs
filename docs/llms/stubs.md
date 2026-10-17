@@ -39,7 +39,7 @@ query?.sinkFacts?.single()?.vulnType == VulnType.SQLI.id   // true
 
 **`record(subject: ModelSubject): BuiltinRecord<ModelSubject>?`** -- An already built subject.
 
-**Enumeration** (first-statement order for records, record then statement order for facts):
+**Enumeration** (records in Merge Order of each subject's first mounted entry; facts in record order, then condition, unit and document order):
 
 **`functions`, `classes`, `methods`, `constants`, `classConstants`, `properties`, `variables`** -- `Collection<BuiltinRecord<…>>`.
 
@@ -55,7 +55,7 @@ query?.sinkFacts?.single()?.vulnType == VulnType.SQLI.id   // true
 
 ### BuiltinRecord<S : ModelSubject> (data class)
 
-**`subject: S`**, **`extension: String?`** (from the generated document's placement, `standard_3.yaml` -> `standard`; `null` when no generated set declares the subject), **`signature: SignatureInfo?`** (the unconditional signature statement in force), **`returns`, `flows`, `characters`, `sourceFacts`, `sinkFacts`, `sanitizerFacts`, `throws`** (every fact in force under every condition), **`facts`** (all seven in that order). Construction requires a signature or at least one fact, and every fact's `owner == subject`.
+**`subject: S`**, **`extension: String?`** (from the generated document's placement, `standard_3.yaml` -> `standard`; `null` when no generated set declares the subject), **`signature: SignatureInfo?`** (the signature of the unconditional entry in force), **`returns`, `flows`, `characters`, `sourceFacts`, `sinkFacts`, `sanitizerFacts`, `throws`** (every fact in force under every condition), **`facts`** (all seven in that order). Construction requires a signature or at least one fact, and every fact's `owner == subject`.
 
 Typed accessors (top-level extension properties, nullable):
 
@@ -69,7 +69,7 @@ Typed accessors (top-level extension properties, nullable):
 
 ### Fact (sealed interface)
 
-Every fact: **`owner: ModelSubject`**, **`condition: ArgPattern?`** (`null` for an unconditional statement; otherwise match it with `condition.matches(args)` -> `true`, `false`, or `null` for undecidable).
+Every fact: **`owner: ModelSubject`**, **`condition: ArgPattern?`** (`null` for an unconditional entry; otherwise match it with `condition.matches(args)` -> `true`, `false`, or `null` for undecidable).
 
 **`SinkFact(port: Port.Argument, vulnType: VulnTypeId)`** | **`SourceFact(sourceKinds: Set<SourceKindId>, at: Port.Argument?, keys: List<KeyPattern>?)`** | **`SanitizerFact(vulnTypes: Set<VulnTypeId>, check: ArgumentCheck?)`** | **`FlowFact(from: Port.Input, to: Port)`** | **`CharactersFact(bound: CharacterBound)`** | **`ReturnsFact(kind: ReturnKind)`** | **`ThrowsFact(classes: Set<ClassSubject>)`**.
 

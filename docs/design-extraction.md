@@ -99,10 +99,10 @@ php-src, the interpreter's own declarations (CobraPHP user decision BP-2).
 - Each generated function or method entry php-src declares is relocated
   to its extension, then gets the subject line and signature block
   php-src states; its other sections (propagation, throws) stay, except a
-  propagation statement naming an argument position the signature lacks
+  propagation element naming an argument position the signature lacks
   (no variadic parameter): PHP rejects a call passing more arguments
   than an internal function declares (`ArgumentCountError`), so no value
-  reaches that position. A propagation section left without a statement
+  reaches that position. A propagation section left without an element
   fails the run.
 - A php-src function no models document declares joins `placement` of its
   extension; a method joins the generated document declaring its class,
@@ -165,7 +165,7 @@ sorted tab-separated line per internal declaration the build reflects.
 | Unknown entry macro | A function entry table uses a macro outside the known set |
 | Undefined Handler | An entry names a Handler no C source defines |
 | Unbalanced source | A C source holds a brace no brace closes |
-| Propagation without a port | Every propagation statement of an entry names an argument position its php-src signature lacks |
+| Propagation without a port | Every propagation element of an entry names an argument position its php-src signature lacks |
 
 ## Open Gaps
 

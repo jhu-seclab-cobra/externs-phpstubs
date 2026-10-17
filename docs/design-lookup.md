@@ -118,13 +118,13 @@ members only.
 
 ### Fact (sealed interface) and its seven data classes
 
-**Responsibility:** One element of one assertion statement, with the record
+**Responsibility:** One element of one assertion unit of an entry in force, with the record
 it belongs to and the condition it holds under. A consumer matches
 `condition` against its own call arguments through `ArgPattern.matches` and
 applies its own rule to an undecidable outcome; the library ranks nothing.
 
 **Common fields:** `owner: ModelSubject`, `condition: ArgPattern?` (`null`
-for an unconditional statement).
+for an unconditional entry).
 
 | Type | Own fields | From |
 |------|------------|------|

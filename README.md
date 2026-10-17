@@ -75,7 +75,7 @@ val extended = PhpStubs.with(Path.of("models/site-rules"))
 | `property(spelling)`, `property(owner, name)` | `BuiltinRecord<PropertySubject>?` |
 | `variable(name)` | `BuiltinRecord<VariableSubject>?` |
 | `record(subject)` | `BuiltinRecord<ModelSubject>?` |
-| `functions`, `classes`, `methods`, `constants`, `classConstants`, `properties`, `variables` | `Collection<BuiltinRecord<…>>` in first-statement order |
+| `functions`, `classes`, `methods`, `constants`, `classConstants`, `properties`, `variables` | `Collection<BuiltinRecord<…>>` in Merge Order of each subject's first mounted entry |
 | `sinkFacts`, `sourceFacts`, `sanitizerFacts`, `flows`, `characters`, `returns`, `throws` | `List<…Fact>` in record order |
 | `vocabulary`, `policy` | `Vocabulary`, `TaintPolicy` accumulated over every mounted set |
 
@@ -99,7 +99,7 @@ val extended = PhpStubs.with(Path.of("models/site-rules"))
 | 3 | `taint/` | psalm's sink facts, sanitizer facts, and source facts in psalm's names, translated by the psalm mapping | generated |
 | 4 | `taint-rules/` | Hand-maintained sink facts (Argus lists), sanitizer facts, and source facts psalm lacks, translated by the same mapping | manual |
 
-The merge keeps one statement per (subject, condition, unit); a higher-ranked provenance wins (`Precedence.DEFAULT`: manual over generated), and among equal ranks the later position wins. A unit is replaced whole; a set that omits a unit leaves the earlier statement in force. Each set also loads on its own through commons-phpmodels `DocumentSetLoader.load(StubResources.opener(root), context, mapping)`; the taint set is regenerated from a psalm checkout by `tools/extract_taint.py --psalm <root> --out externs-phpstubs/src/main/resources/taint`. The generated entries are rewritten from a php-src checkout by `tools/extract_hierarchy.py` (class hierarchy), `tools/extract_signatures.py` (function and method signatures, placement by extension), and `tools/extract_throws.py` (throws), run in that order, each as `--php-src <root> --models externs-phpstubs/src/main/resources/models`.
+The merge keeps the entry in force per (subject, condition, unit); a higher-ranked provenance wins (`Precedence.DEFAULT`: manual over generated), and among equal ranks the later position wins. A unit is replaced whole; a set that omits a unit leaves the earlier entry in force. Each set also loads on its own through commons-phpmodels `DocumentSetLoader.load(StubResources.opener(root), context, mapping)`; the taint set is regenerated from a psalm checkout by `tools/extract_taint.py --psalm <root> --out externs-phpstubs/src/main/resources/taint`. The generated entries are rewritten from a php-src checkout by `tools/extract_hierarchy.py` (class hierarchy), `tools/extract_signatures.py` (function and method signatures, placement by extension), and `tools/extract_throws.py` (throws), run in that order, each as `--php-src <root> --models externs-phpstubs/src/main/resources/models`.
 
 ## Background
 
@@ -109,8 +109,8 @@ Model documents derived from [JetBrains/phpstorm-stubs](https://github.com/JetBr
 
 - [Concepts](docs/concept.md) -- generated layer over commons-phpmodels, PHP extension placement, lookup semantics
 - [Lookup Concepts](docs/concept-lookup.md) -- canonical vocabulary, the merge, `BuiltinRecord` and `BuiltinLookup`
-- [Lookup Model](docs/model-lookup.md) -- bundled sets, merge order, statements in force, records and facts
-- [Merge Algorithm](docs/spec-merge.md) -- folding the mounted sets into one statement per subject, condition, and unit
+- [Lookup Model](docs/model-lookup.md) -- bundled sets, merge order, entries in force, records and facts
+- [Merge Algorithm](docs/spec-merge.md) -- folding the mounted sets into the entry in force per subject, condition, and unit
 - [Taint Concepts](docs/concept-taint.md) -- the taint document set in psalm's names and its extraction
 - [Design](docs/design.md) -- resource roots, merge order, generated-set rules, exception types
 - [Extraction Concepts](docs/concept-extraction.md) -- extraction from php-src: declarations, Handlers, Raises Summary

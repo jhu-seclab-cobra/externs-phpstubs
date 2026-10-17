@@ -17,23 +17,23 @@ import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 /**
- * Tests for [Merge]: the fold of mounts into one statement per (subject, condition, unit) key.
+ * Tests for [Merge]: the fold of mounts into the entry in force per (subject, condition, unit) key.
  *
- * - `a manual statement outranks a later generated one` — verifies rank beats merge order
+ * - `a manual entry outranks a later generated one` — verifies rank beats merge order
  * - `among equal ranks the later mount wins` — verifies merge order breaks a rank tie
  * - `within one set the later document wins the same key` — verifies document order inside a set
- * - `statements under different conditions coexist` — verifies conditions partition a unit
- * - `a conditional statement never replaces an unconditional one across ranks` — verifies the partition holds under rank
+ * - `entries under different conditions coexist` — verifies conditions partition a unit
+ * - `a conditional entry never replaces an unconditional one across ranks` — verifies the partition holds under rank
  * - `a unit is replaced whole and other units stay in force` — verifies per-unit replacement
- * - `a value statement without characters replaces the bound` — verifies characters belong to the value unit
- * - `a throws statement is replaced only by another throws statement` — verifies the throws unit
- * - `the extension follows the signature statement` — verifies a value override keeps the generated extension
- * - `a signature-only statement yields a record without facts` — verifies a declaration is a record
+ * - `a value entry without characters replaces the bound` — verifies characters belong to the value unit
+ * - `a throws entry is replaced only by another throws entry` — verifies the throws unit
+ * - `the extension follows the signature entry` — verifies a value override keeps the generated extension
+ * - `a signature-only entry yields a record without facts` — verifies a declaration is a record
  * - `a conditional entry declaring a signature fails the merge` — verifies the signature invariant
  * - `an empty mount list yields an empty merge` — verifies the degenerate input
  * - `vocabulary and policy accumulate over every mount` — verifies the merged vocabulary
  * - `each subject appears in exactly one kind map` — verifies the kind maps partition the records
- * - `fact lists follow record order then first-statement order` — verifies enumeration determinism
+ * - `fact lists follow record order then condition order` — verifies enumeration determinism
  * - `equal mount lists merge into equal records` — verifies the fold is a function of its input
  */
 internal class MergeTest {
@@ -47,7 +47,7 @@ internal class MergeTest {
         """.trimIndent()
 
     @Test
-    fun `a manual statement outranks a later generated one`() {
+    fun `a manual entry outranks a later generated one`() {
         val manual = TestSets.mount(0, Verification.MANUAL, "- subject: {function: f}\n  returns: str\n")
         val later = TestSets.mount(1, Verification.GENERATED, generated, extension = "standard")
         val record = Merge.of(listOf(manual, later)).functions.getValue(f)
@@ -78,7 +78,7 @@ internal class MergeTest {
     }
 
     @Test
-    fun `statements under different conditions coexist`() {
+    fun `entries under different conditions coexist`() {
         val document =
             """
             - subject: {function: f}
@@ -93,7 +93,7 @@ internal class MergeTest {
     }
 
     @Test
-    fun `a conditional statement never replaces an unconditional one across ranks`() {
+    fun `a conditional entry never replaces an unconditional one across ranks`() {
         val valued =
             """
             - subject: {function: f}
@@ -128,7 +128,7 @@ internal class MergeTest {
     }
 
     @Test
-    fun `a value statement without characters replaces the bound`() {
+    fun `a value entry without characters replaces the bound`() {
         val document =
             "- subject: {function: f}\n  returns: str\n  propagation: [{from: argument(0), to: return}]\n" +
                 "  characters: {of: [argument(0)]}\n"
@@ -147,7 +147,7 @@ internal class MergeTest {
     }
 
     @Test
-    fun `a throws statement is replaced only by another throws statement`() {
+    fun `a throws entry is replaced only by another throws entry`() {
         val base = TestSets.mount(0, Verification.GENERATED, "$generated\n  throws: [valueerror]\n", extension = "standard")
         val value = TestSets.mount(1, Verification.MANUAL, "- subject: {function: f}\n  returns: str\n")
         val kept = Merge.of(listOf(base, value)).functions.getValue(f)
@@ -159,7 +159,7 @@ internal class MergeTest {
     }
 
     @Test
-    fun `the extension follows the signature statement`() {
+    fun `the extension follows the signature entry`() {
         val base = TestSets.mount(0, Verification.GENERATED, generated, extension = "standard")
         val signed =
             TestSets.mount(
@@ -174,7 +174,7 @@ internal class MergeTest {
     }
 
     @Test
-    fun `a signature-only statement yields a record without facts`() {
+    fun `a signature-only entry yields a record without facts`() {
         val document = "- subject: {class: K}\n  signature: {classifier: class}\n"
         val record = Merge.of(listOf(TestSets.mount(0, Verification.MANUAL, document))).classes.getValue(ClassSubject("K"))
         assertNotNull(record.signature)
@@ -226,7 +226,7 @@ internal class MergeTest {
     }
 
     @Test
-    fun `fact lists follow record order then first-statement order`() {
+    fun `fact lists follow record order then condition order`() {
         val document =
             """
             - subject: {function: g}
