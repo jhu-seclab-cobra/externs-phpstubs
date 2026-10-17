@@ -10,7 +10,7 @@ import edu.jhu.cobra.commons.phpmodels.OriginId
 import edu.jhu.cobra.commons.phpmodels.Port
 import edu.jhu.cobra.commons.phpmodels.VariableSubject
 import edu.jhu.cobra.commons.phpmodels.Vocabulary
-import edu.jhu.cobra.commons.phpmodels.VulnClassId
+import edu.jhu.cobra.commons.phpmodels.VulnTypeId
 import edu.jhu.cobra.commons.value.IntVal
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -47,7 +47,7 @@ internal class TaintSetTest {
         val row = taint.policy.single()
         assertEquals(OriginId("input"), row.origin)
         assertEquals(13, row.enables.size)
-        assertTrue(VulnClassId("user_secret") !in row.enables)
+        assertTrue(VulnTypeId("user_secret") !in row.enables)
     }
 
     @Test
@@ -111,7 +111,7 @@ internal class TaintSetTest {
         assertEquals(Vocabulary.EMPTY, mapped.vocabulary)
         assertEquals(OriginId("user-input"), mapped.policy.single().origin)
         val enables = mapped.policy.single().enables
-        assertTrue(VulnClass.entries.map { it.id }.containsAll(enables) && VulnClassId("xss") in enables)
+        assertTrue(VulnClass.entries.map { it.id }.containsAll(enables) && VulnTypeId("xss") in enables)
         val bySubject = mapped.entries.groupBy { it.subject }
         assertEquals(listOf(Port.Argument(0) to "cmdi"), sinksOf(bySubject.getValue(FunctionSubject("exec")).single()))
         assertEquals(setOf("xss"), sanitizersOf(bySubject.getValue(FunctionSubject("urlencode")).single()))

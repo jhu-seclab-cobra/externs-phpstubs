@@ -3,7 +3,7 @@ package edu.jhu.cobra.externs.phpstubs
 import edu.jhu.cobra.commons.phpmodels.CategoryMappingLoader
 import edu.jhu.cobra.commons.phpmodels.FunctionSubject
 import edu.jhu.cobra.commons.phpmodels.Verification
-import edu.jhu.cobra.commons.phpmodels.VulnClassId
+import edu.jhu.cobra.commons.phpmodels.VulnTypeId
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -161,7 +161,7 @@ internal class MountTest {
                 .map { it.first }
                 .single { it.subject == FunctionSubject("exec") }
         assertEquals(
-            VulnClassId("cmdi"),
+            VulnTypeId("cmdi"),
             exec.body.sinks!!
                 .single()
                 .vulnClass,

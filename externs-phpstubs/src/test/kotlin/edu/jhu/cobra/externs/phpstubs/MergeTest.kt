@@ -7,7 +7,7 @@ import edu.jhu.cobra.commons.phpmodels.FunctionSubject
 import edu.jhu.cobra.commons.phpmodels.Port
 import edu.jhu.cobra.commons.phpmodels.ReturnKind
 import edu.jhu.cobra.commons.phpmodels.Verification
-import edu.jhu.cobra.commons.phpmodels.VulnClassId
+import edu.jhu.cobra.commons.phpmodels.VulnTypeId
 import edu.jhu.cobra.commons.value.IntVal
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -108,7 +108,7 @@ internal class MergeTest {
         assertEquals(listOf(null, condition), record.returns.map { it.condition })
         assertEquals(listOf(ReturnKind.NUM, ReturnKind.NUM), record.returns.map { it.kind })
         assertEquals(listOf(null), record.flows.map { it.condition })
-        assertEquals(VulnClassId("sqli"), record.sinks.single().vulnClass)
+        assertEquals(VulnTypeId("sqli"), record.sinks.single().vulnClass)
     }
 
     @Test
@@ -123,7 +123,7 @@ internal class MergeTest {
         val record = Merge.of(listOf(base, override)).functions.getValue(f)
         assertEquals(ReturnKind.STR, record.returns.single().kind)
         assertEquals(Port.Argument(0), record.flows.single().from)
-        assertEquals(VulnClassId("sqli"), record.sinks.single().vulnClass)
+        assertEquals(VulnTypeId("sqli"), record.sinks.single().vulnClass)
         assertEquals("standard", record.extension)
     }
 
@@ -197,7 +197,7 @@ internal class MergeTest {
         val first = TestSets.mount(0, Verification.MANUAL, "- subject: {function: f}\n  returns: str\n")
         val second = TestSets.mount(1, Verification.MANUAL, "- subject: {function: g}\n  returns: str\n", vocabulary = null)
         val merge = Merge.of(listOf(first, second))
-        assertEquals(setOf(VulnClassId("sqli"), VulnClassId("xss")), merge.vocabulary.vulnClasses.keys)
+        assertEquals(setOf(VulnTypeId("sqli"), VulnTypeId("xss")), merge.vocabulary.vulnClasses.keys)
         assertEquals(listOf(f, FunctionSubject("g")), merge.functions.keys.toList())
     }
 

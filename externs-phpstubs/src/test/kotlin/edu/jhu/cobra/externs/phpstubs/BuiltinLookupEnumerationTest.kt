@@ -1,7 +1,7 @@
 package edu.jhu.cobra.externs.phpstubs
 
 import edu.jhu.cobra.commons.phpmodels.OriginId
-import edu.jhu.cobra.commons.phpmodels.VulnClassId
+import edu.jhu.cobra.commons.phpmodels.VulnTypeId
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
@@ -82,6 +82,6 @@ internal class BuiltinLookupEnumerationTest {
                 assertTrue(PhpStubs.policy.isDangerous(origin.id, category.id), "${origin.id.id} -> ${category.id.id}")
             }
         }
-        assertTrue(PhpStubs.policy.isDangerous(OriginId("user-input"), VulnClassId("xpathi")))
+        assertTrue(PhpStubs.policy.isDangerous(OriginId("user-input"), VulnTypeId("xpathi")))
     }
 }

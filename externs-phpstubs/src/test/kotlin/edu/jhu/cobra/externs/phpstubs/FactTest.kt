@@ -10,7 +10,7 @@ import edu.jhu.cobra.commons.phpmodels.OriginId
 import edu.jhu.cobra.commons.phpmodels.Port
 import edu.jhu.cobra.commons.phpmodels.ReturnKind
 import edu.jhu.cobra.commons.phpmodels.Verification
-import edu.jhu.cobra.commons.phpmodels.VulnClassId
+import edu.jhu.cobra.commons.phpmodels.VulnTypeId
 import edu.jhu.cobra.commons.value.BoolVal
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -36,7 +36,7 @@ internal class FactTest {
     fun `an unconditional entry yields facts without a condition`() {
         val document = "- subject: {function: f}\n  sinks: [{port: argument(1), category: xss}]\n"
         val record = Merge.of(listOf(TestSets.mount(0, Verification.MANUAL, document))).records.getValue(f)
-        assertEquals(SinkFact(f, null, Port.Argument(1), VulnClassId("xss")), record.sinks.single())
+        assertEquals(SinkFact(f, null, Port.Argument(1), VulnTypeId("xss")), record.sinks.single())
     }
 
     @Test
@@ -51,7 +51,7 @@ internal class FactTest {
             """.trimIndent()
         val record = Merge.of(listOf(TestSets.mount(0, Verification.MANUAL, document))).records.getValue(f)
         val condition = ArgPattern(listOf(BoolVal(true)))
-        assertEquals(SanitizerFact(f, condition, setOf(VulnClassId("sqli")), null), record.sanitizers.single())
+        assertEquals(SanitizerFact(f, condition, setOf(VulnTypeId("sqli")), null), record.sanitizers.single())
         assertEquals(condition, record.returns.single().condition)
         assertEquals(FlowFact(f, condition, Port.Argument(0), Port.Return), record.flows.single())
     }

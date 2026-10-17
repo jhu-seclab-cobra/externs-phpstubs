@@ -13,7 +13,7 @@ import edu.jhu.cobra.commons.phpmodels.OriginId
 import edu.jhu.cobra.commons.phpmodels.Port
 import edu.jhu.cobra.commons.phpmodels.VariableSubject
 import edu.jhu.cobra.commons.phpmodels.VocabularyException
-import edu.jhu.cobra.commons.phpmodels.VulnClassId
+import edu.jhu.cobra.commons.phpmodels.VulnTypeId
 import edu.jhu.cobra.commons.value.BoolVal
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -53,13 +53,13 @@ internal class TaintRulesSetTest {
 
     @Test
     fun `taint rules set declares its own additions`() {
-        assertEquals(setOf(VulnClassId("xpath")), rules.vocabulary.vulnClasses.keys)
+        assertEquals(setOf(VulnTypeId("xpath")), rules.vocabulary.vulnClasses.keys)
         assertEquals(setOf(OriginId("external")), rules.vocabulary.origins.keys)
         val byOrigin = rules.policy.associate { it.origin to it.enables }
-        assertEquals(setOf(VulnClassId("xpath")), byOrigin.getValue(OriginId("input")))
+        assertEquals(setOf(VulnTypeId("xpath")), byOrigin.getValue(OriginId("input")))
         val external = byOrigin.getValue(OriginId("external"))
         assertTrue(external.containsAll(taint.policy.single().enables))
-        assertTrue(VulnClassId("xpath") in external)
+        assertTrue(VulnTypeId("xpath") in external)
     }
 
     @Test

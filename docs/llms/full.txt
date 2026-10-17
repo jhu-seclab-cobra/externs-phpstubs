@@ -101,11 +101,11 @@ Typed accessors (top-level extension properties, nullable):
 
 Every fact: **`owner: ModelSubject`**, **`condition: ArgPattern?`** (`null` for an unconditional statement; otherwise match it with `condition.matches(args)` -> `true`, `false`, or `null` for undecidable).
 
-**`SinkFact(port: Port.Argument, vulnClass: VulnClassId)`** | **`SourceFact(origins: Set<OriginId>, at: Port.Argument?, keys: List<KeyPattern>?)`** | **`SanitizerFact(categories: Set<VulnClassId>, check: ArgumentCheck?)`** | **`FlowFact(from: Port.Input, to: Port)`** | **`CharactersFact(bound: CharacterBound)`** | **`ReturnsFact(kind: ReturnKind)`** | **`RaisesFact(classes: Set<ClassSubject>)`**.
+**`SinkFact(port: Port.Argument, vulnClass: VulnTypeId)`** | **`SourceFact(origins: Set<OriginId>, at: Port.Argument?, keys: List<KeyPattern>?)`** | **`SanitizerFact(categories: Set<VulnTypeId>, check: ArgumentCheck?)`** | **`FlowFact(from: Port.Input, to: Port)`** | **`CharactersFact(bound: CharacterBound)`** | **`ReturnsFact(kind: ReturnKind)`** | **`RaisesFact(classes: Set<ClassSubject>)`**.
 
 ### VulnClass, Origin (enums)
 
-**`VulnClass.SQLI.id`** ... -- `VulnClassId` per canonical category: `sqli`, `cmdi`, `codei`, `xss`, `headeri`, `ssrf`, `pathtrav`, `fileinc`, `deser`, `callablei`, `ldapi`, `xpathi`. **`Origin.USER_INPUT.id`**, **`Origin.EXTERNAL_INPUT.id`** -- `OriginId("user-input")`, `OriginId("external-input")`. A category an extension set adds has no constant.
+**`VulnClass.SQLI.id`** ... -- `VulnTypeId` per canonical category: `sqli`, `cmdi`, `codei`, `xss`, `headeri`, `ssrf`, `pathtrav`, `fileinc`, `deser`, `callablei`, `ldapi`, `xpathi`. **`Origin.USER_INPUT.id`**, **`Origin.EXTERNAL_INPUT.id`** -- `OriginId("user-input")`, `OriginId("external-input")`. A category an extension set adds has no constant.
 
 ### StubResources (object)
 

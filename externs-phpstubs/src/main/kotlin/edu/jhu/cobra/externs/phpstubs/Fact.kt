@@ -9,7 +9,7 @@ import edu.jhu.cobra.commons.phpmodels.ModelSubject
 import edu.jhu.cobra.commons.phpmodels.OriginId
 import edu.jhu.cobra.commons.phpmodels.Port
 import edu.jhu.cobra.commons.phpmodels.ReturnKind
-import edu.jhu.cobra.commons.phpmodels.VulnClassId
+import edu.jhu.cobra.commons.phpmodels.VulnTypeId
 
 /**
  * One element of one assertion statement in force for a built-in, with the record it belongs to and the
@@ -29,7 +29,7 @@ public data class SinkFact(
     override val owner: ModelSubject,
     override val condition: ArgPattern?,
     val port: Port.Argument,
-    val vulnClass: VulnClassId,
+    val vulnClass: VulnTypeId,
 ) : Fact
 
 /** One production of origin colors: at the result, or at an explicit by-reference argument site. */
@@ -48,7 +48,7 @@ public data class SourceFact(
 public data class SanitizerFact(
     override val owner: ModelSubject,
     override val condition: ArgPattern?,
-    val categories: Set<VulnClassId>,
+    val categories: Set<VulnTypeId>,
     val check: ArgumentCheck?,
 ) : Fact
 

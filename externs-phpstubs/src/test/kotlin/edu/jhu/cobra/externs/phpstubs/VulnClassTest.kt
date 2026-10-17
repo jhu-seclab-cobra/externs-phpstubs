@@ -1,7 +1,7 @@
 package edu.jhu.cobra.externs.phpstubs
 
 import edu.jhu.cobra.commons.phpmodels.DocumentSetLoader
-import edu.jhu.cobra.commons.phpmodels.VulnClassId
+import edu.jhu.cobra.commons.phpmodels.VulnTypeId
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -17,7 +17,7 @@ internal class VulnClassTest {
         val documented =
             listOf("sqli", "cmdi", "codei", "xss", "headeri", "ssrf", "pathtrav", "fileinc", "deser", "callablei", "ldapi", "xpathi")
         assertEquals(documented, VulnClass.entries.map { it.id.id })
-        assertEquals(VulnClassId("sqli"), VulnClass.SQLI.id)
+        assertEquals(VulnTypeId("sqli"), VulnClass.SQLI.id)
     }
 
     @Test

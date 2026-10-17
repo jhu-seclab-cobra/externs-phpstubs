@@ -22,7 +22,7 @@ types: [design-merge.md](design-merge.md). Fold algorithm:
   `CategoryMapping`, `ModelEntry`, `ModelSubject` and its seven subtypes,
   `ArgPattern`, `SignatureInfo` and its four subtypes, `SinkDecl`,
   `SourceDecl`, `SanitizerDecl`, `ArgumentCheck`, `Propagation`, `CharacterClass`,
-  `ReturnKind`, `Vocabulary`, `TaintPolicy`, `VulnClassId`, `OriginId`, `Precedence`, `Verification`
+  `ReturnKind`, `Vocabulary`, `TaintPolicy`, `VulnTypeId`, `OriginId`, `Precedence`, `Verification`
 - **Relationships:** `PhpStubs` holds one `Merge`; `Merge` folds `Mount`s
   (one per set, in Merge Order) into records; a `BuiltinRecord` owns its
   `Fact`s; every `Fact` names its owner subject and its condition. The
@@ -129,9 +129,9 @@ for an unconditional statement).
 
 | Type | Own fields | From |
 |------|------------|------|
-| `SinkFact` | `port: Port.Argument`, `vulnClass: VulnClassId` | one `SinkDecl` |
+| `SinkFact` | `port: Port.Argument`, `vulnClass: VulnTypeId` | one `SinkDecl` |
 | `SourceFact` | `origins: Set<OriginId>`, `at: Port.Argument?`, `keys: List<KeyPattern>?` | one `SourceDecl` |
-| `SanitizerFact` | `categories: Set<VulnClassId>`, `check: ArgumentCheck?` | one `SanitizerDecl` |
+| `SanitizerFact` | `categories: Set<VulnTypeId>`, `check: ArgumentCheck?` | one `SanitizerDecl` |
 | `FlowFact` | `from: Port.Input`, `to: Port` | one `Propagation` |
 | `CharactersFact` | `bound: CharacterBound` | the `characters` section, whole: the bytes the result may hold; the bound keeps its at-least-one-field invariant |
 | `ReturnsFact` | `kind: ReturnKind` | the `returns` section |
@@ -141,10 +141,10 @@ for an unconditional statement).
 
 **Responsibility:** Compile-time names for the Canonical Vocabulary so a
 consumer filters without spelling a string: `VulnClass.SQLI.id` is
-`VulnClassId("sqli")`; `Origin.USER_INPUT.id` is `OriginId("user-input")`.
+`VulnTypeId("sqli")`; `Origin.USER_INPUT.id` is `OriginId("user-input")`.
 Twelve and two constants, each holding its `id`. A repository test asserts
 the bundled vocabulary document declares exactly these names; a category an
-extension set adds has no enum constant and is compared by `VulnClassId`.
+extension set adds has no enum constant and is compared by `VulnTypeId`.
 
 ## Function Specifications
 
