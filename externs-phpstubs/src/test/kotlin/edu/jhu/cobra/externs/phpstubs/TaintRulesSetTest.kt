@@ -33,7 +33,7 @@ import kotlin.test.assertTrue
  * - `no rules unit repeats a taint unit` — verifies each (subject, condition, section) differs from the taint set's
  * - `a taint rules sink over a taint subject widens psalm's ports` — verifies restated entries are strict supersets
  * - `sinks follow the Argus lists` — verifies representative sinks per category
- * - `checks state type predicates and character checks` — verifies the type set and the class of representative checks
+ * - `checks state type predicates and character checks` — verifies the type set, the class, and the covered kinds of representative checks
  * - `sanitizers and sources name the added escapes and colors` — verifies representative entries
  * - `the psalm mapping translates the additions` — verifies the bundled mapping covers xpath and external
  */
@@ -133,6 +133,8 @@ internal class TaintRulesSetTest {
         assertEquals(ArgumentCheck(Port.Argument(0), BoolVal(true), types = DeclaredType("int")), checkOf("is_int"))
         assertEquals(DeclaredType("int|float|string|bool"), checkOf("is_scalar").types)
         assertEquals(ArgumentCheck(Port.Argument(0), BoolVal(true), CharacterClass("[0-9]")), checkOf("ctype_digit"))
+        assertTrue(sanitizersOf(FunctionSubject("ctype_digit")).containsAll(listOf("sql", "shell", "include")))
+        assertFalse("shell" in sanitizersOf(FunctionSubject("is_numeric")))
         val numeric = assertNotNull(checkOf("is_numeric").within)
         assertTrue("-1.5E+3 INF\u000B".all { numeric.contains(it.code) })
         assertFalse(numeric.contains('x'.code))
