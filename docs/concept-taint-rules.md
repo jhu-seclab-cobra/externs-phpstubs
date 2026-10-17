@@ -13,7 +13,7 @@ that published PHP analyses treat as standard: the Argus sink lists
 (Jahanshahi and Egele, USENIX Security 2024), output builtins such as `echo`, callback-taking
 builtins, LDAP and XPath queries, and data read from the environment,
 files, sockets, and stored records. This library states them as one more
-document set in the same format and the same names, so that one category
+document set in the same format and the same names, so that the psalm
 mapping serves both at the merge.
 
 **System Role**
@@ -100,7 +100,7 @@ merge: set loader(taint/, …) then set loader(taint-rules/, taint vocabulary, m
   taint set's vocabulary; every Psalm Kind it names is declared there. No
   entry equals the taint set's entry for the same subject, condition, and
   section.
-- **With the merge:** this library loads the set with the same category
+- **With the merge:** this library loads the set with the same psalm
   mapping as the taint set, extended by the two Vocabulary Additions.
   Mounting it after the taint set makes each taint rules section override
   psalm's for that subject.
