@@ -7,7 +7,7 @@
     returnType: string
   sinks:
     - port: argument(0)
-      category: sqli
+      vulnType: sqli
 - subject:
     function: strlen
   returns: str

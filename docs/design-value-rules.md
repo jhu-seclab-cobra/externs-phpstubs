@@ -48,7 +48,7 @@ directly above the entry it justifies.
 
 ## Validation Rules
 
-- The set decodes with no context: it names no category and no color, and
+- The set decodes with no context: it names no vulnerability type and no source kind, and
   its vocabulary and policy are absent.
 - `provenance.yaml` decodes to verification `manual`.
 - Every entry declares no signature, a `returns` section,

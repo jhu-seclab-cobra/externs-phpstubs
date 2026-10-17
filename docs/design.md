@@ -101,8 +101,8 @@ models/
 vocabulary/
 ├── index.txt              # comment only: the set ships no model document
 ├── provenance.yaml        # producer externs-phpstubs canonical vocabulary; verification manual
-├── vocabulary.yaml        # twelve danger categories, two origin colors, with descriptions
-├── policy.yaml            # both colors enable every category
+├── vocabulary.yaml        # twelve vulnerability types, two source kinds, with descriptions
+├── policy.yaml            # both source kinds enable every vulnerability type
 └── psalm-mapping.yaml     # psalm kinds → canonical names; has_quotes, cookie, user_secret, system_secret → ignore
 ```
 
@@ -147,5 +147,5 @@ extension-set error surfaces from the `with` call that mounts it.
   lines and `#` comments are skipped; a path listed twice fails the load
   (commons-phpmodels rule).
 - The bundled `vocabulary.yaml` declares every name `VulnType` and
-  `Origin` enumerate, and no other; the psalm mapping lists every kind the
+  `SourceKind` enumerate, and no other; the psalm mapping lists every kind the
   two psalm-named sets use.

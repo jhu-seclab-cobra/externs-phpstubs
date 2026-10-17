@@ -134,7 +134,7 @@ internal class Merge private constructor(
                 }
 
                 OverrideUnit.SOURCES -> {
-                    body.sources.orEmpty().mapTo(sources) { SourceFact(owner, condition, it.origin, it.at, it.keys) }
+                    body.sources.orEmpty().mapTo(sources) { SourceFact(owner, condition, it.sourceKinds, it.at, it.keys) }
                 }
 
                 OverrideUnit.SINKS -> {
@@ -143,7 +143,7 @@ internal class Merge private constructor(
 
                 OverrideUnit.SANITIZERS -> {
                     body.sanitizers.orEmpty().mapTo(sanitizers) {
-                        SanitizerFact(owner, condition, it.categories, it.check)
+                        SanitizerFact(owner, condition, it.vulnTypes, it.check)
                     }
                 }
 

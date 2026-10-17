@@ -6,9 +6,9 @@ import edu.jhu.cobra.commons.phpmodels.CharacterBound
 import edu.jhu.cobra.commons.phpmodels.ClassSubject
 import edu.jhu.cobra.commons.phpmodels.KeyPattern
 import edu.jhu.cobra.commons.phpmodels.ModelSubject
-import edu.jhu.cobra.commons.phpmodels.OriginId
 import edu.jhu.cobra.commons.phpmodels.Port
 import edu.jhu.cobra.commons.phpmodels.ReturnKind
+import edu.jhu.cobra.commons.phpmodels.SourceKindId
 import edu.jhu.cobra.commons.phpmodels.VulnTypeId
 
 /**
@@ -24,7 +24,7 @@ public sealed interface Fact {
     public val condition: ArgPattern?
 }
 
-/** One dangerously consumed argument under one danger category. */
+/** One dangerously consumed argument under one vulnerability type. */
 public data class SinkFact(
     override val owner: ModelSubject,
     override val condition: ArgPattern?,
@@ -32,23 +32,23 @@ public data class SinkFact(
     val vulnType: VulnTypeId,
 ) : Fact
 
-/** One production of origin colors: at the result, or at an explicit by-reference argument site. */
+/** One production of source kinds: at the result, or at an explicit by-reference argument site. */
 public data class SourceFact(
     override val owner: ModelSubject,
     override val condition: ArgPattern?,
-    val origins: Set<OriginId>,
+    val sourceKinds: Set<SourceKindId>,
     val at: Port.Argument?,
     val keys: List<KeyPattern>?,
 ) : Fact
 
 /**
- * The danger categories a call neutralizes: in its result, or, with a [check], in the argument a call
+ * The vulnerability types a call neutralizes: in its result, or, with a [check], in the argument a call
  * returning the accepting value accepted. The check also carries the class or type set of that argument.
  */
 public data class SanitizerFact(
     override val owner: ModelSubject,
     override val condition: ArgPattern?,
-    val categories: Set<VulnTypeId>,
+    val vulnTypes: Set<VulnTypeId>,
     val check: ArgumentCheck?,
 ) : Fact
 

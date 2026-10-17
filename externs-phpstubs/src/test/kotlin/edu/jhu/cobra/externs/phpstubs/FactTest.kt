@@ -6,9 +6,9 @@ import edu.jhu.cobra.commons.phpmodels.CharacterBound
 import edu.jhu.cobra.commons.phpmodels.CharacterClass
 import edu.jhu.cobra.commons.phpmodels.ClassSubject
 import edu.jhu.cobra.commons.phpmodels.FunctionSubject
-import edu.jhu.cobra.commons.phpmodels.OriginId
 import edu.jhu.cobra.commons.phpmodels.Port
 import edu.jhu.cobra.commons.phpmodels.ReturnKind
+import edu.jhu.cobra.commons.phpmodels.SourceKindId
 import edu.jhu.cobra.commons.phpmodels.Verification
 import edu.jhu.cobra.commons.phpmodels.VulnTypeId
 import edu.jhu.cobra.commons.value.BoolVal
@@ -34,7 +34,7 @@ internal class FactTest {
 
     @Test
     fun `an unconditional entry yields facts without a condition`() {
-        val document = "- subject: {function: f}\n  sinks: [{port: argument(1), category: xss}]\n"
+        val document = "- subject: {function: f}\n  sinks: [{port: argument(1), vulnType: xss}]\n"
         val record = Merge.of(listOf(TestSets.mount(0, Verification.MANUAL, document))).records.getValue(f)
         assertEquals(SinkFact(f, null, Port.Argument(1), VulnTypeId("xss")), record.sinks.single())
     }
@@ -45,7 +45,7 @@ internal class FactTest {
             """
             - subject: {function: f}
               when: [true]
-              sanitizers: [{categories: [sqli]}]
+              sanitizers: [{vulnTypes: [sqli]}]
               returns: str
               propagation: [{from: argument(0), to: return}]
             """.trimIndent()
@@ -67,19 +67,19 @@ internal class FactTest {
 
     @Test
     fun `a source fact keeps its site and key patterns`() {
-        val document = "- subject: {function: f}\n  sources: [{provenance: [user-input], at: argument(1)}]\n"
+        val document = "- subject: {function: f}\n  sources: [{sourceKinds: [user-input], at: argument(1)}]\n"
         val record = Merge.of(listOf(TestSets.mount(0, Verification.MANUAL, document))).records.getValue(f)
         val source = record.sources.single()
-        assertEquals(setOf(OriginId("user-input")), source.origins)
+        assertEquals(setOf(SourceKindId("user-input")), source.sourceKinds)
         assertEquals(Port.Argument(1), source.at)
         assertNull(source.keys)
     }
 
     @Test
     fun `a source fact at the result has no site`() {
-        val document = "- subject: {function: f}\n  sources: [{provenance: [user-input]}]\n"
+        val document = "- subject: {function: f}\n  sources: [{sourceKinds: [user-input]}]\n"
         val record = Merge.of(listOf(TestSets.mount(0, Verification.MANUAL, document))).records.getValue(f)
-        assertEquals(SourceFact(f, null, setOf(OriginId("user-input")), null, null), record.sources.single())
+        assertEquals(SourceFact(f, null, setOf(SourceKindId("user-input")), null, null), record.sources.single())
     }
 
     @Test

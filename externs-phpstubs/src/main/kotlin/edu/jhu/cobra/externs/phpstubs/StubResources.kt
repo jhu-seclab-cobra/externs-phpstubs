@@ -18,11 +18,11 @@ public object StubResources {
 
     /**
      * Root of the hand-maintained value rules set: value units the generated declarations
-     * lack or state wrongly, reviewed against the PHP manual. Names no category or color.
+     * lack or state wrongly, reviewed against the PHP manual. Names no vulnerability type or source kind.
      */
     public const val VALUE_RULES: String = "/value-rules/"
 
-    /** Root of the canonical vocabulary set: the danger categories, origin colors, and policy every record speaks. */
+    /** Root of the canonical vocabulary set: the vulnerability types, source kinds, and policy every record speaks. */
     public const val VOCABULARY: String = "/vocabulary/"
 
     /** The psalm mapping: the translation of the taint set and the taint rules set into the canonical vocabulary. */

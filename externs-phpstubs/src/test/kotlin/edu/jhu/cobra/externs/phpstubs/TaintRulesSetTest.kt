@@ -9,8 +9,8 @@ import edu.jhu.cobra.commons.phpmodels.FunctionSubject
 import edu.jhu.cobra.commons.phpmodels.MethodSubject
 import edu.jhu.cobra.commons.phpmodels.ModelEntry
 import edu.jhu.cobra.commons.phpmodels.ModelSubject
-import edu.jhu.cobra.commons.phpmodels.OriginId
 import edu.jhu.cobra.commons.phpmodels.Port
+import edu.jhu.cobra.commons.phpmodels.SourceKindId
 import edu.jhu.cobra.commons.phpmodels.VariableSubject
 import edu.jhu.cobra.commons.phpmodels.VocabularyException
 import edu.jhu.cobra.commons.phpmodels.VulnTypeId
@@ -28,13 +28,13 @@ import kotlin.test.assertTrue
  * Tests for the hand-maintained taint rules set rooted at [StubResources.TAINT_RULES].
  *
  * - `taint rules set loads only over the taint vocabulary` — verifies the set's names resolve through the taint set's context
- * - `taint rules set declares its own additions` — verifies the xpath kind, the external color, and the policy rows
+ * - `taint rules set declares its own additions` — verifies the xpath kind, the external source kind, and the policy rows
  * - `every taint rules entry is an unsigned entry with exactly one taint section` — verifies the shape rule
  * - `no rules unit repeats a taint unit` — verifies each (subject, condition, section) differs from the taint set's
  * - `a taint rules sink over a taint subject widens psalm's ports` — verifies restated entries are strict supersets
- * - `sinks follow the Argus lists` — verifies representative sinks per category
+ * - `sinks follow the Argus lists` — verifies representative sinks per vulnerability type
  * - `checks state type predicates and character checks` — verifies the type set, the class, and the covered kinds of representative checks
- * - `sanitizers and sources name the added escapes and colors` — verifies representative entries
+ * - `sanitizers and sources name the added escapes and source kinds` — verifies representative entries
  * - `the psalm mapping translates the additions` — verifies the bundled mapping covers xpath and external
  */
 internal class TaintRulesSetTest {
@@ -54,10 +54,10 @@ internal class TaintRulesSetTest {
     @Test
     fun `taint rules set declares its own additions`() {
         assertEquals(setOf(VulnTypeId("xpath")), rules.vocabulary.vulnTypes.keys)
-        assertEquals(setOf(OriginId("external")), rules.vocabulary.origins.keys)
-        val byOrigin = rules.policy.associate { it.origin to it.enables }
-        assertEquals(setOf(VulnTypeId("xpath")), byOrigin.getValue(OriginId("input")))
-        val external = byOrigin.getValue(OriginId("external"))
+        assertEquals(setOf(SourceKindId("external")), rules.vocabulary.sourceKinds.keys)
+        val bySourceKind = rules.policy.associate { it.sourceKind to it.enables }
+        assertEquals(setOf(VulnTypeId("xpath")), bySourceKind.getValue(SourceKindId("input")))
+        val external = bySourceKind.getValue(SourceKindId("external"))
         assertTrue(external.containsAll(taint.policy.single().enables))
         assertTrue(VulnTypeId("xpath") in external)
     }
@@ -116,7 +116,7 @@ internal class TaintRulesSetTest {
     }
 
     @Test
-    fun `sanitizers and sources name the added escapes and colors`() {
+    fun `sanitizers and sources name the added escapes and source kinds`() {
         assertEquals(setOf("shell"), sanitizersOf(FunctionSubject("escapeshellarg")))
         assertEquals(setOf("html"), sanitizersOf(FunctionSubject("htmlspecialchars")))
         assertEquals(setOf("file"), sanitizersOf(FunctionSubject("basename")))
@@ -154,10 +154,10 @@ internal class TaintRulesSetTest {
                 .getValue(FunctionSubject("getenv"))
                 .body.sources!!
                 .single()
-        assertEquals(setOf(OriginId("external-input")), getenv.origin)
-        val external = mapped.policy.single { it.origin == OriginId("external-input") }
+        assertEquals(setOf(SourceKindId("external-input")), getenv.sourceKinds)
+        val external = mapped.policy.single { it.sourceKind == SourceKindId("external-input") }
         assertEquals(VulnType.entries.map { it.id }.toSet(), external.enables)
-        assertNotNull(mapped.policy.singleOrNull { it.origin == OriginId("user-input") })
+        assertNotNull(mapped.policy.singleOrNull { it.sourceKind == SourceKindId("user-input") })
     }
 
     private fun sinksOf(subject: ModelSubject): Set<Pair<Port.Argument, String>> = sinksOf(unconditional.getValue(subject))
@@ -180,13 +180,13 @@ internal class TaintRulesSetTest {
         unconditional
             .getValue(subject)
             .body.sanitizers!!
-            .flatMap { decl -> decl.categories.map { it.id } }
+            .flatMap { decl -> decl.vulnTypes.map { it.id } }
             .toSet()
 
     private fun sourcesOf(subject: ModelSubject): Set<String> =
         unconditional
             .getValue(subject)
             .body.sources!!
-            .flatMap { decl -> decl.origin.map { it.id } }
+            .flatMap { decl -> decl.sourceKinds.map { it.id } }
             .toSet()
 }

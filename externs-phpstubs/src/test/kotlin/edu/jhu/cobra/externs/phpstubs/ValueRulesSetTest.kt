@@ -24,7 +24,7 @@ import kotlin.test.assertTrue
 /**
  * Tests for the hand-maintained value rules set rooted at [StubResources.VALUE_RULES].
  *
- * - `value rules set loads without a vocabulary` — verifies the set names no category or color
+ * - `value rules set loads without a vocabulary` — verifies the set names no vulnerability type or source kind
  * - `value rules set is manually verified` — verifies the set's provenance
  * - `every value rules entry is an unsigned entry asserting only the value unit` — verifies the shape rule
  * - `every value rules subject is a generated declaration` — verifies existence in the generated set
@@ -49,7 +49,7 @@ internal class ValueRulesSetTest {
     fun `value rules set loads without a vocabulary`() {
         assertTrue(rules.entries.isNotEmpty())
         assertTrue(rules.vocabulary.vulnTypes.isEmpty())
-        assertTrue(rules.vocabulary.origins.isEmpty())
+        assertTrue(rules.vocabulary.sourceKinds.isEmpty())
         assertTrue(rules.policy.isEmpty())
     }
 

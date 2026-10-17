@@ -44,7 +44,7 @@ PhpStubs.function("json_decode")?.raises     // [RaisesFact(classes = {jsonexcep
 
 // Taint facts in the canonical vocabulary, with their argument conditions
 PhpStubs.method("mysqli::query")?.sinks      // [SinkFact(port = argument(0), vulnType = sqli)]
-PhpStubs.variable("\$_GET")?.sources         // [SourceFact(origins = {user-input})]
+PhpStubs.variable("\$_GET")?.sources         // [SourceFact(sourceKinds = {user-input})]
 PhpStubs.function("filter_var")?.sanitizers  // five facts, each with condition [_, <FILTER_* id>]
     ?.filter { it.condition?.matches(myCallArguments) == true }
 
@@ -83,9 +83,9 @@ val extended = PhpStubs.with(Path.of("models/site-rules"))
 
 **`BuiltinRecord<S>`** -- `(subject, extension: String?, signature: SignatureInfo?, returns, flows, characters, sources, sinks, sanitizers, raises)`. Typed accessors: `callableSignature` (function, method), `classSignature` (class), `typedSignature` (constant, class constant), `propertySignature` (property). `extension` is the PHP extension of the generated declaration, `null` for a subject only a hand-maintained set states.
 
-**`Fact`** -- `SinkFact(port, vulnType)`, `SourceFact(origins, at, keys)`, `SanitizerFact(categories, check)`, `FlowFact(from, to)`, `CharactersFact(bound)`, `ReturnsFact(kind)`, `RaisesFact(classes)`; each carries `owner` and `condition: ArgPattern?`. A `RaisesFact` with no classes states the call throws none; a record without one asserts nothing about throws. The record ranks nothing: a consumer matches each condition against its call arguments and applies its own rule to an undecidable outcome.
+**`Fact`** -- `SinkFact(port, vulnType)`, `SourceFact(sourceKinds, at, keys)`, `SanitizerFact(vulnTypes, check)`, `FlowFact(from, to)`, `CharactersFact(bound)`, `ReturnsFact(kind)`, `RaisesFact(classes)`; each carries `owner` and `condition: ArgPattern?`. A `RaisesFact` with no classes states the call throws none; a record without one asserts nothing about throws. The record ranks nothing: a consumer matches each condition against its call arguments and applies its own rule to an undecidable outcome.
 
-**`VulnType`**, **`Origin`** -- enum constants for the canonical vocabulary (`sqli`, `cmdi`, `codei`, `xss`, `headeri`, `ssrf`, `pathtrav`, `fileinc`, `deser`, `callablei`, `ldapi`, `xpathi`; `user-input`, `external-input`).
+**`VulnType`**, **`SourceKind`** -- enum constants for the canonical vocabulary (`sqli`, `cmdi`, `codei`, `xss`, `headeri`, `ssrf`, `pathtrav`, `fileinc`, `deser`, `callablei`, `ldapi`, `xpathi`; `user-input`, `external-input`).
 
 **`StubResources`** -- classpath roots of the five bundled sets, `MODELS`, `VALUE_RULES`, `VOCABULARY`, `TAINT`, `TAINT_RULES`, the `PSALM_MAPPING` document, and `opener(root)`.
 
@@ -95,7 +95,7 @@ val extended = PhpStubs.with(Path.of("models/site-rules"))
 |----------|------|---------|------------|
 | 0 | `models/` | Generated declarations: signature and raises per entry, extension from document placement | generated |
 | 1 | `value-rules/` | Hand-maintained value units beyond or against the generated ones, checked against the PHP manual | manual |
-| 2 | `vocabulary/` | The canonical danger categories, origin colors, and policy; the psalm mapping | manual |
+| 2 | `vocabulary/` | The canonical vulnerability types, source kinds, and policy; the psalm mapping | manual |
 | 3 | `taint/` | psalm's sinks, sanitizers, sources in psalm's names, translated by the psalm mapping | generated |
 | 4 | `taint-rules/` | Hand-maintained sinks (Argus lists), escapes, and sources psalm lacks, translated by the same mapping | manual |
 

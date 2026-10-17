@@ -13,7 +13,7 @@ import kotlin.test.assertTrue
  *
  * - `the vocabulary set ships no model document` — verifies the comment-only manifest yields no entry
  * - `the vocabulary set is manually verified` — verifies the set's provenance
- * - `the policy enables every category under both colors` — verifies the two rows of the matrix
+ * - `the policy enables every vulnerability type under both source kinds` — verifies the two rows of the matrix
  * - `the psalm mapping leaves no psalm name in a mapped set` — verifies mapping totality and the discarded kinds
  */
 internal class VocabularySetTest {
@@ -31,38 +31,38 @@ internal class VocabularySetTest {
     }
 
     @Test
-    fun `the policy enables every category under both colors`() {
+    fun `the policy enables every vulnerability type under both source kinds`() {
         val all = VulnType.entries.map { it.id }.toSet()
-        assertEquals(Origin.entries.map { it.id }.toSet(), set.policy.map { it.origin }.toSet())
-        for (row in set.policy) assertEquals(all, row.enables, row.origin.id)
+        assertEquals(SourceKind.entries.map { it.id }.toSet(), set.policy.map { it.sourceKind }.toSet())
+        for (row in set.policy) assertEquals(all, row.enables, row.sourceKind.id)
     }
 
     @Test
     fun `the psalm mapping leaves no psalm name in a mapped set`() {
         val mapping = VocabularySetTest::class.java.getResourceAsStream(StubResources.PSALM_MAPPING)!!.use(CategoryMappingLoader::load)
         val canonical = VulnType.entries.map { it.id }.toSet()
-        val colors = Origin.entries.map { it.id }.toSet()
+        val sourceKinds = SourceKind.entries.map { it.id }.toSet()
         for (root in listOf(StubResources.TAINT, StubResources.TAINT_RULES)) {
             val mapped = DocumentSetLoader.load(StubResources.opener(root), set.vocabulary, mapping)
             for (entry in mapped.entries) {
-                val categories =
+                val vulnTypes =
                     entry.body.sinks
                         .orEmpty()
                         .map { it.vulnType } +
                         entry.body.sanitizers
                             .orEmpty()
-                            .flatMap { it.categories }
-                assertTrue(canonical.containsAll(categories), "${entry.subject}")
+                            .flatMap { it.vulnTypes }
+                assertTrue(canonical.containsAll(vulnTypes), "${entry.subject}")
                 assertTrue(
-                    colors.containsAll(
+                    sourceKinds.containsAll(
                         entry.body.sources
                             .orEmpty()
-                            .flatMap { it.origin },
+                            .flatMap { it.sourceKinds },
                     ),
                     "${entry.subject}",
                 )
             }
-            assertTrue(mapped.policy.all { it.origin in colors && canonical.containsAll(it.enables) }, root)
+            assertTrue(mapped.policy.all { it.sourceKind in sourceKinds && canonical.containsAll(it.enables) }, root)
         }
     }
 }

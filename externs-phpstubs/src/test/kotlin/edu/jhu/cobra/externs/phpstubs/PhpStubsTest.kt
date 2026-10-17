@@ -76,7 +76,7 @@ internal class PhpStubsTest {
         assertEquals(VulnTypeId("sqli"), assertNotNull(PhpStubs.method("mysqli::query")).sinks.single().vulnType)
         val filterVar = assertNotNull(PhpStubs.function("filter_var"))
         assertEquals(5, filterVar.sanitizers.size)
-        assertTrue(filterVar.sanitizers.all { it.condition != null && it.categories == setOf(VulnTypeId("xss")) })
+        assertTrue(filterVar.sanitizers.all { it.condition != null && it.vulnTypes == setOf(VulnTypeId("xss")) })
     }
 
     @Test

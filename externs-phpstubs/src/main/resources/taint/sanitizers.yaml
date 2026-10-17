@@ -3,81 +3,81 @@
 - subject:
     function: cubrid_real_escape_string
   sanitizers:
-    - categories: [sql]
+    - vulnTypes: [sql]
 - subject:
     function: db2_escape_string
   sanitizers:
-    - categories: [sql]
+    - vulnTypes: [sql]
 - subject:
     function: filter_var
   when: [_, 257]
   sanitizers:
-    - categories: [html]
+    - vulnTypes: [html]
 - subject:
     function: filter_var
   when: [_, 258]
   sanitizers:
-    - categories: [html]
+    - vulnTypes: [html]
 - subject:
     function: filter_var
   when: [_, 259]
   sanitizers:
-    - categories: [html]
+    - vulnTypes: [html]
 - subject:
     function: filter_var
   when: [_, 519]
   sanitizers:
-    - categories: [html]
+    - vulnTypes: [html]
 - subject:
     function: filter_var
   when: [_, 520]
   sanitizers:
-    - categories: [html]
+    - vulnTypes: [html]
 - subject:
     function: ldap_escape
   sanitizers:
-    - categories: [ldap]
+    - vulnTypes: [ldap]
 - subject:
     method: mysqli::escape_string
   sanitizers:
-    - categories: [sql]
+    - vulnTypes: [sql]
 - subject:
     method: mysqli::real_escape_string
   sanitizers:
-    - categories: [sql]
+    - vulnTypes: [sql]
 - subject:
     function: mysqli_escape_string
   sanitizers:
-    - categories: [sql]
+    - vulnTypes: [sql]
 - subject:
     function: mysqli_real_escape_string
   sanitizers:
-    - categories: [sql]
+    - vulnTypes: [sql]
 - subject:
     function: pg_escape_bytea
   sanitizers:
-    - categories: [sql]
+    - vulnTypes: [sql]
 - subject:
     function: pg_escape_identifier
   sanitizers:
-    - categories: [sql]
+    - vulnTypes: [sql]
 - subject:
     function: pg_escape_literal
   sanitizers:
-    - categories: [sql]
+    - vulnTypes: [sql]
 - subject:
     function: pg_escape_string
   sanitizers:
-    - categories: [sql]
+    - vulnTypes: [sql]
 - subject:
     method: SQLite3::escapeString
   sanitizers:
-    - categories: [sql]
+    - vulnTypes: [sql]
 - subject:
     function: strip_tags
   sanitizers:
-    - categories: [html]
+    - vulnTypes: [html]
 - subject:
     function: urlencode
   sanitizers:
-    - categories: [html, has_quotes]
+    - vulnTypes: [html, has_quotes]

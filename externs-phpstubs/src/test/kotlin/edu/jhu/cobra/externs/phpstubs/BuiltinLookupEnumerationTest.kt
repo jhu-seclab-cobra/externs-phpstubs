@@ -1,6 +1,6 @@
 package edu.jhu.cobra.externs.phpstubs
 
-import edu.jhu.cobra.commons.phpmodels.OriginId
+import edu.jhu.cobra.commons.phpmodels.SourceKindId
 import edu.jhu.cobra.commons.phpmodels.VulnTypeId
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -17,7 +17,7 @@ import kotlin.test.assertTrue
  * - `every enumerated record is reachable by exact lookup of its subject` — verifies the kind maps and the shared map agree
  * - `every enumerated fact belongs to the record that owns it` — verifies fact lists are built over the records
  * - `no psalm name survives the merge` — verifies the accumulated vocabulary holds only canonical names
- * - `the policy makes every category dangerous under both colors` — verifies the accumulated matrix
+ * - `the policy makes every vulnerability type dangerous under both source kinds` — verifies the accumulated matrix
  */
 internal class BuiltinLookupEnumerationTest {
     @Test
@@ -71,17 +71,17 @@ internal class BuiltinLookupEnumerationTest {
     @Test
     fun `no psalm name survives the merge`() {
         assertEquals(VulnType.entries.map { it.id }.toSet(), PhpStubs.vocabulary.vulnTypes.keys)
-        assertEquals(Origin.entries.map { it.id }.toSet(), PhpStubs.vocabulary.origins.keys)
+        assertEquals(SourceKind.entries.map { it.id }.toSet(), PhpStubs.vocabulary.sourceKinds.keys)
         assertTrue(PhpStubs.sinks.none { it.vulnType.id in setOf("sql", "html", "shell") })
     }
 
     @Test
-    fun `the policy makes every category dangerous under both colors`() {
-        for (origin in Origin.entries) {
-            for (category in VulnType.entries) {
-                assertTrue(PhpStubs.policy.isDangerous(origin.id, category.id), "${origin.id.id} -> ${category.id.id}")
+    fun `the policy makes every vulnerability type dangerous under both source kinds`() {
+        for (sourceKind in SourceKind.entries) {
+            for (vulnType in VulnType.entries) {
+                assertTrue(PhpStubs.policy.isDangerous(sourceKind.id, vulnType.id), "${sourceKind.id.id} -> ${vulnType.id.id}")
             }
         }
-        assertTrue(PhpStubs.policy.isDangerous(OriginId("user-input"), VulnTypeId("xpathi")))
+        assertTrue(PhpStubs.policy.isDangerous(SourceKindId("user-input"), VulnTypeId("xpathi")))
     }
 }

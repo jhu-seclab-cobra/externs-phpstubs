@@ -13,7 +13,7 @@ internal object TestSets {
 vulnTypes:
   - {name: sqli, description: SQL injection}
   - {name: xss, description: Cross-site scripting}
-provenances:
+sourceKinds:
   - {name: user-input, description: Request data}
 """
 

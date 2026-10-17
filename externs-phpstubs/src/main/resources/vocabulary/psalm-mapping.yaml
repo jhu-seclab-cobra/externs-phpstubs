@@ -2,7 +2,7 @@
 # names) into the canonical vocabulary. Every psalm kind and every name the rules set
 # adds is listed; `ignore` discards the kind, so an element naming only
 # ignored kinds is dropped. Editing is a data-file change.
-categories:
+vulnTypes:
   sql: sqli
   html: xss
   shell: cmdi
@@ -19,6 +19,6 @@ categories:
   cookie: ignore
   user_secret: ignore
   system_secret: ignore
-provenances:
+sourceKinds:
   input: user-input
   external: external-input

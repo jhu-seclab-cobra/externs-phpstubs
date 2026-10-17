@@ -27,11 +27,11 @@ the resource layout. `MODELS`, `TAINT`, and `opener`: [design-taint.md](design-t
 taint-rules/
 ├── index.txt          # build-generated manifest: sanitizers.yaml, sinks.yaml, sources.yaml
 ├── provenance.yaml    # producer externs-phpstubs review of the Argus sink lists; verification manual
-├── vocabulary.yaml    # additions only: kind `xpath`, color `external`
+├── vocabulary.yaml    # additions only: kind `xpath`, source kind `external`
 ├── policy.yaml        # input enables xpath; external enables every input kind and xpath
 ├── sinks.yaml         # Argus sinks the format expresses; widened psalm subjects restate psalm's points
 ├── sanitizers.yaml    # escapes psalm lacks: shell, html, sql, file, value-typing escapes for every kind; checks
-└── sources.yaml       # `input` for request data psalm does not color; `external` for environment and stored data
+└── sources.yaml       # `input` for request data psalm does not taint; `external` for environment and stored data
 ```
 
 Every document carries a header naming its provenance. Entry forms match
@@ -62,5 +62,5 @@ no conditional entry. Entries are sorted by subject spelling.
 
 The set is edited by hand. A new sink is one entry with all of its kinds;
 a subject the taint set already sinks copies psalm's points before adding
-its own. A new kind or color is declared in `vocabulary.yaml` and enabled
+its own. A new kind or source kind is declared in `vocabulary.yaml` and enabled
 in `policy.yaml` before any document names it.

@@ -8,7 +8,7 @@ extraction pipeline are defined there and used here unchanged.
 
 **Problem Statement**
 psalm states which PHP built-ins consume a value dangerously (sinks), which
-neutralize a value for one danger kind (escapes), and which produce
+neutralize a value for one vulnerability type (escapes), and which produce
 attacker-controlled data (sources). That knowledge is spread over a
 dictionary, docblock annotations in psalm's stubs, and psalm's own analyzer
 code, all keyed by psalm's kind names. This library needs it as one
@@ -62,15 +62,15 @@ merge: set loader(taint/, canonical vocabulary, mapping) ─► entries in canon
   reaches every kind, and three documents split by section kind.
 - **Scope:** every sink psalm's dictionary lists, every sink, escape, and
   source annotation in psalm's stubs, and the superglobals psalm's analyzer
-  colors. Nothing hand-added.
+  taints. Nothing hand-added.
 - **Relationships:** a Generated Layer artifact; produced by the Taint
   Extraction; loaded by the merge, never as the generated set.
 
 - **Name:** Psalm Kind
 - **Definition:** One of psalm's taint kind names (`sql`, `html`, `shell`,
-  `eval`, `file`, `ssrf`, ...), used verbatim as a danger category in the
-  set's vocabulary and every sink and sanitizer. Psalm's single origin
-  `input` is the set's one origin color.
+  `eval`, `file`, `ssrf`, ...), used verbatim as a vulnerability type in the
+  set's vocabulary and every sink and sanitizer. Psalm's single source
+  `input` is the set's one source kind.
 - **Scope:** the closed list psalm's kind enumeration declares for one
   release; a kind the set declares but no document names stays declared.
 - **Relationships:** referenced by every taint entry; translated by the
@@ -107,7 +107,7 @@ merge: set loader(taint/, canonical vocabulary, mapping) ─► entries in canon
   start (every bundled set loads on the first access to the lookup).
 - **With the merge:** this library opens the set at its root constant and
   loads it through the set loader with the Canonical Vocabulary as context
-  and a category mapping that lists every psalm kind and the origin
+  and a category mapping that lists every psalm kind and the source kind
   `input`. Names the mapping omits are dropped by the format library;
   nothing is dropped here.
 
@@ -125,8 +125,8 @@ merge: set loader(taint/, canonical vocabulary, mapping) ─► entries in canon
 
 - **Typical:** psalm's dictionary lists `mysqli_query` with its second
   argument as `sql`. The sinks document states subject `mysqli_query`,
-  port `argument(1)`, category `sql`. The mapping renames `sql` to the
-  canonical SQL injection category at the merge.
+  port `argument(1)`, vulnerability type `sql`. The mapping renames `sql`
+  to the canonical SQL injection vulnerability type at the merge.
 - **Boundary:** psalm escapes `html` in `filter_var` only when the filter
   argument equals one of five sanitize-filter values. The set states five
   conditional entries, one per value; a call matching none keeps no escape.

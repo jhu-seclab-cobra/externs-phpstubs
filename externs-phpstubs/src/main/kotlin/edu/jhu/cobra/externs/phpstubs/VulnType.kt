@@ -3,8 +3,8 @@ package edu.jhu.cobra.externs.phpstubs
 import edu.jhu.cobra.commons.phpmodels.VulnTypeId
 
 /**
- * The danger categories of the canonical vocabulary, one constant per name `vocabulary/vocabulary.yaml`
- * declares, so a consumer filters facts without spelling a string. A category an extension set adds has
+ * The vulnerability types of the canonical vocabulary, one constant per name `vocabulary/vocabulary.yaml`
+ * declares, so a consumer filters facts without spelling a string. A vulnerability type an extension set adds has
  * no constant and is compared by its [VulnTypeId].
  *
  * @property id The interned identifier the vocabulary document declares.

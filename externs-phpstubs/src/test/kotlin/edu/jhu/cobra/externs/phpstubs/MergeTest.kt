@@ -43,7 +43,7 @@ internal class MergeTest {
         """
         - subject: {function: f}
           signature: {params: [{name: a, type: string}], returnType: int}
-          sinks: [{port: argument(0), category: sqli}]
+          sinks: [{port: argument(0), vulnType: sqli}]
         """.trimIndent()
 
     @Test
@@ -99,7 +99,7 @@ internal class MergeTest {
             - subject: {function: f}
               signature: {params: [{name: a, type: string}], returnType: int}
               propagation: [{from: argument(0), to: return}]
-              sinks: [{port: argument(0), category: sqli}]
+              sinks: [{port: argument(0), vulnType: sqli}]
             """.trimIndent()
         val base = TestSets.mount(0, Verification.GENERATED, valued, extension = "standard")
         val conditional = TestSets.mount(1, Verification.MANUAL, "- subject: {function: f}\n  when: [1]\n  returns: num\n")
@@ -134,7 +134,12 @@ internal class MergeTest {
                 "  characters: {of: [argument(0)]}\n"
         val base = TestSets.mount(0, Verification.GENERATED, document)
         val bounded = Merge.of(listOf(base)).functions.getValue(f)
-        assertEquals(setOf(Port.Argument(0)), bounded.characters.single().bound.of)
+        assertEquals(
+            setOf(Port.Argument(0)),
+            bounded.characters
+                .single()
+                .bound.of,
+        )
         val value = TestSets.mount(1, Verification.MANUAL, "- subject: {function: f}\n  returns: str\n")
         val replaced = Merge.of(listOf(base, value)).functions.getValue(f)
         assertTrue(replaced.characters.isEmpty())
@@ -226,11 +231,11 @@ internal class MergeTest {
             """
             - subject: {function: g}
               when: [1]
-              sinks: [{port: argument(0), category: xss}]
+              sinks: [{port: argument(0), vulnType: xss}]
             - subject: {function: f}
-              sinks: [{port: argument(0), category: sqli}]
+              sinks: [{port: argument(0), vulnType: sqli}]
             - subject: {function: g}
-              sinks: [{port: argument(0), category: sqli}]
+              sinks: [{port: argument(0), vulnType: sqli}]
             """.trimIndent()
         val merge = Merge.of(listOf(TestSets.mount(0, Verification.MANUAL, document)))
         val g = FunctionSubject("g")

@@ -105,7 +105,7 @@ merge: models/ (generated) ◄──ranked below── value-rules/ (manual), pe
   generated entry; no default-branch unit equals the generated unit of the
   same subject.
 - **With the merge:** this library mounts the set unmapped; the set names
-  no category or color and needs no vocabulary. Its provenance is manual,
+  no vulnerability type or source kind and needs no vocabulary. Its provenance is manual,
   so under the default precedence its units outrank the generated ones
   whatever the mount order.
 

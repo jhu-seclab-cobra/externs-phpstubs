@@ -185,7 +185,7 @@ Runtime:
   fix is in the Extraction Pipeline, which simplifies the upstream type
   before emitting — never a hand edit of the generated file.
 - **Interaction:** a consumer asks the record of `mysqli::query` for
-  its sinks and receives one sink of the canonical SQL injection category
+  its sinks and receives one sink of the canonical SQL injection vulnerability type
   at the first argument, translated from psalm's `sql`. It asks `strlen`
   for its flow and receives the value rules statement, the signature and
   extension staying the generated set's. The sets meet per subject, condition,

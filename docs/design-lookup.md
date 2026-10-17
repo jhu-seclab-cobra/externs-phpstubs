@@ -12,8 +12,7 @@ types: [design-merge.md](design-merge.md). Fold algorithm:
 - **Classes:** `PhpStubs` (final class; companion delegates to the bundled
   instance), `BuiltinRecord<S>` (data class), `SinkFact`, `SourceFact`,
   `SanitizerFact`, `FlowFact`, `CharactersFact`, `ReturnsFact`, `RaisesFact` (data classes),
-  `VulnType`
-  and `Origin` (enums); `Merge`, `Mount`, `MountSequence` (internal,
+  `VulnType` and `SourceKind` (enums); `Merge`, `Mount`, `MountSequence` (internal,
   [design-merge.md](design-merge.md))
 - **Abstract:** `BuiltinLookup` (interface: every read of one merge),
   `Fact` (sealed interface)
@@ -22,7 +21,7 @@ types: [design-merge.md](design-merge.md). Fold algorithm:
   `CategoryMapping`, `ModelEntry`, `ModelSubject` and its seven subtypes,
   `ArgPattern`, `SignatureInfo` and its four subtypes, `SinkDecl`,
   `SourceDecl`, `SanitizerDecl`, `ArgumentCheck`, `Propagation`, `CharacterClass`,
-  `ReturnKind`, `Vocabulary`, `TaintPolicy`, `VulnTypeId`, `OriginId`, `Precedence`, `Verification`
+  `ReturnKind`, `Vocabulary`, `TaintPolicy`, `VulnTypeId`, `SourceKindId`, `Precedence`, `Verification`
 - **Relationships:** `PhpStubs` holds one `Merge`; `Merge` folds `Mount`s
   (one per set, in Merge Order) into records; a `BuiltinRecord` owns its
   `Fact`s; every `Fact` names its owner subject and its condition. The
@@ -130,21 +129,21 @@ for an unconditional statement).
 | Type | Own fields | From |
 |------|------------|------|
 | `SinkFact` | `port: Port.Argument`, `vulnType: VulnTypeId` | one `SinkDecl` |
-| `SourceFact` | `origins: Set<OriginId>`, `at: Port.Argument?`, `keys: List<KeyPattern>?` | one `SourceDecl` |
-| `SanitizerFact` | `categories: Set<VulnTypeId>`, `check: ArgumentCheck?` | one `SanitizerDecl` |
+| `SourceFact` | `sourceKinds: Set<SourceKindId>`, `at: Port.Argument?`, `keys: List<KeyPattern>?` | one `SourceDecl` |
+| `SanitizerFact` | `vulnTypes: Set<VulnTypeId>`, `check: ArgumentCheck?` | one `SanitizerDecl` |
 | `FlowFact` | `from: Port.Input`, `to: Port` | one `Propagation` |
 | `CharactersFact` | `bound: CharacterBound` | the `characters` section, whole: the bytes the result may hold; the bound keeps its at-least-one-field invariant |
 | `ReturnsFact` | `kind: ReturnKind` | the `returns` section |
 | `RaisesFact` | `classes: Set<ClassSubject>` | the `raises` section, whole: the empty set states the subject throws none |
 
-### VulnType, Origin (enums)
+### VulnType, SourceKind (enums)
 
 **Responsibility:** Compile-time names for the Canonical Vocabulary so a
 consumer filters without spelling a string: `VulnType.SQLI.id` is
-`VulnTypeId("sqli")`; `Origin.USER_INPUT.id` is `OriginId("user-input")`.
+`VulnTypeId("sqli")`; `SourceKind.USER_INPUT.id` is `SourceKindId("user-input")`.
 Twelve and two constants, each holding its `id`. A repository test asserts
-the bundled vocabulary document declares exactly these names; a category an
-extension set adds has no enum constant and is compared by `VulnTypeId`.
+the bundled vocabulary document declares exactly these names; a vulnerability
+type an extension set adds has no enum constant and is compared by `VulnTypeId`.
 
 ## Function Specifications
 
@@ -163,7 +162,7 @@ already rejects a signature subtype that does not match the subject kind.
 - Existence of a declaration is `signature != null`; a record with facts
   and no signature (a taint-only function, every predefined variable) is a
   record all the same, so no fact is dropped by the merge.
-- A category or color a fact carries is declared in `vocabulary`; the
+- A vulnerability type or source kind a fact carries is declared in `vocabulary`; the
   format library verified it when the set decoded.
 - `functions.size` equals the number of distinct function subjects over
   every mounted set; a subject appears in exactly one kind map.

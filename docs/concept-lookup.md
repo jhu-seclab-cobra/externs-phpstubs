@@ -60,12 +60,12 @@ consumer: fact kind ────────► Built-in Lookup ──► every 
 **Core Concepts**
 
 - **Name:** Canonical Vocabulary
-- **Definition:** This library's own names for danger categories (SQL
-  injection, command injection, ...) and origin colors (user input,
+- **Definition:** This library's own names for vulnerability types (SQL
+  injection, command injection, ...) and source kinds (user input,
   external input), with the policy rows over them. The psalm-named sets
   are translated into it by one category mapping this library ships and
   applies at the merge; a consumer never sees psalm's names.
-- **Scope:** every category and color any shipped set states.
+- **Scope:** every vulnerability type and source kind any shipped set states.
 - **Relationships:** context of the merge; the names every fact is in.
 
 - **Name:** Merge
@@ -132,8 +132,8 @@ consumer: fact kind ────────► Built-in Lookup ──► every 
 
 - **Typical:** `mysqli::query` asked by owner and name. The record reports
   extension `mysqli`, the hand-declared signature, and one sink of the
-  canonical SQL injection category at the first argument, unconditional.
-- **Enumeration:** every sink of the SQL injection category, each naming
+  canonical SQL injection vulnerability type at the first argument, unconditional.
+- **Enumeration:** every sink of the SQL injection vulnerability type, each naming
   the built-in it belongs to; every method named `query` whatever its
   owner, for a consumer that has not resolved the receiver yet.
 - **Boundary:** `strlen` is declared by the generated set and restated by

@@ -51,7 +51,7 @@ own here: `MountSequence` decodes it through the format library's set loader.
 taint/
 ├── index.txt          # build-generated manifest: sanitizers.yaml, sinks.yaml, sources.yaml
 ├── provenance.yaml    # producer tools/extract_taint.py over vimeo/psalm 5.6.0; verification generated
-├── vocabulary.yaml    # psalm's taint kinds as categories; origin `input`
+├── vocabulary.yaml    # psalm's taint kinds as vulnerability types; source kind `input`
 ├── policy.yaml        # one row: input enables every kind of psalm's input group
 ├── sinks.yaml         # dictionary + @psalm-taint-sink: one entry per subject
 ├── sanitizers.yaml    # @psalm-taint-escape: one entry per (subject, condition)
@@ -79,11 +79,11 @@ checkout and writes every file of the set except the manifest:
 
 | Input (relative to the psalm root) | Yields |
 |------------------------------------|--------|
-| `src/Psalm/Type/TaintKind.php` | category names, in declaration order |
+| `src/Psalm/Type/TaintKind.php` | vulnerability type names, in declaration order |
 | `src/Psalm/Type/TaintKindGroup.php` (`ALL_INPUT`) | the policy row's `enables` |
 | `dictionaries/InternalTaintSinkMap.php` | sinks by argument position |
 | `stubs/**/*.phpstub` docblocks | `@psalm-taint-sink kind $param` → sink at the parameter's position; `@psalm-taint-escape kind` → sanitizer; `@psalm-taint-escape ($param is N ? 'kind' : null)` → conditional sanitizer; `@psalm-taint-source input` → source |
-| `.../Fetch/VariableFetchAnalyzer.php` | the superglobal names psalm colors |
+| `.../Fetch/VariableFetchAnalyzer.php` | the superglobal names psalm taints |
 
 Arguments: `--psalm <root>`, `--out <taint dir>`; the psalm version is read
 from the checkout's Composer metadata when present. A parameter name that
@@ -93,9 +93,9 @@ aborts the run. Output is deterministic: same input, identical bytes.
 ## Validation Rules
 
 - The set decodes under its own vocabulary with no mapping: every kind
-  and origin an entry names is declared in `vocabulary.yaml`.
+  and source kind an entry names is declared in `vocabulary.yaml`.
 - Every entry declares no signature and exactly one of the three taint
   sections.
-- Consumers load with a mapping that lists every category and origin the
-  set uses; an unlisted name is the format library's `VocabularyException`.
+- Consumers load with a mapping that lists every vulnerability type and source
+  kind the set uses; an unlisted name is the format library's `VocabularyException`.
 - The repository tests, not the consumer, prove the set decodes.

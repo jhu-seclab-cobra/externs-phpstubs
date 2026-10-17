@@ -2,6 +2,6 @@
 vulnTypes:
   - name: xpath
     description: XPath injection
-provenances:
+sourceKinds:
   - name: external
     description: Data read from the environment, files, sockets, mail, LDAP, or stored records

@@ -6,7 +6,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 /**
- * Tests for the [VulnType] enum: the compile-time names of the canonical danger categories.
+ * Tests for the [VulnType] enum: the compile-time names of the canonical vulnerability types.
  *
  * - `twelve constants carry the documented ids` — verifies the constants and their interned identifiers
  * - `the bundled vocabulary declares exactly the enum names` — verifies the vocabulary document against the enum

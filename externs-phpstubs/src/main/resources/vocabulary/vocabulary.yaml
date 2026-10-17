@@ -1,6 +1,6 @@
 # Two-axis vocabulary for taint analysis.
-# vulnTypes: danger categories; every category a bundled set entry or the psalm mapping names
-# must be declared here. provenances: origin colors; every color a
+# vulnTypes: vulnerability types; every vulnerability type a bundled set entry or the psalm mapping
+# names must be declared here. sourceKinds: source kinds; every source kind a
 # source entry, policy.yaml row, or psalm mapping names must be declared here.
 # Adding an entry is a data-file edit — no code change.
 vulnTypes:
@@ -29,7 +29,7 @@ vulnTypes:
   - name: xpathi
     description: XPath injection
 
-provenances:
+sourceKinds:
   - name: user-input
     description: Attacker-controlled request input (superglobals, request body, headers)
   - name: external-input

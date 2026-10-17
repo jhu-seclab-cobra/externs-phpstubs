@@ -6,7 +6,7 @@ detekt = "1.23.8"
 javaSource = "21"
 javaTarget = "21"
 cobra-commons-value = "0.1.1"
-cobra-commons-phpmodels = "0.9.0"
+cobra-commons-phpmodels = "0.10.0"
 junit = "6.1.3"
 
 [libraries]

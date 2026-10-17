@@ -174,6 +174,6 @@ internal class MountTest {
 
     private companion object {
         val GEN = Verification.GENERATED
-        const val SINK = "- subject: {function: f}\n  sinks: [{port: argument(0), category: sqli}]\n"
+        const val SINK = "- subject: {function: f}\n  sinks: [{port: argument(0), vulnType: sqli}]\n"
     }
 }

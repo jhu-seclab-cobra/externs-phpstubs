@@ -15,7 +15,7 @@ from collections import OrderedDict
 from pathlib import Path
 
 SCRIPT = "tools/extract_taint.py"
-ORIGIN = "input"
+SOURCE_KIND = "input"
 
 KIND_DESCRIPTIONS = {
     "callable": "Callable name resolved and invoked",
@@ -35,7 +35,7 @@ KIND_DESCRIPTIONS = {
     "system_secret": "Secret belonging to the system",
 }
 
-ORIGIN_DESCRIPTION = "Attacker-controlled input from colored superglobals and annotated sources"
+SOURCE_KIND_DESCRIPTION = "Attacker-controlled input from tainted superglobals and annotated sources"
 
 TAINT_KIND = "src/Psalm/Type/TaintKind.php"
 TAINT_GROUP = "src/Psalm/Type/TaintKindGroup.php"
@@ -228,11 +228,11 @@ def collect(root):
             elif escape:
                 sanitizers.setdefault((subject, None, None), set()).add(kind_checked(escape.group(1), path))
             elif source:
-                if source.group(1) != ORIGIN:
+                if source.group(1) != SOURCE_KIND:
                     fail(f"unexpected source kind '{source.group(1)}' in {path}")
-                sources.setdefault(subject, set()).add(ORIGIN)
+                sources.setdefault(subject, set()).add(SOURCE_KIND)
     for name in superglobals(root):
-        sources.setdefault(name, set()).add(ORIGIN)
+        sources.setdefault(name, set()).add(SOURCE_KIND)
     return kinds, sinks, sanitizers, sources
 
 
@@ -260,14 +260,14 @@ def emit_vocabulary(kinds):
     for kind in kinds:
         out.append(f"  - name: {kind}")
         out.append(f"    description: {KIND_DESCRIPTIONS.get(kind, 'psalm taint kind ' + kind)}")
-    out.append("provenances:")
-    out.append(f"  - name: {ORIGIN}")
-    out.append(f"    description: {ORIGIN_DESCRIPTION}")
+    out.append("sourceKinds:")
+    out.append(f"  - name: {SOURCE_KIND}")
+    out.append(f"    description: {SOURCE_KIND_DESCRIPTION}")
     return "\n".join(out) + "\n"
 
 
 def emit_policy(enables):
-    return f"- origin: {ORIGIN}\n  enables: [{', '.join(enables)}]\n"
+    return f"- sourceKind: {SOURCE_KIND}\n  enables: [{', '.join(enables)}]\n"
 
 
 def emit_sinks(sinks, kinds):
@@ -278,7 +278,7 @@ def emit_sinks(sinks, kinds):
         out.append("  sinks:")
         for position, kind in sorted(sinks[subject], key=lambda item: (item[0], kinds.index(item[1]))):
             out.append(f"    - port: argument({position})")
-            out.append(f"      category: {kind}")
+            out.append(f"      vulnType: {kind}")
     return "\n".join(out) + "\n"
 
 
@@ -293,7 +293,7 @@ def emit_sanitizers(sanitizers, kinds):
             out.append(f"    is: {value}")
         out.append("  sanitizers:")
         ordered = sorted(sanitizers[(subject, position, value)], key=kinds.index)
-        out.append(f"    - categories: [{', '.join(ordered)}]")
+        out.append(f"    - vulnTypes: [{', '.join(ordered)}]")
     return "\n".join(out) + "\n"
 
 
@@ -303,7 +303,7 @@ def emit_sources(sources):
         out.append("- subject:")
         out.append(subject_line(subject))
         out.append("  sources:")
-        out.append(f"    - provenance: [{', '.join(sorted(sources[subject]))}]")
+        out.append(f"    - sourceKinds: [{', '.join(sorted(sources[subject]))}]")
     return "\n".join(out) + "\n"
 
 

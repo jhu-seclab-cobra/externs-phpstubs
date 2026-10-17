@@ -6,8 +6,8 @@ import edu.jhu.cobra.commons.phpmodels.FunctionSubject
 import edu.jhu.cobra.commons.phpmodels.MethodSubject
 import edu.jhu.cobra.commons.phpmodels.ModelEntry
 import edu.jhu.cobra.commons.phpmodels.ModelSubject
-import edu.jhu.cobra.commons.phpmodels.OriginId
 import edu.jhu.cobra.commons.phpmodels.Port
+import edu.jhu.cobra.commons.phpmodels.SourceKindId
 import edu.jhu.cobra.commons.phpmodels.VariableSubject
 import edu.jhu.cobra.commons.phpmodels.Vocabulary
 import edu.jhu.cobra.commons.phpmodels.VulnTypeId
@@ -21,12 +21,12 @@ import kotlin.test.assertTrue
 /**
  * Tests for the generated taint document set rooted at [StubResources.TAINT].
  *
- * - `taint set declares psalm's kinds and the input color` — verifies vocabulary and policy content
+ * - `taint set declares psalm's kinds and the input source kind` — verifies vocabulary and policy content
  * - `taint set names its producer` — verifies the provenance document
  * - `every taint entry is an unsigned entry with exactly one taint section` — verifies the set's shape rule
  * - `sinks keep psalm's argument positions and kinds` — verifies dictionary and annotation sinks
  * - `sanitizers keep psalm's escapes including conditional ones` — verifies filter_var's five conditional entries
- * - `sources name the colored superglobals and annotated methods` — verifies the source entries
+ * - `sources name the tainted superglobals and annotated methods` — verifies the source entries
  * - `the psalm mapping translates the taint set into the canonical vocabulary` — verifies the bundled mapping
  */
 internal class TaintSetTest {
@@ -37,15 +37,15 @@ internal class TaintSetTest {
     }
 
     @Test
-    fun `taint set declares psalm's kinds and the input color`() {
+    fun `taint set declares psalm's kinds and the input source kind`() {
         val kinds =
             taint.vocabulary.vulnTypes.keys
                 .map { it.id }
         assertEquals(15, kinds.size)
         assertTrue(kinds.containsAll(listOf("sql", "html", "shell", "eval", "include", "ssrf", "file", "header")))
-        assertEquals(setOf(OriginId("input")), taint.vocabulary.origins.keys)
+        assertEquals(setOf(SourceKindId("input")), taint.vocabulary.sourceKinds.keys)
         val row = taint.policy.single()
-        assertEquals(OriginId("input"), row.origin)
+        assertEquals(SourceKindId("input"), row.sourceKind)
         assertEquals(13, row.enables.size)
         assertTrue(VulnTypeId("user_secret") !in row.enables)
     }
@@ -89,14 +89,14 @@ internal class TaintSetTest {
     }
 
     @Test
-    fun `sources name the colored superglobals and annotated methods`() {
+    fun `sources name the tainted superglobals and annotated methods`() {
         for (name in listOf("_GET", "_POST", "_COOKIE", "_REQUEST")) {
             val entry = unconditional.getValue(VariableSubject(name))
             assertEquals(
-                setOf(OriginId("input")),
+                setOf(SourceKindId("input")),
                 entry.body.sources!!
                     .single()
-                    .origin,
+                    .sourceKinds,
             )
         }
         assertNotNull(unconditional[MethodSubject("Throwable", "getTraceAsString")])
@@ -109,7 +109,7 @@ internal class TaintSetTest {
         val mapping = TaintSetTest::class.java.getResourceAsStream(StubResources.PSALM_MAPPING)!!.use(CategoryMappingLoader::load)
         val mapped = DocumentSetLoader.load(StubResources.opener(StubResources.TAINT), context, mapping)
         assertEquals(Vocabulary.EMPTY, mapped.vocabulary)
-        assertEquals(OriginId("user-input"), mapped.policy.single().origin)
+        assertEquals(SourceKindId("user-input"), mapped.policy.single().sourceKind)
         val enables = mapped.policy.single().enables
         assertTrue(VulnType.entries.map { it.id }.containsAll(enables) && VulnTypeId("xss") in enables)
         val bySubject = mapped.entries.groupBy { it.subject }
@@ -124,6 +124,6 @@ internal class TaintSetTest {
 
     private fun sanitizersOf(entry: ModelEntry): Set<String> =
         entry.body.sanitizers!!
-            .flatMap { decl -> decl.categories.map { it.id } }
+            .flatMap { decl -> decl.vulnTypes.map { it.id } }
             .toSet()
 }

@@ -68,9 +68,9 @@ merge: set loader(taint/, …) then set loader(taint-rules/, taint vocabulary, m
   mounted by the merge above it.
 
 - **Name:** Vocabulary Addition
-- **Definition:** A danger category or origin color the set declares
+- **Definition:** A vulnerability type or source kind the set declares
   because psalm has no name for it: the kind `xpath` (XPath injection)
-  and the color `external` (data read from the environment, files,
+  and the source kind `external` (data read from the environment, files,
   sockets, mail, LDAP, or stored records).
 - **Scope:** the two names; every other name in the set is a Psalm Kind.
 - **Relationships:** declared in the set's vocabulary, enabled by its
@@ -118,13 +118,14 @@ merge: set loader(taint/, …) then set loader(taint-rules/, taint vocabulary, m
 
 - **Typical:** Argus lists `mail` with its additional-parameters argument
   as a command-injection sink. The sinks document states subject `mail`,
-  port `argument(4)`, category `shell`.
+  port `argument(4)`, vulnerability type `shell`.
 - **Boundary:** psalm states `readfile` as a `file` and `unserialize`
   sink; Argus adds server-side request forgery and output. The taint rules entry
   states all four kinds, and the test proves it contains psalm's two.
 - **Interaction:** the mapping translates `external` to the canonical
-  color and `xpath` to the canonical category. `getenv` is answered as a
-  source of that color; `DOMXPath::query` as a sink of that category; the
+  source kind and `xpath` to the canonical vulnerability type. `getenv` is
+  answered as a source of that source kind; `DOMXPath::query` as a sink of
+  that vulnerability type; the
   `external` policy row in canonical names.
 
 Software structure: [design-taint-rules.md](design-taint-rules.md).

@@ -3,40 +3,40 @@
 - subject:
     variable: $_COOKIE
   sources:
-    - provenance: [input]
+    - sourceKinds: [input]
 - subject:
     variable: $_GET
   sources:
-    - provenance: [input]
+    - sourceKinds: [input]
 - subject:
     variable: $_POST
   sources:
-    - provenance: [input]
+    - sourceKinds: [input]
 - subject:
     variable: $_REQUEST
   sources:
-    - provenance: [input]
+    - sourceKinds: [input]
 - subject:
     method: Error::__toString
   sources:
-    - provenance: [input]
+    - sourceKinds: [input]
 - subject:
     method: Error::getTraceAsString
   sources:
-    - provenance: [input]
+    - sourceKinds: [input]
 - subject:
     method: Exception::__toString
   sources:
-    - provenance: [input]
+    - sourceKinds: [input]
 - subject:
     method: Exception::getTraceAsString
   sources:
-    - provenance: [input]
+    - sourceKinds: [input]
 - subject:
     method: Throwable::__toString
   sources:
-    - provenance: [input]
+    - sourceKinds: [input]
 - subject:
     method: Throwable::getTraceAsString
   sources:
-    - provenance: [input]
+    - sourceKinds: [input]

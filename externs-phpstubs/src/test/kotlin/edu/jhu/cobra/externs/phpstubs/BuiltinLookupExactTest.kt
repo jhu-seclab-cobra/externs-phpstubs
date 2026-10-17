@@ -3,7 +3,7 @@ package edu.jhu.cobra.externs.phpstubs
 import edu.jhu.cobra.commons.phpmodels.ClassConstantSubject
 import edu.jhu.cobra.commons.phpmodels.FunctionSubject
 import edu.jhu.cobra.commons.phpmodels.MethodSubject
-import edu.jhu.cobra.commons.phpmodels.OriginId
+import edu.jhu.cobra.commons.phpmodels.SourceKindId
 import edu.jhu.cobra.commons.phpmodels.VariableSubject
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -113,9 +113,9 @@ internal class BuiltinLookupExactTest {
     fun `predefined variables are records with source facts`() {
         val get = assertNotNull(PhpStubs.variable("\$_GET"))
         assertNull(get.signature)
-        assertEquals(setOf(OriginId("user-input")), get.sources.single().origins)
+        assertEquals(setOf(SourceKindId("user-input")), get.sources.single().sourceKinds)
         assertSame(get, PhpStubs.record(VariableSubject("_GET")))
-        assertEquals(setOf(OriginId("external-input")), assertNotNull(PhpStubs.function("getenv")).sources.single().origins)
+        assertEquals(setOf(SourceKindId("external-input")), assertNotNull(PhpStubs.function("getenv")).sources.single().sourceKinds)
     }
 
     @Test

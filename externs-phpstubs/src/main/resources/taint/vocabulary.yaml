@@ -31,6 +31,6 @@ vulnTypes:
     description: Secret belonging to one user
   - name: system_secret
     description: Secret belonging to the system
-provenances:
+sourceKinds:
   - name: input
-    description: Attacker-controlled input from colored superglobals and annotated sources
+    description: Attacker-controlled input from tainted superglobals and annotated sources

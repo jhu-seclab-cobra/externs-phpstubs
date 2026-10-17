@@ -45,7 +45,7 @@ query?.sinks?.single()?.vulnType == VulnType.SQLI.id   // true
 
 **`sinks: List<SinkFact>`**, **`sources: List<SourceFact>`**, **`sanitizers: List<SanitizerFact>`**, **`flows: List<FlowFact>`**, **`characters: List<CharactersFact>`**, **`returns: List<ReturnsFact>`**, **`raises: List<RaisesFact>`**.
 
-**`vocabulary: Vocabulary`**, **`policy: TaintPolicy`** -- Accumulated over every mounted set; `policy.isDangerous(color, category)`.
+**`vocabulary: Vocabulary`**, **`policy: TaintPolicy`** -- Accumulated over every mounted set; `policy.isDangerous(sourceKind, vulnType)`.
 
 ### PhpStubs (class, companion = bundled lookup)
 
@@ -71,11 +71,11 @@ Typed accessors (top-level extension properties, nullable):
 
 Every fact: **`owner: ModelSubject`**, **`condition: ArgPattern?`** (`null` for an unconditional statement; otherwise match it with `condition.matches(args)` -> `true`, `false`, or `null` for undecidable).
 
-**`SinkFact(port: Port.Argument, vulnType: VulnTypeId)`** | **`SourceFact(origins: Set<OriginId>, at: Port.Argument?, keys: List<KeyPattern>?)`** | **`SanitizerFact(categories: Set<VulnTypeId>, check: ArgumentCheck?)`** | **`FlowFact(from: Port.Input, to: Port)`** | **`CharactersFact(bound: CharacterBound)`** | **`ReturnsFact(kind: ReturnKind)`** | **`RaisesFact(classes: Set<ClassSubject>)`**.
+**`SinkFact(port: Port.Argument, vulnType: VulnTypeId)`** | **`SourceFact(sourceKinds: Set<SourceKindId>, at: Port.Argument?, keys: List<KeyPattern>?)`** | **`SanitizerFact(vulnTypes: Set<VulnTypeId>, check: ArgumentCheck?)`** | **`FlowFact(from: Port.Input, to: Port)`** | **`CharactersFact(bound: CharacterBound)`** | **`ReturnsFact(kind: ReturnKind)`** | **`RaisesFact(classes: Set<ClassSubject>)`**.
 
-### VulnType, Origin (enums)
+### VulnType, SourceKind (enums)
 
-**`VulnType.SQLI.id`** ... -- `VulnTypeId` per canonical category: `sqli`, `cmdi`, `codei`, `xss`, `headeri`, `ssrf`, `pathtrav`, `fileinc`, `deser`, `callablei`, `ldapi`, `xpathi`. **`Origin.USER_INPUT.id`**, **`Origin.EXTERNAL_INPUT.id`** -- `OriginId("user-input")`, `OriginId("external-input")`. A category an extension set adds has no constant.
+**`VulnType.SQLI.id`** ... -- `VulnTypeId` per canonical vulnerability type: `sqli`, `cmdi`, `codei`, `xss`, `headeri`, `ssrf`, `pathtrav`, `fileinc`, `deser`, `callablei`, `ldapi`, `xpathi`. **`SourceKind.USER_INPUT.id`**, **`SourceKind.EXTERNAL_INPUT.id`** -- `SourceKindId("user-input")`, `SourceKindId("external-input")`. A vulnerability type an extension set adds has no constant.
 
 ### StubResources (object)
 
