@@ -43,7 +43,7 @@ other set.
 
 **Responsibility:** Builds mounts in order, decoding each set through
 `DocumentSetLoader.load(opener, accumulated vocabulary, mapping)` and
-classifying failures. `mount(label, open, mapping, fallback, corpus)`:
+classifying failures. `mount(root, open, mapping, fallback, corpus)`:
 `fallback` is the verification of a set without `provenance.yaml` (`MANUAL`
 for extension sets, `null` for bundled sets, where absence is
 `StubIndexInvalidException`); `corpus = true` applies the generated set's

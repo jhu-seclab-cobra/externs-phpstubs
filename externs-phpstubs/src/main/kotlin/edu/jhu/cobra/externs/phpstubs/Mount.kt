@@ -44,31 +44,31 @@ internal class MountSequence(
     /**
      * Decodes and appends one set.
      *
-     * @param label The root the failure messages name.
+     * @param root The set root the failure messages name.
      * @param open The opener over the set's root.
      * @param mapping The vocabulary mapping the set decodes under, or null for a set in canonical names.
      * @param fallback The verification of a set without `provenance.yaml`, or null when one is required.
      * @param corpus True for the generated declaration set: the corpus rules apply and extensions derive.
      */
     fun mount(
-        label: String,
+        root: String,
         open: ResourceOpener,
         mapping: VocabularyMapping? = null,
         fallback: Verification? = Verification.MANUAL,
         corpus: Boolean = false,
     ): MountSequence {
-        val set = loadSet(label, open, mapping)
+        val set = loadSet(root, open, mapping)
         val verification =
             set.provenance?.verification ?: fallback
-                ?: throw StubIndexInvalidException("$label: bundled set declares no provenance")
-        val entries = if (corpus) corpusEntries(label, set.documents) else set.entries.map { it to null }
+                ?: throw StubIndexInvalidException("$root: bundled set declares no provenance")
+        val entries = if (corpus) corpusEntries(root, set.documents) else set.entries.map { it to null }
         mounts += Mount(mounts.size, verification, set.vocabulary, set.policy, entries)
         vocabulary = vocabulary.merge(set.vocabulary)
         return this
     }
 
     private fun loadSet(
-        label: String,
+        root: String,
         open: ResourceOpener,
         mapping: VocabularyMapping?,
     ): DocumentSet {
@@ -76,37 +76,37 @@ internal class MountSequence(
         return try {
             DocumentSetLoader.load(opener, vocabulary, mapping)
         } catch (failure: IllegalArgumentException) {
-            throw stubFailure(label, opener.absent, failure)
+            throw stubFailure(root, opener.absent, failure)
         }
     }
 
     // A set failure naming a path the opener could not resolve is an absence; every other failure is invalidity.
     private fun stubFailure(
-        label: String,
+        root: String,
         absent: Set<String>,
         failure: IllegalArgumentException,
     ): RuntimeException {
         val path = (failure as? DocumentSetException)?.path
         return when {
-            path != null && path in absent -> StubIndexNotFoundException("$label$path")
-            path != null -> StubIndexInvalidException("$label$path: ${failure.message}", failure)
-            else -> StubIndexInvalidException("$label: ${failure.message}", failure)
+            path != null && path in absent -> StubIndexNotFoundException("$root$path")
+            path != null -> StubIndexInvalidException("$root$path: ${failure.message}", failure)
+            else -> StubIndexInvalidException("$root: ${failure.message}", failure)
         }
     }
 
     // The corpus rules of the generated set: no variable, every entry signed and unconditional, one document per subject.
     private fun corpusEntries(
-        label: String,
+        root: String,
         documents: List<Document>,
     ): List<Pair<ModelEntry, String?>> {
-        val origins = HashMap<ModelSubject, String>()
+        val declaredIn = HashMap<ModelSubject, String>()
         val entries = ArrayList<Pair<ModelEntry, String?>>()
         for (document in documents) {
-            val path = label + document.path
+            val path = root + document.path
             val extension = extensionOf(document.path)
             for (entry in document.entries) {
                 requireCorpusEntry(path, entry)
-                origins.put(entry.subject, path)?.let { previous ->
+                declaredIn.put(entry.subject, path)?.let { previous ->
                     throw StubIndexInvalidException("Duplicate subject '${entry.subject}' declared in $previous and $path")
                 }
                 entries += entry to extension

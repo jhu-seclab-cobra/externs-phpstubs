@@ -167,5 +167,5 @@ already rejects a signature subtype that does not match the subject kind.
 - `functions.size` equals the number of distinct function subjects over
   every mounted set; a subject appears in exactly one kind map.
 - Two `PhpStubs` built from equal mount lists hold equal records.
-- No public type of this file holds a psalm name, a set root, a layer
-  label, or a precedence.
+- No public type of this file holds a psalm name, a set root, or a
+  precedence.

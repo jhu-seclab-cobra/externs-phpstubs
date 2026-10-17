@@ -134,7 +134,7 @@ public class PhpStubs internal constructor(
 
     private fun extend(sets: List<Pair<String, ResourceOpener>>): PhpStubs {
         val sequence = MountSequence(mounts)
-        for ((label, open) in sets) sequence.mount(label, open)
+        for ((root, open) in sets) sequence.mount(root, open)
         return PhpStubs(sequence.toList())
     }
 
