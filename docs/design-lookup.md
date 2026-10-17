@@ -60,7 +60,7 @@ delegation, by its companion, so `PhpStubs.function("substr")` and
 | `variable(name)` | `BuiltinRecord<VariableSubject>?` | `VariableSubject.parse(name)`, map read |
 | `record(subject)` | `BuiltinRecord<ModelSubject>?` | the record of an already built subject |
 | `functions`, `classes`, `methods`, `constants`, `classConstants`, `properties`, `variables` | `Collection<BuiltinRecord<…>>` | every record of the kind, load order |
-| `sinks`, `sources`, `sanitizers`, `flows`, `returns`, `throws` | `List<…Fact>` | every fact of the kind over every record, load order |
+| `sinkFacts`, `sourceFacts`, `sanitizerFacts`, `flows`, `returns`, `throws` | `List<…Fact>` | every fact of the kind over every record, load order |
 | `vocabulary` | `Vocabulary` | accumulated over every mounted set |
 | `policy` | `TaintPolicy` | accumulated over every mounted set |
 
@@ -110,8 +110,8 @@ members only.
 **State/Fields:** `subject: S`, `extension: String?`,
 `signature: SignatureInfo?`, `returns: List<ReturnsFact>`,
 `flows: List<FlowFact>`, `characters: List<CharactersFact>`,
-`sources: List<SourceFact>`, `sinks: List<SinkFact>`,
-`sanitizers: List<SanitizerFact>`, `throws: List<ThrowsFact>`.
+`sourceFacts: List<SourceFact>`, `sinkFacts: List<SinkFact>`,
+`sanitizerFacts: List<SanitizerFact>`, `throws: List<ThrowsFact>`.
 
 **Validation (`init`):** every fact's `owner == subject`; at least one of
 `signature` or a fact present.

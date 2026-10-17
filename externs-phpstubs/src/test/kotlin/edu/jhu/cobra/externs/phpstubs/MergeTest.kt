@@ -108,7 +108,7 @@ internal class MergeTest {
         assertEquals(listOf(null, condition), record.returns.map { it.condition })
         assertEquals(listOf(ReturnKind.NUM, ReturnKind.NUM), record.returns.map { it.kind })
         assertEquals(listOf(null), record.flows.map { it.condition })
-        assertEquals(VulnTypeId("sqli"), record.sinks.single().vulnType)
+        assertEquals(VulnTypeId("sqli"), record.sinkFacts.single().vulnType)
     }
 
     @Test
@@ -123,7 +123,7 @@ internal class MergeTest {
         val record = Merge.of(listOf(base, override)).functions.getValue(f)
         assertEquals(ReturnKind.STR, record.returns.single().kind)
         assertEquals(Port.Argument(0), record.flows.single().from)
-        assertEquals(VulnTypeId("sqli"), record.sinks.single().vulnType)
+        assertEquals(VulnTypeId("sqli"), record.sinkFacts.single().vulnType)
         assertEquals("standard", record.extension)
     }
 
@@ -193,7 +193,7 @@ internal class MergeTest {
     fun `an empty mount list yields an empty merge`() {
         val merge = Merge.of(emptyList())
         assertTrue(merge.records.isEmpty())
-        assertTrue(merge.sinks.isEmpty())
+        assertTrue(merge.sinkFacts.isEmpty())
         assertTrue(merge.vocabulary.vulnTypes.isEmpty())
     }
 
@@ -239,12 +239,12 @@ internal class MergeTest {
             """.trimIndent()
         val merge = Merge.of(listOf(TestSets.mount(0, Verification.MANUAL, document)))
         val g = FunctionSubject("g")
-        assertEquals(listOf(g, g, f), merge.sinks.map { it.owner })
+        assertEquals(listOf(g, g, f), merge.sinkFacts.map { it.owner })
         assertEquals(
             listOf(ArgPattern(listOf(IntVal(1))), null),
             merge.functions
                 .getValue(g)
-                .sinks
+                .sinkFacts
                 .map { it.condition },
         )
     }

@@ -100,9 +100,9 @@ internal class BuiltinRecordTest {
             returns = returns,
             flows = emptyList(),
             characters = emptyList(),
-            sources = emptyList(),
-            sinks = emptyList(),
-            sanitizers = emptyList(),
+            sourceFacts = emptyList(),
+            sinkFacts = emptyList(),
+            sanitizerFacts = emptyList(),
             throws = emptyList(),
         )
 }

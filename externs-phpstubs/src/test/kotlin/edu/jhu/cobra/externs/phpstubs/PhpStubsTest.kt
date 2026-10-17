@@ -72,11 +72,11 @@ internal class PhpStubsTest {
 
     @Test
     fun `taint facts speak the canonical vocabulary`() {
-        assertEquals(VulnTypeId("cmdi"), assertNotNull(PhpStubs.function("exec")).sinks.single().vulnType)
-        assertEquals(VulnTypeId("sqli"), assertNotNull(PhpStubs.method("mysqli::query")).sinks.single().vulnType)
+        assertEquals(VulnTypeId("cmdi"), assertNotNull(PhpStubs.function("exec")).sinkFacts.single().vulnType)
+        assertEquals(VulnTypeId("sqli"), assertNotNull(PhpStubs.method("mysqli::query")).sinkFacts.single().vulnType)
         val filterVar = assertNotNull(PhpStubs.function("filter_var"))
-        assertEquals(5, filterVar.sanitizers.size)
-        assertTrue(filterVar.sanitizers.all { it.condition != null && it.vulnTypes == setOf(VulnTypeId("xss")) })
+        assertEquals(5, filterVar.sanitizerFacts.size)
+        assertTrue(filterVar.sanitizerFacts.all { it.condition != null && it.vulnTypes == setOf(VulnTypeId("xss")) })
     }
 
     @Test
@@ -84,9 +84,9 @@ internal class PhpStubsTest {
         val readfile = assertNotNull(PhpStubs.function("readfile"))
         assertEquals(
             setOf(VulnType.XSS.id, VulnType.SSRF.id, VulnType.PATHTRAV.id, VulnType.DESER.id),
-            readfile.sinks.map { it.vulnType }.toSet(),
+            readfile.sinkFacts.map { it.vulnType }.toSet(),
         )
-        assertTrue(readfile.sinks.all { it.condition == null && it.port == Port.Argument(0) })
+        assertTrue(readfile.sinkFacts.all { it.condition == null && it.port == Port.Argument(0) })
     }
 
     @Test
@@ -103,7 +103,7 @@ internal class PhpStubsTest {
         val added = assertNotNull(extended.function("extension_only"))
         assertNull(added.extension)
         assertNotNull(added.callableSignature)
-        assertEquals(VulnTypeId("sqli"), added.sinks.single().vulnType)
+        assertEquals(VulnTypeId("sqli"), added.sinkFacts.single().vulnType)
         assertEquals("core", extended.function("strlen")!!.extension)
         assertNull(PhpStubs.function("extension_only"))
         assertEquals(

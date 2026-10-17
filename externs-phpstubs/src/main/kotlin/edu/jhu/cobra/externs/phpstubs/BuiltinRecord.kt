@@ -24,9 +24,9 @@ import edu.jhu.cobra.commons.phpmodels.SignatureInfo.TypedSignature
  * @property returns Every returns fact, in statement order.
  * @property flows Every flow fact, in statement order.
  * @property characters Every characters fact, in statement order.
- * @property sources Every source fact, in statement order.
- * @property sinks Every sink fact, in statement order.
- * @property sanitizers Every sanitizer fact, in statement order.
+ * @property sourceFacts Every source fact, in statement order.
+ * @property sinkFacts Every sink fact, in statement order.
+ * @property sanitizerFacts Every sanitizer fact, in statement order.
  * @property throws Every throws fact, in statement order.
  * @throws IllegalArgumentException If a fact names another owner or the record asserts nothing.
  */
@@ -37,14 +37,14 @@ public data class BuiltinRecord<out S : ModelSubject>(
     val returns: List<ReturnsFact>,
     val flows: List<FlowFact>,
     val characters: List<CharactersFact>,
-    val sources: List<SourceFact>,
-    val sinks: List<SinkFact>,
-    val sanitizers: List<SanitizerFact>,
+    val sourceFacts: List<SourceFact>,
+    val sinkFacts: List<SinkFact>,
+    val sanitizerFacts: List<SanitizerFact>,
     val throws: List<ThrowsFact>,
 ) {
-    /** Every fact of the record: returns, flows, characters, sources, sinks, sanitizers, then throws. */
+    /** Every fact of the record: returns, flows, characters, source facts, sink facts, sanitizer facts, then throws. */
     val facts: List<Fact>
-        get() = returns + flows + characters + sources + sinks + sanitizers + throws
+        get() = returns + flows + characters + sourceFacts + sinkFacts + sanitizerFacts + throws
 
     init {
         val declared = facts

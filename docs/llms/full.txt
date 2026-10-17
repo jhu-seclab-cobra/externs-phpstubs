@@ -7,12 +7,12 @@
 ## Instructions for Agents
 
 - Call `PhpStubs.function(name)`, `clazz(name)`, `method("Owner::name")` or `method(owner, name)`, `constant(name)`, `classConstant(...)`, `property(...)`, `variable("$name")`, or `record(subject)`; each returns a `BuiltinRecord<…>?`. A name that is not a spelling of the kind raises `IllegalArgumentException`; an unknown name returns `null`.
-- `BuiltinRecord` holds `subject`, `extension: String?` (null when no generated set declares the subject), `signature: SignatureInfo?`, and the fact lists `returns`, `flows`, `sources`, `sinks`, `sanitizers`, `throws`. Read signatures through the typed accessors `callableSignature`, `classSignature`, `typedSignature`, `propertySignature`.
+- `BuiltinRecord` holds `subject`, `extension: String?` (null when no generated set declares the subject), `signature: SignatureInfo?`, and the fact lists `returns`, `flows`, `sourceFacts`, `sinkFacts`, `sanitizerFacts`, `throws`. Read signatures through the typed accessors `callableSignature`, `classSignature`, `typedSignature`, `propertySignature`.
 - A `ThrowsFact` with empty `classes` states the call throws none; an empty `throws` list asserts nothing about throws.
 - Existence of a declaration is `signature != null`. A taint-only function or a predefined variable is a record without a signature.
 - Every fact carries `owner` and `condition: ArgPattern?`. Match `condition` against the call's arguments with `ArgPattern.matches(List<IPrimitiveVal?>)`; `null` (undecidable) is the consumer's rule to apply. The record ranks nothing.
 - Taint facts speak the canonical vocabulary only: `VulnType` (`sqli`, `cmdi`, `codei`, `xss`, `headeri`, `ssrf`, `pathtrav`, `fileinc`, `deser`, `callablei`, `ldapi`, `xpathi`) and `SourceKind` (`user-input`, `external-input`). No psalm name survives the merge.
-- Enumerate with `PhpStubs.functions`, `classes`, `methods`, `constants`, `classConstants`, `properties`, `variables` (records) or `sinks`, `sources`, `sanitizers`, `flows`, `returns`, `throws` (facts); a match looser than exact is your filter over an enumeration.
+- Enumerate with `PhpStubs.functions`, `classes`, `methods`, `constants`, `classConstants`, `properties`, `variables` (records) or `sinkFacts`, `sourceFacts`, `sanitizerFacts`, `flows`, `returns`, `throws` (facts); a match looser than exact is your filter over an enumeration.
 - The merge keeps one statement per (subject, condition, unit); manual sets outrank generated ones, later position wins among equal ranks, and a unit is replaced whole. Merge order: `models/`, `value-rules/`, `vocabulary/`, `taint/`, `taint-rules/`.
 - `PhpStubs.with(Path)` / `with("/classpath/root/")` / `PhpStubs + root` mounts extension sets after the bundled ones; a set without `provenance.yaml` is manual. The bundled lookup is unchanged.
 - Every bundled set also loads alone through `DocumentSetLoader.load(StubResources.opener(root), context, mapping)`; `StubResources.VOCABULARY` and `StubResources.PSALM_MAPPING` give the context and mapping the taint sets need.
@@ -44,7 +44,7 @@ strlen?.extension                                        // "core"
 strlen?.callableSignature?.returnType                    // DeclaredType("int")
 strlen?.returns?.single()?.kind                          // ReturnKind.NUM
 val query = PhpStubs.method("mysqli::query")             // BuiltinRecord<MethodSubject>?
-query?.sinks?.single()?.vulnType == VulnType.SQLI.id   // true
+query?.sinkFacts?.single()?.vulnType == VulnType.SQLI.id   // true
 ```
 
 ## API
@@ -73,7 +73,7 @@ query?.sinks?.single()?.vulnType == VulnType.SQLI.id   // true
 
 **`functions`, `classes`, `methods`, `constants`, `classConstants`, `properties`, `variables`** -- `Collection<BuiltinRecord<…>>`.
 
-**`sinks: List<SinkFact>`**, **`sources: List<SourceFact>`**, **`sanitizers: List<SanitizerFact>`**, **`flows: List<FlowFact>`**, **`characters: List<CharactersFact>`**, **`returns: List<ReturnsFact>`**, **`throws: List<ThrowsFact>`**.
+**`sinkFacts: List<SinkFact>`**, **`sourceFacts: List<SourceFact>`**, **`sanitizerFacts: List<SanitizerFact>`**, **`flows: List<FlowFact>`**, **`characters: List<CharactersFact>`**, **`returns: List<ReturnsFact>`**, **`throws: List<ThrowsFact>`**.
 
 **`vocabulary: Vocabulary`**, **`policy: TaintPolicy`** -- Accumulated over every mounted set; `policy.isDangerous(sourceKind, vulnType)`.
 
@@ -85,7 +85,7 @@ query?.sinks?.single()?.vulnType == VulnType.SQLI.id   // true
 
 ### BuiltinRecord<S : ModelSubject> (data class)
 
-**`subject: S`**, **`extension: String?`** (from the generated document's placement, `standard_3.yaml` -> `standard`; `null` when no generated set declares the subject), **`signature: SignatureInfo?`** (the unconditional signature statement in force), **`returns`, `flows`, `characters`, `sources`, `sinks`, `sanitizers`, `throws`** (every fact in force under every condition), **`facts`** (all seven in that order). Construction requires a signature or at least one fact, and every fact's `owner == subject`.
+**`subject: S`**, **`extension: String?`** (from the generated document's placement, `standard_3.yaml` -> `standard`; `null` when no generated set declares the subject), **`signature: SignatureInfo?`** (the unconditional signature statement in force), **`returns`, `flows`, `characters`, `sourceFacts`, `sinkFacts`, `sanitizerFacts`, `throws`** (every fact in force under every condition), **`facts`** (all seven in that order). Construction requires a signature or at least one fact, and every fact's `owner == subject`.
 
 Typed accessors (top-level extension properties, nullable):
 

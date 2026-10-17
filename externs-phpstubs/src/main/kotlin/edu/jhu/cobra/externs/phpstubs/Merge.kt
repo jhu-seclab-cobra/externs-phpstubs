@@ -55,9 +55,9 @@ internal class Merge private constructor(
 
     val records: Map<ModelSubject, BuiltinRecord<ModelSubject>> get() = all
 
-    val sinks: List<SinkFact> by lazy { all.values.flatMap { it.sinks } }
-    val sources: List<SourceFact> by lazy { all.values.flatMap { it.sources } }
-    val sanitizers: List<SanitizerFact> by lazy { all.values.flatMap { it.sanitizers } }
+    val sinkFacts: List<SinkFact> by lazy { all.values.flatMap { it.sinkFacts } }
+    val sourceFacts: List<SourceFact> by lazy { all.values.flatMap { it.sourceFacts } }
+    val sanitizerFacts: List<SanitizerFact> by lazy { all.values.flatMap { it.sanitizerFacts } }
     val flows: List<FlowFact> by lazy { all.values.flatMap { it.flows } }
     val characters: List<CharactersFact> by lazy { all.values.flatMap { it.characters } }
     val returns: List<ReturnsFact> by lazy { all.values.flatMap { it.returns } }
@@ -97,9 +97,9 @@ internal class Merge private constructor(
                 returns = facts.returns,
                 flows = facts.flows,
                 characters = facts.characters,
-                sources = facts.sources,
-                sinks = facts.sinks,
-                sanitizers = facts.sanitizers,
+                sourceFacts = facts.sourceFacts,
+                sinkFacts = facts.sinkFacts,
+                sanitizerFacts = facts.sanitizerFacts,
                 throws = facts.throws,
             )
         all[subject] = record
@@ -110,9 +110,9 @@ internal class Merge private constructor(
         val returns = ArrayList<ReturnsFact>()
         val flows = ArrayList<FlowFact>()
         val characters = ArrayList<CharactersFact>()
-        val sources = ArrayList<SourceFact>()
-        val sinks = ArrayList<SinkFact>()
-        val sanitizers = ArrayList<SanitizerFact>()
+        val sourceFacts = ArrayList<SourceFact>()
+        val sinkFacts = ArrayList<SinkFact>()
+        val sanitizerFacts = ArrayList<SanitizerFact>()
         val throws = ArrayList<ThrowsFact>()
 
         fun add(
@@ -134,15 +134,15 @@ internal class Merge private constructor(
                 }
 
                 OverrideUnit.SOURCES -> {
-                    body.sources.orEmpty().mapTo(sources) { SourceFact(owner, condition, it.sourceKinds, it.at, it.keys) }
+                    body.sources.orEmpty().mapTo(sourceFacts) { SourceFact(owner, condition, it.sourceKinds, it.at, it.keys) }
                 }
 
                 OverrideUnit.SINKS -> {
-                    body.sinks.orEmpty().mapTo(sinks) { SinkFact(owner, condition, it.port, it.vulnType) }
+                    body.sinks.orEmpty().mapTo(sinkFacts) { SinkFact(owner, condition, it.port, it.vulnType) }
                 }
 
                 OverrideUnit.SANITIZERS -> {
-                    body.sanitizers.orEmpty().mapTo(sanitizers) {
+                    body.sanitizers.orEmpty().mapTo(sanitizerFacts) {
                         SanitizerFact(owner, condition, it.vulnTypes, it.check)
                     }
                 }

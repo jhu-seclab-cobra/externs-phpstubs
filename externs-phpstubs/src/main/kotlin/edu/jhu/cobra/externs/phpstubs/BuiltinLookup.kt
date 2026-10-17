@@ -85,13 +85,13 @@ public interface BuiltinLookup {
     public val variables: Collection<BuiltinRecord<VariableSubject>>
 
     /** Every sink fact over every record, in record then statement order. */
-    public val sinks: List<SinkFact>
+    public val sinkFacts: List<SinkFact>
 
     /** Every source fact over every record, in record then statement order. */
-    public val sources: List<SourceFact>
+    public val sourceFacts: List<SourceFact>
 
     /** Every sanitizer fact over every record, in record then statement order. */
-    public val sanitizers: List<SanitizerFact>
+    public val sanitizerFacts: List<SanitizerFact>
 
     /** Every flow fact over every record, in record then statement order. */
     public val flows: List<FlowFact>

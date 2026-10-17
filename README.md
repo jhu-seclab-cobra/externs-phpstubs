@@ -35,17 +35,17 @@ import java.nio.file.Path
 
 // One record per built-in: extension, signature, and every fact in force
 val strlen = PhpStubs.function("strlen")
-strlen?.extension                            // "core"
-strlen?.callableSignature?.returnType        // DeclaredType("int")
-strlen?.returns?.single()?.kind              // ReturnKind.NUM (value rules outrank the generated unit)
-strlen?.flows                                // [FlowFact(argument(0) -> return)]
-strlen?.throws?.single()?.classes             // empty: the call throws none
-PhpStubs.function("json_decode")?.throws     // [ThrowsFact(classes = {jsonexception, valueerror})]
+strlen?.extension                                // "core"
+strlen?.callableSignature?.returnType            // DeclaredType("int")
+strlen?.returns?.single()?.kind                  // ReturnKind.NUM (value rules outrank the generated unit)
+strlen?.flows                                    // [FlowFact(argument(0) -> return)]
+strlen?.throws?.single()?.classes                // empty: the call throws none
+PhpStubs.function("json_decode")?.throws         // [ThrowsFact(classes = {jsonexception, valueerror})]
 
 // Taint facts in the canonical vocabulary, with their argument conditions
-PhpStubs.method("mysqli::query")?.sinks      // [SinkFact(port = argument(0), vulnType = sqli)]
-PhpStubs.variable("\$_GET")?.sources         // [SourceFact(sourceKinds = {user-input})]
-PhpStubs.function("filter_var")?.sanitizers  // five facts, each with condition [_, <FILTER_* id>]
+PhpStubs.method("mysqli::query")?.sinkFacts      // [SinkFact(port = argument(0), vulnType = sqli)]
+PhpStubs.variable("\$_GET")?.sourceFacts         // [SourceFact(sourceKinds = {user-input})]
+PhpStubs.function("filter_var")?.sanitizerFacts  // five facts, each with condition [_, <FILTER_* id>]
     ?.filter { it.condition?.matches(myCallArguments) == true }
 
 // Constants keep their case; a member spelling on a function lookup is an argument error
@@ -54,7 +54,7 @@ PhpStubs.constant("php_int_max")                           // null
 PhpStubs.classConstant("Exception::SEVERITY_ERROR")        // record
 
 // Enumerations for a consumer's own filter
-PhpStubs.sinks.filter { it.vulnType == VulnType.SQLI.id }
+PhpStubs.sinkFacts.filter { it.vulnType == VulnType.SQLI.id }
 PhpStubs.functions.filter { it.extension == "keyword" }
 
 // Extension sets mount after the bundled ones; the bundled lookup is unchanged
@@ -76,12 +76,12 @@ val extended = PhpStubs.with(Path.of("models/site-rules"))
 | `variable(name)` | `BuiltinRecord<VariableSubject>?` |
 | `record(subject)` | `BuiltinRecord<ModelSubject>?` |
 | `functions`, `classes`, `methods`, `constants`, `classConstants`, `properties`, `variables` | `Collection<BuiltinRecord<…>>` in first-statement order |
-| `sinks`, `sources`, `sanitizers`, `flows`, `characters`, `returns`, `throws` | `List<…Fact>` in record order |
+| `sinkFacts`, `sourceFacts`, `sanitizerFacts`, `flows`, `characters`, `returns`, `throws` | `List<…Fact>` in record order |
 | `vocabulary`, `policy` | `Vocabulary`, `TaintPolicy` accumulated over every mounted set |
 
 **`PhpStubs`** -- one `BuiltinLookup` over one merge. The companion is the lookup over the bundled sets, built on first access and shared. `with(vararg roots: String)`, `with(vararg dirs: Path)`, and `plus` build a second lookup that mounts extension sets after the bundled ones, in order; a set without `provenance.yaml` mounts as manual.
 
-**`BuiltinRecord<S>`** -- `(subject, extension: String?, signature: SignatureInfo?, returns, flows, characters, sources, sinks, sanitizers, throws)`. Typed accessors: `callableSignature` (function, method), `classSignature` (class), `typedSignature` (constant, class constant), `propertySignature` (property). `extension` is the PHP extension of the generated declaration, `null` for a subject only a hand-maintained set states.
+**`BuiltinRecord<S>`** -- `(subject, extension: String?, signature: SignatureInfo?, returns, flows, characters, sourceFacts, sinkFacts, sanitizerFacts, throws)`. Typed accessors: `callableSignature` (function, method), `classSignature` (class), `typedSignature` (constant, class constant), `propertySignature` (property). `extension` is the PHP extension of the generated declaration, `null` for a subject only a hand-maintained set states.
 
 **`Fact`** -- `SinkFact(port, vulnType)`, `SourceFact(sourceKinds, at, keys)`, `SanitizerFact(vulnTypes, check)`, `FlowFact(from, to)`, `CharactersFact(bound)`, `ReturnsFact(kind)`, `ThrowsFact(classes)`; each carries `owner` and `condition: ArgPattern?`. A `ThrowsFact` with no classes states the call throws none; a record without one asserts nothing about throws. The record ranks nothing: a consumer matches each condition against its call arguments and applies its own rule to an undecidable outcome.
 

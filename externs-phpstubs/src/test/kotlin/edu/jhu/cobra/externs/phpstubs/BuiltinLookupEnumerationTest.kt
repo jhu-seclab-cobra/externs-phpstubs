@@ -25,7 +25,7 @@ internal class BuiltinLookupEnumerationTest {
         assertTrue(PhpStubs.functions.size > 5000)
         assertTrue(PhpStubs.classes.isNotEmpty() && PhpStubs.methods.isNotEmpty() && PhpStubs.constants.isNotEmpty())
         assertTrue(PhpStubs.classConstants.isNotEmpty() && PhpStubs.variables.isNotEmpty())
-        assertTrue(PhpStubs.sinks.isNotEmpty() && PhpStubs.sources.isNotEmpty() && PhpStubs.sanitizers.isNotEmpty())
+        assertTrue(PhpStubs.sinkFacts.isNotEmpty() && PhpStubs.sourceFacts.isNotEmpty() && PhpStubs.sanitizerFacts.isNotEmpty())
         assertTrue(PhpStubs.flows.isNotEmpty() && PhpStubs.returns.isNotEmpty() && PhpStubs.characters.isNotEmpty())
         val first = PhpStubs.functions.first()
         assertEquals(first, PhpStubs.function(first.subject.name))
@@ -60,9 +60,9 @@ internal class BuiltinLookupEnumerationTest {
 
     @Test
     fun `every enumerated fact belongs to the record that owns it`() {
-        assertTrue(PhpStubs.sinks.all { it in assertNotNull(PhpStubs.record(it.owner)).sinks })
-        assertTrue(PhpStubs.sources.all { it in assertNotNull(PhpStubs.record(it.owner)).sources })
-        assertTrue(PhpStubs.sanitizers.all { it in assertNotNull(PhpStubs.record(it.owner)).sanitizers })
+        assertTrue(PhpStubs.sinkFacts.all { it in assertNotNull(PhpStubs.record(it.owner)).sinkFacts })
+        assertTrue(PhpStubs.sourceFacts.all { it in assertNotNull(PhpStubs.record(it.owner)).sourceFacts })
+        assertTrue(PhpStubs.sanitizerFacts.all { it in assertNotNull(PhpStubs.record(it.owner)).sanitizerFacts })
         assertTrue(PhpStubs.flows.all { it in assertNotNull(PhpStubs.record(it.owner)).flows })
         assertTrue(PhpStubs.returns.all { it in assertNotNull(PhpStubs.record(it.owner)).returns })
         assertTrue(PhpStubs.characters.all { it in assertNotNull(PhpStubs.record(it.owner)).characters })
@@ -72,7 +72,7 @@ internal class BuiltinLookupEnumerationTest {
     fun `no psalm name survives the merge`() {
         assertEquals(VulnType.entries.map { it.id }.toSet(), PhpStubs.vocabulary.vulnTypes.keys)
         assertEquals(SourceKind.entries.map { it.id }.toSet(), PhpStubs.vocabulary.sourceKinds.keys)
-        assertTrue(PhpStubs.sinks.none { it.vulnType.id in setOf("sql", "html", "shell") })
+        assertTrue(PhpStubs.sinkFacts.none { it.vulnType.id in setOf("sql", "html", "shell") })
     }
 
     @Test

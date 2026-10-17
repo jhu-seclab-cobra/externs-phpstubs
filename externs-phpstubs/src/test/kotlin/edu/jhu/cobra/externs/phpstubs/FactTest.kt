@@ -36,7 +36,7 @@ internal class FactTest {
     fun `an unconditional entry yields facts without a condition`() {
         val document = "- subject: {function: f}\n  sinks: [{port: argument(1), vulnType: xss}]\n"
         val record = Merge.of(listOf(TestSets.mount(0, Verification.MANUAL, document))).records.getValue(f)
-        assertEquals(SinkFact(f, null, Port.Argument(1), VulnTypeId("xss")), record.sinks.single())
+        assertEquals(SinkFact(f, null, Port.Argument(1), VulnTypeId("xss")), record.sinkFacts.single())
     }
 
     @Test
@@ -51,7 +51,7 @@ internal class FactTest {
             """.trimIndent()
         val record = Merge.of(listOf(TestSets.mount(0, Verification.MANUAL, document))).records.getValue(f)
         val condition = ArgPattern(listOf(BoolVal(true)))
-        assertEquals(SanitizerFact(f, condition, setOf(VulnTypeId("sqli")), null), record.sanitizers.single())
+        assertEquals(SanitizerFact(f, condition, setOf(VulnTypeId("sqli")), null), record.sanitizerFacts.single())
         assertEquals(condition, record.returns.single().condition)
         assertEquals(FlowFact(f, condition, Port.Argument(0), Port.Return), record.flows.single())
     }
@@ -62,14 +62,14 @@ internal class FactTest {
             "- subject: {function: f}\n  sanitizers: [{check: {argument: argument(0), accepts: true, within: '[0-9]'}}]\n"
         val record = Merge.of(listOf(TestSets.mount(0, Verification.MANUAL, document))).records.getValue(f)
         val check = ArgumentCheck(Port.Argument(0), BoolVal(true), CharacterClass("[0-9]"))
-        assertEquals(SanitizerFact(f, null, emptySet(), check), record.sanitizers.single())
+        assertEquals(SanitizerFact(f, null, emptySet(), check), record.sanitizerFacts.single())
     }
 
     @Test
     fun `a source fact keeps its site and key patterns`() {
         val document = "- subject: {function: f}\n  sources: [{sourceKinds: [user-input], at: argument(1)}]\n"
         val record = Merge.of(listOf(TestSets.mount(0, Verification.MANUAL, document))).records.getValue(f)
-        val source = record.sources.single()
+        val source = record.sourceFacts.single()
         assertEquals(setOf(SourceKindId("user-input")), source.sourceKinds)
         assertEquals(Port.Argument(1), source.at)
         assertNull(source.keys)
@@ -79,7 +79,7 @@ internal class FactTest {
     fun `a source fact at the result has no site`() {
         val document = "- subject: {function: f}\n  sources: [{sourceKinds: [user-input]}]\n"
         val record = Merge.of(listOf(TestSets.mount(0, Verification.MANUAL, document))).records.getValue(f)
-        assertEquals(SourceFact(f, null, setOf(SourceKindId("user-input")), null, null), record.sources.single())
+        assertEquals(SourceFact(f, null, setOf(SourceKindId("user-input")), null, null), record.sourceFacts.single())
     }
 
     @Test

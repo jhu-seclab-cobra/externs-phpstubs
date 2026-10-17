@@ -113,9 +113,9 @@ internal class BuiltinLookupExactTest {
     fun `predefined variables are records with source facts`() {
         val get = assertNotNull(PhpStubs.variable("\$_GET"))
         assertNull(get.signature)
-        assertEquals(setOf(SourceKindId("user-input")), get.sources.single().sourceKinds)
+        assertEquals(setOf(SourceKindId("user-input")), get.sourceFacts.single().sourceKinds)
         assertSame(get, PhpStubs.record(VariableSubject("_GET")))
-        assertEquals(setOf(SourceKindId("external-input")), assertNotNull(PhpStubs.function("getenv")).sources.single().sourceKinds)
+        assertEquals(setOf(SourceKindId("external-input")), assertNotNull(PhpStubs.function("getenv")).sourceFacts.single().sourceKinds)
     }
 
     @Test

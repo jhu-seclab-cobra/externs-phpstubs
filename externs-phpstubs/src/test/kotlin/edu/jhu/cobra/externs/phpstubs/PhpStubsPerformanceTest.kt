@@ -85,7 +85,8 @@ internal class PhpStubsPerformanceTest {
                 "methods" to PhpStubs.methods.size,
                 "constants" to PhpStubs.constants.size,
                 "facts" to
-                    PhpStubs.sinks.size + PhpStubs.sources.size + PhpStubs.sanitizers.size + PhpStubs.flows.size + PhpStubs.returns.size,
+                    PhpStubs.sinkFacts.size + PhpStubs.sourceFacts.size + PhpStubs.sanitizerFacts.size + PhpStubs.flows.size +
+                    PhpStubs.returns.size,
             )
         val runtime = Runtime.getRuntime()
         runtime.gc()

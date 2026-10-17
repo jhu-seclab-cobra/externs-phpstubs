@@ -91,11 +91,11 @@ public class PhpStubs internal constructor(
 
     override val variables: Collection<BuiltinRecord<VariableSubject>> get() = merge.variables.values
 
-    override val sinks: List<SinkFact> get() = merge.sinks
+    override val sinkFacts: List<SinkFact> get() = merge.sinkFacts
 
-    override val sources: List<SourceFact> get() = merge.sources
+    override val sourceFacts: List<SourceFact> get() = merge.sourceFacts
 
-    override val sanitizers: List<SanitizerFact> get() = merge.sanitizers
+    override val sanitizerFacts: List<SanitizerFact> get() = merge.sanitizerFacts
 
     override val flows: List<FlowFact> get() = merge.flows
 
