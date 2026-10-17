@@ -102,7 +102,7 @@ public class PhpStubs internal constructor(
     override val characters: List<CharactersFact> get() = merge.characters
 
     override val returns: List<ReturnsFact> get() = merge.returns
-    override val raises: List<RaisesFact> get() = merge.raises
+    override val throws: List<ThrowsFact> get() = merge.throws
 
     override val vocabulary: Vocabulary get() = merge.vocabulary
 

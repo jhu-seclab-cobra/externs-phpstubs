@@ -1,2 +1,2 @@
-producer: tools/convert_stubs.py v2 over JetBrains/phpstorm-stubs; tools/extract_hierarchy.py, tools/extract_signatures.py, tools/extract_raises.py over php-src php-8.5.11
+producer: tools/convert_stubs.py v2 over JetBrains/phpstorm-stubs; tools/extract_hierarchy.py, tools/extract_signatures.py, tools/extract_throws.py over php-src php-8.5.11
 verification: generated

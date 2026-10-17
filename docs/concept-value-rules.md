@@ -129,7 +129,7 @@ merge: models/ (generated) ◄──ranked below── value-rules/ (manual), pe
 - **Boundary:** `print_r` returns its rendering only when the second
   argument is true. A conditional entry states that case; the
   unconditional entry states a boolean result with no flow.
-- **Interaction:** `mysqli::query` takes its signature and raises section
+- **Interaction:** `mysqli::query` takes its signature and throws section
   from the php-src extraction ([concept-extraction.md](concept-extraction.md));
   the `database` document states its reviewed flow from the query argument
   into the result, ranked above the generated unit.

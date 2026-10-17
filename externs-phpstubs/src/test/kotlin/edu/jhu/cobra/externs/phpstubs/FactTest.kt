@@ -26,8 +26,8 @@ import kotlin.test.assertNull
  * - `a source fact at the result has no site` — verifies the result-site source shape
  * - `a returns fact and its flow facts come from one value unit` — verifies the classification and the ports
  * - `a characters fact comes from the value unit` — verifies the bound is read with returns and flows
- * - `a raises fact holds the whole class set` — verifies one fact per raises statement
- * - `an empty raises section is a fact` — verifies the statement that a call throws none
+ * - `a throws fact holds the whole class set` — verifies one fact per throws statement
+ * - `an empty throws section is a fact` — verifies the statement that a call throws none
  */
 internal class FactTest {
     private val f = FunctionSubject("f")
@@ -103,18 +103,18 @@ internal class FactTest {
     }
 
     @Test
-    fun `a raises fact holds the whole class set`() {
+    fun `a throws fact holds the whole class set`() {
         val document = "- subject: {function: f}\n  throws: [valueerror, \\jsonexception]\n"
         val record = Merge.of(listOf(TestSets.mount(0, Verification.MANUAL, document))).records.getValue(f)
         val classes = setOf(ClassSubject("valueerror"), ClassSubject("jsonexception"))
-        assertEquals(RaisesFact(f, null, classes), record.raises.single())
+        assertEquals(ThrowsFact(f, null, classes), record.throws.single())
     }
 
     @Test
-    fun `an empty raises section is a fact`() {
+    fun `an empty throws section is a fact`() {
         val document = "- subject: {function: f}\n  throws: []\n"
         val record = Merge.of(listOf(TestSets.mount(0, Verification.MANUAL, document))).records.getValue(f)
-        assertEquals(RaisesFact(f, null, emptySet()), record.raises.single())
-        assertEquals(record.raises, record.facts)
+        assertEquals(ThrowsFact(f, null, emptySet()), record.throws.single())
+        assertEquals(record.throws, record.facts)
     }
 }

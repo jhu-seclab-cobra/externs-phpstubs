@@ -60,7 +60,7 @@ format library's: `extern/commons-phpmodels/docs/model.md`,
   *sink* (port, vulnerability type), a *source* (produced source kinds,
   site, key patterns), a *sanitizer* (neutralized vulnerability types), a *flow* (one
   propagation pair), a *characters* (the bytes the result may hold, the
-  whole section in one Fact), a *returns* (the classification), a *raises* (the
+  whole section in one Fact), a *returns* (the classification), a *throws* (the
   exception classes the subject's own implementation may throw, the whole
   section in one Fact, so the empty set states it throws none). Every Fact of every
   entry is present; the record ranks none of them against a call.

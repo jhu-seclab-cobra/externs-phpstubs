@@ -78,7 +78,7 @@ public data class CharactersFact(
 ) : Fact
 
 /** The exception classes a call may throw; the empty set states it throws none. */
-public data class RaisesFact(
+public data class ThrowsFact(
     override val owner: ModelSubject,
     override val condition: ArgPattern?,
     val classes: Set<ClassSubject>,

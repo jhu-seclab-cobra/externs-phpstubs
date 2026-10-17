@@ -15,7 +15,7 @@ policy, set provenance; a mapped set arrives translated into the Canonical
 Vocabulary), and the default Precedence over verification kinds. Output:
 the accumulated vocabulary, the policy matrix, and one Statement per
 (subject, condition, unit) key stated by any set — six units: signature,
-value (returns with propagation and characters), sources, sinks, sanitizers, raises — each
+value (returns with propagation and characters), sources, sinks, sanitizers, throws — each
 Statement remembering the set that stated it. Correctness: per key the
 highest-ranked set's Statement is in force and, among equal ranks, the
 later mounted; a Statement never replaces one with a different key; the
@@ -50,7 +50,7 @@ declaredUnits(e):
       sources    if e.body.sources declared
       sinks      if e.body.sinks declared
       sanitizers if e.body.sanitizers declared
-      raises     if e.body.raises declared }       # the empty set is declared
+      throws     if e.body.throws declared }       # the empty set is declared
 ```
 
 `accumulate` and the verification of every reference against the

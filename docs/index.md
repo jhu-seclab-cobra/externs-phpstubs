@@ -10,14 +10,14 @@
 | [concept-value-rules.md](concept-value-rules.md) | The hand-maintained value rules set: value units beyond the generated declarations, corpus gaps |
 | [model-lookup.md](model-lookup.md) | Bundled sets, canonical vocabulary, psalm mapping, merge order, merge, extension sets, Built-in Record, Fact with condition, Built-in Lookup |
 | [design.md](design.md) | `StubResources`, merge order, corpus rules, resource layout, exception types |
-| [design-extraction.md](design-extraction.md) | `php_src` and the php-src producers: hierarchy, signature, and raises extraction |
+| [design-extraction.md](design-extraction.md) | `php_src` and the php-src producers: hierarchy, signature, and throws extraction |
 | [design-lookup.md](design-lookup.md) | `BuiltinLookup`, `PhpStubs`, `BuiltinRecord`, fact types, canonical enums |
 | [design-merge.md](design-merge.md) | `Mount`, `MountSequence`, `Merge`: set mounting, failure classification, the fold |
 | [design-taint.md](design-taint.md) | `StubResources`, taint resource layout, extraction script inputs and validation rules |
 | [design-taint-rules.md](design-taint-rules.md) | `StubResources.TAINT_RULES`, rules resource layout, validation and maintenance rules |
 | [design-value-rules.md](design-value-rules.md) | `StubResources.VALUE_RULES`, value rules resource layout, validation and maintenance rules |
 | [spec-merge.md](spec-merge.md) | Folding the mounted sets into one statement per subject, condition, and unit |
-| [spec-raises.md](spec-raises.md) | Computing the raises section from the php-src C sources: the Raises Summary fixpoint |
+| [spec-throws.md](spec-throws.md) | Computing the throws section from the php-src C sources: the Raises Summary fixpoint |
 | [impl.md](impl.md) | commons-phpmodels API findings, version constraints, extension and set provenance, variadic, taint-extraction, and value rules review notes |
 | [performance.md](performance.md) | Load-time and lookup benchmark procedure and baselines |
 | [llms.txt](llms.txt) | Agent-facing L0 index (llmstxt.org format) |

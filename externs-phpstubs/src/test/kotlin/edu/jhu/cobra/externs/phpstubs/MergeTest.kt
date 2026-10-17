@@ -26,7 +26,7 @@ import kotlin.test.assertTrue
  * - `a conditional statement never replaces an unconditional one across ranks` — verifies the partition holds under rank
  * - `a unit is replaced whole and other units stay in force` — verifies per-unit replacement
  * - `a value statement without characters replaces the bound` — verifies characters belong to the value unit
- * - `a raises statement is replaced only by another raises statement` — verifies the raises unit
+ * - `a throws statement is replaced only by another throws statement` — verifies the throws unit
  * - `the extension follows the signature statement` — verifies a value override keeps the generated extension
  * - `a signature-only statement yields a record without facts` — verifies a declaration is a record
  * - `a conditional entry declaring a signature fails the merge` — verifies the signature invariant
@@ -147,14 +147,14 @@ internal class MergeTest {
     }
 
     @Test
-    fun `a raises statement is replaced only by another raises statement`() {
+    fun `a throws statement is replaced only by another throws statement`() {
         val base = TestSets.mount(0, Verification.GENERATED, "$generated\n  throws: [valueerror]\n", extension = "standard")
         val value = TestSets.mount(1, Verification.MANUAL, "- subject: {function: f}\n  returns: str\n")
         val kept = Merge.of(listOf(base, value)).functions.getValue(f)
-        assertEquals(setOf(ClassSubject("valueerror")), kept.raises.single().classes)
+        assertEquals(setOf(ClassSubject("valueerror")), kept.throws.single().classes)
         val none = TestSets.mount(2, Verification.MANUAL, "- subject: {function: f}\n  throws: []\n")
         val replaced = Merge.of(listOf(base, value, none)).functions.getValue(f)
-        assertEquals(emptySet(), replaced.raises.single().classes)
+        assertEquals(emptySet(), replaced.throws.single().classes)
         assertEquals(ReturnKind.STR, replaced.returns.single().kind)
     }
 

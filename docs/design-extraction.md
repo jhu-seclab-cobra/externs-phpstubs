@@ -1,19 +1,19 @@
 # PHP Stubs — Extraction Design
 
 The offline producers that rewrite the generated declaration set from
-php-src. Concepts: [concept-extraction.md](concept-extraction.md). Raises
-algorithm: [spec-raises.md](spec-raises.md). Resource layout and corpus
+php-src. Concepts: [concept-extraction.md](concept-extraction.md). Throws
+algorithm: [spec-throws.md](spec-throws.md). Resource layout and corpus
 rules: [design.md](design.md).
 
 ## Design Overview
 
 - **Modules:** `tools/php_src.py` (shared reading, placement, and
   writing), `tools/extract_hierarchy.py`, `tools/extract_signatures.py`,
-  `tools/extract_raises.py`; Python 3 standard library only. The test
+  `tools/extract_throws.py`; Python 3 standard library only. The test
   oracle `tools/reflect.php` runs on a PHP build, not over php-src.
 - **Relationships:** each tool imports `php_src`; `php_src` imports no tool.
   The tools run in this order, because each reads what the earlier one
-  wrote: a method joins its class's document, and a raises element names a
+  wrote: a method joins its class's document, and a throws element names a
   declared class.
 - **Errors:** a tool prints `<tool>: <reason>` naming the php-src file or
   the subject, exits with status 1, and leaves the documents as the last
@@ -98,7 +98,7 @@ php-src, the interpreter's own declarations (CobraPHP user decision BP-2).
   fails the run.
 - Each generated function or method entry php-src declares is relocated
   to its extension, then gets the subject line and signature block
-  php-src states; its other sections (propagation, raises) stay, except a
+  php-src states; its other sections (propagation, throws) stay, except a
   propagation statement naming an argument position the signature lacks
   (no variadic parameter): PHP rejects a call passing more arguments
   than an internal function declares (`ArgumentCountError`), so no value
@@ -108,7 +108,7 @@ php-src, the interpreter's own declarations (CobraPHP user decision BP-2).
   extension; a method joins the generated document declaring its class,
   and a class no generated document declares fails the run.
 
-### extract_raises.py
+### extract_throws.py
 
 | Input | Yields |
 |-------|--------|
@@ -116,10 +116,10 @@ php-src, the interpreter's own declarations (CobraPHP user decision BP-2).
 | `**/*.{c,h,cpp,cc}` | C function definitions, handler macro definitions, and function-like macros, conditional-compilation branches kept |
 
 - **Output:** each generated function or method entry with at least one
-  Handler gets the line `  raises: [<classes>]` as its last line, the
+  Handler gets the line `  throws: [<classes>]` as its last line, the
   classes folded and sorted, `[]` for none. An entry whose Handlers throw
   an object the caller supplies gets no line and is printed. Every other
-  generated callable entry keeps no `raises` line: this tool owns the
+  generated callable entry keeps no `throws` line: this tool owns the
   line in generated documents. A method table no class registration
   names is printed and keys no entry.
 - **Tables (constant tier, each naming the php-src header it reads):**
@@ -129,7 +129,7 @@ php-src, the interpreter's own declarations (CobraPHP user decision BP-2).
   entries, the diagnostic prefixes, and the conversion prefixes of
   `Zend/zend_operators.h`.
 - **Fails** when a class expression no rule resolves reaches an entry,
-  when a raises element names a class no generated document declares,
+  when a throws element names a class no generated document declares,
   when a Handler has no definition, or when a source brace is unbalanced.
 
 ### reflect.php
@@ -160,8 +160,8 @@ sorted tab-separated line per internal declaration the build reflects.
 |---------|------|
 | Unreadable declaration | A stub header, parameter, or return type no rule reads |
 | Conflicting declarations | Two stubs, or two variants, declare one subject and neither subsumes the other |
-| Undeclared class | A method's class or a raises element is declared by no generated document |
-| Unresolved class | A class expression no rule resolves reaches an entry's raises |
+| Undeclared class | A method's class or a throws element is declared by no generated document |
+| Unresolved class | A class expression no rule resolves reaches an entry's throws |
 | Unknown entry macro | A function entry table uses a macro outside the known set |
 | Undefined Handler | An entry names a Handler no C source defines |
 | Unbalanced source | A C source holds a brace no brace closes |
@@ -170,8 +170,8 @@ sorted tab-separated line per internal declaration the build reflects.
 ## Open Gaps
 
 - **Indirect calls.** The model asserts that a class outside an entry's
-  raises section is never thrown by it (commons-phpmodels `docs/model.md`,
-  Relations). `extract_raises.py` follows calls by name only; a call
+  throws section is never thrown by it (commons-phpmodels `docs/model.md`,
+  Relations). `extract_throws.py` follows calls by name only; a call
   through a struct member or a function pointer (object handler tables,
   class entry hooks such as `get_iterator`, stream wrapper operations,
   C++ member calls) is not followed, so a class only such a call throws is
@@ -186,5 +186,5 @@ sorted tab-separated line per internal declaration the build reflects.
 - **PDO driver methods.** php-src declares `PDO_PGSql_Ext` and
   `PDO_SQLite_Ext` as stub-only pseudo classes whose methods PHP attaches
   to a `PDO` object of that driver; no class registration names their
-  method tables, so their entries keep no `raises` line and
-  `extract_raises.py` prints the two tables.
+  method tables, so their entries keep no `throws` line and
+  `extract_throws.py` prints the two tables.

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Give the generated function and method entries the exception classes their php-src implementation may throw
-(design-extraction.md, extract_raises.py; algorithm: spec-raises.md).
+(design-extraction.md, extract_throws.py; algorithm: spec-throws.md).
 
 Reads every C source and header of one php-src checkout outside test
 directories, maps each builtin function and method to its C handlers through
@@ -8,7 +8,7 @@ the ``*_arginfo.h`` function entry tables, and computes for every C function
 and function-like macro a summary of the exception classes it may throw: a
 fixpoint over the strongly connected components of the call graph, with
 calls into argument binding, user code, diagnostics, and value conversion as
-boundaries. Writes the ``raises`` line of every generated entry whose
+boundaries. Writes the ``throws`` line of every generated entry whose
 handlers resolve to classes alone, every other line untouched; an entry whose
 handlers throw an object the caller supplies keeps no line and is listed.
 A second run over its own output changes nothing.
@@ -22,9 +22,9 @@ from pathlib import Path
 
 import php_src
 
-TOOL = "tools/extract_raises.py"
+TOOL = "tools/extract_throws.py"
 CALLABLE_KINDS = ("function", "method")
-RAISES_LINE = re.compile(r"^  throws: .*\n", re.M)
+THROWS_LINE = re.compile(r"^  throws: .*\n", re.M)
 # The C and C++ sources of php-src; intl and others implement builtins in C++.
 SOURCE_SUFFIXES = (".c", ".h", ".cpp", ".cc")
 
@@ -103,7 +103,7 @@ NULL_LITERALS = {"NULL", "nullptr", "0"}
 OBJECT_ACCESSORS = re.compile(r"^(?:Z_OBJ_P|Z_OBJ)\s*\((.*)\)$", re.S)
 CLASS_OF_OBJECT = re.compile(r"^(?:Z_OBJCE_P|Z_OBJCE)\s*\((.*)\)$", re.S)
 
-# Term kinds (spec-raises.md): an object no class set bounds is open; a class expression no rule resolves is
+# Summary element kinds (spec-throws.md): an object no class set bounds is open; a class expression no rule resolves is
 # unresolved, and fails the run when it reaches an entry.
 CLASS, CLASS_PARAM, OBJECT_PARAM, OPEN, UNRESOLVED = "class", "class_param", "object_param", "open", "unresolved"
 # The argument expression of a function reference, whose call site is not in the body; it resolves to no class.
@@ -667,17 +667,17 @@ def conversion_names(header, strings):
 class Summary:
     """What one definition may throw, which classes it creates into its parameters, and which classes it returns."""
 
-    def __init__(self, raises=frozenset(), creates=None, returns=frozenset()):
-        self.raises, self.creates, self.returns = raises, creates or {}, returns
+    def __init__(self, throws=frozenset(), creates=None, returns=frozenset()):
+        self.throws, self.creates, self.returns = throws, creates or {}, returns
 
     def __eq__(self, other):
-        return (self.raises, self.creates, self.returns) == (other.raises, other.creates, other.returns)
+        return (self.throws, self.creates, self.returns) == (other.throws, other.creates, other.returns)
 
 
 EMPTY = Summary()
 
 
-def term(kind, value, guards=frozenset()):
+def element(kind, value, guards=frozenset()):
     return kind, value, guards
 
 
@@ -691,12 +691,12 @@ class Evaluation:
     def run(self):
         for call in self.definition.calls:
             self.create(call)
-        raises = {t for call in self.definition.calls for t in self.throws(call)}
+        throws = {t for call in self.definition.calls for t in self.throws(call)}
         returns = set()
         if self.definition.returns_class:
             for expression in self.definition.returns:
-                returns |= self.class_terms(expression, None)
-        return Summary(frozenset(raises), {k: frozenset(v) for k, v in self.creates.items()}, frozenset(returns))
+                returns |= self.class_elements(expression, None)
+        return Summary(frozenset(throws), {k: frozenset(v) for k, v in self.creates.items()}, frozenset(returns))
 
     def callees(self, call):
         return self.program.resolve(self.definition, call)
@@ -707,7 +707,7 @@ class Evaluation:
         if call.args is None:
             return
         if call.name == name:
-            self.created(call.argument(target_index, "NULL"), self.class_terms(call.argument(class_index, "NULL"), None))
+            self.created(call.argument(target_index, "NULL"), self.class_elements(call.argument(class_index, "NULL"), None))
             return
         if self.is_boundary(call.name):
             return
@@ -734,14 +734,14 @@ class Evaluation:
             if name == THROW_MODE[0] and call.argument(THROW_MODE[1], "") != THROW_MODE[2]:
                 return set()
             index, default = CLASS_THROWS[name]
-            return {guarded(t, guards) for t in self.class_terms(call.argument(index, "NULL"), default)}
+            return {guarded(t, guards) for t in self.class_elements(call.argument(index, "NULL"), default)}
         if name in OBJECT_THROWS:
-            return {guarded(t, guards) for t in self.object_terms(call.argument(OBJECT_THROWS[name], "NULL"))}
+            return {guarded(t, guards) for t in self.object_elements(call.argument(OBJECT_THROWS[name], "NULL"))}
         if self.is_boundary(name):
-            return {term(CLASS, c, guards) for c in self.specifier_classes(call)}
+            return {element(CLASS, c, guards) for c in self.specifier_classes(call)}
         found = set()
         for callee in self.callees(call):
-            for raised in self.summaries.get(id(callee), EMPTY).raises:
+            for raised in self.summaries.get(id(callee), EMPTY).throws:
                 found |= self.instantiate_raise(raised, call)
         return found
 
@@ -769,50 +769,50 @@ class Evaluation:
             return set()
         if kind == CLASS_PARAM:
             index, default = value
-            terms = self.class_terms(call.argument(index, "NULL"), default)
+            elements = self.class_elements(call.argument(index, "NULL"), default)
         elif kind == OBJECT_PARAM:
-            terms = self.object_terms(call.argument(value, "NULL"))
+            elements = self.object_elements(call.argument(value, "NULL"))
         else:
-            terms = {term(kind, value)}
-        return {guarded(t, frozenset(guards)) for t in terms}
+            elements = {element(kind, value)}
+        return {guarded(t, frozenset(guards)) for t in elements}
 
     def instantiate_class(self, class_term, call, seen=frozenset()):
         kind, value, _ = class_term
         if kind != CLASS_PARAM:
             return {class_term}
         index, default = value
-        return self.class_terms(call.argument(index, "NULL"), default, seen)
+        return self.class_elements(call.argument(index, "NULL"), default, seen)
 
-    def class_terms(self, expression, default, seen=frozenset()):
-        """The class terms a class entry expression denotes."""
+    def class_elements(self, expression, default, seen=frozenset()):
+        """The summary elements a class entry expression denotes."""
         expression = strip_casts(expression)
         if expression in seen:
             return set()
         if expression in NULL_LITERALS:
-            return {term(CLASS, default)} if default else set()
+            return {element(CLASS, default)} if default else set()
         index = self.definition.index(expression)
         if index is not None:
-            return {term(CLASS_PARAM, (index, default))}
+            return {element(CLASS_PARAM, (index, default))}
         alternatives = conditional_alternatives(expression)
         if alternatives:
-            return {t for e in alternatives for t in self.class_terms(e, default, seen)}
+            return {t for e in alternatives for t in self.class_elements(e, default, seen)}
         of_object = CLASS_OF_OBJECT.match(expression)
         if of_object:
-            return {t for t in self.object_terms(of_object.group(1)) if t[0] != OBJECT_PARAM} or {
-                term(UNRESOLVED, f"{self.definition.name}: {expression}")
+            return {t for t in self.object_elements(of_object.group(1)) if t[0] != OBJECT_PARAM} or {
+                element(UNRESOLVED, f"{self.definition.name}: {expression}")
             }
         if expression in self.definition.assignments:
-            return {t for rhs in self.definition.assignments[expression] for t in self.class_terms(rhs, default, seen | {expression})}
+            return {t for rhs in self.definition.assignments[expression] for t in self.class_elements(rhs, default, seen | {expression})}
         if expression in self.program.class_entries:
-            return {term(CLASS, self.program.class_entries[expression])}
+            return {element(CLASS, self.program.class_entries[expression])}
         call = re.match(r"^([A-Za-z_]\w*)\s*\((.*)\)$", expression, re.S)
         inner = call and Call(call.group(1), split_arguments(call.group(2)), frozenset())
         if inner and self.callees(inner):
             return {c for callee in self.callees(inner) for t in self.summaries.get(id(callee), EMPTY).returns for c in self.instantiate_class(t, inner, seen | {expression})}
-        return {term(UNRESOLVED, f"{self.definition.name}: {expression}")}
+        return {element(UNRESOLVED, f"{self.definition.name}: {expression}")}
 
-    def object_terms(self, expression):
-        """The terms an object expression denotes: created classes, a caller's object, or an object no analysis bounds."""
+    def object_elements(self, expression):
+        """The summary elements an object expression denotes: created classes, a caller's object, or an object no analysis bounds."""
         variable = object_variable(expression)
         if variable in NULL_LITERALS:
             return set()
@@ -820,8 +820,8 @@ class Evaluation:
             return set(self.creations[variable])
         index = self.definition.index(variable)
         if index is not None:
-            return {term(OBJECT_PARAM, index)}
-        return {term(OPEN, f"object {variable}")}
+            return {element(OBJECT_PARAM, index)}
+        return {element(OPEN, f"object {variable}")}
 
 
 def guarded(found, guards):
@@ -930,7 +930,7 @@ def handler_definitions(program, entries):
     return handlers
 
 
-def raises_of(program, entries):
+def throws_of(program, entries):
     """(kind, folded subject) → the sorted folded classes its Handlers may throw, or None when one throws an object
     no class set bounds, for every entry with a Handler; a class expression no rule resolves fails the run."""
     handlers = handler_definitions(program, entries)
@@ -939,26 +939,26 @@ def raises_of(program, entries):
     for key, names in entries.items():
         if not names:
             continue
-        terms = {t for h in names for d in handlers[h] for t in summaries.get(id(d), EMPTY).raises}
-        unresolved |= {f"{t[0]} {t[1]}" for t in terms if t[0] not in (CLASS, OPEN)}
-        result[key] = None if any(t[0] == OPEN for t in terms) else sorted({t[1].lower() for t in terms})
+        elements = {t for h in names for d in handlers[h] for t in summaries.get(id(d), EMPTY).throws}
+        unresolved |= {f"{t[0]} {t[1]}" for t in elements if t[0] not in (CLASS, OPEN)}
+        result[key] = None if any(t[0] == OPEN for t in elements) else sorted({t[1].lower() for t in elements})
     if unresolved:
         raise php_src.ExtractionFailure(f"class expressions no rule resolves reach an entry: {'; '.join(sorted(unresolved))}")
     return result
 
 
-def check_declared(models, raises):
-    """Fail when a raises element names a class no generated document declares."""
+def check_declared(models, throws):
+    """Fail when a throws element names a class no generated document declares."""
     classes = php_src.declared(php_src.generated_documents(models))
-    undeclared = sorted({c for found in raises.values() if found for c in found if ("class", c) not in classes})
+    undeclared = sorted({c for found in throws.values() if found for c in found if ("class", c) not in classes})
     if undeclared:
-        raise php_src.ExtractionFailure(f"raises elements no generated document declares: {', '.join(undeclared)}")
+        raise php_src.ExtractionFailure(f"throws elements no generated document declares: {', '.join(undeclared)}")
 
 
-def with_raises(entry, raises):
-    """The entry text with its raises line replaced: the classes of its Handlers, or none."""
-    text = RAISES_LINE.sub("", entry.text)
-    found = raises.get(entry.key()) if entry.kind in CALLABLE_KINDS else None
+def with_throws(entry, throws):
+    """The entry text with its throws line replaced: the classes of its Handlers, or none."""
+    text = THROWS_LINE.sub("", entry.text)
+    found = throws.get(entry.key()) if entry.kind in CALLABLE_KINDS else None
     return text if found is None else text + f"  throws: [{', '.join(found)}]\n"
 
 
@@ -969,16 +969,16 @@ def main():
     args = parser.parse_args()
     try:
         program = Program(args.php_src)
-        raises = raises_of(program, program.entries())
-        check_declared(args.models, raises)
-        changed = php_src.rewrite(args.models, lambda entry: with_raises(entry, raises))
+        throws = throws_of(program, program.entries())
+        check_declared(args.models, throws)
+        changed = php_src.rewrite(args.models, lambda entry: with_throws(entry, throws))
     except php_src.ExtractionFailure as failure:
         print(f"{TOOL}: {failure}", file=sys.stderr)
         sys.exit(1)
-    opened = sorted(subject for (_, subject), found in raises.items() if found is None)
+    opened = sorted(subject for (_, subject), found in throws.items() if found is None)
     print(
-        f"{TOOL}: {len(raises)} entries with a Handler, {changed} documents rewritten; "
-        f"no raises line (an object the caller supplies): {', '.join(opened)}; "
+        f"{TOOL}: {len(throws)} entries with a Handler, {changed} documents rewritten; "
+        f"no throws line (an object the caller supplies): {', '.join(opened)}; "
         f"method tables no class registration names: {', '.join(sorted(program.unowned))}"
     )
 

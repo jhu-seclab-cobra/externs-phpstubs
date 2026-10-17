@@ -17,7 +17,7 @@ import edu.jhu.cobra.commons.phpmodels.Vocabulary
 import java.util.EnumMap
 
 /** The six override units one entry can state; a statement is replaced whole per unit. */
-internal enum class OverrideUnit { SIGNATURE, VALUE, SOURCES, SINKS, SANITIZERS, RAISES }
+internal enum class OverrideUnit { SIGNATURE, VALUE, SOURCES, SINKS, SANITIZERS, THROWS }
 
 /** One entry as mounted: its set's position and verification rank, and its extension when derived. */
 private data class Mounted(
@@ -61,7 +61,7 @@ internal class Merge private constructor(
     val flows: List<FlowFact> by lazy { all.values.flatMap { it.flows } }
     val characters: List<CharactersFact> by lazy { all.values.flatMap { it.characters } }
     val returns: List<ReturnsFact> by lazy { all.values.flatMap { it.returns } }
-    val raises: List<RaisesFact> by lazy { all.values.flatMap { it.raises } }
+    val throws: List<ThrowsFact> by lazy { all.values.flatMap { it.throws } }
 
     // Builds the record once per subject and stores it under its own kind and under the shared map.
     private fun add(
@@ -100,7 +100,7 @@ internal class Merge private constructor(
                 sources = facts.sources,
                 sinks = facts.sinks,
                 sanitizers = facts.sanitizers,
-                raises = facts.raises,
+                throws = facts.throws,
             )
         all[subject] = record
         return record
@@ -113,7 +113,7 @@ internal class Merge private constructor(
         val sources = ArrayList<SourceFact>()
         val sinks = ArrayList<SinkFact>()
         val sanitizers = ArrayList<SanitizerFact>()
-        val raises = ArrayList<RaisesFact>()
+        val throws = ArrayList<ThrowsFact>()
 
         fun add(
             owner: ModelSubject,
@@ -147,8 +147,8 @@ internal class Merge private constructor(
                     }
                 }
 
-                OverrideUnit.RAISES -> {
-                    raises += RaisesFact(owner, condition, body.throws!!)
+                OverrideUnit.THROWS -> {
+                    throws += ThrowsFact(owner, condition, body.throws!!)
                 }
             }
         }
@@ -203,7 +203,7 @@ internal class Merge private constructor(
                 OverrideUnit.SOURCES.takeIf { entry.body.sources != null },
                 OverrideUnit.SINKS.takeIf { entry.body.sinks != null },
                 OverrideUnit.SANITIZERS.takeIf { entry.body.sanitizers != null },
-                OverrideUnit.RAISES.takeIf { entry.body.throws != null },
+                OverrideUnit.THROWS.takeIf { entry.body.throws != null },
             )
     }
 }

@@ -103,6 +103,6 @@ internal class BuiltinRecordTest {
             sources = emptyList(),
             sinks = emptyList(),
             sanitizers = emptyList(),
-            raises = emptyList(),
+            throws = emptyList(),
         )
 }

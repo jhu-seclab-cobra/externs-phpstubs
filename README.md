@@ -2,7 +2,7 @@
 
 > PHP built-in lookup for static analysis: declarations, value units, and taint facts in one record per built-in.
 
-Lookup of PHP built-in functions, classes, methods, constants, properties, and predefined variables by their PHP spelling. Each record merges the generated declarations (extension, signature), the hand-maintained value rules, psalm's taint data, and the hand-maintained taint rules into one `BuiltinRecord`: the signature in force plus every sink, source, sanitizer, flow, characters, returns, and raises fact, each tagged with the argument condition it holds under. Taint facts speak one canonical vocabulary; a consumer holds no set, mapping, or precedence.
+Lookup of PHP built-in functions, classes, methods, constants, properties, and predefined variables by their PHP spelling. Each record merges the generated declarations (extension, signature), the hand-maintained value rules, psalm's taint data, and the hand-maintained taint rules into one `BuiltinRecord`: the signature in force plus every sink, source, sanitizer, flow, characters, returns, and throws fact, each tagged with the argument condition it holds under. Taint facts speak one canonical vocabulary; a consumer holds no set, mapping, or precedence.
 
 [![codecov](https://codecov.io/gh/jhu-seclab-cobra/externs-phpstubs/branch/main/graph/badge.svg)](https://codecov.io/gh/jhu-seclab-cobra/externs-phpstubs)
 ![Kotlin JVM](https://img.shields.io/badge/Kotlin%20JVM-2.4.20%20%7C%20JVM%2021%2B-blue?logo=kotlin)
@@ -39,8 +39,8 @@ strlen?.extension                            // "core"
 strlen?.callableSignature?.returnType        // DeclaredType("int")
 strlen?.returns?.single()?.kind              // ReturnKind.NUM (value rules outrank the generated unit)
 strlen?.flows                                // [FlowFact(argument(0) -> return)]
-strlen?.raises?.single()?.classes             // empty: the call throws none
-PhpStubs.function("json_decode")?.raises     // [RaisesFact(classes = {jsonexception, valueerror})]
+strlen?.throws?.single()?.classes             // empty: the call throws none
+PhpStubs.function("json_decode")?.throws     // [ThrowsFact(classes = {jsonexception, valueerror})]
 
 // Taint facts in the canonical vocabulary, with their argument conditions
 PhpStubs.method("mysqli::query")?.sinks      // [SinkFact(port = argument(0), vulnType = sqli)]
@@ -76,14 +76,14 @@ val extended = PhpStubs.with(Path.of("models/site-rules"))
 | `variable(name)` | `BuiltinRecord<VariableSubject>?` |
 | `record(subject)` | `BuiltinRecord<ModelSubject>?` |
 | `functions`, `classes`, `methods`, `constants`, `classConstants`, `properties`, `variables` | `Collection<BuiltinRecord<…>>` in first-statement order |
-| `sinks`, `sources`, `sanitizers`, `flows`, `characters`, `returns`, `raises` | `List<…Fact>` in record order |
+| `sinks`, `sources`, `sanitizers`, `flows`, `characters`, `returns`, `throws` | `List<…Fact>` in record order |
 | `vocabulary`, `policy` | `Vocabulary`, `TaintPolicy` accumulated over every mounted set |
 
 **`PhpStubs`** -- one `BuiltinLookup` over one merge. The companion is the lookup over the bundled sets, built on first access and shared. `with(vararg roots: String)`, `with(vararg dirs: Path)`, and `plus` build a second lookup that mounts extension sets after the bundled ones, in order; a set without `provenance.yaml` mounts as manual.
 
-**`BuiltinRecord<S>`** -- `(subject, extension: String?, signature: SignatureInfo?, returns, flows, characters, sources, sinks, sanitizers, raises)`. Typed accessors: `callableSignature` (function, method), `classSignature` (class), `typedSignature` (constant, class constant), `propertySignature` (property). `extension` is the PHP extension of the generated declaration, `null` for a subject only a hand-maintained set states.
+**`BuiltinRecord<S>`** -- `(subject, extension: String?, signature: SignatureInfo?, returns, flows, characters, sources, sinks, sanitizers, throws)`. Typed accessors: `callableSignature` (function, method), `classSignature` (class), `typedSignature` (constant, class constant), `propertySignature` (property). `extension` is the PHP extension of the generated declaration, `null` for a subject only a hand-maintained set states.
 
-**`Fact`** -- `SinkFact(port, vulnType)`, `SourceFact(sourceKinds, at, keys)`, `SanitizerFact(vulnTypes, check)`, `FlowFact(from, to)`, `CharactersFact(bound)`, `ReturnsFact(kind)`, `RaisesFact(classes)`; each carries `owner` and `condition: ArgPattern?`. A `RaisesFact` with no classes states the call throws none; a record without one asserts nothing about throws. The record ranks nothing: a consumer matches each condition against its call arguments and applies its own rule to an undecidable outcome.
+**`Fact`** -- `SinkFact(port, vulnType)`, `SourceFact(sourceKinds, at, keys)`, `SanitizerFact(vulnTypes, check)`, `FlowFact(from, to)`, `CharactersFact(bound)`, `ReturnsFact(kind)`, `ThrowsFact(classes)`; each carries `owner` and `condition: ArgPattern?`. A `ThrowsFact` with no classes states the call throws none; a record without one asserts nothing about throws. The record ranks nothing: a consumer matches each condition against its call arguments and applies its own rule to an undecidable outcome.
 
 **`VulnType`**, **`SourceKind`** -- enum constants for the canonical vocabulary (`sqli`, `cmdi`, `codei`, `xss`, `headeri`, `ssrf`, `pathtrav`, `fileinc`, `deser`, `callablei`, `ldapi`, `xpathi`; `user-input`, `external-input`).
 
@@ -93,17 +93,17 @@ val extended = PhpStubs.with(Path.of("models/site-rules"))
 
 | Position | Root | Content | Provenance |
 |----------|------|---------|------------|
-| 0 | `models/` | Generated declarations: signature and raises per entry, extension from document placement | generated |
+| 0 | `models/` | Generated declarations: signature and throws per entry, extension from document placement | generated |
 | 1 | `value-rules/` | Hand-maintained value units beyond or against the generated ones, checked against the PHP manual | manual |
 | 2 | `vocabulary/` | The canonical vulnerability types, source kinds, and policy; the psalm mapping | manual |
 | 3 | `taint/` | psalm's sinks, sanitizers, sources in psalm's names, translated by the psalm mapping | generated |
 | 4 | `taint-rules/` | Hand-maintained sinks (Argus lists), escapes, and sources psalm lacks, translated by the same mapping | manual |
 
-The merge keeps one statement per (subject, condition, unit); a higher-ranked provenance wins (`Precedence.DEFAULT`: manual over generated), and among equal ranks the later position wins. A unit is replaced whole; a set that omits a unit leaves the earlier statement in force. Each set also loads on its own through commons-phpmodels `DocumentSetLoader.load(StubResources.opener(root), context, mapping)`; the taint set is regenerated from a psalm checkout by `tools/extract_taint.py --psalm <root> --out externs-phpstubs/src/main/resources/taint`. The generated entries are rewritten from a php-src checkout by `tools/extract_hierarchy.py` (class hierarchy), `tools/extract_signatures.py` (function and method signatures, placement by extension), and `tools/extract_raises.py` (raises), run in that order, each as `--php-src <root> --models externs-phpstubs/src/main/resources/models`.
+The merge keeps one statement per (subject, condition, unit); a higher-ranked provenance wins (`Precedence.DEFAULT`: manual over generated), and among equal ranks the later position wins. A unit is replaced whole; a set that omits a unit leaves the earlier statement in force. Each set also loads on its own through commons-phpmodels `DocumentSetLoader.load(StubResources.opener(root), context, mapping)`; the taint set is regenerated from a psalm checkout by `tools/extract_taint.py --psalm <root> --out externs-phpstubs/src/main/resources/taint`. The generated entries are rewritten from a php-src checkout by `tools/extract_hierarchy.py` (class hierarchy), `tools/extract_signatures.py` (function and method signatures, placement by extension), and `tools/extract_throws.py` (throws), run in that order, each as `--php-src <root> --models externs-phpstubs/src/main/resources/models`.
 
 ## Background
 
-Model documents derived from [JetBrains/phpstorm-stubs](https://github.com/JetBrains/phpstorm-stubs) (the declarations php-src does not rewrite: constants, properties, extensions outside php-src; Apache-2.0), [vimeo/psalm](https://github.com/vimeo/psalm) (dataflow annotations and taint data, MIT), and [php/php-src](https://github.com/php/php-src) stubs and C sources (class hierarchy, function and method signatures, raises; PHP License), emitted in the [commons-phpmodels](https://github.com/jhu-seclab-cobra/commons-phpmodels) format. Language constructs (`echo`, `isset`, `int`, ...) are declared as data under `models/language/`; built-ins the extraction does not produce are hand-declared under `models/manual/`.
+Model documents derived from [JetBrains/phpstorm-stubs](https://github.com/JetBrains/phpstorm-stubs) (the declarations php-src does not rewrite: constants, properties, extensions outside php-src; Apache-2.0), [vimeo/psalm](https://github.com/vimeo/psalm) (dataflow annotations and taint data, MIT), and [php/php-src](https://github.com/php/php-src) stubs and C sources (class hierarchy, function and method signatures, throws; PHP License), emitted in the [commons-phpmodels](https://github.com/jhu-seclab-cobra/commons-phpmodels) format. Language constructs (`echo`, `isset`, `int`, ...) are declared as data under `models/language/`; built-ins the extraction does not produce are hand-declared under `models/manual/`.
 
 ## Documentation
 
@@ -113,9 +113,9 @@ Model documents derived from [JetBrains/phpstorm-stubs](https://github.com/JetBr
 - [Merge Algorithm](docs/spec-merge.md) -- folding the mounted sets into one statement per subject, condition, and unit
 - [Taint Concepts](docs/concept-taint.md) -- the taint document set in psalm's names and its extraction
 - [Design](docs/design.md) -- resource roots, merge order, corpus rules, exception types
-- [Extraction Concepts](docs/concept-extraction.md) -- extraction from php-src: declarations, Handlers, raises summary
-- [Extraction Design](docs/design-extraction.md) -- the php-src producers of hierarchy, signatures, and raises
-- [Raises Algorithm](docs/spec-raises.md) -- computing the raises section from the php-src C sources
+- [Extraction Concepts](docs/concept-extraction.md) -- extraction from php-src: declarations, Handlers, Raises Summary
+- [Extraction Design](docs/design-extraction.md) -- the php-src producers of hierarchy, signatures, and throws
+- [Throws Algorithm](docs/spec-throws.md) -- computing the throws section from the php-src C sources
 - [Lookup Design](docs/design-lookup.md) -- `BuiltinLookup`, `PhpStubs`, `BuiltinRecord`, fact types, canonical enums
 - [Merge Design](docs/design-merge.md) -- `Mount`, `MountSequence`, `Merge`
 - [Taint Design](docs/design-taint.md) -- `StubResources`, taint resource layout, extraction script

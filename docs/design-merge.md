@@ -12,7 +12,7 @@ mounts into records. Every type here is internal; the public surface is
 
 - **Classes:** `Mount` (internal data class), `MountSequence` (internal
   class), `Merge` (internal class), `OverrideUnit` (internal enum:
-  `SIGNATURE`, `VALUE`, `SOURCES`, `SINKS`, `SANITIZERS`, `RAISES`)
+  `SIGNATURE`, `VALUE`, `SOURCES`, `SINKS`, `SANITIZERS`, `THROWS`)
 - **External types (commons-phpmodels):** `DocumentSetLoader`,
   `DocumentSet`, `Document`, `ResourceOpener`, `VocabularyMapping`,
   `ModelEntry`, `PolicyRow`, `Vocabulary`, `TaintPolicy`, `Precedence`,

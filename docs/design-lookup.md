@@ -11,7 +11,7 @@ types: [design-merge.md](design-merge.md). Fold algorithm:
 
 - **Classes:** `PhpStubs` (final class; companion delegates to the bundled
   instance), `BuiltinRecord<S>` (data class), `SinkFact`, `SourceFact`,
-  `SanitizerFact`, `FlowFact`, `CharactersFact`, `ReturnsFact`, `RaisesFact` (data classes),
+  `SanitizerFact`, `FlowFact`, `CharactersFact`, `ReturnsFact`, `ThrowsFact` (data classes),
   `VulnType` and `SourceKind` (enums); `Merge`, `Mount`, `MountSequence` (internal,
   [design-merge.md](design-merge.md))
 - **Abstract:** `BuiltinLookup` (interface: every read of one merge),
@@ -60,7 +60,7 @@ delegation, by its companion, so `PhpStubs.function("substr")` and
 | `variable(name)` | `BuiltinRecord<VariableSubject>?` | `VariableSubject.parse(name)`, map read |
 | `record(subject)` | `BuiltinRecord<ModelSubject>?` | the record of an already built subject |
 | `functions`, `classes`, `methods`, `constants`, `classConstants`, `properties`, `variables` | `Collection<BuiltinRecord<…>>` | every record of the kind, load order |
-| `sinks`, `sources`, `sanitizers`, `flows`, `returns`, `raises` | `List<…Fact>` | every fact of the kind over every record, load order |
+| `sinks`, `sources`, `sanitizers`, `flows`, `returns`, `throws` | `List<…Fact>` | every fact of the kind over every record, load order |
 | `vocabulary` | `Vocabulary` | accumulated over every mounted set |
 | `policy` | `TaintPolicy` | accumulated over every mounted set |
 
@@ -111,7 +111,7 @@ members only.
 `signature: SignatureInfo?`, `returns: List<ReturnsFact>`,
 `flows: List<FlowFact>`, `characters: List<CharactersFact>`,
 `sources: List<SourceFact>`, `sinks: List<SinkFact>`,
-`sanitizers: List<SanitizerFact>`, `raises: List<RaisesFact>`.
+`sanitizers: List<SanitizerFact>`, `throws: List<ThrowsFact>`.
 
 **Validation (`init`):** every fact's `owner == subject`; at least one of
 `signature` or a fact present.
@@ -134,7 +134,7 @@ for an unconditional statement).
 | `FlowFact` | `from: Port.Input`, `to: Port` | one `Propagation` |
 | `CharactersFact` | `bound: CharacterBound` | the `characters` section, whole: the bytes the result may hold; the bound keeps its at-least-one-field invariant |
 | `ReturnsFact` | `kind: ReturnKind` | the `returns` section |
-| `RaisesFact` | `classes: Set<ClassSubject>` | the `raises` section, whole: the empty set states the subject throws none |
+| `ThrowsFact` | `classes: Set<ClassSubject>` | the `throws` section, whole: the empty set states the subject throws none |
 
 ### VulnType, SourceKind (enums)
 

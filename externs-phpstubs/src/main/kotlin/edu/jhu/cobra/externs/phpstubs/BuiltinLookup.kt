@@ -102,8 +102,8 @@ public interface BuiltinLookup {
     /** Every returns fact over every record, in record then statement order. */
     public val returns: List<ReturnsFact>
 
-    /** Every raises fact over every record, in record then statement order. */
-    public val raises: List<RaisesFact>
+    /** Every throws fact over every record, in record then statement order. */
+    public val throws: List<ThrowsFact>
 
     /** The vocabulary accumulated over every mounted set. */
     public val vocabulary: Vocabulary
