@@ -47,7 +47,7 @@ accumulated vocabulary and policy. Implemented by `PhpStubs` and, by
 delegation, by its companion, so `PhpStubs.function("substr")` and
 `PhpStubs.with(dir).function("substr")` are the same call on two merges.
 
-**Members** (reads of a frozen merge; the seven fact lists are built on first read):
+**Members** (reads of a built merge; the seven fact lists are built on first read):
 
 | Member | Return | Behavior |
 |--------|--------|----------|

@@ -43,7 +43,7 @@ format library's: `extern/commons-phpmodels/docs/model.md`,
   that stated it and that set's position in Merge Order.
 - **Merge** — The map from every (subject, condition, unit) key stated by
   any mounted set to the one Statement in force for it. Built once per set
-  sequence and frozen. Two Statements with the same key compete; a
+  sequence and never changed. Two Statements with the same key compete; a
   Statement with a different condition never competes.
 - **PHP Extension** — The PHP extension a declaration belongs to, derived from
   the generated document's placement (`mysqli`, `standard`, `keyword`,
@@ -103,12 +103,12 @@ Two Statements with the same (subject, condition, unit) key:
 
 | State | Trigger | Target |
 |-------|---------|-------|
-| Unread | first lookup on the bundled merge | folded once, frozen, shared by every later lookup |
-| Frozen | exact lookup, subject exists | one record |
-| Frozen | exact lookup, subject absent | no record; not a failure |
-| Frozen | exact lookup, name not a PHP spelling | argument error |
-| Frozen | enumeration | every record or fact of the kind, in first-statement order |
-| Frozen | extension sets supplied | a second merge: bundled sets then extensions; the bundled merge unchanged |
+| Unread | first lookup on the bundled merge | Built: folded once, shared by every later lookup |
+| Built | exact lookup, subject exists | one record |
+| Built | exact lookup, subject absent | no record; not a failure |
+| Built | exact lookup, name not a PHP spelling | argument error |
+| Built | enumeration | every record or fact of the kind, in first-statement order |
+| Built | extension sets supplied | a second merge: bundled sets then extensions; the bundled merge unchanged |
 
 ## Invariants
 

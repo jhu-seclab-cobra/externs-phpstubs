@@ -121,7 +121,7 @@ consumer: fact kind ────────► BuiltinLookup ────► ev
   own additions; without a provenance document it ranks as manual.
 
 **Internal Processing Flow**
-1. Merge — decode each set in order, fold by rank then order, freeze.
+1. Merge — decode each set in order, fold by rank then order, build once.
 2. Resolve — parse the lookup name into a Subject through the format
    library's creators, so folding is decided once.
 3. Read — take the subject's statements; the record exposes each section's

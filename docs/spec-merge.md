@@ -33,7 +33,7 @@ merge(sets, precedence):
         for entry in set.entries:
             mounted.append((position, rank, entry))
     statements = fold(mounted)
-    return frozen(vocab, matrix(rows), statements)
+    return read_only(vocab, matrix(rows), statements)
 
 fold(mounted):
     statements = {}                                    # (subject, condition, unit) → Statement

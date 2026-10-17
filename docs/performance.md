@@ -40,7 +40,7 @@ The retired `contains*`/`find*` facade read the generated set alone (5,694 subje
 | P1-1 | Fast-path `normalize()` | RETIRED -- name handling moved into the commons-phpmodels subject creators |
 | P1-2 | Reverse suffix index | RETIRED -- exact lookup only; a looser match is the consumer's filter over an enumeration |
 | P1-3 | Cache synthetic records | RETIRED -- language constructs are data under `models/language/`, no synthetic records exist |
-| P1-4 | Unmodifiable wrappers | KEEP -- the per-kind record maps of `Merge` are frozen once at construction |
+| P1-4 | Unmodifiable wrappers | KEEP -- the per-kind record maps of `Merge` become read-only once at construction |
 | P1-5 | StringBuilder for member key concat | SKIP -- Kotlin string templates already compile to `StringBuilder` |
 
 ## Candidates
