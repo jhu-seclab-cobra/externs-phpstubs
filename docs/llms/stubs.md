@@ -71,7 +71,7 @@ Typed accessors (top-level extension properties, nullable):
 
 Every fact: **`owner: ModelSubject`**, **`condition: ArgPattern?`** (`null` for an unconditional statement; otherwise match it with `condition.matches(args)` -> `true`, `false`, or `null` for undecidable).
 
-**`SinkFact(port: Port.Argument, vulnClass: VulnClassId)`** | **`SourceFact(origins: Set<OriginId>, at: Port.Argument?, keys: List<KeyPattern>?)`** | **`SanitizerFact(categories: Set<VulnClassId>)`** | **`FlowFact(from: Port.Input, to: Port)`** | **`CharactersFact(bound: CharacterBound)`** | **`ReturnsFact(kind: ReturnKind)`** | **`RaisesFact(classes: Set<ClassSubject>)`**.
+**`SinkFact(port: Port.Argument, vulnClass: VulnClassId)`** | **`SourceFact(origins: Set<OriginId>, at: Port.Argument?, keys: List<KeyPattern>?)`** | **`SanitizerFact(categories: Set<VulnClassId>, check: ArgumentCheck?)`** | **`FlowFact(from: Port.Input, to: Port)`** | **`CharactersFact(bound: CharacterBound)`** | **`ReturnsFact(kind: ReturnKind)`** | **`RaisesFact(classes: Set<ClassSubject>)`**.
 
 ### VulnClass, Origin (enums)
 

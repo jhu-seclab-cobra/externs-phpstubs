@@ -142,7 +142,9 @@ internal class Merge private constructor(
                 }
 
                 OverrideUnit.SANITIZERS -> {
-                    body.sanitizers.orEmpty().mapTo(sanitizers) { SanitizerFact(owner, condition, it.categories) }
+                    body.sanitizers.orEmpty().mapTo(sanitizers) {
+                        SanitizerFact(owner, condition, it.categories, it.check)
+                    }
                 }
 
                 OverrideUnit.RAISES -> {

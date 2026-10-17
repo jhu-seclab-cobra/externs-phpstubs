@@ -1,6 +1,9 @@
 package edu.jhu.cobra.externs.phpstubs
 
+import edu.jhu.cobra.commons.phpmodels.ArgumentCheck
 import edu.jhu.cobra.commons.phpmodels.CategoryMappingLoader
+import edu.jhu.cobra.commons.phpmodels.CharacterClass
+import edu.jhu.cobra.commons.phpmodels.DeclaredType
 import edu.jhu.cobra.commons.phpmodels.DocumentSetLoader
 import edu.jhu.cobra.commons.phpmodels.FunctionSubject
 import edu.jhu.cobra.commons.phpmodels.MethodSubject
@@ -11,9 +14,11 @@ import edu.jhu.cobra.commons.phpmodels.Port
 import edu.jhu.cobra.commons.phpmodels.VariableSubject
 import edu.jhu.cobra.commons.phpmodels.VocabularyException
 import edu.jhu.cobra.commons.phpmodels.VulnClassId
+import edu.jhu.cobra.commons.value.BoolVal
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertFalse
 import kotlin.test.assertNotEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
@@ -28,6 +33,7 @@ import kotlin.test.assertTrue
  * - `no rules unit repeats a taint unit` — verifies each (subject, condition, section) differs from the taint set's
  * - `a taint rules sink over a taint subject widens psalm's ports` — verifies restated entries are strict supersets
  * - `sinks follow the Argus lists` — verifies representative sinks per category
+ * - `checks state type predicates and character checks` — verifies the type set and the class of representative checks
  * - `sanitizers and sources name the added escapes and colors` — verifies representative entries
  * - `the psalm mapping translates the additions` — verifies the bundled mapping covers xpath and external
  */
@@ -123,6 +129,16 @@ internal class TaintRulesSetTest {
     }
 
     @Test
+    fun `checks state type predicates and character checks`() {
+        assertEquals(ArgumentCheck(Port.Argument(0), BoolVal(true), types = DeclaredType("int")), checkOf("is_int"))
+        assertEquals(DeclaredType("int|float|string|bool"), checkOf("is_scalar").types)
+        assertEquals(ArgumentCheck(Port.Argument(0), BoolVal(true), CharacterClass("[0-9]")), checkOf("ctype_digit"))
+        val numeric = assertNotNull(checkOf("is_numeric").within)
+        assertTrue("-1.5E+3 INF\u000B".all { numeric.contains(it.code) })
+        assertFalse(numeric.contains('x'.code))
+    }
+
+    @Test
     fun `the psalm mapping translates the additions`() {
         val context = DocumentSetLoader.load(StubResources.opener(StubResources.VOCABULARY)).vocabulary
         val mapping = TaintRulesSetTest::class.java.getResourceAsStream(StubResources.PSALM_MAPPING)!!.use(CategoryMappingLoader::load)
@@ -148,6 +164,15 @@ internal class TaintRulesSetTest {
         entry.body.sinks!!
             .map { it.port to it.vulnClass.id }
             .toSet()
+
+    private fun checkOf(function: String): ArgumentCheck =
+        assertNotNull(
+            unconditional
+                .getValue(FunctionSubject(function))
+                .body.sanitizers
+                ?.single()
+                ?.check,
+        )
 
     private fun sanitizersOf(subject: ModelSubject): Set<String> =
         unconditional

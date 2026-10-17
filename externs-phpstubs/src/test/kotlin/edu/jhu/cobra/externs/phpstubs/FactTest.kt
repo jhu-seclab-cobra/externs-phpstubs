@@ -1,6 +1,7 @@
 package edu.jhu.cobra.externs.phpstubs
 
 import edu.jhu.cobra.commons.phpmodels.ArgPattern
+import edu.jhu.cobra.commons.phpmodels.ArgumentCheck
 import edu.jhu.cobra.commons.phpmodels.CharacterBound
 import edu.jhu.cobra.commons.phpmodels.CharacterClass
 import edu.jhu.cobra.commons.phpmodels.ClassSubject
@@ -20,6 +21,7 @@ import kotlin.test.assertNull
  *
  * - `an unconditional entry yields facts without a condition` — verifies the null condition
  * - `a conditional entry tags every fact with its pattern` — verifies condition propagation per fact kind
+ * - `a sanitizer fact keeps its check` — verifies the checked argument, accepting value, and class
  * - `a source fact keeps its site and key patterns` — verifies the by-reference source shape
  * - `a source fact at the result has no site` — verifies the result-site source shape
  * - `a returns fact and its flow facts come from one value unit` — verifies the classification and the ports
@@ -49,9 +51,18 @@ internal class FactTest {
             """.trimIndent()
         val record = Merge.of(listOf(TestSets.mount(0, Verification.MANUAL, document))).records.getValue(f)
         val condition = ArgPattern(listOf(BoolVal(true)))
-        assertEquals(SanitizerFact(f, condition, setOf(VulnClassId("sqli"))), record.sanitizers.single())
+        assertEquals(SanitizerFact(f, condition, setOf(VulnClassId("sqli")), null), record.sanitizers.single())
         assertEquals(condition, record.returns.single().condition)
         assertEquals(FlowFact(f, condition, Port.Argument(0), Port.Return), record.flows.single())
+    }
+
+    @Test
+    fun `a sanitizer fact keeps its check`() {
+        val document =
+            "- subject: {function: f}\n  sanitizers: [{check: {argument: argument(0), accepts: true, within: '[0-9]'}}]\n"
+        val record = Merge.of(listOf(TestSets.mount(0, Verification.MANUAL, document))).records.getValue(f)
+        val check = ArgumentCheck(Port.Argument(0), BoolVal(true), CharacterClass("[0-9]"))
+        assertEquals(SanitizerFact(f, null, emptySet(), check), record.sanitizers.single())
     }
 
     @Test

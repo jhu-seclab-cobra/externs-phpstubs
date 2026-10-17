@@ -30,7 +30,7 @@ taint-rules/
 ├── vocabulary.yaml    # additions only: kind `xpath`, color `external`
 ├── policy.yaml        # input enables xpath; external enables every input kind and xpath
 ├── sinks.yaml         # Argus sinks the format expresses; widened psalm subjects restate psalm's points
-├── sanitizers.yaml    # escapes psalm lacks: shell, html, sql, file, and value-typing escapes for every kind
+├── sanitizers.yaml    # escapes psalm lacks: shell, html, sql, file, value-typing escapes for every kind; checks
 └── sources.yaml       # `input` for request data psalm does not color; `external` for environment and stored data
 ```
 
@@ -41,7 +41,7 @@ no conditional entry. Entries are sorted by subject spelling.
 | Document | Subject kinds | Content |
 |----------|---------------|---------|
 | sinks.yaml | function, method | one entry per subject with every kind it sinks, ports ascending, kinds in psalm order; receiver-triggered sinks omitted |
-| sanitizers.yaml | function | one declaration per subject; a value-typing escape (`intval`, `md5`, ...) names every kind |
+| sanitizers.yaml | function | one declaration per subject; a value-typing escape (`intval`, `md5`, ...) names every kind; a check names `argument(0)` and `accepts: true` with the `types` of a type predicate (`is_int`, `is_scalar`, ...) or the `within` class of a character check (`ctype_digit`, `is_numeric`, ...) |
 | sources.yaml | variable, function, method | one declaration per subject producing `input` or `external` |
 
 ## Validation Rules

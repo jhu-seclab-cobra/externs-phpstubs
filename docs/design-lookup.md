@@ -21,8 +21,8 @@ types: [design-merge.md](design-merge.md). Fold algorithm:
   `DocumentSet`, `ResourceOpener`, `CategoryMappingLoader`,
   `CategoryMapping`, `ModelEntry`, `ModelSubject` and its seven subtypes,
   `ArgPattern`, `SignatureInfo` and its four subtypes, `SinkDecl`,
-  `SourceDecl`, `SanitizerDecl`, `Propagation`, `CharacterClass`, `ReturnKind`, `Vocabulary`,
-  `TaintPolicy`, `VulnClassId`, `OriginId`, `Precedence`, `Verification`
+  `SourceDecl`, `SanitizerDecl`, `ArgumentCheck`, `Propagation`, `CharacterClass`,
+  `ReturnKind`, `Vocabulary`, `TaintPolicy`, `VulnClassId`, `OriginId`, `Precedence`, `Verification`
 - **Relationships:** `PhpStubs` holds one `Merge`; `Merge` folds `Mount`s
   (one per set, in Merge Order) into records; a `BuiltinRecord` owns its
   `Fact`s; every `Fact` names its owner subject and its condition. The
@@ -131,7 +131,7 @@ for an unconditional statement).
 |------|------------|------|
 | `SinkFact` | `port: Port.Argument`, `vulnClass: VulnClassId` | one `SinkDecl` |
 | `SourceFact` | `origins: Set<OriginId>`, `at: Port.Argument?`, `keys: List<KeyPattern>?` | one `SourceDecl` |
-| `SanitizerFact` | `categories: Set<VulnClassId>` | one `SanitizerDecl` |
+| `SanitizerFact` | `categories: Set<VulnClassId>`, `check: ArgumentCheck?` | one `SanitizerDecl` |
 | `FlowFact` | `from: Port.Input`, `to: Port` | one `Propagation` |
 | `CharactersFact` | `bound: CharacterBound` | the `characters` section, whole: the bytes the result may hold; the bound keeps its at-least-one-field invariant |
 | `ReturnsFact` | `kind: ReturnKind` | the `returns` section |

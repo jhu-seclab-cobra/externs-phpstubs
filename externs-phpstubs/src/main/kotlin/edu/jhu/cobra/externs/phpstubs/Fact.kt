@@ -1,6 +1,7 @@
 package edu.jhu.cobra.externs.phpstubs
 
 import edu.jhu.cobra.commons.phpmodels.ArgPattern
+import edu.jhu.cobra.commons.phpmodels.ArgumentCheck
 import edu.jhu.cobra.commons.phpmodels.CharacterBound
 import edu.jhu.cobra.commons.phpmodels.ClassSubject
 import edu.jhu.cobra.commons.phpmodels.KeyPattern
@@ -40,11 +41,15 @@ public data class SourceFact(
     val keys: List<KeyPattern>?,
 ) : Fact
 
-/** The danger categories a call neutralizes. */
+/**
+ * The danger categories a call neutralizes: in its result, or, with a [check], in the argument a call
+ * returning the accepting value accepted. The check also carries the class or type set of that argument.
+ */
 public data class SanitizerFact(
     override val owner: ModelSubject,
     override val condition: ArgPattern?,
     val categories: Set<VulnClassId>,
+    val check: ArgumentCheck?,
 ) : Fact
 
 /** One declared flow from an input port to another port of the same call. */
