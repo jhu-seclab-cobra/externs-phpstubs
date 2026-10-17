@@ -96,8 +96,8 @@ val extended = PhpStubs.with(Path.of("models/site-rules"))
 | 0 | `models/` | Generated declarations: signature and throws per entry, extension from document placement | generated |
 | 1 | `value-rules/` | Hand-maintained value units beyond or against the generated ones, checked against the PHP manual | manual |
 | 2 | `vocabulary/` | The canonical vulnerability types, source kinds, and policy; the psalm mapping | manual |
-| 3 | `taint/` | psalm's sinks, sanitizers, sources in psalm's names, translated by the psalm mapping | generated |
-| 4 | `taint-rules/` | Hand-maintained sinks (Argus lists), escapes, and sources psalm lacks, translated by the same mapping | manual |
+| 3 | `taint/` | psalm's sink facts, sanitizer facts, and source facts in psalm's names, translated by the psalm mapping | generated |
+| 4 | `taint-rules/` | Hand-maintained sink facts (Argus lists), sanitizer facts, and source facts psalm lacks, translated by the same mapping | manual |
 
 The merge keeps one statement per (subject, condition, unit); a higher-ranked provenance wins (`Precedence.DEFAULT`: manual over generated), and among equal ranks the later position wins. A unit is replaced whole; a set that omits a unit leaves the earlier statement in force. Each set also loads on its own through commons-phpmodels `DocumentSetLoader.load(StubResources.opener(root), context, mapping)`; the taint set is regenerated from a psalm checkout by `tools/extract_taint.py --psalm <root> --out externs-phpstubs/src/main/resources/taint`. The generated entries are rewritten from a php-src checkout by `tools/extract_hierarchy.py` (class hierarchy), `tools/extract_signatures.py` (function and method signatures, placement by extension), and `tools/extract_throws.py` (throws), run in that order, each as `--php-src <root> --models externs-phpstubs/src/main/resources/models`.
 

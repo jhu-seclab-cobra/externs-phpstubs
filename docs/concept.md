@@ -6,9 +6,9 @@
 PHP static analyses must recognise built-in declarations they never see the
 body of: whether a name is a built-in function, class, method, or constant,
 which PHP extension provides it, what its signature looks like, what a
-constant's value is, and which built-ins psalm marks as taint sources, sinks,
-and escapes. This knowledge is extracted from upstream sources and is
-independent of any analysis technique. The model format for stating it
+constant's value is, and which built-ins psalm declares source facts, sink
+facts, and sanitizer facts for. This knowledge is extracted from upstream
+sources and is independent of any analysis technique. The model format for stating it
 exists in commons-phpmodels; what remains is the data, its merge into one
 body of facts, and a lookup that answers by PHP name in one vocabulary.
 
@@ -24,7 +24,8 @@ The format, its decoding, and its validation belong to commons-phpmodels.
 - **Inputs:** upstream stub sources, psalm's taint data, and the Argus
   lists (offline); five bundled document sets.
 - **Outputs:** one `BuiltinRecord` per PHP name: extension, signature, flows,
-  sources, sinks, sanitizers, and throws in the canonical vocabulary; the same facts enumerable by kind.
+  source facts, sink facts, sanitizer facts, and throws in the canonical
+  vocabulary; the same facts enumerable by kind.
 - **Connections:** upstream stubs → extraction → model documents; psalm
   taint data → extraction, Argus lists → review → document sets; all sets
   → [commons-phpmodels decode] → merge → `BuiltinLookup` → consumers.
@@ -153,10 +154,11 @@ Runtime:
   the format.
 - **With a consumer:** a name lookup returns one `BuiltinRecord` or
   nothing. Signature fields and constant values are read as
-  commons-phpmodels types; flows, sources, sinks, sanitizers, and throws are read
-  from the record in the Canonical Vocabulary, conditions attached. The
-  consumer holds no set, layer, mapping, or precedence; which set stated a
-  fact is answered on request, never required.
+  commons-phpmodels types; flows, source facts, sink facts, sanitizer facts,
+  and throws are read from the record in the Canonical Vocabulary,
+  conditions attached. The consumer holds no set, layer, mapping, or
+  precedence; which set stated a fact is answered on request, never
+  required.
 - **With the Extraction Pipeline:** generated documents are reproducible
   from the same upstream versions; a re-run yields identical files.
 

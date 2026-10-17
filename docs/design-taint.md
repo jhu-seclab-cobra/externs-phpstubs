@@ -64,7 +64,7 @@ the script; `provenance.yaml` states the same producer as data. Entry forms:
 | Document | Subject kinds | Body | Condition |
 |----------|---------------|------|-------|
 | sinks.yaml | function, method | `sinks`: one `(argument(n), kind)` per dangerous argument, ports ascending, kinds in psalm order | none |
-| sanitizers.yaml | function, method | `sanitizers`: one declaration with the escaped kinds | `when: [_, <int>]` (a wildcard per earlier position) for a conditional escape |
+| sanitizers.yaml | function, method | `sanitizers`: one declaration with the neutralized kinds | `when: [_, <int>]` (a wildcard per earlier position) for a conditional sanitizer fact |
 | sources.yaml | variable, method | `sources`: one declaration producing `input` | none |
 
 No entry declares a signature: the set states psalm's assertions, not

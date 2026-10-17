@@ -30,7 +30,8 @@ decides.
   vocabulary and policy, the taint set and the taint rules set with the
   one mapping that translates them; optionally a consumer's extension sets.
 - **Outputs:** one `BuiltinRecord` per PHP name; the returns, flows,
-  sources, sinks, sanitizers, and throws of every record enumerable by kind.
+  source facts, sink facts, sanitizer facts, and throws of every record
+  enumerable by kind.
 - **Connections:** sets → Merge → `BuiltinLookup` → consumers.
 
 **Scope Boundaries**
@@ -82,9 +83,9 @@ consumer: fact kind ────────► BuiltinLookup ────► ev
 - **Name:** `BuiltinRecord`
 - **Definition:** What `BuiltinLookup` answers for one PHP name: the
   extension, the signature, and the facts the merge holds for that subject
-  — returns, flows, sources, sinks, sanitizers, throws — each carrying the
-  condition its entry declared, or none. The same facts are enumerable by
-  kind, each naming the record it belongs to.
+  — returns, flows, source facts, sink facts, sanitizer facts, throws —
+  each carrying the condition its entry declared, or none. The same facts
+  are enumerable by kind, each naming the record it belongs to.
 - **Scope:** one per subject any set states; a record without a signature
   is a fact-only record (taint-only function, predefined variable).
 - **Relationships:** read from the Merge; identified by its Subject.

@@ -6,7 +6,7 @@
 | [concept-lookup.md](concept-lookup.md) | Canonical vocabulary, the merge, `BuiltinRecord` and `BuiltinLookup` by PHP name |
 | [concept-extraction.md](concept-extraction.md) | Extraction from php-src: declarations, Handlers, Raises Summary, Boundary Call |
 | [concept-taint.md](concept-taint.md) | The taint document set in psalm's names, its extraction, and its translation at the merge |
-| [concept-taint-rules.md](concept-taint-rules.md) | The hand-maintained taint rules document set: Argus sinks, added escapes and sources, vocabulary additions |
+| [concept-taint-rules.md](concept-taint-rules.md) | The hand-maintained taint rules document set: Argus sink facts, added sanitizer facts and source facts, vocabulary additions |
 | [concept-value-rules.md](concept-value-rules.md) | The hand-maintained value rules set: value units beyond the generated declarations, generated-set gaps |
 | [model-lookup.md](model-lookup.md) | Bundled sets, canonical vocabulary, psalm mapping, merge order, merge, extension sets, `BuiltinRecord`, Fact with condition, `BuiltinLookup` |
 | [design.md](design.md) | `StubResources`, merge order, generated-set rules, resource layout, exception types |

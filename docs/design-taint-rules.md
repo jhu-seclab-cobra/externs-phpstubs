@@ -29,8 +29,8 @@ taint-rules/
 ├── provenance.yaml    # producer externs-phpstubs review of the Argus sink lists; verification manual
 ├── vocabulary.yaml    # additions only: kind `xpath`, source kind `external`
 ├── policy.yaml        # input enables xpath; external enables every input kind and xpath
-├── sinks.yaml         # Argus sinks the format expresses; widened psalm subjects restate psalm's points
-├── sanitizers.yaml    # escapes psalm lacks: shell, html, sql, file, value-typing escapes for every kind; checks
+├── sinks.yaml         # Argus sink facts the format expresses; widened psalm subjects restate psalm's points
+├── sanitizers.yaml    # sanitizer facts psalm lacks: shell, html, sql, file, value-typing sanitizer facts for every kind; checks
 └── sources.yaml       # `input` for request data psalm does not taint; `external` for environment and stored data
 ```
 
@@ -41,7 +41,7 @@ no conditional entry. Entries are sorted by subject spelling.
 | Document | Subject kinds | Content |
 |----------|---------------|---------|
 | sinks.yaml | function, method | one entry per subject with every kind it sinks, ports ascending, kinds in psalm order; receiver-triggered sinks omitted |
-| sanitizers.yaml | function | one declaration per subject; a value-typing escape (`intval`, `md5`, ...) names every kind; a check names `argument(0)` and `accepts: true` with the `types` of a type predicate (`is_int`, `is_scalar`, ...) or the `within` class of a character check (`ctype_digit`, `is_numeric`, ...) with the kinds its class cannot carry |
+| sanitizers.yaml | function | one declaration per subject; a value-typing sanitizer fact (`intval`, `md5`, ...) names every kind; a check names `argument(0)` and `accepts: true` with the `types` of a type predicate (`is_int`, `is_scalar`, ...) or the `within` class of a character check (`ctype_digit`, `is_numeric`, ...) with the kinds its class cannot carry |
 | sources.yaml | variable, function, method | one declaration per subject producing `input` or `external` |
 
 ## Validation Rules

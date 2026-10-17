@@ -7,7 +7,7 @@ public object StubResources {
     /** Root of the generated declaration set: one signature-bearing model per built-in. */
     public const val MODELS: String = "/models/"
 
-    /** Root of the taint set: sinks, sanitizers, and sources in psalm's names. */
+    /** Root of the taint set: sink facts, sanitizer facts, and source facts in psalm's names. */
     public const val TAINT: String = "/taint/"
 
     /**

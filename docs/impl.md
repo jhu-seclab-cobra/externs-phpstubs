@@ -55,7 +55,7 @@
 ### Taint document set
 - Source release: vimeo/psalm 5.6.0 (`vendor/vimeo/psalm` of a dataset checkout; version from `vendor/composer/installed.json`). Psalm declares 15 taint kinds; the `ALL_INPUT` group enables 13 (not `user_secret`, `system_secret`).
 - Psalm's sources are code, not data: only `$_GET`, `$_POST`, `$_COOKIE`, `$_REQUEST` are tainted (`VariableFetchAnalyzer::taintVariable`); `$_SERVER` and `$_FILES` are not. `@psalm-taint-source input` appears on `Throwable`, `Exception`, and `Error` `getTraceAsString`/`__toString` only.
-- `@psalm-taint-specialize` has no model counterpart and is dropped. The five conditional escapes on `filter_var` become conditional entries `when: [_, 257]` … `[_, 520]`.
+- `@psalm-taint-specialize` has no model counterpart and is dropped. The five conditional sanitizer facts on `filter_var` become conditional entries `when: [_, 257]` … `[_, 520]`.
 - Method subjects in the set (`mysqli::query`, `mysqli_stmt::prepare`, ...) are psalm's data verbatim, not a projection onto the generated set; a subject the generated set lacks is merged all the same.
 - **[taint rules set]** Sinks follow `sinks.json` of the Argus artifact (411 sinks, 12 vulnerability types); `SinkPoint` accepts argument ports only, so the receiver-triggered deserialization getters (Phar, SplFileInfo, DirectoryIterator families) are omitted. `TaintPolicy` unions rows sharing a source kind, so the set's `input → [xpath]` row extends psalm's row at load.
 - **[commons-phpmodels 0.2.1]** `DocumentSetException(path, detail, cause?)` now wraps a malformed listed document; `VocabularyException` names the document on an undeclared reference. `MountSequence` maps absence to `StubIndexNotFoundException` by recording which path the opener could not resolve.

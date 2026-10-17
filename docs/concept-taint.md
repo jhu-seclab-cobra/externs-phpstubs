@@ -7,9 +7,9 @@ extraction pipeline are defined there and used here unchanged.
 ## 1. Context
 
 **Problem Statement**
-psalm states which PHP built-ins consume a value dangerously (sinks), which
-neutralize a value for one vulnerability type (escapes), and which produce
-attacker-controlled data (sources). That knowledge is spread over a
+psalm states which PHP built-ins consume a value dangerously (sink facts),
+which neutralize a value for one vulnerability type (sanitizer facts), and
+which produce attacker-controlled data (source facts). That knowledge is spread over a
 dictionary, docblock annotations in psalm's stubs, and psalm's own analyzer
 code, all keyed by psalm's kind names. This library needs it as one
 document set in the commons-phpmodels format, kept in psalm's names so the
@@ -60,8 +60,8 @@ merge: set loader(taint/, canonical vocabulary, mapping) ─► entries in canon
   assertions in the commons-phpmodels format: a manifest, a vocabulary
   declaring psalm's kind names, a policy stating psalm's rule that input
   reaches every kind, and three documents split by section kind.
-- **Scope:** every sink psalm's dictionary lists, every sink, escape, and
-  source annotation in psalm's stubs, and the superglobals psalm's analyzer
+- **Scope:** every sink fact psalm's dictionary lists, every sink, escape,
+  and source annotation in psalm's stubs, and the superglobals psalm's analyzer
   taints. Nothing hand-added.
 - **Relationships:** a Generated Layer artifact; produced by the Taint
   Extraction; loaded by the merge, never as the generated set.
@@ -78,10 +78,10 @@ merge: set loader(taint/, canonical vocabulary, mapping) ─► entries in canon
 
 - **Name:** Taint Entry
 - **Definition:** A model entry with no signature whose body holds exactly
-  one taint section: sinks with one argument port per dangerous argument,
-  sanitizers with the escaped kinds, or sources producing `input`. A
-  conditional escape (an escape that holds only under one argument value)
-  is an entry whose condition states that value at its position.
+  one taint section: sink facts with one argument port per dangerous
+  argument, sanitizer facts with the neutralized kinds, or source facts
+  producing `input`. A conditional sanitizer fact (one that holds only
+  under one argument value) is an entry whose condition states that value at its position.
 - **Scope:** function, method, and predefined-variable subjects.
   A variadic dangerous parameter is stated at the variadic's position.
 - **Relationships:** a Model Entry; its Subject may or may not exist in
@@ -127,11 +127,12 @@ merge: set loader(taint/, canonical vocabulary, mapping) ─► entries in canon
   argument as `sql`. The sinks document states subject `mysqli_query`,
   port `argument(1)`, vulnerability type `sql`. The mapping renames `sql`
   to the canonical SQL injection vulnerability type at the merge.
-- **Boundary:** psalm escapes `html` in `filter_var` only when the filter
-  argument equals one of five sanitize-filter values. The set states five
-  conditional entries, one per value; a call matching none keeps no escape.
+- **Boundary:** psalm neutralizes `html` in `filter_var` only when the
+  filter argument equals one of five sanitize-filter values. The set states
+  five conditional entries, one per value; a call matching none keeps no
+  sanitizer fact.
 - **Interaction:** the mapping discards psalm's `has_quotes`. The
-  `urlencode` entry, which escapes `html` and `has_quotes`, arrives with
+  `urlencode` entry, which neutralizes `html` and `has_quotes`, arrives with
   `html` alone; an entry whose every kind is discarded arrives not at all.
   Both decisions are the format library's, driven by the mapping.
 

@@ -1,5 +1,5 @@
 # Hand-maintained taint set in psalm's names, mounted after the generated taint set.
-# Escapes psalm does not state: per-kind escapes for one vulnerability type, and value transforms whose
+# Sanitizer facts psalm does not state: per-kind sanitizer facts for one vulnerability type, and value transforms whose
 # output alphabet cannot carry an injection for any kind (casts, digests, hex, base64).
 # Checks: a type predicate returns true exactly when its argument has one of the `types`;
 # a character check returning true accepted an argument whose string conversion lies `within`,

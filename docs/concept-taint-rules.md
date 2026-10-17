@@ -8,9 +8,9 @@ and used here unchanged.
 ## 1. Context
 
 **Problem Statement**
-psalm's taint data misses sinks, escapes, and sources that published PHP
-analyses treat as standard: the Argus sink lists (Jahanshahi and Egele,
-USENIX Security 2024), output built-ins such as `echo`, callback-taking
+psalm's taint data misses sink facts, sanitizer facts, and source facts
+that published PHP analyses treat as standard: the Argus sink lists
+(Jahanshahi and Egele, USENIX Security 2024), output built-ins such as `echo`, callback-taking
 built-ins, LDAP and XPath queries, and data read from the environment,
 files, sockets, and stored records. This library states them as one more
 document set in the same format and the same names, so that one category
@@ -60,10 +60,10 @@ merge: set loader(taint/, …) then set loader(taint-rules/, taint vocabulary, m
 - **Definition:** The bundled hand-maintained document set holding taint
   assertions psalm does not state, in the commons-phpmodels format and in
   psalm's kind names plus two additions of its own.
-- **Scope:** sinks from the Argus lists that the format can express, the
-  escapes and sources those lists and the built-in name list imply, the
-  checks of the type predicates and character checks psalm lacks, and
-  nothing psalm already states identically.
+- **Scope:** sink facts from the Argus lists that the format can express,
+  the sanitizer facts and source facts those lists and the built-in name
+  list imply, the checks of the type predicates and character checks psalm
+  lacks, and nothing psalm already states identically.
 - **Relationships:** loaded over the Taint Document Set's vocabulary;
   mounted by the merge above it.
 
