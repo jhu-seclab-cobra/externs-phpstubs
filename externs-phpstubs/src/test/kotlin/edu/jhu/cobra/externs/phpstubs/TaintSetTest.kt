@@ -39,7 +39,7 @@ internal class TaintSetTest {
     @Test
     fun `taint set declares psalm's kinds and the input color`() {
         val kinds =
-            taint.vocabulary.vulnClasses.keys
+            taint.vocabulary.vulnTypes.keys
                 .map { it.id }
         assertEquals(15, kinds.size)
         assertTrue(kinds.containsAll(listOf("sql", "html", "shell", "eval", "include", "ssrf", "file", "header")))
@@ -111,7 +111,7 @@ internal class TaintSetTest {
         assertEquals(Vocabulary.EMPTY, mapped.vocabulary)
         assertEquals(OriginId("user-input"), mapped.policy.single().origin)
         val enables = mapped.policy.single().enables
-        assertTrue(VulnClass.entries.map { it.id }.containsAll(enables) && VulnTypeId("xss") in enables)
+        assertTrue(VulnType.entries.map { it.id }.containsAll(enables) && VulnTypeId("xss") in enables)
         val bySubject = mapped.entries.groupBy { it.subject }
         assertEquals(listOf(Port.Argument(0) to "cmdi"), sinksOf(bySubject.getValue(FunctionSubject("exec")).single()))
         assertEquals(setOf("xss"), sanitizersOf(bySubject.getValue(FunctionSubject("urlencode")).single()))
@@ -120,7 +120,7 @@ internal class TaintSetTest {
 
     private fun sinksOf(subject: ModelSubject): List<Pair<Port.Argument, String>> = sinksOf(unconditional.getValue(subject))
 
-    private fun sinksOf(entry: ModelEntry): List<Pair<Port.Argument, String>> = entry.body.sinks!!.map { it.port to it.vulnClass.id }
+    private fun sinksOf(entry: ModelEntry): List<Pair<Port.Argument, String>> = entry.body.sinks!!.map { it.port to it.vulnType.id }
 
     private fun sanitizersOf(entry: ModelEntry): Set<String> =
         entry.body.sanitizers!!

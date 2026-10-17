@@ -108,7 +108,7 @@ internal class MergeTest {
         assertEquals(listOf(null, condition), record.returns.map { it.condition })
         assertEquals(listOf(ReturnKind.NUM, ReturnKind.NUM), record.returns.map { it.kind })
         assertEquals(listOf(null), record.flows.map { it.condition })
-        assertEquals(VulnTypeId("sqli"), record.sinks.single().vulnClass)
+        assertEquals(VulnTypeId("sqli"), record.sinks.single().vulnType)
     }
 
     @Test
@@ -123,7 +123,7 @@ internal class MergeTest {
         val record = Merge.of(listOf(base, override)).functions.getValue(f)
         assertEquals(ReturnKind.STR, record.returns.single().kind)
         assertEquals(Port.Argument(0), record.flows.single().from)
-        assertEquals(VulnTypeId("sqli"), record.sinks.single().vulnClass)
+        assertEquals(VulnTypeId("sqli"), record.sinks.single().vulnType)
         assertEquals("standard", record.extension)
     }
 
@@ -189,7 +189,7 @@ internal class MergeTest {
         val merge = Merge.of(emptyList())
         assertTrue(merge.records.isEmpty())
         assertTrue(merge.sinks.isEmpty())
-        assertTrue(merge.vocabulary.vulnClasses.isEmpty())
+        assertTrue(merge.vocabulary.vulnTypes.isEmpty())
     }
 
     @Test
@@ -197,7 +197,7 @@ internal class MergeTest {
         val first = TestSets.mount(0, Verification.MANUAL, "- subject: {function: f}\n  returns: str\n")
         val second = TestSets.mount(1, Verification.MANUAL, "- subject: {function: g}\n  returns: str\n", vocabulary = null)
         val merge = Merge.of(listOf(first, second))
-        assertEquals(setOf(VulnTypeId("sqli"), VulnTypeId("xss")), merge.vocabulary.vulnClasses.keys)
+        assertEquals(setOf(VulnTypeId("sqli"), VulnTypeId("xss")), merge.vocabulary.vulnTypes.keys)
         assertEquals(listOf(f, FunctionSubject("g")), merge.functions.keys.toList())
     }
 

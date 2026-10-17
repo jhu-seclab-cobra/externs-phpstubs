@@ -72,8 +72,8 @@ internal class PhpStubsTest {
 
     @Test
     fun `taint facts speak the canonical vocabulary`() {
-        assertEquals(VulnTypeId("cmdi"), assertNotNull(PhpStubs.function("exec")).sinks.single().vulnClass)
-        assertEquals(VulnTypeId("sqli"), assertNotNull(PhpStubs.method("mysqli::query")).sinks.single().vulnClass)
+        assertEquals(VulnTypeId("cmdi"), assertNotNull(PhpStubs.function("exec")).sinks.single().vulnType)
+        assertEquals(VulnTypeId("sqli"), assertNotNull(PhpStubs.method("mysqli::query")).sinks.single().vulnType)
         val filterVar = assertNotNull(PhpStubs.function("filter_var"))
         assertEquals(5, filterVar.sanitizers.size)
         assertTrue(filterVar.sanitizers.all { it.condition != null && it.categories == setOf(VulnTypeId("xss")) })
@@ -83,8 +83,8 @@ internal class PhpStubsTest {
     fun `taint rules outrank taint for the same key`() {
         val readfile = assertNotNull(PhpStubs.function("readfile"))
         assertEquals(
-            setOf(VulnClass.XSS.id, VulnClass.SSRF.id, VulnClass.PATHTRAV.id, VulnClass.DESER.id),
-            readfile.sinks.map { it.vulnClass }.toSet(),
+            setOf(VulnType.XSS.id, VulnType.SSRF.id, VulnType.PATHTRAV.id, VulnType.DESER.id),
+            readfile.sinks.map { it.vulnType }.toSet(),
         )
         assertTrue(readfile.sinks.all { it.condition == null && it.port == Port.Argument(0) })
     }
@@ -103,7 +103,7 @@ internal class PhpStubsTest {
         val added = assertNotNull(extended.function("extension_only"))
         assertNull(added.extension)
         assertNotNull(added.callableSignature)
-        assertEquals(VulnTypeId("sqli"), added.sinks.single().vulnClass)
+        assertEquals(VulnTypeId("sqli"), added.sinks.single().vulnType)
         assertEquals("core", extended.function("strlen")!!.extension)
         assertNull(PhpStubs.function("extension_only"))
         assertEquals(

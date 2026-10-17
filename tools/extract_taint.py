@@ -256,7 +256,7 @@ def header(version):
 
 
 def emit_vocabulary(kinds):
-    out = ["vulnClasses:"]
+    out = ["vulnTypes:"]
     for kind in kinds:
         out.append(f"  - name: {kind}")
         out.append(f"    description: {KIND_DESCRIPTIONS.get(kind, 'psalm taint kind ' + kind)}")

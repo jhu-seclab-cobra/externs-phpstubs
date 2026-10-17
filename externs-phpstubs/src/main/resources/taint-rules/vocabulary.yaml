@@ -1,5 +1,5 @@
 # Additions to the generated taint set's vocabulary; the set loads with that vocabulary as context.
-vulnClasses:
+vulnTypes:
   - name: xpath
     description: XPath injection
 provenances:

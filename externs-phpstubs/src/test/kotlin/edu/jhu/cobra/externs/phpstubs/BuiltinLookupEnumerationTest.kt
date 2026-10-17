@@ -70,15 +70,15 @@ internal class BuiltinLookupEnumerationTest {
 
     @Test
     fun `no psalm name survives the merge`() {
-        assertEquals(VulnClass.entries.map { it.id }.toSet(), PhpStubs.vocabulary.vulnClasses.keys)
+        assertEquals(VulnType.entries.map { it.id }.toSet(), PhpStubs.vocabulary.vulnTypes.keys)
         assertEquals(Origin.entries.map { it.id }.toSet(), PhpStubs.vocabulary.origins.keys)
-        assertTrue(PhpStubs.sinks.none { it.vulnClass.id in setOf("sql", "html", "shell") })
+        assertTrue(PhpStubs.sinks.none { it.vulnType.id in setOf("sql", "html", "shell") })
     }
 
     @Test
     fun `the policy makes every category dangerous under both colors`() {
         for (origin in Origin.entries) {
-            for (category in VulnClass.entries) {
+            for (category in VulnType.entries) {
                 assertTrue(PhpStubs.policy.isDangerous(origin.id, category.id), "${origin.id.id} -> ${category.id.id}")
             }
         }

@@ -10,7 +10,7 @@ import edu.jhu.cobra.commons.phpmodels.Vocabulary
 /** In-memory document sets for the merge and mount tests: one YAML document plus an optional vocabulary. */
 internal object TestSets {
     const val VOCABULARY = """
-vulnClasses:
+vulnTypes:
   - {name: sqli, description: SQL injection}
   - {name: xss, description: Cross-site scripting}
 provenances:

@@ -48,7 +48,7 @@ internal class ValueRulesSetTest {
     @Test
     fun `value rules set loads without a vocabulary`() {
         assertTrue(rules.entries.isNotEmpty())
-        assertTrue(rules.vocabulary.vulnClasses.isEmpty())
+        assertTrue(rules.vocabulary.vulnTypes.isEmpty())
         assertTrue(rules.vocabulary.origins.isEmpty())
         assertTrue(rules.policy.isEmpty())
     }

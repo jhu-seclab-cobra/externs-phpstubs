@@ -1,6 +1,6 @@
 # Generated from vimeo/psalm 5.6.0 by tools/extract_taint.py.
 # Do not hand-edit; re-run the script on a newer psalm release.
-vulnClasses:
+vulnTypes:
   - name: callable
     description: Callable name resolved and invoked
   - name: unserialize

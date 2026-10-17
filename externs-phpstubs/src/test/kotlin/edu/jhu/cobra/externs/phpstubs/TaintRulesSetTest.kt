@@ -53,7 +53,7 @@ internal class TaintRulesSetTest {
 
     @Test
     fun `taint rules set declares its own additions`() {
-        assertEquals(setOf(VulnTypeId("xpath")), rules.vocabulary.vulnClasses.keys)
+        assertEquals(setOf(VulnTypeId("xpath")), rules.vocabulary.vulnTypes.keys)
         assertEquals(setOf(OriginId("external")), rules.vocabulary.origins.keys)
         val byOrigin = rules.policy.associate { it.origin to it.enables }
         assertEquals(setOf(VulnTypeId("xpath")), byOrigin.getValue(OriginId("input")))
@@ -156,7 +156,7 @@ internal class TaintRulesSetTest {
                 .single()
         assertEquals(setOf(OriginId("external-input")), getenv.origin)
         val external = mapped.policy.single { it.origin == OriginId("external-input") }
-        assertEquals(VulnClass.entries.map { it.id }.toSet(), external.enables)
+        assertEquals(VulnType.entries.map { it.id }.toSet(), external.enables)
         assertNotNull(mapped.policy.singleOrNull { it.origin == OriginId("user-input") })
     }
 
@@ -164,7 +164,7 @@ internal class TaintRulesSetTest {
 
     private fun sinksOf(entry: ModelEntry): Set<Pair<Port.Argument, String>> =
         entry.body.sinks!!
-            .map { it.port to it.vulnClass.id }
+            .map { it.port to it.vulnType.id }
             .toSet()
 
     private fun checkOf(function: String): ArgumentCheck =

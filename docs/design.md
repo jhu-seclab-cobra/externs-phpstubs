@@ -146,6 +146,6 @@ extension-set error surfaces from the `with` call that mounts it.
 - `index.txt` lists relative document paths, one per line, sorted; blank
   lines and `#` comments are skipped; a path listed twice fails the load
   (commons-phpmodels rule).
-- The bundled `vocabulary.yaml` declares every name `VulnClass` and
+- The bundled `vocabulary.yaml` declares every name `VulnType` and
   `Origin` enumerate, and no other; the psalm mapping lists every kind the
   two psalm-named sets use.

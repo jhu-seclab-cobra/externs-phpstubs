@@ -1,9 +1,9 @@
 # Two-axis vocabulary for taint analysis.
-# vulnClasses: danger categories; every category a bundled set entry or the psalm mapping names
+# vulnTypes: danger categories; every category a bundled set entry or the psalm mapping names
 # must be declared here. provenances: origin colors; every color a
 # source entry, policy.yaml row, or psalm mapping names must be declared here.
 # Adding an entry is a data-file edit — no code change.
-vulnClasses:
+vulnTypes:
   - name: sqli
     description: SQL injection
   - name: cmdi

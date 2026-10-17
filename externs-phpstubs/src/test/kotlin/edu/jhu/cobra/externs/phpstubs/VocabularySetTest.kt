@@ -32,7 +32,7 @@ internal class VocabularySetTest {
 
     @Test
     fun `the policy enables every category under both colors`() {
-        val all = VulnClass.entries.map { it.id }.toSet()
+        val all = VulnType.entries.map { it.id }.toSet()
         assertEquals(Origin.entries.map { it.id }.toSet(), set.policy.map { it.origin }.toSet())
         for (row in set.policy) assertEquals(all, row.enables, row.origin.id)
     }
@@ -40,7 +40,7 @@ internal class VocabularySetTest {
     @Test
     fun `the psalm mapping leaves no psalm name in a mapped set`() {
         val mapping = VocabularySetTest::class.java.getResourceAsStream(StubResources.PSALM_MAPPING)!!.use(CategoryMappingLoader::load)
-        val canonical = VulnClass.entries.map { it.id }.toSet()
+        val canonical = VulnType.entries.map { it.id }.toSet()
         val colors = Origin.entries.map { it.id }.toSet()
         for (root in listOf(StubResources.TAINT, StubResources.TAINT_RULES)) {
             val mapped = DocumentSetLoader.load(StubResources.opener(root), set.vocabulary, mapping)
@@ -48,7 +48,7 @@ internal class VocabularySetTest {
                 val categories =
                     entry.body.sinks
                         .orEmpty()
-                        .map { it.vulnClass } +
+                        .map { it.vulnType } +
                         entry.body.sanitizers
                             .orEmpty()
                             .flatMap { it.categories }

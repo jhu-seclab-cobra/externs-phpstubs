@@ -12,7 +12,7 @@ types: [design-merge.md](design-merge.md). Fold algorithm:
 - **Classes:** `PhpStubs` (final class; companion delegates to the bundled
   instance), `BuiltinRecord<S>` (data class), `SinkFact`, `SourceFact`,
   `SanitizerFact`, `FlowFact`, `CharactersFact`, `ReturnsFact`, `RaisesFact` (data classes),
-  `VulnClass`
+  `VulnType`
   and `Origin` (enums); `Merge`, `Mount`, `MountSequence` (internal,
   [design-merge.md](design-merge.md))
 - **Abstract:** `BuiltinLookup` (interface: every read of one merge),
@@ -129,7 +129,7 @@ for an unconditional statement).
 
 | Type | Own fields | From |
 |------|------------|------|
-| `SinkFact` | `port: Port.Argument`, `vulnClass: VulnTypeId` | one `SinkDecl` |
+| `SinkFact` | `port: Port.Argument`, `vulnType: VulnTypeId` | one `SinkDecl` |
 | `SourceFact` | `origins: Set<OriginId>`, `at: Port.Argument?`, `keys: List<KeyPattern>?` | one `SourceDecl` |
 | `SanitizerFact` | `categories: Set<VulnTypeId>`, `check: ArgumentCheck?` | one `SanitizerDecl` |
 | `FlowFact` | `from: Port.Input`, `to: Port` | one `Propagation` |
@@ -137,10 +137,10 @@ for an unconditional statement).
 | `ReturnsFact` | `kind: ReturnKind` | the `returns` section |
 | `RaisesFact` | `classes: Set<ClassSubject>` | the `raises` section, whole: the empty set states the subject throws none |
 
-### VulnClass, Origin (enums)
+### VulnType, Origin (enums)
 
 **Responsibility:** Compile-time names for the Canonical Vocabulary so a
-consumer filters without spelling a string: `VulnClass.SQLI.id` is
+consumer filters without spelling a string: `VulnType.SQLI.id` is
 `VulnTypeId("sqli")`; `Origin.USER_INPUT.id` is `OriginId("user-input")`.
 Twelve and two constants, each holding its `id`. A repository test asserts
 the bundled vocabulary document declares exactly these names; a category an

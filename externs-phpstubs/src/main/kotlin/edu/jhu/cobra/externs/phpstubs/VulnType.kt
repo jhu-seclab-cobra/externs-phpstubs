@@ -9,7 +9,7 @@ import edu.jhu.cobra.commons.phpmodels.VulnTypeId
  *
  * @property id The interned identifier the vocabulary document declares.
  */
-public enum class VulnClass(
+public enum class VulnType(
     public val id: VulnTypeId,
 ) {
     SQLI(VulnTypeId("sqli")),

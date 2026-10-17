@@ -29,7 +29,7 @@ public data class SinkFact(
     override val owner: ModelSubject,
     override val condition: ArgPattern?,
     val port: Port.Argument,
-    val vulnClass: VulnTypeId,
+    val vulnType: VulnTypeId,
 ) : Fact
 
 /** One production of origin colors: at the result, or at an explicit by-reference argument site. */

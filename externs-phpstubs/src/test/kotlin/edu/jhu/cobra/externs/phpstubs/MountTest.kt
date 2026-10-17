@@ -164,7 +164,7 @@ internal class MountTest {
             VulnTypeId("cmdi"),
             exec.body.sinks!!
                 .single()
-                .vulnClass,
+                .vulnType,
         )
     }
 

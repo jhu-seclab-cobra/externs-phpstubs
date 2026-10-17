@@ -138,7 +138,7 @@ internal class Merge private constructor(
                 }
 
                 OverrideUnit.SINKS -> {
-                    body.sinks.orEmpty().mapTo(sinks) { SinkFact(owner, condition, it.port, it.vulnClass) }
+                    body.sinks.orEmpty().mapTo(sinks) { SinkFact(owner, condition, it.port, it.vulnType) }
                 }
 
                 OverrideUnit.SANITIZERS -> {
