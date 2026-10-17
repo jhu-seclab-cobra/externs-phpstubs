@@ -113,7 +113,7 @@ consumer: fact kind ────────► BuiltinLookup ────► ev
   or nothing; a name that is not a PHP identifier spelling is an argument
   error. Every fact is returned with its condition; the consumer matches
   the condition against the call's arguments with the format library's one
-  matching operation and applies its own rule to an unknown outcome.
+  matching operation and applies its own rule to an undecidable outcome.
 - **With extension sets:** a consumer that ships its own document set
   obtains a second lookup over the bundled sets plus its own, mounted
   after them, from a directory or classpath root. The set follows the
