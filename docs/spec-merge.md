@@ -1,7 +1,7 @@
 # PHP Stubs — Merge Algorithm
 
 Folding the bundled sets, and any extension sets, into the Merge the
-Built-in Lookup reads. Entity vocabulary: [model-lookup.md](model-lookup.md);
+`BuiltinLookup` reads. Entity vocabulary: [model-lookup.md](model-lookup.md);
 format entities: commons-phpmodels `docs/model.md`, `model-conditions.md`,
 `model-sets.md`.
 

@@ -1,6 +1,6 @@
 # PHP Stubs — Lookup Domain Model
 
-Domain semantics of the Built-in Lookup: the sets this library merges, the
+Domain semantics of `BuiltinLookup`: the sets this library merges, the
 vocabulary they end in, the merge, and the records a consumer reads by PHP
 name. The format entities — Model, Matching Subject, Signature, Section,
 Override Unit, Condition, Conditional Entry, Unconditional Entry, Source
@@ -49,7 +49,7 @@ format library's: `extern/commons-phpmodels/docs/model.md`,
   the generated document's placement (`mysqli`, `standard`, `keyword`,
   `scalar`, ...). A subject declared only by a non-generated set has no
   Extension.
-- **Built-in Record** — One subject the Merge holds any Statement for:
+- **`BuiltinRecord`** — One subject the Merge holds any Statement for:
   its PHP spelling, its Extension, its signature when an unconditional
   signature Statement is in force, and its Facts. Existence condition: the
   subject is keyed after the merge. Identity is the subject. One record
@@ -64,7 +64,7 @@ format library's: `extern/commons-phpmodels/docs/model.md`,
   exception classes the subject's own implementation may throw, the whole
   section in one Fact, so the empty set states it throws none). Every Fact of every
   entry is present; the record ranks none of them against a call.
-- **Built-in Lookup** — The two reading modes over one Merge:
+- **`BuiltinLookup`** — The two reading modes over one Merge:
   *exact* — one PHP spelling (`substr`, `mysqli::query`, `PDO`,
   `PHP_INT_MAX`, `PDO::ATTR_ERRMODE`), or owner and name apart, to at most
   one record; *enumeration* — every record of one declaration kind, or
@@ -75,15 +75,15 @@ format library's: `extern/commons-phpmodels/docs/model.md`,
 
 | From | To | Relation | Cardinality | Meaning |
 |------|----|----------|-------------|---------|
-| Built-in Lookup | Merge | reads | 1:1 | One merge per lookup; bundled or bundled plus extensions |
+| `BuiltinLookup` | Merge | reads | 1:1 | One merge per lookup; bundled or bundled plus extensions |
 | Merge | Bundled Set | folds | 1:5 | In Merge Order, under the default Precedence |
 | Merge | Extension Set | folds | 1:N | After the bundled sets, in supplied order |
 | Merge | Statement | holds | 1:N | Exactly one per (subject, condition, unit) key stated by any set |
 | Psalm Mapping | Bundled Set | translates | 1:2 | The taint set and the taint rules set |
 | Canonical Vocabulary | Fact | names | 1:N | Every vulnerability type and source kind a fact carries |
-| Built-in Record | Matching Subject | identifies | 1:1 | PHP spelling folded per kind |
-| Built-in Record | Extension | belongs to | N:0..1 | From the generated set's document placement |
-| Built-in Record | Fact | owns | 1:N | Every fact names the record it was read from |
+| `BuiltinRecord` | Matching Subject | identifies | 1:1 | PHP spelling folded per kind |
+| `BuiltinRecord` | Extension | belongs to | N:0..1 | From the generated set's document placement |
+| `BuiltinRecord` | Fact | owns | 1:N | Every fact names the record it was read from |
 | Fact | Condition | carries | N:0..1 | The condition of the entry that stated it |
 
 ## State Model
@@ -112,7 +112,7 @@ Two Statements with the same (subject, condition, unit) key:
 
 ## Invariants
 
-- A Built-in Record holds a signature or at least one Fact; a declared
+- A `BuiltinRecord` holds a signature or at least one Fact; a declared
   built-in is a record whose signature is in force, and the generated set
   declares one on every entry. A predefined-variable record never holds a
   signature.

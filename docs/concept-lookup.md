@@ -29,9 +29,9 @@ decides.
 - **Inputs:** the generated declaration set, the value rules set, the canonical
   vocabulary and policy, the taint set and the taint rules set with the
   one mapping that translates them; optionally a consumer's extension sets.
-- **Outputs:** one Built-in Record per PHP name; the returns, flows,
+- **Outputs:** one `BuiltinRecord` per PHP name; the returns, flows,
   sources, sinks, sanitizers, and throws of every record enumerable by kind.
-- **Connections:** sets → Merge → Built-in Lookup → consumers.
+- **Connections:** sets → Merge → `BuiltinLookup` → consumers.
 
 **Scope Boundaries**
 - **Owned:** the Canonical Vocabulary, the mapping onto it, the merge
@@ -52,9 +52,9 @@ value-rules/ (manual) ──────────┤
 canonical vocabulary + policy ──┤──► Merge (manual over generated, per subject / condition / section)
 taint/ ──── mapping ────────────┤                       │
 taint-rules/ ── same mapping ───┘                       ▼
-consumer: PHP name ────────► Built-in Lookup ──► Built-in Record ──► signature, returns, flows, sources, sinks, sanitizers, throws
-consumer: declaration kind ─► Built-in Lookup ──► every record of that kind, filtered by the consumer
-consumer: fact kind ────────► Built-in Lookup ──► every fact of that kind, each naming its record
+consumer: PHP name ────────► BuiltinLookup ────► BuiltinRecord ────► signature, returns, flows, sourceFacts, sinkFacts, sanitizerFacts, throws
+consumer: declaration kind ─► BuiltinLookup ────► every record of that kind, filtered by the consumer
+consumer: fact kind ────────► BuiltinLookup ────► every fact of that kind, each naming its record
 ```
 
 **Core Concepts**
@@ -77,10 +77,10 @@ consumer: fact kind ────────► Built-in Lookup ──► every 
 - **Scope:** the Generated Layer, the value rules set, the Canonical
   Vocabulary, the taint set, the taint rules set, then extension sets.
 - **Relationships:** consumes commons-phpmodels document sets; read by the
-  Built-in Lookup.
+  `BuiltinLookup`.
 
-- **Name:** Built-in Record
-- **Definition:** What the Built-in Lookup answers for one PHP name: the
+- **Name:** `BuiltinRecord`
+- **Definition:** What `BuiltinLookup` answers for one PHP name: the
   extension, the signature, and the facts the merge holds for that subject
   — returns, flows, sources, sinks, sanitizers, throws — each carrying the
   condition its entry declared, or none. The same facts are enumerable by
@@ -89,11 +89,11 @@ consumer: fact kind ────────► Built-in Lookup ──► every 
   is a fact-only record (taint-only function, predefined variable).
 - **Relationships:** read from the Merge; identified by its Subject.
 
-- **Name:** Built-in Lookup
+- **Name:** `BuiltinLookup`
 - **Definition:** The entry point consumers use. An exact lookup asks for
   a function, method, class, constant, class constant, or property by its
   PHP spelling — a member either as one `Owner::name` string or as owner
-  and name apart — and is answered with its Built-in Record or nothing.
+  and name apart — and is answered with its `BuiltinRecord` or nothing.
   An enumeration yields every record of one declaration kind, or every
   fact of one fact kind, for the consumer to filter by its own rule.
 - **Scope:** exact lookup by name; enumeration by declaration kind and by

@@ -19,7 +19,7 @@ vocabulary happens once, at this library's merge.
 **System Role**
 The taint document set is the second generated artifact of this library:
 a classpath root laid out by the commons-phpmodels document-set convention,
-merged by this library into its Built-in Records under its own vocabulary mapping
+merged by this library into its `BuiltinRecord`s under its own vocabulary mapping
 onto the Canonical Vocabulary ([concept.md](concept.md)).
 
 **Data Flow**

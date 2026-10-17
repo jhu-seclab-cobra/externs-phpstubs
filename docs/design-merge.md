@@ -1,7 +1,7 @@
 # PHP Stubs — Merge Design
 
-Software structure of the mount and merge machinery behind the Built-in
-Lookup: how each document set becomes a `Mount`, how a `MountSequence`
+Software structure of the mount and merge machinery behind
+`BuiltinLookup`: how each document set becomes a `Mount`, how a `MountSequence`
 threads the vocabulary and classifies failures, and how `Merge` folds the
 mounts into records. Every type here is internal; the public surface is
 [design-lookup.md](design-lookup.md). Fold algorithm:

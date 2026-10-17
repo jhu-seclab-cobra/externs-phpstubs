@@ -20,7 +20,7 @@ mapping serves both at the merge.
 The taint rules document set is the third shipped artifact of this library: a
 classpath root laid out by the commons-phpmodels document-set convention,
 written by hand, kept in psalm's names, and merged after the taint set
-under the same mapping into this library's Built-in Records.
+under the same mapping into this library's `BuiltinRecord`s.
 
 **Data Flow**
 - **Inputs:** the Argus sink lists, the psalm kind names, and the list

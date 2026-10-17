@@ -23,17 +23,17 @@ The format, its decoding, and its validation belong to commons-phpmodels.
 **Data Flow**
 - **Inputs:** upstream stub sources, psalm's taint data, and the Argus
   lists (offline); five bundled document sets.
-- **Outputs:** one Built-in Record per PHP name: extension, signature, flows,
+- **Outputs:** one `BuiltinRecord` per PHP name: extension, signature, flows,
   sources, sinks, sanitizers, and throws in the canonical vocabulary; the same facts enumerable by kind.
 - **Connections:** upstream stubs → extraction → model documents; psalm
   taint data → extraction, Argus lists → review → document sets; all sets
-  → [commons-phpmodels decode] → merge → Built-in Lookup → consumers.
+  → [commons-phpmodels decode] → merge → `BuiltinLookup` → consumers.
 
 **Scope Boundaries**
 - **Owned:** the generated model documents, the language-construct
   document, extension provenance, document discovery, the
   taint sets in psalm's names, the value rules set, every shipped set's
-  provenance, the Canonical Vocabulary, the merge, and the Built-in Lookup.
+  provenance, the Canonical Vocabulary, the merge, and `BuiltinLookup`.
 - **Not Owned:** the model format, the document-set convention, their
   validation, and condition matching (commons-phpmodels); a call's
   argument values, the rule for an undecidable condition, computing a
@@ -54,10 +54,10 @@ Offline (per upstream release):
 Runtime:
     models/** ──manifest──► commons-phpmodels decode ──► generated declaration set
     value-rules/** ─────────────────────────────────────┐
-    vocabulary (canonical) ─────────────────────────────┤──► this library's merge ──► Built-in Records
+    vocabulary (canonical) ─────────────────────────────┤──► this library's merge ──► BuiltinRecord
     taint/** + mapping onto canonical names ────────────┤                                  │
     taint-rules/** + the same mapping ──────────────────┘                                  ▼
-                                                                                   Built-in Lookup by PHP name
+                                                                                   BuiltinLookup by PHP name
 ```
 
 **Core Concepts**
@@ -92,7 +92,7 @@ Runtime:
   hand-declared `language/` and `manual/` documents), and the taint set.
 - **Relationships:** produced by the Extraction Pipeline; the models tree
   is mounted whole as the first set of the merge and carries the extension
-  each Built-in Record reports.
+  each `BuiltinRecord` reports.
 
 - **Name:** Extension Provenance
 - **Definition:** The PHP extension that provides a declaration
@@ -120,8 +120,8 @@ Runtime:
   its Extension Provenance.
 
 - **Name:** Lookup Surface
-- **Definition:** The Canonical Vocabulary, Merge, Built-in Record, and
-  Built-in Lookup ([concept-lookup.md](concept-lookup.md)): how the sets
+- **Definition:** The Canonical Vocabulary, Merge, `BuiltinRecord`, and
+  `BuiltinLookup` ([concept-lookup.md](concept-lookup.md)): how the sets
   merge and how a consumer reads them.
 - **Relationships:** built over the bundled document sets.
 
@@ -151,7 +151,7 @@ Runtime:
   between sets, is a load failure at the consumer's start or in this
   repository's tests — never a silent miss. This library adds no rule of
   the format.
-- **With a consumer:** a name lookup returns one Built-in Record or
+- **With a consumer:** a name lookup returns one `BuiltinRecord` or
   nothing. Signature fields and constant values are read as
   commons-phpmodels types; flows, sources, sinks, sanitizers, and throws are read
   from the record in the Canonical Vocabulary, conditions attached. The
@@ -177,7 +177,7 @@ Runtime:
 
 ## 4. Scenarios
 
-- **Typical:** an analysis meets `substr($s, 1)`. The Built-in Lookup
+- **Typical:** an analysis meets `substr($s, 1)`. `BuiltinLookup`
   answers the record with extension `standard`, its signature, and the
   flow from the first argument to the result.
 - **Boundary:** a generated document carries a union return type. The

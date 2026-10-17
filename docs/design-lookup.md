@@ -1,6 +1,6 @@
 # PHP Stubs — Lookup Design
 
-Software structure of the Built-in Lookup: the merge over the bundled sets,
+Software structure of `BuiltinLookup`: the merge over the bundled sets,
 the record and fact types a consumer reads, and the `PhpStubs` facade.
 Domain semantics: [model-lookup.md](model-lookup.md). Mount and merge
 types: [design-merge.md](design-merge.md). Fold algorithm:
