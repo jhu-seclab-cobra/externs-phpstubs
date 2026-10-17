@@ -49,7 +49,7 @@ Offline (per upstream release):
                                                 models/{language,manual}/*.yaml (hand-declared)
     psalm taint data ───────────extraction──► taint/** (document set)
     Argus sink lists ───────────review──────► taint-rules/** (document set)
-    reviewed value semantics ───review──────► value-rules/** (document set)
+    reviewed value units ───────review──────► value-rules/** (document set)
 
 Runtime:
     models/** ──manifest──► commons-phpmodels decode ──► generated declaration set

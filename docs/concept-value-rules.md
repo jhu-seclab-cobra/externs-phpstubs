@@ -1,7 +1,7 @@
 # PHP Stubs — Value Rules Document Set Concept
 
 Extends [concept.md](concept.md) with the one concern it does not cover:
-hand-maintained value semantics that the generated declarations lack or
+hand-maintained value units that the generated declarations lack or
 state wrongly. Model entries, subjects, and the generated layer are
 defined there and used here unchanged; the taint counterpart is
 [concept-taint-rules.md](concept-taint-rules.md). Set provenance and
@@ -10,7 +10,7 @@ precedence are defined in commons-phpmodels `docs/concept-provenance.md`.
 ## 1. Context
 
 **Problem Statement**
-The generated declarations carry a value-semantics unit (returns with
+The generated declarations carry a value unit (returns with
 propagation and optionally characters) only where psalm annotates a flow. For most built-ins no
 annotation exists, so a consumer falls back to its conservative default:
 an untyped result that every argument influences. Where an annotation
@@ -22,12 +22,12 @@ consumer reads them, not inside one analyzer's configuration.
 **System Role**
 The value rules document set is the fourth shipped artifact of this
 library: a hand-maintained classpath root in the commons-phpmodels
-document-set convention holding value-semantics units only, declared
+document-set convention holding value units only, declared
 manually verified, so that the merge, ranking sets by verification, lets
 each unit override the generated one for its subject.
 
 **Data Flow**
-- **Inputs:** hand-reviewed value-semantics units, checked against the
+- **Inputs:** hand-reviewed value units, checked against the
   generated declarations and the PHP manual (offline).
 - **Outputs:** one document set: manifest, provenance, and value documents
   grouped by PHP manual area.
@@ -50,7 +50,7 @@ each unit override the generated one for its subject.
 hand review against models/ and the PHP manual ──────────────► value-rules/
                                                                     ├── index.txt
                                                                     ├── provenance.yaml  (manual)
-                                                                    └── <area>.yaml      (value-semantics units only)
+                                                                    └── <area>.yaml      (value units only)
 merge: models/ (generated) ◄──ranked below── value-rules/ (manual), per subject and unit
 ```
 
@@ -58,7 +58,7 @@ merge: models/ (generated) ◄──ranked below── value-rules/ (manual), pe
 
 - **Name:** Value Rules Document Set
 - **Definition:** The bundled hand-maintained document set whose every
-  entry is a signature-less model asserting exactly one value-semantics
+  entry is a signature-less model asserting exactly one value
   unit: a returns classification, the exhaustive flow set into the
   result, and optionally the bytes the result may hold. Its provenance declares it manually verified.
 - **Scope:** built-ins whose generated entry has no unit, whose generated

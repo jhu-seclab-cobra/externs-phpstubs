@@ -139,7 +139,7 @@ Two Statements with the same (subject, condition, unit) key:
   is deterministic.
 - A Fact always names its owner; a fact never exists apart from a record.
 - The value rules set corrects only subjects the generated set declares,
-  and never repeats a value-semantics unit the generated set already states.
+  and never repeats a value unit the generated set already states.
 
 ## Cross-Structure Contracts
 

@@ -1,4 +1,4 @@
-# Hand-maintained value rules set: value semantics the generated declarations lack or state wrongly.
+# Hand-maintained value rules set: value units the generated declarations lack or state wrongly.
 # Runtime I/O boundary (PHP manual: Info, Readline, Filter, Network, Error handling).
 # An entry whose unit differs from the generated one carries the PHP manual reason above it.
 

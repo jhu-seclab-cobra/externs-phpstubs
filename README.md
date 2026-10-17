@@ -1,6 +1,6 @@
 # COBRA.EXTERNS.PHPSTUBS
 
-> PHP built-in lookup for static analysis: declarations, value semantics, and taint facts in one record per built-in.
+> PHP built-in lookup for static analysis: declarations, value units, and taint facts in one record per built-in.
 
 Lookup of PHP built-in functions, classes, methods, constants, properties, and predefined variables by their PHP spelling. Each record merges the generated declarations (extension, signature), the hand-maintained value rules, psalm's taint data, and the hand-maintained taint rules into one `BuiltinRecord`: the signature in force plus every sink, source, sanitizer, flow, characters, returns, and raises fact, each tagged with the argument condition it holds under. Taint facts speak one canonical vocabulary; a consumer holds no set, mapping, or precedence.
 
@@ -94,7 +94,7 @@ val extended = PhpStubs.with(Path.of("models/site-rules"))
 | Position | Root | Content | Provenance |
 |----------|------|---------|------------|
 | 0 | `models/` | Generated declarations: signature and raises per entry, extension from document placement | generated |
-| 1 | `value-rules/` | Hand-maintained value semantics beyond or against the generated ones, checked against the PHP manual | manual |
+| 1 | `value-rules/` | Hand-maintained value units beyond or against the generated ones, checked against the PHP manual | manual |
 | 2 | `vocabulary/` | The canonical danger categories, origin colors, and policy; the psalm mapping | manual |
 | 3 | `taint/` | psalm's sinks, sanitizers, sources in psalm's names, translated by the psalm mapping | generated |
 | 4 | `taint-rules/` | Hand-maintained sinks (Argus lists), escapes, and sources psalm lacks, translated by the same mapping | manual |

@@ -31,7 +31,7 @@ php-src release, beside the upstream stub conversion
   Declaration in the document of its extension, rewriting the hierarchy,
   signature, and raises of a generated entry.
 - **Not Owned:** the format of a raises section and what it asserts
-  (commons-phpmodels `docs/model.md`); value semantics, which the value
+  (commons-phpmodels `docs/model.md`); value units, which the value
   rules set states; the hand-declared `language/` and `manual/` documents.
 
 ## 2. Concepts
