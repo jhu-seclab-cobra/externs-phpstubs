@@ -75,7 +75,7 @@ format library's: `extern/commons-phpmodels/docs/model.md`,
 
 | From | To | Relation | Cardinality | Meaning |
 |------|----|----------|-------------|---------|
-| `BuiltinLookup` | Merge | reads | 1:1 | One merge per lookup; bundled or bundled plus extensions |
+| `BuiltinLookup` | Merge | reads | 1:1 | One merge per lookup; bundled or bundled plus consumer sets |
 | Merge | Bundled Set | folds | 1:5 | In Merge Order, under the default Precedence |
 | Merge | Consumer Set | folds | 1:N | After the bundled sets, in supplied order |
 | Merge | Statement | holds | 1:N | Exactly one per (subject, condition, unit) key stated by any set |

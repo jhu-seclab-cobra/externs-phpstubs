@@ -26,7 +26,7 @@ types: [design-merge.md](design-merge.md). Fold algorithm:
   (one per set, in Merge Order) into records; a `BuiltinRecord` owns its
   `Fact`s; every `Fact` names its owner subject and its condition. The
   companion holds the bundled `PhpStubs`; `with` builds a second one from
-  the bundled mounts plus extension mounts. All arrows one-way into the
+  the bundled mounts plus consumer set mounts. All arrows one-way into the
   format library.
 - **Exceptions:** [design.md](design.md) Exception / Error Types.
 - **Dependency roles:** Facade: `PhpStubs`. Contract: `BuiltinLookup`.
