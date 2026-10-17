@@ -1,6 +1,6 @@
 # externs-phpstubs
 
-> Read-only Kotlin lookup of PHP builtins: one `BuiltinRecord` per function, class, method, constant, class constant, property, or predefined variable, merging the generated declarations, the value rules, psalm's taint data, and the taint rules into the signature in force plus every fact, each tagged with its argument condition, in one canonical vocabulary.
+> Read-only Kotlin lookup of PHP builtins: one `BuiltinRecord` per function, class, method, constant, class constant, property, or predefined variable, merging the generated set, the value rules, psalm's taint data, and the taint rules into the signature in force plus every fact, each tagged with its argument condition, in one canonical vocabulary.
 
 `PhpStubs` is the entry point: its companion is the lookup over the bundled sets; `PhpStubs.with(...)` builds a lookup that also mounts extension sets. Lookup names go through the commons-phpmodels subject creators: functions, classes, and methods fold case and drop a leading `\`; constants keep their case.
 
@@ -109,7 +109,7 @@ Every fact: **`owner: ModelSubject`**, **`condition: ArgPattern?`** (`null` for 
 
 ### StubResources (object)
 
-**`MODELS`** (`/models/`, generated declarations), **`VALUE_RULES`** (`/value-rules/`, manual value units), **`VOCABULARY`** (`/vocabulary/`, the canonical vocabulary and policy, manual), **`TAINT`** (`/taint/`, psalm's data in psalm's names, generated), **`TAINT_RULES`** (`/taint-rules/`, manual additions in psalm's names, adds `xpath` and `external`), **`PSALM_MAPPING`** (`/vocabulary/psalm-mapping.yaml`). Merge order is that listing. **`opener(root: String): ResourceOpener`** -- `root + path` on this module's classpath; trailing slash optional; `null` for an absent path.
+**`MODELS`** (`/models/`, generated set), **`VALUE_RULES`** (`/value-rules/`, manual value units), **`VOCABULARY`** (`/vocabulary/`, the canonical vocabulary and policy, manual), **`TAINT`** (`/taint/`, psalm's data in psalm's names, generated), **`TAINT_RULES`** (`/taint-rules/`, manual additions in psalm's names, adds `xpath` and `external`), **`PSALM_MAPPING`** (`/vocabulary/psalm-mapping.yaml`). Merge order is that listing. **`opener(root: String): ResourceOpener`** -- `root + path` on this module's classpath; trailing slash optional; `null` for an absent path.
 
 ```kotlin
 val canonical = DocumentSetLoader.load(StubResources.opener(StubResources.VOCABULARY)).vocabulary

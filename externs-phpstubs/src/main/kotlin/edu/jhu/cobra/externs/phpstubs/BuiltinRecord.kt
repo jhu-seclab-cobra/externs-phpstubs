@@ -19,7 +19,7 @@ import edu.jhu.cobra.commons.phpmodels.SignatureInfo.TypedSignature
  *
  * @param S The subject kind, so a lookup result exposes its identity fields without a cast.
  * @property subject The declaration the record identifies.
- * @property extension The PHP extension of the generated declaration, or null when no generated set declares it.
+ * @property extension The PHP extension of the generated entry, or null when no generated set declares it.
  * @property signature The unconditional signature statement in force, or null for a fact-only record.
  * @property returns Every returns fact, in statement order.
  * @property flows Every flow fact, in statement order.

@@ -27,7 +27,7 @@ import kotlin.test.assertTrue
  * - `value rules set loads without a vocabulary` — verifies the set names no vulnerability type or source kind
  * - `value rules set is manually verified` — verifies the set's provenance
  * - `every value rules entry is an unsigned entry asserting only the value unit` — verifies the shape rule
- * - `every value rules subject is a generated declaration` — verifies existence in the generated set
+ * - `every value rules subject is a generated entry` — verifies existence in the generated set
  * - `no value rules unit repeats the generated unit` — verifies each unconditional unit differs from the generated one
  * - `mode-switching subjects carry a conditional entry and an unconditional one` — verifies print_r and var_export
  * - `representative units follow the PHP manual` — verifies typed results and flow sets
@@ -71,7 +71,7 @@ internal class ValueRulesSetTest {
     }
 
     @Test
-    fun `every value rules subject is a generated declaration`() {
+    fun `every value rules subject is a generated entry`() {
         val declared = generated.entries.map { it.subject }.toSet()
         val missing = rules.entries.map { it.subject }.filter { it !in declared }
         assertTrue(missing.isEmpty(), "Subjects absent from the generated set: $missing")

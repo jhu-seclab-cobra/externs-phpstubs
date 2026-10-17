@@ -64,6 +64,6 @@ The set is edited by hand. A new rule states one subject the generated set
 declares, with the whole unit. A rule whose unit differs from the
 generated one, or that narrows the declared return type, is checked
 against the PHP manual and carries the reason as a comment; a rule the
-manual shows the generated declaration already states correctly is not
+manual shows the generated entry already states correctly is not
 added. A subject the generated set lacks is an extraction task in `todo.md`,
 never a rule.

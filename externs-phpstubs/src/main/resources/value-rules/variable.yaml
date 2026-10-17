@@ -1,4 +1,4 @@
-# Hand-maintained value rules set: value units the generated declarations lack or state wrongly.
+# Hand-maintained value rules set: value units the generated set lacks or states wrongly.
 # Variable handling (PHP manual: Variable handling; isset and empty language constructs).
 # An entry whose unit differs from the generated one carries the PHP manual reason above it.
 

@@ -4,7 +4,7 @@ import edu.jhu.cobra.commons.phpmodels.ResourceOpener
 
 /** The classpath roots of the document sets this module ships, the psalm mapping, and the opener over a root. */
 public object StubResources {
-    /** Root of the generated declaration set: one signature-bearing model per builtin. */
+    /** Root of the generated set: one signature-bearing model per builtin. */
     public const val MODELS: String = "/models/"
 
     /** Root of the taint set: sink facts, sanitizer facts, and source facts in psalm's names. */
@@ -17,8 +17,8 @@ public object StubResources {
     public const val TAINT_RULES: String = "/taint-rules/"
 
     /**
-     * Root of the hand-maintained value rules set: value units the generated declarations
-     * lack or state wrongly, reviewed against the PHP manual. Names no vulnerability type or source kind.
+     * Root of the hand-maintained value rules set: value units the generated set
+     * lacks or states wrongly, reviewed against the PHP manual. Names no vulnerability type or source kind.
      */
     public const val VALUE_RULES: String = "/value-rules/"
 

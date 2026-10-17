@@ -53,7 +53,7 @@ Offline (per upstream release):
     reviewed value units ───────review──────► value-rules/** (document set)
 
 Runtime:
-    models/** ──manifest──► commons-phpmodels decode ──► generated declaration set
+    models/** ──manifest──► commons-phpmodels decode ──► generated set
     value-rules/** ─────────────────────────────────────┐
     vocabulary (canonical) ─────────────────────────────┤──► this library's merge ──► BuiltinRecord
     taint/** + mapping onto canonical names ────────────┤                                  │
@@ -156,7 +156,7 @@ Runtime:
   nothing. Signature fields and constant values are read as
   commons-phpmodels types; flows, source facts, sink facts, sanitizer facts,
   and throws are read from the record in the Canonical Vocabulary,
-  conditions attached. The consumer holds no set, layer, mapping, or
+  conditions attached. The consumer holds no set, mapping, or
   precedence; which set stated a fact is answered on request, never
   required.
 - **With the Extraction Pipeline:** generated documents are reproducible

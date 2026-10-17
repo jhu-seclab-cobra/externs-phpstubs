@@ -26,7 +26,7 @@ with its condition attached, and the consumer, which alone knows the call,
 decides.
 
 **Data Flow**
-- **Inputs:** the generated declaration set, the value rules set, the canonical
+- **Inputs:** the generated set, the value rules set, the canonical
   vocabulary and policy, the taint set and the taint rules set with the
   one mapping that translates them; optionally a consumer's extension sets.
 - **Outputs:** one `BuiltinRecord` per PHP name; the returns, flows,
@@ -48,7 +48,7 @@ decides.
 
 **Conceptual Diagram**
 ```
-generated declaration set ──────┐
+generated set ──────────────────┐
 value-rules/ (manual) ──────────┤
 canonical vocabulary + policy ──┤──► Merge (manual over generated, per subject / condition / section)
 taint/ ──── mapping ────────────┤                       │

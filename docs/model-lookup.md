@@ -11,7 +11,7 @@ format library's: `extern/commons-phpmodels/docs/model.md`,
 ## Entities
 
 - **Bundled Set** — One of the five document sets this library ships:
-  the generated declaration set, the value rules set, the Canonical
+  the generated set, the value rules set, the Canonical
   Vocabulary set, the taint set, the taint rules set. Identity is its
   resource root. Each carries a Set Provenance; generated for the
   declaration set and the taint set, manual for the others.

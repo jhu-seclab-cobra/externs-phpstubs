@@ -3,7 +3,7 @@
 ## 1. Context
 
 **Problem Statement**
-The generated declaration set states facts about PHP builtins that only
+The generated set states facts about PHP builtins that only
 the interpreter's own source decides: which class a builtin class extends,
 which parameters a builtin function declares, and which exception classes
 its implementation may throw. The upstream stub conversion that seeded the
@@ -13,7 +13,7 @@ declarations the interpreter's argument metadata is generated from, and its
 C sources are the implementations.
 
 **System Role**
-The offline producers that rewrite the generated declaration set from one
+The offline producers that rewrite the generated set from one
 php-src release, beside the upstream stub conversion
 ([concept.md](concept.md), Extraction Pipeline).
 

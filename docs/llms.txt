@@ -1,6 +1,6 @@
 # externs-phpstubs
 
-> Read-only Kotlin lookup of PHP builtins: one `BuiltinRecord` per function, class, method, constant, class constant, property, or predefined variable, merging the generated declarations, the value rules, psalm's taint data, and the taint rules into the signature in force plus every fact, each tagged with its argument condition, in one canonical vocabulary.
+> Read-only Kotlin lookup of PHP builtins: one `BuiltinRecord` per function, class, method, constant, class constant, property, or predefined variable, merging the generated set, the value rules, psalm's taint data, and the taint rules into the signature in force plus every fact, each tagged with its argument condition, in one canonical vocabulary.
 
 `PhpStubs` is the entry point: its companion is the lookup over the bundled sets; `PhpStubs.with(...)` builds a lookup that also mounts extension sets. Lookup names go through the commons-phpmodels subject creators: functions, classes, and methods fold case and drop a leading `\`; constants keep their case.
 

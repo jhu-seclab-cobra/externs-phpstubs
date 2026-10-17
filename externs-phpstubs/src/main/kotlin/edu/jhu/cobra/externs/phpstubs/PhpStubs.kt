@@ -18,7 +18,7 @@ import java.nio.file.Path
 // The bundled merge: built on the first access to PhpStubs and shared by every later lookup.
 private val bundled: PhpStubs = PhpStubs(bundledMounts())
 
-// Merge order: generated declarations, value rules, canonical vocabulary, taint (mapped), taint rules (mapped).
+// Merge order: generated set, value rules, canonical vocabulary, taint (mapped), taint rules (mapped).
 private fun bundledMounts(): List<Mount> {
     val mapping =
         StubResources::class.java.getResourceAsStream(StubResources.PSALM_MAPPING)?.use(VocabularyMappingLoader::load)

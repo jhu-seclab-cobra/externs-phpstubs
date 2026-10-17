@@ -1,8 +1,8 @@
 # PHP Stubs — Value Rules Document Set Concept
 
 Extends [concept.md](concept.md) with the one concern it does not cover:
-hand-maintained value units that the generated declarations lack or
-state wrongly. Model entries, subjects, and the generated layer are
+hand-maintained value units that the generated set lacks or
+states wrongly. Model entries, subjects, and the generated layer are
 defined there and used here unchanged; the taint counterpart is
 [concept-taint-rules.md](concept-taint-rules.md). Set provenance and
 precedence are defined in commons-phpmodels `docs/concept-provenance.md`.
@@ -10,13 +10,13 @@ precedence are defined in commons-phpmodels `docs/concept-provenance.md`.
 ## 1. Context
 
 **Problem Statement**
-The generated declarations carry a value unit (returns with
+The generated set carries a value unit (returns with
 propagation and optionally characters) only where psalm annotates a flow. For most builtins no
 annotation exists, so a consumer falls back to its conservative default:
 an unknown value of any type that every argument influences. Where an annotation
 exists it is sometimes wider or narrower than the flow the PHP manual
 supports. The corrections are consumer-independent facts about PHP
-builtins, so they belong beside the generated declarations, where every
+builtins, so they belong beside the generated set, where every
 consumer reads them, not inside one analyzer's configuration.
 
 **System Role**
@@ -28,7 +28,7 @@ each unit override the generated one for its subject.
 
 **Data Flow**
 - **Inputs:** hand-reviewed value units, checked against the
-  generated declarations and the PHP manual (offline).
+  generated set and the PHP manual (offline).
 - **Outputs:** one document set: manifest, provenance, and value documents
   grouped by PHP manual area.
 - **Connections:** review → value rules document set →
@@ -75,7 +75,7 @@ merge: models/ (generated) ◄──ranked below── value-rules/ (manual), pe
 - **Scope:** function and method subjects; an optional condition on the
   argument values states the mode of a mode-switching builtin.
 - **Relationships:** a Model Entry; its Subject must exist in the
-  generated declarations (the set's own rule, checked by the repository
+  generated set (the set's own rule, checked by the repository
   test: a value unit for an undeclared subject would produce a
   signature-less record).
 
@@ -85,7 +85,7 @@ merge: models/ (generated) ◄──ranked below── value-rules/ (manual), pe
   rule. Recorded as a comment above the entry, since the format rejects
   any key it does not define.
 - **Scope:** every differing or corrected entry; an entry that only adds a
-  unit the generated declaration lacks carries none.
+  unit the generated entry lacks carries none.
 - **Relationships:** documents a Value Rule; a rule the manual confirms as
   already generated correctly is dropped, not annotated.
 
@@ -101,7 +101,7 @@ merge: models/ (generated) ◄──ranked below── value-rules/ (manual), pe
 ## 3. Contracts & Flow
 
 **Data Contracts**
-- **With the generated declarations:** every subject the set states has a
+- **With the generated set:** every subject the set states has a
   generated entry; no default-branch unit equals the generated unit of the
   same subject.
 - **With the merge:** this library mounts the set unmapped; the set names

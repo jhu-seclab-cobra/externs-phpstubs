@@ -2,7 +2,7 @@
 
 > PHP builtin lookup for static analysis: declarations, value units, and taint facts in one record per builtin.
 
-Lookup of PHP builtin functions, classes, methods, constants, properties, and predefined variables by their PHP spelling. Each record merges the generated declarations (extension, signature), the hand-maintained value rules, psalm's taint data, and the hand-maintained taint rules into one `BuiltinRecord`: the signature in force plus every sink, source, sanitizer, flow, characters, returns, and throws fact, each tagged with the argument condition it holds under. Taint facts speak one canonical vocabulary; a consumer holds no set, mapping, or precedence.
+Lookup of PHP builtin functions, classes, methods, constants, properties, and predefined variables by their PHP spelling. Each record merges the generated set (extension, signature), the hand-maintained value rules, psalm's taint data, and the hand-maintained taint rules into one `BuiltinRecord`: the signature in force plus every sink, source, sanitizer, flow, characters, returns, and throws fact, each tagged with the argument condition it holds under. Taint facts speak one canonical vocabulary; a consumer holds no set, mapping, or precedence.
 
 [![codecov](https://codecov.io/gh/jhu-seclab-cobra/externs-phpstubs/branch/main/graph/badge.svg)](https://codecov.io/gh/jhu-seclab-cobra/externs-phpstubs)
 ![Kotlin JVM](https://img.shields.io/badge/Kotlin%20JVM-2.4.20%20%7C%20JVM%2021%2B-blue?logo=kotlin)
@@ -81,7 +81,7 @@ val extended = PhpStubs.with(Path.of("models/site-rules"))
 
 **`PhpStubs`** -- one `BuiltinLookup` over one merge. The companion is the lookup over the bundled sets, built on first access and shared. `with(vararg roots: String)`, `with(vararg dirs: Path)`, and `plus` build a second lookup that mounts extension sets after the bundled ones, in order; a set without `provenance.yaml` mounts as manual.
 
-**`BuiltinRecord<S>`** -- `(subject, extension: String?, signature: SignatureInfo?, returns, flows, characters, sourceFacts, sinkFacts, sanitizerFacts, throws)`. Typed accessors: `callableSignature` (function, method), `classSignature` (class), `typedSignature` (constant, class constant), `propertySignature` (property). `extension` is the PHP extension of the generated declaration, `null` for a subject only a hand-maintained set states.
+**`BuiltinRecord<S>`** -- `(subject, extension: String?, signature: SignatureInfo?, returns, flows, characters, sourceFacts, sinkFacts, sanitizerFacts, throws)`. Typed accessors: `callableSignature` (function, method), `classSignature` (class), `typedSignature` (constant, class constant), `propertySignature` (property). `extension` is the PHP extension of the generated entry, `null` for a subject only a hand-maintained set states.
 
 **`Fact`** -- `SinkFact(port, vulnType)`, `SourceFact(sourceKinds, at, keys)`, `SanitizerFact(vulnTypes, check)`, `FlowFact(from, to)`, `CharactersFact(bound)`, `ReturnsFact(kind)`, `ThrowsFact(classes)`; each carries `owner` and `condition: ArgPattern?`. A `ThrowsFact` with no classes states the call throws none; a record without one asserts nothing about throws. The record ranks nothing: a consumer matches each condition against its call arguments and applies its own rule to an undecidable outcome.
 
@@ -93,7 +93,7 @@ val extended = PhpStubs.with(Path.of("models/site-rules"))
 
 | Position | Root | Content | Provenance |
 |----------|------|---------|------------|
-| 0 | `models/` | Generated declarations: signature and throws per entry, extension from document placement | generated |
+| 0 | `models/` | Generated set: signature and throws per entry, extension from document placement | generated |
 | 1 | `value-rules/` | Hand-maintained value units beyond or against the generated ones, checked against the PHP manual | manual |
 | 2 | `vocabulary/` | The canonical vulnerability types, source kinds, and policy; the psalm mapping | manual |
 | 3 | `taint/` | psalm's sink facts, sanitizer facts, and source facts in psalm's names, translated by the psalm mapping | generated |

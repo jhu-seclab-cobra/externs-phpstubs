@@ -1,8 +1,8 @@
-# Hand-maintained value rules set: value units the generated declarations lack or state wrongly.
+# Hand-maintained value rules set: value units the generated set lacks or states wrongly.
 # Database access (PHP manual: MySQLi, PDO, PostgreSQL, SQLite3).
 # An entry whose unit differs from the generated one carries the PHP manual reason above it.
 
-# PHP manual: returns bool; the generated declaration's bool return type is confirmed.
+# PHP manual: returns bool; the generated entry's bool return type is confirmed.
 - subject: {function: mysqli_multi_query}
   returns: bool
   propagation: [{from: argument(1), to: return}]
@@ -13,7 +13,7 @@
 - subject: {function: mysqli_real_escape_string}
   returns: str
   propagation: [{from: argument(1), to: return}]
-# PHP manual: returns bool; the generated declaration's bool return type is confirmed.
+# PHP manual: returns bool; the generated entry's bool return type is confirmed.
 - subject: {function: mysqli_real_query}
   returns: bool
   propagation: [{from: argument(1), to: return}]
