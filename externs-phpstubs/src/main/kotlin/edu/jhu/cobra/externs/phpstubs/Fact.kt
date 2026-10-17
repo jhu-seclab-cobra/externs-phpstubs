@@ -60,7 +60,7 @@ public data class FlowFact(
     val to: Port,
 ) : Fact
 
-/** The classification of a call's result. */
+/** The return kind of a call's result. */
 public data class ReturnsFact(
     override val owner: ModelSubject,
     override val condition: ArgPattern?,

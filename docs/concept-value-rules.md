@@ -59,7 +59,7 @@ merge: models/ (generated) ◄──ranked below── value-rules/ (manual), pe
 - **Name:** Value Rules Document Set
 - **Definition:** The bundled hand-maintained document set whose every
   entry is a signature-less model asserting exactly one value
-  unit: a returns classification, the exhaustive flow set into the
+  unit: a return kind, the exhaustive flow set into the
   result, and optionally the bytes the result may hold. Its provenance declares it manually verified.
 - **Scope:** builtins whose generated entry has no unit, whose generated
   unit the PHP manual contradicts, and mode-switching builtins that need
@@ -70,7 +70,7 @@ merge: models/ (generated) ◄──ranked below── value-rules/ (manual), pe
 - **Name:** Value Rule
 - **Definition:** One entry of the set. Under the format's coupling rule,
   a hand-written entry without a signature asserts the unit exhaustively:
-  the returns classification and every argument-to-result flow, with an
+  the return kind and every argument-to-result flow, with an
   absent flow set meaning the result is unrelated to the arguments.
 - **Scope:** function and method subjects; an optional condition on the
   argument values states the mode of a mode-switching builtin.
