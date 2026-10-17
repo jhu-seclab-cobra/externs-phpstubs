@@ -8,7 +8,7 @@ import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 /**
- * Tests for the hand-declared documents under `models/manual/`: built-ins php-src 8.5.11 does not declare.
+ * Tests for the hand-declared documents under `models/manual/`: builtins php-src 8.5.11 does not declare.
  *
  * - `manual documents declare functions removed before PHP 8` — verifies the removed functions under `standard`
  *   and `mysql`

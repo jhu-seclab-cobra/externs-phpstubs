@@ -4,7 +4,7 @@ import edu.jhu.cobra.commons.phpmodels.ResourceOpener
 
 /** The classpath roots of the document sets this module ships, the psalm mapping, and the opener over a root. */
 public object StubResources {
-    /** Root of the generated declaration set: one signature-bearing model per built-in. */
+    /** Root of the generated declaration set: one signature-bearing model per builtin. */
     public const val MODELS: String = "/models/"
 
     /** Root of the taint set: sink facts, sanitizer facts, and source facts in psalm's names. */

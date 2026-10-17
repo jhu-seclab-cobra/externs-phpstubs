@@ -113,7 +113,7 @@ Two Statements with the same (subject, condition, unit) key:
 ## Invariants
 
 - A `BuiltinRecord` holds a signature or at least one Fact; a declared
-  built-in is a record whose signature is in force, and the generated set
+  builtin is a record whose signature is in force, and the generated set
   declares one on every entry. A predefined-variable record never holds a
   signature.
 - The signature Statement is unconditional: a conditional entry that
@@ -152,7 +152,7 @@ Two Statements with the same (subject, condition, unit) key:
 - **With the taint sets.** A vulnerability type or source kind a psalm-named set introduces
   is declared in that set's vocabulary document and given a mapping row;
   an unmapped kind fails the merge.
-- **With consumers.** A consumer names a built-in by its PHP spelling and
+- **With consumers.** A consumer names a builtin by its PHP spelling and
   reads a record; it holds no set, mapping, vocabulary, or precedence.
   Call Arguments are the consumer's conversion; the consumer matches each
   Fact's Condition and applies its own rule to an undecidable outcome.

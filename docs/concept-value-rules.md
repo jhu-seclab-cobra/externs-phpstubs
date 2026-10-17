@@ -11,12 +11,12 @@ precedence are defined in commons-phpmodels `docs/concept-provenance.md`.
 
 **Problem Statement**
 The generated declarations carry a value unit (returns with
-propagation and optionally characters) only where psalm annotates a flow. For most built-ins no
+propagation and optionally characters) only where psalm annotates a flow. For most builtins no
 annotation exists, so a consumer falls back to its conservative default:
 an untyped result that every argument influences. Where an annotation
 exists it is sometimes wider or narrower than the flow the PHP manual
 supports. The corrections are consumer-independent facts about PHP
-built-ins, so they belong beside the generated declarations, where every
+builtins, so they belong beside the generated declarations, where every
 consumer reads them, not inside one analyzer's configuration.
 
 **System Role**
@@ -61,8 +61,8 @@ merge: models/ (generated) ◄──ranked below── value-rules/ (manual), pe
   entry is a signature-less model asserting exactly one value
   unit: a returns classification, the exhaustive flow set into the
   result, and optionally the bytes the result may hold. Its provenance declares it manually verified.
-- **Scope:** built-ins whose generated entry has no unit, whose generated
-  unit the PHP manual contradicts, and mode-switching built-ins that need
+- **Scope:** builtins whose generated entry has no unit, whose generated
+  unit the PHP manual contradicts, and mode-switching builtins that need
   a conditional entry. Nothing a generated entry already states correctly.
 - **Relationships:** outranks the Generated Layer under the default
   precedence; sibling of the Taint Rules Document Set.
@@ -73,7 +73,7 @@ merge: models/ (generated) ◄──ranked below── value-rules/ (manual), pe
   the returns classification and every argument-to-result flow, with an
   absent flow set meaning the result is unrelated to the arguments.
 - **Scope:** function and method subjects; an optional condition on the
-  argument values states the mode of a mode-switching built-in.
+  argument values states the mode of a mode-switching builtin.
 - **Relationships:** a Model Entry; its Subject must exist in the
   generated declarations (the set's own rule, checked by the repository
   test: a value unit for an undeclared subject would produce a
@@ -90,7 +90,7 @@ merge: models/ (generated) ◄──ranked below── value-rules/ (manual), pe
   already generated correctly is dropped, not annotated.
 
 - **Name:** Generated-Set Gap
-- **Definition:** A built-in an analysis meets that the generated
+- **Definition:** A builtin an analysis meets that the generated
   declarations do not carry: a function the pinned php-src release no
   longer declares.
 - **Scope:** excluded from the set; declared in a hand-maintained document

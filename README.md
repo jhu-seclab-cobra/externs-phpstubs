@@ -1,8 +1,8 @@
 # COBRA.EXTERNS.PHPSTUBS
 
-> PHP built-in lookup for static analysis: declarations, value units, and taint facts in one record per built-in.
+> PHP builtin lookup for static analysis: declarations, value units, and taint facts in one record per builtin.
 
-Lookup of PHP built-in functions, classes, methods, constants, properties, and predefined variables by their PHP spelling. Each record merges the generated declarations (extension, signature), the hand-maintained value rules, psalm's taint data, and the hand-maintained taint rules into one `BuiltinRecord`: the signature in force plus every sink, source, sanitizer, flow, characters, returns, and throws fact, each tagged with the argument condition it holds under. Taint facts speak one canonical vocabulary; a consumer holds no set, mapping, or precedence.
+Lookup of PHP builtin functions, classes, methods, constants, properties, and predefined variables by their PHP spelling. Each record merges the generated declarations (extension, signature), the hand-maintained value rules, psalm's taint data, and the hand-maintained taint rules into one `BuiltinRecord`: the signature in force plus every sink, source, sanitizer, flow, characters, returns, and throws fact, each tagged with the argument condition it holds under. Taint facts speak one canonical vocabulary; a consumer holds no set, mapping, or precedence.
 
 [![codecov](https://codecov.io/gh/jhu-seclab-cobra/externs-phpstubs/branch/main/graph/badge.svg)](https://codecov.io/gh/jhu-seclab-cobra/externs-phpstubs)
 ![Kotlin JVM](https://img.shields.io/badge/Kotlin%20JVM-2.4.20%20%7C%20JVM%2021%2B-blue?logo=kotlin)
@@ -33,7 +33,7 @@ import edu.jhu.cobra.externs.phpstubs.callableSignature
 import edu.jhu.cobra.externs.phpstubs.typedSignature
 import java.nio.file.Path
 
-// One record per built-in: extension, signature, and every fact in force
+// One record per builtin: extension, signature, and every fact in force
 val strlen = PhpStubs.function("strlen")
 strlen?.extension                                // "core"
 strlen?.callableSignature?.returnType            // DeclaredType("int")
@@ -103,7 +103,7 @@ The merge keeps one statement per (subject, condition, unit); a higher-ranked pr
 
 ## Background
 
-Model documents derived from [JetBrains/phpstorm-stubs](https://github.com/JetBrains/phpstorm-stubs) (the declarations php-src does not rewrite: constants, properties, extensions outside php-src; Apache-2.0), [vimeo/psalm](https://github.com/vimeo/psalm) (dataflow annotations and taint data, MIT), and [php/php-src](https://github.com/php/php-src) stubs and C sources (class hierarchy, function and method signatures, throws; PHP License), emitted in the [commons-phpmodels](https://github.com/jhu-seclab-cobra/commons-phpmodels) format. Language constructs (`echo`, `isset`, `int`, ...) are declared as data under `models/language/`; built-ins the extraction does not produce are hand-declared under `models/manual/`.
+Model documents derived from [JetBrains/phpstorm-stubs](https://github.com/JetBrains/phpstorm-stubs) (the declarations php-src does not rewrite: constants, properties, extensions outside php-src; Apache-2.0), [vimeo/psalm](https://github.com/vimeo/psalm) (dataflow annotations and taint data, MIT), and [php/php-src](https://github.com/php/php-src) stubs and C sources (class hierarchy, function and method signatures, throws; PHP License), emitted in the [commons-phpmodels](https://github.com/jhu-seclab-cobra/commons-phpmodels) format. Language constructs (`echo`, `isset`, `int`, ...) are declared as data under `models/language/`; builtins the extraction does not produce are hand-declared under `models/manual/`.
 
 ## Documentation
 

@@ -1,6 +1,6 @@
 # Stubs API
 
-> One record per PHP built-in over the merged document sets.
+> One record per PHP builtin over the merged document sets.
 
 ## Quick Start
 

@@ -14,7 +14,7 @@ import edu.jhu.cobra.commons.phpmodels.SignatureInfo.PropertySignature
 import edu.jhu.cobra.commons.phpmodels.SignatureInfo.TypedSignature
 
 /**
- * The one thing a consumer reads about a built-in: its subject, the PHP extension of its declaration,
+ * The one thing a consumer reads about a builtin: its subject, the PHP extension of its declaration,
  * the signature in force, and every fact in force under every condition.
  *
  * @param S The subject kind, so a lookup result exposes its identity fields without a cast.

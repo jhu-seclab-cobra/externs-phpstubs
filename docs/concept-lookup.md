@@ -15,7 +15,7 @@ sets and had to merge them itself: choose a mount order,
 declare its own vocabulary, write a mapping from psalm's names, rank sets
 by provenance. Every consumer repeated that work, and this library could
 not check that its own sets merge. A consumer that wants to know what
-`substr` does, or which built-ins are SQL injection sinks, should ask by
+`substr` does, or which builtins are SQL injection sinks, should ask by
 name and read the answer.
 
 **System Role**
@@ -135,7 +135,7 @@ consumer: fact kind ────────► BuiltinLookup ────► ev
   extension `mysqli`, the hand-declared signature, and one sink of the
   canonical SQL injection vulnerability type at the first argument, unconditional.
 - **Enumeration:** every sink of the SQL injection vulnerability type, each naming
-  the built-in it belongs to; every method named `query` whatever its
+  the builtin it belongs to; every method named `query` whatever its
   owner, for a consumer that has not resolved the receiver yet.
 - **Boundary:** `strlen` is declared by the generated set and restated by
   the value rules set. The record's flow is the reviewed one; the
@@ -147,6 +147,6 @@ consumer: fact kind ────────► BuiltinLookup ────► ev
 - **Extension:** a framework team ships `laravel-sinks/` with a sinks
   document for `DB::raw`. The consumer builds a lookup over the bundled
   sets plus that directory; `DB::raw` answers as a sink, every bundled
-  built-in answers as before.
+  builtin answers as before.
 
 Software structure: [design-lookup.md](design-lookup.md).

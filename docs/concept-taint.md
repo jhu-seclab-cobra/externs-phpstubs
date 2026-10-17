@@ -7,7 +7,7 @@ extraction pipeline are defined there and used here unchanged.
 ## 1. Context
 
 **Problem Statement**
-psalm states which PHP built-ins consume a value dangerously (sink facts),
+psalm states which PHP builtins consume a value dangerously (sink facts),
 which neutralize a value for one vulnerability type (sanitizer facts), and
 which produce attacker-controlled data (source facts). That knowledge is spread over a
 dictionary, docblock annotations in psalm's stubs, and psalm's own analyzer

@@ -1,6 +1,6 @@
 # PHP Stubs — Throws Algorithm
 
-Computing the throws section of every implemented built-in from the php-src
+Computing the throws section of every implemented builtin from the php-src
 C sources. Concepts: [concept-extraction.md](concept-extraction.md)
 (Handler, Raises Summary, Boundary Call). Tool structure and tables:
 [design-extraction.md](design-extraction.md). What a throws section
@@ -11,7 +11,7 @@ asserts: commons-phpmodels `docs/model.md`.
 ### Problem
 
 Input: the definitions of one php-src checkout — C functions, handler
-macro definitions, function-like macros — and the built-in entries with
+macro definitions, function-like macros — and the builtin entries with
 their Handlers. Output: per entry, the set of exception classes its
 Handlers may throw outside the Boundary Calls, or *open* when a Handler
 throws an object no class set bounds. Correctness: every class a direct

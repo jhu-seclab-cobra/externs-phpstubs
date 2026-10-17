@@ -3,10 +3,10 @@
 ## 1. Context
 
 **Problem Statement**
-PHP static analyses must recognise built-in declarations they never see the
-body of: whether a name is a built-in function, class, method, or constant,
+PHP static analyses must recognise builtin declarations they never see the
+body of: whether a name is a builtin function, class, method, or constant,
 which PHP extension provides it, what its signature looks like, what a
-constant's value is, and which built-ins psalm declares source facts, sink
+constant's value is, and which builtins psalm declares source facts, sink
 facts, and sanitizer facts for. This knowledge is extracted from upstream
 sources and is independent of any analysis technique. The model format for stating it
 exists in commons-phpmodels; what remains is the data, its merge into one
@@ -14,7 +14,7 @@ body of facts, and a lookup that answers by PHP name in one vocabulary.
 
 **System Role**
 This library is the data layer and the lookup surface of the Cobra PHP
-model stack: the generated model documents for PHP built-ins, two taint
+model stack: the generated model documents for PHP builtins, two taint
 sets ([concept-taint.md](concept-taint.md), [concept-taint-rules.md](concept-taint-rules.md)),
 a value rules set ([concept-value-rules.md](concept-value-rules.md)), and the
 vocabulary, merge, and lookup by PHP name over them ([concept-lookup.md](concept-lookup.md)).
@@ -69,7 +69,7 @@ Runtime:
   signature section describing it, with a propagation section when the
   upstream data states a flow. The entry is this library's unit of data;
   no parallel record type exists.
-- **Scope:** every built-in function, class, method, constant, class
+- **Scope:** every builtin function, class, method, constant, class
   constant, and property the upstream sources declare.
 - **Relationships:** decoded by commons-phpmodels; mounted as the
   generated set; identified by its Subject.
@@ -113,7 +113,7 @@ Runtime:
   keyword constructs (`echo`, `isset`, `empty`, `include`, ...) and scalar
   type names used in class position (`int`, `string`, ...), declared as
   data in the models tree so one load path serves every lookup. The
-  `manual/` documents declare, the same way, built-ins the Extraction
+  `manual/` documents declare, the same way, builtins the Extraction
   Pipeline cannot produce: functions php-src no longer declares.
 - **Scope:** the closed keyword and scalar-type sets the generated set declares
   today.

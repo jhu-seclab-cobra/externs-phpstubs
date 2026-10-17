@@ -105,7 +105,7 @@ members only.
 
 ### BuiltinRecord<S : ModelSubject> (data class)
 
-**Responsibility:** The one thing a consumer reads about a built-in.
+**Responsibility:** The one thing a consumer reads about a builtin.
 
 **State/Fields:** `subject: S`, `extension: String?`,
 `signature: SignatureInfo?`, `returns: List<ReturnsFact>`,

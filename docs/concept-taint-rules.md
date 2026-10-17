@@ -10,8 +10,8 @@ and used here unchanged.
 **Problem Statement**
 psalm's taint data misses sink facts, sanitizer facts, and source facts
 that published PHP analyses treat as standard: the Argus sink lists
-(Jahanshahi and Egele, USENIX Security 2024), output built-ins such as `echo`, callback-taking
-built-ins, LDAP and XPath queries, and data read from the environment,
+(Jahanshahi and Egele, USENIX Security 2024), output builtins such as `echo`, callback-taking
+builtins, LDAP and XPath queries, and data read from the environment,
 files, sockets, and stored records. This library states them as one more
 document set in the same format and the same names, so that one category
 mapping serves both at the merge.
@@ -24,7 +24,7 @@ under the same mapping into this library's `BuiltinRecord`s.
 
 **Data Flow**
 - **Inputs:** the Argus sink lists, the psalm kind names, and the list
-  of built-in names this library declares (offline, reviewed by hand).
+  of builtin names this library declares (offline, reviewed by hand).
 - **Outputs:** one document set: manifest, vocabulary additions, policy
   rows, and the sink, sanitizer, and source documents.
 - **Connections:** Argus lists + review → taint rules document set →
@@ -45,7 +45,7 @@ under the same mapping into this library's `BuiltinRecord`s.
 ```
 Argus sink lists ──review──┐
 psalm kind names ──────────┼──► taint-rules/
-built-in name list ────────┘    ├── index.txt
+builtin name list ─────────┘    ├── index.txt
                                 ├── vocabulary.yaml   (+ xpath, + external)
                                 ├── policy.yaml       (input → xpath; external → every kind)
                                 ├── sinks.yaml
@@ -61,7 +61,7 @@ merge: set loader(taint/, …) then set loader(taint-rules/, taint vocabulary, m
   assertions psalm does not state, in the commons-phpmodels format and in
   psalm's kind names plus two additions of its own.
 - **Scope:** sink facts from the Argus lists that the format can express,
-  the sanitizer facts and source facts those lists and the built-in name
+  the sanitizer facts and source facts those lists and the builtin name
   list imply, the checks of the type predicates and character checks psalm
   lacks, and nothing psalm already states identically.
 - **Relationships:** loaded over the Taint Document Set's vocabulary;

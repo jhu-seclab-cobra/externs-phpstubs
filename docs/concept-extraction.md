@@ -3,9 +3,9 @@
 ## 1. Context
 
 **Problem Statement**
-The generated declaration set states facts about PHP built-ins that only
-the interpreter's own source decides: which class a built-in class extends,
-which parameters a built-in function declares, and which exception classes
+The generated declaration set states facts about PHP builtins that only
+the interpreter's own source decides: which class a builtin class extends,
+which parameters a builtin function declares, and which exception classes
 its implementation may throw. The upstream stub conversion that seeded the
 set covers an older release, omits most methods, and states no throw at
 all. php-src at the pinned release states all three: its stub files are the
@@ -60,15 +60,15 @@ php-src (release tag)
   placed by its Extension Provenance ([concept.md](concept.md)).
 
 - **Name:** Handler
-- **Definition:** The C function the interpreter calls for one built-in,
-  named by the built-in's function entry table; a built-in with a
+- **Definition:** The C function the interpreter calls for one builtin,
+  named by the builtin's function entry table; a builtin with a
   specialized form (frameless call) has one Handler per form.
 - **Scope:** every function and method entry php-src registers; an
   abstract method has none.
 - **Relationships:** the roots of the Throws Extraction.
 
 - **Name:** Raises Summary
-- **Definition:** What one C function may contribute to a built-in's
+- **Definition:** What one C function may contribute to a builtin's
   throws section: the exception classes it may throw, each with the
   parameter tests it is guarded by, plus the classes it creates into a
   parameter and the class entries it returns, so a caller resolves a class
@@ -133,6 +133,6 @@ php-src (release tag)
   analysis of the C sources, so the set is regenerated per release.
   **Rejected:** phpstorm-stubs `@throws` tags (hand-written, incomplete,
   spanning releases); the per-function throw extensions of static
-  analyzers (a handful of built-ins); dynamic testing (it observes throws
+  analyzers (a handful of builtins); dynamic testing (it observes throws
   but cannot state that a class is never thrown); hand-declared sections
   (several thousand entries no producer regenerates).

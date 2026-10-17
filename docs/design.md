@@ -94,7 +94,7 @@ models/
 │   ├── keyword.yaml       # 11 keyword functions + class exit, extension "keyword"
 │   ├── scalar.yaml        # classes int, float, string, bool, array, extension "scalar"
 │   └── legacy.yaml        # class resource, extension "legacy"
-├── manual/<extension>.yaml       # hand-declared built-ins php-src 8.5.11 lacks: mysql, standard
+├── manual/<extension>.yaml       # hand-declared builtins php-src 8.5.11 lacks: mysql, standard
 ├── standard/standard_1..8.yaml   # extension "standard" (split suffix removed)
 ├── <category>/<extension>.yaml   # crypto, database, file, image, misc, network, system, text, xml
 └── <extension>.yaml              # extensions only php-src declares (placement, design-extraction.md)

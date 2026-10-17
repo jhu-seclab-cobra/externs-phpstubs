@@ -12,7 +12,7 @@ import edu.jhu.cobra.commons.phpmodels.SourceKindId
 import edu.jhu.cobra.commons.phpmodels.VulnTypeId
 
 /**
- * One element of one assertion statement in force for a built-in, with the record it belongs to and the
+ * One element of one assertion statement in force for a builtin, with the record it belongs to and the
  * condition it holds under. A consumer matches [condition] against its own call arguments through
  * [ArgPattern.matches] and applies its own rule to an undecidable outcome; the library ranks nothing.
  */
