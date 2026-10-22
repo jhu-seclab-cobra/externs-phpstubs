@@ -1,0 +1,184 @@
+# Hand-maintained value rules set: value units the generated set lacks or states wrongly.
+# SPL containers (PHP manual: SPL Data Structures): receiver stores and element reads.
+# An entry whose unit differs from the generated one carries the PHP manual reason above it.
+
+# PHP manual: stores the value argument in the container.
+- subject: {method: ArrayIterator::__construct}
+  returns: any
+  propagation: [{from: argument(0), to: this}]
+# PHP manual: stores the value argument in the container.
+- subject: {method: ArrayIterator::append}
+  returns: any
+  propagation: [{from: argument(0), to: this}]
+# PHP manual: returns an element the container holds.
+- subject: {method: ArrayIterator::current}
+  returns: any
+  propagation: [{from: this, to: return}]
+# PHP manual: returns an element the container holds.
+- subject: {method: ArrayIterator::getArrayCopy}
+  returns: any
+  propagation: [{from: this, to: return}]
+# PHP manual: returns an element the container holds.
+- subject: {method: ArrayIterator::offsetGet}
+  returns: any
+  propagation: [{from: this, to: return}]
+# PHP manual: stores the value argument in the container.
+- subject: {method: ArrayIterator::offsetSet}
+  returns: any
+  propagation: [{from: argument(1), to: this}]
+# PHP manual: stores the value argument in the container.
+- subject: {method: ArrayObject::__construct}
+  returns: any
+  propagation: [{from: argument(0), to: this}]
+# PHP manual: stores the value argument in the container.
+- subject: {method: ArrayObject::append}
+  returns: any
+  propagation: [{from: argument(0), to: this}]
+# PHP manual: stores the value argument in the container.
+- subject: {method: ArrayObject::exchangeArray}
+  returns: any
+  propagation: [{from: argument(0), to: this}]
+# PHP manual: returns an element the container holds.
+- subject: {method: ArrayObject::getArrayCopy}
+  returns: any
+  propagation: [{from: this, to: return}]
+# PHP manual: returns an element the container holds.
+- subject: {method: ArrayObject::getIterator}
+  returns: any
+  propagation: [{from: this, to: return}]
+# PHP manual: returns an element the container holds.
+- subject: {method: ArrayObject::offsetGet}
+  returns: any
+  propagation: [{from: this, to: return}]
+# PHP manual: stores the value argument in the container.
+- subject: {method: ArrayObject::offsetSet}
+  returns: any
+  propagation: [{from: argument(1), to: this}]
+# PHP manual: stores the value argument in the container.
+- subject: {method: SplDoublyLinkedList::add}
+  returns: any
+  propagation: [{from: argument(1), to: this}]
+# PHP manual: returns an element the container holds.
+- subject: {method: SplDoublyLinkedList::bottom}
+  returns: any
+  propagation: [{from: this, to: return}]
+# PHP manual: returns an element the container holds.
+- subject: {method: SplDoublyLinkedList::current}
+  returns: any
+  propagation: [{from: this, to: return}]
+# PHP manual: returns an element the container holds.
+- subject: {method: SplDoublyLinkedList::offsetGet}
+  returns: any
+  propagation: [{from: this, to: return}]
+# PHP manual: stores the value argument in the container.
+- subject: {method: SplDoublyLinkedList::offsetSet}
+  returns: any
+  propagation: [{from: argument(1), to: this}]
+# PHP manual: returns an element the container holds.
+- subject: {method: SplDoublyLinkedList::pop}
+  returns: any
+  propagation: [{from: this, to: return}]
+# PHP manual: stores the value argument in the container.
+- subject: {method: SplDoublyLinkedList::push}
+  returns: any
+  propagation: [{from: argument(0), to: this}]
+# PHP manual: returns an element the container holds.
+- subject: {method: SplDoublyLinkedList::shift}
+  returns: any
+  propagation: [{from: this, to: return}]
+# PHP manual: returns an element the container holds.
+- subject: {method: SplDoublyLinkedList::top}
+  returns: any
+  propagation: [{from: this, to: return}]
+# PHP manual: stores the value argument in the container.
+- subject: {method: SplDoublyLinkedList::unshift}
+  returns: any
+  propagation: [{from: argument(0), to: this}]
+# PHP manual: the elements of the array become the elements of the new container.
+- subject: {method: SplFixedArray::fromArray}
+  returns: any
+  propagation: [{from: argument(0), to: return}]
+# PHP manual: returns an element the container holds.
+- subject: {method: SplFixedArray::getIterator}
+  returns: any
+  propagation: [{from: this, to: return}]
+# PHP manual: returns an element the container holds.
+- subject: {method: SplFixedArray::offsetGet}
+  returns: any
+  propagation: [{from: this, to: return}]
+# PHP manual: stores the value argument in the container.
+- subject: {method: SplFixedArray::offsetSet}
+  returns: any
+  propagation: [{from: argument(1), to: this}]
+# PHP manual: returns an element the container holds.
+- subject: {method: SplFixedArray::toArray}
+  returns: any
+  propagation: [{from: this, to: return}]
+# PHP manual: returns an element the container holds.
+- subject: {method: SplHeap::current}
+  returns: any
+  propagation: [{from: this, to: return}]
+# PHP manual: returns an element the container holds.
+- subject: {method: SplHeap::extract}
+  returns: any
+  propagation: [{from: this, to: return}]
+# PHP manual: stores the value argument in the container.
+- subject: {method: SplHeap::insert}
+  returns: any
+  propagation: [{from: argument(0), to: this}]
+# PHP manual: returns an element the container holds.
+- subject: {method: SplHeap::top}
+  returns: any
+  propagation: [{from: this, to: return}]
+# PHP manual: stores the value argument in the container.
+- subject: {method: SplObjectStorage::addAll}
+  returns: any
+  propagation: [{from: argument(0), to: this}]
+# PHP manual: stores the value argument in the container.
+- subject: {method: SplObjectStorage::attach}
+  returns: any
+  propagation: [{from: argument(0), to: this}, {from: argument(1), to: this}]
+# PHP manual: returns an element the container holds.
+- subject: {method: SplObjectStorage::current}
+  returns: any
+  propagation: [{from: this, to: return}]
+# PHP manual: returns an element the container holds.
+- subject: {method: SplObjectStorage::getInfo}
+  returns: any
+  propagation: [{from: this, to: return}]
+# PHP manual: returns an element the container holds.
+- subject: {method: SplObjectStorage::offsetGet}
+  returns: any
+  propagation: [{from: this, to: return}]
+# PHP manual: stores the value argument in the container.
+- subject: {method: SplObjectStorage::offsetSet}
+  returns: any
+  propagation: [{from: argument(0), to: this}, {from: argument(1), to: this}]
+# PHP manual: stores the value argument in the container.
+- subject: {method: SplObjectStorage::setInfo}
+  returns: any
+  propagation: [{from: argument(0), to: this}]
+# PHP manual: returns an element the container holds.
+- subject: {method: SplPriorityQueue::current}
+  returns: any
+  propagation: [{from: this, to: return}]
+# PHP manual: returns an element the container holds.
+- subject: {method: SplPriorityQueue::extract}
+  returns: any
+  propagation: [{from: this, to: return}]
+# PHP manual: stores the value argument in the container.
+- subject: {method: SplPriorityQueue::insert}
+  returns: any
+  propagation: [{from: argument(0), to: this}]
+# PHP manual: returns an element the container holds.
+- subject: {method: SplPriorityQueue::top}
+  returns: any
+  propagation: [{from: this, to: return}]
+# PHP manual: returns an element the container holds.
+- subject: {method: SplQueue::dequeue}
+  returns: any
+  propagation: [{from: this, to: return}]
+# PHP manual: stores the value argument in the container.
+- subject: {method: SplQueue::enqueue}
+  returns: any
+  propagation: [{from: argument(0), to: this}]

@@ -40,6 +40,13 @@ import kotlin.test.assertTrue
  * - `a num returns bound admits no false or null` — verifies each num rule against the reflected return type
  * - `query and exception units apply to the php-src declarations` — verifies the merged records of the query
  *   methods and the exception constructors keep their php-src extension and take the reviewed unit
+ * - `SPL container writes store their value argument into the receiver` — verifies each store rule
+ * - `SPL container reads return what the receiver holds` — verifies each element-returning rule
+ * - `SplFixedArray fromArray returns its array argument's elements` — verifies the static factory rule
+ * - `SPL subclasses reach the store rules through the declared parent` — verifies subclasses declare no rules
+ * - `every SPL container has a store and a read through its lineage` — verifies coverage of the containers
+ * - `SPL rules are sorted by subject` — verifies the entry order of the SPL document
+ * - `SPL store rules keep the generated declaration` — verifies the merged record of `SplQueue::enqueue`
  */
 internal class ValueRulesSetTest {
     private val rules by lazy { DocumentSetLoader.load(StubResources.opener(StubResources.VALUE_RULES)) }
@@ -193,7 +200,141 @@ internal class ValueRulesSetTest {
         assertTrue(violations.isEmpty(), "num bounds whose reflected return type is wider: $violations")
     }
 
+    @Test
+    fun `SPL container writes store their value argument into the receiver`() {
+        val stores =
+            mapOf(
+                "ArrayObject::__construct" to listOf(0),
+                "ArrayObject::append" to listOf(0),
+                "ArrayObject::exchangeArray" to listOf(0),
+                "ArrayObject::offsetSet" to listOf(1),
+                "ArrayIterator::__construct" to listOf(0),
+                "ArrayIterator::append" to listOf(0),
+                "ArrayIterator::offsetSet" to listOf(1),
+                "SplDoublyLinkedList::add" to listOf(1),
+                "SplDoublyLinkedList::offsetSet" to listOf(1),
+                "SplDoublyLinkedList::push" to listOf(0),
+                "SplDoublyLinkedList::unshift" to listOf(0),
+                "SplFixedArray::offsetSet" to listOf(1),
+                "SplHeap::insert" to listOf(0),
+                "SplObjectStorage::addAll" to listOf(0),
+                "SplObjectStorage::attach" to listOf(0, 1),
+                "SplObjectStorage::offsetSet" to listOf(0, 1),
+                "SplObjectStorage::setInfo" to listOf(0),
+                "SplPriorityQueue::insert" to listOf(0),
+                "SplQueue::enqueue" to listOf(0),
+            )
+        for ((spelling, positions) in stores) {
+            val flows = positions.map { Propagation(from = Port.Argument(it), to = Port.Receiver) }
+            assertEquals(ValueUnit(ReturnKind.ANY, flows), methodUnit(spelling), spelling)
+        }
+    }
+
+    @Test
+    fun `SPL container reads return what the receiver holds`() {
+        val reads =
+            listOf(
+                "ArrayObject::getArrayCopy",
+                "ArrayObject::getIterator",
+                "ArrayObject::offsetGet",
+                "ArrayIterator::current",
+                "ArrayIterator::getArrayCopy",
+                "ArrayIterator::offsetGet",
+                "SplDoublyLinkedList::bottom",
+                "SplDoublyLinkedList::current",
+                "SplDoublyLinkedList::offsetGet",
+                "SplDoublyLinkedList::pop",
+                "SplDoublyLinkedList::shift",
+                "SplDoublyLinkedList::top",
+                "SplFixedArray::getIterator",
+                "SplFixedArray::offsetGet",
+                "SplFixedArray::toArray",
+                "SplHeap::current",
+                "SplHeap::extract",
+                "SplHeap::top",
+                "SplObjectStorage::current",
+                "SplObjectStorage::getInfo",
+                "SplObjectStorage::offsetGet",
+                "SplPriorityQueue::current",
+                "SplPriorityQueue::extract",
+                "SplPriorityQueue::top",
+                "SplQueue::dequeue",
+            )
+        val expected = ValueUnit(ReturnKind.ANY, listOf(Propagation(from = Port.Receiver, to = Port.Return)))
+        for (spelling in reads) assertEquals(expected, methodUnit(spelling), spelling)
+    }
+
+    @Test
+    fun `SplFixedArray fromArray returns its array argument's elements`() {
+        assertEquals(ValueUnit(ReturnKind.ANY, listOf(argumentToReturn(0))), methodUnit("SplFixedArray::fromArray"))
+    }
+
+    @Test
+    fun `SPL subclasses reach the store rules through the declared parent`() {
+        val parents =
+            mapOf(
+                "SplStack" to "spldoublylinkedlist",
+                "SplQueue" to "spldoublylinkedlist",
+                "SplMinHeap" to "splheap",
+                "SplMaxHeap" to "splheap",
+            )
+        for ((subclass, parent) in parents) {
+            assertEquals(parent, PhpStubs.clazz(subclass)?.classSignature?.parent, subclass)
+        }
+        assertNull(PhpStubs.method("SplStack::push"))
+        for (spelling in listOf("SplDoublyLinkedList::push", "SplHeap::insert")) {
+            val record = assertNotNull(PhpStubs.method(spelling), spelling)
+            assertTrue((Port.Argument(0) to Port.Receiver) in record.flows.map { it.from to it.to }, spelling)
+        }
+    }
+
+    @Test
+    fun `every SPL container has a store and a read through its lineage`() {
+        val containers =
+            listOf(
+                "ArrayObject",
+                "ArrayIterator",
+                "SplDoublyLinkedList",
+                "SplQueue",
+                "SplStack",
+                "SplFixedArray",
+                "SplPriorityQueue",
+                "SplObjectStorage",
+                "SplHeap",
+                "SplMinHeap",
+                "SplMaxHeap",
+            )
+        for (container in containers) {
+            val flows = lineage(container).flatMap { owner -> methodsOf(owner).flatMap { it.flows } }
+            assertTrue(flows.any { it.from is Port.Argument && it.to == Port.Receiver }, "$container store")
+            assertTrue(flows.any { it.from == Port.Receiver && it.to == Port.Return }, "$container read")
+        }
+    }
+
+    @Test
+    fun `SPL rules are sorted by subject`() {
+        val stream = assertNotNull(StubResources.opener(StubResources.VALUE_RULES).open("spl.yaml"))
+        val subjects = stream.bufferedReader().use { it.readLines() }.filter { it.contains("subject:") }
+        assertEquals(subjects.sorted(), subjects)
+    }
+
+    @Test
+    fun `SPL store rules keep the generated declaration`() {
+        val record = assertNotNull(PhpStubs.method("SplQueue::enqueue"))
+        assertEquals(listOf(Port.Argument(0) to Port.Receiver), record.flows.map { it.from to it.to })
+        assertEquals("spl", record.extension)
+    }
+
     private fun unitOf(name: String): ValueUnit = unconditional.getValue(FunctionSubject(name)).body.valueUnit()!!
+
+    private fun methodUnit(spelling: String): ValueUnit = unconditional.getValue(MethodSubject.parse(spelling)).body.valueUnit()!!
+
+    private fun lineage(name: String): List<String> {
+        val signature = PhpStubs.clazz(name)?.classSignature ?: return listOf(name)
+        return listOf(name) + listOfNotNull(signature.parent).flatMap(::lineage)
+    }
+
+    private fun methodsOf(owner: String) = PhpStubs.methods.filter { it.subject.owner.equals(owner, ignoreCase = true) }
 
     private fun argumentToReturn(position: Int): Propagation = Propagation(from = Port.Argument(position), to = Port.Return)
 }
