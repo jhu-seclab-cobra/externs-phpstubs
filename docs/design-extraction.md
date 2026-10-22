@@ -85,11 +85,22 @@ php-src, the interpreter's own declarations (CobraPHP user decision BP-2).
 
 | Input | Yields |
 |-------|--------|
-| `**/*.stub.php` | each function and method: parameter names, declared types, by-reference, variadic, and default marks, the return type |
+| `**/*.stub.php` | each function and method: parameter names, declared types, by-reference, variadic, and default marks, the return type, the `@frameless-function` argument counts |
+| `Zend/zend_compile.c` | the by-name dispatch of function calls compiled to one opcode (`zend_try_compile_special_func_ex`) and the operands of each compile function |
 
 - A parameter is `optional` when it declares a default or is variadic, and
   `byRef` when declared `&` or tagged `@prefer-ref` in its doc comment
   (the interpreter passes such an argument by reference when it can).
+- `opcodeArities` lists the argument counts at which php-src compiles a
+  call to one opcode whose operands are the arguments: the counts of the
+  `@frameless-function {"arity": N}` tags of the function's doc comment,
+  and the argument count of a function the compiler dispatches by name
+  when its compile function compiles two or more arguments as operands
+  (`zend_compile_func_array_key_exists`: `ZEND_ARRAY_KEY_EXISTS` of
+  `args->child[0]` and `args->child[1]`). A compile function with fewer
+  operands leaves the order among the arguments no question and adds no
+  count; one whose operands disagree with its argument count check fails
+  the run.
 - A type php-src omits is `mixed`, PHP's reading of an omitted type. A
   class name in a type is resolved and keeps its spelling.
 - A declaration stated in several conditional-compilation variants keeps
