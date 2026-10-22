@@ -43,8 +43,8 @@ directly above the entry it justifies.
 | Document group | Subject kinds | Content |
 |----------------|---------------|---------|
 | strings-* | function | length, comparison, search, hashing, transformation, formatting; `echo` and `print` |
-| variable, array | function | conversions, type tests, `isset`, `empty`, `print_r` and `var_export` branches |
-| filesystem, database, execution, funchand, encoding, environment, math, datetime | function, method | typed results and flow sets by PHP manual area; `eval`; the query methods of `mysqli`, `PDO`, `SQLite3` |
+| variable, array | function | conversions, type tests, `isset`, `empty`, `print_r` and `var_export` branches; the flows into and out of the callback of `array_map`, `array_filter`, `array_reduce`, `array_walk` and `usort` |
+| filesystem, database, execution, funchand, encoding, environment, math, datetime | function, method | typed results and flow sets by PHP manual area, with the callback flows of `call_user_func`, `call_user_func_array` and `register_tick_function`; `eval`; the query methods of `mysqli`, `PDO`, `SQLite3` |
 | exceptions | method | the message flow from the constructor's message argument into the receiver, and from the receiver into the `getMessage` result |
 | spl | method | the stored value argument into the receiver, and the receiver into the element-returning methods of the SPL containers; the receiver is one abstract value, so a read of a container that ever held a tainted value is tainted; subclasses reach the rules through the declared parent |
 
@@ -58,6 +58,9 @@ directly above the entry it justifies.
 - Every subject is a function or method the generated set declares.
 - No unconditional entry's unit equals the generated entry's unit for the
   same subject.
+- A callback port names a parameter of the subject's merged signature whose
+  type admits `callable`; what a callback port means is defined in
+  commons-phpmodels `docs/model.md` Port.
 - The repository tests, not the consumer, prove the set decodes.
 
 ## Maintenance
