@@ -606,7 +606,7 @@
     - name: array
       type: array
     returnType: bool
-    opcodeArities: [2]
+    specialArities: [2]
   throws: [typeerror]
 - subject:
     function: array_key_first
@@ -3258,7 +3258,7 @@
     - name: num
       type: int
     returnType: string
-    opcodeArities: [1]
+    framelessArities: [1]
   throws: []
 - subject:
     function: decoct

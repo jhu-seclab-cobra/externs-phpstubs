@@ -10,7 +10,8 @@
 | [concept-value-rules.md](concept-value-rules.md) | The hand-maintained value rules set: value units beyond the generated declarations, generated-set gaps |
 | [model-lookup.md](model-lookup.md) | Bundled sets, canonical vocabulary, psalm mapping, mount order, set merge, consumer sets, `BuiltinRecord`, Fact with condition, `BuiltinLookup` |
 | [design.md](design.md) | `StubResources`, mount order, generated-set rules, resource layout, exception types |
-| [design-extraction.md](design-extraction.md) | `php_src` and the php-src producers: hierarchy, signature, and throws extraction |
+| [design-extraction.md](design-extraction.md) | `php_src` and the php-src producers: hierarchy and throws extraction, the signature producer's link |
+| [design-extraction-signatures.md](design-extraction-signatures.md) | The signature producer: parameters, return types, frameless, special and rope facts, the compiler closure check |
 | [design-lookup.md](design-lookup.md) | `BuiltinLookup`, `PhpStubs`, `BuiltinRecord`, fact types, canonical enums |
 | [design-merge.md](design-merge.md) | `Mount`, `MountSequence`, `SetMerge`: set mounting, failure classification, the fold |
 | [design-taint.md](design-taint.md) | `StubResources`, taint resource layout, extraction script inputs and validation rules |

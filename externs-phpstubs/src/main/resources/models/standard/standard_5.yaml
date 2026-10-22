@@ -3592,6 +3592,7 @@
       optional: true
       variadic: true
     returnType: string
+    ropeFormat: format
   propagation:
   - from: argument(0)
     to: return

@@ -3080,7 +3080,7 @@
       type: ?array
       optional: true
     returnType: string
-    opcodeArities: [1, 2]
+    framelessArities: [1, 2]
   propagation:
   - from: argument(0)
     to: return
@@ -3109,7 +3109,7 @@
       type: bool
       optional: true
     returnType: bool
-    opcodeArities: [2, 3]
+    framelessArities: [2, 3]
   throws: [error]
 - subject:
     function: inclued_get_data
@@ -3779,7 +3779,7 @@
     - name: value
       type: mixed
     returnType: bool
-    opcodeArities: [1]
+    framelessArities: [1]
   throws: []
 - subject:
     function: is_object

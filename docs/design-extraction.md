@@ -9,7 +9,9 @@ rules: [design.md](design.md).
 
 - **Modules:** `tools/php_src.py` (shared reading, placement, and
   writing), `tools/extract_hierarchy.py`, `tools/extract_signatures.py`,
-  `tools/extract_throws.py`; Python 3 standard library only. The test
+  `tools/compile_facts.py` (the call compiler's facts, read by
+  `extract_signatures.py`), `tools/extract_throws.py`; Python 3 standard
+  library only. The test
   oracle `tools/reflect.php` runs on a PHP build, not over php-src.
 - **Relationships:** each tool imports `php_src`; `php_src` imports no tool.
   The tools run in this order, because each reads what the earlier one
@@ -83,41 +85,9 @@ php-src, the interpreter's own declarations (CobraPHP user decision BP-2).
 
 ### extract_signatures.py
 
-| Input | Yields |
-|-------|--------|
-| `**/*.stub.php` | each function and method: parameter names, declared types, by-reference, variadic, and default marks, the return type, the `@frameless-function` argument counts |
-| `Zend/zend_compile.c` | the by-name dispatch of function calls compiled to one opcode (`zend_try_compile_special_func_ex`) and the operands of each compile function |
-
-- A parameter is `optional` when it declares a default or is variadic, and
-  `byRef` when declared `&` or tagged `@prefer-ref` in its doc comment
-  (the interpreter passes such an argument by reference when it can).
-- `opcodeArities` lists the argument counts at which php-src compiles a
-  call to one opcode whose operands are the arguments: the counts of the
-  `@frameless-function {"arity": N}` tags of the function's doc comment,
-  and the argument count of a function the compiler dispatches by name
-  when its compile function compiles two or more arguments as operands
-  (`zend_compile_func_array_key_exists`: `ZEND_ARRAY_KEY_EXISTS` of
-  `args->child[0]` and `args->child[1]`). A compile function with fewer
-  operands leaves the order among the arguments no question and adds no
-  count; one whose operands disagree with its argument count check fails
-  the run.
-- A type php-src omits is `mixed`, PHP's reading of an omitted type. A
-  class name in a type is resolved and keeps its spelling.
-- A declaration stated in several conditional-compilation variants keeps
-  the variant that subsumes the other: it admits every call the other
-  admits and its return type includes the other's. Neither subsuming
-  fails the run.
-- Each generated function or method entry php-src declares is relocated
-  to its extension, then gets the subject line and signature block
-  php-src states; its other sections (propagation, throws) stay, except a
-  propagation element naming an argument position the signature lacks
-  (no variadic parameter): PHP rejects a call passing more arguments
-  than an internal function declares (`ArgumentCountError`), so no value
-  reaches that position. A propagation section left without an element
-  fails the run.
-- A php-src function no models document declares joins `placement` of its
-  extension; a method joins the generated document declaring its class,
-  and a class no generated document declares fails the run.
+Reads every function and method declaration of the stubs and the call
+compiler of php-src, and rewrites each generated entry's signature. Inputs,
+outputs and rules: [design-extraction-signatures.md](design-extraction-signatures.md).
 
 ### extract_throws.py
 

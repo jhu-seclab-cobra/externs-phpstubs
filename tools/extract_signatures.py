@@ -4,8 +4,8 @@
 Reads every function and method declaration of the php-src stubs: parameter
 names, declared types, defaults, by-reference and variadic marks, and the
 declared return type, with class names resolved by PHP's name resolution
-rules. Also gives each function the `opcodeArities` php-src fixes: the
-argument counts at which the engine compiles a call to one opcode. Rewrites
+rules. Also gives each function the facts php-src's call compiler fixes: the frameless argument counts, the special
+argument counts, and the rope format parameter (compile_facts.py). Rewrites
 the subject line and signature of every generated function and method entry
 php-src declares, removes the propagation statements naming
 an argument position the signature lacks, every other line untouched. Each
@@ -20,6 +20,7 @@ import re
 import sys
 from pathlib import Path
 
+import compile_facts
 import php_src
 
 TOOL = "tools/extract_signatures.py"
@@ -41,12 +42,6 @@ DOC_COMMENT = re.compile(r"/\*\*(.*?)\*/", re.S)
 DECLARATION_HEAD = re.compile(r"\s*(?:(?:public|protected|private|static|final|abstract)\s+)*(?=function\b)")
 PREFER_REF = re.compile(r"@prefer-ref\s+\$(\w+)")
 FRAMELESS_ARITY = re.compile(r'@frameless-function\s*\{\s*"arity"\s*:\s*(\d+)\s*\}')
-# The compiler's by-name dispatch of function calls compiled to one opcode, and the operands such a compile function takes.
-SPECIAL_COMPILER = "Zend/zend_compile.c"
-SPECIAL_DISPATCH = re.compile(r"\breturn\s+(zend_compile_func_\w+)\(")
-DISPATCHED_NAME = re.compile(r'\blcname,\s*"(\w+)"')
-OPERAND_ARGUMENT = re.compile(r"\bzend_compile_expr\(\s*&\w+\s*,\s*args->child\[(\d+)\]\s*\)")
-ARGUMENT_COUNT_CHECK = re.compile(r"\bargs->children\s*!=\s*(\d+)")
 RETURN_TYPE = re.compile(r"\s*(?::\s*([^{;]+?))?\s*[{;]")
 PARAMETER = re.compile(
     r"^(?:(?:public|protected|private|readonly)\s+)*(?P<type>.*?)\s*(?P<ref>&)?\s*(?P<variadic>\.\.\.)?\s*"
@@ -73,9 +68,9 @@ class Parameter:
 class Signature:
     """One callable declaration: subject kind, spelled subject, parameters, return type, and its stub."""
 
-    def __init__(self, kind, subject, params, return_type, source, opcode_arities=()):
+    def __init__(self, kind, subject, params, return_type, source, frameless=(), special=(), rope_format=None):
         self.kind, self.subject, self.params, self.return_type, self.source = kind, subject, params, return_type, source
-        self.opcode_arities = sorted(set(opcode_arities))
+        self.frameless, self.special, self.rope_format = sorted(frameless), sorted(special), rope_format
 
     def subsumes(self, other):
         """True when every call other admits this one admits, with a return type including other's."""
@@ -107,8 +102,11 @@ class Signature:
             lines.append("    params:")
             lines += [line for p in self.params for line in p.render()]
         lines.append(f"    returnType: {scalar(self.return_type)}")
-        if self.opcode_arities:
-            lines.append(f"    opcodeArities: [{', '.join(map(str, self.opcode_arities))}]")
+        for key, counts in (("framelessArities", self.frameless), ("specialArities", self.special)):
+            if counts:
+                lines.append(f"    {key}: [{', '.join(map(str, counts))}]")
+        if self.rope_format:
+            lines.append(f"    ropeFormat: {scalar(self.rope_format)}")
         return "\n".join(lines) + "\n"
 
 
@@ -157,42 +155,14 @@ def prefer_ref_names(stub):
     return tagged
 
 
-def frameless_arities(stub):
-    """The function keyword offset → argument counts its doc comment tags `@frameless-function`."""
+def frameless_tags(stub):
+    """The function keyword offset → the arities of its doc comment's `@frameless-function` tags, in order."""
     tagged = {}
     for comment in DOC_COMMENT.finditer(stub.raw):
         head = DECLARATION_HEAD.match(stub.text, comment.end())
         if head:
-            tagged[head.end()] = {int(n) for n in FRAMELESS_ARITY.findall(comment.group(1))}
+            tagged[head.end()] = [int(n) for n in FRAMELESS_ARITY.findall(comment.group(1))]
     return tagged
-
-
-def special_function_arities(root):
-    """Function name → the argument count the compiler's by-name dispatch compiles to one opcode, for the dispatched
-    functions whose compile function takes two or more arguments as operands. Fewer operands leave the order of
-    evaluation among the arguments no question, and the compile function names the count it accepts."""
-    path = root / SPECIAL_COMPILER
-    text = php_src.strip_comments(path.read_text(encoding="utf-8"), SPECIAL_COMPILER)
-    chain = re.search(r"\bstatic\s+zend_result\s+zend_try_compile_special_func_ex\([^)]*\)\s*{", text)
-    if chain is None:
-        raise php_src.ExtractionFailure(f"{SPECIAL_COMPILER}: no zend_try_compile_special_func_ex")
-    end = php_src.matching(text, chain.end() - 1, SPECIAL_COMPILER)
-    arities, previous = {}, chain.end()
-    for dispatch in SPECIAL_DISPATCH.finditer(text, chain.end(), end):
-        names = DISPATCHED_NAME.findall(text[previous : dispatch.start()])
-        previous = dispatch.end()
-        definition = re.search(rf"\bstatic\s+zend_result\s+{dispatch.group(1)}\([^)]*\)\s*{{", text)
-        if definition is None:
-            raise php_src.ExtractionFailure(f"{SPECIAL_COMPILER}: no definition of {dispatch.group(1)}")
-        body = text[definition.end() - 1 : php_src.matching(text, definition.end() - 1, SPECIAL_COMPILER)]
-        operands = set(OPERAND_ARGUMENT.findall(body))
-        if len(operands) < 2:
-            continue
-        checks = set(ARGUMENT_COUNT_CHECK.findall(body))
-        if checks != {str(len(operands))}:
-            raise php_src.ExtractionFailure(f"{dispatch.group(1)}: operands {sorted(operands)} against argument count checks {sorted(checks)}")
-        arities.update({name: len(operands) for name in names})
-    return arities
 
 
 def class_bodies(stub):
@@ -205,10 +175,19 @@ def class_bodies(stub):
     return spans
 
 
-def read_stub(stub, special):
-    """Yield the Signature of every function and method one stub declares; special is the function name → argument
-    count the compiler compiles to one opcode."""
-    bodies, prefer_ref, frameless = class_bodies(stub), prefer_ref_names(stub), frameless_arities(stub)
+def function_signature(name, params, return_type, source, tags, compiler):
+    """The function's Signature with the facts php-src's call compiler fixes for a call of it."""
+    key = name.lower()
+    required = sum(not p.optional for p in params)
+    counts = compile_facts.frameless_counts(tags, required, any(p.variadic for p in params))
+    special = {compiler.special[key]} if key in compiler.special else set()
+    rope = params[compiler.rope[key]].name if key in compiler.rope else None
+    return Signature("function", name, params, return_type, source, counts, special, rope)
+
+
+def read_stub(stub, compiler):
+    """Yield the Signature of every function and method one stub declares; compiler is the CompilerFacts."""
+    bodies, prefer_ref, frameless = class_bodies(stub), prefer_ref_names(stub), frameless_tags(stub)
     for match in FUNCTION.finditer(stub.text):
         offset, close = match.start(), php_src.matching(stub.text, match.end() - 1, stub.source)
         refs = prefer_ref.get(offset, set())
@@ -220,17 +199,16 @@ def read_stub(stub, special):
         owner = next((name for start, end, name in bodies if start < offset < end), None)
         if owner is None:
             name = php_src.resolve(match.group(1), stub.namespace_at(offset), {})
-            arities = frameless.get(offset, set()) | ({special[name.lower()]} if name.lower() in special else set())
-            yield Signature("function", name, params, return_type, stub.source, arities)
+            yield function_signature(name, params, return_type, stub.source, frameless.get(offset, []), compiler)
         else:
             yield Signature("method", f"{owner}::{match.group(1)}", params, return_type, stub.source)
 
 
 def read_php_src(root):
     """Return the (kind, folded subject) → Signature map, one variant per subject by subsumption."""
-    signatures, special = {}, special_function_arities(root)
+    signatures, compiler = {}, compile_facts.read_compiler(root)
     for stub in php_src.stubs(root):
-        for signature in read_stub(stub, special):
+        for signature in read_stub(stub, compiler):
             key = (signature.kind, signature.subject.lower())
             known = signatures.setdefault(key, signature)
             if known.subsumes(signature):
