@@ -25,12 +25,13 @@ fixed by the resource layout. `MODELS`, `TAINT`, `TAINT_RULES`, and `opener`:
 
 ```
 value-rules/
-├── index.txt             # build-generated manifest: the fourteen area documents
+├── index.txt             # build-generated manifest: the fifteen area documents
 ├── provenance.yaml       # producer: externs-phpstubs review against the PHP manual; verification: manual
 ├── strings-transform.yaml, strings-inspect.yaml, strings-format.yaml
 ├── variable.yaml, array.yaml, filesystem.yaml, database.yaml
 ├── execution.yaml, funchand.yaml, encoding.yaml, environment.yaml
-└── math.yaml, datetime.yaml, exceptions.yaml
+├── math.yaml, datetime.yaml, exceptions.yaml
+└── spl.yaml
 ```
 
 Every document carries a header naming the set and its PHP manual area.
@@ -45,6 +46,7 @@ directly above the entry it justifies.
 | variable, array | function | conversions, type tests, `isset`, `empty`, `print_r` and `var_export` branches |
 | filesystem, database, execution, funchand, encoding, environment, math, datetime | function, method | typed results and flow sets by PHP manual area; `eval`; the query methods of `mysqli`, `PDO`, `SQLite3` |
 | exceptions | method | the message flow from the constructor's message argument into the receiver, and from the receiver into the `getMessage` result |
+| spl | method | the stored value argument into the receiver, and the receiver into the element-returning methods of the SPL containers; the receiver is one abstract value, so a read of a container that ever held a tainted value is tainted; subclasses reach the rules through the declared parent |
 
 ## Validation Rules
 
