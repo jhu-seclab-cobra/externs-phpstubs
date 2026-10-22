@@ -35,6 +35,9 @@ import kotlin.test.assertTrue
  *   the `/`-free result of basename
  * - `a character bound beside the generated flows repeats them exactly` — verifies str_replace, strtr, and substr
  *   differ from the generated unit only by the bound, so a change of the generated flows fails here
+ * - `str position functions admit false beside the integer` — verifies the return bound of strpos, stripos, strrpos,
+ *   and strripos, and that strspn and strcspn keep the integer bound
+ * - `a num returns bound admits no false or null` — verifies each num rule against the reflected return type
  * - `query and exception units apply to the php-src declarations` — verifies the merged records of the query
  *   methods and the exception constructors keep their php-src extension and take the reviewed unit
  */
@@ -159,6 +162,35 @@ internal class ValueRulesSetTest {
             assertEquals(ReturnKind.STR, message.returns.single { it.condition == null }.kind, owner)
             assertEquals(listOf(Port.Receiver to Port.Return), message.flows.map { it.from to it.to }, owner)
         }
+    }
+
+    @Test
+    fun `str position functions admit false beside the integer`() {
+        val flows = listOf(argumentToReturn(0), argumentToReturn(1))
+        for (name in listOf("strpos", "stripos", "strrpos", "strripos")) {
+            assertEquals(ValueUnit(ReturnKind.ANY, flows), unitOf(name), name)
+        }
+        for (name in listOf("strspn", "strcspn")) {
+            assertEquals(ValueUnit(ReturnKind.NUM, flows), unitOf(name), name)
+        }
+    }
+
+    @Test
+    fun `a num returns bound admits no false or null`() {
+        val stream = assertNotNull(javaClass.getResourceAsStream("/reflection/php_8_5_11.tsv"))
+        val reflected =
+            stream
+                .bufferedReader(Charsets.UTF_8)
+                .use { reader -> reader.readLines().map { it.split('\t') } }
+                .filter { it.first() == "function" }
+                .associate { it[1] to it[2].split('|').toSet() }
+        val violations =
+            unconditional.entries
+                .filter { (subject, entry) -> subject is FunctionSubject && entry.body.valueUnit()?.returns == ReturnKind.NUM }
+                .mapNotNull { (subject, _) -> (subject as FunctionSubject).let { it.name to reflected[it.name] } }
+                .filter { (_, parts) -> parts != null && !setOf("int", "float").containsAll(parts) }
+                .map { it.first }
+        assertTrue(violations.isEmpty(), "num bounds whose reflected return type is wider: $violations")
     }
 
     private fun unitOf(name: String): ValueUnit = unconditional.getValue(FunctionSubject(name)).body.valueUnit()!!

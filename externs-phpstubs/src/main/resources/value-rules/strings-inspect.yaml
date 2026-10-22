@@ -51,8 +51,9 @@
 - subject: {function: strcspn}
   returns: num
   propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]
+# PHP manual: the offset of the needle, or false when the needle is absent; both arguments determine the result.
 - subject: {function: stripos}
-  returns: num
+  returns: any
   propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]
 - subject: {function: strlen}
   returns: num
@@ -69,14 +70,17 @@
 - subject: {function: strncmp}
   returns: num
   propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]
+# PHP manual: the offset of the needle, or false when the needle is absent; both arguments determine the result.
 - subject: {function: strpos}
-  returns: num
+  returns: any
   propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]
+# PHP manual: the offset of the needle, or false when the needle is absent; both arguments determine the result.
 - subject: {function: strripos}
-  returns: num
+  returns: any
   propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]
+# PHP manual: the offset of the needle, or false when the needle is absent; both arguments determine the result.
 - subject: {function: strrpos}
-  returns: num
+  returns: any
   propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]
 - subject: {function: strspn}
   returns: num
