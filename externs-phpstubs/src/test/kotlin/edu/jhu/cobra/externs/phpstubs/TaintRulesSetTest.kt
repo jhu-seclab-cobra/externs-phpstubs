@@ -121,7 +121,10 @@ internal class TaintRulesSetTest {
     @Test
     fun `no phar file function sinks unserialize`() {
         for (entry in rules.entries) {
-            val kinds = entry.body.sinks.orEmpty().map { it.vulnType.id }
+            val kinds =
+                entry.body.sinks
+                    .orEmpty()
+                    .map { it.vulnType.id }
             assertFalse("unserialize" in kinds, "${entry.subject}")
         }
     }
