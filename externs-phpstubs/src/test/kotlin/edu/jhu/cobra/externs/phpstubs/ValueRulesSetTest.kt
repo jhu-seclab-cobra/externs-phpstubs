@@ -198,7 +198,7 @@ internal class ValueRulesSetTest {
                 .associate { it[1] to it[2].split('|').toSet() }
         val violations =
             unconditional.entries
-                .filter { (subject, entry) -> subject is FunctionSubject && entry.body.valueUnit()?.returns == ReturnKind.NUM }
+                .filter { (subject, entry) -> subject is FunctionSubject && entry.body.valueUnit()?.returns == setOf(ReturnKind.NUM) }
                 .mapNotNull { (subject, _) -> (subject as FunctionSubject).let { it.name to reflected[it.name] } }
                 .filter { (_, parts) -> parts != null && !setOf("int", "float").containsAll(parts) }
                 .map { it.first }
