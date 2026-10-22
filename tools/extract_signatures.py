@@ -4,8 +4,10 @@
 Reads every function and method declaration of the php-src stubs: parameter
 names, declared types, defaults, by-reference and variadic marks, and the
 declared return type, with class names resolved by PHP's name resolution
-rules. Rewrites the subject line and signature of every generated function
-and method entry php-src declares, removes the propagation statements naming
+rules. Also gives each function the `opcodeArities` php-src fixes: the
+argument counts at which the engine compiles a call to one opcode. Rewrites
+the subject line and signature of every generated function and method entry
+php-src declares, removes the propagation statements naming
 an argument position the signature lacks, every other line untouched. Each
 such entry lives in the generated document of its php-src extension, moved
 there when another document holds it, and each declaration no models
