@@ -33,6 +33,9 @@ import kotlin.test.assertTrue
  * - `no rules unit repeats a taint unit` — verifies each (subject, condition, section) differs from the taint set's
  * - `a taint rules sink over a taint subject adds to psalm's ports` — verifies restated entries are strict supersets
  * - `sinks follow the Argus lists` — verifies representative sinks per vulnerability type
+ * - `no phar file function sinks unserialize` — verifies no sink point carries the unserialize vulnerability type
+ * - `eval sinks keep only what PHP 8_5_11 evaluates` — verifies the eval construct stays and the removed eval paths are absent
+ * - `curl keeps its request sink at the configuring call` — verifies the curl_setopt request sink
  * - `checks state type predicates and character checks` — verifies the type set, the class, and the covered kinds of representative checks
  * - `sanitizers and sources name the added escapes and source kinds` — verifies representative entries
  * - `the psalm mapping translates the additions` — verifies the bundled mapping covers xpath and external
@@ -93,7 +96,7 @@ internal class TaintRulesSetTest {
             assertTrue(entry.body.sinks!!.containsAll(base), "${entry.subject}")
         }
         assertEquals(
-            setOf(Port.Argument(0) to "html", Port.Argument(0) to "ssrf", Port.Argument(0) to "file", Port.Argument(0) to "unserialize"),
+            setOf(Port.Argument(0) to "html", Port.Argument(0) to "ssrf", Port.Argument(0) to "file"),
             sinksOf(FunctionSubject("readfile")),
         )
     }
@@ -109,10 +112,33 @@ internal class TaintRulesSetTest {
         assertEquals(setOf(Port.Argument(0) to "xpath"), sinksOf(MethodSubject("DOMXPath", "query")))
         assertEquals(setOf(Port.Argument(0) to "sql"), sinksOf(MethodSubject("SQLite3", "querySingle")))
         assertEquals(setOf(Port.Argument(1) to "ldap"), sinksOf(FunctionSubject("ldap_bind")))
-        assertEquals(setOf(Port.Argument(0) to "unserialize"), sinksOf(MethodSubject("Phar", "__construct")))
-        assertEquals(setOf(Port.Argument(0) to "file", Port.Argument(0) to "unserialize"), sinksOf(FunctionSubject("scandir")))
+        assertNull(unconditional[MethodSubject("Phar", "__construct")])
+        assertEquals(setOf(Port.Argument(0) to "file"), sinksOf(FunctionSubject("scandir")))
         assertNull(unconditional.getValue(FunctionSubject("curl_exec")).body.sinks)
         assertNull(unconditional[MethodSubject("SplFileObject", "fpassthru")])
+    }
+
+    @Test
+    fun `no phar file function sinks unserialize`() {
+        for (entry in rules.entries) {
+            assertTrue(entry.body.sinks.orEmpty().none { it.vulnType.id == "unserialize" }, "${entry.subject}")
+        }
+    }
+
+    @Test
+    fun `eval sinks keep only what PHP 8_5_11 evaluates`() {
+        assertEquals(setOf(Port.Argument(0) to "eval"), sinksOf(FunctionSubject("eval")))
+        for (name in listOf("preg_replace", "assert", "mb_ereg_replace", "mb_eregi_replace")) {
+            assertNull(unconditional[FunctionSubject(name)], name)
+        }
+    }
+
+    @Test
+    fun `curl keeps its request sink at the configuring call`() {
+        val setopt = taint.entries.single { it.subject == FunctionSubject("curl_setopt") && it.condition == null }
+        assertTrue((Port.Argument(2) to "ssrf") in sinksOf(setopt))
+        assertTrue(assertNotNull(PhpStubs.function("curl_setopt")).sinkFacts.isNotEmpty())
+        assertNull(unconditional.getValue(FunctionSubject("curl_exec")).body.sinks)
     }
 
     @Test

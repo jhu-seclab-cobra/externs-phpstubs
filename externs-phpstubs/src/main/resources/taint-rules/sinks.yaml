@@ -3,6 +3,8 @@
 # (USENIX Security 2024), Table 5 and the artifact run, plus the curated lists shipped with it;
 # an entry for a subject the taint set already names restates psalm's ports and adds its own.
 # Receiver-triggered sinks (methods with no path argument) are not expressible and are omitted.
+# The set leaves out the Argus points PHP 8.5.11 contradicts: unserialize on file functions (phar metadata
+# is read lazily) and eval on preg_replace, assert, mb_ereg_replace and mb_eregi_replace.
 - subject:
     function: array_filter
   sinks:
@@ -28,11 +30,6 @@
   sinks:
     - port: argument(1)
       vulnType: callable
-- subject:
-    function: assert
-  sinks:
-    - port: argument(0)
-      vulnType: eval
 - subject:
     function: bzopen
   sinks:
@@ -81,17 +78,6 @@
     - port: argument(1)
       vulnType: html
 - subject:
-    function: copy
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-    - port: argument(0)
-      vulnType: file
-    - port: argument(1)
-      vulnType: unserialize
-    - port: argument(1)
-      vulnType: file
-- subject:
     function: cubrid_execute
   sinks:
     - port: argument(1)
@@ -125,14 +111,10 @@
     function: dir
   sinks:
     - port: argument(0)
-      vulnType: unserialize
-    - port: argument(0)
       vulnType: file
 - subject:
     method: DirectoryIterator::__construct
   sinks:
-    - port: argument(0)
-      vulnType: unserialize
     - port: argument(0)
       vulnType: file
 - subject:
@@ -140,16 +122,6 @@
   sinks:
     - port: argument(0)
       vulnType: file
-- subject:
-    method: DOMDocument::loadHTMLFile
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-- subject:
-    method: DOMDocument::relaxNGValidate
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
 - subject:
     method: DOMXPath::evaluate
   sinks:
@@ -171,21 +143,6 @@
     - port: argument(0)
       vulnType: eval
 - subject:
-    function: exif_imagetype
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-- subject:
-    function: exif_read_data
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-- subject:
-    function: exif_thumbnail
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-- subject:
     function: exit
   sinks:
     - port: argument(0)
@@ -196,88 +153,13 @@
     - port: argument(0)
       vulnType: sql
 - subject:
-    function: file
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-    - port: argument(0)
-      vulnType: file
-- subject:
-    function: file_exists
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-- subject:
-    function: file_get_contents
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-    - port: argument(0)
-      vulnType: file
-- subject:
-    function: fileatime
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-- subject:
-    function: filectime
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-- subject:
-    function: filegroup
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-- subject:
-    function: fileinode
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-- subject:
-    function: filemtime
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-- subject:
-    function: fileowner
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-- subject:
     function: fileperms
   sinks:
     - port: argument(0)
-      vulnType: unserialize
-    - port: argument(0)
       vulnType: file
-- subject:
-    function: filesize
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
 - subject:
     method: FilesystemIterator::__construct
   sinks:
-    - port: argument(0)
-      vulnType: unserialize
-    - port: argument(0)
-      vulnType: file
-- subject:
-    function: filetype
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-- subject:
-    method: finfo::file
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-- subject:
-    function: fopen
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
     - port: argument(0)
       vulnType: file
 - subject:
@@ -301,44 +183,13 @@
     - port: argument(0)
       vulnType: ssrf
 - subject:
-    function: ftp_nb_put
-  sinks:
-    - port: argument(2)
-      vulnType: unserialize
-- subject:
-    function: ftp_put
-  sinks:
-    - port: argument(2)
-      vulnType: unserialize
-- subject:
-    function: get_meta_tags
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-    - port: argument(0)
-      vulnType: ssrf
-- subject:
-    function: getimagesize
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-    - port: argument(0)
-      vulnType: ssrf
-- subject:
     function: glob
   sinks:
     - port: argument(0)
       vulnType: file
 - subject:
-    function: gzfile
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-- subject:
     function: gzopen
   sinks:
-    - port: argument(0)
-      vulnType: unserialize
     - port: argument(0)
       vulnType: file
 - subject:
@@ -346,21 +197,6 @@
   sinks:
     - port: argument(0)
       vulnType: html
-- subject:
-    function: hash_file
-  sinks:
-    - port: argument(1)
-      vulnType: unserialize
-- subject:
-    function: hash_hmac_file
-  sinks:
-    - port: argument(1)
-      vulnType: unserialize
-- subject:
-    function: hash_update_file
-  sinks:
-    - port: argument(1)
-      vulnType: unserialize
 - subject:
     function: http_get
   sinks:
@@ -382,51 +218,6 @@
     - port: argument(1)
       vulnType: sql
 - subject:
-    function: imagecreatefromgd2
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-- subject:
-    function: imagecreatefromgd2part
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-- subject:
-    function: imagecreatefromgif
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-- subject:
-    function: imagecreatefromjpeg
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-- subject:
-    function: imagecreatefrompng
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-- subject:
-    function: imagecreatefromwbmp
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-- subject:
-    function: imagecreatefromxbm
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-- subject:
-    function: imagecreatefromxpm
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-- subject:
-    function: imageloadfont
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-- subject:
     function: include
   sinks:
     - port: argument(0)
@@ -446,41 +237,6 @@
   sinks:
     - port: argument(1)
       vulnType: sql
-- subject:
-    function: is_dir
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-- subject:
-    function: is_executable
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-- subject:
-    function: is_file
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-- subject:
-    function: is_link
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-- subject:
-    function: is_readable
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-- subject:
-    function: is_writable
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-- subject:
-    function: is_writeable
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
 - subject:
     function: iterator_apply
   sinks:
@@ -569,11 +325,6 @@
     - port: argument(3)
       vulnType: ldap
 - subject:
-    function: lstat
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-- subject:
     function: mail
   sinks:
     - port: argument(4)
@@ -589,30 +340,10 @@
     - port: argument(1)
       vulnType: sql
 - subject:
-    function: mb_ereg_replace
-  sinks:
-    - port: argument(1)
-      vulnType: eval
-- subject:
-    function: mb_eregi_replace
-  sinks:
-    - port: argument(1)
-      vulnType: eval
-- subject:
     function: mb_send_mail
   sinks:
     - port: argument(4)
       vulnType: shell
-- subject:
-    function: md5_file
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-- subject:
-    function: mime_content_type
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
 - subject:
     function: msql_query
   sinks:
@@ -667,8 +398,6 @@
     function: opendir
   sinks:
     - port: argument(0)
-      vulnType: unserialize
-    - port: argument(0)
       vulnType: file
 - subject:
     function: pfsockopen
@@ -686,51 +415,6 @@
     - port: argument(0)
       vulnType: html
 - subject:
-    method: Phar::__construct
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-- subject:
-    method: Phar::addFile
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-- subject:
-    method: Phar::buildFromDirectory
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-- subject:
-    method: Phar::loadPhar
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-- subject:
-    method: Phar::unlinkArchive
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-- subject:
-    method: PharData::loadPhar
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-- subject:
-    method: PharData::unlinkArchive
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-- subject:
-    method: PharFileInfo::__construct
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-- subject:
-    function: preg_replace
-  sinks:
-    - port: argument(1)
-      vulnType: eval
-- subject:
     function: preg_replace_callback
   sinks:
     - port: argument(1)
@@ -746,17 +430,10 @@
     - port: argument(0)
       vulnType: html
 - subject:
-    function: read_exif_data
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-- subject:
     function: readfile
   sinks:
     - port: argument(0)
       vulnType: html
-    - port: argument(0)
-      vulnType: unserialize
     - port: argument(0)
       vulnType: ssrf
     - port: argument(0)
@@ -766,8 +443,6 @@
   sinks:
     - port: argument(0)
       vulnType: html
-    - port: argument(0)
-      vulnType: unserialize
 - subject:
     function: realpath
   sinks:
@@ -781,8 +456,6 @@
 - subject:
     method: RecursiveDirectoryIterator::__construct
   sinks:
-    - port: argument(0)
-      vulnType: unserialize
     - port: argument(0)
       vulnType: file
 - subject:
@@ -808,8 +481,6 @@
 - subject:
     function: scandir
   sinks:
-    - port: argument(0)
-      vulnType: unserialize
     - port: argument(0)
       vulnType: file
 - subject:
@@ -845,16 +516,6 @@
     - port: argument(1)
       vulnType: cookie
 - subject:
-    function: sha1_file
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-- subject:
-    function: simplexml_load_file
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-- subject:
     method: SimpleXMLElement::xpath
   sinks:
     - port: argument(0)
@@ -868,14 +529,10 @@
     method: SplFileInfo::__construct
   sinks:
     - port: argument(0)
-      vulnType: unserialize
-    - port: argument(0)
       vulnType: file
 - subject:
     method: SplFileObject::__construct
   sinks:
-    - port: argument(0)
-      vulnType: unserialize
     - port: argument(0)
       vulnType: file
 - subject:
@@ -934,11 +591,6 @@
     - port: argument(1)
       vulnType: sql
 - subject:
-    function: stat
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-- subject:
     function: stream_socket_client
   sinks:
     - port: argument(0)
@@ -951,8 +603,6 @@
 - subject:
     function: touch
   sinks:
-    - port: argument(0)
-      vulnType: unserialize
     - port: argument(0)
       vulnType: file
 - subject:
@@ -970,13 +620,6 @@
   sinks:
     - port: argument(1)
       vulnType: callable
-- subject:
-    function: unlink
-  sinks:
-    - port: argument(0)
-      vulnType: unserialize
-    - port: argument(0)
-      vulnType: file
 - subject:
     function: user_error
   sinks:
