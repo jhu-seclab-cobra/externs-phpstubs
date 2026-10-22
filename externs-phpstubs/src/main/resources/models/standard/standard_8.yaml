@@ -1630,6 +1630,7 @@
       type: int
       optional: true
     returnType: string
+    opcodeArities: [1, 2]
   propagation:
   - from: argument(0)
     to: return

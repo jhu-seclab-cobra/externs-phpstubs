@@ -1791,6 +1791,7 @@
     - name: needle
       type: string
     returnType: bool
+    opcodeArities: [2]
   propagation:
   - from: argument(0)
     to: return
@@ -1895,6 +1896,7 @@
       optional: true
       byRef: true
     returnType: string|array
+    opcodeArities: [3]
   propagation:
   - from: argument(0)
     to: return
@@ -1948,6 +1950,7 @@
     - name: needle
       type: string
     returnType: bool
+    opcodeArities: [2]
   propagation:
   - from: argument(0)
     to: return
@@ -2124,6 +2127,7 @@
       type: int
       optional: true
     returnType: int|false
+    opcodeArities: [2, 3]
   throws: [valueerror]
 - subject:
     function: strptime
@@ -2218,6 +2222,7 @@
       type: bool
       optional: true
     returnType: string|false
+    opcodeArities: [2, 3]
   propagation:
   - from: argument(0)
     to: return
@@ -2274,6 +2279,7 @@
       type: ?string
       optional: true
     returnType: string
+    opcodeArities: [2, 3]
   propagation:
   - from: argument(0)
     to: return
@@ -2305,6 +2311,7 @@
       type: ?int
       optional: true
     returnType: string
+    opcodeArities: [2, 3]
   propagation:
   - from: argument(0)
     to: return

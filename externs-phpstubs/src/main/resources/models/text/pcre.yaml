@@ -71,6 +71,7 @@
       type: int
       optional: true
     returnType: int|false
+    opcodeArities: [2]
   throws: [error, typeerror, valueerror]
 - subject:
     function: preg_match_all
@@ -126,6 +127,7 @@
       optional: true
       byRef: true
     returnType: string|array|null
+    opcodeArities: [3]
   propagation:
   - from: argument(0)
     to: return

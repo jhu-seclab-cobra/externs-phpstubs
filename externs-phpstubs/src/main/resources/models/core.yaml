@@ -1451,6 +1451,7 @@
       type: bool
       optional: true
     returnType: bool
+    opcodeArities: [1, 2]
   throws: []
 - subject:
     function: debug_backtrace
@@ -1777,6 +1778,7 @@
     - name: property
       type: string
     returnType: bool
+    opcodeArities: [2]
   throws: [typeerror]
 - subject:
     function: restore_error_handler

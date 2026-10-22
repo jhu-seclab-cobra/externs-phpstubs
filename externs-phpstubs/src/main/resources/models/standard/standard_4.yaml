@@ -254,6 +254,7 @@
       optional: true
       variadic: true
     returnType: mixed
+    opcodeArities: [2]
   throws: [error, typeerror, valueerror]
 - subject:
     function: md5
@@ -669,6 +670,7 @@
       optional: true
       variadic: true
     returnType: mixed
+    opcodeArities: [2]
   throws: [error, typeerror, valueerror]
 - subject:
     function: ming_keypress
