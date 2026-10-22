@@ -34,6 +34,7 @@ import kotlin.test.assertTrue
  * - `a taint rules sink over a taint subject adds to psalm's ports` — verifies restated entries are strict supersets
  * - `sinks follow the Argus lists` — verifies representative sinks per vulnerability type
  * - `no phar file function sinks unserialize` — verifies no sink point carries the unserialize vulnerability type
+ * - `a deleted sink entry leaves psalm's points in the merged record` — verifies the merge keeps psalm's file sink and adds no unserialize
  * - `eval sinks keep only what PHP 8_5_11 evaluates` — verifies the eval construct stays and the removed eval paths are absent
  * - `curl keeps its request sink at the configuring call` — verifies the curl_setopt request sink
  * - `checks state type predicates and character checks` — verifies the type set, the class, and the covered kinds of representative checks
@@ -127,6 +128,15 @@ internal class TaintRulesSetTest {
                     .map { it.vulnType.id }
             assertFalse("unserialize" in kinds, "${entry.subject}")
         }
+    }
+
+    @Test
+    fun `a deleted sink entry leaves psalm's points in the merged record`() {
+        for (name in listOf("file_get_contents", "copy", "unlink")) {
+            val sinks = assertNotNull(PhpStubs.function(name), name).sinkFacts
+            assertEquals(setOf(VulnType.PATHTRAV.id), sinks.map { it.vulnType }.toSet(), name)
+        }
+        assertTrue(assertNotNull(PhpStubs.function("file_exists")).sinkFacts.isEmpty())
     }
 
     @Test
