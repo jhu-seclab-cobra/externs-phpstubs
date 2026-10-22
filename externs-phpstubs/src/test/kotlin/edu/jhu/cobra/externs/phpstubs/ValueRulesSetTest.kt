@@ -47,6 +47,11 @@ import kotlin.test.assertTrue
  * - `every SPL container has a store and a read through its lineage` — verifies coverage of the containers
  * - `SPL rules are sorted by subject` — verifies the entry order of the SPL document
  * - `SPL store rules keep the generated declaration` — verifies the merged record of `SplQueue::enqueue`
+ * - `callable-taking builtins declare the flows into and out of their callback` — verifies the callback flows of
+ *   `array_map`, `array_filter`, `array_reduce`, `array_walk`, `usort`, `call_user_func`, `call_user_func_array`
+ *   and `register_tick_function`, and that the flows around the callback are kept
+ * - `every callback port names a callable parameter` — verifies each callback port of every merged function names
+ *   a declared parameter whose type admits `callable`
  */
 internal class ValueRulesSetTest {
     private val rules by lazy { DocumentSetLoader.load(StubResources.opener(StubResources.VALUE_RULES)) }
@@ -324,6 +329,82 @@ internal class ValueRulesSetTest {
         assertEquals(listOf(Port.Argument(0) to Port.Receiver), record.flows.map { it.from to it.to })
         assertEquals("spl", record.extension)
     }
+
+    @Test
+    fun `callable-taking builtins declare the flows into and out of their callback`() {
+        val callbackFlows =
+            mapOf(
+                "array_map" to
+                    listOf(
+                        flow(Port.Argument(1), Port.CallbackParameter(0, 0)),
+                        flow(Port.CallbackReturn(0), Port.Return),
+                    ),
+                "array_filter" to
+                    listOf(
+                        flow(Port.Argument(0), Port.CallbackParameter(1, 0)),
+                        flow(Port.Argument(0), Port.CallbackParameter(1, 1)),
+                    ),
+                "array_reduce" to
+                    listOf(
+                        flow(Port.Argument(2), Port.CallbackParameter(1, 0)),
+                        flow(Port.CallbackReturn(1), Port.CallbackParameter(1, 0)),
+                        flow(Port.Argument(0), Port.CallbackParameter(1, 1)),
+                        flow(Port.CallbackReturn(1), Port.Return),
+                    ),
+                "array_walk" to
+                    listOf(
+                        flow(Port.Argument(0), Port.CallbackParameter(1, 0)),
+                        flow(Port.Argument(0), Port.CallbackParameter(1, 1)),
+                        flow(Port.Argument(2), Port.CallbackParameter(1, 2)),
+                    ),
+                "usort" to
+                    listOf(
+                        flow(Port.Argument(0), Port.CallbackParameter(1, 0)),
+                        flow(Port.Argument(0), Port.CallbackParameter(1, 1)),
+                    ),
+                "call_user_func" to
+                    listOf(
+                        flow(Port.Argument(1), Port.CallbackParameter(0, 0)),
+                        flow(Port.CallbackReturn(0), Port.Return),
+                    ),
+                "call_user_func_array" to
+                    listOf(
+                        flow(Port.Argument(1), Port.CallbackParameter(0, 0)),
+                        flow(Port.CallbackReturn(0), Port.Return),
+                    ),
+                "register_tick_function" to listOf(flow(Port.Argument(1), Port.CallbackParameter(0, 0))),
+            )
+        for ((name, expected) in callbackFlows) {
+            val declared = assertNotNull(PhpStubs.function(name), name).flows.map { it.from to it.to }
+            assertTrue(declared.containsAll(expected), "$name declares $declared")
+        }
+        // The flows around the callback stay until the interpreter consumes the callback ports.
+        val aroundMap = assertNotNull(PhpStubs.function("array_map")).flows.map { it.from to it.to }
+        assertTrue(flow(Port.Argument(1), Port.Return) in aroundMap)
+    }
+
+    @Test
+    fun `every callback port names a callable parameter`() {
+        for (record in PhpStubs.functions) {
+            val callable = record.callableSignature ?: continue
+            val positions =
+                record.flows.flatMap { fact ->
+                    listOfNotNull(
+                        (fact.from as? Port.CallbackReturn)?.callable,
+                        (fact.to as? Port.CallbackParameter)?.callable,
+                    )
+                }
+            for (position in positions) {
+                val type = callable.params.getOrNull(position)?.type
+                assertTrue(type != null && type.alternatives.any { "callable" in it }, "${record.subject} argument($position)")
+            }
+        }
+    }
+
+    private fun flow(
+        from: Port.Input,
+        to: Port,
+    ): Pair<Port.Input, Port> = from to to
 
     private fun unitOf(name: String): ValueUnit = unconditional.getValue(FunctionSubject(name)).body.valueUnit()!!
 

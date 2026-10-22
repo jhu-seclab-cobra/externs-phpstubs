@@ -2,16 +2,54 @@
 # Arrays (PHP manual: Arrays).
 # An entry whose unit differs from the generated one carries the PHP manual reason above it.
 
+# PHP manual: the result keeps the elements the callback accepts; the callback receives each element
+# and, under the key modes, each key.
+- subject: {function: array_filter}
+  returns: any
+  propagation:
+    - {from: argument(0), to: return}
+    - {from: argument(0), to: callback(argument(1)).parameter(0)}
+    - {from: argument(0), to: callback(argument(1)).parameter(1)}
 - subject: {function: array_key_exists}
   returns: bool
   propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]
-# PHP manual: the result holds the callback's return values, so callback and array both determine it.
+# PHP manual: the result holds the callback's return values, so callback and array both determine it;
+# the callback receives each element of the array.
 - subject: {function: array_map}
   returns: any
-  propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]
+  propagation:
+    - {from: argument(0), to: return}
+    - {from: argument(1), to: return}
+    - {from: argument(1), to: callback(argument(0)).parameter(0)}
+    - {from: callback(argument(0)).return, to: return}
+# PHP manual: the callback receives the carry and the next element; its return value is the next
+# carry and, after the last element, the result.
+- subject: {function: array_reduce}
+  returns: any
+  propagation:
+    - {from: argument(0), to: return}
+    - {from: argument(1), to: return}
+    - {from: argument(2), to: return}
+    - {from: argument(2), to: callback(argument(1)).parameter(0)}
+    - {from: callback(argument(1)).return, to: callback(argument(1)).parameter(0)}
+    - {from: argument(0), to: callback(argument(1)).parameter(1)}
+    - {from: callback(argument(1)).return, to: return}
+# PHP manual: the callback receives each value, its key, and the extra argument.
+- subject: {function: array_walk}
+  returns: bool
+  propagation:
+    - {from: argument(0), to: callback(argument(1)).parameter(0)}
+    - {from: argument(0), to: callback(argument(1)).parameter(1)}
+    - {from: argument(2), to: callback(argument(1)).parameter(2)}
 - subject: {function: count}
   returns: num
   propagation: [{from: argument(0), to: return}]
 - subject: {function: in_array}
   returns: bool
   propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]
+# PHP manual: the callback compares two elements of the array.
+- subject: {function: usort}
+  returns: bool
+  propagation:
+    - {from: argument(0), to: callback(argument(1)).parameter(0)}
+    - {from: argument(0), to: callback(argument(1)).parameter(1)}

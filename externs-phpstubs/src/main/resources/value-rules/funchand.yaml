@@ -2,12 +2,30 @@
 # Function handling (PHP manual: Function handling).
 # An entry whose unit differs from the generated one carries the PHP manual reason above it.
 
+# PHP manual: returns the callback's result; the callback receives the arguments after it.
+- subject: {function: call_user_func}
+  returns: any
+  propagation:
+    - {from: argument(0), to: return}
+    - {from: argument(1), to: return}
+    - {from: argument(1), to: callback(argument(0)).parameter(0)}
+    - {from: callback(argument(0)).return, to: return}
+# PHP manual: returns the callback's result; the callback receives the elements of the array.
+- subject: {function: call_user_func_array}
+  returns: any
+  propagation:
+    - {from: argument(0), to: return}
+    - {from: argument(1), to: return}
+    - {from: argument(1), to: callback(argument(0)).parameter(0)}
+    - {from: callback(argument(0)).return, to: return}
 - subject: {function: func_num_args}
   returns: num
 - subject: {function: get_defined_functions}
   returns: any
-# PHP manual: returns bool.
+# PHP manual: calls the callback with the arguments after it, each tick.
 - subject: {function: register_tick_function}
   returns: bool
+  propagation:
+    - {from: argument(1), to: callback(argument(0)).parameter(0)}
 - subject: {function: unregister_tick_function}
   returns: any
