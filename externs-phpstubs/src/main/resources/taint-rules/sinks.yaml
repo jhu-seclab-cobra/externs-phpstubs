@@ -2,6 +2,7 @@
 # Sinks follow Jahanshahi & Egele, "Argus: All your (PHP) Injection-sinks are belong to us"
 # (USENIX Security 2024), Table 5 and the artifact run, plus the curated lists shipped with it;
 # an entry for a subject the taint set already names restates psalm's ports and adds its own.
+# Every output sink of cross-site scripting (vulnType html) has a scheme injection twin on the same port.
 # Receiver-triggered sinks (methods with no path argument) are not expressible and are omitted.
 # The set leaves out the Argus points PHP 8.5.11 contradicts: unserialize on file functions (phar metadata
 # is read lazily) and eval on preg_replace, assert, mb_ereg_replace and mb_eregi_replace.
@@ -40,6 +41,8 @@
   sinks:
     - port: argument(0)
       vulnType: html
+    - port: argument(0)
+      vulnType: scheme
 - subject:
     function: call_user_func
   sinks:
@@ -67,16 +70,24 @@
       vulnType: html
     - port: argument(1)
       vulnType: html
+    - port: argument(0)
+      vulnType: scheme
+    - port: argument(1)
+      vulnType: scheme
 - subject:
     method: Closure::bind
   sinks:
     - port: argument(2)
       vulnType: html
+    - port: argument(2)
+      vulnType: scheme
 - subject:
     method: Closure::bindTo
   sinks:
     - port: argument(1)
       vulnType: html
+    - port: argument(1)
+      vulnType: scheme
 - subject:
     function: cubrid_execute
   sinks:
@@ -107,6 +118,8 @@
   sinks:
     - port: argument(0)
       vulnType: html
+    - port: argument(0)
+      vulnType: scheme
 - subject:
     function: dir
   sinks:
@@ -137,6 +150,8 @@
   sinks:
     - port: argument(0)
       vulnType: html
+    - port: argument(0)
+      vulnType: scheme
 - subject:
     function: eval
   sinks:
@@ -147,6 +162,8 @@
   sinks:
     - port: argument(0)
       vulnType: html
+    - port: argument(0)
+      vulnType: scheme
 - subject:
     function: fbsql_query
   sinks:
@@ -177,6 +194,8 @@
   sinks:
     - port: argument(0)
       vulnType: html
+    - port: argument(0)
+      vulnType: scheme
 - subject:
     function: fsockopen
   sinks:
@@ -197,6 +216,8 @@
   sinks:
     - port: argument(0)
       vulnType: html
+    - port: argument(0)
+      vulnType: scheme
 - subject:
     function: http_get
   sinks:
@@ -394,6 +415,8 @@
   sinks:
     - port: argument(0)
       vulnType: html
+    - port: argument(0)
+      vulnType: scheme
 - subject:
     function: opendir
   sinks:
@@ -409,11 +432,15 @@
   sinks:
     - port: argument(0)
       vulnType: html
+    - port: argument(0)
+      vulnType: scheme
 - subject:
     function: pg_loreadall
   sinks:
     - port: argument(0)
       vulnType: html
+    - port: argument(0)
+      vulnType: scheme
 - subject:
     function: preg_replace_callback
   sinks:
@@ -429,6 +456,26 @@
   sinks:
     - port: argument(0)
       vulnType: html
+    - port: argument(0)
+      vulnType: scheme
+- subject:
+    function: print_r
+  sinks:
+    - port: argument(0)
+      vulnType: html
+    - port: argument(0)
+      vulnType: scheme
+- subject:
+    function: printf
+  sinks:
+    - port: argument(0)
+      vulnType: html
+    - port: argument(1)
+      vulnType: html
+    - port: argument(0)
+      vulnType: scheme
+    - port: argument(1)
+      vulnType: scheme
 - subject:
     function: readfile
   sinks:
@@ -438,11 +485,15 @@
       vulnType: ssrf
     - port: argument(0)
       vulnType: file
+    - port: argument(0)
+      vulnType: scheme
 - subject:
     function: readgzfile
   sinks:
     - port: argument(0)
       vulnType: html
+    - port: argument(0)
+      vulnType: scheme
 - subject:
     function: realpath
   sinks:
@@ -453,6 +504,8 @@
   sinks:
     - port: argument(0)
       vulnType: html
+    - port: argument(0)
+      vulnType: scheme
 - subject:
     method: RecursiveDirectoryIterator::__construct
   sinks:
@@ -610,6 +663,8 @@
   sinks:
     - port: argument(0)
       vulnType: html
+    - port: argument(0)
+      vulnType: scheme
 - subject:
     function: uasort
   sinks:
@@ -625,13 +680,44 @@
   sinks:
     - port: argument(0)
       vulnType: html
+    - port: argument(0)
+      vulnType: scheme
 - subject:
     function: usort
   sinks:
     - port: argument(1)
       vulnType: callable
 - subject:
+    function: var_dump
+  sinks:
+    - port: argument(0)
+      vulnType: html
+    - port: argument(1)
+      vulnType: html
+    - port: argument(0)
+      vulnType: scheme
+    - port: argument(1)
+      vulnType: scheme
+- subject:
+    function: var_export
+  sinks:
+    - port: argument(0)
+      vulnType: html
+    - port: argument(0)
+      vulnType: scheme
+- subject:
     function: virtual
   sinks:
     - port: argument(0)
       vulnType: include
+- subject:
+    function: vprintf
+  sinks:
+    - port: argument(0)
+      vulnType: html
+    - port: argument(1)
+      vulnType: html
+    - port: argument(0)
+      vulnType: scheme
+    - port: argument(1)
+      vulnType: scheme

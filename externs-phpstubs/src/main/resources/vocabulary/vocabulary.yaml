@@ -28,9 +28,191 @@ vulnTypes:
     description: LDAP injection
   - name: xpathi
     description: XPath injection
+  - name: schemei
+    description: >-
+      Scheme injection: a value at the start of a URL attribute value chooses the scheme
+      (javascript:, data:); its tokenizer reads the HTML text before the value
+    tokenizer:
+      start: text
+      targets:
+        - url-before-value
+        - url-bare-scheme
+        - url-double-start
+        - url-double-scheme
+        - url-single-start
+        - url-single-scheme
+      words:
+        url-attribute: [href, src, action, formaction, 'xlink:href']
+      states:
+        text:
+          rules:
+            - {chars: '[<]', next: tag-open}
+        tag-open:
+          rules:
+            - {chars: '[<]', next: tag-open}
+            - {chars: '[!]', next: markup-declaration}
+            - {chars: '[/]', next: end-tag}
+            - {chars: '[?]', next: bogus-comment}
+            - {chars: '[A-Za-z]', next: tag-name}
+          otherwise: text
+        end-tag:
+          rules:
+            - {chars: '[>]', next: text}
+        bogus-comment:
+          rules:
+            - {chars: '[>]', next: text}
+        markup-declaration:
+          rules:
+            - {chars: '[-]', next: markup-declaration-dash}
+            - {chars: '[>]', next: text}
+          otherwise: bogus-comment
+        markup-declaration-dash:
+          rules:
+            - {chars: '[-]', next: comment-start}
+            - {chars: '[>]', next: text}
+          otherwise: bogus-comment
+        comment-start:
+          rules:
+            - {chars: '[>]', next: text}
+            - {chars: '[-]', next: comment-start-dash}
+          otherwise: comment
+        comment-start-dash:
+          rules:
+            - {chars: '[>]', next: text}
+            - {chars: '[-]', next: comment-end}
+          otherwise: comment
+        comment:
+          rules:
+            - {chars: '[-]', next: comment-dash}
+        comment-dash:
+          rules:
+            - {chars: '[-]', next: comment-end}
+          otherwise: comment
+        comment-end:
+          rules:
+            - {chars: '[>]', next: text}
+            - {chars: '[!]', next: comment-end-bang}
+            - {chars: '[-]', next: comment-end}
+          otherwise: comment
+        comment-end-bang:
+          rules:
+            - {chars: '[-]', next: comment-dash}
+            - {chars: '[>]', next: text}
+          otherwise: comment
+        tag-name:
+          rules:
+            - {chars: '[\t\n\f\r ]', next: before-attribute-name}
+            - {chars: '[/]', next: self-closing}
+            - {chars: '[>]', next: text}
+        before-attribute-name:
+          rules:
+            - {chars: '[\t\n\f\r ]', next: before-attribute-name}
+            - {chars: '[/]', next: self-closing}
+            - {chars: '[>]', next: text}
+          otherwise: attribute-name
+        self-closing:
+          rules:
+            - {chars: '[>]', next: text}
+            - {chars: '[\t\n\f\r ]', next: before-attribute-name}
+            - {chars: '[/]', next: self-closing}
+          otherwise: attribute-name
+        attribute-name:
+          track: url-attribute
+          rules:
+            - {chars: '[\t\n\f\r ]', next: url-attribute-after-name, ifWord: true}
+            - {chars: '[\t\n\f\r ]', next: attribute-after-name}
+            - {chars: '[/]', next: self-closing}
+            - {chars: '[=]', next: url-before-value, ifWord: true}
+            - {chars: '[=]', next: before-value}
+            - {chars: '[>]', next: text}
+        attribute-after-name:
+          rules:
+            - {chars: '[\t\n\f\r ]', next: attribute-after-name}
+            - {chars: '[/]', next: self-closing}
+            - {chars: '[=]', next: before-value}
+            - {chars: '[>]', next: text}
+          otherwise: attribute-name
+        url-attribute-after-name:
+          rules:
+            - {chars: '[\t\n\f\r ]', next: url-attribute-after-name}
+            - {chars: '[/]', next: self-closing}
+            - {chars: '[=]', next: url-before-value}
+            - {chars: '[>]', next: text}
+          otherwise: attribute-name
+        before-value:
+          rules:
+            - {chars: '[\t\n\f\r ]', next: before-value}
+            - {chars: '["]', next: value-double}
+            - {chars: "[']", next: value-single}
+            - {chars: '[>]', next: text}
+          otherwise: value-bare
+        value-double:
+          rules:
+            - {chars: '["]', next: after-value}
+        value-single:
+          rules:
+            - {chars: "[']", next: after-value}
+        value-bare:
+          rules:
+            - {chars: '[\t\n\f\r ]', next: before-attribute-name}
+            - {chars: '[>]', next: text}
+        after-value:
+          rules:
+            - {chars: '[\t\n\f\r ]', next: before-attribute-name}
+            - {chars: '[/]', next: self-closing}
+            - {chars: '[>]', next: text}
+          otherwise: attribute-name
+        url-before-value:
+          rules:
+            - {chars: '[\t\n\f\r ]', next: url-before-value}
+            - {chars: '["]', next: url-double-start}
+            - {chars: "[']", next: url-single-start}
+            - {chars: '[>]', next: text}
+            - {chars: '[A-Za-z]', next: url-bare-scheme}
+          otherwise: url-bare-fixed
+        url-bare-scheme:
+          rules:
+            - {chars: '[\t\n\f\r ]', next: before-attribute-name}
+            - {chars: '[>]', next: text}
+            - {chars: '[A-Za-z0-9+.-]', next: url-bare-scheme}
+          otherwise: url-bare-fixed
+        url-bare-fixed:
+          rules:
+            - {chars: '[\t\n\f\r ]', next: before-attribute-name}
+            - {chars: '[>]', next: text}
+        url-double-start:
+          rules:
+            - {chars: '["]', next: after-value}
+            - {chars: '[\t\n\f\r ]', next: url-double-start}
+            - {chars: '[A-Za-z]', next: url-double-scheme}
+          otherwise: url-double-fixed
+        url-double-scheme:
+          rules:
+            - {chars: '["]', next: after-value}
+            - {chars: '[A-Za-z0-9+.-]', next: url-double-scheme}
+          otherwise: url-double-fixed
+        url-double-fixed:
+          rules:
+            - {chars: '["]', next: after-value}
+        url-single-start:
+          rules:
+            - {chars: "[']", next: after-value}
+            - {chars: '[\t\n\f\r ]', next: url-single-start}
+            - {chars: '[A-Za-z]', next: url-single-scheme}
+          otherwise: url-single-fixed
+        url-single-scheme:
+          rules:
+            - {chars: "[']", next: after-value}
+            - {chars: '[A-Za-z0-9+.-]', next: url-single-scheme}
+          otherwise: url-single-fixed
+        url-single-fixed:
+          rules:
+            - {chars: "[']", next: after-value}
 
 sourceKinds:
   - name: user-input
     description: Attacker-controlled request input (superglobals, request body, headers)
   - name: external-input
     description: Data read from the environment, files, sockets, mail, LDAP, or stored records
+  - name: server-path
+    description: Request path data of the server superglobal, which the web server has resolved to a path

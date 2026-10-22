@@ -75,7 +75,7 @@ Every fact: **`owner: ModelSubject`**, **`condition: ArgPattern?`** (`null` for 
 
 ### VulnType, SourceKind (enums)
 
-**`VulnType.SQLI.id`** ... -- `VulnTypeId` per canonical vulnerability type: `sqli`, `cmdi`, `codei`, `xss`, `headeri`, `ssrf`, `pathtrav`, `fileinc`, `deser`, `callablei`, `ldapi`, `xpathi`. **`SourceKind.USER_INPUT.id`**, **`SourceKind.EXTERNAL_INPUT.id`** -- `SourceKindId("user-input")`, `SourceKindId("external-input")`. A vulnerability type a consumer set adds has no constant.
+**`VulnType.SQLI.id`** ... -- `VulnTypeId` per canonical vulnerability type: `sqli`, `cmdi`, `codei`, `xss`, `headeri`, `ssrf`, `pathtrav`, `fileinc`, `deser`, `callablei`, `ldapi`, `xpathi`, `schemei`. **`SourceKind.USER_INPUT.id`**, **`SourceKind.EXTERNAL_INPUT.id`**, **`SourceKind.SERVER_PATH.id`** -- `SourceKindId("user-input")`, `SourceKindId("external-input")`, `SourceKindId("server-path")`. A vulnerability type a consumer set adds has no constant.
 
 ### StubResources (object)
 

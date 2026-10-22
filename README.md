@@ -85,7 +85,7 @@ val extended = PhpStubs.with(Path.of("models/site-rules"))
 
 **`Fact`** -- `SinkFact(port, vulnType)`, `SourceFact(sourceKinds, at, keys)`, `SanitizerFact(vulnTypes, check)`, `FlowFact(from, to)`, `CharactersFact(bound)`, `ReturnsFact(kind)`, `ThrowsFact(classes)`; each carries `owner` and `condition: ArgPattern?`. A `ThrowsFact` with no classes states the call throws none; a record without one asserts nothing about throws. The record ranks nothing: a consumer matches each condition against its call arguments and applies its own rule to an undecidable outcome.
 
-**`VulnType`**, **`SourceKind`** -- enum constants for the canonical vocabulary (`sqli`, `cmdi`, `codei`, `xss`, `headeri`, `ssrf`, `pathtrav`, `fileinc`, `deser`, `callablei`, `ldapi`, `xpathi`; `user-input`, `external-input`).
+**`VulnType`**, **`SourceKind`** -- enum constants for the canonical vocabulary (`sqli`, `cmdi`, `codei`, `xss`, `headeri`, `ssrf`, `pathtrav`, `fileinc`, `deser`, `callablei`, `ldapi`, `xpathi`, `schemei`; `user-input`, `external-input`, `server-path`).
 
 **`StubResources`** -- classpath roots of the five bundled sets, `MODELS`, `VALUE_RULES`, `VOCABULARY`, `TAINT`, `TAINT_RULES`, the `PSALM_MAPPING` document, and `opener(root)`.
 

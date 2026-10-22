@@ -2,6 +2,10 @@
 vulnTypes:
   - name: xpath
     description: XPath injection
+  - name: scheme
+    description: Scheme injection
 sourceKinds:
   - name: external
     description: Data read from the environment, files, sockets, mail, LDAP, or stored records
+  - name: path
+    description: Request path data of the server superglobal

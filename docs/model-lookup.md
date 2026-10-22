@@ -16,10 +16,14 @@ format library's: `extern/commons-phpmodels/docs/model.md`,
   resource root. Each carries a Set Provenance; generated for the
   declaration set and the taint set, manual for the others.
 - **Canonical Vocabulary** — The vulnerability types and source kinds every
-  record speaks: twelve vulnerability types (`sqli`, `cmdi`, `codei`, `xss`,
+  record speaks: thirteen vulnerability types (`sqli`, `cmdi`, `codei`, `xss`,
   `headeri`, `ssrf`, `pathtrav`, `fileinc`, `deser`, `callablei`, `ldapi`,
-  `xpathi`) and two source kinds (`user-input`, `external-input`), with the policy
-  enabling every vulnerability type under both source kinds. A hand-written
+  `xpathi`, `schemei`) and three source kinds (`user-input`, `external-input`,
+  `server-path`). The policy enables every vulnerability type under the first two
+  source kinds, and every type but `schemei` under `server-path`: a request path
+  starts with a slash, so it never fixes a URL scheme. `schemei` declares a
+  tokenizer language, the HTML text its sinks write into (commons-phpmodels
+  tokenizer model). A hand-written
   set of this library, mounted before any set that names a vulnerability
   type or source kind.
   Existence condition: declared in the vocabulary document; adding a name
