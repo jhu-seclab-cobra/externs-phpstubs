@@ -28,7 +28,7 @@ import kotlin.test.assertTrue
  * Tests for the hand-maintained taint rules set rooted at [StubResources.TAINT_RULES].
  *
  * - `taint rules set loads only over the taint vocabulary` — verifies the set's names resolve through the taint set's context
- * - `taint rules set declares its own additions` — verifies the xpath kind, the external source kind, and the policy rows
+ * - `taint rules set declares its own additions` — verifies the xpath and scheme kinds, the external and path source kinds, and the policy rows
  * - `every taint rules entry is an unsigned entry with exactly one taint section` — verifies the shape rule
  * - `no rules unit repeats a taint unit` — verifies each (subject, condition, section) differs from the taint set's
  * - `a taint rules sink over a taint subject adds to psalm's ports` — verifies restated entries are strict supersets
@@ -39,7 +39,7 @@ import kotlin.test.assertTrue
  * - `curl keeps its request sink at the configuring call` — verifies the curl_setopt request sink
  * - `checks state type predicates and character checks` — verifies the type set, the class, and the covered kinds of representative checks
  * - `sanitizers and sources name the added escapes and source kinds` — verifies representative entries
- * - `the psalm mapping translates the additions` — verifies the bundled mapping covers xpath and external
+ * - `the psalm mapping translates the additions` — verifies the bundled mapping covers xpath, scheme, external and path
  */
 internal class TaintRulesSetTest {
     private val taint by lazy { DocumentSetLoader.load(StubResources.opener(StubResources.TAINT)) }
@@ -57,13 +57,14 @@ internal class TaintRulesSetTest {
 
     @Test
     fun `taint rules set declares its own additions`() {
-        assertEquals(setOf(VulnTypeId("xpath")), rules.vocabulary.vulnTypes.keys)
-        assertEquals(setOf(SourceKindId("external")), rules.vocabulary.sourceKinds.keys)
+        assertEquals(setOf(VulnTypeId("xpath"), VulnTypeId("scheme")), rules.vocabulary.vulnTypes.keys)
+        assertEquals(setOf(SourceKindId("external"), SourceKindId("path")), rules.vocabulary.sourceKinds.keys)
         val bySourceKind = rules.policy.associate { it.sourceKind to it.enables }
-        assertEquals(setOf(VulnTypeId("xpath")), bySourceKind.getValue(SourceKindId("input")))
+        assertEquals(setOf(VulnTypeId("xpath"), VulnTypeId("scheme")), bySourceKind.getValue(SourceKindId("input")))
         val external = bySourceKind.getValue(SourceKindId("external"))
         assertTrue(external.containsAll(taint.policy.single().enables))
-        assertTrue(VulnTypeId("xpath") in external)
+        assertTrue(VulnTypeId("xpath") in external && VulnTypeId("scheme") in external)
+        assertEquals(external - VulnTypeId("scheme"), bySourceKind.getValue(SourceKindId("path")))
     }
 
     @Test
@@ -97,7 +98,12 @@ internal class TaintRulesSetTest {
             assertTrue(entry.body.sinks!!.containsAll(base), "${entry.subject}")
         }
         assertEquals(
-            setOf(Port.Argument(0) to "html", Port.Argument(0) to "ssrf", Port.Argument(0) to "file"),
+            setOf(
+                Port.Argument(0) to "html",
+                Port.Argument(0) to "scheme",
+                Port.Argument(0) to "ssrf",
+                Port.Argument(0) to "file",
+            ),
             sinksOf(FunctionSubject("readfile")),
         )
     }
@@ -105,8 +111,11 @@ internal class TaintRulesSetTest {
     @Test
     fun `sinks follow the Argus lists`() {
         assertEquals(setOf(Port.Argument(4) to "shell"), sinksOf(FunctionSubject("mail")))
-        assertEquals(setOf(Port.Argument(0) to "html"), sinksOf(FunctionSubject("echo")))
-        assertEquals(setOf(Port.Argument(0) to "html", Port.Argument(1) to "html"), sinksOf(FunctionSubject("class_alias")))
+        assertEquals(setOf(Port.Argument(0) to "html", Port.Argument(0) to "scheme"), sinksOf(FunctionSubject("echo")))
+        assertEquals(
+            setOf(Port.Argument(0) to "html", Port.Argument(1) to "html", Port.Argument(0) to "scheme", Port.Argument(1) to "scheme"),
+            sinksOf(FunctionSubject("class_alias")),
+        )
         assertEquals(setOf(Port.Argument(0) to "eval"), sinksOf(FunctionSubject("eval")))
         assertEquals(setOf(Port.Argument(0) to "include"), sinksOf(FunctionSubject("require_once")))
         assertEquals(setOf(Port.Argument(1) to "callable"), sinksOf(FunctionSubject("usort")))
@@ -159,9 +168,10 @@ internal class TaintRulesSetTest {
     fun `sanitizers and sources name the added escapes and source kinds`() {
         assertEquals(setOf("shell"), sanitizersOf(FunctionSubject("escapeshellarg")))
         assertEquals(setOf("html"), sanitizersOf(FunctionSubject("htmlspecialchars")))
+        assertEquals(setOf("html", "scheme"), sanitizersOf(FunctionSubject("rawurlencode")))
         assertEquals(setOf("file"), sanitizersOf(FunctionSubject("basename")))
-        assertTrue(sanitizersOf(FunctionSubject("intval")).containsAll(listOf("sql", "html", "shell", "xpath")))
-        assertEquals(setOf("input"), sourcesOf(VariableSubject("_SERVER")))
+        assertTrue(sanitizersOf(FunctionSubject("intval")).containsAll(listOf("sql", "html", "shell", "xpath", "scheme")))
+        assertEquals(setOf("input", "path"), sourcesOf(VariableSubject("_SERVER")))
         assertEquals(setOf("input"), sourcesOf(FunctionSubject("getallheaders")))
         assertEquals(setOf("external"), sourcesOf(FunctionSubject("getenv")))
         assertEquals(setOf("external"), sourcesOf(MethodSubject("PDOStatement", "fetchAll")))
@@ -187,7 +197,10 @@ internal class TaintRulesSetTest {
         val mapped = DocumentSetLoader.load(StubResources.opener(StubResources.TAINT_RULES), context, mapping)
         val bySubject = mapped.entries.filter { it.condition == null }.associateBy { it.subject }
         assertEquals(setOf(Port.Argument(0) to "xpathi"), sinksOf(bySubject.getValue(MethodSubject("DOMXPath", "query"))))
-        assertEquals(setOf(Port.Argument(0) to "xss"), sinksOf(bySubject.getValue(FunctionSubject("echo"))))
+        assertEquals(
+            setOf(Port.Argument(0) to "xss", Port.Argument(0) to "schemei"),
+            sinksOf(bySubject.getValue(FunctionSubject("echo"))),
+        )
         assertEquals(setOf(Port.Argument(4) to "cmdi"), sinksOf(bySubject.getValue(FunctionSubject("mail"))))
         val getenv =
             bySubject
@@ -198,6 +211,8 @@ internal class TaintRulesSetTest {
         val external = mapped.policy.single { it.sourceKind == SourceKindId("external-input") }
         assertEquals(VulnType.entries.map { it.id }.toSet(), external.enables)
         assertNotNull(mapped.policy.singleOrNull { it.sourceKind == SourceKindId("user-input") })
+        val path = mapped.policy.single { it.sourceKind == SourceKindId("server-path") }
+        assertEquals(external.enables - VulnType.SCHEMEI.id, path.enables)
     }
 
     private fun sinksOf(subject: ModelSubject): Set<Pair<Port.Argument, String>> = sinksOf(unconditional.getValue(subject))

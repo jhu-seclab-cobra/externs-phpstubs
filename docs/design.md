@@ -101,8 +101,8 @@ models/
 vocabulary/
 ├── index.txt              # comment only: the set ships no model document
 ├── provenance.yaml        # producer externs-phpstubs canonical vocabulary; verification manual
-├── vocabulary.yaml        # twelve vulnerability types, two source kinds, with descriptions
-├── policy.yaml            # both source kinds enable every vulnerability type
+├── vocabulary.yaml        # thirteen vulnerability types (schemei with its tokenizer language), three source kinds
+├── policy.yaml            # user-input and external-input enable every vulnerability type; server-path all but schemei
 └── psalm-mapping.yaml     # psalm kinds → canonical names; has_quotes, cookie, user_secret, system_secret → ignore
 ```
 

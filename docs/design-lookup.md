@@ -141,7 +141,7 @@ for an unconditional entry).
 **Responsibility:** Compile-time names for the Canonical Vocabulary so a
 consumer filters without spelling a string: `VulnType.SQLI.id` is
 `VulnTypeId("sqli")`; `SourceKind.USER_INPUT.id` is `SourceKindId("user-input")`.
-Twelve and two constants, each holding its `id`. A repository test asserts
+Thirteen and three constants, each holding its `id`. A repository test asserts
 the bundled vocabulary document declares exactly these names; a vulnerability
 type a consumer set adds has no enum constant and is compared by `VulnTypeId`.
 

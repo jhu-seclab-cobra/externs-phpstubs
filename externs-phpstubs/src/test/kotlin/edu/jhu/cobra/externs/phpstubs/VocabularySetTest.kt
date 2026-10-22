@@ -13,7 +13,8 @@ import kotlin.test.assertTrue
  *
  * - `the vocabulary set ships no model document` — verifies the comment-only manifest yields no entry
  * - `the vocabulary set is manually verified` — verifies the set's provenance
- * - `the policy enables every vulnerability type under both source kinds` — verifies the two rows of the matrix
+ * - `the policy enables every vulnerability type under the two input source kinds` — verifies their rows of the matrix
+ * - `the server path source kind enables every type except scheme injection` — verifies the third row
  * - `the psalm mapping leaves no psalm name in a mapped set` — verifies mapping totality and the discarded kinds
  */
 internal class VocabularySetTest {
@@ -31,10 +32,18 @@ internal class VocabularySetTest {
     }
 
     @Test
-    fun `the policy enables every vulnerability type under both source kinds`() {
+    fun `the policy enables every vulnerability type under the two input source kinds`() {
         val all = VulnType.entries.map { it.id }.toSet()
         assertEquals(SourceKind.entries.map { it.id }.toSet(), set.policy.map { it.sourceKind }.toSet())
-        for (row in set.policy) assertEquals(all, row.enables, row.sourceKind.id)
+        for (row in set.policy.filter { it.sourceKind != SourceKind.SERVER_PATH.id }) {
+            assertEquals(all, row.enables, row.sourceKind.id)
+        }
+    }
+
+    @Test
+    fun `the server path source kind enables every type except scheme injection`() {
+        val row = set.policy.single { it.sourceKind == SourceKind.SERVER_PATH.id }
+        assertEquals(VulnType.entries.map { it.id }.toSet() - VulnType.SCHEMEI.id, row.enables)
     }
 
     @Test

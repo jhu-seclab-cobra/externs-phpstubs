@@ -32,7 +32,7 @@ under the same mapping into this library's `BuiltinRecord`s.
   mounted above the taint set.
 
 **Scope Boundaries**
-- **Owned:** the set's files, the two names it adds to psalm's vocabulary,
+- **Owned:** the set's files, the four names it adds to psalm's vocabulary,
   the choice of which subjects and ports it states, and the classpath root
   constant that names it.
 - **Not Owned:** psalm's own assertions (the taint set), the Canonical
@@ -46,8 +46,8 @@ under the same mapping into this library's `BuiltinRecord`s.
 Argus sink lists ──review──┐
 psalm kind names ──────────┼──► taint-rules/
 builtin name list ─────────┘    ├── index.txt
-                                ├── vocabulary.yaml   (+ xpath, + external)
-                                ├── policy.yaml       (input → xpath; external → every kind)
+                                ├── vocabulary.yaml   (+ xpath, scheme; + external, path)
+                                ├── policy.yaml       (input → xpath, scheme; external → every kind; path → every kind but scheme)
                                 ├── sinks.yaml
                                 ├── sanitizers.yaml
                                 └── sources.yaml
@@ -59,7 +59,7 @@ merge: set loader(taint/, …) then set loader(taint-rules/, taint vocabulary, m
 - **Name:** Taint Rules Document Set
 - **Definition:** The bundled hand-maintained document set holding taint
   assertions psalm does not state, in the commons-phpmodels format and in
-  psalm's kind names plus two additions of its own.
+  psalm's kind names plus four additions of its own.
 - **Scope:** sink facts from the Argus lists that the format can express,
   the sanitizer facts and source facts those lists and the builtin name
   list imply, the checks of the type predicates and character checks psalm
@@ -69,10 +69,14 @@ merge: set loader(taint/, …) then set loader(taint-rules/, taint vocabulary, m
 
 - **Name:** Vocabulary Addition
 - **Definition:** A vulnerability type or source kind the set declares
-  because psalm has no name for it: the kind `xpath` (XPath injection)
-  and the source kind `external` (data read from the environment, files,
-  sockets, mail, LDAP, or stored records).
-- **Scope:** the two names; every other name in the set is a Psalm Kind.
+  because psalm has no name for it: the kinds `xpath` (XPath injection) and
+  `scheme` (scheme injection: a value at the start of a URL attribute value
+  chooses the scheme), and the source kinds `external` (data read from the
+  environment, files, sockets, mail, LDAP, or stored records) and `path`
+  (the `$_SERVER` keys `PHP_SELF`, `REQUEST_URI`, `SCRIPT_NAME`, `PATH_INFO`,
+  which the web server resolves to a path; the policy withholds `scheme`
+  from it).
+- **Scope:** the four names; every other name in the set is a Psalm Kind.
 - **Relationships:** declared in the set's vocabulary, enabled by its
   policy rows, translated by the library's mapping like a Psalm Kind.
 
@@ -97,10 +101,14 @@ merge: set loader(taint/, …) then set loader(taint-rules/, taint vocabulary, m
   section. A taint rules entry for a subject and section the taint set
   also states restates every point of psalm's section and adds its own:
   the merge replaces one section per subject at a time, so the entry is a
-  strict superset, never a rewrite. The shipped set has two such
-  entries, both sinks.
+  strict superset, never a rewrite. The shipped set has such
+  entries among its sinks and sanitizers.
 - **With the merge:** this library loads the set with the same psalm
-  mapping as the taint set, extended by the two Vocabulary Additions.
+  mapping as the taint set, extended by the four Vocabulary Additions.
+  Every output sink of cross-site scripting has a `scheme` twin on the same
+  port, and the sanitizers that encode the characters that fix a scheme
+  (`urlencode`, `rawurlencode`, `curl_escape`) and the value-typing
+  sanitizers cover `scheme`; the HTML escapes do not.
   Mounting it after the taint set makes each taint rules section override
   psalm's for that subject.
 
@@ -121,8 +129,12 @@ merge: set loader(taint/, …) then set loader(taint-rules/, taint vocabulary, m
 - **Boundary:** psalm states `readfile` as a `file` sink; Argus adds
   server-side request forgery and output. The taint rules entry states all
   three kinds, and the test proves it contains psalm's point.
-- **Interaction:** the mapping translates `external` to the canonical
-  source kind and `xpath` to the canonical vulnerability type. `getenv` is
+- **Boundary:** `$_SERVER['REQUEST_URI']` is a `path` source and
+  `$_SERVER['HTTP_REFERER']` an `input` source. Written at the start of an
+  `href`, the second can open `javascript:`, the first cannot.
+- **Interaction:** the mapping translates `external` and `path` to the
+  canonical source kinds and `xpath` and `scheme` to the canonical
+  vulnerability types. `getenv` is
   answered as a source of that source kind; `DOMXPath::query` as a sink of
   that vulnerability type; the
   `external` policy row in canonical names.

@@ -11,7 +11,7 @@
 - A `ThrowsFact` with empty `classes` states the call throws none; an empty `throws` list asserts nothing about throws.
 - Existence of a declaration is `signature != null`. A taint-only function or a predefined variable is a record without a signature.
 - Every fact carries `owner` and `condition: ArgPattern?`. Match `condition` against the call's arguments with `ArgPattern.matches(List<IPrimitiveVal?>)`; `null` (undecidable) is the consumer's rule to apply. The record ranks nothing.
-- Taint facts speak the canonical vocabulary only: `VulnType` (`sqli`, `cmdi`, `codei`, `xss`, `headeri`, `ssrf`, `pathtrav`, `fileinc`, `deser`, `callablei`, `ldapi`, `xpathi`) and `SourceKind` (`user-input`, `external-input`). No psalm name survives the merge.
+- Taint facts speak the canonical vocabulary only: `VulnType` (`sqli`, `cmdi`, `codei`, `xss`, `headeri`, `ssrf`, `pathtrav`, `fileinc`, `deser`, `callablei`, `ldapi`, `xpathi`, `schemei`) and `SourceKind` (`user-input`, `external-input`, `server-path`). No psalm name survives the merge.
 - Enumerate with `PhpStubs.functions`, `classes`, `methods`, `constants`, `classConstants`, `properties`, `variables` (records) or `sinkFacts`, `sourceFacts`, `sanitizerFacts`, `flows`, `returns`, `throws` (facts); a match looser than exact is your filter over an enumeration.
 - The merge keeps the entry in force per (subject, condition, unit); manual sets outrank generated ones, later position wins among equal ranks, and a unit is replaced whole. Mount order: `models/`, `value-rules/`, `vocabulary/`, `taint/`, `taint-rules/`.
 - `PhpStubs.with(Path)` / `with("/classpath/root/")` / `PhpStubs + root` mounts consumer sets after the bundled ones; a set without `provenance.yaml` is manual. The bundled lookup is unchanged.
@@ -105,7 +105,7 @@ Every fact: **`owner: ModelSubject`**, **`condition: ArgPattern?`** (`null` for 
 
 ### VulnType, SourceKind (enums)
 
-**`VulnType.SQLI.id`** ... -- `VulnTypeId` per canonical vulnerability type: `sqli`, `cmdi`, `codei`, `xss`, `headeri`, `ssrf`, `pathtrav`, `fileinc`, `deser`, `callablei`, `ldapi`, `xpathi`. **`SourceKind.USER_INPUT.id`**, **`SourceKind.EXTERNAL_INPUT.id`** -- `SourceKindId("user-input")`, `SourceKindId("external-input")`. A vulnerability type a consumer set adds has no constant.
+**`VulnType.SQLI.id`** ... -- `VulnTypeId` per canonical vulnerability type: `sqli`, `cmdi`, `codei`, `xss`, `headeri`, `ssrf`, `pathtrav`, `fileinc`, `deser`, `callablei`, `ldapi`, `xpathi`, `schemei`. **`SourceKind.USER_INPUT.id`**, **`SourceKind.EXTERNAL_INPUT.id`**, **`SourceKind.SERVER_PATH.id`** -- `SourceKindId("user-input")`, `SourceKindId("external-input")`, `SourceKindId("server-path")`. A vulnerability type a consumer set adds has no constant.
 
 ### StubResources (object)
 

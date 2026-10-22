@@ -8,16 +8,17 @@ import kotlin.test.assertEquals
 /**
  * Tests for the [VulnType] enum: the compile-time names of the canonical vulnerability types.
  *
- * - `twelve constants carry the documented ids` — verifies the constants and their interned identifiers
+ * - `thirteen constants carry the documented ids` — verifies the constants and their interned identifiers
  * - `the bundled vocabulary declares exactly the enum names` — verifies the vocabulary document against the enum
  */
 internal class VulnTypeTest {
     @Test
-    fun `twelve constants carry the documented ids`() {
+    fun `thirteen constants carry the documented ids`() {
         val documented =
-            listOf("sqli", "cmdi", "codei", "xss", "headeri", "ssrf", "pathtrav", "fileinc", "deser", "callablei", "ldapi", "xpathi")
+            listOf("sqli", "cmdi", "codei", "xss", "headeri", "ssrf", "pathtrav", "fileinc", "deser", "callablei", "ldapi", "xpathi", "schemei")
         assertEquals(documented, VulnType.entries.map { it.id.id })
         assertEquals(VulnTypeId("sqli"), VulnType.SQLI.id)
+        assertEquals(VulnTypeId("schemei"), VulnType.SCHEMEI.id)
     }
 
     @Test

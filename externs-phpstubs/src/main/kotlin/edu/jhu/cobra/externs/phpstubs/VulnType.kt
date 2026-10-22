@@ -24,4 +24,5 @@ public enum class VulnType(
     CALLABLEI(VulnTypeId("callablei")),
     LDAPI(VulnTypeId("ldapi")),
     XPATHI(VulnTypeId("xpathi")),
+    SCHEMEI(VulnTypeId("schemei")),
 }

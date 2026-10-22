@@ -15,6 +15,7 @@ vulnTypes:
   callable: callablei
   ldap: ldapi
   xpath: xpathi
+  scheme: schemei
   has_quotes: ignore
   cookie: ignore
   user_secret: ignore
@@ -22,3 +23,4 @@ vulnTypes:
 sourceKinds:
   input: user-input
   external: external-input
+  path: server-path

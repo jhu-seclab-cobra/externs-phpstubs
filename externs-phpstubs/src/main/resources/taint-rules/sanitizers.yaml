@@ -14,7 +14,7 @@
 - subject:
     function: base64_encode
   sanitizers:
-    - vulnTypes: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie, xpath]
+    - vulnTypes: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie, xpath, scheme]
 - subject:
     function: basename
   sanitizers:
@@ -22,15 +22,15 @@
 - subject:
     function: bin2hex
   sanitizers:
-    - vulnTypes: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie, xpath]
+    - vulnTypes: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie, xpath, scheme]
 - subject:
     function: boolval
   sanitizers:
-    - vulnTypes: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie, xpath]
+    - vulnTypes: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie, xpath, scheme]
 - subject:
     function: crc32
   sanitizers:
-    - vulnTypes: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie, xpath]
+    - vulnTypes: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie, xpath, scheme]
 - subject:
     function: ctype_alnum
   sanitizers:
@@ -39,7 +39,7 @@
 - subject:
     function: ctype_digit
   sanitizers:
-    - vulnTypes: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie, xpath]
+    - vulnTypes: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie, xpath, scheme]
       check: {argument: argument(0), accepts: true, within: '[0-9]'}
 - subject:
     function: ctype_xdigit
@@ -49,7 +49,7 @@
 - subject:
     function: curl_escape
   sanitizers:
-    - vulnTypes: [html]
+    - vulnTypes: [html, scheme]
 - subject:
     function: dbx_escape_string
   sanitizers:
@@ -65,15 +65,15 @@
 - subject:
     function: floatval
   sanitizers:
-    - vulnTypes: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie, xpath]
+    - vulnTypes: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie, xpath, scheme]
 - subject:
     function: hash
   sanitizers:
-    - vulnTypes: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie, xpath]
+    - vulnTypes: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie, xpath, scheme]
 - subject:
     function: hash_hmac
   sanitizers:
-    - vulnTypes: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie, xpath]
+    - vulnTypes: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie, xpath, scheme]
 - subject:
     function: htmlentities
   sanitizers:
@@ -89,7 +89,7 @@
 - subject:
     function: intval
   sanitizers:
-    - vulnTypes: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie, xpath]
+    - vulnTypes: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie, xpath, scheme]
 - subject:
     function: is_array
   sanitizers:
@@ -142,24 +142,28 @@
 - subject:
     function: md5
   sanitizers:
-    - vulnTypes: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie, xpath]
+    - vulnTypes: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie, xpath, scheme]
 - subject:
     function: number_format
   sanitizers:
-    - vulnTypes: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie, xpath]
+    - vulnTypes: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie, xpath, scheme]
 - subject:
     function: password_hash
   sanitizers:
-    - vulnTypes: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie, xpath]
+    - vulnTypes: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie, xpath, scheme]
 - subject:
     function: rawurlencode
   sanitizers:
-    - vulnTypes: [html]
+    - vulnTypes: [html, scheme]
 - subject:
     function: sha1
   sanitizers:
-    - vulnTypes: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie, xpath]
+    - vulnTypes: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie, xpath, scheme]
 - subject:
     function: sqlite_escape_string
   sanitizers:
     - vulnTypes: [sql]
+- subject:
+    function: urlencode
+  sanitizers:
+    - vulnTypes: [html, has_quotes, scheme]

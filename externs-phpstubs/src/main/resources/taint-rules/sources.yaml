@@ -1,6 +1,7 @@
 # Hand-maintained taint set in psalm's names, mounted after the generated taint set.
 # Source kind `input` marks request-controlled data psalm does not mark; source kind `external` marks
 # data read from the environment, files, sockets, mail, LDAP, or stored records (declared in vocabulary.yaml).
+# Source kind `path` marks the `$_SERVER` keys the web server resolves to a path; the other keys are `input`.
 - subject:
     variable: $_ENV
   sources:
@@ -12,7 +13,10 @@
 - subject:
     variable: $_SERVER
   sources:
+    - sourceKinds: [path]
+      keys: [PHP_SELF, REQUEST_URI, SCRIPT_NAME, PATH_INFO]
     - sourceKinds: [input]
+      keys: ['(?!(?:PHP_SELF|REQUEST_URI|SCRIPT_NAME|PATH_INFO)$).*']
 - subject:
     variable: $_SESSION
   sources:
