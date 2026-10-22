@@ -79,8 +79,12 @@ merge: set loader(taint/, …) then set loader(taint-rules/, taint vocabulary, m
 - **Name:** Receiver-triggered Sink
 - **Definition:** A dangerous operation the Argus lists attribute to the
   object a method is called on rather than to an argument, such as the
-  Phar and SPL getters that deserialize on access.
-- **Scope:** excluded; the format admits argument ports only for sinks.
+  Phar and SPL getters that deserialize on access. `Phar::getMetadata` and
+  `PharFileInfo::getMetadata` are such sinks: PHP 8 reads phar metadata
+  lazily, so only these getters deserialize it.
+- **Scope:** excluded; the format admits argument ports only for sinks. The
+  `unserialize` sink point of the file functions is dropped for the same
+  reason, because opening a phar path runs no `__wakeup`.
 - **Relationships:** documented in the sinks document header; a format
   extension would readmit them.
 
@@ -93,8 +97,8 @@ merge: set loader(taint/, …) then set loader(taint-rules/, taint vocabulary, m
   section. A taint rules entry for a subject and section the taint set
   also states restates every point of psalm's section and adds its own:
   the merge replaces one section per subject at a time, so the entry is a
-  strict superset, never a rewrite. The shipped set has nine such
-  entries, all sinks.
+  strict superset, never a rewrite. The shipped set has two such
+  entries, both sinks.
 - **With the merge:** this library loads the set with the same psalm
   mapping as the taint set, extended by the two Vocabulary Additions.
   Mounting it after the taint set makes each taint rules section override
@@ -114,9 +118,9 @@ merge: set loader(taint/, …) then set loader(taint-rules/, taint vocabulary, m
 - **Typical:** Argus lists `mail` with its additional-parameters argument
   as a command-injection sink. The sinks document states subject `mail`,
   port `argument(4)`, vulnerability type `shell`.
-- **Boundary:** psalm states `readfile` as a `file` and `unserialize`
-  sink; Argus adds server-side request forgery and output. The taint rules entry
-  states all four kinds, and the test proves it contains psalm's two.
+- **Boundary:** psalm states `readfile` as a `file` sink; Argus adds
+  server-side request forgery and output. The taint rules entry states all
+  three kinds, and the test proves it contains psalm's point.
 - **Interaction:** the mapping translates `external` to the canonical
   source kind and `xpath` to the canonical vulnerability type. `getenv` is
   answered as a source of that source kind; `DOMXPath::query` as a sink of
