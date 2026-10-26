@@ -81,6 +81,10 @@ php-src, the interpreter's own declarations (CobraPHP user decision BP-2).
 - Each php-src class-like declaration no models document declares is
   added to `placement` of its extension.
 - A class php-src does not declare (a PECL class) keeps its entry.
+- The handler-fact lines of a class entry (the commons-phpmodels class
+  signature field `handlers`, Effective Handler Facts in its
+  `model-declarations-handlers.md`) are among the other lines that stay; this step
+  rewrites the classifier, parent and interfaces only.
 - Two stubs declaring one class with different hierarchies fail.
 
 ### extract_signatures.py
