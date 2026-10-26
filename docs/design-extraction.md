@@ -81,10 +81,8 @@ php-src, the interpreter's own declarations (CobraPHP user decision BP-2).
 - Each php-src class-like declaration no models document declares is
   added to `placement` of its extension.
 - A class php-src does not declare (a PECL class) keeps its entry.
-- The handler-fact lines of a class entry (the commons-phpmodels class
-  signature field `handlers`, Effective Handler Facts in its
-  `model-declarations-handlers.md`) are among the other lines that stay; this step
-  rewrites the classifier, parent and interfaces only.
+- Class signature field definitions:
+  [commons-phpmodels declaration types](../../commons-phpmodels/docs/design-declarations.md#signatureinfo-sealed).
 - Two stubs declaring one class with different hierarchies fail.
 
 ### extract_signatures.py
@@ -153,6 +151,11 @@ sorted tab-separated line per internal declaration the build reflects.
 | Propagation without a port | Every propagation element of an entry names an argument position its php-src signature lacks |
 
 ## Open Gaps
+
+- **Class handler preservation.** `extract_hierarchy.rewrite` calls
+  `Entry.with_signature`, which replaces the entire signature and discards
+  `handlers`; it does not yet implement the field-preservation contract of
+  `extract_hierarchy.py` above.
 
 - **Indirect calls.** The model asserts that a class outside an entry's
   throws section is never thrown by it (commons-phpmodels `docs/model.md`,
