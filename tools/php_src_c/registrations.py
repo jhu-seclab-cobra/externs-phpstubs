@@ -43,9 +43,9 @@ class Program:
             source = Source(path, self.strings, provenance)
             source.relative, source.is_header = path.relative_to(root), path.suffix == ".h"
             self.sources.append(source)
-        preprocessor = Preprocessor(self.sources, self.strings)
+        self.preprocessor = Preprocessor(self.sources, self.strings)
         for source in self.sources:
-            preprocessor.expand_definitions(source)
+            self.preprocessor.expand_definitions(source)
             self.load(source)
         self.class_names = self.registered_class_names()
         self.class_entries = {

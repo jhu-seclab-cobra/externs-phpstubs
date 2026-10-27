@@ -17,7 +17,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 
 import php_src
 from php_src_c import Program, Source
-from php_src_c.definitions import definitions_of
+from php_src_c.definitions import definitions_of, parse_body, parse_expression
 from php_src_c.registrations import Registration
 from php_src_c.source import BRANCH, matching, split_arguments
 
@@ -235,3 +235,29 @@ def definitions_calls(program, definition):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class BodyParserTest(unittest.TestCase):
+    def test_statements_parse_to_nodes(self):
+        block = parse_body("{ int a = 1; if (a) { b = 2; } else c = 3; return a ? b : c; }", [])
+        kinds = [node[0] for node in block[1]]
+        self.assertEqual(["decl", "if", "return"], kinds)
+        self.assertEqual(("cond", ("name", "a"), ("name", "b"), ("name", "c")), block[1][2][1])
+
+    def test_conditional_group_keeps_each_branch(self):
+        block = parse_body("{\n__BRANCH_1_1__\n x = 1;\n__BRANCH_1_2__\n x = 2;\n__BRANCH_1_END__\n return x; }", [])
+        group = block[1][0]
+        self.assertEqual("cgroup", group[0])
+        self.assertEqual([1, 2], [number for number, _ in group[2]])
+
+    def test_expression_forms(self):
+        call = parse_expression("f(a, &b->c[2], (int)d)")
+        self.assertEqual("call", call[0])
+        self.assertEqual(["name", "un", "cast"], [argument[0] for argument in call[2]])
+
+    def test_initializer_items_carry_designators_and_branch_marks(self):
+        block = parse_body("{ T t = { .a = 1, 2 }; }", [])
+        init = block[1][0][2][0][3]
+        self.assertEqual("init", init[0])
+        self.assertEqual(2, len(init[1]))
+        self.assertEqual(3, len(init[1][0]))

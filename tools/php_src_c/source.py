@@ -28,11 +28,12 @@ class Source:
     """One C file with comments removed, string literals replaced by placeholders, and macros recorded.
 
     With provenance, each conditional directive becomes a marker line and ``conditions`` maps (group, branch) to the
-    condition the branch stands under; a nested group is numbered in order of its opening directive."""
+    condition the branch stands under and ``otherwise`` holds the groups that end in an else branch; a nested group is
+    numbered in order of its opening directive."""
 
     def __init__(self, path, strings, provenance=False):
         self.path = path
-        self.provenance, self.conditions = provenance, {}
+        self.provenance, self.conditions, self.otherwise = provenance, {}, set()
         raw = path.read_text(encoding="utf-8", errors="replace")
         lexed = LEXEME.sub(lambda m: self.lexeme(m.group(0), strings), raw).replace("\\\n", " ")
         lines = balance_conditionals(lexed.split("\n"))
@@ -68,6 +69,8 @@ class Source:
                 continue
             condition = branch_condition(keyword, rest, conditions)
             self.conditions[(group, len(conditions))] = condition
+            if keyword == "else":
+                self.otherwise.add(group)
             marks[number] = f"__BRANCH_{group}_{len(conditions)}__"
             conditions.append(condition)
         return marks
