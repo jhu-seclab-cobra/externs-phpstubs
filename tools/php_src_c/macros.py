@@ -10,6 +10,7 @@ HANDLER_MACROS = {
     "ZEND_METHOD": "zim_{0}_{1}", "PHP_METHOD": "zim_{0}_{1}",
     "ZEND_NAMED_FUNCTION": "{0}", "PHP_NAMED_FUNCTION": "{0}",
     "ZEND_FRAMELESS_FUNCTION": "zflf_{0}_{1}",
+    "PHP_MINIT_FUNCTION": "zm_startup_{0}", "ZEND_MINIT_FUNCTION": "zm_startup_{0}",
 }
 
 
