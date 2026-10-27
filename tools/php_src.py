@@ -20,6 +20,9 @@ GENERATED_HEADER = "# Generated from php-src stubs by {tool}.\n# Do not hand-edi
 
 ENTRY_START = re.compile(r"^- subject:\n    (\w+): (\S+)\n", re.M)
 SIGNATURE_BLOCK = re.compile(r"^  signature:\n(?:    .*\n)*", re.M)
+SIGNATURE_HEAD = re.compile(r"^  signature:[ \t]*\n", re.M)
+SIGNATURE_FIELD = re.compile(r"    (\w+):")
+SIGNATURE_COMMENT = re.compile(r"    #")
 NAMESPACE = re.compile(r"\bnamespace(?:\s+([\w\\]+))?\s*[;{]")
 USE = re.compile(r"^\s*use\s+\\?([\w\\]+)(?:\s+as\s+(\w+))?\s*;", re.M)
 OPENERS, CLOSERS = "([{", ")]}"
@@ -39,13 +42,97 @@ class Entry:
     def key(self):
         return self.kind, self.subject.lower()
 
-    def with_signature(self, block):
-        """The entry text with its signature block replaced by block, every other line kept."""
-        return SIGNATURE_BLOCK.sub(lambda _: block, self.text, count=1)
+    def with_signature(self, block, owned_fields):
+        """The entry text with the owned fields of its signature taken from block, every other byte kept.
+
+        block is a complete rendered signature. Each owned key is replaced in place by the block's field, removed
+        when the block omits it, and inserted after the block's preceding field when the entry lacks it. A field
+        outside owned_fields keeps its bytes, nested values, comments and blank lines included; so does everything
+        after the signature, and the end of the file. An entry without a signature takes the block after its subject.
+        """
+        owned = set(owned_fields)
+        fresh = signature_fields(block.split("\n", 1)[1])
+        if any(key not in owned for key, _ in fresh):
+            raise ValueError(f"signature block holds a field outside {sorted(owned)}")
+        head = SIGNATURE_HEAD.search(self.text)
+        if head is None:
+            at = self.header_length
+            for line in self.text[at:].splitlines(keepends=True):
+                if not line.startswith("    "):
+                    break
+                at += len(line)
+            before = self.text[:at]
+            return before + ("" if before.endswith("\n") else "\n") + block + self.text[at:]
+        body_start = head.end()
+        lines = self.text[body_start:].splitlines(keepends=True)
+        count = 0
+        for line in lines:
+            if line.strip() and not line.startswith("    "):
+                break
+            count += 1
+        while count and not lines[count - 1].strip():
+            count -= 1
+        region = "".join(lines[:count])
+        bare = region != "" and not region.endswith("\n")
+        kept = [(key, chunk) for key, chunk in signature_fields(region + ("\n" if bare else ""))]
+        replacement = dict(fresh)
+        merged, placed = [], set()
+        for key, chunk in kept:
+            if key is None or key not in owned:
+                merged.append((key, chunk))
+            elif key in replacement and key not in placed:
+                merged.append((key, replacement[key]))
+                placed.add(key)
+        previous = None
+        for key, chunk in fresh:
+            if key in placed:
+                previous = key
+                continue
+            index = 0
+            if previous is not None:
+                index = next(i for i, (k, _) in enumerate(merged) if k == previous) + 1
+            elif merged and merged[0][0] is None:
+                index = 1
+            merged.insert(index, (key, chunk))
+            previous = key
+        rendered = "".join(chunk for _, chunk in merged)
+        if bare:
+            rendered = rendered[:-1] if rendered.endswith("\n") else rendered
+        rest = "".join(lines[count:])
+        return self.text[:body_start] + rendered + rest
 
     def without_signature(self):
         """The entry's sections after the subject lines, its signature block removed."""
         return SIGNATURE_BLOCK.sub("", self.text[self.header_length :], count=1)
+
+
+def signature_fields(body):
+    """Split signature body lines into (key, text) fields: the key line with the comment lines directly above it
+    and the deeper or blank lines below. Lines before the first key form a field of key None."""
+    fields, pending = [], []
+    for line in body.splitlines(keepends=True):
+        if SIGNATURE_FIELD.match(line):
+            fields.append((SIGNATURE_FIELD.match(line).group(1), "".join(pending) + line))
+            pending = []
+        elif SIGNATURE_COMMENT.match(line):
+            pending.append(line)
+        else:
+            if pending:
+                if fields:
+                    fields[-1] = (fields[-1][0], fields[-1][1] + "".join(pending))
+                else:
+                    fields.append((None, "".join(pending)))
+                pending = []
+            if fields:
+                fields[-1] = (fields[-1][0], fields[-1][1] + line)
+            else:
+                fields.append((None, line))
+    if pending:
+        if fields:
+            fields[-1] = (fields[-1][0], fields[-1][1] + "".join(pending))
+        else:
+            fields.append((None, "".join(pending)))
+    return fields
 
 
 class StubText:

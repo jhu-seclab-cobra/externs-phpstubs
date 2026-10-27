@@ -18,6 +18,8 @@ from pathlib import Path
 import php_src
 
 TOOL = "tools/extract_hierarchy.py"
+# The signature fields this producer writes; every other field of an entry stays as it is.
+OWNED_FIELDS = ("classifier", "parent", "interfaces", "isFinal", "handlers")
 
 DECLARATION = re.compile(r"\b(?:(?:final|abstract|readonly)\s+)*(class|interface|enum|trait)\s+(\w+)([^{;]*)\{")
 HEADER = re.compile(
@@ -113,7 +115,7 @@ def rewrite(models, declarations):
 
     def transform(entry):
         declaration = declarations.get(entry.subject.lower()) if entry.kind == "class" else None
-        return entry.with_signature(declaration.render_signature()) if declaration else entry.text
+        return entry.with_signature(declaration.render_signature(), OWNED_FIELDS) if declaration else entry.text
 
     return php_src.rewrite(models, transform)
 
