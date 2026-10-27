@@ -2,25 +2,27 @@
 
 | File | Topic |
 |------|-------|
-| [concept.md](concept.md) | Problem statement, data-side concepts over commons-phpmodels, extension provenance, scenarios |
-| [concept-lookup.md](concept-lookup.md) | Canonical vocabulary, the merge, `BuiltinRecord` and `BuiltinLookup` by PHP name |
-| [concept-extraction.md](concept-extraction.md) | Extraction from php-src: declarations, Handlers, Procedure Summary, Boundary Call |
-| [concept-taint.md](concept-taint.md) | The taint document set in psalm's names, its extraction, and its translation at the merge |
-| [concept-taint-rules.md](concept-taint-rules.md) | The hand-maintained taint rules document set: Argus sink facts, added sanitizer facts and source facts, vocabulary additions |
-| [concept-value-rules.md](concept-value-rules.md) | The hand-maintained value rules set: value units beyond the generated declarations, generated-set gaps |
-| [model-lookup.md](model-lookup.md) | Bundled sets, canonical vocabulary, psalm mapping, mount order, set merge, consumer sets, `BuiltinRecord`, Fact with condition, `BuiltinLookup` |
-| [design.md](design.md) | `StubResources`, mount order, generated-set rules, resource layout, exception types |
-| [design-extraction.md](design-extraction.md) | `php_src` and the php-src producers: hierarchy and throws extraction, the signature producer's link |
-| [design-extraction-signatures.md](design-extraction-signatures.md) | The signature producer: parameters, return types, frameless, special and rope facts, the compiler closure check |
+| [concept.md](concept.md) | Problem, scope, concepts and data flow |
+| [concept-lookup.md](concept-lookup.md) | Canonical vocabulary, merge and builtin lookup |
+| [concept-extraction.md](concept-extraction.md) | Declarations, source extraction and throws |
+| [concept-taint.md](concept-taint.md) | Taint sources, extraction and translation |
+| [concept-taint-rules.md](concept-taint-rules.md) | Manual sink and source facts and vocabulary |
+| [concept-value-rules.md](concept-value-rules.md) | Manual value units and generated-set gaps |
+| [model-lookup.md](model-lookup.md) | Bundled sets, mounting, records and builtin lookup |
+| [design.md](design.md) | Resources, mount order, generated sets and errors |
+| [design-extraction.md](design-extraction.md) | Shared reader and hierarchy, signature and throws producers |
+| [design-extraction-handlers.md](design-extraction-handlers.md) | Handler extraction inputs, shared reader, preservation and failures |
+| [design-extraction-signatures.md](design-extraction-signatures.md) | Parameters, returns and one-opcode facts |
 | [design-lookup.md](design-lookup.md) | `BuiltinLookup`, `PhpStubs`, `BuiltinRecord`, fact types, canonical enums |
-| [design-merge.md](design-merge.md) | `Mount`, `MountSequence`, `SetMerge`: set mounting, failure classification, the fold |
-| [design-taint.md](design-taint.md) | `StubResources`, taint resource layout, extraction script inputs and validation rules |
-| [design-taint-rules.md](design-taint-rules.md) | `StubResources.TAINT_RULES`, rules resource layout, validation and maintenance rules |
-| [design-value-rules.md](design-value-rules.md) | `StubResources.VALUE_RULES`, value rules resource layout, validation and maintenance rules |
-| [spec-merge.md](spec-merge.md) | Folding the mounted sets into the entry in force per subject, condition, and unit |
-| [spec-throws.md](spec-throws.md) | Computing the throws section from the php-src C sources: the Procedure Summary fixpoint |
-| [impl.md](impl.md) | commons-phpmodels API findings, version constraints, extension and set provenance, variadic, taint-extraction, and value rules review notes |
+| [design-merge.md](design-merge.md) | Mounting, failure classification and set merge |
+| [design-taint.md](design-taint.md) | Taint resource layout, extraction and validation |
+| [design-taint-rules.md](design-taint-rules.md) | Taint-rule resources, validation and maintenance |
+| [design-value-rules.md](design-value-rules.md) | Value-rule resources, validation and maintenance |
+| [spec-merge.md](spec-merge.md) | Set folding by subject, condition and unit |
+| [spec-throws.md](spec-throws.md) | Procedure summaries over the C sources |
+| [spec-extraction-handlers.md](spec-extraction-handlers.md) | Effective native tables and request-specific handler summaries |
+| [impl.md](impl.md) | APIs, source constraints, regeneration and integration |
 | [performance.md](performance.md) | Load-time and lookup benchmark procedure and baselines |
 | [llms.txt](llms.txt) | Agent-facing L0 index (llmstxt.org format) |
-| [llms/stubs.md](llms/stubs.md) | Agent-facing API reference: `BuiltinLookup`, `PhpStubs`, `BuiltinRecord`, facts, enums, `StubResources` |
+| [llms/stubs.md](llms/stubs.md) | Builtin lookup, records, facts, enums and resources |
 | [llms/full.txt](llms/full.txt) | Agent-facing L2 concatenation of llms.txt and llms/stubs.md |

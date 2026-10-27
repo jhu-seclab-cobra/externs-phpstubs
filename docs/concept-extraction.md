@@ -19,8 +19,10 @@ php-src release, beside the upstream stub conversion
 
 **Data Flow**
 - **Inputs:** one php-src checkout at the pinned release tag: its stub
-  files, its function entry tables, and its C sources.
-- **Outputs:** class hierarchies, callable signatures, and throws sections
+  files, its function entry tables, and its C sources, including native
+  object-handler declarations and implementations.
+- **Outputs:** class hierarchies, final-class status, effective object-handler
+  facts, callable signatures, and throws sections
   of the generated entries; entries for every php-src declaration the set
   lacked.
 - **Connections:** php-src → hierarchy extraction → signature extraction
@@ -28,7 +30,8 @@ php-src release, beside the upstream stub conversion
 
 **Scope Boundaries**
 - **Owned:** reading php-src, placing the entry of every php-src
-  Declaration in the document of its extension, rewriting the hierarchy,
+  Declaration in the document of its extension, rewriting its declaration
+  fields and established effective object-handler facts,
   signature, and throws of a generated entry.
 - **Not Owned:** the format of a throws section and what it asserts
   (commons-phpmodels `docs/model.md`); value units, which the value
@@ -39,7 +42,8 @@ php-src release, beside the upstream stub conversion
 **Conceptual Diagram**
 ```
 php-src (release tag)
-  **/*.stub.php ──────► Hierarchy Extraction ──► class entries   (classifier, parent, interfaces)
+  **/*.stub.php ─┐
+  **/*.{c,h,cpp,cc} ┴─► Hierarchy Extraction ──► class declarations and handler facts
   **/*.stub.php ──────► Signature Extraction ──► function and method entries (params, returnType)
   *_arginfo.h  ───┐
   **/*.{c,h,cpp,cc}┴──► Throws Extraction ───► throws section of each implemented callable entry
@@ -99,8 +103,8 @@ php-src (release tag)
   documents yields identical files, and a second run changes nothing.
 
 **Internal Processing Flow**
-1. Hierarchy — every php-src class-like declaration gets its classifier,
-   parent, and interfaces; one the set lacks is added.
+1. Hierarchy — every php-src class-like declaration gets its declaration
+   fields and established handler facts; one the set lacks is added.
 2. Signatures — every php-src function and method gets its declared
    parameters and return type; one the set lacks is added.
 3. Throws — every implemented function and method gets the classes its
@@ -123,9 +127,8 @@ php-src (release tag)
 
 ## 5. Rationale and Rejected Alternatives
 
-- **Choice:** php-src stubs for hierarchies and signatures (CobraPHP user
-  decision BP-2 for hierarchies; the same source for signatures so the two
-  agree).
+- **Choice:** php-src stubs for hierarchies and signatures, so both use
+  the interpreter's own declarations.
   **Rejected:** the upstream stub conversion (an older release, methods
   missing); PHP reflection as the producer (it reports only the extensions
   one build loads, so it serves as the test oracle instead).

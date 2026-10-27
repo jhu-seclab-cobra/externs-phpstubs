@@ -64,16 +64,19 @@ nothing.
 
 ### extract_hierarchy.py
 
-The class entries take their classifier, parent, and interfaces from
-php-src, the interpreter's own declarations (CobraPHP user decision BP-2).
+Class entries take declaration fields and established effective handler facts
+from php-src. The producer interfaces are in
+[Handler Extraction](design-extraction-handlers.md); its source-mapping
+algorithm is in [Effective Handler Extraction](spec-extraction-handlers.md).
 
 | Input | Yields |
 |-------|--------|
-| `**/*.stub.php` | each class, interface, enum, and trait with its namespace, `extends`, and `implements` names, folded |
+| `**/*.stub.php` | each class, interface, enum, and trait with its namespace, modifiers, `extends`, and `implements` names, folded |
 
 - Each generated class entry php-src declares is relocated to its
-  extension, then gets the classifier, parent, and interfaces php-src
-  declares for its name; its other lines stay.
+  extension, then gets the classifier, parent, interfaces, final-class status
+  and established effective handler facts of its declaration; its other lines
+  stay. Inputs, preservation and failures: [Handler Extraction](design-extraction-handlers.md).
 - An enum's interfaces end with `unitenum`, and with `unitenum`,
   `backedenum` when it declares a backing type: the interfaces the engine
   appends to every enum (`ENUM_INTERFACES`, `BACKED_ENUM_INTERFACES`,
@@ -83,7 +86,9 @@ php-src, the interpreter's own declarations (CobraPHP user decision BP-2).
 - A class php-src does not declare (a PECL class) keeps its entry.
 - Class signature field definitions:
   [commons-phpmodels declaration types](../../commons-phpmodels/docs/design-declarations.md#signatureinfo-sealed).
-- Two stubs declaring one class with different hierarchies fail.
+- Conflicting source hierarchies or incompatible declared final modifiers
+  fail. Registered flags establish finality independently of classifier;
+  source-defined enum restrictions are not rewritten as a FINAL flag.
 
 ### extract_signatures.py
 
@@ -152,10 +157,10 @@ sorted tab-separated line per internal declaration the build reflects.
 
 ## Open Gaps
 
-- **Class handler preservation.** `extract_hierarchy.rewrite` calls
-  `Entry.with_signature`, which replaces the entire signature and discards
-  `handlers`; it does not yet implement the field-preservation contract of
-  `extract_hierarchy.py` above.
+- **Class handler extraction and preservation.** `extract_hierarchy.rewrite`
+  calls `Entry.with_signature`, which discards fields outside its current
+  hierarchy output; it does not yet implement the handler and final-class
+  extraction or field-preservation contract of [Handler Extraction](design-extraction-handlers.md).
 
 - **Indirect calls.** The model asserts that a class outside an entry's
   throws section is never thrown by it (commons-phpmodels `docs/model.md`,
