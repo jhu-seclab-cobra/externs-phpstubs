@@ -17,7 +17,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 
 import php_src
 from php_src_c import Program, Source
-from php_src_c.definitions import definitions_of, parse_body, parse_expression
+from php_src_c.definitions import ParseFailure, definitions_of, parse_body, parse_expression
 from php_src_c.registrations import Registration
 from php_src_c.source import BRANCH, matching, split_arguments
 
@@ -261,3 +261,7 @@ class BodyParserTest(unittest.TestCase):
         self.assertEqual("init", init[0])
         self.assertEqual(2, len(init[1]))
         self.assertEqual(3, len(init[1][0]))
+
+    def test_parenthesized_star_fails_as_a_parse_error(self):
+        with self.assertRaises(ParseFailure):
+            parse_expression("(*) + 1")

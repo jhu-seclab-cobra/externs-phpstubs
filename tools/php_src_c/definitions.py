@@ -673,6 +673,8 @@ class BodyParser:
         if not inside or any(kind != "id" and text != "*" for kind, text in inside):
             return False
         words = [text for kind, text in inside if kind == "id"]
+        if not words:
+            return False
         after = self.toks[close + 1] if close + 1 < len(self.toks) else ("eof", "")
         if not (after[0] in ("id", "num", "str") or after[1] in ("(", "&", "*", "!", "~", "-", "{", "+")):
             return False
