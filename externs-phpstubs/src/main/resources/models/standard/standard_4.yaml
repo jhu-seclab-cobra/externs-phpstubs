@@ -253,6 +253,7 @@
       type: mixed
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 0}
     returnType: mixed
     framelessArities: [2]
   throws: [error, typeerror, valueerror]
@@ -669,6 +670,7 @@
       type: mixed
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 0}
     returnType: mixed
     framelessArities: [2]
   throws: [error, typeerror, valueerror]
@@ -2875,6 +2877,7 @@
       type: mixed
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 1}
     returnType: string
   propagation:
   - from: argument(0)

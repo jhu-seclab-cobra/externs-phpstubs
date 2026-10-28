@@ -5581,6 +5581,7 @@
       type: mixed
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 0}
     returnType: void
   throws: [error, typeerror]
 - subject:

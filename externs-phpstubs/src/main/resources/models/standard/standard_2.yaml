@@ -2641,6 +2641,7 @@
       type: mixed
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 1}
     returnType: mixed
   propagation:
   - from: argument(0)
@@ -2680,6 +2681,7 @@
       type: mixed
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 2}
     returnType: int
   throws: [argumentcounterror, error, typeerror, valueerror]
 - subject:
@@ -2724,6 +2726,7 @@
       optional: true
       byRef: true
       variadic: true
+      namedExtras: {kind: reject, position: 2}
     returnType: array|int|false|null
   propagation:
   - from: argument(2)

@@ -97,6 +97,7 @@
       optional: true
       byRef: true
       variadic: true
+      namedExtras: {kind: reject, position: 2}
     returnType: string|false
   propagation:
   - from: argument(0)

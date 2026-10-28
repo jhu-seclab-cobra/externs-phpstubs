@@ -2278,6 +2278,7 @@
       type: mixed
       optional: true
       variadic: true
+      namedExtras: {kind: forward}
     returnType: object
   throws: [error, reflectionexception]
 - subject:
@@ -2378,6 +2379,7 @@
       type: mixed
       optional: true
       variadic: true
+      namedExtras: {kind: forward}
     returnType: mixed
   throws: [error, reflectionexception]
 - subject:
@@ -2466,6 +2468,7 @@
       type: mixed
       optional: true
       variadic: true
+      namedExtras: {kind: forward}
     returnType: mixed
   throws: [error, reflectionexception]
 - subject:

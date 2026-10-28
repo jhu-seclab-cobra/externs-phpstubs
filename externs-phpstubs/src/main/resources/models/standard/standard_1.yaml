@@ -379,6 +379,7 @@
       type: array
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 0}
     returnType: array
   propagation:
   - from: argument(0)
@@ -653,6 +654,7 @@
       type: array
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 1}
     returnType: array
   propagation:
   - from: argument(1)
@@ -666,6 +668,7 @@
       type: array
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 0}
     returnType: array
   propagation:
   - from: argument(0)
@@ -681,6 +684,7 @@
       type: array
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 0}
     returnType: array
   propagation:
   - from: argument(0)
@@ -698,6 +702,7 @@
       optional: true
       byRef: true
       variadic: true
+      namedExtras: {kind: reject, position: 0}
     returnType: 'true'
   throws: [typeerror, valueerror]
 - subject:
@@ -748,6 +753,7 @@
       type: mixed
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 1}
     returnType: int
   throws: [error]
 - subject:
@@ -794,6 +800,7 @@
       type: array
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 0}
     returnType: array
   propagation:
   - from: argument(0)
@@ -811,6 +818,7 @@
       type: array
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 0}
     returnType: array
   propagation:
   - from: argument(0)
@@ -1041,6 +1049,7 @@
       type: mixed
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 1}
     returnType: int
   throws: []
 - subject:
@@ -1683,6 +1692,7 @@
       type: mixed
       optional: true
       variadic: true
+      namedExtras: {kind: forward}
     returnType: mixed
   propagation:
   - from: argument(0)
@@ -2092,6 +2102,7 @@
       type: mixed
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 0}
     returnType: array
   propagation:
   - from: argument(0)
@@ -3221,6 +3232,7 @@
       type: mixed
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 0}
     returnType: void
   throws: [error, typeerror]
 - subject:

@@ -4,7 +4,7 @@ The signature producer of the extraction design
 ([design-extraction.md](design-extraction.md)): `tools/extract_signatures.py`
 and `tools/compile_facts.py`, with `tools/named_extras.py` for argument reception.
 The tests: `tools/test_named_extras.py` (source patterns and extracted policies),
-`tools/test_compile_facts.py`
+`BuiltinNamedExtrasTest` (bundled signature decoding), `tools/test_compile_facts.py`
 (closure check, selection rule) and `OneOpcodeCompileTest` (the extracted
 sets).
 

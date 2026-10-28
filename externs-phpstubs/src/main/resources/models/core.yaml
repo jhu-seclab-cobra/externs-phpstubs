@@ -3420,6 +3420,7 @@
       type: mixed
       optional: true
       variadic: true
+      namedExtras: {kind: forward}
     returnType: mixed
   throws: []
 - subject:
@@ -3655,6 +3656,7 @@
       type: mixed
       optional: true
       variadic: true
+      namedExtras: {kind: forward}
     returnType: mixed
   throws: [exception, fibererror]
 - subject:

@@ -2011,6 +2011,7 @@
       type: Dom\Node|string
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 0}
     returnType: void
   throws: [domexception, error, typeerror, valueerror]
 - subject:
@@ -2029,6 +2030,7 @@
       type: Dom\Node|string
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 0}
     returnType: void
   throws: [domexception, error, typeerror, valueerror]
 - subject:
@@ -2076,6 +2078,7 @@
       type: Dom\Node|string
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 0}
     returnType: void
   throws: [domexception, error, typeerror, valueerror]
 - subject:
@@ -2135,6 +2138,7 @@
       type: Dom\Node|string
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 0}
     returnType: void
   throws: [domexception, error, typeerror, valueerror]
 - subject:
@@ -2276,6 +2280,7 @@
       type: Dom\Node|string
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 0}
     returnType: void
   throws: [domexception, error, typeerror, valueerror]
 - subject:
@@ -2360,6 +2365,7 @@
       type: Dom\Node|string
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 0}
     returnType: void
   throws: [domexception, error, typeerror, valueerror]
 - subject:
@@ -2378,6 +2384,7 @@
       type: Dom\Node|string
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 0}
     returnType: void
   throws: [domexception, error, typeerror, valueerror]
 - subject:
@@ -2404,6 +2411,7 @@
       type: Dom\Node|string
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 0}
     returnType: void
   throws: [domexception, error, typeerror, valueerror]
 - subject:
@@ -2414,6 +2422,7 @@
       type: Dom\Node|string
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 0}
     returnType: void
   throws: [domexception, error, typeerror, valueerror]
 - subject:
@@ -2424,6 +2433,7 @@
       type: Dom\Node|string
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 0}
     returnType: void
   throws: [domexception, error, typeerror, valueerror]
 - subject:
@@ -2439,6 +2449,7 @@
       type: Dom\Node|string
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 0}
     returnType: void
   throws: [domexception, error, typeerror, valueerror]
 - subject:
@@ -2485,6 +2496,7 @@
       type: Dom\Node|string
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 0}
     returnType: void
   throws: [domexception, error, typeerror, valueerror]
 - subject:
@@ -2495,6 +2507,7 @@
       type: Dom\Node|string
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 0}
     returnType: void
   throws: [domexception, error, typeerror, valueerror]
 - subject:
@@ -2505,6 +2518,7 @@
       type: Dom\Node|string
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 0}
     returnType: void
   throws: [domexception, error, typeerror, valueerror]
 - subject:
@@ -2661,6 +2675,7 @@
       type: Dom\Node|string
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 0}
     returnType: void
   throws: [domexception, error, typeerror, valueerror]
 - subject:
@@ -2728,6 +2743,7 @@
       type: Dom\Node|string
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 0}
     returnType: void
   throws: [domexception, error, typeerror, valueerror]
 - subject:
@@ -2738,6 +2754,7 @@
       type: Dom\Node|string
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 0}
     returnType: void
   throws: [domexception, error, typeerror, valueerror]
 - subject:
@@ -3267,6 +3284,7 @@
       type: string
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 0}
     returnType: void
   throws: [domexception, error, typeerror, valueerror]
 - subject:
@@ -3303,6 +3321,7 @@
       type: string
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 0}
     returnType: void
   throws: [domexception, error, typeerror, valueerror]
 - subject:
@@ -3513,6 +3532,7 @@
       type: mixed
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 0}
     returnType: void
   throws: [domexception, error, typeerror, valueerror]
 - subject:
@@ -3531,6 +3551,7 @@
       type: mixed
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 0}
     returnType: void
   throws: [domexception, error, typeerror, valueerror]
 - subject:
@@ -3578,6 +3599,7 @@
       type: mixed
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 0}
     returnType: void
   throws: [domexception, error, typeerror, valueerror]
 - subject:
@@ -3634,6 +3656,7 @@
       type: mixed
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 0}
     returnType: void
   throws: [domexception, error, typeerror, valueerror]
 - subject:
@@ -3652,6 +3675,7 @@
       type: mixed
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 0}
     returnType: void
   throws: [domexception, error, typeerror, valueerror]
 - subject:
@@ -4295,6 +4319,7 @@
       type: mixed
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 0}
     returnType: void
   throws: [domexception, error, typeerror, valueerror]
 - subject:
@@ -4481,6 +4506,7 @@
       type: mixed
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 0}
     returnType: void
   throws: [domexception, error, typeerror, valueerror]
 - subject:
@@ -4617,6 +4643,7 @@
       type: mixed
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 0}
     returnType: void
   throws: [domexception, error, typeerror, valueerror]
 - subject:
@@ -4627,6 +4654,7 @@
       type: mixed
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 0}
     returnType: void
   throws: [domexception, error, typeerror, valueerror]
 - subject:
@@ -4637,6 +4665,7 @@
       type: mixed
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 0}
     returnType: void
   throws: [domexception, error, typeerror, valueerror]
 - subject:
@@ -4744,6 +4773,7 @@
       type: mixed
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 0}
     returnType: void
   throws: [domexception, error, typeerror, valueerror]
 - subject:
@@ -4785,6 +4815,7 @@
       type: mixed
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 0}
     returnType: void
   throws: [domexception, error, typeerror, valueerror]
 - subject:
@@ -4795,6 +4826,7 @@
       type: mixed
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 0}
     returnType: void
   throws: [domexception, error, typeerror, valueerror]
 - subject:

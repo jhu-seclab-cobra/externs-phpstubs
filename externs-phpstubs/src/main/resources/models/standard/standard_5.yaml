@@ -475,6 +475,7 @@
       type: mixed
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 1}
     returnType: int
   throws: [argumentcounterror, error, valueerror]
 - subject:
@@ -3333,6 +3334,7 @@
       type: mixed
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 1}
     returnType: string|false
   propagation:
   - from: argument(1)
@@ -3591,6 +3593,7 @@
       type: mixed
       optional: true
       variadic: true
+      namedExtras: {kind: reject, position: 1}
     returnType: string
     ropeFormat: format
   propagation:

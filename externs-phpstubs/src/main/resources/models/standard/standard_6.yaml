@@ -376,6 +376,7 @@
       optional: true
       byRef: true
       variadic: true
+      namedExtras: {kind: reject, position: 2}
     returnType: array|int|null
   throws: [error, typeerror, valueerror]
 - subject:
