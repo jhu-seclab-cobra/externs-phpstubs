@@ -10,6 +10,7 @@ import kotlin.test.assertTrue
  * probe is a PHP 8.5.12 program with its saved output (`src/test/resources/handlers-test/probes.txt`, copied byte for
  * byte). The probes are references of the analyzer's later reads, never taint recall measures; this chain pins the
  * facts each one rests on:
+ * - `every complete saved reference is pinned` -- all programs, outputs and diagnostics match the reference bytes
  * - `the probe table covers P01 to P39 once` -- every probe has a saved program, output and at least one pin
  * - `every probe runs the fact pins it rests on` -- each pin is a test of [HandlerFactsTest] asserting the facts
  * - `the saved diagnostics are retained` -- the P01 deprecations, the P24 executed prefix and fatal error, and the P35
@@ -53,6 +54,14 @@ internal class HandlerProbePinsTest {
         "P36" to listOf(simpleXml, tidy), "P37" to listOf(flags, finality), "P38" to listOf(gmp, standard),
         "P39" to listOf(standard, finality),
     )
+
+    @Test
+    fun `every complete saved reference is pinned`() {
+        val bytes = checkNotNull(javaClass.getResourceAsStream("/handlers-test/probes.txt")).use { it.readBytes() }
+        val digest = java.security.MessageDigest.getInstance("SHA-256").digest(bytes)
+            .joinToString("") { "%02x".format(it) }
+        assertEquals("da624ea2e0f5c81b578bdb884fd59433c8b7621368a93460d34ee7b474d65367", digest)
+    }
 
     @Test
     fun `the probe table covers P01 to P39 once`() {
