@@ -22,10 +22,11 @@ import fixture_handler_tree
 import php_src
 from handler_create import Creation
 from handler_facts import effective_string_method, read_handler_tables
-from handler_memory import Fn
+from handler_memory import Fn, Ptr
 from handler_minit import Registered
 from handler_render import Table, render_handlers
 from handler_sites import Sites, typed_tables
+from handler_summary import SummaryPolicy
 from php_src_c import Program
 
 DEMO = "ext/demo/demo.c"
@@ -40,6 +41,22 @@ static void odd(counter_object *intern)
 	intern->std.handlers = choose();
 }
 """
+
+FAN_OUT = """
+static int pick(int key)
+{
+	switch (key) {
+%s
+	default: return 99;
+	}
+}
+
+static int fan(int key)
+{
+	if (pick(key)) return 7;
+	return 7;
+}
+""" % "\n".join(f"\tcase {n}: return {n + 1};" for n in range(24))
 
 
 Declaration = collections.namedtuple("Declaration", "classifier parent to_string")
@@ -276,6 +293,27 @@ class SummaryTest(TreeCase):
         }
         self.assertTrue(effective_string_method(found, "child"))
         self.assertFalse(effective_string_method({**found, "base": declaration()}, "child"))
+
+
+class MachineTest(TreeCase):
+    replaced = {DEMO: fixture_handler_tree.DEMO_C + FAN_OUT}
+
+    def exits(self, name):
+        registered = Registered(self.program)
+        machine = registered.machine
+        machine.policy = SummaryPolicy()
+        definition = self.program.functions[name][0]
+        return machine.call(definition, [Ptr("o:key", ())], registered.state.fork(), 100000)
+
+    def test_states_returning_together_leave_as_one_exit(self):
+        exits, complete = self.exits("fan")
+        self.assertTrue(complete)
+        self.assertEqual([7], [value for value, _ in exits])
+
+    def test_exits_that_differ_in_their_result_stay_apart(self):
+        exits, complete = self.exits("pick")
+        self.assertTrue(complete)
+        self.assertEqual(25, len(exits))
 
 
 class RenderTest(unittest.TestCase):

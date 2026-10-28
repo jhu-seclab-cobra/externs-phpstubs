@@ -3,7 +3,6 @@ memory and returns every exit (design-extraction-handlers.md)."""
 
 import collections
 import heapq
-import itertools
 
 from handler_expr import FORK_CAP, OFFSET_NAMES, Expressions, type_name
 from handler_index import NORETURN, STRUCT_TYPE, THROWERS
@@ -16,6 +15,8 @@ VISIT_CAP = 40
 CALL_SLICE = 50000
 STACK_REPEAT = 2
 RETRIES = 8
+JOIN_BATCH = 16
+JOINED = ("n", "r")
 
 
 class Exhausted(Exception):
@@ -111,12 +112,25 @@ class Machine(Expressions, Primitives):
 
     # -- statements ----------------------------------------------------------------------------------------------
     def execute(self, frame, code, state):
-        heap, tick, memo, visits, exits = [(0, 0, state)], itertools.count(1), {}, collections.Counter(), []
-        push = lambda pc, st: heapq.heappush(heap, (pc, next(tick), st))
-        while heap:
-            pc, _, st = heapq.heappop(heap)
+        waiting, pcs, memo, visits, exits = collections.defaultdict(list), [0], {}, collections.Counter(), []
+        waiting[0].append(state)
+
+        def push(pc, st):
+            """Queue a state at an instruction. States waiting at a join point are joined once they exceed
+            ``JOIN_BATCH``, since the join point joins them all when it is reached. A return is a join point: the states
+            that return together are joined per event history and pending exception."""
+            if pc not in waiting:
+                heapq.heappush(pcs, pc)
+            queue = waiting[pc]
+            queue.append(st)
+            if len(queue) > JOIN_BATCH and code.instrs[pc][0] in JOINED:
+                waiting[pc] = join_by_events(queue)
+
+        while pcs:
+            pc = heapq.heappop(pcs)
             instr = code.instrs[pc]
-            for current in self.drain(heap, pc, st) if instr[0] == "n" else [st]:
+            batch = waiting.pop(pc)
+            for current in join_by_events(batch) if instr[0] in JOINED else batch:
                 self.steps += 1
                 if self.steps > self.limit:
                     raise Exhausted(self.owner, tuple(self.running))
@@ -125,14 +139,6 @@ class Machine(Expressions, Primitives):
                 if current is not None:
                     getattr(self, "i_" + instr[0])(instr, pc, current, frame, push, exits)
         return exits
-
-    @staticmethod
-    def drain(heap, pc, state):
-        """The states waiting at a join point, joined per event history."""
-        batch = [state]
-        while heap and heap[0][0] == pc:
-            batch.append(heapq.heappop(heap)[2])
-        return join_by_events(batch)
 
     @staticmethod
     def admit(frame, code, memo, visits, pc, state):
