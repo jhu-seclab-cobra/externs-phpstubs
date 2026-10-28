@@ -42,8 +42,16 @@ Format: [handler types](../../commons-phpmodels/docs/design-declarations-handler
   hidden ancestors and end their locals' lifetime on every outgoing path,
   including break, continue and goto. Jumping past an initializer leaves that
   declaration unread, rather than selecting an enclosing homonym.
-  Conditional-compilation alternatives start with the same enclosing visibility;
-  declarations of the same name in the same block share that block's binding.
+  Conditional-compilation alternatives start with the same enclosing visibility.
+  `ConditionalBinding` retains their declarations and the enclosing alternative;
+  its configuration rules belong to [signature extraction](design-extraction-signatures.md).
+  `Configuration` stores the source choice in a region of its owning scope.
+  The state carries that choice through subsequent instructions and checkpoints;
+  an alternative choice is narrowed in the same region before the instruction
+  runs. Declarations of the same name in the same block share that block's binding.
+  Instructions resolve only the conditional bindings their expressions reference,
+  including sizeof operands and nested statement expressions. A group whose
+  bindings are never referenced after it retains no configuration region.
   `Frame` selects these bindings over its parameters or enclosing statement
   expression's bindings, using the existing regions, arrays and type lookup.
   Leaving a scope drops its local regions; assignments through surviving
@@ -75,8 +83,8 @@ Format: [handler types](../../commons-phpmodels/docs/design-declarations-handler
   copies join each member with its source guards. Unknown calls invalidate
   canonical argument locations just as they invalidate caller locations.
 - The machine bounds its working states without dropping an outcome. States
-  that reach one join point with the same event history and pending exception
-  are joined into one whose differing cells are alternatives; outcomes of one
+  that reach one join point with the same event history, pending exception and
+  lexical configuration are joined into one whose differing cells are alternatives; outcomes of one
   expression whose states are equal become one outcome whose value is the
   alternatives of their values; the exits of a call with one history are
   joined the same way. A call that exceeds its step or pending-state budget

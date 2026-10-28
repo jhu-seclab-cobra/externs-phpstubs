@@ -49,6 +49,11 @@ sets).
   unshadowed lexical declarations, including parameters, enclosing references,
   nested blocks and for scopes. Visibility and lifetime follow the
   [shared compiler and machine](design-extraction-handlers.md#class--type-specifications).
+  A reference after a conditional-compilation group retains each configuration's
+  binding, including the enclosing binding when a branch declares no local or
+  the group has no else branch. Subsequent instructions, child scopes and
+  suspended-instruction retries preserve those alternatives and their correlation.
+  Selecting one configuration cannot replace another configuration's binding.
   Shadowing in a transport body leaves forwarding unestablished.
   Helper calls and aliases share memory, and writes into the collection
   invalidate its preservation. Returns and false branches reach no target.

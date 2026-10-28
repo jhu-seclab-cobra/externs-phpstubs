@@ -3,10 +3,14 @@ memory and returns every exit (design-extraction-handlers.md)."""
 
 import collections
 import heapq
+from collections.abc import Callable
 
 from handler_expr import FORK_CAP, OFFSET_NAMES, Expressions, type_name
-from handler_index import NORETURN, STRUCT_TYPE, THROWERS, Instruction
-from handler_memory import ANYV, SIZE, Fn, Ptr, Region, join_states, join_values
+from handler_index import (
+    CONFIGURATION_PREFIX, IMPLICIT_BRANCH, NORETURN, STRUCT_TYPE, THROWERS,
+    Binding, Bindings, ConditionalBinding, Configuration, Instruction, Local,
+)
+from handler_memory import ANYV, SIZE, Alt, Fn, Ptr, Region, State, join_states, join_values
 from handler_values import assume, exclude, literals, resolve
 from handler_prims import EXCEPTION, EXCEPTIONS_REGION, Primitives
 from php_src_c.definitions import SummaryDependency, SummaryInterruption
@@ -18,6 +22,8 @@ RETRIES = 8
 JOIN_BATCH = 16
 PENDING_CAP = 20000
 EXIT_BATCH = 64
+CONFIGURATION_REGION = f":{CONFIGURATION_PREFIX}"
+Checkpoint = tuple[dict[str, str], set[str], dict[str, str | None], set[str]]
 
 
 class Exhausted(SummaryInterruption):
@@ -33,22 +39,28 @@ class Exhausted(SummaryInterruption):
         return self.trail[depth + 1] if len(self.trail) > depth + 1 else None
 
 
+def configuration_key(state: State) -> frozenset[tuple[str, int | Alt]]:
+    """The live lexical choices that must agree before machine states can join."""
+    return frozenset((rid, region.read(())) for rid, region in state.mem.items()
+                     if rid.startswith("l:") and CONFIGURATION_REGION in rid)
+
+
 def join_by_events(states):
-    """States that ran the same events and hold the same pending exception become one state whose differing cells
-    are alternatives; states with different event histories or exception states stay apart."""
+    """States with the same events, pending exception and lexical choices become one whose differing cells are
+    alternatives; states with different histories, exception states or lexical choices stay apart."""
     groups = {}
     for member in states:
         pending = member.read(EXCEPTIONS_REGION, EXCEPTION)
-        groups.setdefault((member.events, member.flags, pending), []).append(member)
+        groups.setdefault((member.events, member.flags, pending, configuration_key(member)), []).append(member)
     return [join_states(group) if len(group) > 1 else group[0] for group in groups.values()]
 
 
 def join_exits(exits):
-    """The exits of a run with the exits of one event history and pending exception joined: their states are joined
+    """The exits of a run joined by event history, pending exception and lexical choices: their states are joined
     and their return values become the alternatives of one value."""
     groups = {}
     for value, member in exits:
-        key = (member.events, member.flags, member.read(EXCEPTIONS_REGION, EXCEPTION))
+        key = (member.events, member.flags, member.read(EXCEPTIONS_REGION, EXCEPTION), configuration_key(member))
         groups.setdefault(key, []).append((value, member))
     return [joined_exit(group) for group in groups.values()]
 
@@ -92,16 +104,24 @@ class Frame:
         self.vars, self.arrays, self.types = variables.copy(), arrays.copy(), types.copy()
         self.created = created.copy()
 
-    def activate(self, instruction, enclosing):
+    def activate(self, bindings: Bindings, enclosing: Checkpoint) -> None:
         variables, arrays, types, _ = enclosing
         self.vars, self.arrays, self.types = variables.copy(), arrays.copy(), types.copy()
-        for name, local in instruction.bindings.items():
+        for name, local in bindings.items():
+            if local is None or isinstance(local, ConditionalBinding):
+                continue
             self.vars[name] = self.local_region(local)
             self.types[name] = type_name(local.words)
             (self.arrays.add if local.array else self.arrays.discard)(name)
 
-    def local_region(self, local):
+    def local_region(self, local: Local | Configuration) -> str:
         return f"l:{self.depth}:{local.scope}:{local.name}"
+
+    def _configure(self, state: State, selection: tuple[Configuration, int]) -> None:
+        configuration, number = selection
+        rid = self.local_region(configuration)
+        self.created.add(rid)
+        state.write(rid, (), number)
 
 
 class Machine(Expressions, Primitives):
@@ -179,13 +199,13 @@ class Machine(Expressions, Primitives):
         projection = self.procedures if project and self.procedures is not None and not code.opaque else None
         bindings, scopes, live = None, None, frozenset()
 
-        def activate(instruction, current):
+        def activate(instruction, visible, current):
             nonlocal bindings, scopes, live
             if not isinstance(instruction, Instruction):
                 return
-            if instruction.bindings is not bindings:
-                frame.activate(instruction, enclosing)
-                bindings = instruction.bindings
+            if visible is not bindings:
+                frame.activate(visible, enclosing)
+                bindings = visible
             if instruction.scopes != scopes:
                 live = enclosing[3] | {frame.local_region(local) for scope in instruction.scopes for local in scope}
                 scopes = instruction.scopes
@@ -212,8 +232,9 @@ class Machine(Expressions, Primitives):
             instr = code.instrs[pc]
             batch = waiting.pop(pc)
             pending[0] -= len(batch)
-            for current in join_by_events(batch) if instr[0] == "n" else batch:
-                activate(instr, current)
+            batch = join_by_events(batch) if instr[0] == "n" else batch
+            for visible, current in self.binding_states(instr, batch, frame):
+                activate(instr, visible, current)
                 self.steps += 1
                 if self.steps > self.limit:
                     raise Exhausted(self.owner, tuple(self.running))
@@ -232,6 +253,44 @@ class Machine(Expressions, Primitives):
                 if len(exits) > EXIT_BATCH:
                     exits[:] = join_exits(exits)
         return exits
+
+    def binding_states(self, instruction: Instruction | tuple[str, str], states: list[State],
+                       frame: Frame) -> list[tuple[Bindings | None, State]]:
+        if not isinstance(instruction, Instruction):
+            return [(None, state) for state in states]
+        outcomes = [(instruction.bindings, state) for state in states]
+        for name in instruction.conditional:
+            outcomes = [({**bindings, name: local}, member)
+                        for bindings, state in outcomes
+                        for local, member in self.binding_values(bindings[name], state, frame)]
+        return outcomes
+
+    def binding_values(self, binding: Binding, state: State, frame: Frame) -> list[tuple[Local | None, State]]:
+        if not isinstance(binding, ConditionalBinding):
+            return [(binding, state)]
+        choices = dict(binding.branches)
+        numbers = tuple(choices) + (() if binding.configuration.group in frame.source.otherwise else (IMPLICIT_BRANCH,))
+        outcomes = []
+        for number, member in self.configuration_states((binding.configuration, numbers), state, frame):
+            selected = binding.enclosing if number == IMPLICIT_BRANCH else choices[number]
+            outcomes.extend(self.binding_values(selected, member, frame))
+        return outcomes
+
+    def configuration_states(self, selection: tuple[Configuration, tuple[int, ...]], state: State,
+                             frame: Frame) -> list[tuple[int, State]]:
+        configuration, numbers = selection
+        value = state.read(frame.local_region(configuration), ())
+        outcomes = []
+        for value, member in self.alts(value, state):
+            if isinstance(value, int):
+                frame._configure(member, (configuration, value))
+                outcomes.append((value, member))
+                continue
+            for number in numbers:
+                fork = member.fork()
+                frame._configure(fork, (configuration, number))
+                outcomes.append((number, fork))
+        return outcomes
 
     def instruction_steps(self, instr, pc, state, frame):
         # Replaying only the suspended instruction requires its unmodified state and lexical bindings.
@@ -255,7 +314,7 @@ class Machine(Expressions, Primitives):
     @staticmethod
     def admit(frame, code, memo, visits, pc, state):
         """The state to continue from at a join point, or None when the point has seen it. A loop head keeps the
-        join of every state that reached it and continues only while the join grows."""
+        join of the states of each lexical configuration and continues only while that join grows."""
         visits[pc] += 1
         if visits[pc] > VISIT_CAP:
             frame.complete = False
@@ -264,7 +323,7 @@ class Machine(Expressions, Primitives):
             key = (pc, state.key())
             seen, memo[key] = key in memo, None
             return None if seen else state
-        key = (pc, state.events, state.flags)
+        key = (pc, state.events, state.flags, configuration_key(state))
         old = memo.get(key)
         merged = state if old is None else join_states([old, state])
         if old is not None and merged.key() == old.key():
@@ -318,7 +377,10 @@ class Machine(Expressions, Primitives):
         return self.ev(init, state, frame)
 
     def i_g(self, instr, pc, state, frame, push, exits):
-        _, group, starts, end, _ = instr
+        _, group, starts, end, configuration = instr
+        if configuration is not None:
+            self.configured_group(instr, state, (frame, push))
+            return
         source = frame.source
         for k, (number, start) in enumerate(starts):
             fork = state.fork()
@@ -326,6 +388,18 @@ class Machine(Expressions, Primitives):
             push(start, fork)
         if group not in source.otherwise:
             push(end, state)
+
+    def configured_group(self, instr: Instruction, state: State,
+                         execution: tuple[Frame, Callable[[int, State], None]]) -> None:
+        frame, push = execution
+        _, group, starts, end, configuration = instr
+        targets = dict(starts)
+        if group not in frame.source.otherwise:
+            targets[IMPLICIT_BRANCH] = end
+        for number, member in self.configuration_states((configuration, tuple(targets)), state, frame):
+            if number != IMPLICIT_BRANCH:
+                member.tags = member.tags | frozenset(literals(frame.source.conditions[(group, number)]))
+            push(targets[number], member)
 
     def i_s(self, instr, pc, state, frame, push, exits):
         _, subject, cases, default, end = instr

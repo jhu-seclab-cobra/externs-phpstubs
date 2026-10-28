@@ -5,6 +5,7 @@ import collections
 import re
 from contextlib import contextmanager
 from dataclasses import dataclass
+from collections.abc import Iterable
 
 import php_src
 from php_src_c.definitions import ParseFailure, ParsedBlock, parse_body, parse_expression
@@ -41,6 +42,8 @@ THROWERS = re.compile(
     r"|zend_wrong_\w+|zend_zval_type_error|zend_cannot_pass_by_reference|zend_unsupported_operand\w*"
 )
 NORETURN = {"zend_error_noreturn", "zend_bailout", "abort", "ZEND_UNREACHABLE"}
+IMPLICIT_BRANCH = -1
+CONFIGURATION_PREFIX = "configuration:"
 
 
 def is_primitive(name):
@@ -230,7 +233,7 @@ def declarator_name(member):
 # Compiler: statements to a flat instruction list, so goto, switch fall-through and loops are plain jumps.
 
 
-@dataclass(frozen=True, eq=False)
+@dataclass(frozen=True)
 class Local:
     """One lexical declaration, independently of any same-named ancestor or sibling."""
 
@@ -240,18 +243,96 @@ class Local:
     scope: int
 
 
+@dataclass(frozen=True)
+class Configuration:
+    """The source alternative selected for a conditional group, stored in its block's regions."""
+
+    name: str
+    scope: int
+    group: int
+
+
+@dataclass(frozen=True)
+class ConditionalBinding:
+    """A source group's alternative bindings, including the enclosing binding when no branch declares it."""
+
+    configuration: Configuration
+    branches: tuple[tuple[int, "Binding"], ...]
+    enclosing: "Binding"
+
+
+Binding = Local | ConditionalBinding | None
+Bindings = dict[str, Binding]
+Syntax = str | int | None | Configuration | tuple["Syntax", ...] | list["Syntax"]
+
+
+def reference_children(value: Syntax) -> list[Syntax]:
+    match value:
+        case ("cast", _, expression):
+            return [expression]
+        case ("d", _, _, dimensions, expression, _):
+            return [*dimensions, expression]
+        case ("decl", _, entries):
+            return [expression for _, _, dimensions, initial in entries for expression in (*dimensions, initial)]
+        case ("init", entries):
+            return [expression for _, expression, _ in entries]
+    return list(value) if isinstance(value, (tuple, list)) else []
+
+
+def referenced_names(value: Syntax) -> frozenset[str]:
+    pending, names = [value], set()
+    while pending:
+        node = pending.pop()
+        if not isinstance(node, (tuple, list)):
+            continue
+        if isinstance(node, tuple) and len(node) == 2 and node[0] == "name" and isinstance(node[1], str):
+            names.add(node[1])
+        elif isinstance(node, tuple) and len(node) == 2 and node[0] == "sizeof":
+            names.update(node[1])
+        else:
+            pending.extend(reference_children(node))
+    return frozenset(names)
+
+
+def binding_configurations(bindings: Iterable[Binding]) -> set[Configuration]:
+    pending, seen, configurations = list(bindings), set(), set()
+    while pending:
+        binding = pending.pop()
+        if not isinstance(binding, ConditionalBinding) or id(binding) in seen:
+            continue
+        seen.add(id(binding))
+        configurations.add(binding.configuration)
+        pending.extend(local for _, local in binding.branches)
+        pending.append(binding.enclosing)
+    return configurations
+
+
+def conditional_bindings(configuration: Configuration, branches: list[tuple[int, Bindings]],
+                         enclosing: Bindings) -> Bindings:
+    visible = enclosing.copy()
+    names = dict.fromkeys(name for _, bindings in branches for name in bindings)
+    for name in names:
+        before = enclosing.get(name)
+        choices = tuple((number, bindings.get(name)) for number, bindings in branches)
+        if any(local != before for _, local in choices):
+            visible[name] = ConditionalBinding(configuration, choices, before)
+    return visible
+
+
 class Instruction(tuple):
     """An instruction with its source-position bindings and the scopes that own its live locals."""
 
     def __new__(cls, instruction, bindings, scopes):
         value = super().__new__(cls, instruction)
         value.bindings, value.scopes = bindings, scopes
+        names = referenced_names(instruction) if any(isinstance(local, ConditionalBinding) for local in bindings.values()) else ()
+        value.conditional = tuple(name for name in sorted(names) if isinstance(bindings.get(name), ConditionalBinding))
         return value
 
 
 class Compiler:
     """Compile a parsed body. Instructions: ("x", expr), ("d", name, pointer, dims, init, type), ("b", cond, then, else),
-    ("j", pc), ("r", expr), ("s", subject, cases, default, end), ("g", group, branches, end, exhaustive), ("o", text),
+    ("j", pc), ("r", expr), ("s", subject, cases, default, end), ("g", group, branches, end, configuration), ("o", text),
     ("n",)."""
 
     def __init__(self):
@@ -266,7 +347,19 @@ class Compiler:
             if label not in self.labels:
                 return Compiled([], {}, set(), f"goto to unknown label {label}")
             self.replace(pc, "j", self.labels[label])
+        self.retain_configurations()
         return Compiled(self.instrs, self.labels, self.heads, opaque=block.opaque)
+
+    def retain_configurations(self) -> None:
+        required = binding_configurations(instruction.bindings[name]
+                                          for instruction in self.instrs for name in instruction.conditional)
+        for pc, instruction in enumerate(self.instrs):
+            if instruction[0] != "g":
+                continue
+            configuration = instruction[4]
+            if configuration is not None and configuration not in required:
+                instruction.scopes[-1].remove(configuration)
+                self.replace(pc, *instruction[:4], None)
 
     def emit(self, *instruction):
         self.instrs.append(Instruction(instruction, self.bindings, tuple(self.scopes)))
@@ -410,19 +503,28 @@ class Compiler:
 
     def s_cgroup(self, node, breaks, continues):
         group = self.emit("g", node[1], None, None, None)
-        starts, jumps = [], []
-        enclosing, visible = self.bindings, self.bindings.copy()
+        starts, jumps, branches = [], [], []
+        enclosing = self.bindings
         for number, statements in node[2]:
             self.bindings = enclosing
             starts.append((number, self.here()))
             for child in statements:
                 self.statement(child, breaks, continues)
-            visible.update(self.bindings)
+            branches.append((number, self.bindings))
             jumps.append(self.emit("j", None))
-        self.bindings = visible
+        configuration = self.group_bindings(node[1], branches, enclosing)
         end = self.emit("n")
         self.patch(jumps, end)
-        self.replace(group, "g", node[1], starts, end, None)
+        self.replace(group, "g", node[1], starts, end, configuration)
+
+    def group_bindings(self, group: int, branches: list[tuple[int, Bindings]],
+                       enclosing: Bindings) -> Configuration | None:
+        configuration = Configuration(f"{CONFIGURATION_PREFIX}{group}", id(self.scopes[-1]), group)
+        self.bindings = conditional_bindings(configuration, branches, enclosing)
+        if self.bindings != enclosing:
+            self.scopes[-1].append(configuration)
+            return configuration
+        return None
 
     def patch(self, pcs, target):
         for pc in pcs:
