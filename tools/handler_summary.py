@@ -81,24 +81,26 @@ class Summarizer:
         return self.cache[key]
 
     def summarize(self, function, slot, request, has_method):
-        definition = self.definition(function)
-        if definition is None:
+        definitions = self.definitions(function)
+        if not definitions:
             return Summary(reason=f"no readable definition of {function.name}")
-        state, arguments = self.setup(definition, slot, request, has_method)
-        if arguments is None:
-            return Summary(reason=f"unknown request {request}")
         machine = self.machine
         machine.policy, machine.sites, machine.marker = self.policy, None, METHOD if has_method else None
         machine.opaques.clear()
-        exits, complete = machine.call(definition, arguments, state, SUMMARY_BUDGET)
-        if not complete:
-            return Summary(reason=f"{definition.name}: incomplete run")
+        exits = []
+        for definition in definitions:
+            state, arguments = self.setup(definition, slot, request, has_method)
+            if arguments is None:
+                return Summary(reason=f"unknown request {request}")
+            found, complete = machine.call(definition, arguments, state, SUMMARY_BUDGET)
+            if not complete:
+                return Summary(reason=f"{definition.name}: incomplete run")
+            exits.extend(found)
         return self.classify(exits, slot, request)
 
-    def definition(self, function):
-        found = [d for d in self.program.functions.get(function.name, ())
-                 if not d.is_macro and (function.source is None or d.source.relative == function.source)]
-        return found[0] if found else None
+    def definitions(self, function):
+        return [d for d in self.program.functions.get(function.name, ())
+                if not d.is_macro and (function.source is None or d.source.relative == function.source)]
 
     # -- the request ---------------------------------------------------------------------------------------------
     def setup(self, definition, slot, request, has_method):

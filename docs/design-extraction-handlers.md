@@ -32,6 +32,9 @@ Format: [handler types](../../commons-phpmodels/docs/design-declarations-handler
   Reader extension preserves branch provenance instead of imposing a
   last-write order on mutually exclusive configurations. The throws view
   retains its decided boundaries and output.
+- Each definition retains its enclosing conditional-compilation provenance.
+  A handler target summarizes every matching definition; all of their normal
+  exits contribute, and an incomplete alternative leaves the request unknown.
 - Handler summaries extend the existing summary mechanism with the finite
   data named by the extraction specification; they are offline working data,
   never a second runtime handler store.

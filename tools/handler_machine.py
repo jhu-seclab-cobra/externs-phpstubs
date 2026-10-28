@@ -117,6 +117,7 @@ class Machine(Expressions, Primitives):
             if self.policy.opaque(definition, definition.body):
                 self.opaques.append((definition, code.failure))
             return [], False
+        state.tags = state.tags | definition.conditions
         frame.types.update(definition.param_types)
         for name, value in zip(definition.params, args):
             frame.bind(state, name, value)

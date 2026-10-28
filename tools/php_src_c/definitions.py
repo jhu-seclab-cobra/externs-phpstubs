@@ -33,6 +33,7 @@ class Definition:
         self.returns_class, self.is_static, self.is_macro = returns_class, is_static, is_macro
         self.calls, self.assignments, self.returns = [], collections.defaultdict(list), []
         self.param_types = {}
+        self.conditions = frozenset()
 
     def index(self, name):
         return self.params.index(name) if name in self.params else None
@@ -41,6 +42,7 @@ class Definition:
 def definitions_of(source):
     """Yield every top-level function definition of a file; a brace no brace closes fails the run."""
     text, depth_start, i = source.text, 0, 0
+    active = {}
     while True:
         brace = text.find("{", i)
         if brace < 0:
@@ -49,11 +51,18 @@ def definitions_of(source):
         if end < 0:
             raise php_src.ExtractionFailure(f"{source.relative}: unbalanced brace at offset {brace}")
         head = text[depth_start:brace]
+        for marker in BRANCH.finditer(head):
+            group, branch = int(marker.group(1)), marker.group(2)
+            if branch == "END":
+                active.pop(group, None)
+            else:
+                active[group] = source.conditions[(group, int(branch))]
         if LINKAGE_BLOCK.search(head):
             i = depth_start = brace + 1
             continue
         definition = definition_head(head, source, text[brace:end + 1])
         if definition:
+            definition.conditions = frozenset(active.values())
             yield definition
         i = depth_start = end + 1
 

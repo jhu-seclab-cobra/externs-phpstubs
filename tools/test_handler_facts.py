@@ -6,6 +6,7 @@ Run: python3 -B -m unittest discover -s tools -p "test_*.py" (from the externs-p
   slot writes read only in functions that name the table type, the parent's creator and table inherited
 - creation: the creator's table of each class, the struct type it allocates, the default table of a class with no creator
 - write sites: creation, copy, typed and foreign dispositions; a write that fits none fails the extraction
+- test_conditional_definitions_keep_both_results: every conditional definition contributes normal results
 - request summaries: result kinds per cast and operation request, a compare that may return, string dispatch order,
   conditional slots as two table alternatives, absent slots, the rendered handlers field
 - the handler write patterns of php-src (testdata/handlers): repeated and aliased writes, direct and snapshot copies,
@@ -32,7 +33,7 @@ from handler_machine import EXIT_BATCH
 from handler_minit import Registered
 from handler_render import Table, render_handlers
 from handler_sites import Sites, typed_tables
-from handler_summary import SummaryPolicy
+from handler_summary import Summarizer, SummaryPolicy
 from php_src_c import Program
 
 DEMO = "ext/demo/demo.c"
@@ -500,3 +501,24 @@ class RealShapeTest(unittest.TestCase):
         self.assertNotIn("renum", self.classes)
         self.assertEqual("interface", self.declarations["rface"].classifier)
         self.assertEqual("enum", self.declarations["renum"].classifier)
+
+
+class SummaryCoverageTest(TreeCase):
+    def summary(self, code):
+        start = fixture_handler_tree.DEMO_C.index("static int counter_cast(")
+        end = fixture_handler_tree.DEMO_C.index("static int counter_operation(")
+        fixture_handler_tree.write_tree(self.root, {
+            DEMO: fixture_handler_tree.DEMO_C[:start] + code + fixture_handler_tree.DEMO_C[end:]
+        })
+        registered = Registered(Program(self.root, provenance=True))
+        return Summarizer(registered).cast(fn("counter_cast"), "IS_LONG", False)
+
+    def test_conditional_definitions_keep_both_results(self):
+        summary = self.summary("""
+#ifdef FEATURE_COMPARE
+static int counter_cast(zend_object *o,zval *out,int type) { ZVAL_LONG(out,1);return SUCCESS; }
+#else
+static int counter_cast(zend_object *o,zval *out,int type) { ZVAL_STR(out,NULL);return SUCCESS; }
+#endif
+""")
+        self.assertEqual(frozenset({"num", "str"}), summary.results)
