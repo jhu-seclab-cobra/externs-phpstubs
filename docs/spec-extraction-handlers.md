@@ -40,8 +40,13 @@ kinds and string dispatch. Unknown source coverage remains unestablished.
    callee-first component iteration grows guarded return and memory effects
    until stable. Apply effects to the caller's corresponding locations while
    retaining its unrelated locals. No repetition count cuts a recursive call.
-   Evaluate newly admitted direct-call inputs immediately and reuse settled
-   acyclic inputs. A domain value that cannot grow releases its dependencies;
+   Schedule newly admitted direct-call inputs on an explicit continuation
+   stack and reuse settled acyclic inputs. Suspend the caller at its current
+   instruction; resume from its state and lexical-binding checkpoint after
+   the dependency settles, without rerunning earlier instructions. Charge
+   instruction retries to the existing machine budgets. Native call depth
+   does not consume the host interpreter's call stack.
+   A domain value that cannot grow releases its dependencies;
    discard unfinished inputs no requested summary reaches. Keep the existing
    direct-call step slice and unknown-call memory transfer, without turning
    unread output into a known result kind.
@@ -90,8 +95,9 @@ expressions fail instead of introducing unbounded paths or guessed results.
 
 **Complexity:** For S input bytes, W actual transfer and set-processing work,
 and R output items, time is O(S + W + R log R); space is the source/indexes,
-live guarded summary states and output. W includes fixpoint revisits and branch
-combinations, which may be exponential. This is offline generation, with no
+live guarded summary states, suspended instruction checkpoints and output.
+W includes instruction retries, fixpoint revisits and branch combinations,
+which may be exponential. This is offline generation, with no
 claimed source-linear bound or additional interpretation-phase traversal.
 
 **Edge cases:** Whole standard-table copies, overwritten slots, explicit NULL,

@@ -43,9 +43,12 @@ Format: [handler types](../../commons-phpmodels/docs/design-declarations-handler
   compare by type name. The throws evaluator supplies its existing domain; the handler
   evaluator supplies guarded return/memory-effect alternatives. `Summarizer`
   classifies request exits and has no separate summary cache.
-  New direct-call inputs are evaluated eagerly. An acyclic input with settled
-  callees is completed immediately; recursive inputs retain the current
-  outcome set until component iteration stabilizes. A permanently incomplete
+  New direct-call inputs use the shared driver's explicit continuation stack.
+  The caller suspends at its current instruction while a new callee settles;
+  retry restores that instruction's state and lexical bindings, without
+  rerunning completed instructions. An acyclic input with settled callees is
+  completed immediately; recursive inputs retain the current outcome set
+  until component iteration stabilizes. A permanently incomplete
   outcome releases its dependencies, and unfinished unreachable inputs are
   discarded rather than cached as completed results.
 - Handler procedure inputs retain globals and the memory reachable from their

@@ -9,6 +9,7 @@ from handler_index import NORETURN, STRUCT_TYPE, THROWERS
 from handler_memory import ANYV, SIZE, Fn, Ptr, Region, join_states, join_values
 from handler_values import assume, exclude, literals, resolve
 from handler_prims import EXCEPTION, EXCEPTIONS_REGION, Primitives
+from php_src_c.definitions import SummaryDependency, SummaryInterruption
 
 CALL_DEPTH = 24
 VISIT_CAP = 40
@@ -19,7 +20,7 @@ PENDING_CAP = 20000
 EXIT_BATCH = 64
 
 
-class Exhausted(Exception):
+class Exhausted(SummaryInterruption):
     """The step budget of the running call or request ran out; ``owner`` is the call whose budget it was and
     ``trail`` the definitions running at that moment, outermost first."""
 
@@ -113,7 +114,20 @@ class Machine(Expressions, Primitives):
                 self.procedures.abort()
             return [], False
 
+    @staticmethod
+    def _finish(execution):
+        try:
+            next(execution)
+        except StopIteration as complete:
+            return complete.value
+        finally:
+            execution.close()
+        raise RuntimeError("A synchronous machine run suspended a procedure dependency")
+
     def run(self, definition, args, state, depth):
+        return self._finish(self.run_steps(definition, args, state, depth))
+
+    def run_steps(self, definition, args, state, depth):
         if definition.noreturn:
             return [], True
         code = self.index.code(definition)
@@ -128,7 +142,7 @@ class Machine(Expressions, Primitives):
             frame.bind(state, name, value)
         self.running.append(definition)
         try:
-            exits = self.execute(frame, code, state, project=True)
+            exits = yield from self.execute_steps(frame, code, state, project=True)
         finally:
             self.running.pop()
         for _, exit_state in exits:
@@ -136,7 +150,10 @@ class Machine(Expressions, Primitives):
         return exits, frame.complete
 
     # -- statements ----------------------------------------------------------------------------------------------
-    def execute(self, frame, code, state, project=False):
+    def execute(self, frame, code, state):
+        return self._finish(self.execute_steps(frame, code, state))
+
+    def execute_steps(self, frame, code, state, project=False):
         waiting, pcs, memo, visits, exits = collections.defaultdict(list), [0], {}, collections.Counter(), []
         waiting[0].append(state)
         pending = [1]
@@ -171,12 +188,38 @@ class Machine(Expressions, Primitives):
                 if instr[0] == "n":
                     current = self.admit(frame, code, memo, visits, pc, current)
                 if current is not None:
-                    getattr(self, "i_" + instr[0])(instr, pc, current, frame, push, exits)
+                    if project and self.procedures is not None:
+                        queued, found = yield from self.instruction_steps(instr, pc, current, frame)
+                        for target, member in queued:
+                            push(target, member)
+                        exits.extend(found)
+                    else:
+                        getattr(self, "i_" + instr[0])(instr, pc, current, frame, push, exits)
                 if projection is not None and exits:
                     projection.close(frame, exits)
                 if len(exits) > EXIT_BATCH:
                     exits[:] = join_exits(exits)
         return exits
+
+    def instruction_steps(self, instr, pc, state, frame):
+        # Replaying only the suspended instruction requires its unmodified state and lexical bindings.
+        bindings = frame.vars.copy(), frame.arrays.copy(), frame.types.copy(), list(frame.created), frame.complete
+        opaque_count = len(self.opaques)
+        while True:
+            queued, exits = [], []
+            try:
+                getattr(self, "i_" + instr[0])(
+                    instr, pc, state.fork(), frame, lambda target, member: queued.append((target, member)), exits)
+                return queued, exits
+            except SummaryDependency as dependency:
+                variables, arrays, types, created, frame.complete = bindings
+                frame.vars, frame.arrays, frame.types = variables.copy(), arrays.copy(), types.copy()
+                frame.created = list(created)
+                del self.opaques[opaque_count:]
+                yield dependency.node
+                self.steps += 1
+                if self.steps > self.limit:
+                    raise Exhausted(self.owner, tuple(self.running))
 
     @staticmethod
     def admit(frame, code, memo, visits, pc, state):

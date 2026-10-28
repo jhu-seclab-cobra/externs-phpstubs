@@ -3,6 +3,7 @@
 
 import collections
 import re
+import types
 
 import php_src
 from php_src_c.macros import HANDLER_MACROS
@@ -249,12 +250,24 @@ class CompleteSummary(Exception):
         self.node, self.value = node, value
 
 
+class SummaryInterruption(Exception):
+    """A domain interruption delivered through suspended evaluations to its owning continuation."""
+
+
+class SummaryDependency(Exception):
+    """A newly admitted input the shared driver must settle before resuming its caller."""
+
+    def __init__(self, node):
+        super().__init__()
+        self.node = node
+
+
 class ProcedureSummaries:
     """The shared callee-first SCC/fixpoint driver; a domain supplies evaluation, bottom and monotone join.
 
     An evaluation reads callees through read(), which records dependencies and admits new domain inputs. A newly
-    discovered dependency rebuilds the component order. Eager reads evaluate new inputs once; an acyclic input
-    whose dependencies have settled becomes completed immediately. Recursive reads keep the current value.
+    discovered dependency rebuilds the component order. Eager reads suspend onto an explicit continuation stack;
+    an acyclic input with settled dependencies completes immediately. Recursive reads keep the current value.
     A domain's closed value no longer depends on its callees. Completed inputs stay in the per-program table.
     """
 
@@ -273,9 +286,7 @@ class ProcedureSummaries:
             self.edges[self.current].add(node)
             self.revision += 1
         if added and eager:
-            self.update(node)
-            if not (self.edges[node] & self.pending):
-                self.pending.discard(node)
+            raise SummaryDependency(node)
         return self.summaries[node]
 
     def solve(self, roots, edges=None):
@@ -327,20 +338,52 @@ class ProcedureSummaries:
             if not changed or revision != self.revision:
                 return
 
+    def _evaluation(self, node):
+        while True:
+            try:
+                value = self.evaluate(node, self)
+                return (yield from value) if isinstance(value, types.GeneratorType) else value
+            except SummaryDependency as dependency:
+                yield dependency.node
+
     def update(self, node):
         old = self.summaries[node]
         if self.closed(old):
             return False
-        previous, self.current = self.current, node
+        previous, work = self.current, [(node, self._evaluation(node))]
+        interruption = None
         try:
-            summary = self.join(old, self.evaluate(node, self))
+            while work:
+                current, evaluation = work[-1]
+                self.current = current
+                try:
+                    dependency = evaluation.throw(interruption) if interruption is not None else next(evaluation)
+                    interruption = None
+                except StopIteration as complete:
+                    self._store(current, complete.value)
+                    work.pop()
+                    interruption = None
+                    continue
+                except SummaryInterruption as failure:
+                    work.pop()
+                    if not work:
+                        raise
+                    interruption = failure
+                    continue
+                work.append((dependency, self._evaluation(dependency)))
         finally:
+            for _, evaluation in reversed(work):
+                evaluation.close()
             self.current = previous
-        self.summaries[node] = summary
+        return self.summaries[node] != old
+
+    def _store(self, node, fresh):
+        summary = self.summaries[node] = self.join(self.summaries[node], fresh)
         if self.closed(summary) and self.edges[node]:
             self.edges[node].clear()
             self.revision += 1
-        return summary != old
+        if not (self.edges[node] & self.pending):
+            self.pending.discard(node)
 
     def abort(self):
         for node in self.pending:

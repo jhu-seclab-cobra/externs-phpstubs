@@ -3,6 +3,7 @@
 Run: python3 -B -m unittest discover -s tools -p "test_*.py" (from the externs-phpstubs root).
 - test_closed_projection_does_not_cache_partial_callees: only the proved request survives early closure
 - test_closed_callee_does_not_cache_partial_dependencies: a closed domain value releases unfinished work
+- test_deep_eager_inputs_use_the_shared_worklist: 2000 finite inputs avoid the Python call stack
 - test_recursive_procedure_components_join_to_fixpoint: one shared driver grows both recursive summaries
 - test_aborted_procedure_inputs_do_not_poison_later_roots: incomplete work is removed before another request
 - conditional compilation: the plain view keeps every branch text and drops the directives; the provenance view
@@ -381,3 +382,11 @@ class ProcedureSummaryTest(unittest.TestCase):
         driver = ProcedureSummaries(evaluate, frozenset(), closed=lambda value: value == {"unknown"})
         self.assertEqual({"request": {"unknown"}, "callee": {"unknown"}}, driver.solve(["request"]))
         self.assertEqual(frozenset({"str"}), driver.solve(["deferred"])["deferred"])
+
+
+    def test_deep_eager_inputs_use_the_shared_worklist(self):
+        def evaluate(node, table):
+            return table.read(node - 1, eager=True) if node else frozenset({"num"})
+
+        driver = ProcedureSummaries(evaluate, frozenset())
+        self.assertEqual(frozenset({"num"}), driver.solve([2000])[2000])

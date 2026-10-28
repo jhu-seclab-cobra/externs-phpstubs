@@ -411,27 +411,32 @@ class HandlerProcedures:
 
     def _evaluate(self, key, driver):
         entry = self.inputs[key]
-        start = self.machine.steps
-        saved, owner = self.machine.limit, self.machine.owner
-        token = object()
-        if key != self.root and start + CALL_SLICE < saved:
-            self.machine.limit, self.machine.owner = start + CALL_SLICE, token
-        try:
-            try:
-                exits, complete = self.machine.run(entry.definition, entry.args, entry.state.fork(), 0)
-            except Exhausted as exhausted:
-                if exhausted.owner is not token:
-                    raise
-                self.machine.steps = start
-                return ProcedureOutcome(complete=False)
-        finally:
-            self.machine.limit, self.machine.owner = saved, owner
+        exits, complete = yield from self._run_steps(key, entry)
         for _, member in exits:
             member.events = tuple(dict.fromkeys(member.events))
             for rid in list(member.mem):
                 if not self._changed(member, rid, member.mem[rid]):
                     member.drop(rid)
         return ProcedureOutcome(exits, complete)
+
+    def _run_steps(self, key, entry):
+        start = self.machine.steps
+        saved, owner = self.machine.limit, self.machine.owner
+        token = object()
+        if key != self.root and start + CALL_SLICE < saved:
+            self.machine.limit, self.machine.owner = start + CALL_SLICE, token
+        execution = self.machine.run_steps(entry.definition, entry.args, entry.state.fork(), 0)
+        try:
+            try:
+                return (yield from execution)
+            except Exhausted as exhausted:
+                if exhausted.owner is not token:
+                    raise
+                self.machine.steps = start
+                return [], False
+        finally:
+            execution.close()
+            self.machine.limit, self.machine.owner = saved, owner
 
     def _restore(self, outcome, before, mapping, caller):
         exits = []

@@ -7,6 +7,9 @@ Run: python3 -B -m unittest discover -s tools -p "test_*.py" (from the externs-p
 - creation: the creator's table of each class, the struct type it allocates, the default table of a class with no creator
 - write sites: creation, copy, typed and foreign dispositions; a write that fits none fails the extraction
 - test_finite_recursive_helper_has_num_result: four terminating calls establish NUM
+- test_hundred_recursive_inputs_keep_num: a terminating 100-call helper needs no Python recursion
+- test_suspended_ancestor_slice_keeps_later_root_write: a nested slice resumes its owning caller
+- test_suspended_instruction_keeps_inline_locals: dependency admission preserves an instruction checkpoint
 - test_mutual_recursion_has_num_result: mutually recursive procedures reach the base write
 - test_recursive_local_output_alias_has_num_result: recursive argument aliases retain their effects
 - test_recursive_call_keeps_caller_locals: callee effects cannot overwrite private caller locals
@@ -774,3 +777,43 @@ static int counter_cast(zend_object *o,zval *out,int t) {""" + "".join(
             self.assertEqual(frozenset({"num"}), summary.results)
         finally:
             handler_summary.SUMMARY_BUDGET = old
+
+
+    def test_hundred_recursive_inputs_keep_num(self):
+        summary = self.summary("""
+static void fill(zval *out,int n) {
+    if(n) fill(out,n-1); else ZVAL_LONG(out,1);
+}
+static int counter_cast(zend_object *o,zval *out,int t) {
+    fill(out,100); return SUCCESS;
+}
+""")
+        self.assertEqual(frozenset({"num"}), summary.results)
+
+    def test_suspended_instruction_keeps_inline_locals(self):
+        summary = self.summary("""
+static int amount(int n) {return n;}
+static int counter_cast(zend_object *o,zval *out,int t) {
+    int n=1;
+    int value=({int local=n++;local+amount(n++);});
+    if(n==3 && value==3) ZVAL_LONG(out,1); else ZVAL_STR(out,NULL);
+    return SUCCESS;
+}
+""")
+        self.assertEqual(frozenset({"num"}), summary.results)
+
+
+    def test_suspended_ancestor_slice_keeps_later_root_write(self):
+        previous = handler_summary.CALL_SLICE
+        try:
+            handler_summary.CALL_SLICE = 5
+            summary = self.summary("""
+static void inner(zval *out) {""" + "unknown_flag();" * 12 + """}
+static void outer(zval *out) {inner(out);ZVAL_LONG(out,1);}
+static int counter_cast(zend_object *o,zval *out,int t) {
+    outer(out);ZVAL_STR(out,NULL);return SUCCESS;
+}
+""")
+            self.assertEqual(frozenset({"str"}), summary.results)
+        finally:
+            handler_summary.CALL_SLICE = previous
