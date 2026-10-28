@@ -57,8 +57,8 @@ class Expressions:
         """Fork a state over the alternatives of a value; an alternative holding under source conditions adds them."""
         items = alternatives(value) if isinstance(value, Alt) else ((value, ()),)
         out = []
-        for k, (plain, conditions) in enumerate(items[:FORK_CAP]):
-            fork = state if k == len(items[:FORK_CAP]) - 1 else state.fork()
+        for k, (plain, conditions) in enumerate(items):
+            fork = state if k == len(items) - 1 else state.fork()
             fork.tags = fork.tags | frozenset(conditions)
             out.append((plain, fork))
         return out
@@ -214,8 +214,8 @@ class Expressions:
         """The outcomes of an operator on two values that may be alternatives: one outcome per distinct result and
         source conditions, since the states of two operand alternatives differ only by their conditions."""
         results = {}
-        for a, a_conditions in alternatives(left)[:FORK_CAP]:
-            for b, b_conditions in alternatives(right)[:FORK_CAP]:
+        for a, a_conditions in alternatives(left):
+            for b, b_conditions in alternatives(right):
                 conditions = frozenset(a_conditions) | frozenset(b_conditions)
                 results[binary(operator, a, b, state), conditions] = None
         out = []

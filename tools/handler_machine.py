@@ -325,8 +325,8 @@ class Machine(Expressions, Primitives):
         if not definitions or frame.depth >= CALL_DEPTH or self.stack.count(name) >= STACK_REPEAT:
             return self.unknown_call(args, state)
         out = []
-        for k, definition in enumerate(definitions[:FORK_CAP]):
-            fork = state if k == len(definitions[:FORK_CAP]) - 1 else state.fork()
+        for k, definition in enumerate(definitions):
+            fork = state if k == len(definitions) - 1 else state.fork()
             out.extend(self.run_callee(definition, args, fork, frame.depth + 1))
         return out
 

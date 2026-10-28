@@ -45,6 +45,8 @@ Format: [handler types](../../commons-phpmodels/docs/design-declarations-handler
   alternatives of their values; the exits of a call with one history are
   joined the same way. A call that exceeds its step or pending-state budget
   yields no summary, so its facts are omitted, never emitted empty.
+  Value alternatives, binary operand combinations and called definitions are
+  processed in full; batching chooses joins and never discards a remainder.
 
 ## Function Specifications
 

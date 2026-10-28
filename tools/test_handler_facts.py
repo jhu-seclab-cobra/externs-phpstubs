@@ -6,6 +6,9 @@ Run: python3 -B -m unittest discover -s tools -p "test_*.py" (from the externs-p
   slot writes read only in functions that name the table type, the parent's creator and table inherited
 - creation: the creator's table of each class, the struct type it allocates, the default table of a class with no creator
 - write sites: creation, copy, typed and foreign dispositions; a write that fits none fails the extraction
+- test_expression_bound_keeps_every_alternative: every one of 49 value alternatives is visited
+- test_source_alternative_bound_keeps_str: the last source branch contributes STR
+- test_conditional_callee_definitions_keep_str: all matching helper definitions contribute
 - test_conditional_definitions_keep_both_results: every conditional definition contributes normal results
 - request summaries: result kinds per cast and operation request, a compare that may return, string dispatch order,
   conditional slots as two table alternatives, absent slots, the rendered handlers field
@@ -28,7 +31,7 @@ import php_src
 from handler_create import Creation
 from handler_facts import effective_string_method, read_handler_tables
 from handler_expr import Expressions
-from handler_memory import Fn, Ptr, alternatives
+from handler_memory import Alt, Fn, Ptr, alternatives
 from handler_machine import EXIT_BATCH
 from handler_minit import Registered
 from handler_render import Table, render_handlers
@@ -522,3 +525,32 @@ static int counter_cast(zend_object *o,zval *out,int type) { ZVAL_STR(out,NULL);
 #endif
 """)
         self.assertEqual(frozenset({"num", "str"}), summary.results)
+
+    def test_expression_bound_keeps_every_alternative(self):
+        value = Alt(tuple((n, ()) for n in range(49)))
+        machine = Expressions()
+        state = Registered(self.program).state
+        self.assertEqual(set(range(49)), {v for v, _ in machine.alts(value, state)})
+
+    def test_source_alternative_bound_keeps_str(self):
+        functions = "\n".join(
+            f"static int f{n}(zend_object *o,zval *out,int t) {{ZVAL_LONG(out,1);return SUCCESS;}}"
+            for n in range(48)
+        )
+        functions += "\nstatic int f48(zend_object *o,zval *out,int t) {ZVAL_STR(out,NULL);return SUCCESS;}\n"
+        branches = "\n".join(
+            ("#if" if n == 0 else "#elif") + f" defined(CHOICE_{n})\n.selected=f{n}," for n in range(48)
+        )
+        code = functions + "struct dispatch {int (*selected)(zend_object *o,zval *out,int t);};\n"
+        code += "static int counter_cast(zend_object *o,zval *out,int t) {struct dispatch d={\n" + branches
+        code += "\n#else\n.selected=f48,\n#endif\n};return d.selected(o,out,t);}"
+        self.assertEqual(frozenset({"num", "str"}), self.summary(code).results)
+
+    def test_conditional_callee_definitions_keep_str(self):
+        branches = "\n".join(
+            ("#if" if n == 0 else "#elif") + f" defined(CHOICE_{n})\n"
+            "static int fill(zval *out) {ZVAL_LONG(out,1);return SUCCESS;}" for n in range(48)
+        )
+        code = branches + "\n#else\nstatic int fill(zval *out) {ZVAL_STR(out,NULL);return SUCCESS;}\n#endif\n"
+        code += "static int counter_cast(zend_object *o,zval *out,int t) {return fill(out);}"
+        self.assertEqual(frozenset({"num", "str"}), self.summary(code).results)
