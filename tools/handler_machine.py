@@ -253,7 +253,7 @@ class Machine(Expressions, Primitives):
 
     def dispatch(self, value, cases, otherwise, state, frame, push):
         """Send a state to the case its value selects; an unknown value forks over every case and the default."""
-        seen = []
+        seen, known = [], isinstance(resolve(value, state), int)
         for expression, pc in cases:
             constant = resolve(self.ev(expression, state, frame)[0][0], state)
             if not isinstance(constant, int):
@@ -261,7 +261,7 @@ class Machine(Expressions, Primitives):
             fork = state.fork()
             if assume(value, constant, fork):
                 push(pc, fork)
-                if isinstance(resolve(value, fork), int):
+                if known:
                     return
             seen.append(constant)
         if exclude(value, seen, state):
