@@ -5,11 +5,20 @@ handlers or reception operations leave the signature field unextracted.
 """
 
 import re
-from copy import copy
+from collections.abc import Iterable
+from dataclasses import dataclass
+from typing import Literal, TypeAlias
 
 import compile_facts
-from php_src_c.definitions import Call
-from php_src_c.source import CALL, matching, split_arguments, statement_end
+from php_src_c import Program, Source
+from named_extras_flow import Forwarding, ParsedCollection
+from named_extras_reception import Operation, reception_count
+from php_src_c.definitions import Call, Definition
+from php_src_c.source import CALL, matching, split_arguments
+
+Policy: TypeAlias = tuple[Literal["reject"], int] | tuple[Literal["forward"], None] | None
+Subject: TypeAlias = tuple[str, str]
+HelperContext: TypeAlias = tuple[list[str], frozenset[int]]
 
 # Whitespace-collapsed bodies of the parsing primitives in the producer-pinned zend_API.h.
 PRIMITIVES = {
@@ -28,24 +37,25 @@ PARSING = re.compile(
     r"\bZEND_PARSE_PARAMETERS_END\(\s*\)", re.S,
 )
 THIN_HELPER = re.compile(r"\{\s*(\w+)\(\s*INTERNAL_FUNCTION_PARAM_PASSTHRU\s*(.*?)\);\s*\}", re.S)
-CONSTANT_IF = re.compile(r"\bif\s*\(\s*(\w+)\s*\)")
 FORWARD = ("forward", None)
 REJECTING = {"Z_PARAM_VARIADIC", "Z_PARAM_VARIADIC_EX"}
 VARIADICS = REJECTING | {"Z_PARAM_VARIADIC_WITH_NAMED"}
-KNOWN_CALLS = {"zend_call_known_function", "zend_call_known_fcc"}
 CONTROL = re.compile(r"\b(?:if|else|for|while|switch|do|goto|return|RETURN_\w+)\b")
-RECEPTION_WRITE = re.compile(r"(?:\+\+|--)\s*_i\b|\b_i\s*(?:\+\+|--|[+*/-]?=(?!=))")
 
 
-def invocations(text):
-    """Calls with their arguments, using the shared C reader's bracket handling."""
-    for match in CALL.finditer(text):
-        end = matching(text, match.end() - 1)
-        if end >= 0:
-            yield match, split_arguments(text[match.end():end]), end + 1
+@dataclass(frozen=True)
+class Binding:
+    values: tuple[int, ...] = ()
+    seen: frozenset[int] = frozenset()
 
 
-def primitives_match(program, source):
+@dataclass(frozen=True)
+class ParsingGroup:
+    block: re.Match[str]
+    binding: Binding
+
+
+def primitives_match(program: Program, source: Source) -> bool:
     for name, digest in PRIMITIVES.items():
         macro = program.preprocessor.lookup(source, name)
         if macro is None or compile_facts.digest(macro[1]) != digest:
@@ -53,22 +63,7 @@ def primitives_match(program, source):
     return True
 
 
-def reception_count(program, source, name):
-    """Count prologues through source macro aliases; unknown or recursive macros have no count."""
-    def count(current, seen):
-        if current == "Z_PARAM_PROLOGUE":
-            return 1
-        macro = program.preprocessor.lookup(source, current)
-        if current in seen or macro is None or RECEPTION_WRITE.search(macro[1]):
-            return None
-        counts = [count(call.group(1), seen | {current}) for call in CALL.finditer(macro[1])
-                  if program.preprocessor.lookup(source, call.group(1)) is not None]
-        return None if None in counts else sum(counts)
-
-    return count(name, frozenset())
-
-
-def parsing_operations(text):
+def parsing_operations(text: str) -> list[Operation] | None:
     """A plain sequence of parsing macro invocations, or None for an unread operation."""
     operations, at = [], 0
     while text[at:].strip(" \t\r\n;"):
@@ -84,83 +79,42 @@ def parsing_operations(text):
     return operations
 
 
-def parsing_policy(program, definition, block):
-    operations = parsing_operations(block.group(1))
+def parsing_policy(flow: Forwarding, definition: Definition, group: ParsingGroup) -> Policy:
+    operations = parsing_operations(group.block.group(1))
     if operations is None or sum(name in VARIADICS for name, _ in operations) != 1:
         return None
     position = 0
-    for name, args in operations:
+    for index, (name, args) in enumerate(operations):
         if name in REJECTING:
-            prefix = definition.body[:block.start()]
-            if CONTROL.search(prefix) or prefix.count("{") - prefix.count("}") != 1:
-                return None
-            return ("reject", position)
+            return rejecting_policy(definition, group.block, position)
         if name == "Z_PARAM_VARIADIC_WITH_NAMED":
-            return FORWARD if len(args) == 3 and forwards_named(program, definition, (args[2], block.end())) else None
-        count = reception_count(program, definition.source, name)
-        if count != 1:
+            if len(args) != 3:
+                return None
+            inputs = tuple(values[0] for operation, values in operations[:index] if values)
+            parsed = ParsedCollection(group.block.start(), group.block.end(), args[2], inputs, group.binding.values)
+            return FORWARD if flow.proves(definition, parsed) else None
+        count = reception_count(flow.program, definition.source, (name, args))
+        if count is None:
             return None
         position += count
     return None
 
 
-def calls_named(body, named):
-    """The parsed collection is the explicit named-argument input of a callable invocation."""
-    owner = named.removesuffix(".named_params")
-    assigned = re.compile(r"(?<![\w.])(?:" + re.escape(named) + "|" + re.escape(owner) + r")\s*=(?!=)")
-    for match, args, _ in invocations(body):
-        if assigned.search(body[:match.start()]):
-            return False
-        if match.group(1) in KNOWN_CALLS and args and args[-1] == named:
-            return True
-        if named.endswith(".named_params") and match.group(1) == "zend_call_function":
-            if args and args[0] == "&" + named.removesuffix(".named_params"):
-                return True
-    return False
+def rejecting_policy(definition: Definition, block: re.Match[str], position: int) -> Policy:
+    prefix = definition.body[:block.start()]
+    if CONTROL.search(prefix) or prefix.count("{") - prefix.count("}") != 1:
+        return None
+    return ("reject", position)
 
 
-def forwards_named(program, definition, parsed):
-    named, after = parsed
-    suffix = definition.body[after:]
-    if calls_named(suffix, named):
-        return True
-    # A context entry receives the same stored fcall_info (Fiber's argument parsing).
-    for _, args, _ in invocations(suffix):
-        for arg in args:
-            if not re.fullmatch(r"[A-Za-z_]\w*", arg):
-                continue
-            for target in program.resolve(definition, Call(arg, None, frozenset())):
-                if calls_named(target.body, named):
-                    return True
-    return False
-
-
-def select_constants(body, bindings):
-    """Select only literal-bound helper branches; other conditions keep their source structure."""
-    for match in list(CONSTANT_IF.finditer(body))[::-1]:
-        if match.group(1) not in bindings:
-            continue
-        start = match.end()
-        end = statement_end(body, start) + 1
-        otherwise = re.match(r"\s*else\b", body[end:])
-        final = statement_end(body, end + otherwise.end()) + 1 if otherwise else end
-        selected = ""
-        if bindings[match.group(1)]:
-            selected = body[start:end]
-        elif otherwise:
-            selected = body[end + otherwise.end():final]
-        body = body[:match.start()] + selected + body[final:]
-    return body
-
-
-def definition_policy(program, definition, seen=frozenset()):
-    if id(definition) in seen or not primitives_match(program, definition.source):
+def definition_policy(flow: Forwarding, definition: Definition, binding: Binding = Binding()) -> Policy:
+    if id(definition) in binding.seen or not primitives_match(flow.program, definition.source):
         return None
     blocks = list(PARSING.finditer(definition.body))
     if len(re.findall(r"\bZEND_PARSE_PARAMETERS_START(?:_EX)?\s*\(", definition.body)) != len(blocks):
         return None
     if blocks:
-        policies = [parsing_policy(program, definition, block) for block in blocks]
+        policies = [parsing_policy(flow, definition, ParsingGroup(block, binding)) for block in blocks]
         return policies[0] if all(policy == policies[0] for policy in policies) else None
     helper = THIN_HELPER.fullmatch(definition.body)
     if helper is None:
@@ -168,29 +122,25 @@ def definition_policy(program, definition, seen=frozenset()):
     args = split_arguments(helper.group(2).lstrip().removeprefix(","))
     if any(arg not in ("0", "1") for arg in args):
         return None
-    targets = program.resolve(definition, Call(helper.group(1), [], frozenset()))
-    policies = [helper_policy(program, target, (args, seen | {id(definition)})) for target in targets]
+    targets = flow.program.resolve(definition, Call(helper.group(1), [], frozenset()))
+    policies = [helper_policy(flow, target, (args, binding.seen | {id(definition)})) for target in targets]
     return policies[0] if policies and all(policy == policies[0] for policy in policies) else None
 
 
-def helper_policy(program, target, context):
+def helper_policy(flow: Forwarding, target: Definition, context: HelperContext) -> Policy:
     args, seen = context
     if len(target.params) != len(args) + 1:
         return None
-    # A local view preserves shared source definitions and linkage without changing Program.
-    specialized = copy(target)
-    specialized.body = select_constants(target.body, dict(zip(target.params[1:], map(int, args))))
-    if id(target) in seen:
-        return None
-    return definition_policy(program, specialized, seen | {id(target)})
+    return definition_policy(flow, target, Binding((0, *map(int, args)), seen))
 
 
-def read_policies(program, keys):
+def read_policies(program: Program, keys: Iterable[Subject]) -> dict[Subject, Policy]:
     """The policy of every requested builtin, requiring agreement across ordinary handlers and definitions."""
     entries, policies = program.entries(), {}
+    flow = Forwarding(program)
     for key in keys:
         handlers = [name for name in entries.get(key, ()) if not name.startswith("zflf_")]
-        alternatives = [definition_policy(program, definition) for name in handlers
+        alternatives = [definition_policy(flow, definition) for name in handlers
                         for definition in program.functions.get(name, ())]
         complete = handlers and all(program.functions.get(name) for name in handlers)
         policies[key] = alternatives[0] if complete and alternatives and all(p == alternatives[0] for p in alternatives) else None

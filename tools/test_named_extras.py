@@ -1,5 +1,23 @@
 """Builtin named-extra extraction from the pinned php-src through the signature producer.
 
+- test_unreachable_forward_call: unreachable calls establish no forwarding
+- test_call_info_cleared_by_helper: intervening helper writes invalidate the parsed collection
+- test_conditional_reception: a conditional macro establishes no fixed reception count
+- test_unknown_counter_write: an unread counter update leaves the reception count unknown
+- test_early_return_and_memset_leave_no_forwarding: early return and zeroing do not preserve names
+- test_unread_or_false_guard_leaves_no_forwarding: false and unread conditions prove no reachable target
+- test_aliasing_helper_invalidates_call_info: interprocedural aliases share the invalidated field
+- test_readonly_helper_preserves_named_collection: a read-only helper keeps the parsed value
+- test_unbound_callback_reference_is_not_an_invocation: unexecuted callbacks establish nothing
+- test_all_counter_assignments_remain_unknown: every assignment operator uses the same unknown effect
+- test_named_collection_contents_are_preserved: writes through the collection pointer invalidate forwarding
+- test_unexpanded_recursive_macro_remains_unknown: an unexpanded macro establishes no reception count
+- test_unread_intervening_call_prevents_forwarding: unread call effects establish no forwarding
+- test_helper_argument_reassignment_stays_null: helper branches use the current bound value
+- test_unread_control_before_helper_stays_null: unread caller control invalidates its callees
+- test_conditional_prologues_stay_null: equally counted conditional prologues are still conditional
+- test_counter_macro_arguments_stay_null: writes through substituted macro arguments are unknown
+- test_shadowed_c_apis_stay_null: local definitions determine control and target reachability
 - test_array_map_rejects_at_first_array_reception: the parsing group begins before the declared variadic tail
 - test_call_user_func_forwards: the named arguments reach the callback
 - test_closure_call_forwards: method signatures carry the same fact
@@ -113,6 +131,91 @@ class SourcePatternTest(unittest.TestCase):
             header = root / "zend_API.h"
             header.write_text(header.read_text(encoding="utf-8").replace("ZPP_ERROR_UNEXPECTED_EXTRA_NAMED", "OTHER_ERROR"), encoding="utf-8")
             self.assertIsNone(named_extras.read_policies(Program(root), [("function", "reject")])[("function", "reject")])
+
+
+class BoundaryRegressionsTest(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        import named_extras
+        fixture = Path(__file__).parent / "testdata/named_extras_boundaries"
+        names = ("unreachable_forward", "clobbered_fci", "conditional_reception", "mutated_counter",
+                 "early_success", "zeroed_fci", "unread_guard", "false_guarded", "aliased_fci",
+                 "preserved_fci", "unbound_callback", "mutated_collection", "recursive_macro", "unread_intervening_call",
+                 "rebound_argument", "unread_before_helper", "unread_inline_before_helper", "conditional_prologues", "counter_argument_write",
+                 "shadowed_jump", "shadowed_target")
+        cls.policies = named_extras.read_policies(
+            Program(fixture, provenance=True), [("function", name) for name in names])
+
+    def test_unreachable_forward_call(self) -> None:
+        self.assertIsNone(self.policies[("function", "unreachable_forward")])
+
+    def test_call_info_cleared_by_helper(self) -> None:
+        self.assertIsNone(self.policies[("function", "clobbered_fci")])
+
+    def test_conditional_reception(self) -> None:
+        self.assertIsNone(self.policies[("function", "conditional_reception")])
+
+    def test_unknown_counter_write(self) -> None:
+        self.assertIsNone(self.policies[("function", "mutated_counter")])
+
+    def test_early_return_and_memset_leave_no_forwarding(self) -> None:
+        for name in ("early_success", "zeroed_fci"):
+            with self.subTest(name=name):
+                self.assertIsNone(self.policies[("function", name)])
+
+    def test_unread_or_false_guard_leaves_no_forwarding(self) -> None:
+        for name in ("unread_guard", "false_guarded"):
+            with self.subTest(name=name):
+                self.assertIsNone(self.policies[("function", name)])
+
+    def test_aliasing_helper_invalidates_call_info(self) -> None:
+        self.assertIsNone(self.policies[("function", "aliased_fci")])
+
+    def test_readonly_helper_preserves_named_collection(self) -> None:
+        self.assertEqual(("forward", None), self.policies[("function", "preserved_fci")])
+
+    def test_unbound_callback_reference_is_not_an_invocation(self) -> None:
+        self.assertIsNone(self.policies[("function", "unbound_callback")])
+
+    def test_named_collection_contents_are_preserved(self) -> None:
+        self.assertIsNone(self.policies[("function", "mutated_collection")])
+
+    def test_unexpanded_recursive_macro_remains_unknown(self) -> None:
+        self.assertIsNone(self.policies[("function", "recursive_macro")])
+
+    def test_unread_intervening_call_prevents_forwarding(self) -> None:
+        self.assertIsNone(self.policies[("function", "unread_intervening_call")])
+
+    def test_helper_argument_reassignment_stays_null(self) -> None:
+        self.assertIsNone(self.policies[("function", "rebound_argument")])
+
+    def test_unread_control_before_helper_stays_null(self) -> None:
+        for name in ("unread_before_helper", "unread_inline_before_helper"):
+            with self.subTest(name=name):
+                self.assertIsNone(self.policies[("function", name)])
+
+    def test_conditional_prologues_stay_null(self) -> None:
+        self.assertIsNone(self.policies[("function", "conditional_prologues")])
+
+    def test_counter_macro_arguments_stay_null(self) -> None:
+        self.assertIsNone(self.policies[("function", "counter_argument_write")])
+
+    def test_shadowed_c_apis_stay_null(self) -> None:
+        for name in ("shadowed_jump", "shadowed_target"):
+            with self.subTest(name=name):
+                self.assertIsNone(self.policies[("function", name)])
+
+    def test_all_counter_assignments_remain_unknown(self) -> None:
+        import named_extras
+        fixture = Path(__file__).parent / "testdata/named_extras_boundaries"
+        operators = ("=", "+=", "-=", "*=", "/=", "%=", "&=", "|=", "^=", "<<=", ">>=")
+        for operator in operators:
+            with self.subTest(operator=operator), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                shutil.copytree(fixture, root, dirs_exist_ok=True)
+                source = root / "functions.c"
+                source.write_text(source.read_text(encoding="utf-8").replace("_i |= 1", f"_i {operator} 1"), encoding="utf-8")
+                self.assertIsNone(named_extras.read_policies(Program(root), [("function", "mutated_counter")])[("function", "mutated_counter")])
 
 
 if __name__ == "__main__":

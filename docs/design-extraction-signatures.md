@@ -3,6 +3,8 @@
 The signature producer of the extraction design
 ([design-extraction.md](design-extraction.md)): `tools/extract_signatures.py`
 and `tools/compile_facts.py`, with `tools/named_extras.py` for argument reception.
+Its reception counts, memory transport and admitted C call-context APIs are in
+`named_extras_reception`, `named_extras_flow` and `named_extras_context`.
 The tests: `tools/test_named_extras.py` (source patterns and extracted policies),
 `BuiltinNamedExtrasTest` (bundled signature decoding), `tools/test_compile_facts.py`
 (closure check, selection rule) and `OneOpcodeCompileTest` (the extracted
@@ -28,15 +30,37 @@ sets).
   every definition must agree. Frameless handlers do not receive named calls.
 - `Z_PARAM_VARIADIC` and `Z_PARAM_VARIADIC_EX` establish rejection in a plain,
   unconditional parsing group. The reception position counts preceding
-  argument-consuming macro prologues, following source macro aliases; it is
-  not inferred from the stub's variadic index. Thus `array_map` records 1:
-  its callback is parsed before the group that includes its first array.
+  argument-consuming macro prologues, following source macro aliases. The shared
+  C parser and CFG compiler read each expanded macro in its parsing-group break
+  scope. All reachable exits must pass the same unconditional prologues. Macro
+  arguments are substituted before effects are read. An assignment or
+  update of the counter outside the admitted prologue, an escaped counter
+  address, conditional count, residual macro or unread statement is unknown.
+  Assignment nodes cover direct and compound assignments uniformly. The count
+  is not inferred from the stub's variadic index: `array_map` records 1, because
+  its callback precedes the group including its first array.
 - `Z_PARAM_VARIADIC_WITH_NAMED` establishes forwarding when its preserved named
   arguments reach `zend_call_known_function`, `zend_call_known_fcc` or
-  `zend_call_function`, directly or through a referenced context entry using
-  the stored call information. An overwritten collection establishes nothing.
-  A thin `INTERNAL_FUNCTION_PARAM_PASSTHRU` helper is followed with literal
-  zero/one arguments selecting its branches, including Reflection invocation.
+  `zend_call_function` on a reached path. `Forwarding` reuses the shared C
+  compiler, source index, abstract machine and region memory. Its incoming call
+  frame holds the original named collection; the parsing group reads that same
+  input. Helper calls and aliases share memory, and writes into the collection
+  invalidate its preservation. Returns and false branches reach no target.
+  Unread calls invalidate passed memory and the proof, even when their result
+  is unused. Thin helpers bind their literal arguments in the machine, so
+  subsequent assignments determine their branch selection.
+- C call-context summaries are source-admitted APIs, not builtin names. A
+  constructor selector requires its declared handler ABI, admitted source, and
+  the same object produced by a successful admitted object initializer. Known
+  selector targets run their body. Context initialization binds its selected
+  source entry to an opaque handle; resumption requires that same binding and
+  supplies its active fiber and transfer context. Body and expanded-body digests
+  admit these contracts and the read-only INI getter forms. Literal ASCII strlen
+  is folded only without a source override. Changed protocol bodies are
+  unestablished. Local definitions never inherit a native summary. Initial
+  external setjmp returns zero; a non-local jump reaches no following instruction.
+- The working-state bound of reception counting and the existing C machine's
+  request budget leave unestablished proofs null. They add no analyzer state.
 - Whitespace-collapsed digests check the parsing primitives of `zend_API.h`.
   A changed primitive, missing/conflicting definition, unread reception,
   optional or conditional rejecting group, earlier control flow, unread parsing block, recursive
