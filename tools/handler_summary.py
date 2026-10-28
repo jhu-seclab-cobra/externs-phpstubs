@@ -15,7 +15,7 @@ from handler_minit import Policy
 from handler_prims import EXCEPTION, EXCEPTIONS_REGION
 from handler_values import resolve
 
-SUMMARY_BUDGET = 200_000
+SUMMARY_BUDGET = 1_000_000
 DIAGNOSTICS = re.compile(r"zend_error\w*|php_error_docref\w*|zend_get_executed_\w+|php_verror|zend_message_dispatcher")
 SELF, CLASS, OUT, FIRST, SECOND = "o:self", "o:ce", "o:out", "o:op1", "o:op2"
 OPERAND_SYMBOLS = "o:op"
