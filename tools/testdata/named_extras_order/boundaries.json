@@ -1,0 +1,122 @@
+[
+  {
+    "name": "nested",
+    "body": "ZEND_PARSE_PARAMETERS_START(0, -1) Z_PARAM_VARIADIC_WITH_NAMED(args, argc, named) ZEND_PARSE_PARAMETERS_END();HashTable *outer = NULL; { { HashTable *outer = named; } }zend_call_known_function(target, object, scope, result, argc, args, named);",
+    "forward": false
+  },
+  {
+    "name": "if_shadow",
+    "body": "ZEND_PARSE_PARAMETERS_START(0, -1) Z_PARAM_VARIADIC_WITH_NAMED(args, argc, named) ZEND_PARSE_PARAMETERS_END();HashTable *outer = NULL; if (1) { HashTable *outer = named; }zend_call_known_function(target, object, scope, result, argc, args, named);",
+    "forward": false
+  },
+  {
+    "name": "while_shadow",
+    "body": "ZEND_PARSE_PARAMETERS_START(0, -1) Z_PARAM_VARIADIC_WITH_NAMED(args, argc, named) ZEND_PARSE_PARAMETERS_END();HashTable *outer = NULL; while (1) { HashTable *outer = named; break; }zend_call_known_function(target, object, scope, result, argc, args, named);",
+    "forward": false
+  },
+  {
+    "name": "do_shadow",
+    "body": "ZEND_PARSE_PARAMETERS_START(0, -1) Z_PARAM_VARIADIC_WITH_NAMED(args, argc, named) ZEND_PARSE_PARAMETERS_END();HashTable *outer = NULL; do { HashTable *outer = named; } while (0);zend_call_known_function(target, object, scope, result, argc, args, named);",
+    "forward": false
+  },
+  {
+    "name": "for_init_shadow",
+    "body": "ZEND_PARSE_PARAMETERS_START(0, -1) Z_PARAM_VARIADIC_WITH_NAMED(args, argc, named) ZEND_PARSE_PARAMETERS_END();HashTable *outer = NULL; for (HashTable *outer = named; 1;) { break; }zend_call_known_function(target, object, scope, result, argc, args, named);",
+    "forward": false
+  },
+  {
+    "name": "for_body_shadow",
+    "body": "ZEND_PARSE_PARAMETERS_START(0, -1) Z_PARAM_VARIADIC_WITH_NAMED(args, argc, named) ZEND_PARSE_PARAMETERS_END();int outer = 0; for (int i = 0; i < 1; ++i) { int outer = 1; }zend_call_known_function(target, object, scope, result, argc, args, named);",
+    "forward": false
+  },
+  {
+    "name": "for_variable_inner_shadow",
+    "body": "ZEND_PARSE_PARAMETERS_START(0, -1) Z_PARAM_VARIADIC_WITH_NAMED(args, argc, named) ZEND_PARSE_PARAMETERS_END();for (int i = 0; i < 1; ++i) { int i = 1; break; }zend_call_known_function(target, object, scope, result, argc, args, named);",
+    "forward": false
+  },
+  {
+    "name": "statement_expression_shadow",
+    "body": "ZEND_PARSE_PARAMETERS_START(0, -1) Z_PARAM_VARIADIC_WITH_NAMED(args, argc, named) ZEND_PARSE_PARAMETERS_END();int ordinary = 0; ({ int ordinary = 1; ordinary; });zend_call_known_function(target, object, scope, result, argc, args, named);",
+    "forward": false
+  },
+  {
+    "name": "ordinary_shadow",
+    "body": "ZEND_PARSE_PARAMETERS_START(0, -1) Z_PARAM_VARIADIC_WITH_NAMED(args, argc, named) ZEND_PARSE_PARAMETERS_END();int ordinary = 0; { int ordinary = 1; }zend_call_known_function(target, object, scope, result, argc, args, named);",
+    "forward": false
+  },
+  {
+    "name": "ordinary_distinct",
+    "body": "ZEND_PARSE_PARAMETERS_START(0, -1) Z_PARAM_VARIADIC_WITH_NAMED(args, argc, named) ZEND_PARSE_PARAMETERS_END();int ordinary = 0; { int different = 1; }zend_call_known_function(target, object, scope, result, argc, args, named);",
+    "forward": true
+  },
+  {
+    "name": "args_shadow",
+    "body": "ZEND_PARSE_PARAMETERS_START(0, -1) Z_PARAM_VARIADIC_WITH_NAMED(args, argc, named) ZEND_PARSE_PARAMETERS_END();zval *args = NULL; { zval *args = NULL; }zend_call_known_function(target, object, scope, result, argc, args, named);",
+    "forward": false
+  },
+  {
+    "name": "argc_shadow",
+    "body": "ZEND_PARSE_PARAMETERS_START(0, -1) Z_PARAM_VARIADIC_WITH_NAMED(args, argc, named) ZEND_PARSE_PARAMETERS_END();int argc = 0; { int argc = 1; }zend_call_known_function(target, object, scope, result, argc, args, named);",
+    "forward": false
+  },
+  {
+    "name": "named_shadow",
+    "body": "ZEND_PARSE_PARAMETERS_START(0, -1) Z_PARAM_VARIADIC_WITH_NAMED(args, argc, named) ZEND_PARSE_PARAMETERS_END();HashTable *named = NULL; { HashTable *named = NULL; }zend_call_known_function(target, object, scope, result, argc, args, named);",
+    "forward": false
+  },
+  {
+    "name": "siblings",
+    "body": "ZEND_PARSE_PARAMETERS_START(0, -1) Z_PARAM_VARIADIC_WITH_NAMED(args, argc, named) ZEND_PARSE_PARAMETERS_END();{ int temporary = 1; } { int temporary = 2; }zend_call_known_function(target, object, scope, result, argc, args, named);",
+    "forward": true
+  },
+  {
+    "name": "siblings_conditional",
+    "body": "ZEND_PARSE_PARAMETERS_START(0, -1) Z_PARAM_VARIADIC_WITH_NAMED(args, argc, named) ZEND_PARSE_PARAMETERS_END();if (flag) { int temporary = 1; } else { int temporary = 2; }zend_call_known_function(target, object, scope, result, argc, args, named);",
+    "forward": true
+  },
+  {
+    "name": "siblings_for",
+    "body": "ZEND_PARSE_PARAMETERS_START(0, -1) Z_PARAM_VARIADIC_WITH_NAMED(args, argc, named) ZEND_PARSE_PARAMETERS_END();for (int i = 0; i < 1; ++i) { } for (int i = 0; i < 1; ++i) { }zend_call_known_function(target, object, scope, result, argc, args, named);",
+    "forward": true
+  },
+  {
+    "name": "distinct_while",
+    "body": "ZEND_PARSE_PARAMETERS_START(0, -1) Z_PARAM_VARIADIC_WITH_NAMED(args, argc, named) ZEND_PARSE_PARAMETERS_END();int ordinary = 0; while (0) { int different = 1; }zend_call_known_function(target, object, scope, result, argc, args, named);",
+    "forward": true
+  },
+  {
+    "name": "distinct_if",
+    "body": "ZEND_PARSE_PARAMETERS_START(0, -1) Z_PARAM_VARIADIC_WITH_NAMED(args, argc, named) ZEND_PARSE_PARAMETERS_END();int ordinary = 0; if (1) { int different = 1; }zend_call_known_function(target, object, scope, result, argc, args, named);",
+    "forward": true
+  },
+  {
+    "name": "before_declaration",
+    "body": "ZEND_PARSE_PARAMETERS_START(0, -1) Z_PARAM_VARIADIC_WITH_NAMED(args, argc, named) ZEND_PARSE_PARAMETERS_END();{ int temporary = 1; } int temporary = 2;zend_call_known_function(target, object, scope, result, argc, args, named);",
+    "forward": true
+  },
+  {
+    "name": "for_before_declaration",
+    "body": "ZEND_PARSE_PARAMETERS_START(0, -1) Z_PARAM_VARIADIC_WITH_NAMED(args, argc, named) ZEND_PARSE_PARAMETERS_END();for (int temporary = 0; temporary < 1; ++temporary) { } int temporary = 2;zend_call_known_function(target, object, scope, result, argc, args, named);",
+    "forward": true
+  },
+  {
+    "name": "nested_before_declaration",
+    "body": "ZEND_PARSE_PARAMETERS_START(0, -1) Z_PARAM_VARIADIC_WITH_NAMED(args, argc, named) ZEND_PARSE_PARAMETERS_END();{ { int temporary = 1; } } int temporary = 2;zend_call_known_function(target, object, scope, result, argc, args, named);",
+    "forward": true
+  },
+  {
+    "name": "siblings_then_declaration",
+    "body": "ZEND_PARSE_PARAMETERS_START(0, -1) Z_PARAM_VARIADIC_WITH_NAMED(args, argc, named) ZEND_PARSE_PARAMETERS_END();{ int temporary = 1; } { int temporary = 2; } int temporary = 3;zend_call_known_function(target, object, scope, result, argc, args, named);",
+    "forward": true
+  },
+  {
+    "name": "ordinary_type_payload",
+    "body": "ZEND_PARSE_PARAMETERS_START(0, -1) Z_PARAM_VARIADIC_WITH_NAMED(args, argc, named) ZEND_PARSE_PARAMETERS_END();int ordinary = 0; { struct ordinary *different = NULL; }zend_call_known_function(target, object, scope, result, argc, args, named);",
+    "forward": true
+  },
+  {
+    "name": "ordinary_sizeof_payload",
+    "body": "ZEND_PARSE_PARAMETERS_START(0, -1) Z_PARAM_VARIADIC_WITH_NAMED(args, argc, named) ZEND_PARSE_PARAMETERS_END();int ordinary = 0; { int different = sizeof(ordinary); }zend_call_known_function(target, object, scope, result, argc, args, named);",
+    "forward": true
+  }
+]

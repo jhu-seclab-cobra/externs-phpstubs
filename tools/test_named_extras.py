@@ -21,6 +21,7 @@
 - test_shadowed_collection_does_not_forward: an inner collection declaration cannot replace the outer NULL
 - test_shadowed_call_info_does_not_forward: an inner fci declaration cannot replace the outer call info
 - test_real_handler_shadowed_call_info_does_not_forward: a real handler variant retains its cleared outer fci
+- test_real_handler_later_declaration_keeps_forwarding: an unrelated later local preserves the real handler transport
 - test_nested_scope_bindings_stay_unextracted: parameters, loops, expressions and ancestors preserve the scope boundary
 - test_distinct_local_scopes_can_forward: sibling names and an active local do not shadow an enclosing binding
 - test_shadowed_outer_reference_does_not_forward: a nested declaration cannot outlive a referenced outer binding
@@ -97,6 +98,16 @@ class RealNamedExtrasTest(unittest.TestCase):
         definition.body = fixture.read_text(encoding="utf-8").removeprefix("PHP_FUNCTION(call_user_func)\n")
         program.functions[name] = [definition]
         self.assertIsNone(named_extras.read_policies(program, [("function", "call_user_func")])[("function", "call_user_func")])
+
+    def test_real_handler_later_declaration_keeps_forwarding(self) -> None:
+        import named_extras
+        program = Program(Path(os.environ["PHP_SRC"]), provenance=True)
+        name = "zif_call_user_func"
+        definition = copy(program.functions[name][0])
+        fixture = Path(__file__).parent / "testdata/named_extras_real_scope/call_user_func_no_shadow.c"
+        definition.body = fixture.read_text(encoding="utf-8").removeprefix("PHP_FUNCTION(call_user_func)\n")
+        program.functions[name] = [definition]
+        self.assertEqual(("forward", None), named_extras.read_policies(program, [("function", "call_user_func")])[("function", "call_user_func")])
 
 
 class SourcePatternTest(unittest.TestCase):

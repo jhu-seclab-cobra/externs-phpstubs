@@ -47,7 +47,11 @@ sets).
   frame holds the original named collection; the parsing group reads that same
   input. Before flattening, the parsed body must establish unshadowed lexical
   declarations, including parameters, enclosing references, nested blocks and
-  for scopes. Shadowing in a transport body leaves forwarding unestablished.
+  for scopes. Declarations enter visibility in source order after their
+  declarators and before their initializers. References resolve against the
+  bindings visible at their own position; completed child scopes return no
+  local bindings to the parent. Shadowing in a transport body leaves
+  forwarding unestablished.
   Helper calls and aliases share memory, and writes into the collection
   invalidate its preservation. Returns and false branches reach no target.
   Unread calls invalidate passed memory and the proof, even when their result
