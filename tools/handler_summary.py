@@ -165,19 +165,20 @@ class Summarizer:
 
     def kinds(self, state):
         """The result kinds of the output zval of a normal exit, or None when one of its types is unknown. An output
-        no path wrote has the kind ``any``; the unwritten alternative of a joined output belongs to a failure path."""
+        no path wrote is unestablished; an unwritten alternative beside proved writes belongs to a failure path."""
         items = [item for item, _ in alternatives(state.read(OUT, TYPE_INFO))]
-        found = {self.alternative_kind(item, state) for item in items if item != UNWRITTEN} or {"any"}
-        return None if None in found else found
+        found = {self.alternative_kind(item, state) for item in items if item != UNWRITTEN}
+        return found if found and None not in found else None
 
     def alternative_kind(self, item, state):
         """The kind one alternative of the output type tag stands for: a known tag by its name, a value derived from
-        the user method or an operand, or an unknown value of a complete run, as ``any``; None for any other symbol."""
+        the user method or an operand, as ``any``; None for an unresolved type or any other symbol."""
         tag = resolve(masked(item, TYPE_MASK), state)
         if isinstance(tag, int):
-            return KINDS.get(self.tag_name(tag), "any")
+            name = self.tag_name(tag)
+            return KINDS.get(name, "any") if name is not None else None
         if tag is ANYV:
-            return "any"
+            return None
         root = origin(tag)
         return "any" if root is not None and root.startswith(("m:", OPERAND_SYMBOLS)) else None
 

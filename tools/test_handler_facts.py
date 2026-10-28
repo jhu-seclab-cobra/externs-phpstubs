@@ -6,6 +6,8 @@ Run: python3 -B -m unittest discover -s tools -p "test_*.py" (from the externs-p
   slot writes read only in functions that name the table type, the parent's creator and table inherited
 - creation: the creator's table of each class, the struct type it allocates, the default table of a class with no creator
 - write sites: creation, copy, typed and foreign dispositions; a write that fits none fails the extraction
+- test_unknown_type_is_unestablished: an unread type helper cannot establish ANY
+- test_unwritten_success_is_unestablished: SUCCESS without an output write has no proved result
 - test_expression_bound_keeps_every_alternative: every one of 49 value alternatives is visited
 - test_source_alternative_bound_keeps_str: the last source branch contributes STR
 - test_conditional_callee_definitions_keep_str: all matching helper definitions contribute
@@ -554,3 +556,14 @@ static int counter_cast(zend_object *o,zval *out,int type) { ZVAL_STR(out,NULL);
         code = branches + "\n#else\nstatic int fill(zval *out) {ZVAL_STR(out,NULL);return SUCCESS;}\n#endif\n"
         code += "static int counter_cast(zend_object *o,zval *out,int t) {return fill(out);}"
         self.assertEqual(frozenset({"num", "str"}), self.summary(code).results)
+
+    def test_unknown_type_is_unestablished(self):
+        summary = self.summary(
+            "static int counter_cast(zend_object *o,zval *out,int type) "
+            "{ Z_TYPE_INFO_P(out)=unknown_type();return SUCCESS; }"
+        )
+        self.assertIsNone(summary.results)
+
+    def test_unwritten_success_is_unestablished(self):
+        summary = self.summary("static int counter_cast(zend_object *o,zval *out,int type) {return SUCCESS;}")
+        self.assertIsNone(summary.results)

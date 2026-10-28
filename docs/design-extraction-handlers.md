@@ -63,6 +63,9 @@ Format: [handler types](../../commons-phpmodels/docs/design-declarations-handler
 - Hierarchy regeneration recomputes owned generated facts from source; an
   old generated handler value is not evidence for preserving it unchanged.
   Source-external entries keep their existing fields and bytes.
+- An unresolved output type or a successful exit without a proved output
+  leaves the request unestablished. ANY requires a known non-scalar tag or
+  an output derived from an operand or effective method, not unread analysis.
 - Source summaries use the registered class's effective methods; hypothetical
   descendant methods remain ordinary calls admitted by the dispatch descriptor.
 - Consumed tokens come from the source dispatch inventory. The generated-set
