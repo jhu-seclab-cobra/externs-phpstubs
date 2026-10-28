@@ -10,6 +10,7 @@ from handler_machine import Frame, Machine
 from handler_memory import ANYV, SYMBOLIC, Agg, Alt, Fill, Fn, Masked, Ptr, Region, Size, Str, Sym, Test, Unknown, State
 from handler_summary import SummaryPolicy
 from handler_world import World
+from named_extras_bindings import shadowed_bindings
 from named_extras_context import CONTEXT_SOURCE, INI_SOURCE, OBJECT_SOURCE, read_protocols, source_api, strlen_api, target_api
 from named_extras_reception import CNode
 from php_src_c import Program
@@ -55,7 +56,11 @@ class FlowIndex(Index):
             disabled = disabled | {'strlen'}
         text = self.pre.expand(definition.body, definition.source, disabled)
         try:
-            return control_flow(Compiler().compile(parse_body(text, definition.params)))
+            block = parse_body(text, definition.params)
+            shadowed = shadowed_bindings(block, frozenset(definition.params))
+            if shadowed:
+                return Compiled([], {}, set(), f'unestablished lexical bindings: {", ".join(sorted(shadowed))}')
+            return control_flow(Compiler().compile(block))
         except ParseFailure as failure:
             return Compiled([], {}, set(), str(failure))
 

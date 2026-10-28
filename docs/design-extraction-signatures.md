@@ -3,8 +3,9 @@
 The signature producer of the extraction design
 ([design-extraction.md](design-extraction.md)): `tools/extract_signatures.py`
 and `tools/compile_facts.py`, with `tools/named_extras.py` for argument reception.
-Its reception counts, memory transport and admitted C call-context APIs are in
-`named_extras_reception`, `named_extras_flow` and `named_extras_context`.
+Its reception counts, binding admission, memory transport and admitted C
+call-context APIs are in `named_extras_reception`, `named_extras_bindings`,
+`named_extras_flow` and `named_extras_context`.
 The tests: `tools/test_named_extras.py` (source patterns and extracted policies),
 `BuiltinNamedExtrasTest` (bundled signature decoding), `tools/test_compile_facts.py`
 (closure check, selection rule) and `OneOpcodeCompileTest` (the extracted
@@ -44,7 +45,10 @@ sets).
   `zend_call_function` on a reached path. `Forwarding` reuses the shared C
   compiler, source index, abstract machine and region memory. Its incoming call
   frame holds the original named collection; the parsing group reads that same
-  input. Helper calls and aliases share memory, and writes into the collection
+  input. Before flattening, the parsed body must establish unshadowed lexical
+  declarations, including parameters, enclosing references, nested blocks and
+  for scopes. Shadowing in a transport body leaves forwarding unestablished.
+  Helper calls and aliases share memory, and writes into the collection
   invalidate its preservation. Returns and false branches reach no target.
   Unread calls invalidate passed memory and the proof, even when their result
   is unused. Thin helpers bind their literal arguments in the machine, so

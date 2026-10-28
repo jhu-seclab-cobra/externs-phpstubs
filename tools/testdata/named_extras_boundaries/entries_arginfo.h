@@ -20,5 +20,14 @@ static const zend_function_entry more_functions[] = {
  ZEND_FE(counter_argument_write, arginfo_reject)
  ZEND_FE(shadowed_jump, arginfo_forward)
  ZEND_FE(shadowed_target, arginfo_forward)
+ ZEND_FE(check_shadowed_collection, arginfo_forward)
+ ZEND_FE(check_shadowed_fci, arginfo_forward)
+ ZEND_FE(check_shadowed_parameter, arginfo_forward)
+ ZEND_FE(check_shadowed_for, arginfo_forward)
+ ZEND_FE(check_shadowed_expression, arginfo_forward)
+ ZEND_FE(check_shadowed_ancestor, arginfo_forward)
+ ZEND_FE(check_shadowed_outer_reference, arginfo_forward)
+ ZEND_FE(check_sibling_scopes, arginfo_forward)
+ ZEND_FE(check_local_forward, arginfo_forward)
  ZEND_FE_END
 };

@@ -18,6 +18,12 @@
 - test_conditional_prologues_stay_null: equally counted conditional prologues are still conditional
 - test_counter_macro_arguments_stay_null: writes through substituted macro arguments are unknown
 - test_shadowed_c_apis_stay_null: local definitions determine control and target reachability
+- test_shadowed_collection_does_not_forward: an inner collection declaration cannot replace the outer NULL
+- test_shadowed_call_info_does_not_forward: an inner fci declaration cannot replace the outer call info
+- test_real_handler_shadowed_call_info_does_not_forward: a real handler variant retains its cleared outer fci
+- test_nested_scope_bindings_stay_unextracted: parameters, loops, expressions and ancestors preserve the scope boundary
+- test_distinct_local_scopes_can_forward: sibling names and an active local do not shadow an enclosing binding
+- test_shadowed_outer_reference_does_not_forward: a nested declaration cannot outlive a referenced outer binding
 - test_array_map_rejects_at_first_array_reception: the parsing group begins before the declared variadic tail
 - test_call_user_func_forwards: the named arguments reach the callback
 - test_closure_call_forwards: method signatures carry the same fact
@@ -39,6 +45,7 @@ import os
 import shutil
 import tempfile
 import unittest
+from copy import copy
 from pathlib import Path
 
 import extract_signatures
@@ -80,6 +87,16 @@ class RealNamedExtrasTest(unittest.TestCase):
         rendered = self.signatures[("function", "array_map")].render()
         self.assertIn("      namedExtras: {kind: reject, position: 1}\n", rendered)
         self.assertEqual(1, rendered.count("namedExtras:"))
+
+    def test_real_handler_shadowed_call_info_does_not_forward(self) -> None:
+        import named_extras
+        program = Program(Path(os.environ["PHP_SRC"]), provenance=True)
+        name = "zif_call_user_func"
+        definition = copy(program.functions[name][0])
+        fixture = Path(__file__).parent / "testdata/named_extras_real_scope/call_user_func.c"
+        definition.body = fixture.read_text(encoding="utf-8").removeprefix("PHP_FUNCTION(call_user_func)\n")
+        program.functions[name] = [definition]
+        self.assertIsNone(named_extras.read_policies(program, [("function", "call_user_func")])[("function", "call_user_func")])
 
 
 class SourcePatternTest(unittest.TestCase):
@@ -142,7 +159,9 @@ class BoundaryRegressionsTest(unittest.TestCase):
                  "early_success", "zeroed_fci", "unread_guard", "false_guarded", "aliased_fci",
                  "preserved_fci", "unbound_callback", "mutated_collection", "recursive_macro", "unread_intervening_call",
                  "rebound_argument", "unread_before_helper", "unread_inline_before_helper", "conditional_prologues", "counter_argument_write",
-                 "shadowed_jump", "shadowed_target")
+                 "shadowed_jump", "shadowed_target", "check_shadowed_collection", "check_shadowed_fci",
+                 "check_shadowed_parameter", "check_shadowed_for", "check_shadowed_expression", "check_shadowed_ancestor",
+                 "check_sibling_scopes", "check_local_forward", "check_shadowed_outer_reference")
         cls.policies = named_extras.read_policies(
             Program(fixture, provenance=True), [("function", name) for name in names])
 
@@ -204,6 +223,25 @@ class BoundaryRegressionsTest(unittest.TestCase):
         for name in ("shadowed_jump", "shadowed_target"):
             with self.subTest(name=name):
                 self.assertIsNone(self.policies[("function", name)])
+
+    def test_shadowed_collection_does_not_forward(self) -> None:
+        self.assertIsNone(self.policies[("function", "check_shadowed_collection")])
+
+    def test_shadowed_call_info_does_not_forward(self) -> None:
+        self.assertIsNone(self.policies[("function", "check_shadowed_fci")])
+
+    def test_nested_scope_bindings_stay_unextracted(self) -> None:
+        for name in ("check_shadowed_parameter", "check_shadowed_for", "check_shadowed_expression", "check_shadowed_ancestor"):
+            with self.subTest(name=name):
+                self.assertIsNone(self.policies[("function", name)])
+
+    def test_distinct_local_scopes_can_forward(self) -> None:
+        for name in ("check_sibling_scopes", "check_local_forward"):
+            with self.subTest(name=name):
+                self.assertEqual(("forward", None), self.policies[("function", name)])
+
+    def test_shadowed_outer_reference_does_not_forward(self) -> None:
+        self.assertIsNone(self.policies[("function", "check_shadowed_outer_reference")])
 
     def test_all_counter_assignments_remain_unknown(self) -> None:
         import named_extras
