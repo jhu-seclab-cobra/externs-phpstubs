@@ -7,7 +7,9 @@ Run: python3 -B -m unittest discover -s tools -p "test_*.py" (from the externs-p
 - macros: a function-defining macro invocation is expanded; handler macros stay unexpanded
 - registrations: the class a register_class function registers, its kind, its flags and its parent
 - parameter types: the type name of a parameter declaration and of each parameter of a definition
-- expressions: sizeof keeps the words of its operand, a C++ cast reads as the C cast
+- expressions: sizeof keeps the words of its operand, a C++ cast reads as the C cast, a scoped name is one name,
+  a parenthesized type name before an operand is a cast whatever the type is called, a function prototype
+  inside a body declares nothing
 """
 
 import sys
@@ -275,6 +277,26 @@ class BodyParserTest(unittest.TestCase):
     def test_cxx_cast_reads_as_the_c_cast(self):
         self.assertEqual(parse_expression("(box *)p"), parse_expression("reinterpret_cast<box *>(p)"))
         self.assertEqual(parse_expression("(int)(a + b)"), parse_expression("static_cast<int>(a + b)"))
+
+    def test_scoped_name_is_one_name(self):
+        self.assertEqual(("call", ("name", "std::isfinite"), [("name", "d")]), parse_expression("std::isfinite(d)"))
+        self.assertEqual(("cond", ("name", "a"), ("name", "b"), ("name", "c")), parse_expression("a ? b : c"))
+
+    def test_parenthesized_type_before_an_operand_is_a_cast(self):
+        self.assertEqual(("cast", ("gmp_ulong",), ("name", "shift")), parse_expression("(gmp_ulong) shift"))
+        self.assertEqual(("cast", ("gmp_ulong",), ("num", 3)), parse_expression("(gmp_ulong) 3"))
+
+    def test_prototype_in_a_body_declares_no_variable(self):
+        block = parse_body("{ STDAPI VarCmp(LPVARIANT left, DWORD flags); return VarCmp(a, 0); }")
+        self.assertEqual([("decl", ("STDAPI",), []), "return"], [block[1][0], block[1][1][0]])
+
+    def test_call_statement_is_not_a_prototype(self):
+        block = parse_body("{ lookup(table, key); }")
+        self.assertEqual("expr", block[1][0][0])
+
+    def test_parenthesized_variable_before_an_operator_is_not_a_cast(self):
+        self.assertEqual("bin", parse_expression("(limit) - 1", ["limit"])[0])
+        self.assertEqual("bin", parse_expression("(limit) * count", ["limit"])[0])
 
 
 class ParameterTypeTest(unittest.TestCase):

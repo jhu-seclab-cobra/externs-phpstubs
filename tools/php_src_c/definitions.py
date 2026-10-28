@@ -235,7 +235,7 @@ def strongly_connected(nodes, edges):
 
 TOKEN = re.compile(
     r"\s+|(?P<num>0[xX][0-9a-fA-F]+[uUlL]*|\d+(?:\.\d*)?(?:[eE][+-]?\d+)?[uUlLfF]*)|(?P<id>[A-Za-z_]\w*)"
-    r"|(?P<op>\.\.\.|<<=|>>=|->|\+\+|--|<<|>>|<=|>=|==|!=|&&|\|\||[-+*/%&|^]=|.)", re.S)
+    r"|(?P<op>\.\.\.|::|<<=|>>=|->|\+\+|--|<<|>>|<=|>=|==|!=|&&|\|\||[-+*/%&|^]=|.)", re.S)
 ATTRIBUTE = re.compile(r"\b__attribute__\s*\(\s*\(")
 TYPE_KEYWORDS = {
     "const", "static", "struct", "union", "enum", "unsigned", "signed", "volatile", "register", "extern", "inline",
@@ -537,9 +537,11 @@ class BodyParser:
         if self.toks[name_at][1] in STATEMENT_KEYWORDS or "sizeof" in words:
             return None
         follower = self.toks[name_at + 1][1] if name_at + 1 < len(self.toks) else ""
-        if follower not in ("=", ";", ",", "["):
-            return None
         if len(words) == 1 and words[0] in self.variables:
+            return None
+        if follower == "(":
+            return self.prototype(name_at, type_words)
+        if follower not in ("=", ";", ",", "["):
             return None
         self.i = name_at - (0 if stars else 0)
         declarators, pointer = [], stars
@@ -562,6 +564,15 @@ class BodyParser:
         if not self.accept(";"):
             raise ParseFailure(f"expected ';' after a declaration, found {self.peek()!r}")
         return ("decl", tuple(type_words), declarators)
+
+    def prototype(self, name_at, type_words):
+        """A function prototype statement, ``type name(parameters);``, which declares no variable; None when the
+        parenthesis is not followed by a semicolon."""
+        close = self.matching_paren(name_at + 1)
+        if close + 1 >= len(self.toks) or self.toks[close + 1][1] != ";":
+            return None
+        self.i = close + 2
+        return ("decl", tuple(type_words), [])
 
     def initializer(self):
         if self.peek() != "{" or self.kind() != "op":
@@ -699,7 +710,8 @@ class BodyParser:
         typed = any(w in TYPE_KEYWORDS for w in words) or pointer
         if words[-1] in self.variables and not typed:
             return False
-        return typed or words[-1].endswith("_t") or words[-1].startswith(("zend_", "php_"))
+        operand = after[0] in ("id", "num", "str") or after[1] in ("!", "~")
+        return typed or operand or words[-1].endswith("_t") or words[-1].startswith(("zend_", "php_"))
 
     def postfix(self):
         node = self.primary()
@@ -747,6 +759,8 @@ class BodyParser:
             return ("str", joined)
         if kind == "id":
             self.i += 1
+            while self.peek() == "::" and self.kind(1) == "id":
+                token += self.take() + self.take()
             return ("name", token)
         if token == "(":
             if self.peek(1) == "{":
