@@ -146,11 +146,13 @@ class Primitives:
 
     @staticmethod
     def inherit(entry, parent, state):
-        """The engine copies the parent's create_object and default_object_handlers into a class unconditionally."""
+        """The engine records the parent of a class and copies the parent's create_object and default_object_handlers
+        into it unconditionally."""
         if isinstance(parent, Sym):
             parent = parent.pointer()
         if not isinstance(entry, Ptr) or not isinstance(parent, Ptr):
             return
+        state.write(entry.rid, entry.path + ("parent",), parent)
         for field in ("create_object", "default_object_handlers"):
             state.write(entry.rid, entry.path + (field,), state.read(parent.rid, parent.path + (field,)))
 
