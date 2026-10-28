@@ -157,11 +157,6 @@ sorted tab-separated line per internal declaration the build reflects.
 
 ## Open Gaps
 
-- **Class handler extraction and preservation.** `extract_hierarchy.rewrite`
-  calls `Entry.with_signature`, which discards fields outside its current
-  hierarchy output; it does not yet implement the handler and final-class
-  extraction or field-preservation contract of [Handler Extraction](design-extraction-handlers.md).
-
 - **Indirect calls.** The model asserts that a class outside an entry's
   throws section is never thrown by it (commons-phpmodels `docs/model.md`,
   Relations). `extract_throws.py` follows calls by name only; a call

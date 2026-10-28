@@ -69,8 +69,3 @@ Format: [handler types](../../commons-phpmodels/docs/design-declarations-handler
   or a changed/unreadable admitted semantic primitive.
 - Deliberately unavailable external coverage remains missing; COM's absence
   in one build does not erase its source-backed facts.
-
-## Open Gaps
-
-- Handler/finality extraction, branch-preserving shared reading, member-flow
-  summaries and owned-field preservation are not yet implemented.
