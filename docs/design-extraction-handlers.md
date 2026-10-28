@@ -6,11 +6,20 @@ Format: [handler types](../../commons-phpmodels/docs/design-declarations-handler
 
 ## Design Overview
 
-- **Modules:** `php_src`, `php_src_c`, `handler_facts`, `extract_hierarchy`.
+- **Modules:** `php_src`, `php_src_c`, `extract_hierarchy`, and the handler
+  modules, one per stage of the extraction: `handler_memory` and
+  `handler_values` (abstract memory and values), `handler_index`,
+  `handler_expr`, `handler_machine`, `handler_prims` and `handler_world` (the
+  machine that runs C bodies), `handler_requests` (the requests the engine
+  makes), `handler_minit` (class registration), `handler_create` (object
+  creation), `handler_summary` (request summaries), `handler_sites`, `handler_tables`
+  and `handler_render` (write-site dispositions, table alternatives, the
+  rendered field), and `handler_facts` (the driver).
 - **Relationships:** tools import the shared `php_src` surface, which imports
   no producer. The C source/macro/definition/registration reader moves from
-  `extract_throws` to `php_src_c`; it is not copied. `handler_facts` extends
-  the existing procedure-summary mechanism for this extraction concern.
+  `extract_throws` to `php_src_c`; it is not copied. The handler modules extend
+  the existing procedure-summary mechanism for this extraction concern, and
+  only `handler_facts` and `extract_hierarchy` are entry points of other tools.
 - **Dependency roles:** shared source identity, parsing and registrations belong
   to the reader; table/result extraction belongs to the hierarchy producer;
   throws semantics remain with the throws producer; YAML validation belongs
@@ -26,6 +35,13 @@ Format: [handler types](../../commons-phpmodels/docs/design-declarations-handler
 - Handler summaries extend the existing summary mechanism with the finite
   data named by the extraction specification; they are offline working data,
   never a second runtime handler store.
+- The machine bounds its working states without dropping an outcome. States
+  that reach one join point with the same event history and pending exception
+  are joined into one whose differing cells are alternatives; outcomes of one
+  expression whose states are equal become one outcome whose value is the
+  alternatives of their values; the exits of a call with one history are
+  joined the same way. A call that exceeds its step or pending-state budget
+  yields no summary, so its facts are omitted, never emitted empty.
 
 ## Function Specifications
 

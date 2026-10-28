@@ -6,7 +6,7 @@ import heapq
 
 from handler_expr import FORK_CAP, OFFSET_NAMES, Expressions, type_name
 from handler_index import NORETURN, STRUCT_TYPE, THROWERS
-from handler_memory import ANYV, SIZE, Fn, Ptr, Region, join_states
+from handler_memory import ANYV, SIZE, Fn, Ptr, Region, join_states, join_values
 from handler_values import assume, exclude, literals, resolve
 from handler_prims import EXCEPTION, EXCEPTIONS_REGION, Primitives
 
@@ -16,7 +16,8 @@ CALL_SLICE = 50000
 STACK_REPEAT = 2
 RETRIES = 8
 JOIN_BATCH = 16
-JOINED = ("n", "r")
+PENDING_CAP = 20000
+EXIT_BATCH = 64
 
 
 class Exhausted(Exception):
@@ -40,6 +41,26 @@ def join_by_events(states):
         pending = member.read(EXCEPTIONS_REGION, EXCEPTION)
         groups.setdefault((member.events, member.flags, pending), []).append(member)
     return [join_states(group) if len(group) > 1 else group[0] for group in groups.values()]
+
+
+def join_exits(exits):
+    """The exits of a run with the exits of one event history and pending exception joined: their states are joined
+    and their return values become the alternatives of one value."""
+    groups = {}
+    for value, member in exits:
+        key = (member.events, member.flags, member.read(EXCEPTIONS_REGION, EXCEPTION))
+        groups.setdefault(key, []).append((value, member))
+    return [joined_exit(group) for group in groups.values()]
+
+
+def joined_exit(group):
+    if len(group) == 1:
+        return group[0]
+    states, values = [member for _, member in group], [found for found, _ in group]
+    common = frozenset.intersection(*(member.tags for member in states))
+    value = values[0] if all(found == values[0] for found in values) else join_values(
+        values, [member.tags - common for member in states])
+    return value, join_states(states)
 
 
 class Frame:
@@ -114,23 +135,30 @@ class Machine(Expressions, Primitives):
     def execute(self, frame, code, state):
         waiting, pcs, memo, visits, exits = collections.defaultdict(list), [0], {}, collections.Counter(), []
         waiting[0].append(state)
+        pending = [1]
 
         def push(pc, st):
             """Queue a state at an instruction. States waiting at a join point are joined once they exceed
-            ``JOIN_BATCH``, since the join point joins them all when it is reached. A return is a join point: the states
-            that return together are joined per event history and pending exception."""
+            ``JOIN_BATCH``, since the join point joins them all when it is reached. The states waiting at all
+            instructions are bounded by ``PENDING_CAP``; a run that exceeds it is exhausted like one that exceeds
+            its step budget."""
             if pc not in waiting:
                 heapq.heappush(pcs, pc)
             queue = waiting[pc]
             queue.append(st)
-            if len(queue) > JOIN_BATCH and code.instrs[pc][0] in JOINED:
+            pending[0] += 1
+            if len(queue) > JOIN_BATCH and code.instrs[pc][0] == "n":
                 waiting[pc] = join_by_events(queue)
+                pending[0] -= len(queue) - len(waiting[pc])
+            if pending[0] > PENDING_CAP:
+                raise Exhausted(self.owner, tuple(self.running))
 
         while pcs:
             pc = heapq.heappop(pcs)
             instr = code.instrs[pc]
             batch = waiting.pop(pc)
-            for current in join_by_events(batch) if instr[0] in JOINED else batch:
+            pending[0] -= len(batch)
+            for current in join_by_events(batch) if instr[0] == "n" else batch:
                 self.steps += 1
                 if self.steps > self.limit:
                     raise Exhausted(self.owner, tuple(self.running))
@@ -138,6 +166,8 @@ class Machine(Expressions, Primitives):
                     current = self.admit(frame, code, memo, visits, pc, current)
                 if current is not None:
                     getattr(self, "i_" + instr[0])(instr, pc, current, frame, push, exits)
+                if len(exits) > EXIT_BATCH:
+                    exits[:] = join_exits(exits)
         return exits
 
     @staticmethod
@@ -247,7 +277,7 @@ class Machine(Expressions, Primitives):
         results = []
         for args, s in self.evaluate_arguments(argument_nodes, state, frame):
             results.extend(self.invoke(callee, args, s, frame))
-        return results[:FORK_CAP * 4]
+        return join_exits(results) if len(results) > FORK_CAP * 4 else results
 
     def evaluate_arguments(self, nodes, state, frame):
         outcomes = [([], state)]

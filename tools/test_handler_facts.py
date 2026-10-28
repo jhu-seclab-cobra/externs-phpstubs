@@ -22,7 +22,9 @@ import fixture_handler_tree
 import php_src
 from handler_create import Creation
 from handler_facts import effective_string_method, read_handler_tables
-from handler_memory import Fn, Ptr
+from handler_expr import Expressions
+from handler_memory import Fn, Ptr, alternatives
+from handler_machine import EXIT_BATCH
 from handler_minit import Registered
 from handler_render import Table, render_handlers
 from handler_sites import Sites, typed_tables
@@ -51,12 +53,19 @@ static int pick(int key)
 	}
 }
 
+static int through(int key)
+{
+	return fan(key) + 1;
+}
+
 static int fan(int key)
 {
-	if (pick(key)) return 7;
-	return 7;
+	switch (key) {
+%s
+	default: return 7;
+	}
 }
-""" % "\n".join(f"\tcase {n}: return {n + 1};" for n in range(24))
+""" % ("\n".join(f"\tcase {n}: return {n + 1};" for n in range(24)), "\n".join(f"\tcase {n}: return 7;" for n in range(120)))
 
 
 Declaration = collections.namedtuple("Declaration", "classifier parent to_string")
@@ -305,15 +314,36 @@ class MachineTest(TreeCase):
         definition = self.program.functions[name][0]
         return machine.call(definition, [Ptr("o:key", ())], registered.state.fork(), 100000)
 
-    def test_states_returning_together_leave_as_one_exit(self):
+    def test_exits_of_one_history_are_joined_when_they_pile_up(self):
         exits, complete = self.exits("fan")
         self.assertTrue(complete)
-        self.assertEqual([7], [value for value, _ in exits])
+        self.assertLessEqual(len(exits), EXIT_BATCH)
+        self.assertEqual({7}, {value for value, _ in exits})
+
+    def test_a_caller_of_many_exits_keeps_every_outcome_as_one(self):
+        exits, complete = self.exits("through")
+        self.assertTrue(complete)
+        self.assertEqual({8}, {value for value, _ in exits})
 
     def test_exits_that_differ_in_their_result_stay_apart(self):
         exits, complete = self.exits("pick")
         self.assertTrue(complete)
         self.assertEqual(25, len(exits))
+
+    def test_outcomes_of_equal_states_become_one_outcome_of_alternatives(self):
+        state = Registered(self.program).state
+        first, second = state.fork(), state.fork()
+        merged = Expressions.merged([(1, first), (2, second), (1, state.fork())])
+        self.assertEqual(1, len(merged))
+        self.assertEqual({(1, ()), (2, ())}, set(alternatives(merged[0][0])))
+
+    def test_outcomes_of_different_states_stay_apart(self):
+        state = Registered(self.program).state
+        written, tagged = state.fork(), state.fork()
+        written.write("g:x", (), 5)
+        tagged.tags = frozenset({"defined(X)"})
+        merged = Expressions.merged([(1, state.fork()), (1, written), (1, tagged)])
+        self.assertEqual(3, len(merged))
 
 
 class RenderTest(unittest.TestCase):

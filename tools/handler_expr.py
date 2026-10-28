@@ -3,7 +3,7 @@
 ``ev`` returns every (value, state) outcome of an expression; an outcome that forks the path owns a forked state, so a
 caller continues only from the returned states. ``lv`` returns the (location, state) outcomes of an lvalue."""
 
-from handler_memory import ANYV, Agg, Size, Alt, Fn, Masked, Ptr, Str, Sym, ZERO, alternatives
+from handler_memory import ANYV, Agg, Size, Alt, Fn, Masked, Ptr, Str, Sym, ZERO, alternatives, join_values
 from handler_values import binary, cast, literals, narrow, resolve, truth
 
 FORK_CAP = 48
@@ -42,6 +42,14 @@ def type_name(words):
     return names[-1] if names and "*" not in words else None
 
 
+def one_outcome(group):
+    """The (value, state) of outcomes whose states are equal."""
+    values = [value for value, _ in group]
+    if all(value == values[0] for value in values):
+        return group[0]
+    return join_values(values, [()] * len(values)), group[0][1]
+
+
 class Expressions:
     """The expression half of the machine; ``Machine`` supplies the index, the primitives and the call mechanism."""
 
@@ -76,7 +84,19 @@ class Expressions:
         state.write(pointer.rid, path, value)
 
     def ev(self, node, state, frame):
-        return getattr(self, "e_" + node[0])(node, state, frame)
+        return self.merged(getattr(self, "e_" + node[0])(node, state, frame))
+
+    @staticmethod
+    def merged(outcomes):
+        """The outcomes of an expression with the outcomes of equal states joined into one whose value is the
+        alternatives of their values. A read through an alternative pointer forks the state per alternative, and the
+        forks differ in nothing later code can tell apart: the code forks on the alternatives again where it must."""
+        if len(outcomes) < 2:
+            return outcomes
+        groups = {}
+        for value, member in outcomes:
+            groups.setdefault((member.key(), member.tags), []).append((value, member))
+        return [one_outcome(group) for group in groups.values()]
 
     def e_num(self, node, state, frame):
         return [(node[1], state)]
@@ -191,10 +211,18 @@ class Expressions:
         return out
 
     def apply_binary(self, operator, left, right, state):
+        """The outcomes of an operator on two values that may be alternatives: one outcome per distinct result and
+        source conditions, since the states of two operand alternatives differ only by their conditions."""
+        results = {}
+        for a, a_conditions in alternatives(left)[:FORK_CAP]:
+            for b, b_conditions in alternatives(right)[:FORK_CAP]:
+                conditions = frozenset(a_conditions) | frozenset(b_conditions)
+                results[binary(operator, a, b, state), conditions] = None
         out = []
-        for a, s1 in self.alts(left, state):
-            for b, s2 in self.alts(right, s1):
-                out.append((binary(operator, a, b, s2), s2))
+        for k, (result, conditions) in enumerate(results):
+            fork = state if k == len(results) - 1 else state.fork()
+            fork.tags = fork.tags | conditions
+            out.append((result, fork))
         return out
 
     def e_cond(self, node, state, frame):
