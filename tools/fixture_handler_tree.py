@@ -2,7 +2,8 @@
 engine's calls of the cast, compare and operation handlers, and one extension that registers classes whose creators
 take tables of every shape the extraction follows (design-extraction-handlers.md).
 
-``write_tree(root)`` writes the tree below a directory; ``replaced`` swaps or adds files.
+``write_tree(root)`` writes the tree below a directory; ``replaced`` swaps or adds files. ``write_real_tree(root)``
+adds the extension of ``testdata/handlers``.
 """
 
 from pathlib import Path
@@ -401,3 +402,16 @@ def write_tree(root, replaced=None):
         path = Path(root) / name
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(text, encoding="utf-8")
+
+
+REAL = Path(__file__).parent / "testdata" / "handlers"
+REAL_FILES = {
+    "ext/real/real.c": "handlers.c",
+    "ext/real/handlers.h": "handlers.h",
+    "ext/real/real.stub.php": "classes.stub.php",
+}
+
+
+def write_real_tree(root):
+    """Write the tree plus ``testdata/handlers``: the handler write patterns of php-src in their smallest form."""
+    write_tree(root, {name: (REAL / source).read_text(encoding="utf-8") for name, source in REAL_FILES.items()})

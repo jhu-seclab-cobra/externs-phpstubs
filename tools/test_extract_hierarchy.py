@@ -7,6 +7,9 @@ Run: python3 -B -m unittest discover -s tools -p "test_*.py" (from the externs-p
 - handler tables: only registered classes have them; interfaces get none
 - the command line rewrites the owned fields of generated entries, adds a declaration no document holds, keeps the
   bytes of an entry php-src does not declare, and a second run over its own output changes nothing
+- the handler write patterns of php-src (testdata/handlers): registered flags of classes, interfaces and enums, an
+  inherited creator rendered as the parent's tables, the five external classes and two unregistered PDO pseudo-classes
+  keeping their bytes, an old generated handler value recomputed, and a second run that changes nothing
 """
 
 import io
@@ -174,6 +177,90 @@ class CommandTest(unittest.TestCase):
 
     def test_report_counts_the_classes_with_handler_tables(self):
         self.assertIn("8 classes with handler tables", self.run_tool())
+
+
+EXTERNAL = "".join(
+    f"- subject:\n    class: {name}\n  signature:\n    classifier: class\n"
+    for name in ("redis", "memcached", "imagick", "imagickdraw", "imagickpixel", "pdo_pgsql_ext", "pdo_sqlite_ext")
+)
+STALE = """- subject:
+    class: rsdl
+  signature:
+    classifier: class
+    isFinal: true
+    handlers:
+    - id: stale.c:old_handlers
+      facts: []
+"""
+
+
+class RealTreeTest(unittest.TestCase):
+    """The hierarchy producer over the handler write patterns of php-src."""
+
+    def setUp(self):
+        self.directory = tempfile.TemporaryDirectory()
+        base = Path(self.directory.name)
+        self.root, self.models = base / "src", base / "models"
+        fixture_handler_tree.write_real_tree(self.root)
+        self.models.mkdir()
+        (self.models / "real.yaml").write_text(EXTERNAL + STALE, encoding="utf-8")
+
+    def tearDown(self):
+        self.directory.cleanup()
+
+    def generated(self):
+        return extract_hierarchy.generate(self.root)
+
+    def run_tool(self):
+        argv, sys.argv = sys.argv, ["extract_hierarchy.py", "--php-src", str(self.root), "--models", str(self.models)]
+        try:
+            with redirect_stdout(io.StringIO()) as out:
+                extract_hierarchy.main()
+        finally:
+            sys.argv = argv
+        return out.getvalue()
+
+    def text(self):
+        return (self.models / "real.yaml").read_text(encoding="utf-8")
+
+    def test_final_status_is_the_registered_flag_for_classes_interfaces_and_enums(self):
+        finals = self.generated().finals
+        self.assertEqual({"rcdata", "rgmp", "rfinal"}, {name for name, final in finals.items() if final})
+        self.assertIs(False, finals["rface"])
+        self.assertIs(False, finals["renum"])
+        self.assertIs(False, finals["rlink"])
+
+    def test_interface_and_enum_carry_their_classifier_and_no_handler_table(self):
+        generated = self.generated()
+        self.assertEqual("  signature:\n    classifier: interface\n    isFinal: false\n", generated.signature("rface"))
+        enum = generated.signature("renum")
+        self.assertTrue(enum.startswith("  signature:\n    classifier: enum\n"))
+        self.assertIn("    isFinal: false\n", enum)
+        self.assertNotIn("handlers:", enum)
+
+    def test_registered_subclass_of_a_class_fixed_creator_renders_the_parent_tables(self):
+        generated = self.generated()
+        parent = generated.signature("rlink").split("handlers:\n")[1]
+        child = generated.signature("rlinkchild").split("handlers:\n")[1]
+        self.assertEqual(parent, child)
+        self.assertIn("ext/real/real.c:link_handlers", child)
+
+    def test_external_classes_and_pseudo_classes_keep_their_bytes(self):
+        self.run_tool()
+        self.assertTrue(self.text().startswith(EXTERNAL))
+
+    def test_old_generated_handler_value_is_recomputed_from_source(self):
+        self.run_tool()
+        text = self.text()
+        self.assertNotIn("stale.c:old_handlers", text)
+        self.assertIn("    class: rsdl\n  signature:\n    classifier: class\n    isFinal: false\n    handlers:\n", text)
+
+    def test_second_run_changes_nothing(self):
+        self.run_tool()
+        first = self.text()
+        message = self.run_tool()
+        self.assertEqual(first, self.text())
+        self.assertIn("0 classes moved, 0 classes added, 0 documents rewritten", message)
 
 
 if __name__ == "__main__":

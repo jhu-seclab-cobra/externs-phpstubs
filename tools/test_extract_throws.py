@@ -4,7 +4,8 @@ Run: python3 -B -m unittest discover -s tools -p "test_*.py" (from the externs-p
 - a throw primitive, a helper chain, a class parameter, a binding specifier and an object the caller supplies
 - both branches of a conditional, a macro-defined function, file-local resolution of a static helper
 - a class expression no rule resolves and a Handler no definition defines fail the run
-- the command line rewrites the throws line of an entry and leaves every other line
+- the command line rewrites the throws line of an entry and leaves every other line, the hierarchy-owned signature
+  fields (final status and handler tables) included
 """
 
 import io
@@ -306,6 +307,24 @@ class ThrowsCommandTest(unittest.TestCase):
                 finally:
                     sys.argv = argv
             self.assertEqual(before, (models / "core.yaml").read_text(encoding="utf-8"))
+
+
+class ThrowsKeepsHierarchyFieldsTest(unittest.TestCase):
+    def test_final_status_and_handler_tables_survive_the_throws_rewrite(self):
+        plain = "function: foo_plain\n  signature:\n    returnType: void\n"
+        kept = "    isFinal: true\n    handlers:\n    - id: ext/real/real.c:t_handlers\n      facts: []\n"
+        with tempfile.TemporaryDirectory() as directory:
+            root, models = Path(directory) / "src", Path(directory) / "models"
+            tree(root)
+            write(models, "core.yaml", MODELS.replace(plain, plain + kept))
+            argv, sys.argv = sys.argv, ["extract_throws.py", "--php-src", str(root), "--models", str(models)]
+            try:
+                with redirect_stdout(io.StringIO()):
+                    extract_throws.main()
+            finally:
+                sys.argv = argv
+            text = (models / "core.yaml").read_text(encoding="utf-8")
+            self.assertIn(plain + kept + "  throws: [typeerror]\n", text)
 
 
 if __name__ == "__main__":

@@ -5,7 +5,8 @@ Run: python3 -B -m unittest discover -s tools -p "test_*.py" (from the externs-p
 - a missing signature is inserted after the subject lines
 - unowned fields keep their bytes: nested values, comments, blank lines, the sections after the signature, EOF
 - adjacent entries and the document bytes outside the rewritten entries stay as they are
-- relocation and rewrite leave the hand-declared directories and the set documents untouched
+- relocation and rewrite leave the hand-declared directories and the set documents untouched, byte for byte
+- an entry the transform does not name (an external class) keeps every byte; an old generated value is not evidence
 """
 
 import sys
@@ -180,6 +181,36 @@ class DocumentTest(unittest.TestCase):
         self.assertEqual(1, php_src.rewrite(self.root, transform))
         for name in ("language/core.yaml", "manual/core.yaml", "provenance.yaml"):
             self.assertEqual(entry, (self.root / name).read_text(encoding="utf-8"))
+
+    def test_relocation_leaves_hand_declared_and_set_documents_byte_for_byte(self):
+        entry = "- subject:\n    class: a\n" + block("classifier: class", "note: keep") + "  # manual\n"
+        for name in ("language/core.yaml", "manual/core.yaml", "provenance.yaml"):
+            write(self.root, name, entry)
+        write(self.root, "core.yaml", HEADER + entry)
+
+        self.assertEqual(1, php_src.relocate(self.root, {("class", "a"): "spl"}, "tools/test.py"))
+        for name in ("language/core.yaml", "manual/core.yaml", "provenance.yaml"):
+            self.assertEqual(entry, (self.root / name).read_text(encoding="utf-8"))
+
+    def test_entry_the_transform_leaves_alone_keeps_every_byte_and_is_not_counted(self):
+        external = "- subject:\n    class: redis\n" + block("classifier: class") + "  # external\n\n"
+        generated = "- subject:\n    class: a\n" + block("classifier: class", "isFinal: true")
+        write(self.root, "core.yaml", HEADER + external + generated)
+
+        def transform(item):
+            return item.with_signature(block("classifier: class"), OWNED) if item.key() == ("class", "a") else item.text
+
+        self.assertEqual(1, php_src.rewrite(self.root, transform))
+        self.assertEqual(HEADER + external + "- subject:\n    class: a\n" + block("classifier: class"),
+                         (self.root / "core.yaml").read_text(encoding="utf-8"))
+
+    def test_old_generated_handler_value_is_recomputed_and_never_preserved(self):
+        stale = "- subject:\n    class: a\n" + block("classifier: class", "handlers:\n      - id: old")
+        write(self.root, "core.yaml", HEADER + stale)
+        php_src.rewrite(self.root, lambda item: item.with_signature(block("classifier: class", "isFinal: false"), OWNED))
+        text = (self.root / "core.yaml").read_text(encoding="utf-8")
+        self.assertNotIn("old", text)
+        self.assertIn("isFinal: false", text)
 
     def test_relocation_moves_entries_with_every_unowned_byte(self):
         moved = "- subject:\n    class: a\n" + block("classifier: class", "note: keep") + "  throws: [x]\n\n  # tail\n"

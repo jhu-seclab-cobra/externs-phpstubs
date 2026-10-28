@@ -8,6 +8,9 @@ Run: python3 -B -m unittest discover -s tools -p "test_*.py" (from the externs-p
 - write sites: creation, copy, typed and foreign dispositions; a write that fits none fails the extraction
 - request summaries: result kinds per cast and operation request, a compare that may return, string dispatch order,
   conditional slots as two table alternatives, absent slots, the rendered handlers field
+- the handler write patterns of php-src (testdata/handlers): repeated and aliased writes, direct and snapshot copies,
+  aggregate tables, helper arguments, class-fixed creators, inherited creators, typed lifetime writes, final writes
+  after conversion, pending exceptions, COM's guard, and the omission of a proof that does not end
 """
 
 import collections
@@ -18,6 +21,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 
+import extract_hierarchy
 import fixture_handler_tree
 import php_src
 from handler_create import Creation
@@ -360,3 +364,139 @@ class RenderTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+def moves(fact):
+    """The comparable form of a fact: ``absent`` or the (target function, result kinds, string dispatch) triples."""
+    if fact.absent:
+        return "absent"
+    return [(t.symbol.split(":")[-1], sorted(t.results), t.dispatch) for t in fact.targets]
+
+
+class RealShapeTest(unittest.TestCase):
+    """The extraction over the handler write patterns of php-src in their smallest form (testdata/handlers)."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.directory = tempfile.TemporaryDirectory()
+        root = Path(cls.directory.name)
+        fixture_handler_tree.write_real_tree(root)
+        cls.declarations = extract_hierarchy.read_php_src(root)
+        cls.classes, cls.report = read_handler_tables(Program(root, provenance=True), cls.declarations)
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.directory.cleanup()
+
+    def tables(self, name):
+        """The table alternatives of a class by identifier, each as {(slot, request): moves}."""
+        return {t.identifier.split(":")[-1]: {(f.slot, f.request): moves(f) for f in t.facts}
+                for t in self.classes[name]}
+
+    def cast(self, name, table, request="is_long"):
+        return self.tables(name)[table][("cast", request)]
+
+    def test_every_source_pattern_but_the_unending_proof_was_established(self):
+        self.assertEqual([("ext/real/real.c:rec_handlers", "cast", request) for request in ("IS_LONG", "IS_STRING", "_IS_BOOL")],
+                         [omitted[:3] for omitted in self.report.omitted])
+
+    def test_unending_proof_is_reported_as_an_omission_and_never_as_an_empty_or_guessed_result(self):
+        self.assertEqual({"the output type is unknown"}, {omitted[3] for omitted in self.report.omitted})
+        facts = self.tables("rrec")["rec_handlers"]
+        self.assertNotIn(("cast", "is_long"), facts)
+        self.assertEqual([("std_compare", ["num"], None)], facts[("compare", None)])
+
+    def test_repeated_assignment_of_the_same_slot_keeps_the_last_write_of_that_table(self):
+        self.assertEqual([("cast_sdl", ["bool"], None)], self.cast("rurl", "url_handlers"))
+        self.assertEqual([("std_cast", [], None)], self.cast("rsdl", "sdl_handlers"))
+
+    def test_direct_struct_copy_takes_the_standard_slots_then_the_later_writes(self):
+        facts = self.tables("rbundle")["bundle_handlers"]
+        self.assertEqual([("std_cast", [], None)], facts[("cast", "is_long")])
+        self.assertEqual([("compare_unordered", ["num"], None)], facts[("compare", None)])
+
+    def test_aggregate_tables_by_position_by_designator_and_zeroed(self):
+        self.assertEqual([("cast_long", ["num"], None)], self.cast("rpos", "positional_handlers"))
+        self.assertEqual([("compare_throwing", [], None)], self.tables("rpos")["positional_handlers"][("compare", None)])
+        self.assertEqual([("cast_string", ["str"], None)], self.cast("rdes", "designated_handlers"))
+        zeroed = self.tables("rzero")["zero_handlers"]
+        self.assertEqual("absent", zeroed[("compare", None)])
+        self.assertEqual([("cast_long", ["num"], None)], zeroed[("cast", "is_long")])
+
+    def test_copy_is_a_snapshot_and_a_child_without_a_creator_takes_the_parent_table(self):
+        self.assertEqual([("std_cast", [], None)], self.cast("rsnap", "snap_handlers"))
+        self.assertEqual([("cast_string", ["str"], None)], self.cast("rbase", "base_handlers"))
+        self.assertEqual(self.tables("rbase")["base_handlers"], self.tables("rchild")["base_handlers"])
+
+    def test_pointer_alias_taken_after_the_initialization_writes_the_aliased_table(self):
+        self.assertEqual([("cast_long", ["num"], None)], self.cast("ralias", "alias_handlers"))
+
+    def test_conditional_compilation_gives_one_table_alternative_per_configuration(self):
+        casts = sorted(str(table[("cast", None)] if ("cast", None) in table else table[("cast", "is_long")])
+                       for table in self.tables("rcond").values())
+        self.assertEqual(2, len(self.classes["rcond"]))
+        self.assertEqual(sorted(["absent", str([("cast_long", ["num"], None)])]), casts)
+
+    def test_creator_helper_takes_its_table_from_each_class_creator(self):
+        self.assertEqual([("cast_long", ["num"], None)], self.cast("rtidya", "tidy_doc_handlers"))
+        self.assertEqual([("cast_string", ["str"], None)], self.cast("rtidyb", "tidy_node_handlers"))
+
+    def test_class_fixed_creator_picks_the_table_by_the_class_and_its_ancestors(self):
+        self.assertEqual([("cast_long", ["num"], None)], self.cast("rlink", "link_handlers"))
+        self.assertEqual([("cast_string", ["str"], None)], self.cast("rstmt", "stmt_handlers"))
+        self.assertEqual([("std_cast", [], None)], self.cast("rother", "plain_link_handlers"))
+
+    def test_registered_subclass_of_a_class_fixed_creator_takes_the_parent_table(self):
+        self.assertEqual(self.tables("rlink"), self.tables("rlinkchild"))
+
+    def test_class_fixed_creator_gives_no_other_class_the_tables_it_does_not_pick(self):
+        for name in ("rother", "rstmt", "rtidya", "rtidyb"):
+            self.assertEqual(1, len(self.classes[name]), name)
+        self.assertEqual({"plain_link_handlers"}, set(self.tables("rother")))
+
+    def test_object_result_is_any_and_a_number_branch_adds_num(self):
+        self.assertEqual([("gmp_operation", ["any"], None)], self.tables("rgmp")["gmp_handlers"][("operation", "zend_add")])
+        self.assertEqual([("gmp_operation", ["any"], None)], self.tables("rgmp")["gmp_handlers"][("operation", "zend_sub")])
+        ordinary = self.tables("rcdata")["cdata_handlers"]
+        self.assertEqual([("cdata_operation", ["any"], None)], ordinary[("operation", "zend_add")])
+        self.assertEqual([("cdata_operation", ["any", "num"], None)], ordinary[("operation", "zend_sub")])
+
+    def test_lifetime_writes_give_the_ordinary_value_and_freed_tables(self):
+        found = self.tables("rcdata")
+        self.assertEqual(["cdata_handlers", "cdata_value_handlers", "cdata_free_handlers"], list(found))
+        self.assertEqual("absent", found["cdata_value_handlers"][("operation", None)])
+        self.assertEqual([("cdata_free_cast", [], None)], found["cdata_free_handlers"][("cast", "is_long")])
+        self.assertEqual("absent", found["cdata_free_handlers"][("compare", None)])
+
+    def test_typed_write_reaches_only_the_classes_of_its_struct_and_a_pointer_copy_writes_none(self):
+        dispositions = {(d.kind, d.definition.name) for d in self.report.dispositions}
+        self.assertIn(("typed", "cdata_into_value"), dispositions)
+        self.assertNotIn("cdata_pointer_free", {name for _, name in dispositions})
+        self.assertEqual(1, len(self.classes["rgmp"]))
+
+    def test_normal_final_write_after_conversion_decides_the_kind(self):
+        found = self.tables("rconv")["conv_handlers"]
+        self.assertEqual([("conv_cast", ["num"], None)], found[("cast", "is_long")])
+        self.assertEqual([("conv_cast", ["str"], "none")], found[("cast", "is_string")])
+        self.assertEqual([("conv_cast", ["bool"], None)], found[("cast", "_is_bool")])
+
+    def test_pending_exception_is_no_normal_result_whatever_the_function_returns(self):
+        found = self.tables("rexc")["exc_handlers"]
+        self.assertEqual([("exc_cast", [], None)], found[("cast", "is_long")])
+        self.assertEqual([("exc_cast", ["num"], "none")], found[("cast", "is_string")])
+
+    def test_nonthrowing_compare_sentinel_yields_num_and_a_throwing_one_none(self):
+        self.assertEqual([("compare_unordered", ["num"], None)], self.tables("rdes")["designated_handlers"][("compare", None)])
+        self.assertEqual([("compare_throwing", [], None)], self.tables("rpos")["positional_handlers"][("compare", None)])
+
+    def test_com_cast_is_any_through_the_variant_guard_and_native_first_on_failure(self):
+        found = self.tables("rcom")["com_handlers"]
+        self.assertEqual([("com_cast", ["any", "num", "str"], None)], found[("cast", "is_long")])
+        self.assertEqual([("com_cast", ["any", "num", "str"], "native_first")], found[("cast", "is_string")])
+        self.assertEqual([("com_cast", ["any", "num", "str"], None)], found[("cast", "_is_bool")])
+
+    def test_registered_interface_and_enum_have_no_tables_and_no_registered_flag(self):
+        self.assertNotIn("rface", self.classes)
+        self.assertNotIn("renum", self.classes)
+        self.assertEqual("interface", self.declarations["rface"].classifier)
+        self.assertEqual("enum", self.declarations["renum"].classifier)

@@ -5,6 +5,7 @@ Run: python3 -B -m unittest discover -s tools -p "test_*.py" (from the externs-p
   keeps one marker per branch with the condition it stands under
 - linkage: a static definition is visible to its own file only; a header definition to every file
 - macros: a function-defining macro invocation is expanded; handler macros stay unexpanded
+- source selection: every C and header file of the checkout is read; the skipped directories are not
 - registrations: the class a register_class function registers, its kind, its flags and its parent
 - parameter types: the type name of a parameter declaration and of each parameter of a definition
 - expressions: sizeof keeps the words of its operand, a C++ cast reads as the C cast, a scoped name is one name,
@@ -186,6 +187,26 @@ class ProgramTest(unittest.TestCase):
         program = Program(self.root)
         self.assertIn("get_seven", program.functions)
         self.assertEqual(["zif_zif_target"], [d.name for d in program.functions["zif_zif_target"]])
+
+    def test_source_selection_reads_every_c_and_header_file_outside_the_skipped_directories(self):
+        for name in ("ext/a/a.c", "ext/a/a.h", "ext/a/b.cpp", "ext/a/c.cc", "Zend/zend_x.c", "ext/a/sub/deep.c"):
+            write(self.root, name, "int " + Path(name).stem + "_value;\n")
+        for name in ("ext/a/tests/t.c", "ext/zend_test/z.c", "ext/dl_test/d.c", "ext/skeleton/s.c", "ext/a/notes.txt"):
+            write(self.root, name, "int skipped_value;\n")
+        found = sorted(str(source.relative) for source in Program(self.root).sources)
+        self.assertEqual(
+            ["Zend/zend_x.c", "ext/a/a.c", "ext/a/a.h", "ext/a/b.cpp", "ext/a/c.cc", "ext/a/sub/deep.c"], found
+        )
+
+    def test_header_definition_is_visible_to_every_file_and_marks_its_source_as_a_header(self):
+        write(self.root, "ext/a/shared.h", "int header_value(void)\n{\n\treturn 1;\n}\n")
+        write(self.root, "ext/a/user.c", "int user_value(void)\n{\n\treturn header_value();\n}\n")
+        program = Program(self.root)
+        self.assertEqual({"ext/a/shared.h": True, "ext/a/user.c": False},
+                         {str(s.relative): s.is_header for s in program.sources})
+        caller = program.functions["user_value"][0]
+        call = [c for c in definitions_calls(program, caller) if c.name == "header_value"][0]
+        self.assertEqual([Path("ext/a/shared.h")], [d.source.relative for d in program.resolve(caller, call)])
 
     def test_definitions_of_reports_an_unbalanced_brace(self):
         source = Source(write(self.root, "bad.c", "int f(void) {\n"), [])
