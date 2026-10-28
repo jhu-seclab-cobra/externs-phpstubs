@@ -5,7 +5,7 @@ import collections
 import re
 
 import php_src
-from php_src_c.definitions import ParseFailure, parse_body, parse_expression
+from php_src_c.definitions import ParseFailure, ParsedBlock, parse_body, parse_expression
 from handler_requests import tag_values
 from handler_values import arithmetic
 from php_src_c.source import matching, split_arguments
@@ -207,7 +207,7 @@ class Index:
             statements = list(block[1])
             if statements and statements[-1][0] == "expr":
                 statements[-1] = ("return", statements[-1][1])
-            compiled = self.compiled[id(block)] = Compiler().compile(("block", statements))
+            compiled = self.compiled[id(block)] = Compiler().compile(ParsedBlock(statements, block.opaque))
         return compiled
 
     def compile(self, definition):
@@ -228,19 +228,6 @@ def declarator_name(member):
 # Compiler: statements to a flat instruction list, so goto, switch fall-through and loops are plain jumps.
 
 
-def contains_opaque(block):
-    """Whether the parsed body contains an opaque statement, including a nested statement expression."""
-    pending = [block]
-    while pending:
-        node = pending.pop()
-        if not isinstance(node, (tuple, list)):
-            continue
-        if node and node[0] == "opaque":
-            return True
-        pending.extend(node)
-    return False
-
-
 class Compiler:
     """Compile a parsed body. Instructions: ("x", expr), ("d", name, pointer, dims, init, type), ("b", cond, then, else),
     ("j", pc), ("r", expr), ("s", subject, cases, default, end), ("g", group, branches, end, exhaustive), ("o", text),
@@ -257,7 +244,7 @@ class Compiler:
             if label not in self.labels:
                 return Compiled([], {}, set(), f"goto to unknown label {label}")
             self.instrs[pc] = ("j", self.labels[label])
-        return Compiled(self.instrs, self.labels, self.heads, opaque=contains_opaque(block))
+        return Compiled(self.instrs, self.labels, self.heads, opaque=block.opaque)
 
     def emit(self, *instruction):
         self.instrs.append(instruction)

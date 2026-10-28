@@ -457,12 +457,22 @@ def parse_number(text):
         return None
 
 
+class ParsedBlock(tuple):
+    """A parsed block tuple with the parser's nested opaque-statement status."""
+
+    def __new__(cls, statements, opaque):
+        block = super().__new__(cls, ("block", statements))
+        block.opaque = opaque
+        return block
+
+
 class BodyParser:
     """Recursive-descent parser of one C body. ``variables`` are the names declared so far, which tells a cast from a
     parenthesized name."""
 
     def __init__(self, text, variables=()):
         self.toks, self.i, self.variables = tokens_of(text), 0, set(variables)
+        self.opaque_count = 0
 
     # -- token access --
     def peek(self, k=0):
@@ -497,21 +507,24 @@ class BodyParser:
         return block
 
     def block_rest(self):
-        statements = []
+        statements, opaque_before = [], self.opaque_count
         while self.peek() != "}":
             if self.kind() == "eof":
                 raise ParseFailure("unterminated block")
             statements.append(self.statement())
         self.i += 1
-        return ("block", statements)
+        return ParsedBlock(statements, self.opaque_count != opaque_before)
 
     def statement(self):
         start = self.i
         try:
-            return self.statement_unchecked()
+            node = self.statement_unchecked()
         except ParseFailure:
             self.i = start
-            return self.opaque()
+            node = self.opaque()
+        if node[0] == "opaque":
+            self.opaque_count += 1
+        return node
 
     def opaque(self):
         """Skip a statement: to the next top-level ';', or past a braced block."""

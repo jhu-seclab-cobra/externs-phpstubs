@@ -21,6 +21,7 @@ Run: python3 -B -m unittest discover -s tools -p "test_*.py" (from the externs-p
 - test_compare_closes_num_bound_after_a_normal_exit: remaining C return values cannot add a non-NUM kind
 - test_nested_opaque_compare_stays_unestablished: nested opaque source prevents NUM closure
 - test_nested_opaque_compare_is_reported_not_emitted: incomplete nested coverage emits no fact
+- test_opaque_type_name_does_not_prevent_compare_closure: type-word payloads are not opaque statements
 - test_deeper_nested_opaque_compare_stays_unestablished: opacity survives multiple statement expressions
 - test_inline_expression_is_not_a_normal_compare_exit: an expression value cannot close a throwing request
 - test_unread_callee_invalidates_a_canonical_local: a procedure input keeps unknown pointer writes
@@ -860,3 +861,22 @@ static int probe_compare(zval *a,zval *b) {
 """})
         registered = Registered(Program(self.root, provenance=True))
         self.assertIsNone(Summarizer(registered).compare(fn("probe_compare")).results)
+
+
+    def test_opaque_type_name_does_not_prevent_compare_closure(self):
+        fixture_handler_tree.write_tree(self.root, {DEMO: fixture_handler_tree.DEMO_C + """
+typedef int opaque;
+static int unfinished(zval *a,zval *b) {""" + "unknown_flag();" * 100 + """return 0;}
+static int probe_compare(zval *a,zval *b) {
+    opaque const value=0;
+    if(Z_TYPE_P(a)==IS_LONG) return value;
+    return unfinished(a,b);
+}
+"""})
+        registered = Registered(Program(self.root, provenance=True))
+        previous = handler_summary.SUMMARY_BUDGET
+        try:
+            handler_summary.SUMMARY_BUDGET = 20
+            self.assertEqual(frozenset({"num"}), Summarizer(registered).compare(fn("probe_compare")).results)
+        finally:
+            handler_summary.SUMMARY_BUDGET = previous
