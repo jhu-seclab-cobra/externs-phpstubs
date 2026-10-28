@@ -528,7 +528,7 @@ class Machine(Expressions, Primitives):
 
     def run_inline(self, block, state, frame):
         """A GNU statement expression: its statements run in the frame, the value is the last expression."""
-        code = self.index.inline(block)
+        code = self.index.inline(block, frame.source)
         bindings = frame.checkpoint()
         try:
             exits = self.execute(frame, code, state)

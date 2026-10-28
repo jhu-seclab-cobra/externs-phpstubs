@@ -13,7 +13,7 @@ from handler_world import World
 from named_extras_bindings import shadowed_bindings
 from named_extras_context import CONTEXT_SOURCE, INI_SOURCE, OBJECT_SOURCE, read_protocols, source_api, strlen_api, target_api
 from named_extras_reception import CNode
-from php_src_c import Program
+from php_src_c import Program, Source
 from php_src_c.definitions import Definition, ParseFailure, ParsedBlock, parse_body
 from php_src_c.source import STRING_PLACEHOLDER
 
@@ -60,12 +60,12 @@ class FlowIndex(Index):
             shadowed = shadowed_bindings(block, frozenset(definition.params))
             if shadowed:
                 return Compiled([], {}, set(), f'unestablished lexical bindings: {", ".join(sorted(shadowed))}')
-            return control_flow(Compiler().compile(block))
+            return control_flow(Compiler(definition.source.otherwise).compile(block))
         except ParseFailure as failure:
             return Compiled([], {}, set(), str(failure))
 
-    def inline(self, block: ParsedBlock) -> Compiled:
-        return control_flow(super().inline(block))
+    def inline(self, block: ParsedBlock, source: Source) -> Compiled:
+        return control_flow(super().inline(block, source))
 
 
 def pointer(value: Value) -> Ptr | None:

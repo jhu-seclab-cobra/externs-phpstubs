@@ -205,14 +205,14 @@ class Index:
             compiled = self.compiled[id(definition)] = self.compile(definition)
         return compiled
 
-    def inline(self, block):
+    def inline(self, block, source):
         """The compiled code of a statement expression: its last expression statement becomes the returned value."""
         compiled = self.compiled.get(id(block))
         if compiled is None:
             statements = list(block[1])
             if statements and statements[-1][0] == "expr":
                 statements[-1] = ("return", statements[-1][1])
-            compiled = self.compiled[id(block)] = Compiler().compile(ParsedBlock(statements, block.opaque))
+            compiled = self.compiled[id(block)] = Compiler(source.otherwise).compile(ParsedBlock(statements, block.opaque))
         return compiled
 
     def compile(self, definition):
@@ -221,7 +221,7 @@ class Index:
             block = parse_body(text, definition.params)
         except ParseFailure as failure:
             return Compiled([], {}, set(), str(failure))
-        return Compiler().compile(block)
+        return Compiler(definition.source.otherwise).compile(block)
 
 
 def declarator_name(member):
@@ -314,8 +314,12 @@ def conditional_bindings(configuration: Configuration, branches: list[tuple[int,
     for name in names:
         before = enclosing.get(name)
         choices = tuple((number, bindings.get(name)) for number, bindings in branches)
-        if any(local != before for _, local in choices):
-            visible[name] = ConditionalBinding(configuration, choices, before)
+        first = choices[0][1]
+        if isinstance(first, Local) and all(local == first for _, local in choices):
+            visible[name] = first
+        elif any(local != before for _, local in choices):
+            explicit = tuple((number, local) for number, local in choices if number != IMPLICIT_BRANCH)
+            visible[name] = ConditionalBinding(configuration, explicit, before)
     return visible
 
 
@@ -335,10 +339,11 @@ class Compiler:
     ("j", pc), ("r", expr), ("s", subject, cases, default, end), ("g", group, branches, end, configuration), ("o", text),
     ("n",)."""
 
-    def __init__(self):
+    def __init__(self, otherwise=()):
         self.instrs, self.labels, self.heads, self.jumps = [], {}, set(), []
         self.switches = []
         self.bindings, self.scopes = {}, []
+        self.otherwise = frozenset(otherwise)
 
     def compile(self, block):
         self.statement(block, None, None)
@@ -520,6 +525,8 @@ class Compiler:
     def group_bindings(self, group: int, branches: list[tuple[int, Bindings]],
                        enclosing: Bindings) -> Configuration | None:
         configuration = Configuration(f"{CONFIGURATION_PREFIX}{group}", id(self.scopes[-1]), group)
+        if group not in self.otherwise:
+            branches = [*branches, (IMPLICIT_BRANCH, enclosing)]
         self.bindings = conditional_bindings(configuration, branches, enclosing)
         if self.bindings != enclosing:
             self.scopes[-1].append(configuration)
