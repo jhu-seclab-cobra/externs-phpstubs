@@ -1,6 +1,7 @@
 """Tests for php_src.Entry.with_signature: the field-preserving signature writer (design-extraction-handlers.md).
 
 Run: python3 -B -m unittest discover -s tools -p "test_*.py" (from the externs-phpstubs root).
+- test_owned_fields_keep_comments_and_blank_lines: owned-key changes preserve adjacent trivia
 - owned keys are replaced in place, recomputed from the new block, and removed when the block omits them
 - a missing signature is inserted after the subject lines
 - unowned fields keep their bytes: nested values, comments, blank lines, the sections after the signature, EOF
@@ -39,6 +40,13 @@ def write(root, name, text):
 
 
 class OwnedFieldsTest(unittest.TestCase):
+    def test_owned_fields_keep_comments_and_blank_lines(self):
+        text = "- subject:\n    class: a\n  signature:\n    # preserved\n    classifier: class\n\n    isFinal: false\n"
+        actual = php_src.entries(text)[0].with_signature(
+            "  signature:\n    classifier: class\n    isFinal: true\n", ("classifier", "isFinal")
+        )
+        self.assertEqual(text.replace("isFinal: false", "isFinal: true"), actual)
+
     def test_owned_keys_are_replaced_in_place(self):
         entry = only("- subject:\n    class: a\n" + block("classifier: class", "parent: old", "interfaces: [x]"))
         updated = entry.with_signature(block("classifier: class", "parent: new", "isFinal: true"), OWNED)

@@ -107,31 +107,29 @@ class Entry:
 
 
 def signature_fields(body):
-    """Split signature body lines into (key, text) fields: the key line with the comment lines directly above it
-    and the deeper or blank lines below. Lines before the first key form a field of key None."""
-    fields, pending = [], []
+    """Split key/value spans from adjacent signature comments and blank lines.
+
+    Blank lines inside a nested value belong to that value. Trailing blank lines and signature-level comments are
+    separate unowned spans, so replacing or removing an owned key cannot consume them.
+    """
+    chunks = []
     for line in body.splitlines(keepends=True):
-        if SIGNATURE_FIELD.match(line):
-            fields.append((SIGNATURE_FIELD.match(line).group(1), "".join(pending) + line))
-            pending = []
-        elif SIGNATURE_COMMENT.match(line):
-            pending.append(line)
+        match = SIGNATURE_FIELD.match(line)
+        if match:
+            chunks.append((match.group(1), [line]))
+        elif chunks:
+            chunks[-1][1].append(line)
         else:
-            if pending:
-                if fields:
-                    fields[-1] = (fields[-1][0], fields[-1][1] + "".join(pending))
-                else:
-                    fields.append((None, "".join(pending)))
-                pending = []
-            if fields:
-                fields[-1] = (fields[-1][0], fields[-1][1] + line)
-            else:
-                fields.append((None, line))
-    if pending:
-        if fields:
-            fields[-1] = (fields[-1][0], fields[-1][1] + "".join(pending))
-        else:
-            fields.append((None, "".join(pending)))
+            chunks.append((None, [line]))
+    fields = []
+    for key, lines in chunks:
+        end = len(lines)
+        while end and (not lines[end - 1].strip() or SIGNATURE_COMMENT.match(lines[end - 1])):
+            end -= 1
+        if end:
+            fields.append((key, "".join(lines[:end])))
+        if end < len(lines):
+            fields.append((None, "".join(lines[end:])))
     return fields
 
 

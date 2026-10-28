@@ -50,6 +50,8 @@ Format: [handler types](../../commons-phpmodels/docs/design-declarations-handler
 - `Entry.with_signature(block, owned_fields)` — replaces only the explicitly
   owned keys and inserts a missing signature; preserves every unowned field
   and every other entry byte, including comments, nested values and EOF.
+  Signature-level comments and blank lines between fields are unowned spans;
+  replacing or removing an owned field retains those spans in place.
   The hierarchy producer owns classifier, parent, interfaces, isFinal and
   handlers for registered source declarations; stub-only declarations retain
   hierarchy treatment but establish no registered finality or handler table.
