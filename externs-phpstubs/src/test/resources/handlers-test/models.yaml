@@ -1,0 +1,57 @@
+# Test fixture: class records whose whole signature, handler tables included, passes through the merge unchanged.
+# HWide carries a complete table and a table of partial facts; HHidden has a table whose slots are all absent.
+- subject: {class: HBase}
+  signature:
+    classifier: class
+    isFinal: false
+- subject: {class: HIface}
+  signature:
+    classifier: interface
+    isFinal: false
+- subject: {class: HWide}
+  signature:
+    classifier: class
+    parent: HBase
+    interfaces: [HIface]
+    isFinal: true
+    handlers:
+      - id: fixture/wide.c:wide_handlers
+        facts:
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: fixture/wide.c:wide_cast
+                results: [str, any]
+                stringDispatch: method_first
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: fixture/wide.c:wide_cast
+                results: [bool]
+          - slot: compare
+            targets:
+              - symbol: fixture/wide.c:wide_compare
+                results: [num]
+          - slot: operation
+            request: zend_add
+            targets:
+              - symbol: fixture/wide.c:wide_operation
+                results: [any]
+      - id: fixture/wide.c:partial_handlers
+        facts:
+          - slot: compare
+            targets:
+              - symbol: fixture/wide.c:partial_compare
+                results: [num]
+- subject: {class: HHidden}
+  signature:
+    classifier: class
+    handlers:
+      - id: fixture/hidden.c:hidden_handlers#!defined(HIDDEN)
+        facts:
+          - slot: cast
+            absent: true
+          - slot: compare
+            absent: true
+          - slot: operation
+            absent: true

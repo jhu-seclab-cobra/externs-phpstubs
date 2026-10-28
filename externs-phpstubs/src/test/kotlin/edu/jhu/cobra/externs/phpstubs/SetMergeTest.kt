@@ -2,16 +2,22 @@ package edu.jhu.cobra.externs.phpstubs
 
 import edu.jhu.cobra.commons.phpmodels.ArgPattern
 import edu.jhu.cobra.commons.phpmodels.ClassSubject
+import edu.jhu.cobra.commons.phpmodels.Classifier
 import edu.jhu.cobra.commons.phpmodels.ConstantSubject
 import edu.jhu.cobra.commons.phpmodels.FunctionSubject
+import edu.jhu.cobra.commons.phpmodels.HandlerRequest
+import edu.jhu.cobra.commons.phpmodels.HandlerSlot
 import edu.jhu.cobra.commons.phpmodels.Port
 import edu.jhu.cobra.commons.phpmodels.ReturnKind
+import edu.jhu.cobra.commons.phpmodels.SignatureInfo.ClassSignature
+import edu.jhu.cobra.commons.phpmodels.StringDispatch
 import edu.jhu.cobra.commons.phpmodels.Verification
 import edu.jhu.cobra.commons.phpmodels.VulnTypeId
 import edu.jhu.cobra.commons.value.IntVal
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertIs
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
@@ -35,6 +41,13 @@ import kotlin.test.assertTrue
  * - `each subject appears in exactly one kind map` — verifies the kind maps partition the records
  * - `fact lists follow record order then condition order` — verifies enumeration determinism
  * - `equal mount lists merge into equal records` — verifies the fold is a function of its input
+ *
+ * Class signatures with handler tables (design-extraction-handlers.md, Override Unit):
+ * - `a class signature passes through the merge with every handler table` — complete, partial and unavailable tables
+ * - `a manual signature replaces the generated one whole` — classifier, parent, interfaces, finality and tables
+ * - `a manual signature without tables leaves the class without tables` — no union with the generated tables
+ * - `a later generated signature never replaces a manual one` — rank decides, tables included
+ * - `a mount that omits a class leaves its signature in force` — omission preserves
  */
 internal class SetMergeTest {
     private val f = FunctionSubject("f")
@@ -258,5 +271,124 @@ internal class SetMergeTest {
             )
         }
         assertEquals(SetMerge.of(mounts()).records, SetMerge.of(mounts()).records)
+    }
+
+    // ========== class signatures with handler tables ==========
+
+    private val classK = ClassSubject("K")
+
+    private val generatedClass =
+        """
+        - subject: {class: K}
+          signature:
+            classifier: class
+            parent: P
+            interfaces: [I]
+            isFinal: false
+            handlers:
+              - id: gen.c:gen_handlers
+                facts:
+                  - slot: compare
+                    targets:
+                      - {symbol: "gen.c:gen_compare", results: [num]}
+        """.trimIndent()
+
+    private fun signatureOf(vararg mounts: Mount) = classSignature(SetMerge.of(mounts.toList()), classK)
+
+    private fun classSignature(merge: SetMerge, subject: ClassSubject) =
+        assertIs<ClassSignature>(merge.classes.getValue(subject).signature)
+
+    @Test
+    fun `a class signature passes through the merge with every handler table`() {
+        val root = "/handlers-test/"
+        val merge = SetMerge.of(MountSequence().mount(root, StubResources.opener(root)).toList())
+        val wide = classSignature(merge, ClassSubject("HWide"))
+        assertEquals(Classifier.CLASS, wide.classifier)
+        assertEquals("hbase", wide.parent)
+        assertEquals(listOf("hiface"), wide.interfaces)
+        assertEquals(true, wide.isFinal)
+        assertEquals(listOf("fixture/wide.c:wide_handlers", "fixture/wide.c:partial_handlers"), wide.handlers.map { it.id })
+        val complete = wide.handlers.first().facts
+        assertEquals(
+            listOf(
+                HandlerSlot.CAST to HandlerRequest.IS_STRING,
+                HandlerSlot.CAST to HandlerRequest._IS_BOOL,
+                HandlerSlot.COMPARE to null,
+                HandlerSlot.OPERATION to HandlerRequest.ZEND_ADD,
+            ),
+            complete.map { it.slot to it.request },
+        )
+        val string = complete.first().targets.single()
+        assertEquals(setOf(ReturnKind.STR, ReturnKind.ANY), string.results)
+        assertEquals(StringDispatch.METHOD_FIRST, string.stringDispatch)
+        assertEquals(listOf(HandlerSlot.COMPARE), wide.handlers.last().facts.map { it.slot })
+        val hidden = classSignature(merge, ClassSubject("HHidden")).handlers.single()
+        assertTrue(hidden.facts.all { it.absent && it.targets.isEmpty() })
+        assertEquals(HandlerSlot.entries.toSet(), hidden.facts.map { it.slot }.toSet())
+    }
+
+    @Test
+    fun `a manual signature replaces the generated one whole`() {
+        val manual =
+            """
+            - subject: {class: K}
+              signature:
+                classifier: class
+                handlers:
+                  - id: man.c:man_handlers
+                    facts:
+                      - slot: cast
+                        absent: true
+            """.trimIndent()
+        val signature =
+            signatureOf(
+                TestSets.mount(0, Verification.GENERATED, generatedClass),
+                TestSets.mount(1, Verification.MANUAL, manual),
+            )
+        assertNull(signature.parent)
+        assertTrue(signature.interfaces.isEmpty())
+        assertNull(signature.isFinal)
+        assertEquals(listOf("man.c:man_handlers"), signature.handlers.map { it.id })
+        assertTrue(signature.handlers.single().facts.single().absent)
+    }
+
+    @Test
+    fun `a manual signature without tables leaves the class without tables`() {
+        val manual = "- subject: {class: K}\n  signature: {classifier: class, isFinal: true}\n"
+        val signature =
+            signatureOf(
+                TestSets.mount(0, Verification.GENERATED, generatedClass),
+                TestSets.mount(1, Verification.MANUAL, manual),
+            )
+        assertTrue(signature.handlers.isEmpty())
+        assertEquals(true, signature.isFinal)
+    }
+
+    @Test
+    fun `a later generated signature never replaces a manual one`() {
+        val manual = "- subject: {class: K}\n  signature: {classifier: class, parent: Q}\n"
+        val signature =
+            signatureOf(
+                TestSets.mount(0, Verification.MANUAL, manual),
+                TestSets.mount(1, Verification.GENERATED, generatedClass),
+            )
+        assertEquals("q", signature.parent)
+        assertTrue(signature.handlers.isEmpty())
+    }
+
+    @Test
+    fun `a mount that omits a class leaves its signature in force`() {
+        val other = "- subject: {class: L}\n  signature: {classifier: class}\n"
+        val merge =
+            SetMerge.of(
+                listOf(
+                    TestSets.mount(0, Verification.GENERATED, generatedClass),
+                    TestSets.mount(1, Verification.MANUAL, other),
+                ),
+            )
+        val kept = classSignature(merge, classK)
+        assertEquals("p", kept.parent)
+        assertEquals(listOf("gen.c:gen_handlers"), kept.handlers.map { it.id })
+        assertTrue(ClassSubject("L") in merge.classes)
     }
 }
