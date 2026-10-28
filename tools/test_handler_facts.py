@@ -19,6 +19,9 @@ Run: python3 -B -m unittest discover -s tools -p "test_*.py" (from the externs-p
 - test_exit_fold_keeps_every_normal_kind: folding 80 normal exits retains NUM and STR
 - test_aggregate_alternatives_keep_every_result_kind: a by-value conditional struct copy keeps NUM and STR
 - test_compare_closes_num_bound_after_a_normal_exit: remaining C return values cannot add a non-NUM kind
+- test_nested_opaque_compare_stays_unestablished: nested opaque source prevents NUM closure
+- test_nested_opaque_compare_is_reported_not_emitted: incomplete nested coverage emits no fact
+- test_deeper_nested_opaque_compare_stays_unestablished: opacity survives multiple statement expressions
 - test_inline_expression_is_not_a_normal_compare_exit: an expression value cannot close a throwing request
 - test_unread_callee_invalidates_a_canonical_local: a procedure input keeps unknown pointer writes
 - test_completed_callees_keep_the_request_budget: settled direct calls are reused during component iteration
@@ -61,6 +64,7 @@ from handler_machine import EXIT_BATCH
 from handler_minit import Registered
 from handler_render import Table, render_handlers
 from handler_sites import Sites, typed_tables
+from handler_tables import Report, TableBuilder
 from handler_summary import Summarizer, SummaryPolicy
 from php_src_c import Program
 
@@ -817,3 +821,42 @@ static int counter_cast(zend_object *o,zval *out,int t) {
             self.assertEqual(frozenset({"str"}), summary.results)
         finally:
             handler_summary.CALL_SLICE = previous
+
+
+    def test_nested_opaque_compare_stays_unestablished(self):
+        fixture_handler_tree.write_tree(self.root, {DEMO: fixture_handler_tree.DEMO_C + """
+static int probe_compare(zval *a,zval *b) {
+    if(Z_TYPE_P(a)==IS_LONG) return 0;
+    int value=({_Generic(1,int:1,default:2);0;});
+    return value;
+}
+"""})
+        registered = Registered(Program(self.root, provenance=True))
+        self.assertIsNone(Summarizer(registered).compare(fn("probe_compare")).results)
+
+    def test_nested_opaque_compare_is_reported_not_emitted(self):
+        fixture_handler_tree.write_tree(self.root, {DEMO: fixture_handler_tree.DEMO_C + """
+static int probe_compare(zval *a,zval *b) {
+    if(Z_TYPE_P(a)==IS_LONG) return 0;
+    int value=({_Generic(1,int:1,default:2);0;});
+    return value;
+}
+"""})
+        registered = Registered(Program(self.root, provenance=True))
+        report = Report()
+        builder = TableBuilder(registered, Summarizer(registered), (set(), set()), report)
+        facts = builder.requested("ext/demo/demo.c:table", "compare", None, fn("probe_compare"), False)
+        self.assertEqual([], facts)
+        self.assertEqual(
+            [("ext/demo/demo.c:table", "compare", None, "probe_compare: incomplete run")], report.omitted
+        )
+
+    def test_deeper_nested_opaque_compare_stays_unestablished(self):
+        fixture_handler_tree.write_tree(self.root, {DEMO: fixture_handler_tree.DEMO_C + """
+static int probe_compare(zval *a,zval *b) {
+    if(Z_TYPE_P(a)==IS_LONG) return 0;
+    return ({int value=({_Generic(1,int:1,default:2);0;});value;});
+}
+"""})
+        registered = Registered(Program(self.root, provenance=True))
+        self.assertIsNone(Summarizer(registered).compare(fn("probe_compare")).results)

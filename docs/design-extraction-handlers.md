@@ -96,7 +96,9 @@ Format: [handler types](../../commons-phpmodels/docs/design-declarations-handler
   the C return protocol excludes every other kind. This request projection
   has a distinct key from a callee's complete return/effect summary, and its
   early closure discards unfinished callees. Opaque instructions prevent
-  early closure. Proving no normal exit still requires the full fixpoint.
+  early closure, including opacity in nested statement expressions. The source
+  index carries that property from the existing parsed body into its compiled
+  representation. Proving no normal exit still requires the full fixpoint.
 - Consumed tokens come from the source dispatch inventory. The generated-set
   decode gate checks the single PM enum; the producer has no allowed-name
   list and no dependency on the consumer's internal operator vocabulary.

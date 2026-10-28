@@ -157,8 +157,7 @@ class Machine(Expressions, Primitives):
         waiting, pcs, memo, visits, exits = collections.defaultdict(list), [0], {}, collections.Counter(), []
         waiting[0].append(state)
         pending = [1]
-        projection = self.procedures if project and self.procedures is not None and all(
-            instr[0] != "o" for instr in code.instrs) else None
+        projection = self.procedures if project and self.procedures is not None and not code.opaque else None
 
         def push(pc, st):
             """Queue a state at an instruction. States waiting at a join point are joined once they exceed

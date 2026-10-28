@@ -58,8 +58,9 @@ class TableDeclaration:
 class Compiled:
     """The flat instruction list of one function body and the labels, loop heads and parse status it came with."""
 
-    def __init__(self, instrs, labels, heads, failure=None):
+    def __init__(self, instrs, labels, heads, failure=None, opaque=False):
         self.instrs, self.labels, self.heads, self.failure = instrs, labels, heads, failure
+        self.opaque = opaque
 
 
 class Index:
@@ -227,6 +228,19 @@ def declarator_name(member):
 # Compiler: statements to a flat instruction list, so goto, switch fall-through and loops are plain jumps.
 
 
+def contains_opaque(block):
+    """Whether the parsed body contains an opaque statement, including a nested statement expression."""
+    pending = [block]
+    while pending:
+        node = pending.pop()
+        if not isinstance(node, (tuple, list)):
+            continue
+        if node and node[0] == "opaque":
+            return True
+        pending.extend(node)
+    return False
+
+
 class Compiler:
     """Compile a parsed body. Instructions: ("x", expr), ("d", name, pointer, dims, init, type), ("b", cond, then, else),
     ("j", pc), ("r", expr), ("s", subject, cases, default, end), ("g", group, branches, end, exhaustive), ("o", text),
@@ -243,7 +257,7 @@ class Compiler:
             if label not in self.labels:
                 return Compiled([], {}, set(), f"goto to unknown label {label}")
             self.instrs[pc] = ("j", self.labels[label])
-        return Compiled(self.instrs, self.labels, self.heads)
+        return Compiled(self.instrs, self.labels, self.heads, opaque=contains_opaque(block))
 
     def emit(self, *instruction):
         self.instrs.append(instruction)

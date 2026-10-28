@@ -58,7 +58,9 @@ kinds and string dispatch. Unknown source coverage remains unestablished.
    Once a comparison has a proved normal exit, NUM is its complete kind bound;
    further normal C returns cannot enlarge it. Close only this request
    projection, never cache partial callee effects. Early closure requires a
-   body without opaque instructions; an empty bound needs full convergence.
+   body without opaque instructions, including those in nested GNU statement
+   expressions. The compiled body's opacity covers the complete parsed body,
+   not only its outer instruction list. An empty bound needs full convergence.
 6. Derive the string dispatch order from the relative reachability of the
    effective-method call, native work, success exits and failure continuation.
    The standard dispatcher supplies the effective __toString call. Native
