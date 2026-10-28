@@ -5,7 +5,8 @@ Reads every function and method declaration of the php-src stubs: parameter
 names, declared types, defaults, by-reference and variadic marks, and the
 declared return type, with class names resolved by PHP's name resolution
 rules. Also gives each function the facts php-src's call compiler fixes: the frameless argument counts, the special
-argument counts, and the rope format parameter (compile_facts.py). Rewrites
+argument counts, and the rope format parameter (compile_facts.py). Also reads
+variadic named-extra reception from argument parsing (named_extras.py). Rewrites
 the subject line and signature of every generated function and method entry
 php-src declares, removes the propagation statements naming
 an argument position the signature lacks, every other line untouched. Each
@@ -21,7 +22,9 @@ import sys
 from pathlib import Path
 
 import compile_facts
+import named_extras
 import php_src
+from php_src_c import Program
 
 TOOL = "tools/extract_signatures.py"
 
@@ -57,11 +60,16 @@ ARGUMENT_PORT = re.compile(r"^argument\((\d+)\)$")
 class Parameter:
     def __init__(self, name, type_, optional, by_ref, variadic):
         self.name, self.type, self.optional, self.by_ref, self.variadic = name, type_, optional, by_ref, variadic
+        self.named_extras = None
 
     def render(self):
         lines = [f"    - name: {scalar(self.name)}", f"      type: {scalar(self.type)}"]
         lines += ["      optional: true"] * self.optional + ["      byRef: true"] * self.by_ref
         lines += ["      variadic: true"] * self.variadic
+        if self.named_extras is not None:
+            kind, position = self.named_extras
+            fields = f"kind: {kind}" + (f", position: {position}" if position is not None else "")
+            lines.append(f"      namedExtras: {{{fields}}}")
         return lines
 
 
@@ -218,6 +226,17 @@ def read_php_src(root):
                     f"{signature.subject}: neither {known.source} nor {signature.source} declares a signature subsuming the other"
                 )
             signatures[key] = signature
+    return with_named_extras(root, signatures)
+
+
+def with_named_extras(root, signatures):
+    """Attach only source-established reception facts after selecting stub signature variants."""
+    variadics = {key: signature for key, signature in signatures.items() if any(p.variadic for p in signature.params)}
+    policies = named_extras.read_policies(Program(root, provenance=True), variadics)
+    for key, signature in variadics.items():
+        for param in signature.params:
+            if param.variadic:
+                param.named_extras = policies[key]
     return signatures
 
 

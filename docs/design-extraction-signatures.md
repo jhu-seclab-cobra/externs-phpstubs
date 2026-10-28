@@ -2,7 +2,9 @@
 
 The signature producer of the extraction design
 ([design-extraction.md](design-extraction.md)): `tools/extract_signatures.py`
-and `tools/compile_facts.py`. The tests: `tools/test_compile_facts.py`
+and `tools/compile_facts.py`, with `tools/named_extras.py` for argument reception.
+The tests: `tools/test_named_extras.py` (source patterns and extracted policies),
+`tools/test_compile_facts.py`
 (closure check, selection rule) and `OneOpcodeCompileTest` (the extracted
 sets).
 
@@ -12,10 +14,35 @@ sets).
 |-------|--------|
 | `**/*.stub.php` | each function and method: parameter names, declared types, by-reference, variadic, and default marks, the return type, the `@frameless-function` argument counts |
 | `Zend/zend_compile.c`, `Zend/zend_string.h` | the by-name dispatch of function calls compiled to one opcode (`zend_try_compile_special_func_ex`), the operands of each compile function, and the known strings the dispatch names |
+| `**/*_arginfo.h`, `**/*.{c,h,cpp,cc}` through `php_src_c.Program` | ordinary builtin handlers, argument parsing macros and their reception groups |
 
 - A parameter is `optional` when it declares a default or is variadic, and
   `byRef` when declared `&` or tagged `@prefer-ref` in its doc comment
   (the interpreter passes such an argument by reference when it can).
+- After selecting stub signature variants, `with_named_extras` reads one shared
+  C program and attaches a source-established policy only to each callable's
+  variadic parameter. Format and meaning:
+  [parameter facts](../../commons-phpmodels/docs/design-declarations.md#namedextras).
+- `named_extras.read_policies(program, keys)` resolves each subject through the
+  shared registration tables, including aliases. Every ordinary handler and
+  every definition must agree. Frameless handlers do not receive named calls.
+- `Z_PARAM_VARIADIC` and `Z_PARAM_VARIADIC_EX` establish rejection in a plain,
+  unconditional parsing group. The reception position counts preceding
+  argument-consuming macro prologues, following source macro aliases; it is
+  not inferred from the stub's variadic index. Thus `array_map` records 1:
+  its callback is parsed before the group that includes its first array.
+- `Z_PARAM_VARIADIC_WITH_NAMED` establishes forwarding when its preserved named
+  arguments reach `zend_call_known_function`, `zend_call_known_fcc` or
+  `zend_call_function`, directly or through a referenced context entry using
+  the stored call information. An overwritten collection establishes nothing.
+  A thin `INTERNAL_FUNCTION_PARAM_PASSTHRU` helper is followed with literal
+  zero/one arguments selecting its branches, including Reflection invocation.
+- Whitespace-collapsed digests check the parsing primitives of `zend_API.h`.
+  A changed primitive, missing/conflicting definition, unread reception,
+  optional or conditional rejecting group, earlier control flow, unread parsing block, recursive
+  helper or unproved forwarding leaves the policy null. No variadic default
+  asserts rejection. `imagefilter` dispatches to filter-specific parsing
+  without a recognized variadic group and remains null (accept-and-ignore).
 - `frameless_counts` applies php-src
   `find_frameless_function_info` to the function's `@frameless-function`
   tags: a count c from 0 to 3 is listed when the first tag whose arity is at

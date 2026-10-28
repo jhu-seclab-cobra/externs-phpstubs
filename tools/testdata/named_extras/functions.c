@@ -1,0 +1,94 @@
+PHP_FUNCTION(reject) {
+ ZEND_PARSE_PARAMETERS_START(2, -1)
+  Z_PARAM_LONG(first)
+  Z_PARAM_LONG(second)
+  Z_PARAM_VARIADIC('*', args, argc)
+ ZEND_PARSE_PARAMETERS_END();
+}
+PHP_FUNCTION(reject_ex) {
+ ZEND_PARSE_PARAMETERS_START(2, -1)
+  Z_PARAM_LONG(first)
+  Z_PARAM_VARIADIC_EX('*', args, argc, 1)
+  Z_PARAM_LONG(last)
+ ZEND_PARSE_PARAMETERS_END();
+}
+PHP_FUNCTION(forward) {
+ ZEND_PARSE_PARAMETERS_START(0, -1)
+  Z_PARAM_VARIADIC_WITH_NAMED(args, argc, named)
+ ZEND_PARSE_PARAMETERS_END();
+ zend_call_known_function(target, object, scope, result, argc, args, named);
+}
+PHP_FUNCTION(ignored) {
+ ZEND_PARSE_PARAMETERS_START(0, -1)
+  Z_PARAM_VARIADIC_WITH_NAMED(args, argc, named)
+ ZEND_PARSE_PARAMETERS_END();
+ RETURN_TRUE;
+}
+PHP_FUNCTION(conditional) {
+ if (flag) {
+  ZEND_PARSE_PARAMETERS_START(0, -1)
+   Z_PARAM_VARIADIC('*', args, argc)
+  ZEND_PARSE_PARAMETERS_END();
+ }
+}
+PHP_FUNCTION(unknown) {
+ ZEND_PARSE_PARAMETERS_START(0, -1)
+  UNKNOWN_RECEPTION(args)
+  Z_PARAM_VARIADIC('*', args, argc)
+ ZEND_PARSE_PARAMETERS_END();
+}
+PHP_FUNCTION(optional) {
+ ZEND_PARSE_PARAMETERS_START(0, -1)
+  Z_PARAM_OPTIONAL
+  Z_PARAM_LONG(first)
+  Z_PARAM_VARIADIC('*', args, argc)
+ ZEND_PARSE_PARAMETERS_END();
+}
+PHP_FUNCTION(conflict) {
+ ZEND_PARSE_PARAMETERS_START(0, -1)
+  Z_PARAM_VARIADIC('*', args, argc)
+ ZEND_PARSE_PARAMETERS_END();
+}
+PHP_FUNCTION(conflict) { RETURN_TRUE; }
+static void helper(INTERNAL_FUNCTION_PARAMETERS, int variadic) {
+ if (variadic) {
+  ZEND_PARSE_PARAMETERS_START(0, -1)
+   Z_PARAM_VARIADIC_WITH_NAMED(args, argc, named)
+  ZEND_PARSE_PARAMETERS_END();
+ } else {
+  ZEND_PARSE_PARAMETERS_NONE();
+ }
+ zend_call_known_function(target, object, scope, result, argc, args, named);
+}
+PHP_FUNCTION(wrapper) { helper(INTERNAL_FUNCTION_PARAM_PASSTHRU, 1); }
+PHP_FUNCTION(unselected) { helper(INTERNAL_FUNCTION_PARAM_PASSTHRU, 0); }
+static void recursion(INTERNAL_FUNCTION_PARAMETERS) { recursion(INTERNAL_FUNCTION_PARAM_PASSTHRU); }
+PHP_FUNCTION(recursive) { recursion(INTERNAL_FUNCTION_PARAM_PASSTHRU); }
+PHP_FUNCTION(reassigned) {
+ ZEND_PARSE_PARAMETERS_START(0, -1)
+  Z_PARAM_VARIADIC_WITH_NAMED(args, argc, named)
+ ZEND_PARSE_PARAMETERS_END();
+ named = NULL;
+ zend_call_known_function(target, object, scope, result, argc, args, named);
+}
+PHP_FUNCTION(unread_block) {
+ ZEND_PARSE_PARAMETERS_START_EX(flags, 0, -1)
+  Z_PARAM_VARIADIC_WITH_NAMED(args, argc, named)
+ ZEND_PARSE_PARAMETERS_END();
+ ZEND_PARSE_PARAMETERS_START(0, -1)
+  Z_PARAM_VARIADIC('*', args, argc)
+ ZEND_PARSE_PARAMETERS_END();
+}
+PHP_FUNCTION(bypass) {
+ if (flag) { RETURN_TRUE; }
+ ZEND_PARSE_PARAMETERS_START(0, -1)
+  Z_PARAM_VARIADIC('*', args, argc)
+ ZEND_PARSE_PARAMETERS_END();
+}
+#define Z_PARAM_SKIP(dest) Z_PARAM_PROLOGUE(0, 0); ++_i;
+PHP_FUNCTION(miscount) {
+ ZEND_PARSE_PARAMETERS_START(1, -1)
+  Z_PARAM_SKIP(value)
+  Z_PARAM_VARIADIC('*', args, argc)
+ ZEND_PARSE_PARAMETERS_END();
+}

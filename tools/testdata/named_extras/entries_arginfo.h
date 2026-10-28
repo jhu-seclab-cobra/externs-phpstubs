@@ -1,0 +1,20 @@
+static const zend_function_entry ext_functions[] = {
+ ZEND_FE(reject, arginfo_reject)
+ ZEND_RAW_FENTRY("alias", zif_reject, arginfo_reject, 0, NULL)
+ ZEND_FE(reject_ex, arginfo_reject)
+ ZEND_FE(forward, arginfo_forward)
+ ZEND_FE(ignored, arginfo_forward)
+ ZEND_FE(conditional, arginfo_reject)
+ ZEND_FE(unknown, arginfo_reject)
+ ZEND_FE(optional, arginfo_reject)
+ ZEND_FE(missing, arginfo_reject)
+ ZEND_FE(conflict, arginfo_reject)
+ ZEND_FE(wrapper, arginfo_forward)
+ ZEND_FE(unselected, arginfo_forward)
+ ZEND_FE(recursive, arginfo_reject)
+ ZEND_FE(reassigned, arginfo_forward)
+ ZEND_FE(unread_block, arginfo_reject)
+ ZEND_FE(bypass, arginfo_reject)
+ ZEND_FE(miscount, arginfo_reject)
+ ZEND_FE_END
+};

@@ -10,7 +10,8 @@ rules: [design.md](design.md).
 - **Modules:** `tools/php_src.py` (shared reading, placement, and
   writing), `tools/extract_hierarchy.py`, `tools/extract_signatures.py`,
   `tools/compile_facts.py` (the call compiler's facts, read by
-  `extract_signatures.py`), `tools/extract_throws.py`; Python 3 standard
+  `extract_signatures.py`), `tools/named_extras.py` (argument reception),
+  `tools/extract_throws.py`; Python 3 standard
   library only. The test
   oracle `tools/reflect.php` runs on a PHP build, not over php-src.
 - **Relationships:** each tool imports `php_src`; `php_src` imports no tool.
@@ -93,7 +94,7 @@ algorithm is in [Effective Handler Extraction](spec-extraction-handlers.md).
 ### extract_signatures.py
 
 Reads every function and method declaration of the stubs and the call
-compiler of php-src, and rewrites each generated entry's signature. Inputs,
+compiler and builtin argument parsing of php-src, and rewrites each generated entry's signature. Inputs,
 outputs and rules: [design-extraction-signatures.md](design-extraction-signatures.md).
 
 ### extract_throws.py
