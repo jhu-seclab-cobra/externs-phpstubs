@@ -1,0 +1,851 @@
+@@ P01 table_alternatives.php
+@@ program
+<?php
+$scalar = FFI::new('int');
+$scalar->cdata = 4;
+$array = FFI::new('int[2]');
+$pointer = FFI::addr($array);
+
+var_dump(get_class($scalar) === get_class($pointer));
+var_dump((string) $scalar);
+try {
+    var_dump($scalar + 1);
+} catch (TypeError $error) {
+    echo get_class($error), "\n";
+}
+$next = $pointer + 1;
+var_dump(get_class($next));
+var_dump($next - $pointer);
+
+$freed = FFI::new('int', false);
+FFI::free($freed);
+var_dump((bool) $freed);
+try {
+    var_dump((string) $freed);
+} catch (Error $error) {
+    echo get_class($error), "\n";
+}
+
+@@ output
+
+Deprecated: Calling FFI::new() statically is deprecated in /Users/yichao/Projects/Cobra/cobraphp-run/W1/oc-facts/api/p-architect/programs/table_alternatives.php on line 2
+
+Deprecated: Calling FFI::new() statically is deprecated in /Users/yichao/Projects/Cobra/cobraphp-run/W1/oc-facts/api/p-architect/programs/table_alternatives.php on line 4
+bool(true)
+string(1) "4"
+TypeError
+string(9) "FFI\CData"
+int(1)
+
+Deprecated: Calling FFI::new() statically is deprecated in /Users/yichao/Projects/Cobra/cobraphp-run/W1/oc-facts/api/p-architect/programs/table_alternatives.php on line 18
+bool(true)
+Error
+
+@@ P02 effective_tables.php
+@@ program
+<?php
+$ffi = FFI::cdef('typedef int I;');
+$scalar = $ffi->new('int');
+$scalar->cdata = 4;
+$array = $ffi->new('int[2]');
+$pointer = FFI::addr($array);
+
+var_dump(get_class($scalar) === get_class($pointer));
+var_dump((string) $scalar);
+try {
+    var_dump($scalar + 1);
+} catch (TypeError $error) {
+    echo get_class($error), "\n";
+}
+$next = $pointer + 1;
+var_dump(get_class($next));
+var_dump($next - $pointer);
+
+$freed = $ffi->new('int', false);
+FFI::free($freed);
+var_dump((bool) $freed);
+try {
+    var_dump((string) $freed);
+} catch (Error $error) {
+    echo get_class($error), "\n";
+}
+
+@@ output
+bool(true)
+string(1) "4"
+TypeError
+string(9) "FFI\CData"
+int(1)
+bool(true)
+Error
+
+@@ P03 mixed_comparison_requests.php
+@@ program
+<?php
+$object = new stdClass;
+$resource = fopen('php://memory', 'r+');
+var_dump($object == []);
+var_dump($object <=> []);
+var_dump($object == $resource);
+var_dump($object <=> $resource);
+fclose($resource);
+
+@@ output
+bool(false)
+int(1)
+bool(false)
+int(1)
+
+@@ P04 request_routing.php
+@@ program
+<?php
+$ffi = FFI::cdef('typedef int I;');
+$scalar = $ffi->new('int');
+$scalar->cdata = 4;
+echo "scalar-add\n";
+try {
+    var_dump($scalar + 1);
+} catch (Throwable $error) {
+    echo get_class($error), ': ', $error->getMessage(), "\n";
+}
+$pointer = FFI::addr($scalar);
+$next = $pointer + 1;
+echo "pointer-add\n";
+var_dump(get_debug_type($next));
+var_dump($next == $pointer + 1);
+echo "unary-and-truth\n";
+$number = new GMP(4);
+var_dump(get_debug_type(+$number), gmp_strval(-$number));
+var_dump(!$number, ($number xor true));
+
+@@ output
+scalar-add
+TypeError: Unsupported operand types: FFI\CData + int
+pointer-add
+string(9) "FFI\CData"
+bool(true)
+unary-and-truth
+string(3) "GMP"
+string(2) "-4"
+bool(false)
+bool(false)
+
+@@ P05 table_alternatives.php
+@@ program
+<?php
+$ffi = FFI::cdef('typedef int I;');
+$scalar = $ffi->new('int');
+$pointer = FFI::addr($scalar);
+try {
+    var_dump($scalar + 1);
+} catch (TypeError $error) {
+    echo get_class($error), ': ', $error->getMessage(), "\n";
+}
+var_dump(get_debug_type($pointer + 1));
+
+@@ output
+TypeError: Unsupported operand types: FFI\CData + int
+string(9) "FFI\CData"
+
+@@ P06 enum_finality.php
+@@ program
+<?php
+enum UserEnum { case A; }
+foreach (['RoundingMode', 'UserEnum'] as $name) {
+    $reflection = new ReflectionClass($name);
+    echo $name, "\n";
+    var_dump($reflection->isFinal(), $reflection->isEnum());
+}
+
+@@ output
+RoundingMode
+bool(false)
+bool(true)
+UserEnum
+bool(true)
+bool(true)
+
+@@ P07 J-FFI-instance.php
+@@ program
+<?php
+$f=FFI::cdef('typedef int I;');$c=$f->new('int');$t=FFI::typeof($c);
+var_dump((bool)$f,(bool)$t,(bool)$c,(string)$c);$c->cdata=4;var_dump((string)$c);
+foreach([$f,$t] as $o){try{var_dump((string)$o);}catch(Throwable $e){echo get_class($e),': ',$e->getMessage(),"\n";}}
+try{var_dump($c+1);}catch(Throwable $e){echo get_class($e),': ',$e->getMessage(),"\n";}
+$free=$f->new('int',false);FFI::free($free);var_dump((bool)$free);
+try{var_dump((string)$free);}catch(Throwable $e){echo get_class($e),': ',$e->getMessage(),"\n";}
+?>
+@@ output
+bool(true)
+bool(true)
+bool(true)
+string(1) "0"
+string(1) "4"
+Error: Object of class FFI could not be converted to string
+Error: Object of class FFI\CType could not be converted to string
+TypeError: Unsupported operand types: FFI\CData + int
+bool(true)
+Error: Object of class FFI\CData could not be converted to string
+
+@@ P08 J-FFI-numeric.php
+@@ program
+<?php
+set_error_handler(static function(int $severity,string $message):bool{return true;});
+$f=FFI::cdef('typedef int I;');$c=$f->new('int');$t=FFI::typeof($c);
+var_dump((int)$f,(float)$f,(int)$t,(float)$t,(int)$c,(float)$c);
+$t2=FFI::typeof($c);try{var_dump($t==$t2);}catch(Throwable $e){echo get_class($e),': ',$e->getMessage(),"\n";}
+?>
+@@ output
+int(1)
+float(1)
+int(1)
+float(1)
+int(1)
+float(1)
+bool(true)
+
+@@ P09 J-FFI-value-and-pointer.php
+@@ program
+<?php
+$f=FFI::cdef('struct S { int v; };');$s=$f->new('struct S');$s->v=3;
+$view=$f->cast('struct S',$s);var_dump((bool)$view,$view->v);
+$p=FFI::addr($s);$q=FFI::addr($s);var_dump($p==$q,$p===$q);
+try{var_dump((string)$view);}catch(Throwable $e){echo get_class($e),': ',$e->getMessage(),"\n";}
+?>
+@@ output
+bool(true)
+int(3)
+bool(true)
+bool(false)
+Error: Object of class FFI\CData could not be converted to string
+
+@@ P10 J-compare-only.php
+@@ program
+<?php
+set_error_handler(static function(int $severity,string $message): bool{return true;});
+$a=new DateTimeImmutable('2020-01-01T00:00:00Z');$b=new DateTimeImmutable('2020-01-02T00:00:00Z');
+var_dump((bool)$a,(int)$a,(float)$a,$a==$b,$a<$b,$a<=>$b);
+?>
+@@ output
+bool(true)
+int(1)
+float(1)
+bool(false)
+bool(true)
+int(-1)
+
+@@ P11 J-environment.php
+@@ program
+<?php
+var_dump(PHP_VERSION,PHP_INT_SIZE,class_exists('COM',false),class_exists('variant',false));
+?>
+@@ output
+string(6) "8.5.12"
+int(8)
+bool(false)
+bool(false)
+
+@@ P12 compare_only_string.php
+@@ program
+<?php
+class DateChild extends DateTimeImmutable { public function __toString(): string { return 'user-date'; } }
+$a = new DateChild('2020-01-01T00:00:00Z');
+$b = new DateChild('2020-01-02T00:00:00Z');
+var_dump((string) $a, (bool) $a, $a == $b, $a < $b);
+
+@@ output
+string(9) "user-date"
+bool(true)
+bool(false)
+bool(true)
+
+@@ P13 enum_and_interface.php
+@@ program
+<?php
+interface Stringer extends Stringable {}
+class ParentText { public function __toString(): string { return 'inherited'; } }
+class ChildText extends ParentText implements Stringer {}
+enum E { case A; }
+var_dump((string) new ChildText, (bool) E::A);
+try { var_dump((string) E::A); }
+catch (Error $e) { echo get_class($e), ': ', $e->getMessage(), "\n"; }
+
+@@ output
+string(9) "inherited"
+bool(true)
+Error: Object of class E could not be converted to string
+
+@@ P14 final_classes.php
+@@ program
+<?php
+foreach (['Closure', 'Generator', 'FFI\\CData', 'DateTimeImmutable', 'tidy', 'SimpleXMLElement', 'stdClass'] as $name) {
+    echo $name, ': ', (new ReflectionClass($name))->isFinal() ? 'final' : 'non-final', "\n";
+}
+
+@@ output
+Closure: final
+Generator: final
+FFI\CData: final
+DateTimeImmutable: non-final
+tidy: non-final
+SimpleXMLElement: non-final
+stdClass: non-final
+
+@@ P15 handler_inheritance.php
+@@ program
+<?php
+/* PHP 8.5.12 stdout (exit 0):
+bool(true)
+bool(false)
+bool(false)
+bool(true)
+string(8) "nonempty"
+bool(false)
+bool(true)
+*/
+class XMLChild extends SimpleXMLElement {
+    public function __toString(): string {
+        return 'nonempty';
+    }
+}
+$plain = new stdClass;
+$empty = new SimpleXMLElement('<r/>');
+$child = new XMLChild('<r/>');
+$full = new SimpleXMLElement('<r><x/></r>');
+var_dump((bool) $plain, (bool) $empty, (bool) $child, (bool) $full);
+var_dump((string) $child, (bool) gmp_init(0), (bool) gmp_init(1));
+
+@@ output
+bool(true)
+bool(false)
+bool(false)
+bool(true)
+string(8) "nonempty"
+bool(false)
+bool(true)
+
+@@ P16 inherited_string.php
+@@ program
+<?php
+class XMLParent extends SimpleXMLElement {
+    public function __toString(): string { return 'override'; }
+}
+class XMLGrandchild extends XMLParent {}
+class UserParent { public function __toString(): string { return 'inherited'; } }
+class UserChild extends UserParent {}
+class FileChild extends SplFileInfo { public function __toString(): string { return 'user-file'; } }
+foreach ([new XMLGrandchild('<r/>'), new UserChild, new FileChild('path')] as $object) {
+    echo get_class($object), "\n";
+    var_dump((string) $object, $object == (string) $object, (bool) $object);
+}
+
+@@ output
+XMLGrandchild
+string(8) "override"
+bool(true)
+bool(false)
+UserChild
+string(9) "inherited"
+bool(true)
+bool(true)
+FileChild
+string(9) "user-file"
+bool(true)
+bool(true)
+
+@@ P17 native_operator_result.php
+@@ program
+<?php
+/* PHP 8.5.12 stdout (exit 0):
+string(3) "GMP"
+int(5)
+*/
+$g = new GMP(4);
+$r = $g + 1;
+var_dump(get_debug_type($r));
+var_dump((int) $r);
+
+@@ output
+string(3) "GMP"
+int(5)
+
+@@ P18 native_scalar_operator.php
+@@ program
+<?php
+/* PHP 8.5.12 stdout (exit 0):
+int(5)
+*/
+$x = new SimpleXMLElement('<r>4</r>');
+var_dump($x + 1);
+
+@@ output
+int(5)
+
+@@ P19 null_and_missing.php
+@@ program
+<?php
+try { var_dump((string) new stdClass); }
+catch (Error $e) { echo get_class($e), ': ', $e->getMessage(), "\n"; }
+var_dump((bool) new stdClass);
+try { var_dump((new stdClass) + 1); }
+catch (TypeError $e) { echo get_class($e), ': ', $e->getMessage(), "\n"; }
+
+@@ output
+Error: Object of class stdClass could not be converted to string
+bool(true)
+TypeError: Unsupported operand types: stdClass + int
+
+@@ P20 tidy_override.php
+@@ program
+<?php
+class TidyText extends tidy {
+    public function __toString(): string { return 'USER_OVERRIDE'; }
+}
+$object = new TidyText;
+$object->parseString('<p>native</p>');
+var_dump($object->__toString());
+var_dump(str_contains((string) $object, 'USER_OVERRIDE'));
+var_dump(str_contains((string) $object, 'native'));
+
+@@ output
+string(13) "USER_OVERRIDE"
+bool(false)
+bool(true)
+
+@@ P21 unary_standard.php
+@@ program
+<?php
+foreach (['plus', 'minus', 'not', 'increment', 'decrement'] as $operation) {
+    $object = new stdClass;
+    try {
+        match ($operation) {
+            'plus' => +$object,
+            'minus' => -$object,
+            'not' => ~$object,
+            'increment' => ++$object,
+            'decrement' => --$object,
+        };
+    } catch (TypeError $error) {
+        echo $operation, ':', get_class($error), "\n";
+    }
+}
+
+@@ output
+plus:TypeError
+minus:TypeError
+not:TypeError
+increment:TypeError
+decrement:TypeError
+
+@@ P22 com_availability.php
+@@ program
+<?php
+var_dump(class_exists('COM', false), class_exists('variant', false));
+if (class_exists('variant', false)) {
+    class VariantChildText extends variant {
+        public function __toString(): string { return 'USER_OVERRIDE'; }
+    }
+    $value = new VariantChildText('native');
+    var_dump($value->__toString(), (string) $value);
+}
+
+@@ output
+bool(false)
+bool(false)
+
+@@ P23 ffi_tables.php
+@@ program
+<?php
+$ffi = FFI::cdef('struct S { int v; };');
+$array = $ffi->new('int[3]');
+$array[0] = 10;
+$array[1] = 20;
+$pointer = FFI::addr($array[0]);
+$next = $pointer + 1;
+var_dump(get_debug_type($next), $next[0], $next - $pointer);
+$scalar = $ffi->new('int');
+$scalar->cdata = 0;
+var_dump((bool) $scalar, (string) $scalar);
+try { var_dump($scalar + 1); }
+catch (Throwable $error) { echo get_class($error), ': ', $error->getMessage(), "\n"; }
+$freed = $ffi->new('int', false);
+FFI::free($freed);
+var_dump((bool) $freed);
+try { var_dump((string) $freed); }
+catch (Throwable $error) { echo get_class($error), ': ', $error->getMessage(), "\n"; }
+
+@@ output
+string(9) "FFI\CData"
+int(20)
+int(1)
+bool(true)
+string(1) "0"
+TypeError: Unsupported operand types: FFI\CData + int
+bool(true)
+Error: Object of class FFI\CData could not be converted to string
+
+@@ P24 finality_inherited.php
+@@ program
+<?php
+class NonFinalParent { public function __toString(): string { return 'inherited'; } }
+final class FinalChild extends NonFinalParent {}
+$value = new FinalChild;
+var_dump((new ReflectionClass(FinalChild::class))->isFinal(), (string) $value, (bool) $value);
+foreach ([Closure::class, Generator::class, FFI\CData::class, GMP::class] as $name) {
+    try { eval('class BadChild extends \\' . $name . ' {}'); }
+    catch (Throwable $error) { echo get_class($error), ': ', $error->getMessage(), "\n"; }
+}
+
+@@ output
+bool(true)
+string(9) "inherited"
+bool(true)
+
+Fatal error: Class BadChild cannot extend final class Closure in /Users/yichao/Projects/Cobra/cobraphp-run/W1/oc-facts/api/p-semantics/finality_inherited.php(7) : eval()'d code on line 1
+Stack trace:
+#0 {main}
+
+@@ P25 gmp_final.php
+@@ program
+<?php
+$zero = gmp_init(0);
+$one = gmp_init(1);
+var_dump((new ReflectionClass(GMP::class))->isFinal());
+var_dump((bool) $zero, (bool) $one, (string) $zero, (int) $one);
+$sum = $one + 4;
+var_dump(get_debug_type($sum), (int) $sum, (string) (~$zero));
+var_dump(!$zero, !$one, $zero xor $one);
+
+@@ output
+bool(true)
+bool(false)
+bool(true)
+string(1) "0"
+int(1)
+string(3) "GMP"
+int(5)
+string(2) "-1"
+bool(true)
+bool(false)
+bool(true)
+
+@@ P26 string_dispatch.php
+@@ program
+<?php
+class XmlParentText extends SimpleXMLElement {
+    public function __toString(): string { return '0'; }
+}
+class XmlInheritedText extends XmlParentText {}
+class TidyParentText extends tidy {
+    public function __toString(): string { return '0'; }
+}
+class TidyInheritedText extends TidyParentText {}
+$xml = new XmlInheritedText('<r><x/></r>');
+$tidy = new TidyInheritedText;
+$tidy->parseString('<p>native</p>');
+var_dump((string) $xml, (bool) $xml, !(string) $xml, !$xml);
+var_dump($tidy->__toString(), (bool) $tidy);
+var_dump(str_contains((string) $tidy, 'native'), (string) $tidy === '0');
+
+@@ output
+string(1) "0"
+bool(true)
+bool(true)
+bool(false)
+string(1) "0"
+bool(true)
+bool(true)
+bool(false)
+
+@@ P27 mixed_compare.php
+@@ program
+<?php
+set_error_handler(static function (int $severity, string $message): bool { return true; });
+$object = new stdClass;
+$stream = fopen('php://memory', 'r+');
+var_dump($object == [], $object <=> [], $object == $stream, $object <=> $stream);
+fclose($stream);
+
+@@ output
+bool(false)
+int(1)
+bool(false)
+int(1)
+
+@@ P28 operator_requests.php
+@@ program
+<?php
+$number = gmp_init(4);
+$positive = +$number;
+$negative = -$number;
+var_dump(get_debug_type($positive), (int) $positive);
+var_dump(get_debug_type($negative), (int) $negative);
+$number++;
+var_dump(get_debug_type($number), (int) $number);
+$number--;
+var_dump(get_debug_type($number), (int) $number);
+var_dump($number xor gmp_init(0));
+
+@@ output
+string(3) "GMP"
+int(4)
+string(3) "GMP"
+int(-4)
+string(3) "GMP"
+int(5)
+string(3) "GMP"
+int(4)
+bool(true)
+
+@@ P29 worked_ffi.php
+@@ program
+<?php
+$ffi = FFI::cdef('struct S { int v; };');
+$array = $ffi->new('int[3]');
+$array[0] = 10;
+$array[1] = 20;
+$pointer = FFI::addr($array[0]);
+$next = $pointer + 1;
+var_dump(get_debug_type($next), $next[0], $next - $pointer);
+
+@@ output
+string(9) "FFI\CData"
+int(20)
+int(1)
+
+@@ P30 bool_not_initializer.php
+@@ program
+<?php
+function delayedNot($value = !new GMP(0)): void {
+    var_dump($value);
+}
+function delayedBitwiseNot($value = ~new GMP(0)): void {
+    var_dump(get_debug_type($value), (string) $value);
+}
+var_dump(!new GMP(0));
+delayedNot();
+delayedBitwiseNot();
+
+@@ output
+bool(true)
+bool(true)
+string(3) "GMP"
+string(2) "-1"
+
+@@ P31 throwing_dispatch.php
+@@ program
+<?php
+class ThrowingXml extends SimpleXMLElement {
+    public function __toString(): string {
+        echo "xml-method\n";
+        throw new RuntimeException('xml-stop');
+    }
+}
+class ThrowingTidy extends tidy {
+    public function __toString(): string {
+        echo "tidy-method\n";
+        throw new RuntimeException('tidy-stop');
+    }
+}
+try {
+    var_dump((string) new ThrowingXml('<r>native</r>'));
+} catch (RuntimeException $error) {
+    echo $error->getMessage(), "\n";
+}
+$document = new ThrowingTidy;
+$document->parseString('<p>native</p>');
+var_dump(str_contains((string) $document, 'native'));
+try {
+    $document->__toString();
+} catch (RuntimeException $error) {
+    echo $error->getMessage(), "\n";
+}
+
+@@ output
+xml-method
+xml-stop
+bool(true)
+tidy-method
+tidy-stop
+
+@@ P32 constant_requests.php
+@@ program
+<?php
+function defaultNotZero($value = !new GMP(0)) { var_dump($value); }
+function defaultNotOne($value = !new GMP(1)) { var_dump($value); }
+var_dump(!new GMP(0), !new GMP(1));
+defaultNotZero();
+defaultNotOne();
+
+@@ output
+bool(true)
+bool(false)
+bool(true)
+bool(false)
+
+@@ P33 interface_finality.php
+@@ program
+<?php
+foreach (['Stringable', 'Iterator'] as $name) {
+    echo $name, "\n";
+    $class = new ReflectionClass($name);
+    var_dump($class->isFinal(), $class->isInterface());
+}
+
+@@ output
+Stringable
+bool(false)
+bool(true)
+Iterator
+bool(false)
+bool(true)
+
+@@ P34 standard_dispatch_subclass.php
+@@ program
+<?php
+class ChildOfStd extends stdClass {
+    public function __toString(): string { return 'std-child'; }
+}
+var_dump((string) new ChildOfStd);
+try {
+    var_dump((string) new stdClass);
+} catch (Error $error) {
+    echo get_class($error), ': ', $error->getMessage(), "\n";
+}
+
+@@ output
+string(9) "std-child"
+Error: Object of class stdClass could not be converted to string
+
+@@ P35 initializer_requests.php
+@@ program
+<?php
+function initializedNot($value = !new GMP(0)) {
+    var_dump($value);
+}
+function initializedXor($value = (new GMP(0) xor true)) {
+    var_dump($value);
+}
+initializedNot();
+initializedXor();
+var_dump(!new GMP(0), new GMP(0) xor true);
+function initializedObject($value = !new class {}) {
+    var_dump($value);
+}
+
+@@ output
+
+Fatal error: Cannot use anonymous class in constant expression in /Users/yichao/Projects/Cobra/cobraphp-run/W1/oc-facts/api/r-semantics/initializer_requests.php on line 11
+Stack trace:
+#0 {main}
+
+@@ P36 throwing_dispatch.php
+@@ program
+<?php
+class ThrowingXml extends SimpleXMLElement {
+    public function __toString(): string {
+        echo "xml method\n";
+        throw new RuntimeException('xml failure');
+    }
+}
+class InheritedThrowingXml extends ThrowingXml {}
+class ThrowingTidy extends tidy {
+    public function __toString(): string {
+        echo "tidy method\n";
+        throw new RuntimeException('tidy failure');
+    }
+}
+$xml = new InheritedThrowingXml('<r>native</r>');
+try {
+    var_dump((string) $xml);
+} catch (Throwable $error) {
+    echo get_class($error), ': ', $error->getMessage(), "\n";
+}
+$tidy = new ThrowingTidy;
+$tidy->parseString('<p>native</p>');
+var_dump(str_contains((string) $tidy, 'native'));
+try {
+    var_dump($tidy->__toString());
+} catch (Throwable $error) {
+    echo get_class($error), ': ', $error->getMessage(), "\n";
+}
+
+@@ output
+xml method
+RuntimeException: xml failure
+bool(true)
+tidy method
+RuntimeException: tidy failure
+
+@@ P37 finality_independent.php
+@@ program
+<?php
+enum LocalEnum { case A; }
+interface LocalInterface {}
+trait LocalTrait {}
+class TextParent {
+    public function __toString(): string { return 'inherited'; }
+}
+final class FinalTextChild extends TextParent {}
+foreach (['RoundingMode', 'LocalEnum', 'Stringable', 'LocalInterface', 'LocalTrait', 'FinalTextChild'] as $name) {
+    $reflection = new ReflectionClass($name);
+    echo $name, ': ', $reflection->isFinal() ? 'final' : 'non-final', "\n";
+}
+var_dump((string) new FinalTextChild);
+var_dump((bool) gmp_init(0), (bool) gmp_init(1));
+
+@@ output
+RoundingMode: non-final
+LocalEnum: final
+Stringable: non-final
+LocalInterface: non-final
+LocalTrait: non-final
+FinalTextChild: final
+string(9) "inherited"
+bool(false)
+bool(true)
+
+@@ P38 initializer_objects.php
+@@ program
+<?php
+function initializedNot($value = !new GMP(0)) {
+    var_dump($value);
+}
+function initializedXor($value = (new GMP(0) xor true)) {
+    var_dump($value);
+}
+function initializedOrdinary($value = !new stdClass) {
+    var_dump($value);
+}
+initializedNot();
+initializedXor();
+initializedOrdinary();
+var_dump(!new GMP(0), new GMP(0) xor true);
+
+@@ output
+bool(true)
+bool(true)
+bool(false)
+bool(true)
+bool(true)
+
+@@ P39 standard_descendant.php
+@@ program
+<?php
+class NativeBaseChild extends stdClass {
+    public function __toString(): string { return 'child'; }
+}
+final class FinalNativeGrandchild extends NativeBaseChild {}
+$object = new FinalNativeGrandchild;
+var_dump((string) $object, (bool) $object);
+try {
+    var_dump((string) new stdClass);
+} catch (Throwable $error) {
+    echo get_class($error), ': ', $error->getMessage(), "\n";
+}
+
+@@ output
+string(5) "child"
+bool(true)
+Error: Object of class stdClass could not be converted to string
+
