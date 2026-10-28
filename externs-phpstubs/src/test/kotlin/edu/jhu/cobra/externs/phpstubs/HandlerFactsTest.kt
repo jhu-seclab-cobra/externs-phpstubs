@@ -30,6 +30,7 @@ import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 /**
+ * - `class fixed creators keep other classes tables out` — exact source identities for twelve classes.
  * Tests for the handler facts and finality of the bundled class records (design-extraction-handlers.md,
  * spec-extraction-handlers.md). The expectations are read off php-src 8.5 and its PHP 8.5.12 behavior, never off the
  * extractor's output; each mapping test cites the C function it follows and the reference programs it pins.
@@ -59,6 +60,27 @@ internal class HandlerFactsTest {
     private val subjects: List<String> = manifest.values.flatten()
 
     // ========== coverage of the generated documents ==========
+
+    @Test
+    fun `class fixed creators keep other classes tables out`() {
+        val expected = mapOf(
+            "mysqli" to "ext/mysqli/mysqli.c:mysqli_object_link_handlers",
+            "mysqli_driver" to "ext/mysqli/mysqli.c:mysqli_object_driver_handlers",
+            "mysqli_stmt" to "ext/mysqli/mysqli.c:mysqli_object_stmt_handlers",
+            "mysqli_result" to "ext/mysqli/mysqli.c:mysqli_object_result_handlers",
+            "mysqli_warning" to "ext/mysqli/mysqli.c:mysqli_object_warning_handlers",
+            "arrayobject" to "ext/spl/spl_array.c:spl_handler_ArrayObject",
+            "arrayiterator" to "ext/spl/spl_array.c:spl_handler_ArrayObject",
+            "dom\\element" to "ext/dom/php_dom.c:dom_modern_element_object_handlers",
+            "domnodelist" to "ext/dom/php_dom.c:dom_nodelist_object_handlers",
+            "dom\\nodelist" to "ext/dom/php_dom.c:dom_modern_nodelist_object_handlers",
+            "intlcalendar" to "ext/intl/calendar/calendar_class.cpp:Calendar_handlers",
+            "intlbreakiterator" to "ext/intl/breakiterator/breakiterator_class.cpp:BreakIterator_handlers",
+        )
+        for ((name, table) in expected) {
+            assertEquals(setOf(table), signatureOf(name).handlers.map { it.id }.toSet(), name)
+        }
+    }
 
     @Test
     fun `the manifest lists 56 documents and 310 subjects`() {

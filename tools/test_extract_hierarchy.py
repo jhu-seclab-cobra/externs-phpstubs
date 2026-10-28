@@ -1,6 +1,8 @@
 """Tests for extract_hierarchy.py over the small tree of fixture_handler_tree.py plus a stub file.
 
 Run: python3 -B -m unittest discover -s tools -p "test_*.py" (from the externs-phpstubs root).
+- test_namespace_imports_and_both_enum_interfaces: PHP imports and both engine enum interface sets
+- test_conflicting_stub_parent_fails: incompatible duplicate stub hierarchies reject
 - declarations: classifier, parent, modifiers, and whether a class body declares a string-conversion method
 - final-class status: from the registration flags only; a stub that declares a class final while its registration
   lacks the flag fails; an unregistered declaration has none
@@ -84,6 +86,28 @@ class HierarchyTest(unittest.TestCase):
 
     def generated(self):
         return extract_hierarchy.generate(self.root)
+
+    def test_namespace_imports_and_both_enum_interfaces(self):
+        write_tree(self.root, r"""<?php
+namespace N;
+use Vendor\Base as B;
+class Child extends B implements \Iface {}
+enum Plain { case A; }
+enum Backed: string { case A = 'a'; }
+""")
+        declarations = extract_hierarchy.read_php_src(self.root)
+        self.assertEqual(
+            ('vendor\\base', ['iface']), (declarations['n\\child'].parent, declarations['n\\child'].interfaces)
+        )
+        self.assertEqual(['unitenum'], declarations['n\\plain'].interfaces)
+        self.assertEqual(['unitenum', 'backedenum'], declarations['n\\backed'].interfaces)
+
+    def test_conflicting_stub_parent_fails(self):
+        (self.root / 'ext/demo/other.stub.php').write_text(
+            '<?php class Pair extends Different {}', encoding='utf-8'
+        )
+        with self.assertRaisesRegex(php_src.ExtractionFailure, 'pair: .*different hierarchies'):
+            extract_hierarchy.read_php_src(self.root)
 
     def test_declaration_records_classifier_parent_and_modifiers(self):
         found = extract_hierarchy.read_php_src(self.root)
