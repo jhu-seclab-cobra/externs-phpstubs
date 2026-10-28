@@ -245,6 +245,7 @@
   signature:
     classifier: enum
     interfaces: [unitenum]
+    isFinal: false
 - subject:
     function: pcntl_forkx
   signature:

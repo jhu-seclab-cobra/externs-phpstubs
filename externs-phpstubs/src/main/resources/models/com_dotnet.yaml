@@ -5,28 +5,304 @@
   signature:
     classifier: class
     parent: variant
+    isFinal: false
+    handlers:
+      - id: ext/com_dotnet/com_handlers.c:php_com_object_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: ext/com_dotnet/com_handlers.c:com_object_cast
+                results: [any]
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: ext/com_dotnet/com_handlers.c:com_object_cast
+                results: [any]
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: ext/com_dotnet/com_handlers.c:com_object_cast
+                results: [any]
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: ext/com_dotnet/com_handlers.c:com_object_cast
+                results: [any]
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: ext/com_dotnet/com_handlers.c:com_object_cast
+                results: [any]
+                stringDispatch: native_first
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: ext/com_dotnet/com_handlers.c:com_object_cast
+                results: [bool, any]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: ext/com_dotnet/com_handlers.c:com_object_cast
+                results: [any]
+          - slot: compare
+            targets:
+              - symbol: ext/com_dotnet/com_handlers.c:com_objects_compare
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: com_exception
   signature:
     classifier: class
     parent: exception
+    isFinal: true
+    handlers:
+      - id: Zend/zend_exceptions.c:default_exception_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [str, any]
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: com_safearray_proxy
   signature:
     classifier: class
+    isFinal: true
+    handlers:
+      - id: ext/com_dotnet/com_saproxy.c:php_com_saproxy_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: ext/com_dotnet/com_saproxy.c:saproxy_object_cast
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: ext/com_dotnet/com_saproxy.c:saproxy_object_cast
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: ext/com_dotnet/com_saproxy.c:saproxy_object_cast
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: ext/com_dotnet/com_saproxy.c:saproxy_object_cast
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: ext/com_dotnet/com_saproxy.c:saproxy_object_cast
+                results: []
+                stringDispatch: none
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: ext/com_dotnet/com_saproxy.c:saproxy_object_cast
+                results: []
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: ext/com_dotnet/com_saproxy.c:saproxy_object_cast
+                results: []
+          - slot: compare
+            targets:
+              - symbol: ext/com_dotnet/com_saproxy.c:saproxy_objects_compare
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: compersisthelper
   signature:
     classifier: class
+    isFinal: true
+    handlers:
+      - id: ext/com_dotnet/com_persist.c:helper_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: dotnet
   signature:
     classifier: class
     parent: variant
+    isFinal: false
+    handlers:
+      - id: ext/com_dotnet/com_handlers.c:php_com_object_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: ext/com_dotnet/com_handlers.c:com_object_cast
+                results: [any]
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: ext/com_dotnet/com_handlers.c:com_object_cast
+                results: [any]
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: ext/com_dotnet/com_handlers.c:com_object_cast
+                results: [any]
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: ext/com_dotnet/com_handlers.c:com_object_cast
+                results: [any]
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: ext/com_dotnet/com_handlers.c:com_object_cast
+                results: [any]
+                stringDispatch: native_first
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: ext/com_dotnet/com_handlers.c:com_object_cast
+                results: [bool, any]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: ext/com_dotnet/com_handlers.c:com_object_cast
+                results: [any]
+          - slot: compare
+            targets:
+              - symbol: ext/com_dotnet/com_handlers.c:com_objects_compare
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: variant
   signature:
     classifier: class
+    isFinal: false
+    handlers:
+      - id: ext/com_dotnet/com_handlers.c:php_com_object_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: ext/com_dotnet/com_handlers.c:com_object_cast
+                results: [any]
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: ext/com_dotnet/com_handlers.c:com_object_cast
+                results: [any]
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: ext/com_dotnet/com_handlers.c:com_object_cast
+                results: [any]
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: ext/com_dotnet/com_handlers.c:com_object_cast
+                results: [any]
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: ext/com_dotnet/com_handlers.c:com_object_cast
+                results: [any]
+                stringDispatch: native_first
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: ext/com_dotnet/com_handlers.c:com_object_cast
+                results: [bool, any]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: ext/com_dotnet/com_handlers.c:com_object_cast
+                results: [any]
+          - slot: compare
+            targets:
+              - symbol: ext/com_dotnet/com_handlers.c:com_objects_compare
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     method: com::__construct
   signature:

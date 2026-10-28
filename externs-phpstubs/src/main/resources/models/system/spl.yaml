@@ -85,156 +85,1311 @@
   signature:
     classifier: class
     parent: iteratoriterator
+    isFinal: false
+    handlers:
+      - id: ext/spl/spl_iterators.c:spl_handlers_dual_it
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: cachingiterator
   signature:
     classifier: class
     parent: iteratoriterator
     interfaces: [arrayaccess, countable, stringable]
+    isFinal: false
+    handlers:
+      - id: ext/spl/spl_iterators.c:spl_handlers_dual_it
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [str, any]
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: callbackfilteriterator
   signature:
     classifier: class
     parent: filteriterator
+    isFinal: false
+    handlers:
+      - id: ext/spl/spl_iterators.c:spl_handlers_dual_it
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: emptyiterator
   signature:
     classifier: class
     interfaces: [iterator]
+    isFinal: false
+    handlers:
+      - id: Zend/zend_object_handlers.c:std_object_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: filesystemiterator
   signature:
     classifier: class
     parent: directoryiterator
+    isFinal: false
+    handlers:
+      - id: ext/spl/spl_directory.c:spl_filesystem_object_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [str, any]
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: filteriterator
   signature:
     classifier: class
     parent: iteratoriterator
+    isFinal: false
+    handlers:
+      - id: ext/spl/spl_iterators.c:spl_handlers_dual_it
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: globiterator
   signature:
     classifier: class
     parent: filesystemiterator
     interfaces: [countable]
+    isFinal: false
+    handlers:
+      - id: ext/spl/spl_directory.c:spl_filesystem_object_check_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [str, any]
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: infiniteiterator
   signature:
     classifier: class
     parent: iteratoriterator
+    isFinal: false
+    handlers:
+      - id: ext/spl/spl_iterators.c:spl_handlers_dual_it
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: iteratoriterator
   signature:
     classifier: class
     interfaces: [outeriterator]
+    isFinal: false
+    handlers:
+      - id: ext/spl/spl_iterators.c:spl_handlers_dual_it
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: limititerator
   signature:
     classifier: class
     parent: iteratoriterator
+    isFinal: false
+    handlers:
+      - id: ext/spl/spl_iterators.c:spl_handlers_dual_it
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: multipleiterator
   signature:
     classifier: class
     interfaces: [iterator]
+    isFinal: false
+    handlers:
+      - id: ext/spl/spl_observer.c:spl_handler_MultipleIterator
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: ext/spl/spl_observer.c:spl_object_storage_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: norewinditerator
   signature:
     classifier: class
     parent: iteratoriterator
+    isFinal: false
+    handlers:
+      - id: ext/spl/spl_iterators.c:spl_handlers_dual_it
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: outeriterator
   signature:
     classifier: interface
     interfaces: [iterator]
+    isFinal: false
 - subject:
     class: parentiterator
   signature:
     classifier: class
     parent: recursivefilteriterator
+    isFinal: false
+    handlers:
+      - id: ext/spl/spl_iterators.c:spl_handlers_dual_it
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: recursivearrayiterator
   signature:
     classifier: class
     parent: arrayiterator
     interfaces: [recursiveiterator]
+    isFinal: false
+    handlers:
+      - id: ext/spl/spl_array.c:spl_handler_ArrayObject
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: ext/spl/spl_array.c:spl_array_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: recursivecachingiterator
   signature:
     classifier: class
     parent: cachingiterator
     interfaces: [recursiveiterator]
+    isFinal: false
+    handlers:
+      - id: ext/spl/spl_iterators.c:spl_handlers_dual_it
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [str, any]
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: recursivecallbackfilteriterator
   signature:
     classifier: class
     parent: callbackfilteriterator
     interfaces: [recursiveiterator]
+    isFinal: false
+    handlers:
+      - id: ext/spl/spl_iterators.c:spl_handlers_dual_it
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: recursivefilteriterator
   signature:
     classifier: class
     parent: filteriterator
     interfaces: [recursiveiterator]
+    isFinal: false
+    handlers:
+      - id: ext/spl/spl_iterators.c:spl_handlers_dual_it
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: recursiveiterator
   signature:
     classifier: interface
     interfaces: [iterator]
+    isFinal: false
 - subject:
     class: recursiveiteratoriterator
   signature:
     classifier: class
     interfaces: [outeriterator]
+    isFinal: false
+    handlers:
+      - id: ext/spl/spl_iterators.c:spl_handlers_rec_it_it
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: recursiveregexiterator
   signature:
     classifier: class
     parent: regexiterator
     interfaces: [recursiveiterator]
+    isFinal: false
+    handlers:
+      - id: ext/spl/spl_iterators.c:spl_handlers_dual_it
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: recursivetreeiterator
   signature:
     classifier: class
     parent: recursiveiteratoriterator
+    isFinal: false
+    handlers:
+      - id: ext/spl/spl_iterators.c:spl_handlers_rec_it_it
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: regexiterator
   signature:
     classifier: class
     parent: filteriterator
+    isFinal: false
+    handlers:
+      - id: ext/spl/spl_iterators.c:spl_handlers_dual_it
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: seekableiterator
   signature:
     classifier: interface
     interfaces: [iterator]
+    isFinal: false
 - subject:
     class: spldoublylinkedlist
   signature:
     classifier: class
     interfaces: [iterator, countable, arrayaccess, serializable]
+    isFinal: false
+    handlers:
+      - id: ext/spl/spl_dllist.c:spl_handler_SplDoublyLinkedList
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: splmaxheap
   signature:
     classifier: class
     parent: splheap
+    isFinal: false
+    handlers:
+      - id: ext/spl/spl_heap.c:spl_handler_SplHeap
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: splminheap
   signature:
     classifier: class
     parent: splheap
+    isFinal: false
+    handlers:
+      - id: ext/spl/spl_heap.c:spl_handler_SplHeap
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: splobserver
   signature:
     classifier: interface
+    isFinal: false
 - subject:
     class: splsubject
   signature:
     classifier: interface
+    isFinal: false
 - subject:
     class: spltempfileobject
   signature:
     classifier: class
     parent: splfileobject
+    isFinal: false
+    handlers:
+      - id: ext/spl/spl_directory.c:spl_filesystem_object_check_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [str, any]
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     method: AppendIterator::__construct
   signature:
@@ -1294,129 +2449,1279 @@
   signature:
     classifier: class
     parent: exception
+    isFinal: false
+    handlers:
+      - id: Zend/zend_exceptions.c:default_exception_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [str, any]
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: logicexception
   signature:
     classifier: class
     parent: exception
+    isFinal: false
+    handlers:
+      - id: Zend/zend_exceptions.c:default_exception_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [str, any]
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: invalidargumentexception
   signature:
     classifier: class
     parent: logicexception
+    isFinal: false
+    handlers:
+      - id: Zend/zend_exceptions.c:default_exception_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [str, any]
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: outofrangeexception
   signature:
     classifier: class
     parent: logicexception
+    isFinal: false
+    handlers:
+      - id: Zend/zend_exceptions.c:default_exception_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [str, any]
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: outofboundsexception
   signature:
     classifier: class
     parent: runtimeexception
+    isFinal: false
+    handlers:
+      - id: Zend/zend_exceptions.c:default_exception_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [str, any]
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: overflowexception
   signature:
     classifier: class
     parent: runtimeexception
+    isFinal: false
+    handlers:
+      - id: Zend/zend_exceptions.c:default_exception_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [str, any]
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: underflowexception
   signature:
     classifier: class
     parent: runtimeexception
+    isFinal: false
+    handlers:
+      - id: Zend/zend_exceptions.c:default_exception_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [str, any]
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: unexpectedvalueexception
   signature:
     classifier: class
     parent: runtimeexception
+    isFinal: false
+    handlers:
+      - id: Zend/zend_exceptions.c:default_exception_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [str, any]
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: badmethodcallexception
   signature:
     classifier: class
     parent: badfunctioncallexception
+    isFinal: false
+    handlers:
+      - id: Zend/zend_exceptions.c:default_exception_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [str, any]
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: badfunctioncallexception
   signature:
     classifier: class
     parent: logicexception
+    isFinal: false
+    handlers:
+      - id: Zend/zend_exceptions.c:default_exception_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [str, any]
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: domainexception
   signature:
     classifier: class
     parent: logicexception
+    isFinal: false
+    handlers:
+      - id: Zend/zend_exceptions.c:default_exception_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [str, any]
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: lengthexception
   signature:
     classifier: class
     parent: logicexception
+    isFinal: false
+    handlers:
+      - id: Zend/zend_exceptions.c:default_exception_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [str, any]
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: rangeexception
   signature:
     classifier: class
     parent: runtimeexception
+    isFinal: false
+    handlers:
+      - id: Zend/zend_exceptions.c:default_exception_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [str, any]
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: arrayobject
   signature:
     classifier: class
     interfaces: [iteratoraggregate, arrayaccess, serializable, countable]
+    isFinal: false
+    handlers:
+      - id: ext/spl/spl_array.c:spl_handler_ArrayObject
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: ext/spl/spl_array.c:spl_array_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: arrayiterator
   signature:
     classifier: class
     interfaces: [seekableiterator, arrayaccess, serializable, countable]
+    isFinal: false
+    handlers:
+      - id: ext/spl/spl_array.c:spl_handler_ArrayObject
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: ext/spl/spl_array.c:spl_array_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: splfileinfo
   signature:
     classifier: class
     interfaces: [stringable]
+    isFinal: false
+    handlers:
+      - id: ext/spl/spl_directory.c:spl_filesystem_object_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [str, any]
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: splfileobject
   signature:
     classifier: class
     parent: splfileinfo
     interfaces: [recursiveiterator, seekableiterator]
+    isFinal: false
+    handlers:
+      - id: ext/spl/spl_directory.c:spl_filesystem_object_check_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [str, any]
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: splfixedarray
   signature:
     classifier: class
     interfaces: [iteratoraggregate, arrayaccess, countable, jsonserializable]
+    isFinal: false
+    handlers:
+      - id: ext/spl/spl_fixedarray.c:spl_handler_SplFixedArray
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: splstack
   signature:
     classifier: class
     parent: spldoublylinkedlist
+    isFinal: false
+    handlers:
+      - id: ext/spl/spl_dllist.c:spl_handler_SplDoublyLinkedList
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: splqueue
   signature:
     classifier: class
     parent: spldoublylinkedlist
+    isFinal: false
+    handlers:
+      - id: ext/spl/spl_dllist.c:spl_handler_SplDoublyLinkedList
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: splheap
   signature:
     classifier: class
     interfaces: [iterator, countable]
+    isFinal: false
+    handlers:
+      - id: ext/spl/spl_heap.c:spl_handler_SplHeap
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: splpriorityqueue
   signature:
     classifier: class
     interfaces: [iterator, countable]
+    isFinal: false
+    handlers:
+      - id: ext/spl/spl_heap.c:spl_handler_SplPriorityQueue
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: splobjectstorage
   signature:
     classifier: class
     interfaces: [countable, seekableiterator, serializable, arrayaccess]
+    isFinal: false
+    handlers:
+      - id: ext/spl/spl_observer.c:spl_handler_SplObjectStorage
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: ext/spl/spl_observer.c:spl_object_storage_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: directoryiterator
   signature:
     classifier: class
     parent: splfileinfo
     interfaces: [seekableiterator]
+    isFinal: false
+    handlers:
+      - id: ext/spl/spl_directory.c:spl_filesystem_object_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [str, any]
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: recursivedirectoryiterator
   signature:
     classifier: class
     parent: filesystemiterator
     interfaces: [recursiveiterator]
+    isFinal: false
+    handlers:
+      - id: ext/spl/spl_directory.c:spl_filesystem_object_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [str, any]
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     function: class_implements
   signature:

@@ -4,24 +4,415 @@
     class: ffi
   signature:
     classifier: class
+    isFinal: true
+    handlers:
+      - id: ext/ffi/ffi.c:zend_ffi_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_fake_cast_object
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_fake_cast_object
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_fake_cast_object
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_fake_cast_object
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_fake_cast_object
+                results: []
+                stringDispatch: none
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_fake_cast_object
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_fake_cast_object
+                results: []
+          - slot: compare
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_fake_compare_objects
+                results: []
+          - slot: operation
+            absent: true
 - subject:
     class: ffi\cdata
   signature:
     classifier: class
+    isFinal: true
+    handlers:
+      - id: ext/ffi/ffi.c:zend_ffi_cdata_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_ffi_cdata_cast_object
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_ffi_cdata_cast_object
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_ffi_cdata_cast_object
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_ffi_cdata_cast_object
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_ffi_cdata_cast_object
+                results: [str]
+                stringDispatch: none
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_ffi_cdata_cast_object
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_ffi_cdata_cast_object
+                results: []
+          - slot: compare
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_ffi_cdata_compare_objects
+                results: [num]
+          - slot: operation
+            request: zend_add
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_ffi_cdata_do_operation
+                results: [any]
+          - slot: operation
+            request: zend_bool_not
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_ffi_cdata_do_operation
+                results: []
+          - slot: operation
+            request: zend_bool_xor
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_ffi_cdata_do_operation
+                results: []
+          - slot: operation
+            request: zend_bw_and
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_ffi_cdata_do_operation
+                results: []
+          - slot: operation
+            request: zend_bw_not
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_ffi_cdata_do_operation
+                results: []
+          - slot: operation
+            request: zend_bw_or
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_ffi_cdata_do_operation
+                results: []
+          - slot: operation
+            request: zend_bw_xor
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_ffi_cdata_do_operation
+                results: []
+          - slot: operation
+            request: zend_concat
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_ffi_cdata_do_operation
+                results: []
+          - slot: operation
+            request: zend_div
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_ffi_cdata_do_operation
+                results: []
+          - slot: operation
+            request: zend_mod
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_ffi_cdata_do_operation
+                results: []
+          - slot: operation
+            request: zend_mul
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_ffi_cdata_do_operation
+                results: []
+          - slot: operation
+            request: zend_pow
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_ffi_cdata_do_operation
+                results: []
+          - slot: operation
+            request: zend_sl
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_ffi_cdata_do_operation
+                results: []
+          - slot: operation
+            request: zend_sr
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_ffi_cdata_do_operation
+                results: []
+          - slot: operation
+            request: zend_sub
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_ffi_cdata_do_operation
+                results: [num, any]
+      - id: ext/ffi/ffi.c:zend_ffi_cdata_value_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_ffi_cdata_cast_object
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_ffi_cdata_cast_object
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_ffi_cdata_cast_object
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_ffi_cdata_cast_object
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_ffi_cdata_cast_object
+                results: [str]
+                stringDispatch: none
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_ffi_cdata_cast_object
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_ffi_cdata_cast_object
+                results: []
+          - slot: compare
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_ffi_cdata_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
+      - id: ext/ffi/ffi.c:zend_ffi_cdata_free_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_fake_cast_object
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_fake_cast_object
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_fake_cast_object
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_fake_cast_object
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_fake_cast_object
+                results: []
+                stringDispatch: none
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_fake_cast_object
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_fake_cast_object
+                results: []
+          - slot: compare
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_ffi_cdata_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: ffi\ctype
   signature:
     classifier: class
+    isFinal: true
+    handlers:
+      - id: ext/ffi/ffi.c:zend_ffi_ctype_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_fake_cast_object
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_fake_cast_object
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_fake_cast_object
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_fake_cast_object
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_fake_cast_object
+                results: []
+                stringDispatch: none
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_fake_cast_object
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_fake_cast_object
+                results: []
+          - slot: compare
+            targets:
+              - symbol: ext/ffi/ffi.c:zend_ffi_ctype_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: ffi\exception
   signature:
     classifier: class
     parent: error
+    isFinal: false
+    handlers:
+      - id: Zend/zend_exceptions.c:default_exception_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [str, any]
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: ffi\parserexception
   signature:
     classifier: class
     parent: ffi\exception
+    isFinal: true
+    handlers:
+      - id: Zend/zend_exceptions.c:default_exception_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [str, any]
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     method: FFI::addr
   signature:

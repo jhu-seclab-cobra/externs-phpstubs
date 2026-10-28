@@ -315,10 +315,102 @@
     class: tidy
   signature:
     classifier: class
+    isFinal: false
+    handlers:
+      - id: ext/tidy/tidy.c:tidy_object_handlers_doc
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: ext/tidy/tidy.c:tidy_doc_cast_handler
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: ext/tidy/tidy.c:tidy_doc_cast_handler
+                results: [num]
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: ext/tidy/tidy.c:tidy_doc_cast_handler
+                results: [num]
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: ext/tidy/tidy.c:tidy_doc_cast_handler
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: ext/tidy/tidy.c:tidy_doc_cast_handler
+                results: [str]
+                stringDispatch: none
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: ext/tidy/tidy.c:tidy_doc_cast_handler
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: ext/tidy/tidy.c:tidy_doc_cast_handler
+                results: [num]
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: tidynode
   signature:
     classifier: class
+    isFinal: true
+    handlers:
+      - id: ext/tidy/tidy.c:tidy_object_handlers_node
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: ext/tidy/tidy.c:tidy_node_cast_handler
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: ext/tidy/tidy.c:tidy_node_cast_handler
+                results: [num]
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: ext/tidy/tidy.c:tidy_node_cast_handler
+                results: [num]
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: ext/tidy/tidy.c:tidy_node_cast_handler
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: ext/tidy/tidy.c:tidy_node_cast_handler
+                results: [str]
+                stringDispatch: none
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: ext/tidy/tidy.c:tidy_node_cast_handler
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: ext/tidy/tidy.c:tidy_node_cast_handler
+                results: [num]
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     method: tidy::__construct
   signature:

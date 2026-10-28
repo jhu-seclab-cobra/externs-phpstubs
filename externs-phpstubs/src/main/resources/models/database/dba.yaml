@@ -185,3 +185,49 @@
     class: dba\connection
   signature:
     classifier: class
+    isFinal: true
+    handlers:
+      - id: ext/dba/dba.c:dba_connection_object_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: ext/dba/dba.c:dba_connection_cast_object
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: ext/dba/dba.c:dba_connection_cast_object
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: ext/dba/dba.c:dba_connection_cast_object
+                results: [num]
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: ext/dba/dba.c:dba_connection_cast_object
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: ext/dba/dba.c:dba_connection_cast_object
+                results: []
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: ext/dba/dba.c:dba_connection_cast_object
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: ext/dba/dba.c:dba_connection_cast_object
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_objects_not_comparable
+                results: [num]
+          - slot: operation
+            absent: true

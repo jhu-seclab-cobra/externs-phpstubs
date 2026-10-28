@@ -329,14 +329,152 @@
     class: curlfile
   signature:
     classifier: class
+    isFinal: false
+    handlers:
+      - id: Zend/zend_object_handlers.c:std_object_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: curlsharepersistenthandle
   signature:
     classifier: class
+    isFinal: true
+    handlers:
+      - id: ext/curl/share.c:curl_share_persistent_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_objects_not_comparable
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: curlstringfile
   signature:
     classifier: class
+    isFinal: false
+    handlers:
+      - id: Zend/zend_object_handlers.c:std_object_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_compare_objects
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     function: curl_multi_get_handles
   signature:
@@ -423,11 +561,149 @@
     class: curlhandle
   signature:
     classifier: class
+    isFinal: true
+    handlers:
+      - id: ext/curl/interface.c:curl_object_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: ext/curl/interface.c:curl_cast_object
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: ext/curl/interface.c:curl_cast_object
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: ext/curl/interface.c:curl_cast_object
+                results: [num]
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: ext/curl/interface.c:curl_cast_object
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: ext/curl/interface.c:curl_cast_object
+                results: []
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: ext/curl/interface.c:curl_cast_object
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: ext/curl/interface.c:curl_cast_object
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_objects_not_comparable
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: curlmultihandle
   signature:
     classifier: class
+    isFinal: true
+    handlers:
+      - id: ext/curl/multi.c:curl_multi_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: ext/curl/interface.c:curl_cast_object
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: ext/curl/interface.c:curl_cast_object
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: ext/curl/interface.c:curl_cast_object
+                results: [num]
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: ext/curl/interface.c:curl_cast_object
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: ext/curl/interface.c:curl_cast_object
+                results: []
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: ext/curl/interface.c:curl_cast_object
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: ext/curl/interface.c:curl_cast_object
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_objects_not_comparable
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: curlsharehandle
   signature:
     classifier: class
+    isFinal: true
+    handlers:
+      - id: ext/curl/share.c:curl_share_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_std_cast_object_tostring
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_objects_not_comparable
+                results: [num]
+          - slot: operation
+            absent: true

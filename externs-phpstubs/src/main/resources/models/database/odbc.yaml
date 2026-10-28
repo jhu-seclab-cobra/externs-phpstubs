@@ -696,10 +696,102 @@
     class: odbc\connection
   signature:
     classifier: class
+    isFinal: false
+    handlers:
+      - id: ext/odbc/php_odbc.c:odbc_connection_object_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: ext/odbc/php_odbc.c:odbc_connection_cast_object
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: ext/odbc/php_odbc.c:odbc_connection_cast_object
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: ext/odbc/php_odbc.c:odbc_connection_cast_object
+                results: [num]
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: ext/odbc/php_odbc.c:odbc_connection_cast_object
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: ext/odbc/php_odbc.c:odbc_connection_cast_object
+                results: []
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: ext/odbc/php_odbc.c:odbc_connection_cast_object
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: ext/odbc/php_odbc.c:odbc_connection_cast_object
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_objects_not_comparable
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: odbc\result
   signature:
     classifier: class
+    isFinal: false
+    handlers:
+      - id: ext/odbc/php_odbc.c:odbc_result_object_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: ext/odbc/php_odbc.c:odbc_result_cast_object
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: ext/odbc/php_odbc.c:odbc_result_cast_object
+                results: []
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: ext/odbc/php_odbc.c:odbc_result_cast_object
+                results: [num]
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: ext/odbc/php_odbc.c:odbc_result_cast_object
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: ext/odbc/php_odbc.c:odbc_result_cast_object
+                results: []
+                stringDispatch: method_only
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: ext/odbc/php_odbc.c:odbc_result_cast_object
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: ext/odbc/php_odbc.c:odbc_result_cast_object
+                results: []
+          - slot: compare
+            targets:
+              - symbol: Zend/zend_object_handlers.c:zend_objects_not_comparable
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     function: odbc_connection_string_is_quoted
   signature:

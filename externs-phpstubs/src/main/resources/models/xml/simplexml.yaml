@@ -83,11 +83,103 @@
   signature:
     classifier: class
     parent: simplexmlelement
+    isFinal: false
+    handlers:
+      - id: ext/simplexml/simplexml.c:sxe_object_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: ext/simplexml/simplexml.c:sxe_object_cast
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: ext/simplexml/simplexml.c:sxe_object_cast
+                results: [num]
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: ext/simplexml/simplexml.c:sxe_object_cast
+                results: [num]
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: ext/simplexml/simplexml.c:sxe_object_cast
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: ext/simplexml/simplexml.c:sxe_object_cast
+                results: [str, any]
+                stringDispatch: method_first
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: ext/simplexml/simplexml.c:sxe_object_cast
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: ext/simplexml/simplexml.c:sxe_object_cast
+                results: [num]
+          - slot: compare
+            targets:
+              - symbol: ext/simplexml/simplexml.c:sxe_objects_compare
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     class: simplexmlelement
   signature:
     classifier: class
     interfaces: [stringable, countable, recursiveiterator]
+    isFinal: false
+    handlers:
+      - id: ext/simplexml/simplexml.c:sxe_object_handlers
+        facts:
+          - slot: cast
+            request: is_array
+            targets:
+              - symbol: ext/simplexml/simplexml.c:sxe_object_cast
+                results: []
+          - slot: cast
+            request: is_double
+            targets:
+              - symbol: ext/simplexml/simplexml.c:sxe_object_cast
+                results: [num]
+          - slot: cast
+            request: is_long
+            targets:
+              - symbol: ext/simplexml/simplexml.c:sxe_object_cast
+                results: [num]
+          - slot: cast
+            request: is_resource
+            targets:
+              - symbol: ext/simplexml/simplexml.c:sxe_object_cast
+                results: []
+          - slot: cast
+            request: is_string
+            targets:
+              - symbol: ext/simplexml/simplexml.c:sxe_object_cast
+                results: [str, any]
+                stringDispatch: method_first
+          - slot: cast
+            request: _is_bool
+            targets:
+              - symbol: ext/simplexml/simplexml.c:sxe_object_cast
+                results: [bool]
+          - slot: cast
+            request: _is_number
+            targets:
+              - symbol: ext/simplexml/simplexml.c:sxe_object_cast
+                results: [num]
+          - slot: compare
+            targets:
+              - symbol: ext/simplexml/simplexml.c:sxe_objects_compare
+                results: [num]
+          - slot: operation
+            absent: true
 - subject:
     method: SimpleXMLElement::__construct
   signature:
