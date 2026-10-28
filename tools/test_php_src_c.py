@@ -6,6 +6,8 @@ Run: python3 -B -m unittest discover -s tools -p "test_*.py" (from the externs-p
 - linkage: a static definition is visible to its own file only; a header definition to every file
 - macros: a function-defining macro invocation is expanded; handler macros stay unexpanded
 - registrations: the class a register_class function registers, its kind, its flags and its parent
+- parameter types: the type name of a parameter declaration and of each parameter of a definition
+- expressions: sizeof keeps the words of its operand, a C++ cast reads as the C cast
 """
 
 import sys
@@ -19,7 +21,7 @@ import php_src
 from php_src_c import Program, Source
 from php_src_c.definitions import ParseFailure, definitions_of, parse_body, parse_expression
 from php_src_c.registrations import Registration
-from php_src_c.source import BRANCH, matching, split_arguments
+from php_src_c.source import BRANCH, matching, parameter_type, split_arguments
 
 CONDITIONAL = """int always;
 #ifdef HAVE_A
@@ -265,3 +267,28 @@ class BodyParserTest(unittest.TestCase):
     def test_parenthesized_star_fails_as_a_parse_error(self):
         with self.assertRaises(ParseFailure):
             parse_expression("(*) + 1")
+
+    def test_sizeof_keeps_the_words_of_its_operand(self):
+        self.assertEqual(("sizeof", ("struct", "box")), parse_expression("sizeof(struct box)"))
+        self.assertEqual(("sizeof", ()), parse_expression("sizeof value"))
+
+    def test_cxx_cast_reads_as_the_c_cast(self):
+        self.assertEqual(parse_expression("(box *)p"), parse_expression("reinterpret_cast<box *>(p)"))
+        self.assertEqual(parse_expression("(int)(a + b)"), parse_expression("static_cast<int>(a + b)"))
+
+
+class ParameterTypeTest(unittest.TestCase):
+    def test_declaration_names_its_type(self):
+        self.assertEqual("zend_object", parameter_type("zend_object *object"))
+        self.assertEqual("box", parameter_type("const struct box *const items[4]"))
+        self.assertEqual("long", parameter_type("unsigned long count"))
+
+    def test_declaration_without_a_name_has_no_type(self):
+        self.assertIsNone(parameter_type("void"))
+
+    def test_definition_records_the_type_of_each_parameter(self):
+        with tempfile.TemporaryDirectory() as directory:
+            source = Source(write(Path(directory), "f.c", "int f(zend_object *object, struct box b, int n) { return 0; }\n"), [])
+            source.relative = Path("f.c")
+            definition = next(iter(definitions_of(source)))
+        self.assertEqual({"object": "zend_object", "b": "box", "n": "int"}, definition.param_types)

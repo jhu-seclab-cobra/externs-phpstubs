@@ -7,7 +7,7 @@ import re
 import php_src
 from php_src_c.macros import HANDLER_MACROS
 from php_src_c.source import (
-    BRANCH, CALL, STRING_PLACEHOLDER, matching, matching_brace, parameter_name, split_arguments, statement_end,
+    BRANCH, CALL, STRING_PLACEHOLDER, matching, matching_brace, parameter_name, parameter_type, split_arguments, statement_end,
     strip_parentheses,
 )
 
@@ -32,6 +32,7 @@ class Definition:
         self.name, self.source, self.params, self.body = name, source, params, body
         self.returns_class, self.is_static, self.is_macro = returns_class, is_static, is_macro
         self.calls, self.assignments, self.returns = [], collections.defaultdict(list), []
+        self.param_types = {}
 
     def index(self, name):
         return self.params.index(name) if name in self.params else None
@@ -79,7 +80,9 @@ def definition_head(head, source, body):
     if name in HANDLER_MACROS:
         return Definition(HANDLER_MACROS[name].format(*arguments), source, [], body, False, False)
     params = [p for p in (parameter_name(a) for a in arguments) if p]
-    return Definition(name, source, params, body, "zend_class_entry" in prefix, "static" in prefix)
+    definition = Definition(name, source, params, body, "zend_class_entry" in prefix, "static" in prefix)
+    definition.param_types = {p: parameter_type(a) for a in arguments if (p := parameter_name(a))}
+    return definition
 
 
 # The argument expression of a function reference, whose call site is not in the body; it resolves to no class.
@@ -244,6 +247,7 @@ BINARY = {
     "||": 4, "&&": 5, "|": 6, "^": 7, "&": 8, "==": 9, "!=": 9, "<": 10, ">": 10, "<=": 10, ">=": 10, "<<": 11,
     ">>": 11, "+": 12, "-": 12, "*": 13, "/": 13, "%": 13,
 }
+CXX_CASTS = ("reinterpret_cast", "static_cast", "const_cast", "dynamic_cast")
 ASSIGN_OPS = {"=", "+=", "-=", "*=", "/=", "%=", "&=", "|=", "^=", "<<=", ">>="}
 
 
@@ -641,12 +645,15 @@ class BodyParser:
             return ("assign", "+=" if token == "++" else "-=", self.unary(), ("num", 1))
         if kind == "id" and token == "sizeof":
             self.i += 1
-            if self.peek() == "(":
-                close = self.matching_paren(self.i)
-                self.i = close + 1
-            else:
+            if self.peek() != "(":
                 self.unary()
-            return ("sizeof",)
+                return ("sizeof", ())
+            close = self.matching_paren(self.i)
+            words = tuple(t for _, t in self.toks[self.i + 1:close])
+            self.i = close + 1
+            return ("sizeof", words)
+        if kind == "id" and token in CXX_CASTS and self.toks[self.i + 1][1] == "<":
+            return self.cxx_cast()
         if kind == "op" and token == "(" and self.is_cast():
             close = self.matching_paren(self.i)
             type_words = tuple(t for _, t in self.toks[self.i + 1:close])
@@ -655,6 +662,16 @@ class BodyParser:
                 return ("cast", type_words, self.initializer())
             return ("cast", type_words, self.unary())
         return self.postfix()
+
+    def cxx_cast(self):
+        """``reinterpret_cast<T>(x)`` and the other C++ casts read as the C cast ``(T)x``."""
+        close = next(j for j in range(self.i + 2, len(self.toks)) if self.toks[j][1] == ">")
+        type_words = tuple(t for _, t in self.toks[self.i + 2:close])
+        self.i = close + 1
+        self.expect("(")
+        operand = self.expression()
+        self.expect(")")
+        return ("cast", type_words, operand)
 
     def matching_paren(self, start):
         depth = 0

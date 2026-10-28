@@ -176,6 +176,16 @@ def parameter_name(declaration):
     return names[-1] if names else None
 
 
+QUALIFIERS = {"struct", "union", "enum", "const", "volatile", "unsigned", "signed", "register"}
+
+
+def parameter_type(declaration):
+    """The type name a C parameter declaration names (``zend_object *object`` gives zend_object), or None."""
+    name = parameter_name(declaration)
+    words = [w for w in IDENTIFIER.findall(re.sub(r"\[[^\]]*\]", "", declaration)) if w != name and w not in QUALIFIERS]
+    return words[-1] if words and name else None
+
+
 def statement_end(text, start):
     """The offset ending the statement or block starting at or after start."""
     j = start
