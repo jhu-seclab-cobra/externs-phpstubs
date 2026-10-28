@@ -13,7 +13,6 @@ from handler_prims import EXCEPTION, EXCEPTIONS_REGION, Primitives
 CALL_DEPTH = 24
 VISIT_CAP = 40
 CALL_SLICE = 50000
-STACK_REPEAT = 2
 RETRIES = 8
 JOIN_BATCH = 16
 PENDING_CAP = 20000
@@ -94,7 +93,8 @@ class Machine(Expressions, Primitives):
         self.index, self.policy = index, policy
         self.global_accessors = {"EG": "executor_globals"}
         self.steps, self.limit, self.owner = 0, 0, None
-        self.stack, self.running = [], []
+        self.running = []
+        self.procedures = None
         self.marker = None
         self.opaques = []
         self.hopeless = {}
@@ -104,13 +104,18 @@ class Machine(Expressions, Primitives):
     def call(self, definition, args, state, budget):
         """The (exits, complete) of one top-level call; exits are (value, state) pairs."""
         self.limit, self.owner = self.steps + budget, None
-        self.stack = []
         try:
+            if self.procedures is not None:
+                return self.procedures.solve(definition, args, state)
             return self.run(definition, args, state, 0)
         except Exhausted:
+            if self.procedures is not None:
+                self.procedures.abort()
             return [], False
 
     def run(self, definition, args, state, depth):
+        if definition.noreturn:
+            return [], True
         code = self.index.code(definition)
         frame = Frame(definition, depth)
         if code.failure:
@@ -121,22 +126,22 @@ class Machine(Expressions, Primitives):
         frame.types.update(definition.param_types)
         for name, value in zip(definition.params, args):
             frame.bind(state, name, value)
-        self.stack.append(definition.name)
         self.running.append(definition)
         try:
-            exits = self.execute(frame, code, state)
+            exits = self.execute(frame, code, state, project=True)
         finally:
-            self.stack.pop()
             self.running.pop()
         for _, exit_state in exits:
             frame.release(exit_state)
         return exits, frame.complete
 
     # -- statements ----------------------------------------------------------------------------------------------
-    def execute(self, frame, code, state):
+    def execute(self, frame, code, state, project=False):
         waiting, pcs, memo, visits, exits = collections.defaultdict(list), [0], {}, collections.Counter(), []
         waiting[0].append(state)
         pending = [1]
+        projection = self.procedures if project and self.procedures is not None and all(
+            instr[0] != "o" for instr in code.instrs) else None
 
         def push(pc, st):
             """Queue a state at an instruction. States waiting at a join point are joined once they exceed
@@ -167,6 +172,8 @@ class Machine(Expressions, Primitives):
                     current = self.admit(frame, code, memo, visits, pc, current)
                 if current is not None:
                     getattr(self, "i_" + instr[0])(instr, pc, current, frame, push, exits)
+                if projection is not None and exits:
+                    projection.close(frame, exits)
                 if len(exits) > EXIT_BATCH:
                     exits[:] = join_exits(exits)
         return exits
@@ -322,7 +329,7 @@ class Machine(Expressions, Primitives):
 
     def interpret(self, definitions, name, args, state, frame):
         definitions = [d for d in definitions if self.policy.interpret(d)]
-        if not definitions or frame.depth >= CALL_DEPTH or self.stack.count(name) >= STACK_REPEAT:
+        if not definitions or (self.procedures is None and frame.depth >= CALL_DEPTH):
             return self.unknown_call(args, state)
         out = []
         for k, definition in enumerate(definitions):
@@ -333,6 +340,8 @@ class Machine(Expressions, Primitives):
     def run_callee(self, definition, args, state, depth):
         """The exits of a read callee. A callee whose subtree exhausts the step slice of the call is not read again:
         the direct callee that used the slice joins the unread calls and the call runs once more."""
+        if self.procedures is not None:
+            return self.procedures.read(definition, args, state)
         failed = self.hopeless.setdefault(id(self.policy), set())
         for _ in range(RETRIES):
             if id(definition) in failed:
@@ -365,7 +374,7 @@ class Machine(Expressions, Primitives):
         """A call whose callee the machine does not read: the result is unknown and a pointer to local or heap
         memory loses its contents."""
         for argument in args:
-            if isinstance(argument, Ptr) and argument.rid[0] in "lhoy" and self.policy.unread_writes(argument):
+            if isinstance(argument, Ptr) and argument.rid[0] in "lhoyp" and self.policy.unread_writes(argument):
                 state.havoc(argument.rid, argument.path)
         return [(ANYV, state)]
 

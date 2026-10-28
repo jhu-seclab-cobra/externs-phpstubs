@@ -22,7 +22,7 @@ from pathlib import Path
 
 import php_src
 import php_src_c
-from php_src_c.definitions import UNKNOWN_ARGUMENT, Call, analyze, consistent, parameter_guard, strongly_connected
+from php_src_c.definitions import UNKNOWN_ARGUMENT, Call, analyze, consistent, parameter_guard, ProcedureSummaries
 from php_src_c.source import IDENTIFIER, Source, split_arguments, strip_parentheses
 
 TOOL = "tools/extract_throws.py"
@@ -292,17 +292,8 @@ def summarize(program, roots):
         callees = [c for call in definition.calls for c in program.resolve(definition, call)]
         edges[id(definition)] = [id(c) for c in callees]
         frontier.extend(callees)
-    summaries = {}
-    for component in strongly_connected(list(definitions), edges):
-        changed = True
-        while changed:
-            changed = False
-            for node in component:
-                summary = Evaluation(program, definitions[node], summaries).run()
-                if summary != summaries.get(node, EMPTY):
-                    summaries[node] = summary
-                    changed = True
-    return summaries
+    driver = ProcedureSummaries(lambda node, table: Evaluation(program, definitions[node], table.summaries).run(), EMPTY)
+    return driver.solve(definitions, edges)
 
 
 def handler_definitions(program, entries):

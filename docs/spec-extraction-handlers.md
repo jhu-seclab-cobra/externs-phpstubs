@@ -34,11 +34,26 @@ kinds and string dispatch. Unknown source coverage remains unestablished.
    has no invented normal string result. Hypothetical user-subclass methods
    are served by the dispatch descriptor and ordinary call, not by erasing
    that class-specific proof. Track exceptions separately from normal success.
+   Canonicalize each call's argument-reachable local and allocated locations,
+   preserving their alias relation. Record direct-call dependencies in the
+   shared summary graph. A recursive call reads the current outcome set;
+   callee-first component iteration grows guarded return and memory effects
+   until stable. Apply effects to the caller's corresponding locations while
+   retaining its unrelated locals. No repetition count cuts a recursive call.
+   Evaluate newly admitted direct-call inputs immediately and reuse settled
+   acyclic inputs. A domain value that cannot grow releases its dependencies;
+   discard unfinished inputs no requested summary reaches. Keep the existing
+   direct-call step slice and unknown-call memory transfer, without turning
+   unread output into a known result kind.
 5. Classify the output at a normal SUCCESS exit, after all writes and conversion
    calls. An intermediate output type or a sentinel returned with a pending
    exception is not a normal-result kind. A complete proof of no normal exit
    emits an empty set; an incomplete proof omits the fact. COMPARE's normal C
    return is NUM, independently of the comparison expression's result type.
+   Once a comparison has a proved normal exit, NUM is its complete kind bound;
+   further normal C returns cannot enlarge it. Close only this request
+   projection, never cache partial callee effects. Early closure requires a
+   body without opaque instructions; an empty bound needs full convergence.
 6. Derive the string dispatch order from the relative reachability of the
    effective-method call, native work, success exits and failure continuation.
    The standard dispatcher supplies the effective __toString call. Native

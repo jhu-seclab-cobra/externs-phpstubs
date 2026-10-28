@@ -1,6 +1,10 @@
 """Tests for php_src_c: the shared C reader of the php-src producers (design-extraction-handlers.md).
 
 Run: python3 -B -m unittest discover -s tools -p "test_*.py" (from the externs-phpstubs root).
+- test_closed_projection_does_not_cache_partial_callees: only the proved request survives early closure
+- test_closed_callee_does_not_cache_partial_dependencies: a closed domain value releases unfinished work
+- test_recursive_procedure_components_join_to_fixpoint: one shared driver grows both recursive summaries
+- test_aborted_procedure_inputs_do_not_poison_later_roots: incomplete work is removed before another request
 - conditional compilation: the plain view keeps every branch text and drops the directives; the provenance view
   keeps one marker per branch with the condition it stands under
 - linkage: a static definition is visible to its own file only; a header definition to every file
@@ -22,7 +26,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 
 import php_src
 from php_src_c import Program, Source
-from php_src_c.definitions import ParseFailure, definitions_of, parse_body, parse_expression
+from php_src_c.definitions import CompleteSummary, ParseFailure, ProcedureSummaries, definitions_of, parse_body, parse_expression
 from php_src_c.registrations import Registration
 from php_src_c.source import BRANCH, matching, parameter_type, split_arguments
 
@@ -335,3 +339,45 @@ class ParameterTypeTest(unittest.TestCase):
             source.relative = Path("f.c")
             definition = next(iter(definitions_of(source)))
         self.assertEqual({"object": "zend_object", "b": "box", "n": "int"}, definition.param_types)
+
+
+class ProcedureSummaryTest(unittest.TestCase):
+    def test_recursive_procedure_components_join_to_fixpoint(self):
+        for eager in (False, True):
+            def evaluate(node, table):
+                return table.read("right" if node == "left" else "left", eager=eager) | {"num" if node == "left" else "str"}
+
+            driver = ProcedureSummaries(evaluate, frozenset(), lambda old, fresh: old | fresh)
+            self.assertEqual({"left": {"num", "str"}, "right": {"num", "str"}}, driver.solve(["left"]))
+
+    def test_aborted_procedure_inputs_do_not_poison_later_roots(self):
+        driver = ProcedureSummaries(lambda node, table: frozenset({node}), frozenset())
+        driver.read("unfinished")
+        driver.abort()
+        self.assertEqual({"complete": frozenset({"complete"})}, driver.solve(["complete"]))
+
+    def test_closed_projection_does_not_cache_partial_callees(self):
+        def evaluate(node, table):
+            if node == "request":
+                table.read("callee")
+                raise CompleteSummary(node, frozenset({"num"}))
+            return frozenset({"str"})
+
+        driver = ProcedureSummaries(evaluate, frozenset())
+        driver.solve(["request"])
+        self.assertEqual(
+            {"request": frozenset({"num"}), "callee": frozenset({"str"})}, driver.solve(["callee"])
+        )
+
+    def test_closed_callee_does_not_cache_partial_dependencies(self):
+        def evaluate(node, table):
+            if node == "request":
+                return table.read("callee", eager=True)
+            if node == "callee":
+                table.read("deferred")
+                return frozenset({"unknown"})
+            return frozenset({"str"})
+
+        driver = ProcedureSummaries(evaluate, frozenset(), closed=lambda value: value == {"unknown"})
+        self.assertEqual({"request": {"unknown"}, "callee": {"unknown"}}, driver.solve(["request"]))
+        self.assertEqual(frozenset({"str"}), driver.solve(["deferred"])["deferred"])

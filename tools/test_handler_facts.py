@@ -6,6 +6,24 @@ Run: python3 -B -m unittest discover -s tools -p "test_*.py" (from the externs-p
   slot writes read only in functions that name the table type, the parent's creator and table inherited
 - creation: the creator's table of each class, the struct type it allocates, the default table of a class with no creator
 - write sites: creation, copy, typed and foreign dispositions; a write that fits none fails the extraction
+- test_finite_recursive_helper_has_num_result: four terminating calls establish NUM
+- test_mutual_recursion_has_num_result: mutually recursive procedures reach the base write
+- test_recursive_local_output_alias_has_num_result: recursive argument aliases retain their effects
+- test_recursive_call_keeps_caller_locals: callee effects cannot overwrite private caller locals
+- test_recursive_fixed_input_keeps_only_normal_results: a recursive component joins terminating exits
+- test_step_budget_exhaustion_is_unestablished: exhausting total work never establishes a result
+- test_pending_budget_exhaustion_is_unestablished: exhausting queued states never establishes a result
+- test_exit_fold_keeps_every_normal_kind: folding 80 normal exits retains NUM and STR
+- test_aggregate_alternatives_keep_every_result_kind: a by-value conditional struct copy keeps NUM and STR
+- test_compare_closes_num_bound_after_a_normal_exit: remaining C return values cannot add a non-NUM kind
+- test_inline_expression_is_not_a_normal_compare_exit: an expression value cannot close a throwing request
+- test_unread_callee_invalidates_a_canonical_local: a procedure input keeps unknown pointer writes
+- test_completed_callees_keep_the_request_budget: settled direct calls are reused during component iteration
+- test_scalar_argument_retains_its_member_alias: argument renaming preserves equality with a member read
+- test_declared_noreturn_call_has_no_normal_result: a declared C non-returning call cannot reach SUCCESS
+- test_procedure_size_values_reach_fixpoint: sizeof values compare by source type rather than allocation identity
+- test_recursive_component_without_exit_has_no_normal_result: a stable empty component has no normal exit
+- test_cached_effects_rebind_argument_regions: the same helper writes each caller argument
 - test_unknown_type_is_unestablished: an unread type helper cannot establish ANY
 - test_unwritten_success_is_unestablished: SUCCESS without an output write has no proved result
 - test_expression_bound_keeps_every_alternative: every one of 49 value alternatives is visited
@@ -16,7 +34,7 @@ Run: python3 -B -m unittest discover -s tools -p "test_*.py" (from the externs-p
   conditional slots as two table alternatives, absent slots, the rendered handlers field
 - the handler write patterns of php-src (testdata/handlers): repeated and aliased writes, direct and snapshot copies,
   aggregate tables, helper arguments, class-fixed creators, inherited creators, typed lifetime writes, final writes
-  after conversion, pending exceptions, COM's guard, and the omission of a proof that does not end
+  after conversion, pending exceptions, COM's guard, and finite recursive procedure summaries
 """
 
 import collections
@@ -28,6 +46,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 
 import extract_hierarchy
+import handler_machine
+import handler_summary
 import fixture_handler_tree
 import php_src
 from handler_create import Creation
@@ -402,14 +422,14 @@ class RealShapeTest(unittest.TestCase):
     def cast(self, name, table, request="is_long"):
         return self.tables(name)[table][("cast", request)]
 
-    def test_every_source_pattern_but_the_unending_proof_was_established(self):
-        self.assertEqual([("ext/real/real.c:rec_handlers", "cast", request) for request in ("IS_LONG", "IS_STRING", "_IS_BOOL")],
-                         [omitted[:3] for omitted in self.report.omitted])
+    def test_every_source_pattern_is_established(self):
+        self.assertEqual([], self.report.omitted)
 
-    def test_unending_proof_is_reported_as_an_omission_and_never_as_an_empty_or_guessed_result(self):
-        self.assertEqual({"the output type is unknown"}, {omitted[3] for omitted in self.report.omitted})
+    def test_finite_helper_result_is_established_for_each_request(self):
         facts = self.tables("rrec")["rec_handlers"]
-        self.assertNotIn(("cast", "is_long"), facts)
+        for request in ("is_long", "is_string", "_is_bool"):
+            dispatch = "none" if request == "is_string" else None
+            self.assertEqual([("rec_cast", ["num"], dispatch)], facts[("cast", request)])
         self.assertEqual([("std_compare", ["num"], None)], facts[("compare", None)])
 
     def test_repeated_assignment_of_the_same_slot_keeps_the_last_write_of_that_table(self):
@@ -567,3 +587,190 @@ static int counter_cast(zend_object *o,zval *out,int type) { ZVAL_STR(out,NULL);
     def test_unwritten_success_is_unestablished(self):
         summary = self.summary("static int counter_cast(zend_object *o,zval *out,int type) {return SUCCESS;}")
         self.assertIsNone(summary.results)
+
+    def test_finite_recursive_helper_has_num_result(self):
+        fixture_handler_tree.write_real_tree(self.root)
+        registered = Registered(Program(self.root, provenance=True))
+        summary = Summarizer(registered).cast(fn("rec_cast", "ext/real/real.c"), "IS_LONG", False)
+        self.assertEqual(frozenset({"num"}), summary.results)
+
+    def test_mutual_recursion_has_num_result(self):
+        summary = self.summary("""
+static void left(zval *out,int n) {if(n) right(out,n-1);else ZVAL_LONG(out,1);}
+static void right(zval *out,int n) {if(n) left(out,n-1);else ZVAL_LONG(out,1);}
+static int counter_cast(zend_object *o,zval *out,int t) {left(out,7);return SUCCESS;}
+""")
+        self.assertEqual(frozenset({"num"}), summary.results)
+
+    def test_recursive_local_output_alias_has_num_result(self):
+        summary = self.summary("""
+static void fill(zval *out,int n) {
+    if(n) {zval tmp;fill(&tmp,n-1);Z_TYPE_INFO_P(out)=Z_TYPE_INFO_P(&tmp);}
+    else {ZVAL_LONG(out,1);}
+}
+static int counter_cast(zend_object *o,zval *out,int t) {fill(out,4);return SUCCESS;}
+""")
+        self.assertEqual(frozenset({"num"}), summary.results)
+
+    def test_recursive_call_keeps_caller_locals(self):
+        summary = self.summary("""
+static void fill(zval *out,int n) {
+    if(n) {int kept=n;fill(out,n-1);if(kept != n) ZVAL_STR(out,NULL);}
+    else {ZVAL_LONG(out,1);}
+}
+static int counter_cast(zend_object *o,zval *out,int t) {fill(out,4);return SUCCESS;}
+""")
+        self.assertEqual(frozenset({"num"}), summary.results)
+
+    def test_recursive_fixed_input_keeps_only_normal_results(self):
+        summary = self.summary("""
+static void fill(zval *out,zend_object *o) {
+    if(o->some_native_flag) {fill(out,o);} else {ZVAL_LONG(out,1);}
+}
+static int counter_cast(zend_object *o,zval *out,int t) {fill(out,o);return SUCCESS;}
+""")
+        self.assertEqual(frozenset({"num"}), summary.results)
+
+    def test_cached_effects_rebind_argument_regions(self):
+        summary = self.summary("""
+static void fill(zval *out) {ZVAL_LONG(out,1);}
+static int counter_cast(zend_object *o,zval *out,int t) {
+    zval first;zval second;fill(&first);fill(&second);
+    Z_TYPE_INFO_P(out)=Z_TYPE_INFO_P(&first);
+    if(Z_TYPE_INFO_P(&second) != IS_LONG) ZVAL_STR(out,NULL);
+    return SUCCESS;
+}
+""")
+        self.assertEqual(frozenset({"num"}), summary.results)
+
+    def test_step_budget_exhaustion_is_unestablished(self):
+        old = handler_summary.SUMMARY_BUDGET
+        try:
+            handler_summary.SUMMARY_BUDGET = 0
+            summary = self.summary(
+                "static int counter_cast(zend_object *o,zval *out,int type) {ZVAL_LONG(out,1);return SUCCESS;}"
+            )
+            self.assertIsNone(summary.results)
+        finally:
+            handler_summary.SUMMARY_BUDGET = old
+
+    def test_pending_budget_exhaustion_is_unestablished(self):
+        registered = Registered(self.program)
+        old = handler_machine.PENDING_CAP
+        try:
+            handler_machine.PENDING_CAP = 0
+            summary = Summarizer(registered).cast(fn("counter_cast"), "IS_LONG", False)
+            self.assertIsNone(summary.results)
+        finally:
+            handler_machine.PENDING_CAP = old
+
+    def test_exit_fold_keeps_every_normal_kind(self):
+        cases = "\n".join(f"case {n}: ZVAL_LONG(out,{n}); return SUCCESS;" for n in range(80))
+        summary = self.summary(
+            "static int counter_cast(zend_object *o,zval *out,int type) {switch(o->some_native_flag) {"
+            + cases + "default: ZVAL_STR(out,NULL);return SUCCESS;}}"
+        )
+        self.assertEqual(frozenset({"num", "str"}), summary.results)
+
+    def test_recursive_component_without_exit_has_no_normal_result(self):
+        summary = self.summary("""
+static void fill(zval *out) {fill(out);}
+static int counter_cast(zend_object *o,zval *out,int t) {fill(out);return SUCCESS;}
+""")
+        self.assertEqual(frozenset(), summary.results)
+
+    def test_procedure_size_values_reach_fixpoint(self):
+        old = handler_summary.SUMMARY_BUDGET
+        try:
+            handler_summary.SUMMARY_BUDGET = 200
+            summary = self.summary("""
+static size_t amount(void) {return sizeof(int);}
+static int counter_cast(zend_object *o,zval *out,int t) {amount();ZVAL_LONG(out,1);return SUCCESS;}
+""")
+            self.assertEqual(frozenset({"num"}), summary.results)
+        finally:
+            handler_summary.SUMMARY_BUDGET = old
+
+    def test_declared_noreturn_call_has_no_normal_result(self):
+        summary = self.summary("""
+extern void work(zval *out);
+static ZEND_NORETURN void halt(zval *out) {for(;;) {work(out);}}
+static int counter_cast(zend_object *o,zval *out,int t) {halt(out);return SUCCESS;}
+""")
+        self.assertEqual(frozenset(), summary.results)
+
+    def test_scalar_argument_retains_its_member_alias(self):
+        summary = self.summary("""
+static int same(zend_object *o,zval *out,int flag) {
+    if(flag != o->some_flag) {ZVAL_STR(out,NULL);} else {ZVAL_LONG(out,1);}
+    return SUCCESS;
+}
+static int counter_cast(zend_object *o,zval *out,int t) {return same(o,out,o->some_flag);}
+""")
+        self.assertEqual(frozenset({"num"}), summary.results)
+
+    def test_compare_closes_num_bound_after_a_normal_exit(self):
+        code = fixture_handler_tree.DEMO_C + """
+extern void work(zval *out);
+static int unfinished(zval *a,zval *b) {""" + "work(a);" * 100 + """return 0;}
+static int projected_compare(zval *a,zval *b) {
+    if(Z_TYPE_P(a) == IS_LONG) return 0;
+    return unfinished(a,b);
+}
+"""
+        fixture_handler_tree.write_tree(self.root, {DEMO: code})
+        registered = Registered(Program(self.root, provenance=True))
+        old = handler_summary.SUMMARY_BUDGET
+        try:
+            handler_summary.SUMMARY_BUDGET = 20
+            summary = Summarizer(registered).compare(fn("projected_compare"))
+            self.assertEqual(frozenset({"num"}), summary.results)
+        finally:
+            handler_summary.SUMMARY_BUDGET = old
+
+    def test_inline_expression_is_not_a_normal_compare_exit(self):
+        code = fixture_handler_tree.DEMO_C + """
+static int inline_compare(zval *a,zval *b) {
+    int value=({int x=1;x;});
+    zend_throw_error(NULL,"no normal exit");return value;
+}
+"""
+        fixture_handler_tree.write_tree(self.root, {DEMO: code})
+        registered = Registered(Program(self.root, provenance=True))
+        self.assertEqual(frozenset(), Summarizer(registered).compare(fn("inline_compare")).results)
+
+    def test_aggregate_alternatives_keep_every_result_kind(self):
+        summary = self.summary("""
+static int counter_cast(zend_object *o,zval *out,int t) {
+    zval first;ZVAL_LONG(&first,1);
+    zval second;ZVAL_STR(&second,NULL);
+    zval chosen=unknown_flag() ? first : second;
+    Z_TYPE_INFO_P(out)=Z_TYPE_INFO(chosen);
+    return SUCCESS;
+}
+""")
+        self.assertEqual(frozenset({"num", "str"}), summary.results)
+
+    def test_unread_callee_invalidates_a_canonical_local(self):
+        summary = self.summary("""
+extern void opaque(zval *out);
+static void fill(zval *out) {opaque(out);}
+static int counter_cast(zend_object *o,zval *out,int t) {
+    zval local;ZVAL_LONG(&local,1);fill(&local);
+    Z_TYPE_INFO_P(out)=Z_TYPE_INFO(local);return SUCCESS;
+}
+""")
+        self.assertIsNone(summary.results)
+
+    def test_completed_callees_keep_the_request_budget(self):
+        old = handler_summary.SUMMARY_BUDGET
+        try:
+            handler_summary.SUMMARY_BUDGET = 100
+            summary = self.summary("""
+static size_t amount(int n) {return sizeof(int);}
+static int counter_cast(zend_object *o,zval *out,int t) {""" + "".join(
+                f"amount({i});" for i in range(20)) + """ZVAL_LONG(out,1);return SUCCESS;}
+""")
+            self.assertEqual(frozenset({"num"}), summary.results)
+        finally:
+            handler_summary.SUMMARY_BUDGET = old

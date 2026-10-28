@@ -37,7 +37,24 @@ Format: [handler types](../../commons-phpmodels/docs/design-declarations-handler
   exits contribute, and an incomplete alternative leaves the request unknown.
 - Handler summaries extend the existing summary mechanism with the finite
   data named by the extraction specification; they are offline working data,
-  never a second runtime handler store.
+  never a second runtime handler store. `php_src_c.definitions.ProcedureSummaries`
+  owns the callee-first SCC iteration and completed-result table for both
+  producers. C no-return declarations have no normal exit; source sizes
+  compare by type name. The throws evaluator supplies its existing domain; the handler
+  evaluator supplies guarded return/memory-effect alternatives. `Summarizer`
+  classifies request exits and has no separate summary cache.
+  New direct-call inputs are evaluated eagerly. An acyclic input with settled
+  callees is completed immediately; recursive inputs retain the current
+  outcome set until component iteration stabilizes. A permanently incomplete
+  outcome releases its dependencies, and unfinished unreachable inputs are
+  discarded rather than cached as completed results.
+- Handler procedure inputs retain globals and the memory reachable from their
+  arguments. Reachable local and allocated regions are renamed by argument
+  position, preserving aliases. Effects are renamed back onto the current
+  caller; unrelated caller locals are never read from a cached summary.
+  Sizes and aggregate values have value identity. Conditional aggregate
+  copies join each member with its source guards. Unknown calls invalidate
+  canonical argument locations just as they invalidate caller locations.
 - The machine bounds its working states without dropping an outcome. States
   that reach one join point with the same event history and pending exception
   are joined into one whose differing cells are alternatives; outcomes of one
@@ -47,6 +64,10 @@ Format: [handler types](../../commons-phpmodels/docs/design-declarations-handler
   yields no summary, so its facts are omitted, never emitted empty.
   Value alternatives, binary operand combinations and called definitions are
   processed in full; batching chooses joins and never discards a remainder.
+  Direct-call evaluation retains the machine's existing step slice and
+  unknown-call transfer when that slice is exhausted. A later proved write
+  can establish an output; the unknown transfer alone establishes no kind.
+  Total request exhaustion discards unfinished summaries.
 
 ## Function Specifications
 
@@ -68,6 +89,11 @@ Format: [handler types](../../commons-phpmodels/docs/design-declarations-handler
   an output derived from an operand or effective method, not unread analysis.
 - Source summaries use the registered class's effective methods; hypothetical
   descendant methods remain ordinary calls admitted by the dispatch descriptor.
+- A comparison request can close its NUM bound after a proved normal exit:
+  the C return protocol excludes every other kind. This request projection
+  has a distinct key from a callee's complete return/effect summary, and its
+  early closure discards unfinished callees. Opaque instructions prevent
+  early closure. Proving no normal exit still requires the full fixpoint.
 - Consumed tokens come from the source dispatch inventory. The generated-set
   decode gate checks the single PM enum; the producer has no allowed-name
   list and no dependency on the consumer's internal operator vocabulary.

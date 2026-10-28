@@ -15,6 +15,7 @@ ASSIGNMENT = re.compile(r"\b([A-Za-z_]\w*)\s*=(?!=)")
 RETURN = re.compile(r"\breturn\b")
 IF = re.compile(r"\bif\s*\(")
 ELSE = re.compile(r"\s*else\b")
+NORETURN_ATTRIBUTE = re.compile(r"\b(?:ZEND_NORETURN|_Noreturn)\b")
 LINKAGE_BLOCK = re.compile(r"\bextern\s+__STR_\d+__\s*$")
 NOT_CALLS = {
     "if", "while", "for", "switch", "return", "sizeof", "do", "else", "case", "defined", "__attribute__",
@@ -34,6 +35,7 @@ class Definition:
         self.calls, self.assignments, self.returns = [], collections.defaultdict(list), []
         self.param_types = {}
         self.conditions = frozenset()
+        self.noreturn = False
 
     def index(self, name):
         return self.params.index(name) if name in self.params else None
@@ -87,10 +89,12 @@ def definition_head(head, source, body):
     prefix = stripped[:name_match.start()]
     prefix = prefix[max(prefix.rfind(";"), prefix.rfind("}")) + 1:]
     if name in HANDLER_MACROS:
-        return Definition(HANDLER_MACROS[name].format(*arguments), source, [], body, False, False)
-    params = [p for p in (parameter_name(a) for a in arguments) if p]
-    definition = Definition(name, source, params, body, "zend_class_entry" in prefix, "static" in prefix)
-    definition.param_types = {p: parameter_type(a) for a in arguments if (p := parameter_name(a))}
+        definition = Definition(HANDLER_MACROS[name].format(*arguments), source, [], body, False, False)
+    else:
+        params = [p for p in (parameter_name(a) for a in arguments) if p]
+        definition = Definition(name, source, params, body, "zend_class_entry" in prefix, "static" in prefix)
+        definition.param_types = {p: parameter_type(a) for a in arguments if (p := parameter_name(a))}
+    definition.noreturn = bool(NORETURN_ATTRIBUTE.search(prefix))
     return definition
 
 
@@ -235,6 +239,116 @@ def strongly_connected(nodes, edges):
                         break
                 order.append(component)
     return order
+
+
+class CompleteSummary(Exception):
+    """A domain has proved the complete value of the one requested summary."""
+
+    def __init__(self, node, value):
+        super().__init__()
+        self.node, self.value = node, value
+
+
+class ProcedureSummaries:
+    """The shared callee-first SCC/fixpoint driver; a domain supplies evaluation, bottom and monotone join.
+
+    An evaluation reads callees through read(), which records dependencies and admits new domain inputs. A newly
+    discovered dependency rebuilds the component order. Eager reads evaluate new inputs once; an acyclic input
+    whose dependencies have settled becomes completed immediately. Recursive reads keep the current value.
+    A domain's closed value no longer depends on its callees. Completed inputs stay in the per-program table.
+    """
+
+    def __init__(self, evaluate, empty, join=lambda old, new: new, closed=lambda value: False):
+        self.evaluate, self.empty, self.join, self.closed = evaluate, empty, join, closed
+        self.summaries, self.edges, self.pending = {}, {}, set()
+        self.current, self.revision = None, 0
+
+    def read(self, node, eager=False):
+        added = node not in self.summaries
+        if added:
+            self.summaries[node], self.edges[node] = self.empty, set()
+            self.pending.add(node)
+            self.revision += 1
+        if self.current is not None and node not in self.edges[self.current]:
+            self.edges[self.current].add(node)
+            self.revision += 1
+        if added and eager:
+            self.update(node)
+            if not (self.edges[node] & self.pending):
+                self.pending.discard(node)
+        return self.summaries[node]
+
+    def solve(self, roots, edges=None):
+        roots = list(roots)
+        for node in roots:
+            self.read(node)
+        for node, callees in (edges or {}).items():
+            self.edges[node].update(callees)
+        try:
+            self._solve_pending(roots)
+        except CompleteSummary as complete:
+            if roots != [complete.node]:
+                raise ValueError("Only the single requested summary may close") from complete
+            self.abort()
+            self.summaries[complete.node], self.edges[complete.node] = complete.value, set()
+        return self.summaries
+
+    def _solve_pending(self, roots):
+        while self.pending:
+            self._prune(roots)
+            nodes, revision = list(self.pending), self.revision
+            graph = {node: self.edges[node] & self.pending for node in nodes}
+            for component in strongly_connected(nodes, graph):
+                self.component(component)
+                if revision != self.revision:
+                    break
+            if revision == self.revision:
+                self.pending.difference_update(nodes)
+
+    def _prune(self, roots):
+        reachable, frontier = set(), list(roots)
+        while frontier:
+            node = frontier.pop()
+            if node in reachable:
+                continue
+            reachable.add(node)
+            frontier.extend(self.edges.get(node, ()))
+        discarded = self.pending - reachable
+        for node in discarded:
+            self.summaries.pop(node)
+            self.edges.pop(node)
+        self.pending.difference_update(discarded)
+
+    def component(self, nodes):
+        while True:
+            changed, revision = False, self.revision
+            for node in nodes:
+                changed = self.update(node) or changed
+            if not changed or revision != self.revision:
+                return
+
+    def update(self, node):
+        old = self.summaries[node]
+        if self.closed(old):
+            return False
+        previous, self.current = self.current, node
+        try:
+            summary = self.join(old, self.evaluate(node, self))
+        finally:
+            self.current = previous
+        self.summaries[node] = summary
+        if self.closed(summary) and self.edges[node]:
+            self.edges[node].clear()
+            self.revision += 1
+        return summary != old
+
+    def abort(self):
+        for node in self.pending:
+            self.summaries.pop(node)
+            self.edges.pop(node)
+        for callees in self.edges.values():
+            callees.difference_update(self.pending)
+        self.pending.clear()
 
 
 # ---------------------------------------------------------------------------------------------------------------------

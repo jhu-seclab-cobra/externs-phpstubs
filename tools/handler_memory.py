@@ -8,6 +8,7 @@ reads as the region's base value, and an unknown value is never the NULL pointer
 """
 
 import collections
+from collections.abc import Mapping
 
 
 class Unknown:
@@ -74,16 +75,28 @@ class Str(str):
     """A string literal placeholder (``__STR_n__``)."""
 
 
-class Agg(dict):
-    """A subtree read from memory: path relative to the read location to value."""
+class Agg(Mapping):
+    """An immutable subtree value, compared and hashed by its relative paths and values."""
+
+    def __init__(self, cells):
+        self._cells = dict(cells)
+
+    def __getitem__(self, path):
+        return self._cells[path]
+
+    def __iter__(self):
+        return iter(self._cells)
+
+    def __len__(self):
+        return len(self._cells)
+
+    def __hash__(self):
+        return hash(frozenset(self._cells.items()))
 
 
-class Size:
-    """An unknown byte size or offset (sizeof, offsetof); pointer arithmetic with it keeps the pointer. A sizeof of
-    a type names it."""
-
-    def __init__(self, type_name=None):
-        self.type_name = type_name
+class Size(collections.namedtuple("Size", "type_name", defaults=(None,))):
+    """An unknown byte size or offset (sizeof, offsetof); its type name is its value identity. Pointer arithmetic
+    with a size keeps the pointer. A sizeof of a type names it."""
 
 
 SIZE = Size()
@@ -257,6 +270,11 @@ class State:
                 self.events = self.events + (NATIVE_EVENT,)
 
     def write(self, rid, path, value):
+        if isinstance(value, Alt) and any(isinstance(item, Agg) for item, _ in value.items):
+            regions = [Region(ANYV, dict(item) if isinstance(item, Agg) else {(): Fill(item)})
+                       for item, _ in value.items]
+            guards = [conditions for _, conditions in value.items]
+            value = Agg(join_regions(regions, guards, self.token).tree(()))
         if isinstance(value, Agg):
             self.write_tree(rid, path, value)
             return
