@@ -5,7 +5,7 @@ import collections
 import heapq
 
 from handler_expr import FORK_CAP, OFFSET_NAMES, Expressions, type_name
-from handler_index import NORETURN, STRUCT_TYPE, THROWERS
+from handler_index import NORETURN, STRUCT_TYPE, THROWERS, Instruction
 from handler_memory import ANYV, SIZE, Fn, Ptr, Region, join_states, join_values
 from handler_values import assume, exclude, literals, resolve
 from handler_prims import EXCEPTION, EXCEPTIONS_REGION, Primitives
@@ -69,21 +69,39 @@ class Frame:
 
     def __init__(self, definition, depth):
         self.definition, self.source, self.depth = definition, definition.source, depth
-        self.vars, self.arrays, self.complete, self.created = {}, set(), True, []
+        self.vars, self.arrays, self.complete, self.created = {}, set(), True, set()
         self.types = {}
 
     def bind(self, state, name, value, array=False):
-        rid = f"l:{self.depth}:{name}"
-        self.vars[name] = rid
-        self.created.append(rid)
+        rid = self.vars.setdefault(name, f"l:{self.depth}:{name}")
+        self.created.add(rid)
         (self.arrays.add if array else self.arrays.discard)(name)
         state.put(rid, Region(ANYV, owner=state.token))
         if value is not None:
             state.write(rid, (), value)
 
-    def release(self, state):
-        for rid in self.created:
+    def release(self, state, retained=frozenset()):
+        for rid in self.created - retained:
             state.drop(rid)
+
+    def checkpoint(self):
+        return self.vars.copy(), self.arrays.copy(), self.types.copy(), self.created.copy()
+
+    def restore(self, bindings):
+        variables, arrays, types, created = bindings
+        self.vars, self.arrays, self.types = variables.copy(), arrays.copy(), types.copy()
+        self.created = created.copy()
+
+    def activate(self, instruction, enclosing):
+        variables, arrays, types, _ = enclosing
+        self.vars, self.arrays, self.types = variables.copy(), arrays.copy(), types.copy()
+        for name, local in instruction.bindings.items():
+            self.vars[name] = self.local_region(local)
+            self.types[name] = type_name(local.words)
+            (self.arrays.add if local.array else self.arrays.discard)(name)
+
+    def local_region(self, local):
+        return f"l:{self.depth}:{local.scope}:{local.name}"
 
 
 class Machine(Expressions, Primitives):
@@ -155,9 +173,23 @@ class Machine(Expressions, Primitives):
 
     def execute_steps(self, frame, code, state, project=False):
         waiting, pcs, memo, visits, exits = collections.defaultdict(list), [0], {}, collections.Counter(), []
+        enclosing = frame.checkpoint()
         waiting[0].append(state)
         pending = [1]
         projection = self.procedures if project and self.procedures is not None and not code.opaque else None
+        bindings, scopes, live = None, None, frozenset()
+
+        def activate(instruction, current):
+            nonlocal bindings, scopes, live
+            if not isinstance(instruction, Instruction):
+                return
+            if instruction.bindings is not bindings:
+                frame.activate(instruction, enclosing)
+                bindings = instruction.bindings
+            if instruction.scopes != scopes:
+                live = enclosing[3] | {frame.local_region(local) for scope in instruction.scopes for local in scope}
+                scopes = instruction.scopes
+            frame.release(current, live)
 
         def push(pc, st):
             """Queue a state at an instruction. States waiting at a join point are joined once they exceed
@@ -181,6 +213,7 @@ class Machine(Expressions, Primitives):
             batch = waiting.pop(pc)
             pending[0] -= len(batch)
             for current in join_by_events(batch) if instr[0] == "n" else batch:
+                activate(instr, current)
                 self.steps += 1
                 if self.steps > self.limit:
                     raise Exhausted(self.owner, tuple(self.running))
@@ -202,7 +235,7 @@ class Machine(Expressions, Primitives):
 
     def instruction_steps(self, instr, pc, state, frame):
         # Replaying only the suspended instruction requires its unmodified state and lexical bindings.
-        bindings = frame.vars.copy(), frame.arrays.copy(), frame.types.copy(), list(frame.created), frame.complete
+        bindings, complete = frame.checkpoint(), frame.complete
         opaque_count = len(self.opaques)
         while True:
             queued, exits = [], []
@@ -211,9 +244,8 @@ class Machine(Expressions, Primitives):
                     instr, pc, state.fork(), frame, lambda target, member: queued.append((target, member)), exits)
                 return queued, exits
             except SummaryDependency as dependency:
-                variables, arrays, types, created, frame.complete = bindings
-                frame.vars, frame.arrays, frame.types = variables.copy(), arrays.copy(), types.copy()
-                frame.created = list(created)
+                frame.restore(bindings)
+                frame.complete = complete
                 del self.opaques[opaque_count:]
                 yield dependency.node
                 self.steps += 1
@@ -423,7 +455,14 @@ class Machine(Expressions, Primitives):
     def run_inline(self, block, state, frame):
         """A GNU statement expression: its statements run in the frame, the value is the last expression."""
         code = self.index.inline(block)
-        return self.execute(frame, code, state)
+        bindings = frame.checkpoint()
+        try:
+            exits = self.execute(frame, code, state)
+            for _, member in exits:
+                frame.release(member, bindings[3])
+            return exits
+        finally:
+            frame.restore(bindings)
 
     def note_marker(self, args, state):
         if self.marker is not None and any(a == self.marker for a in args):

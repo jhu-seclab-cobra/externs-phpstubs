@@ -35,6 +35,22 @@ Format: [handler types](../../commons-phpmodels/docs/design-declarations-handler
 - Each definition retains its enclosing conditional-compilation provenance.
   A handler target summarizes every matching definition; all of their normal
   exits contribute, and an incomplete alternative leaves the request unknown.
+- `Compiler` retains each declaration as a distinct `Local` and each
+  instruction's visible bindings and enclosing block scopes in `Instruction`.
+  A declarator becomes visible before its initializer; earlier references use
+  the binding visible at their source position. Blocks and for scopes retain
+  hidden ancestors and end their locals' lifetime on every outgoing path,
+  including break, continue and goto. Jumping past an initializer leaves that
+  declaration unread, rather than selecting an enclosing homonym.
+  Conditional-compilation alternatives start with the same enclosing visibility;
+  declarations of the same name in the same block share that block's binding.
+  `Frame` selects these bindings over its parameters or enclosing statement
+  expression's bindings, using the existing regions, arrays and type lookup.
+  Leaving a scope drops its local regions; assignments through surviving
+  aliases and aggregate copies retain their own identities. A return reads
+  its value before releasing locals. Statement expressions restore the enclosing
+  bindings on normal and interrupted exits. Instruction checkpoints include
+  those same bindings and created regions; no producer owns another name map.
 - Handler summaries extend the existing summary mechanism with the finite
   data named by the extraction specification; they are offline working data,
   never a second runtime handler store. `php_src_c.definitions.ProcedureSummaries`

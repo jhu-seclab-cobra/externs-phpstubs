@@ -3,6 +3,8 @@ compiled bodies of the functions of one php-src checkout (design-extraction-hand
 
 import collections
 import re
+from contextlib import contextmanager
+from dataclasses import dataclass
 
 import php_src
 from php_src_c.definitions import ParseFailure, ParsedBlock, parse_body, parse_expression
@@ -228,6 +230,25 @@ def declarator_name(member):
 # Compiler: statements to a flat instruction list, so goto, switch fall-through and loops are plain jumps.
 
 
+@dataclass(frozen=True, eq=False)
+class Local:
+    """One lexical declaration, independently of any same-named ancestor or sibling."""
+
+    name: str
+    array: bool
+    words: tuple[str, ...]
+    scope: int
+
+
+class Instruction(tuple):
+    """An instruction with its source-position bindings and the scopes that own its live locals."""
+
+    def __new__(cls, instruction, bindings, scopes):
+        value = super().__new__(cls, instruction)
+        value.bindings, value.scopes = bindings, scopes
+        return value
+
+
 class Compiler:
     """Compile a parsed body. Instructions: ("x", expr), ("d", name, pointer, dims, init, type), ("b", cond, then, else),
     ("j", pc), ("r", expr), ("s", subject, cases, default, end), ("g", group, branches, end, exhaustive), ("o", text),
@@ -236,6 +257,7 @@ class Compiler:
     def __init__(self):
         self.instrs, self.labels, self.heads, self.jumps = [], {}, set(), []
         self.switches = []
+        self.bindings, self.scopes = {}, []
 
     def compile(self, block):
         self.statement(block, None, None)
@@ -243,12 +265,26 @@ class Compiler:
         for pc, label in self.jumps:
             if label not in self.labels:
                 return Compiled([], {}, set(), f"goto to unknown label {label}")
-            self.instrs[pc] = ("j", self.labels[label])
+            self.replace(pc, "j", self.labels[label])
         return Compiled(self.instrs, self.labels, self.heads, opaque=block.opaque)
 
     def emit(self, *instruction):
-        self.instrs.append(instruction)
+        self.instrs.append(Instruction(instruction, self.bindings, tuple(self.scopes)))
         return len(self.instrs) - 1
+
+    def replace(self, pc, *instruction):
+        old = self.instrs[pc]
+        self.instrs[pc] = Instruction(instruction, old.bindings, old.scopes)
+
+    @contextmanager
+    def scope(self):
+        enclosing = self.bindings
+        self.scopes.append([])
+        try:
+            yield
+        finally:
+            self.scopes.pop()
+            self.bindings = enclosing
 
     def here(self):
         return len(self.instrs)
@@ -257,8 +293,9 @@ class Compiler:
         getattr(self, "s_" + node[0])(node, breaks, continues)
 
     def s_block(self, node, breaks, continues):
-        for child in node[1]:
-            self.statement(child, breaks, continues)
+        with self.scope():
+            for child in node[1]:
+                self.statement(child, breaks, continues)
 
     def s_empty(self, node, breaks, continues):
         pass
@@ -271,6 +308,9 @@ class Compiler:
 
     def s_decl(self, node, breaks, continues):
         for name, pointer, dims, init in node[2]:
+            local = Local(name, bool(dims), node[1], id(self.scopes[-1]))
+            self.scopes[-1].append(local)
+            self.bindings = {**self.bindings, name: local}
             self.emit("d", name, pointer, dims, init, node[1])
 
     def s_if(self, node, breaks, continues):
@@ -282,8 +322,8 @@ class Compiler:
         if node[3] is not None:
             self.statement(node[3], breaks, continues)
         end = self.emit("n")
-        self.instrs[branch] = ("b", node[1], then, otherwise)
-        self.instrs[skip] = ("j", end)
+        self.replace(branch, "b", node[1], then, otherwise)
+        self.replace(skip, "j", end)
 
     def s_while(self, node, breaks, continues):
         head = self.emit("n")
@@ -294,7 +334,7 @@ class Compiler:
         self.statement(node[2], exits, again)
         self.emit("j", head)
         end = self.emit("n")
-        self.instrs[branch] = ("b", node[1], body, end)
+        self.replace(branch, "b", node[1], body, end)
         self.patch(exits, end)
         self.patch(again, head)
 
@@ -311,6 +351,10 @@ class Compiler:
         self.patch(again, test)
 
     def s_for(self, node, breaks, continues):
+        with self.scope():
+            self.for_loop(node, breaks, continues)
+
+    def for_loop(self, node, breaks, continues):
         _, init, condition, step, body = node
         self.statement(init, breaks, continues)
         head = self.emit("n")
@@ -324,7 +368,7 @@ class Compiler:
             self.emit("x", step)
         self.emit("j", head)
         end = self.emit("n")
-        self.instrs[branch] = ("b", condition if condition else ("num", 1), start, end)
+        self.replace(branch, "b", condition if condition else ("num", 1), start, end)
         self.patch(exits, end)
         self.patch(again, advance)
 
@@ -336,7 +380,7 @@ class Compiler:
         self.statement(node[2], exits, continues)
         self.switches.pop()
         end = self.emit("n")
-        self.instrs[switch] = ("s", node[1], collected["cases"], collected["default"], end)
+        self.replace(switch, "s", node[1], collected["cases"], collected["default"], end)
         self.patch(exits, end)
 
     def s_case(self, node, breaks, continues):
@@ -367,15 +411,19 @@ class Compiler:
     def s_cgroup(self, node, breaks, continues):
         group = self.emit("g", node[1], None, None, None)
         starts, jumps = [], []
+        enclosing, visible = self.bindings, self.bindings.copy()
         for number, statements in node[2]:
+            self.bindings = enclosing
             starts.append((number, self.here()))
             for child in statements:
                 self.statement(child, breaks, continues)
+            visible.update(self.bindings)
             jumps.append(self.emit("j", None))
+        self.bindings = visible
         end = self.emit("n")
         self.patch(jumps, end)
-        self.instrs[group] = ("g", node[1], starts, end, None)
+        self.replace(group, "g", node[1], starts, end, None)
 
     def patch(self, pcs, target):
         for pc in pcs:
-            self.instrs[pc] = ("j", target)
+            self.replace(pc, "j", target)
