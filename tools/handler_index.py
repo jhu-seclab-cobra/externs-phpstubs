@@ -264,6 +264,7 @@ class ConditionalBinding:
 Binding = Local | ConditionalBinding | None
 Bindings = dict[str, Binding]
 Syntax = str | int | None | Configuration | tuple["Syntax", ...] | list["Syntax"]
+Branch = tuple[int, Bindings, list[Syntax]]
 
 
 def reference_children(value: Syntax) -> list[Syntax]:
@@ -307,15 +308,41 @@ def binding_configurations(bindings: Iterable[Binding]) -> set[Configuration]:
     return configurations
 
 
-def conditional_bindings(configuration: Configuration, branches: list[tuple[int, Bindings]],
+def branch_dependency(node: Syntax) -> bool:
+    match node:
+        case ("name", _) | ("sizeof", _) | ("call", _, _) | ("opaque", _) | ("unknown",):
+            return True
+        case ("cgroup", _, _) | ("assign", _, _, _) | ("post", _, _) | ("index", _, _) | ("member", _, _, _):
+            return True
+        case ("un", "*" | "&", _):
+            return True
+    return False
+
+
+def independent_branch(value: Syntax) -> bool:
+    pending = [value]
+    while pending:
+        node = pending.pop()
+        if not isinstance(node, (tuple, list)):
+            continue
+        if branch_dependency(node):
+            return False
+        pending.extend(reference_children(node))
+    return True
+
+
+def conditional_bindings(configuration: Configuration, branches: list[Branch],
                          enclosing: Bindings) -> Bindings:
     visible = enclosing.copy()
-    names = dict.fromkeys(name for _, bindings in branches for name in bindings)
+    if not branches:
+        return visible
+    equivalent = all(body == branches[0][2] for _, _, body in branches) and independent_branch(branches[0][2])
+    names = dict.fromkeys(name for _, bindings, _ in branches for name in bindings)
     for name in names:
         before = enclosing.get(name)
-        choices = tuple((number, bindings.get(name)) for number, bindings in branches)
+        choices = tuple((number, bindings.get(name)) for number, bindings, _ in branches)
         first = choices[0][1]
-        if isinstance(first, Local) and all(local == first for _, local in choices):
+        if equivalent and isinstance(first, Local) and all(local == first for _, local in choices):
             visible[name] = first
         elif any(local != before for _, local in choices):
             explicit = tuple((number, local) for number, local in choices if number != IMPLICIT_BRANCH)
@@ -515,18 +542,18 @@ class Compiler:
             starts.append((number, self.here()))
             for child in statements:
                 self.statement(child, breaks, continues)
-            branches.append((number, self.bindings))
+            branches.append((number, self.bindings, statements))
             jumps.append(self.emit("j", None))
         configuration = self.group_bindings(node[1], branches, enclosing)
         end = self.emit("n")
         self.patch(jumps, end)
         self.replace(group, "g", node[1], starts, end, configuration)
 
-    def group_bindings(self, group: int, branches: list[tuple[int, Bindings]],
+    def group_bindings(self, group: int, branches: list[Branch],
                        enclosing: Bindings) -> Configuration | None:
         configuration = Configuration(f"{CONFIGURATION_PREFIX}{group}", id(self.scopes[-1]), group)
         if group not in self.otherwise:
-            branches = [*branches, (IMPLICIT_BRANCH, enclosing)]
+            branches = [*branches, (IMPLICIT_BRANCH, enclosing, [])]
         self.bindings = conditional_bindings(configuration, branches, enclosing)
         if self.bindings != enclosing:
             self.scopes[-1].append(configuration)

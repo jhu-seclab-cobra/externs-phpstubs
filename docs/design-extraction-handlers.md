@@ -43,10 +43,13 @@ Format: [handler types](../../commons-phpmodels/docs/design-declarations-handler
   including break, continue and goto. Jumping past an initializer leaves that
   declaration unread, rather than selecting an enclosing homonym.
   Conditional-compilation alternatives start with the same enclosing visibility.
-  An exhaustive group whose branches bind the same `Local` retains that `Local`
-  without a configuration choice. A non-exhaustive group includes its enclosing
-  binding when comparing alternatives. `ConditionalBinding` retains declarations
-  that differ across those alternatives; its configuration rules belong to
+  Equal `Local` bindings omit their configuration only when the compiler proves
+  identical configuration-independent branch effects: matching parsed statements
+  without input reads, calls, indirect memory access, nested source groups or unread code.
+  Otherwise `ConditionalBinding` retains the choice even when its leaves share
+  one `Local`, preserving initialized-value correlation through later reads and
+  retries. A non-exhaustive group includes its enclosing alternative in this
+  comparison. The configuration rules belong to
   [signature extraction](design-extraction-signatures.md).
   `Configuration` stores the source choice in a region of its owning scope.
   The state carries that choice through subsequent instructions and checkpoints;
