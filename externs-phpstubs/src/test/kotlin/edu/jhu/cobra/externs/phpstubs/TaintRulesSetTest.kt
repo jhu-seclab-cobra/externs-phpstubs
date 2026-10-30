@@ -9,6 +9,7 @@ import edu.jhu.cobra.commons.phpmodels.MethodSubject
 import edu.jhu.cobra.commons.phpmodels.ModelEntry
 import edu.jhu.cobra.commons.phpmodels.ModelSubject
 import edu.jhu.cobra.commons.phpmodels.Port
+import edu.jhu.cobra.commons.phpmodels.SignatureInfo
 import edu.jhu.cobra.commons.phpmodels.SourceKindId
 import edu.jhu.cobra.commons.phpmodels.VariableSubject
 import edu.jhu.cobra.commons.phpmodels.VocabularyException
@@ -38,6 +39,7 @@ import kotlin.test.assertTrue
  * - `eval sinks keep only what PHP 8_5_11 evaluates` — verifies the eval construct stays and the removed eval paths are absent
  * - `curl keeps its request sink at the configuring call` — verifies the curl_setopt request sink
  * - `checks state type predicates and character checks` — verifies the type set, the class, and the covered kinds of representative checks
+ * - `a digest covers its result only in hex form` — verifies each digest's sanitizer facts require `binary` false, its declared default
  * - `sanitizers and sources name the added escapes and source kinds` — verifies representative entries
  * - `the psalm mapping translates the additions` — verifies the bundled mapping covers xpath and external
  */
@@ -153,6 +155,23 @@ internal class TaintRulesSetTest {
         assertTrue((Port.Argument(2) to "ssrf") in sinksOf(setopt))
         assertTrue(assertNotNull(PhpStubs.function("curl_setopt")).sinkFacts.isNotEmpty())
         assertNull(unconditional.getValue(FunctionSubject("curl_exec")).body.sinks)
+    }
+
+    @Test
+    fun `a digest covers its result only in hex form`() {
+        val binaryPosition = mapOf("md5" to 1, "sha1" to 1, "hash" to 2, "hash_hmac" to 3)
+        for ((function, position) in binaryPosition) {
+            val record = assertNotNull(PhpStubs.record(FunctionSubject(function)), function)
+            val parameter = (record.signature as SignatureInfo.CallableSignature).params[position]
+            assertEquals("binary", parameter.name, function)
+            assertEquals(BoolVal(false), parameter.defaultValue, function)
+            assertTrue(record.sanitizerFacts.isNotEmpty(), function)
+            for (fact in record.sanitizerFacts) {
+                val condition = assertNotNull(fact.condition, function)
+                assertEquals(listOf(position), condition.positions, function)
+                assertEquals(BoolVal(false), condition.expected[position], function)
+            }
+        }
     }
 
     @Test

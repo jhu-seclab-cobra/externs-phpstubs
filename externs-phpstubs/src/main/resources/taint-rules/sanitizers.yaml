@@ -1,6 +1,8 @@
 # Hand-maintained taint set in psalm's names, mounted after the generated taint set.
 # Sanitizer facts psalm does not state: per-kind sanitizer facts for one vulnerability type, and value transforms whose
 # output alphabet cannot carry an injection for any kind (casts, digests, hex, base64).
+# A digest covers its result only in hex form: md5, sha1, hash and hash_hmac are conditioned on `binary` being false,
+# which an omitted `binary` also satisfies, because a raw digest carries any byte.
 # Checks: a type predicate returns true exactly when its argument has one of the `types`;
 # a character check returning true accepted an argument whose string conversion lies `within`,
 # and names the kinds that alphabet cannot carry, as the value transforms above do; is_numeric
@@ -68,10 +70,12 @@
     - vulnTypes: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie, xpath]
 - subject:
     function: hash
+  when: [_, _, false]
   sanitizers:
     - vulnTypes: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie, xpath]
 - subject:
     function: hash_hmac
+  when: [_, _, _, false]
   sanitizers:
     - vulnTypes: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie, xpath]
 - subject:
@@ -141,6 +145,7 @@
     - check: {argument: argument(0), accepts: true, types: "string"}
 - subject:
     function: md5
+  when: [_, false]
   sanitizers:
     - vulnTypes: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie, xpath]
 - subject:
@@ -157,6 +162,7 @@
     - vulnTypes: [html]
 - subject:
     function: sha1
+  when: [_, false]
   sanitizers:
     - vulnTypes: [html, has_quotes, shell, sql, callable, eval, unserialize, include, ssrf, ldap, file, header, cookie, xpath]
 - subject:
