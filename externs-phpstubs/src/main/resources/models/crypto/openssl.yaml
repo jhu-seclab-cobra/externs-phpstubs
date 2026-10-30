@@ -21,6 +21,7 @@
     - name: private_key
       type: mixed
       optional: true
+      default: 'null'
     - name: encoding
       type: int
       optional: true
@@ -41,6 +42,7 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     - name: encoding
       type: int
       optional: true
@@ -77,12 +79,14 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     - name: encoding
       type: int
       optional: true
     - name: untrusted_certificates_filename
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [valueerror]
 - subject:
@@ -94,24 +98,30 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     - name: certificates
       type: ?string
       optional: true
+      default: 'null'
     - name: ca_info
       type: array
       optional: true
     - name: untrusted_certificates_filename
       type: ?string
       optional: true
+      default: 'null'
     - name: content
       type: ?string
       optional: true
+      default: 'null'
     - name: pk7
       type: ?string
       optional: true
+      default: 'null'
     - name: sigfile
       type: ?string
       optional: true
+      default: 'null'
     - name: encoding
       type: int
       optional: true
@@ -129,6 +139,7 @@
     - name: no_text
       type: bool
       optional: true
+      default: 'true'
     returnType: bool
   throws: [error, typeerror, valueerror]
 - subject:
@@ -142,6 +153,7 @@
     - name: no_text
       type: bool
       optional: true
+      default: 'true'
     returnType: bool
   throws: [valueerror]
 - subject:
@@ -153,6 +165,7 @@
     - name: short_names
       type: bool
       optional: true
+      default: 'true'
     returnType: OpenSSLAsymmetricKey|false
   propagation:
   - from: argument(0)
@@ -169,6 +182,7 @@
     - name: short_names
       type: bool
       optional: true
+      default: 'true'
     returnType: array|false
   propagation:
   - from: argument(0)
@@ -186,9 +200,11 @@
     - name: options
       type: ?array
       optional: true
+      default: 'null'
     - name: extra_attributes
       type: ?array
       optional: true
+      default: 'null'
     returnType: OpenSSLCertificateSigningRequest|bool
   propagation:
   - from: argument(0)
@@ -215,12 +231,15 @@
     - name: options
       type: ?array
       optional: true
+      default: 'null'
     - name: serial
       type: int
       optional: true
+      default: '0'
     - name: serial_hex
       type: ?string
       optional: true
+      default: 'null'
     returnType: OpenSSLCertificate|false
   propagation:
   - from: argument(0)
@@ -249,15 +268,19 @@
     - name: options
       type: int
       optional: true
+      default: '0'
     - name: iv
       type: string
       optional: true
+      default: '""'
     - name: tag
       type: ?string
       optional: true
+      default: 'null'
     - name: aad
       type: string
       optional: true
+      default: '""'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -299,6 +322,7 @@
     - name: binary
       type: bool
       optional: true
+      default: 'false'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -319,19 +343,24 @@
     - name: options
       type: int
       optional: true
+      default: '0'
     - name: iv
       type: string
       optional: true
+      default: '""'
     - name: tag
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     - name: aad
       type: string
       optional: true
+      default: '""'
     - name: tag_length
       type: int
       optional: true
+      default: '16'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -372,6 +401,7 @@
     - name: aliases
       type: bool
       optional: true
+      default: 'false'
     returnType: array
   throws: []
 - subject:
@@ -386,6 +416,7 @@
     - name: aliases
       type: bool
       optional: true
+      default: 'false'
     returnType: array
   throws: []
 - subject:
@@ -397,6 +428,7 @@
     - name: passphrase
       type: ?string
       optional: true
+      default: 'null'
     returnType: OpenSSLAsymmetricKey|false
   propagation:
   - from: argument(0)
@@ -433,6 +465,7 @@
     - name: iv
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error, typeerror, valueerror]
 - subject:
@@ -450,6 +483,7 @@
     - name: digest_algo
       type: string
       optional: true
+      default: '"sha1"'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -520,6 +554,7 @@
     - name: private_key
       type: mixed
       optional: true
+      default: 'null'
     returnType: bool
   throws: [valueerror]
 - subject:
@@ -537,6 +572,7 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     - name: cipher_algo
       type: int
       optional: true
@@ -573,6 +609,7 @@
     - name: untrusted_certificates_filename
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [valueerror]
 - subject:
@@ -586,18 +623,22 @@
     - name: signers_certificates_filename
       type: ?string
       optional: true
+      default: 'null'
     - name: ca_info
       type: array
       optional: true
     - name: untrusted_certificates_filename
       type: ?string
       optional: true
+      default: 'null'
     - name: content
       type: ?string
       optional: true
+      default: 'null'
     - name: output_filename
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool|int
   throws: [valueerror]
 - subject:
@@ -611,6 +652,7 @@
     - name: key_length
       type: int
       optional: true
+      default: '0'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -630,9 +672,11 @@
     - name: passphrase
       type: ?string
       optional: true
+      default: 'null'
     - name: options
       type: ?array
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error, typeerror, valueerror]
 - subject:
@@ -646,9 +690,11 @@
     - name: passphrase
       type: ?string
       optional: true
+      default: 'null'
     - name: options
       type: ?array
       optional: true
+      default: 'null'
     returnType: bool
   throws: [valueerror]
 - subject:
@@ -679,6 +725,7 @@
     - name: passphrase
       type: ?string
       optional: true
+      default: 'null'
     returnType: OpenSSLAsymmetricKey|false
   propagation:
   - from: argument(0)
@@ -704,6 +751,7 @@
     - name: options
       type: ?array
       optional: true
+      default: 'null'
     returnType: OpenSSLAsymmetricKey|false
   propagation:
   - from: argument(0)
@@ -726,6 +774,7 @@
     - name: digest_algo
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error, typeerror, valueerror]
 - subject:
@@ -777,6 +826,7 @@
     - name: digest_algo
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error, typeerror, valueerror]
 - subject:
@@ -788,6 +838,7 @@
     - name: strong_result
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: string
   throws: [error, exception, typeerror, valueerror]
@@ -810,6 +861,7 @@
     - name: iv
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: int|false
   throws: [error, typeerror, valueerror]
@@ -830,6 +882,7 @@
     - name: padding
       type: int
       optional: true
+      default: '0'
     returnType: bool
   throws: [error, typeerror, valueerror]
 - subject:
@@ -896,6 +949,7 @@
     - name: padding
       type: int
       optional: true
+      default: '0'
     returnType: int|false
   propagation:
   - from: argument(0)
@@ -931,6 +985,7 @@
     - name: untrusted_certificates_file
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool|int
   throws: [valueerror]
 - subject:
@@ -945,6 +1000,7 @@
     - name: no_text
       type: bool
       optional: true
+      default: 'true'
     returnType: bool
   throws: [error, typeerror, valueerror]
 - subject:
@@ -958,6 +1014,7 @@
     - name: no_text
       type: bool
       optional: true
+      default: 'true'
     returnType: bool
   throws: [valueerror]
 - subject:
@@ -969,9 +1026,11 @@
     - name: digest_algo
       type: string
       optional: true
+      default: '"sha1"'
     - name: binary
       type: bool
       optional: true
+      default: 'false'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -996,6 +1055,7 @@
     - name: short_names
       type: bool
       optional: true
+      default: 'true'
     returnType: array|false
   propagation:
   - from: argument(0)

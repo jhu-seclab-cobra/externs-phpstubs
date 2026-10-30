@@ -1819,6 +1819,7 @@
     - name: separator
       type: string
       optional: true
+      default: '","'
     - name: enclosure
       type: string
       optional: true
@@ -1840,6 +1841,7 @@
     - name: count
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: string|array
   propagation:
@@ -1861,6 +1863,7 @@
     - name: pad_string
       type: string
       optional: true
+      default: '" "'
     - name: pad_type
       type: int
       optional: true
@@ -1895,6 +1898,7 @@
     - name: count
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: string|array
     framelessArities: [3]
@@ -1937,6 +1941,7 @@
     - name: length
       type: int
       optional: true
+      default: '1'
     returnType: array
   propagation:
   - from: argument(0)
@@ -1965,9 +1970,11 @@
     - name: format
       type: int
       optional: true
+      default: '0'
     - name: characters
       type: ?string
       optional: true
+      default: 'null'
     returnType: array|int
   propagation:
   - from: argument(0)
@@ -1984,6 +1991,7 @@
     - name: before_needle
       type: bool
       optional: true
+      default: 'false'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -2012,9 +2020,11 @@
     - name: offset
       type: int
       optional: true
+      default: '0'
     - name: length
       type: ?int
       optional: true
+      default: 'null'
     returnType: int
   throws: []
 - subject:
@@ -2026,6 +2036,7 @@
     - name: allowed_tags
       type: array|string|null
       optional: true
+      default: 'null'
     returnType: string
   throws: []
 - subject:
@@ -2050,6 +2061,7 @@
     - name: offset
       type: int
       optional: true
+      default: '0'
     returnType: int|false
   throws: [valueerror]
 - subject:
@@ -2074,6 +2086,7 @@
     - name: before_needle
       type: bool
       optional: true
+      default: 'false'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -2127,6 +2140,7 @@
     - name: offset
       type: int
       optional: true
+      default: '0'
     returnType: int|false
     framelessArities: [2, 3]
   throws: [valueerror]
@@ -2151,6 +2165,7 @@
     - name: before_needle
       type: bool
       optional: true
+      default: 'false'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -2180,6 +2195,7 @@
     - name: offset
       type: int
       optional: true
+      default: '0'
     returnType: int|false
   throws: [valueerror]
 - subject:
@@ -2193,6 +2209,7 @@
     - name: offset
       type: int
       optional: true
+      default: '0'
     returnType: int|false
   throws: [valueerror]
 - subject:
@@ -2206,9 +2223,11 @@
     - name: offset
       type: int
       optional: true
+      default: '0'
     - name: length
       type: ?int
       optional: true
+      default: 'null'
     returnType: int
   throws: []
 - subject:
@@ -2222,6 +2241,7 @@
     - name: before_needle
       type: bool
       optional: true
+      default: 'false'
     returnType: string|false
     framelessArities: [2, 3]
   propagation:
@@ -2239,6 +2259,7 @@
     - name: token
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -2279,6 +2300,7 @@
     - name: to
       type: ?string
       optional: true
+      default: 'null'
     returnType: string
     framelessArities: [2, 3]
   propagation:
@@ -2311,6 +2333,7 @@
     - name: length
       type: ?int
       optional: true
+      default: 'null'
     returnType: string
     framelessArities: [2, 3]
   propagation:
@@ -2330,9 +2353,11 @@
     - name: length
       type: ?int
       optional: true
+      default: 'null'
     - name: case_insensitive
       type: bool
       optional: true
+      default: 'false'
     returnType: int
   throws: [valueerror]
 - subject:
@@ -2346,9 +2371,11 @@
     - name: offset
       type: int
       optional: true
+      default: '0'
     - name: length
       type: ?int
       optional: true
+      default: 'null'
     returnType: int
   throws: [valueerror]
 - subject:
@@ -2364,6 +2391,7 @@
     - name: length
       type: array|int|null
       optional: true
+      default: 'null'
     returnType: string|array
   propagation:
   - from: argument(0)
@@ -5673,6 +5701,7 @@
     - name: result_code
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: string|false
   throws: [error, typeerror, valueerror]
@@ -5726,9 +5755,11 @@
     - name: mtime
       type: ?int
       optional: true
+      default: 'null'
     - name: atime
       type: ?int
       optional: true
+      default: 'null'
     returnType: bool
   throws: [valueerror]
 - subject:

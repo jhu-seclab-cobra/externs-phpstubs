@@ -36,6 +36,7 @@
     - name: include_scripts
       type: bool
       optional: true
+      default: 'true'
     returnType: array|false
   throws: []
 - subject:
@@ -47,6 +48,7 @@
     - name: force
       type: bool
       optional: true
+      default: 'false'
     returnType: bool
   throws: []
 - subject:

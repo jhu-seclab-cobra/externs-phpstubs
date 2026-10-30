@@ -12,6 +12,7 @@
     - name: value
       type: ?int
       optional: true
+      default: 'null'
     returnType: int|false
   throws: []
 - subject:
@@ -21,6 +22,7 @@
     - name: value
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -38,6 +40,7 @@
     - name: prefix
       type: string
       optional: true
+      default: '""'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -78,6 +81,7 @@
     - name: id
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -97,6 +101,7 @@
     - name: module
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -109,6 +114,7 @@
     - name: name
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -158,6 +164,7 @@
     - name: delete_old_session
       type: bool
       optional: true
+      default: 'false'
     returnType: bool
   throws: [dateerror, error]
 - subject:
@@ -187,6 +194,7 @@
     - name: path
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -201,15 +209,19 @@
     - name: path
       type: ?string
       optional: true
+      default: 'null'
     - name: domain
       type: ?string
       optional: true
+      default: 'null'
     - name: secure
       type: ?bool
       optional: true
+      default: 'null'
     - name: httponly
       type: ?bool
       optional: true
+      default: 'null'
     returnType: bool
   throws: [valueerror]
 - subject:
@@ -236,12 +248,15 @@
     - name: create_sid
       type: ?callable
       optional: true
+      default: 'null'
     - name: validate_sid
       type: ?callable
       optional: true
+      default: 'null'
     - name: update_timestamp
       type: ?callable
       optional: true
+      default: 'null'
     returnType: bool
   throws: []
 - subject:

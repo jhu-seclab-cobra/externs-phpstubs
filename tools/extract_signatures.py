@@ -51,6 +51,8 @@ PARAMETER = re.compile(
     r"\$(?P<name>\w+)\s*(?P<default>=.*)?$",
     re.S,
 )
+# A decimal integer, a decimal float, or a quoted string without an escape or a line break.
+SCALAR_LITERAL = re.compile(r"-?\d+(?:\.\d+)?|'[^'\\\n]*'|\"[^\"\\$\n]*\"")
 TYPE_NAME = re.compile(r"\\?[A-Za-z_][\w\\]*")
 # One propagation statement of an entry, and an argument port it names.
 STATEMENT = re.compile(r"^  - from: (\S+)\n    to: (\S+)\n", re.M)
@@ -58,13 +60,17 @@ ARGUMENT_PORT = re.compile(r"^argument\((\d+)\)$")
 
 
 class Parameter:
-    def __init__(self, name, type_, optional, by_ref, variadic):
+    def __init__(self, name, type_, optional, by_ref, variadic, default=None):
         self.name, self.type, self.optional, self.by_ref, self.variadic = name, type_, optional, by_ref, variadic
+        self.default = default
         self.named_extras = None
 
     def render(self):
         lines = [f"    - name: {scalar(self.name)}", f"      type: {scalar(self.type)}"]
-        lines += ["      optional: true"] * self.optional + ["      byRef: true"] * self.by_ref
+        lines += ["      optional: true"] * self.optional
+        if self.default is not None:
+            lines.append("      default: '" + self.default.replace("'", "''") + "'")
+        lines += ["      byRef: true"] * self.by_ref
         lines += ["      variadic: true"] * self.variadic
         if self.named_extras is not None:
             kind, position = self.named_extras
@@ -139,6 +145,20 @@ def declared_type(spelled, stub, offset):
     return TYPE_NAME.sub(resolved, text)
 
 
+def scalar_default(spelled):
+    """The default as one PHP scalar literal (true, false, null, a decimal integer or float, a plain quoted string).
+
+    A default of any other form, such as a constant, an expression or an array, is not a scalar the models state:
+    the parameter stays optional and declares no default value.
+    """
+    if not spelled:
+        return None
+    text = spelled[1:].strip()
+    if text.lower() in ("true", "false", "null"):
+        return text.lower()
+    return text if SCALAR_LITERAL.fullmatch(text) else None
+
+
 def parameter(text, stub, offset, prefer_ref):
     match = PARAMETER.match(text)
     if not match:
@@ -150,6 +170,7 @@ def parameter(text, stub, offset, prefer_ref):
         variadic or bool(match.group("default")),
         bool(match.group("ref")) or match.group("name") in prefer_ref,
         variadic,
+        scalar_default(match.group("default")),
     )
 
 

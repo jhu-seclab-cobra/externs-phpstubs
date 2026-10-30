@@ -213,6 +213,7 @@
     - name: encryptionKey
       type: string
       optional: true
+      default: '""'
     returnType: mixed
   throws: [exception, sqlite3exception, valueerror]
 - subject:
@@ -224,9 +225,11 @@
     - name: sourceDatabase
       type: string
       optional: true
+      default: '"main"'
     - name: destinationDatabase
       type: string
       optional: true
+      default: '"main"'
     returnType: bool
   throws: [error, sqlite3exception, valueerror]
 - subject:
@@ -260,6 +263,7 @@
     - name: argCount
       type: int
       optional: true
+      default: '-1'
     returnType: bool
   throws: [error]
 - subject:
@@ -283,9 +287,11 @@
     - name: argCount
       type: int
       optional: true
+      default: '-1'
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: bool
   throws: [error]
 - subject:
@@ -295,6 +301,7 @@
     - name: enable
       type: bool
       optional: true
+      default: 'false'
     returnType: bool
   throws: []
 - subject:
@@ -304,6 +311,7 @@
     - name: enable
       type: bool
       optional: true
+      default: 'true'
     returnType: bool
   throws: [error]
 - subject:
@@ -362,6 +370,7 @@
     - name: encryptionKey
       type: string
       optional: true
+      default: '""'
     returnType: void
   throws: [exception, sqlite3exception, valueerror]
 - subject:
@@ -377,6 +386,7 @@
     - name: database
       type: string
       optional: true
+      default: '"main"'
     - name: flags
       type: int
       optional: true
@@ -407,6 +417,7 @@
     - name: entireRow
       type: bool
       optional: true
+      default: 'false'
     returnType: mixed
   throws: [error, sqlite3exception]
 - subject:
@@ -545,6 +556,7 @@
     - name: expand
       type: bool
       optional: true
+      default: 'false'
     returnType: string|false
   throws: [error, sqlite3exception, typeerror]
 - subject:

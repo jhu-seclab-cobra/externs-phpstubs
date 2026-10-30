@@ -51,6 +51,7 @@
     - name: is_final
       type: bool
       optional: true
+      default: 'false'
     returnType: int
   throws: [error]
 - subject:
@@ -67,6 +68,7 @@
     - name: index
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: int|false
   throws: [error, typeerror]
@@ -77,6 +79,7 @@
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: XMLParser
   propagation:
   - from: argument(0)
@@ -89,9 +92,11 @@
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     - name: separator
       type: string
       optional: true
+      default: '":"'
     returnType: XMLParser
   propagation:
   - from: argument(0)

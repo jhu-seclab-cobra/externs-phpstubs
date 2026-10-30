@@ -24,6 +24,7 @@
     - name: controls
       type: ?array
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error, typeerror, valueerror]
 - subject:
@@ -39,6 +40,7 @@
     - name: controls
       type: ?array
       optional: true
+      default: 'null'
     returnType: LDAP\Result|false
   propagation:
   - from: argument(0)
@@ -59,9 +61,11 @@
     - name: dn
       type: ?string
       optional: true
+      default: 'null'
     - name: password
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error, valueerror]
 - subject:
@@ -73,12 +77,15 @@
     - name: dn
       type: ?string
       optional: true
+      default: 'null'
     - name: password
       type: ?string
       optional: true
+      default: 'null'
     - name: controls
       type: ?array
       optional: true
+      default: 'null'
     returnType: LDAP\Result|false
   propagation:
   - from: argument(0)
@@ -113,6 +120,7 @@
     - name: controls
       type: ?array
       optional: true
+      default: 'null'
     returnType: bool|int
   throws: [error, typeerror, valueerror]
 - subject:
@@ -122,9 +130,11 @@
     - name: uri
       type: ?string
       optional: true
+      default: 'null'
     - name: port
       type: int
       optional: true
+      default: '389'
     - name: wallet
       type: string
       optional: true
@@ -168,6 +178,7 @@
     - name: controls
       type: ?array
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error, typeerror, valueerror]
 - subject:
@@ -181,6 +192,7 @@
     - name: controls
       type: ?array
       optional: true
+      default: 'null'
     returnType: LDAP\Result|false
   propagation:
   - from: argument(0)
@@ -234,9 +246,11 @@
     - name: ignore
       type: string
       optional: true
+      default: '""'
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: string
   propagation:
   - from: argument(0)
@@ -255,9 +269,11 @@
     - name: request_data
       type: ?string
       optional: true
+      default: 'null'
     - name: controls
       type: ?array
       optional: true
+      default: 'null'
     - name: response_data
       type: mixed
       optional: true
@@ -265,6 +281,7 @@
     - name: response_oid
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: LDAP\Result|bool
   throws: [error, typeerror, valueerror]
@@ -277,15 +294,19 @@
     - name: user
       type: string
       optional: true
+      default: '""'
     - name: old_password
       type: string
       optional: true
+      default: '""'
     - name: new_password
       type: string
       optional: true
+      default: '""'
     - name: controls
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: string|bool
   throws: [error, typeerror]
@@ -408,6 +429,7 @@
     - name: value
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: bool
   throws: [error, typeerror, valueerror]
@@ -451,18 +473,22 @@
     - name: attributes_only
       type: int
       optional: true
+      default: '0'
     - name: sizelimit
       type: int
       optional: true
+      default: '-1'
     - name: timelimit
       type: int
       optional: true
+      default: '-1'
     - name: deref
       type: int
       optional: true
     - name: controls
       type: ?array
       optional: true
+      default: 'null'
     returnType: LDAP\Result|array|false
   propagation:
   - from: argument(0)
@@ -497,6 +523,7 @@
     - name: controls
       type: ?array
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error, typeerror, valueerror]
 - subject:
@@ -512,6 +539,7 @@
     - name: controls
       type: ?array
       optional: true
+      default: 'null'
     returnType: LDAP\Result|false
   propagation:
   - from: argument(0)
@@ -536,6 +564,7 @@
     - name: controls
       type: ?array
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error, typeerror, valueerror]
 - subject:
@@ -551,6 +580,7 @@
     - name: controls
       type: ?array
       optional: true
+      default: 'null'
     returnType: LDAP\Result|false
   propagation:
   - from: argument(0)
@@ -575,6 +605,7 @@
     - name: controls
       type: ?array
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error, typeerror, valueerror]
 - subject:
@@ -590,6 +621,7 @@
     - name: controls
       type: ?array
       optional: true
+      default: 'null'
     returnType: LDAP\Result|false
   propagation:
   - from: argument(0)
@@ -614,6 +646,7 @@
     - name: controls
       type: ?array
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error, typeerror, valueerror]
 - subject:
@@ -629,6 +662,7 @@
     - name: controls
       type: ?array
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error, typeerror, valueerror]
 - subject:
@@ -682,10 +716,12 @@
     - name: response_data
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     - name: response_oid
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: bool
   throws: [error, typeerror]
@@ -716,18 +752,22 @@
     - name: matched_dn
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     - name: error_message
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     - name: referrals
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     - name: controls
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: bool
   throws: [error, typeerror]
@@ -747,18 +787,22 @@
     - name: attributes_only
       type: int
       optional: true
+      default: '0'
     - name: sizelimit
       type: int
       optional: true
+      default: '-1'
     - name: timelimit
       type: int
       optional: true
+      default: '-1'
     - name: deref
       type: int
       optional: true
     - name: controls
       type: ?array
       optional: true
+      default: 'null'
     returnType: LDAP\Result|array|false
   propagation:
   - from: argument(0)
@@ -797,6 +841,7 @@
     - name: controls
       type: ?array
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error, typeerror, valueerror]
 - subject:
@@ -816,6 +861,7 @@
     - name: controls
       type: ?array
       optional: true
+      default: 'null'
     returnType: LDAP\Result|false
   propagation:
   - from: argument(0)
@@ -840,24 +886,31 @@
     - name: dn
       type: ?string
       optional: true
+      default: 'null'
     - name: password
       type: ?string
       optional: true
+      default: 'null'
     - name: mech
       type: ?string
       optional: true
+      default: 'null'
     - name: realm
       type: ?string
       optional: true
+      default: 'null'
     - name: authc_id
       type: ?string
       optional: true
+      default: 'null'
     - name: authz_id
       type: ?string
       optional: true
+      default: 'null'
     - name: props
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error, valueerror]
 - subject:
@@ -876,18 +929,22 @@
     - name: attributes_only
       type: int
       optional: true
+      default: '0'
     - name: sizelimit
       type: int
       optional: true
+      default: '-1'
     - name: timelimit
       type: int
       optional: true
+      default: '-1'
     - name: deref
       type: int
       optional: true
     - name: controls
       type: ?array
       optional: true
+      default: 'null'
     returnType: LDAP\Result|array|false
   throws: [error, typeerror, valueerror]
 - subject:
@@ -1096,6 +1153,7 @@
     - name: uri
       type: ?string
       optional: true
+      default: 'null'
     - name: wallet
       type: string
     - name: password
@@ -1126,16 +1184,20 @@
     - name: request_data
       type: ?string
       optional: true
+      default: 'null'
     - name: controls
       type: ?array
       optional: true
+      default: 'null'
     - name: response_data
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     - name: response_oid
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: LDAP\Result|bool
   throws: [error, typeerror, valueerror]

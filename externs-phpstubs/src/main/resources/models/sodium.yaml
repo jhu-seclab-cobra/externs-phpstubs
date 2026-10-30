@@ -308,6 +308,7 @@
     - name: ignore
       type: string
       optional: true
+      default: '""'
     returnType: string
   propagation:
   - from: argument(0)
@@ -731,6 +732,7 @@
     - name: key
       type: string
       optional: true
+      default: '""'
     - name: length
       type: int
       optional: true
@@ -763,6 +765,7 @@
     - name: key
       type: string
       optional: true
+      default: '""'
     - name: length
       type: int
       optional: true
@@ -1085,6 +1088,7 @@
     - name: additional_data
       type: string
       optional: true
+      default: '""'
     returnType: array|false
   throws: [sodiumexception]
 - subject:
@@ -1099,6 +1103,7 @@
     - name: additional_data
       type: string
       optional: true
+      default: '""'
     - name: tag
       type: int
       optional: true
@@ -1333,6 +1338,7 @@
     - name: ignore
       type: string
       optional: true
+      default: '""'
     returnType: string
   propagation:
   - from: argument(0)

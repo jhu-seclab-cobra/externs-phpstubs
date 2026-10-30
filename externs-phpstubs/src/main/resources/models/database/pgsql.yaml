@@ -23,6 +23,7 @@
     - name: connection
       type: ?PgSql\Connection
       optional: true
+      default: 'null'
     returnType: string
   throws: [error]
 - subject:
@@ -32,6 +33,7 @@
     - name: connection
       type: ?PgSql\Connection
       optional: true
+      default: 'null'
     returnType: string
   propagation:
   - from: argument(0)
@@ -44,6 +46,7 @@
     - name: connection
       type: ?PgSql\Connection
       optional: true
+      default: 'null'
     returnType: 'true'
   throws: [error]
 - subject:
@@ -63,6 +66,7 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: PgSql\Connection|false
   propagation:
   - from: argument(0)
@@ -123,6 +127,7 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: array|false
   propagation:
   - from: argument(2)
@@ -169,6 +174,7 @@
     - name: connection
       type: ?PgSql\Connection
       optional: true
+      default: 'null'
     returnType: string
   throws: [error]
 - subject:
@@ -193,6 +199,7 @@
     - name: connection
       type: ?PgSql\Connection
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error]
 - subject:
@@ -202,6 +209,7 @@
     - name: connection
       type: ?PgSql\Connection
       optional: true
+      default: 'null'
     returnType: string
   propagation:
   - from: argument(0)
@@ -305,6 +313,7 @@
     - name: field
       type: int
       optional: true
+      default: '0'
     returnType: array
   throws: [error, valueerror]
 - subject:
@@ -316,6 +325,7 @@
     - name: row
       type: ?int
       optional: true
+      default: 'null'
     - name: mode
       type: int
       optional: true
@@ -330,6 +340,7 @@
     - name: row
       type: ?int
       optional: true
+      default: 'null'
     returnType: array|false
   throws: [error, valueerror]
 - subject:
@@ -341,9 +352,11 @@
     - name: row
       type: ?int
       optional: true
+      default: 'null'
     - name: class
       type: string
       optional: true
+      default: '"stdClass"'
     - name: constructor_args
       type: array
       optional: true
@@ -380,6 +393,7 @@
     - name: row
       type: ?int
       optional: true
+      default: 'null'
     - name: mode
       type: int
       optional: true
@@ -452,6 +466,7 @@
     - name: oid_only
       type: bool
       optional: true
+      default: 'false'
     returnType: string|int|false
   throws: [error, valueerror]
 - subject:
@@ -615,6 +630,7 @@
     - name: connection
       type: ?PgSql\Connection
       optional: true
+      default: 'null'
     returnType: string
   throws: [error]
 - subject:
@@ -648,6 +664,7 @@
     - name: connection
       type: ?PgSql\Connection
       optional: true
+      default: 'null'
     returnType: string
   throws: [error]
 - subject:
@@ -747,6 +764,7 @@
     - name: length
       type: int
       optional: true
+      default: '8192'
     returnType: string|false
   throws: [error, valueerror]
 - subject:
@@ -810,6 +828,7 @@
     - name: length
       type: ?int
       optional: true
+      default: 'null'
     returnType: int|false
   throws: [error, valueerror]
 - subject:
@@ -890,6 +909,7 @@
     - name: length
       type: int
       optional: true
+      default: '8192'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -925,6 +945,7 @@
     - name: length
       type: ?int
       optional: true
+      default: 'null'
     returnType: int|false
   throws: [error, valueerror]
 - subject:
@@ -938,6 +959,7 @@
     - name: extended
       type: bool
       optional: true
+      default: 'false'
     returnType: array|false
   throws: [error, valueerror]
 - subject:
@@ -979,6 +1001,7 @@
     - name: connection
       type: ?PgSql\Connection
       optional: true
+      default: 'null'
     returnType: string
   throws: [error]
 - subject:
@@ -1004,6 +1027,7 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: PgSql\Connection|false
   propagation:
   - from: argument(0)
@@ -1018,6 +1042,7 @@
     - name: connection
       type: ?PgSql\Connection
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error]
 - subject:
@@ -1027,6 +1052,7 @@
     - name: connection
       type: ?PgSql\Connection
       optional: true
+      default: 'null'
     returnType: string
   throws: [error]
 - subject:
@@ -1255,12 +1281,15 @@
     - name: mode
       type: string
       optional: true
+      default: '"w"'
     - name: connection
       type: ?PgSql\Connection
       optional: true
+      default: 'null'
     - name: trace_mode
       type: int
       optional: true
+      default: '0'
     returnType: bool
   throws: [error, valueerror]
 - subject:
@@ -1278,6 +1307,7 @@
     - name: connection
       type: ?PgSql\Connection
       optional: true
+      default: 'null'
     returnType: string
   throws: [error]
 - subject:
@@ -1298,6 +1328,7 @@
     - name: connection
       type: ?PgSql\Connection
       optional: true
+      default: 'null'
     returnType: 'true'
   throws: [error]
 - subject:
@@ -1324,6 +1355,7 @@
     - name: connection
       type: ?PgSql\Connection
       optional: true
+      default: 'null'
     returnType: array
   throws: [error]
 - subject:
@@ -1505,6 +1537,7 @@
     - name: connection
       type: ?PgSql\Connection
       optional: true
+      default: 'null'
     returnType: array
   throws: [error]
 - subject:
@@ -1526,6 +1559,7 @@
     - name: error
       type: ?string
       optional: true
+      default: 'null'
     returnType: int
   throws: [error]
 - subject:
@@ -1543,6 +1577,7 @@
     - name: connection
       type: ?PgSql\Connection
       optional: true
+      default: 'null'
     returnType: string
   throws: [error]
 - subject:
@@ -1578,5 +1613,6 @@
     - name: timeout
       type: int
       optional: true
+      default: '-1'
     returnType: int
   throws: [typeerror]

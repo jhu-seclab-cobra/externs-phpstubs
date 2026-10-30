@@ -197,12 +197,15 @@
     - name: config
       type: array|string|null
       optional: true
+      default: 'null'
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     - name: useIncludePath
       type: bool
       optional: true
+      default: 'false'
     returnType: tidy|false
   propagation:
   - from: argument(0)
@@ -223,9 +226,11 @@
     - name: config
       type: array|string|null
       optional: true
+      default: 'null'
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: tidy|false
   propagation:
   - from: argument(0)
@@ -244,12 +249,15 @@
     - name: config
       type: array|string|null
       optional: true
+      default: 'null'
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     - name: useIncludePath
       type: bool
       optional: true
+      default: 'false'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -266,9 +274,11 @@
     - name: config
       type: array|string|null
       optional: true
+      default: 'null'
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -418,15 +428,19 @@
     - name: filename
       type: ?string
       optional: true
+      default: 'null'
     - name: config
       type: array|string|null
       optional: true
+      default: 'null'
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     - name: useIncludePath
       type: bool
       optional: true
+      default: 'false'
     returnType: mixed
   throws: [exception, typeerror, valueerror]
 - subject:
@@ -509,12 +523,15 @@
     - name: config
       type: array|string|null
       optional: true
+      default: 'null'
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     - name: useIncludePath
       type: bool
       optional: true
+      default: 'false'
     returnType: bool
   throws: [typeerror, valueerror]
 - subject:
@@ -526,9 +543,11 @@
     - name: config
       type: array|string|null
       optional: true
+      default: 'null'
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [typeerror, valueerror]
 - subject:
@@ -540,12 +559,15 @@
     - name: config
       type: array|string|null
       optional: true
+      default: 'null'
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     - name: useIncludePath
       type: bool
       optional: true
+      default: 'false'
     returnType: string|false
   throws: [typeerror, valueerror]
 - subject:
@@ -557,9 +579,11 @@
     - name: config
       type: array|string|null
       optional: true
+      default: 'null'
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|false
   throws: [typeerror, valueerror]
 - subject:

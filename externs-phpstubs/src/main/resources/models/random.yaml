@@ -435,6 +435,7 @@
     - name: seed
       type: int|null
       optional: true
+      default: 'null'
     - name: mode
       type: int
       optional: true
@@ -470,6 +471,7 @@
     - name: seed
       type: string|int|null
       optional: true
+      default: 'null'
     returnType: mixed
   throws: [random\randomexception, valueerror]
 - subject:
@@ -515,6 +517,7 @@
     - name: seed
       type: string|int|null
       optional: true
+      default: 'null'
     returnType: mixed
   throws: [random\randomexception, valueerror]
 - subject:
@@ -557,6 +560,7 @@
     - name: engine
       type: ?Random\Engine
       optional: true
+      default: 'null'
     returnType: mixed
   throws: []
 - subject:
@@ -683,6 +687,7 @@
     - name: seed
       type: ?int
       optional: true
+      default: 'null'
     - name: mode
       type: int
       optional: true
@@ -725,6 +730,7 @@
     - name: seed
       type: ?int
       optional: true
+      default: 'null'
     - name: mode
       type: int
       optional: true

@@ -29,6 +29,7 @@
     - name: calendar
       type: int
       optional: true
+      default: '-1'
     returnType: array
   throws: [valueerror]
 - subject:
@@ -52,6 +53,7 @@
     - name: year
       type: ?int
       optional: true
+      default: 'null'
     - name: mode
       type: int
       optional: true
@@ -64,6 +66,7 @@
     - name: year
       type: ?int
       optional: true
+      default: 'null'
     - name: mode
       type: int
       optional: true
@@ -139,9 +142,11 @@
     - name: hebrew
       type: bool
       optional: true
+      default: 'false'
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: string
   throws: [valueerror]
 - subject:
@@ -191,5 +196,6 @@
     - name: timestamp
       type: ?int
       optional: true
+      default: 'null'
     returnType: int|false
   throws: [valueerror]

@@ -89,6 +89,7 @@
     - name: empty
       type: bool
       optional: true
+      default: 'true'
     returnType: string|int
   throws: [error]
 - subject:
@@ -124,6 +125,7 @@
     - name: flush
       type: bool
       optional: true
+      default: 'true'
     returnType: string
   propagation:
   - from: argument(0)
@@ -198,12 +200,15 @@
     - name: version
       type: ?string
       optional: true
+      default: '"1.0"'
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     - name: standalone
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error, valueerror]
 - subject:
@@ -217,9 +222,11 @@
     - name: publicId
       type: ?string
       optional: true
+      default: 'null'
     - name: systemId
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error]
 - subject:
@@ -357,12 +364,15 @@
     - name: publicId
       type: ?string
       optional: true
+      default: 'null'
     - name: systemId
       type: ?string
       optional: true
+      default: 'null'
     - name: content
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error]
 - subject:
@@ -402,15 +412,19 @@
     - name: isParam
       type: bool
       optional: true
+      default: 'false'
     - name: publicId
       type: ?string
       optional: true
+      default: 'null'
     - name: systemId
       type: ?string
       optional: true
+      default: 'null'
     - name: notationData
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error, valueerror]
 - subject:
@@ -424,6 +438,7 @@
     - name: content
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error, valueerror]
 - subject:
@@ -441,6 +456,7 @@
     - name: content
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error, valueerror]
 - subject:
@@ -572,6 +588,7 @@
     - name: empty
       type: bool
       optional: true
+      default: 'true'
     returnType: string|int
   throws: [error]
 - subject:
@@ -599,6 +616,7 @@
     - name: flush
       type: bool
       optional: true
+      default: 'true'
     returnType: string
   throws: [error]
 - subject:
@@ -654,12 +672,15 @@
     - name: version
       type: ?string
       optional: true
+      default: '"1.0"'
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     - name: standalone
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error, valueerror]
 - subject:
@@ -671,9 +692,11 @@
     - name: publicId
       type: ?string
       optional: true
+      default: 'null'
     - name: systemId
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error]
 - subject:
@@ -808,12 +831,15 @@
     - name: publicId
       type: ?string
       optional: true
+      default: 'null'
     - name: systemId
       type: ?string
       optional: true
+      default: 'null'
     - name: content
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error]
 - subject:
@@ -847,15 +873,19 @@
     - name: isParam
       type: bool
       optional: true
+      default: 'false'
     - name: publicId
       type: ?string
       optional: true
+      default: 'null'
     - name: systemId
       type: ?string
       optional: true
+      default: 'null'
     - name: notationData
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error, valueerror]
 - subject:
@@ -867,6 +897,7 @@
     - name: content
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error, valueerror]
 - subject:
@@ -882,6 +913,7 @@
     - name: content
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error, valueerror]
 - subject:

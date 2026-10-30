@@ -17,12 +17,15 @@
     - name: required_sections
       type: ?string
       optional: true
+      default: 'null'
     - name: as_arrays
       type: bool
       optional: true
+      default: 'false'
     - name: read_thumbnail
       type: bool
       optional: true
+      default: 'false'
     returnType: array|false
   throws: [typeerror, valueerror]
 - subject:
@@ -42,14 +45,17 @@
     - name: width
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     - name: height
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     - name: image_type
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: string|false
   propagation:

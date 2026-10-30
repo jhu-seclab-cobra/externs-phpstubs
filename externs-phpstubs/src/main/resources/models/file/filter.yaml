@@ -32,6 +32,7 @@
     - name: options
       type: array|int
       optional: true
+      default: '0'
     returnType: mixed
   throws: [filter\filterfailedexception, valueerror]
 - subject:
@@ -46,6 +47,7 @@
     - name: add_empty
       type: bool
       optional: true
+      default: 'true'
     returnType: array|false|null
   propagation:
   - from: argument(0)
@@ -70,6 +72,7 @@
     - name: options
       type: array|int
       optional: true
+      default: '0'
     returnType: mixed
   throws: [filter\filterfailedexception, valueerror]
 - subject:
@@ -84,6 +87,7 @@
     - name: add_empty
       type: bool
       optional: true
+      default: 'true'
     returnType: array|false|null
   propagation:
   - from: argument(0)

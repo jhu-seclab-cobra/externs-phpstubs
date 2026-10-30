@@ -1707,6 +1707,7 @@
     - name: options
       type: ?array
       optional: true
+      default: 'null'
     returnType: array
   throws: [requestparsebodyexception, valueerror]
 - subject:
@@ -1718,6 +1719,7 @@
     - name: pid
       type: int
       optional: true
+      default: '0'
     returnType: bool
   throws: [error]
 - subject:
@@ -1729,6 +1731,7 @@
     - name: add
       type: bool
       optional: true
+      default: 'true'
     returnType: bool
   throws: [error]
 - subject:
@@ -1806,6 +1809,7 @@
     - name: suffix
       type: string
       optional: true
+      default: '""'
     returnType: string
   throws: []
 - subject:
@@ -1849,6 +1853,7 @@
     - name: context
       type: mixed
       optional: true
+      default: 'null'
     returnType: bool
   throws: [typeerror, valueerror]
 - subject:
@@ -1860,6 +1865,7 @@
     - name: levels
       type: int
       optional: true
+      default: '1'
     returnType: string
     framelessArities: [1, 2]
   propagation:
@@ -1907,9 +1913,11 @@
     - name: length
       type: ?int
       optional: true
+      default: 'null'
     - name: separator
       type: string
       optional: true
+      default: '","'
     - name: enclosure
       type: string
       optional: true
@@ -1927,6 +1935,7 @@
     - name: length
       type: ?int
       optional: true
+      default: 'null'
     returnType: string|false
   throws: [typeerror, valueerror]
 - subject:
@@ -1938,9 +1947,11 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     - name: context
       type: mixed
       optional: true
+      default: 'null'
     returnType: array|false
   throws: [typeerror, valueerror]
 - subject:
@@ -1960,15 +1971,19 @@
     - name: use_include_path
       type: bool
       optional: true
+      default: 'false'
     - name: context
       type: mixed
       optional: true
+      default: 'null'
     - name: offset
       type: int
       optional: true
+      default: '0'
     - name: length
       type: ?int
       optional: true
+      default: 'null'
     returnType: string|false
   throws: [typeerror, valueerror]
 - subject:
@@ -1982,9 +1997,11 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     - name: context
       type: mixed
       optional: true
+      default: 'null'
     returnType: int|false
   throws: [error, typeerror, valueerror]
 - subject:
@@ -2073,6 +2090,7 @@
     - name: would_block
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: bool
   throws: [error, typeerror, valueerror]
@@ -2087,9 +2105,11 @@
     - name: use_include_path
       type: bool
       optional: true
+      default: 'false'
     - name: context
       type: mixed
       optional: true
+      default: 'null'
     returnType: mixed
   throws: [typeerror, valueerror]
 - subject:
@@ -2111,6 +2131,7 @@
     - name: separator
       type: string
       optional: true
+      default: '","'
     - name: enclosure
       type: string
       optional: true
@@ -2182,6 +2203,7 @@
     - name: length
       type: ?int
       optional: true
+      default: 'null'
     returnType: int|false
   throws: [typeerror]
 - subject:
@@ -2193,6 +2215,7 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: array|false
   throws: [valueerror]
 - subject:
@@ -2268,12 +2291,15 @@
     - name: permissions
       type: int
       optional: true
+      default: '0777'
     - name: recursive
       type: bool
       optional: true
+      default: 'false'
     - name: context
       type: mixed
       optional: true
+      default: 'null'
     returnType: bool
   throws: [typeerror, valueerror]
 - subject:
@@ -2295,6 +2321,7 @@
     - name: context
       type: mixed
       optional: true
+      default: 'null'
     returnType: mixed
   propagation:
   - from: argument(0)
@@ -2322,9 +2349,11 @@
     - name: use_include_path
       type: bool
       optional: true
+      default: 'false'
     - name: context
       type: mixed
       optional: true
+      default: 'null'
     returnType: int|false
   throws: [error, typeerror, valueerror]
 - subject:
@@ -2367,6 +2396,7 @@
     - name: context
       type: mixed
       optional: true
+      default: 'null'
     returnType: bool
   throws: [typeerror, valueerror]
 - subject:
@@ -2378,6 +2408,7 @@
     - name: context
       type: mixed
       optional: true
+      default: 'null'
     returnType: bool
   throws: [typeerror, valueerror]
 - subject:
@@ -2392,6 +2423,7 @@
     - name: context
       type: mixed
       optional: true
+      default: 'null'
     returnType: array|false
   throws: [typeerror, valueerror]
 - subject:
@@ -2418,6 +2450,7 @@
     - name: context
       type: mixed
       optional: true
+      default: 'null'
     returnType: bool
   throws: [typeerror, valueerror]
 - subject:
@@ -2429,6 +2462,7 @@
     - name: include_dot
       type: bool
       optional: true
+      default: 'true'
     returnType: string|false
   throws: []
 - subject:
@@ -2446,6 +2480,7 @@
     - name: as_float
       type: bool
       optional: true
+      default: 'false'
     returnType: string|float
   throws: []
 - subject:
@@ -2498,6 +2533,7 @@
     - name: microseconds
       type: int
       optional: true
+      default: '0'
     returnType: bool
   throws: [typeerror]
 - subject:
@@ -2553,9 +2589,11 @@
     - name: options
       type: ?array
       optional: true
+      default: 'null'
     - name: params
       type: ?array
       optional: true
+      default: 'null'
     returnType: mixed
   propagation:
   - from: argument(0)
@@ -2570,6 +2608,7 @@
     - name: options
       type: ?array
       optional: true
+      default: 'null'
     returnType: mixed
   propagation:
   - from: argument(0)
@@ -2613,6 +2652,7 @@
     - name: option_name
       type: ?string
       optional: true
+      default: 'null'
     - name: value
       type: mixed
       optional: true
@@ -2639,9 +2679,11 @@
     - name: length
       type: ?int
       optional: true
+      default: 'null'
     - name: offset
       type: int
       optional: true
+      default: '0'
     returnType: int|false
   throws: [typeerror]
 - subject:
@@ -2655,6 +2697,7 @@
     - name: mode
       type: int
       optional: true
+      default: '0'
     - name: params
       type: mixed
       optional: true
@@ -2680,6 +2723,7 @@
     - name: mode
       type: int
       optional: true
+      default: '0'
     - name: params
       type: mixed
       optional: true
@@ -2721,9 +2765,11 @@
     - name: length
       type: ?int
       optional: true
+      default: 'null'
     - name: offset
       type: int
       optional: true
+      default: '-1'
     returnType: string|false
   throws: [typeerror, valueerror]
 - subject:
@@ -2742,6 +2788,7 @@
     - name: ending
       type: string
       optional: true
+      default: '""'
     returnType: string|false
   propagation:
   - from: argument(2)
@@ -2792,6 +2839,7 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: bool
   throws: [typeerror]
 - subject:
@@ -2823,6 +2871,7 @@
     - name: microseconds
       type: ?int
       optional: true
+      default: 'null'
     returnType: int|false
   throws: [typeerror, valueerror]
 - subject:
@@ -2866,6 +2915,7 @@
     - name: microseconds
       type: int
       optional: true
+      default: '0'
     returnType: bool
   throws: [typeerror]
 - subject:
@@ -2887,9 +2937,11 @@
     - name: timeout
       type: ?float
       optional: true
+      default: 'null'
     - name: peer_name
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: mixed
   propagation:
@@ -2909,20 +2961,24 @@
     - name: error_code
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     - name: error_message
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     - name: timeout
       type: ?float
       optional: true
+      default: 'null'
     - name: flags
       type: int
       optional: true
     - name: context
       type: mixed
       optional: true
+      default: 'null'
     returnType: mixed
   propagation:
   - from: argument(0)
@@ -2949,9 +3005,11 @@
     - name: crypto_method
       type: ?int
       optional: true
+      default: 'null'
     - name: session_stream
       type: mixed
       optional: true
+      default: 'null'
     returnType: int|bool
   throws: [typeerror, valueerror]
 - subject:
@@ -2987,9 +3045,11 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     - name: address
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: string|false
   propagation:
@@ -3007,9 +3067,11 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     - name: address
       type: string
       optional: true
+      default: '""'
     returnType: int|false
   throws: [typeerror]
 - subject:
@@ -3021,10 +3083,12 @@
     - name: error_code
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     - name: error_message
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     - name: flags
       type: int
@@ -3032,6 +3096,7 @@
     - name: context
       type: mixed
       optional: true
+      default: 'null'
     returnType: mixed
   propagation:
   - from: argument(0)
@@ -3074,6 +3139,7 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: bool
   throws: [typeerror]
 - subject:

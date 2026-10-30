@@ -312,12 +312,14 @@
     - name: server_name
       type: array|string|null
       optional: true
+      default: 'null'
     - name: codepage
       type: int
       optional: true
     - name: typelib
       type: string
       optional: true
+      default: '""'
     returnType: mixed
   throws: [com_exception, error]
 - subject:
@@ -327,6 +329,7 @@
     - name: variant
       type: ?variant
       optional: true
+      default: 'null'
     returnType: mixed
   throws: [com_exception]
 - subject:
@@ -353,6 +356,7 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: bool
   throws: [com_exception, valueerror]
 - subject:
@@ -372,6 +376,7 @@
     - name: remember
       type: bool
       optional: true
+      default: 'true'
     returnType: bool
   throws: [com_exception, valueerror]
 - subject:
@@ -402,6 +407,7 @@
     - name: value
       type: mixed
       optional: true
+      default: 'null'
     - name: type
       type: int
       optional: true
@@ -426,6 +432,7 @@
     - name: sink_interface
       type: array|string|null
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error]
 - subject:
@@ -437,6 +444,7 @@
     - name: codepage
       type: ?int
       optional: true
+      default: 'null'
     returnType: variant
   propagation:
   - from: argument(0)
@@ -453,6 +461,7 @@
     - name: case_insensitive
       type: bool
       optional: true
+      default: 'true'
     returnType: bool
   throws: [error]
 - subject:
@@ -462,6 +471,7 @@
     - name: timeout_milliseconds
       type: int
       optional: true
+      default: '0'
     returnType: bool
   throws: []
 - subject:
@@ -473,9 +483,11 @@
     - name: dispatch_interface
       type: ?string
       optional: true
+      default: 'null'
     - name: display_sink
       type: bool
       optional: true
+      default: 'false'
     returnType: bool
   throws: [error]
 - subject:
@@ -563,6 +575,7 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: int
   throws: []
 - subject:

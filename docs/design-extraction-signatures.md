@@ -22,6 +22,11 @@ sets).
 - A parameter is `optional` when it declares a default or is variadic, and
   `byRef` when declared `&` or tagged `@prefer-ref` in its doc comment
   (the interpreter passes such an argument by reference when it can).
+- A parameter whose default is a scalar literal (`true`, `false`, `null`, an
+  integer, a decimal, or a quoted string with no escape or interpolation) also
+  carries that literal as `default`, spelled as in the stub; any other default
+  (a constant, an array, an expression) leaves `default` absent. Format and
+  meaning: [parameter facts](../../commons-phpmodels/docs/design-declarations.md).
 - After selecting stub signature variants, `with_named_extras` reads one shared
   C program and attaches a source-established policy only to each callable's
   variadic parameter. Format and meaning:

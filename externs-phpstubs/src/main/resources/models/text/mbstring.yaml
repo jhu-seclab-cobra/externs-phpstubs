@@ -7,9 +7,11 @@
     - name: value
       type: array|string|null
       optional: true
+      default: 'null'
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [valueerror]
 - subject:
@@ -21,6 +23,7 @@
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|false
   propagation:
   - from: argument(1)
@@ -37,6 +40,7 @@
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: string
   propagation:
   - from: argument(0)
@@ -55,6 +59,7 @@
     - name: from_encoding
       type: array|string|null
       optional: true
+      default: 'null'
     returnType: array|string|false
   propagation:
   - from: argument(0)
@@ -69,9 +74,11 @@
     - name: mode
       type: string
       optional: true
+      default: '"KV"'
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: string
   propagation:
   - from: argument(0)
@@ -125,6 +132,7 @@
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: string
   propagation:
   - from: argument(0)
@@ -141,9 +149,11 @@
     - name: encodings
       type: array|string|null
       optional: true
+      default: 'null'
     - name: strict
       type: bool
       optional: true
+      default: 'false'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -156,6 +166,7 @@
     - name: encoding
       type: array|string|null
       optional: true
+      default: 'null'
     returnType: array|bool
   throws: [valueerror]
 - subject:
@@ -167,15 +178,18 @@
     - name: charset
       type: ?string
       optional: true
+      default: 'null'
     - name: transfer_encoding
       type: ?string
       optional: true
+      default: 'null'
     - name: newline
       type: string
       optional: true
     - name: indent
       type: int
       optional: true
+      default: '0'
     returnType: string
   propagation:
   - from: argument(0)
@@ -198,9 +212,11 @@
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     - name: hex
       type: bool
       optional: true
+      default: 'false'
     returnType: string
   propagation:
   - from: argument(0)
@@ -227,6 +243,7 @@
     - name: matches
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: bool
   throws: [error, typeerror, valueerror]
@@ -241,6 +258,7 @@
     - name: options
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [valueerror]
 - subject:
@@ -256,6 +274,7 @@
     - name: options
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|false|null
   propagation:
   - from: argument(0)
@@ -280,6 +299,7 @@
     - name: options
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|false|null
   propagation:
   - from: argument(0)
@@ -296,9 +316,11 @@
     - name: pattern
       type: ?string
       optional: true
+      default: 'null'
     - name: options
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error, valueerror]
 - subject:
@@ -320,9 +342,11 @@
     - name: pattern
       type: ?string
       optional: true
+      default: 'null'
     - name: options
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [valueerror]
 - subject:
@@ -332,9 +356,11 @@
     - name: pattern
       type: ?string
       optional: true
+      default: 'null'
     - name: options
       type: ?string
       optional: true
+      default: 'null'
     returnType: array|false
   throws: [error, valueerror]
 - subject:
@@ -344,9 +370,11 @@
     - name: pattern
       type: ?string
       optional: true
+      default: 'null'
     - name: options
       type: ?string
       optional: true
+      default: 'null'
     returnType: array|false
   throws: [error, valueerror]
 - subject:
@@ -368,6 +396,7 @@
     - name: matches
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: bool
   throws: [error, typeerror, valueerror]
@@ -384,6 +413,7 @@
     - name: options
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|false|null
   propagation:
   - from: argument(0)
@@ -402,6 +432,7 @@
     - name: type
       type: string
       optional: true
+      default: '"all"'
     returnType: array|string|int|false|null
   throws: []
 - subject:
@@ -411,6 +442,7 @@
     - name: type
       type: ?string
       optional: true
+      default: 'null'
     returnType: array|string|false
   throws: [valueerror]
 - subject:
@@ -420,6 +452,7 @@
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|bool
   throws: [valueerror]
 - subject:
@@ -429,6 +462,7 @@
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|bool
   throws: [valueerror]
 - subject:
@@ -438,6 +472,7 @@
     - name: language
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|bool
   throws: [valueerror]
 - subject:
@@ -454,6 +489,7 @@
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: int|false
   throws: [valueerror]
 - subject:
@@ -498,6 +534,7 @@
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|bool
   throws: [valueerror]
 - subject:
@@ -507,6 +544,7 @@
     - name: options
       type: ?string
       optional: true
+      default: 'null'
     returnType: string
   propagation:
   - from: argument(0)
@@ -521,6 +559,7 @@
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: string
   propagation:
   - from: argument(0)
@@ -544,6 +583,7 @@
     - name: additional_params
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [dateerror, typeerror, valueerror]
 - subject:
@@ -557,6 +597,7 @@
     - name: limit
       type: int
       optional: true
+      default: '-1'
     returnType: array|false
   throws: []
 - subject:
@@ -568,9 +609,11 @@
     - name: length
       type: int
       optional: true
+      default: '1'
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: array
   throws: [valueerror]
 - subject:
@@ -584,9 +627,11 @@
     - name: length
       type: ?int
       optional: true
+      default: 'null'
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: string
   propagation:
   - from: argument(0)
@@ -607,9 +652,11 @@
     - name: trim_marker
       type: string
       optional: true
+      default: '""'
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: string
   propagation:
   - from: argument(0)
@@ -630,9 +677,11 @@
     - name: offset
       type: int
       optional: true
+      default: '0'
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: int|false
   throws: [valueerror]
 - subject:
@@ -646,9 +695,11 @@
     - name: before_needle
       type: bool
       optional: true
+      default: 'false'
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -667,6 +718,7 @@
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: int
   throws: [valueerror]
 - subject:
@@ -680,9 +732,11 @@
     - name: offset
       type: int
       optional: true
+      default: '0'
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: int|false
   throws: [valueerror]
 - subject:
@@ -696,9 +750,11 @@
     - name: before_needle
       type: bool
       optional: true
+      default: 'false'
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -719,9 +775,11 @@
     - name: before_needle
       type: bool
       optional: true
+      default: 'false'
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -742,9 +800,11 @@
     - name: offset
       type: int
       optional: true
+      default: '0'
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: int|false
   throws: [valueerror]
 - subject:
@@ -758,9 +818,11 @@
     - name: offset
       type: int
       optional: true
+      default: '0'
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: int|false
   throws: [valueerror]
 - subject:
@@ -774,9 +836,11 @@
     - name: before_needle
       type: bool
       optional: true
+      default: 'false'
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -795,6 +859,7 @@
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: string
   propagation:
   - from: argument(0)
@@ -809,6 +874,7 @@
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: string
   propagation:
   - from: argument(0)
@@ -823,6 +889,7 @@
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: int
   throws: [valueerror]
 - subject:
@@ -832,6 +899,7 @@
     - name: substitute_character
       type: string|int|null
       optional: true
+      default: 'null'
     returnType: string|int|bool
   throws: [valueerror]
 - subject:
@@ -845,9 +913,11 @@
     - name: length
       type: ?int
       optional: true
+      default: 'null'
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: string
   propagation:
   - from: argument(0)
@@ -864,6 +934,7 @@
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: int
   throws: [valueerror]
 - subject:
@@ -875,6 +946,7 @@
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: string
   throws: [valueerror]
 - subject:
@@ -886,9 +958,11 @@
     - name: characters
       type: ?string
       optional: true
+      default: 'null'
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: string
   throws: [valueerror]
 - subject:
@@ -900,9 +974,11 @@
     - name: characters
       type: ?string
       optional: true
+      default: 'null'
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: string
   throws: [valueerror]
 - subject:
@@ -916,12 +992,14 @@
     - name: pad_string
       type: string
       optional: true
+      default: '" "'
     - name: pad_type
       type: int
       optional: true
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: string
   throws: [error, valueerror]
 - subject:
@@ -933,9 +1011,11 @@
     - name: characters
       type: ?string
       optional: true
+      default: 'null'
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: string
   throws: [valueerror]
 - subject:
@@ -947,5 +1027,6 @@
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: string
   throws: [valueerror]

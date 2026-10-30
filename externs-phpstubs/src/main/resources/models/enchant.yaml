@@ -344,6 +344,7 @@
     - name: suggestions
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: bool
   throws: [error, typeerror, valueerror]

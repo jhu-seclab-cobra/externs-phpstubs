@@ -97,6 +97,7 @@
     - name: functions
       type: array|string|null
       optional: true
+      default: 'null'
     returnType: void
   throws: [error, typeerror, valueerror]
 - subject:
@@ -120,6 +121,7 @@
     - name: value
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [typeerror, valueerror]
 - subject:
@@ -147,6 +149,7 @@
     - name: returnClass
       type: ?string
       optional: true
+      default: 'null'
     returnType: object|false
   throws: [error, typeerror]
 - subject:

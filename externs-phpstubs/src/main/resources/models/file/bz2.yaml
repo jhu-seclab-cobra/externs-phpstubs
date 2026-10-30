@@ -17,9 +17,11 @@
     - name: block_size
       type: int
       optional: true
+      default: '4'
     - name: work_factor
       type: int
       optional: true
+      default: '0'
     returnType: string|int
   throws: [valueerror]
 - subject:
@@ -31,6 +33,7 @@
     - name: use_less_memory
       type: bool
       optional: true
+      default: 'false'
     returnType: string|int|false
   throws: []
 - subject:
@@ -89,6 +92,7 @@
     - name: length
       type: int
       optional: true
+      default: '1024'
     returnType: string|false
   throws: [typeerror, valueerror]
 - subject:
@@ -102,5 +106,6 @@
     - name: length
       type: ?int
       optional: true
+      default: 'null'
     returnType: int|false
   throws: [typeerror]

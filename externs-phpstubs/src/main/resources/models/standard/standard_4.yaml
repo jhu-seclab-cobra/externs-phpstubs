@@ -109,6 +109,7 @@
     - name: additional_params
       type: string
       optional: true
+      default: '""'
     returnType: bool
   throws: [dateerror, typeerror, valueerror]
 - subject:
@@ -266,6 +267,7 @@
     - name: binary
       type: bool
       optional: true
+      default: 'false'
     returnType: string
   throws: []
 - subject:
@@ -277,6 +279,7 @@
     - name: binary
       type: bool
       optional: true
+      default: 'false'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -635,6 +638,7 @@
     - name: real_usage
       type: bool
       optional: true
+      default: 'false'
     returnType: int
   throws: []
 - subject:
@@ -644,6 +648,7 @@
     - name: real_usage
       type: bool
       optional: true
+      default: 'false'
     returnType: int
   throws: []
 - subject:
@@ -655,6 +660,7 @@
     - name: max_phonemes
       type: int
       optional: true
+      default: '0'
     returnType: string
   propagation:
   - from: argument(0)
@@ -2116,6 +2122,7 @@
     - name: use_xhtml
       type: bool
       optional: true
+      default: 'true'
     returnType: string
   propagation:
   - from: argument(0)
@@ -2303,12 +2310,15 @@
     - name: decimals
       type: int
       optional: true
+      default: '0'
     - name: decimal_separator
       type: ?string
       optional: true
+      default: '"."'
     - name: thousands_separator
       type: ?string
       optional: true
+      default: '","'
     returnType: string
   propagation:
   - from: argument(0)
@@ -2416,6 +2426,7 @@
     - name: full_status
       type: bool
       optional: true
+      default: 'false'
     returnType: array
   throws: []
 - subject:
@@ -2437,6 +2448,7 @@
     - name: enable
       type: bool
       optional: true
+      default: 'true'
     returnType: void
   throws: []
 - subject:
@@ -2463,9 +2475,11 @@
     - name: callback
       type: mixed
       optional: true
+      default: 'null'
     - name: chunk_size
       type: int
       optional: true
+      default: '0'
     - name: flags
       type: int
       optional: true
@@ -2892,6 +2906,7 @@
     - name: process_sections
       type: bool
       optional: true
+      default: 'false'
     - name: scanner_mode
       type: int
       optional: true
@@ -2906,6 +2921,7 @@
     - name: process_sections
       type: bool
       optional: true
+      default: 'false'
     - name: scanner_mode
       type: int
       optional: true
@@ -2931,6 +2947,7 @@
     - name: component
       type: int
       optional: true
+      default: '-1'
     returnType: int|string|array|null|false
   throws: [valueerror]
 - subject:
@@ -2984,6 +3001,7 @@
     - name: result_code
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: false|null
   throws: [error, typeerror, valueerror]

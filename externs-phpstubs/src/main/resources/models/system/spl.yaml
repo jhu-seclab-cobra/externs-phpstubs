@@ -9,6 +9,7 @@
     - name: file_extensions
       type: ?string
       optional: true
+      default: 'null'
     returnType: void
   throws: [valueerror]
 - subject:
@@ -26,6 +27,7 @@
     - name: file_extensions
       type: ?string
       optional: true
+      default: 'null'
     returnType: string
   propagation:
   - from: argument(0)
@@ -43,12 +45,15 @@
     - name: callback
       type: ?callable
       optional: true
+      default: 'null'
     - name: throw
       type: bool
       optional: true
+      default: 'true'
     - name: prepend
       type: bool
       optional: true
+      default: 'false'
     returnType: bool
   throws: [error, valueerror]
 - subject:
@@ -1665,6 +1670,7 @@
     - name: class
       type: ?string
       optional: true
+      default: 'null'
     returnType: mixed
   throws: [badmethodcallexception, invalidargumentexception, logicexception, valueerror]
 - subject:
@@ -1706,9 +1712,11 @@
     - name: offset
       type: int
       optional: true
+      default: '0'
     - name: limit
       type: int
       optional: true
+      default: '-1'
     returnType: mixed
   throws: [badmethodcallexception, invalidargumentexception, logicexception, valueerror]
 - subject:
@@ -1762,6 +1770,7 @@
     - name: info
       type: string|int|null
       optional: true
+      default: 'null'
     returnType: void
   throws: [error, invalidargumentexception, typeerror]
 - subject:
@@ -1962,6 +1971,7 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: mixed
   throws: [error, invalidargumentexception, logicexception, typeerror]
 - subject:
@@ -2021,6 +2031,7 @@
     - name: level
       type: ?int
       optional: true
+      default: 'null'
     returnType: ?RecursiveIterator
   throws: [error]
 - subject:
@@ -2050,6 +2061,7 @@
     - name: maxDepth
       type: int
       optional: true
+      default: '-1'
     returnType: void
   throws: [valueerror]
 - subject:
@@ -2071,9 +2083,11 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     - name: pregFlags
       type: int
       optional: true
+      default: '0'
     returnType: mixed
   throws: [badmethodcallexception, invalidargumentexception, logicexception, valueerror]
 - subject:
@@ -2165,9 +2179,11 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     - name: pregFlags
       type: int
       optional: true
+      default: '0'
     returnType: mixed
   throws: [badmethodcallexception, invalidargumentexception, logicexception, valueerror]
 - subject:
@@ -3731,6 +3747,7 @@
     - name: autoload
       type: bool
       optional: true
+      default: 'true'
     returnType: array|false
   throws: [typeerror]
 - subject:
@@ -3742,6 +3759,7 @@
     - name: autoload
       type: bool
       optional: true
+      default: 'true'
     returnType: array|false
   throws: [typeerror]
 - subject:
@@ -3753,6 +3771,7 @@
     - name: autoload
       type: bool
       optional: true
+      default: 'true'
     returnType: array|false
   throws: [error, typeerror]
 - subject:
@@ -3766,6 +3785,7 @@
     - name: args
       type: ?array
       optional: true
+      default: 'null'
     returnType: int
   throws: []
 - subject:
@@ -3785,6 +3805,7 @@
     - name: preserve_keys
       type: bool
       optional: true
+      default: 'true'
     returnType: array
   propagation:
   - from: argument(0)
@@ -3800,6 +3821,7 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: mixed
   throws: [error, invalidargumentexception]
 - subject:
@@ -3985,6 +4007,7 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     - name: iteratorClass
       type: string
       optional: true
@@ -4181,6 +4204,7 @@
     - name: suffix
       type: string
       optional: true
+      default: '""'
     returnType: string
   throws: [error]
 - subject:
@@ -4259,6 +4283,7 @@
     - name: allowLinks
       type: bool
       optional: true
+      default: 'false'
     returnType: bool
   throws: [error]
 - subject:
@@ -4296,6 +4321,7 @@
     - name: suffix
       type: string
       optional: true
+      default: '""'
     returnType: string
   throws: [error]
 - subject:
@@ -4315,6 +4341,7 @@
     - name: class
       type: ?string
       optional: true
+      default: 'null'
     returnType: SplFileInfo
   throws: [error, logicexception, runtimeexception, typeerror, valueerror]
 - subject:
@@ -4359,6 +4386,7 @@
     - name: class
       type: ?string
       optional: true
+      default: 'null'
     returnType: ?SplFileInfo
   throws: [error, typeerror]
 - subject:
@@ -4423,12 +4451,15 @@
     - name: mode
       type: string
       optional: true
+      default: '"r"'
     - name: useIncludePath
       type: bool
       optional: true
+      default: 'false'
     - name: context
       type: mixed
       optional: true
+      default: 'null'
     returnType: SplFileObject
   throws: [error, logicexception, runtimeexception, typeerror, valueerror]
 - subject:
@@ -4458,12 +4489,15 @@
     - name: mode
       type: string
       optional: true
+      default: '"r"'
     - name: useIncludePath
       type: bool
       optional: true
+      default: 'false'
     - name: context
       type: mixed
       optional: true
+      default: 'null'
     returnType: mixed
   throws: [error, logicexception, runtimeexception, typeerror, valueerror]
 - subject:
@@ -4498,6 +4532,7 @@
     - name: separator
       type: string
       optional: true
+      default: '","'
     - name: enclosure
       type: string
       optional: true
@@ -4520,6 +4555,7 @@
     - name: wouldBlock
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: bool
   throws: [error, typeerror, valueerror]
@@ -4537,6 +4573,7 @@
     - name: separator
       type: string
       optional: true
+      default: '","'
     - name: enclosure
       type: string
       optional: true
@@ -4607,6 +4644,7 @@
     - name: length
       type: ?int
       optional: true
+      default: 'null'
     returnType: int|false
   throws: [error]
 - subject:
@@ -4669,6 +4707,7 @@
     - name: separator
       type: string
       optional: true
+      default: '","'
     - name: enclosure
       type: string
       optional: true
@@ -4705,6 +4744,7 @@
     - name: size
       type: int
       optional: true
+      default: '0'
     returnType: mixed
   throws: [valueerror]
 - subject:
@@ -4739,6 +4779,7 @@
     - name: preserveKeys
       type: bool
       optional: true
+      default: 'true'
     returnType: SplFixedArray
   throws: [invalidargumentexception]
 - subject:
@@ -4928,6 +4969,7 @@
     - name: info
       type: mixed
       optional: true
+      default: 'null'
     returnType: void
   throws: [typeerror]
 - subject:
@@ -5008,6 +5050,7 @@
     - name: info
       type: mixed
       optional: true
+      default: 'null'
     returnType: void
   throws: [typeerror]
 - subject:

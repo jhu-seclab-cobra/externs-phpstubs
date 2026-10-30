@@ -53,6 +53,7 @@
     - name: service
       type: ?string
       optional: true
+      default: 'null'
     - name: hints
       type: array
       optional: true
@@ -72,6 +73,7 @@
     - name: port
       type: int
       optional: true
+      default: '0'
     returnType: bool
   throws: [error, valueerror]
 - subject:
@@ -81,6 +83,7 @@
     - name: socket
       type: ?Socket
       optional: true
+      default: 'null'
     returnType: void
   throws: [error]
 - subject:
@@ -102,6 +105,7 @@
     - name: num
       type: int
       optional: true
+      default: '0'
     returnType: ?int
   throws: [valueerror]
 - subject:
@@ -115,6 +119,7 @@
     - name: port
       type: ?int
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error, valueerror]
 - subject:
@@ -220,6 +225,7 @@
     - name: port
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: bool
   throws: [error, typeerror, valueerror]
@@ -235,6 +241,7 @@
     - name: port
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: bool
   throws: [error, typeerror, valueerror]
@@ -256,6 +263,7 @@
     - name: socket
       type: ?Socket
       optional: true
+      default: 'null'
     returnType: int
   throws: [error]
 - subject:
@@ -267,6 +275,7 @@
     - name: backlog
       type: int
       optional: true
+      default: '0'
     returnType: bool
   throws: [error]
 - subject:
@@ -319,6 +328,7 @@
     - name: port
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: int|false
   throws: [error, typeerror, valueerror]
@@ -334,6 +344,7 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: int|false
   throws: [error, valueerror]
 - subject:
@@ -354,6 +365,7 @@
     - name: microseconds
       type: int
       optional: true
+      default: '0'
     returnType: int|false
   throws: [typeerror, valueerror]
 - subject:
@@ -381,6 +393,7 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: int|false
   throws: [error, valueerror]
 - subject:
@@ -400,6 +413,7 @@
     - name: port
       type: ?int
       optional: true
+      default: 'null'
     returnType: int|false
   throws: [error, valueerror]
 - subject:
@@ -455,6 +469,7 @@
     - name: mode
       type: int
       optional: true
+      default: '2'
     returnType: bool
   throws: [error, valueerror]
 - subject:
@@ -476,6 +491,7 @@
     - name: length
       type: ?int
       optional: true
+      default: 'null'
     returnType: int|false
   throws: [error, valueerror]
 - subject:

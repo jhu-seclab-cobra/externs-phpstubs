@@ -62,6 +62,7 @@
     - name: baseNode
       type: ?DOMNode
       optional: true
+      default: 'null'
     returnType: DOMNode|false
   throws: [error]
 - subject:
@@ -73,12 +74,15 @@
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     - name: flags
       type: int
       optional: true
+      default: '0'
     - name: documentUri
       type: ?string
       optional: true
+      default: 'null'
     returnType: static
   throws: [error, typeerror, valueerror]
 - subject:
@@ -90,9 +94,11 @@
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: static
   throws: [error, typeerror, valueerror]
 - subject:
@@ -104,9 +110,11 @@
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: static
   throws: [error, typeerror, valueerror]
 - subject:
@@ -204,6 +212,7 @@
     - name: name
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error]
 - subject:
@@ -215,9 +224,11 @@
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: mixed
   throws: [error, typeerror, valueerror]
 - subject:
@@ -283,8 +294,10 @@
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: mixed
   throws: [error, typeerror, valueerror]

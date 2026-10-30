@@ -375,6 +375,7 @@
     - name: baseUrl
       type: ?Uri\Rfc3986\Uri
       optional: true
+      default: 'null'
     returnType: mixed
   throws: [error, typeerror]
 - subject:
@@ -500,6 +501,7 @@
     - name: baseUrl
       type: ?Uri\Rfc3986\Uri
       optional: true
+      default: 'null'
     returnType: ?static
   throws: [error, typeerror]
 - subject:
@@ -583,15 +585,18 @@
     - name: message
       type: string
       optional: true
+      default: '""'
     - name: errors
       type: array
       optional: true
     - name: code
       type: int
       optional: true
+      default: '0'
     - name: previous
       type: ?Throwable
       optional: true
+      default: 'null'
     returnType: mixed
   throws: [valueerror]
 - subject:
@@ -603,9 +608,11 @@
     - name: baseUrl
       type: ?Uri\WhatWg\Url
       optional: true
+      default: 'null'
     - name: softErrors
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: mixed
   throws: [error, typeerror]
@@ -692,9 +699,11 @@
     - name: baseUrl
       type: ?Uri\WhatWg\Url
       optional: true
+      default: 'null'
     - name: errors
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: ?static
   throws: [error, typeerror]
@@ -707,6 +716,7 @@
     - name: softErrors
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: static
   throws: [error, typeerror]

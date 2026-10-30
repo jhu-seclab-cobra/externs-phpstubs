@@ -9,12 +9,15 @@
     - name: associative
       type: ?bool
       optional: true
+      default: 'null'
     - name: depth
       type: int
       optional: true
+      default: '512'
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: mixed
   propagation:
   - from: argument(0)
@@ -29,9 +32,11 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     - name: depth
       type: int
       optional: true
+      default: '512'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -107,9 +112,11 @@
     - name: depth
       type: int
       optional: true
+      default: '512'
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: bool
   throws: [valueerror]
 - subject:

@@ -7,6 +7,7 @@
     - name: prompt
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -60,9 +61,11 @@
     - name: var_name
       type: ?string
       optional: true
+      default: 'null'
     - name: value
       type: mixed
       optional: true
+      default: 'null'
     returnType: mixed
   propagation:
   - from: argument(0)
@@ -87,6 +90,7 @@
     - name: filename
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [valueerror]
 - subject:
@@ -101,5 +105,6 @@
     - name: filename
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [valueerror]

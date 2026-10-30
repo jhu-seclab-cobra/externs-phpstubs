@@ -594,15 +594,19 @@
     - name: insertion_cost
       type: int
       optional: true
+      default: '1'
     - name: replacement_cost
       type: int
       optional: true
+      default: '1'
     - name: deletion_cost
       type: int
       optional: true
+      default: '1'
     - name: locale
       type: string
       optional: true
+      default: '""'
     returnType: int|false
   throws: [intlexception, valueerror]
 - subject:
@@ -614,6 +618,7 @@
     - name: length
       type: int
       optional: true
+      default: '1'
     returnType: array|false
   throws: [intlexception, valueerror]
 - subject:
@@ -660,6 +665,7 @@
     - name: locale
       type: ?string
       optional: true
+      default: 'null'
     returnType: ?IntlBreakIterator
   throws: [intlexception]
 - subject:
@@ -674,6 +680,7 @@
     - name: locale
       type: ?string
       optional: true
+      default: 'null'
     returnType: ?IntlBreakIterator
   throws: [intlexception]
 - subject:
@@ -683,6 +690,7 @@
     - name: locale
       type: ?string
       optional: true
+      default: 'null'
     returnType: ?IntlBreakIterator
   throws: [intlexception]
 - subject:
@@ -692,6 +700,7 @@
     - name: locale
       type: ?string
       optional: true
+      default: 'null'
     returnType: ?IntlBreakIterator
   throws: [intlexception]
 - subject:
@@ -701,6 +710,7 @@
     - name: locale
       type: ?string
       optional: true
+      default: 'null'
     returnType: ?IntlBreakIterator
   throws: [intlexception]
 - subject:
@@ -778,6 +788,7 @@
     - name: offset
       type: ?int
       optional: true
+      default: 'null'
     returnType: int
   throws: [valueerror]
 - subject:
@@ -880,6 +891,7 @@
     - name: base
       type: int
       optional: true
+      default: '10'
     returnType: int|false|null
   throws: [intlexception]
 - subject:
@@ -925,6 +937,7 @@
     - name: base
       type: int
       optional: true
+      default: '10'
     returnType: int
   throws: []
 - subject:
@@ -1318,6 +1331,7 @@
     - name: locale
       type: ?string
       optional: true
+      default: 'null'
     returnType: mixed
   throws: [intlexception]
 - subject:
@@ -1327,6 +1341,7 @@
     - name: locale
       type: ?string
       optional: true
+      default: 'null'
     returnType: ?IntlDatePatternGenerator
   throws: [intlexception]
 - subject:
@@ -1390,6 +1405,7 @@
     - name: second
       type: ?int
       optional: true
+      default: 'null'
     returnType: static
   throws: [dateerror, intlexception, valueerror]
 - subject:
@@ -1489,6 +1505,7 @@
     - name: compiled
       type: bool
       optional: true
+      default: 'false'
     returnType: mixed
   throws: [error, intlexception]
 - subject:
@@ -1518,9 +1535,11 @@
     - name: destination_encoding
       type: ?string
       optional: true
+      default: 'null'
     - name: source_encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: mixed
   throws: [intlexception]
 - subject:
@@ -1532,6 +1551,7 @@
     - name: reverse
       type: bool
       optional: true
+      default: 'false'
     returnType: string|false
   throws: [intlexception]
 - subject:
@@ -1662,6 +1682,7 @@
     - name: options
       type: ?array
       optional: true
+      default: 'null'
     returnType: string|false
   throws: [intlexception]
 - subject:
@@ -2230,12 +2251,15 @@
     - name: timezone
       type: IntlTimeZone|DateTimeZone|string|null
       optional: true
+      default: 'null'
     - name: calendar
       type: IntlCalendar|int|null
       optional: true
+      default: 'null'
     - name: pattern
       type: ?string
       optional: true
+      default: 'null'
     returnType: ?IntlDateFormatter
   throws: [dateerror, error, intlexception, valueerror]
 - subject:
@@ -2260,9 +2284,11 @@
     - name: format
       type: mixed
       optional: true
+      default: 'null'
     - name: locale
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|false
   propagation:
   - from: argument(1)
@@ -2372,6 +2398,7 @@
     - name: offset
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: array|false
   throws: [error, intlexception, typeerror]
@@ -2386,6 +2413,7 @@
     - name: offset
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: int|float|false
   throws: [error, intlexception, typeerror]
@@ -2592,9 +2620,11 @@
     - name: offset
       type: int
       optional: true
+      default: '0'
     - name: next
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: string|false
   propagation:
@@ -2612,9 +2642,11 @@
     - name: offset
       type: int
       optional: true
+      default: '0'
     - name: locale
       type: string
       optional: true
+      default: '""'
     returnType: int|false
   throws: [intlexception, valueerror]
 - subject:
@@ -2628,9 +2660,11 @@
     - name: beforeNeedle
       type: bool
       optional: true
+      default: 'false'
     - name: locale
       type: string
       optional: true
+      default: '""'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -2657,9 +2691,11 @@
     - name: offset
       type: int
       optional: true
+      default: '0'
     - name: locale
       type: string
       optional: true
+      default: '""'
     returnType: int|false
   throws: [intlexception, valueerror]
 - subject:
@@ -2673,9 +2709,11 @@
     - name: offset
       type: int
       optional: true
+      default: '0'
     - name: locale
       type: string
       optional: true
+      default: '""'
     returnType: int|false
   throws: [intlexception, valueerror]
 - subject:
@@ -2689,9 +2727,11 @@
     - name: offset
       type: int
       optional: true
+      default: '0'
     - name: locale
       type: string
       optional: true
+      default: '""'
     returnType: int|false
   throws: [intlexception, valueerror]
 - subject:
@@ -2705,9 +2745,11 @@
     - name: beforeNeedle
       type: bool
       optional: true
+      default: 'false'
     - name: locale
       type: string
       optional: true
+      default: '""'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -2726,9 +2768,11 @@
     - name: length
       type: ?int
       optional: true
+      default: 'null'
     - name: locale
       type: string
       optional: true
+      default: '""'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -2749,6 +2793,7 @@
     - name: idna_info
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: string|false
   propagation:
@@ -2770,6 +2815,7 @@
     - name: idna_info
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: string|false
   propagation:
@@ -2817,6 +2863,7 @@
     - name: field
       type: ?int
       optional: true
+      default: 'null'
     returnType: 'true'
   throws: [valueerror]
 - subject:
@@ -2826,9 +2873,11 @@
     - name: timezone
       type: IntlTimeZone|DateTimeZone|string|null
       optional: true
+      default: 'null'
     - name: locale
       type: ?string
       optional: true
+      default: 'null'
     returnType: ?IntlCalendar
   throws: [dateerror, error, intlexception]
 - subject:
@@ -2862,6 +2911,7 @@
     - name: locale
       type: ?string
       optional: true
+      default: 'null'
     returnType: ?IntlCalendar
   throws: [intlexception]
 - subject:
@@ -3103,6 +3153,7 @@
     - name: timestamp
       type: ?float
       optional: true
+      default: 'null'
     returnType: bool
   throws: [intlexception]
 - subject:
@@ -3294,6 +3345,7 @@
     - name: countryOrRawOffset
       type: string|int|null
       optional: true
+      default: 'null'
     returnType: IntlIterator|false
   throws: [intlexception, valueerror]
 - subject:
@@ -3313,9 +3365,11 @@
     - name: region
       type: ?string
       optional: true
+      default: 'null'
     - name: rawOffset
       type: ?int
       optional: true
+      default: 'null'
     returnType: IntlIterator|false
   throws: [intlexception, valueerror]
 - subject:
@@ -3335,6 +3389,7 @@
     - name: isSystemId
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: string|false
   propagation:
@@ -3350,12 +3405,14 @@
     - name: dst
       type: bool
       optional: true
+      default: 'false'
     - name: style
       type: int
       optional: true
     - name: locale
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|false
   propagation:
   - from: argument(3)
@@ -3420,6 +3477,7 @@
     - name: region
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -3555,6 +3613,7 @@
     - name: canonicalize
       type: bool
       optional: true
+      default: 'false'
     returnType: ?bool
   throws: [intlexception, valueerror]
 - subject:
@@ -3579,6 +3638,7 @@
     - name: displayLocale
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -3595,6 +3655,7 @@
     - name: displayLocale
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -3611,6 +3672,7 @@
     - name: displayLocale
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -3627,6 +3689,7 @@
     - name: displayLocale
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -3643,6 +3706,7 @@
     - name: displayLocale
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -3702,9 +3766,11 @@
     - name: canonicalize
       type: bool
       optional: true
+      default: 'false'
     - name: defaultLocale
       type: ?string
       optional: true
+      default: 'null'
     returnType: ?string
   propagation:
   - from: argument(1)
@@ -3899,6 +3965,7 @@
     - name: pattern
       type: ?string
       optional: true
+      default: 'null'
     returnType: ?NumberFormatter
   propagation:
   - from: argument(0)
@@ -4035,6 +4102,7 @@
     - name: offset
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: int|float|false
   throws: [error, intlexception, typeerror, valueerror]
@@ -4052,6 +4120,7 @@
     - name: offset
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: float|false
   throws: [error, intlexception, typeerror]
@@ -4120,6 +4189,7 @@
     - name: fallback
       type: bool
       optional: true
+      default: 'true'
     returnType: ?ResourceBundle
   propagation:
   - from: argument(0)
@@ -4140,6 +4210,7 @@
     - name: fallback
       type: bool
       optional: true
+      default: 'true'
     returnType: ResourceBundle|array|string|int|null
   propagation:
   - from: argument(0)
@@ -4254,9 +4325,11 @@
     - name: start
       type: int
       optional: true
+      default: '0'
     - name: end
       type: int
       optional: true
+      default: '-1'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -4418,6 +4491,7 @@
     - name: field
       type: ?int
       optional: true
+      default: 'null'
     returnType: 'true'
   throws: [valueerror]
 - subject:
@@ -4427,9 +4501,11 @@
     - name: timezone
       type: IntlTimeZone|DateTimeZone|string|null
       optional: true
+      default: 'null'
     - name: locale
       type: ?string
       optional: true
+      default: 'null'
     returnType: ?IntlCalendar
   throws: [dateerror, error, intlexception]
 - subject:
@@ -4459,6 +4535,7 @@
     - name: locale
       type: ?string
       optional: true
+      default: 'null'
     returnType: ?IntlCalendar
   throws: [intlexception]
 - subject:
@@ -4641,6 +4718,7 @@
     - name: timestamp
       type: ?float
       optional: true
+      default: 'null'
     returnType: bool
   throws: [intlexception]
 - subject:
@@ -4704,6 +4782,7 @@
     - name: second
       type: ?int
       optional: true
+      default: 'null'
     returnType: void
   throws: [valueerror]
 - subject:
@@ -4782,12 +4861,15 @@
     - name: timezone
       type: IntlTimeZone|DateTimeZone|string|null
       optional: true
+      default: 'null'
     - name: calendar
       type: mixed
       optional: true
+      default: 'null'
     - name: pattern
       type: ?string
       optional: true
+      default: 'null'
     returnType: mixed
   throws: [dateerror, error, intlexception, valueerror]
 - subject:
@@ -4805,12 +4887,15 @@
     - name: timezone
       type: IntlTimeZone|DateTimeZone|string|null
       optional: true
+      default: 'null'
     - name: calendar
       type: IntlCalendar|int|null
       optional: true
+      default: 'null'
     - name: pattern
       type: ?string
       optional: true
+      default: 'null'
     returnType: ?IntlDateFormatter
   throws: [dateerror, error, intlexception, valueerror]
 - subject:
@@ -4830,9 +4915,11 @@
     - name: format
       type: mixed
       optional: true
+      default: 'null'
     - name: locale
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|false
   throws: [intlexception]
 - subject:
@@ -4903,6 +4990,7 @@
     - name: offset
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: array|false
   throws: [error, intlexception, typeerror]
@@ -4915,6 +5003,7 @@
     - name: offset
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: int|float|false
   throws: [error, intlexception, typeerror]
@@ -4927,6 +5016,7 @@
     - name: offset
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: int|float|false
   throws: [error, intlexception, typeerror]
@@ -4987,6 +5077,7 @@
     - name: countryOrRawOffset
       type: string|int|null
       optional: true
+      default: 'null'
     returnType: IntlIterator|false
   throws: [intlexception, valueerror]
 - subject:
@@ -5006,9 +5097,11 @@
     - name: region
       type: ?string
       optional: true
+      default: 'null'
     - name: rawOffset
       type: ?int
       optional: true
+      default: 'null'
     returnType: IntlIterator|false
   throws: [intlexception, valueerror]
 - subject:
@@ -5028,6 +5121,7 @@
     - name: isSystemId
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: string|false
   throws: [error, intlexception, typeerror]
@@ -5038,12 +5132,14 @@
     - name: dst
       type: bool
       optional: true
+      default: 'false'
     - name: style
       type: int
       optional: true
     - name: locale
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|false
   throws: [intlexception]
 - subject:
@@ -5098,6 +5194,7 @@
     - name: region
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|false
   throws: [intlexception]
 - subject:
@@ -5208,6 +5305,7 @@
     - name: canonicalize
       type: bool
       optional: true
+      default: 'false'
     returnType: ?bool
   throws: [intlexception, valueerror]
 - subject:
@@ -5232,6 +5330,7 @@
     - name: displayLocale
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|false
   throws: [intlexception, valueerror]
 - subject:
@@ -5243,6 +5342,7 @@
     - name: displayLocale
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|false
   throws: [intlexception, valueerror]
 - subject:
@@ -5254,6 +5354,7 @@
     - name: displayLocale
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|false
   throws: [intlexception, valueerror]
 - subject:
@@ -5265,6 +5366,7 @@
     - name: displayLocale
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|false
   throws: [intlexception, valueerror]
 - subject:
@@ -5276,6 +5378,7 @@
     - name: displayLocale
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|false
   throws: [intlexception, valueerror]
 - subject:
@@ -5329,9 +5432,11 @@
     - name: canonicalize
       type: bool
       optional: true
+      default: 'false'
     - name: defaultLocale
       type: ?string
       optional: true
+      default: 'null'
     returnType: ?string
   throws: [intlexception, typeerror, valueerror]
 - subject:
@@ -5490,6 +5595,7 @@
     - name: pattern
       type: ?string
       optional: true
+      default: 'null'
     returnType: mixed
   throws: [error, intlexception, valueerror]
 - subject:
@@ -5503,6 +5609,7 @@
     - name: pattern
       type: ?string
       optional: true
+      default: 'null'
     returnType: ?NumberFormatter
   throws: [error, intlexception, valueerror]
 - subject:
@@ -5586,6 +5693,7 @@
     - name: offset
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: int|float|false
   throws: [error, intlexception, typeerror, valueerror]
@@ -5601,6 +5709,7 @@
     - name: offset
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: float|false
   throws: [error, intlexception, typeerror]
@@ -5653,6 +5762,7 @@
     - name: fallback
       type: bool
       optional: true
+      default: 'true'
     returnType: mixed
   throws: [error, intlexception, valueerror]
 - subject:
@@ -5671,6 +5781,7 @@
     - name: fallback
       type: bool
       optional: true
+      default: 'true'
     returnType: ?ResourceBundle
   throws: [error, intlexception, valueerror]
 - subject:
@@ -5682,6 +5793,7 @@
     - name: fallback
       type: bool
       optional: true
+      default: 'true'
     returnType: ResourceBundle|array|string|int|null
   throws: [intlexception, valueerror]
 - subject:
@@ -5723,6 +5835,7 @@
     - name: errorCode
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: bool
   throws: [error, typeerror]
@@ -5735,6 +5848,7 @@
     - name: errorCode
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: bool
   throws: [error, typeerror]
@@ -5747,6 +5861,7 @@
     - name: patternOptions
       type: int
       optional: true
+      default: '0'
     returnType: void
   throws: [valueerror]
 - subject:
@@ -5829,8 +5944,10 @@
     - name: start
       type: int
       optional: true
+      default: '0'
     - name: end
       type: int
       optional: true
+      default: '-1'
     returnType: string|false
   throws: [intlexception, valueerror]

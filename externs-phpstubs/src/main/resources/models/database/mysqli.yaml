@@ -27,9 +27,11 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     - name: name
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error, mysqli_sql_exception, valueerror]
 - subject:
@@ -74,9 +76,11 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     - name: name
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error, mysqli_sql_exception]
 - subject:
@@ -86,21 +90,27 @@
     - name: hostname
       type: ?string
       optional: true
+      default: 'null'
     - name: username
       type: ?string
       optional: true
+      default: 'null'
     - name: password
       type: ?string
       optional: true
+      default: 'null'
     - name: database
       type: ?string
       optional: true
+      default: 'null'
     - name: port
       type: ?int
       optional: true
+      default: 'null'
     - name: socket
       type: ?string
       optional: true
+      default: 'null'
     returnType: mysqli|false
   propagation:
   - from: argument(0)
@@ -249,6 +259,7 @@
     - name: params
       type: ?array
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error, mysqli_sql_exception, valueerror]
 - subject:
@@ -351,6 +362,7 @@
     - name: class
       type: string
       optional: true
+      default: '"stdClass"'
     - name: constructor_args
       type: array
       optional: true
@@ -430,6 +442,7 @@
     - name: mysql
       type: ?mysqli
       optional: true
+      default: 'null'
     returnType: string
   propagation:
   - from: argument(0)
@@ -637,6 +650,7 @@
     - name: microseconds
       type: int
       optional: true
+      default: '0'
     returnType: int|false
   throws: [error, typeerror, valueerror]
 - subject:
@@ -671,24 +685,31 @@
     - name: hostname
       type: ?string
       optional: true
+      default: 'null'
     - name: username
       type: ?string
       optional: true
+      default: 'null'
     - name: password
       type: ?string
       optional: true
+      default: 'null'
     - name: database
       type: ?string
       optional: true
+      default: 'null'
     - name: port
       type: ?int
       optional: true
+      default: 'null'
     - name: socket
       type: ?string
       optional: true
+      default: 'null'
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: bool
   throws: [error, mysqli_sql_exception]
 - subject:
@@ -759,9 +780,11 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     - name: name
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error, mysqli_sql_exception]
 - subject:
@@ -1022,6 +1045,7 @@
     - name: params
       type: ?array
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error, mysqli_sql_exception, valueerror]
 - subject:
@@ -1193,6 +1217,7 @@
     - name: mode
       type: int
       optional: true
+      default: '0'
     returnType: mysqli_result|false
   propagation:
   - from: argument(0)
@@ -1344,6 +1369,7 @@
     - name: params
       type: ?array
       optional: true
+      default: 'null'
     returnType: mysqli_result|bool
   throws: [error, mysqli_sql_exception, valueerror]
 - subject:
@@ -1355,6 +1381,7 @@
     - name: column
       type: int
       optional: true
+      default: '0'
     returnType: null|int|float|string|false
   throws: [error, mysqli_sql_exception, valueerror]
 - subject:
@@ -1580,21 +1607,27 @@
     - name: hostname
       type: ?string
       optional: true
+      default: 'null'
     - name: username
       type: ?string
       optional: true
+      default: 'null'
     - name: password
       type: ?string
       optional: true
+      default: 'null'
     - name: database
       type: ?string
       optional: true
+      default: 'null'
     - name: port
       type: ?int
       optional: true
+      default: 'null'
     - name: socket
       type: ?string
       optional: true
+      default: 'null'
     returnType: mixed
   throws: [error, mysqli_sql_exception]
 - subject:
@@ -1612,9 +1645,11 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     - name: name
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error, mysqli_sql_exception, valueerror]
 - subject:
@@ -1646,9 +1681,11 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     - name: name
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error, mysqli_sql_exception]
 - subject:
@@ -1658,21 +1695,27 @@
     - name: hostname
       type: ?string
       optional: true
+      default: 'null'
     - name: username
       type: ?string
       optional: true
+      default: 'null'
     - name: password
       type: ?string
       optional: true
+      default: 'null'
     - name: database
       type: ?string
       optional: true
+      default: 'null'
     - name: port
       type: ?int
       optional: true
+      default: 'null'
     - name: socket
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error, mysqli_sql_exception]
 - subject:
@@ -1705,6 +1748,7 @@
     - name: params
       type: ?array
       optional: true
+      default: 'null'
     returnType: mysqli_result|bool
   throws: [error, mysqli_sql_exception, valueerror]
 - subject:
@@ -1796,6 +1840,7 @@
     - name: microseconds
       type: int
       optional: true
+      default: '0'
     returnType: int|false
   throws: [error, typeerror, valueerror]
 - subject:
@@ -1824,24 +1869,31 @@
     - name: hostname
       type: ?string
       optional: true
+      default: 'null'
     - name: username
       type: ?string
       optional: true
+      default: 'null'
     - name: password
       type: ?string
       optional: true
+      default: 'null'
     - name: database
       type: ?string
       optional: true
+      default: 'null'
     - name: port
       type: ?int
       optional: true
+      default: 'null'
     - name: socket
       type: ?string
       optional: true
+      default: 'null'
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: bool
   throws: [error, mysqli_sql_exception]
 - subject:
@@ -1888,9 +1940,11 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     - name: name
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error, mysqli_sql_exception]
 - subject:
@@ -1960,6 +2014,7 @@
     - name: mode
       type: int
       optional: true
+      default: '0'
     returnType: mysqli_result|false
   throws: [error, mysqli_sql_exception]
 - subject:
@@ -2026,6 +2081,7 @@
     - name: column
       type: int
       optional: true
+      default: '0'
     returnType: null|int|float|string|false
   throws: [error, mysqli_sql_exception, valueerror]
 - subject:
@@ -2053,6 +2109,7 @@
     - name: class
       type: string
       optional: true
+      default: '"stdClass"'
     - name: constructor_args
       type: array
       optional: true
@@ -2095,6 +2152,7 @@
     - name: query
       type: ?string
       optional: true
+      default: 'null'
     returnType: mixed
   throws: [error, mysqli_sql_exception]
 - subject:
@@ -2159,6 +2217,7 @@
     - name: params
       type: ?array
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error, mysqli_sql_exception, valueerror]
 - subject:

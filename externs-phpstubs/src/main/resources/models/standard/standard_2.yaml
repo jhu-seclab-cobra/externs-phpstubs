@@ -21,10 +21,12 @@
     - name: output
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     - name: result_code
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: string|false
   throws: [error, typeerror, valueerror]
@@ -95,6 +97,7 @@
     - name: prefix
       type: string
       optional: true
+      default: '""'
     returnType: int
   throws: [error, typeerror, valueerror]
 - subject:
@@ -2629,6 +2632,7 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: bool
   throws: [valueerror]
 - subject:
@@ -2695,6 +2699,7 @@
     - name: length
       type: ?int
       optional: true
+      default: 'null'
     returnType: int|false
   throws: [typeerror]
 - subject:
@@ -2741,17 +2746,21 @@
     - name: port
       type: int
       optional: true
+      default: '-1'
     - name: error_code
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     - name: error_message
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     - name: timeout
       type: ?float
       optional: true
+      default: 'null'
     returnType: mixed
   propagation:
   - from: argument(0)
@@ -4257,9 +4266,11 @@
     - name: user_agent
       type: ?string
       optional: true
+      default: 'null'
     - name: return_array
       type: bool
       optional: true
+      default: 'false'
     returnType: object|array|false
   throws: [error, typeerror]
 - subject:
@@ -4299,9 +4310,11 @@
     - name: associative
       type: bool
       optional: true
+      default: 'false'
     - name: context
       type: mixed
       optional: true
+      default: 'null'
     returnType: array|false
   throws: [typeerror, valueerror]
 - subject:
@@ -4317,6 +4330,7 @@
     - name: encoding
       type: string
       optional: true
+      default: '"UTF-8"'
     returnType: array
   throws: []
 - subject:
@@ -4333,6 +4347,7 @@
     - name: use_include_path
       type: bool
       optional: true
+      default: 'false'
     returnType: array|false
   throws: [valueerror]
 - subject:
@@ -4352,9 +4367,11 @@
     - name: name
       type: ?string
       optional: true
+      default: 'null'
     - name: local_only
       type: bool
       optional: true
+      default: 'false'
     returnType: string|array|false
   propagation:
   - from: argument(0)
@@ -4404,6 +4421,7 @@
     - name: image_info
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: array|false
   throws: [error, typeerror, valueerror]
@@ -4416,6 +4434,7 @@
     - name: image_info
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: array|false
   propagation:
@@ -4439,6 +4458,7 @@
     - name: weights
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: bool
   throws: [error, typeerror, valueerror]
@@ -4474,6 +4494,7 @@
     - name: rest_index
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: array|false
   propagation:
@@ -4503,6 +4524,7 @@
     - name: mode
       type: int
       optional: true
+      default: '0'
     returnType: array|false
   throws: []
 - subject:
@@ -4535,6 +4557,7 @@
     - name: as_float
       type: bool
       optional: true
+      default: 'false'
     returnType: array|float
   throws: [dateerror]
 - subject:

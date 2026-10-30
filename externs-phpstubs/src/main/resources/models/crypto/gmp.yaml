@@ -189,6 +189,7 @@
     - name: word_size
       type: int
       optional: true
+      default: '1'
     - name: flags
       type: int
       optional: true
@@ -257,6 +258,7 @@
     - name: word_size
       type: int
       optional: true
+      default: '1'
     - name: flags
       type: int
       optional: true
@@ -278,6 +280,7 @@
     - name: base
       type: int
       optional: true
+      default: '0'
     returnType: GMP
   propagation:
   - from: argument(0)
@@ -487,6 +490,7 @@
     - name: repetitions
       type: int
       optional: true
+      default: '10'
     returnType: int
   throws: [typeerror, valueerror]
 - subject:
@@ -582,6 +586,7 @@
     - name: value
       type: bool
       optional: true
+      default: 'true'
     returnType: void
   throws: [valueerror]
 - subject:
@@ -623,6 +628,7 @@
     - name: base
       type: int
       optional: true
+      default: '10'
     returnType: string
   propagation:
   - from: argument(0)
@@ -798,9 +804,11 @@
     - name: num
       type: int|string
       optional: true
+      default: '0'
     - name: base
       type: int
       optional: true
+      default: '0'
     returnType: mixed
   throws: [valueerror]
 - subject:

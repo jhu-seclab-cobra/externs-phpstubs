@@ -70,9 +70,11 @@
     - name: mime_type
       type: ?string
       optional: true
+      default: 'null'
     - name: posted_filename
       type: ?string
       optional: true
+      default: 'null'
     returnType: CURLFile
   propagation:
   - from: argument(0)
@@ -91,6 +93,7 @@
     - name: option
       type: ?int
       optional: true
+      default: 'null'
     returnType: mixed
   propagation:
   - from: argument(0)
@@ -105,6 +108,7 @@
     - name: url
       type: ?string
       optional: true
+      default: 'null'
     returnType: CurlHandle|false
   throws: [error, valueerror]
 - subject:
@@ -164,6 +168,7 @@
     - name: queued_messages
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: array|false
   propagation:
@@ -194,6 +199,7 @@
     - name: timeout
       type: float
       optional: true
+      default: '1.0'
     returnType: int
   throws: [valueerror]
 - subject:
@@ -508,9 +514,11 @@
     - name: mime_type
       type: ?string
       optional: true
+      default: 'null'
     - name: posted_filename
       type: ?string
       optional: true
+      default: 'null'
     returnType: mixed
   throws: [valueerror]
 - subject:
@@ -555,6 +563,7 @@
     - name: mime
       type: string
       optional: true
+      default: '"application/octet-stream"'
     returnType: mixed
   throws: []
 - subject:

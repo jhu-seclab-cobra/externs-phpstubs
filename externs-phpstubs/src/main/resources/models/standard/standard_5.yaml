@@ -207,17 +207,21 @@
     - name: port
       type: int
       optional: true
+      default: '-1'
     - name: error_code
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     - name: error_message
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     - name: timeout
       type: ?float
       optional: true
+      default: 'null'
     returnType: mixed
   propagation:
   - from: argument(0)
@@ -278,6 +282,7 @@
     - name: mode
       type: string
       optional: true
+      default: '"a"'
     returnType: string
   throws: [valueerror]
 - subject:
@@ -401,6 +406,7 @@
     - name: extension
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|false
   throws: []
 - subject:
@@ -460,6 +466,7 @@
     - name: return
       type: bool
       optional: true
+      default: 'false'
     returnType: string|true
   propagation:
   - from: argument(0)
@@ -516,12 +523,15 @@
     - name: cwd
       type: ?string
       optional: true
+      default: 'null'
     - name: env_vars
       type: ?array
       optional: true
+      default: 'null'
     - name: options
       type: ?array
       optional: true
+      default: 'null'
     returnType: mixed
   throws: [error, typeerror, valueerror]
 - subject:
@@ -533,6 +543,7 @@
     - name: signal
       type: int
       optional: true
+      default: '15'
     returnType: bool
   throws: [typeerror]
 - subject:
@@ -2244,6 +2255,7 @@
     - name: step
       type: int|float
       optional: true
+      default: '1'
     returnType: array
   throws: [valueerror]
 - subject:
@@ -2360,6 +2372,7 @@
     - name: dir_handle
       type: mixed
       optional: true
+      default: 'null'
     returnType: string|false
   throws: [typeerror]
 - subject:
@@ -2463,6 +2476,7 @@
     - name: dir_handle
       type: mixed
       optional: true
+      default: 'null'
     returnType: void
   throws: [typeerror]
 - subject:
@@ -2474,6 +2488,7 @@
     - name: precision
       type: int
       optional: true
+      default: '0'
     - name: mode
       type: int|RoundingMode
       optional: true
@@ -3185,6 +3200,7 @@
     - name: kind
       type: string
       optional: true
+      default: '""'
     returnType: int
   throws: []
 - subject:
@@ -3209,6 +3225,7 @@
     - name: enable
       type: ?bool
       optional: true
+      default: 'null'
     returnType: bool
   throws: [typeerror]
 - subject:
@@ -3275,21 +3292,27 @@
     - name: value
       type: string
       optional: true
+      default: '""'
     - name: expires_or_options
       type: array|int
       optional: true
+      default: '0'
     - name: path
       type: string
       optional: true
+      default: '""'
     - name: domain
       type: string
       optional: true
+      default: '""'
     - name: secure
       type: bool
       optional: true
+      default: 'false'
     - name: httponly
       type: bool
       optional: true
+      default: 'false'
     returnType: bool
   throws: [argumentcounterror, valueerror]
 - subject:
@@ -3358,21 +3381,27 @@
     - name: value
       type: string
       optional: true
+      default: '""'
     - name: expires_or_options
       type: array|int
       optional: true
+      default: '0'
     - name: path
       type: string
       optional: true
+      default: '""'
     - name: domain
       type: string
       optional: true
+      default: '""'
     - name: secure
       type: bool
       optional: true
+      default: 'false'
     - name: httponly
       type: bool
       optional: true
+      default: 'false'
     returnType: bool
   throws: [argumentcounterror, valueerror]
 - subject:
@@ -3416,6 +3445,7 @@
     - name: binary
       type: bool
       optional: true
+      default: 'false'
     returnType: string
   throws: []
 - subject:
@@ -3427,6 +3457,7 @@
     - name: binary
       type: bool
       optional: true
+      default: 'false'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -3475,6 +3506,7 @@
     - name: return
       type: bool
       optional: true
+      default: 'false'
     returnType: string|bool
   throws: [error, valueerror]
 - subject:
@@ -3511,6 +3543,7 @@
     - name: percent
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: int
   throws: [error, typeerror]

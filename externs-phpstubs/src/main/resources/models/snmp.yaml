@@ -114,9 +114,11 @@
     - name: timeout
       type: int
       optional: true
+      default: '-1'
     - name: retries
       type: int
       optional: true
+      default: '-1'
     returnType: mixed
   throws: [valueerror]
 - subject:
@@ -133,6 +135,7 @@
     - name: preserveKeys
       type: bool
       optional: true
+      default: 'false'
     returnType: mixed
   throws: [error, snmpexception, typeerror, valueerror]
 - subject:
@@ -174,21 +177,27 @@
     - name: authProtocol
       type: string
       optional: true
+      default: '""'
     - name: authPassphrase
       type: string
       optional: true
+      default: '""'
     - name: privacyProtocol
       type: string
       optional: true
+      default: '""'
     - name: privacyPassphrase
       type: string
       optional: true
+      default: '""'
     - name: contextName
       type: string
       optional: true
+      default: '""'
     - name: contextEngineId
       type: string
       optional: true
+      default: '""'
     returnType: bool
   throws: [error, valueerror]
 - subject:
@@ -200,12 +209,15 @@
     - name: suffixAsKey
       type: bool
       optional: true
+      default: 'false'
     - name: maxRepetitions
       type: int
       optional: true
+      default: '-1'
     - name: nonRepeaters
       type: int
       optional: true
+      default: '-1'
     returnType: array|false
   throws: [error, snmpexception, typeerror, valueerror]
 - subject:
@@ -221,9 +233,11 @@
     - name: timeout
       type: int
       optional: true
+      default: '-1'
     - name: retries
       type: int
       optional: true
+      default: '-1'
     returnType: mixed
   propagation:
   - from: argument(0)
@@ -244,9 +258,11 @@
     - name: timeout
       type: int
       optional: true
+      default: '-1'
     - name: retries
       type: int
       optional: true
+      default: '-1'
     returnType: mixed
   propagation:
   - from: argument(0)
@@ -267,9 +283,11 @@
     - name: timeout
       type: int
       optional: true
+      default: '-1'
     - name: retries
       type: int
       optional: true
+      default: '-1'
     returnType: array|false
   propagation:
   - from: argument(2)
@@ -292,9 +310,11 @@
     - name: timeout
       type: int
       optional: true
+      default: '-1'
     - name: retries
       type: int
       optional: true
+      default: '-1'
     returnType: bool
   throws: [error, snmpexception, typeerror, valueerror]
 - subject:
@@ -310,9 +330,11 @@
     - name: timeout
       type: int
       optional: true
+      default: '-1'
     - name: retries
       type: int
       optional: true
+      default: '-1'
     returnType: array|false
   propagation:
   - from: argument(2)
@@ -341,9 +363,11 @@
     - name: timeout
       type: int
       optional: true
+      default: '-1'
     - name: retries
       type: int
       optional: true
+      default: '-1'
     returnType: mixed
   propagation:
   - from: argument(0)
@@ -384,9 +408,11 @@
     - name: timeout
       type: int
       optional: true
+      default: '-1'
     - name: retries
       type: int
       optional: true
+      default: '-1'
     returnType: mixed
   propagation:
   - from: argument(0)
@@ -427,9 +453,11 @@
     - name: timeout
       type: int
       optional: true
+      default: '-1'
     - name: retries
       type: int
       optional: true
+      default: '-1'
     returnType: array|false
   propagation:
   - from: argument(7)
@@ -462,9 +490,11 @@
     - name: timeout
       type: int
       optional: true
+      default: '-1'
     - name: retries
       type: int
       optional: true
+      default: '-1'
     returnType: bool
   throws: [error, snmpexception, typeerror, valueerror]
 - subject:
@@ -490,9 +520,11 @@
     - name: timeout
       type: int
       optional: true
+      default: '-1'
     - name: retries
       type: int
       optional: true
+      default: '-1'
     returnType: array|false
   propagation:
   - from: argument(7)
@@ -569,9 +601,11 @@
     - name: timeout
       type: int
       optional: true
+      default: '-1'
     - name: retries
       type: int
       optional: true
+      default: '-1'
     returnType: mixed
   propagation:
   - from: argument(0)
@@ -592,9 +626,11 @@
     - name: timeout
       type: int
       optional: true
+      default: '-1'
     - name: retries
       type: int
       optional: true
+      default: '-1'
     returnType: mixed
   propagation:
   - from: argument(0)
@@ -615,9 +651,11 @@
     - name: timeout
       type: int
       optional: true
+      default: '-1'
     - name: retries
       type: int
       optional: true
+      default: '-1'
     returnType: array|false
   propagation:
   - from: argument(2)
@@ -640,9 +678,11 @@
     - name: timeout
       type: int
       optional: true
+      default: '-1'
     - name: retries
       type: int
       optional: true
+      default: '-1'
     returnType: bool
   throws: [error, snmpexception, typeerror, valueerror]
 - subject:
@@ -658,9 +698,11 @@
     - name: timeout
       type: int
       optional: true
+      default: '-1'
     - name: retries
       type: int
       optional: true
+      default: '-1'
     returnType: array|false
   propagation:
   - from: argument(2)
@@ -679,9 +721,11 @@
     - name: timeout
       type: int
       optional: true
+      default: '-1'
     - name: retries
       type: int
       optional: true
+      default: '-1'
     returnType: array|false
   propagation:
   - from: argument(2)

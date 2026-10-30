@@ -848,9 +848,11 @@
     - name: name
       type: ?string
       optional: true
+      default: 'null'
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: array
   throws: [error, valueerror]
 - subject:
@@ -938,9 +940,11 @@
     - name: name
       type: ?string
       optional: true
+      default: 'null'
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: array
   throws: [error, valueerror]
 - subject:
@@ -1179,9 +1183,11 @@
     - name: name
       type: ?string
       optional: true
+      default: 'null'
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: array
   throws: [error, valueerror]
 - subject:
@@ -1941,9 +1947,11 @@
     - name: name
       type: ?string
       optional: true
+      default: 'null'
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: array
   throws: [error, valueerror]
 - subject:
@@ -1961,6 +1969,7 @@
     - name: filter
       type: ?int
       optional: true
+      default: 'null'
     returnType: array
   throws: [error, typeerror]
 - subject:
@@ -2031,6 +2040,7 @@
     - name: filter
       type: ?int
       optional: true
+      default: 'null'
     returnType: array
   throws: [error]
 - subject:
@@ -2060,6 +2070,7 @@
     - name: filter
       type: ?int
       optional: true
+      default: 'null'
     returnType: array
   throws: [error]
 - subject:
@@ -2085,6 +2096,7 @@
     - name: filter
       type: ?int
       optional: true
+      default: 'null'
     returnType: array
   throws: [error]
 - subject:
@@ -2304,6 +2316,7 @@
     - name: options
       type: int
       optional: true
+      default: '0'
     returnType: object
   throws: [error, reflectionexception, typeerror]
 - subject:
@@ -2315,6 +2328,7 @@
     - name: options
       type: int
       optional: true
+      default: '0'
     returnType: object
   throws: [error, reflectionexception, typeerror]
 - subject:
@@ -2328,6 +2342,7 @@
     - name: options
       type: int
       optional: true
+      default: '0'
     returnType: void
   throws: [error, reflectionexception, typeerror]
 - subject:
@@ -2341,6 +2356,7 @@
     - name: options
       type: int
       optional: true
+      default: '0'
     returnType: void
   throws: [error, reflectionexception, typeerror]
 - subject:
@@ -2414,6 +2430,7 @@
     - name: method
       type: ?string
       optional: true
+      default: 'null'
     returnType: mixed
   throws: [reflectionexception, valueerror]
 - subject:
@@ -2436,6 +2453,7 @@
     - name: object
       type: ?object
       optional: true
+      default: 'null'
     returnType: Closure
   throws: [error, reflectionexception, valueerror]
 - subject:
@@ -2571,9 +2589,11 @@
     - name: name
       type: ?string
       optional: true
+      default: 'null'
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: array
   throws: [error, valueerror]
 - subject:
@@ -2688,9 +2708,11 @@
     - name: name
       type: ?string
       optional: true
+      default: 'null'
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: array
   throws: [error, valueerror]
 - subject:
@@ -2761,6 +2783,7 @@
     - name: object
       type: ?object
       optional: true
+      default: 'null'
     returnType: mixed
   throws: [error, reflectionexception, typeerror]
 - subject:
@@ -2813,6 +2836,7 @@
     - name: object
       type: ?object
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error, reflectionexception, typeerror]
 - subject:

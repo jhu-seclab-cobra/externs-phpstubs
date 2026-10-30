@@ -459,9 +459,11 @@
     - name: code
       type: string
       optional: true
+      default: '""'
     - name: lib
       type: ?string
       optional: true
+      default: 'null'
     returnType: FFI
   throws: [ffi\exception, ffi\parserexception]
 - subject:
@@ -540,9 +542,11 @@
     - name: owned
       type: bool
       optional: true
+      default: 'true'
     - name: persistent
       type: bool
       optional: true
+      default: 'false'
     returnType: FFI\CData
   throws: [ffi\exception, ffi\parserexception]
 - subject:
@@ -572,6 +576,7 @@
     - name: size
       type: ?int
       optional: true
+      default: 'null'
     returnType: string
   throws: [ffi\exception]
 - subject:

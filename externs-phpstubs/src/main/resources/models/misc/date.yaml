@@ -21,6 +21,7 @@
     - name: timestamp
       type: ?int
       optional: true
+      default: 'null'
     returnType: string
   throws: [dateerror]
 - subject:
@@ -45,9 +46,11 @@
     - name: datetime
       type: string
       optional: true
+      default: '"now"'
     - name: timezone
       type: ?DateTimeZone
       optional: true
+      default: 'null'
     returnType: DateTime|false
   propagation:
   - from: argument(0)
@@ -66,6 +69,7 @@
     - name: timezone
       type: ?DateTimeZone
       optional: true
+      default: 'null'
     returnType: DateTime|false
   propagation:
   - from: argument(0)
@@ -82,9 +86,11 @@
     - name: datetime
       type: string
       optional: true
+      default: '"now"'
     - name: timezone
       type: ?DateTimeZone
       optional: true
+      default: 'null'
     returnType: DateTimeImmutable|false
   propagation:
   - from: argument(0)
@@ -103,6 +109,7 @@
     - name: timezone
       type: ?DateTimeZone
       optional: true
+      default: 'null'
     returnType: DateTimeImmutable|false
   propagation:
   - from: argument(0)
@@ -159,6 +166,7 @@
     - name: absolute
       type: bool
       optional: true
+      default: 'false'
     returnType: DateInterval
   propagation:
   - from: argument(0)
@@ -227,6 +235,7 @@
     - name: dayOfWeek
       type: int
       optional: true
+      default: '1'
     returnType: DateTime
   propagation:
   - from: argument(0)
@@ -318,15 +327,19 @@
     - name: latitude
       type: ?float
       optional: true
+      default: 'null'
     - name: longitude
       type: ?float
       optional: true
+      default: 'null'
     - name: zenith
       type: ?float
       optional: true
+      default: 'null'
     - name: utcOffset
       type: ?float
       optional: true
+      default: 'null'
     returnType: string|int|float|false
   throws: [dateerror, valueerror]
 - subject:
@@ -341,15 +354,19 @@
     - name: latitude
       type: ?float
       optional: true
+      default: 'null'
     - name: longitude
       type: ?float
       optional: true
+      default: 'null'
     - name: zenith
       type: ?float
       optional: true
+      default: 'null'
     - name: utcOffset
       type: ?float
       optional: true
+      default: 'null'
     returnType: string|int|float|false
   throws: [dateerror, valueerror]
 - subject:
@@ -365,9 +382,11 @@
     - name: second
       type: int
       optional: true
+      default: '0'
     - name: microsecond
       type: int
       optional: true
+      default: '0'
     returnType: DateTime
   propagation:
   - from: argument(0)
@@ -437,6 +456,7 @@
     - name: timestamp
       type: ?int
       optional: true
+      default: 'null'
     returnType: array
   throws: [dateerror]
 - subject:
@@ -448,6 +468,7 @@
     - name: timestamp
       type: ?int
       optional: true
+      default: 'null'
     returnType: string
   propagation:
   - from: argument(0)
@@ -462,18 +483,23 @@
     - name: minute
       type: ?int
       optional: true
+      default: 'null'
     - name: second
       type: ?int
       optional: true
+      default: 'null'
     - name: month
       type: ?int
       optional: true
+      default: 'null'
     - name: day
       type: ?int
       optional: true
+      default: 'null'
     - name: year
       type: ?int
       optional: true
+      default: 'null'
     returnType: int|false
   throws: []
 - subject:
@@ -485,18 +511,23 @@
     - name: minute
       type: ?int
       optional: true
+      default: 'null'
     - name: second
       type: ?int
       optional: true
+      default: 'null'
     - name: month
       type: ?int
       optional: true
+      default: 'null'
     - name: day
       type: ?int
       optional: true
+      default: 'null'
     - name: year
       type: ?int
       optional: true
+      default: 'null'
     returnType: int|false
   throws: [dateerror]
 - subject:
@@ -508,6 +539,7 @@
     - name: timestamp
       type: ?int
       optional: true
+      default: 'null'
     returnType: string|false
   throws: [dateerror]
 - subject:
@@ -519,6 +551,7 @@
     - name: baseTimestamp
       type: ?int
       optional: true
+      default: 'null'
     returnType: int|false
   throws: [dateerror]
 - subject:
@@ -541,6 +574,7 @@
     - name: countryCode
       type: ?string
       optional: true
+      default: 'null'
     returnType: array
   throws: [valueerror]
 - subject:
@@ -563,9 +597,11 @@
     - name: utcOffset
       type: int
       optional: true
+      default: '-1'
     - name: isDST
       type: int
       optional: true
+      default: '-1'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -615,6 +651,7 @@
     - name: timestampEnd
       type: int
       optional: true
+      default: '2147483647'
     returnType: array|false
   propagation:
   - from: argument(0)
@@ -1351,6 +1388,7 @@
     - name: timestamp
       type: ?int
       optional: true
+      default: 'null'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -1365,6 +1403,7 @@
     - name: timestamp
       type: ?int
       optional: true
+      default: 'null'
     returnType: int|false
   throws: [dateerror]
 - subject:
@@ -1374,9 +1413,11 @@
     - name: timestamp
       type: ?int
       optional: true
+      default: 'null'
     - name: associative
       type: bool
       optional: true
+      default: 'false'
     returnType: array
   throws: [dateerror]
 - subject:
@@ -1481,6 +1522,7 @@
     - name: options
       type: int
       optional: true
+      default: '0'
     returnType: static
   throws: [datemalformedperiodstringexception, datemalformedstringexception]
 - subject:
@@ -1515,9 +1557,11 @@
     - name: datetime
       type: string
       optional: true
+      default: '"now"'
     - name: timezone
       type: ?DateTimeZone
       optional: true
+      default: 'null'
     returnType: mixed
   throws: [dateerror, datemalformedstringexception, error]
 - subject:
@@ -1565,6 +1609,7 @@
     - name: timezone
       type: ?DateTimeZone
       optional: true
+      default: 'null'
     returnType: DateTime|false
   throws: [dateerror, datemalformedstringexception, error, valueerror]
 - subject:
@@ -1600,6 +1645,7 @@
     - name: absolute
       type: bool
       optional: true
+      default: 'false'
     returnType: DateInterval
   throws: [dateobjecterror]
 - subject:
@@ -1666,6 +1712,7 @@
     - name: dayOfWeek
       type: int
       optional: true
+      default: '1'
     returnType: DateTime
   throws: [dateobjecterror]
 - subject:
@@ -1687,9 +1734,11 @@
     - name: second
       type: int
       optional: true
+      default: '0'
     - name: microsecond
       type: int
       optional: true
+      default: '0'
     returnType: DateTime
   throws: [dateobjecterror]
 - subject:
@@ -1723,9 +1772,11 @@
     - name: datetime
       type: string
       optional: true
+      default: '"now"'
     - name: timezone
       type: ?DateTimeZone
       optional: true
+      default: 'null'
     returnType: mixed
   throws: [dateerror, datemalformedstringexception, error]
 - subject:
@@ -1773,6 +1824,7 @@
     - name: timezone
       type: ?DateTimeZone
       optional: true
+      default: 'null'
     returnType: DateTimeImmutable|false
   throws: [dateerror, datemalformedstringexception, error, valueerror]
 - subject:
@@ -1808,6 +1860,7 @@
     - name: absolute
       type: bool
       optional: true
+      default: 'false'
     returnType: DateInterval
   throws: [dateobjecterror]
 - subject:
@@ -1874,6 +1927,7 @@
     - name: dayOfWeek
       type: int
       optional: true
+      default: '1'
     returnType: DateTimeImmutable
   throws: [dateobjecterror]
 - subject:
@@ -1895,9 +1949,11 @@
     - name: second
       type: int
       optional: true
+      default: '0'
     - name: microsecond
       type: int
       optional: true
+      default: '0'
     returnType: DateTimeImmutable
   throws: [dateobjecterror]
 - subject:
@@ -1948,6 +2004,7 @@
     - name: absolute
       type: bool
       optional: true
+      default: 'false'
     returnType: DateInterval
 - subject:
     method: DateTimeInterface::format
@@ -2034,6 +2091,7 @@
     - name: timestampEnd
       type: int
       optional: true
+      default: '2147483647'
     returnType: array|false
   throws: [dateobjecterror]
 - subject:
@@ -2051,5 +2109,6 @@
     - name: countryCode
       type: ?string
       optional: true
+      default: 'null'
     returnType: array
   throws: [valueerror]

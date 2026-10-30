@@ -39,6 +39,7 @@
     - name: skip
       type: mixed
       optional: true
+      default: '0'
     returnType: string|false
   throws: [error, valueerror]
 - subject:
@@ -56,6 +57,7 @@
     - name: full_info
       type: bool
       optional: true
+      default: 'false'
     returnType: array
   throws: []
 - subject:
@@ -102,15 +104,18 @@
     - name: handler
       type: ?string
       optional: true
+      default: 'null'
     - name: permission
       type: int
       optional: true
     - name: map_size
       type: int
       optional: true
+      default: '0'
     - name: flags
       type: ?int
       optional: true
+      default: 'null'
     returnType: Dba\Connection|false
   propagation:
   - from: argument(0)
@@ -141,15 +146,18 @@
     - name: handler
       type: ?string
       optional: true
+      default: 'null'
     - name: permission
       type: int
       optional: true
     - name: map_size
       type: int
       optional: true
+      default: '0'
     - name: flags
       type: ?int
       optional: true
+      default: 'null'
     returnType: Dba\Connection|false
   propagation:
   - from: argument(0)

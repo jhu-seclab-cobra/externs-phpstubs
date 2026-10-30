@@ -12,6 +12,7 @@
     - name: disable
       type: bool
       optional: true
+      default: 'true'
     returnType: bool
   throws: []
 - subject:
@@ -47,6 +48,7 @@
     - name: use_errors
       type: ?bool
       optional: true
+      default: 'null'
     returnType: bool
   throws: []
 - subject:

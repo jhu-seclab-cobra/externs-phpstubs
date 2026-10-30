@@ -11,6 +11,7 @@
     - name: scale
       type: ?int
       optional: true
+      default: 'null'
     returnType: string
   propagation:
   - from: argument(0)
@@ -29,6 +30,7 @@
     - name: scale
       type: ?int
       optional: true
+      default: 'null'
     returnType: int
   throws: [valueerror]
 - subject:
@@ -42,6 +44,7 @@
     - name: scale
       type: ?int
       optional: true
+      default: 'null'
     returnType: string
   propagation:
   - from: argument(0)
@@ -60,6 +63,7 @@
     - name: scale
       type: ?int
       optional: true
+      default: 'null'
     returnType: string
   propagation:
   - from: argument(0)
@@ -78,6 +82,7 @@
     - name: scale
       type: ?int
       optional: true
+      default: 'null'
     returnType: string
   propagation:
   - from: argument(0)
@@ -96,6 +101,7 @@
     - name: scale
       type: ?int
       optional: true
+      default: 'null'
     returnType: string
   propagation:
   - from: argument(0)
@@ -116,6 +122,7 @@
     - name: scale
       type: ?int
       optional: true
+      default: 'null'
     returnType: string
   propagation:
   - from: argument(0)
@@ -132,6 +139,7 @@
     - name: scale
       type: ?int
       optional: true
+      default: 'null'
     returnType: int
   throws: [valueerror]
 - subject:
@@ -143,6 +151,7 @@
     - name: scale
       type: ?int
       optional: true
+      default: 'null'
     returnType: string
   propagation:
   - from: argument(0)
@@ -159,6 +168,7 @@
     - name: scale
       type: ?int
       optional: true
+      default: 'null'
     returnType: string
   propagation:
   - from: argument(0)
@@ -309,6 +319,7 @@
     - name: scale
       type: ?int
       optional: true
+      default: 'null'
     returnType: array
   throws: [divisionbyzeroerror, valueerror]
 - subject:
@@ -328,6 +339,7 @@
     - name: precision
       type: int
       optional: true
+      default: '0'
     - name: mode
       type: RoundingMode
       optional: true
@@ -368,6 +380,7 @@
     - name: scale
       type: ?int
       optional: true
+      default: 'null'
     returnType: BcMath\Number
   throws: [divisionbyzeroerror, typeerror, valueerror]
 - subject:
@@ -384,6 +397,7 @@
     - name: scale
       type: ?int
       optional: true
+      default: 'null'
     returnType: int
   throws: [typeerror, valueerror]
 - subject:
@@ -395,6 +409,7 @@
     - name: scale
       type: ?int
       optional: true
+      default: 'null'
     returnType: BcMath\Number
   throws: [divisionbyzeroerror, typeerror, valueerror]
 - subject:
@@ -406,6 +421,7 @@
     - name: scale
       type: ?int
       optional: true
+      default: 'null'
     returnType: array
   throws: [divisionbyzeroerror, typeerror, valueerror]
 - subject:
@@ -422,6 +438,7 @@
     - name: scale
       type: ?int
       optional: true
+      default: 'null'
     returnType: BcMath\Number
   throws: [divisionbyzeroerror, typeerror, valueerror]
 - subject:
@@ -433,6 +450,7 @@
     - name: scale
       type: ?int
       optional: true
+      default: 'null'
     returnType: BcMath\Number
   throws: [divisionbyzeroerror, typeerror, valueerror]
 - subject:
@@ -444,6 +462,7 @@
     - name: scale
       type: ?int
       optional: true
+      default: 'null'
     returnType: BcMath\Number
   throws: [divisionbyzeroerror, typeerror, valueerror]
 - subject:
@@ -457,6 +476,7 @@
     - name: scale
       type: ?int
       optional: true
+      default: 'null'
     returnType: BcMath\Number
   throws: [divisionbyzeroerror, typeerror, valueerror]
 - subject:
@@ -466,6 +486,7 @@
     - name: precision
       type: int
       optional: true
+      default: '0'
     - name: mode
       type: RoundingMode
       optional: true
@@ -478,6 +499,7 @@
     - name: scale
       type: ?int
       optional: true
+      default: 'null'
     returnType: BcMath\Number
   throws: [valueerror]
 - subject:
@@ -489,5 +511,6 @@
     - name: scale
       type: ?int
       optional: true
+      default: 'null'
     returnType: BcMath\Number
   throws: [divisionbyzeroerror, typeerror, valueerror]

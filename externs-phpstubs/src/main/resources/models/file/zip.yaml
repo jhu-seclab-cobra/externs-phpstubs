@@ -59,6 +59,7 @@
     - name: mode
       type: string
       optional: true
+      default: '"rb"'
     returnType: bool
   throws: [typeerror]
 - subject:
@@ -70,6 +71,7 @@
     - name: len
       type: int
       optional: true
+      default: '1024'
     returnType: string|false
   throws: [typeerror]
 - subject:
@@ -151,6 +153,7 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: bool
   throws: [valueerror]
 - subject:
@@ -162,9 +165,11 @@
     - name: entryname
       type: string
       optional: true
+      default: '""'
     - name: start
       type: int
       optional: true
+      default: '0'
     - name: length
       type: int
       optional: true
@@ -195,6 +200,7 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     - name: options
       type: array
       optional: true
@@ -209,6 +215,7 @@
     - name: path
       type: string
       optional: true
+      default: '"."'
     - name: options
       type: array
       optional: true
@@ -254,6 +261,7 @@
     - name: files
       type: array|string|null
       optional: true
+      default: 'null'
     returnType: bool
   throws: [valueerror]
 - subject:
@@ -263,6 +271,7 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: string|false
   throws: [valueerror]
 - subject:
@@ -274,6 +283,7 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: int
   throws: [valueerror]
 - subject:
@@ -285,6 +295,7 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: string|false
   throws: [valueerror]
 - subject:
@@ -296,6 +307,7 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: string|false
   throws: [valueerror]
 - subject:
@@ -313,6 +325,7 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: bool
   throws: [error, typeerror, valueerror]
 - subject:
@@ -330,6 +343,7 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: bool
   throws: [error, typeerror, valueerror]
 - subject:
@@ -341,9 +355,11 @@
     - name: len
       type: int
       optional: true
+      default: '0'
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: string|false
   throws: [valueerror]
 - subject:
@@ -355,9 +371,11 @@
     - name: len
       type: int
       optional: true
+      default: '0'
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: string|false
   throws: [valueerror]
 - subject:
@@ -369,6 +387,7 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: string|false
   throws: [valueerror]
 - subject:
@@ -393,6 +412,7 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: mixed
   throws: [valueerror]
 - subject:
@@ -404,6 +424,7 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: mixed
   throws: [valueerror]
 - subject:
@@ -415,6 +436,7 @@
     - name: enc
       type: bool
       optional: true
+      default: 'true'
     returnType: bool
   throws: []
 - subject:
@@ -426,6 +448,7 @@
     - name: enc
       type: bool
       optional: true
+      default: 'true'
     returnType: bool
   throws: []
 - subject:
@@ -437,6 +460,7 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: int|false
   throws: [valueerror]
 - subject:
@@ -448,6 +472,7 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: bool|int
   throws: [valueerror]
 - subject:
@@ -499,12 +524,14 @@
     - name: start
       type: int
       optional: true
+      default: '0'
     - name: length
       type: int
       optional: true
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: bool
   throws: [valueerror]
 - subject:
@@ -556,6 +583,7 @@
     - name: compflags
       type: int
       optional: true
+      default: '0'
     returnType: bool
   throws: [valueerror]
 - subject:
@@ -569,6 +597,7 @@
     - name: compflags
       type: int
       optional: true
+      default: '0'
     returnType: bool
   throws: [valueerror]
 - subject:
@@ -582,6 +611,7 @@
     - name: password
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [valueerror]
 - subject:
@@ -595,6 +625,7 @@
     - name: password
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [valueerror]
 - subject:
@@ -610,6 +641,7 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: bool
   throws: [valueerror]
 - subject:
@@ -625,6 +657,7 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: bool
   throws: [valueerror]
 - subject:
@@ -638,6 +671,7 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: bool
   throws: [valueerror]
 - subject:
@@ -651,6 +685,7 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: bool
   throws: [valueerror]
 - subject:
@@ -670,6 +705,7 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: array|false
   throws: [valueerror]
 - subject:
@@ -681,6 +717,7 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: array|false
   throws: [valueerror]
 - subject:

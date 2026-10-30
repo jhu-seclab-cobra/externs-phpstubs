@@ -9,6 +9,7 @@
     - name: directory
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -66,6 +67,7 @@
     - name: domain
       type: ?string
       optional: true
+      default: 'null'
     returnType: string
   propagation:
   - from: argument(0)
@@ -91,6 +93,7 @@
     - name: codeset
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|false
   propagation:
   - from: argument(0)

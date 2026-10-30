@@ -28,12 +28,15 @@
     - name: options
       type: int
       optional: true
+      default: '0'
     - name: namespace_or_prefix
       type: string
       optional: true
+      default: '""'
     - name: is_prefix
       type: bool
       optional: true
+      default: 'false'
     returnType: SimpleXMLElement|false
   propagation:
   - from: argument(0)
@@ -59,12 +62,15 @@
     - name: options
       type: int
       optional: true
+      default: '0'
     - name: namespace_or_prefix
       type: string
       optional: true
+      default: '""'
     - name: is_prefix
       type: bool
       optional: true
+      default: 'false'
     returnType: SimpleXMLElement|false
   propagation:
   - from: argument(0)
@@ -189,15 +195,19 @@
     - name: options
       type: int
       optional: true
+      default: '0'
     - name: dataIsURL
       type: bool
       optional: true
+      default: 'false'
     - name: namespaceOrPrefix
       type: string
       optional: true
+      default: '""'
     - name: isPrefix
       type: bool
       optional: true
+      default: 'false'
     returnType: mixed
   throws: [exception]
 - subject:
@@ -221,6 +231,7 @@
     - name: namespace
       type: ?string
       optional: true
+      default: 'null'
     returnType: void
   throws: [error, valueerror]
 - subject:
@@ -232,9 +243,11 @@
     - name: value
       type: ?string
       optional: true
+      default: 'null'
     - name: namespace
       type: ?string
       optional: true
+      default: 'null'
     returnType: ?SimpleXMLElement
   throws: [error, valueerror]
 - subject:
@@ -244,6 +257,7 @@
     - name: filename
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|bool
   throws: [error, valueerror]
 - subject:
@@ -253,9 +267,11 @@
     - name: namespaceOrPrefix
       type: ?string
       optional: true
+      default: 'null'
     - name: isPrefix
       type: bool
       optional: true
+      default: 'false'
     returnType: ?SimpleXMLElement
   throws: [error]
 - subject:
@@ -265,9 +281,11 @@
     - name: namespaceOrPrefix
       type: ?string
       optional: true
+      default: 'null'
     - name: isPrefix
       type: bool
       optional: true
+      default: 'false'
     returnType: ?SimpleXMLElement
   throws: [error]
 - subject:
@@ -292,9 +310,11 @@
     - name: recursive
       type: bool
       optional: true
+      default: 'false'
     - name: fromRoot
       type: bool
       optional: true
+      default: 'true'
     returnType: array|false
   throws: [error]
 - subject:
@@ -309,6 +329,7 @@
     - name: recursive
       type: bool
       optional: true
+      default: 'false'
     returnType: array
   throws: [error]
 - subject:
@@ -348,6 +369,7 @@
     - name: filename
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|bool
   throws: [error, valueerror]
 - subject:

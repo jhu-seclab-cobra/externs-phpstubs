@@ -62,9 +62,11 @@
     - name: line
       type: int
       optional: true
+      default: '-1'
     - name: pos
       type: int
       optional: true
+      default: '-1'
     returnType: mixed
   throws: []
 - subject:
@@ -99,6 +101,7 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: array
   throws: [error, typeerror]
 - subject:
@@ -110,6 +113,7 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: array
   throws: []
 - subject:

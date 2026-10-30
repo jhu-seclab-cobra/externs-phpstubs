@@ -14,6 +14,7 @@
     - name: context
       type: mixed
       optional: true
+      default: 'null'
     returnType: string|false
   propagation:
   - from: argument(1)
@@ -41,6 +42,7 @@
     - name: context
       type: mixed
       optional: true
+      default: 'null'
     returnType: string|false
   propagation:
   - from: argument(1)
@@ -56,6 +58,7 @@
     - name: magic_database
       type: ?string
       optional: true
+      default: 'null'
     returnType: finfo|false
   propagation:
   - from: argument(0)
@@ -141,6 +144,7 @@
     - name: magic_database
       type: ?string
       optional: true
+      default: 'null'
     returnType: mixed
   throws: [exception, valueerror]
 - subject:
@@ -155,6 +159,7 @@
     - name: context
       type: mixed
       optional: true
+      default: 'null'
     returnType: string|false
   throws: [error, typeerror, valueerror]
 - subject:
@@ -169,6 +174,7 @@
     - name: context
       type: mixed
       optional: true
+      default: 'null'
     returnType: string|false
   throws: [error, typeerror, valueerror]
 - subject:

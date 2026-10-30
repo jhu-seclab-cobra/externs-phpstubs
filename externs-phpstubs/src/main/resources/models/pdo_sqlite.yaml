@@ -68,6 +68,7 @@
     - name: numArgs
       type: int
       optional: true
+      default: '-1'
     returnType: bool
   throws: [error]
 - subject:
@@ -91,9 +92,11 @@
     - name: num_args
       type: int
       optional: true
+      default: '-1'
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: bool
   throws: [error]
 - subject:
@@ -117,6 +120,7 @@
     - name: dbname
       type: ?string
       optional: true
+      default: '"main"'
     - name: flags
       type: int
       optional: true
@@ -143,6 +147,7 @@
     - name: numArgs
       type: int
       optional: true
+      default: '-1'
     returnType: bool
 - subject:
     method: PDO_SQLite_Ext::sqliteCreateCollation
@@ -164,7 +169,9 @@
     - name: numArgs
       type: int
       optional: true
+      default: '-1'
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: bool

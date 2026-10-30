@@ -9,9 +9,11 @@
     - name: size
       type: ?int
       optional: true
+      default: 'null'
     - name: permissions
       type: int
       optional: true
+      default: '0666'
     returnType: SysvSharedMemory|false
   propagation:
   - from: argument(0)

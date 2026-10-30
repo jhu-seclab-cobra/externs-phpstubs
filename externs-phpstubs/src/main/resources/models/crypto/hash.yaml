@@ -11,6 +11,7 @@
     - name: binary
       type: bool
       optional: true
+      default: 'false'
     - name: options
       type: array
       optional: true
@@ -53,6 +54,7 @@
     - name: binary
       type: bool
       optional: true
+      default: 'false'
     - name: options
       type: array
       optional: true
@@ -72,6 +74,7 @@
     - name: binary
       type: bool
       optional: true
+      default: 'false'
     returnType: string
   propagation:
   - from: argument(0)
@@ -88,12 +91,15 @@
     - name: length
       type: int
       optional: true
+      default: '0'
     - name: info
       type: string
       optional: true
+      default: '""'
     - name: salt
       type: string
       optional: true
+      default: '""'
     returnType: string
   propagation:
   - from: argument(0)
@@ -118,6 +124,7 @@
     - name: binary
       type: bool
       optional: true
+      default: 'false'
     returnType: string
   propagation:
   - from: argument(0)
@@ -145,6 +152,7 @@
     - name: binary
       type: bool
       optional: true
+      default: 'false'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -163,9 +171,11 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     - name: key
       type: string
       optional: true
+      default: '""'
     - name: options
       type: array
       optional: true
@@ -193,9 +203,11 @@
     - name: length
       type: int
       optional: true
+      default: '0'
     - name: binary
       type: bool
       optional: true
+      default: 'false'
     - name: options
       type: array
       optional: true
@@ -229,6 +241,7 @@
     - name: stream_context
       type: mixed
       optional: true
+      default: 'null'
     returnType: bool
   throws: [typeerror, valueerror]
 - subject:
@@ -242,6 +255,7 @@
     - name: length
       type: int
       optional: true
+      default: '-1'
     returnType: int
   throws: [typeerror]
 - subject:
@@ -328,6 +342,7 @@
     - name: key
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|false
   propagation:
   - from: argument(1)

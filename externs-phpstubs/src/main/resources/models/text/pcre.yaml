@@ -13,9 +13,11 @@
     - name: limit
       type: int
       optional: true
+      default: '-1'
     - name: count
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: string|array|null
   propagation:
@@ -37,6 +39,7 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: array|false
   propagation:
   - from: argument(1)
@@ -63,13 +66,16 @@
     - name: matches
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     - name: flags
       type: int
       optional: true
+      default: '0'
     - name: offset
       type: int
       optional: true
+      default: '0'
     returnType: int|false
     framelessArities: [2]
   throws: [error, typeerror, valueerror]
@@ -84,13 +90,16 @@
     - name: matches
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     - name: flags
       type: int
       optional: true
+      default: '0'
     - name: offset
       type: int
       optional: true
+      default: '0'
     returnType: int|false
   throws: [error, typeerror, valueerror]
 - subject:
@@ -102,6 +111,7 @@
     - name: delimiter
       type: ?string
       optional: true
+      default: 'null'
     returnType: string
   propagation:
   - from: argument(0)
@@ -122,9 +132,11 @@
     - name: limit
       type: int
       optional: true
+      default: '-1'
     - name: count
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: string|array|null
     framelessArities: [3]
@@ -149,13 +161,16 @@
     - name: limit
       type: int
       optional: true
+      default: '-1'
     - name: count
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: string|array|null
   propagation:
   - from: argument(1)
@@ -174,13 +189,16 @@
     - name: limit
       type: int
       optional: true
+      default: '-1'
     - name: count
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: string|array|null
   propagation:
   - from: argument(1)
@@ -197,8 +215,10 @@
     - name: limit
       type: int
       optional: true
+      default: '-1'
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: array|false
   throws: []

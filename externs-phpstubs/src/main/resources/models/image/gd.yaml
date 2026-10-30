@@ -11,6 +11,7 @@
     - name: clip
       type: ?array
       optional: true
+      default: 'null'
     returnType: GdImage|false
   propagation:
   - from: argument(0)
@@ -99,9 +100,11 @@
     - name: file
       type: mixed
       optional: true
+      default: 'null'
     - name: compressed
       type: bool
       optional: true
+      default: 'true'
     returnType: bool
   throws: [error, typeerror, valueerror]
 - subject:
@@ -323,6 +326,7 @@
     - name: alpha
       type: int
       optional: true
+      default: '0'
     returnType: false|null
   throws: [valueerror]
 - subject:
@@ -355,6 +359,7 @@
     - name: color
       type: ?int
       optional: true
+      default: 'null'
     returnType: int
   throws: []
 - subject:
@@ -709,9 +714,11 @@
     - name: threshold
       type: float
       optional: true
+      default: '0.5'
     - name: color
       type: int
       optional: true
+      default: '-1'
     returnType: GdImage|false
   propagation:
   - from: argument(0)
@@ -836,6 +843,7 @@
     - name: color
       type: ?int
       optional: true
+      default: 'null'
     returnType: bool
   throws: [valueerror]
 - subject:
@@ -983,6 +991,7 @@
     - name: file
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error, valueerror]
 - subject:
@@ -994,9 +1003,11 @@
     - name: file
       type: ?string
       optional: true
+      default: 'null'
     - name: chunk_size
       type: int
       optional: true
+      default: '128'
     - name: mode
       type: int
       optional: true
@@ -1030,6 +1041,7 @@
     - name: file
       type: mixed
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error, typeerror, valueerror]
 - subject:
@@ -1046,6 +1058,7 @@
     - name: client_area
       type: bool
       optional: true
+      default: 'false'
     returnType: GdImage|false
   propagation:
   - from: argument(0)
@@ -1062,6 +1075,7 @@
     - name: enable
       type: ?bool
       optional: true
+      default: 'null'
     returnType: bool
   throws: []
 - subject:
@@ -1081,9 +1095,11 @@
     - name: file
       type: mixed
       optional: true
+      default: 'null'
     - name: quality
       type: int
       optional: true
+      default: '-1'
     returnType: bool
   throws: [error, typeerror, valueerror]
 - subject:
@@ -1135,6 +1151,7 @@
     - name: color
       type: ?int
       optional: true
+      default: 'null'
     returnType: bool
   throws: [valueerror]
 - subject:
@@ -1164,12 +1181,15 @@
     - name: file
       type: mixed
       optional: true
+      default: 'null'
     - name: quality
       type: int
       optional: true
+      default: '-1'
     - name: filters
       type: int
       optional: true
+      default: '-1'
     returnType: bool
   throws: [error, typeerror, valueerror]
 - subject:
@@ -1185,6 +1205,7 @@
     - name: color
       type: ?int
       optional: true
+      default: 'null'
     returnType: bool
   throws: [valueerror]
 - subject:
@@ -1214,9 +1235,11 @@
     - name: resolution_x
       type: ?int
       optional: true
+      default: 'null'
     - name: resolution_y
       type: ?int
       optional: true
+      default: 'null'
     returnType: array|true
   propagation:
   - from: argument(0)
@@ -1262,6 +1285,7 @@
     - name: height
       type: int
       optional: true
+      default: '-1'
     - name: mode
       type: int
       optional: true
@@ -1485,9 +1509,11 @@
     - name: file
       type: mixed
       optional: true
+      default: 'null'
     - name: foreground_color
       type: ?int
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error, typeerror, valueerror]
 - subject:
@@ -1499,9 +1525,11 @@
     - name: file
       type: mixed
       optional: true
+      default: 'null'
     - name: quality
       type: int
       optional: true
+      default: '-1'
     returnType: bool
   throws: [error, typeerror, valueerror]
 - subject:
@@ -1515,6 +1543,7 @@
     - name: foreground_color
       type: ?int
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error, typeerror, valueerror]
 - subject:
@@ -1576,12 +1605,15 @@
     - name: file
       type: mixed
       optional: true
+      default: 'null'
     - name: quality
       type: int
       optional: true
+      default: '-1'
     - name: speed
       type: int
       optional: true
+      default: '-1'
     returnType: bool
   throws: [error, typeerror, valueerror]
 - subject:

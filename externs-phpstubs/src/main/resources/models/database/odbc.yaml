@@ -9,6 +9,7 @@
     - name: enable
       type: ?bool
       optional: true
+      default: 'null'
     returnType: int|bool
   throws: [error]
 - subject:
@@ -70,15 +71,19 @@
     - name: catalog
       type: ?string
       optional: true
+      default: 'null'
     - name: schema
       type: ?string
       optional: true
+      default: 'null'
     - name: table
       type: ?string
       optional: true
+      default: 'null'
     - name: column
       type: ?string
       optional: true
+      default: 'null'
     returnType: Odbc\Result|false
   propagation:
   - from: argument(0)
@@ -109,9 +114,11 @@
     - name: user
       type: ?string
       optional: true
+      default: 'null'
     - name: password
       type: ?string
       optional: true
+      default: 'null'
     - name: cursor_option
       type: int
       optional: true
@@ -166,6 +173,7 @@
     - name: odbc
       type: ?Odbc\Connection
       optional: true
+      default: 'null'
     returnType: string
   throws: [error]
 - subject:
@@ -175,6 +183,7 @@
     - name: odbc
       type: ?Odbc\Connection
       optional: true
+      default: 'null'
     returnType: string
   throws: [error]
 - subject:
@@ -212,6 +221,7 @@
     - name: row
       type: ?int
       optional: true
+      default: 'null'
     returnType: array|false
   throws: [error]
 - subject:
@@ -226,6 +236,7 @@
     - name: row
       type: ?int
       optional: true
+      default: 'null'
     returnType: int|false
   throws: [error, typeerror]
 - subject:
@@ -237,6 +248,7 @@
     - name: row
       type: ?int
       optional: true
+      default: 'null'
     returnType: stdClass|false
   propagation:
   - from: argument(0)
@@ -253,6 +265,7 @@
     - name: row
       type: ?int
       optional: true
+      default: 'null'
     returnType: bool
   throws: [error]
 - subject:
@@ -367,6 +380,7 @@
     - name: data_type
       type: int
       optional: true
+      default: '0'
     returnType: Odbc\Result|false
   propagation:
   - from: argument(0)
@@ -417,9 +431,11 @@
     - name: user
       type: ?string
       optional: true
+      default: 'null'
     - name: password
       type: ?string
       optional: true
+      default: 'null'
     - name: cursor_option
       type: int
       optional: true
@@ -481,15 +497,19 @@
     - name: catalog
       type: ?string
       optional: true
+      default: 'null'
     - name: schema
       type: ?string
       optional: true
+      default: 'null'
     - name: procedure
       type: ?string
       optional: true
+      default: 'null'
     - name: column
       type: ?string
       optional: true
+      default: 'null'
     returnType: Odbc\Result|false
   propagation:
   - from: argument(0)
@@ -512,12 +532,15 @@
     - name: catalog
       type: ?string
       optional: true
+      default: 'null'
     - name: schema
       type: ?string
       optional: true
+      default: 'null'
     - name: procedure
       type: ?string
       optional: true
+      default: 'null'
     returnType: Odbc\Result|false
   propagation:
   - from: argument(0)
@@ -548,6 +571,7 @@
     - name: format
       type: string
       optional: true
+      default: '""'
     returnType: int|false
   throws: [error]
 - subject:
@@ -670,15 +694,19 @@
     - name: catalog
       type: ?string
       optional: true
+      default: 'null'
     - name: schema
       type: ?string
       optional: true
+      default: 'null'
     - name: table
       type: ?string
       optional: true
+      default: 'null'
     - name: types
       type: ?string
       optional: true
+      default: 'null'
     returnType: Odbc\Result|false
   propagation:
   - from: argument(0)

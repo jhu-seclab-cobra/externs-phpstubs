@@ -2829,6 +2829,7 @@
     - name: autoload
       type: bool
       optional: true
+      default: 'true'
     returnType: bool
   throws: []
 - subject:
@@ -2840,6 +2841,7 @@
     - name: autoload
       type: bool
       optional: true
+      default: 'true'
     returnType: bool
     framelessArities: [1, 2]
   throws: []
@@ -2853,6 +2855,7 @@
     - name: limit
       type: int
       optional: true
+      default: '0'
     returnType: array
   throws: []
 - subject:
@@ -2862,9 +2865,11 @@
     - name: options
       type: int
       optional: true
+      default: '0'
     - name: limit
       type: int
       optional: true
+      default: '0'
     returnType: void
   throws: []
 - subject:
@@ -2878,6 +2883,7 @@
     - name: case_insensitive
       type: bool
       optional: true
+      default: 'false'
     returnType: bool
   throws: [valueerror]
 - subject:
@@ -2895,6 +2901,7 @@
     - name: error_level
       type: ?int
       optional: true
+      default: 'null'
     returnType: int
   throws: []
 - subject:
@@ -3016,6 +3023,7 @@
     - name: categorize
       type: bool
       optional: true
+      default: 'false'
     returnType: array
   throws: []
 - subject:
@@ -3025,6 +3033,7 @@
     - name: exclude_disabled
       type: bool
       optional: true
+      default: 'true'
     returnType: array
   throws: []
 - subject:
@@ -3052,6 +3061,7 @@
     - name: zend_extensions
       type: bool
       optional: true
+      default: 'false'
     returnType: array
   throws: []
 - subject:
@@ -3110,6 +3120,7 @@
     - name: type
       type: ?string
       optional: true
+      default: 'null'
     returnType: array
   throws: [valueerror]
 - subject:
@@ -3121,6 +3132,7 @@
     - name: autoload
       type: bool
       optional: true
+      default: 'true'
     returnType: bool
   throws: []
 - subject:
@@ -3134,6 +3146,7 @@
     - name: allow_string
       type: bool
       optional: true
+      default: 'false'
     returnType: bool
   throws: []
 - subject:
@@ -3147,6 +3160,7 @@
     - name: allow_string
       type: bool
       optional: true
+      default: 'true'
     returnType: bool
   throws: []
 - subject:
@@ -3268,6 +3282,7 @@
     - name: autoload
       type: bool
       optional: true
+      default: 'true'
     returnType: bool
   throws: []
 - subject:
@@ -3311,6 +3326,7 @@
     - name: autoload
       type: bool
       optional: true
+      default: 'true'
     returnType: bool
   throws: []
 - subject:
@@ -3397,6 +3413,7 @@
     - name: newScope
       type: object|string|null
       optional: true
+      default: '"static"'
     returnType: ?Closure
   throws: []
 - subject:
@@ -3408,6 +3425,7 @@
     - name: newScope
       type: object|string|null
       optional: true
+      default: '"static"'
     returnType: ?Closure
   throws: []
 - subject:
@@ -3447,9 +3465,11 @@
     - name: message
       type: ?string
       optional: true
+      default: 'null'
     - name: since
       type: ?string
       optional: true
+      default: 'null'
     returnType: mixed
   throws: []
 - subject:
@@ -3464,12 +3484,15 @@
     - name: message
       type: string
       optional: true
+      default: '""'
     - name: code
       type: int
       optional: true
+      default: '0'
     - name: previous
       type: ?Throwable
       optional: true
+      default: 'null'
     returnType: mixed
   throws: []
 - subject:
@@ -3524,21 +3547,26 @@
     - name: message
       type: string
       optional: true
+      default: '""'
     - name: code
       type: int
       optional: true
+      default: '0'
     - name: severity
       type: int
       optional: true
     - name: filename
       type: ?string
       optional: true
+      default: 'null'
     - name: line
       type: ?int
       optional: true
+      default: 'null'
     - name: previous
       type: ?Throwable
       optional: true
+      default: 'null'
     returnType: mixed
   throws: []
 - subject:
@@ -3558,12 +3586,15 @@
     - name: message
       type: string
       optional: true
+      default: '""'
     - name: code
       type: int
       optional: true
+      default: '0'
     - name: previous
       type: ?Throwable
       optional: true
+      default: 'null'
     returnType: mixed
   throws: []
 - subject:
@@ -3646,6 +3677,7 @@
     - name: value
       type: mixed
       optional: true
+      default: 'null'
     returnType: mixed
   throws: [fibererror]
 - subject:
@@ -3666,6 +3698,7 @@
     - name: value
       type: mixed
       optional: true
+      default: 'null'
     returnType: mixed
   throws: [fibererror]
 - subject:
@@ -3792,6 +3825,7 @@
     - name: message
       type: ?string
       optional: true
+      default: 'null'
     returnType: mixed
   throws: []
 - subject:
@@ -3954,6 +3988,7 @@
     - name: status
       type: string|int
       optional: true
+      default: '0'
     returnType: never
   throws: []
 - subject:
@@ -3963,5 +3998,6 @@
     - name: status
       type: string|int
       optional: true
+      default: '0'
     returnType: never
   throws: []

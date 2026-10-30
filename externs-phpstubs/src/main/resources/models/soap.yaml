@@ -264,9 +264,11 @@
     - name: mustUnderstand
       type: bool
       optional: true
+      default: 'false'
     - name: actor
       type: string|int|null
       optional: true
+      default: 'null'
     returnType: mixed
   throws: [valueerror]
 - subject:
@@ -290,15 +292,19 @@
     - name: typeName
       type: ?string
       optional: true
+      default: 'null'
     - name: typeNamespace
       type: ?string
       optional: true
+      default: 'null'
     - name: nodeName
       type: ?string
       optional: true
+      default: 'null'
     - name: nodeNamespace
       type: ?string
       optional: true
+      default: 'null'
     returnType: mixed
   throws: [valueerror]
 - subject:
@@ -467,6 +473,7 @@
     - name: enable
       type: bool
       optional: true
+      default: 'true'
     returnType: bool
   throws: []
 - subject:
@@ -505,9 +512,11 @@
     - name: oneWay
       type: bool
       optional: true
+      default: 'false'
     - name: uriParserClass
       type: ?string
       optional: true
+      default: 'null'
     returnType: ?string
   throws: [random\randomexception, typeerror, valueerror]
 - subject:
@@ -554,6 +563,7 @@
     - name: value
       type: ?string
       optional: true
+      default: 'null'
     returnType: void
   throws: []
 - subject:
@@ -563,6 +573,7 @@
     - name: location
       type: ?string
       optional: true
+      default: 'null'
     returnType: ?string
   throws: []
 - subject:
@@ -572,6 +583,7 @@
     - name: headers
       type: mixed
       optional: true
+      default: 'null'
     returnType: bool
   throws: [typeerror]
 - subject:
@@ -585,12 +597,15 @@
     - name: options
       type: ?array
       optional: true
+      default: 'null'
     - name: inputHeaders
       type: mixed
       optional: true
+      default: 'null'
     - name: outputHeaders
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: mixed
   throws: [error, soapfault, typeerror]
@@ -605,18 +620,23 @@
     - name: actor
       type: ?string
       optional: true
+      default: 'null'
     - name: details
       type: mixed
       optional: true
+      default: 'null'
     - name: name
       type: ?string
       optional: true
+      default: 'null'
     - name: headerFault
       type: mixed
       optional: true
+      default: 'null'
     - name: lang
       type: string
       optional: true
+      default: '""'
     returnType: mixed
   throws: [valueerror]
 - subject:
@@ -667,15 +687,19 @@
     - name: actor
       type: string
       optional: true
+      default: '""'
     - name: details
       type: mixed
       optional: true
+      default: 'null'
     - name: name
       type: string
       optional: true
+      default: '""'
     - name: lang
       type: string
       optional: true
+      default: '""'
     returnType: void
   throws: [error, valueerror]
 - subject:
@@ -690,6 +714,7 @@
     - name: request
       type: ?string
       optional: true
+      default: 'null'
     returnType: void
   throws: [dateerror, error, random\brokenrandomengineerror, random\randomexception, typeerror, valueerror]
 - subject:

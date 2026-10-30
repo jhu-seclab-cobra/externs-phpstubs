@@ -2259,6 +2259,7 @@
     - name: deep
       type: bool
       optional: true
+      default: 'false'
     returnType: Dom\Node
   throws: [domexception, error]
 - subject:
@@ -2270,6 +2271,7 @@
     - name: deep
       type: bool
       optional: true
+      default: 'false'
     returnType: Dom\Node
   throws: [domexception, error]
 - subject:
@@ -2344,6 +2346,7 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: bool
   throws: [error, valueerror]
 - subject:
@@ -2355,6 +2358,7 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: bool
   throws: [error, valueerror]
 - subject:
@@ -2836,6 +2840,7 @@
     - name: force
       type: ?bool
       optional: true
+      default: 'null'
     returnType: bool
   throws: [domexception, error]
 - subject:
@@ -2871,6 +2876,7 @@
     - name: encoding
       type: string
       optional: true
+      default: '"UTF-8"'
     returnType: Dom\HTMLDocument
   throws: [domexception, error, valueerror]
 - subject:
@@ -2882,9 +2888,11 @@
     - name: options
       type: int
       optional: true
+      default: '0'
     - name: overrideEncoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: Dom\HTMLDocument
   throws: [domexception, error, exception, typeerror, valueerror]
 - subject:
@@ -2896,9 +2904,11 @@
     - name: options
       type: int
       optional: true
+      default: '0'
     - name: overrideEncoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: Dom\HTMLDocument
   throws: [domexception, error, valueerror]
 - subject:
@@ -2913,6 +2923,7 @@
     - name: node
       type: ?Dom\Node
       optional: true
+      default: 'null'
     returnType: string
   throws: [domexception, error]
 - subject:
@@ -2930,9 +2941,11 @@
     - name: node
       type: ?Dom\Node
       optional: true
+      default: 'null'
     - name: options
       type: int
       optional: true
+      default: '0'
     returnType: string|false
   throws: [domexception, error]
 - subject:
@@ -2944,6 +2957,7 @@
     - name: options
       type: int
       optional: true
+      default: '0'
     returnType: int|false
   throws: [error, valueerror]
 - subject:
@@ -2957,6 +2971,7 @@
     - name: doctype
       type: ?Dom\DocumentType
       optional: true
+      default: 'null'
     returnType: Dom\XMLDocument
   throws: [domexception, error, valueerror]
 - subject:
@@ -2978,6 +2993,7 @@
     - name: title
       type: ?string
       optional: true
+      default: 'null'
     returnType: Dom\HTMLDocument
   throws: [domexception, error, valueerror]
 - subject:
@@ -3051,15 +3067,19 @@
     - name: exclusive
       type: bool
       optional: true
+      default: 'false'
     - name: withComments
       type: bool
       optional: true
+      default: 'false'
     - name: xpath
       type: ?array
       optional: true
+      default: 'null'
     - name: nsPrefixes
       type: ?array
       optional: true
+      default: 'null'
     returnType: string|false
   throws: [domexception, error, typeerror, valueerror]
 - subject:
@@ -3071,15 +3091,19 @@
     - name: exclusive
       type: bool
       optional: true
+      default: 'false'
     - name: withComments
       type: bool
       optional: true
+      default: 'false'
     - name: xpath
       type: ?array
       optional: true
+      default: 'null'
     - name: nsPrefixes
       type: ?array
       optional: true
+      default: 'null'
     returnType: int|false
   throws: [domexception, error, typeerror, valueerror]
 - subject:
@@ -3089,6 +3113,7 @@
     - name: deep
       type: bool
       optional: true
+      default: 'false'
     returnType: Dom\Node
   throws: [error]
 - subject:
@@ -3351,6 +3376,7 @@
     - name: force
       type: ?bool
       optional: true
+      default: 'null'
     returnType: bool
   throws: [domexception, error, valueerror]
 - subject:
@@ -3360,9 +3386,11 @@
     - name: version
       type: string
       optional: true
+      default: '"1.0"'
     - name: encoding
       type: string
       optional: true
+      default: '"UTF-8"'
     returnType: Dom\XMLDocument
   throws: [domexception, error, valueerror]
 - subject:
@@ -3382,9 +3410,11 @@
     - name: options
       type: int
       optional: true
+      default: '0'
     - name: overrideEncoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: Dom\XMLDocument
   throws: [domexception, error, exception, valueerror]
 - subject:
@@ -3396,9 +3426,11 @@
     - name: options
       type: int
       optional: true
+      default: '0'
     - name: overrideEncoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: Dom\XMLDocument
   throws: [domexception, error, exception, valueerror]
 - subject:
@@ -3408,9 +3440,11 @@
     - name: node
       type: ?Dom\Node
       optional: true
+      default: 'null'
     - name: options
       type: int
       optional: true
+      default: '0'
     returnType: string|false
   throws: [domexception, error]
 - subject:
@@ -3422,6 +3456,7 @@
     - name: options
       type: int
       optional: true
+      default: '0'
     returnType: int|false
   throws: [error, valueerror]
 - subject:
@@ -3436,6 +3471,7 @@
     - name: options
       type: int
       optional: true
+      default: '0'
     returnType: int
   throws: [domexception, error, valueerror]
 - subject:
@@ -3447,6 +3483,7 @@
     - name: registerNodeNS
       type: bool
       optional: true
+      default: 'true'
     returnType: mixed
   throws: [domexception, error, typeerror]
 - subject:
@@ -3458,9 +3495,11 @@
     - name: contextNode
       type: ?Dom\Node
       optional: true
+      default: 'null'
     - name: registerNodeNS
       type: bool
       optional: true
+      default: 'true'
     returnType: null|bool|float|string|Dom\NodeList
   throws: [domexception, error]
 - subject:
@@ -3472,9 +3511,11 @@
     - name: contextNode
       type: ?Dom\Node
       optional: true
+      default: 'null'
     - name: registerNodeNS
       type: bool
       optional: true
+      default: 'true'
     returnType: Dom\NodeList
   throws: [domexception, error]
 - subject:
@@ -3514,6 +3555,7 @@
     - name: restrict
       type: string|array|null
       optional: true
+      default: 'null'
     returnType: void
   throws: [error, typeerror, valueerror]
 - subject:
@@ -3703,12 +3745,15 @@
     - name: namespace
       type: ?string
       optional: true
+      default: 'null'
     - name: qualifiedName
       type: string
       optional: true
+      default: '""'
     - name: doctype
       type: ?DOMDocumentType
       optional: true
+      default: 'null'
     returnType: DOMDocument
   throws: [domexception, error, valueerror]
 - subject:
@@ -3720,9 +3765,11 @@
     - name: publicId
       type: string
       optional: true
+      default: '""'
     - name: systemId
       type: string
       optional: true
+      default: '""'
     returnType: mixed
   throws: [domexception, error, valueerror]
 - subject:
@@ -3817,6 +3864,7 @@
     - name: value
       type: string
       optional: true
+      default: '""'
     returnType: mixed
   throws: [domexception]
 - subject:
@@ -3828,6 +3876,7 @@
     - name: registerNodeNS
       type: bool
       optional: true
+      default: 'true'
     returnType: mixed
   throws: [domexception, error, typeerror]
 - subject:
@@ -3839,9 +3888,11 @@
     - name: contextNode
       type: ?DOMNode
       optional: true
+      default: 'null'
     - name: registerNodeNS
       type: bool
       optional: true
+      default: 'true'
     returnType: mixed
   throws: [error]
 - subject:
@@ -3853,9 +3904,11 @@
     - name: contextNode
       type: ?DOMNode
       optional: true
+      default: 'null'
     - name: registerNodeNS
       type: bool
       optional: true
+      default: 'true'
     returnType: mixed
   throws: [error]
 - subject:
@@ -3895,6 +3948,7 @@
     - name: restrict
       type: string|array|null
       optional: true
+      default: 'null'
     returnType: void
   throws: [error, typeerror, valueerror]
 - subject:
@@ -4275,6 +4329,7 @@
     - name: value
       type: string
       optional: true
+      default: '""'
     returnType: mixed
   throws: [domexception]
 - subject:
@@ -4289,6 +4344,7 @@
     - name: data
       type: string
       optional: true
+      default: '""'
     returnType: mixed
   throws: [domexception]
 - subject:
@@ -4298,9 +4354,11 @@
     - name: version
       type: string
       optional: true
+      default: '"1.0"'
     - name: encoding
       type: string
       optional: true
+      default: '""'
     returnType: mixed
   throws: [domexception]
 - subject:
@@ -4370,6 +4428,7 @@
     - name: value
       type: string
       optional: true
+      default: '""'
     returnType: mixed
   throws: [domexception, error]
 - subject:
@@ -4383,6 +4442,7 @@
     - name: value
       type: string
       optional: true
+      default: '""'
     returnType: mixed
   throws: [domexception, error]
 - subject:
@@ -4402,6 +4462,7 @@
     - name: data
       type: string
       optional: true
+      default: '""'
     returnType: mixed
   throws: [domexception, error]
 - subject:
@@ -4447,6 +4508,7 @@
     - name: deep
       type: bool
       optional: true
+      default: 'false'
     returnType: mixed
   throws: [error]
 - subject:
@@ -4458,6 +4520,7 @@
     - name: options
       type: int
       optional: true
+      default: '0'
     returnType: bool
   throws: [valueerror]
 - subject:
@@ -4469,6 +4532,7 @@
     - name: options
       type: int
       optional: true
+      default: '0'
     returnType: bool
   throws: [valueerror]
 - subject:
@@ -4480,6 +4544,7 @@
     - name: options
       type: int
       optional: true
+      default: '0'
     returnType: bool
   throws: [valueerror]
 - subject:
@@ -4491,6 +4556,7 @@
     - name: options
       type: int
       optional: true
+      default: '0'
     returnType: bool
   throws: [valueerror]
 - subject:
@@ -4554,6 +4620,7 @@
     - name: options
       type: int
       optional: true
+      default: '0'
     returnType: int|false
   throws: [error, valueerror]
 - subject:
@@ -4563,6 +4630,7 @@
     - name: node
       type: ?DOMNode
       optional: true
+      default: 'null'
     returnType: string|false
   throws: [domexception, error]
 - subject:
@@ -4580,9 +4648,11 @@
     - name: node
       type: ?DOMNode
       optional: true
+      default: 'null'
     - name: options
       type: int
       optional: true
+      default: '0'
     returnType: string|false
   throws: [domexception, error]
 - subject:
@@ -4594,6 +4664,7 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: bool
   throws: [error, valueerror]
 - subject:
@@ -4605,6 +4676,7 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     returnType: bool
   throws: [error, valueerror]
 - subject:
@@ -4619,6 +4691,7 @@
     - name: options
       type: int
       optional: true
+      default: '0'
     returnType: int|false
   throws: [error]
 - subject:
@@ -4630,9 +4703,11 @@
     - name: value
       type: ?string
       optional: true
+      default: 'null'
     - name: namespace
       type: string
       optional: true
+      default: '""'
     returnType: mixed
   throws: [domexception]
 - subject:
@@ -4908,6 +4983,7 @@
     - name: force
       type: ?bool
       optional: true
+      default: 'null'
     returnType: bool
   throws: [domexception, error]
 - subject:
@@ -4935,15 +5011,19 @@
     - name: exclusive
       type: bool
       optional: true
+      default: 'false'
     - name: withComments
       type: bool
       optional: true
+      default: 'false'
     - name: xpath
       type: ?array
       optional: true
+      default: 'null'
     - name: nsPrefixes
       type: ?array
       optional: true
+      default: 'null'
     returnType: string|false
   throws: [domexception, error, typeerror, valueerror]
 - subject:
@@ -4955,15 +5035,19 @@
     - name: exclusive
       type: bool
       optional: true
+      default: 'false'
     - name: withComments
       type: bool
       optional: true
+      default: 'false'
     - name: xpath
       type: ?array
       optional: true
+      default: 'null'
     - name: nsPrefixes
       type: ?array
       optional: true
+      default: 'null'
     returnType: int|false
   throws: [domexception, error, typeerror, valueerror]
 - subject:
@@ -4973,6 +5057,7 @@
     - name: deep
       type: bool
       optional: true
+      default: 'false'
     returnType: mixed
   throws: [error]
 - subject:
@@ -5008,6 +5093,7 @@
     - name: options
       type: ?array
       optional: true
+      default: 'null'
     returnType: DOMNode
   throws: [error]
 - subject:
@@ -5029,6 +5115,7 @@
     - name: child
       type: ?DOMNode
       optional: true
+      default: 'null'
     returnType: mixed
   throws: [domexception, error]
 - subject:
@@ -5129,6 +5216,7 @@
     - name: data
       type: string
       optional: true
+      default: '""'
     returnType: mixed
   throws: [domexception]
 - subject:

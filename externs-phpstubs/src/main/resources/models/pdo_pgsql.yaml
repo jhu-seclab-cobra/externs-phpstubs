@@ -72,6 +72,7 @@
     - name: fields
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [pdoexception]
 - subject:
@@ -91,6 +92,7 @@
     - name: fields
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [pdoexception, valueerror]
 - subject:
@@ -108,6 +110,7 @@
     - name: fields
       type: ?string
       optional: true
+      default: 'null'
     returnType: array|false
   throws: [pdoexception]
 - subject:
@@ -127,6 +130,7 @@
     - name: fields
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [pdoexception, valueerror]
 - subject:
@@ -147,6 +151,7 @@
     - name: timeoutMilliseconds
       type: int
       optional: true
+      default: '0'
     returnType: array|false
   throws: [pdoexception, valueerror]
 - subject:
@@ -168,6 +173,7 @@
     - name: mode
       type: string
       optional: true
+      default: '"rb"'
     returnType: mixed
   throws: [pdoexception]
 - subject:
@@ -203,6 +209,7 @@
     - name: fields
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
 - subject:
     method: PDO_PGSql_Ext::pgsqlCopyFromFile
@@ -221,6 +228,7 @@
     - name: fields
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
 - subject:
     method: PDO_PGSql_Ext::pgsqlCopyToArray
@@ -237,6 +245,7 @@
     - name: fields
       type: ?string
       optional: true
+      default: 'null'
     returnType: array|false
 - subject:
     method: PDO_PGSql_Ext::pgsqlCopyToFile
@@ -255,6 +264,7 @@
     - name: fields
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
 - subject:
     method: PDO_PGSql_Ext::pgsqlGetNotify
@@ -266,6 +276,7 @@
     - name: timeoutMilliseconds
       type: int
       optional: true
+      default: '0'
     returnType: array|false
 - subject:
     method: PDO_PGSql_Ext::pgsqlGetPid
@@ -284,6 +295,7 @@
     - name: mode
       type: string
       optional: true
+      default: '"rb"'
     returnType: mixed
 - subject:
     method: PDO_PGSql_Ext::pgsqlLOBUnlink

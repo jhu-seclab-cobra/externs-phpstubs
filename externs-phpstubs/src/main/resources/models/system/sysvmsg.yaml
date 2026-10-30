@@ -9,6 +9,7 @@
     - name: permissions
       type: int
       optional: true
+      default: '0666'
     returnType: SysvMessageQueue|false
   propagation:
   - from: argument(0)
@@ -43,12 +44,15 @@
     - name: unserialize
       type: bool
       optional: true
+      default: 'true'
     - name: flags
       type: int
       optional: true
+      default: '0'
     - name: error_code
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: bool
   throws: [error, typeerror, valueerror]
@@ -73,12 +77,15 @@
     - name: serialize
       type: bool
       optional: true
+      default: 'true'
     - name: blocking
       type: bool
       optional: true
+      default: 'true'
     - name: error_code
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: bool
   throws: [error, exception, typeerror]

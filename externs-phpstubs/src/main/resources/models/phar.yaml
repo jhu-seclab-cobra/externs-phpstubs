@@ -218,6 +218,7 @@
     - name: alias
       type: ?string
       optional: true
+      default: 'null'
     returnType: mixed
   throws: [badmethodcallexception, unexpectedvalueexception, valueerror]
 - subject:
@@ -242,6 +243,7 @@
     - name: localName
       type: ?string
       optional: true
+      default: 'null'
     returnType: void
   throws: [badmethodcallexception, error, exception, pharexception, runtimeexception, typeerror, valueerror]
 - subject:
@@ -268,6 +270,7 @@
     - name: pattern
       type: string
       optional: true
+      default: '""'
     returnType: array
   throws: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
 - subject:
@@ -279,6 +282,7 @@
     - name: baseDirectory
       type: ?string
       optional: true
+      default: 'null'
     returnType: array
   throws: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
 - subject:
@@ -288,6 +292,7 @@
     - name: compression
       type: int
       optional: true
+      default: '0'
     returnType: bool
   throws: []
 - subject:
@@ -304,6 +309,7 @@
     - name: extension
       type: ?string
       optional: true
+      default: 'null'
     returnType: ?Phar
   throws: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
 - subject:
@@ -321,12 +327,15 @@
     - name: format
       type: ?int
       optional: true
+      default: 'null'
     - name: compression
       type: ?int
       optional: true
+      default: 'null'
     - name: extension
       type: ?string
       optional: true
+      default: 'null'
     returnType: ?PharData
   throws: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
 - subject:
@@ -336,12 +345,15 @@
     - name: format
       type: ?int
       optional: true
+      default: 'null'
     - name: compression
       type: ?int
       optional: true
+      default: 'null'
     - name: extension
       type: ?string
       optional: true
+      default: 'null'
     returnType: ?Phar
   throws: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
 - subject:
@@ -370,9 +382,11 @@
     - name: index
       type: ?string
       optional: true
+      default: 'null'
     - name: webIndex
       type: ?string
       optional: true
+      default: 'null'
     returnType: string
   throws: [pharexception, valueerror]
 - subject:
@@ -382,6 +396,7 @@
     - name: extension
       type: ?string
       optional: true
+      default: 'null'
     returnType: ?Phar
   throws: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
 - subject:
@@ -411,9 +426,11 @@
     - name: files
       type: array|string|null
       optional: true
+      default: 'null'
     - name: overwrite
       type: bool
       optional: true
+      default: 'false'
     returnType: bool
   throws: [badmethodcallexception, invalidargumentexception, pharexception, runtimeexception, valueerror]
 - subject:
@@ -502,6 +519,7 @@
     - name: executable
       type: bool
       optional: true
+      default: 'true'
     returnType: bool
   throws: [valueerror]
 - subject:
@@ -518,6 +536,7 @@
     - name: alias
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [pharexception, valueerror]
 - subject:
@@ -527,9 +546,11 @@
     - name: alias
       type: ?string
       optional: true
+      default: 'null'
     - name: offset
       type: int
       optional: true
+      default: '0'
     returnType: bool
   throws: [pharexception, valueerror]
 - subject:
@@ -591,6 +612,7 @@
     - name: returnPhar
       type: bool
       optional: true
+      default: 'true'
     returnType: string
   throws: []
 - subject:
@@ -608,9 +630,11 @@
     - name: index
       type: ?string
       optional: true
+      default: 'null'
     - name: webIndex
       type: ?string
       optional: true
+      default: 'null'
     returnType: 'true'
   throws: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
 - subject:
@@ -630,6 +654,7 @@
     - name: privateKey
       type: ?string
       optional: true
+      default: 'null'
     returnType: void
   throws: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
 - subject:
@@ -668,18 +693,22 @@
     - name: alias
       type: ?string
       optional: true
+      default: 'null'
     - name: index
       type: ?string
       optional: true
+      default: 'null'
     - name: fileNotFoundScript
       type: ?string
       optional: true
+      default: 'null'
     - name: mimeTypes
       type: array
       optional: true
     - name: rewrite
       type: ?callable
       optional: true
+      default: 'null'
     returnType: void
   throws: [error, pharexception, valueerror]
 - subject:
@@ -694,9 +723,11 @@
     - name: alias
       type: ?string
       optional: true
+      default: 'null'
     - name: format
       type: int
       optional: true
+      default: '0'
     returnType: mixed
   throws: [badmethodcallexception, unexpectedvalueexception, valueerror]
 - subject:
@@ -721,6 +752,7 @@
     - name: localName
       type: ?string
       optional: true
+      default: 'null'
     returnType: void
   throws: [badmethodcallexception, error, exception, pharexception, runtimeexception, typeerror, valueerror]
 - subject:
@@ -747,6 +779,7 @@
     - name: pattern
       type: string
       optional: true
+      default: '""'
     returnType: array
   throws: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
 - subject:
@@ -758,6 +791,7 @@
     - name: baseDirectory
       type: ?string
       optional: true
+      default: 'null'
     returnType: array
   throws: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
 - subject:
@@ -767,6 +801,7 @@
     - name: compression
       type: int
       optional: true
+      default: '0'
     returnType: bool
   throws: []
 - subject:
@@ -783,6 +818,7 @@
     - name: extension
       type: ?string
       optional: true
+      default: 'null'
     returnType: ?PharData
   throws: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
 - subject:
@@ -800,12 +836,15 @@
     - name: format
       type: ?int
       optional: true
+      default: 'null'
     - name: compression
       type: ?int
       optional: true
+      default: 'null'
     - name: extension
       type: ?string
       optional: true
+      default: 'null'
     returnType: ?PharData
   throws: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
 - subject:
@@ -815,12 +854,15 @@
     - name: format
       type: ?int
       optional: true
+      default: 'null'
     - name: compression
       type: ?int
       optional: true
+      default: 'null'
     - name: extension
       type: ?string
       optional: true
+      default: 'null'
     returnType: ?Phar
   throws: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
 - subject:
@@ -849,9 +891,11 @@
     - name: index
       type: ?string
       optional: true
+      default: 'null'
     - name: webIndex
       type: ?string
       optional: true
+      default: 'null'
     returnType: string
   throws: [pharexception, valueerror]
 - subject:
@@ -861,6 +905,7 @@
     - name: extension
       type: ?string
       optional: true
+      default: 'null'
     returnType: ?PharData
   throws: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
 - subject:
@@ -890,9 +935,11 @@
     - name: files
       type: array|string|null
       optional: true
+      default: 'null'
     - name: overwrite
       type: bool
       optional: true
+      default: 'false'
     returnType: bool
   throws: [badmethodcallexception, invalidargumentexception, pharexception, runtimeexception, valueerror]
 - subject:
@@ -981,6 +1028,7 @@
     - name: executable
       type: bool
       optional: true
+      default: 'true'
     returnType: bool
   throws: [valueerror]
 - subject:
@@ -997,6 +1045,7 @@
     - name: alias
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [pharexception, valueerror]
 - subject:
@@ -1006,9 +1055,11 @@
     - name: alias
       type: ?string
       optional: true
+      default: 'null'
     - name: offset
       type: int
       optional: true
+      default: '0'
     returnType: bool
   throws: [pharexception, valueerror]
 - subject:
@@ -1070,6 +1121,7 @@
     - name: returnPhar
       type: bool
       optional: true
+      default: 'true'
     returnType: string
   throws: []
 - subject:
@@ -1087,9 +1139,11 @@
     - name: index
       type: ?string
       optional: true
+      default: 'null'
     - name: webIndex
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
 - subject:
@@ -1109,6 +1163,7 @@
     - name: privateKey
       type: ?string
       optional: true
+      default: 'null'
     returnType: void
   throws: [badmethodcallexception, error, exception, pharexception, typeerror, unexpectedvalueexception, valueerror]
 - subject:
@@ -1147,18 +1202,22 @@
     - name: alias
       type: ?string
       optional: true
+      default: 'null'
     - name: index
       type: ?string
       optional: true
+      default: 'null'
     - name: fileNotFoundScript
       type: ?string
       optional: true
+      default: 'null'
     - name: mimeTypes
       type: array
       optional: true
     - name: rewrite
       type: ?callable
       optional: true
+      default: 'null'
     returnType: void
   throws: [error, pharexception, valueerror]
 - subject:
@@ -1241,6 +1300,7 @@
     - name: compression
       type: ?int
       optional: true
+      default: 'null'
     returnType: bool
   throws: [badmethodcallexception]
 - subject:

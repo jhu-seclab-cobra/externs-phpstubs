@@ -9,6 +9,7 @@
     - name: non_blocking
       type: bool
       optional: true
+      default: 'false'
     returnType: bool
   throws: []
 - subject:
@@ -20,12 +21,15 @@
     - name: max_acquire
       type: int
       optional: true
+      default: '1'
     - name: permissions
       type: int
       optional: true
+      default: '0666'
     - name: auto_release
       type: bool
       optional: true
+      default: 'true'
     returnType: SysvSemaphore|false
   propagation:
   - from: argument(0)

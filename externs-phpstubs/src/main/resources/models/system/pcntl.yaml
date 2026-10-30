@@ -15,6 +15,7 @@
     - name: enable
       type: ?bool
       optional: true
+      default: 'null'
     returnType: bool
   throws: []
 - subject:
@@ -53,6 +54,7 @@
     - name: process_id
       type: ?int
       optional: true
+      default: 'null'
     - name: mode
       type: int
       optional: true
@@ -67,6 +69,7 @@
     - name: process_id
       type: ?int
       optional: true
+      default: 'null'
     - name: mode
       type: int
       optional: true
@@ -83,6 +86,7 @@
     - name: restart_syscalls
       type: bool
       optional: true
+      default: 'true'
     returnType: bool
   throws: [error, typeerror, valueerror]
 - subject:
@@ -109,6 +113,7 @@
     - name: old_signals
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: bool
   throws: [error, typeerror, valueerror]
@@ -125,9 +130,11 @@
     - name: seconds
       type: int
       optional: true
+      default: '0'
     - name: nanoseconds
       type: int
       optional: true
+      default: '0'
     returnType: int|false
   throws: [error, typeerror, valueerror]
 - subject:
@@ -168,6 +175,7 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     - name: resource_usage
       type: mixed
       optional: true
@@ -186,6 +194,7 @@
     - name: flags
       type: int
       optional: true
+      default: '0'
     - name: resource_usage
       type: mixed
       optional: true
@@ -266,6 +275,7 @@
     - name: process_id
       type: ?int
       optional: true
+      default: 'null'
     returnType: array|false
   throws: [valueerror]
 - subject:
@@ -282,6 +292,7 @@
     - name: signal
       type: int
       optional: true
+      default: '0'
     returnType: int
   throws: [valueerror]
 - subject:
@@ -291,6 +302,7 @@
     - name: process_id
       type: ?int
       optional: true
+      default: 'null'
     - name: cpu_ids
       type: array
       optional: true
@@ -303,6 +315,7 @@
     - name: process_id
       type: ?int
       optional: true
+      default: 'null'
     - name: nstype
       type: int
       optional: true
@@ -327,6 +340,7 @@
     - name: id
       type: ?int
       optional: true
+      default: 'null'
     - name: info
       type: mixed
       optional: true

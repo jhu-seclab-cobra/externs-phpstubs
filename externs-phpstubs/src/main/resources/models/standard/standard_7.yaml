@@ -3052,6 +3052,7 @@
     - name: mask
       type: ?int
       optional: true
+      default: 'null'
     returnType: int
   throws: []
 - subject:
@@ -3061,9 +3062,11 @@
     - name: prefix
       type: string
       optional: true
+      default: '""'
     - name: more_entropy
       type: bool
       optional: true
+      default: 'false'
     returnType: string
   propagation:
   - from: argument(0)
@@ -3080,6 +3083,7 @@
     - name: offset
       type: int
       optional: true
+      default: '0'
     returnType: array|false
   propagation:
   - from: argument(1)
@@ -5593,6 +5597,7 @@
     - name: return
       type: bool
       optional: true
+      default: 'false'
     returnType: ?string
   propagation:
   - from: argument(0)
@@ -5609,6 +5614,7 @@
     - name: operator
       type: ?string
       optional: true
+      default: 'null'
     returnType: int|bool
   throws: [valueerror]
 - subject:
@@ -6298,12 +6304,14 @@
     - name: width
       type: int
       optional: true
+      default: '75'
     - name: break
       type: string
       optional: true
     - name: cut_long_words
       type: bool
       optional: true
+      default: 'false'
     returnType: string
   propagation:
   - from: argument(0)

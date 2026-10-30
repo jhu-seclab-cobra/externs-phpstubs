@@ -301,9 +301,11 @@
     - name: replace
       type: bool
       optional: true
+      default: 'true'
     - name: response_code
       type: int
       optional: true
+      default: '0'
     returnType: void
   throws: []
 - subject:
@@ -321,6 +323,7 @@
     - name: name
       type: ?string
       optional: true
+      default: 'null'
     returnType: void
   throws: []
 - subject:
@@ -335,10 +338,12 @@
     - name: filename
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     - name: line
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: bool
   throws: [error, typeerror]
@@ -351,6 +356,7 @@
     - name: max_chars_per_line
       type: int
       optional: true
+      default: '0'
     returnType: string
   propagation:
   - from: argument(0)
@@ -384,6 +390,7 @@
     - name: return
       type: bool
       optional: true
+      default: 'false'
     returnType: string|bool
   throws: [error, valueerror]
 - subject:
@@ -395,6 +402,7 @@
     - name: return
       type: bool
       optional: true
+      default: 'false'
     returnType: string|true
   throws: [error]
 - subject:
@@ -404,6 +412,7 @@
     - name: as_number
       type: bool
       optional: true
+      default: 'false'
     returnType: array|int|float|false
   throws: []
 - subject:
@@ -418,6 +427,7 @@
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: string
   propagation:
   - from: argument(0)
@@ -437,9 +447,11 @@
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     - name: double_encode
       type: bool
       optional: true
+      default: 'true'
     returnType: string
   throws: []
 - subject:
@@ -454,9 +466,11 @@
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     - name: double_encode
       type: bool
       optional: true
+      default: 'true'
     returnType: string
   throws: []
 - subject:
@@ -489,9 +503,11 @@
     - name: numeric_prefix
       type: string
       optional: true
+      default: '""'
     - name: arg_separator
       type: ?string
       optional: true
+      default: 'null'
     - name: encoding_type
       type: int
       optional: true
@@ -960,6 +976,7 @@
     - name: response_code
       type: int
       optional: true
+      default: '0'
     returnType: int|bool
   throws: []
 - subject:
@@ -2911,6 +2928,7 @@
     - name: enable
       type: ?bool
       optional: true
+      default: 'null'
     returnType: int
   throws: []
 - subject:
@@ -3079,6 +3097,7 @@
     - name: array
       type: ?array
       optional: true
+      default: 'null'
     returnType: string
     framelessArities: [1, 2]
   propagation:
@@ -3108,6 +3127,7 @@
     - name: strict
       type: bool
       optional: true
+      default: 'false'
     returnType: bool
     framelessArities: [2, 3]
   throws: [error]
@@ -3529,9 +3549,11 @@
     - name: extension
       type: ?string
       optional: true
+      default: 'null'
     - name: details
       type: bool
       optional: true
+      default: 'true'
     returnType: array|false
   throws: []
 - subject:
@@ -3622,6 +3644,7 @@
     - name: base
       type: int
       optional: true
+      default: '10'
     returnType: int
   throws: []
 - subject:
@@ -3643,6 +3666,7 @@
     - name: spool
       type: int
       optional: true
+      default: '0'
     returnType: string|bool
   throws: [error, valueerror]
 - subject:
@@ -3678,9 +3702,11 @@
     - name: syntax_only
       type: bool
       optional: true
+      default: 'false'
     - name: callable_name
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: bool
   throws: [error, typeerror]
@@ -3876,6 +3902,7 @@
     - name: array
       type: ?array
       optional: true
+      default: 'null'
     returnType: string
   propagation:
   - from: argument(0)
@@ -4107,12 +4134,15 @@
     - name: insertion_cost
       type: int
       optional: true
+      default: '1'
     - name: replacement_cost
       type: int
       optional: true
+      default: '1'
     - name: deletion_cost
       type: int
       optional: true
+      default: '1'
     returnType: int
   throws: []
 - subject:

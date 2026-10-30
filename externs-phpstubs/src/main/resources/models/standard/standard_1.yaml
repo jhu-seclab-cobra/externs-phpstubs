@@ -134,6 +134,7 @@
     - name: walk_to_top
       type: bool
       optional: true
+      default: 'false'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -159,6 +160,7 @@
     - name: note_value
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -191,6 +193,7 @@
     - name: walk_to_top
       type: bool
       optional: true
+      default: 'false'
     returnType: bool
   throws: []
 - subject:
@@ -325,6 +328,7 @@
     - name: preserve_keys
       type: bool
       optional: true
+      default: 'false'
     returnType: array
   propagation:
   - from: argument(0)
@@ -341,6 +345,7 @@
     - name: index_key
       type: int|string|null
       optional: true
+      default: 'null'
     returnType: array
   propagation:
   - from: argument(0)
@@ -494,9 +499,11 @@
     - name: callback
       type: ?callable
       optional: true
+      default: 'null'
     - name: mode
       type: int
       optional: true
+      default: '0'
     returnType: array
   propagation:
   - from: argument(0)
@@ -637,6 +644,7 @@
     - name: strict
       type: bool
       optional: true
+      default: 'false'
     returnType: array
   propagation:
   - from: argument(0)
@@ -765,6 +773,7 @@
     - name: num
       type: int
       optional: true
+      default: '1'
     returnType: int|string|array
   propagation:
   - from: argument(0)
@@ -781,6 +790,7 @@
     - name: initial
       type: mixed
       optional: true
+      default: 'null'
     returnType: mixed
   propagation:
   - from: argument(0)
@@ -835,6 +845,7 @@
     - name: preserve_keys
       type: bool
       optional: true
+      default: 'false'
     returnType: array
   propagation:
   - from: argument(0)
@@ -851,6 +862,7 @@
     - name: strict
       type: bool
       optional: true
+      default: 'false'
     returnType: int|string|false
   throws: [error]
 - subject:
@@ -876,9 +888,11 @@
     - name: length
       type: ?int
       optional: true
+      default: 'null'
     - name: preserve_keys
       type: bool
       optional: true
+      default: 'false'
     returnType: array
   propagation:
   - from: argument(0)
@@ -896,6 +910,7 @@
     - name: length
       type: ?int
       optional: true
+      default: 'null'
     - name: replacement
       type: mixed
       optional: true
@@ -1140,6 +1155,7 @@
     - name: description
       type: Throwable|string|null
       optional: true
+      default: 'null'
     returnType: bool
 - subject:
     function: assert_options
@@ -1251,6 +1267,7 @@
     - name: strict
       type: bool
       optional: true
+      default: 'false'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -1791,6 +1808,7 @@
     - name: type
       type: string
       optional: true
+      default: '"MX"'
     returnType: bool
   throws: [valueerror]
 - subject:
@@ -1834,6 +1852,7 @@
     - name: length
       type: int
       optional: true
+      default: '76'
     - name: separator
       type: string
       optional: true
@@ -1922,9 +1941,11 @@
     - name: clear_realpath_cache
       type: bool
       optional: true
+      default: 'false'
     - name: filename
       type: string
       optional: true
+      default: '""'
     returnType: void
   throws: [valueerror]
 - subject:
@@ -1945,6 +1966,7 @@
     - name: dir_handle
       type: mixed
       optional: true
+      default: 'null'
     returnType: void
   throws: [typeerror]
 - subject:
@@ -2352,6 +2374,7 @@
     - name: mode
       type: int
       optional: true
+      default: '0'
     returnType: array|string
   propagation:
   - from: argument(1)
@@ -3412,6 +3435,7 @@
     - name: context
       type: mixed
       optional: true
+      default: 'null'
     returnType: Directory|false
   propagation:
   - from: argument(0)
@@ -3463,6 +3487,7 @@
     - name: type
       type: string
       optional: true
+      default: '"MX"'
     returnType: bool
   throws: [valueerror]
 - subject:
@@ -3477,6 +3502,7 @@
     - name: weights
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     returnType: bool
   throws: [error, typeerror, valueerror]
@@ -3492,14 +3518,17 @@
     - name: authoritative_name_servers
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     - name: additional_records
       type: mixed
       optional: true
+      default: 'null'
       byRef: true
     - name: raw
       type: bool
       optional: true
+      default: 'false'
     returnType: array|false
   propagation:
   - from: argument(2)
@@ -5002,12 +5031,15 @@
     - name: message_type
       type: int
       optional: true
+      default: '0'
     - name: destination
       type: ?string
       optional: true
+      default: 'null'
     - name: additional_headers
       type: ?string
       optional: true
+      default: 'null'
     returnType: bool
   throws: [dateerror, valueerror]
 - subject:

@@ -7,6 +7,7 @@
     - name: type
       type: string
       optional: true
+      default: '"all"'
     returnType: array|string|false
   throws: []
 - subject:
@@ -18,9 +19,11 @@
     - name: mode
       type: int
       optional: true
+      default: '0'
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|false
   propagation:
   - from: argument(0)
@@ -37,9 +40,11 @@
     - name: mode
       type: int
       optional: true
+      default: '0'
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: array|false
   throws: [valueerror]
 - subject:
@@ -79,6 +84,7 @@
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: int|false
   throws: [valueerror]
 - subject:
@@ -92,9 +98,11 @@
     - name: offset
       type: int
       optional: true
+      default: '0'
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: int|false
   throws: [valueerror]
 - subject:
@@ -108,6 +116,7 @@
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: int|false
   throws: [valueerror]
 - subject:
@@ -121,9 +130,11 @@
     - name: length
       type: ?int
       optional: true
+      default: 'null'
     - name: encoding
       type: ?string
       optional: true
+      default: 'null'
     returnType: string|false
   propagation:
   - from: argument(0)
