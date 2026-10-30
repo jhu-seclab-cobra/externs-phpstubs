@@ -35,6 +35,8 @@ import kotlin.test.assertTrue
  *   the `/`-free result of basename
  * - `a character bound beside the generated flows repeats them exactly` — verifies str_replace, strtr, and substr
  *   differ from the generated unit only by the bound, so a change of the generated flows fails here
+ * - `an escaper or encoder of the sanitizer facts carries its argument to the result` — verifies the flow into the
+ *   result and the kept sanitizer fact of rawurlencode, the pg_escape functions and the escape methods
  * - `str position functions admit false beside the integer` — verifies the return bound of strpos, stripos, strrpos,
  *   and strripos, and that strspn and strcspn keep the integer bound
  * - `a num returns bound admits no false or null` — verifies each num rule against the reflected return type
@@ -418,4 +420,23 @@ internal class ValueRulesSetTest {
     private fun methodsOf(owner: String) = PhpStubs.methods.filter { it.subject.owner.equals(owner, ignoreCase = true) }
 
     private fun argumentToReturn(position: Int): Propagation = Propagation(from = Port.Argument(position), to = Port.Return)
+
+    // A builtin with a sanitizer fact whose result holds its string argument declares the flow into the result; a
+    // later decoder or a sink the sanitizer does not cover then reaches the source.
+    @Test
+    fun `an escaper or encoder of the sanitizer facts carries its argument to the result`() {
+        val functions = mapOf(
+            "rawurlencode" to 0, "pg_escape_string" to 1, "pg_escape_literal" to 1, "pg_escape_identifier" to 1,
+        )
+        for ((name, position) in functions) {
+            val record = assertNotNull(PhpStubs.function(name), name)
+            assertTrue(Port.Argument(position) in record.flows.filter { it.to == Port.Return }.map { it.from }, name)
+            assertTrue(record.sanitizerFacts.isNotEmpty(), name)
+        }
+        for (spelling in listOf("SQLite3::escapeString", "mysqli::escape_string", "mysqli::real_escape_string")) {
+            val record = assertNotNull(PhpStubs.method(spelling), spelling)
+            assertEquals(listOf(Port.Argument(0)), record.flows.filter { it.to == Port.Return }.map { it.from }, spelling)
+            assertTrue(record.sanitizerFacts.isNotEmpty(), spelling)
+        }
+    }
 }

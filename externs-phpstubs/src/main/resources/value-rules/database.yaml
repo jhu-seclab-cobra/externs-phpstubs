@@ -52,3 +52,30 @@
 - subject: {method: mysqli::real_query}
   returns: bool
   propagation: [{from: argument(0), to: return}]
+# PHP manual: returns the string escaped for a PostgreSQL query; the connection argument is optional, so the string is
+# argument(0) without it and argument(1) with it.
+- subject: {function: pg_escape_string}
+  returns: str
+  propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]
+# PHP manual: returns the string quoted as a PostgreSQL literal, or false; the string is argument(0) without the
+# optional connection and argument(1) with it.
+- subject: {function: pg_escape_literal}
+  returns: any
+  propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]
+# PHP manual: returns the string quoted as a PostgreSQL identifier, or false; the string is argument(0) without the
+# optional connection and argument(1) with it.
+- subject: {function: pg_escape_identifier}
+  returns: any
+  propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]
+# PHP manual: returns the string with special characters escaped for a mysqli statement.
+- subject: {method: mysqli::escape_string}
+  returns: str
+  propagation: [{from: argument(0), to: return}]
+# PHP manual: returns the string with special characters escaped for a mysqli statement.
+- subject: {method: mysqli::real_escape_string}
+  returns: str
+  propagation: [{from: argument(0), to: return}]
+# PHP manual: returns the string escaped for use in an SQLite query.
+- subject: {method: SQLite3::escapeString}
+  returns: str
+  propagation: [{from: argument(0), to: return}]

@@ -5,3 +5,7 @@
 - subject: {function: urlencode}
   returns: str
   propagation: [{from: argument(0), to: return}]
+# PHP manual: returns the string percent-encoded (RFC 3986); rawurldecode restores it.
+- subject: {function: rawurlencode}
+  returns: str
+  propagation: [{from: argument(0), to: return}]
