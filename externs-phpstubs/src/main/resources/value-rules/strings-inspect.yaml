@@ -12,10 +12,10 @@
 - subject: {function: crc32}
   returns: num
   propagation: [{from: argument(0), to: return}]
-# PHP manual: the digest is computed from data (argument 1); algo only selects the algorithm.
+# PHP manual: the digest depends on data, and algo, binary (the representation) and options (for example a seed) change it.
 - subject: {function: hash}
   returns: str
-  propagation: [{from: argument(1), to: return}]
+  propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}, {from: argument(2), to: return}, {from: argument(3), to: return}]
 - subject: {function: levenshtein}
   returns: num
   propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]

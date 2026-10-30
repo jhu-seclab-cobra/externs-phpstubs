@@ -36,7 +36,7 @@ import kotlin.test.assertTrue
  * - `a character bound beside the generated flows repeats them exactly` — verifies str_replace, strtr, and substr
  *   differ from the generated unit only by the bound, so a change of the generated flows fails here
  * - `a builtin whose sanitizer fact covers its result declares a value unit` — verifies every function and method with
- *   a result-covering sanitizer fact declares a returns fact, and that `hash` carries its data argument to the result
+ *   a result-covering sanitizer fact declares a returns fact, and that `hash` carries each of its four arguments to the result
  * - `an escaper or encoder of the sanitizer facts carries its argument to the result` — verifies the flow into the
  *   result and the kept sanitizer fact of rawurlencode, the pg_escape functions and the escape methods
  * - `str position functions admit false beside the integer` — verifies the return bound of strpos, stripos, strrpos,
@@ -453,6 +453,9 @@ internal class ValueRulesSetTest {
             assertTrue(record.returns.isNotEmpty(), "${record.subject} returns")
         }
         val hash = assertNotNull(PhpStubs.function("hash"))
-        assertEquals(listOf(Port.Argument(1)), hash.flows.filter { it.to == Port.Return }.map { it.from })
+        assertEquals(
+            (0..3).map(Port::Argument),
+            hash.flows.filter { it.to == Port.Return }.map { it.from },
+        )
     }
 }
