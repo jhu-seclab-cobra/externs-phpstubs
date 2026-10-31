@@ -254,6 +254,7 @@
   signature:
     classifier: enum
     interfaces: [unitenum]
+    name: Pcntl\QosClass
     isFinal: false
 - subject:
     function: pcntl_forkx

@@ -5,8 +5,10 @@ Reads every class-like declaration of the php-src stubs, resolves its
 ``extends`` and ``implements`` names by PHP's name resolution rules, reads the
 registered flags and the effective handler tables of the registered classes,
 and rewrites the signature of every generated class entry php-src declares:
-classifier, parent, interfaces, final-class status and handlers from php-src,
-every other line untouched. Each such entry lives in the generated document of
+classifier, parent, interfaces, declared class name, class aliases,
+final-class status and handlers from php-src, every other line untouched.
+A class alias is the value of an ``@alias`` tag in a doc comment before the
+declaration, read as gen_stub.php reads it. Each such entry lives in the generated document of
 its php-src extension, moved there when another document holds it, and a
 php-src declaration no models document declares is added there. An entry php-src
 does not declare keeps its bytes. A second run over its own output changes nothing.
@@ -24,11 +26,16 @@ from php_src_c import Program
 
 TOOL = "tools/extract_hierarchy.py"
 # The signature fields this producer writes; every other field of an entry stays as it is.
-OWNED_FIELDS = ("classifier", "parent", "interfaces", "isFinal", "handlers")
+OWNED_FIELDS = ("classifier", "parent", "interfaces", "name", "aliases", "isFinal", "handlers")
 
 DECLARATION = re.compile(r"\b((?:(?:final|abstract|readonly)\s+)*)(class|interface|enum|trait)\s+(\w+)([^{;]*)\{")
 STRING_METHOD = re.compile(r"\bfunction\s+__toString\b", re.I)
 FINAL_FLAG = "ZEND_ACC_FINAL"
+# What separates a doc comment from its class keyword once comments and attributes are blanked.
+CLASS_HEAD = re.compile(r"\s*(?:(?:final|abstract|readonly)\s+)*(?=(?:class|interface|enum|trait)\b)")
+# gen_stub.php DocCommentTag::parseDocComments: one tag per trimmed line of a comment without its delimiters.
+DOC_TAG = re.compile(r"^\*\s*@([a-z-]+)(?:\s+(.+))?$")
+CLASS_SPELLING = re.compile(r"\\?[A-Za-z_]\w*(?:\\[A-Za-z_]\w*)*")
 HEADER = re.compile(
     r"^(?:\s*:\s*(?P<backing>\w+))?(?:\s+extends\s+(?P<extends>[\w\\,\s]+?))?"
     r"(?:\s+implements\s+(?P<implements>[\w\\,\s]+?))?\s*$"
@@ -39,15 +46,16 @@ BACKED_ENUM_INTERFACES = ["unitenum", "backedenum"]
 
 
 class Declaration:
-    """One class-like declaration: classifier, folded parent, folded interfaces, its stub, whether the stub declares
-    it final, and whether its body declares a ``__toString`` method."""
+    """One class-like declaration: classifier, folded parent and interfaces, declared name, folded aliases, its stub,
+    whether the stub declares it final, and whether its body declares a ``__toString`` method."""
 
-    def __init__(self, classifier, parent, interfaces, source, final=False, to_string=False):
+    def __init__(self, classifier, parent, interfaces, naming, source, final=False, to_string=False):
         self.classifier, self.parent, self.interfaces, self.source = classifier, parent, interfaces, source
+        self.name, self.aliases = naming
         self.final, self.to_string = final, to_string
 
     def key(self):
-        return self.classifier, self.parent, tuple(self.interfaces), self.final
+        return self.classifier, self.parent, tuple(self.interfaces), self.name, tuple(self.aliases), self.final
 
     def render_signature(self, is_final=None, handlers=()):
         """The signature lines: the declaration fields, the registered final-class status when established, and the
@@ -57,6 +65,9 @@ class Declaration:
             lines.append(f"    parent: {self.parent}")
         if self.interfaces:
             lines.append(f"    interfaces: [{', '.join(self.interfaces)}]")
+        lines.append(f"    name: {self.name}")
+        if self.aliases:
+            lines.append(f"    aliases: [{', '.join(self.aliases)}]")
         if is_final is not None:
             lines.append(f"    isFinal: {'true' if is_final else 'false'}")
         return "\n".join(lines) + "\n" + render_handlers(handlers)
@@ -69,9 +80,38 @@ def names(text, stub, offset):
     return [stub.resolve(n.strip(), offset).lower() for n in (text or "").split(",") if n.strip()]
 
 
-def declaration_of(match, stub):
+def class_aliases(stub):
+    """The keyword offset of each class-like declaration → its folded aliases, from the doc comments before it."""
+    comments = {}
+    for start, end in stub.doc_comments:
+        head = CLASS_HEAD.match(stub.text, end)
+        if head:
+            comments.setdefault(head.end(), []).append(stub.raw[start:end])
+    return {offset: alias_of(texts, stub.source) for offset, texts in comments.items()}
+
+
+def alias_of(comments, source):
+    """The folded alias the @alias tags of the doc comments select: every tag needs a value, the last wins."""
+    values = [
+        value
+        for comment in comments
+        for line in comment[2:-2].split("\n")
+        for tag, value in DOC_TAG.findall(line.strip())
+        if tag == "alias"
+    ]
+    if "" in values:
+        raise php_src.ExtractionFailure(f"{source}: an @alias tag has no value")
+    if not values:
+        return []
+    if not CLASS_SPELLING.fullmatch(values[-1]):
+        raise php_src.ExtractionFailure(f"{source}: @alias value is not a class spelling: {values[-1]!r}")
+    return [values[-1].removeprefix("\\").lower()]
+
+
+def declaration_of(match, stub, naming):
     """Build the Declaration of one matched class-like header.
 
+    naming is the declared name and the folded aliases.
     An interface's extends names are interfaces; an enum implements the engine's enum interfaces after its own.
     """
     modifiers, classifier, short, header = match.groups()
@@ -84,25 +124,30 @@ def declaration_of(match, stub):
     opening = match.end() - 1
     to_string = bool(STRING_METHOD.search(stub.text, opening, php_src.matching(stub.text, opening, stub.source)))
     if classifier == "interface":
-        return Declaration(classifier, None, extends + implements, stub.source, final, to_string)
+        return Declaration(classifier, None, extends + implements, naming, stub.source, final, to_string)
     if classifier == "enum":
         implicit = BACKED_ENUM_INTERFACES if parsed.group("backing") else ENUM_INTERFACES
-        return Declaration(classifier, None, implements + implicit, stub.source, final, to_string)
+        return Declaration(classifier, None, implements + implicit, naming, stub.source, final, to_string)
     if len(extends) > 1:
         raise php_src.ExtractionFailure(f"{stub.source}: {classifier} {short} extends more than one class")
-    return Declaration(classifier, extends[0] if extends else None, implements, stub.source, final, to_string)
+    return Declaration(classifier, extends[0] if extends else None, implements, naming, stub.source, final, to_string)
 
 
 def read_php_src(root):
     """Return the folded name → Declaration map of every stub."""
     declarations = {}
     for stub in php_src.stubs(root):
+        aliases = class_aliases(stub)
         for match in DECLARATION.finditer(stub.text):
-            declaration = declaration_of(match, stub)
-            name = php_src.resolve(match.group(3), stub.namespace_at(match.start()), {}).lower()
+            declared = php_src.resolve(match.group(3), stub.namespace_at(match.start()), {})
+            declaration = declaration_of(match, stub, (declared, aliases.get(match.start(2), [])))
+            name = declared.lower()
             known = declarations.setdefault(name, declaration)
             if known.key() != declaration.key():
-                raise php_src.ExtractionFailure(f"{name}: {known.source} and {declaration.source} declare different hierarchies")
+                raise php_src.ExtractionFailure(
+                    f"{name}: {known.source} and {declaration.source} declare different hierarchies, "
+                    "class names or class aliases"
+                )
     return declarations
 
 

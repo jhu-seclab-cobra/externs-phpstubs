@@ -667,6 +667,7 @@
   signature:
     classifier: class
     parent: error
+    name: DateError
     isFinal: false
     handlers:
       - id: Zend/zend_exceptions.c:default_exception_handlers
@@ -718,6 +719,7 @@
   signature:
     classifier: class
     parent: exception
+    name: DateException
     isFinal: false
     handlers:
       - id: Zend/zend_exceptions.c:default_exception_handlers
@@ -769,6 +771,7 @@
   signature:
     classifier: class
     parent: dateexception
+    name: DateInvalidOperationException
     isFinal: false
     handlers:
       - id: Zend/zend_exceptions.c:default_exception_handlers
@@ -820,6 +823,7 @@
   signature:
     classifier: class
     parent: dateexception
+    name: DateInvalidTimeZoneException
     isFinal: false
     handlers:
       - id: Zend/zend_exceptions.c:default_exception_handlers
@@ -871,6 +875,7 @@
   signature:
     classifier: class
     parent: dateexception
+    name: DateMalformedIntervalStringException
     isFinal: false
     handlers:
       - id: Zend/zend_exceptions.c:default_exception_handlers
@@ -922,6 +927,7 @@
   signature:
     classifier: class
     parent: dateexception
+    name: DateMalformedPeriodStringException
     isFinal: false
     handlers:
       - id: Zend/zend_exceptions.c:default_exception_handlers
@@ -973,6 +979,7 @@
   signature:
     classifier: class
     parent: dateexception
+    name: DateMalformedStringException
     isFinal: false
     handlers:
       - id: Zend/zend_exceptions.c:default_exception_handlers
@@ -1024,6 +1031,7 @@
   signature:
     classifier: class
     parent: dateerror
+    name: DateObjectError
     isFinal: false
     handlers:
       - id: Zend/zend_exceptions.c:default_exception_handlers
@@ -1075,6 +1083,7 @@
   signature:
     classifier: class
     parent: dateerror
+    name: DateRangeError
     isFinal: false
     handlers:
       - id: Zend/zend_exceptions.c:default_exception_handlers
@@ -1126,6 +1135,7 @@
   signature:
     classifier: class
     interfaces: [datetimeinterface]
+    name: DateTime
     isFinal: false
     handlers:
       - id: ext/date/php_date.c:date_object_handlers_date
@@ -1177,6 +1187,7 @@
   signature:
     classifier: class
     interfaces: [datetimeinterface]
+    name: DateTimeImmutable
     isFinal: false
     handlers:
       - id: ext/date/php_date.c:date_object_handlers_date
@@ -1227,11 +1238,13 @@
     class: datetimeinterface
   signature:
     classifier: interface
+    name: DateTimeInterface
     isFinal: false
 - subject:
     class: datetimezone
   signature:
     classifier: class
+    name: DateTimeZone
     isFinal: false
     handlers:
       - id: ext/date/php_date.c:date_object_handlers_timezone
@@ -1282,6 +1295,7 @@
     class: dateinterval
   signature:
     classifier: class
+    name: DateInterval
     isFinal: false
     handlers:
       - id: ext/date/php_date.c:date_object_handlers_interval
@@ -1333,6 +1347,7 @@
   signature:
     classifier: class
     interfaces: [iteratoraggregate]
+    name: DatePeriod
     isFinal: false
     handlers:
       - id: ext/date/php_date.c:date_object_handlers_period

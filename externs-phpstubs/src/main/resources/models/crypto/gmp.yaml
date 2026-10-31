@@ -678,6 +678,7 @@
     class: gmp
   signature:
     classifier: class
+    name: GMP
     isFinal: true
     handlers:
       - id: ext/gmp/gmp.c:gmp_object_handlers

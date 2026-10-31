@@ -475,6 +475,7 @@
     class: ftp\connection
   signature:
     classifier: class
+    name: FTP\Connection
     isFinal: true
     handlers:
       - id: ext/ftp/php_ftp.c:ftp_object_handlers

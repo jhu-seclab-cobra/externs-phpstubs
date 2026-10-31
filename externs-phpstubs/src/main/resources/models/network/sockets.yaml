@@ -530,6 +530,7 @@
     class: addressinfo
   signature:
     classifier: class
+    name: AddressInfo
     isFinal: true
     handlers:
       - id: ext/sockets/sockets.c:address_info_object_handlers
@@ -580,6 +581,7 @@
     class: socket
   signature:
     classifier: class
+    name: Socket
     isFinal: true
     handlers:
       - id: ext/sockets/sockets.c:socket_object_handlers

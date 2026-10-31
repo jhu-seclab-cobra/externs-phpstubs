@@ -104,7 +104,7 @@ php-src (release tag)
 
 **Internal Processing Flow**
 1. Hierarchy — every php-src class-like declaration gets its declaration
-   fields and established handler facts; one the set lacks is added.
+   fields (including class name and class aliases) and established handler facts; one the set lacks is added.
 2. Signatures — every php-src function and method gets its declared
    parameters and return type; one the set lacks is added.
 3. Throws — every implemented function and method gets the classes its

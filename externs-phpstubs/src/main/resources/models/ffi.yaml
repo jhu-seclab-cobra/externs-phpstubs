@@ -4,6 +4,7 @@
     class: ffi
   signature:
     classifier: class
+    name: FFI
     isFinal: true
     handlers:
       - id: ext/ffi/ffi.c:zend_ffi_handlers
@@ -54,6 +55,7 @@
     class: ffi\cdata
   signature:
     classifier: class
+    name: FFI\CData
     isFinal: true
     handlers:
       - id: ext/ffi/ffi.c:zend_ffi_cdata_handlers
@@ -265,6 +267,7 @@
     class: ffi\ctype
   signature:
     classifier: class
+    name: FFI\CType
     isFinal: true
     handlers:
       - id: ext/ffi/ffi.c:zend_ffi_ctype_handlers
@@ -316,6 +319,7 @@
   signature:
     classifier: class
     parent: error
+    name: FFI\Exception
     isFinal: false
     handlers:
       - id: Zend/zend_exceptions.c:default_exception_handlers
@@ -367,6 +371,7 @@
   signature:
     classifier: class
     parent: ffi\exception
+    name: FFI\ParserException
     isFinal: true
     handlers:
       - id: Zend/zend_exceptions.c:default_exception_handlers

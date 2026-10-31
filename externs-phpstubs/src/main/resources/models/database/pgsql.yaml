@@ -1362,6 +1362,7 @@
     class: pgsql\connection
   signature:
     classifier: class
+    name: PgSql\Connection
     isFinal: true
     handlers:
       - id: ext/pgsql/pgsql.c:pgsql_link_object_handlers
@@ -1412,6 +1413,7 @@
     class: pgsql\lob
   signature:
     classifier: class
+    name: PgSql\Lob
     isFinal: true
     handlers:
       - id: ext/pgsql/pgsql.c:pgsql_lob_object_handlers
@@ -1462,6 +1464,7 @@
     class: pgsql\result
   signature:
     classifier: class
+    name: PgSql\Result
     isFinal: true
     handlers:
       - id: ext/pgsql/pgsql.c:pgsql_result_object_handlers

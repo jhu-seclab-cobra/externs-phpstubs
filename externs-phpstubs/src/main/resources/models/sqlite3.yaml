@@ -5,6 +5,7 @@
   signature:
     classifier: class
     parent: exception
+    name: SQLite3Exception
     isFinal: false
     handlers:
       - id: Zend/zend_exceptions.c:default_exception_handlers
@@ -55,6 +56,7 @@
     class: sqlite3
   signature:
     classifier: class
+    name: SQLite3
     isFinal: false
     handlers:
       - id: ext/sqlite3/sqlite3.c:sqlite3_object_handlers
@@ -105,6 +107,7 @@
     class: sqlite3stmt
   signature:
     classifier: class
+    name: SQLite3Stmt
     isFinal: false
     handlers:
       - id: ext/sqlite3/sqlite3.c:sqlite3_stmt_object_handlers
@@ -155,6 +158,7 @@
     class: sqlite3result
   signature:
     classifier: class
+    name: SQLite3Result
     isFinal: false
     handlers:
       - id: ext/sqlite3/sqlite3.c:sqlite3_result_object_handlers

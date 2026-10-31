@@ -72,11 +72,12 @@ algorithm is in [Effective Handler Extraction](spec-extraction-handlers.md).
 
 | Input | Yields |
 |-------|--------|
-| `**/*.stub.php` | each class, interface, enum, and trait with its namespace, modifiers, `extends`, and `implements` names, folded |
+| `**/*.stub.php` | each class, interface, enum, and trait with its namespace, modifiers, `extends`, and `implements` names, folded; its name as declared; the `@alias` tags of its doc comments |
 
 - Each generated class entry php-src declares is relocated to its
-  extension, then gets the classifier, parent, interfaces, final-class status
-  and established effective handler facts of its declaration; its other lines
+  extension, then gets the classifier, parent, interfaces, class name, class
+  aliases, final-class status and established effective handler facts of its
+  declaration; its other lines
   stay. Inputs, preservation and failures: [Handler Extraction](design-extraction-handlers.md).
 - An enum's interfaces end with `unitenum`, and with `unitenum`,
   `backedenum` when it declares a backing type: the interfaces the engine
@@ -85,10 +86,16 @@ algorithm is in [Effective Handler Extraction](spec-extraction-handlers.md).
 - Each php-src class-like declaration no models document declares is
   added to `placement` of its extension.
 - A class php-src does not declare (a PECL class) keeps its entry.
+- A class's class aliases come from the `@alias` tags of the doc comments
+  directly before its declaration, read with the line and tag parsing of
+  the stub generator: every attached doc comment is read, each `@alias`
+  tag needs a value even when a later tag has one, and the last `@alias`
+  tag selects the alias. The selected value must be a class spelling; one
+  leading `\` is dropped and the rest is folded.
 - Class signature field definitions:
   [commons-phpmodels declaration types](../../commons-phpmodels/docs/design-declarations.md#signatureinfo-sealed).
-- Conflicting source hierarchies or incompatible declared final modifiers
-  fail. Registered flags establish finality independently of classifier;
+- Conflicting source hierarchies, class names or class aliases, or
+  incompatible declared final modifiers, fail. Registered flags establish finality independently of classifier;
   source-defined enum restrictions are not rewritten as a FINAL flag.
 
 ### extract_signatures.py
@@ -148,6 +155,7 @@ sorted tab-separated line per internal declaration the build reflects.
 | Failure | When |
 |---------|------|
 | Unreadable declaration | A stub header, parameter, or return type no rule reads |
+| Invalid class alias | An `@alias` tag has no value, or the selected value is outside the class-spelling grammar |
 | Conflicting declarations | Two stubs, or two variants, declare one subject and neither subsumes the other |
 | Undeclared class | A method's class or a throws element is declared by no generated document |
 | Unresolved class | A class expression no rule resolves reaches an entry's throws |

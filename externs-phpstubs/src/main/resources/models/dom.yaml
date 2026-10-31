@@ -5,12 +5,14 @@
   signature:
     classifier: enum
     interfaces: [unitenum, backedenum]
+    name: Dom\AdjacentPosition
     isFinal: false
 - subject:
     class: dom\attr
   signature:
     classifier: class
     parent: dom\node
+    name: Dom\Attr
     isFinal: false
     handlers:
       - id: ext/dom/php_dom.c:dom_object_handlers
@@ -62,6 +64,7 @@
   signature:
     classifier: class
     parent: dom\text
+    name: Dom\CDATASection
     isFinal: false
     handlers:
       - id: ext/dom/php_dom.c:dom_object_handlers
@@ -114,6 +117,7 @@
     classifier: class
     parent: dom\node
     interfaces: [dom\childnode]
+    name: Dom\CharacterData
     isFinal: false
     handlers:
       - id: ext/dom/php_dom.c:dom_object_handlers
@@ -164,12 +168,14 @@
     class: dom\childnode
   signature:
     classifier: interface
+    name: Dom\ChildNode
     isFinal: false
 - subject:
     class: dom\comment
   signature:
     classifier: class
     parent: dom\characterdata
+    name: Dom\Comment
     isFinal: false
     handlers:
       - id: ext/dom/php_dom.c:dom_object_handlers
@@ -222,6 +228,7 @@
     classifier: class
     parent: dom\node
     interfaces: [dom\parentnode]
+    name: Dom\Document
     isFinal: false
     handlers:
       - id: ext/dom/php_dom.c:dom_unset_children_property_object_handlers
@@ -274,6 +281,7 @@
     classifier: class
     parent: dom\node
     interfaces: [dom\parentnode]
+    name: Dom\DocumentFragment
     isFinal: false
     handlers:
       - id: ext/dom/php_dom.c:dom_unset_children_property_object_handlers
@@ -326,6 +334,7 @@
     classifier: class
     parent: dom\node
     interfaces: [dom\childnode]
+    name: Dom\DocumentType
     isFinal: false
     handlers:
       - id: ext/dom/php_dom.c:dom_object_handlers
@@ -377,6 +386,7 @@
   signature:
     classifier: class
     interfaces: [iteratoraggregate, countable]
+    name: Dom\DtdNamedNodeMap
     isFinal: false
     handlers:
       - id: ext/dom/php_dom.c:dom_modern_nnodemap_object_handlers
@@ -429,6 +439,7 @@
     classifier: class
     parent: dom\node
     interfaces: [dom\parentnode, dom\childnode]
+    name: Dom\Element
     isFinal: false
     handlers:
       - id: ext/dom/php_dom.c:dom_modern_element_object_handlers
@@ -480,6 +491,7 @@
   signature:
     classifier: class
     parent: dom\node
+    name: Dom\Entity
     isFinal: false
     handlers:
       - id: ext/dom/php_dom.c:dom_object_handlers
@@ -531,6 +543,7 @@
   signature:
     classifier: class
     parent: dom\node
+    name: Dom\EntityReference
     isFinal: false
     handlers:
       - id: ext/dom/php_dom.c:dom_object_handlers
@@ -582,6 +595,7 @@
   signature:
     classifier: class
     interfaces: [iteratoraggregate, countable]
+    name: Dom\HTMLCollection
     isFinal: false
     handlers:
       - id: ext/dom/php_dom.c:dom_html_collection_object_handlers
@@ -633,6 +647,7 @@
   signature:
     classifier: class
     parent: dom\document
+    name: Dom\HTMLDocument
     isFinal: true
     handlers:
       - id: ext/dom/php_dom.c:dom_object_handlers
@@ -684,6 +699,7 @@
   signature:
     classifier: class
     parent: dom\element
+    name: Dom\HTMLElement
     isFinal: false
     handlers:
       - id: ext/dom/php_dom.c:dom_modern_element_object_handlers
@@ -734,6 +750,7 @@
     class: dom\implementation
   signature:
     classifier: class
+    name: Dom\Implementation
     isFinal: false
     handlers:
       - id: ext/dom/php_dom.c:dom_modern_domimplementation_object_handlers
@@ -785,6 +802,7 @@
   signature:
     classifier: class
     interfaces: [iteratoraggregate, countable]
+    name: Dom\NamedNodeMap
     isFinal: false
     handlers:
       - id: ext/dom/php_dom.c:dom_modern_nnodemap_object_handlers
@@ -835,6 +853,7 @@
     class: dom\namespaceinfo
   signature:
     classifier: class
+    name: Dom\NamespaceInfo
     isFinal: true
     handlers:
       - id: Zend/zend_object_handlers.c:std_object_handlers
@@ -885,6 +904,7 @@
     class: dom\node
   signature:
     classifier: class
+    name: Dom\Node
     isFinal: false
     handlers:
       - id: ext/dom/php_dom.c:dom_object_handlers
@@ -936,6 +956,7 @@
   signature:
     classifier: class
     interfaces: [iteratoraggregate, countable]
+    name: Dom\NodeList
     isFinal: false
     handlers:
       - id: ext/dom/php_dom.c:dom_modern_nodelist_object_handlers
@@ -987,6 +1008,7 @@
   signature:
     classifier: class
     parent: dom\node
+    name: Dom\Notation
     isFinal: false
     handlers:
       - id: ext/dom/php_dom.c:dom_object_handlers
@@ -1037,12 +1059,14 @@
     class: dom\parentnode
   signature:
     classifier: interface
+    name: Dom\ParentNode
     isFinal: false
 - subject:
     class: dom\processinginstruction
   signature:
     classifier: class
     parent: dom\characterdata
+    name: Dom\ProcessingInstruction
     isFinal: false
     handlers:
       - id: ext/dom/php_dom.c:dom_object_handlers
@@ -1094,6 +1118,7 @@
   signature:
     classifier: class
     parent: dom\characterdata
+    name: Dom\Text
     isFinal: false
     handlers:
       - id: ext/dom/php_dom.c:dom_object_handlers
@@ -1145,6 +1170,7 @@
   signature:
     classifier: class
     interfaces: [iteratoraggregate, countable]
+    name: Dom\TokenList
     isFinal: true
     handlers:
       - id: ext/dom/php_dom.c:dom_token_list_object_handlers
@@ -1196,6 +1222,7 @@
   signature:
     classifier: class
     parent: dom\document
+    name: Dom\XMLDocument
     isFinal: true
     handlers:
       - id: ext/dom/php_dom.c:dom_object_handlers
@@ -1246,6 +1273,7 @@
     class: dom\xpath
   signature:
     classifier: class
+    name: Dom\XPath
     isFinal: true
     handlers:
       - id: "ext/dom/php_dom.c:dom_xpath_object_handlers #defined(LIBXML_XPATH_ENABLED)"
@@ -1305,6 +1333,7 @@
   signature:
     classifier: class
     parent: domtext
+    name: DOMCdataSection
     isFinal: false
     handlers:
       - id: ext/dom/php_dom.c:dom_object_handlers
@@ -1357,6 +1386,7 @@
     classifier: class
     parent: domnode
     interfaces: [domchildnode]
+    name: DOMCharacterData
     isFinal: false
     handlers:
       - id: ext/dom/php_dom.c:dom_object_handlers
@@ -1407,6 +1437,7 @@
     class: domchildnode
   signature:
     classifier: interface
+    name: DOMChildNode
     isFinal: false
 - subject:
     class: domdocumentfragment
@@ -1414,6 +1445,7 @@
     classifier: class
     parent: domnode
     interfaces: [domparentnode]
+    name: DOMDocumentFragment
     isFinal: false
     handlers:
       - id: ext/dom/php_dom.c:dom_object_handlers
@@ -1465,6 +1497,7 @@
   signature:
     classifier: class
     parent: domnode
+    name: DOMDocumentType
     isFinal: false
     handlers:
       - id: ext/dom/php_dom.c:dom_object_handlers
@@ -1516,6 +1549,7 @@
   signature:
     classifier: class
     parent: domnode
+    name: DOMEntity
     isFinal: false
     handlers:
       - id: ext/dom/php_dom.c:dom_object_handlers
@@ -1567,6 +1601,7 @@
   signature:
     classifier: class
     parent: domnode
+    name: DOMEntityReference
     isFinal: false
     handlers:
       - id: ext/dom/php_dom.c:dom_object_handlers
@@ -1618,6 +1653,8 @@
   signature:
     classifier: class
     parent: exception
+    name: DOMException
+    aliases: [dom\domexception]
     isFinal: true
     handlers:
       - id: Zend/zend_exceptions.c:default_exception_handlers
@@ -1668,6 +1705,7 @@
     class: domimplementation
   signature:
     classifier: class
+    name: DOMImplementation
     isFinal: false
     handlers:
       - id: ext/dom/php_dom.c:dom_object_handlers
@@ -1719,6 +1757,7 @@
   signature:
     classifier: class
     interfaces: [iteratoraggregate, countable]
+    name: DOMNamedNodeMap
     isFinal: false
     handlers:
       - id: ext/dom/php_dom.c:dom_nnodemap_object_handlers
@@ -1769,6 +1808,7 @@
     class: domnamespacenode
   signature:
     classifier: class
+    name: DOMNameSpaceNode
     isFinal: false
     handlers:
       - id: ext/dom/php_dom.c:dom_object_namespace_node_handlers
@@ -1820,6 +1860,7 @@
   signature:
     classifier: class
     parent: domnode
+    name: DOMNotation
     isFinal: false
     handlers:
       - id: ext/dom/php_dom.c:dom_object_handlers
@@ -1870,12 +1911,14 @@
     class: domparentnode
   signature:
     classifier: interface
+    name: DOMParentNode
     isFinal: false
 - subject:
     class: domprocessinginstruction
   signature:
     classifier: class
     parent: domnode
+    name: DOMProcessingInstruction
     isFinal: false
     handlers:
       - id: ext/dom/php_dom.c:dom_object_handlers
@@ -1926,6 +1969,7 @@
     class: domxpath
   signature:
     classifier: class
+    name: DOMXPath
     isFinal: false
     handlers:
       - id: "ext/dom/php_dom.c:dom_xpath_object_handlers #defined(LIBXML_XPATH_ENABLED)"
@@ -3955,6 +3999,7 @@
     class: domnode
   signature:
     classifier: class
+    name: DOMNode
     isFinal: false
     handlers:
       - id: ext/dom/php_dom.c:dom_object_handlers
@@ -4007,6 +4052,7 @@
     classifier: class
     parent: domnode
     interfaces: [domparentnode]
+    name: DOMDocument
     isFinal: false
     handlers:
       - id: ext/dom/php_dom.c:dom_object_handlers
@@ -4059,6 +4105,7 @@
     classifier: class
     parent: domnode
     interfaces: [domparentnode, domchildnode]
+    name: DOMElement
     isFinal: false
     handlers:
       - id: ext/dom/php_dom.c:dom_object_handlers
@@ -4110,6 +4157,7 @@
   signature:
     classifier: class
     interfaces: [iteratoraggregate, countable]
+    name: DOMNodeList
     isFinal: false
     handlers:
       - id: ext/dom/php_dom.c:dom_nodelist_object_handlers
@@ -4161,6 +4209,7 @@
   signature:
     classifier: class
     parent: domnode
+    name: DOMAttr
     isFinal: false
     handlers:
       - id: ext/dom/php_dom.c:dom_object_handlers
@@ -4212,6 +4261,7 @@
   signature:
     classifier: class
     parent: domcharacterdata
+    name: DOMText
     isFinal: false
     handlers:
       - id: ext/dom/php_dom.c:dom_object_handlers
@@ -4263,6 +4313,7 @@
   signature:
     classifier: class
     parent: domcharacterdata
+    name: DOMComment
     isFinal: false
     handlers:
       - id: ext/dom/php_dom.c:dom_object_handlers

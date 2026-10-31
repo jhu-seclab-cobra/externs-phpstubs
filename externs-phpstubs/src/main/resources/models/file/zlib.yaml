@@ -247,6 +247,7 @@
     class: deflatecontext
   signature:
     classifier: class
+    name: DeflateContext
     isFinal: true
     handlers:
       - id: ext/zlib/zlib.c:deflate_context_object_handlers
@@ -297,6 +298,7 @@
     class: inflatecontext
   signature:
     classifier: class
+    name: InflateContext
     isFinal: true
     handlers:
       - id: ext/zlib/zlib.c:inflate_context_object_handlers

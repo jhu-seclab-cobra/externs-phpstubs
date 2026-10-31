@@ -6,6 +6,7 @@
     classifier: class
     parent: recursivedirectoryiterator
     interfaces: [countable, arrayaccess]
+    name: Phar
     isFinal: false
     handlers:
       - id: ext/spl/spl_directory.c:spl_filesystem_object_handlers
@@ -58,6 +59,7 @@
     classifier: class
     parent: recursivedirectoryiterator
     interfaces: [countable, arrayaccess]
+    name: PharData
     isFinal: false
     handlers:
       - id: ext/spl/spl_directory.c:spl_filesystem_object_handlers
@@ -109,6 +111,7 @@
   signature:
     classifier: class
     parent: exception
+    name: PharException
     isFinal: false
     handlers:
       - id: Zend/zend_exceptions.c:default_exception_handlers
@@ -160,6 +163,7 @@
   signature:
     classifier: class
     parent: splfileinfo
+    name: PharFileInfo
     isFinal: false
     handlers:
       - id: ext/spl/spl_directory.c:spl_filesystem_object_handlers

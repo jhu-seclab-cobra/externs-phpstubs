@@ -89,6 +89,7 @@
   signature:
     classifier: class
     parent: simplexmlelement
+    name: SimpleXMLIterator
     isFinal: false
     handlers:
       - id: ext/simplexml/simplexml.c:sxe_object_handlers
@@ -140,6 +141,7 @@
   signature:
     classifier: class
     interfaces: [stringable, countable, recursiveiterator]
+    name: SimpleXMLElement
     isFinal: false
     handlers:
       - id: ext/simplexml/simplexml.c:sxe_object_handlers

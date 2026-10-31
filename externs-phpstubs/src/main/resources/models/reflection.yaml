@@ -5,11 +5,13 @@
   signature:
     classifier: enum
     interfaces: [unitenum, backedenum]
+    name: PropertyHookType
     isFinal: false
 - subject:
     class: reflection
   signature:
     classifier: class
+    name: Reflection
     isFinal: false
     handlers:
       - id: Zend/zend_object_handlers.c:std_object_handlers
@@ -61,6 +63,7 @@
   signature:
     classifier: class
     interfaces: [reflector]
+    name: ReflectionAttribute
     isFinal: false
     handlers:
       - id: ext/reflection/php_reflection.c:reflection_object_handlers
@@ -112,6 +115,7 @@
   signature:
     classifier: class
     interfaces: [reflector]
+    name: ReflectionClassConstant
     isFinal: false
     handlers:
       - id: ext/reflection/php_reflection.c:reflection_object_handlers
@@ -163,6 +167,7 @@
   signature:
     classifier: class
     interfaces: [reflector]
+    name: ReflectionConstant
     isFinal: false
     handlers:
       - id: ext/reflection/php_reflection.c:reflection_object_handlers
@@ -214,6 +219,7 @@
   signature:
     classifier: class
     parent: reflectionclass
+    name: ReflectionEnum
     isFinal: false
     handlers:
       - id: ext/reflection/php_reflection.c:reflection_object_handlers
@@ -265,6 +271,7 @@
   signature:
     classifier: class
     parent: reflectionenumunitcase
+    name: ReflectionEnumBackedCase
     isFinal: false
     handlers:
       - id: ext/reflection/php_reflection.c:reflection_object_handlers
@@ -316,6 +323,7 @@
   signature:
     classifier: class
     parent: reflectionclassconstant
+    name: ReflectionEnumUnitCase
     isFinal: false
     handlers:
       - id: ext/reflection/php_reflection.c:reflection_object_handlers
@@ -367,6 +375,7 @@
   signature:
     classifier: class
     parent: exception
+    name: ReflectionException
     isFinal: false
     handlers:
       - id: Zend/zend_exceptions.c:default_exception_handlers
@@ -418,6 +427,7 @@
   signature:
     classifier: class
     interfaces: [reflector]
+    name: ReflectionExtension
     isFinal: false
     handlers:
       - id: ext/reflection/php_reflection.c:reflection_object_handlers
@@ -468,6 +478,7 @@
     class: reflectionfiber
   signature:
     classifier: class
+    name: ReflectionFiber
     isFinal: true
     handlers:
       - id: ext/reflection/php_reflection.c:reflection_object_handlers
@@ -519,6 +530,7 @@
   signature:
     classifier: class
     interfaces: [reflector]
+    name: ReflectionFunctionAbstract
     isFinal: false
     handlers:
       - id: ext/reflection/php_reflection.c:reflection_object_handlers
@@ -569,6 +581,7 @@
     class: reflectiongenerator
   signature:
     classifier: class
+    name: ReflectionGenerator
     isFinal: true
     handlers:
       - id: ext/reflection/php_reflection.c:reflection_object_handlers
@@ -620,6 +633,7 @@
   signature:
     classifier: class
     parent: reflectionclass
+    name: ReflectionObject
     isFinal: false
     handlers:
       - id: ext/reflection/php_reflection.c:reflection_object_handlers
@@ -670,6 +684,7 @@
     class: reflectionreference
   signature:
     classifier: class
+    name: ReflectionReference
     isFinal: true
     handlers:
       - id: ext/reflection/php_reflection.c:reflection_object_handlers
@@ -721,6 +736,7 @@
   signature:
     classifier: class
     interfaces: [reflector]
+    name: ReflectionZendExtension
     isFinal: false
     handlers:
       - id: ext/reflection/php_reflection.c:reflection_object_handlers
@@ -772,6 +788,7 @@
   signature:
     classifier: interface
     interfaces: [stringable]
+    name: Reflector
     isFinal: false
 - subject:
     method: Reflection::getModifierNames
@@ -1468,6 +1485,7 @@
   signature:
     classifier: class
     interfaces: [reflector]
+    name: ReflectionClass
     isFinal: false
     handlers:
       - id: ext/reflection/php_reflection.c:reflection_object_handlers
@@ -1519,6 +1537,7 @@
   signature:
     classifier: class
     parent: reflectionfunctionabstract
+    name: ReflectionMethod
     isFinal: false
     handlers:
       - id: ext/reflection/php_reflection.c:reflection_object_handlers
@@ -1570,6 +1589,7 @@
   signature:
     classifier: class
     parent: reflectionfunctionabstract
+    name: ReflectionFunction
     isFinal: false
     handlers:
       - id: ext/reflection/php_reflection.c:reflection_object_handlers
@@ -1621,6 +1641,7 @@
   signature:
     classifier: class
     interfaces: [reflector]
+    name: ReflectionProperty
     isFinal: false
     handlers:
       - id: ext/reflection/php_reflection.c:reflection_object_handlers
@@ -1672,6 +1693,7 @@
   signature:
     classifier: class
     interfaces: [reflector]
+    name: ReflectionParameter
     isFinal: false
     handlers:
       - id: ext/reflection/php_reflection.c:reflection_object_handlers
@@ -1723,6 +1745,7 @@
   signature:
     classifier: class
     interfaces: [stringable]
+    name: ReflectionType
     isFinal: false
     handlers:
       - id: ext/reflection/php_reflection.c:reflection_object_handlers
@@ -1774,6 +1797,7 @@
   signature:
     classifier: class
     parent: reflectiontype
+    name: ReflectionNamedType
     isFinal: false
     handlers:
       - id: ext/reflection/php_reflection.c:reflection_object_handlers
@@ -1825,6 +1849,7 @@
   signature:
     classifier: class
     parent: reflectiontype
+    name: ReflectionUnionType
     isFinal: false
     handlers:
       - id: ext/reflection/php_reflection.c:reflection_object_handlers
@@ -1876,6 +1901,7 @@
   signature:
     classifier: class
     parent: reflectiontype
+    name: ReflectionIntersectionType
     isFinal: false
     handlers:
       - id: ext/reflection/php_reflection.c:reflection_object_handlers

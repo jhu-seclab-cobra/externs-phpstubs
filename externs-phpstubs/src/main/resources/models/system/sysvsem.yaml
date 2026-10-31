@@ -61,6 +61,7 @@
     class: sysvsemaphore
   signature:
     classifier: class
+    name: SysvSemaphore
     isFinal: true
     handlers:
       - id: ext/sysvsem/sysvsem.c:sysvsem_object_handlers

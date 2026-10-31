@@ -5,6 +5,7 @@
   signature:
     classifier: class
     parent: uri\uriexception
+    name: Uri\InvalidUriException
     isFinal: false
     handlers:
       - id: Zend/zend_exceptions.c:default_exception_handlers
@@ -55,6 +56,7 @@
     class: uri\rfc3986\uri
   signature:
     classifier: class
+    name: Uri\Rfc3986\Uri
     isFinal: true
     handlers:
       - id: ext/uri/php_uri.c:object_handlers_rfc3986_uri
@@ -106,12 +108,14 @@
   signature:
     classifier: enum
     interfaces: [unitenum]
+    name: Uri\UriComparisonMode
     isFinal: false
 - subject:
     class: uri\urierror
   signature:
     classifier: class
     parent: error
+    name: Uri\UriError
     isFinal: false
     handlers:
       - id: Zend/zend_exceptions.c:default_exception_handlers
@@ -163,6 +167,7 @@
   signature:
     classifier: class
     parent: exception
+    name: Uri\UriException
     isFinal: false
     handlers:
       - id: Zend/zend_exceptions.c:default_exception_handlers
@@ -214,6 +219,7 @@
   signature:
     classifier: class
     parent: uri\invaliduriexception
+    name: Uri\WhatWg\InvalidUrlException
     isFinal: false
     handlers:
       - id: Zend/zend_exceptions.c:default_exception_handlers
@@ -264,6 +270,7 @@
     class: uri\whatwg\url
   signature:
     classifier: class
+    name: Uri\WhatWg\Url
     isFinal: true
     handlers:
       - id: ext/uri/php_uri.c:object_handlers_whatwg_uri
@@ -314,6 +321,7 @@
     class: uri\whatwg\urlvalidationerror
   signature:
     classifier: class
+    name: Uri\WhatWg\UrlValidationError
     isFinal: true
     handlers:
       - id: Zend/zend_object_handlers.c:std_object_handlers
@@ -365,6 +373,7 @@
   signature:
     classifier: enum
     interfaces: [unitenum]
+    name: Uri\WhatWg\UrlValidationErrorType
     isFinal: false
 - subject:
     method: Uri\Rfc3986\Uri::__construct

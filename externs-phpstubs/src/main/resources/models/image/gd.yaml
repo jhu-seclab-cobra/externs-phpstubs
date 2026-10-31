@@ -1550,6 +1550,7 @@
     class: gdfont
   signature:
     classifier: class
+    name: GdFont
     isFinal: true
     handlers:
       - id: ext/gd/gd.c:php_gd_font_object_handlers
@@ -1628,6 +1629,7 @@
     class: gdimage
   signature:
     classifier: class
+    name: GdImage
     isFinal: true
     handlers:
       - id: ext/gd/gd.c:php_gd_image_object_handlers

@@ -114,6 +114,7 @@
     class: sysvmessagequeue
   signature:
     classifier: class
+    name: SysvMessageQueue
     isFinal: true
     handlers:
       - id: ext/sysvmsg/sysvmsg.c:sysvmsg_queue_object_handlers

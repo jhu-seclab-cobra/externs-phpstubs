@@ -1000,6 +1000,7 @@
     class: ldap\connection
   signature:
     classifier: class
+    name: LDAP\Connection
     isFinal: true
     handlers:
       - id: ext/ldap/ldap.c:ldap_link_object_handlers
@@ -1050,6 +1051,7 @@
     class: ldap\result
   signature:
     classifier: class
+    name: LDAP\Result
     isFinal: true
     handlers:
       - id: ext/ldap/ldap.c:ldap_result_object_handlers
@@ -1100,6 +1102,7 @@
     class: ldap\resultentry
   signature:
     classifier: class
+    name: LDAP\ResultEntry
     isFinal: true
     handlers:
       - id: ext/ldap/ldap.c:ldap_result_entry_object_handlers

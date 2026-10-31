@@ -90,6 +90,7 @@
   signature:
     classifier: class
     parent: iteratoriterator
+    name: AppendIterator
     isFinal: false
     handlers:
       - id: ext/spl/spl_iterators.c:spl_handlers_dual_it
@@ -142,6 +143,7 @@
     classifier: class
     parent: iteratoriterator
     interfaces: [arrayaccess, countable, stringable]
+    name: CachingIterator
     isFinal: false
     handlers:
       - id: ext/spl/spl_iterators.c:spl_handlers_dual_it
@@ -193,6 +195,7 @@
   signature:
     classifier: class
     parent: filteriterator
+    name: CallbackFilterIterator
     isFinal: false
     handlers:
       - id: ext/spl/spl_iterators.c:spl_handlers_dual_it
@@ -244,6 +247,7 @@
   signature:
     classifier: class
     interfaces: [iterator]
+    name: EmptyIterator
     isFinal: false
     handlers:
       - id: Zend/zend_object_handlers.c:std_object_handlers
@@ -295,6 +299,7 @@
   signature:
     classifier: class
     parent: directoryiterator
+    name: FilesystemIterator
     isFinal: false
     handlers:
       - id: ext/spl/spl_directory.c:spl_filesystem_object_handlers
@@ -346,6 +351,7 @@
   signature:
     classifier: class
     parent: iteratoriterator
+    name: FilterIterator
     isFinal: false
     handlers:
       - id: ext/spl/spl_iterators.c:spl_handlers_dual_it
@@ -398,6 +404,7 @@
     classifier: class
     parent: filesystemiterator
     interfaces: [countable]
+    name: GlobIterator
     isFinal: false
     handlers:
       - id: ext/spl/spl_directory.c:spl_filesystem_object_check_handlers
@@ -449,6 +456,7 @@
   signature:
     classifier: class
     parent: iteratoriterator
+    name: InfiniteIterator
     isFinal: false
     handlers:
       - id: ext/spl/spl_iterators.c:spl_handlers_dual_it
@@ -500,6 +508,7 @@
   signature:
     classifier: class
     interfaces: [outeriterator]
+    name: IteratorIterator
     isFinal: false
     handlers:
       - id: ext/spl/spl_iterators.c:spl_handlers_dual_it
@@ -551,6 +560,7 @@
   signature:
     classifier: class
     parent: iteratoriterator
+    name: LimitIterator
     isFinal: false
     handlers:
       - id: ext/spl/spl_iterators.c:spl_handlers_dual_it
@@ -602,6 +612,7 @@
   signature:
     classifier: class
     interfaces: [iterator]
+    name: MultipleIterator
     isFinal: false
     handlers:
       - id: ext/spl/spl_observer.c:spl_handler_MultipleIterator
@@ -653,6 +664,7 @@
   signature:
     classifier: class
     parent: iteratoriterator
+    name: NoRewindIterator
     isFinal: false
     handlers:
       - id: ext/spl/spl_iterators.c:spl_handlers_dual_it
@@ -704,12 +716,14 @@
   signature:
     classifier: interface
     interfaces: [iterator]
+    name: OuterIterator
     isFinal: false
 - subject:
     class: parentiterator
   signature:
     classifier: class
     parent: recursivefilteriterator
+    name: ParentIterator
     isFinal: false
     handlers:
       - id: ext/spl/spl_iterators.c:spl_handlers_dual_it
@@ -762,6 +776,7 @@
     classifier: class
     parent: arrayiterator
     interfaces: [recursiveiterator]
+    name: RecursiveArrayIterator
     isFinal: false
     handlers:
       - id: ext/spl/spl_array.c:spl_handler_ArrayObject
@@ -814,6 +829,7 @@
     classifier: class
     parent: cachingiterator
     interfaces: [recursiveiterator]
+    name: RecursiveCachingIterator
     isFinal: false
     handlers:
       - id: ext/spl/spl_iterators.c:spl_handlers_dual_it
@@ -866,6 +882,7 @@
     classifier: class
     parent: callbackfilteriterator
     interfaces: [recursiveiterator]
+    name: RecursiveCallbackFilterIterator
     isFinal: false
     handlers:
       - id: ext/spl/spl_iterators.c:spl_handlers_dual_it
@@ -918,6 +935,7 @@
     classifier: class
     parent: filteriterator
     interfaces: [recursiveiterator]
+    name: RecursiveFilterIterator
     isFinal: false
     handlers:
       - id: ext/spl/spl_iterators.c:spl_handlers_dual_it
@@ -969,12 +987,14 @@
   signature:
     classifier: interface
     interfaces: [iterator]
+    name: RecursiveIterator
     isFinal: false
 - subject:
     class: recursiveiteratoriterator
   signature:
     classifier: class
     interfaces: [outeriterator]
+    name: RecursiveIteratorIterator
     isFinal: false
     handlers:
       - id: ext/spl/spl_iterators.c:spl_handlers_rec_it_it
@@ -1027,6 +1047,7 @@
     classifier: class
     parent: regexiterator
     interfaces: [recursiveiterator]
+    name: RecursiveRegexIterator
     isFinal: false
     handlers:
       - id: ext/spl/spl_iterators.c:spl_handlers_dual_it
@@ -1078,6 +1099,7 @@
   signature:
     classifier: class
     parent: recursiveiteratoriterator
+    name: RecursiveTreeIterator
     isFinal: false
     handlers:
       - id: ext/spl/spl_iterators.c:spl_handlers_rec_it_it
@@ -1129,6 +1151,7 @@
   signature:
     classifier: class
     parent: filteriterator
+    name: RegexIterator
     isFinal: false
     handlers:
       - id: ext/spl/spl_iterators.c:spl_handlers_dual_it
@@ -1180,12 +1203,14 @@
   signature:
     classifier: interface
     interfaces: [iterator]
+    name: SeekableIterator
     isFinal: false
 - subject:
     class: spldoublylinkedlist
   signature:
     classifier: class
     interfaces: [iterator, countable, arrayaccess, serializable]
+    name: SplDoublyLinkedList
     isFinal: false
     handlers:
       - id: ext/spl/spl_dllist.c:spl_handler_SplDoublyLinkedList
@@ -1237,6 +1262,7 @@
   signature:
     classifier: class
     parent: splheap
+    name: SplMaxHeap
     isFinal: false
     handlers:
       - id: ext/spl/spl_heap.c:spl_handler_SplHeap
@@ -1288,6 +1314,7 @@
   signature:
     classifier: class
     parent: splheap
+    name: SplMinHeap
     isFinal: false
     handlers:
       - id: ext/spl/spl_heap.c:spl_handler_SplHeap
@@ -1338,17 +1365,20 @@
     class: splobserver
   signature:
     classifier: interface
+    name: SplObserver
     isFinal: false
 - subject:
     class: splsubject
   signature:
     classifier: interface
+    name: SplSubject
     isFinal: false
 - subject:
     class: spltempfileobject
   signature:
     classifier: class
     parent: splfileobject
+    name: SplTempFileObject
     isFinal: false
     handlers:
       - id: ext/spl/spl_directory.c:spl_filesystem_object_check_handlers
@@ -2465,6 +2495,7 @@
   signature:
     classifier: class
     parent: exception
+    name: RuntimeException
     isFinal: false
     handlers:
       - id: Zend/zend_exceptions.c:default_exception_handlers
@@ -2516,6 +2547,7 @@
   signature:
     classifier: class
     parent: exception
+    name: LogicException
     isFinal: false
     handlers:
       - id: Zend/zend_exceptions.c:default_exception_handlers
@@ -2567,6 +2599,7 @@
   signature:
     classifier: class
     parent: logicexception
+    name: InvalidArgumentException
     isFinal: false
     handlers:
       - id: Zend/zend_exceptions.c:default_exception_handlers
@@ -2618,6 +2651,7 @@
   signature:
     classifier: class
     parent: logicexception
+    name: OutOfRangeException
     isFinal: false
     handlers:
       - id: Zend/zend_exceptions.c:default_exception_handlers
@@ -2669,6 +2703,7 @@
   signature:
     classifier: class
     parent: runtimeexception
+    name: OutOfBoundsException
     isFinal: false
     handlers:
       - id: Zend/zend_exceptions.c:default_exception_handlers
@@ -2720,6 +2755,7 @@
   signature:
     classifier: class
     parent: runtimeexception
+    name: OverflowException
     isFinal: false
     handlers:
       - id: Zend/zend_exceptions.c:default_exception_handlers
@@ -2771,6 +2807,7 @@
   signature:
     classifier: class
     parent: runtimeexception
+    name: UnderflowException
     isFinal: false
     handlers:
       - id: Zend/zend_exceptions.c:default_exception_handlers
@@ -2822,6 +2859,7 @@
   signature:
     classifier: class
     parent: runtimeexception
+    name: UnexpectedValueException
     isFinal: false
     handlers:
       - id: Zend/zend_exceptions.c:default_exception_handlers
@@ -2873,6 +2911,7 @@
   signature:
     classifier: class
     parent: badfunctioncallexception
+    name: BadMethodCallException
     isFinal: false
     handlers:
       - id: Zend/zend_exceptions.c:default_exception_handlers
@@ -2924,6 +2963,7 @@
   signature:
     classifier: class
     parent: logicexception
+    name: BadFunctionCallException
     isFinal: false
     handlers:
       - id: Zend/zend_exceptions.c:default_exception_handlers
@@ -2975,6 +3015,7 @@
   signature:
     classifier: class
     parent: logicexception
+    name: DomainException
     isFinal: false
     handlers:
       - id: Zend/zend_exceptions.c:default_exception_handlers
@@ -3026,6 +3067,7 @@
   signature:
     classifier: class
     parent: logicexception
+    name: LengthException
     isFinal: false
     handlers:
       - id: Zend/zend_exceptions.c:default_exception_handlers
@@ -3077,6 +3119,7 @@
   signature:
     classifier: class
     parent: runtimeexception
+    name: RangeException
     isFinal: false
     handlers:
       - id: Zend/zend_exceptions.c:default_exception_handlers
@@ -3128,6 +3171,7 @@
   signature:
     classifier: class
     interfaces: [iteratoraggregate, arrayaccess, serializable, countable]
+    name: ArrayObject
     isFinal: false
     handlers:
       - id: ext/spl/spl_array.c:spl_handler_ArrayObject
@@ -3179,6 +3223,7 @@
   signature:
     classifier: class
     interfaces: [seekableiterator, arrayaccess, serializable, countable]
+    name: ArrayIterator
     isFinal: false
     handlers:
       - id: ext/spl/spl_array.c:spl_handler_ArrayObject
@@ -3230,6 +3275,7 @@
   signature:
     classifier: class
     interfaces: [stringable]
+    name: SplFileInfo
     isFinal: false
     handlers:
       - id: ext/spl/spl_directory.c:spl_filesystem_object_handlers
@@ -3282,6 +3328,7 @@
     classifier: class
     parent: splfileinfo
     interfaces: [recursiveiterator, seekableiterator]
+    name: SplFileObject
     isFinal: false
     handlers:
       - id: ext/spl/spl_directory.c:spl_filesystem_object_check_handlers
@@ -3333,6 +3380,7 @@
   signature:
     classifier: class
     interfaces: [iteratoraggregate, arrayaccess, countable, jsonserializable]
+    name: SplFixedArray
     isFinal: false
     handlers:
       - id: ext/spl/spl_fixedarray.c:spl_handler_SplFixedArray
@@ -3384,6 +3432,7 @@
   signature:
     classifier: class
     parent: spldoublylinkedlist
+    name: SplStack
     isFinal: false
     handlers:
       - id: ext/spl/spl_dllist.c:spl_handler_SplDoublyLinkedList
@@ -3435,6 +3484,7 @@
   signature:
     classifier: class
     parent: spldoublylinkedlist
+    name: SplQueue
     isFinal: false
     handlers:
       - id: ext/spl/spl_dllist.c:spl_handler_SplDoublyLinkedList
@@ -3486,6 +3536,7 @@
   signature:
     classifier: class
     interfaces: [iterator, countable]
+    name: SplHeap
     isFinal: false
     handlers:
       - id: ext/spl/spl_heap.c:spl_handler_SplHeap
@@ -3537,6 +3588,7 @@
   signature:
     classifier: class
     interfaces: [iterator, countable]
+    name: SplPriorityQueue
     isFinal: false
     handlers:
       - id: ext/spl/spl_heap.c:spl_handler_SplPriorityQueue
@@ -3588,6 +3640,7 @@
   signature:
     classifier: class
     interfaces: [countable, seekableiterator, serializable, arrayaccess]
+    name: SplObjectStorage
     isFinal: false
     handlers:
       - id: ext/spl/spl_observer.c:spl_handler_SplObjectStorage
@@ -3640,6 +3693,7 @@
     classifier: class
     parent: splfileinfo
     interfaces: [seekableiterator]
+    name: DirectoryIterator
     isFinal: false
     handlers:
       - id: ext/spl/spl_directory.c:spl_filesystem_object_handlers
@@ -3692,6 +3746,7 @@
     classifier: class
     parent: filesystemiterator
     interfaces: [recursiveiterator]
+    name: RecursiveDirectoryIterator
     isFinal: false
     handlers:
       - id: ext/spl/spl_directory.c:spl_filesystem_object_handlers

@@ -193,6 +193,7 @@
     class: dba\connection
   signature:
     classifier: class
+    name: Dba\Connection
     isFinal: true
     handlers:
       - id: ext/dba/dba.c:dba_connection_object_handlers

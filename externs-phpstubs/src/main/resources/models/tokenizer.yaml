@@ -5,6 +5,7 @@
   signature:
     classifier: class
     interfaces: [stringable]
+    name: PhpToken
     isFinal: false
     handlers:
       - id: Zend/zend_object_handlers.c:std_object_handlers

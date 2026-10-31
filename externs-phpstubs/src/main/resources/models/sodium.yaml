@@ -5,6 +5,7 @@
   signature:
     classifier: class
     parent: exception
+    name: SodiumException
     isFinal: false
     handlers:
       - id: Zend/zend_exceptions.c:default_exception_handlers

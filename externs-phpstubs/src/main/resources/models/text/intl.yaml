@@ -31,6 +31,7 @@
   signature:
     classifier: class
     interfaces: [iteratoraggregate]
+    name: IntlBreakIterator
     isFinal: false
     handlers:
       - id: ext/intl/breakiterator/breakiterator_class.cpp:BreakIterator_handlers
@@ -81,6 +82,7 @@
     class: intlchar
   signature:
     classifier: class
+    name: IntlChar
     isFinal: false
     handlers:
       - id: Zend/zend_object_handlers.c:std_object_handlers
@@ -132,6 +134,7 @@
   signature:
     classifier: class
     parent: intlbreakiterator
+    name: IntlCodePointBreakIterator
     isFinal: false
     handlers:
       - id: ext/intl/breakiterator/breakiterator_class.cpp:BreakIterator_handlers
@@ -182,6 +185,7 @@
     class: intldatepatterngenerator
   signature:
     classifier: class
+    name: IntlDatePatternGenerator
     isFinal: false
     handlers:
       - id: ext/intl/dateformat/datepatterngenerator_class.cpp:IntlDatePatternGenerator_handlers
@@ -233,6 +237,7 @@
   signature:
     classifier: class
     parent: exception
+    name: IntlException
     isFinal: false
     handlers:
       - id: Zend/zend_exceptions.c:default_exception_handlers
@@ -284,6 +289,7 @@
   signature:
     classifier: class
     parent: intlcalendar
+    name: IntlGregorianCalendar
     isFinal: false
     handlers:
       - id: ext/intl/calendar/calendar_class.cpp:Calendar_handlers
@@ -335,6 +341,7 @@
   signature:
     classifier: class
     interfaces: [iterator]
+    name: IntlIterator
     isFinal: false
     handlers:
       - id: ext/intl/common/common_enum.cpp:IntlIterator_handlers
@@ -385,6 +392,7 @@
     class: intllistformatter
   signature:
     classifier: class
+    name: IntlListFormatter
     isFinal: true
     handlers:
       - id: ext/intl/listformatter/listformatter_class.c:listformatter_handlers
@@ -436,6 +444,7 @@
   signature:
     classifier: class
     parent: intliterator
+    name: IntlPartsIterator
     isFinal: false
     handlers:
       - id: ext/intl/common/common_enum.cpp:IntlIterator_handlers
@@ -487,6 +496,7 @@
   signature:
     classifier: class
     parent: intlbreakiterator
+    name: IntlRuleBasedBreakIterator
     isFinal: false
     handlers:
       - id: ext/intl/breakiterator/breakiterator_class.cpp:BreakIterator_handlers
@@ -537,6 +547,7 @@
     class: uconverter
   signature:
     classifier: class
+    name: UConverter
     isFinal: false
     handlers:
       - id: ext/intl/converter/converter.c:php_converter_object_handlers
@@ -1689,6 +1700,7 @@
     class: intldateformatter
   signature:
     classifier: class
+    name: IntlDateFormatter
     isFinal: false
     handlers:
       - id: ext/intl/dateformat/dateformat_class.c:IntlDateFormatter_handlers
@@ -1739,6 +1751,7 @@
     class: numberformatter
   signature:
     classifier: class
+    name: NumberFormatter
     isFinal: false
     handlers:
       - id: ext/intl/formatter/formatter_class.c:NumberFormatter_handlers
@@ -1789,6 +1802,7 @@
     class: collator
   signature:
     classifier: class
+    name: Collator
     isFinal: false
     handlers:
       - id: ext/intl/collator/collator_class.c:Collator_handlers
@@ -1839,6 +1853,7 @@
     class: messageformatter
   signature:
     classifier: class
+    name: MessageFormatter
     isFinal: false
     handlers:
       - id: ext/intl/msgformat/msgformat_class.cpp:MessageFormatter_handlers
@@ -1889,6 +1904,7 @@
     class: locale
   signature:
     classifier: class
+    name: Locale
     isFinal: false
     handlers:
       - id: Zend/zend_object_handlers.c:std_object_handlers
@@ -1939,6 +1955,7 @@
     class: normalizer
   signature:
     classifier: class
+    name: Normalizer
     isFinal: false
     handlers:
       - id: Zend/zend_object_handlers.c:std_object_handlers
@@ -1990,6 +2007,7 @@
   signature:
     classifier: class
     interfaces: [iteratoraggregate, countable]
+    name: ResourceBundle
     isFinal: false
     handlers:
       - id: ext/intl/resourcebundle/resourcebundle_class.c:ResourceBundle_object_handlers
@@ -2040,6 +2058,7 @@
     class: transliterator
   signature:
     classifier: class
+    name: Transliterator
     isFinal: false
     handlers:
       - id: ext/intl/transliterator/transliterator_class.c:Transliterator_handlers
@@ -2090,6 +2109,7 @@
     class: spoofchecker
   signature:
     classifier: class
+    name: Spoofchecker
     isFinal: false
     handlers:
       - id: ext/intl/spoofchecker/spoofchecker_class.c:Spoofchecker_handlers
@@ -2140,6 +2160,7 @@
     class: intlcalendar
   signature:
     classifier: class
+    name: IntlCalendar
     isFinal: false
     handlers:
       - id: ext/intl/calendar/calendar_class.cpp:Calendar_handlers
@@ -2190,6 +2211,7 @@
     class: intltimezone
   signature:
     classifier: class
+    name: IntlTimeZone
     isFinal: false
     handlers:
       - id: ext/intl/timezone/timezone_class.cpp:TimeZone_handlers

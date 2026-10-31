@@ -98,6 +98,7 @@
   signature:
     classifier: class
     interfaces: [countable]
+    name: ZipArchive
     isFinal: false
     handlers:
       - id: ext/zip/php_zip.c:zip_object_handlers

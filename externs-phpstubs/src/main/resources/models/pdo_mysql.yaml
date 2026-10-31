@@ -5,6 +5,7 @@
   signature:
     classifier: class
     parent: pdo
+    name: Pdo\Mysql
     isFinal: false
     handlers:
       - id: ext/pdo/pdo_dbh.c:pdo_dbh_object_handlers

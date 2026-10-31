@@ -4,6 +4,7 @@
     class: snmp
   signature:
     classifier: class
+    name: SNMP
     isFinal: false
     handlers:
       - id: ext/snmp/snmp.c:php_snmp_object_handlers
@@ -55,6 +56,7 @@
   signature:
     classifier: class
     parent: runtimeexception
+    name: SNMPException
     isFinal: false
     handlers:
       - id: Zend/zend_exceptions.c:default_exception_handlers

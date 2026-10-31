@@ -295,6 +295,7 @@
   signature:
     classifier: class
     interfaces: [sessionhandlerinterface, sessionidinterface]
+    name: SessionHandler
     isFinal: false
     handlers:
       - id: Zend/zend_object_handlers.c:std_object_handlers
@@ -345,16 +346,19 @@
     class: sessionhandlerinterface
   signature:
     classifier: interface
+    name: SessionHandlerInterface
     isFinal: false
 - subject:
     class: sessionidinterface
   signature:
     classifier: interface
+    name: SessionIdInterface
     isFinal: false
 - subject:
     class: sessionupdatetimestamphandlerinterface
   signature:
     classifier: interface
+    name: SessionUpdateTimestampHandlerInterface
     isFinal: false
 - subject:
     method: SessionHandler::close

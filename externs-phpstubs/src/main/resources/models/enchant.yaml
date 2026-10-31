@@ -4,6 +4,7 @@
     class: enchantbroker
   signature:
     classifier: class
+    name: EnchantBroker
     isFinal: true
     handlers:
       - id: ext/enchant/enchant.c:enchant_broker_handlers
@@ -54,6 +55,7 @@
     class: enchantdictionary
   signature:
     classifier: class
+    name: EnchantDictionary
     isFinal: true
     handlers:
       - id: ext/enchant/enchant.c:enchant_dict_handlers

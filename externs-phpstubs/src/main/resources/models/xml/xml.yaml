@@ -240,6 +240,7 @@
     class: xmlparser
   signature:
     classifier: class
+    name: XMLParser
     isFinal: true
     handlers:
       - id: ext/xml/xml.c:xml_parser_object_handlers

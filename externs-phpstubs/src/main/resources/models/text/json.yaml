@@ -57,6 +57,7 @@
   signature:
     classifier: class
     parent: exception
+    name: JsonException
     isFinal: false
     handlers:
       - id: Zend/zend_exceptions.c:default_exception_handlers
@@ -123,6 +124,7 @@
     class: jsonserializable
   signature:
     classifier: interface
+    name: JsonSerializable
     isFinal: false
 - subject:
     method: JsonSerializable::jsonSerialize

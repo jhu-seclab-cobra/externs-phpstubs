@@ -4,6 +4,7 @@
     class: pdorow
   signature:
     classifier: class
+    name: PDORow
     isFinal: true
     handlers:
       - id: ext/pdo/pdo_stmt.c:pdo_row_object_handlers
@@ -54,6 +55,7 @@
     class: pdo
   signature:
     classifier: class
+    name: PDO
     isFinal: false
     handlers:
       - id: ext/pdo/pdo_dbh.c:pdo_dbh_object_handlers
@@ -105,6 +107,7 @@
   signature:
     classifier: class
     interfaces: [iteratoraggregate]
+    name: PDOStatement
     isFinal: false
     handlers:
       - id: ext/pdo/pdo_stmt.c:pdo_dbstmt_object_handlers
@@ -156,6 +159,7 @@
   signature:
     classifier: class
     parent: runtimeexception
+    name: PDOException
     isFinal: false
     handlers:
       - id: Zend/zend_exceptions.c:default_exception_handlers

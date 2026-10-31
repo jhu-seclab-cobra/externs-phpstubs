@@ -55,6 +55,7 @@
     class: libxmlerror
   signature:
     classifier: class
+    name: LibXMLError
     isFinal: false
     handlers:
       - id: Zend/zend_object_handlers.c:std_object_handlers

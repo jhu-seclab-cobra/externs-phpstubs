@@ -485,6 +485,7 @@
     class: xmlwriter
   signature:
     classifier: class
+    name: XMLWriter
     isFinal: false
     handlers:
       - id: ext/xmlwriter/php_xmlwriter.c:xmlwriter_object_handlers

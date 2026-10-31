@@ -724,6 +724,7 @@
     class: odbc\connection
   signature:
     classifier: class
+    name: Odbc\Connection
     isFinal: false
     handlers:
       - id: ext/odbc/php_odbc.c:odbc_connection_object_handlers
@@ -774,6 +775,7 @@
     class: odbc\result
   signature:
     classifier: class
+    name: Odbc\Result
     isFinal: false
     handlers:
       - id: ext/odbc/php_odbc.c:odbc_result_object_handlers

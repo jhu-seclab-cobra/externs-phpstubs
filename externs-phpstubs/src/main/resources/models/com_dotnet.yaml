@@ -5,6 +5,7 @@
   signature:
     classifier: class
     parent: variant
+    name: com
     isFinal: false
     handlers:
       - id: ext/com_dotnet/com_handlers.c:php_com_object_handlers
@@ -56,6 +57,7 @@
   signature:
     classifier: class
     parent: exception
+    name: com_exception
     isFinal: true
     handlers:
       - id: Zend/zend_exceptions.c:default_exception_handlers
@@ -106,6 +108,7 @@
     class: com_safearray_proxy
   signature:
     classifier: class
+    name: com_safearray_proxy
     isFinal: true
     handlers:
       - id: ext/com_dotnet/com_saproxy.c:php_com_saproxy_handlers
@@ -156,6 +159,7 @@
     class: compersisthelper
   signature:
     classifier: class
+    name: COMPersistHelper
     isFinal: true
     handlers:
       - id: ext/com_dotnet/com_persist.c:helper_handlers
@@ -207,6 +211,7 @@
   signature:
     classifier: class
     parent: variant
+    name: dotnet
     isFinal: false
     handlers:
       - id: ext/com_dotnet/com_handlers.c:php_com_object_handlers
@@ -257,6 +262,7 @@
     class: variant
   signature:
     classifier: class
+    name: variant
     isFinal: false
     handlers:
       - id: ext/com_dotnet/com_handlers.c:php_com_object_handlers

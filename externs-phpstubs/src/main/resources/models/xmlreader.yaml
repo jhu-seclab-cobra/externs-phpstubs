@@ -4,6 +4,7 @@
     class: xmlreader
   signature:
     classifier: class
+    name: XMLReader
     isFinal: false
     handlers:
       - id: ext/xmlreader/php_xmlreader.c:xmlreader_object_handlers

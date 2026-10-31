@@ -335,6 +335,7 @@
     class: curlfile
   signature:
     classifier: class
+    name: CURLFile
     isFinal: false
     handlers:
       - id: Zend/zend_object_handlers.c:std_object_handlers
@@ -385,6 +386,7 @@
     class: curlsharepersistenthandle
   signature:
     classifier: class
+    name: CurlSharePersistentHandle
     isFinal: true
     handlers:
       - id: ext/curl/share.c:curl_share_persistent_handlers
@@ -435,6 +437,7 @@
     class: curlstringfile
   signature:
     classifier: class
+    name: CURLStringFile
     isFinal: false
     handlers:
       - id: Zend/zend_object_handlers.c:std_object_handlers
@@ -570,6 +573,7 @@
     class: curlhandle
   signature:
     classifier: class
+    name: CurlHandle
     isFinal: true
     handlers:
       - id: ext/curl/interface.c:curl_object_handlers
@@ -620,6 +624,7 @@
     class: curlmultihandle
   signature:
     classifier: class
+    name: CurlMultiHandle
     isFinal: true
     handlers:
       - id: ext/curl/multi.c:curl_multi_handlers
@@ -670,6 +675,7 @@
     class: curlsharehandle
   signature:
     classifier: class
+    name: CurlShareHandle
     isFinal: true
     handlers:
       - id: ext/curl/share.c:curl_share_handlers

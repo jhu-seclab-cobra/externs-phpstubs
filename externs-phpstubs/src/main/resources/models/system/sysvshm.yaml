@@ -90,6 +90,7 @@
     class: sysvsharedmemory
   signature:
     classifier: class
+    name: SysvSharedMemory
     isFinal: true
     handlers:
       - id: ext/sysvshm/sysvshm.c:sysvshm_object_handlers

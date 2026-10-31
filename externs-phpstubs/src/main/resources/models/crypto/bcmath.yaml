@@ -181,6 +181,7 @@
   signature:
     classifier: class
     interfaces: [stringable]
+    name: BcMath\Number
     isFinal: true
     handlers:
       - id: ext/bcmath/bcmath.c:bcmath_number_obj_handlers

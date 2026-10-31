@@ -1324,6 +1324,7 @@
     class: __php_incomplete_class
   signature:
     classifier: class
+    name: __PHP_Incomplete_Class
     isFinal: true
     handlers:
       - id: ext/standard/incomplete_class.c:php_incomplete_object_handlers
@@ -1375,6 +1376,7 @@
   signature:
     classifier: class
     parent: error
+    name: AssertionError
     isFinal: false
     handlers:
       - id: Zend/zend_exceptions.c:default_exception_handlers
@@ -1425,6 +1427,7 @@
     class: directory
   signature:
     classifier: class
+    name: Directory
     isFinal: true
     handlers:
       - id: ext/standard/dir.c:dir_class_object_handlers
@@ -1475,6 +1478,7 @@
     class: php_user_filter
   signature:
     classifier: class
+    name: php_user_filter
     isFinal: false
     handlers:
       - id: Zend/zend_object_handlers.c:std_object_handlers
@@ -1526,11 +1530,13 @@
   signature:
     classifier: enum
     interfaces: [unitenum]
+    name: RoundingMode
     isFinal: false
 - subject:
     class: streambucket
   signature:
     classifier: class
+    name: StreamBucket
     isFinal: true
     handlers:
       - id: Zend/zend_object_handlers.c:std_object_handlers

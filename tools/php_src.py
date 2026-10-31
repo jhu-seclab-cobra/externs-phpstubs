@@ -140,6 +140,7 @@ class StubText:
         self.source = path.relative_to(root)
         self.raw = path.read_text(encoding="utf-8")
         self.text = strip_comments(self.raw, self.source)
+        self.doc_comments = doc_comments(self.raw, self.source)
         self.spaces = [(m.start(), m.group(1) or "") for m in NAMESPACE.finditer(self.text)]
         self.imports = {(m.group(2) or m.group(1).rsplit("\\", 1)[-1]).lower(): m.group(1) for m in USE.finditer(self.text)}
 
@@ -276,9 +277,9 @@ def rewrite(models, transform):
     return changed
 
 
-def strip_comments(text, source):
-    """Blank comments and attributes, keeping offsets and string literals intact."""
-    out, i, n = list(text), 0, len(text)
+def tokens(text, source):
+    """The (start, end) offset of each top-level comment and attribute of the text, string literals skipped."""
+    i, n = 0, len(text)
     while i < n:
         if text[i] in "'\"":
             i = skip_string(text, i)
@@ -287,11 +288,27 @@ def strip_comments(text, source):
         if end is None:
             i += 1
             continue
-        for j in range(i, end):
+        yield i, end
+        i = end
+
+
+def strip_comments(text, source):
+    """Blank comments and attributes, keeping offsets and string literals intact."""
+    out = list(text)
+    for start, end in tokens(text, source):
+        for j in range(start, end):
             if out[j] != "\n":
                 out[j] = " "
-        i = end
     return "".join(out)
+
+
+def doc_comments(text, source):
+    """The (start, end) offset of each doc comment token: a top-level comment that opens with /** and a space."""
+    return [
+        (start, end)
+        for start, end in tokens(text, source)
+        if re.match(r"/\*\*\s", text[start:end]) and end - start > 4
+    ]
 
 
 def comment_end(text, i, source):

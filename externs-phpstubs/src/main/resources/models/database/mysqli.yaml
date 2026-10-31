@@ -1262,6 +1262,7 @@
   signature:
     classifier: class
     parent: runtimeexception
+    name: mysqli_sql_exception
     isFinal: true
     handlers:
       - id: Zend/zend_exceptions.c:default_exception_handlers
@@ -1312,6 +1313,7 @@
     class: mysqli_warning
   signature:
     classifier: class
+    name: mysqli_warning
     isFinal: true
     handlers:
       - id: ext/mysqli/mysqli.c:mysqli_object_warning_handlers
@@ -1403,6 +1405,7 @@
     class: mysqli
   signature:
     classifier: class
+    name: mysqli
     isFinal: false
     handlers:
       - id: ext/mysqli/mysqli.c:mysqli_object_link_handlers
@@ -1454,6 +1457,7 @@
   signature:
     classifier: class
     interfaces: [iteratoraggregate]
+    name: mysqli_result
     isFinal: false
     handlers:
       - id: ext/mysqli/mysqli.c:mysqli_object_result_handlers
@@ -1504,6 +1508,7 @@
     class: mysqli_stmt
   signature:
     classifier: class
+    name: mysqli_stmt
     isFinal: false
     handlers:
       - id: ext/mysqli/mysqli.c:mysqli_object_stmt_handlers
@@ -1554,6 +1559,7 @@
     class: mysqli_driver
   signature:
     classifier: class
+    name: mysqli_driver
     isFinal: true
     handlers:
       - id: ext/mysqli/mysqli.c:mysqli_object_driver_handlers

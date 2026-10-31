@@ -4,6 +4,7 @@
     class: shmop
   signature:
     classifier: class
+    name: Shmop
     isFinal: true
     handlers:
       - id: ext/shmop/shmop.c:shmop_object_handlers

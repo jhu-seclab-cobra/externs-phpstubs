@@ -325,6 +325,7 @@
     class: tidy
   signature:
     classifier: class
+    name: tidy
     isFinal: false
     handlers:
       - id: ext/tidy/tidy.c:tidy_object_handlers_doc
@@ -375,6 +376,7 @@
     class: tidynode
   signature:
     classifier: class
+    name: tidyNode
     isFinal: true
     handlers:
       - id: ext/tidy/tidy.c:tidy_object_handlers_node

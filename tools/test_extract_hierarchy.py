@@ -145,11 +145,11 @@ enum Backed: string { case A = 'a'; }
 
     def test_signature_renders_final_status_then_the_handler_tables(self):
         text = self.generated().signature("counter")
-        self.assertTrue(text.startswith("  signature:\n    classifier: class\n    isFinal: true\n    handlers:\n"))
+        self.assertTrue(text.startswith("  signature:\n    classifier: class\n    name: Counter\n    isFinal: true\n    handlers:\n"))
         self.assertIn("      - id: ext/demo/demo.c:counter_handlers\n", text)
 
     def test_signature_of_an_unregistered_declaration_has_only_its_hierarchy(self):
-        self.assertEqual("  signature:\n    classifier: class\n    parent: plain\n", self.generated().signature("ghost"))
+        self.assertEqual("  signature:\n    classifier: class\n    parent: plain\n    name: Ghost\n", self.generated().signature("ghost"))
 
 
 class CommandTest(unittest.TestCase):
@@ -256,7 +256,7 @@ class RealTreeTest(unittest.TestCase):
 
     def test_interface_and_enum_carry_their_classifier_and_no_handler_table(self):
         generated = self.generated()
-        self.assertEqual("  signature:\n    classifier: interface\n    isFinal: false\n", generated.signature("rface"))
+        self.assertEqual("  signature:\n    classifier: interface\n    name: Rface\n    isFinal: false\n", generated.signature("rface"))
         enum = generated.signature("renum")
         self.assertTrue(enum.startswith("  signature:\n    classifier: enum\n"))
         self.assertIn("    isFinal: false\n", enum)
@@ -277,7 +277,7 @@ class RealTreeTest(unittest.TestCase):
         self.run_tool()
         text = self.text()
         self.assertNotIn("stale.c:old_handlers", text)
-        self.assertIn("    class: rsdl\n  signature:\n    classifier: class\n    isFinal: false\n    handlers:\n", text)
+        self.assertIn("    class: rsdl\n  signature:\n    classifier: class\n    name: Rsdl\n    isFinal: false\n    handlers:\n", text)
 
     def test_second_run_changes_nothing(self):
         self.run_tool()

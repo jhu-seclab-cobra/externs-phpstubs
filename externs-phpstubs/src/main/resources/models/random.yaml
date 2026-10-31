@@ -5,6 +5,7 @@
   signature:
     classifier: class
     parent: random\randomerror
+    name: Random\BrokenRandomEngineError
     isFinal: false
     handlers:
       - id: Zend/zend_exceptions.c:default_exception_handlers
@@ -56,17 +57,20 @@
   signature:
     classifier: interface
     interfaces: [random\engine]
+    name: Random\CryptoSafeEngine
     isFinal: false
 - subject:
     class: random\engine
   signature:
     classifier: interface
+    name: Random\Engine
     isFinal: false
 - subject:
     class: random\engine\mt19937
   signature:
     classifier: class
     interfaces: [random\engine]
+    name: Random\Engine\Mt19937
     isFinal: true
     handlers:
       - id: ext/random/random.c:random_engine_mt19937_object_handlers
@@ -118,6 +122,7 @@
   signature:
     classifier: class
     interfaces: [random\engine]
+    name: Random\Engine\PcgOneseq128XslRr64
     isFinal: true
     handlers:
       - id: ext/random/random.c:random_engine_pcgoneseq128xslrr64_object_handlers
@@ -169,6 +174,7 @@
   signature:
     classifier: class
     interfaces: [random\cryptosafeengine]
+    name: Random\Engine\Secure
     isFinal: true
     handlers:
       - id: ext/random/random.c:random_engine_secure_object_handlers
@@ -220,6 +226,7 @@
   signature:
     classifier: class
     interfaces: [random\engine]
+    name: Random\Engine\Xoshiro256StarStar
     isFinal: true
     handlers:
       - id: ext/random/random.c:random_engine_xoshiro256starstar_object_handlers
@@ -271,12 +278,14 @@
   signature:
     classifier: enum
     interfaces: [unitenum]
+    name: Random\IntervalBoundary
     isFinal: false
 - subject:
     class: random\randomerror
   signature:
     classifier: class
     parent: error
+    name: Random\RandomError
     isFinal: false
     handlers:
       - id: Zend/zend_exceptions.c:default_exception_handlers
@@ -328,6 +337,7 @@
   signature:
     classifier: class
     parent: exception
+    name: Random\RandomException
     isFinal: false
     handlers:
       - id: Zend/zend_exceptions.c:default_exception_handlers
@@ -378,6 +388,7 @@
     class: random\randomizer
   signature:
     classifier: class
+    name: Random\Randomizer
     isFinal: true
     handlers:
       - id: ext/random/random.c:random_randomizer_object_handlers

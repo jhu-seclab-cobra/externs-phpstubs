@@ -262,6 +262,7 @@
     class: hashcontext
   signature:
     classifier: class
+    name: HashContext
     isFinal: true
     handlers:
       - id: ext/hash/hash.c:php_hashcontext_handlers

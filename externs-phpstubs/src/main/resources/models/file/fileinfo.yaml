@@ -88,6 +88,7 @@
     class: finfo
   signature:
     classifier: class
+    name: finfo
     isFinal: false
     handlers:
       - id: ext/fileinfo/fileinfo.c:finfo_object_handlers

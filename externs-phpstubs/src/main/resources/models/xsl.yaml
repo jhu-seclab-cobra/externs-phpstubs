@@ -4,6 +4,7 @@
     class: xsltprocessor
   signature:
     classifier: class
+    name: XSLTProcessor
     isFinal: false
     handlers:
       - id: ext/xsl/php_xsl.c:xsl_object_handlers

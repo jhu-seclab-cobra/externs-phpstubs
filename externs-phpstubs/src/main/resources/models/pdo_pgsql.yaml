@@ -5,6 +5,7 @@
   signature:
     classifier: class
     parent: pdo
+    name: Pdo\Pgsql
     isFinal: false
     handlers:
       - id: ext/pdo/pdo_dbh.c:pdo_dbh_object_handlers
@@ -55,6 +56,7 @@
     class: pdo_pgsql_ext
   signature:
     classifier: class
+    name: PDO_PGSql_Ext
 - subject:
     method: Pdo\Pgsql::copyFromArray
   signature:

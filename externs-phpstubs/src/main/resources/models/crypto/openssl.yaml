@@ -1086,6 +1086,7 @@
     class: opensslasymmetrickey
   signature:
     classifier: class
+    name: OpenSSLAsymmetricKey
     isFinal: true
     handlers:
       - id: ext/openssl/openssl.c:php_openssl_pkey_object_handlers
@@ -1136,6 +1137,7 @@
     class: opensslcertificate
   signature:
     classifier: class
+    name: OpenSSLCertificate
     isFinal: true
     handlers:
       - id: ext/openssl/openssl.c:php_openssl_certificate_object_handlers
@@ -1186,6 +1188,7 @@
     class: opensslcertificatesigningrequest
   signature:
     classifier: class
+    name: OpenSSLCertificateSigningRequest
     isFinal: true
     handlers:
       - id: ext/openssl/openssl.c:php_openssl_request_object_handlers
