@@ -25,7 +25,7 @@ query?.sinkFacts?.single()?.vulnType == VulnType.SQLI.id   // true
 
 **`function(name: String): BuiltinRecord<FunctionSubject>?`** -- Includes keyword constructs (`echo`, `isset`, ...; extension `keyword`).
 
-**`clazz(name: String): BuiltinRecord<ClassSubject>?`** -- Includes scalar types (`int`, `float`, ...; extension `scalar`), `exit` (`keyword`), `resource` (`legacy`).
+**`clazz(name: String): BuiltinRecord<ClassSubject>?`** -- Includes scalar types (`int`, `float`, ...; extension `scalar`), `exit` (`keyword`), `resource` (`legacy`). Alias lookup: [class lookup contract](../design-lookup.md#builtinlookup-interface).
 
 **`method(spelling: String)`**, **`method(owner: String, name: String): BuiltinRecord<MethodSubject>?`** -- `Owner::name`, or owner and name apart. Both halves fold.
 
@@ -37,11 +37,11 @@ query?.sinkFacts?.single()?.vulnType == VulnType.SQLI.id   // true
 
 **`variable(name: String): BuiltinRecord<VariableSubject>?`** -- `$name`; the bundled sets state `$_GET`, `$_POST`, `$_COOKIE`, `$_REQUEST`, `$_SERVER`, ... as source-only records.
 
-**`record(subject: ModelSubject): BuiltinRecord<ModelSubject>?`** -- An already built subject.
+**`record(subject: ModelSubject): BuiltinRecord<ModelSubject>?`** -- An already built declaration subject ([contract](../design-lookup.md#builtinlookup-interface)).
 
 **Enumeration** (records in Mount Order of each subject's first mounted entry; facts in record order, then condition, unit and document order):
 
-**`functions`, `classes`, `methods`, `constants`, `classConstants`, `properties`, `variables`** -- `Collection<BuiltinRecord<…>>`.
+**`functions`, `classes`, `methods`, `constants`, `classConstants`, `properties`, `variables`** -- `Collection<BuiltinRecord<…>>`, each record once ([enumeration contract](../design-lookup.md#builtinlookup-interface)).
 
 **`sinkFacts: List<SinkFact>`**, **`sourceFacts: List<SourceFact>`**, **`sanitizerFacts: List<SanitizerFact>`**, **`flows: List<FlowFact>`**, **`characters: List<CharactersFact>`**, **`returns: List<ReturnsFact>`**, **`throws: List<ThrowsFact>`**.
 
@@ -61,7 +61,7 @@ Typed accessors (top-level extension properties, nullable):
 
 **`BuiltinRecord<FunctionSubject>.callableSignature`**, **`BuiltinRecord<MethodSubject>.callableSignature`** -- `CallableSignature(params, returnType)`.
 
-**`BuiltinRecord<ClassSubject>.classSignature`** -- `ClassSignature(classifier, parent, interfaces)`, folded.
+**`BuiltinRecord<ClassSubject>.classSignature`** -- `ClassSignature(classifier, parent, interfaces, name, aliases)`, field semantics: the format library's Class Signature (`commons-phpmodels/docs/model-declarations.md`).
 
 **`BuiltinRecord<ConstantSubject>.typedSignature`**, **`BuiltinRecord<ClassConstantSubject>.typedSignature`** -- `TypedSignature(type, value)`.
 
@@ -93,14 +93,14 @@ values.provenance?.verification                    // Verification.MANUAL
 
 **`StubIndexNotFoundException`** -- `index.txt` or a listed document is absent; the message names the resource path.
 
-**`StubIndexInvalidException`** -- A set fails to decode (cause attached), a bundled set lacks `provenance.yaml`, a generated entry breaks a generated-set rule (variable subject, no signature, duplicate subject across documents), or a conditional entry declares a signature.
+**`StubIndexInvalidException`** -- A set fails to decode (cause attached), a bundled set lacks `provenance.yaml`, a generated entry breaks a generated-set rule (variable subject, no signature, duplicate subject across documents), a conditional entry declares a signature, or a class alias collides with another class key.
 
 **`IllegalArgumentException`** -- A lookup name is not a PHP spelling of the kind; a `BuiltinRecord` is built empty or with a foreign fact.
 
 ## Gotchas
 
 - Identity folding is commons-phpmodels': `MethodSubject("Exception", "getMessage")` equals `MethodSubject("exception", "getmessage")`; `ConstantSubject("TRUE")` and `ConstantSubject("true")` differ.
-- No suffix, prefix, or case-folded index exists; a looser match is your filter over an enumeration.
+- No suffix, prefix, or case-folded index exists; a looser match is your filter over an enumeration. Class-alias keys follow [the lookup model](../model-lookup.md#relations).
 - `strlen` and other value rules subjects carry the manual value unit (`returns: num`), not the generated one: manual outranks generated whatever the position.
 - `filter_var` is five conditional sanitizer facts (`[_, 257]` ... `[_, 520]`) and no unconditional one; `print_r` and `var_export` carry a `[_, true]` returns fact beside the unconditional one. Choose per your undecidable rule.
 - A value unit is `returns` plus the `flows` and `characters` of the same entry: filter both by equality with the chosen returns fact's `condition`.

@@ -79,7 +79,7 @@ public class PhpStubs internal constructor(
 
     override val functions: Collection<BuiltinRecord<FunctionSubject>> get() = merge.functions.values
 
-    override val classes: Collection<BuiltinRecord<ClassSubject>> get() = merge.classes.values
+    override val classes: Collection<BuiltinRecord<ClassSubject>> get() = DeclaredClasses(merge.classes)
 
     override val methods: Collection<BuiltinRecord<MethodSubject>> get() = merge.methods.values
 

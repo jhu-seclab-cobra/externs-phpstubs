@@ -78,6 +78,7 @@ format library's: `extern/commons-phpmodels/docs/model.md`,
 | Set Merge | Bundled Set | folds | 1:5 | In Mount Order, under the default Precedence |
 | Set Merge | Consumer Set | folds | 1:N | After the bundled sets, in supplied order |
 | Set Merge | entry in force | holds | 1:N | Exactly one per (subject, condition, unit) key stated by any set |
+| class-alias key | `BuiltinRecord` | reads | N:1 | Each class-alias key reads the record whose class signature states it; the record retains its declaration subject |
 | Psalm Mapping | Bundled Set | translates | 1:2 | The taint set and the taint rules set |
 | Canonical Vocabulary | Fact | names | 1:N | Every vulnerability type and source kind a fact carries |
 | `BuiltinRecord` | Matching Subject | identifies | 1:1 | PHP spelling folded per kind |
@@ -103,8 +104,9 @@ Two entries stating the same (subject, condition, unit) key:
 | State | Trigger | Target |
 |-------|---------|-------|
 | Unread | first lookup on the bundled merge | Built: folded once, shared by every later lookup |
-| Built | exact lookup, subject exists | one record |
-| Built | exact lookup, subject absent | no record; not a failure |
+| Built | `clazz(name)`, declared name or class-alias key present | one record |
+| Built | `record(subject)` or another exact lookup, declaration subject present | one record |
+| Built | exact lookup, key absent from the accessor's own map | no record; not a failure |
 | Built | exact lookup, name not a PHP spelling | argument error |
 | Built | enumeration | every record or fact of the kind, in enumeration order (Invariants) |
 | Built | consumer sets supplied | a second merge: bundled sets then consumer sets; the bundled merge unchanged |
@@ -134,7 +136,8 @@ Two entries stating the same (subject, condition, unit) key:
   give equal records.
 - Exact lookup is exact: the spelling is folded per kind by the format
   library and compared whole; no suffix, prefix, or case-insensitive match
-  exists in the lookup.
+  exists in the lookup. Class-alias keys are the relation in
+  [Relations](#relations).
 - Enumeration order is deterministic, so a consumer's "first match" is:
   records in Mount Order of each subject's first mounted entry, whatever
   its rank; facts in record order, then conditions in Mount Order of their

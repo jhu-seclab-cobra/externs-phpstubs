@@ -16,6 +16,8 @@ import kotlin.test.assertTrue
  * - `every declared signature admits the reflected one` — verifies parameters and return type
  * - `every reflected class carries the reflected parent and interfaces` — verifies the parent and the transitive
  *   interface set
+ * - `every reflected class is listed once per name it is registered under` — the class table lists a class under
+ *   its name and under each class alias, so the fixture lines of a class equal its aliases plus one
  */
 internal class ReflectionOracleTest {
     private val fixture: List<List<String>> by lazy {
@@ -48,6 +50,14 @@ internal class ReflectionOracleTest {
                 PhpStubs.clazz(it.name)?.classSignature?.parent != it.parent || interfacesOf(it.name) != it.interfaces
             }
         assertTrue(differing.isEmpty(), "Classes whose hierarchy differs from reflection: ${differing.map { it.name }}")
+    }
+
+    @Test
+    fun `every reflected class is listed once per name it is registered under`() {
+        val listed = fixture.filter { it.first() == CLASS }.map(::ReflectedClass).groupingBy { it.name }.eachCount()
+        val differing =
+            listed.filter { (name, count) -> count != (PhpStubs.clazz(name)?.classSignature?.aliases?.size ?: 0) + 1 }
+        assertTrue(differing.isEmpty(), "Classes listed other than aliases plus one times: $differing")
     }
 
     private fun callables(): List<ReflectedCallable> =

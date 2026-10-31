@@ -35,7 +35,7 @@ merge(sets, precedence):
         for entry in set.entries:
             mounted.append((position, rank, entry))
     inForce = fold(mounted)
-    return read_only(vocab, matrix(rows), inForce)
+    return read_only(vocab, matrix(rows), inForce, keyClassAliases(inForce))
 
 fold(mounted):
     inForce = {}                                       # subject → condition → unit → (e, rank, position)
@@ -55,7 +55,22 @@ declaredUnits(e):
       sinks      if e.body.sinks declared
       sanitizers if e.body.sanitizers declared
       throws     if e.body.throws declared }       # the empty set is declared
+
+keyClassAliases(inForce):                              # after every declaration subject is keyed
+    classes = { key(r.subject) → r  for each class record r, in key order }
+    for r in the class records, in key order:
+        for a in r.signature.aliases:                  # the signature in force
+            require key(a) not in classes              # a declaration subject or an earlier alias → failure
+            classes[key(a)] = r
+    return classes
 ```
+
+The alias-key step inserts keys into the existing class map and adds no
+record: a record keeps its declaration subject and its position. Its
+aliases are those of the signature in force, so a replacing signature that
+omits them removes their keys (a replacing signature replaces the whole
+signature: `commons-phpmodels/docs/model-declarations.md`, Invariants). `key(a)` is the class subject the alias
+spelling parses to.
 
 `accumulate` and the verification of every reference against the
 vocabulary accumulated so far are the set loader's ([model-sets.md] of
@@ -88,6 +103,12 @@ sources, sinks, sanitizers, throws), then document order.
   consumer sets the later supplied override the earlier.
 - An empty list of sets merges into an empty result; every lookup answers
   no record.
+- A class record whose signature states the alias `dom\domexception` is
+  keyed under `domexception` and `dom\domexception`; both keys read the same
+  record.
+- Class `a` states the alias `b` while class `b` is declared, or classes
+  `a` and `b` both state the alias `x\c`: the alias-key step fails with
+  `StubIndexInvalidException`.
 
 ### Invariants
 
@@ -102,13 +123,17 @@ sources, sinks, sanitizers, throws), then document order.
   same identity a lookup key carries.
 - The same sets in the same order under the same precedence merge into
   equal entries in force.
+- The alias-key step preserves the lookup relations and enumeration
+  invariants of [model-lookup.md](model-lookup.md).
 
 ### Termination
 
 - Finitely many sets, each with finitely many entries. One linear pass,
-  one sort and one more linear pass, no fixpoint.
+  one sort, one more linear pass and one finite pass over the alias keys,
+  no fixpoint.
 
 ### Complexity
 
-- O(E log E) time over entries E for the stable sort, O(E) writes; O(K)
-  space over distinct keys K ≤ 6E.
+- O(E log E + A) time over entries E for the stable sort, O(E) writes and
+  O(A) alias insertions; O(K + A) space over distinct keys K ≤ 6E before the
+  alias step, with A the aliases in the class signatures in force.

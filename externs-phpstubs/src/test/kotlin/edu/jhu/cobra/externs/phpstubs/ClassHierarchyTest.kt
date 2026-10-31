@@ -16,6 +16,7 @@ import kotlin.test.assertTrue
  * - `enums implement the engine's enum interfaces` — verifies a pure and a backed enum
  * - `every named parent and interface is a declared class` — verifies the closure over the set
  * - `a class php-src does not declare keeps no hierarchy` — verifies a PECL class
+ * - `a class declares its name and its engine aliases` — verifies DOMException, its alias, and a model subject with no name
  */
 internal class ClassHierarchyTest {
     @Test
@@ -79,6 +80,17 @@ internal class ClassHierarchyTest {
         val imagick = signatureOf("Imagick")
         assertNull(imagick.parent)
         assertTrue(imagick.interfaces.isEmpty())
+    }
+
+    @Test
+    fun `a class declares its name and its engine aliases`() {
+        val exception = signatureOf("DOMException")
+        assertEquals("DOMException", exception.name)
+        assertEquals(listOf("dom\\domexception"), exception.aliases)
+        assertEquals(PhpStubs.clazz("DOMException"), PhpStubs.clazz("Dom\\DOMException"))
+        assertEquals("ArrayObject", signatureOf("ArrayObject").name)
+        assertTrue(signatureOf("ArrayObject").aliases.isEmpty())
+        assertNull(signatureOf("string").name)
     }
 
     private fun signatureOf(name: String) = assertNotNull(assertNotNull(PhpStubs.clazz(name), name).classSignature, name)

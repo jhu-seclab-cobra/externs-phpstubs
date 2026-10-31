@@ -127,7 +127,7 @@ fixture directory ship their own manifest. Set layouts:
 | Exception | When raised |
 |-----------|-------------|
 | `StubIndexNotFoundException(resource)` | `index.txt`, a listed document, or the psalm mapping resource is not on the classpath or under an extension directory |
-| `StubIndexInvalidException(reason, cause?)` | The set load or merge fails for any other reason (commons-phpmodels cause attached), a bundled set ships without `provenance.yaml`, a generated-set rule is violated, or a conditional entry declares a signature |
+| `StubIndexInvalidException(reason, cause?)` | The set load or merge fails for any other reason (commons-phpmodels cause attached), a bundled set ships without `provenance.yaml`, a generated-set rule is violated, a conditional entry declares a signature, or a class alias collides with another class key ([alias-key step](spec-merge.md#steps)) |
 | `IllegalArgumentException` | A lookup name is not a PHP identifier spelling (raised by the commons-phpmodels subject creator) |
 
 Every bundled-set error surfaces on first access to `PhpStubs`; an

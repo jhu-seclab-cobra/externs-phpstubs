@@ -52,14 +52,14 @@ delegation, by its companion, so `PhpStubs.function("substr")` and
 | Member | Return | Behavior |
 |--------|--------|----------|
 | `function(name)` | `BuiltinRecord<FunctionSubject>?` | `FunctionSubject.parse(name)`, map read |
-| `clazz(name)` | `BuiltinRecord<ClassSubject>?` | `ClassSubject.parse(name)`, map read |
+| `clazz(name)` | `BuiltinRecord<ClassSubject>?` | `ClassSubject.parse(name)`, map read; a class-alias key reads its record ([relations](model-lookup.md#relations)) |
 | `method(spelling)` / `method(owner, name)` | `BuiltinRecord<MethodSubject>?` | `MethodSubject.parse` / constructor, map read |
 | `constant(name)` | `BuiltinRecord<ConstantSubject>?` | `ConstantSubject.parse(name)`, map read |
 | `classConstant(spelling)` / `classConstant(owner, name)` | `BuiltinRecord<ClassConstantSubject>?` | parse / constructor, map read |
 | `property(spelling)` / `property(owner, name)` | `BuiltinRecord<PropertySubject>?` | parse / constructor, map read |
 | `variable(name)` | `BuiltinRecord<VariableSubject>?` | `VariableSubject.parse(name)`, map read |
-| `record(subject)` | `BuiltinRecord<ModelSubject>?` | the record of an already built subject |
-| `functions`, `classes`, `methods`, `constants`, `classConstants`, `properties`, `variables` | `Collection<BuiltinRecord<…>>` | every record of the kind, load order |
+| `record(subject)` | `BuiltinRecord<ModelSubject>?` | reads the declaration-subject map; an alias key inserted only into the class map is not consulted |
+| `functions`, `classes`, `methods`, `constants`, `classConstants`, `properties`, `variables` | `Collection<BuiltinRecord<…>>` | every record of the kind once, in the [enumeration order](model-lookup.md#invariants) |
 | `sinkFacts`, `sourceFacts`, `sanitizerFacts`, `flows`, `returns`, `throws` | `List<…Fact>` | every fact of the kind over every record, load order |
 | `vocabulary` | `Vocabulary` | accumulated over every mounted set |
 | `policy` | `TaintPolicy` | accumulated over every mounted set |
@@ -165,7 +165,9 @@ already rejects a signature subtype that does not match the subject kind.
 - A vulnerability type or source kind a fact carries is declared in `vocabulary`; the
   format library verified it when the set decoded.
 - `functions.size` equals the number of distinct function subjects over
-  every mounted set; a subject appears in exactly one kind map.
+  every mounted set, and `classes.size` counts declaration subjects, not
+  the alias keys of the class map ([merge design](design-merge.md#setmerge-internal-class));
+  a subject appears in exactly one kind map.
 - Two `PhpStubs` built from equal mount lists hold equal records.
 - No public type of this file holds a psalm name, a set root, or a
   precedence.

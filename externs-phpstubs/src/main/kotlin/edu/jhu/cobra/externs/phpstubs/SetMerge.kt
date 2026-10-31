@@ -41,6 +41,7 @@ internal class SetMerge private constructor(
 ) {
     private val all = LinkedHashMap<ModelSubject, BuiltinRecord<ModelSubject>>()
     val functions = LinkedHashMap<FunctionSubject, BuiltinRecord<FunctionSubject>>()
+    // Keyed by declaration subject, then by class alias: a record with aliases appears under several keys.
     val classes = LinkedHashMap<ClassSubject, BuiltinRecord<ClassSubject>>()
     val methods = LinkedHashMap<MethodSubject, BuiltinRecord<MethodSubject>>()
     val constants = LinkedHashMap<ConstantSubject, BuiltinRecord<ConstantSubject>>()
@@ -99,6 +100,18 @@ internal class SetMerge private constructor(
             )
         all[subject] = record
         return record
+    }
+
+    // Keys each class record under the aliases of its signature in force, after every declaration subject is keyed.
+    private fun keyClassAliases() {
+        val aliased = classes.values.mapNotNull { record -> record.classSignature?.aliases?.let { record to it } }
+        for ((record, aliases) in aliased) {
+            for (alias in aliases) {
+                if (classes.putIfAbsent(ClassSubject.parse(alias), record) != null) {
+                    throw StubIndexInvalidException("Class alias '$alias' of '${record.subject}' collides with another class key")
+                }
+            }
+        }
     }
 
     private class FactLists {
@@ -170,6 +183,7 @@ internal class SetMerge private constructor(
             }
             val merge = SetMerge(vocabulary, TaintPolicy(rows))
             for ((subject, slots) in fold(mounted)) merge.add(subject, slots)
+            merge.keyClassAliases()
             return merge
         }
 

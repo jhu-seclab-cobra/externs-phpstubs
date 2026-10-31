@@ -58,7 +58,9 @@ records built from its result. Built once per set sequence, immutable.
 
 **State/Fields:** `vocabulary`, `policy`, one `LinkedHashMap<Subject, BuiltinRecord>`
 per declaration kind in Mount Order of each subject's first mounted entry,
-whatever its rank, and the seven fact lists in record order.
+whatever its rank, and the seven fact lists in record order. The class map
+also holds the alias keys that the alias-key step of
+[spec-merge.md](spec-merge.md#steps) adds.
 
 **Construction (`SetMerge.of(mounts: List<Mount>)`):** for each mount in
 position order and each entry: key = (subject, condition); per unit the
@@ -67,6 +69,8 @@ verification ranks at least equal under `Precedence.DEFAULT` (equal rank,
 later position wins; lower rank never replaces). The extension of a record
 is the extension of the entry in force for its signature unit. A
 conditional entry declaring a signature is `StubIndexInvalidException`.
+`SetMerge.of` completes record construction with the alias-key step of
+[spec-merge.md](spec-merge.md#steps).
 
 **Record assembly:** per subject, the signature is that of the unconditional
 entry in force for the signature unit, or `null`; the facts are every
@@ -82,5 +86,6 @@ order.
   without one mounts as `MANUAL`.
 - The generated-set rules and PHP extension derivation apply to exactly the mount
   flagged as the generated set.
-- `SetMerge.records` holds every subject any mount states, and each subject
-  appears in exactly one kind map.
+- `SetMerge.records` holds every declaration subject any mount states, and
+  each subject appears in exactly one kind map; class-map key relations
+  follow [model-lookup.md](model-lookup.md#relations).

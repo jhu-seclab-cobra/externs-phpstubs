@@ -24,7 +24,7 @@ public interface BuiltinLookup {
     /** The record of the function spelled [name], or null. */
     public fun function(name: String): BuiltinRecord<FunctionSubject>?
 
-    /** The record of the class spelled [name], or null. */
+    /** The record of the class spelled [name], whether its declared name or a class alias, or null. */
     public fun clazz(name: String): BuiltinRecord<ClassSubject>?
 
     /** The record of the method spelled `Owner::name`, or null. */
@@ -60,13 +60,13 @@ public interface BuiltinLookup {
     /** The record of the predefined variable spelled `$name`, or null. */
     public fun variable(name: String): BuiltinRecord<VariableSubject>?
 
-    /** The record of an already built [subject], or null. */
+    /** The record of an already built declaration [subject], or null; a class alias spelling has no record. */
     public fun record(subject: ModelSubject): BuiltinRecord<ModelSubject>?
 
     /** Every function record, in Mount Order of its subject's first mounted entry. */
     public val functions: Collection<BuiltinRecord<FunctionSubject>>
 
-    /** Every class record, in Mount Order of its subject's first mounted entry. */
+    /** Every class record once, in Mount Order of its subject's first mounted entry, whatever its class aliases. */
     public val classes: Collection<BuiltinRecord<ClassSubject>>
 
     /** Every method record, in Mount Order of its subject's first mounted entry. */
