@@ -13,9 +13,12 @@ import kotlin.test.assertTrue
  * - `unresolved occurrences are independent while concrete replacements remain literal` — derived query contract.
  */
 internal class NamePatternTest {
-    private fun pattern(vararg parts: String?): NamePattern = NamePattern(parts.map { part ->
-        if (part == null) NamePattern.Part.Gap else NamePattern.Part.Literal(part)
-    })
+    private fun pattern(vararg parts: String?): NamePattern =
+        NamePattern(
+            parts.map { part ->
+                if (part == null) NamePattern.Part.Gap else NamePattern.Part.Literal(part)
+            },
+        )
 
     @Test
     fun `whole name boundaries and literal bytes are respected`() {

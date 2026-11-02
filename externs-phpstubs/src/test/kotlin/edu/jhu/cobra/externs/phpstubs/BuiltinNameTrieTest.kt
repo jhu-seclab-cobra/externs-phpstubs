@@ -21,20 +21,32 @@ import kotlin.test.assertTrue
  */
 internal class BuiltinNameTrieTest {
     private val names = listOf("strlen", "strpos", "substr", "system")
-    private fun pattern(vararg parts: String?): NamePattern = NamePattern(parts.map { part ->
-        if (part == null) NamePattern.Part.Gap else NamePattern.Part.Literal(part)
-    })
 
-    private fun trie(): BuiltinNameTrie<FunctionSubject> = BuiltinNameTrie<FunctionSubject>().also { trie ->
-        names.forEach { trie.add(assertNotNull(PhpStubs.function(it))) }
-    }
+    private fun pattern(vararg parts: String?): NamePattern =
+        NamePattern(
+            parts.map { part ->
+                if (part == null) NamePattern.Part.Gap else NamePattern.Part.Literal(part)
+            },
+        )
+
+    private fun trie(): BuiltinNameTrie<FunctionSubject> =
+        BuiltinNameTrie<FunctionSubject>().also { trie ->
+            names.forEach { trie.add(assertNotNull(PhpStubs.function(it))) }
+        }
 
     @Test
     fun `trie and single name matching accept the same complete records`() {
         val trie = trie()
         for (query in listOf(pattern("str", null), pattern(null, "str", null), pattern("str", null, "en"))) {
             val expected = names.filter(query::matches).toSet()
-            assertEquals(expected, trie.matches(query).asSequence().map { it.subject.name }.toSet())
+            assertEquals(
+                expected,
+                trie
+                    .matches(query)
+                    .asSequence()
+                    .map { it.subject.name }
+                    .toSet(),
+            )
         }
     }
 
@@ -68,52 +80,100 @@ internal class BuiltinNameTrieTest {
 
     @Test
     fun `effective merge indexes signatures before alias keys`() {
-        val document = """
+        val document =
+            """
             - subject: {function: signed}
               signature: {params: [], returnType: string}
             - subject: {function: facts_only}
               returns: str
             - subject: {class: original}
               signature: {classifier: class, name: Original, aliases: [other]}
-        """.trimIndent()
+            """.trimIndent()
         val merge = SetMerge.of(listOf(TestSets.mount(0, Verification.MANUAL, document)))
-        assertEquals(listOf("signed"),
-            merge.functionNames.matches(pattern(null)).asSequence().map { it.subject.name }.toList())
-        assertEquals(listOf("original"),
-            merge.classNames.matches(pattern(null)).asSequence().map { it.subject.name }.toList())
+        assertEquals(
+            listOf("signed"),
+            merge.functionNames
+                .matches(pattern(null))
+                .asSequence()
+                .map { it.subject.name }
+                .toList(),
+        )
+        assertEquals(
+            listOf("original"),
+            merge.classNames
+                .matches(pattern(null))
+                .asSequence()
+                .map { it.subject.name }
+                .toList(),
+        )
         assertSame(merge.classes.values.first(), merge.classNames.matches(pattern(null)).next())
         assertTrue(merge.functions.containsKey(FunctionSubject("facts_only")))
     }
 
     @Test
     fun `independent effective merges do not share query results`() {
-        val first = TestSets.mount(0, Verification.GENERATED,
-            "- subject: {function: first}\n  signature: {params: [], returnType: string}\n")
-        val second = TestSets.mount(1, Verification.MANUAL,
-            "- subject: {function: second}\n  signature: {params: [], returnType: int}\n")
+        val first =
+            TestSets.mount(
+                0,
+                Verification.GENERATED,
+                "- subject: {function: first}\n  signature: {params: [], returnType: string}\n",
+            )
+        val second =
+            TestSets.mount(
+                1,
+                Verification.MANUAL,
+                "- subject: {function: second}\n  signature: {params: [], returnType: int}\n",
+            )
         val base = SetMerge.of(listOf(first))
         val extended = SetMerge.of(listOf(first, second))
-        assertEquals(listOf("first"),
-            base.functionNames.matches(pattern(null)).asSequence().map { it.subject.name }.toList())
-        assertEquals(listOf("first", "second"),
-            extended.functionNames.matches(pattern(null)).asSequence().map { it.subject.name }.toList())
+        assertEquals(
+            listOf("first"),
+            base.functionNames
+                .matches(pattern(null))
+                .asSequence()
+                .map { it.subject.name }
+                .toList(),
+        )
+        assertEquals(
+            listOf("first", "second"),
+            extended.functionNames
+                .matches(pattern(null))
+                .asSequence()
+                .map { it.subject.name }
+                .toList(),
+        )
     }
 
     @Test
     fun `query terminals use the effective signature and canonical namespace identity`() {
-        val generated = TestSets.mount(0, Verification.GENERATED,
-            "- subject: {class: 'vendor\\original'}\n" +
-                "  signature: {classifier: class, name: 'Vendor\\Original', aliases: ['oldalias']}\n")
-        val replacement = TestSets.mount(1, Verification.MANUAL,
-            "- subject: {class: 'vendor\\original'}\n" +
-                "  signature: {classifier: interface, name: 'Vendor\\Original', aliases: ['newalias']}\n")
+        val generated =
+            TestSets.mount(
+                0,
+                Verification.GENERATED,
+                "- subject: {class: 'vendor\\original'}\n" +
+                    "  signature: {classifier: class, name: 'Vendor\\Original', aliases: ['oldalias']}\n",
+            )
+        val replacement =
+            TestSets.mount(
+                1,
+                Verification.MANUAL,
+                "- subject: {class: 'vendor\\original'}\n" +
+                    "  signature: {classifier: interface, name: 'Vendor\\Original', aliases: ['newalias']}\n",
+            )
         val first = SetMerge.of(listOf(generated))
         val effective = SetMerge.of(listOf(generated, replacement))
         val query = pattern("\\vendor\\", null)
         val result = effective.classNames.matches(query).next()
         assertSame(effective.classes.values.first(), result)
         assertEquals(listOf("newalias"), result.classSignature?.aliases)
-        assertEquals(listOf("oldalias"), first.classNames.matches(query).next().classSignature?.aliases)
+        assertEquals(
+            listOf("oldalias"),
+            first.classNames
+                .matches(query)
+                .next()
+                .classSignature
+                ?.aliases,
+        )
         assertFalse(effective.classNames.matches(pattern("new", null)).hasNext())
     }
 
