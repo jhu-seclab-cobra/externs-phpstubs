@@ -219,9 +219,9 @@ internal class TaintRulesSetTest {
         assertNotNull(mapped.policy.singleOrNull { it.sourceKind == SourceKindId("user-input") })
     }
 
-    private fun sinksOf(subject: ModelSubject): Set<Pair<Port.Argument, String>> = sinksOf(unconditional.getValue(subject))
+    private fun sinksOf(subject: ModelSubject): Set<Pair<Port.Sink, String>> = sinksOf(unconditional.getValue(subject))
 
-    private fun sinksOf(entry: ModelEntry): Set<Pair<Port.Argument, String>> =
+    private fun sinksOf(entry: ModelEntry): Set<Pair<Port.Sink, String>> =
         entry.body.sinks!!
             .map { it.port to it.vulnType.id }
             .toSet()

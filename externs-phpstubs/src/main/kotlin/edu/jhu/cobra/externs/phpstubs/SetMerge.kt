@@ -8,6 +8,7 @@ import edu.jhu.cobra.commons.phpmodels.FunctionSubject
 import edu.jhu.cobra.commons.phpmodels.MethodSubject
 import edu.jhu.cobra.commons.phpmodels.ModelEntry
 import edu.jhu.cobra.commons.phpmodels.ModelSubject
+import edu.jhu.cobra.commons.phpmodels.OperationSubject
 import edu.jhu.cobra.commons.phpmodels.PolicyRow
 import edu.jhu.cobra.commons.phpmodels.Precedence
 import edu.jhu.cobra.commons.phpmodels.PropertySubject
@@ -72,6 +73,7 @@ internal class SetMerge private constructor(
             is ClassConstantSubject -> classConstants[subject] = record(subject, slots)
             is PropertySubject -> properties[subject] = record(subject, slots)
             is VariableSubject -> variables[subject] = record(subject, slots)
+            is OperationSubject -> record(subject, slots)
         }
     }
 

@@ -40,7 +40,7 @@ no conditional entry. Entries are sorted by subject spelling.
 
 | Document | Subject kinds | Content |
 |----------|---------------|---------|
-| sinks.yaml | function, method | one entry per subject with every kind it sinks, ports ascending, kinds in psalm order; receiver-triggered sinks omitted |
+| sinks.yaml | function, method, operation | one entry per subject with every kind it sinks, ports ascending, kinds in psalm order; receiver-triggered sinks omitted; the invocation operation consumes `callee` |
 | sanitizers.yaml | function | one declaration per subject; a value-typing sanitizer fact (`intval`, `md5`, ...) names every kind; a check names `argument(0)` and `accepts: true` with the `types` of a type predicate (`is_int`, `is_scalar`, ...) or the `within` class of a character check (`ctype_digit`, `is_numeric`, ...) with the kinds its class cannot carry |
 | sources.yaml | variable, function, method | one declaration per subject producing `input` or `external` |
 

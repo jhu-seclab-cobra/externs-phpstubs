@@ -118,9 +118,9 @@ internal class TaintSetTest {
         assertEquals(listOf(Port.Argument(0) to "sqli"), sinksOf(bySubject.getValue(MethodSubject("mysqli", "query")).single()))
     }
 
-    private fun sinksOf(subject: ModelSubject): List<Pair<Port.Argument, String>> = sinksOf(unconditional.getValue(subject))
+    private fun sinksOf(subject: ModelSubject): List<Pair<Port.Sink, String>> = sinksOf(unconditional.getValue(subject))
 
-    private fun sinksOf(entry: ModelEntry): List<Pair<Port.Argument, String>> = entry.body.sinks!!.map { it.port to it.vulnType.id }
+    private fun sinksOf(entry: ModelEntry): List<Pair<Port.Sink, String>> = entry.body.sinks!!.map { it.port to it.vulnType.id }
 
     private fun sanitizersOf(entry: ModelEntry): Set<String> =
         entry.body.sanitizers!!

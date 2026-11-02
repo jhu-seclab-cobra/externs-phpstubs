@@ -18,7 +18,7 @@ types: [design-merge.md](design-merge.md). Fold algorithm:
   `Fact` (sealed interface)
 - **External types (commons-phpmodels):** `DocumentSetLoader`,
   `DocumentSet`, `ResourceOpener`, `VocabularyMappingLoader`,
-  `VocabularyMapping`, `ModelEntry`, `ModelSubject` and its seven subtypes,
+  `VocabularyMapping`, `ModelEntry`, `ModelSubject` and its eight subtypes,
   `ArgPattern`, `SignatureInfo` and its four subtypes, `SinkDecl`,
   `SourceDecl`, `SanitizerDecl`, `ArgumentCheck`, `Propagation`, `CharacterClass`,
   `ReturnKind`, `Vocabulary`, `TaintPolicy`, `VulnTypeId`, `SourceKindId`, `Precedence`, `Verification`
@@ -58,7 +58,7 @@ delegation, by its companion, so `PhpStubs.function("substr")` and
 | `classConstant(spelling)` / `classConstant(owner, name)` | `BuiltinRecord<ClassConstantSubject>?` | parse / constructor, map read |
 | `property(spelling)` / `property(owner, name)` | `BuiltinRecord<PropertySubject>?` | parse / constructor, map read |
 | `variable(name)` | `BuiltinRecord<VariableSubject>?` | `VariableSubject.parse(name)`, map read |
-| `record(subject)` | `BuiltinRecord<ModelSubject>?` | reads the declaration-subject map; an alias key inserted only into the class map is not consulted |
+| `record(subject)` | `BuiltinRecord<ModelSubject>?` | reads the subject map, including the invocation operation; an alias key inserted only into the class map is not consulted |
 | `functions`, `classes`, `methods`, `constants`, `classConstants`, `properties`, `variables` | `Collection<BuiltinRecord<…>>` | every record of the kind once, in the [enumeration order](model-lookup.md#invariants) |
 | `sinkFacts`, `sourceFacts`, `sanitizerFacts`, `flows`, `returns`, `throws` | `List<…Fact>` | every fact of the kind over every record, load order |
 | `vocabulary` | `Vocabulary` | accumulated over every mounted set |
@@ -128,7 +128,7 @@ for an unconditional entry).
 
 | Type | Own fields | From |
 |------|------------|------|
-| `SinkFact` | `port: Port.Argument`, `vulnType: VulnTypeId` | one `SinkDecl` |
+| `SinkFact` | `port: Port.Sink`, `vulnType: VulnTypeId` | one `SinkDecl` |
 | `SourceFact` | `sourceKinds: Set<SourceKindId>`, `at: Port.Argument?`, `keys: List<KeyPattern>?` | one `SourceDecl` |
 | `SanitizerFact` | `vulnTypes: Set<VulnTypeId>`, `check: ArgumentCheck?` | one `SanitizerDecl` |
 | `FlowFact` | `from: Port.Input`, `to: Port` | one `Propagation` |

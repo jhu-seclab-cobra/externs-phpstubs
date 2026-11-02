@@ -635,3 +635,9 @@
   sinks:
     - port: argument(0)
       vulnType: include
+
+- subject:
+    operation: dynamic_invocation
+  sinks:
+    - port: callee
+      vulnType: callable

@@ -24,11 +24,11 @@ public sealed interface Fact {
     public val condition: ArgPattern?
 }
 
-/** One dangerously consumed argument under one vulnerability type. */
+/** One dangerously consumed argument or invocation selector under one vulnerability type. */
 public data class SinkFact(
     override val owner: ModelSubject,
     override val condition: ArgPattern?,
-    val port: Port.Argument,
+    val port: Port.Sink,
     val vulnType: VulnTypeId,
 ) : Fact
 
