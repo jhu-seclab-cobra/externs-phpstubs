@@ -136,4 +136,13 @@ sources, sinks, sanitizers, throws), then document order.
 
 - O(E log E + A) time over entries E for the stable sort, O(E) writes and
   O(A) alias insertions; O(K + A) space over distinct keys K ≤ 6E before the
-  alias step, with A the aliases in the class signatures in force.
+  alias step, with A the aliases in the class signatures in force. Canonical-name
+  construction adds the cost below.
+
+## Canonical Name Query
+
+During final record assembly insert each function/class subject whose record has a signature into its kind's ordinary trie, before adding aliases. Walk the canonical spelling character by character and attach the existing record at its terminal. A new effective merge owns a new trie.
+
+Compile a typed literal/gap pattern to positions: a literal consumes its character and moves forward; a gap may consume any character and remain, or advance without consuming. Start with position zero and close every gap's empty transition. Combine the ordinary start with the state after one leading root separator. For each trie child character, advance the active positions using that same transition operation; prune when no position remains. At an accepting terminal emit its canonical record once. Use DFS frames for child position and the current active positions; discard a frame when its children end. Single-name matching runs these identical transitions over that name. Existence stops at the first emitted match; full lookup consumes all matches.
+
+Construction costs O(S) time and O(S+N) additional storage per effective merge. Query construction is O(p); worst-case traversal is O(pQ+Z), with O(pL) DFS live state. S is eligible name text, N terminal identities, Q trie nodes, L maximum name length, p pattern size and Z actual outputs. Character/eligibility/state/output work and live merges' summed storage are included. Broad negative patterns may visit the entire trie. Single-name matching takes O(pT) time for a name of length T and O(p) live state.

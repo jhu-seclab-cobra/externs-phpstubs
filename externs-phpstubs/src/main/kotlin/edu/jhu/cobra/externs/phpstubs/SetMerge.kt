@@ -42,6 +42,8 @@ internal class SetMerge private constructor(
 ) {
     private val all = LinkedHashMap<ModelSubject, BuiltinRecord<ModelSubject>>()
     val functions = LinkedHashMap<FunctionSubject, BuiltinRecord<FunctionSubject>>()
+    val functionNames = BuiltinNameTrie<FunctionSubject>()
+    val classNames = BuiltinNameTrie<ClassSubject>()
 
     // Keyed by declaration subject, then by class alias: a record with aliases appears under several keys.
     val classes = LinkedHashMap<ClassSubject, BuiltinRecord<ClassSubject>>()
@@ -67,8 +69,8 @@ internal class SetMerge private constructor(
         slots: Slots,
     ) {
         when (subject) {
-            is FunctionSubject -> functions[subject] = record(subject, slots)
-            is ClassSubject -> classes[subject] = record(subject, slots)
+            is FunctionSubject -> addFunction(subject, slots)
+            is ClassSubject -> addClass(subject, slots)
             is MethodSubject -> methods[subject] = record(subject, slots)
             is ConstantSubject -> constants[subject] = record(subject, slots)
             is ClassConstantSubject -> classConstants[subject] = record(subject, slots)
@@ -76,6 +78,24 @@ internal class SetMerge private constructor(
             is VariableSubject -> variables[subject] = record(subject, slots)
             is OperationSubject -> record(subject, slots)
         }
+    }
+
+    private fun addFunction(
+        subject: FunctionSubject,
+        slots: Slots,
+    ) {
+        val record = record(subject, slots)
+        functions[subject] = record
+        if (record.signature != null) functionNames.add(record)
+    }
+
+    private fun addClass(
+        subject: ClassSubject,
+        slots: Slots,
+    ) {
+        val record = record(subject, slots)
+        classes[subject] = record
+        if (record.signature != null) classNames.add(record)
     }
 
     // Assembles one record: the unconditional signature, then every fact of every entry in force per condition.

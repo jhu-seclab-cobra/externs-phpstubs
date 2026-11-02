@@ -100,7 +100,7 @@ values.provenance?.verification                    // Verification.MANUAL
 ## Gotchas
 
 - Identity folding is commons-phpmodels': `MethodSubject("Exception", "getMessage")` equals `MethodSubject("exception", "getmessage")`; `ConstantSubject("TRUE")` and `ConstantSubject("true")` differ.
-- No suffix, prefix, or case-folded index exists; a looser match is your filter over an enumeration. Class-alias keys follow [the lookup model](../model-lookup.md#relations).
+- Canonical literal/gap matching is specified by [the query design](../design-lookup.md#namepattern-and-canonical-matches); exact accessors retain their whole-key behavior. Class-alias keys follow [the lookup model](../model-lookup.md#relations).
 - `strlen` and other value rules subjects carry the manual value unit (`returns: num`), not the generated one: manual outranks generated whatever the position.
 - `filter_var` is five conditional sanitizer facts (`[_, 257]` ... `[_, 520]`) and no unconditional one; `print_r` and `var_export` carry a `[_, true]` returns fact beside the unconditional one. Choose per your undecidable rule.
 - A value unit is `returns` plus the `flows` and `characters` of the same entry: filter both by equality with the chosen returns fact's `condition`.

@@ -63,12 +63,11 @@ format library's: `extern/commons-phpmodels/docs/model.md`,
   exception classes the subject's own implementation may throw, the whole
   section in one Fact, so the empty set states it throws none). Every Fact of every
   entry is present; the record ranks none of them against a call.
-- **`BuiltinLookup`** — The two reading modes over one Set Merge:
+- **`BuiltinLookup`** — The reading modes over one Set Merge:
   *exact* — one PHP spelling (`substr`, `mysqli::query`, `PDO`,
   `PHP_INT_MAX`, `PDO::ATTR_ERRMODE`), or owner and name apart, to at most
   one record; *enumeration* — every record of one declaration kind, or
-  every Fact of one fact kind, for the consumer to filter. No third mode:
-  a match looser than exact is the consumer's filter over an enumeration.
+  every Fact of one fact kind, for the consumer to filter. A third mode matches an original literal/gap name pattern against canonical function/class declarations whose effective record has a signature; class-alias keys are not additional matching declarations. Existence consumes the first match; complete lookup consumes every match. Each immutable merge owns its own name dictionary.
 
 ## Relations
 
@@ -135,8 +134,7 @@ Two entries stating the same (subject, condition, unit) key:
   bundled merge; two lookups built from the same sets in the same order
   give equal records.
 - Exact lookup is exact: the spelling is folded per kind by the format
-  library and compared whole; no suffix, prefix, or case-insensitive match
-  exists in the lookup. Class-alias keys are the relation in
+  library and compared whole; the exact accessor does not interpret a name pattern. Class-alias keys are the relation in
   [Relations](#relations).
 - Enumeration order is deterministic, so a consumer's "first match" is:
   records in Mount Order of each subject's first mounted entry, whatever

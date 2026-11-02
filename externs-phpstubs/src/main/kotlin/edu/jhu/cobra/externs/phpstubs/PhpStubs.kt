@@ -77,6 +77,12 @@ public class PhpStubs internal constructor(
 
     override fun record(subject: ModelSubject): BuiltinRecord<ModelSubject>? = merge.records[subject]
 
+    override fun matchingFunctions(pattern: NamePattern): Sequence<BuiltinRecord<FunctionSubject>> =
+        Sequence { merge.functionNames.matches(pattern) }
+
+    override fun matchingClasses(pattern: NamePattern): Sequence<BuiltinRecord<ClassSubject>> =
+        Sequence { merge.classNames.matches(pattern) }
+
     override val functions: Collection<BuiltinRecord<FunctionSubject>> get() = merge.functions.values
 
     override val classes: Collection<BuiltinRecord<ClassSubject>> get() = DeclaredClasses(merge.classes)

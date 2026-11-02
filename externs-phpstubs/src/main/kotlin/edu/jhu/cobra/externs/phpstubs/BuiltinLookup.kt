@@ -17,8 +17,9 @@ import edu.jhu.cobra.commons.phpmodels.Vocabulary
  *
  * Every exact lookup spells its subject in PHP's own grammar (`substr`, `mysqli::query`, `PDO::ATTR_ERRMODE`,
  * `mysqli::$insert_id`, `$_GET`); a name that is not a spelling of the kind is the format library's
- * [IllegalArgumentException], and an absent subject is null. No suffix, prefix, or case-folded index
- * exists: a looser match is the consumer's filter over an enumeration.
+ * [IllegalArgumentException], and an absent subject is null. Exact accessors do not interpret patterns.
+ * Canonical function/class pattern queries use the immutable merge
+ * dictionary and return only records with an effective signature, excluding class-alias keys.
  */
 public interface BuiltinLookup {
     /** The record of the function spelled [name], or null. */
@@ -62,6 +63,12 @@ public interface BuiltinLookup {
 
     /** The record of an already built declaration [subject], or null; a class alias spelling has no record. */
     public fun record(subject: ModelSubject): BuiltinRecord<ModelSubject>?
+
+    /** All canonical declared functions accepted by [pattern], once each; existence consumes the first result. */
+    public fun matchingFunctions(pattern: NamePattern): Sequence<BuiltinRecord<FunctionSubject>>
+
+    /** All canonical declared classes accepted by [pattern], once each; alias keys are not declarations. */
+    public fun matchingClasses(pattern: NamePattern): Sequence<BuiltinRecord<ClassSubject>>
 
     /** Every function record, in Mount Order of its subject's first mounted entry. */
     public val functions: Collection<BuiltinRecord<FunctionSubject>>

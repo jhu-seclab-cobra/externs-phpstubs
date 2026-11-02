@@ -63,11 +63,10 @@ delegation, by its companion, so `PhpStubs.function("substr")` and
 | `sinkFacts`, `sourceFacts`, `sanitizerFacts`, `flows`, `returns`, `throws` | `List<…Fact>` | every fact of the kind over every record, load order |
 | `vocabulary` | `Vocabulary` | accumulated over every mounted set |
 | `policy` | `TaintPolicy` | accumulated over every mounted set |
+| `matchingFunctions(pattern)`, `matchingClasses(pattern)` | `Sequence<BuiltinRecord<…>>` | every canonical signed match through the [name query](#namepattern-and-canonical-matches) |
 
 A name that is not a PHP spelling of the kind is the format library's
-`IllegalArgumentException`; an absent subject is `null`. No suffix, prefix,
-or case-folded index exists: a looser match is the consumer's filter over an
-enumeration.
+`IllegalArgumentException`; an absent subject is `null`. Pattern matching of canonical function/class declarations uses the query below; exact accessors do not interpret patterns.
 
 ### PhpStubs (final class)
 
@@ -144,6 +143,14 @@ consumer filters without spelling a string: `VulnType.SQLI.id` is
 Twelve and two constants, each holding its `id`. A repository test asserts
 the bundled vocabulary document declares exactly these names; a vulnerability
 type a consumer set adds has no enum constant and is compared by `VulnTypeId`.
+
+### NamePattern and canonical matches
+
+`NamePattern` is public immutable graph-free input, a sequence of typed `Literal` and `Gap` parts. A gap accepts any string at that occurrence. Its dedicated NFA transition operation serves both `matches(canonicalName)` and trie queries; a name boundary is accepted only when the complete pattern is accepted. The consumer supplies PHP ASCII-folded literal segments; one optional leading root separator is accepted without duplicating canonical outputs. Source/provenance remains with the consumer, never in the dictionary.
+
+`BuiltinLookup.matchingFunctions(pattern)` and `matchingClasses(pattern)` return lazy sequences of existing canonical records with effective signatures. `SetMerge` owns ordinary tries populated during final record construction, before alias-key expansion. A query cursor keeps DFS frames and NFA states, emits each terminal once and retains no global query memo. First-item existence and full enumeration share that cursor; neither caps output at a consumer candidate bound. Exact lookup and enumeration retain their own contracts and ordering.
+
+Resource bounds: [Canonical Name Query](spec-merge.md#canonical-name-query).
 
 ## Function Specifications
 

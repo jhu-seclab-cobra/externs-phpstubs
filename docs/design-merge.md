@@ -69,7 +69,7 @@ verification ranks at least equal under `Precedence.DEFAULT` (equal rank,
 later position wins; lower rank never replaces). The extension of a record
 is the extension of the entry in force for its signature unit. A
 conditional entry declaring a signature is `StubIndexInvalidException`.
-`SetMerge.of` completes record construction with the alias-key step of
+Each final function/class record with an effective signature is inserted into its kind's ordinary canonical-name trie before aliases are expanded. Terminals reference that record; exact maps remain separate. `SetMerge.of` completes record construction with the alias-key step of
 [spec-merge.md](spec-merge.md#steps).
 
 **Record assembly:** per subject, the signature is that of the unconditional

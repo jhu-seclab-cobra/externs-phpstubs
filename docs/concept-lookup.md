@@ -38,8 +38,9 @@ decides.
 - **Owned:** the Canonical Vocabulary, the mapping onto it, the mount
   order and the Set Merge (which set's entry is in force per subject,
   condition, and unit), the exact lookup by PHP spelling, and
-  enumeration by declaration kind and by fact kind. Any looser match is the
-  consumer's filter over an enumeration, never a rule here.
+  enumeration by declaration kind and by fact kind, and typed queries over
+  canonical function/class names ([lookup model](model-lookup.md)). Other
+  loose matches remain consumer filters over enumeration.
 - **Not Owned:** the format and its decoding (commons-phpmodels); deciding
   whether a fact's condition holds at a call, and computing a call's
   result (consumers).
@@ -98,7 +99,7 @@ consumer: fact kind ────────► BuiltinLookup ────► ev
   An enumeration yields every record of one declaration kind, or every
   fact of one fact kind, for the consumer to filter by its own rule.
 - **Scope:** exact lookup by name; enumeration by declaration kind and by
-  fact kind. Consumer sets give a second lookup beside the bundled one.
+  fact kind; canonical name patterns. Consumer sets give a second lookup beside the bundled one.
 - **Relationships:** reads the Set Merge; answers consumer queries.
 
 ## 3. Contracts & Flow
