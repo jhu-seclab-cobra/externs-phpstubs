@@ -42,6 +42,7 @@ internal class SetMerge private constructor(
 ) {
     private val all = LinkedHashMap<ModelSubject, BuiltinRecord<ModelSubject>>()
     val functions = LinkedHashMap<FunctionSubject, BuiltinRecord<FunctionSubject>>()
+
     // Keyed by declaration subject, then by class alias: a record with aliases appears under several keys.
     val classes = LinkedHashMap<ClassSubject, BuiltinRecord<ClassSubject>>()
     val methods = LinkedHashMap<MethodSubject, BuiltinRecord<MethodSubject>>()
