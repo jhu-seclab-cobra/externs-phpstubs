@@ -17,6 +17,7 @@ import kotlin.test.assertTrue
  * - `effective merge indexes signatures before alias keys` — canonical subjects only, facts stay present.
  * - `independent effective merges do not share query results` — extension/override lifecycle.
  * - `bundled matches include an unloaded function without creating a second record` — real builtin intake.
+ * - `query terminals use the effective signature and canonical namespace identity` — effective record lifecycle.
  */
 internal class BuiltinNameTrieTest {
     private val names = listOf("strlen", "strpos", "substr", "system")
@@ -76,8 +77,10 @@ internal class BuiltinNameTrieTest {
               signature: {classifier: class, name: Original, aliases: [other]}
         """.trimIndent()
         val merge = SetMerge.of(listOf(TestSets.mount(0, Verification.MANUAL, document)))
-        assertEquals(listOf("signed"), merge.functionNames.matches(pattern(null)).asSequence().map { it.subject.name }.toList())
-        assertEquals(listOf("original"), merge.classNames.matches(pattern(null)).asSequence().map { it.subject.name }.toList())
+        assertEquals(listOf("signed"),
+            merge.functionNames.matches(pattern(null)).asSequence().map { it.subject.name }.toList())
+        assertEquals(listOf("original"),
+            merge.classNames.matches(pattern(null)).asSequence().map { it.subject.name }.toList())
         assertSame(merge.classes.values.first(), merge.classNames.matches(pattern(null)).next())
         assertTrue(merge.functions.containsKey(FunctionSubject("facts_only")))
     }
@@ -90,7 +93,8 @@ internal class BuiltinNameTrieTest {
             "- subject: {function: second}\n  signature: {params: [], returnType: int}\n")
         val base = SetMerge.of(listOf(first))
         val extended = SetMerge.of(listOf(first, second))
-        assertEquals(listOf("first"), base.functionNames.matches(pattern(null)).asSequence().map { it.subject.name }.toList())
+        assertEquals(listOf("first"),
+            base.functionNames.matches(pattern(null)).asSequence().map { it.subject.name }.toList())
         assertEquals(listOf("first", "second"),
             extended.functionNames.matches(pattern(null)).asSequence().map { it.subject.name }.toList())
     }
