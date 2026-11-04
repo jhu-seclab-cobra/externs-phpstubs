@@ -2,6 +2,7 @@
 
 | File | Topic |
 |------|-------|
+| [glossary/glossary.md](glossary/glossary.md) | Glossary — canonical vocabulary, set merge, facts and imported terms |
 | [concept.md](concept.md) | Problem, scope, concepts and data flow |
 | [concept-lookup.md](concept-lookup.md) | Canonical vocabulary, merge and builtin lookup |
 | [concept-extraction.md](concept-extraction.md) | Declarations, source extraction and throws |
