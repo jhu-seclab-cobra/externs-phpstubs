@@ -93,7 +93,7 @@ algorithm is in [Effective Handler Extraction](spec-extraction-handlers.md).
   tag selects the alias. The selected value must be a class spelling; one
   leading `\` is dropped and the rest is folded.
 - Class signature field definitions:
-  [commons-phpmodels declaration types](../../commons-phpmodels/docs/design-declarations.md#signatureinfo-sealed).
+  [commons-phpmodels declaration types](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/717fd5024ce1f8b2792b4ca4a952b58450db6706/docs/design-declarations.md#signatureinfo-sealed).
 - Conflicting source hierarchies, class names or class aliases, or
   incompatible declared final modifiers, fail. Registered flags establish finality independently of classifier;
   source-defined enum restrictions are not rewritten as a FINAL flag.

@@ -63,7 +63,7 @@ val extended = PhpStubs.with(Path.of("models/site-rules"))
 
 ## API
 
-**`BuiltinLookup`** -- the read surface of one merge. Every exact lookup spells its subject in PHP's own grammar through the [commons-phpmodels](https://github.com/jhu-seclab-cobra/commons-phpmodels) subject creators: functions, classes, and methods fold case and drop a leading `\`; constants keep their case. A name that is not a spelling of the kind raises `IllegalArgumentException`; an absent subject is `null`.
+**`BuiltinLookup`** -- the read surface of one merge. Every exact lookup spells its subject in PHP's own grammar through the [commons-phpmodels](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/717fd5024ce1f8b2792b4ca4a952b58450db6706/docs/design-subjects.md#modelsubject-sealed) subject creators: functions, classes, and methods fold case and drop a leading `\`; constants keep their case. A name that is not a spelling of the kind raises `IllegalArgumentException`; an absent subject is `null`.
 
 | Member | Return |
 |--------|--------|
@@ -103,7 +103,7 @@ The merge keeps the entry in force per (subject, condition, unit); a higher-rank
 
 ## Background
 
-Model documents derived from [JetBrains/phpstorm-stubs](https://github.com/JetBrains/phpstorm-stubs) (the declarations php-src does not rewrite: constants, properties, extensions outside php-src; Apache-2.0), [vimeo/psalm](https://github.com/vimeo/psalm) (dataflow annotations and taint data, MIT), and [php/php-src](https://github.com/php/php-src) stubs and C sources (class hierarchy, function and method signatures, throws; PHP License), emitted in the [commons-phpmodels](https://github.com/jhu-seclab-cobra/commons-phpmodels) format. Language constructs (`echo`, `isset`, `int`, ...) are declared as data under `models/language/`; builtins the extraction does not produce are hand-declared under `models/manual/`.
+Model documents derived from [JetBrains/phpstorm-stubs](https://github.com/JetBrains/phpstorm-stubs) (the declarations php-src does not rewrite: constants, properties, extensions outside php-src; Apache-2.0), [vimeo/psalm](https://github.com/vimeo/psalm) (dataflow annotations and taint data, MIT), and [php/php-src](https://github.com/php/php-src) stubs and C sources (class hierarchy, function and method signatures, throws; PHP License), emitted in the [commons-phpmodels](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/717fd5024ce1f8b2792b4ca4a952b58450db6706/README.md) format. Language constructs (`echo`, `isset`, `int`, ...) are declared as data under `models/language/`; builtins the extraction does not produce are hand-declared under `models/manual/`.
 
 ## Documentation
 

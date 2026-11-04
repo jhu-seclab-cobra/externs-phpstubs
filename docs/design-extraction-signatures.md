@@ -26,11 +26,11 @@ sets).
   integer, a decimal, or a quoted string with no escape or interpolation) also
   carries that literal as `default`, spelled as in the stub; any other default
   (a constant, an array, an expression) leaves `default` absent. Format and
-  meaning: [parameter facts](../../commons-phpmodels/docs/design-declarations.md).
+  meaning: [parameter facts](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/717fd5024ce1f8b2792b4ca4a952b58450db6706/docs/design-declarations.md#namedextras).
 - After selecting stub signature variants, `with_named_extras` reads one shared
   C program and attaches a source-established policy only to each callable's
   variadic parameter. Format and meaning:
-  [parameter facts](../../commons-phpmodels/docs/design-declarations.md#namedextras).
+  [parameter facts](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/717fd5024ce1f8b2792b4ca4a952b58450db6706/docs/design-declarations.md#namedextras).
 - `named_extras.read_policies(program, keys)` resolves each subject through the
   shared registration tables, including aliases. Every ordinary handler and
   every definition must agree. Frameless handlers do not receive named calls.
