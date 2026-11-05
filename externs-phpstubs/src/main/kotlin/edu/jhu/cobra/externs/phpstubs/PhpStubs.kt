@@ -132,12 +132,6 @@ public class PhpStubs internal constructor(
      */
     public fun with(vararg dirs: Path): PhpStubs = extend(dirs.map { "$it/" to directoryOpener(it) })
 
-    /** [with] of one classpath root. */
-    public operator fun plus(root: String): PhpStubs = with(root)
-
-    /** [with] of one directory. */
-    public operator fun plus(dir: Path): PhpStubs = with(dir)
-
     private fun extend(sets: List<Pair<String, ResourceOpener>>): PhpStubs {
         val sequence = MountSequence(mounts)
         for ((root, open) in sets) sequence.mount(root, open)
@@ -150,18 +144,12 @@ public class PhpStubs internal constructor(
             if (Files.isRegularFile(file)) Files.newInputStream(file) else null
         }
 
-    /** The lookup over the bundled sets; [with] and [plus] extend it. */
+    /** The lookup over the bundled sets; [with] extends it. */
     public companion object : BuiltinLookup by bundled {
         /** [PhpStubs.with] over the bundled lookup. */
         public fun with(vararg roots: String): PhpStubs = bundled.with(*roots)
 
         /** [PhpStubs.with] over the bundled lookup. */
         public fun with(vararg dirs: Path): PhpStubs = bundled.with(*dirs)
-
-        /** [PhpStubs.plus] over the bundled lookup. */
-        public operator fun plus(root: String): PhpStubs = bundled + root
-
-        /** [PhpStubs.plus] over the bundled lookup. */
-        public operator fun plus(dir: Path): PhpStubs = bundled + dir
     }
 }

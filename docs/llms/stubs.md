@@ -51,7 +51,7 @@ query?.sinkFacts?.single()?.vulnType == VulnType.SQLI.id   // true
 
 **`PhpStubs.<any BuiltinLookup member>`** -- The bundled merge, built on first access and shared.
 
-**`with(vararg roots: String): PhpStubs`**, **`with(vararg dirs: Path): PhpStubs`**, **`plus(root)`, `plus(dir)`** -- A new lookup mounting the consumer sets after this lookup's sets, in order; each decodes against the vocabulary accumulated so far; no `provenance.yaml` means manual. The receiver is unchanged. Also on the companion.
+**`with(vararg roots: String): PhpStubs`**, **`with(vararg dirs: Path): PhpStubs`** -- A new lookup mounting the consumer sets after this lookup's sets, in order; each decodes against the vocabulary accumulated so far; no `provenance.yaml` means manual. The receiver is unchanged. Also on the companion.
 
 ### BuiltinRecord<S : ModelSubject> (data class)
 

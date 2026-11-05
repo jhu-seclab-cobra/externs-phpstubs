@@ -83,7 +83,7 @@ holds its mounts (so `with` can extend them) and `SetMerge.of(mounts)`.
 mapping read once from `StubResources.PSALM_MAPPING`). The constructor is
 internal, not private, because a top-level value cannot call a private
 constructor, and the companion cannot be referenced during its own
-initialization ([impl.md](impl.md)). The companion declares `with`/`plus`
+initialization ([impl.md](impl.md)). The companion declares `with`
 overloads forwarding to `bundled`, since delegation covers interface
 members only.
 
@@ -93,8 +93,6 @@ members only.
   mounts in the given order.
 - `fun with(vararg dirs: Path): PhpStubs` — filesystem directories,
   opened relative to each directory, mounted the same way.
-- `operator fun plus(root: String): PhpStubs`, `operator fun plus(dir: Path): PhpStubs`
-  — `with` of one root.
 - **Behavior:** every consumer set decodes through
   `DocumentSetLoader.load(opener, vocabulary, mapping = null)` against the
   vocabulary accumulated so far; a set without `provenance.yaml` mounts as

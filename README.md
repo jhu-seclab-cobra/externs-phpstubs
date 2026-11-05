@@ -79,7 +79,7 @@ val extended = PhpStubs.with(Path.of("models/site-rules"))
 | `sinkFacts`, `sourceFacts`, `sanitizerFacts`, `flows`, `characters`, `returns`, `throws` | `List<…Fact>` in record order |
 | `vocabulary`, `policy` | `Vocabulary`, `TaintPolicy` accumulated over every mounted set |
 
-**`PhpStubs`** -- one `BuiltinLookup` over one merge. The companion is the lookup over the bundled sets, built on first access and shared. `with(vararg roots: String)`, `with(vararg dirs: Path)`, and `plus` build a second lookup that mounts consumer sets after the bundled ones, in order; a set without `provenance.yaml` mounts as manual.
+**`PhpStubs`** -- one `BuiltinLookup` over one merge. The companion is the lookup over the bundled sets, built on first access and shared. `with(vararg roots: String)` and `with(vararg dirs: Path)` build a second lookup that mounts consumer sets after the bundled ones, in order; a set without `provenance.yaml` mounts as manual.
 
 **`BuiltinRecord<S>`** -- `(subject, extension: String?, signature: SignatureInfo?, returns, flows, characters, sourceFacts, sinkFacts, sanitizerFacts, throws)`. Typed accessors: `callableSignature` (function, method), `classSignature` (class), `typedSignature` (constant, class constant), `propertySignature` (property). `extension` is the PHP extension of the generated entry, `null` for a subject only a hand-maintained set states.
 

@@ -154,12 +154,12 @@ consumer: fact kind ────────► BuiltinLookup ────► ev
 ## 5. Rationale and Rejected Alternatives
 
 - **Choice (T4d-U4, agent decision):** a set the consumer mounts through
-  `PhpStubs.with` or `plus` is a Consumer Set, paired with Bundled Set by
+  `PhpStubs.with` is a Consumer Set, paired with Bundled Set by
   who supplies it, so "extension" names only the PHP extension of a
   declaration, as the PHP manual and php-src use it.
 - **Rejected:** "extension set" (a second sense of extension); "stub set"
   (names the bundled sets too); "supplied set", "third-party set",
-  "overlay set", "user-supplied set"; renaming `with` and `plus`.
+  "overlay set", "user-supplied set"; renaming `with`.
 - **Choice (T4d-U9, agent decision):** the merge result for one
   (subject, condition, unit) key is "the entry in force", the format
   library's phrase; the fold stores the mounted entry itself, and the

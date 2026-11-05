@@ -17,7 +17,7 @@ import kotlin.test.assertTrue
 
 /**
  * Tests for [PhpStubs]: the bundled merge in Mount Order and the construction of consumer set merges through
- * [PhpStubs.with] and [PhpStubs.plus]. The read surface: [BuiltinLookupExactTest], [BuiltinLookupEnumerationTest].
+ * [PhpStubs.with]. The read surface: [BuiltinLookupExactTest], [BuiltinLookupEnumerationTest].
  *
  * - `keyword constructs and scalar classes are records` — verifies the language documents load
  * - `a record carries extension, signature, and the value unit in force` — verifies the manual rule outranks
@@ -29,7 +29,7 @@ import kotlin.test.assertTrue
  * - `a consumer set without provenance mounts as manual` — verifies it replaces a bundled manual entry
  * - `a consumer set with generated provenance loses to a bundled manual entry` — verifies rank over order
  * - `later consumer roots override earlier ones` — verifies supplied order among consumer sets
- * - `plus chains like with` — verifies the operator form
+ * - `with chains like one with of every root` — verifies chained single-root calls equal one call of every root
  * - `with mounts a directory consumer set` — verifies the filesystem opener
  * - `a consumer set failure surfaces from the mounting call` — verifies error classification
  * - `a directory consumer set names the absent document` — verifies absence under the filesystem opener
@@ -138,12 +138,12 @@ internal class PhpStubsTest {
     }
 
     @Test
-    fun `plus chains like with`() {
-        val chained = PhpStubs + "/consumer-test/" + "/consumer-second/"
+    fun `with chains like one with of every root`() {
+        val chained = PhpStubs.with("/consumer-test/").with("/consumer-second/")
         val together = PhpStubs.with("/consumer-test/", "/consumer-second/")
         assertEquals(together.function("strlen"), chained.function("strlen"))
         assertEquals(together.function("consumer_only"), chained.function("consumer_only"))
-        assertEquals(together.function("consumer_only"), (PhpStubs + "/consumer-test/").function("consumer_only"))
+        assertEquals(together.function("consumer_only"), PhpStubs.with("/consumer-test/").function("consumer_only"))
     }
 
     @Test
@@ -152,8 +152,7 @@ internal class PhpStubsTest {
     ) {
         Files.writeString(dir.resolve("index.txt"), "dir.yaml\n")
         Files.writeString(dir.resolve("dir.yaml"), "- subject: {function: directory_only}\n  returns: str\n")
-        assertEquals(ReturnKind.STR, assertNotNull((PhpStubs + dir).function("directory_only")).returns.single().kind)
-        assertNotNull(PhpStubs.with(dir).function("directory_only"))
+        assertEquals(ReturnKind.STR, assertNotNull(PhpStubs.with(dir).function("directory_only")).returns.single().kind)
     }
 
     @Test
