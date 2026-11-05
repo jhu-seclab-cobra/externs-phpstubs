@@ -2053,7 +2053,7 @@
     constant: EXTR_PREFIX_IF_EXISTS
   signature:
     type: int
-    value: '7'
+    value: '5'
 - subject:
     constant: EXTR_REFS
   signature:
