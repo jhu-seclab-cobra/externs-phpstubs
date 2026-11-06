@@ -3019,15 +3019,15 @@
       type: string
     returnType: bool
 - subject:
-    function: ui\\draw\\text\\font\\fontfamilies
+    function: ui\draw\text\font\fontfamilies
   signature:
     returnType: array
 - subject:
-    function: ui\\quit
+    function: ui\quit
   signature:
     returnType: void
 - subject:
-    function: ui\\run
+    function: ui\run
   signature:
     params:
     - name: flags

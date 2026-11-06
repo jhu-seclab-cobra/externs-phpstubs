@@ -1174,18 +1174,18 @@
     to: return
   throws: [valueerror]
 - subject:
-    function: ast\\get_kind_name
+    function: ast\get_kind_name
   signature:
     params:
     - name: kind
       type: int
     returnType: string
 - subject:
-    function: ast\\get_metadata
+    function: ast\get_metadata
   signature:
     returnType: array
 - subject:
-    function: ast\\get_supported_versions
+    function: ast\get_supported_versions
   signature:
     params:
     - name: exclude_deprecated
@@ -1193,14 +1193,14 @@
       optional: true
     returnType: array
 - subject:
-    function: ast\\kind_uses_flags
+    function: ast\kind_uses_flags
   signature:
     params:
     - name: kind
       type: int
     returnType: bool
 - subject:
-    function: ast\\parse_code
+    function: ast\parse_code
   signature:
     params:
     - name: code
@@ -1219,7 +1219,7 @@
   - from: argument(2)
     to: return
 - subject:
-    function: ast\\parse_file
+    function: ast\parse_file
   signature:
     params:
     - name: filename
@@ -1975,7 +1975,7 @@
     returnType: 'true'
   throws: []
 - subject:
-    function: co\\defer
+    function: co\defer
   signature:
     params:
     - name: fn
@@ -1985,7 +1985,7 @@
   - from: argument(0)
     to: return
 - subject:
-    function: co\\go
+    function: co\go
   signature:
     params:
     - name: fn
@@ -2000,7 +2000,7 @@
   - from: argument(1)
     to: return
 - subject:
-    function: co\\run
+    function: co\run
   signature:
     params:
     - name: fn
@@ -2026,7 +2026,7 @@
       type: mixed
     returnType: bool
 - subject:
-    function: commonmark\\parse
+    function: commonmark\parse
   signature:
     params:
     - name: content
@@ -2041,7 +2041,7 @@
   - from: argument(1)
     to: return
 - subject:
-    function: commonmark\\render
+    function: commonmark\render
   signature:
     params:
     - name: node
@@ -2057,7 +2057,7 @@
   - from: argument(0)
     to: return
 - subject:
-    function: commonmark\\render\\html
+    function: commonmark\render\html
   signature:
     params:
     - name: node
@@ -2070,23 +2070,7 @@
   - from: argument(0)
     to: return
 - subject:
-    function: commonmark\\render\\latex
-  signature:
-    params:
-    - name: node
-      type: mixed
-    - name: options
-      type: int
-      optional: true
-    - name: width
-      type: int
-      optional: true
-    returnType: string
-  propagation:
-  - from: argument(0)
-    to: return
-- subject:
-    function: commonmark\\render\\man
+    function: commonmark\render\latex
   signature:
     params:
     - name: node
@@ -2102,7 +2086,23 @@
   - from: argument(0)
     to: return
 - subject:
-    function: commonmark\\render\\xml
+    function: commonmark\render\man
+  signature:
+    params:
+    - name: node
+      type: mixed
+    - name: options
+      type: int
+      optional: true
+    - name: width
+      type: int
+      optional: true
+    returnType: string
+  propagation:
+  - from: argument(0)
+    to: return
+- subject:
+    function: commonmark\render\xml
   signature:
     params:
     - name: node
@@ -2135,7 +2135,7 @@
     to: return
   throws: [error]
 - subject:
-    function: componere\\cast
+    function: componere\cast
   signature:
     params:
     - name: arg1
@@ -2149,7 +2149,7 @@
   - from: argument(1)
     to: return
 - subject:
-    function: componere\\cast_by_ref
+    function: componere\cast_by_ref
   signature:
     params:
     - name: arg1
@@ -2230,7 +2230,7 @@
     returnType: float
   throws: []
 - subject:
-    function: couchbase\\basicdecoderv1
+    function: couchbase\basicdecoderv1
   signature:
     params:
     - name: bytes
@@ -2252,7 +2252,7 @@
   - from: argument(3)
     to: return
 - subject:
-    function: couchbase\\basicencoderv1
+    function: couchbase\basicencoderv1
   signature:
     params:
     - name: value
@@ -2266,7 +2266,7 @@
   - from: argument(1)
     to: return
 - subject:
-    function: couchbase\\defaultdecoder
+    function: couchbase\defaultdecoder
   signature:
     params:
     - name: bytes
@@ -2284,7 +2284,7 @@
   - from: argument(2)
     to: return
 - subject:
-    function: couchbase\\defaultencoder
+    function: couchbase\defaultencoder
   signature:
     params:
     - name: value
@@ -2294,7 +2294,7 @@
   - from: argument(0)
     to: return
 - subject:
-    function: couchbase\\fastlzcompress
+    function: couchbase\fastlzcompress
   signature:
     params:
     - name: data
@@ -2304,7 +2304,7 @@
   - from: argument(0)
     to: return
 - subject:
-    function: couchbase\\fastlzdecompress
+    function: couchbase\fastlzdecompress
   signature:
     params:
     - name: data
@@ -2314,7 +2314,7 @@
   - from: argument(0)
     to: return
 - subject:
-    function: couchbase\\passthrudecoder
+    function: couchbase\passthrudecoder
   signature:
     params:
     - name: bytes
@@ -2328,14 +2328,14 @@
   - from: argument(0)
     to: return
 - subject:
-    function: couchbase\\passthruencoder
+    function: couchbase\passthruencoder
   signature:
     params:
     - name: value
       type: string
     returnType: array
 - subject:
-    function: couchbase\\zlibcompress
+    function: couchbase\zlibcompress
   signature:
     params:
     - name: data
@@ -2345,7 +2345,7 @@
   - from: argument(0)
     to: return
 - subject:
-    function: couchbase\\zlibdecompress
+    function: couchbase\zlibdecompress
   signature:
     params:
     - name: data

@@ -11,6 +11,7 @@ import kotlin.test.assertFailsWith
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 import kotlin.test.assertSame
+import kotlin.test.assertTrue
 
 /**
  * Tests for the exact-lookup half of [BuiltinLookup], read through the bundled [PhpStubs] companion:
@@ -19,6 +20,7 @@ import kotlin.test.assertSame
  *
  * - `function lookup folds case and the leading slash` — verifies the spelling is the format library's
  * - `function lookup misses an unknown name and rejects a member spelling` — verifies absence and argument error
+ * - `every declared function name is a PHP spelling` — verifies each namespace part of a declared function is one identifier
  * - `clazz lookup folds case and misses an unknown name` — verifies the class kind
  * - `method lookup accepts both spellings and needs the owner` — verifies the two method forms
  * - `constant lookup is exact and case sensitive` — verifies a global constant resolves only by its spelling
@@ -31,6 +33,8 @@ import kotlin.test.assertSame
  * - `record answers an already built subject` — verifies the subject-keyed lookup
  * - `a name that is not a PHP spelling of the kind is an argument error` — verifies the error class per kind
  */
+private val PHP_IDENTIFIER = Regex("[A-Za-z_\\x80-\\uFFFF][A-Za-z0-9_\\x80-\\uFFFF]*")
+
 internal class BuiltinLookupExactTest {
     @Test
     fun `function lookup folds case and the leading slash`() {
@@ -43,6 +47,15 @@ internal class BuiltinLookupExactTest {
     fun `function lookup misses an unknown name and rejects a member spelling`() {
         assertNull(PhpStubs.function("nonexistent_function_xyz"))
         assertFailsWith<IllegalArgumentException> { PhpStubs.function("Exception::getCode") }
+    }
+
+    @Test
+    fun `every declared function name is a PHP spelling`() {
+        val declared = PhpStubs.functions.filter { it.signature != null }
+        assertTrue(declared.isNotEmpty())
+        val malformed =
+            declared.map { it.subject.name }.filterNot { name -> name.split('\\').all(PHP_IDENTIFIER::matches) }
+        assertEquals(emptyList<String>(), malformed)
     }
 
     @Test

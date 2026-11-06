@@ -723,7 +723,7 @@
       type: int
     returnType: void
 - subject:
-    function: mongodb\\bson\\fromjson
+    function: mongodb\bson\fromjson
   signature:
     params:
     - name: json
@@ -733,14 +733,14 @@
   - from: argument(0)
     to: return
 - subject:
-    function: mongodb\\bson\\fromphp
+    function: mongodb\bson\fromphp
   signature:
     params:
     - name: value
       type: array
     returnType: string
 - subject:
-    function: mongodb\\bson\\tocanonicalextendedjson
+    function: mongodb\bson\tocanonicalextendedjson
   signature:
     params:
     - name: bson
@@ -750,7 +750,7 @@
   - from: argument(0)
     to: return
 - subject:
-    function: mongodb\\bson\\tojson
+    function: mongodb\bson\tojson
   signature:
     params:
     - name: bson
@@ -760,7 +760,7 @@
   - from: argument(0)
     to: return
 - subject:
-    function: mongodb\\bson\\tophp
+    function: mongodb\bson\tophp
   signature:
     params:
     - name: bson
@@ -773,7 +773,7 @@
   - from: argument(1)
     to: return
 - subject:
-    function: mongodb\\bson\\torelaxedextendedjson
+    function: mongodb\bson\torelaxedextendedjson
   signature:
     params:
     - name: bson
@@ -783,14 +783,14 @@
   - from: argument(0)
     to: return
 - subject:
-    function: mongodb\\driver\\monitoring\\addsubscriber
+    function: mongodb\driver\monitoring\addsubscriber
   signature:
     params:
     - name: subscriber
       type: mixed
     returnType: void
 - subject:
-    function: mongodb\\driver\\monitoring\\mongoc_log
+    function: mongodb\driver\monitoring\mongoc_log
   signature:
     params:
     - name: level
@@ -801,7 +801,7 @@
       type: string
     returnType: void
 - subject:
-    function: mongodb\\driver\\monitoring\\removesubscriber
+    function: mongodb\driver\monitoring\removesubscriber
   signature:
     params:
     - name: subscriber
@@ -1630,7 +1630,7 @@
       optional: true
     returnType: bool
 - subject:
-    function: mysql_xdevapi\\getsession
+    function: mysql_xdevapi\getsession
   signature:
     params:
     - name: uri

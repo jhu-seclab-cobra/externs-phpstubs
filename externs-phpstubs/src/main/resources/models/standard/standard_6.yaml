@@ -3948,7 +3948,7 @@
   - from: argument(1)
     to: return
 - subject:
-    function: swoole\\coroutine\\batch
+    function: swoole\coroutine\batch
   signature:
     params:
     - name: tasks
@@ -3961,11 +3961,11 @@
   - from: argument(0)
     to: return
 - subject:
-    function: swoole\\coroutine\\deadlock_check
+    function: swoole\coroutine\deadlock_check
   signature:
     returnType: mixed
 - subject:
-    function: swoole\\coroutine\\defer
+    function: swoole\coroutine\defer
   signature:
     params:
     - name: fn
@@ -3975,7 +3975,7 @@
   - from: argument(0)
     to: return
 - subject:
-    function: swoole\\coroutine\\go
+    function: swoole\coroutine\go
   signature:
     params:
     - name: fn
@@ -3990,7 +3990,7 @@
   - from: argument(1)
     to: return
 - subject:
-    function: swoole\\coroutine\\http\\get
+    function: swoole\coroutine\http\get
   signature:
     params:
     - name: url
@@ -4015,7 +4015,7 @@
   - from: argument(3)
     to: return
 - subject:
-    function: swoole\\coroutine\\http\\post
+    function: swoole\coroutine\http\post
   signature:
     params:
     - name: url
@@ -4044,7 +4044,7 @@
   - from: argument(4)
     to: return
 - subject:
-    function: swoole\\coroutine\\http\\request
+    function: swoole\coroutine\http\request
   signature:
     params:
     - name: url
@@ -4078,7 +4078,7 @@
   - from: argument(5)
     to: return
 - subject:
-    function: swoole\\coroutine\\http\\request_with_curl
+    function: swoole\coroutine\http\request_with_curl
   signature:
     params:
     - name: url
@@ -4112,7 +4112,7 @@
   - from: argument(5)
     to: return
 - subject:
-    function: swoole\\coroutine\\http\\request_with_http_client
+    function: swoole\coroutine\http\request_with_http_client
   signature:
     params:
     - name: url
@@ -4146,7 +4146,7 @@
   - from: argument(5)
     to: return
 - subject:
-    function: swoole\\coroutine\\http\\request_with_stream
+    function: swoole\coroutine\http\request_with_stream
   signature:
     params:
     - name: url
@@ -4180,7 +4180,7 @@
   - from: argument(5)
     to: return
 - subject:
-    function: swoole\\coroutine\\map
+    function: swoole\coroutine\map
   signature:
     params:
     - name: list
@@ -4195,7 +4195,7 @@
   - from: argument(0)
     to: return
 - subject:
-    function: swoole\\coroutine\\parallel
+    function: swoole\coroutine\parallel
   signature:
     params:
     - name: n
@@ -4204,7 +4204,7 @@
       type: callable
     returnType: void
 - subject:
-    function: swoole\\coroutine\\run
+    function: swoole\coroutine\run
   signature:
     params:
     - name: fn
