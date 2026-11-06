@@ -13,6 +13,8 @@ import kotlin.test.assertNull
 import kotlin.test.assertSame
 import kotlin.test.assertTrue
 
+private val PHP_IDENTIFIER = Regex("[A-Za-z_\\x80-\\uFFFF][A-Za-z0-9_\\x80-\\uFFFF]*")
+
 /**
  * Tests for the exact-lookup half of [BuiltinLookup], read through the bundled [PhpStubs] companion:
  * one PHP spelling per declaration kind, or owner and name apart, to at most one record.
@@ -33,8 +35,6 @@ import kotlin.test.assertTrue
  * - `record answers an already built subject` — verifies the subject-keyed lookup
  * - `a name that is not a PHP spelling of the kind is an argument error` — verifies the error class per kind
  */
-private val PHP_IDENTIFIER = Regex("[A-Za-z_\\x80-\\uFFFF][A-Za-z0-9_\\x80-\\uFFFF]*")
-
 internal class BuiltinLookupExactTest {
     @Test
     fun `function lookup folds case and the leading slash`() {
