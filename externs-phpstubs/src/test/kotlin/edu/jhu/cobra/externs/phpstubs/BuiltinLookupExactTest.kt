@@ -26,7 +26,7 @@ import kotlin.test.assertSame
  * - `a constant record carries its typed signature and extension` — verifies value and type reach the consumer
  * - `class constant lookup accepts both spellings` — verifies the qualified and split forms
  * - `property lookup accepts both spellings` — verifies the qualified and split forms over a consumer set
- * - `variable lookup spells the dollar prefix` — verifies the predefined variable kind
+ * - `variable lookup spells the dollar prefix` — verifies the predefined variable kind; a variable name keeps its case
  * - `predefined variables are records with source facts` — verifies the mapped taint sources
  * - `record answers an already built subject` — verifies the subject-keyed lookup
  * - `a name that is not a PHP spelling of the kind is an argument error` — verifies the error class per kind
@@ -104,8 +104,8 @@ internal class BuiltinLookupExactTest {
 
     @Test
     fun `variable lookup spells the dollar prefix`() {
-        val get = assertNotNull(PhpStubs.variable("\$_GET"))
-        assertSame(get, PhpStubs.variable("\$_get"))
+        assertNotNull(PhpStubs.variable("\$_GET"))
+        assertNull(PhpStubs.variable("\$_get"))
         assertNull(PhpStubs.variable("\$_NONEXISTENT_XYZ"))
     }
 
