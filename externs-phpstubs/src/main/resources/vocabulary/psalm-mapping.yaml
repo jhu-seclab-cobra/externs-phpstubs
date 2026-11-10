@@ -3,6 +3,8 @@
 # adds is listed; `ignore` discards the kind, so an element naming only
 # ignored kinds is dropped. Editing is a data-file change.
 vulnTypes:
+  nosql: nosqli
+  html_url: xss
   sql: sqli
   html: xss
   shell: cmdi

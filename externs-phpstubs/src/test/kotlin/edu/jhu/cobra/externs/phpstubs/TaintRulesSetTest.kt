@@ -215,7 +215,8 @@ internal class TaintRulesSetTest {
                 .single()
         assertEquals(setOf(SourceKindId("external-input")), getenv.sourceKinds)
         val external = mapped.policy.single { it.sourceKind == SourceKindId("external-input") }
-        assertEquals(VulnType.entries.map { it.id }.toSet(), external.enables)
+        val libraryTypes = setOf(VulnType.OPENREDIRECT.id, VulnType.NOSQLI.id, VulnType.TEMPLATEI.id, VulnType.HARDCODEDKEY.id)
+        assertEquals(VulnType.entries.map { it.id }.toSet() - libraryTypes, external.enables)
         assertNotNull(mapped.policy.singleOrNull { it.sourceKind == SourceKindId("user-input") })
     }
 

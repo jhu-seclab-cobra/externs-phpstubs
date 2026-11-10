@@ -29,6 +29,16 @@ vulnTypes:
   - name: xpathi
     description: XPath injection
 
+  - name: openredirect
+    description: Open redirect (CWE-601)
+  - name: nosqli
+    description: NoSQL injection (CWE-943)
+
+  - name: templatei
+    description: Server-side template injection (CWE-1336)
+  - name: hardcodedkey
+    description: Hard-coded cryptographic key (CWE-321)
+
 sourceKinds:
   - name: user-input
     description: Attacker-controlled request input (superglobals, request body, headers)

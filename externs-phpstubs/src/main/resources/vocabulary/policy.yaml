@@ -3,6 +3,6 @@
 # triggers when it reaches a sink. Every `sourceKind`/`enables` tag must be declared in
 # vocabulary.yaml. Editing the matrix is a data-file change — no code change.
 - sourceKind: user-input
-  enables: [sqli, cmdi, codei, xss, headeri, ssrf, pathtrav, fileinc, deser, callablei, ldapi, xpathi]
+  enables: [sqli, cmdi, codei, xss, headeri, ssrf, pathtrav, fileinc, deser, callablei, ldapi, xpathi, openredirect, nosqli, templatei, hardcodedkey]
 - sourceKind: external-input
-  enables: [sqli, cmdi, codei, xss, headeri, ssrf, pathtrav, fileinc, deser, callablei, ldapi, xpathi]
+  enables: [sqli, cmdi, codei, xss, headeri, ssrf, pathtrav, fileinc, deser, callablei, ldapi, xpathi, openredirect, nosqli, templatei, hardcodedkey]

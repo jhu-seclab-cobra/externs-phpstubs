@@ -24,4 +24,8 @@ public enum class VulnType(
     CALLABLEI(VulnTypeId("callablei")),
     LDAPI(VulnTypeId("ldapi")),
     XPATHI(VulnTypeId("xpathi")),
+    OPENREDIRECT(VulnTypeId("openredirect")),
+    NOSQLI(VulnTypeId("nosqli")),
+    TEMPLATEI(VulnTypeId("templatei")),
+    HARDCODEDKEY(VulnTypeId("hardcodedkey")),
 }
