@@ -53,6 +53,10 @@ query?.sinkFacts?.single()?.vulnType == VulnType.SQLI.id   // true
 
 **`with(vararg roots: String): PhpStubs`**, **`with(vararg dirs: Path): PhpStubs`** -- A new lookup mounting the consumer sets after this lookup's sets, in order; each decodes against the vocabulary accumulated so far; no `provenance.yaml` means manual. The receiver is unchanged. Also on the companion.
 
+**`libraries: List<LibrarySet>`** — Available Composer packages, described versions, upstreams and resource roots.
+
+**`withLibraries(vararg packages: String): PhpStubs`** — Mount generated package sets in order. Raises `IllegalArgumentException` for an unknown package.
+
 ### BuiltinRecord<S : ModelSubject> (data class)
 
 **`subject: S`**, **`extension: String?`** (from the generated document's placement, `standard_3.yaml` -> `standard`; `null` when no generated set declares the subject), **`signature: SignatureInfo?`** (the signature of the unconditional entry in force), **`returns`, `flows`, `characters`, `sourceFacts`, `sinkFacts`, `sanitizerFacts`, `throws`** (every fact in force under every condition), **`facts`** (all seven in that order). Construction requires a signature or at least one fact, and every fact's `owner == subject`.
@@ -75,7 +79,7 @@ Every fact: **`owner: ModelSubject`**, **`condition: ArgPattern?`** (`null` for 
 
 ### VulnType, SourceKind (enums)
 
-**`VulnType.SQLI.id`** ... -- `VulnTypeId` per canonical vulnerability type: `sqli`, `cmdi`, `codei`, `xss`, `headeri`, `ssrf`, `pathtrav`, `fileinc`, `deser`, `callablei`, `ldapi`, `xpathi`. **`SourceKind.USER_INPUT.id`**, **`SourceKind.EXTERNAL_INPUT.id`** -- `SourceKindId("user-input")`, `SourceKindId("external-input")`. A vulnerability type a consumer set adds has no constant.
+**`VulnType.SQLI.id`** ... -- `VulnTypeId` per canonical vulnerability type: `sqli`, `cmdi`, `codei`, `xss`, `headeri`, `ssrf`, `pathtrav`, `fileinc`, `deser`, `callablei`, `ldapi`, `xpathi`, `openredirect`, `nosqli`, `templatei`, `hardcodedkey`. **`SourceKind.USER_INPUT.id`**, **`SourceKind.EXTERNAL_INPUT.id`** -- `SourceKindId("user-input")`, `SourceKindId("external-input")`. A vulnerability type a consumer set adds has no constant.
 
 ### StubResources (object)
 

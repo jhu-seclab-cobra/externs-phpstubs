@@ -11,23 +11,18 @@
 - A `ThrowsFact` with empty `classes` states the call throws none; an empty `throws` list asserts nothing about throws.
 - Existence of a declaration is `signature != null`. A taint-only function or a predefined variable is a record without a signature.
 - Every fact carries `owner` and `condition: ArgPattern?`. Match `condition` against the call's arguments with `ArgPattern.matches(List<IPrimitiveVal?>)`; `null` (undecidable) is the consumer's rule to apply. The record ranks nothing.
-- Taint facts speak the canonical vocabulary only: `VulnType` (`sqli`, `cmdi`, `codei`, `xss`, `headeri`, `ssrf`, `pathtrav`, `fileinc`, `deser`, `callablei`, `ldapi`, `xpathi`) and `SourceKind` (`user-input`, `external-input`). No psalm name survives the merge.
+- Taint facts speak the canonical vocabulary only: `VulnType` (`sqli`, `cmdi`, `codei`, `xss`, `headeri`, `ssrf`, `pathtrav`, `fileinc`, `deser`, `callablei`, `ldapi`, `xpathi`, `openredirect`, `nosqli`, `templatei`, `hardcodedkey`) and `SourceKind` (`user-input`, `external-input`). No psalm name survives the merge.
 - Enumerate with `PhpStubs.functions`, `classes`, `methods`, `constants`, `classConstants`, `properties`, `variables` (records) or `sinkFacts`, `sourceFacts`, `sanitizerFacts`, `flows`, `returns`, `throws` (facts); a match looser than exact is your filter over an enumeration.
 - The merge keeps the entry in force per (subject, condition, unit); manual sets outrank generated ones, later position wins among equal ranks, and a unit is replaced whole. Mount order: `models/`, `value-rules/`, `vocabulary/`, `taint/`, `taint-rules/`.
 - `PhpStubs.with(Path)` / `with("/classpath/root/")` mounts consumer sets after the bundled ones; a set without `provenance.yaml` is manual. The bundled lookup is unchanged.
 - Every bundled set also loads alone through `DocumentSetLoader.load(StubResources.opener(root), context, mapping)`; `StubResources.VOCABULARY` and `StubResources.PSALM_MAPPING` give the context and mapping the taint sets need.
 - Errors: `StubIndexNotFoundException` (absent manifest or document), `StubIndexInvalidException` (malformed set, generated-set rule, conditional signature, bundled set without provenance).
 
+- Call `PhpStubs.withLibraries("laravel/framework")` to select library sets; read `PhpStubs.libraries` for package metadata.
+
 ## API Reference
 
 - [Stubs API](llms/stubs.md): `BuiltinLookup`, `PhpStubs`, `BuiltinRecord`, facts, `VulnType`, `SourceKind`, `StubResources`.
-
----
-
-# Referenced Documents
-
-## Source: llms/stubs.md
-
 # Stubs API
 
 > One record per PHP builtin over the merged document sets.
@@ -83,6 +78,10 @@ query?.sinkFacts?.single()?.vulnType == VulnType.SQLI.id   // true
 
 **`with(vararg roots: String): PhpStubs`**, **`with(vararg dirs: Path): PhpStubs`** -- A new lookup mounting the consumer sets after this lookup's sets, in order; each decodes against the vocabulary accumulated so far; no `provenance.yaml` means manual. The receiver is unchanged. Also on the companion.
 
+**`libraries: List<LibrarySet>`** — Available Composer packages, described versions, upstreams and resource roots.
+
+**`withLibraries(vararg packages: String): PhpStubs`** — Mount generated package sets in order. Raises `IllegalArgumentException` for an unknown package.
+
 ### BuiltinRecord<S : ModelSubject> (data class)
 
 **`subject: S`**, **`extension: String?`** (from the generated document's placement, `standard_3.yaml` -> `standard`; `null` when no generated set declares the subject), **`signature: SignatureInfo?`** (the signature of the unconditional entry in force), **`returns`, `flows`, `characters`, `sourceFacts`, `sinkFacts`, `sanitizerFacts`, `throws`** (every fact in force under every condition), **`facts`** (all seven in that order). Construction requires a signature or at least one fact, and every fact's `owner == subject`.
@@ -105,7 +104,7 @@ Every fact: **`owner: ModelSubject`**, **`condition: ArgPattern?`** (`null` for 
 
 ### VulnType, SourceKind (enums)
 
-**`VulnType.SQLI.id`** ... -- `VulnTypeId` per canonical vulnerability type: `sqli`, `cmdi`, `codei`, `xss`, `headeri`, `ssrf`, `pathtrav`, `fileinc`, `deser`, `callablei`, `ldapi`, `xpathi`. **`SourceKind.USER_INPUT.id`**, **`SourceKind.EXTERNAL_INPUT.id`** -- `SourceKindId("user-input")`, `SourceKindId("external-input")`. A vulnerability type a consumer set adds has no constant.
+**`VulnType.SQLI.id`** ... -- `VulnTypeId` per canonical vulnerability type: `sqli`, `cmdi`, `codei`, `xss`, `headeri`, `ssrf`, `pathtrav`, `fileinc`, `deser`, `callablei`, `ldapi`, `xpathi`, `openredirect`, `nosqli`, `templatei`, `hardcodedkey`. **`SourceKind.USER_INPUT.id`**, **`SourceKind.EXTERNAL_INPUT.id`** -- `SourceKindId("user-input")`, `SourceKindId("external-input")`. A vulnerability type a consumer set adds has no constant.
 
 ### StubResources (object)
 
@@ -130,7 +129,7 @@ values.provenance?.verification                    // Verification.MANUAL
 ## Gotchas
 
 - Identity folding is commons-phpmodels': `MethodSubject("Exception", "getMessage")` equals `MethodSubject("exception", "getmessage")`; `ConstantSubject("TRUE")` and `ConstantSubject("true")` differ.
-- No suffix, prefix, or case-folded index exists; a looser match is your filter over an enumeration. Class-alias keys follow [the lookup model](../model-lookup.md#relations).
+- Canonical literal/gap matching is specified by [the query design](../design-lookup.md#namepattern-and-canonical-matches); exact accessors retain their whole-key behavior. Class-alias keys follow [the lookup model](../model-lookup.md#relations).
 - `strlen` and other value rules subjects carry the manual value unit (`returns: num`), not the generated one: manual outranks generated whatever the position.
 - `filter_var` is five conditional sanitizer facts (`[_, 257]` ... `[_, 520]`) and no unconditional one; `print_r` and `var_export` carry a `[_, true]` returns fact beside the unconditional one. Choose per your undecidable rule.
 - A value unit is `returns` plus the `flows` and `characters` of the same entry: filter both by equality with the chosen returns fact's `condition`.

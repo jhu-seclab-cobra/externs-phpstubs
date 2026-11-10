@@ -22,3 +22,10 @@ Builtin lookup: the vocabulary every shipped set is translated into, the merge o
 - **Definition:** One element of one assertion unit of an entry in force, carrying the Matching Subject it belongs to and the Condition it holds under: a source, sink, sanitizer, flow, returns, characters or throws fact.
 - **Source:** `Fact.kt` `Fact`, `SourceFact`, `SinkFact`, `SanitizerFact`, `FlowFact`, `ReturnsFact`, `CharactersFact`, `ThrowsFact`
 - **Reference:** none
+
+## Libraries
+
+### Library Set
+- **Definition:** A generated Document Set containing a Composer package's Signatures and Facts in the Canonical Vocabulary, selectable by its package name.
+- **Example:** `laravel/framework` → the generated declarations and Facts mounted by `PhpStubs.withLibraries`.
+- **Source:** `LibrarySet.kt` `LibrarySet`; `PhpStubs.kt` `withLibraries`; `docs/design-taint-libraries.md` LibrarySet

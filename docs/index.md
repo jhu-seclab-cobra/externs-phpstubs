@@ -8,6 +8,7 @@
 | [concept-extraction.md](concept-extraction.md) | Declarations, source extraction and throws |
 | [concept-taint.md](concept-taint.md) | Taint sources, extraction and translation |
 | [concept-taint-rules.md](concept-taint-rules.md) | Manual sink and source facts and vocabulary |
+| [concept-taint-libraries.md](concept-taint-libraries.md) | Selectable library declarations and taint Facts |
 | [concept-value-rules.md](concept-value-rules.md) | Manual value units and generated-set gaps |
 | [model-lookup.md](model-lookup.md) | Bundled sets, mounting, records and builtin lookup |
 | [design.md](design.md) | Resources, mount order, generated sets and errors |
@@ -18,6 +19,7 @@
 | [design-merge.md](design-merge.md) | Mounting, failure classification and set merge |
 | [design-taint.md](design-taint.md) | Taint resource layout, extraction and validation |
 | [design-taint-rules.md](design-taint-rules.md) | Taint-rule resources, validation and maintenance |
+| [design-taint-libraries.md](design-taint-libraries.md) | Library catalog, importer, notices and rejected inputs |
 | [design-value-rules.md](design-value-rules.md) | Value-rule resources, validation and maintenance |
 | [spec-merge.md](spec-merge.md) | Set folding by subject, condition and unit |
 | [spec-throws.md](spec-throws.md) | Procedure summaries over the C sources |

@@ -142,6 +142,10 @@ Agent-consumable documentation index at `docs/llms.txt` ([llmstxt.org](https://l
 }
 ```
 
+## Library packages
+
+Select generated library declarations and taint Facts with `PhpStubs.withLibraries("laravel/framework")`. `PhpStubs.libraries` lists the available package names, described library versions, upstreams and resource roots. Each selected set ships its upstream notices and rejected input rows. See [library concepts](docs/concept-taint-libraries.md) and [selection and import design](docs/design-taint-libraries.md).
+
 ## License
 
 GPL-2.0-only
