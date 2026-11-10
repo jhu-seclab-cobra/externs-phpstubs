@@ -6,6 +6,10 @@
   signature:
     classifier: "class"
     name: "Jcupitt\\Vips\\Image"
+    parent: "Jcupitt\\Vips\\ImageAutodoc"
+    interfaces:
+      -
+        "ArrayAccess"
 # from: psalm
 -
   subject:
@@ -63,6 +67,7 @@
   signature:
     classifier: "class"
     name: "Jcupitt\\Vips\\Source"
+    parent: "Jcupitt\\Vips\\Connection"
 # from: psalm
 -
   subject:
@@ -84,6 +89,7 @@
   signature:
     classifier: "class"
     name: "Jcupitt\\Vips\\Target"
+    parent: "Jcupitt\\Vips\\Connection"
 # from: psalm
 -
   subject:

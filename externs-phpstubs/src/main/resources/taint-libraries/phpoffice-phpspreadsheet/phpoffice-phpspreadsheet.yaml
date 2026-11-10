@@ -6,6 +6,9 @@
   signature:
     classifier: "class"
     name: "PhpOffice\\PhpSpreadsheet\\Cell\\Cell"
+    interfaces:
+      -
+        "Stringable"
 # from: psalm
 -
   subject:
@@ -152,6 +155,9 @@
   signature:
     classifier: "class"
     name: "PhpOffice\\PhpSpreadsheet\\Reader\\BaseReader"
+    interfaces:
+      -
+        "PhpOffice\\PhpSpreadsheet\\Reader\\IReader2"
 # from: psalm
 -
   subject:
@@ -373,6 +379,7 @@
   signature:
     classifier: "class"
     name: "PhpOffice\\PhpSpreadsheet\\Writer\\Csv"
+    parent: "PhpOffice\\PhpSpreadsheet\\Writer\\BaseWriter"
 # from: psalm
 -
   subject:
@@ -425,6 +432,7 @@
   signature:
     classifier: "class"
     name: "PhpOffice\\PhpSpreadsheet\\Writer\\Xlsx"
+    parent: "PhpOffice\\PhpSpreadsheet\\Writer\\BaseWriter"
 # from: psalm
 -
   subject:

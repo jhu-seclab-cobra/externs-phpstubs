@@ -6,6 +6,9 @@
   signature:
     classifier: "class"
     name: "GuzzleHttp\\Psr7\\Request"
+    interfaces:
+      -
+        "Psr\\Http\\Message\\RequestInterface"
 # from: psalm
 -
   subject:

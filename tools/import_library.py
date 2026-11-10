@@ -13,7 +13,7 @@ import json
 import re
 import sys
 from collections import Counter, defaultdict
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from pathlib import Path
 
 SCRIPT = 'tools/import_library.py'
@@ -56,7 +56,7 @@ CODEQL_KINDS = {
     'server-side request forgery': 'ssrf', 'ssrf': 'ssrf',
     'unsafe deserialization': 'deser', 'insecure deserialization': 'deser',
     'file inclusion': 'fileinc', 'XPath injection': 'xpathi', 'xpath injection': 'xpathi',
-    'template injection': 'templatei', 'hardcoded-crypto-key': 'hardcodedkey',
+    'template injection': 'templatei',
     'NoSQL injection': 'nosqli', 'nosql-injection': 'nosqli',
 }
 NEON_KINDS = {
@@ -107,6 +107,8 @@ class Candidate:
 class ImportData:
     signatures: dict[str, Declaration] = field(default_factory=dict)
     candidates: list[Candidate] = field(default_factory=list)
+    traits: dict[str, list[str]] = field(default_factory=dict)
+    trait_aliases: dict[str, list[tuple[str, str]]] = field(default_factory=dict)
     psalm_kinds: dict[str, str] = field(default_factory=lambda: {'sql': 'sqli', 'shell': 'cmdi', 'input': 'user-input'})
 
 
@@ -164,11 +166,15 @@ def split_tokens(tokens: list[str]) -> list[list[str]]:
 
 def parameter(tokens: list[str], scope: Scope) -> dict:
     position = next(index for index, token in enumerate(tokens) if token.startswith('$'))
-    prefix = [token for token in tokens[:position] if token not in MODIFIERS | {'&', '...'}]
+    prefix = [token for token in tokens[:position] if token not in MODIFIERS]
+    by_ref = bool(prefix and prefix[-1] == '&' or len(prefix) > 1 and prefix[-2:] == ['&', '...'])
+    if by_ref:
+        prefix.pop(-1 if prefix[-1] == '&' else -2)
+    prefix = [token for token in prefix if token != '...']
     value = {'name': tokens[position][1:], 'type': php_type(prefix, scope)}
     if '...' in tokens[:position]:
         value['variadic'] = True
-    if '&' in tokens[:position]:
+    if by_ref:
         value['byRef'] = True
     if '=' in tokens[position + 1:]:
         value['optional'] = True
@@ -218,16 +224,58 @@ def read_class(tokens: list[str], scope: Scope, context: tuple) -> int:
     name = qualify(tokens[index + 1], scope)
     start = tokens.index('{', index + 2)
     signature = {'classifier': tokens[index], 'name': name}
+    class_edges(tokens[index + 2:start], scope, signature)
     declaration = Declaration(name.lower(), 'class', signature, origin, location)
     store.signatures[declaration.subject] = declaration
     end = end_of(tokens, start)
+    store.traits[declaration.subject] = []
+    store.trait_aliases[declaration.subject] = []
     scan_php(tokens[start + 1:end], Scope(scope.namespace, dict(scope.aliases), name), (origin, location, store))
     return end + 1
 
 
+def class_edges(tokens: list[str], scope: Scope, signature: dict) -> None:
+    relation = ''
+    for token in tokens:
+        if token in ('extends', 'implements'):
+            relation = token
+        elif token != ',' and relation:
+            name = qualify(token, scope)
+            if relation == 'extends' and signature['classifier'] == 'class':
+                signature['parent'] = name
+            else:
+                signature.setdefault('interfaces', []).append(name)
+
+
+def read_traits(tokens: list[str], index: int, context: tuple) -> int:
+    scope, store = context
+    end = index + 1
+    while tokens[end] not in (';', '{'):
+        end += 1
+    store.traits[scope.owner.lower()].extend(qualify(part[0], scope) for part in split_tokens(tokens[index + 1:end]))
+    if tokens[end] == '{':
+        last = end_of(tokens, end)
+        read_trait_aliases(tokens[end + 1:last], scope, store)
+        return last + 1
+    return end + 1
+
+
+def read_trait_aliases(tokens: list[str], scope: Scope, store: ImportData) -> None:
+    for clause in ' '.join(tokens).split(';'):
+        parts = clause.split()
+        if not parts:
+            continue
+        if 'as' not in parts:
+            raise ValueError(f'unsupported trait adaptation: {clause}')
+        source = qualify(parts[0], scope).lower() + '::' + parts[2].lower() if '::' in parts else parts[0].lower()
+        alias = parts[-1]
+        if alias not in MODIFIERS:
+            store.trait_aliases[scope.owner.lower()].append((source, alias.lower()))
+
+
 def read_use(tokens: list[str], index: int, scope: Scope) -> int:
     end = tokens.index(';', index)
-    if scope.owner or tokens[index + 1] in ('function', 'const'):
+    if tokens[index + 1] in ('function', 'const'):
         return end + 1
     for part in split_tokens(tokens[index + 1:end]):
         if '{' in part:
@@ -251,7 +299,7 @@ def scan_php(tokens: list[str], scope: Scope, context: tuple) -> None:
         elif token == 'namespace':
             index = read_namespace(tokens, index, context)
         elif token == 'use':
-            index = read_use(tokens, index, scope)
+            index = read_traits(tokens, index, (scope, store)) if scope.owner else read_use(tokens, index, scope)
         elif token in ('class', 'interface', 'trait', 'enum') and tokens[index - 1] != '::':
             index, doc = read_class(tokens, scope, (index, origin, location, store)), ''
         elif token == 'function':
@@ -349,6 +397,8 @@ def codeql_row(row: list, context: tuple[str, str], store: ImportData) -> None:
     mapping = CODEQL_KINDS if section != 'sources' else CODEQL_SOURCES
     kind = mapping.get(raw_kind, raw_kind)
     reason = reason or ('' if raw_kind in mapping else 'no-cwe-kind')
+    if raw_kind == 'hardcoded-crypto-key':
+        reason = 'not-taint-flow'
     store.candidates.append(Candidate(subject.lower().lstrip('\\'), section, kind, parameter_name,
                                       'codeql-php', location, reason))
 
@@ -371,17 +421,89 @@ def rejection(candidate: Candidate, reason: str) -> dict:
             'location': candidate.location, 'reason': reason}
 
 
+def inherited_declaration(subject: str, store: ImportData, visited: set[str]) -> Declaration | None:
+    if subject in store.signatures:
+        return store.signatures[subject]
+    if '::' not in subject or subject in visited:
+        return None
+    visited.add(subject)
+    owner, member = subject.split('::')
+    declaration = store.signatures.get(owner)
+    if declaration is None:
+        return None
+    signature = declaration.signature
+    supers = store.traits.get(owner, []) + ([signature['parent']] if 'parent' in signature else []) + signature.get('interfaces', [])
+    for parent in supers:
+        found = inherited_declaration(f'{parent.lower()}::{member}', store, visited)
+        if found:
+            return found
+    return None
+
+
+def trait_owners(owner: str, store: ImportData, visited: set[str]) -> set[str]:
+    if owner in visited:
+        return set()
+    visited.add(owner)
+    owners = set()
+    for trait in store.traits.get(owner, []):
+        owners.add(trait.lower())
+        owners.update(trait_owners(trait.lower(), store, visited))
+    return owners
+
+
+def expand_trait_members(store: ImportData) -> None:
+    """Materialize trait methods because ClassSignature has no trait-use field."""
+    declarations = list(store.signatures.values())
+    candidates = list(store.candidates)
+    additions = {}
+    for owner in store.traits:
+        traits = trait_owners(owner, store, set())
+        members = [item for item in declarations if item.kind == 'method' and item.subject.split('::')[0] in traits]
+        for member in members:
+            subject = owner + '::' + member.subject.split('::')[1]
+            resolved = inherited_declaration(subject, store, set())
+            if subject in store.signatures or resolved is not member:
+                continue
+            add_trait_member((subject, member, candidates), additions, store)
+        for source, alias in store.trait_aliases.get(owner, []):
+            member = trait_alias_declaration(owner, source, store)
+            if member is None:
+                continue
+            add_trait_member((owner + '::' + alias, member, candidates), additions, store)
+    store.signatures.update(additions)
+
+
+def add_trait_member(context: tuple, additions: dict[str, Declaration], store: ImportData) -> None:
+    subject, member, candidates = context
+    owner = subject.split('::')[0]
+    additions[subject] = replace(member, subject=subject, package=store.signatures[owner].package)
+    store.candidates.extend(replace(item, subject=subject) for item in candidates if item.subject == member.subject)
+
+
+def trait_alias_declaration(owner: str, source: str, store: ImportData) -> Declaration | None:
+    if '::' in source:
+        return inherited_declaration(source, store, set())
+    for trait in store.traits.get(owner, []):
+        declaration = inherited_declaration(trait.lower() + '::' + source, store, set())
+        if declaration:
+            return declaration
+    return None
+
+
 def resolve(store: ImportData) -> tuple[list[ResolvedFact], list[dict]]:
     """Union canonical facts; keep every discarded input with a specific reason."""
     facts, rejected = {}, []
     for candidate in store.candidates:
-        declaration = store.signatures.get(candidate.subject)
-        reason = 'no-class' if candidate.reason == 'no-class' else ('no-signature' if declaration is None else candidate.reason)
+        declaration = inherited_declaration(candidate.subject, store, set())
+        reason = candidate.reason if candidate.reason in ('no-class', 'not-taint-flow') else ('no-signature' if declaration is None else candidate.reason)
         positions = [] if reason else candidate_positions(candidate, declaration.signature)
         reason = reason or ('' if positions else 'unresolved-parameter')
         if reason:
             rejected.append(rejection(candidate, reason))
             continue
+        if candidate.subject not in store.signatures:
+            owner = store.signatures[candidate.subject.split('::')[0]]
+            store.signatures[candidate.subject] = replace(declaration, subject=candidate.subject, package=owner.package)
         for position in positions:
             key = (candidate.subject, candidate.section, candidate.kind, position)
             fact = facts.setdefault(key, ResolvedFact(*key))
@@ -483,8 +605,9 @@ def qualify_candidates(store: ImportData) -> None:
         if candidate.origin != 'codeql-php' or candidate.reason == 'no-class' or '\\' in candidate.subject:
             continue
         package = package_for(candidate, store)
-        matches = [item.subject for item in declarations if item.package == package
-                   and item.subject.rsplit('\\', 1)[-1] == candidate.subject]
+        owner, separator, member = candidate.subject.partition('::')
+        matches = [item.subject + separator + member for item in declarations if item.package == package
+                   and item.kind == 'class' and item.subject.rsplit('\\', 1)[-1] == owner]
         if len(matches) == 1:
             store.candidates[index] = Candidate(matches[0], candidate.section, candidate.kind, candidate.parameter,
                                                  candidate.origin, candidate.location, candidate.reason)
@@ -535,13 +658,42 @@ def notices(origins: set[str], upstream: Path) -> dict[str, str]:
             else (upstream / origin / 'LICENSE').read_text(encoding='utf-8') for origin in sorted(origins)}
 
 
+def hierarchy_subjects(subjects: set[str], store: ImportData) -> set[str]:
+    result, pending = set(subjects), list(subjects)
+    while pending:
+        subject = pending.pop()
+        declaration = store.signatures[subject]
+        if declaration.kind != 'class':
+            continue
+        signature = declaration.signature
+        names = store.traits.get(subject, []) + signature.get('interfaces', [])
+        names += [signature['parent']] if 'parent' in signature else []
+        for name in names:
+            key = name.lower()
+            if key in store.signatures and key not in result:
+                result.add(key)
+                pending.append(key)
+    return result
+
+
+def package_subjects(facts: list[ResolvedFact], store: ImportData) -> set[str]:
+    subjects = {fact.subject for fact in facts}
+    subjects.update(fact.subject.split('::')[0] for fact in facts if '::' in fact.subject)
+    return hierarchy_subjects(subjects, store)
+
+
+def unrecorded_parents(facts: list[ResolvedFact], store: ImportData) -> list[str]:
+    signatures = [store.signatures[subject].signature for subject in package_subjects(facts, store)]
+    return sorted({signature['parent'] for signature in signatures
+                   if 'parent' in signature and signature['parent'].lower() not in store.signatures})
+
+
 def package_output(package: str, context: tuple, store: ImportData) -> tuple[dict[str, str], dict]:
     facts, rejections, upstream, version = context
     by_subject = defaultdict(list)
     for fact in facts:
         by_subject[fact.subject].append(fact)
-    subjects = set(by_subject)
-    subjects.update(subject.split('::')[0] for subject in by_subject if '::' in subject)
+    subjects = package_subjects(facts, store)
     declarations = [store.signatures[subject] for subject in sorted(subjects)]
     origins = {origin for fact in facts for origin in fact.origins} | {item.origin for item in declarations}
     origins |= {item['upstream'] for item in rejections}
@@ -554,7 +706,7 @@ def package_output(package: str, context: tuple, store: ImportData) -> tuple[dic
     filename = package.replace('/', '-') + '.yaml'
     if not declarations:
         return {'rejections.json': json.dumps(rejections, indent=2) + '\n', **notices(origins, upstream)}, {}
-    output = {filename: document, 'index.txt': filename + '\n',
+    output = {filename: document,
               'provenance.yaml': header + yaml_text({'producer': SCRIPT + ' over ' + ', '.join(upstream_label(origin) for origin in sorted(origins)), 'verification': 'generated'}),
               'rejections.json': json.dumps(sorted(rejections, key=lambda row: json.dumps(row, sort_keys=True)), indent=2, ensure_ascii=False) + '\n',
               **notices(origins, upstream)}
@@ -572,6 +724,7 @@ def generate(upstream: Path, resources: Path) -> dict[str, str]:
     for path in sorted((upstream / 'codeql-php' / 'php' / 'ql' / 'lib' / 'ext').glob('*.model.yml')):
         if path.name != 'php-builtins.model.yml':
             read_codeql(path, store)
+    expand_trait_members(store)
     qualify_candidates(store)
     normalize_sources(store)
     facts, rejected = resolve(store)
@@ -594,7 +747,8 @@ def generated_packages(context: tuple, store: ImportData) -> dict[str, str]:
             catalog.append(item)
         summary[package] = {'entries': sum(text.startswith('  subject:') for text in files.get(package.replace('/', '-') + '.yaml', '').splitlines()),
                             'facts': dict(sorted(Counter(f'{fact.section}:{fact.kind}' for fact in grouped[package]).items())),
-                            'rejections': dict(sorted(Counter(row['reason'] for row in rejected_by[package]).items()))}
+                            'rejections': dict(sorted(Counter(row['reason'] for row in rejected_by[package]).items())),
+                            'unrecordedParents': unrecorded_parents(grouped[package], store)}
     header = '# Generated by tools/import_library.py from ' + ', '.join(upstream_label(origin) for origin in UPSTREAMS) + '.\n'
     output['catalog.yaml'] = header + '# Versions describe the upstream stubs.\n' + yaml_text(catalog)
     output['summary.json'] = json.dumps(summary, indent=2, sort_keys=True) + '\n'

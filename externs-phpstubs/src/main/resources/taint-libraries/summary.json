@@ -4,7 +4,8 @@
     "facts": {
       "sinks:pathtrav": 17
     },
-    "rejections": {}
+    "rejections": {},
+    "unrecordedParents": []
   },
   "amphp/http-client": {
     "entries": 10,
@@ -13,14 +14,19 @@
       "sinks:ssrf": 2,
       "sources:external-input": 4
     },
-    "rejections": {}
+    "rejections": {},
+    "unrecordedParents": [
+      "Amp\\Http\\HttpRequest",
+      "Amp\\Http\\HttpResponse"
+    ]
   },
   "amphp/process": {
     "entries": 2,
     "facts": {
       "sinks:cmdi": 1
     },
-    "rejections": {}
+    "rejections": {},
+    "unrecordedParents": []
   },
   "doctrine/dbal": {
     "entries": 7,
@@ -31,33 +37,42 @@
     "rejections": {
       "no-signature": 14,
       "unresolved-parameter": 1
-    }
+    },
+    "unrecordedParents": []
   },
   "guzzlehttp/guzzle": {
-    "entries": 28,
+    "entries": 41,
     "facts": {
       "sinks:pathtrav": 1,
-      "sinks:ssrf": 18,
-      "sources:external-input": 23
+      "sinks:ssrf": 30,
+      "sources:external-input": 35
     },
-    "rejections": {}
+    "rejections": {},
+    "unrecordedParents": [
+      "GuzzleHttp\\Cookie\\CookieJar"
+    ]
   },
   "guzzlehttp/psr7": {
     "entries": 2,
     "facts": {
       "sinks:ssrf": 1
     },
-    "rejections": {}
+    "rejections": {},
+    "unrecordedParents": []
   },
   "jcupitt/vips": {
     "entries": 8,
     "facts": {
       "sinks:pathtrav": 5
     },
-    "rejections": {}
+    "rejections": {},
+    "unrecordedParents": [
+      "Jcupitt\\Vips\\Connection",
+      "Jcupitt\\Vips\\ImageAutodoc"
+    ]
   },
   "laravel/framework": {
-    "entries": 382,
+    "entries": 397,
     "facts": {
       "sanitizers:sqli": 24,
       "sanitizers:xss": 3,
@@ -71,20 +86,26 @@
       "sinks:ssrf": 18,
       "sinks:xss": 15,
       "sources:external-input": 18,
-      "sources:user-input": 68
+      "sources:user-input": 79
     },
     "rejections": {
       "no-class": 43,
       "no-cwe-kind": 16,
-      "no-signature": 89
-    }
+      "no-signature": 72
+    },
+    "unrecordedParents": [
+      "Illuminate\\Notifications\\Messages\\SimpleMessage",
+      "Illuminate\\Support\\Facades\\Facade",
+      "Symfony\\Component\\HttpFoundation\\Request"
+    ]
   },
   "mongodb/mongodb": {
     "entries": 32,
     "facts": {
       "sinks:nosqli": 32
     },
-    "rejections": {}
+    "rejections": {},
+    "unrecordedParents": []
   },
   "monolog/monolog": {
     "entries": 4,
@@ -92,14 +113,20 @@
       "sinks:pathtrav": 1,
       "sinks:ssrf": 1
     },
-    "rejections": {}
+    "rejections": {},
+    "unrecordedParents": [
+      "Monolog\\Handler\\AbstractProcessingHandler"
+    ]
   },
   "pear/archive_tar": {
     "entries": 9,
     "facts": {
       "sinks:pathtrav": 8
     },
-    "rejections": {}
+    "rejections": {},
+    "unrecordedParents": [
+      "PEAR"
+    ]
   },
   "phpoffice/phpspreadsheet": {
     "entries": 23,
@@ -107,14 +134,18 @@
       "sinks:pathtrav": 8,
       "sources:external-input": 7
     },
-    "rejections": {}
+    "rejections": {},
+    "unrecordedParents": [
+      "PhpOffice\\PhpSpreadsheet\\Writer\\BaseWriter"
+    ]
   },
   "psr/http-client": {
     "entries": 2,
     "facts": {
       "sources:external-input": 1
     },
-    "rejections": {}
+    "rejections": {},
+    "unrecordedParents": []
   },
   "smi2/phpclickhouse": {
     "entries": 21,
@@ -124,70 +155,80 @@
     },
     "rejections": {
       "unsupported-condition": 2
-    }
+    },
+    "unrecordedParents": []
   },
   "spatie/browsershot": {
     "entries": 0,
     "facts": {},
     "rejections": {
       "no-signature": 4
-    }
+    },
+    "unrecordedParents": []
   },
   "symfony/dom-crawler": {
     "entries": 0,
     "facts": {},
     "rejections": {
       "no-signature": 2
-    }
+    },
+    "unrecordedParents": []
   },
   "symfony/filesystem": {
     "entries": 0,
     "facts": {},
     "rejections": {
       "no-signature": 26
-    }
+    },
+    "unrecordedParents": []
   },
   "symfony/framework-bundle": {
     "entries": 0,
     "facts": {},
     "rejections": {
       "no-signature": 3
-    }
+    },
+    "unrecordedParents": []
   },
   "symfony/http-foundation": {
     "entries": 0,
     "facts": {},
     "rejections": {
       "no-signature": 20
-    }
+    },
+    "unrecordedParents": []
   },
   "symfony/ldap": {
     "entries": 0,
     "facts": {},
     "rejections": {
       "no-signature": 2
-    }
+    },
+    "unrecordedParents": []
   },
   "symfony/process": {
     "entries": 0,
     "facts": {},
     "rejections": {
       "no-signature": 1
-    }
+    },
+    "unrecordedParents": []
   },
   "unassigned/cacti": {
     "entries": 0,
     "facts": {},
     "rejections": {
       "no-class": 7
-    }
+    },
+    "unrecordedParents": []
   },
   "unassigned/cakephp": {
     "entries": 0,
     "facts": {},
     "rejections": {
       "no-signature": 13
-    }
+    },
+    "unrecordedParents": []
   },
   "unassigned/codeigniter": {
     "entries": 0,
@@ -195,7 +236,8 @@
     "rejections": {
       "no-class": 5,
       "no-signature": 9
-    }
+    },
+    "unrecordedParents": []
   },
   "unassigned/concrete": {
     "entries": 0,
@@ -203,35 +245,40 @@
     "rejections": {
       "no-class": 6,
       "no-signature": 12
-    }
+    },
+    "unrecordedParents": []
   },
   "unassigned/contao": {
     "entries": 0,
     "facts": {},
     "rejections": {
       "no-signature": 5
-    }
+    },
+    "unrecordedParents": []
   },
   "unassigned/craftcms": {
     "entries": 0,
     "facts": {},
     "rejections": {
       "no-signature": 13
-    }
+    },
+    "unrecordedParents": []
   },
   "unassigned/crypto": {
     "entries": 0,
     "facts": {},
     "rejections": {
-      "no-class": 7
-    }
+      "not-taint-flow": 7
+    },
+    "unrecordedParents": []
   },
   "unassigned/dolibarr": {
     "entries": 0,
     "facts": {},
     "rejections": {
       "no-class": 9
-    }
+    },
+    "unrecordedParents": []
   },
   "unassigned/drupal": {
     "entries": 0,
@@ -239,7 +286,8 @@
     "rejections": {
       "no-class": 8,
       "no-signature": 19
-    }
+    },
+    "unrecordedParents": []
   },
   "unassigned/e107": {
     "entries": 0,
@@ -247,7 +295,8 @@
     "rejections": {
       "no-class": 16,
       "no-signature": 5
-    }
+    },
+    "unrecordedParents": []
   },
   "unassigned/joomla": {
     "entries": 0,
@@ -255,7 +304,8 @@
     "rejections": {
       "no-class": 13,
       "no-signature": 38
-    }
+    },
+    "unrecordedParents": []
   },
   "unassigned/ldap-injection": {
     "entries": 0,
@@ -263,7 +313,8 @@
     "rejections": {
       "no-class": 8,
       "no-signature": 4
-    }
+    },
+    "unrecordedParents": []
   },
   "unassigned/magento": {
     "entries": 0,
@@ -271,7 +322,8 @@
     "rejections": {
       "no-class": 21,
       "no-signature": 22
-    }
+    },
+    "unrecordedParents": []
   },
   "unassigned/mediawiki": {
     "entries": 0,
@@ -279,14 +331,16 @@
     "rejections": {
       "no-class": 5,
       "no-signature": 21
-    }
+    },
+    "unrecordedParents": []
   },
   "unassigned/modern-frameworks": {
     "entries": 0,
     "facts": {},
     "rejections": {
       "no-class": 32
-    }
+    },
+    "unrecordedParents": []
   },
   "unassigned/modx": {
     "entries": 0,
@@ -294,14 +348,16 @@
     "rejections": {
       "no-class": 3,
       "no-signature": 2
-    }
+    },
+    "unrecordedParents": []
   },
   "unassigned/moodle": {
     "entries": 0,
     "facts": {},
     "rejections": {
       "no-class": 19
-    }
+    },
+    "unrecordedParents": []
   },
   "unassigned/october": {
     "entries": 0,
@@ -309,7 +365,8 @@
     "rejections": {
       "no-class": 3,
       "no-signature": 5
-    }
+    },
+    "unrecordedParents": []
   },
   "unassigned/php-apps": {
     "entries": 0,
@@ -317,7 +374,8 @@
     "rejections": {
       "no-class": 10,
       "no-signature": 2
-    }
+    },
+    "unrecordedParents": []
   },
   "unassigned/phpbb": {
     "entries": 0,
@@ -325,7 +383,8 @@
     "rejections": {
       "no-class": 8,
       "no-signature": 11
-    }
+    },
+    "unrecordedParents": []
   },
   "unassigned/prestashop": {
     "entries": 0,
@@ -333,28 +392,32 @@
     "rejections": {
       "no-class": 10,
       "no-signature": 16
-    }
+    },
+    "unrecordedParents": []
   },
   "unassigned/processwire": {
     "entries": 0,
     "facts": {},
     "rejections": {
       "no-signature": 23
-    }
+    },
+    "unrecordedParents": []
   },
   "unassigned/silverstripe": {
     "entries": 0,
     "facts": {},
     "rejections": {
       "no-signature": 4
-    }
+    },
+    "unrecordedParents": []
   },
   "unassigned/spip": {
     "entries": 0,
     "facts": {},
     "rejections": {
       "no-class": 41
-    }
+    },
+    "unrecordedParents": []
   },
   "unassigned/suitecrm": {
     "entries": 0,
@@ -362,7 +425,8 @@
     "rejections": {
       "no-class": 6,
       "no-signature": 2
-    }
+    },
+    "unrecordedParents": []
   },
   "unassigned/symfony": {
     "entries": 0,
@@ -370,21 +434,24 @@
     "rejections": {
       "no-class": 39,
       "no-signature": 12
-    }
+    },
+    "unrecordedParents": []
   },
   "unassigned/templating": {
     "entries": 0,
     "facts": {},
     "rejections": {
       "no-class": 10
-    }
+    },
+    "unrecordedParents": []
   },
   "unassigned/textpattern": {
     "entries": 0,
     "facts": {},
     "rejections": {
       "no-class": 15
-    }
+    },
+    "unrecordedParents": []
   },
   "unassigned/typo3": {
     "entries": 0,
@@ -392,7 +459,8 @@
     "rejections": {
       "no-class": 21,
       "no-signature": 30
-    }
+    },
+    "unrecordedParents": []
   },
   "unassigned/wordpress": {
     "entries": 0,
@@ -400,7 +468,8 @@
     "rejections": {
       "no-class": 37,
       "no-signature": 9
-    }
+    },
+    "unrecordedParents": []
   },
   "unassigned/xoops": {
     "entries": 0,
@@ -408,7 +477,8 @@
     "rejections": {
       "no-class": 10,
       "no-signature": 12
-    }
+    },
+    "unrecordedParents": []
   },
   "unassigned/yii": {
     "entries": 0,
@@ -416,7 +486,8 @@
     "rejections": {
       "no-class": 6,
       "no-signature": 5
-    }
+    },
+    "unrecordedParents": []
   },
   "unassigned/zencart": {
     "entries": 0,
@@ -424,13 +495,15 @@
     "rejections": {
       "no-class": 8,
       "no-signature": 3
-    }
+    },
+    "unrecordedParents": []
   },
   "webklex/php-imap": {
     "entries": 16,
     "facts": {
       "sources:external-input": 13
     },
-    "rejections": {}
+    "rejections": {},
+    "unrecordedParents": []
   }
 }

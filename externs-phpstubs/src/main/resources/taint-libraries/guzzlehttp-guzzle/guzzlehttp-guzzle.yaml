@@ -6,6 +6,287 @@
   signature:
     classifier: "class"
     name: "GuzzleHttp\\Client"
+    interfaces:
+      -
+        "GuzzleHttp\\ClientInterface"
+      -
+        "Psr\\Http\\Client\\ClientInterface"
+# from: psalm
+-
+  subject:
+    method: "guzzlehttp\\client::delete"
+  signature:
+    params:
+      -
+        name: "uri"
+        type: "mixed"
+      -
+        name: "options"
+        type: "array"
+        optional: true
+    returnType: "Psr\\Http\\Message\\ResponseInterface"
+  sinks:
+    -
+      port: "argument(0)"
+      vulnType: "ssrf"
+  sources:
+    -
+      sourceKinds:
+        -
+          "external-input"
+# from: psalm
+-
+  subject:
+    method: "guzzlehttp\\client::deleteasync"
+  signature:
+    params:
+      -
+        name: "uri"
+        type: "mixed"
+      -
+        name: "options"
+        type: "array"
+        optional: true
+    returnType: "GuzzleHttp\\Promise\\PromiseInterface"
+  sinks:
+    -
+      port: "argument(0)"
+      vulnType: "ssrf"
+  sources:
+    -
+      sourceKinds:
+        -
+          "external-input"
+# from: psalm
+-
+  subject:
+    method: "guzzlehttp\\client::get"
+  signature:
+    params:
+      -
+        name: "uri"
+        type: "mixed"
+      -
+        name: "options"
+        type: "array"
+        optional: true
+    returnType: "Psr\\Http\\Message\\ResponseInterface"
+  sinks:
+    -
+      port: "argument(0)"
+      vulnType: "ssrf"
+  sources:
+    -
+      sourceKinds:
+        -
+          "external-input"
+# from: psalm
+-
+  subject:
+    method: "guzzlehttp\\client::getasync"
+  signature:
+    params:
+      -
+        name: "uri"
+        type: "mixed"
+      -
+        name: "options"
+        type: "array"
+        optional: true
+    returnType: "GuzzleHttp\\Promise\\PromiseInterface"
+  sinks:
+    -
+      port: "argument(0)"
+      vulnType: "ssrf"
+  sources:
+    -
+      sourceKinds:
+        -
+          "external-input"
+# from: psalm
+-
+  subject:
+    method: "guzzlehttp\\client::head"
+  signature:
+    params:
+      -
+        name: "uri"
+        type: "mixed"
+      -
+        name: "options"
+        type: "array"
+        optional: true
+    returnType: "Psr\\Http\\Message\\ResponseInterface"
+  sinks:
+    -
+      port: "argument(0)"
+      vulnType: "ssrf"
+  sources:
+    -
+      sourceKinds:
+        -
+          "external-input"
+# from: psalm
+-
+  subject:
+    method: "guzzlehttp\\client::headasync"
+  signature:
+    params:
+      -
+        name: "uri"
+        type: "mixed"
+      -
+        name: "options"
+        type: "array"
+        optional: true
+    returnType: "GuzzleHttp\\Promise\\PromiseInterface"
+  sinks:
+    -
+      port: "argument(0)"
+      vulnType: "ssrf"
+  sources:
+    -
+      sourceKinds:
+        -
+          "external-input"
+# from: psalm
+-
+  subject:
+    method: "guzzlehttp\\client::patch"
+  signature:
+    params:
+      -
+        name: "uri"
+        type: "mixed"
+      -
+        name: "options"
+        type: "array"
+        optional: true
+    returnType: "Psr\\Http\\Message\\ResponseInterface"
+  sinks:
+    -
+      port: "argument(0)"
+      vulnType: "ssrf"
+  sources:
+    -
+      sourceKinds:
+        -
+          "external-input"
+# from: psalm
+-
+  subject:
+    method: "guzzlehttp\\client::patchasync"
+  signature:
+    params:
+      -
+        name: "uri"
+        type: "mixed"
+      -
+        name: "options"
+        type: "array"
+        optional: true
+    returnType: "GuzzleHttp\\Promise\\PromiseInterface"
+  sinks:
+    -
+      port: "argument(0)"
+      vulnType: "ssrf"
+  sources:
+    -
+      sourceKinds:
+        -
+          "external-input"
+# from: psalm
+-
+  subject:
+    method: "guzzlehttp\\client::post"
+  signature:
+    params:
+      -
+        name: "uri"
+        type: "mixed"
+      -
+        name: "options"
+        type: "array"
+        optional: true
+    returnType: "Psr\\Http\\Message\\ResponseInterface"
+  sinks:
+    -
+      port: "argument(0)"
+      vulnType: "ssrf"
+  sources:
+    -
+      sourceKinds:
+        -
+          "external-input"
+# from: psalm
+-
+  subject:
+    method: "guzzlehttp\\client::postasync"
+  signature:
+    params:
+      -
+        name: "uri"
+        type: "mixed"
+      -
+        name: "options"
+        type: "array"
+        optional: true
+    returnType: "GuzzleHttp\\Promise\\PromiseInterface"
+  sinks:
+    -
+      port: "argument(0)"
+      vulnType: "ssrf"
+  sources:
+    -
+      sourceKinds:
+        -
+          "external-input"
+# from: psalm
+-
+  subject:
+    method: "guzzlehttp\\client::put"
+  signature:
+    params:
+      -
+        name: "uri"
+        type: "mixed"
+      -
+        name: "options"
+        type: "array"
+        optional: true
+    returnType: "Psr\\Http\\Message\\ResponseInterface"
+  sinks:
+    -
+      port: "argument(0)"
+      vulnType: "ssrf"
+  sources:
+    -
+      sourceKinds:
+        -
+          "external-input"
+# from: psalm
+-
+  subject:
+    method: "guzzlehttp\\client::putasync"
+  signature:
+    params:
+      -
+        name: "uri"
+        type: "mixed"
+      -
+        name: "options"
+        type: "array"
+        optional: true
+    returnType: "GuzzleHttp\\Promise\\PromiseInterface"
+  sinks:
+    -
+      port: "argument(0)"
+      vulnType: "ssrf"
+  sources:
+    -
+      sourceKinds:
+        -
+          "external-input"
 # from: psalm
 -
   subject:
@@ -554,6 +835,7 @@
   signature:
     classifier: "class"
     name: "GuzzleHttp\\Cookie\\FileCookieJar"
+    parent: "GuzzleHttp\\Cookie\\CookieJar"
 # from: psalm
 -
   subject:
@@ -573,3 +855,10 @@
     -
       port: "argument(0)"
       vulnType: "pathtrav"
+# from: psalm
+-
+  subject:
+    class: "psr\\http\\client\\clientinterface"
+  signature:
+    classifier: "interface"
+    name: "Psr\\Http\\Client\\ClientInterface"

@@ -111,6 +111,11 @@
   signature:
     classifier: "class"
     name: "Illuminate\\Container\\Container"
+    interfaces:
+      -
+        "ArrayAccess"
+      -
+        "Illuminate\\Contracts\\Container\\Container"
 # from: psalm-plugin-laravel
 -
   subject:
@@ -202,6 +207,11 @@
   signature:
     classifier: "interface"
     name: "Illuminate\\Contracts\\Container\\Container"
+    interfaces:
+      -
+        "Psr\\Container\\ContainerInterface"
+      -
+        "ArrayAccess"
 # from: psalm-plugin-laravel
 -
   subject:
@@ -510,6 +520,9 @@
   signature:
     classifier: "class"
     name: "Illuminate\\Cookie\\CookieJar"
+    interfaces:
+      -
+        "Illuminate\\Contracts\\Cookie\\QueueingFactory"
 # from: psalm-plugin-laravel
 -
   subject:
@@ -709,6 +722,9 @@
   signature:
     classifier: "class"
     name: "Illuminate\\Database\\Connection"
+    interfaces:
+      -
+        "Illuminate\\Database\\ConnectionInterface"
 # from: psalm-plugin-laravel
 -
   subject:
@@ -1021,6 +1037,9 @@
   signature:
     classifier: "class"
     name: "Illuminate\\Database\\Eloquent\\Builder"
+    interfaces:
+      -
+        "Illuminate\\Contracts\\Database\\Eloquent\\Builder"
 # from: psalm-plugin-laravel
 -
   subject:
@@ -1369,10 +1388,18 @@
 # from: psalm-plugin-laravel
 -
   subject:
+    class: "illuminate\\database\\eloquent\\concerns\\queriesrelationships"
+  signature:
+    classifier: "trait"
+    name: "Illuminate\\Database\\Eloquent\\Concerns\\QueriesRelationships"
+# from: psalm-plugin-laravel
+-
+  subject:
     class: "illuminate\\database\\eloquent\\relations\\belongstomany"
   signature:
     classifier: "class"
     name: "Illuminate\\Database\\Eloquent\\Relations\\BelongsToMany"
+    parent: "Illuminate\\Database\\Eloquent\\Relations\\Relation"
 # from: psalm-plugin-laravel
 -
   subject:
@@ -1410,10 +1437,23 @@
 # from: psalm-plugin-laravel
 -
   subject:
+    class: "illuminate\\database\\eloquent\\relations\\relation"
+  signature:
+    classifier: "class"
+    name: "Illuminate\\Database\\Eloquent\\Relations\\Relation"
+    interfaces:
+      -
+        "Illuminate\\Contracts\\Database\\Eloquent\\Builder"
+# from: psalm-plugin-laravel
+-
+  subject:
     class: "illuminate\\database\\query\\builder"
   signature:
     classifier: "class"
     name: "Illuminate\\Database\\Query\\Builder"
+    interfaces:
+      -
+        "Illuminate\\Contracts\\Database\\Query\\Builder"
 # from: psalm-plugin-laravel
 -
   subject:
@@ -3327,6 +3367,9 @@
   signature:
     classifier: "class"
     name: "Illuminate\\Filesystem\\FilesystemAdapter"
+    interfaces:
+      -
+        "Illuminate\\Contracts\\Filesystem\\Cloud"
 # from: psalm-plugin-laravel
 -
   subject:
@@ -3886,6 +3929,9 @@
   signature:
     classifier: "class"
     name: "Illuminate\\Foundation\\Console\\Kernel"
+    interfaces:
+      -
+        "Illuminate\\Contracts\\Console\\Kernel"
 # from: psalm-plugin-laravel
 -
   subject:
@@ -3934,6 +3980,10 @@
   signature:
     classifier: "class"
     name: "Illuminate\\Foundation\\Http\\FormRequest"
+    parent: "Illuminate\\Http\\Request"
+    interfaces:
+      -
+        "Illuminate\\Contracts\\Validation\\ValidatesWhenResolved"
 # from: codeql-php, psalm-plugin-laravel
 -
   subject:
@@ -3980,6 +4030,7 @@
   signature:
     classifier: "class"
     name: "Illuminate\\Http\\Client\\AsyncPendingRequest"
+    parent: "Illuminate\\Http\\Client\\PendingRequest"
 # from: psalm-plugin-laravel
 -
   subject:
@@ -4321,6 +4372,11 @@
   signature:
     classifier: "class"
     name: "Illuminate\\Http\\Client\\Response"
+    interfaces:
+      -
+        "ArrayAccess"
+      -
+        "Stringable"
 # from: psalm-plugin-laravel
 -
   subject:
@@ -4707,6 +4763,12 @@
   signature:
     classifier: "class"
     name: "Illuminate\\Http\\Request"
+    parent: "Symfony\\Component\\HttpFoundation\\Request"
+    interfaces:
+      -
+        "Illuminate\\Contracts\\Support\\Arrayable"
+      -
+        "ArrayAccess"
 # from: psalm-plugin-laravel
 -
   subject:
@@ -4716,6 +4778,69 @@
       -
         name: "key"
         type: "mixed"
+    returnType: "mixed"
+  sources:
+    -
+      sourceKinds:
+        -
+          "user-input"
+# from: codeql-php, phpstan-security, psalm-plugin-laravel
+-
+  subject:
+    method: "illuminate\\http\\request::all"
+  signature:
+    params:
+      -
+        name: "keys"
+        type: "mixed"
+        optional: true
+        default: "null"
+    returnType: "mixed"
+  sources:
+    -
+      sourceKinds:
+        -
+          "user-input"
+# from: codeql-php, psalm-plugin-laravel
+-
+  subject:
+    method: "illuminate\\http\\request::allfiles"
+  signature:
+    params: []
+    returnType: "mixed"
+  sources:
+    -
+      sourceKinds:
+        -
+          "user-input"
+# from: phpstan-security, psalm-plugin-laravel
+-
+  subject:
+    method: "illuminate\\http\\request::bearertoken"
+  signature:
+    params: []
+    returnType: "mixed"
+  sources:
+    -
+      sourceKinds:
+        -
+          "user-input"
+# from: codeql-php, phpstan-security, psalm-plugin-laravel
+-
+  subject:
+    method: "illuminate\\http\\request::cookie"
+  signature:
+    params:
+      -
+        name: "key"
+        type: "mixed"
+        optional: true
+        default: "null"
+      -
+        name: "default"
+        type: "mixed"
+        optional: true
+        default: "null"
     returnType: "mixed"
   sources:
     -
@@ -4750,6 +4875,27 @@
         type: "mixed"
         optional: true
         default: "null"
+    returnType: "mixed"
+  sources:
+    -
+      sourceKinds:
+        -
+          "user-input"
+# from: psalm-plugin-laravel
+-
+  subject:
+    method: "illuminate\\http\\request::fluent"
+  signature:
+    params:
+      -
+        name: "key"
+        type: "mixed"
+        optional: true
+        default: "null"
+      -
+        name: "default"
+        type: "array"
+        optional: true
     returnType: "mixed"
   sources:
     -
@@ -4892,6 +5038,28 @@
       sourceKinds:
         -
           "user-input"
+# from: codeql-php, phpstan-security, psalm-plugin-laravel
+-
+  subject:
+    method: "illuminate\\http\\request::input"
+  signature:
+    params:
+      -
+        name: "key"
+        type: "mixed"
+        optional: true
+        default: "null"
+      -
+        name: "default"
+        type: "mixed"
+        optional: true
+        default: "null"
+    returnType: "mixed"
+  sources:
+    -
+      sourceKinds:
+        -
+          "user-input"
 # from: codeql-php, psalm-plugin-laravel
 -
   subject:
@@ -4919,9 +5087,97 @@
 # from: codeql-php, phpstan-security, psalm-plugin-laravel
 -
   subject:
+    method: "illuminate\\http\\request::json"
+  signature:
+    params:
+      -
+        name: "key"
+        type: "mixed"
+        optional: true
+        default: "null"
+      -
+        name: "default"
+        type: "mixed"
+        optional: true
+        default: "null"
+    returnType: "mixed"
+  sources:
+    -
+      sourceKinds:
+        -
+          "user-input"
+# from: phpstan-security, psalm-plugin-laravel
+-
+  subject:
+    method: "illuminate\\http\\request::old"
+  signature:
+    params:
+      -
+        name: "key"
+        type: "mixed"
+        optional: true
+        default: "null"
+      -
+        name: "default"
+        type: "mixed"
+        optional: true
+        default: "null"
+    returnType: "mixed"
+  sources:
+    -
+      sourceKinds:
+        -
+          "user-input"
+# from: codeql-php, phpstan-security, psalm-plugin-laravel
+-
+  subject:
     method: "illuminate\\http\\request::path"
   signature:
     params: []
+    returnType: "mixed"
+  sources:
+    -
+      sourceKinds:
+        -
+          "user-input"
+# from: codeql-php, phpstan-security, psalm-plugin-laravel
+-
+  subject:
+    method: "illuminate\\http\\request::post"
+  signature:
+    params:
+      -
+        name: "key"
+        type: "mixed"
+        optional: true
+        default: "null"
+      -
+        name: "default"
+        type: "mixed"
+        optional: true
+        default: "null"
+    returnType: "mixed"
+  sources:
+    -
+      sourceKinds:
+        -
+          "user-input"
+# from: codeql-php, phpstan-security, psalm-plugin-laravel
+-
+  subject:
+    method: "illuminate\\http\\request::query"
+  signature:
+    params:
+      -
+        name: "key"
+        type: "mixed"
+        optional: true
+        default: "null"
+      -
+        name: "default"
+        type: "mixed"
+        optional: true
+        default: "null"
     returnType: "mixed"
   sources:
     -
@@ -4988,6 +5244,28 @@
     method: "illuminate\\http\\request::segments"
   signature:
     params: []
+    returnType: "mixed"
+  sources:
+    -
+      sourceKinds:
+        -
+          "user-input"
+# from: codeql-php, phpstan-security, psalm-plugin-laravel
+-
+  subject:
+    method: "illuminate\\http\\request::server"
+  signature:
+    params:
+      -
+        name: "key"
+        type: "mixed"
+        optional: true
+        default: "null"
+      -
+        name: "default"
+        type: "mixed"
+        optional: true
+        default: "null"
     returnType: "mixed"
   sources:
     -
@@ -5173,6 +5451,11 @@
   signature:
     classifier: "class"
     name: "Illuminate\\Mail\\Mailable"
+    interfaces:
+      -
+        "Illuminate\\Contracts\\Mail\\Mailable"
+      -
+        "Illuminate\\Contracts\\Support\\Renderable"
 # from: psalm-plugin-laravel
 -
   subject:
@@ -5289,6 +5572,10 @@
   signature:
     classifier: "class"
     name: "Illuminate\\Notifications\\Messages\\MailMessage"
+    parent: "Illuminate\\Notifications\\Messages\\SimpleMessage"
+    interfaces:
+      -
+        "Illuminate\\Contracts\\Support\\Renderable"
 # from: psalm-plugin-laravel
 -
   subject:
@@ -5493,10 +5780,21 @@
 # from: psalm-plugin-laravel
 -
   subject:
+    class: "illuminate\\redis\\connections\\connection"
+  signature:
+    classifier: "class"
+    name: "Illuminate\\Redis\\Connections\\Connection"
+# from: psalm-plugin-laravel
+-
+  subject:
     class: "illuminate\\redis\\connections\\phpredisconnection"
   signature:
     classifier: "class"
     name: "Illuminate\\Redis\\Connections\\PhpRedisConnection"
+    parent: "Illuminate\\Redis\\Connections\\Connection"
+    interfaces:
+      -
+        "Illuminate\\Contracts\\Redis\\Connection"
 # from: psalm-plugin-laravel
 -
   subject:
@@ -5699,6 +5997,9 @@
   signature:
     classifier: "class"
     name: "Illuminate\\Routing\\ResponseFactory"
+    interfaces:
+      -
+        "Illuminate\\Contracts\\Routing\\ResponseFactory"
 # from: psalm-plugin-laravel
 -
   subject:
@@ -6011,6 +6312,9 @@
   signature:
     classifier: "class"
     name: "Illuminate\\Session\\Store"
+    interfaces:
+      -
+        "Illuminate\\Contracts\\Session\\Session"
 # from: psalm-plugin-laravel
 -
   subject:
@@ -6167,6 +6471,7 @@
   signature:
     classifier: "class"
     name: "Illuminate\\Support\\Facades\\DB"
+    parent: "Illuminate\\Support\\Facades\\Facade"
 # from: phpstan-security, psalm-plugin-laravel
 -
   subject:
@@ -6479,6 +6784,7 @@
   signature:
     classifier: "class"
     name: "Illuminate\\Support\\Facades\\Schema"
+    parent: "Illuminate\\Support\\Facades\\Facade"
 # from: psalm-plugin-laravel
 -
   subject:
@@ -6500,6 +6806,11 @@
   signature:
     classifier: "class"
     name: "Illuminate\\Support\\HtmlString"
+    interfaces:
+      -
+        "Illuminate\\Contracts\\Support\\Htmlable"
+      -
+        "Stringable"
 # from: psalm-plugin-laravel
 -
   subject:
@@ -6523,6 +6834,11 @@
   signature:
     classifier: "class"
     name: "Illuminate\\Support\\Js"
+    interfaces:
+      -
+        "Illuminate\\Contracts\\Support\\Htmlable"
+      -
+        "Stringable"
 # from: psalm-plugin-laravel
 -
   subject:
@@ -6573,6 +6889,13 @@
       vulnTypes:
         -
           "xss"
+# from: psalm-plugin-laravel
+-
+  subject:
+    class: "illuminate\\support\\traits\\conditionable"
+  signature:
+    classifier: "trait"
+    name: "Illuminate\\Support\\Traits\\Conditionable"
 # from: psalm-plugin-laravel
 -
   subject:
@@ -6701,6 +7024,9 @@
   signature:
     classifier: "class"
     name: "Illuminate\\Support\\ValidatedInput"
+    interfaces:
+      -
+        "Illuminate\\Contracts\\Support\\ValidatedData"
 # from: psalm-plugin-laravel
 -
   subject:
@@ -6886,6 +7212,9 @@
   signature:
     classifier: "class"
     name: "Illuminate\\Validation\\Validator"
+    interfaces:
+      -
+        "Illuminate\\Contracts\\Validation\\Validator"
 # from: psalm-plugin-laravel
 -
   subject:
@@ -6961,6 +7290,9 @@
   signature:
     classifier: "class"
     name: "Illuminate\\View\\Factory"
+    interfaces:
+      -
+        "Illuminate\\Contracts\\View\\Factory"
 # from: psalm-plugin-laravel
 -
   subject:

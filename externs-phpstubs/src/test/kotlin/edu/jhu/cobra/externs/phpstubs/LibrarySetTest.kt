@@ -1,5 +1,6 @@
 package edu.jhu.cobra.externs.phpstubs
 
+import edu.jhu.cobra.commons.phpmodels.Classifier
 import edu.jhu.cobra.commons.phpmodels.DocumentSetLoader
 import edu.jhu.cobra.commons.phpmodels.Port
 import edu.jhu.cobra.commons.phpmodels.Verification
@@ -18,6 +19,9 @@ import kotlin.test.assertTrue
  * - `catalog matches resource roots` checks that every shipped manifest is selectable.
  * - `each package answers a signed endpoint` checks one method or function per package.
  * - `whereRaw keeps its SQL argument and owner signature` checks the consumer lookup.
+ * - `Request input resolves its trait source` checks signed trait expansion and native hierarchy.
+ * - `Client get resolves its trait sink` checks the effective SSRF endpoint and signed trait owner.
+ * - `Request file keeps the source from the upstream union` checks the source disagreement rule.
  * - `selection preserves order and supports chaining` checks mounting through extend.
  * - `unknown package fails before mounting` checks exact package selection.
  * - `selection leaves the bundled lookup unchanged` checks instance isolation and empty selection.
@@ -81,6 +85,41 @@ internal class LibrarySetTest {
         assertNotNull(lookup.clazz("Illuminate\\Database\\Query\\Builder")?.classSignature)
         assertTrue(record.sinkFacts.any { it.port == Port.Argument(0) && it.vulnType == VulnType.SQLI.id })
         assertTrue(record.sinkFacts.none { it.port == Port.Argument(1) })
+    }
+
+    @Test
+    fun `Request input resolves its trait source`() {
+        val lookup = PhpStubs.withLibraries("laravel/framework")
+        val request = assertNotNull(lookup.clazz("Illuminate\\Http\\Request")?.classSignature)
+        assertEquals("symfony\\component\\httpfoundation\\request", request.parent)
+        assertEquals(listOf("illuminate\\contracts\\support\\arrayable", "arrayaccess"), request.interfaces)
+        val trait = "Illuminate\\Http\\Concerns\\InteractsWithInput"
+        assertEquals(Classifier.TRAIT, lookup.clazz(trait)?.classSignature?.classifier)
+        for (owner in listOf("Illuminate\\Http\\Request", trait)) {
+            val record = assertNotNull(lookup.method(owner, "input"))
+            assertNotNull(record.callableSignature)
+            assertTrue(record.sourceFacts.any { SourceKind.USER_INPUT.id in it.sourceKinds })
+        }
+    }
+
+    @Test
+    fun `Client get resolves its trait sink`() {
+        val lookup = PhpStubs.withLibraries("guzzlehttp/guzzle")
+        val signature = assertNotNull(lookup.clazz("GuzzleHttp\\Client")?.classSignature)
+        assertTrue("guzzlehttp\\clientinterface" in signature.interfaces)
+        assertNotNull(lookup.clazz("GuzzleHttp\\ClientInterface")?.classSignature)
+        assertEquals(Classifier.TRAIT, lookup.clazz("GuzzleHttp\\ClientTrait")?.classSignature?.classifier)
+        for (owner in listOf("GuzzleHttp\\Client", "GuzzleHttp\\ClientTrait")) {
+            val record = assertNotNull(lookup.method(owner, "get"))
+            assertNotNull(record.callableSignature)
+            assertTrue(record.sinkFacts.any { it.port == Port.Argument(0) && it.vulnType == VulnType.SSRF.id })
+        }
+    }
+
+    @Test
+    fun `Request file keeps the source from the upstream union`() {
+        val record = assertNotNull(PhpStubs.withLibraries("laravel/framework").method("Illuminate\\Http\\Request::file"))
+        assertTrue(record.sourceFacts.any { SourceKind.USER_INPUT.id in it.sourceKinds })
     }
 
     @Test

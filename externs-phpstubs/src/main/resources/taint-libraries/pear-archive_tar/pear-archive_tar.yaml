@@ -6,6 +6,7 @@
   signature:
     classifier: "class"
     name: "Archive_Tar"
+    parent: "PEAR"
 # from: psalm
 -
   subject:

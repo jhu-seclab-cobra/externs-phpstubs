@@ -1,1 +1,0 @@
-phpoffice-phpspreadsheet.yaml

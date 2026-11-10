@@ -1,0 +1,28 @@
+<?php
+namespace Demo;
+use Vendor\Base as ParentClass;
+use Vendor\Contract as Contract;
+use Vendor\Input as InputTrait;
+class Child extends ParentClass implements Contract, \Countable {
+    use InputTrait;
+}
+interface Extended extends Contract, \Countable {}
+namespace Vendor;
+interface Contract { public function execute(string $sql): void; }
+class Base { public function inherited(string $sql): void {} }
+trait Input {
+    use Nested;
+    /** @psalm-taint-source input */
+    public function input(): string {}
+}
+trait Nested {
+    /** @psalm-taint-sink sql $sql */
+    public function query(string $sql): void {}
+}
+class Override {
+    use Input { input as aliasInput; Input::input as namedInput; }
+    public function input(): int {}
+}
+class Missing extends \UnknownParent {}
+class CycleA extends CycleB {}
+class CycleB extends CycleA {}

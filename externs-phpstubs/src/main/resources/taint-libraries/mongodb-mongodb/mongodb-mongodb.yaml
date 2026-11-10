@@ -6,6 +6,9 @@
   signature:
     classifier: "class"
     name: "MongoDB\\Client"
+    interfaces:
+      -
+        "Stringable"
 # from: psalm
 -
   subject:
@@ -144,6 +147,9 @@
   signature:
     classifier: "class"
     name: "MongoDB\\Collection"
+    interfaces:
+      -
+        "Stringable"
 # from: psalm
 -
   subject:
@@ -472,6 +478,9 @@
   signature:
     classifier: "class"
     name: "MongoDB\\Database"
+    interfaces:
+      -
+        "Stringable"
 # from: psalm
 -
   subject:

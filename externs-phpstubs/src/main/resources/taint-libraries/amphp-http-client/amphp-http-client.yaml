@@ -6,6 +6,9 @@
   signature:
     classifier: "class"
     name: "Amp\\Http\\Client\\Form"
+    interfaces:
+      -
+        "Amp\\Http\\Client\\HttpContent"
 # from: psalm
 -
   subject:
@@ -35,6 +38,7 @@
   signature:
     classifier: "class"
     name: "Amp\\Http\\Client\\Request"
+    parent: "Amp\\Http\\HttpRequest"
 # from: psalm
 -
   subject:
@@ -80,6 +84,7 @@
   signature:
     classifier: "class"
     name: "Amp\\Http\\Client\\Response"
+    parent: "Amp\\Http\\HttpResponse"
 # from: psalm
 -
   subject:

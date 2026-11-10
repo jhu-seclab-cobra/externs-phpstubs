@@ -6,6 +6,9 @@
   signature:
     classifier: "class"
     name: "Doctrine\\DBAL\\Connection"
+    interfaces:
+      -
+        "Doctrine\\DBAL\\Driver\\Connection"
 # from: psalm-plugin-doctrine
 -
   subject:

@@ -2,64 +2,64 @@
   {
     "subject": "openssl_encrypt",
     "section": "sinks",
-    "kind": "hardcodedkey",
+    "kind": "hardcoded-crypto-key",
     "parameter": "2",
     "upstream": "codeql-php",
     "location": "crypto.model.yml:4",
-    "reason": "no-class"
+    "reason": "not-taint-flow"
   },
   {
     "subject": "openssl_decrypt",
     "section": "sinks",
-    "kind": "hardcodedkey",
+    "kind": "hardcoded-crypto-key",
     "parameter": "2",
     "upstream": "codeql-php",
     "location": "crypto.model.yml:5",
-    "reason": "no-class"
+    "reason": "not-taint-flow"
   },
   {
     "subject": "hash_hmac",
     "section": "sinks",
-    "kind": "hardcodedkey",
+    "kind": "hardcoded-crypto-key",
     "parameter": "2",
     "upstream": "codeql-php",
     "location": "crypto.model.yml:6",
-    "reason": "no-class"
+    "reason": "not-taint-flow"
   },
   {
     "subject": "hash_pbkdf2",
     "section": "sinks",
-    "kind": "hardcodedkey",
+    "kind": "hardcoded-crypto-key",
     "parameter": "1",
     "upstream": "codeql-php",
     "location": "crypto.model.yml:7",
-    "reason": "no-class"
+    "reason": "not-taint-flow"
   },
   {
     "subject": "crypt",
     "section": "sinks",
-    "kind": "hardcodedkey",
+    "kind": "hardcoded-crypto-key",
     "parameter": "1",
     "upstream": "codeql-php",
     "location": "crypto.model.yml:8",
-    "reason": "no-class"
+    "reason": "not-taint-flow"
   },
   {
     "subject": "mcrypt_encrypt",
     "section": "sinks",
-    "kind": "hardcodedkey",
+    "kind": "hardcoded-crypto-key",
     "parameter": "1",
     "upstream": "codeql-php",
     "location": "crypto.model.yml:9",
-    "reason": "no-class"
+    "reason": "not-taint-flow"
   },
   {
     "subject": "sodium_crypto_secretbox",
     "section": "sinks",
-    "kind": "hardcodedkey",
+    "kind": "hardcoded-crypto-key",
     "parameter": "2",
     "upstream": "codeql-php",
     "location": "crypto.model.yml:10",
-    "reason": "no-class"
+    "reason": "not-taint-flow"
   }
 ]

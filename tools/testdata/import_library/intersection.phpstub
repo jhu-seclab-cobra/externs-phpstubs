@@ -1,0 +1,6 @@
+<?php
+namespace Demo;
+use Vendor\Thing as Alias;
+class Intersection {
+    public function run(Alias&\Countable $value, Alias&\Countable &$reference, (Alias&\Countable)|null $optional): Alias&\Countable {}
+}

@@ -666,7 +666,7 @@
     "reason": "no-signature"
   },
   {
-    "subject": "http::get",
+    "subject": "illuminate\\support\\facades\\http::get",
     "section": "sinks",
     "kind": "ssrf",
     "parameter": "0",
@@ -675,7 +675,7 @@
     "reason": "no-signature"
   },
   {
-    "subject": "http::post",
+    "subject": "illuminate\\support\\facades\\http::post",
     "section": "sinks",
     "kind": "ssrf",
     "parameter": "0",
@@ -684,7 +684,7 @@
     "reason": "no-signature"
   },
   {
-    "subject": "http::put",
+    "subject": "illuminate\\support\\facades\\http::put",
     "section": "sinks",
     "kind": "ssrf",
     "parameter": "0",
@@ -693,7 +693,7 @@
     "reason": "no-signature"
   },
   {
-    "subject": "http::patch",
+    "subject": "illuminate\\support\\facades\\http::patch",
     "section": "sinks",
     "kind": "ssrf",
     "parameter": "0",
@@ -702,7 +702,7 @@
     "reason": "no-signature"
   },
   {
-    "subject": "http::delete",
+    "subject": "illuminate\\support\\facades\\http::delete",
     "section": "sinks",
     "kind": "ssrf",
     "parameter": "0",
@@ -711,7 +711,7 @@
     "reason": "no-signature"
   },
   {
-    "subject": "http::head",
+    "subject": "illuminate\\support\\facades\\http::head",
     "section": "sinks",
     "kind": "ssrf",
     "parameter": "0",
@@ -765,7 +765,7 @@
     "reason": "no-class"
   },
   {
-    "subject": "request::get",
+    "subject": "illuminate\\http\\request::get",
     "section": "sources",
     "kind": "user-input",
     "parameter": "",
@@ -774,52 +774,7 @@
     "reason": "no-signature"
   },
   {
-    "subject": "request::cookie",
-    "section": "sources",
-    "kind": "user-input",
-    "parameter": "",
-    "upstream": "codeql-php",
-    "location": "laravel.model.yml:40",
-    "reason": "no-signature"
-  },
-  {
-    "subject": "request::input",
-    "section": "sources",
-    "kind": "user-input",
-    "parameter": "",
-    "upstream": "codeql-php",
-    "location": "laravel.model.yml:42",
-    "reason": "no-signature"
-  },
-  {
-    "subject": "request::query",
-    "section": "sources",
-    "kind": "user-input",
-    "parameter": "",
-    "upstream": "codeql-php",
-    "location": "laravel.model.yml:43",
-    "reason": "no-signature"
-  },
-  {
-    "subject": "request::post",
-    "section": "sources",
-    "kind": "user-input",
-    "parameter": "",
-    "upstream": "codeql-php",
-    "location": "laravel.model.yml:44",
-    "reason": "no-signature"
-  },
-  {
-    "subject": "request::all",
-    "section": "sources",
-    "kind": "user-input",
-    "parameter": "",
-    "upstream": "codeql-php",
-    "location": "laravel.model.yml:45",
-    "reason": "no-signature"
-  },
-  {
-    "subject": "request::only",
+    "subject": "illuminate\\http\\request::only",
     "section": "sources",
     "kind": "user-input",
     "parameter": "",
@@ -828,7 +783,7 @@
     "reason": "no-signature"
   },
   {
-    "subject": "request::except",
+    "subject": "illuminate\\http\\request::except",
     "section": "sources",
     "kind": "user-input",
     "parameter": "",
@@ -837,16 +792,7 @@
     "reason": "no-signature"
   },
   {
-    "subject": "request::json",
-    "section": "sources",
-    "kind": "user-input",
-    "parameter": "",
-    "upstream": "codeql-php",
-    "location": "laravel.model.yml:48",
-    "reason": "no-signature"
-  },
-  {
-    "subject": "request::string",
+    "subject": "illuminate\\http\\request::string",
     "section": "sources",
     "kind": "user-input",
     "parameter": "",
@@ -855,7 +801,7 @@
     "reason": "no-signature"
   },
   {
-    "subject": "request::collect",
+    "subject": "illuminate\\http\\request::collect",
     "section": "sources",
     "kind": "user-input",
     "parameter": "",
@@ -864,25 +810,7 @@
     "reason": "no-signature"
   },
   {
-    "subject": "request::allfiles",
-    "section": "sources",
-    "kind": "user-input",
-    "parameter": "",
-    "upstream": "codeql-php",
-    "location": "laravel.model.yml:59",
-    "reason": "no-signature"
-  },
-  {
-    "subject": "request::server",
-    "section": "sources",
-    "kind": "user-input",
-    "parameter": "",
-    "upstream": "codeql-php",
-    "location": "laravel.model.yml:62",
-    "reason": "no-signature"
-  },
-  {
-    "subject": "request::validate",
+    "subject": "illuminate\\http\\request::validate",
     "section": "sources",
     "kind": "user-input",
     "parameter": "",
@@ -891,7 +819,7 @@
     "reason": "no-signature"
   },
   {
-    "subject": "request::validated",
+    "subject": "illuminate\\http\\request::validated",
     "section": "sources",
     "kind": "user-input",
     "parameter": "",
@@ -900,7 +828,7 @@
     "reason": "no-signature"
   },
   {
-    "subject": "request::safe",
+    "subject": "illuminate\\http\\request::safe",
     "section": "sources",
     "kind": "user-input",
     "parameter": "",
@@ -909,52 +837,7 @@
     "reason": "no-signature"
   },
   {
-    "subject": "illuminate\\http\\request::all",
-    "section": "sources",
-    "kind": "user-input",
-    "parameter": "",
-    "upstream": "phpstan-security",
-    "location": "laravel.neon:5",
-    "reason": "no-signature"
-  },
-  {
-    "subject": "illuminate\\http\\request::bearertoken",
-    "section": "sources",
-    "kind": "user-input",
-    "parameter": "",
-    "upstream": "phpstan-security",
-    "location": "laravel.neon:5",
-    "reason": "no-signature"
-  },
-  {
-    "subject": "illuminate\\http\\request::cookie",
-    "section": "sources",
-    "kind": "user-input",
-    "parameter": "",
-    "upstream": "phpstan-security",
-    "location": "laravel.neon:5",
-    "reason": "no-signature"
-  },
-  {
     "subject": "illuminate\\http\\request::except",
-    "section": "sources",
-    "kind": "user-input",
-    "parameter": "",
-    "upstream": "phpstan-security",
-    "location": "laravel.neon:5",
-    "reason": "no-signature"
-  },
-  {
-    "subject": "illuminate\\http\\request::input",
-    "section": "sources",
-    "kind": "user-input",
-    "parameter": "",
-    "upstream": "phpstan-security",
-    "location": "laravel.neon:5",
-    "reason": "no-signature"
-  },
-  {
-    "subject": "illuminate\\http\\request::json",
     "section": "sources",
     "kind": "user-input",
     "parameter": "",
@@ -972,15 +855,6 @@
     "reason": "no-signature"
   },
   {
-    "subject": "illuminate\\http\\request::old",
-    "section": "sources",
-    "kind": "user-input",
-    "parameter": "",
-    "upstream": "phpstan-security",
-    "location": "laravel.neon:5",
-    "reason": "no-signature"
-  },
-  {
     "subject": "illuminate\\http\\request::only",
     "section": "sources",
     "kind": "user-input",
@@ -990,34 +864,7 @@
     "reason": "no-signature"
   },
   {
-    "subject": "illuminate\\http\\request::post",
-    "section": "sources",
-    "kind": "user-input",
-    "parameter": "",
-    "upstream": "phpstan-security",
-    "location": "laravel.neon:5",
-    "reason": "no-signature"
-  },
-  {
-    "subject": "illuminate\\http\\request::query",
-    "section": "sources",
-    "kind": "user-input",
-    "parameter": "",
-    "upstream": "phpstan-security",
-    "location": "laravel.neon:5",
-    "reason": "no-signature"
-  },
-  {
     "subject": "illuminate\\http\\request::root",
-    "section": "sources",
-    "kind": "user-input",
-    "parameter": "",
-    "upstream": "phpstan-security",
-    "location": "laravel.neon:5",
-    "reason": "no-signature"
-  },
-  {
-    "subject": "illuminate\\http\\request::server",
     "section": "sources",
     "kind": "user-input",
     "parameter": "",

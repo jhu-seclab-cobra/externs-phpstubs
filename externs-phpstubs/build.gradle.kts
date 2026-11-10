@@ -61,8 +61,17 @@ tasks.withType<ProcessResources>().configureEach {
     doLast {
         // The set-level documents the loader reads by fixed name; the manifest lists model documents only.
         val unlistedSetFiles = setOf("vocabulary.yaml", "policy.yaml", "provenance.yaml", "psalm-mapping.yaml")
-        for (setDirName in setDirNames) {
-            val setDir = destinationDir.resolve(setDirName)
+        val librarySetDirs =
+            if (name == "processResources") {
+                destinationDir
+                    .resolve("taint-libraries")
+                    .listFiles()
+                    .orEmpty()
+                    .filter { it.isDirectory && it.resolve("provenance.yaml").isFile }
+            } else {
+                emptyList()
+            }
+        for (setDir in setDirNames.map { destinationDir.resolve(it) } + librarySetDirs) {
             if (!setDir.isDirectory) continue
             val yamlFiles =
                 setDir
