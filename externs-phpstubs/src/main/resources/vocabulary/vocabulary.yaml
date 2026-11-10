@@ -36,8 +36,6 @@ vulnTypes:
 
   - name: templatei
     description: Server-side template injection (CWE-1336)
-  - name: hardcodedkey
-    description: Hard-coded cryptographic key (CWE-321)
 
 sourceKinds:
   - name: user-input

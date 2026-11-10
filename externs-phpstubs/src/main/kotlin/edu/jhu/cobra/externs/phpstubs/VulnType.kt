@@ -27,5 +27,4 @@ public enum class VulnType(
     OPENREDIRECT(VulnTypeId("openredirect")),
     NOSQLI(VulnTypeId("nosqli")),
     TEMPLATEI(VulnTypeId("templatei")),
-    HARDCODEDKEY(VulnTypeId("hardcodedkey")),
 }

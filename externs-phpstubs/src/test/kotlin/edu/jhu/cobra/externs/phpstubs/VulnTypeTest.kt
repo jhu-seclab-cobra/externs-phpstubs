@@ -31,7 +31,6 @@ internal class VulnTypeTest {
                 "openredirect",
                 "nosqli",
                 "templatei",
-                "hardcodedkey",
             )
         assertEquals(documented, VulnType.entries.map { it.id.id })
         assertEquals(VulnTypeId("sqli"), VulnType.SQLI.id)
