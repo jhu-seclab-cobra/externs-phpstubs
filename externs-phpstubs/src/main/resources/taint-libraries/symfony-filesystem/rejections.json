@@ -1,0 +1,236 @@
+[
+  {
+    "subject": "symfony\\component\\filesystem\\filesystem::readfile",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "filename",
+    "upstream": "phpstan-security",
+    "location": "symfony.neon:26",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "symfony\\component\\filesystem\\filesystem::readfile",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "filename",
+    "upstream": "phpstan-security",
+    "location": "symfony.neon:26",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "symfony\\component\\filesystem\\filesystem::dumpfile",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "filename",
+    "upstream": "phpstan-security",
+    "location": "symfony.neon:27",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "symfony\\component\\filesystem\\filesystem::dumpfile",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "filename",
+    "upstream": "phpstan-security",
+    "location": "symfony.neon:27",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "symfony\\component\\filesystem\\filesystem::appendtofile",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "filename",
+    "upstream": "phpstan-security",
+    "location": "symfony.neon:28",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "symfony\\component\\filesystem\\filesystem::appendtofile",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "filename",
+    "upstream": "phpstan-security",
+    "location": "symfony.neon:28",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "symfony\\component\\filesystem\\filesystem::remove",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "files",
+    "upstream": "phpstan-security",
+    "location": "symfony.neon:29",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "symfony\\component\\filesystem\\filesystem::remove",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "files",
+    "upstream": "phpstan-security",
+    "location": "symfony.neon:29",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "symfony\\component\\filesystem\\filesystem::copy",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "originFile",
+    "upstream": "phpstan-security",
+    "location": "symfony.neon:30",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "symfony\\component\\filesystem\\filesystem::copy",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "originFile",
+    "upstream": "phpstan-security",
+    "location": "symfony.neon:30",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "symfony\\component\\filesystem\\filesystem::copy",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "targetFile",
+    "upstream": "phpstan-security",
+    "location": "symfony.neon:30",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "symfony\\component\\filesystem\\filesystem::copy",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "targetFile",
+    "upstream": "phpstan-security",
+    "location": "symfony.neon:30",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "symfony\\component\\filesystem\\filesystem::rename",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "origin",
+    "upstream": "phpstan-security",
+    "location": "symfony.neon:31",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "symfony\\component\\filesystem\\filesystem::rename",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "origin",
+    "upstream": "phpstan-security",
+    "location": "symfony.neon:31",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "symfony\\component\\filesystem\\filesystem::rename",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "target",
+    "upstream": "phpstan-security",
+    "location": "symfony.neon:31",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "symfony\\component\\filesystem\\filesystem::rename",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "target",
+    "upstream": "phpstan-security",
+    "location": "symfony.neon:31",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "symfony\\component\\filesystem\\filesystem::mkdir",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "dirs",
+    "upstream": "phpstan-security",
+    "location": "symfony.neon:32",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "symfony\\component\\filesystem\\filesystem::mkdir",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "dirs",
+    "upstream": "phpstan-security",
+    "location": "symfony.neon:32",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "symfony\\component\\filesystem\\filesystem::touch",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "files",
+    "upstream": "phpstan-security",
+    "location": "symfony.neon:33",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "symfony\\component\\filesystem\\filesystem::touch",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "files",
+    "upstream": "phpstan-security",
+    "location": "symfony.neon:33",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "symfony\\component\\filesystem\\filesystem::chmod",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "files",
+    "upstream": "phpstan-security",
+    "location": "symfony.neon:34",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "symfony\\component\\filesystem\\filesystem::chmod",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "files",
+    "upstream": "phpstan-security",
+    "location": "symfony.neon:34",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "symfony\\component\\filesystem\\filesystem::symlink",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "originDir",
+    "upstream": "phpstan-security",
+    "location": "symfony.neon:35",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "symfony\\component\\filesystem\\filesystem::symlink",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "originDir",
+    "upstream": "phpstan-security",
+    "location": "symfony.neon:35",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "symfony\\component\\filesystem\\filesystem::symlink",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "targetDir",
+    "upstream": "phpstan-security",
+    "location": "symfony.neon:35",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "symfony\\component\\filesystem\\filesystem::symlink",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "targetDir",
+    "upstream": "phpstan-security",
+    "location": "symfony.neon:35",
+    "reason": "no-signature"
+  }
+]

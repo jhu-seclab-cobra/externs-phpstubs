@@ -1,0 +1,236 @@
+[
+  {
+    "subject": "webrequest::getval",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "mediawiki.model.yml:10",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "webrequest::gettext",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "mediawiki.model.yml:11",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "webrequest::getrawval",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "mediawiki.model.yml:12",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "webrequest::getarray",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "mediawiki.model.yml:13",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "webrequest::getvalues",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "mediawiki.model.yml:14",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "webrequest::getrawinput",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "mediawiki.model.yml:15",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "ireadabledatabase::select",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "2",
+    "upstream": "codeql-php",
+    "location": "mediawiki.model.yml:21",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "ireadabledatabase::select",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "mediawiki.model.yml:22",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "ireadabledatabase::select",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "mediawiki.model.yml:23",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "ireadabledatabase::selectrow",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "2",
+    "upstream": "codeql-php",
+    "location": "mediawiki.model.yml:24",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "ireadabledatabase::selectfield",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "2",
+    "upstream": "codeql-php",
+    "location": "mediawiki.model.yml:25",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "ireadabledatabase::selectfieldvalues",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "2",
+    "upstream": "codeql-php",
+    "location": "mediawiki.model.yml:26",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "idatabase::query",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "mediawiki.model.yml:27",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "idatabase::update",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "mediawiki.model.yml:28",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "idatabase::update",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "2",
+    "upstream": "codeql-php",
+    "location": "mediawiki.model.yml:29",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "idatabase::delete",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "mediawiki.model.yml:30",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "httprequestfactory::create",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "mediawiki.model.yml:32",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "httprequestfactory::get",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "mediawiki.model.yml:33",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "httprequestfactory::post",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "mediawiki.model.yml:34",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "httprequestfactory::request",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "mediawiki.model.yml:35",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "outputpage::redirect",
+    "section": "sinks",
+    "kind": "openredirect",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "mediawiki.model.yml:37",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "selectfieldvalues",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "2",
+    "upstream": "codeql-php",
+    "location": "mediawiki.model.yml:41",
+    "reason": "no-class"
+  },
+  {
+    "subject": "makewherefrom2d",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "-1",
+    "upstream": "codeql-php",
+    "location": "mediawiki.model.yml:42",
+    "reason": "no-class"
+  },
+  {
+    "subject": "addquotes",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "mediawiki.model.yml:47",
+    "reason": "no-class"
+  },
+  {
+    "subject": "makelist",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "mediawiki.model.yml:48",
+    "reason": "no-class"
+  },
+  {
+    "subject": "buildlike",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "mediawiki.model.yml:49",
+    "reason": "no-class"
+  }
+]

@@ -1,0 +1,137 @@
+[
+  {
+    "subject": "doctrine\\dbal\\connection::fetchnumeric",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "query",
+    "upstream": "phpstan-security",
+    "location": "doctrine.neon:10",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "doctrine\\dbal\\connection::fetchone",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "query",
+    "upstream": "phpstan-security",
+    "location": "doctrine.neon:11",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "doctrine\\dbal\\connection::fetchallnumeric",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "query",
+    "upstream": "phpstan-security",
+    "location": "doctrine.neon:12",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "doctrine\\dbal\\connection::fetchallassociative",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "query",
+    "upstream": "phpstan-security",
+    "location": "doctrine.neon:13",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "doctrine\\dbal\\connection::fetchallkeyvalue",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "query",
+    "upstream": "phpstan-security",
+    "location": "doctrine.neon:14",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "doctrine\\dbal\\connection::fetchallassociativeindexed",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "query",
+    "upstream": "phpstan-security",
+    "location": "doctrine.neon:15",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "doctrine\\dbal\\connection::fetchfirstcolumn",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "query",
+    "upstream": "phpstan-security",
+    "location": "doctrine.neon:16",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "doctrine\\dbal\\connection::iteratenumeric",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "query",
+    "upstream": "phpstan-security",
+    "location": "doctrine.neon:17",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "doctrine\\dbal\\connection::iterateassociative",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "query",
+    "upstream": "phpstan-security",
+    "location": "doctrine.neon:18",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "doctrine\\dbal\\connection::iteratekeyvalue",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "query",
+    "upstream": "phpstan-security",
+    "location": "doctrine.neon:19",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "doctrine\\dbal\\connection::iterateassociativeindexed",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "query",
+    "upstream": "phpstan-security",
+    "location": "doctrine.neon:20",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "doctrine\\dbal\\connection::iteratecolumn",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "query",
+    "upstream": "phpstan-security",
+    "location": "doctrine.neon:21",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "doctrine\\dbal\\connection::executequery",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "sql",
+    "upstream": "phpstan-security",
+    "location": "doctrine.neon:6",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "doctrine\\dbal\\connection::prepare",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "sql",
+    "upstream": "phpstan-security",
+    "location": "doctrine.neon:8",
+    "reason": "unresolved-parameter"
+  },
+  {
+    "subject": "doctrine\\dbal\\connection::fetchassociative",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "query",
+    "upstream": "phpstan-security",
+    "location": "doctrine.neon:9",
+    "reason": "no-signature"
+  }
+]

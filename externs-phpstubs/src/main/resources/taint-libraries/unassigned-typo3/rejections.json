@@ -1,0 +1,461 @@
+[
+  {
+    "subject": "_gp",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:14",
+    "reason": "no-class"
+  },
+  {
+    "subject": "_get",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:15",
+    "reason": "no-class"
+  },
+  {
+    "subject": "_post",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:16",
+    "reason": "no-class"
+  },
+  {
+    "subject": "getindpenv",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:17",
+    "reason": "no-class"
+  },
+  {
+    "subject": "_gpmerged",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:18",
+    "reason": "no-class"
+  },
+  {
+    "subject": "_getset",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:19",
+    "reason": "no-class"
+  },
+  {
+    "subject": "serverrequestinterface::getqueryparams",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:26",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "serverrequestinterface::getparsedbody",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:27",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "serverrequestinterface::getuploadedfiles",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:28",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "serverrequestinterface::getcookieparams",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:29",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "serverrequestinterface::getbody",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:30",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "serverrequestinterface::getheader",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:31",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "serverrequestinterface::getheaderline",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:32",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "request::getargument",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:33",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "request::getarguments",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:34",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "request::getqueryparams",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:35",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "request::getparsedbody",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:36",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "requestinterface::getargument",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:37",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "requestinterface::getarguments",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:38",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "sql_query",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "-1",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:44",
+    "reason": "no-class"
+  },
+  {
+    "subject": "exec_selectquery",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "-1",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:45",
+    "reason": "no-class"
+  },
+  {
+    "subject": "exec_selectgetrows",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "-1",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:46",
+    "reason": "no-class"
+  },
+  {
+    "subject": "admin_query",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "-1",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:47",
+    "reason": "no-class"
+  },
+  {
+    "subject": "connection::executequery",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:55",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "connection::executestatement",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:56",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "connection::query",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:57",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "querybuilder::where",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "-1",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:58",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "querybuilder::andwhere",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "-1",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:59",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "querybuilder::orwhere",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "-1",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:60",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "querybuilder::having",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "-1",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:61",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "querybuilder::andhaving",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "-1",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:62",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "querybuilder::orhaving",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "-1",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:63",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "querybuilder::selectliteral",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "-1",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:64",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "querybuilder::addselectliteral",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "-1",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:65",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "querybuilder::groupby",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "-1",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:66",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "querybuilder::addgroupby",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "-1",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:67",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "querybuilder::orderby",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "-1",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:68",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "querybuilder::addorderby",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "-1",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:69",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "geturl",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:74",
+    "reason": "no-class"
+  },
+  {
+    "subject": "createrequest",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:76",
+    "reason": "no-class"
+  },
+  {
+    "subject": "writefile",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:77",
+    "reason": "no-class"
+  },
+  {
+    "subject": "writefiletotypo3tempdir",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:78",
+    "reason": "no-class"
+  },
+  {
+    "subject": "mkdir",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:79",
+    "reason": "no-class"
+  },
+  {
+    "subject": "mkdir_deep",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:80",
+    "reason": "no-class"
+  },
+  {
+    "subject": "rmdir",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:81",
+    "reason": "no-class"
+  },
+  {
+    "subject": "unlink_tempfile",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:82",
+    "reason": "no-class"
+  },
+  {
+    "subject": "locationheaderurl",
+    "section": "sinks",
+    "kind": "openredirect",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:83",
+    "reason": "no-class"
+  },
+  {
+    "subject": "quotestr",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:90",
+    "reason": "no-class"
+  },
+  {
+    "subject": "fullquotestr",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:91",
+    "reason": "no-class"
+  },
+  {
+    "subject": "querybuilder::createnamedparameter",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:96",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "querybuilder::createpositionalparameter",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:97",
+    "reason": "no-signature"
+  }
+]

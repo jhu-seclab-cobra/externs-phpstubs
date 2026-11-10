@@ -1,0 +1,18 @@
+<?php
+namespace Demo {
+use Vendor\Thing as Alias;
+class Query {
+    /**
+     * @psalm-taint-sink sql $sql
+     * @psalm-taint-sink shell $sql
+     */
+    public static function run(string $sql, ?Alias $value = null, ...$rest): Alias {}
+    /** @psalm-taint-source input */
+    public function read(): string {}
+    /** @psalm-taint-escape sql */
+    public function quote(string $value): string {}
+}
+function outside(array $value = ['x', 'y']): string {}
+}
+namespace Other;
+class Query { public function run(int $n): void {} }

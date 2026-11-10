@@ -1,0 +1,47 @@
+[
+  {
+    "subject": "input::get",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "contao.model.yml:7",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "input::post",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "contao.model.yml:8",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "input::postraw",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "contao.model.yml:9",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "input::posthtml",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "contao.model.yml:10",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "input::cookie",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "contao.model.yml:11",
+    "reason": "no-signature"
+  }
+]

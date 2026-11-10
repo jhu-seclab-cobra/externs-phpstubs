@@ -1,0 +1,110 @@
+[
+  {
+    "subject": "ldap_search",
+    "section": "sinks",
+    "kind": "ldapi",
+    "parameter": "2",
+    "upstream": "codeql-php",
+    "location": "ldap-injection.model.yml:9",
+    "reason": "no-class"
+  },
+  {
+    "subject": "ldap_list",
+    "section": "sinks",
+    "kind": "ldapi",
+    "parameter": "2",
+    "upstream": "codeql-php",
+    "location": "ldap-injection.model.yml:10",
+    "reason": "no-class"
+  },
+  {
+    "subject": "ldap_read",
+    "section": "sinks",
+    "kind": "ldapi",
+    "parameter": "2",
+    "upstream": "codeql-php",
+    "location": "ldap-injection.model.yml:11",
+    "reason": "no-class"
+  },
+  {
+    "subject": "ldap_search",
+    "section": "sinks",
+    "kind": "ldapi",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "ldap-injection.model.yml:13",
+    "reason": "no-class"
+  },
+  {
+    "subject": "ldap_list",
+    "section": "sinks",
+    "kind": "ldapi",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "ldap-injection.model.yml:14",
+    "reason": "no-class"
+  },
+  {
+    "subject": "ldap_read",
+    "section": "sinks",
+    "kind": "ldapi",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "ldap-injection.model.yml:15",
+    "reason": "no-class"
+  },
+  {
+    "subject": "ldap_bind",
+    "section": "sinks",
+    "kind": "ldapi",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "ldap-injection.model.yml:17",
+    "reason": "no-class"
+  },
+  {
+    "subject": "ldap::query",
+    "section": "sinks",
+    "kind": "ldapi",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "ldap-injection.model.yml:21",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "ldap::query",
+    "section": "sinks",
+    "kind": "ldapi",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "ldap-injection.model.yml:22",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "ldapinterface::query",
+    "section": "sinks",
+    "kind": "ldapi",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "ldap-injection.model.yml:24",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "ldapinterface::query",
+    "section": "sinks",
+    "kind": "ldapi",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "ldap-injection.model.yml:25",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "ldap_escape",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "ldap-injection.model.yml:28",
+    "reason": "no-class"
+  }
+]

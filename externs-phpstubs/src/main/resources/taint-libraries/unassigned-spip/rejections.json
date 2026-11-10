@@ -1,0 +1,371 @@
+[
+  {
+    "subject": "_request",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "spip.model.yml:12",
+    "reason": "no-class"
+  },
+  {
+    "subject": "collecter_requests",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "spip.model.yml:14",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sql_query",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "spip.model.yml:34",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sql_select",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "spip.model.yml:35",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sql_select",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "spip.model.yml:36",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sql_select",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "2",
+    "upstream": "codeql-php",
+    "location": "spip.model.yml:37",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sql_select",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "3",
+    "upstream": "codeql-php",
+    "location": "spip.model.yml:38",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sql_select",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "4",
+    "upstream": "codeql-php",
+    "location": "spip.model.yml:39",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sql_select",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "6",
+    "upstream": "codeql-php",
+    "location": "spip.model.yml:40",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sql_fetsel",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "spip.model.yml:43",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sql_fetsel",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "spip.model.yml:44",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sql_fetsel",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "2",
+    "upstream": "codeql-php",
+    "location": "spip.model.yml:45",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sql_fetsel",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "3",
+    "upstream": "codeql-php",
+    "location": "spip.model.yml:46",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sql_fetsel",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "4",
+    "upstream": "codeql-php",
+    "location": "spip.model.yml:47",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sql_fetsel",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "6",
+    "upstream": "codeql-php",
+    "location": "spip.model.yml:48",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sql_allfetsel",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "spip.model.yml:49",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sql_allfetsel",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "spip.model.yml:50",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sql_allfetsel",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "2",
+    "upstream": "codeql-php",
+    "location": "spip.model.yml:51",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sql_allfetsel",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "3",
+    "upstream": "codeql-php",
+    "location": "spip.model.yml:52",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sql_allfetsel",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "4",
+    "upstream": "codeql-php",
+    "location": "spip.model.yml:53",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sql_allfetsel",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "6",
+    "upstream": "codeql-php",
+    "location": "spip.model.yml:54",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sql_getfetsel",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "spip.model.yml:55",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sql_getfetsel",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "spip.model.yml:56",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sql_getfetsel",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "2",
+    "upstream": "codeql-php",
+    "location": "spip.model.yml:57",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sql_getfetsel",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "3",
+    "upstream": "codeql-php",
+    "location": "spip.model.yml:58",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sql_getfetsel",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "4",
+    "upstream": "codeql-php",
+    "location": "spip.model.yml:59",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sql_getfetsel",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "6",
+    "upstream": "codeql-php",
+    "location": "spip.model.yml:60",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sql_countsel",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "spip.model.yml:62",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sql_countsel",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "spip.model.yml:63",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sql_countsel",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "2",
+    "upstream": "codeql-php",
+    "location": "spip.model.yml:64",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sql_countsel",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "3",
+    "upstream": "codeql-php",
+    "location": "spip.model.yml:65",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sql_update",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "spip.model.yml:66",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sql_update",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "2",
+    "upstream": "codeql-php",
+    "location": "spip.model.yml:67",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sql_updateq",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "2",
+    "upstream": "codeql-php",
+    "location": "spip.model.yml:68",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sql_delete",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "spip.model.yml:69",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sql_insert",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "2",
+    "upstream": "codeql-php",
+    "location": "spip.model.yml:70",
+    "reason": "no-class"
+  },
+  {
+    "subject": "redirige_par_entete",
+    "section": "sinks",
+    "kind": "openredirect",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "spip.model.yml:73",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sql_quote",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "spip.model.yml:78",
+    "reason": "no-class"
+  },
+  {
+    "subject": "_q",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "spip.model.yml:79",
+    "reason": "no-class"
+  },
+  {
+    "subject": "intval",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "spip.model.yml:80",
+    "reason": "no-class"
+  },
+  {
+    "subject": "securiser_redirect_action",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "spip.model.yml:81",
+    "reason": "no-class"
+  }
+]

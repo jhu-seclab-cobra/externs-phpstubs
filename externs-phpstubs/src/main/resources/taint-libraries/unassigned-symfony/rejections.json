@@ -1,0 +1,461 @@
+[
+  {
+    "subject": "getcontent",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:5",
+    "reason": "no-class"
+  },
+  {
+    "subject": "getquerystring",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:6",
+    "reason": "no-class"
+  },
+  {
+    "subject": "getclientip",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:7",
+    "reason": "no-class"
+  },
+  {
+    "subject": "getpathinfo",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:8",
+    "reason": "no-class"
+  },
+  {
+    "subject": "geturi",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:9",
+    "reason": "no-class"
+  },
+  {
+    "subject": "getrequesturi",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:10",
+    "reason": "no-class"
+  },
+  {
+    "subject": "gethost",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:11",
+    "reason": "no-class"
+  },
+  {
+    "subject": "gethttphost",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:12",
+    "reason": "no-class"
+  },
+  {
+    "subject": "getschemeandhttphost",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:13",
+    "reason": "no-class"
+  },
+  {
+    "subject": "inputbag::get",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:19",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "inputbag::all",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:20",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "inputbag::getstring",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:21",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "parameterbag::get",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:24",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "parameterbag::all",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:25",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "headerbag::get",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:26",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "headerbag::all",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:27",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "serverbag::get",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:28",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "filebag::get",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:29",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "request::get",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:30",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "createquery",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "-1",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:34",
+    "reason": "no-class"
+  },
+  {
+    "subject": "createnativequery",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "-1",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:35",
+    "reason": "no-class"
+  },
+  {
+    "subject": "executequery",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:38",
+    "reason": "no-class"
+  },
+  {
+    "subject": "executestatement",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:39",
+    "reason": "no-class"
+  },
+  {
+    "subject": "executeupdate",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:40",
+    "reason": "no-class"
+  },
+  {
+    "subject": "prepare",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:44",
+    "reason": "no-class"
+  },
+  {
+    "subject": "andwhere",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "-1",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:46",
+    "reason": "no-class"
+  },
+  {
+    "subject": "orwhere",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "-1",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:47",
+    "reason": "no-class"
+  },
+  {
+    "subject": "andhaving",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "-1",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:48",
+    "reason": "no-class"
+  },
+  {
+    "subject": "orhaving",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "-1",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:49",
+    "reason": "no-class"
+  },
+  {
+    "subject": "addselect",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:53",
+    "reason": "no-class"
+  },
+  {
+    "subject": "addorderby",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:54",
+    "reason": "no-class"
+  },
+  {
+    "subject": "orderby",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:57",
+    "reason": "no-class"
+  },
+  {
+    "subject": "setmaxresults",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:62",
+    "reason": "no-class"
+  },
+  {
+    "subject": "setfirstresult",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:63",
+    "reason": "no-class"
+  },
+  {
+    "subject": "mustrun",
+    "section": "sinks",
+    "kind": "cmdi",
+    "parameter": "-1",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:67",
+    "reason": "no-class"
+  },
+  {
+    "subject": "fromshellcommandline",
+    "section": "sinks",
+    "kind": "cmdi",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:68",
+    "reason": "no-class"
+  },
+  {
+    "subject": "fetchallassociative",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:72",
+    "reason": "no-class"
+  },
+  {
+    "subject": "fetchallnumeric",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:73",
+    "reason": "no-class"
+  },
+  {
+    "subject": "fetchallkeyvalue",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:74",
+    "reason": "no-class"
+  },
+  {
+    "subject": "fetchassociative",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:75",
+    "reason": "no-class"
+  },
+  {
+    "subject": "fetchnumeric",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:76",
+    "reason": "no-class"
+  },
+  {
+    "subject": "fetchfirstcolumn",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:77",
+    "reason": "no-class"
+  },
+  {
+    "subject": "iterateassociative",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:78",
+    "reason": "no-class"
+  },
+  {
+    "subject": "setcondition",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:83",
+    "reason": "no-class"
+  },
+  {
+    "subject": "addconditionparam",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:87",
+    "reason": "no-class"
+  },
+  {
+    "subject": "dumpfile",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:89",
+    "reason": "no-class"
+  },
+  {
+    "subject": "appendtofile",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:90",
+    "reason": "no-class"
+  },
+  {
+    "subject": "mirror",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:91",
+    "reason": "no-class"
+  },
+  {
+    "subject": "settargeturl",
+    "section": "sinks",
+    "kind": "openredirect",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:93",
+    "reason": "no-class"
+  },
+  {
+    "subject": "expressionlanguage::evaluate",
+    "section": "sinks",
+    "kind": "codei",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:136",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "expressionlanguage::compile",
+    "section": "sinks",
+    "kind": "codei",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:137",
+    "reason": "no-signature"
+  }
+]

@@ -1,0 +1,11 @@
+[
+  {
+    "subject": "symfony\\component\\process\\process::fromshellcommandline",
+    "section": "sinks",
+    "kind": "cmdi",
+    "parameter": "command",
+    "upstream": "phpstan-security",
+    "location": "symfony.neon:37",
+    "reason": "no-signature"
+  }
+]

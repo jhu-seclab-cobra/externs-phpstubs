@@ -1,0 +1,173 @@
+[
+  {
+    "subject": "optional_param",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "moodle.model.yml:7",
+    "reason": "no-class"
+  },
+  {
+    "subject": "required_param",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "moodle.model.yml:8",
+    "reason": "no-class"
+  },
+  {
+    "subject": "optional_param_array",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "moodle.model.yml:9",
+    "reason": "no-class"
+  },
+  {
+    "subject": "required_param_array",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "moodle.model.yml:10",
+    "reason": "no-class"
+  },
+  {
+    "subject": "get_records_sql",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "moodle.model.yml:13",
+    "reason": "no-class"
+  },
+  {
+    "subject": "get_record_sql",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "moodle.model.yml:14",
+    "reason": "no-class"
+  },
+  {
+    "subject": "get_recordset_sql",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "moodle.model.yml:15",
+    "reason": "no-class"
+  },
+  {
+    "subject": "get_field_sql",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "moodle.model.yml:16",
+    "reason": "no-class"
+  },
+  {
+    "subject": "get_fieldset_sql",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "moodle.model.yml:17",
+    "reason": "no-class"
+  },
+  {
+    "subject": "count_records_sql",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "moodle.model.yml:18",
+    "reason": "no-class"
+  },
+  {
+    "subject": "get_records_select",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "moodle.model.yml:19",
+    "reason": "no-class"
+  },
+  {
+    "subject": "get_record_select",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "moodle.model.yml:20",
+    "reason": "no-class"
+  },
+  {
+    "subject": "count_records_select",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "moodle.model.yml:21",
+    "reason": "no-class"
+  },
+  {
+    "subject": "delete_records_select",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "moodle.model.yml:22",
+    "reason": "no-class"
+  },
+  {
+    "subject": "get_recordset_select",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "moodle.model.yml:24",
+    "reason": "no-class"
+  },
+  {
+    "subject": "record_exists_select",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "moodle.model.yml:25",
+    "reason": "no-class"
+  },
+  {
+    "subject": "get_field_select",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "2",
+    "upstream": "codeql-php",
+    "location": "moodle.model.yml:26",
+    "reason": "no-class"
+  },
+  {
+    "subject": "get_fieldset_select",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "2",
+    "upstream": "codeql-php",
+    "location": "moodle.model.yml:27",
+    "reason": "no-class"
+  },
+  {
+    "subject": "set_field_select",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "3",
+    "upstream": "codeql-php",
+    "location": "moodle.model.yml:28",
+    "reason": "no-class"
+  }
+]

@@ -1,0 +1,416 @@
+[
+  {
+    "subject": "wp_unslash",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:5",
+    "reason": "no-class"
+  },
+  {
+    "subject": "get_query_var",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:6",
+    "reason": "no-class"
+  },
+  {
+    "subject": "stripslashes_deep",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:7",
+    "reason": "no-class"
+  },
+  {
+    "subject": "get_results",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "-1",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:11",
+    "reason": "no-class"
+  },
+  {
+    "subject": "get_var",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "-1",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:12",
+    "reason": "no-class"
+  },
+  {
+    "subject": "get_col",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "-1",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:13",
+    "reason": "no-class"
+  },
+  {
+    "subject": "get_row",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "-1",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:14",
+    "reason": "no-class"
+  },
+  {
+    "subject": "query",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:15",
+    "reason": "no-class"
+  },
+  {
+    "subject": "wp_remote_get",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:17",
+    "reason": "no-class"
+  },
+  {
+    "subject": "wp_remote_post",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:18",
+    "reason": "no-class"
+  },
+  {
+    "subject": "wp_remote_head",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:19",
+    "reason": "no-class"
+  },
+  {
+    "subject": "wp_remote_request",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:20",
+    "reason": "no-class"
+  },
+  {
+    "subject": "wp_remote_fopen",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:21",
+    "reason": "no-class"
+  },
+  {
+    "subject": "wp_safe_remote_get",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:22",
+    "reason": "no-class"
+  },
+  {
+    "subject": "wp_safe_remote_post",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:23",
+    "reason": "no-class"
+  },
+  {
+    "subject": "wp_safe_remote_head",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:24",
+    "reason": "no-class"
+  },
+  {
+    "subject": "wp_safe_remote_request",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:25",
+    "reason": "no-class"
+  },
+  {
+    "subject": "vip_safe_wp_remote_get",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:26",
+    "reason": "no-class"
+  },
+  {
+    "subject": "wp_oembed_get",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:27",
+    "reason": "no-class"
+  },
+  {
+    "subject": "download_url",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:28",
+    "reason": "no-class"
+  },
+  {
+    "subject": "wp_redirect",
+    "section": "sinks",
+    "kind": "openredirect",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:30",
+    "reason": "no-class"
+  },
+  {
+    "subject": "wp_safe_redirect",
+    "section": "sinks",
+    "kind": "openredirect",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:31",
+    "reason": "no-class"
+  },
+  {
+    "subject": "wp_delete_file",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:33",
+    "reason": "no-class"
+  },
+  {
+    "subject": "filesize",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "-1",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:34",
+    "reason": "no-class"
+  },
+  {
+    "subject": "maybe_unserialize",
+    "section": "sinks",
+    "kind": "deser",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:36",
+    "reason": "no-class"
+  },
+  {
+    "subject": "esc_url",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:39",
+    "reason": "no-class"
+  },
+  {
+    "subject": "esc_sql",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:40",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sanitize_email",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:41",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sanitize_key",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:42",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sanitize_title",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:43",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sanitize_file_name",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:44",
+    "reason": "no-class"
+  },
+  {
+    "subject": "esc_url_raw",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:45",
+    "reason": "no-class"
+  },
+  {
+    "subject": "absint",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:46",
+    "reason": "no-class"
+  },
+  {
+    "subject": "wpdb::prepare",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:88",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "wp_rest_request::get_param",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:93",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "wp_rest_request::get_params",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:94",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "wp_rest_request::get_query_params",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:95",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "wp_rest_request::get_body_params",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:96",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "wp_rest_request::get_json_params",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:97",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "wp_rest_request::get_url_params",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:98",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "wp_rest_request::get_body",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:99",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "wp_rest_request::get_header",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:100",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "_e",
+    "section": "sinks",
+    "kind": "xss",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:105",
+    "reason": "no-class"
+  },
+  {
+    "subject": "_ex",
+    "section": "sinks",
+    "kind": "xss",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:106",
+    "reason": "no-class"
+  },
+  {
+    "subject": "wp_die",
+    "section": "sinks",
+    "kind": "xss",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:107",
+    "reason": "no-class"
+  },
+  {
+    "subject": "fetch_feed",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "wordpress.model.yml:108",
+    "reason": "no-class"
+  }
+]

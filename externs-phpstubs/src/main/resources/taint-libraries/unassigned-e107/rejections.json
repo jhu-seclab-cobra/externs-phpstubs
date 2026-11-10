@@ -1,0 +1,191 @@
+[
+  {
+    "subject": "e_admin_request::getquery",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "e107.model.yml:8",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "e_admin_request::getposted",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "e107.model.yml:9",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "erequest::getrequestparam",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "e107.model.yml:10",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "erequest::getparam",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "e107.model.yml:11",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "e_front_model::getposted",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "e107.model.yml:12",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "db_query",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "e107.model.yml:17",
+    "reason": "no-class"
+  },
+  {
+    "subject": "db_query_all",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "e107.model.yml:18",
+    "reason": "no-class"
+  },
+  {
+    "subject": "gen",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "e107.model.yml:19",
+    "reason": "no-class"
+  },
+  {
+    "subject": "select",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "e107.model.yml:20",
+    "reason": "no-class"
+  },
+  {
+    "subject": "select",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "2",
+    "upstream": "codeql-php",
+    "location": "e107.model.yml:21",
+    "reason": "no-class"
+  },
+  {
+    "subject": "db_select",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "e107.model.yml:22",
+    "reason": "no-class"
+  },
+  {
+    "subject": "db_select",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "2",
+    "upstream": "codeql-php",
+    "location": "e107.model.yml:23",
+    "reason": "no-class"
+  },
+  {
+    "subject": "count",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "2",
+    "upstream": "codeql-php",
+    "location": "e107.model.yml:24",
+    "reason": "no-class"
+  },
+  {
+    "subject": "delete",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "e107.model.yml:25",
+    "reason": "no-class"
+  },
+  {
+    "subject": "db_update",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "e107.model.yml:26",
+    "reason": "no-class"
+  },
+  {
+    "subject": "retrieve",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "2",
+    "upstream": "codeql-php",
+    "location": "e107.model.yml:27",
+    "reason": "no-class"
+  },
+  {
+    "subject": "getremotefile",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "e107.model.yml:29",
+    "reason": "no-class"
+  },
+  {
+    "subject": "getremotecontent",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "e107.model.yml:30",
+    "reason": "no-class"
+  },
+  {
+    "subject": "todb",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "e107.model.yml:36",
+    "reason": "no-class"
+  },
+  {
+    "subject": "escape",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "e107.model.yml:37",
+    "reason": "no-class"
+  },
+  {
+    "subject": "intval",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "e107.model.yml:38",
+    "reason": "no-class"
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "subject": "clickhousedb\\quote\\valueformatter::formatvalue",
+    "section": "sanitizers",
+    "kind": "($addQuotes",
+    "parameter": "",
+    "upstream": "psalm",
+    "location": "libraries/smi2/phpclickhouse.phpstub",
+    "reason": "unsupported-condition"
+  },
+  {
+    "subject": "clickhousedb\\quote\\formatline::insert",
+    "section": "sanitizers",
+    "kind": "($skipEncode",
+    "parameter": "",
+    "upstream": "psalm",
+    "location": "libraries/smi2/phpclickhouse.phpstub",
+    "reason": "unsupported-condition"
+  }
+]

@@ -1,0 +1,436 @@
+{
+  "amphp/file": {
+    "entries": 14,
+    "facts": {
+      "sinks:pathtrav": 17
+    },
+    "rejections": {}
+  },
+  "amphp/http-client": {
+    "entries": 10,
+    "facts": {
+      "sinks:pathtrav": 1,
+      "sinks:ssrf": 2,
+      "sources:external-input": 4
+    },
+    "rejections": {}
+  },
+  "amphp/process": {
+    "entries": 2,
+    "facts": {
+      "sinks:cmdi": 1
+    },
+    "rejections": {}
+  },
+  "doctrine/dbal": {
+    "entries": 7,
+    "facts": {
+      "sanitizers:sqli": 1,
+      "sinks:sqli": 5
+    },
+    "rejections": {
+      "no-signature": 14,
+      "unresolved-parameter": 1
+    }
+  },
+  "guzzlehttp/guzzle": {
+    "entries": 28,
+    "facts": {
+      "sinks:pathtrav": 1,
+      "sinks:ssrf": 18,
+      "sources:external-input": 23
+    },
+    "rejections": {}
+  },
+  "guzzlehttp/psr7": {
+    "entries": 2,
+    "facts": {
+      "sinks:ssrf": 1
+    },
+    "rejections": {}
+  },
+  "jcupitt/vips": {
+    "entries": 8,
+    "facts": {
+      "sinks:pathtrav": 5
+    },
+    "rejections": {}
+  },
+  "laravel/framework": {
+    "entries": 382,
+    "facts": {
+      "sanitizers:sqli": 24,
+      "sanitizers:xss": 3,
+      "sinks:callablei": 5,
+      "sinks:cmdi": 7,
+      "sinks:codei": 3,
+      "sinks:fileinc": 14,
+      "sinks:headeri": 47,
+      "sinks:pathtrav": 81,
+      "sinks:sqli": 111,
+      "sinks:ssrf": 18,
+      "sinks:xss": 15,
+      "sources:external-input": 18,
+      "sources:user-input": 68
+    },
+    "rejections": {
+      "no-class": 43,
+      "no-cwe-kind": 16,
+      "no-signature": 89
+    }
+  },
+  "mongodb/mongodb": {
+    "entries": 32,
+    "facts": {
+      "sinks:nosqli": 32
+    },
+    "rejections": {}
+  },
+  "monolog/monolog": {
+    "entries": 4,
+    "facts": {
+      "sinks:pathtrav": 1,
+      "sinks:ssrf": 1
+    },
+    "rejections": {}
+  },
+  "pear/archive_tar": {
+    "entries": 9,
+    "facts": {
+      "sinks:pathtrav": 8
+    },
+    "rejections": {}
+  },
+  "phpoffice/phpspreadsheet": {
+    "entries": 23,
+    "facts": {
+      "sinks:pathtrav": 8,
+      "sources:external-input": 7
+    },
+    "rejections": {}
+  },
+  "psr/http-client": {
+    "entries": 2,
+    "facts": {
+      "sources:external-input": 1
+    },
+    "rejections": {}
+  },
+  "smi2/phpclickhouse": {
+    "entries": 21,
+    "facts": {
+      "sinks:pathtrav": 3,
+      "sinks:sqli": 25
+    },
+    "rejections": {
+      "unsupported-condition": 2
+    }
+  },
+  "spatie/browsershot": {
+    "entries": 0,
+    "facts": {},
+    "rejections": {
+      "no-signature": 4
+    }
+  },
+  "symfony/dom-crawler": {
+    "entries": 0,
+    "facts": {},
+    "rejections": {
+      "no-signature": 2
+    }
+  },
+  "symfony/filesystem": {
+    "entries": 0,
+    "facts": {},
+    "rejections": {
+      "no-signature": 26
+    }
+  },
+  "symfony/framework-bundle": {
+    "entries": 0,
+    "facts": {},
+    "rejections": {
+      "no-signature": 3
+    }
+  },
+  "symfony/http-foundation": {
+    "entries": 0,
+    "facts": {},
+    "rejections": {
+      "no-signature": 20
+    }
+  },
+  "symfony/ldap": {
+    "entries": 0,
+    "facts": {},
+    "rejections": {
+      "no-signature": 2
+    }
+  },
+  "symfony/process": {
+    "entries": 0,
+    "facts": {},
+    "rejections": {
+      "no-signature": 1
+    }
+  },
+  "unassigned/cacti": {
+    "entries": 0,
+    "facts": {},
+    "rejections": {
+      "no-class": 7
+    }
+  },
+  "unassigned/cakephp": {
+    "entries": 0,
+    "facts": {},
+    "rejections": {
+      "no-signature": 13
+    }
+  },
+  "unassigned/codeigniter": {
+    "entries": 0,
+    "facts": {},
+    "rejections": {
+      "no-class": 5,
+      "no-signature": 9
+    }
+  },
+  "unassigned/concrete": {
+    "entries": 0,
+    "facts": {},
+    "rejections": {
+      "no-class": 6,
+      "no-signature": 12
+    }
+  },
+  "unassigned/contao": {
+    "entries": 0,
+    "facts": {},
+    "rejections": {
+      "no-signature": 5
+    }
+  },
+  "unassigned/craftcms": {
+    "entries": 0,
+    "facts": {},
+    "rejections": {
+      "no-signature": 13
+    }
+  },
+  "unassigned/crypto": {
+    "entries": 0,
+    "facts": {},
+    "rejections": {
+      "no-class": 7
+    }
+  },
+  "unassigned/dolibarr": {
+    "entries": 0,
+    "facts": {},
+    "rejections": {
+      "no-class": 9
+    }
+  },
+  "unassigned/drupal": {
+    "entries": 0,
+    "facts": {},
+    "rejections": {
+      "no-class": 8,
+      "no-signature": 19
+    }
+  },
+  "unassigned/e107": {
+    "entries": 0,
+    "facts": {},
+    "rejections": {
+      "no-class": 16,
+      "no-signature": 5
+    }
+  },
+  "unassigned/joomla": {
+    "entries": 0,
+    "facts": {},
+    "rejections": {
+      "no-class": 13,
+      "no-signature": 38
+    }
+  },
+  "unassigned/ldap-injection": {
+    "entries": 0,
+    "facts": {},
+    "rejections": {
+      "no-class": 8,
+      "no-signature": 4
+    }
+  },
+  "unassigned/magento": {
+    "entries": 0,
+    "facts": {},
+    "rejections": {
+      "no-class": 21,
+      "no-signature": 22
+    }
+  },
+  "unassigned/mediawiki": {
+    "entries": 0,
+    "facts": {},
+    "rejections": {
+      "no-class": 5,
+      "no-signature": 21
+    }
+  },
+  "unassigned/modern-frameworks": {
+    "entries": 0,
+    "facts": {},
+    "rejections": {
+      "no-class": 32
+    }
+  },
+  "unassigned/modx": {
+    "entries": 0,
+    "facts": {},
+    "rejections": {
+      "no-class": 3,
+      "no-signature": 2
+    }
+  },
+  "unassigned/moodle": {
+    "entries": 0,
+    "facts": {},
+    "rejections": {
+      "no-class": 19
+    }
+  },
+  "unassigned/october": {
+    "entries": 0,
+    "facts": {},
+    "rejections": {
+      "no-class": 3,
+      "no-signature": 5
+    }
+  },
+  "unassigned/php-apps": {
+    "entries": 0,
+    "facts": {},
+    "rejections": {
+      "no-class": 10,
+      "no-signature": 2
+    }
+  },
+  "unassigned/phpbb": {
+    "entries": 0,
+    "facts": {},
+    "rejections": {
+      "no-class": 8,
+      "no-signature": 11
+    }
+  },
+  "unassigned/prestashop": {
+    "entries": 0,
+    "facts": {},
+    "rejections": {
+      "no-class": 10,
+      "no-signature": 16
+    }
+  },
+  "unassigned/processwire": {
+    "entries": 0,
+    "facts": {},
+    "rejections": {
+      "no-signature": 23
+    }
+  },
+  "unassigned/silverstripe": {
+    "entries": 0,
+    "facts": {},
+    "rejections": {
+      "no-signature": 4
+    }
+  },
+  "unassigned/spip": {
+    "entries": 0,
+    "facts": {},
+    "rejections": {
+      "no-class": 41
+    }
+  },
+  "unassigned/suitecrm": {
+    "entries": 0,
+    "facts": {},
+    "rejections": {
+      "no-class": 6,
+      "no-signature": 2
+    }
+  },
+  "unassigned/symfony": {
+    "entries": 0,
+    "facts": {},
+    "rejections": {
+      "no-class": 39,
+      "no-signature": 12
+    }
+  },
+  "unassigned/templating": {
+    "entries": 0,
+    "facts": {},
+    "rejections": {
+      "no-class": 10
+    }
+  },
+  "unassigned/textpattern": {
+    "entries": 0,
+    "facts": {},
+    "rejections": {
+      "no-class": 15
+    }
+  },
+  "unassigned/typo3": {
+    "entries": 0,
+    "facts": {},
+    "rejections": {
+      "no-class": 21,
+      "no-signature": 30
+    }
+  },
+  "unassigned/wordpress": {
+    "entries": 0,
+    "facts": {},
+    "rejections": {
+      "no-class": 37,
+      "no-signature": 9
+    }
+  },
+  "unassigned/xoops": {
+    "entries": 0,
+    "facts": {},
+    "rejections": {
+      "no-class": 10,
+      "no-signature": 12
+    }
+  },
+  "unassigned/yii": {
+    "entries": 0,
+    "facts": {},
+    "rejections": {
+      "no-class": 6,
+      "no-signature": 5
+    }
+  },
+  "unassigned/zencart": {
+    "entries": 0,
+    "facts": {},
+    "rejections": {
+      "no-class": 8,
+      "no-signature": 3
+    }
+  },
+  "webklex/php-imap": {
+    "entries": 16,
+    "facts": {
+      "sources:external-input": 13
+    },
+    "rejections": {}
+  }
+}

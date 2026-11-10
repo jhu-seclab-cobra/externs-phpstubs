@@ -1,0 +1,137 @@
+[
+  {
+    "subject": "gps",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "textpattern.model.yml:7",
+    "reason": "no-class"
+  },
+  {
+    "subject": "gpsa",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "textpattern.model.yml:8",
+    "reason": "no-class"
+  },
+  {
+    "subject": "ps",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "textpattern.model.yml:9",
+    "reason": "no-class"
+  },
+  {
+    "subject": "psa",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "textpattern.model.yml:10",
+    "reason": "no-class"
+  },
+  {
+    "subject": "psas",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "textpattern.model.yml:11",
+    "reason": "no-class"
+  },
+  {
+    "subject": "safe_query",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "textpattern.model.yml:16",
+    "reason": "no-class"
+  },
+  {
+    "subject": "safe_field",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "2",
+    "upstream": "codeql-php",
+    "location": "textpattern.model.yml:17",
+    "reason": "no-class"
+  },
+  {
+    "subject": "safe_column",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "2",
+    "upstream": "codeql-php",
+    "location": "textpattern.model.yml:18",
+    "reason": "no-class"
+  },
+  {
+    "subject": "safe_row",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "2",
+    "upstream": "codeql-php",
+    "location": "textpattern.model.yml:19",
+    "reason": "no-class"
+  },
+  {
+    "subject": "safe_rows",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "2",
+    "upstream": "codeql-php",
+    "location": "textpattern.model.yml:20",
+    "reason": "no-class"
+  },
+  {
+    "subject": "safe_delete",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "textpattern.model.yml:21",
+    "reason": "no-class"
+  },
+  {
+    "subject": "safe_update",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "textpattern.model.yml:22",
+    "reason": "no-class"
+  },
+  {
+    "subject": "safe_update",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "2",
+    "upstream": "codeql-php",
+    "location": "textpattern.model.yml:23",
+    "reason": "no-class"
+  },
+  {
+    "subject": "doslash",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "textpattern.model.yml:28",
+    "reason": "no-class"
+  },
+  {
+    "subject": "safe_escape",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "textpattern.model.yml:29",
+    "reason": "no-class"
+  }
+]

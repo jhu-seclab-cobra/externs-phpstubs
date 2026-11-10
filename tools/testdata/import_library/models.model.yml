@@ -1,0 +1,10 @@
+extensions:
+  - addsTo: {pack: codeql/php-all, extensible: typedSinkModel}
+    data:
+      - ["Demo\\Query", "run", -1, "SQL injection"]
+  - addsTo: {pack: codeql/php-all, extensible: sinkModel}
+    data:
+      - ["method", "run", 0, "SQL injection"]
+  - addsTo: {pack: codeql/php-all, extensible: typedSourceModel}
+    data:
+      - ["Demo\\Query", "read", "database"]

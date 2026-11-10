@@ -1,0 +1,119 @@
+[
+  {
+    "subject": "serverrequest::getdata",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "cakephp.model.yml:7",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "serverrequest::getquery",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "cakephp.model.yml:8",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "serverrequest::getqueryparams",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "cakephp.model.yml:9",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "serverrequest::getparam",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "cakephp.model.yml:10",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "serverrequest::getcookie",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "cakephp.model.yml:11",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "request::getdata",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "cakephp.model.yml:12",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "request::getquery",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "cakephp.model.yml:13",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "connection::query",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "cakephp.model.yml:18",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "connection::execute",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "cakephp.model.yml:19",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "query::limit",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "cakephp.model.yml:21",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "query::offset",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "cakephp.model.yml:22",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "selectquery::limit",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "cakephp.model.yml:23",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "selectquery::offset",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "cakephp.model.yml:24",
+    "reason": "no-signature"
+  }
+]

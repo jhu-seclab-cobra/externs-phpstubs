@@ -1,0 +1,9 @@
+parameters:
+    taint:
+        sources:
+            methods:
+                Demo\Query: [read]
+        sinks:
+            methods:
+                Demo\Query:
+                    run: {type: path, parameters: [sql, missing]}

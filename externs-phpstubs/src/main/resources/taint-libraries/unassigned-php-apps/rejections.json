@@ -1,0 +1,110 @@
+[
+  {
+    "subject": "db_query",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "php-apps.model.yml:6",
+    "reason": "no-class"
+  },
+  {
+    "subject": "dbfetchrows",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "php-apps.model.yml:7",
+    "reason": "no-class"
+  },
+  {
+    "subject": "dbfetchrow",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "php-apps.model.yml:8",
+    "reason": "no-class"
+  },
+  {
+    "subject": "dbfetchcell",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "php-apps.model.yml:9",
+    "reason": "no-class"
+  },
+  {
+    "subject": "dbfetchcolumn",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "php-apps.model.yml:10",
+    "reason": "no-class"
+  },
+  {
+    "subject": "dbfetchkeyvalue",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "php-apps.model.yml:11",
+    "reason": "no-class"
+  },
+  {
+    "subject": "pwg_query",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "php-apps.model.yml:12",
+    "reason": "no-class"
+  },
+  {
+    "subject": "runquery",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "php-apps.model.yml:13",
+    "reason": "no-class"
+  },
+  {
+    "subject": "get_full_list",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "php-apps.model.yml:14",
+    "reason": "no-class"
+  },
+  {
+    "subject": "database::query",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "php-apps.model.yml:17",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "database::select",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "php-apps.model.yml:18",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "get_vars",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "php-apps.model.yml:21",
+    "reason": "no-class"
+  }
+]

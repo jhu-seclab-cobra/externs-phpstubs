@@ -1,0 +1,83 @@
+[
+  {
+    "subject": "dol_eval",
+    "section": "sinks",
+    "kind": "codei",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "dolibarr.model.yml:21",
+    "reason": "no-class"
+  },
+  {
+    "subject": "dol_eval_new",
+    "section": "sinks",
+    "kind": "codei",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "dolibarr.model.yml:22",
+    "reason": "no-class"
+  },
+  {
+    "subject": "dol_eval_standard",
+    "section": "sinks",
+    "kind": "codei",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "dolibarr.model.yml:23",
+    "reason": "no-class"
+  },
+  {
+    "subject": "dol_include_once",
+    "section": "sinks",
+    "kind": "fileinc",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "dolibarr.model.yml:24",
+    "reason": "no-class"
+  },
+  {
+    "subject": "dol_buildpath",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "dolibarr.model.yml:25",
+    "reason": "no-class"
+  },
+  {
+    "subject": "geturlcontent",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "dolibarr.model.yml:26",
+    "reason": "no-class"
+  },
+  {
+    "subject": "price2num",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "dolibarr.model.yml:31",
+    "reason": "no-class"
+  },
+  {
+    "subject": "dol_sanitizefilename",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "dolibarr.model.yml:32",
+    "reason": "no-class"
+  },
+  {
+    "subject": "dol_sanitizepathname",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "dolibarr.model.yml:33",
+    "reason": "no-class"
+  }
+]

@@ -1,0 +1,461 @@
+[
+  {
+    "subject": "getraw",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:10",
+    "reason": "no-class"
+  },
+  {
+    "subject": "gethtml",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:11",
+    "reason": "no-class"
+  },
+  {
+    "subject": "getuserstatefromrequest",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:14",
+    "reason": "no-class"
+  },
+  {
+    "subject": "input::get",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:22",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "input::getvar",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:23",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "input::getstring",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:24",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "input::getarray",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:25",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "jinput::get",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:26",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "jinput::getvar",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:27",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "jinput::getstring",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:28",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "setquery",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:34",
+    "reason": "no-class"
+  },
+  {
+    "subject": "replaceprefix",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:35",
+    "reason": "no-class"
+  },
+  {
+    "subject": "setredirect",
+    "section": "sinks",
+    "kind": "openredirect",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:38",
+    "reason": "no-class"
+  },
+  {
+    "subject": "http::get",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:44",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "http::post",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:45",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "http::request",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:46",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "http::head",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:47",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "http::put",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:48",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "http::delete",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:49",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "http::patch",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:50",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "http::options",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:51",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "http::trace",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:52",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "jhttp::get",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:53",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "jhttp::post",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:54",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "jhttp::head",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:55",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "jhttp::put",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:56",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "jhttp::delete",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:57",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "file::write",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:59",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "file::delete",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:60",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "file::copy",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:61",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "file::copy",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:62",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "file::move",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:63",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "file::move",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:64",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "file::append",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:65",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "file::upload",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:66",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "jfile::delete",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:67",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "folder::delete",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:68",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "folder::create",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:69",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "folder::copy",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:70",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "folder::copy",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:71",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "folder::move",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:72",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "folder::files",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:73",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "folder::folders",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:74",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "jfolder::delete",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:75",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "getint",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:80",
+    "reason": "no-class"
+  },
+  {
+    "subject": "getuint",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:81",
+    "reason": "no-class"
+  },
+  {
+    "subject": "getfloat",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:82",
+    "reason": "no-class"
+  },
+  {
+    "subject": "getbool",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:83",
+    "reason": "no-class"
+  },
+  {
+    "subject": "getcmd",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:85",
+    "reason": "no-class"
+  },
+  {
+    "subject": "getword",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:86",
+    "reason": "no-class"
+  },
+  {
+    "subject": "getalnum",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:87",
+    "reason": "no-class"
+  }
+]

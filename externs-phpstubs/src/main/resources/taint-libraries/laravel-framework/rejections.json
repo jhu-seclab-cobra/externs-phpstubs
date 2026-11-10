@@ -1,0 +1,1334 @@
+[
+  {
+    "subject": "slug",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:206",
+    "reason": "no-class"
+  },
+  {
+    "subject": "illuminate\\auth\\authenticatable::getauthpassword",
+    "section": "sources",
+    "kind": "ignore",
+    "parameter": "",
+    "upstream": "psalm-plugin-laravel",
+    "location": "common/Auth/Authenticatable.phpstub",
+    "reason": "no-cwe-kind"
+  },
+  {
+    "subject": "illuminate\\auth\\authenticatable::getremembertoken",
+    "section": "sources",
+    "kind": "ignore",
+    "parameter": "",
+    "upstream": "psalm-plugin-laravel",
+    "location": "common/Auth/Authenticatable.phpstub",
+    "reason": "no-cwe-kind"
+  },
+  {
+    "subject": "bcrypt",
+    "section": "sanitizers",
+    "kind": "ignore",
+    "parameter": "",
+    "upstream": "psalm-plugin-laravel",
+    "location": "common/Foundation/helpers.phpstub",
+    "reason": "no-cwe-kind"
+  },
+  {
+    "subject": "bcrypt",
+    "section": "sanitizers",
+    "kind": "ignore",
+    "parameter": "",
+    "upstream": "psalm-plugin-laravel",
+    "location": "common/Foundation/helpers.phpstub",
+    "reason": "no-cwe-kind"
+  },
+  {
+    "subject": "encrypt",
+    "section": "sanitizers",
+    "kind": "ignore",
+    "parameter": "",
+    "upstream": "psalm-plugin-laravel",
+    "location": "common/Foundation/helpers.phpstub",
+    "reason": "no-cwe-kind"
+  },
+  {
+    "subject": "encrypt",
+    "section": "sanitizers",
+    "kind": "ignore",
+    "parameter": "",
+    "upstream": "psalm-plugin-laravel",
+    "location": "common/Foundation/helpers.phpstub",
+    "reason": "no-cwe-kind"
+  },
+  {
+    "subject": "illuminate\\hashing\\hashmanager::make",
+    "section": "sanitizers",
+    "kind": "ignore",
+    "parameter": "",
+    "upstream": "psalm-plugin-laravel",
+    "location": "common/Hashing/HashManager.phpstub",
+    "reason": "no-cwe-kind"
+  },
+  {
+    "subject": "illuminate\\hashing\\hashmanager::make",
+    "section": "sanitizers",
+    "kind": "ignore",
+    "parameter": "",
+    "upstream": "psalm-plugin-laravel",
+    "location": "common/Hashing/HashManager.phpstub",
+    "reason": "no-cwe-kind"
+  },
+  {
+    "subject": "md5",
+    "section": "sinks",
+    "kind": "ignore",
+    "parameter": "string",
+    "upstream": "psalm-plugin-laravel",
+    "location": "common/Php/HashFunctions.phpstub",
+    "reason": "no-cwe-kind"
+  },
+  {
+    "subject": "md5",
+    "section": "sinks",
+    "kind": "ignore",
+    "parameter": "string",
+    "upstream": "psalm-plugin-laravel",
+    "location": "common/Php/HashFunctions.phpstub",
+    "reason": "no-cwe-kind"
+  },
+  {
+    "subject": "sha1",
+    "section": "sinks",
+    "kind": "ignore",
+    "parameter": "string",
+    "upstream": "psalm-plugin-laravel",
+    "location": "common/Php/HashFunctions.phpstub",
+    "reason": "no-cwe-kind"
+  },
+  {
+    "subject": "sha1",
+    "section": "sinks",
+    "kind": "ignore",
+    "parameter": "string",
+    "upstream": "psalm-plugin-laravel",
+    "location": "common/Php/HashFunctions.phpstub",
+    "reason": "no-cwe-kind"
+  },
+  {
+    "subject": "illuminate\\support\\js::encode",
+    "section": "sanitizers",
+    "kind": "ignore",
+    "parameter": "",
+    "upstream": "psalm-plugin-laravel",
+    "location": "common/Support/Js.phpstub",
+    "reason": "no-cwe-kind"
+  },
+  {
+    "subject": "illuminate\\support\\js::from",
+    "section": "sanitizers",
+    "kind": "ignore",
+    "parameter": "",
+    "upstream": "psalm-plugin-laravel",
+    "location": "common/Support/Js.phpstub",
+    "reason": "no-cwe-kind"
+  },
+  {
+    "subject": "e",
+    "section": "sanitizers",
+    "kind": "ignore",
+    "parameter": "",
+    "upstream": "psalm-plugin-laravel",
+    "location": "common/Support/helpers.phpstub",
+    "reason": "no-cwe-kind"
+  },
+  {
+    "subject": "redirect",
+    "section": "sinks",
+    "kind": "openredirect",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "e107.model.yml:31",
+    "reason": "no-class"
+  },
+  {
+    "subject": "redirect",
+    "section": "sinks",
+    "kind": "openredirect",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "joomla.model.yml:37",
+    "reason": "no-class"
+  },
+  {
+    "subject": "redirect",
+    "section": "sinks",
+    "kind": "openredirect",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:129",
+    "reason": "no-class"
+  },
+  {
+    "subject": "away",
+    "section": "sinks",
+    "kind": "openredirect",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:130",
+    "reason": "no-class"
+  },
+  {
+    "subject": "to",
+    "section": "sinks",
+    "kind": "openredirect",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:131",
+    "reason": "no-class"
+  },
+  {
+    "subject": "redirect",
+    "section": "sinks",
+    "kind": "openredirect",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "phpbb.model.yml:36",
+    "reason": "no-class"
+  },
+  {
+    "subject": "redirect",
+    "section": "sinks",
+    "kind": "openredirect",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "prestashop.model.yml:26",
+    "reason": "no-class"
+  },
+  {
+    "subject": "redirect",
+    "section": "sinks",
+    "kind": "openredirect",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "suitecrm.model.yml:16",
+    "reason": "no-class"
+  },
+  {
+    "subject": "redirect",
+    "section": "sinks",
+    "kind": "openredirect",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "symfony.model.yml:65",
+    "reason": "no-class"
+  },
+  {
+    "subject": "storeas",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "-1",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:135",
+    "reason": "no-class"
+  },
+  {
+    "subject": "storepubliclyas",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "-1",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:136",
+    "reason": "no-class"
+  },
+  {
+    "subject": "putfileas",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "-1",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:137",
+    "reason": "no-class"
+  },
+  {
+    "subject": "storage::get",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:86",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "storage::put",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:92",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "storage::download",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:93",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "storage::delete",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:94",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "storage::readstream",
+    "section": "sinks",
+    "kind": "pathtrav",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:95",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "raw",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:102",
+    "reason": "no-class"
+  },
+  {
+    "subject": "select",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:103",
+    "reason": "no-class"
+  },
+  {
+    "subject": "statement",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:104",
+    "reason": "no-class"
+  },
+  {
+    "subject": "unprepared",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:105",
+    "reason": "no-class"
+  },
+  {
+    "subject": "whereraw",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:106",
+    "reason": "no-class"
+  },
+  {
+    "subject": "orwhereraw",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:107",
+    "reason": "no-class"
+  },
+  {
+    "subject": "havingraw",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:108",
+    "reason": "no-class"
+  },
+  {
+    "subject": "orhavingraw",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:109",
+    "reason": "no-class"
+  },
+  {
+    "subject": "orderbyraw",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:110",
+    "reason": "no-class"
+  },
+  {
+    "subject": "groupbyraw",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:111",
+    "reason": "no-class"
+  },
+  {
+    "subject": "selectraw",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:112",
+    "reason": "no-class"
+  },
+  {
+    "subject": "fromraw",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:113",
+    "reason": "no-class"
+  },
+  {
+    "subject": "orderby",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:116",
+    "reason": "no-class"
+  },
+  {
+    "subject": "orderbydesc",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:117",
+    "reason": "no-class"
+  },
+  {
+    "subject": "groupby",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:118",
+    "reason": "no-class"
+  },
+  {
+    "subject": "pluck",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:119",
+    "reason": "no-class"
+  },
+  {
+    "subject": "having",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:120",
+    "reason": "no-class"
+  },
+  {
+    "subject": "where",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:121",
+    "reason": "no-class"
+  },
+  {
+    "subject": "select",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:122",
+    "reason": "no-class"
+  },
+  {
+    "subject": "max",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:124",
+    "reason": "no-class"
+  },
+  {
+    "subject": "min",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:125",
+    "reason": "no-class"
+  },
+  {
+    "subject": "avg",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:126",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sum",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:127",
+    "reason": "no-class"
+  },
+  {
+    "subject": "illuminate\\database\\connectioninterface::select",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "query",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:13",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\database\\connectioninterface::selectone",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "query",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:14",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\database\\connectioninterface::cursor",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "query",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:15",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\database\\connectioninterface::insert",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "query",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:16",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\database\\connectioninterface::update",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "query",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:17",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\database\\connectioninterface::delete",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "query",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:18",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\database\\connectioninterface::statement",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "query",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:19",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\database\\connectioninterface::affectingstatement",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "query",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:20",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\database\\connectioninterface::unprepared",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "query",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:21",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\database\\connectioninterface::raw",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "value",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:22",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\database\\eloquent\\builder::whereraw",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "sql",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:44",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\database\\eloquent\\builder::orwhereraw",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "sql",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:45",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\database\\eloquent\\builder::havingraw",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "sql",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:46",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\database\\eloquent\\builder::orhavingraw",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "sql",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:47",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\database\\eloquent\\builder::orderbyraw",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "sql",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:48",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\database\\eloquent\\builder::groupbyraw",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "sql",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:49",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\database\\eloquent\\builder::selectraw",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "expression",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:50",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\database\\eloquent\\builder::fromraw",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "expression",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:51",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "http::get",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:76",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "http::post",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:77",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "http::put",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:78",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "http::patch",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:79",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "http::delete",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:80",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "http::head",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:81",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "request",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "modern-frameworks.model.yml:13",
+    "reason": "no-class"
+  },
+  {
+    "subject": "request",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "typo3.model.yml:75",
+    "reason": "no-class"
+  },
+  {
+    "subject": "request",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:16",
+    "reason": "no-class"
+  },
+  {
+    "subject": "old",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:17",
+    "reason": "no-class"
+  },
+  {
+    "subject": "input",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:29",
+    "reason": "no-class"
+  },
+  {
+    "subject": "request::get",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:38",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "request::cookie",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:40",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "request::input",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:42",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "request::query",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:43",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "request::post",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:44",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "request::all",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:45",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "request::only",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:46",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "request::except",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:47",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "request::json",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:48",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "request::string",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:49",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "request::collect",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:53",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "request::allfiles",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:59",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "request::server",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:62",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "request::validate",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:64",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "request::validated",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:65",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "request::safe",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "laravel.model.yml:66",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\http\\request::all",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:5",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\http\\request::bearertoken",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:5",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\http\\request::cookie",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:5",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\http\\request::except",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:5",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\http\\request::input",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:5",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\http\\request::json",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:5",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\http\\request::keys",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:5",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\http\\request::old",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:5",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\http\\request::only",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:5",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\http\\request::post",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:5",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\http\\request::query",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:5",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\http\\request::root",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:5",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\http\\request::server",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:5",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\http\\request::str",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:5",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\http\\request::string",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:5",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\support\\facades\\request::all",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:6",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\support\\facades\\request::bearertoken",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:6",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\support\\facades\\request::cookie",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:6",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\support\\facades\\request::decodedpath",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:6",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\support\\facades\\request::except",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:6",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\support\\facades\\request::fullurl",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:6",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\support\\facades\\request::fullurlwithoutquery",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:6",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\support\\facades\\request::fullurlwithquery",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:6",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\support\\facades\\request::header",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:6",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\support\\facades\\request::host",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:6",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\support\\facades\\request::httphost",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:6",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\support\\facades\\request::input",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:6",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\support\\facades\\request::json",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:6",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\support\\facades\\request::keys",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:6",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\support\\facades\\request::old",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:6",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\support\\facades\\request::only",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:6",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\support\\facades\\request::path",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:6",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\support\\facades\\request::post",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:6",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\support\\facades\\request::query",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:6",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\support\\facades\\request::root",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:6",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\support\\facades\\request::route",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:6",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\support\\facades\\request::schemeandhttphost",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:6",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\support\\facades\\request::segment",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:6",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\support\\facades\\request::segments",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:6",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\support\\facades\\request::server",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:6",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\support\\facades\\request::str",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:6",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\support\\facades\\request::string",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:6",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\support\\facades\\request::url",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:6",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "illuminate\\support\\facades\\request::useragent",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "phpstan-security",
+    "location": "laravel.neon:6",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "request",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "modern-frameworks.model.yml:62",
+    "reason": "no-class"
+  },
+  {
+    "subject": "cookie",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "modern-frameworks.model.yml:65",
+    "reason": "no-class"
+  },
+  {
+    "subject": "illuminate\\http\\uploadedfile::getclientoriginalextension",
+    "section": "sources",
+    "kind": "~(file|user_secret|system_secret)",
+    "parameter": "",
+    "upstream": "psalm-plugin-laravel",
+    "location": "common/Http/UploadedFile.phpstub",
+    "reason": "no-cwe-kind"
+  }
+]

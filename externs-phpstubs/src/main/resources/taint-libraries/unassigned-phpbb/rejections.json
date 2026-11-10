@@ -1,0 +1,173 @@
+[
+  {
+    "subject": "request::variable",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "phpbb.model.yml:13",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "request::untrimmed_variable",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "phpbb.model.yml:14",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "request::raw_variable",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "phpbb.model.yml:15",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "request::server",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "phpbb.model.yml:16",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "request::header",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "phpbb.model.yml:17",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "request_interface::variable",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "phpbb.model.yml:18",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "request_interface::untrimmed_variable",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "phpbb.model.yml:19",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "request_interface::raw_variable",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "phpbb.model.yml:20",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "request_interface::server",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "phpbb.model.yml:21",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "request_interface::header",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "phpbb.model.yml:22",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "raw_variable",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "phpbb.model.yml:27",
+    "reason": "no-class"
+  },
+  {
+    "subject": "untrimmed_variable",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "phpbb.model.yml:28",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sql_query",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "phpbb.model.yml:33",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sql_query_limit",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "phpbb.model.yml:34",
+    "reason": "no-class"
+  },
+  {
+    "subject": "meta_refresh",
+    "section": "sinks",
+    "kind": "openredirect",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "phpbb.model.yml:37",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sql_escape",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "phpbb.model.yml:49",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sql_in_set",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "phpbb.model.yml:61",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sql_build_array",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "phpbb.model.yml:62",
+    "reason": "no-class"
+  },
+  {
+    "subject": "file_downloader::get",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "phpbb.model.yml:70",
+    "reason": "no-signature"
+  }
+]

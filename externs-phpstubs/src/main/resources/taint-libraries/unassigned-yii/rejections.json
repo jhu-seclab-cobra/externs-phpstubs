@@ -1,0 +1,101 @@
+[
+  {
+    "subject": "getqueryparam",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "yii.model.yml:7",
+    "reason": "no-class"
+  },
+  {
+    "subject": "getbodyparam",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "yii.model.yml:8",
+    "reason": "no-class"
+  },
+  {
+    "subject": "getbodyparams",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "yii.model.yml:9",
+    "reason": "no-class"
+  },
+  {
+    "subject": "getqueryparams",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "yii.model.yml:10",
+    "reason": "no-class"
+  },
+  {
+    "subject": "request::get",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "yii.model.yml:13",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "request::post",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "yii.model.yml:14",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "request::getrawbody",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "yii.model.yml:15",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "createcommand",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "yii.model.yml:20",
+    "reason": "no-class"
+  },
+  {
+    "subject": "createobject",
+    "section": "sinks",
+    "kind": "codei",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "yii.model.yml:24",
+    "reason": "no-class"
+  },
+  {
+    "subject": "command::setsql",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "yii.model.yml:27",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "response::redirect",
+    "section": "sinks",
+    "kind": "openredirect",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "yii.model.yml:28",
+    "reason": "no-signature"
+  }
+]

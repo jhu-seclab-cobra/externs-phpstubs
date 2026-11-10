@@ -1,0 +1,38 @@
+[
+  {
+    "subject": "httprequest::getvar",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "silverstripe.model.yml:6",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "httprequest::getvars",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "silverstripe.model.yml:7",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "httprequest::postvar",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "silverstripe.model.yml:8",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "httprequest::requestvar",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "silverstripe.model.yml:9",
+    "reason": "no-signature"
+  }
+]

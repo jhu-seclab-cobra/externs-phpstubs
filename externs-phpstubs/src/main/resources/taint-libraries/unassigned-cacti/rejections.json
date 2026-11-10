@@ -1,0 +1,65 @@
+[
+  {
+    "subject": "get_request_var",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "cacti.model.yml:8",
+    "reason": "no-class"
+  },
+  {
+    "subject": "get_nfilter_request_var",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "cacti.model.yml:9",
+    "reason": "no-class"
+  },
+  {
+    "subject": "get_filter_request_var",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "cacti.model.yml:10",
+    "reason": "no-class"
+  },
+  {
+    "subject": "db_fetch_assoc",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "cacti.model.yml:15",
+    "reason": "no-class"
+  },
+  {
+    "subject": "db_fetch_row",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "cacti.model.yml:16",
+    "reason": "no-class"
+  },
+  {
+    "subject": "db_fetch_cell",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "cacti.model.yml:17",
+    "reason": "no-class"
+  },
+  {
+    "subject": "db_execute",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "cacti.model.yml:18",
+    "reason": "no-class"
+  }
+]

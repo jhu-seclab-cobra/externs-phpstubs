@@ -1,0 +1,47 @@
+[
+  {
+    "subject": "processor::getproperty",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "modx.model.yml:10",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "processor::getproperties",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "modx.model.yml:11",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "sendredirect",
+    "section": "sinks",
+    "kind": "openredirect",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "modx.model.yml:16",
+    "reason": "no-class"
+  },
+  {
+    "subject": "runsnippet",
+    "section": "sinks",
+    "kind": "codei",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "modx.model.yml:17",
+    "reason": "no-class"
+  },
+  {
+    "subject": "sanitizestring",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "modx.model.yml:22",
+    "reason": "no-class"
+  }
+]

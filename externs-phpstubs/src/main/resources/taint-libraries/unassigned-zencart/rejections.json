@@ -1,0 +1,101 @@
+[
+  {
+    "subject": "queryfactory::execute",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "zencart.model.yml:7",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "queryfactory::executenocache",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "zencart.model.yml:8",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "queryfactory::executerandommulti",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "zencart.model.yml:9",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "execute",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "zencart.model.yml:15",
+    "reason": "no-class"
+  },
+  {
+    "subject": "executenocache",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "zencart.model.yml:16",
+    "reason": "no-class"
+  },
+  {
+    "subject": "zen_db_perform",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "3",
+    "upstream": "codeql-php",
+    "location": "zencart.model.yml:19",
+    "reason": "no-class"
+  },
+  {
+    "subject": "perform",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "3",
+    "upstream": "codeql-php",
+    "location": "zencart.model.yml:20",
+    "reason": "no-class"
+  },
+  {
+    "subject": "zen_redirect",
+    "section": "sinks",
+    "kind": "openredirect",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "zencart.model.yml:21",
+    "reason": "no-class"
+  },
+  {
+    "subject": "zen_db_input",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "zencart.model.yml:26",
+    "reason": "no-class"
+  },
+  {
+    "subject": "prepare_input",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "zencart.model.yml:27",
+    "reason": "no-class"
+  },
+  {
+    "subject": "prepareinput",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "zencart.model.yml:28",
+    "reason": "no-class"
+  }
+]

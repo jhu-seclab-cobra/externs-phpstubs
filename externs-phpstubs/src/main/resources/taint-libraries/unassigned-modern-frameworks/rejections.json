@@ -1,0 +1,290 @@
+[
+  {
+    "subject": "requestasync",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "modern-frameworks.model.yml:14",
+    "reason": "no-class"
+  },
+  {
+    "subject": "getasync",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "modern-frameworks.model.yml:16",
+    "reason": "no-class"
+  },
+  {
+    "subject": "postasync",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "modern-frameworks.model.yml:17",
+    "reason": "no-class"
+  },
+  {
+    "subject": "putasync",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "modern-frameworks.model.yml:18",
+    "reason": "no-class"
+  },
+  {
+    "subject": "deleteasync",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "modern-frameworks.model.yml:19",
+    "reason": "no-class"
+  },
+  {
+    "subject": "createrequest",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "modern-frameworks.model.yml:21",
+    "reason": "no-class"
+  },
+  {
+    "subject": "createuri",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "modern-frameworks.model.yml:22",
+    "reason": "no-class"
+  },
+  {
+    "subject": "query",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "modern-frameworks.model.yml:24",
+    "reason": "no-class"
+  },
+  {
+    "subject": "exec",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "-1",
+    "upstream": "codeql-php",
+    "location": "modern-frameworks.model.yml:25",
+    "reason": "no-class"
+  },
+  {
+    "subject": "unbuffered_query",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "-1",
+    "upstream": "codeql-php",
+    "location": "modern-frameworks.model.yml:26",
+    "reason": "no-class"
+  },
+  {
+    "subject": "real_query",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "-1",
+    "upstream": "codeql-php",
+    "location": "modern-frameworks.model.yml:27",
+    "reason": "no-class"
+  },
+  {
+    "subject": "createquery",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "-1",
+    "upstream": "codeql-php",
+    "location": "modern-frameworks.model.yml:28",
+    "reason": "no-class"
+  },
+  {
+    "subject": "executequery",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "modern-frameworks.model.yml:31",
+    "reason": "no-class"
+  },
+  {
+    "subject": "executestatement",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "modern-frameworks.model.yml:32",
+    "reason": "no-class"
+  },
+  {
+    "subject": "getcontent",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "modern-frameworks.model.yml:40",
+    "reason": "no-class"
+  },
+  {
+    "subject": "geturi",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "modern-frameworks.model.yml:41",
+    "reason": "no-class"
+  },
+  {
+    "subject": "getrequesturi",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "modern-frameworks.model.yml:42",
+    "reason": "no-class"
+  },
+  {
+    "subject": "getpathinfo",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "modern-frameworks.model.yml:43",
+    "reason": "no-class"
+  },
+  {
+    "subject": "getqueryparams",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "modern-frameworks.model.yml:45",
+    "reason": "no-class"
+  },
+  {
+    "subject": "getparsedbody",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "modern-frameworks.model.yml:46",
+    "reason": "no-class"
+  },
+  {
+    "subject": "getserverparams",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "modern-frameworks.model.yml:47",
+    "reason": "no-class"
+  },
+  {
+    "subject": "getcookieparams",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "modern-frameworks.model.yml:48",
+    "reason": "no-class"
+  },
+  {
+    "subject": "getuploadedfiles",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "modern-frameworks.model.yml:49",
+    "reason": "no-class"
+  },
+  {
+    "subject": "getheaderline",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "modern-frameworks.model.yml:50",
+    "reason": "no-class"
+  },
+  {
+    "subject": "getparsedbodyparam",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "modern-frameworks.model.yml:51",
+    "reason": "no-class"
+  },
+  {
+    "subject": "getqueryparam",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "modern-frameworks.model.yml:52",
+    "reason": "no-class"
+  },
+  {
+    "subject": "wp_unslash",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "modern-frameworks.model.yml:63",
+    "reason": "no-class"
+  },
+  {
+    "subject": "input",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "modern-frameworks.model.yml:64",
+    "reason": "no-class"
+  },
+  {
+    "subject": "getclientoriginalname",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "modern-frameworks.model.yml:66",
+    "reason": "no-class"
+  },
+  {
+    "subject": "getclientoriginalextension",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "modern-frameworks.model.yml:67",
+    "reason": "no-class"
+  },
+  {
+    "subject": "getclientname",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "modern-frameworks.model.yml:68",
+    "reason": "no-class"
+  },
+  {
+    "subject": "getclientfilename",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "modern-frameworks.model.yml:69",
+    "reason": "no-class"
+  }
+]

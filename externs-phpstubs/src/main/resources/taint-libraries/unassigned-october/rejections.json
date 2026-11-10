@@ -1,0 +1,74 @@
+[
+  {
+    "subject": "input",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "october.model.yml:8",
+    "reason": "no-class"
+  },
+  {
+    "subject": "post",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "october.model.yml:9",
+    "reason": "no-class"
+  },
+  {
+    "subject": "param",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "october.model.yml:10",
+    "reason": "no-class"
+  },
+  {
+    "subject": "input::get",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "october.model.yml:17",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "input::post",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "october.model.yml:18",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "input::all",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "october.model.yml:19",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "input::only",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "october.model.yml:20",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "input::except",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "october.model.yml:21",
+    "reason": "no-signature"
+  }
+]

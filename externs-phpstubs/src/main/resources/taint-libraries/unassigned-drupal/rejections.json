@@ -1,0 +1,245 @@
+[
+  {
+    "subject": "arg",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "drupal.model.yml:11",
+    "reason": "no-class"
+  },
+  {
+    "subject": "formstateinterface::getvalue",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "drupal.model.yml:16",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "formstateinterface::getvalues",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "drupal.model.yml:17",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "formstateinterface::getuserinput",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "drupal.model.yml:18",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "formstate::getvalue",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "drupal.model.yml:19",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "formstate::getvalues",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "drupal.model.yml:20",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "formstate::getuserinput",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "drupal.model.yml:21",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "db_query",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "drupal.model.yml:27",
+    "reason": "no-class"
+  },
+  {
+    "subject": "db_query_range",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "drupal.model.yml:28",
+    "reason": "no-class"
+  },
+  {
+    "subject": "drupal_goto",
+    "section": "sinks",
+    "kind": "openredirect",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "drupal.model.yml:31",
+    "reason": "no-class"
+  },
+  {
+    "subject": "system_retrieve_file",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "drupal.model.yml:33",
+    "reason": "no-class"
+  },
+  {
+    "subject": "drupal_http_request",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "drupal.model.yml:34",
+    "reason": "no-class"
+  },
+  {
+    "subject": "connection::query",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "drupal.model.yml:38",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "connection::queryrange",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "drupal.model.yml:39",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "connection::querytemporary",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "drupal.model.yml:40",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "redirectresponse::__construct",
+    "section": "sinks",
+    "kind": "openredirect",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "drupal.model.yml:42",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "trustedredirectresponse::__construct",
+    "section": "sinks",
+    "kind": "openredirect",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "drupal.model.yml:43",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "markup::create",
+    "section": "sinks",
+    "kind": "xss",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "drupal.model.yml:47",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "formattablemarkup::__construct",
+    "section": "sinks",
+    "kind": "xss",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "drupal.model.yml:48",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "safemarkup::set",
+    "section": "sinks",
+    "kind": "xss",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "drupal.model.yml:49",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "client::request",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "drupal.model.yml:52",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "client::get",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "drupal.model.yml:53",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "client::post",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "drupal.model.yml:54",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "client::head",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "drupal.model.yml:55",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "clientinterface::request",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "drupal.model.yml:56",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "escapefield",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "drupal.model.yml:63",
+    "reason": "no-class"
+  },
+  {
+    "subject": "escapetable",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "drupal.model.yml:64",
+    "reason": "no-class"
+  }
+]

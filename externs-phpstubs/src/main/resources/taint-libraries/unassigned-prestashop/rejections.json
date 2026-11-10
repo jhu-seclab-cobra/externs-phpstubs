@@ -1,0 +1,236 @@
+[
+  {
+    "subject": "getvalue",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "prestashop.model.yml:12",
+    "reason": "no-class"
+  },
+  {
+    "subject": "getallvalues",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "prestashop.model.yml:13",
+    "reason": "no-class"
+  },
+  {
+    "subject": "executes",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "-1",
+    "upstream": "codeql-php",
+    "location": "prestashop.model.yml:20",
+    "reason": "no-class"
+  },
+  {
+    "subject": "executes",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "-1",
+    "upstream": "codeql-php",
+    "location": "prestashop.model.yml:21",
+    "reason": "no-class"
+  },
+  {
+    "subject": "getrow",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "-1",
+    "upstream": "codeql-php",
+    "location": "prestashop.model.yml:24",
+    "reason": "no-class"
+  },
+  {
+    "subject": "redirectlink",
+    "section": "sinks",
+    "kind": "openredirect",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "prestashop.model.yml:27",
+    "reason": "no-class"
+  },
+  {
+    "subject": "redirectadmin",
+    "section": "sinks",
+    "kind": "openredirect",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "prestashop.model.yml:28",
+    "reason": "no-class"
+  },
+  {
+    "subject": "file_get_contents",
+    "section": "sinks",
+    "kind": "ssrf",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "prestashop.model.yml:30",
+    "reason": "no-class"
+  },
+  {
+    "subject": "db::execute",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "prestashop.model.yml:38",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "dbcore::execute",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "prestashop.model.yml:39",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "db::query",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "prestashop.model.yml:40",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "dbcore::query",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "prestashop.model.yml:41",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "db::getvalue",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "prestashop.model.yml:42",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "dbcore::getvalue",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "prestashop.model.yml:43",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "db::insert",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "prestashop.model.yml:44",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "dbcore::insert",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "prestashop.model.yml:45",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "db::insert",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "prestashop.model.yml:46",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "dbcore::insert",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "prestashop.model.yml:47",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "db::update",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "2",
+    "upstream": "codeql-php",
+    "location": "prestashop.model.yml:48",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "dbcore::update",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "2",
+    "upstream": "codeql-php",
+    "location": "prestashop.model.yml:49",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "db::delete",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "prestashop.model.yml:50",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "dbcore::delete",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "1",
+    "upstream": "codeql-php",
+    "location": "prestashop.model.yml:51",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "dbquery::where",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "prestashop.model.yml:53",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "dbquery::having",
+    "section": "sinks",
+    "kind": "sqli",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "prestashop.model.yml:54",
+    "reason": "no-signature"
+  },
+  {
+    "subject": "psql",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "prestashop.model.yml:59",
+    "reason": "no-class"
+  },
+  {
+    "subject": "bqsql",
+    "section": "sanitizers",
+    "kind": "",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "prestashop.model.yml:60",
+    "reason": "no-class"
+  }
+]

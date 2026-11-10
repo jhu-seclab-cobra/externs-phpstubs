@@ -1,0 +1,92 @@
+[
+  {
+    "subject": "createtemplate",
+    "section": "sinks",
+    "kind": "templatei",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "templating.model.yml:16",
+    "reason": "no-class"
+  },
+  {
+    "subject": "render",
+    "section": "sinks",
+    "kind": "templatei",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "templating.model.yml:17",
+    "reason": "no-class"
+  },
+  {
+    "subject": "rendertostring",
+    "section": "sinks",
+    "kind": "templatei",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "templating.model.yml:18",
+    "reason": "no-class"
+  },
+  {
+    "subject": "fetch",
+    "section": "sinks",
+    "kind": "templatei",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "templating.model.yml:20",
+    "reason": "no-class"
+  },
+  {
+    "subject": "display",
+    "section": "sinks",
+    "kind": "templatei",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "templating.model.yml:21",
+    "reason": "no-class"
+  },
+  {
+    "subject": "render",
+    "section": "sinks",
+    "kind": "templatei",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "templating.model.yml:23",
+    "reason": "no-class"
+  },
+  {
+    "subject": "compilestring",
+    "section": "sinks",
+    "kind": "templatei",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "templating.model.yml:24",
+    "reason": "no-class"
+  },
+  {
+    "subject": "loadtemplate",
+    "section": "sinks",
+    "kind": "templatei",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "templating.model.yml:26",
+    "reason": "no-class"
+  },
+  {
+    "subject": "compile",
+    "section": "sinks",
+    "kind": "templatei",
+    "parameter": "0",
+    "upstream": "codeql-php",
+    "location": "templating.model.yml:27",
+    "reason": "no-class"
+  },
+  {
+    "subject": "gettemplatevars",
+    "section": "sources",
+    "kind": "user-input",
+    "parameter": "",
+    "upstream": "codeql-php",
+    "location": "templating.model.yml:35",
+    "reason": "no-class"
+  }
+]
