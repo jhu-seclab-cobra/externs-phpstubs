@@ -1,0 +1,5 @@
+- subject:
+    method: Illuminate\Database\Query\Builder::whereRaw
+  sinks:
+    - port: argument(0)
+      vulnType: xss

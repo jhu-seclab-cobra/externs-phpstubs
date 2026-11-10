@@ -22,6 +22,7 @@ repositories {
 
 dependencies {
     api(libs.cobra.commons.phpmodels)
+    implementation(libs.snakeyaml)
     testImplementation(kotlin("test"))
     testImplementation(libs.junit.jupiter.api)
 }

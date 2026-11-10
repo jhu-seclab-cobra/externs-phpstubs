@@ -132,9 +132,26 @@ public class PhpStubs internal constructor(
      */
     public fun with(vararg dirs: Path): PhpStubs = extend(dirs.map { "$it/" to directoryOpener(it) })
 
-    private fun extend(sets: List<Pair<String, ResourceOpener>>): PhpStubs {
+    /**
+     * Mounts the generated sets for [packages] in the given order after this lookup's sets.
+     *
+     * @throws IllegalArgumentException If a package is absent from [libraries].
+     * @throws StubIndexInvalidException If a selected set is malformed.
+     */
+    public fun withLibraries(vararg packages: String): PhpStubs {
+        val roots =
+            packages.map { name ->
+                requireNotNull(libraries.singleOrNull { it.`package` == name }) { "Unknown library package: $name" }.root
+            }
+        return extend(roots.map { it to StubResources.opener(it) }, roots.toSet())
+    }
+
+    private fun extend(
+        sets: List<Pair<String, ResourceOpener>>,
+        generatedRoots: Set<String> = emptySet(),
+    ): PhpStubs {
         val sequence = MountSequence(mounts)
-        for ((root, open) in sets) sequence.mount(root, open)
+        for ((root, open) in sets) sequence.mount(root, open, generated = root in generatedRoots)
         return PhpStubs(sequence.toList())
     }
 
@@ -146,6 +163,12 @@ public class PhpStubs internal constructor(
 
     /** The lookup over the bundled sets; [with] extends it. */
     public companion object : BuiltinLookup by bundled {
+        /** Selectable generated library sets, decoded from the shipped catalog. */
+        public val libraries: List<LibrarySet> by lazy { libraryCatalog() }
+
+        /** [PhpStubs.withLibraries] over the bundled lookup. */
+        public fun withLibraries(vararg packages: String): PhpStubs = bundled.withLibraries(*packages)
+
         /** [PhpStubs.with] over the bundled lookup. */
         public fun with(vararg roots: String): PhpStubs = bundled.with(*roots)
 
