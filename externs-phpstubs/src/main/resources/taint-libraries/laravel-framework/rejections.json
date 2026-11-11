@@ -27,24 +27,6 @@
     "reason": "no-cwe-kind"
   },
   {
-    "subject": "illuminate\\foundation\\auth\\user::getauthpassword",
-    "section": "sources",
-    "kind": "ignore",
-    "parameter": "",
-    "upstream": "psalm-plugin-laravel",
-    "location": "common/Auth/Authenticatable.phpstub",
-    "reason": "no-cwe-kind"
-  },
-  {
-    "subject": "illuminate\\foundation\\auth\\user::getremembertoken",
-    "section": "sources",
-    "kind": "ignore",
-    "parameter": "",
-    "upstream": "psalm-plugin-laravel",
-    "location": "common/Auth/Authenticatable.phpstub",
-    "reason": "no-cwe-kind"
-  },
-  {
     "subject": "bcrypt",
     "section": "sanitizers",
     "kind": "ignore",

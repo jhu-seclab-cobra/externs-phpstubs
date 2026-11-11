@@ -71,7 +71,7 @@
     ]
   },
   "laravel/framework": {
-    "entries": 517,
+    "entries": 490,
     "facts": {
       "sanitizers:sqli": 24,
       "sanitizers:xss": 3,
@@ -85,11 +85,11 @@
       "sinks:ssrf": 18,
       "sinks:xss": 15,
       "sources:external-input": 18,
-      "sources:user-input": 117
+      "sources:user-input": 95
     },
     "rejections": {
       "no-class": 43,
-      "no-cwe-kind": 18,
+      "no-cwe-kind": 16,
       "no-signature": 51
     },
     "unrecordedParents": []
