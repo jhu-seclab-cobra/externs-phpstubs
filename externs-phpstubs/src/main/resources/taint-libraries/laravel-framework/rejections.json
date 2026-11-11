@@ -27,6 +27,24 @@
     "reason": "no-cwe-kind"
   },
   {
+    "subject": "illuminate\\foundation\\auth\\user::getauthpassword",
+    "section": "sources",
+    "kind": "ignore",
+    "parameter": "",
+    "upstream": "psalm-plugin-laravel",
+    "location": "common/Auth/Authenticatable.phpstub",
+    "reason": "no-cwe-kind"
+  },
+  {
+    "subject": "illuminate\\foundation\\auth\\user::getremembertoken",
+    "section": "sources",
+    "kind": "ignore",
+    "parameter": "",
+    "upstream": "psalm-plugin-laravel",
+    "location": "common/Auth/Authenticatable.phpstub",
+    "reason": "no-cwe-kind"
+  },
+  {
     "subject": "bcrypt",
     "section": "sanitizers",
     "kind": "ignore",
@@ -504,96 +522,6 @@
     "reason": "no-class"
   },
   {
-    "subject": "illuminate\\database\\connectioninterface::select",
-    "section": "sinks",
-    "kind": "sqli",
-    "parameter": "query",
-    "upstream": "phpstan-security",
-    "location": "laravel.neon:13",
-    "reason": "no-signature"
-  },
-  {
-    "subject": "illuminate\\database\\connectioninterface::selectone",
-    "section": "sinks",
-    "kind": "sqli",
-    "parameter": "query",
-    "upstream": "phpstan-security",
-    "location": "laravel.neon:14",
-    "reason": "no-signature"
-  },
-  {
-    "subject": "illuminate\\database\\connectioninterface::cursor",
-    "section": "sinks",
-    "kind": "sqli",
-    "parameter": "query",
-    "upstream": "phpstan-security",
-    "location": "laravel.neon:15",
-    "reason": "no-signature"
-  },
-  {
-    "subject": "illuminate\\database\\connectioninterface::insert",
-    "section": "sinks",
-    "kind": "sqli",
-    "parameter": "query",
-    "upstream": "phpstan-security",
-    "location": "laravel.neon:16",
-    "reason": "no-signature"
-  },
-  {
-    "subject": "illuminate\\database\\connectioninterface::update",
-    "section": "sinks",
-    "kind": "sqli",
-    "parameter": "query",
-    "upstream": "phpstan-security",
-    "location": "laravel.neon:17",
-    "reason": "no-signature"
-  },
-  {
-    "subject": "illuminate\\database\\connectioninterface::delete",
-    "section": "sinks",
-    "kind": "sqli",
-    "parameter": "query",
-    "upstream": "phpstan-security",
-    "location": "laravel.neon:18",
-    "reason": "no-signature"
-  },
-  {
-    "subject": "illuminate\\database\\connectioninterface::statement",
-    "section": "sinks",
-    "kind": "sqli",
-    "parameter": "query",
-    "upstream": "phpstan-security",
-    "location": "laravel.neon:19",
-    "reason": "no-signature"
-  },
-  {
-    "subject": "illuminate\\database\\connectioninterface::affectingstatement",
-    "section": "sinks",
-    "kind": "sqli",
-    "parameter": "query",
-    "upstream": "phpstan-security",
-    "location": "laravel.neon:20",
-    "reason": "no-signature"
-  },
-  {
-    "subject": "illuminate\\database\\connectioninterface::unprepared",
-    "section": "sinks",
-    "kind": "sqli",
-    "parameter": "query",
-    "upstream": "phpstan-security",
-    "location": "laravel.neon:21",
-    "reason": "no-signature"
-  },
-  {
-    "subject": "illuminate\\database\\connectioninterface::raw",
-    "section": "sinks",
-    "kind": "sqli",
-    "parameter": "value",
-    "upstream": "phpstan-security",
-    "location": "laravel.neon:22",
-    "reason": "no-signature"
-  },
-  {
     "subject": "illuminate\\database\\eloquent\\builder::whereraw",
     "section": "sinks",
     "kind": "sqli",
@@ -765,51 +693,6 @@
     "reason": "no-class"
   },
   {
-    "subject": "illuminate\\http\\request::get",
-    "section": "sources",
-    "kind": "user-input",
-    "parameter": "",
-    "upstream": "codeql-php",
-    "location": "laravel.model.yml:38",
-    "reason": "no-signature"
-  },
-  {
-    "subject": "illuminate\\http\\request::only",
-    "section": "sources",
-    "kind": "user-input",
-    "parameter": "",
-    "upstream": "codeql-php",
-    "location": "laravel.model.yml:46",
-    "reason": "no-signature"
-  },
-  {
-    "subject": "illuminate\\http\\request::except",
-    "section": "sources",
-    "kind": "user-input",
-    "parameter": "",
-    "upstream": "codeql-php",
-    "location": "laravel.model.yml:47",
-    "reason": "no-signature"
-  },
-  {
-    "subject": "illuminate\\http\\request::string",
-    "section": "sources",
-    "kind": "user-input",
-    "parameter": "",
-    "upstream": "codeql-php",
-    "location": "laravel.model.yml:49",
-    "reason": "no-signature"
-  },
-  {
-    "subject": "illuminate\\http\\request::collect",
-    "section": "sources",
-    "kind": "user-input",
-    "parameter": "",
-    "upstream": "codeql-php",
-    "location": "laravel.model.yml:53",
-    "reason": "no-signature"
-  },
-  {
     "subject": "illuminate\\http\\request::validate",
     "section": "sources",
     "kind": "user-input",
@@ -834,60 +717,6 @@
     "parameter": "",
     "upstream": "codeql-php",
     "location": "laravel.model.yml:66",
-    "reason": "no-signature"
-  },
-  {
-    "subject": "illuminate\\http\\request::except",
-    "section": "sources",
-    "kind": "user-input",
-    "parameter": "",
-    "upstream": "phpstan-security",
-    "location": "laravel.neon:5",
-    "reason": "no-signature"
-  },
-  {
-    "subject": "illuminate\\http\\request::keys",
-    "section": "sources",
-    "kind": "user-input",
-    "parameter": "",
-    "upstream": "phpstan-security",
-    "location": "laravel.neon:5",
-    "reason": "no-signature"
-  },
-  {
-    "subject": "illuminate\\http\\request::only",
-    "section": "sources",
-    "kind": "user-input",
-    "parameter": "",
-    "upstream": "phpstan-security",
-    "location": "laravel.neon:5",
-    "reason": "no-signature"
-  },
-  {
-    "subject": "illuminate\\http\\request::root",
-    "section": "sources",
-    "kind": "user-input",
-    "parameter": "",
-    "upstream": "phpstan-security",
-    "location": "laravel.neon:5",
-    "reason": "no-signature"
-  },
-  {
-    "subject": "illuminate\\http\\request::str",
-    "section": "sources",
-    "kind": "user-input",
-    "parameter": "",
-    "upstream": "phpstan-security",
-    "location": "laravel.neon:5",
-    "reason": "no-signature"
-  },
-  {
-    "subject": "illuminate\\http\\request::string",
-    "section": "sources",
-    "kind": "user-input",
-    "parameter": "",
-    "upstream": "phpstan-security",
-    "location": "laravel.neon:5",
     "reason": "no-signature"
   },
   {

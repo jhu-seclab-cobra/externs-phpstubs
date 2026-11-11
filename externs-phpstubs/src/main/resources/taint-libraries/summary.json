@@ -29,13 +29,12 @@
     "unrecordedParents": []
   },
   "doctrine/dbal": {
-    "entries": 7,
+    "entries": 23,
     "facts": {
       "sanitizers:sqli": 1,
-      "sinks:sqli": 5
+      "sinks:sqli": 19
     },
     "rejections": {
-      "no-signature": 14,
       "unresolved-parameter": 1
     },
     "unrecordedParents": []
@@ -72,7 +71,7 @@
     ]
   },
   "laravel/framework": {
-    "entries": 397,
+    "entries": 517,
     "facts": {
       "sanitizers:sqli": 24,
       "sanitizers:xss": 3,
@@ -80,24 +79,20 @@
       "sinks:cmdi": 7,
       "sinks:codei": 3,
       "sinks:fileinc": 14,
-      "sinks:headeri": 47,
+      "sinks:headeri": 56,
       "sinks:pathtrav": 81,
-      "sinks:sqli": 111,
+      "sinks:sqli": 121,
       "sinks:ssrf": 18,
       "sinks:xss": 15,
       "sources:external-input": 18,
-      "sources:user-input": 79
+      "sources:user-input": 117
     },
     "rejections": {
       "no-class": 43,
-      "no-cwe-kind": 16,
-      "no-signature": 72
+      "no-cwe-kind": 18,
+      "no-signature": 51
     },
-    "unrecordedParents": [
-      "Illuminate\\Notifications\\Messages\\SimpleMessage",
-      "Illuminate\\Support\\Facades\\Facade",
-      "Symfony\\Component\\HttpFoundation\\Request"
-    ]
+    "unrecordedParents": []
   },
   "mongodb/mongodb": {
     "entries": 32,
@@ -159,59 +154,67 @@
     "unrecordedParents": []
   },
   "spatie/browsershot": {
-    "entries": 0,
-    "facts": {},
-    "rejections": {
-      "no-signature": 4
+    "entries": 5,
+    "facts": {
+      "sinks:pathtrav": 2,
+      "sinks:ssrf": 2
     },
+    "rejections": {},
     "unrecordedParents": []
   },
   "symfony/dom-crawler": {
-    "entries": 0,
-    "facts": {},
-    "rejections": {
-      "no-signature": 2
+    "entries": 3,
+    "facts": {
+      "sinks:xpathi": 2
     },
+    "rejections": {},
     "unrecordedParents": []
   },
   "symfony/filesystem": {
-    "entries": 0,
-    "facts": {},
-    "rejections": {
-      "no-signature": 26
+    "entries": 11,
+    "facts": {
+      "sinks:pathtrav": 13,
+      "sinks:ssrf": 13
     },
+    "rejections": {},
     "unrecordedParents": []
   },
   "symfony/framework-bundle": {
-    "entries": 0,
-    "facts": {},
-    "rejections": {
-      "no-signature": 3
+    "entries": 3,
+    "facts": {
+      "sinks:openredirect": 1,
+      "sinks:pathtrav": 1,
+      "sinks:ssrf": 1
     },
+    "rejections": {},
     "unrecordedParents": []
   },
   "symfony/http-foundation": {
-    "entries": 0,
-    "facts": {},
-    "rejections": {
-      "no-signature": 20
+    "entries": 26,
+    "facts": {
+      "sinks:openredirect": 1,
+      "sinks:pathtrav": 1,
+      "sinks:ssrf": 1,
+      "sinks:xss": 1,
+      "sources:user-input": 16
     },
+    "rejections": {},
     "unrecordedParents": []
   },
   "symfony/ldap": {
-    "entries": 0,
-    "facts": {},
-    "rejections": {
-      "no-signature": 2
+    "entries": 2,
+    "facts": {
+      "sinks:ldapi": 2
     },
+    "rejections": {},
     "unrecordedParents": []
   },
   "symfony/process": {
-    "entries": 0,
-    "facts": {},
-    "rejections": {
-      "no-signature": 1
+    "entries": 2,
+    "facts": {
+      "sinks:cmdi": 1
     },
+    "rejections": {},
     "unrecordedParents": []
   },
   "unassigned/cacti": {
