@@ -116,6 +116,10 @@ subject). They are `PHP_OS`, `PHP_OS_FAMILY`, `DIRECTORY_SEPARATOR`,
 `PHP_EXTENSION_DIR`, `PHP_EXTRA_VERSION`, `PHP_SAPI`, `STDIN`, `STDOUT` and
 `STDERR`. A consumer reads a record whose `typedSignature.value` is absent as a
 constant of that type with an unknown value.
+The generated-set rule above keeps the two layers disjoint: a regeneration that
+writes one of these subjects back into `core.yaml` makes the set fail to load,
+naming both documents, and `ManualDeclarationsTest` checks the two documents
+without loading the set.
 
 Generated documents carry the producer header of commons-phpmodels'
 generated layer and are never hand-edited; language, manual, and
@@ -174,3 +178,9 @@ extension-set error surfaces from the `with` call that mounts it.
   declaration error) is not established.
 - `PHP_FLOAT_INF`, `PHP_FLOAT_NAN`, `ARRAY_UNIQUE_REGULAR` and the
   `PDO_FETCH_*` constants are declared, but PHP 8.5.12 defines none of them.
+- The constant entries of `core.yaml` come from `tools/convert_stubs.py` over
+  phpstorm-stubs, a tool this repository no longer holds (the three php-src
+  tools write no constant), so the 24 value-less constants were removed from
+  `core.yaml` by hand and a regeneration with that tool would write them back.
+  The producer has no exclusion of the subjects `manual/core.yaml` declares;
+  the load failure and the test named above are the only guard.

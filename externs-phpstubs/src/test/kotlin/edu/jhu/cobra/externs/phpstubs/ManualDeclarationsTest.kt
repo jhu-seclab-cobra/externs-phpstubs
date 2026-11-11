@@ -14,6 +14,7 @@ import kotlin.test.assertTrue
  *   and `mysql`
  * - `manual declarations carry the reviewed value unit` — verifies the typed result and flows of `money_format`
  * - `create_function declares existence without a value unit` — verifies the entry without propagation
+ * - `a constant of manual core is not declared again in generated core` — verifies the two documents are disjoint
  */
 internal class ManualDeclarationsTest {
     @Test
@@ -39,5 +40,19 @@ internal class ManualDeclarationsTest {
         val record = assertNotNull(PhpStubs.function("create_function"))
         assertNotNull(record.signature)
         assertTrue(record.flows.isEmpty())
+    }
+
+    @Test
+    fun `a constant of manual core is not declared again in generated core`() {
+        val manual = constantNames("/models/manual/core.yaml")
+        val generated = constantNames("/models/core.yaml")
+        assertTrue(manual.isNotEmpty())
+        assertEquals(emptySet(), manual intersect generated, "declared in both models/core.yaml and manual/core.yaml")
+    }
+
+    // The constant subjects of one bundled document, read from its text so that the set need not load.
+    private fun constantNames(resource: String): Set<String> {
+        val text = checkNotNull(ManualDeclarationsTest::class.java.getResource(resource)) { resource }.readText()
+        return Regex("""^\s+constant: (\S+)\s*$""", RegexOption.MULTILINE).findAll(text).map { it.groupValues[1] }.toSet()
     }
 }
