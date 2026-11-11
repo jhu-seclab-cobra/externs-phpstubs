@@ -46,6 +46,7 @@ import kotlin.test.assertTrue
  * - `sanitizers and sources name the added escapes and source kinds` — verifies representative entries
  * - `a constructor that fetches or reads at construction is a sink` — verifies the SoapClient, SimpleXMLElement and finfo constructor facts, their ports, kinds and condition
  * - `a document loader sinks the path or URL it opens` — verifies the argument 0 `ssrf` and `file` facts of each loader, and that the merged record carries them
+ * - `a builtin that reads a schema or WSDL sinks the URL it requests` — verifies the argument 0 `ssrf` fact alone of each such builtin, and that the merged record carries it
  * - `the psalm mapping translates the additions` — verifies the bundled mapping covers xpath and external
  */
 internal class TaintRulesSetTest {
@@ -184,6 +185,26 @@ internal class TaintRulesSetTest {
             val spelling = "$owner::$name"
             val merged = assertNotNull(PhpStubs.method(spelling), spelling).sinkFacts
             assertLoader(MethodSubject(owner, name), merged, spelling)
+        }
+    }
+
+    @Test
+    fun `a builtin that reads a schema or WSDL sinks the URL it requests`() {
+        val methods =
+            listOf(
+                "DOMDocument" to "relaxNGValidate",
+                "DOMDocument" to "schemaValidate",
+                "XMLReader" to "setRelaxNGSchema",
+                "XMLReader" to "setSchema",
+                "SoapServer" to "__construct",
+            )
+        for ((owner, name) in methods) {
+            val spelling = "$owner::$name"
+            assertEquals(setOf(Port.Argument(0) to "ssrf"), sinksOf(MethodSubject(owner, name)), spelling)
+            val merged = assertNotNull(PhpStubs.method(spelling), spelling).sinkFacts
+            assertEquals(listOf(VulnType.SSRF.id), merged.map { it.vulnType }, spelling)
+            assertEquals(listOf(Port.Argument(0)), merged.map { it.port }, spelling)
+            assertNull(merged.firstNotNullOfOrNull { it.condition }, spelling)
         }
     }
 

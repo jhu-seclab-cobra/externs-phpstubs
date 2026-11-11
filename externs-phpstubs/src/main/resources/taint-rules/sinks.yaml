@@ -9,6 +9,9 @@
 # DOMDocument::load and loadHTMLFile, XMLReader::fromUri and open, tidy::__construct, parseFile and repairFile) open the
 # path or URL in argument 0 and parse the document; they follow the PHP manual pages, and each was run on PHP 8.5.12
 # against a local file and a loopback listener.
+# Builtins that read a schema or WSDL (DOMDocument::schemaValidate and relaxNGValidate, XMLReader::setSchema and
+# setRelaxNGSchema, SoapServer::__construct) send the request for the URL in argument 0 but return the content only as a
+# validation result or an error text; they carry ssrf alone.
 # Receiver-triggered sinks (methods with no path argument) are not expressible and are omitted.
 # The set leaves out the Argus points PHP 8.5.11 contradicts: unserialize on file functions (phar metadata
 # is read lazily) and eval on preg_replace, assert, mb_ereg_replace and mb_eregi_replace.
@@ -150,6 +153,16 @@
       vulnType: ssrf
     - port: argument(0)
       vulnType: file
+- subject:
+    method: DOMDocument::relaxNGValidate
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+- subject:
+    method: DOMDocument::schemaValidate
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
 - subject:
     method: DOMXPath::evaluate
   sinks:
@@ -574,6 +587,11 @@
     - port: argument(0)
       vulnType: ssrf
 - subject:
+    method: SoapServer::__construct
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+- subject:
     function: spl_autoload_register
   sinks:
     - port: argument(0)
@@ -737,6 +755,16 @@
       vulnType: ssrf
     - port: argument(0)
       vulnType: file
+- subject:
+    method: XMLReader::setRelaxNGSchema
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+- subject:
+    method: XMLReader::setSchema
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
 
 - subject:
     operation: dynamic_invocation
