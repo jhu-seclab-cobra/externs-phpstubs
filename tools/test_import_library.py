@@ -14,6 +14,7 @@
 - test_release_source_syntax: attributes, heredocs and property names equal to keywords leave declarations intact.
 - test_release_sources: a release's class files follow its composer.json autoload roots and exclusions.
 - test_release_declares_missing_signature: a release supplies the declaration that rule sources lack.
+- test_short_class_name_prefers_rule_sources: a short class name resolves among rule-source classes first.
 - test_redeclared_class_keeps_trait_uses: a second declaration of a class keeps the first one's trait uses.
 - test_license_notice: a release notice may be LICENSE or LICENSE.md.
 """
@@ -187,6 +188,20 @@ class Child implements Contract {}
         self.assertFalse(rejected)
         self.assertEqual(['demo\\child::inherited'], [fact.subject for fact in facts])
         self.assertEqual({'demo-release'}, {self.store.signatures[fact.subject].origin for fact in facts})
+
+    def test_short_class_name_prefers_rule_sources(self):
+        self.store = module.ImportData()
+        self.read_text('<?php namespace Demo\\Http; class Request { public function all() {} }', origin='psalm-plugin-laravel')
+        self.read_text('<?php namespace Demo\\Facades; class Request {}', origin='framework')
+        self.read_text('<?php namespace Demo\\Facades; class Storage {}', origin='framework')
+        self.read_text('<?php namespace Demo\\Other; class Storage {}', origin='framework')
+        for declaration in self.store.signatures.values():
+            declaration.package = 'laravel/framework'
+        for subject in ('Request::all', 'Storage::get'):
+            self.store.candidates.append(module.Candidate(
+                subject.lower(), 'sources', 'user-input', '', 'codeql-php', 'laravel.model.yml:1'))
+        module.qualify_candidates(self.store)
+        self.assertEqual(['demo\\http\\request::all', 'storage::get'], [item.subject for item in self.store.candidates])
 
     def test_redeclared_class_keeps_trait_uses(self):
         self.read_text('''<?php

@@ -649,13 +649,16 @@ def package_for(candidate: Candidate, store: ImportData) -> str:
 
 def qualify_candidates(store: ImportData) -> None:
     declarations = list(store.signatures.values())
+    rule_declarations = [item for item in declarations if item.origin not in LIBRARY_RELEASES]
     for index, candidate in enumerate(store.candidates):
         if candidate.origin != 'codeql-php' or candidate.reason == 'no-class' or '\\' in candidate.subject:
             continue
         package = package_for(candidate, store)
         owner, separator, member = candidate.subject.partition('::')
-        matches = [item.subject + separator + member for item in declarations if item.package == package
-                   and item.kind == 'class' and item.subject.rsplit('\\', 1)[-1] == owner]
+        matches = next((found for found in (
+            [item.subject + separator + member for item in pool if item.package == package
+             and item.kind == 'class' and item.subject.rsplit('\\', 1)[-1] == owner]
+            for pool in (rule_declarations, declarations)) if found), [])
         if len(matches) == 1:
             store.candidates[index] = Candidate(matches[0], candidate.section, candidate.kind, candidate.parameter,
                                                  candidate.origin, candidate.location, candidate.reason)
