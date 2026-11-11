@@ -482,9 +482,16 @@ def trait_owners(owner: str, store: ImportData, visited: set[str]) -> set[str]:
 
 
 def expand_trait_members(store: ImportData) -> None:
-    """Materialize trait methods because ClassSignature has no trait-use field."""
+    """Materialize trait methods because ClassSignature has no trait-use field.
+
+    A sink or sanitizer states what the method body does, so every using class gets it. A source states what
+    data the object holds, so only a using class that a rule source names gets it.
+    """
     declarations = list(store.signatures.values())
     candidates = list(store.candidates)
+    unsourced = [item for item in candidates if item.section != 'sources']
+    named = {item.subject for item in declarations if item.kind == 'class' and item.origin not in LIBRARY_RELEASES}
+    named |= {item.subject.split('::')[0] for item in candidates if item.origin not in LIBRARY_RELEASES}
     additions = {}
     for owner in store.traits:
         traits = trait_owners(owner, store, set())
@@ -494,12 +501,12 @@ def expand_trait_members(store: ImportData) -> None:
             resolved = inherited_declaration(subject, store, set())
             if subject in store.signatures or resolved is not member:
                 continue
-            add_trait_member((subject, member, candidates), additions, store)
+            add_trait_member((subject, member, candidates if owner in named else unsourced), additions, store)
         for source, alias in store.trait_aliases.get(owner, []):
             member = trait_alias_declaration(owner, source, store)
             if member is None:
                 continue
-            add_trait_member((owner + '::' + alias, member, candidates), additions, store)
+            add_trait_member((owner + '::' + alias, member, candidates if owner in named else unsourced), additions, store)
     store.signatures.update(additions)
 
 

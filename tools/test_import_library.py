@@ -19,6 +19,7 @@
 - test_release_sources_listed_once: a file under two autoload roots is listed once.
 - test_stub_replaces_release_declaration: a rule-source declaration replaces the release declaration of the same method.
 - test_release_version: the version of a pinned release is its tag without the leading v.
+- test_trait_sources_need_named_class: a trait's sources reach a using class only when a rule source names the class; its sinks reach every using class.
 - test_license_notice: a release notice may be LICENSE or LICENSE.md.
 """
 
@@ -209,6 +210,21 @@ class After
         self.assertEqual(module.UPSTREAMS['dbal'][1], versions['doctrine/dbal'])
         self.assertEqual(module.UPSTREAMS['process'][1].removeprefix('v'), versions['symfony/process'])
         self.assertFalse(any(version.startswith('v') for version in versions.values()))
+
+    def test_trait_sources_need_named_class(self):
+        self.store = module.ImportData()
+        self.read_text('<?php namespace Demo; trait Reads { public function string() {} public function run($sql) {} } '
+                       'class Named { use Reads; }', origin='psalm-plugin-laravel')
+        self.read_text('<?php namespace Demo; class Unnamed { use Reads; }', origin='framework')
+        for section, kind in (('sources', 'user-input'), ('sinks', 'sqli')):
+            self.store.candidates.append(module.Candidate(
+                'demo\\reads::string' if section == 'sources' else 'demo\\reads::run', section, kind,
+                '' if section == 'sources' else 'sql', 'psalm-plugin-laravel', 'Reads.phpstub'))
+        module.expand_trait_members(self.store)
+        facts, rejected = module.resolve(self.store)
+        self.assertFalse(rejected)
+        self.assertEqual({'demo\\reads::string', 'demo\\named::string', 'demo\\reads::run',
+                          'demo\\named::run', 'demo\\unnamed::run'}, {fact.subject for fact in facts})
 
     def test_release_declares_missing_signature(self):
         self.store = module.ImportData()
