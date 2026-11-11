@@ -1,0 +1,98 @@
+# Core constants whose value depends on the host, the PHP build or the run, so no value is declared.
+# Hand-maintained; PHP extension "core" comes from this file name. A constant without a value reads as an unknown value of its type.
+- subject:
+    constant: PHP_OS
+  signature:
+    type: string
+- subject:
+    constant: PHP_OS_FAMILY
+  signature:
+    type: string
+- subject:
+    constant: DIRECTORY_SEPARATOR
+  signature:
+    type: string
+- subject:
+    constant: PATH_SEPARATOR
+  signature:
+    type: string
+- subject:
+    constant: PHP_EOL
+  signature:
+    type: string
+- subject:
+    constant: PHP_MAXPATHLEN
+  signature:
+    type: int
+- subject:
+    constant: GLOB_BRACE
+  signature:
+    type: int
+- subject:
+    constant: GLOB_MARK
+  signature:
+    type: int
+- subject:
+    constant: GLOB_NOSORT
+  signature:
+    type: int
+- subject:
+    constant: GLOB_NOESCAPE
+  signature:
+    type: int
+- subject:
+    constant: GLOB_ONLYDIR
+  signature:
+    type: int
+- subject:
+    constant: PHP_INT_SIZE
+  signature:
+    type: int
+- subject:
+    constant: PHP_INT_MAX
+  signature:
+    type: int
+- subject:
+    constant: PHP_INT_MIN
+  signature:
+    type: int
+- subject:
+    constant: PHP_PREFIX
+  signature:
+    type: string
+- subject:
+    constant: PHP_BINDIR
+  signature:
+    type: string
+- subject:
+    constant: PHP_LIBDIR
+  signature:
+    type: string
+- subject:
+    constant: PHP_DATADIR
+  signature:
+    type: string
+- subject:
+    constant: PHP_EXTENSION_DIR
+  signature:
+    type: string
+- subject:
+    constant: PHP_EXTRA_VERSION
+  signature:
+    type: string
+- subject:
+    constant: PHP_SAPI
+  signature:
+    type: string
+- subject:
+    constant: STDIN
+  signature:
+    type: resource
+- subject:
+    constant: STDOUT
+  signature:
+    type: resource
+- subject:
+    constant: STDERR
+  signature:
+    type: resource

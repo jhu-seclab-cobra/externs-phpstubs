@@ -94,7 +94,7 @@ models/
 │   ├── keyword.yaml       # 11 keyword functions + class exit, extension "keyword"
 │   ├── scalar.yaml        # classes int, float, string, bool, array, extension "scalar"
 │   └── legacy.yaml        # class resource, extension "legacy"
-├── manual/<extension>.yaml       # hand-declared builtins php-src 8.5.11 lacks: mysql, standard
+├── manual/<extension>.yaml       # hand-declared builtins php-src 8.5.11 lacks: mysql, standard; core holds the constants declared without a value
 ├── standard/standard_1..8.yaml   # extension "standard" (split suffix removed)
 ├── <category>/<extension>.yaml   # crypto, database, file, image, misc, network, system, text, xml
 └── <extension>.yaml              # extensions only php-src declares (placement, design-extraction.md)
@@ -105,6 +105,17 @@ vocabulary/
 ├── policy.yaml            # both source kinds enable every vulnerability type
 └── psalm-mapping.yaml     # psalm kinds → canonical names; has_quotes, cookie, user_secret, system_secret → ignore
 ```
+
+A constant whose value depends on the host, the PHP build or the run is
+declared without a value: only `manual/core.yaml` declares it, with its type,
+and `core.yaml` does not (the generated-set rule allows one document per
+subject). They are `PHP_OS`, `PHP_OS_FAMILY`, `DIRECTORY_SEPARATOR`,
+`PATH_SEPARATOR`, `PHP_EOL`, `PHP_MAXPATHLEN`, `GLOB_BRACE`, `GLOB_MARK`,
+`GLOB_NOSORT`, `GLOB_NOESCAPE`, `GLOB_ONLYDIR`, `PHP_INT_SIZE`, `PHP_INT_MAX`,
+`PHP_INT_MIN`, `PHP_PREFIX`, `PHP_BINDIR`, `PHP_LIBDIR`, `PHP_DATADIR`,
+`PHP_EXTENSION_DIR`, `PHP_EXTRA_VERSION`, `PHP_SAPI`, `STDIN`, `STDOUT` and
+`STDERR`. A consumer reads a record whose `typedSignature.value` is absent as a
+constant of that type with an unknown value.
 
 Generated documents carry the producer header of commons-phpmodels'
 generated layer and are never hand-edited; language, manual, and
@@ -149,3 +160,17 @@ extension-set error surfaces from the `with` call that mounts it.
 - The bundled `vocabulary.yaml` declares every name `VulnType` and
   `SourceKind` enumerate, and no other; the psalm mapping lists every kind the
   two psalm-named sets use.
+
+## Open Gaps
+
+- The version constants `PHP_VERSION`, `PHP_VERSION_ID`, `PHP_MAJOR_VERSION`,
+  `PHP_MINOR_VERSION` and `PHP_RELEASE_VERSION` keep a declared value (8.0.0),
+  although the PHP version of the analyzed program's run decides them; whether
+  they are declared without a value is undecided.
+- `E_ALL`, `T_ABSTRACT`, `T_STRING`, `T_VARIABLE`, `T_LNUMBER`, `T_DNUMBER`,
+  `FILTER_VALIDATE_MAC` and `OPENSSL_ALGO_MD5` are declared with values that
+  differ from PHP 8.5.12 (`E_ALL` 32767 against 30719, `FILTER_VALIDATE_MAC`
+  281 against 276, `OPENSSL_ALGO_MD5` 4 against 2); the cause (PHP version or
+  declaration error) is not established.
+- `PHP_FLOAT_INF`, `PHP_FLOAT_NAN`, `ARRAY_UNIQUE_REGULAR` and the
+  `PDO_FETCH_*` constants are declared, but PHP 8.5.12 defines none of them.

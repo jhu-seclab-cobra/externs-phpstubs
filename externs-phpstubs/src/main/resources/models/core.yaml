@@ -878,21 +878,6 @@
     type: 'null'
     value: 'null'
 - subject:
-    constant: PHP_INT_MAX
-  signature:
-    type: int
-    value: '9223372036854775807'
-- subject:
-    constant: PHP_INT_MIN
-  signature:
-    type: int
-    value: '-9223372036854775808'
-- subject:
-    constant: PHP_INT_SIZE
-  signature:
-    type: int
-    value: '8'
-- subject:
     constant: PHP_FLOAT_MAX
   signature:
     type: float
@@ -923,23 +908,6 @@
     type: float
     value: NAN
 - subject:
-    constant: PHP_MAXPATHLEN
-  signature:
-    type: int
-    value: '4096'
-- subject:
-    constant: PHP_EOL
-  signature:
-    type: string
-    value: '
-
-      '
-- subject:
-    constant: PHP_SAPI
-  signature:
-    type: string
-    value: cli
-- subject:
     constant: PHP_MAJOR_VERSION
   signature:
     type: int
@@ -964,71 +932,6 @@
   signature:
     type: int
     value: '80000'
-- subject:
-    constant: PHP_OS
-  signature:
-    type: string
-    value: Linux
-- subject:
-    constant: PHP_OS_FAMILY
-  signature:
-    type: string
-    value: Linux
-- subject:
-    constant: PHP_PREFIX
-  signature:
-    type: string
-    value: /usr
-- subject:
-    constant: PHP_BINDIR
-  signature:
-    type: string
-    value: /usr/bin
-- subject:
-    constant: PHP_LIBDIR
-  signature:
-    type: string
-    value: /usr/lib
-- subject:
-    constant: PHP_DATADIR
-  signature:
-    type: string
-    value: /usr/share/php
-- subject:
-    constant: PHP_EXTENSION_DIR
-  signature:
-    type: string
-    value: /usr/lib/php
-- subject:
-    constant: PHP_EXTRA_VERSION
-  signature:
-    type: string
-    value: ''
-- subject:
-    constant: STDIN
-  signature:
-    type: resource
-    value: STDIN
-- subject:
-    constant: STDOUT
-  signature:
-    type: resource
-    value: STDOUT
-- subject:
-    constant: STDERR
-  signature:
-    type: resource
-    value: STDERR
-- subject:
-    constant: DIRECTORY_SEPARATOR
-  signature:
-    type: string
-    value: /
-- subject:
-    constant: PATH_SEPARATOR
-  signature:
-    type: string
-    value: ':'
 - subject:
     constant: SORT_REGULAR
   signature:
@@ -1150,35 +1053,10 @@
     type: int
     value: '4'
 - subject:
-    constant: GLOB_BRACE
-  signature:
-    type: int
-    value: '1024'
-- subject:
-    constant: GLOB_MARK
-  signature:
-    type: int
-    value: '2'
-- subject:
-    constant: GLOB_NOSORT
-  signature:
-    type: int
-    value: '4'
-- subject:
     constant: GLOB_NOCHECK
   signature:
     type: int
     value: '16'
-- subject:
-    constant: GLOB_NOESCAPE
-  signature:
-    type: int
-    value: '64'
-- subject:
-    constant: GLOB_ONLYDIR
-  signature:
-    type: int
-    value: '8192'
 - subject:
     constant: PATHINFO_DIRNAME
   signature:

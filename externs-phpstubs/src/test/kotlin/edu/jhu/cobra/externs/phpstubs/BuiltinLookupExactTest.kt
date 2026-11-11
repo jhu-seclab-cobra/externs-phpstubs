@@ -93,7 +93,17 @@ internal class BuiltinLookupExactTest {
         val all = assertNotNull(PhpStubs.constant("E_ALL"))
         assertEquals("core", all.extension)
         assertEquals("32767", assertNotNull(all.typedSignature).value)
-        assertEquals("9223372036854775807", assertNotNull(PhpStubs.constant("PHP_INT_MAX")).typedSignature!!.value)
+    }
+
+    @Test
+    fun `a constant that depends on the host, the build or the run declares a type and no value`() {
+        for (name in listOf("PHP_OS", "PHP_INT_MAX", "DIRECTORY_SEPARATOR", "PHP_EOL", "PHP_SAPI", "STDIN")) {
+            val record = assertNotNull(PhpStubs.constant(name), name)
+            assertEquals("core", record.extension, name)
+            assertNull(assertNotNull(record.typedSignature, name).value, name)
+        }
+        assertEquals("int", assertNotNull(PhpStubs.constant("PHP_INT_MAX")).typedSignature!!.type.raw)
+        assertEquals("resource", assertNotNull(PhpStubs.constant("STDIN")).typedSignature!!.type.raw)
     }
 
     @Test
