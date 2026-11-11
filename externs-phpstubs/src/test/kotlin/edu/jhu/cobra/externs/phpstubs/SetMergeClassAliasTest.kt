@@ -38,8 +38,7 @@ internal class SetMergeClassAliasTest {
         subject: String,
         name: String,
         vararg aliases: String,
-    ): String =
-        "- subject: {class: $subject}\n  signature: {classifier: class, name: $name, aliases: [${aliases.joinToString()}]}\n"
+    ): String = "- subject: {class: $subject}\n  signature: {classifier: class, name: $name, aliases: [${aliases.joinToString()}]}\n"
 
     private fun merge(vararg documents: String): SetMerge =
         SetMerge.of(documents.mapIndexed { i, d -> TestSets.mount(i, Verification.MANUAL, d) })
@@ -86,7 +85,13 @@ internal class SetMergeClassAliasTest {
         val stubs = PhpStubs.with("/consumer-test/")
         val listed = PhpStubs.classes.filter { it.subject == declared }
         assertEquals(1, listed.size)
-        assertEquals(PhpStubs.classes.size, PhpStubs.classes.map { it.subject }.toSet().size)
+        assertEquals(
+            PhpStubs.classes.size,
+            PhpStubs.classes
+                .map { it.subject }
+                .toSet()
+                .size,
+        )
         assertEquals(PhpStubs.classes.size, stubs.classes.size)
     }
 

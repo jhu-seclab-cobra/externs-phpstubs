@@ -427,9 +427,13 @@ internal class ValueRulesSetTest {
     // later decoder or a sink the sanitizer does not cover then reaches the source.
     @Test
     fun `an escaper or encoder of the sanitizer facts carries its argument to the result`() {
-        val functions = mapOf(
-            "rawurlencode" to 0, "pg_escape_string" to 1, "pg_escape_literal" to 1, "pg_escape_identifier" to 1,
-        )
+        val functions =
+            mapOf(
+                "rawurlencode" to 0,
+                "pg_escape_string" to 1,
+                "pg_escape_literal" to 1,
+                "pg_escape_identifier" to 1,
+            )
         for ((name, position) in functions) {
             val record = assertNotNull(PhpStubs.function(name), name)
             assertTrue(Port.Argument(position) in record.flows.filter { it.to == Port.Return }.map { it.from }, name)
@@ -446,8 +450,9 @@ internal class ValueRulesSetTest {
     // summarized result to carry that coverage.
     @Test
     fun `a builtin whose sanitizer fact covers its result declares a value unit`() {
-        val covering = (PhpStubs.functions + PhpStubs.methods)
-            .filter { record -> record.sanitizerFacts.any { it.check == null } }
+        val covering =
+            (PhpStubs.functions + PhpStubs.methods)
+                .filter { record -> record.sanitizerFacts.any { it.check == null } }
         assertTrue(covering.isNotEmpty())
         for (record in covering) {
             assertTrue(record.returns.isNotEmpty(), "${record.subject} returns")

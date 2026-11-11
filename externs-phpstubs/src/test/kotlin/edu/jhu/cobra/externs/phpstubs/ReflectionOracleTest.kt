@@ -54,9 +54,22 @@ internal class ReflectionOracleTest {
 
     @Test
     fun `every reflected class is listed once per name it is registered under`() {
-        val listed = fixture.filter { it.first() == CLASS }.map(::ReflectedClass).groupingBy { it.name }.eachCount()
+        val listed =
+            fixture
+                .filter { it.first() == CLASS }
+                .map(::ReflectedClass)
+                .groupingBy { it.name }
+                .eachCount()
         val differing =
-            listed.filter { (name, count) -> count != (PhpStubs.clazz(name)?.classSignature?.aliases?.size ?: 0) + 1 }
+            listed.filter { (name, count) ->
+                count != (
+                    PhpStubs
+                        .clazz(name)
+                        ?.classSignature
+                        ?.aliases
+                        ?.size ?: 0
+                ) + 1
+            }
         assertTrue(differing.isEmpty(), "Classes listed other than aliases plus one times: $differing")
     }
 

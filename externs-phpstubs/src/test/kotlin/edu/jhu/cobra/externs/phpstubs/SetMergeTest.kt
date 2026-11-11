@@ -295,8 +295,10 @@ internal class SetMergeTest {
 
     private fun signatureOf(vararg mounts: Mount) = classSignature(SetMerge.of(mounts.toList()), classK)
 
-    private fun classSignature(merge: SetMerge, subject: ClassSubject) =
-        assertIs<ClassSignature>(merge.classes.getValue(subject).signature)
+    private fun classSignature(
+        merge: SetMerge,
+        subject: ClassSubject,
+    ) = assertIs<ClassSignature>(merge.classes.getValue(subject).signature)
 
     @Test
     fun `a class signature passes through the merge with every handler table`() {
@@ -321,7 +323,13 @@ internal class SetMergeTest {
         val string = complete.first().targets.single()
         assertEquals(setOf(ReturnKind.STR, ReturnKind.ANY), string.results)
         assertEquals(StringDispatch.METHOD_FIRST, string.stringDispatch)
-        assertEquals(listOf(HandlerSlot.COMPARE), wide.handlers.last().facts.map { it.slot })
+        assertEquals(
+            listOf(HandlerSlot.COMPARE),
+            wide.handlers
+                .last()
+                .facts
+                .map { it.slot },
+        )
         val hidden = classSignature(merge, ClassSubject("HHidden")).handlers.single()
         assertTrue(hidden.facts.all { it.absent && it.targets.isEmpty() })
         assertEquals(HandlerSlot.entries.toSet(), hidden.facts.map { it.slot }.toSet())
@@ -349,7 +357,13 @@ internal class SetMergeTest {
         assertTrue(signature.interfaces.isEmpty())
         assertNull(signature.isFinal)
         assertEquals(listOf("man.c:man_handlers"), signature.handlers.map { it.id })
-        assertTrue(signature.handlers.single().facts.single().absent)
+        assertTrue(
+            signature.handlers
+                .single()
+                .facts
+                .single()
+                .absent,
+        )
     }
 
     @Test

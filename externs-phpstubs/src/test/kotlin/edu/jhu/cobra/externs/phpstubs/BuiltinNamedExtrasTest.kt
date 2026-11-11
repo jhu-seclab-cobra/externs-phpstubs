@@ -53,9 +53,7 @@ internal class BuiltinNamedExtrasTest {
         assertEquals(listOf(null), function("strlen").params.map { it.namedExtras })
     }
 
-    private fun function(name: String): CallableSignature =
-        assertNotNull(assertNotNull(PhpStubs.function(name)).callableSignature)
+    private fun function(name: String): CallableSignature = assertNotNull(assertNotNull(PhpStubs.function(name)).callableSignature)
 
-    private fun policy(signature: CallableSignature): NamedExtras? =
-        signature.params.single { it.variadic }.namedExtras
+    private fun policy(signature: CallableSignature): NamedExtras? = signature.params.single { it.variadic }.namedExtras
 }

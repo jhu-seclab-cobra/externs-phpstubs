@@ -63,20 +63,21 @@ internal class HandlerFactsTest {
 
     @Test
     fun `class fixed creators keep other classes tables out`() {
-        val expected = mapOf(
-            "mysqli" to "ext/mysqli/mysqli.c:mysqli_object_link_handlers",
-            "mysqli_driver" to "ext/mysqli/mysqli.c:mysqli_object_driver_handlers",
-            "mysqli_stmt" to "ext/mysqli/mysqli.c:mysqli_object_stmt_handlers",
-            "mysqli_result" to "ext/mysqli/mysqli.c:mysqli_object_result_handlers",
-            "mysqli_warning" to "ext/mysqli/mysqli.c:mysqli_object_warning_handlers",
-            "arrayobject" to "ext/spl/spl_array.c:spl_handler_ArrayObject",
-            "arrayiterator" to "ext/spl/spl_array.c:spl_handler_ArrayObject",
-            "dom\\element" to "ext/dom/php_dom.c:dom_modern_element_object_handlers",
-            "domnodelist" to "ext/dom/php_dom.c:dom_nodelist_object_handlers",
-            "dom\\nodelist" to "ext/dom/php_dom.c:dom_modern_nodelist_object_handlers",
-            "intlcalendar" to "ext/intl/calendar/calendar_class.cpp:Calendar_handlers",
-            "intlbreakiterator" to "ext/intl/breakiterator/breakiterator_class.cpp:BreakIterator_handlers",
-        )
+        val expected =
+            mapOf(
+                "mysqli" to "ext/mysqli/mysqli.c:mysqli_object_link_handlers",
+                "mysqli_driver" to "ext/mysqli/mysqli.c:mysqli_object_driver_handlers",
+                "mysqli_stmt" to "ext/mysqli/mysqli.c:mysqli_object_stmt_handlers",
+                "mysqli_result" to "ext/mysqli/mysqli.c:mysqli_object_result_handlers",
+                "mysqli_warning" to "ext/mysqli/mysqli.c:mysqli_object_warning_handlers",
+                "arrayobject" to "ext/spl/spl_array.c:spl_handler_ArrayObject",
+                "arrayiterator" to "ext/spl/spl_array.c:spl_handler_ArrayObject",
+                "dom\\element" to "ext/dom/php_dom.c:dom_modern_element_object_handlers",
+                "domnodelist" to "ext/dom/php_dom.c:dom_nodelist_object_handlers",
+                "dom\\nodelist" to "ext/dom/php_dom.c:dom_modern_nodelist_object_handlers",
+                "intlcalendar" to "ext/intl/calendar/calendar_class.cpp:Calendar_handlers",
+                "intlbreakiterator" to "ext/intl/breakiterator/breakiterator_class.cpp:BreakIterator_handlers",
+            )
         for ((name, table) in expected) {
             assertEquals(setOf(table), signatureOf(name).handlers.map { it.id }.toSet(), name)
         }
@@ -279,11 +280,20 @@ internal class HandlerFactsTest {
         val table = singleTable("gmp")
         assertCasts(table, "ext/gmp/gmp.c:gmp_cast_object", string = setOf(STR), dispatch = NONE, numbers = setOf(NUM))
         assertCompare(table, "ext/gmp/gmp.c:gmp_compare")
-        val objects = HandlerRequest.entries.filter { it.slot == HandlerSlot.OPERATION }.map { it.name }.toSet() -
-            setOf("ZEND_CONCAT", "ZEND_BOOL_XOR", "ZEND_BOOL_NOT")
+        val objects =
+            HandlerRequest.entries
+                .filter { it.slot == HandlerSlot.OPERATION }
+                .map { it.name }
+                .toSet() -
+                setOf("ZEND_CONCAT", "ZEND_BOOL_XOR", "ZEND_BOOL_NOT")
         assertOperations(table, "ext/gmp/gmp.c:gmp_do_operation", objects)
         val boolNot = table.facts.single { it.request == ZEND_BOOL_NOT }
-        assertTrue(boolNot.targets.single().results.isEmpty())
+        assertTrue(
+            boolNot.targets
+                .single()
+                .results
+                .isEmpty(),
+        )
         assertEquals(true, signatureOf("gmp").isFinal)
     }
 
@@ -381,11 +391,14 @@ internal class HandlerFactsTest {
 
     // ========== helpers ==========
 
-    private fun signatureOf(name: String) =
-        assertNotNull(assertNotNull(PhpStubs.clazz(name), name).classSignature, name)
+    private fun signatureOf(name: String) = assertNotNull(assertNotNull(PhpStubs.clazz(name), name).classSignature, name)
 
     // A slot of a table is wholly absent (one fact) or answers every request of the slot, once each.
-    private fun assertSlotComplete(table: HandlerTable, slot: HandlerSlot, requests: Set<HandlerRequest?>) {
+    private fun assertSlotComplete(
+        table: HandlerTable,
+        slot: HandlerSlot,
+        requests: Set<HandlerRequest?>,
+    ) {
         val facts = table.facts.filter { it.slot == slot }
         if (facts.singleOrNull()?.absent == true) return
         assertTrue(facts.none { it.absent }, "${table.id} $slot")
@@ -397,8 +410,10 @@ internal class HandlerFactsTest {
 
     private fun singleTable(name: String): HandlerTable = tablesOf(name).single()
 
-    private fun HandlerTable.target(slot: HandlerSlot, request: HandlerRequest?) =
-        assertNotNull(facts.singleOrNull { it.slot == slot && it.request == request }, "$id $slot $request").targets.single()
+    private fun HandlerTable.target(
+        slot: HandlerSlot,
+        request: HandlerRequest?,
+    ) = assertNotNull(facts.singleOrNull { it.slot == slot && it.request == request }, "$id $slot $request").targets.single()
 
     private fun assertCastTarget(
         table: HandlerTable,
@@ -430,7 +445,11 @@ internal class HandlerFactsTest {
         for (request in listOf(IS_ARRAY, IS_RESOURCE)) assertCastTarget(table, request, symbol, others, null)
     }
 
-    private fun assertCompare(table: HandlerTable, symbol: String, results: Set<ReturnKind> = setOf(NUM)) {
+    private fun assertCompare(
+        table: HandlerTable,
+        symbol: String,
+        results: Set<ReturnKind> = setOf(NUM),
+    ) {
         val target = table.target(HandlerSlot.COMPARE, null)
         assertEquals(symbol, target.symbol, table.id)
         assertEquals(results, target.results, table.id)
@@ -458,11 +477,12 @@ internal class HandlerFactsTest {
             assertFalse(fact.absent, table.id)
             val target = fact.targets.single()
             val name = checkNotNull(fact.request).name
-            val expected = when (name) {
-                in numberOrObject -> setOf(NUM, ANY)
-                in producing -> setOf(ANY)
-                else -> emptySet()
-            }
+            val expected =
+                when (name) {
+                    in numberOrObject -> setOf(NUM, ANY)
+                    in producing -> setOf(ANY)
+                    else -> emptySet()
+                }
             assertEquals(symbol, target.symbol, "${table.id} $name")
             assertEquals(expected, target.results, "${table.id} $name")
         }

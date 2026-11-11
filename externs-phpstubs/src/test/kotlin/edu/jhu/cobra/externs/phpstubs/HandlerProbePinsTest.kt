@@ -24,7 +24,10 @@ internal class HandlerProbePinsTest {
     private val facts = HandlerFactsTest()
     private val probes: Map<String, Probe> = readProbes()
 
-    private class Probe(val program: String, val output: String)
+    private class Probe(
+        val program: String,
+        val output: String,
+    )
 
     private val standard = { facts.`standard objects use the standard table`() }
     private val exceptions = { facts.`exception classes share the exception table with the standard cast`() }
@@ -39,27 +42,57 @@ internal class HandlerProbePinsTest {
     private val flags = { facts.`registered enums and interfaces keep their registered flags`() }
 
     // The facts each probe rests on. P35 is a compile-time rejection that executes nothing, so it rests on none.
-    private val pins: Map<String, List<() -> Unit>> = mapOf(
-        "P01" to listOf(ffiTables), "P02" to listOf(ffiTables), "P03" to listOf(standard),
-        "P04" to listOf(ffiTables, gmp), "P05" to listOf(ffiTables), "P06" to listOf(flags),
-        "P07" to listOf(ffiTables, ffiFake), "P08" to listOf(ffiTables, ffiFake), "P09" to listOf(ffiTables, ffiFake),
-        "P10" to listOf(date, standard), "P11" to listOf(com), "P12" to listOf(date, standard),
-        "P13" to listOf(flags, standard), "P14" to listOf(finality), "P15" to listOf(standard, simpleXml, gmp),
-        "P16" to listOf(simpleXml, standard), "P17" to listOf(gmp), "P18" to listOf(simpleXml),
-        "P19" to listOf(standard), "P20" to listOf(tidy), "P21" to listOf(standard, exceptions),
-        "P22" to listOf(com), "P23" to listOf(ffiTables), "P24" to listOf(finality, standard),
-        "P25" to listOf(gmp, finality), "P26" to listOf(simpleXml), "P27" to listOf(standard),
-        "P28" to listOf(gmp), "P29" to listOf(ffiTables), "P30" to listOf(gmp), "P31" to listOf(simpleXml, tidy),
-        "P32" to listOf(gmp), "P33" to listOf(flags), "P34" to listOf(standard), "P35" to listOf(),
-        "P36" to listOf(simpleXml, tidy), "P37" to listOf(flags, finality), "P38" to listOf(gmp, standard),
-        "P39" to listOf(standard, finality),
-    )
+    private val pins: Map<String, List<() -> Unit>> =
+        mapOf(
+            "P01" to listOf(ffiTables),
+            "P02" to listOf(ffiTables),
+            "P03" to listOf(standard),
+            "P04" to listOf(ffiTables, gmp),
+            "P05" to listOf(ffiTables),
+            "P06" to listOf(flags),
+            "P07" to listOf(ffiTables, ffiFake),
+            "P08" to listOf(ffiTables, ffiFake),
+            "P09" to listOf(ffiTables, ffiFake),
+            "P10" to listOf(date, standard),
+            "P11" to listOf(com),
+            "P12" to listOf(date, standard),
+            "P13" to listOf(flags, standard),
+            "P14" to listOf(finality),
+            "P15" to listOf(standard, simpleXml, gmp),
+            "P16" to listOf(simpleXml, standard),
+            "P17" to listOf(gmp),
+            "P18" to listOf(simpleXml),
+            "P19" to listOf(standard),
+            "P20" to listOf(tidy),
+            "P21" to listOf(standard, exceptions),
+            "P22" to listOf(com),
+            "P23" to listOf(ffiTables),
+            "P24" to listOf(finality, standard),
+            "P25" to listOf(gmp, finality),
+            "P26" to listOf(simpleXml),
+            "P27" to listOf(standard),
+            "P28" to listOf(gmp),
+            "P29" to listOf(ffiTables),
+            "P30" to listOf(gmp),
+            "P31" to listOf(simpleXml, tidy),
+            "P32" to listOf(gmp),
+            "P33" to listOf(flags),
+            "P34" to listOf(standard),
+            "P35" to listOf(),
+            "P36" to listOf(simpleXml, tidy),
+            "P37" to listOf(flags, finality),
+            "P38" to listOf(gmp, standard),
+            "P39" to listOf(standard, finality),
+        )
 
     @Test
     fun `every complete saved reference is pinned`() {
         val bytes = checkNotNull(javaClass.getResourceAsStream("/handlers-test/probes.txt")).use { it.readBytes() }
-        val digest = java.security.MessageDigest.getInstance("SHA-256").digest(bytes)
-            .joinToString("") { "%02x".format(it) }
+        val digest =
+            java.security.MessageDigest
+                .getInstance("SHA-256")
+                .digest(bytes)
+                .joinToString("") { "%02x".format(it) }
         assertEquals("da624ea2e0f5c81b578bdb884fd59433c8b7621368a93460d34ee7b474d65367", digest)
     }
 
@@ -107,10 +140,11 @@ internal class HandlerProbePinsTest {
     }
 
     private companion object {
-        val PROBE = Regex(
-            "^@@ (P\\d\\d) \\S+\\n@@ program\\n(.*?)\\n@@ output\\n(.*?)\\n(?=@@ P|\\z)",
-            setOf(RegexOption.DOT_MATCHES_ALL, RegexOption.MULTILINE),
-        )
+        val PROBE =
+            Regex(
+                "^@@ (P\\d\\d) \\S+\\n@@ program\\n(.*?)\\n@@ output\\n(.*?)\\n(?=@@ P|\\z)",
+                setOf(RegexOption.DOT_MATCHES_ALL, RegexOption.MULTILINE),
+            )
         val DIAGNOSTIC = Regex("(Deprecated|Warning|Fatal error|Notice): ")
     }
 }
