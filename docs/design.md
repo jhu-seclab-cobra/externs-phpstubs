@@ -178,24 +178,15 @@ extension-set error surfaces from the `with` call that mounts it.
   with an undeclared constant as an argument is reported by no sink, so `new finfo(FILEINFO_NONE, $_GET['m'])` and
   `new SimpleXMLElement($_GET['u'], LIBXML_NOENT, true)` report nothing while the same calls with the literal flag
   report their constructor sink.
-- Builtins that open the path or URL in an argument, send the request on PHP 8.5.12 and carry no sink in
-  `sinks.yaml`; programs that pass a request value to them report nothing:
-  - `Dom\XMLDocument::createFromFile` (a run reads the file and sends the request, so it is a document loader), and
-    `Dom\Document::schemaValidate` and `Dom\Document::relaxNgValidate` (a run sends the request and the content
-    returns only as a validation result): the PHP manual documents none of the methods of `Dom\Document` and
-    `Dom\XMLDocument`, so the second source is missing and they are not added.
-  - Through the stream-wrapper layer, a run sends the request for a URL given to `exif_imagetype`, `hash_file`,
-    `hash_hmac_file`, `hash_update_file`, `md5_file`, `sha1_file`, `mime_content_type`, `finfo::file`, `finfo_file`,
-    `imageloadfont` and `imagecreatefromgif`, `imagecreatefromjpeg`, `imagecreatefrompng`, `imagecreatefromwebp`,
-    `imagecreatefrombmp`, `imagecreatefromavif`, `imagecreatefromwbmp`, `imagecreatefromxbm`, `imagecreatefromtga`,
-    `imagecreatefromgd`, `imagecreatefromgd2` and `imagecreatefromgd2part`; `gzfile` also returns the content. They
-    carry no `ssrf`, and neither do `file_get_contents`, `fopen`, `file` and `copy`, whose psalm entry holds `file`
-    only.
-  - Not run (the extension is not loaded on the probe host, or the call needs a service): the remaining builtins of
-    `models/` with a parameter named `filename`, `uri`, `url` or `wsdl` that read or fetch (`yaml_parse_file`,
-    `yaml_parse_url`, `ldap_connect`, `mysql_xdevapi\getsession`, the `http_*` request functions, the `swoole`
-    request functions, `rar_open`, `rpm_open`, `fdf_open`, `pdf_open_*`, `ps_open_*`, `rrd_*`, `mailparse_msg_parse_file`
-    and the other functions of extensions the probe host lacks).
+- Builtins that send a request for the URL in an argument on PHP 8.5.12 and carry no `ssrf` in `sinks.yaml`, so a
+  program passing a request value to them reports nothing: `Dom\XMLDocument::createFromFile`,
+  `Dom\Document::schemaValidate` and `Dom\Document::relaxNgValidate` (the PHP manual documents no method of
+  `Dom\Document` or `Dom\XMLDocument`, so the second source is missing); `exif_imagetype`, `hash_file`,
+  `hash_hmac_file`, `hash_update_file`, `md5_file`, `sha1_file`, `gzfile`, `mime_content_type`, `finfo::file`,
+  `finfo_file`, `imageloadfont` and the `imagecreatefrom*` functions of gd (`file_get_contents`, `fopen`, `file` and
+  `copy` hold psalm's `file` alone). Not run, because the extension is absent or the call needs a service:
+  `yaml_parse_file`, `yaml_parse_url`, `ldap_connect`, the `http_*` and `swoole` request functions and the other
+  builtins of `models/` whose `filename`, `uri` or `url` parameter reads or fetches.
 - `PHP_FLOAT_INF`, `PHP_FLOAT_NAN`, `ARRAY_UNIQUE_REGULAR` and the
   `PDO_FETCH_*` constants are declared, but PHP 8.5.12 defines none of them.
 - The constant entries of `core.yaml` come from `tools/convert_stubs.py` over
