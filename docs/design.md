@@ -113,8 +113,9 @@ subject). They are `PHP_OS`, `PHP_OS_FAMILY`, `DIRECTORY_SEPARATOR`,
 `PATH_SEPARATOR`, `PHP_EOL`, `PHP_MAXPATHLEN`, `GLOB_BRACE`, `GLOB_MARK`,
 `GLOB_NOSORT`, `GLOB_NOESCAPE`, `GLOB_ONLYDIR`, `PHP_INT_SIZE`, `PHP_INT_MAX`,
 `PHP_INT_MIN`, `PHP_PREFIX`, `PHP_BINDIR`, `PHP_LIBDIR`, `PHP_DATADIR`,
-`PHP_EXTENSION_DIR`, `PHP_EXTRA_VERSION`, `PHP_SAPI`, `STDIN`, `STDOUT` and
-`STDERR`. A consumer reads a record whose `typedSignature.value` is absent as a
+`PHP_EXTENSION_DIR`, `PHP_EXTRA_VERSION`, `PHP_VERSION`, `PHP_VERSION_ID`,
+`PHP_MAJOR_VERSION`, `PHP_MINOR_VERSION`, `PHP_RELEASE_VERSION`, `PHP_SAPI`,
+`STDIN`, `STDOUT` and `STDERR`. A consumer reads a record whose `typedSignature.value` is absent as a
 constant of that type with an unknown value.
 The generated-set rule above keeps the two layers disjoint: a regeneration that
 writes one of these subjects back into `core.yaml` makes the set fail to load,
@@ -167,10 +168,6 @@ extension-set error surfaces from the `with` call that mounts it.
 
 ## Open Gaps
 
-- The version constants `PHP_VERSION`, `PHP_VERSION_ID`, `PHP_MAJOR_VERSION`,
-  `PHP_MINOR_VERSION` and `PHP_RELEASE_VERSION` keep a declared value (8.0.0),
-  although the PHP version of the analyzed program's run decides them; whether
-  they are declared without a value is undecided.
 - `E_ALL`, `T_ABSTRACT`, `T_STRING`, `T_VARIABLE`, `T_LNUMBER`, `T_DNUMBER`,
   `FILTER_VALIDATE_MAC` and `OPENSSL_ALGO_MD5` are declared with values that
   differ from PHP 8.5.12 (`E_ALL` 32767 against 30719, `FILTER_VALIDATE_MAC`

@@ -97,13 +97,16 @@ internal class BuiltinLookupExactTest {
 
     @Test
     fun `a constant that depends on the host, the build or the run declares a type and no value`() {
-        for (name in listOf("PHP_OS", "PHP_INT_MAX", "DIRECTORY_SEPARATOR", "PHP_EOL", "PHP_SAPI", "STDIN")) {
+        for (name in listOf("PHP_OS", "PHP_INT_MAX", "DIRECTORY_SEPARATOR", "PHP_EOL", "PHP_SAPI", "STDIN",
+            "PHP_VERSION", "PHP_VERSION_ID", "PHP_MAJOR_VERSION", "PHP_MINOR_VERSION", "PHP_RELEASE_VERSION")) {
             val record = assertNotNull(PhpStubs.constant(name), name)
             assertEquals("core", record.extension, name)
             assertNull(assertNotNull(record.typedSignature, name).value, name)
         }
         assertEquals("int", assertNotNull(PhpStubs.constant("PHP_INT_MAX")).typedSignature!!.type.raw)
         assertEquals("resource", assertNotNull(PhpStubs.constant("STDIN")).typedSignature!!.type.raw)
+        assertEquals("string", assertNotNull(PhpStubs.constant("PHP_VERSION")).typedSignature!!.type.raw)
+        assertEquals("int", assertNotNull(PhpStubs.constant("PHP_VERSION_ID")).typedSignature!!.type.raw)
     }
 
     @Test

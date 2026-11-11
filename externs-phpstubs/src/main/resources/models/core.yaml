@@ -908,31 +908,6 @@
     type: float
     value: NAN
 - subject:
-    constant: PHP_MAJOR_VERSION
-  signature:
-    type: int
-    value: '8'
-- subject:
-    constant: PHP_MINOR_VERSION
-  signature:
-    type: int
-    value: '0'
-- subject:
-    constant: PHP_RELEASE_VERSION
-  signature:
-    type: int
-    value: '0'
-- subject:
-    constant: PHP_VERSION
-  signature:
-    type: string
-    value: 8.0.0
-- subject:
-    constant: PHP_VERSION_ID
-  signature:
-    type: int
-    value: '80000'
-- subject:
     constant: SORT_REGULAR
   signature:
     type: int
