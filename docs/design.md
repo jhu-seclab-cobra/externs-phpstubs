@@ -174,8 +174,8 @@ extension-set error surfaces from the `with` call that mounts it.
   281 against 276, `OPENSSL_ALGO_MD5` 4 against 2); the cause (PHP version or
   declaration error) is not established.
 - The models declare 242 of the 3025 constants PHP 8.5.12 defines (extension constants such as `FILEINFO_*`,
-  `LIBXML_*` and `SOAP_*` among the missing ones; `CURLOPT_URL`, `SEEK_SET` and `LOCK_EX` are declared). A consumer
-  that reads an undeclared constant ends the path before the call, so `new finfo(FILEINFO_NONE, $_GET['m'])` and
+  `LIBXML_*` and `SOAP_*` among the missing ones; `CURLOPT_URL`, `SEEK_SET` and `LOCK_EX` are declared). A call
+  with an undeclared constant as an argument is reported by no sink, so `new finfo(FILEINFO_NONE, $_GET['m'])` and
   `new SimpleXMLElement($_GET['u'], LIBXML_NOENT, true)` report nothing while the same calls with the literal flag
   report their constructor sink.
 - `PHP_FLOAT_INF`, `PHP_FLOAT_NAN`, `ARRAY_UNIQUE_REGULAR` and the
