@@ -16,6 +16,9 @@
 - test_release_declares_missing_signature: a release supplies the declaration that rule sources lack.
 - test_short_class_name_prefers_rule_sources: a short class name resolves among rule-source classes first.
 - test_redeclared_class_keeps_trait_uses: a second declaration of a class keeps the first one's trait uses.
+- test_release_sources_listed_once: a file under two autoload roots is listed once.
+- test_stub_replaces_release_declaration: a rule-source declaration replaces the release declaration of the same method.
+- test_release_version: the version of a pinned release is its tag without the leading v.
 - test_license_notice: a release notice may be LICENSE or LICENSE.md.
 """
 
@@ -174,6 +177,38 @@ class After
                 (root / name).write_text('<?php')
             found = [path.relative_to(root).as_posix() for path in module.release_sources(root)]
         self.assertEqual(['more/Other.php', 'src/Kept.php', 'src/Nested/Kept.php'], found)
+
+    def test_release_sources_listed_once(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / 'composer.json').write_text(json.dumps({'autoload': {
+                'psr-4': {'Demo\\': 'src', 'Demo\\Support\\': 'src/Support'}}}))
+            (root / 'src' / 'Support').mkdir(parents=True)
+            (root / 'src' / 'Support' / 'Shared.php').write_text('<?php')
+            found = [path.relative_to(root).as_posix() for path in module.release_sources(root)]
+        self.assertEqual(['src/Support/Shared.php'], found)
+
+    def test_stub_replaces_release_declaration(self):
+        self.store = module.ImportData()
+        self.read_text('<?php namespace Demo; class Box { public function put(string $path) {} public function get() {} }',
+                       origin='framework')
+        self.read_text('<?php namespace Demo; class Box { public function put(string $file) {} }',
+                       origin='psalm-plugin-laravel')
+        put = self.store.signatures['demo\\box::put']
+        self.assertEqual('psalm-plugin-laravel', put.origin)
+        self.assertEqual(['file'], [param['name'] for param in put.signature['params']])
+        self.assertEqual('framework', self.store.signatures['demo\\box::get'].origin)
+
+    def test_release_version(self):
+        with tempfile.TemporaryDirectory() as directory:
+            for origin in module.LIBRARY_RELEASES:
+                (Path(directory) / origin / 'src').mkdir(parents=True)
+                (Path(directory) / origin / 'composer.json').write_text(
+                    json.dumps({'autoload': {'psr-4': {'Demo\\': 'src'}}}))
+            versions = module.load_releases(Path(directory), module.ImportData())
+        self.assertEqual(module.UPSTREAMS['dbal'][1], versions['doctrine/dbal'])
+        self.assertEqual(module.UPSTREAMS['process'][1].removeprefix('v'), versions['symfony/process'])
+        self.assertFalse(any(version.startswith('v') for version in versions.values()))
 
     def test_release_declares_missing_signature(self):
         self.store = module.ImportData()

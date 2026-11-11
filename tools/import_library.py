@@ -599,8 +599,8 @@ def release_sources(root: Path) -> list[Path]:
     directories = [root / target for targets in autoload['psr-4'].values()
                    for target in ([targets] if isinstance(targets, str) else targets)]
     excluded = [root / part.strip('/') for part in autoload.get('exclude-from-classmap', [])]
-    return sorted(path for directory in directories for path in files_under(directory)
-                  if path.name[0].isupper() and not any(path.is_relative_to(part) for part in excluded))
+    return sorted({path for directory in directories for path in files_under(directory)
+                   if path.name[0].isupper() and not any(path.is_relative_to(part) for part in excluded)})
 
 
 def load_releases(upstream: Path, store: ImportData) -> dict[str, str]:
