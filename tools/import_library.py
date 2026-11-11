@@ -23,7 +23,19 @@ UPSTREAMS = {
     'phpstan-security': ('nth-root/phpstan-security', 'v0.3.0', '6d4a940bf01fc48afe161a5d9e0a2bffeb12ec46'),
     'psalm': ('vimeo/psalm', '7.2.1', '127f608db981d5e1d023603514f7bbfcaae8f570'),
     'codeql-php': ('Vozec/codeql-php', 'untagged', '448ec77f9d5286d38c20ecc5fa79bd58a4128432'),
+    'framework': ('laravel/framework', 'v13.40.0', '1449bf241017087fbd38c118ecaabef3f6797fdc'),
+    'dbal': ('doctrine/dbal', '4.5.1', 'b2815456989aa41964ee66d7ab47b7885264acf3'),
+    'browsershot': ('spatie/browsershot', '5.5.0', 'eba71ab7f4aba23d9321d653ccd19d4e94432516'),
+    'filesystem': ('symfony/filesystem', 'v7.4.23', '53d609da66578dad5a39fe290e8f924ec8f05e93'),
+    'http-foundation': ('symfony/http-foundation', 'v7.4.23', '7fb73cffa06e2bcc2cb523fcccb1e8174106b206'),
+    'framework-bundle': ('symfony/framework-bundle', 'v7.4.23', '6a749f2c37cb9def53793633ec72958aaad4b359'),
+    'dom-crawler': ('symfony/dom-crawler', 'v7.4.22', 'cc5c3d6275873fd463c2a772251d65379015682f'),
+    'ldap': ('symfony/ldap', 'v7.4.10', 'bba9e535d29c15bd6842bf85bc341debfbb4bcb3'),
+    'process': ('symfony/process', 'v7.4.22', 'a5a6912edbbfc4c98cd080bc4bbe37c8e7eeb20a'),
 }
+# Origins that are library releases: their own PHP sources declare the package's classes.
+LIBRARY_RELEASES = ('framework', 'dbal', 'browsershot', 'filesystem', 'http-foundation',
+                    'framework-bundle', 'dom-crawler', 'ldap', 'process')
 PSALM_PACKAGES = {
     'amphp/amp': ('amphp/amp', '3'),
     'amphp/byte-stream': ('amphp/byte-stream', '2'),
@@ -78,7 +90,7 @@ CODEQL_SOURCES = {
     'stored': 'external-input', 'environment': 'external-input',
 }
 BUILTIN_TYPES = set('mixed void never null bool true false int float string array object callable iterable self static parent resource'.split())
-TOKEN = re.compile(r'/\*.*?\*/|//[^\n]*|\#[^\n]*|\s+|<\?php|\?>|\'(?:\\.|[^\'\\])*\'|"(?:\\.|[^"\\])*"|\$\w+|\\?[A-Za-z_\x80-\uffff][\w\\\x80-\uffff]*|\.\.\.|::|=>|.', re.S)
+TOKEN = re.compile(r'/\*.*?\*/|//[^\n]*|\#\[|<<<[ \t]*([\'"]?)(\w+)\1\r?\n.*?\r?\n[ \t]*\2\b|\#[^\n]*|\s+|<\?php|\?>|\'(?:\\.|[^\'\\])*\'|"(?:\\.|[^"\\])*"|\$\w+|\\?[A-Za-z_\x80-\uffff][\w\\\x80-\uffff]*|\.\.\.|::|=>|.', re.S)
 MODIFIERS = {'public', 'protected', 'private', 'static', 'abstract', 'final', 'readonly'}
 
 
@@ -228,8 +240,8 @@ def read_class(tokens: list[str], scope: Scope, context: tuple) -> int:
     declaration = Declaration(name.lower(), 'class', signature, origin, location)
     store.signatures[declaration.subject] = declaration
     end = end_of(tokens, start)
-    store.traits[declaration.subject] = []
-    store.trait_aliases[declaration.subject] = []
+    store.traits.setdefault(declaration.subject, [])
+    store.trait_aliases.setdefault(declaration.subject, [])
     scan_php(tokens[start + 1:end], Scope(scope.namespace, dict(scope.aliases), name), (origin, location, store))
     return end + 1
 
@@ -321,17 +333,35 @@ def read_namespace(tokens: list[str], index: int, context: tuple) -> int:
         end = end_of(tokens, start)
         scan_php(tokens[start + 1:end], Scope(namespace), context)
         return end + 1
-    end = next((pos for pos in range(start + 1, len(tokens)) if tokens[pos] == 'namespace'), len(tokens))
+    end = next((pos for pos in range(start + 1, len(tokens)) if tokens[pos] == 'namespace' and tokens[pos - 1] not in ('>', '::')),
+               len(tokens))
     scan_php(tokens[start + 1:end], Scope(namespace), context)
     return end
+
+
+def without_attributes(tokens: list[str]) -> list[str]:
+    """Drop PHP attribute groups, which may sit inside a parameter list."""
+    result, index = [], 0
+    while index < len(tokens):
+        if tokens[index] == '#[':
+            depth = 1
+            index += 1
+            while depth:
+                depth += (tokens[index] == '[') - (tokens[index] == ']')
+                index += 1
+        else:
+            result.append(tokens[index])
+            index += 1
+    return result
 
 
 def read_psalm(path: Path, origin: str, store: ImportData) -> None:
     """Read declarations and exact endpoint tags from PHP stub text without execution."""
     text = path.read_text(encoding='utf-8')
-    tokens = [token for token in TOKEN.findall(text)
-              if not token.isspace() and not token.startswith(('//', '#', '<?', '?>'))
-              and (not token.startswith('/*') or token.startswith('/**'))]
+    tokens = without_attributes([token for token in (match[0] for match in TOKEN.finditer(text))
+                                 if not token.isspace() and not token.startswith(('//', '<?', '?>'))
+                                 and (token == '#[' or not token.startswith('#'))
+                                 and (not token.startswith('/*') or token.startswith('/**'))])
     location = '/'.join(path.parts[path.parts.index('stubs') + 1:]) if 'stubs' in path.parts else path.name
     scan_php(tokens, Scope(), (origin, location, store))
 
@@ -563,6 +593,24 @@ def read_stub_files(paths: list[Path], context: tuple, store: ImportData) -> Non
             declaration.package = doctrine_package(declaration.subject) if package == 'doctrine' else package
 
 
+def release_sources(root: Path) -> list[Path]:
+    """List the release's class files: PSR-4 files named for a class, outside the classmap exclusions."""
+    autoload = json.loads((root / 'composer.json').read_text(encoding='utf-8'))['autoload']
+    directories = [root / target for targets in autoload['psr-4'].values()
+                   for target in ([targets] if isinstance(targets, str) else targets)]
+    excluded = [root / part.strip('/') for part in autoload.get('exclude-from-classmap', [])]
+    return sorted(path for directory in directories for path in files_under(directory)
+                  if path.name[0].isupper() and not any(path.is_relative_to(part) for part in excluded))
+
+
+def load_releases(upstream: Path, store: ImportData) -> dict[str, str]:
+    """Read the pinned library releases; the plugin stubs read afterwards replace a class both declare."""
+    for origin in LIBRARY_RELEASES:
+        name = UPSTREAMS[origin][0]
+        read_stub_files(release_sources(upstream / origin), (origin, name), store)
+    return {UPSTREAMS[origin][0]: UPSTREAMS[origin][1].removeprefix('v') for origin in LIBRARY_RELEASES}
+
+
 def load_stubs(upstream: Path, store: ImportData) -> dict[str, str]:
     laravel = upstream / 'psalm-plugin-laravel' / 'stubs'
     versions = sorted((path for path in laravel.iterdir() if re.fullmatch(r'\d+(?:\.\d+)*', path.name)),
@@ -653,9 +701,15 @@ def mit_doctrine(upstream: Path) -> str:
     return f'MIT License\n\nCopyright (c) {holder}\n\n{permission}'
 
 
+def license_text(origin: str, upstream: Path) -> str:
+    if origin == 'psalm-plugin-doctrine':
+        return mit_doctrine(upstream)
+    notice = next(path for path in (upstream / origin / 'LICENSE', upstream / origin / 'LICENSE.md') if path.is_file())
+    return notice.read_text(encoding='utf-8')
+
+
 def notices(origins: set[str], upstream: Path) -> dict[str, str]:
-    return {f'LICENSE-{origin}.txt': mit_doctrine(upstream) if origin == 'psalm-plugin-doctrine'
-            else (upstream / origin / 'LICENSE').read_text(encoding='utf-8') for origin in sorted(origins)}
+    return {f'LICENSE-{origin}.txt': license_text(origin, upstream) for origin in sorted(origins)}
 
 
 def hierarchy_subjects(subjects: set[str], store: ImportData) -> set[str]:
@@ -717,7 +771,8 @@ def package_output(package: str, context: tuple, store: ImportData) -> tuple[dic
 
 def generate(upstream: Path, resources: Path) -> dict[str, str]:
     store = ImportData(psalm_kinds=psalm_mapping(resources / 'vocabulary' / 'psalm-mapping.yaml'))
-    versions = load_stubs(upstream, store)
+    releases = load_releases(upstream, store)
+    versions = {**load_stubs(upstream, store), **releases}
     for path in sorted((upstream / 'phpstan-security' / 'config' / 'taint').glob('*.neon')):
         if path.name != 'php.neon':
             read_neon(path, store)
@@ -750,7 +805,7 @@ def generated_packages(context: tuple, store: ImportData) -> dict[str, str]:
                             'rejections': dict(sorted(Counter(row['reason'] for row in rejected_by[package]).items())),
                             'unrecordedParents': unrecorded_parents(grouped[package], store)}
     header = '# Generated by tools/import_library.py from ' + ', '.join(upstream_label(origin) for origin in UPSTREAMS) + '.\n'
-    output['catalog.yaml'] = header + '# Versions describe the upstream stubs.\n' + yaml_text(catalog)
+    output['catalog.yaml'] = header + '# Versions describe the upstream stubs or the pinned library release.\n' + yaml_text(catalog)
     output['summary.json'] = json.dumps(summary, indent=2, sort_keys=True) + '\n'
     return output
 

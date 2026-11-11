@@ -11,10 +11,17 @@
 - test_constant_key: constant-key checks are rejected before declaration lookup.
 - test_trait_aliases_and_overrides: aliases retain sources while direct methods override traits.
 - test_missing_hierarchy: missing parents and cyclic edges reject endpoints without signatures.
+- test_release_source_syntax: attributes, heredocs and property names equal to keywords leave declarations intact.
+- test_release_sources: a release's class files follow its composer.json autoload roots and exclusions.
+- test_release_declares_missing_signature: a release supplies the declaration that rule sources lack.
+- test_redeclared_class_keeps_trait_uses: a second declaration of a class keeps the first one's trait uses.
+- test_license_notice: a release notice may be LICENSE or LICENSE.md.
 """
 
 import importlib.util
+import json
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -121,6 +128,87 @@ class ImportLibraryTest(unittest.TestCase):
         self.assertEqual(['no-signature', 'no-signature'], [row['reason'] for row in rejected])
         fact = module.ResolvedFact('vendor\\missing', 'sources', 'user-input', None)
         self.assertEqual(['UnknownParent'], module.unrecorded_parents([fact], self.store))
+
+    def read_text(self, text, origin='fixture', name='Sample.php'):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / name
+            path.write_text(text, encoding='utf-8')
+            module.read_psalm(path, origin, self.store)
+
+    def test_release_source_syntax(self):
+        self.read_text('''<?php
+namespace Demo;
+
+#[Attribute(Attribute::TARGET_CLASS)]
+class Source
+{
+    public string $namespace = <<<'EOT'
+    } not a brace (
+    EOT;
+
+    public function run(#[\\SensitiveParameter] string $first, #[Other([1, 2])] int $second = 1): string
+    {
+        return $this->namespace . self::class;
+    }
+}
+
+class After
+{
+    public function later(): void {}
+}
+''')
+        signature = self.store.signatures['demo\\source::run'].signature
+        self.assertEqual(['first', 'second'], [param['name'] for param in signature['params']])
+        self.assertEqual(['string', 'int'], [param['type'] for param in signature['params']])
+        self.assertIn('demo\\after::later', self.store.signatures)
+
+    def test_release_sources(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / 'composer.json').write_text(json.dumps({'autoload': {
+                'psr-4': {'Demo\\': 'src', 'Demo\\Extra\\': ['more']}, 'exclude-from-classmap': ['/src/Tests/']}}))
+            for name in ('src/Kept.php', 'src/Nested/Kept.php', 'more/Other.php', 'src/Tests/Skipped.php',
+                         'src/helpers.php', 'src/view.blade.php', 'outside/Outside.php'):
+                (root / name).parent.mkdir(parents=True, exist_ok=True)
+                (root / name).write_text('<?php')
+            found = [path.relative_to(root).as_posix() for path in module.release_sources(root)]
+        self.assertEqual(['more/Other.php', 'src/Kept.php', 'src/Nested/Kept.php'], found)
+
+    def test_release_declares_missing_signature(self):
+        self.store = module.ImportData()
+        self.store.candidates.append(module.Candidate(
+            'demo\\child::inherited', 'sinks', 'sqli', 'sql', 'phpstan-security', 'demo.neon:1'))
+        self.read_text('''<?php
+namespace Demo;
+interface Contract { public function inherited(string $sql): void; }
+class Child implements Contract {}
+''', origin='demo-release')
+        facts, rejected = module.resolve(self.store)
+        self.assertFalse(rejected)
+        self.assertEqual(['demo\\child::inherited'], [fact.subject for fact in facts])
+        self.assertEqual({'demo-release'}, {self.store.signatures[fact.subject].origin for fact in facts})
+
+    def test_redeclared_class_keeps_trait_uses(self):
+        self.read_text('''<?php
+namespace Demo;
+trait Inner { public function only() {} }
+trait Outer { use Inner; }
+''', origin='release')
+        self.read_text('<?php namespace Demo; trait Outer { public function input() {} }', origin='stub')
+        self.read_text('<?php namespace Demo; class Holder { use Outer; }', origin='stub')
+        module.expand_trait_members(self.store)
+        self.assertEqual(['Demo\\Inner'], self.store.traits['demo\\outer'])
+        self.assertIn('demo\\holder::only', self.store.signatures)
+        self.assertIn('demo\\holder::input', self.store.signatures)
+
+    def test_license_notice(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for origin, name in (('plain', 'LICENSE'), ('markdown', 'LICENSE.md')):
+                (root / origin).mkdir()
+                (root / origin / name).write_text(origin + ' notice')
+            self.assertEqual({'LICENSE-plain.txt': 'plain notice', 'LICENSE-markdown.txt': 'markdown notice'},
+                             module.notices({'plain', 'markdown'}, root))
 
 
 if __name__ == '__main__':
