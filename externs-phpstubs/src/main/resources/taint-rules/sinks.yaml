@@ -5,6 +5,10 @@
 # Constructor sinks (finfo, SimpleXMLElement, SoapClient) follow the PHP manual pages and the Synacktiv sec4dev 2020
 # slides "Modern PHP security" (Arbitrary instantiation), and were run on PHP 8.5.12. SimpleXMLElement reads its
 # first argument only when dataIsURL is true; its entry carries that condition.
+# Document loaders (simplexml_load_file, tidy_parse_file, tidy_repair_file, Dom\HTMLDocument::createFromFile,
+# DOMDocument::load and loadHTMLFile, XMLReader::fromUri and open, tidy::__construct, parseFile and repairFile) open the
+# path or URL in argument 0 and parse the document; they follow the PHP manual pages, and each was run on PHP 8.5.12
+# against a local file and a loopback listener.
 # Receiver-triggered sinks (methods with no path argument) are not expressible and are omitted.
 # The set leaves out the Argus points PHP 8.5.11 contradicts: unserialize on file functions (phar metadata
 # is read lazily) and eval on preg_replace, assert, mb_ereg_replace and mb_eregi_replace.
@@ -123,6 +127,27 @@
 - subject:
     function: disk_free_space
   sinks:
+    - port: argument(0)
+      vulnType: file
+- subject:
+    method: Dom\HTMLDocument::createFromFile
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+    - port: argument(0)
+      vulnType: file
+- subject:
+    method: DOMDocument::load
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+    - port: argument(0)
+      vulnType: file
+- subject:
+    method: DOMDocument::loadHTMLFile
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
     - port: argument(0)
       vulnType: file
 - subject:
@@ -524,6 +549,13 @@
     - port: argument(1)
       vulnType: cookie
 - subject:
+    function: simplexml_load_file
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+    - port: argument(0)
+      vulnType: file
+- subject:
     method: SimpleXMLElement::__construct
   when: [_, _, true]
   sinks:
@@ -622,6 +654,41 @@
     - port: argument(0)
       vulnType: sql
 - subject:
+    method: tidy::__construct
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+    - port: argument(0)
+      vulnType: file
+- subject:
+    method: tidy::parseFile
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+    - port: argument(0)
+      vulnType: file
+- subject:
+    method: tidy::repairFile
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+    - port: argument(0)
+      vulnType: file
+- subject:
+    function: tidy_parse_file
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+    - port: argument(0)
+      vulnType: file
+- subject:
+    function: tidy_repair_file
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+    - port: argument(0)
+      vulnType: file
+- subject:
     function: touch
   sinks:
     - port: argument(0)
@@ -656,6 +723,20 @@
   sinks:
     - port: argument(0)
       vulnType: include
+- subject:
+    method: XMLReader::fromUri
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+    - port: argument(0)
+      vulnType: file
+- subject:
+    method: XMLReader::open
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+    - port: argument(0)
+      vulnType: file
 
 - subject:
     operation: dynamic_invocation

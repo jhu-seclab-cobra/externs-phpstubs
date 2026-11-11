@@ -29,7 +29,7 @@ taint-rules/
 ├── provenance.yaml    # producer externs-phpstubs review of the Argus sink lists, the PHP manual and the Synacktiv sec4dev 2020 slides; verification manual
 ├── vocabulary.yaml    # additions only: kind `xpath`, source kind `external`
 ├── policy.yaml        # input enables xpath; external enables every input kind and xpath
-├── sinks.yaml         # Argus sink facts the format expresses, plus three constructor sinks; an entry for a psalm subject restates psalm's points and adds its own
+├── sinks.yaml         # Argus sink facts the format expresses, plus three constructor sinks and the document loaders; an entry for a psalm subject restates psalm's points and adds its own
 ├── sanitizers.yaml    # sanitizer facts psalm lacks: shell, html, sql, file, value-typing sanitizer facts for every kind; checks
 └── sources.yaml       # `input` for request data psalm does not taint; `external` for environment and stored data
 ```
@@ -40,7 +40,7 @@ conditional entry, a sinks entry (`SimpleXMLElement::__construct`, `when: [_, _,
 
 | Document | Subject kinds | Content |
 |----------|---------------|---------|
-| sinks.yaml | function, method, operation | one entry per subject with every kind it sinks, ports ascending, kinds in psalm order; receiver-triggered sinks omitted; the invocation operation consumes `callee`; three constructors that fetch or read at construction (`finfo` `argument(1)` `file`, `SoapClient` `argument(0)` `ssrf`, `SimpleXMLElement` `argument(0)` `ssrf` and `file` when `dataIsURL` is `true`) |
+| sinks.yaml | function, method, operation | one entry per subject with every kind it sinks, ports ascending, kinds in psalm order; receiver-triggered sinks omitted; the invocation operation consumes `callee`; three constructors that fetch or read at construction (`finfo` `argument(1)` `file`, `SoapClient` `argument(0)` `ssrf`, `SimpleXMLElement` `argument(0)` `ssrf` and `file` when `dataIsURL` is `true`); a document loader, a builtin that opens the path or URL in `argument(0)` and parses it as a document, carries `ssrf` and `file` on `argument(0)` (`simplexml_load_file`, `tidy_parse_file`, `tidy_repair_file`, `Dom\HTMLDocument::createFromFile`, `DOMDocument::load`, `DOMDocument::loadHTMLFile`, `XMLReader::fromUri`, `XMLReader::open`, `tidy::__construct`, `tidy::parseFile`, `tidy::repairFile`); a loader is added when a run on PHP reads a local file and sends a request to a loopback listener, and the PHP manual page names the argument as a path or URI |
 | sanitizers.yaml | function | one declaration per subject; a value-typing sanitizer fact (`intval`, `md5`, ...) names every kind; a check names `argument(0)` and `accepts: true` with the `types` of a type predicate (`is_int`, `is_scalar`, ...) or the `within` class of a character check (`ctype_digit`, `is_numeric`, ...) with the kinds its class cannot carry |
 | sources.yaml | variable, function, method | one declaration per subject producing `input` or `external` |
 

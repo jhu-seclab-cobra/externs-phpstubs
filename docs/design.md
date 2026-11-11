@@ -178,6 +178,13 @@ extension-set error surfaces from the `with` call that mounts it.
   with an undeclared constant as an argument is reported by no sink, so `new finfo(FILEINFO_NONE, $_GET['m'])` and
   `new SimpleXMLElement($_GET['u'], LIBXML_NOENT, true)` report nothing while the same calls with the literal flag
   report their constructor sink.
+- Builtins that open the path or URL in an argument and parse a document, and carry no sink in `sinks.yaml`:
+  `Dom\XMLDocument::createFromFile` (a run reads the file and sends the request, but the PHP manual has no page for
+  it); `DOMDocument::schemaValidate`, `DOMDocument::relaxNGValidate`, `Dom\Document::schemaValidate`,
+  `Dom\Document::relaxNgValidate`, `XMLReader::setSchema` and `XMLReader::setRelaxNGSchema` (a run reads the file and
+  sends the request, but the file content reaches the caller only as the validation result); `SoapServer::__construct`
+  (reads the WSDL file or URL, and the content reaches the caller only as an error text). Programs that pass a
+  request value to them report nothing.
 - `PHP_FLOAT_INF`, `PHP_FLOAT_NAN`, `ARRAY_UNIQUE_REGULAR` and the
   `PDO_FETCH_*` constants are declared, but PHP 8.5.12 defines none of them.
 - The constant entries of `core.yaml` come from `tools/convert_stubs.py` over

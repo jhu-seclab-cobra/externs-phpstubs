@@ -45,6 +45,7 @@ import kotlin.test.assertTrue
  * - `a digest covers its result only in hex form` — verifies each digest's sanitizer facts require `binary` false, its declared default
  * - `sanitizers and sources name the added escapes and source kinds` — verifies representative entries
  * - `a constructor that fetches or reads at construction is a sink` — verifies the SoapClient, SimpleXMLElement and finfo constructor facts, their ports, kinds and condition
+ * - `a document loader sinks the path or URL it opens` — verifies the argument 0 `ssrf` and `file` facts of each loader, and that the merged record carries them
  * - `the psalm mapping translates the additions` — verifies the bundled mapping covers xpath and external
  */
 internal class TaintRulesSetTest {
@@ -147,6 +148,43 @@ internal class TaintRulesSetTest {
         assertEquals(true, condition.matches(listOf(data, IntVal(0), BoolVal(true))))
         assertEquals(false, condition.matches(listOf(data)))
         assertEquals(false, condition.matches(listOf(data, IntVal(0), BoolVal(false))))
+    }
+
+    @Test
+    fun `a document loader sinks the path or URL it opens`() {
+        val functions = listOf("simplexml_load_file", "tidy_parse_file", "tidy_repair_file")
+        val methods =
+            listOf(
+                "Dom\\HTMLDocument" to "createFromFile",
+                "DOMDocument" to "load",
+                "DOMDocument" to "loadHTMLFile",
+                "XMLReader" to "fromUri",
+                "XMLReader" to "open",
+                "tidy" to "__construct",
+                "tidy" to "parseFile",
+                "tidy" to "repairFile",
+            )
+        val fact = setOf(Port.Argument(0) to "ssrf", Port.Argument(0) to "file")
+
+        fun assertLoader(
+            subject: ModelSubject,
+            merged: List<SinkFact>,
+            label: String,
+        ) {
+            assertEquals(fact, sinksOf(subject), label)
+            assertEquals(setOf(VulnType.SSRF.id, VulnType.PATHTRAV.id), merged.map { it.vulnType }.toSet(), label)
+            assertEquals(setOf(Port.Argument(0)), merged.map { it.port }.toSet(), label)
+            assertNull(merged.firstNotNullOfOrNull { it.condition }, label)
+        }
+        for (name in functions) {
+            val merged = assertNotNull(PhpStubs.function(name), name).sinkFacts
+            assertLoader(FunctionSubject(name), merged, name)
+        }
+        for ((owner, name) in methods) {
+            val spelling = "$owner::$name"
+            val merged = assertNotNull(PhpStubs.method(spelling), spelling).sinkFacts
+            assertLoader(MethodSubject(owner, name), merged, spelling)
+        }
     }
 
     @Test
