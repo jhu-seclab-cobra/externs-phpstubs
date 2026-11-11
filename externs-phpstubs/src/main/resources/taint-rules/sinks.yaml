@@ -2,6 +2,9 @@
 # Sinks follow Jahanshahi & Egele, "Argus: All your (PHP) Injection-sinks are belong to us"
 # (USENIX Security 2024), Table 5 and the artifact run, plus the curated lists shipped with it;
 # an entry for a subject the taint set already names restates psalm's ports and adds its own.
+# Constructor sinks (finfo, SimpleXMLElement, SoapClient) follow the PHP manual pages and the Synacktiv sec4dev 2020
+# slides "Modern PHP security" (Arbitrary instantiation), and were run on PHP 8.5.12. SimpleXMLElement reads its
+# first argument only when dataIsURL is true; its entry carries that condition.
 # Receiver-triggered sinks (methods with no path argument) are not expressible and are omitted.
 # The set leaves out the Argus points PHP 8.5.11 contradicts: unserialize on file functions (phar metadata
 # is read lazily) and eval on preg_replace, assert, mb_ereg_replace and mb_eregi_replace.
@@ -161,6 +164,11 @@
     method: FilesystemIterator::__construct
   sinks:
     - port: argument(0)
+      vulnType: file
+- subject:
+    method: finfo::__construct
+  sinks:
+    - port: argument(1)
       vulnType: file
 - subject:
     function: forward_static_call
@@ -516,10 +524,23 @@
     - port: argument(1)
       vulnType: cookie
 - subject:
+    method: SimpleXMLElement::__construct
+  when: [_, _, true]
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+    - port: argument(0)
+      vulnType: file
+- subject:
     method: SimpleXMLElement::xpath
   sinks:
     - port: argument(0)
       vulnType: xpath
+- subject:
+    method: SoapClient::__construct
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
 - subject:
     function: spl_autoload_register
   sinks:

@@ -1,5 +1,6 @@
 package edu.jhu.cobra.externs.phpstubs
 
+import edu.jhu.cobra.commons.phpmodels.ArgPattern
 import edu.jhu.cobra.commons.phpmodels.ArgumentCheck
 import edu.jhu.cobra.commons.phpmodels.CharacterClass
 import edu.jhu.cobra.commons.phpmodels.DeclaredType
@@ -16,6 +17,8 @@ import edu.jhu.cobra.commons.phpmodels.VocabularyException
 import edu.jhu.cobra.commons.phpmodels.VocabularyMappingLoader
 import edu.jhu.cobra.commons.phpmodels.VulnTypeId
 import edu.jhu.cobra.commons.value.BoolVal
+import edu.jhu.cobra.commons.value.IntVal
+import edu.jhu.cobra.commons.value.StrVal
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -41,6 +44,7 @@ import kotlin.test.assertTrue
  * - `checks state type predicates and character checks` — verifies the type set, the class, and the covered kinds of representative checks
  * - `a digest covers its result only in hex form` — verifies each digest's sanitizer facts require `binary` false, its declared default
  * - `sanitizers and sources name the added escapes and source kinds` — verifies representative entries
+ * - `a constructor that fetches or reads at construction is a sink` — verifies the SoapClient, SimpleXMLElement and finfo constructor facts, their ports, kinds and condition
  * - `the psalm mapping translates the additions` — verifies the bundled mapping covers xpath and external
  */
 internal class TaintRulesSetTest {
@@ -119,6 +123,30 @@ internal class TaintRulesSetTest {
         assertEquals(setOf(Port.Argument(0) to "file"), sinksOf(FunctionSubject("scandir")))
         assertNull(unconditional.getValue(FunctionSubject("curl_exec")).body.sinks)
         assertNull(unconditional[MethodSubject("SplFileObject", "fpassthru")])
+    }
+
+    @Test
+    fun `a constructor that fetches or reads at construction is a sink`() {
+        fun facts(spelling: String) = assertNotNull(PhpStubs.method(spelling), spelling).sinkFacts
+
+        assertEquals(setOf(Port.Argument(0) to "ssrf"), sinksOf(MethodSubject("SoapClient", "__construct")))
+        assertEquals(setOf(Port.Argument(1) to "file"), sinksOf(MethodSubject("finfo", "__construct")))
+        for (spelling in listOf("SoapClient::__construct", "finfo::__construct")) {
+            assertNull(facts(spelling).single().condition, spelling)
+        }
+        assertEquals(
+            setOf(Port.Argument(0) to "ssrf", Port.Argument(0) to "file"),
+            sinksOf(rules.entries.single { it.subject == MethodSubject("SimpleXMLElement", "__construct") }),
+        )
+        val dataIsUrl = facts("SimpleXMLElement::__construct")
+        assertEquals(listOf(Port.Argument(0), Port.Argument(0)), dataIsUrl.map { it.port })
+        assertEquals(setOf(VulnType.SSRF.id, VulnType.PATHTRAV.id), dataIsUrl.map { it.vulnType }.toSet())
+        val condition = assertNotNull(dataIsUrl.map { it.condition }.toSet().single())
+        assertEquals(ArgPattern(listOf(null, null, BoolVal(true))), condition)
+        val data = StrVal("u")
+        assertEquals(true, condition.matches(listOf(data, IntVal(0), BoolVal(true))))
+        assertEquals(false, condition.matches(listOf(data)))
+        assertEquals(false, condition.matches(listOf(data, IntVal(0), BoolVal(false))))
     }
 
     @Test
