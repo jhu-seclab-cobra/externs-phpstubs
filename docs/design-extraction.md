@@ -160,7 +160,7 @@ Read the rewritten model documents and extractor diagnostics after each command.
 
 ## Open Gaps
 
-- **Indirect calls.** The model asserts that a class outside an entry's
+- **Indirect calls.** How should the extractor cover native indirect calls while preserving the format’s exhaustive assertion? The model asserts that a class outside an entry's
   throws section is never thrown by it ([commons-phpmodels model.md](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/model.md),
   Relations). `extract_throws.py` follows calls by name only; a call
   through a struct member or a function pointer (object handler tables,
@@ -171,10 +171,10 @@ Read the rewritten model documents and extractor diagnostics after each command.
   `zend_generator_get_iterator`, and its section names `error` and
   `typeerror` only. Candidate: resolve such a call to every function
   stored into a field of the same struct type (multi-layer type analysis).
-- **`Closure::__invoke`.** The engine attaches it to every closure object
+- **`Closure::__invoke`.** How should the producer declare this engine-generated callable? The engine attaches it to every closure object
   at call time; no stub declares it, so no entry exists and the oracle
   test lists it as the one undeclared reflected callable.
-- **PDO driver methods.** php-src declares `PDO_PGSql_Ext` and
+- **PDO driver methods.** How should driver-attached methods acquire Handler roots? php-src declares `PDO_PGSql_Ext` and
   `PDO_SQLite_Ext` as stub-only pseudo classes whose methods PHP attaches
   to a `PDO` object of that driver; no class registration names their
   method tables, so their entries keep no `throws` line and
