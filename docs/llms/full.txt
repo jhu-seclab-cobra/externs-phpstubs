@@ -1,139 +1,120 @@
 # externs-phpstubs
 
-> Read-only Kotlin lookup of PHP builtins: one `BuiltinRecord` per function, class, method, constant, class constant, property, or predefined variable, merging the generated set, the value rules, psalm's taint data, and the taint rules into the signature in force plus every fact, each tagged with its argument condition, in one canonical vocabulary.
-
-`PhpStubs` is the entry point: its companion is the lookup over the bundled sets; `PhpStubs.with(...)` builds a lookup that also mounts consumer sets. Lookup names go through the commons-phpmodels subject creators: functions, classes, and methods fold case and drop a leading `\`; constants keep their case.
+> Read-only lookup of PHP declarations and their value and taint Facts.
 
 ## Instructions for Agents
 
-- Call `PhpStubs.function(name)`, `clazz(name)`, `method("Owner::name")` or `method(owner, name)`, `constant(name)`, `classConstant(...)`, `property(...)`, `variable("$name")`, or `record(subject)`; each returns a `BuiltinRecord<…>?`. A name that is not a spelling of the kind raises `IllegalArgumentException`; an unknown name returns `null`.
-- `BuiltinRecord` holds `subject`, `extension: String?` (null when no generated set declares the subject), `signature: SignatureInfo?`, and the fact lists `returns`, `flows`, `sourceFacts`, `sinkFacts`, `sanitizerFacts`, `throws`. Read signatures through the typed accessors `callableSignature`, `classSignature`, `typedSignature`, `propertySignature`.
-- A `ThrowsFact` with empty `classes` states the call throws none; an empty `throws` list asserts nothing about throws.
-- Existence of a declaration is `signature != null`. A taint-only function or a predefined variable is a record without a signature.
-- Every fact carries `owner` and `condition: ArgPattern?`. Match `condition` against the call's arguments with `ArgPattern.matches(List<IPrimitiveVal?>)`; `null` (undecidable) is the consumer's rule to apply. The record ranks nothing.
-- Taint facts speak the canonical vocabulary only: `VulnType` (`sqli`, `cmdi`, `codei`, `xss`, `headeri`, `ssrf`, `pathtrav`, `fileinc`, `deser`, `callablei`, `ldapi`, `xpathi`, `openredirect`, `nosqli`, `templatei`) and `SourceKind` (`user-input`, `external-input`). No psalm name survives the merge.
-- Enumerate with `PhpStubs.functions`, `classes`, `methods`, `constants`, `classConstants`, `properties`, `variables` (records) or `sinkFacts`, `sourceFacts`, `sanitizerFacts`, `flows`, `returns`, `throws` (facts); a match looser than exact is your filter over an enumeration.
-- The merge keeps the entry in force per (subject, condition, unit); manual sets outrank generated ones, later position wins among equal ranks, and a unit is replaced whole. Mount order: `models/`, `value-rules/`, `vocabulary/`, `taint/`, `taint-rules/`.
-- `PhpStubs.with(Path)` / `with("/classpath/root/")` mounts consumer sets after the bundled ones; a set without `provenance.yaml` is manual. The bundled lookup is unchanged.
-- Every bundled set also loads alone through `DocumentSetLoader.load(StubResources.opener(root), context, mapping)`; `StubResources.VOCABULARY` and `StubResources.PSALM_MAPPING` give the context and mapping the taint sets need.
-- Errors: `StubIndexNotFoundException` (absent manifest or document), `StubIndexInvalidException` (malformed set, generated-set rule, conditional signature, bundled set without provenance).
-
-- Call `PhpStubs.withLibraries("laravel/framework")` to select library sets; read `PhpStubs.libraries` for package metadata.
+- Use `PhpStubs` for the bundled lookup.
+- Use `with` to mount consumer Document Sets without changing the receiver.
+- Use `withLibraries` to select available Composer packages.
+- Use `matchingFunctions` or `matchingClasses` for canonical literal/gap name queries.
+- Match each Fact’s `condition` against the call arguments before applying it.
+- Never interpret an absent throws assertion as proof that a call throws nothing.
+- Never synthesize host-dependent constant values when `typedSignature.value` is absent.
 
 ## API Reference
 
-- [Stubs API](llms/stubs.md): `BuiltinLookup`, `PhpStubs`, `BuiltinRecord`, facts, `VulnType`, `SourceKind`, `StubResources`.
+- [Stubs API](llms/stubs.md): Typed lookups, records, Facts, configuration and errors.
+- [Module index](llms/index.md): Caller documentation navigation.
+# Stubs usage — caller documentation
+
+| File | Content |
+|------|---------|
+| [stubs.md](stubs.md) | Lookup, record and Fact APIs and configuration |
+| [full.txt](full.txt) | Concatenated entry and module pages |
 # Stubs API
 
-> One record per PHP builtin over the merged document sets.
+> Typed lookup over the mounted Document Sets.
 
 ## Quick Start
 
 ```kotlin
 import edu.jhu.cobra.externs.phpstubs.PhpStubs
-import edu.jhu.cobra.externs.phpstubs.VulnType
 import edu.jhu.cobra.externs.phpstubs.callableSignature
 
-val strlen = PhpStubs.function("strlen")                 // BuiltinRecord<FunctionSubject>?
-strlen?.extension                                        // "core"
-strlen?.callableSignature?.returnType                    // DeclaredType("int")
-strlen?.returns?.single()?.kind                          // ReturnKind.NUM
-val query = PhpStubs.method("mysqli::query")             // BuiltinRecord<MethodSubject>?
-query?.sinkFacts?.single()?.vulnType == VulnType.SQLI.id   // true
+val record = PhpStubs.function("strlen")
+println(record?.callableSignature?.returnType)
+println(record?.sinkFacts)
 ```
 
 ## API
 
-### BuiltinLookup (interface)
+### Construction
 
-**Exact lookup** (PHP spelling; `IllegalArgumentException` for a non-spelling; `null` when absent):
+- `PhpStubs` and its companion implement `BuiltinLookup`; the companion reads the bundled instance on first access.
+- `with(vararg roots: String): PhpStubs` mounts classpath roots after this instance’s sets; the receiver is unchanged.
+- `with(vararg dirs: Path): PhpStubs` mounts filesystem directories after this instance’s sets; the receiver is unchanged.
+- `libraries: List<LibrarySet>` lists available Composer package metadata; each row has `package: String`, `version: String`, `upstreams: List<String>` and `root: String`.
+- `withLibraries(vararg packages: String): PhpStubs` mounts selected generated Library Sets in the supplied order; unknown names raise `IllegalArgumentException`.
 
-**`function(name: String): BuiltinRecord<FunctionSubject>?`** -- Includes keyword constructs (`echo`, `isset`, ...; extension `keyword`).
+### Exact and pattern queries
 
-**`clazz(name: String): BuiltinRecord<ClassSubject>?`** -- Includes scalar types (`int`, `float`, ...; extension `scalar`), `exit` (`keyword`), `resource` (`legacy`). Alias lookup: [class lookup contract](../design-lookup.md#builtinlookup-interface).
+| Member | Return | Input |
+|--------|--------|-------|
+| `function(name: String)` | `BuiltinRecord<FunctionSubject>?` | PHP function spelling |
+| `clazz(name: String)` | `BuiltinRecord<ClassSubject>?` | Class spelling or a declared class alias |
+| `method(spelling: String)` | `BuiltinRecord<MethodSubject>?` | `Owner::name` |
+| `method(owner: String, name: String)` | `BuiltinRecord<MethodSubject>?` | Owner and member separately |
+| `constant(name: String)` | `BuiltinRecord<ConstantSubject>?` | Global constant spelling |
+| `classConstant(spelling: String)` | `BuiltinRecord<ClassConstantSubject>?` | `Owner::NAME` |
+| `classConstant(owner: String, name: String)` | `BuiltinRecord<ClassConstantSubject>?` | Owner and member separately |
+| `property(spelling: String)` | `BuiltinRecord<PropertySubject>?` | `Owner::$name` |
+| `property(owner: String, name: String)` | `BuiltinRecord<PropertySubject>?` | Owner and member separately |
+| `variable(name: String)` | `BuiltinRecord<VariableSubject>?` | `$name` |
+| `record(subject: ModelSubject)` | `BuiltinRecord<ModelSubject>?` | Declaration/operation subject; class-alias keys are not consulted |
+| `matchingFunctions(pattern: NamePattern)` | `Sequence<BuiltinRecord<FunctionSubject>>` | Canonical complete-name pattern |
+| `matchingClasses(pattern: NamePattern)` | `Sequence<BuiltinRecord<ClassSubject>>` | Canonical complete-name pattern, excluding alias keys |
 
-**`method(spelling: String)`**, **`method(owner: String, name: String): BuiltinRecord<MethodSubject>?`** -- `Owner::name`, or owner and name apart. Both halves fold.
+- Exact lookup returns null when absent and propagates the subject creator’s `IllegalArgumentException` on validation failure.
+- `NamePattern(parts: List<NamePattern.Part>)` accepts `Part.Literal(text: String)` and `Part.Gap`; callers supply PHP ASCII-folded literal text. Each gap accepts any string, including empty, independently.
+- `NamePattern.matches(canonicalName: String): Boolean` accepts only the complete spelling, with one optional leading root separator.
 
-**`constant(name: String): BuiltinRecord<ConstantSubject>?`** -- Global constants, case preserved.
+### Enumeration and records
 
-**`classConstant(spelling: String)`**, **`classConstant(owner: String, name: String): BuiltinRecord<ClassConstantSubject>?`** -- `Owner::NAME`; the name keeps its case.
+- `functions`, `classes`, `methods`, `constants`, `classConstants`, `properties`, `variables`: `Collection<BuiltinRecord<…>>`, each canonical record once in the mount order of its first entry.
+- `sinkFacts: List<SinkFact>`, `sourceFacts: List<SourceFact>`, `sanitizerFacts: List<SanitizerFact>`, `flows: List<FlowFact>`, `characters: List<CharactersFact>`, `returns: List<ReturnsFact>`, `throws: List<ThrowsFact>` enumerate Facts in record, Condition, unit and document order.
+- `vocabulary: Vocabulary` and `policy: TaintPolicy` expose the accumulated names and policy.
+- `BuiltinRecord<S : ModelSubject>` holds `subject: S`, `extension: String?`, `signature: SignatureInfo?`, and the seven Fact lists; `facts: List<Fact>` concatenates returns, flows, characters, sources, sinks, sanitizers and throws in that order.
+- `extension` is derived from the mount supplying the effective Signature, or null when that mount does not derive extension metadata.
+- `callableSignature`, `classSignature`, `typedSignature`, `propertySignature` are nullable typed extension properties for their applicable record kinds.
+- `BuiltinRecord` construction requires a Signature or at least one Fact and requires each Fact’s `owner` to equal `subject`; violations raise `IllegalArgumentException`.
 
-**`property(spelling: String)`**, **`property(owner: String, name: String): BuiltinRecord<PropertySubject>?`** -- `Owner::$name`.
+### Fact fields
 
-**`variable(name: String): BuiltinRecord<VariableSubject>?`** -- `$name`; the bundled sets state `$_GET`, `$_POST`, `$_COOKIE`, `$_REQUEST`, `$_SERVER`, ... as source-only records.
+- Each Fact has `owner: ModelSubject` and `condition: ArgPattern?`. A null `condition` is unconditional. Match a non-null Condition with `matches(actual: List<IPrimitiveVal?>): Boolean?`; a null matching result is undecidable and the caller chooses its applicable rule.
 
-**`record(subject: ModelSubject): BuiltinRecord<ModelSubject>?`** -- An already built declaration subject ([contract](../design-lookup.md#builtinlookup-interface)).
+| Type | Additional fields |
+|------|-------------------|
+| `SinkFact` | `port: Port.Sink`, `vulnType: VulnTypeId` |
+| `SourceFact` | `sourceKinds: Set<SourceKindId>`, `at: Port.Argument?`, `keys: List<KeyPattern>?` |
+| `SanitizerFact` | `vulnTypes: Set<VulnTypeId>`, `check: ArgumentCheck?` |
+| `FlowFact` | `from: Port.Input`, `to: Port` |
+| `CharactersFact` | `bound: CharacterBound` |
+| `ReturnsFact` | `kind: ReturnKind` |
+| `ThrowsFact` | `classes: Set<ClassSubject>` |
 
-**Enumeration** (records in Mount Order of each subject's first mounted entry; facts in record order, then condition, unit and document order):
+- `VulnType` enumerates `sqli`, `cmdi`, `codei`, `xss`, `headeri`, `ssrf`, `pathtrav`, `fileinc`, `deser`, `callablei`, `ldapi`, `xpathi`, `openredirect`, `nosqli`, `templatei`; `id: VulnTypeId` is its typed name.
+- `SourceKind` enumerates `user-input` and `external-input`; `id: SourceKindId` is its typed name.
+- A consumer-added name can be compared by its typed identifier without a library enum constant.
 
-**`functions`, `classes`, `methods`, `constants`, `classConstants`, `properties`, `variables`** -- `Collection<BuiltinRecord<…>>`, each record once ([enumeration contract](../design-lookup.md#builtinlookup-interface)).
+### Resource API and errors
 
-**`sinkFacts: List<SinkFact>`**, **`sourceFacts: List<SourceFact>`**, **`sanitizerFacts: List<SanitizerFact>`**, **`flows: List<FlowFact>`**, **`characters: List<CharactersFact>`**, **`returns: List<ReturnsFact>`**, **`throws: List<ThrowsFact>`**.
+- `StubResources.MODELS`, `VALUE_RULES`, `VOCABULARY`, `TAINT`, `TAINT_RULES` and `PSALM_MAPPING` name the bundled resources.
+- `StubResources.opener(root: String): ResourceOpener` opens a relative path under the classpath root and returns null for an absent resource.
+- `StubIndexNotFoundException` reports a missing manifest, listed document, catalog or mapping resource.
+- `StubIndexInvalidException` reports a malformed set/catalog, missing required provenance, generated-set violation, conditional Signature or colliding class-alias key; the cause retains format failure details.
 
-**`vocabulary: Vocabulary`**, **`policy: TaintPolicy`** -- Accumulated over every mounted set; `policy.isDangerous(sourceKind, vulnType)`.
+## Configuration
 
-### PhpStubs (class, companion = bundled lookup)
-
-**`PhpStubs.<any BuiltinLookup member>`** -- The bundled merge, built on first access and shared.
-
-**`with(vararg roots: String): PhpStubs`**, **`with(vararg dirs: Path): PhpStubs`** -- A new lookup mounting the consumer sets after this lookup's sets, in order; each decodes against the vocabulary accumulated so far; no `provenance.yaml` means manual. The receiver is unchanged. Also on the companion.
-
-**`libraries: List<LibrarySet>`** — Available Composer packages, described versions, upstreams and resource roots.
-
-**`withLibraries(vararg packages: String): PhpStubs`** — Mount generated package sets in order. Raises `IllegalArgumentException` for an unknown package.
-
-### BuiltinRecord<S : ModelSubject> (data class)
-
-**`subject: S`**, **`extension: String?`** (from the generated document's placement, `standard_3.yaml` -> `standard`; `null` when no generated set declares the subject), **`signature: SignatureInfo?`** (the signature of the unconditional entry in force), **`returns`, `flows`, `characters`, `sourceFacts`, `sinkFacts`, `sanitizerFacts`, `throws`** (every fact in force under every condition), **`facts`** (all seven in that order). Construction requires a signature or at least one fact, and every fact's `owner == subject`.
-
-Typed accessors (top-level extension properties, nullable):
-
-**`BuiltinRecord<FunctionSubject>.callableSignature`**, **`BuiltinRecord<MethodSubject>.callableSignature`** -- `CallableSignature(params, returnType)`.
-
-**`BuiltinRecord<ClassSubject>.classSignature`** -- `ClassSignature(classifier, parent, interfaces, name, aliases)`, field semantics: the format library's Class Signature (`commons-phpmodels/docs/model-declarations.md`).
-
-**`BuiltinRecord<ConstantSubject>.typedSignature`**, **`BuiltinRecord<ClassConstantSubject>.typedSignature`** -- `TypedSignature(type, value)`.
-
-**`BuiltinRecord<PropertySubject>.propertySignature`** -- `PropertySignature(type, visibility, static)`.
-
-### Fact (sealed interface)
-
-Every fact: **`owner: ModelSubject`**, **`condition: ArgPattern?`** (`null` for an unconditional entry; otherwise match it with `condition.matches(args)` -> `true`, `false`, or `null` for undecidable).
-
-**`SinkFact(port: Port.Argument, vulnType: VulnTypeId)`** | **`SourceFact(sourceKinds: Set<SourceKindId>, at: Port.Argument?, keys: List<KeyPattern>?)`** | **`SanitizerFact(vulnTypes: Set<VulnTypeId>, check: ArgumentCheck?)`** | **`FlowFact(from: Port.Input, to: Port)`** | **`CharactersFact(bound: CharacterBound)`** | **`ReturnsFact(kind: ReturnKind)`** | **`ThrowsFact(classes: Set<ClassSubject>)`**.
-
-### VulnType, SourceKind (enums)
-
-**`VulnType.SQLI.id`** ... -- `VulnTypeId` per canonical vulnerability type: `sqli`, `cmdi`, `codei`, `xss`, `headeri`, `ssrf`, `pathtrav`, `fileinc`, `deser`, `callablei`, `ldapi`, `xpathi`, `openredirect`, `nosqli`, `templatei`. **`SourceKind.USER_INPUT.id`**, **`SourceKind.EXTERNAL_INPUT.id`** -- `SourceKindId("user-input")`, `SourceKindId("external-input")`. A vulnerability type a consumer set adds has no constant.
-
-### StubResources (object)
-
-**`MODELS`** (`/models/`, generated set), **`VALUE_RULES`** (`/value-rules/`, manual value units), **`VOCABULARY`** (`/vocabulary/`, the canonical vocabulary and policy, manual), **`TAINT`** (`/taint/`, psalm's data in psalm's names, generated), **`TAINT_RULES`** (`/taint-rules/`, manual additions in psalm's names, adds `xpath` and `external`), **`PSALM_MAPPING`** (`/vocabulary/psalm-mapping.yaml`). Mount order is that listing. **`opener(root: String): ResourceOpener`** -- `root + path` on this module's classpath; trailing slash optional; `null` for an absent path.
-
-```kotlin
-val canonical = DocumentSetLoader.load(StubResources.opener(StubResources.VOCABULARY)).vocabulary
-val mapping = StubResources::class.java.getResourceAsStream(StubResources.PSALM_MAPPING)!!.use(VocabularyMappingLoader::load)
-val taint = DocumentSetLoader.load(StubResources.opener(StubResources.TAINT), canonical, mapping)
-val values = DocumentSetLoader.load(StubResources.opener(StubResources.VALUE_RULES))
-values.provenance?.verification                    // Verification.MANUAL
-```
-
-### Exceptions
-
-**`StubIndexNotFoundException`** -- `index.txt` or a listed document is absent; the message names the resource path.
-
-**`StubIndexInvalidException`** -- A set fails to decode (cause attached), a bundled set lacks `provenance.yaml`, a generated entry breaks a generated-set rule (variable subject, no signature, duplicate subject across documents), a conditional entry declares a signature, or a class alias collides with another class key.
-
-**`IllegalArgumentException`** -- A lookup name is not a PHP spelling of the kind; a `BuiltinRecord` is built empty or with a foreign fact.
+- Supply consumer roots holding `index.txt`; the listed documents follow the dependency-owned Document Set format. Without provenance a consumer set mounts as manual.
+- Select exact names from `PhpStubs.libraries`; selection does not infer an installed version from `composer.lock`.
+- Use `PhpStubs.withLibraries("laravel/framework")` for bundled package data and apply later manual corrections with the returned lookup’s `with` methods.
 
 ## Gotchas
 
-- Identity folding is commons-phpmodels': `MethodSubject("Exception", "getMessage")` equals `MethodSubject("exception", "getmessage")`; `ConstantSubject("TRUE")` and `ConstantSubject("true")` differ.
-- Canonical literal/gap matching is specified by [the query design](../design-lookup.md#namepattern-and-canonical-matches); exact accessors retain their whole-key behavior. Class-alias keys follow [the lookup model](../model-lookup.md#relations).
-- `strlen` and other value rules subjects carry the manual value unit (`returns: num`), not the generated one: manual outranks generated whatever the position.
-- `filter_var` is five conditional sanitizer facts (`[_, 257]` ... `[_, 520]`) and no unconditional one; `print_r` and `var_export` carry a `[_, true]` returns fact beside the unconditional one. Choose per your undecidable rule.
-- A value unit is `returns` plus the `flows` and `characters` of the same entry: filter both by equality with the chosen returns fact's `condition`.
-- `throws` of a generated function or method is computed from the php-src C sources: an empty `classes` set states the call throws none; no `ThrowsFact` (`assert`, `Generator::throw`, entries outside php-src) asserts nothing. A class thrown only through a function pointer is missing.
-- Constant values are strings on `typedSignature.value`; the consumer converts.
-- Generated documents are never hand-edited; a correction belongs in `value-rules/` or `taint-rules/`, or in a consumer set mounted through `with`.
-- Two lookups built from the same sets hold equal records, not the same instances.
+- Functions, classes and methods fold ASCII case. Global constants retain case except root `TRUE`, `FALSE`, `NULL`, whose case variants identify the same Matching Subject.
+- Declaration existence is `signature != null`; a Fact-only record does not prove a declaration exists.
+- A null `typedSignature.value` means the declaration supplies no concrete value; `PHP_INT_MAX` is such a constant.
+- `filter_var` has five conditional sanitizer Facts and no unconditional sanitizer Fact.
+- A Value unit couples `returns`, `flows` and `characters`; select them under the same Condition.
+- An empty `ThrowsFact.classes` asserts no throws within the format boundary; an absent ThrowsFact asserts nothing. The [indirect-call extraction gap](../design-extraction.md#open-gaps) remains uncorrected.

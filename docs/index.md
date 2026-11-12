@@ -1,31 +1,34 @@
-# Documentation Index
+# externs-phpstubs — PHP declarations and Facts
 
-| File | Topic |
-|------|-------|
-| [glossary/glossary.md](glossary/glossary.md) | Glossary — canonical vocabulary, set merge, facts and imported terms |
-| [concept.md](concept.md) | Problem, scope, concepts and data flow |
-| [concept-lookup.md](concept-lookup.md) | Canonical vocabulary, merge and builtin lookup |
-| [concept-extraction.md](concept-extraction.md) | Declarations, source extraction and throws |
-| [concept-taint.md](concept-taint.md) | Taint sources, extraction and translation |
-| [concept-taint-rules.md](concept-taint-rules.md) | Manual sink and source facts and vocabulary |
-| [concept-taint-libraries.md](concept-taint-libraries.md) | Selectable library declarations and taint Facts |
-| [concept-value-rules.md](concept-value-rules.md) | Manual value units and generated-set gaps |
-| [model-lookup.md](model-lookup.md) | Bundled sets, mounting, records and builtin lookup |
-| [design.md](design.md) | Resources, mount order, generated sets and errors |
-| [design-extraction.md](design-extraction.md) | Shared reader and hierarchy, signature and throws producers |
-| [design-extraction-handlers.md](design-extraction-handlers.md) | Handler extraction inputs, shared reader, preservation and failures |
-| [design-extraction-signatures.md](design-extraction-signatures.md) | Parameters, returns and one-opcode facts |
-| [design-lookup.md](design-lookup.md) | `BuiltinLookup`, `PhpStubs`, `BuiltinRecord`, fact types, canonical enums |
-| [design-merge.md](design-merge.md) | Mounting, failure classification and set merge |
-| [design-taint.md](design-taint.md) | Taint resource layout, extraction and validation |
-| [design-taint-rules.md](design-taint-rules.md) | Taint-rule resources, validation and maintenance |
-| [design-taint-libraries.md](design-taint-libraries.md) | Library catalog, importer, notices and rejected inputs |
-| [design-value-rules.md](design-value-rules.md) | Value-rule resources, validation and maintenance |
-| [spec-merge.md](spec-merge.md) | Set folding by subject, condition and unit |
-| [spec-throws.md](spec-throws.md) | Procedure summaries over the C sources |
-| [spec-extraction-handlers.md](spec-extraction-handlers.md) | Effective native tables and request-specific handler summaries |
-| [impl.md](impl.md) | APIs, source constraints, regeneration and integration |
-| [performance.md](performance.md) | Load-time and lookup benchmark procedure and baselines |
-| [llms.txt](llms.txt) | Agent-facing L0 index (llmstxt.org format) |
-| [llms/stubs.md](llms/stubs.md) | Builtin lookup, records, facts, enums and resources |
-| [llms/full.txt](llms/full.txt) | Agent-facing L2 concatenation of llms.txt and llms/stubs.md |
+| File | Content |
+|------|---------|
+| [concept.md](concept.md) | Responsibilities, inputs, outputs and scope |
+| [concept-lookup.md](concept-lookup.md) | Concept lookup |
+| [concept-extraction.md](concept-extraction.md) | Concept extraction |
+| [concept-taint.md](concept-taint.md) | Concept taint |
+| [concept-taint-rules.md](concept-taint-rules.md) | Concept taint rules |
+| [concept-value-rules.md](concept-value-rules.md) | Concept value rules |
+| [concept-taint-libraries.md](concept-taint-libraries.md) | Concept taint libraries |
+| [model-lookup.md](model-lookup.md) | Lookup records, relations, Conditions and invariants |
+| [design.md](design.md) | Resource ownership, mounts and errors |
+| [design-extraction-handlers.md](design-extraction-handlers.md) | Design extraction handlers |
+| [design-extraction-signatures.md](design-extraction-signatures.md) | Design extraction signatures |
+| [design-extraction.md](design-extraction.md) | Design extraction |
+| [design-gaps.md](design-gaps.md) | Design gaps |
+| [design-lookup.md](design-lookup.md) | Design lookup |
+| [design-merge.md](design-merge.md) | Design merge |
+| [design-taint-libraries.md](design-taint-libraries.md) | Design taint libraries |
+| [design-taint-rules.md](design-taint-rules.md) | Design taint rules |
+| [design-taint.md](design-taint.md) | Design taint |
+| [design-value-rules.md](design-value-rules.md) | Design value rules |
+| [spec-extraction-handlers.md](spec-extraction-handlers.md) | Spec extraction handlers |
+| [spec-extraction-signatures.md](spec-extraction-signatures.md) | Spec extraction signatures |
+| [spec-merge.md](spec-merge.md) | Spec merge |
+| [spec-taint-libraries.md](spec-taint-libraries.md) | Spec taint libraries |
+| [spec-throws.md](spec-throws.md) | Spec throws |
+| [impl.md](impl.md) | External APIs and developer instructions |
+| [glossary/index.md](glossary/index.md) | Owned and imported terminology |
+| [references.bib](references.bib) | Cited external sources and immutable identities |
+| [performance.md](performance.md) | Measurement method and resource bounds |
+| [llms.txt](llms.txt) | Caller documentation entry point |
+| [llms/index.md](llms/index.md) | Caller API and configuration |
