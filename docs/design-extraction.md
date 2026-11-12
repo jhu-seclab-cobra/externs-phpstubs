@@ -1,7 +1,7 @@
 # PHP Stubs — Extraction Design
 
 The offline producers that rewrite the generated set from
-php-src. Concepts: [concept-extraction.md](concept-extraction.md). Throws
+php-src [@php-src]. Concepts: [concept-extraction.md](concept-extraction.md). Throws
 algorithm: [spec-throws.md](spec-throws.md). Resource layout and generated-set
 rules: [design.md](design.md).
 
@@ -34,34 +34,18 @@ nothing.
 
 ### php_src (module)
 
-- **`source_files(root, suffixes)`** — every file of the checkout with
-  one of the suffixes, sorted, skipping any path with a part in
-  `SKIPPED_SOURCE_PARTS` (`tests`, `zend_test`, `dl_test`, `skeleton`).
-- **`resolve(name, namespace, imports)`** — PHP name resolution:
-  fully qualified, imported, or relative to the namespace; the spelling is
-  kept, and the caller folds where a subject is meant.
-- **`extension_of(source)`** — `ext/<dir>/…` → `<dir>`; `Zend/` → `core`;
-  `main/`, `sapi/` → `standard` (`EXTENSION_OF_DIRECTORY`, constant tier,
-  read off PHP reflection's extension of those declarations).
-- **`generated_documents(models)`** — every document except the
-  `HAND_DECLARED` directories (`language`, `manual`) and `provenance.yaml`.
-- **`document_extension(path)`** — the extension a document's placement
-  encodes: its file name, split suffix removed (PHP Extension,
-  [concept.md](concept.md)).
-- **`placement(models, extension)`** — the document a new entry of an
-  extension joins: the last generated document whose
-  `document_extension` equals the extension
-  (`standard` → `standard/standard_8.yaml`), else a new
-  `models/<extension>.yaml` opened with the generated header naming the
-  tool.
-- **`relocate(models, extensions, tool)`** — moves each generated entry
-  whose key `extensions` maps to an extension other than its document's
-  to `placement` of that extension, its text unchanged; a document left
-  without an entry is removed. Every php-src Declaration's entry thus
-  lives in the document of the extension php-src declares it in.
-- **`entries(text)`** — the entry spans of one document: from one
-  `- subject:` line to the next; a rewrite replaces lines inside one span
-  and leaves every other byte.
+| Function | Input | Output and behavior | Errors |
+|----------|-------|---------------------|--------|
+| `source_files(root, suffixes)` | Checkout root and suffix tuple | Sorted file paths excluding `tests`, `zend_test`, `dl_test`, `skeleton` | Filesystem errors propagate |
+| `resolve(name, namespace, imports)` | A PHP class spelling and namespace/import context | Resolved spelling, without case folding | No domain error |
+| `extension_of(source)` | php-src-relative path | `ext/<directory>` maps to that directory; `Zend` maps to core; `main`/`sapi` map to standard | `ExtractionFailure` for an unmapped top directory |
+| `generated_documents(models)` | Models root | Sorted YAML paths excluding `language`, `manual` and set documents | Filesystem errors propagate |
+| `document_extension(path)` | Document path | Filename stem with numeric split suffix removed | No domain error |
+| `placement(models, extension)` | Models root and extension name | Last generated path of that extension, or a destination path at the root; creates no file | Filesystem errors propagate |
+| `relocate(models, extensions, tool)` | Model root, subject-key/extension map, producer name | Moves entries to extension paths, removes empty documents, returns moved-entry count | I/O errors propagate |
+| `entries(text)` | One document’s text | List of entry spans from one subject header to the next | No domain error |
+
+`append` owns creation of a destination document and its generated header; `placement` only chooses the path. The declaration readers and writers remain shared by hierarchy, signature and throws extraction.
 
 ### extract_hierarchy.py
 
@@ -93,7 +77,7 @@ algorithm is in [Effective Handler Extraction](spec-extraction-handlers.md).
   tag selects the alias. The selected value must be a class spelling; one
   leading `\` is dropped and the rest is folded.
 - Class signature field definitions:
-  [commons-phpmodels declaration types](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/717fd5024ce1f8b2792b4ca4a952b58450db6706/docs/design-declarations.md#signatureinfo-sealed).
+  [commons-phpmodels declaration types](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/design-declarations.md#signatureinfo-sealed).
 - Conflicting source hierarchies, class names or class aliases, or
   incompatible declared final modifiers, fail. Registered flags establish finality independently of classifier;
   source-defined enum restrictions are not rewritten as a FINAL flag.
@@ -164,10 +148,20 @@ sorted tab-separated line per internal declaration the build reflects.
 | Unbalanced source | A C source holds a brace no brace closes |
 | Propagation without a port | Every propagation element of an entry names an argument position its php-src signature lacks |
 
+## Caller Examples
+
+```text
+python3 tools/extract_hierarchy.py --php-src /path/to/php-src --models /path/to/models-copy
+python3 tools/extract_signatures.py --php-src /path/to/php-src --models /path/to/models-copy
+python3 tools/extract_throws.py --php-src /path/to/php-src --models /path/to/models-copy
+```
+
+Read the rewritten model documents and extractor diagnostics after each command.
+
 ## Open Gaps
 
 - **Indirect calls.** The model asserts that a class outside an entry's
-  throws section is never thrown by it (commons-phpmodels `docs/model.md`,
+  throws section is never thrown by it ([commons-phpmodels model.md](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/model.md),
   Relations). `extract_throws.py` follows calls by name only; a call
   through a struct member or a function pointer (object handler tables,
   class entry hooks such as `get_iterator`, stream wrapper operations,

@@ -4,7 +4,7 @@ Computing the throws section of every implemented builtin from the php-src
 C sources. Concepts: [concept-extraction.md](concept-extraction.md)
 (Handler, Procedure Summary, Boundary Call). Tool structure and tables:
 [design-extraction.md](design-extraction.md). What a throws section
-asserts: commons-phpmodels `docs/model.md`.
+asserts: [commons-phpmodels model.md](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/model.md).
 
 ## Algorithm: Procedure Summary Fixpoint
 
@@ -112,9 +112,16 @@ call with unknown arguments, so a callback the body registers is entered.
 
 ### Complexity
 
-- Reading: O(S) over the source size S. Per component iteration:
-  O(c · t) over its calls c and the summary elements t per callee's
-  Procedure Summary. Iterations per component are bounded by the number of
-  distinct guarded summary elements, O(T · 2^P) for the summary elements T
-  and guard pairs P per summary; components are typically single
-  definitions, so the run is close to linear in the call graph.
+Reading is O(S) for source bytes S. If component c takes I_c iterations and one evaluation visits C_c calls with at most T_c summary elements per callee, summary transfer work is O(sum_c I_c C_c T_c), excluding expression-resolution work charged by the evaluator. Additional storage is O(S + G + H), with G the call graph representation size and H retained summary data. With P guard parameters there are at most 3^P consistent partial truth assignments for each unguarded summary element; this gives a finite termination domain, not a source-linear runtime claim.
+
+### Example
+
+```php
+<?php
+function numbers() { yield 1; }
+$iterator = numbers();
+foreach ($iterator as $number) {}
+iterator_to_array($iterator);
+```
+
+The finished generator raises `Exception` through an indirect native call that the current extractor does not follow. The exhaustive throws meaning stays unchanged; [the extraction gap](design-extraction.md#open-gaps) records the missing class and mechanism. This example does not establish a complete extracted assertion.

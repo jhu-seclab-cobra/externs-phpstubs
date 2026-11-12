@@ -23,8 +23,8 @@ types: [design-merge.md](design-merge.md). Fold algorithm:
   `SourceDecl`, `SanitizerDecl`, `ArgumentCheck`, `Propagation`, `CharacterClass`,
   `ReturnKind`, `Vocabulary`, `TaintPolicy`, `VulnTypeId`, `SourceKindId`, `Precedence`, `Verification`
 - **Relationships:** `PhpStubs` holds one `SetMerge`; `SetMerge` folds `Mount`s
-  (one per set, in Mount Order) into records; a `BuiltinRecord` owns its
-  `Fact`s; every `Fact` names its owner subject and its condition. The
+  (one per set, in mount order) into records; a `BuiltinRecord` owns its
+  `Fact`s; every `Fact` carries its owner Matching Subject and its condition. The
   companion holds the bundled `PhpStubs`; `with` builds a second one from
   the bundled mounts plus consumer set mounts. All arrows one-way into the
   format library.
@@ -35,7 +35,7 @@ types: [design-merge.md](design-merge.md). Fold algorithm:
 
 Package `edu.jhu.cobra.externs.phpstubs`, `explicitApi()`. commons-phpmodels
 stays an `api` dependency; commons-value is reached through it (`ArgPattern`
-holds `IPrimitiveVal`) and is not declared here.
+holds `IPrimitiveVal`) and is not declared directly; SnakeYAML is a direct implementation dependency for the library catalog.
 
 ## Class / Type Specifications
 
@@ -63,7 +63,7 @@ delegation, by its companion, so `PhpStubs.function("substr")` and
 | `sinkFacts`, `sourceFacts`, `sanitizerFacts`, `flows`, `returns`, `throws` | `List<…Fact>` | every fact of the kind over every record, load order |
 | `vocabulary` | `Vocabulary` | accumulated over every mounted set |
 | `policy` | `TaintPolicy` | accumulated over every mounted set |
-| `matchingFunctions(pattern)`, `matchingClasses(pattern)` | `Sequence<BuiltinRecord<…>>` | every canonical signed match through the [name query](#namepattern-and-canonical-matches) |
+| `matchingFunctions(pattern)`, `matchingClasses(pattern)` | `Sequence<BuiltinRecord<…>>` | every canonical record with an effective Signature through the [name query](#namepattern-and-canonical-matches) |
 
 A name that is not a PHP spelling of the kind is the format library's
 `IllegalArgumentException`; an absent subject is `null`. Pattern matching of canonical function/class declarations uses the query below; exact accessors do not interpret patterns.
@@ -79,7 +79,7 @@ holds its mounts (so `with` can extend them) and `SetMerge.of(mounts)`.
 
 **Companion:** `companion object : BuiltinLookup by bundled`, where
 `bundled` is a top-level private `PhpStubs` over the mounts a
-`MountSequence` builds in [design.md](design.md) Mount Order (the psalm
+`MountSequence` builds in [design.md](design.md) mount order (the psalm
 mapping read once from `StubResources.PSALM_MAPPING`). The constructor is
 internal, not private, because a top-level value cannot call a private
 constructor, and the companion cannot be referenced during its own
@@ -138,7 +138,7 @@ for an unconditional entry).
 **Responsibility:** Compile-time names for the Canonical Vocabulary so a
 consumer filters without spelling a string: `VulnType.SQLI.id` is
 `VulnTypeId("sqli")`; `SourceKind.USER_INPUT.id` is `SourceKindId("user-input")`.
-Twelve and two constants, each holding its `id`. A repository test asserts
+Fifteen and two constants, each holding its `id`. A repository test asserts
 the bundled vocabulary document declares exactly these names; a vulnerability
 type a consumer set adds has no enum constant and is compared by `VulnTypeId`.
 
@@ -176,3 +176,19 @@ already rejects a signature subtype that does not match the subject kind.
 - Two `PhpStubs` built from equal mount lists hold equal records.
 - No public type of this file holds a psalm name, a set root, or a
   precedence.
+
+## Exception / Error Types
+
+Lookup and construction errors are specified by [the resource design](design.md#exception--error-types).
+
+## Caller Examples
+
+```kotlin
+import edu.jhu.cobra.externs.phpstubs.PhpStubs
+import edu.jhu.cobra.externs.phpstubs.callableSignature
+
+val lookup = PhpStubs.withLibraries("laravel/framework")
+val record = lookup.method("Illuminate\\Database\\Query\\Builder::whereRaw")
+println(record?.callableSignature)
+println(record?.sinkFacts)
+```

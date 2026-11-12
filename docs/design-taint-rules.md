@@ -11,15 +11,14 @@ set: [design-taint.md](design-taint.md).
   `DocumentSet`, `VocabularyMapping`, `Vocabulary`
 - **Relationships:** `PhpStubs` mounts the set at position 4 under
   `PSALM_MAPPING` against the accumulated canonical vocabulary
-  ([design.md](design.md) Mount Order).
+  ([design.md](design.md) mount order).
 - **Exceptions:** none of its own.
 
 ## Class / Type Specifications
 
-### StubResources (object), addition
+Resource roots and opener API: [StubResources](design.md#stubresources-object).
 
-**State:** `const val TAINT_RULES = "/taint-rules/"` — value tier: constant, fixed by
-the resource layout. `MODELS`, `TAINT`, and `opener`: [design-taint.md](design-taint.md).
+Source assertions: [@argus-artifact; @modern-php-security].
 
 ## Resource Layout
 
@@ -27,7 +26,7 @@ the resource layout. `MODELS`, `TAINT`, and `opener`: [design-taint.md](design-t
 taint-rules/
 ├── index.txt          # build-generated manifest: sanitizers.yaml, sinks.yaml, sources.yaml
 ├── provenance.yaml    # producer externs-phpstubs review of the Argus sink lists, the PHP manual and the Synacktiv sec4dev 2020 slides; verification manual
-├── vocabulary.yaml    # additions only: kind `xpath`, source kind `external`
+├── vocabulary.yaml    # resource constants only: kind `xpath`, source kind `external`
 ├── policy.yaml        # input enables xpath; external enables every input kind and xpath
 ├── sinks.yaml         # Argus sink facts the format expresses, plus the constructor, document loader, schema-reading and stream-wrapper reader sinks; an entry for a psalm subject restates psalm's points and adds its own
 ├── sanitizers.yaml    # sanitizer facts psalm lacks: shell, html, sql, file, value-typing sanitizer facts for every kind; checks
@@ -40,14 +39,29 @@ conditional entry, a sinks entry (`SimpleXMLElement::__construct`, `when: [_, _,
 
 | Document | Subject kinds | Content |
 |----------|---------------|---------|
-| sinks.yaml | function, method, operation | one entry per subject with every kind it sinks, ports ascending, kinds in psalm order; receiver-triggered sinks omitted; the invocation operation consumes `callee`; a builtin that opens the path or URL in an argument carries the sink fact of what PHP does with it: `ssrf` is defined by the request PHP sends to the URL in the argument, whether or not the content returns to the caller; file builtins that can read a URL carry both `ssrf` and `file` on the read path, including metadata and digest readers regardless of whether raw bytes return (see Stream-Wrapper Readers); write-only builtins gain no request sink; the entries are constructors that fetch or read at construction (`finfo` `argument(1)` `file`, `SoapClient` `argument(0)` `ssrf`, `SimpleXMLElement` `argument(0)` `ssrf` and `file` when `dataIsURL` is `true`), document loaders, which parse the document and return its content, with `ssrf` and `file` on `argument(0)` (`simplexml_load_file`, `tidy_parse_file`, `tidy_repair_file`, `Dom\HTMLDocument::createFromFile`, `DOMDocument::load`, `DOMDocument::loadHTMLFile`, `XMLReader::fromUri`, `XMLReader::open`, `tidy::__construct`, `tidy::parseFile`, `tidy::repairFile`), and builtins that read a schema or WSDL, which return the content only as a validation result or an error text, with `ssrf` alone on `argument(0)` (`DOMDocument::schemaValidate`, `DOMDocument::relaxNGValidate`, `XMLReader::setSchema`, `XMLReader::setRelaxNGSchema`, `SoapServer::__construct`) |
+| sinks.yaml | function, method, operation | Argument sinks and the invocation selector, specified below |
 | sanitizers.yaml | function | one declaration per subject; a value-typing sanitizer fact (`intval`, `md5`, ...) names every kind; a check names `argument(0)` and `accepts: true` with the `types` of a type predicate (`is_int`, `is_scalar`, ...) or the `within` class of a character check (`ctype_digit`, `is_numeric`, ...) with the kinds its class cannot carry |
 | sources.yaml | variable, function, method | one declaration per subject producing `input` or `external` |
+
+## Sink declarations
+
+Each row below states the dangerous input consumed by the builtin. Receiver-triggered sinks are omitted because an argument port does not identify a receiver. The invocation operation consumes `callee`. Path/URL readers use `ssrf` when PHP sends a request to the supplied URL, independent of whether raw bytes return; write-only paths gain no request sink.
+
+| Builtins | Port | Kinds and condition |
+|----------|------|---------------------|
+| `finfo::__construct` | `argument(1)` | `file` |
+| `SoapClient::__construct` | `argument(0)` | `ssrf` |
+| `SimpleXMLElement::__construct` | `argument(0)` | `ssrf`, `file` when `dataIsURL` is true |
+| `simplexml_load_file`, `tidy_parse_file`, `tidy_repair_file` | `argument(0)` | `ssrf`, `file` |
+| `Dom\HTMLDocument::createFromFile`, `DOMDocument::load`, `DOMDocument::loadHTMLFile` | `argument(0)` | `ssrf`, `file` |
+| `XMLReader::fromUri`, `XMLReader::open`, `tidy::__construct`, `tidy::parseFile`, `tidy::repairFile` | `argument(0)` | `ssrf`, `file` |
+| `DOMDocument::schemaValidate`, `DOMDocument::relaxNGValidate` | `argument(0)` | `ssrf`; schema validation exposes content as validation/error output |
+| `XMLReader::setSchema`, `XMLReader::setRelaxNGSchema`, `SoapServer::__construct` | `argument(0)` | `ssrf`; schema/WSDL content is not returned as raw bytes |
 
 ## Stream-Wrapper Readers
 
 These file builtins read the path through stream wrappers. Their hand-maintained
-entries keep all existing sink points and add `ssrf` and `file` on the port below.
+entries contain `ssrf` and `file` on the port below, together with their other declared sink points.
 Kinds use the taint set's spelling; the mapping exposes `file` as `pathtrav`.
 
 | Builtins | Read port |
@@ -70,7 +84,7 @@ than a path and is outside this rule. `readfile` already carries both path sinks
 ## Validation Rules
 
 - The set decodes over the taint set's vocabulary with no mapping and
-  fails to decode alone: its vocabulary declares only the additions.
+  fails to decode alone: its vocabulary declares only the resource constants.
 - Every entry declares no signature and exactly one of
   the three taint sections.
 - No entry's section equals the taint set's section for the same subject
@@ -87,3 +101,7 @@ The set is edited by hand. A new sink is one entry with all of its kinds;
 a subject the taint set already sinks copies psalm's points before adding
 its own. A new kind or source kind is declared in `vocabulary.yaml` and enabled
 in `policy.yaml` before any document names it.
+
+## Exception / Error Types
+
+Set loading raises the errors specified in [the resource design](design.md#exception--error-types).

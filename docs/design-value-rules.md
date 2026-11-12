@@ -10,16 +10,12 @@ opener and the taint set: [design-taint.md](design-taint.md).
 - **External types (commons-phpmodels):** `DocumentSetLoader`,
   `DocumentSet`, `SetProvenance`, `Verification`
 - **Relationships:** `PhpStubs` mounts the set at position 1, unmapped
-  ([design.md](design.md) Mount Order).
+  ([design.md](design.md) mount order).
 - **Exceptions:** none of its own.
 
 ## Class / Type Specifications
 
-### StubResources (object), addition
-
-**State:** `const val VALUE_RULES = "/value-rules/"` — value tier: constant,
-fixed by the resource layout. `MODELS`, `TAINT`, `TAINT_RULES`, and `opener`:
-[design-taint.md](design-taint.md).
+Resource roots and opener API: [StubResources](design.md#stubresources-object).
 
 ## Resource Layout
 
@@ -60,7 +56,7 @@ directly above the entry it justifies.
   same subject.
 - A callback port names a parameter of the subject's merged signature whose
   type admits `callable`; what a callback port means is defined in
-  commons-phpmodels `docs/model.md` Port.
+  [commons-phpmodels model.md](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/model.md) Port.
 - The repository tests, not the consumer, prove the set decodes.
 
 ## Maintenance
@@ -70,5 +66,8 @@ declares, with the whole unit. A rule whose unit differs from the
 generated one, or that narrows the declared return type, is checked
 against the PHP manual and carries the reason as a comment; a rule the
 manual shows the generated entry already states correctly is not
-added. A subject the generated set lacks is an extraction task in `todo.md`,
-never a rule.
+added. A subject the generated set lacks is a missing declaration documented in [extraction gaps](design-extraction.md#open-gaps), never a Value unit rule.
+
+## Exception / Error Types
+
+Set loading raises the errors specified in [the resource design](design.md#exception--error-types).

@@ -5,7 +5,7 @@
 **Problem Statement**
 psalm's taint data misses sink Facts, sanitizer Facts, and source Facts
 that published PHP analyses treat as standard: the Argus sink lists
-from the Argus artifact, output builtins such as `echo`, callback-taking
+[@argus-artifact], output builtins such as `echo`, callback-taking
 builtins, LDAP and XPath queries, and data read from the environment,
 files, sockets, and stored records. This library states them as one more
 document set in the same format and the same names, so that the psalm

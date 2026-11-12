@@ -1,7 +1,7 @@
 # PHP Stubs — Taint Document Set Design
 
 The classpath roots, the opener consumers and the loader share, and the
-layout of the generated taint document set. Concepts:
+layout of the generated taint Document Set [@psalm5]. Concepts:
 [concept-taint.md](concept-taint.md). Resource roots and mount order: [design.md](design.md).
 
 ## Design Overview
@@ -24,26 +24,7 @@ Package `edu.jhu.cobra.externs.phpstubs`, public.
 
 ## Class / Type Specifications
 
-### StubResources (object)
-
-**Responsibility:** Names the bundled classpath roots and builds the one
-opener that reads under a root. The taint set has no entry type of its
-own here: `MountSequence` decodes it through the format library's set loader.
-
-**State:** `const val MODELS = "/models/"`, `const val TAINT = "/taint/"`,
-`const val TAINT_RULES = "/taint-rules/"`, `const val VALUE_RULES = "/value-rules/"`,
-`const val VOCABULARY = "/vocabulary/"`, `const val PSALM_MAPPING = "/vocabulary/psalm-mapping.yaml"`
-— value tier: constants, fixed by the resource layout. The hand-maintained sets:
-[design-taint-rules.md](design-taint-rules.md), [design-value-rules.md](design-value-rules.md).
-
-**Methods:**
-- `opener(root: String): ResourceOpener`
-  - **Behavior:** returns an opener that resolves `root + path` on the
-    classpath of this module; trailing slash on `root` optional.
-  - **Input:** a classpath directory.
-  - **Output:** an opener yielding a fresh stream per call, `null` when the
-    resource is absent.
-  - **Errors:** none.
+Resource roots and opener API: [StubResources](design.md#stubresources-object).
 
 ## Resource Layout
 
@@ -99,3 +80,7 @@ aborts the run. Output is deterministic: same input, identical bytes.
 - Consumers load with a mapping that lists every vulnerability type and source
   kind the set uses; an unlisted name is the format library's `VocabularyException`.
 - The repository tests, not the consumer, prove the set decodes.
+
+## Exception / Error Types
+
+Set loading raises the errors specified in [the resource design](design.md#exception--error-types).

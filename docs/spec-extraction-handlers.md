@@ -96,11 +96,10 @@ grow summaries monotonically per recursive component. Unsupported mandatory
 expressions fail instead of introducing unbounded paths or guessed results.
 
 **Complexity:** For S input bytes, W actual transfer and set-processing work,
-and R output items, time is O(S + W + R log R); space is the source/indexes,
-live guarded summary states, suspended instruction checkpoints and output.
+and R output items, time is O(S + W + R log R); space is O(S + H + K + R), with H retained guarded summary data and K live machine states and suspended instruction checkpoints.
 W includes instruction retries, fixpoint revisits and branch combinations,
 which may be exponential. This is offline generation, with no
-claimed source-linear bound or additional interpretation-phase traversal.
+claimed source-linear bound or additional interpretation-phase traversal. Budget ownership is specified in [the handler design](design-extraction-handlers.md#class--type-specifications).
 
 **Edge cases:** Whole standard-table copies, overwritten slots, explicit NULL,
 conditional compilation, shared allocators, inherited defaults, state-dependent

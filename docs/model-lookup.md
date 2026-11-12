@@ -44,8 +44,7 @@ format library's: [format model](https://github.com/jhu-seclab-cobra/commons-php
   compete; an entry with a different condition never competes.
 - **PHP extension** — The PHP extension a declaration belongs to, derived from
   the generated document's placement (`mysqli`, `standard`, `keyword`,
-  `scalar`, ...). A subject declared only by a non-generated set has no
-  PHP extension.
+  `scalar`, ...). A record’s PHP extension comes from the mount supplying its effective Signature; it is absent when that mount does not derive extension metadata.
 - **`BuiltinRecord`** — One subject the Set Merge holds any entry in force for:
   its PHP spelling, its PHP extension, its signature when an unconditional
   signature is in force, and its Facts. Existence condition: the

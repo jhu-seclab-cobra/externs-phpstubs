@@ -1,78 +1,52 @@
-# PHP Stubs Implementation Notes
+# PHP Stubs — External APIs and developer instructions
 
 ## APIs
 
-- **[commons-phpmodels]** (internal since 0.4.0; consumed through `DocumentSetLoader`) `ModelLoader.load(input: InputStream): List<ModelEntry>` — decodes one document; consumes and closes the stream; every format violation is `IllegalArgumentException` (message carries the reason, cause chain carries Jackson's location).
-- **[commons-phpmodels 0.4.0]** `ModelEntry(subject, condition: ArgPattern?, signature: SignatureInfo?, body: ModelBody)` is the one entry data class; generators and `WhenGuard` are gone. `ArgPattern.expected: List<IPrimitiveVal?>`, `positions`, `matches(actual: List<IPrimitiveVal?>): Boolean?`; `ArgPattern` is a data class, so it keys a `Map` by value (the `(subject, condition)` merge key).
-- **[commons-phpmodels 0.4.0]** `DocumentSetLoader.load(open, context, mapping)` and `VocabularyMappingLoader.load(InputStream)` are the public loaders; `VocabularyLoader`, `PolicyLoader`, `ModelLoader`, `ProvenanceLoader` are internal. A set's verification is read from `DocumentSet.provenance?.verification`, never from a separate loader call. `DocumentSet.documents: List<Document(path, entries)>` keeps the manifest order the extension derivation needs.
-- **[commons-phpmodels 0.11.0]** Names consumed here: `VulnTypeId`, `VulnTypeDecl`, `Vocabulary.requireVulnType`, `SinkDecl(port, vulnType)`, `SourceDecl(sourceKinds: Set<SourceKindId>, at, keys)`, `SanitizerDecl.vulnTypes`, `Vocabulary.sourceKinds`, `VocabularyMapping.vulnTypes` and `VocabularyMapping.sourceKinds`, `TaintPolicy.isDangerous(sourceKind, vulnType)`, `ModelBody.throws`. Each YAML key equals its field name: sink `vulnType`, sanitizer `vulnTypes`, source `sourceKinds`, vocabulary `vulnTypes` and `sourceKinds`, policy row `sourceKind`, mapping `vulnTypes` and `sourceKinds`, section `throws`.
-- **[kotlin]** `companion object : BuiltinLookup by bundled` delegates only the interface members; `with` is a class member, so the companion declares its own `with` forwarding to `bundled`. The delegate expression is evaluated when the companion initializes (first static access to `PhpStubs`), so `bundled` is a top-level `private val` of `PhpStubs.kt`, whose file class initializes on that first read. During that initialization the `Companion` static field is still null, so `bundled` must not touch any companion member, and a top-level value cannot call a private constructor: the constructor is `internal`. API constraint: a private constructor fails to compile, a companion reference from `bundled` throws `NullPointerException` at class init.
-- **[commons-phpmodels]** `FunctionSubject.parse(raw)` / `ClassSubject.parse(raw)` / `ConstantSubject.parse(raw)` — strip one leading `\` only, then fold per kind; `IllegalArgumentException` on blank, whitespace, `::`, `$`. No `/` handling — PHP has no such separator.
-- **[commons-phpmodels]** `MethodSubject(owner, name)` / `ClassConstantSubject(owner, name)` — direct constructors for a qualified lookup; `owner` folds, `name` folds for methods only.
-- **[commons-phpmodels]** `ModelSubject.name` is declared on the sealed interface since v0.1.2; identity fields are still read through the concrete subtypes here.
-- **[commons-phpmodels]** `SignatureInfo` subtypes: `CallableSignature(params, returnType, framelessArities: Set<Int>, specialArities: Set<Int>, ropeFormat: String?)` (the sets empty and `ropeFormat` null when absent; each count within the required..declared parameter count, frameless at most 3, special at least 2, `ropeFormat` a declared by-value non-variadic parameter; a method declares none), [ClassSignature](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/717fd5024ce1f8b2792b4ca4a952b58450db6706/docs/design-declarations.md#signatureinfo-sealed), `TypedSignature(type, value)`, `PropertySignature(type, visibility, static)`; `ParameterInfo(name, type, optional, byRef, variadic, namedExtras: NamedExtras? = null)`. `params`, `returnType` and the other subtypes keep their shape since v0.1.1, the three one-opcode facts are the later addition; `ClassSignature` is built through its companion factory since v0.1.2 — read only, never construct.
-- **[commons-phpmodels]** Entry-level validation since v0.1.2: arity against the parameter list unless the last parameter is variadic; by-ref write direction; `void` return with a return propagation; whitespace in identities; YAML aliases. v0.2.0 is the released HEAD, so a generated set that loads against the pin is proven against every rule.
-- **[commons-phpmodels 0.3.0]** `DocumentSet.provenance: SetProvenance?` — `producer: String`, `verification: Verification` (`GENERATED`, `MANUAL`), read from the set's `provenance.yaml`; null when the file is absent. `Precedence.DEFAULT` ranks `MANUAL` above `GENERATED`; the fold is the consumer's.
-- **[commons-phpmodels 0.5.0]** `ModelBody.throws: Set<ClassSubject>?` — `null` when the entry declares no throws section, the empty set for `throws: []`; each element decoded by the `ClassSubject` creator. Admitted on function and method entries only; the throws section is its own Override Unit and is not translated by a mapping. Declared types are kept as written (`?Throwable`, `int|string`), so a php-src type needs no simplification.
-- **[commons-phpmodels 0.6.1]** `ModelBody.characters: CharacterBound?` — `CharacterBound(of: Set<Port.Argument>?, within: CharacterClass?)`, at least one field declared; each `of` port is the from-port of a declared flow into `Port.Return`. Part of the value unit: it requires returns and is served by `valueUnit()`. `CharacterClass` rejects a pattern matching no byte; `contains(byte: Int)` reads the byte as one Latin-1 character and rejects a value outside 0..255. An argument's bytes are those of the strings the call converts it to.
-- **[commons-phpmodels 0.7.0]** `SanitizerDecl(vulnTypes: Set<VulnTypeId>, check: ArgumentCheck?)` — `ArgumentCheck(argument: Port.Argument, accepts: IPrimitiveVal, within: CharacterClass?, types: DeclaredType?)`; a check element states its vulnerability types, `within` class, or `types` set of the argument a call returning `accepts` accepted; `types` holds when and only when the argument's type is in the set. `ArgumentCheck.accepts` is read as a condition scalar; the checked port joins the arity check. A vocabulary mapping keeps a check element whose vulnerability types it discards while its class or type set remains.
-- **[php-src]** `extract_signatures.py` also reads the compiler source of the pinned php-src: `Zend/zend_compile.c` (`zend_try_compile_special_func_ex`, `find_frameless_function_info` and the compile functions it reaches) and `Zend/zend_string.h` (`ZSTR_KNOWN` names); a digest of each function fails the run when the compiler changes.
-- **[php-src]** `named_extras.read_policies` reads ordinary handlers through `php_src_c.Program` and the parsing macros of `Zend/zend_API.h`; it omits an unrecognized policy instead of treating variadicness as rejection. The parameter field and its YAML alternatives are defined by [NamedExtras](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/717fd5024ce1f8b2792b4ca4a952b58450db6706/docs/design-declarations.md#namedextras).
-- **[php-src]** Its transport machine consumes `zend_object_handlers.get_constructor`, `object_init_ex`, `zend_fiber_init_context`, `zend_fiber_resume_internal`, `zend_ini_long`, and the no-output-pointer form of `zend_ini_string_ex`. Source admission and binding are defined by [signature extraction](design-extraction-signatures.md). Standard C literal `strlen` and initial/non-local `setjmp`/`longjmp` have their native contracts when no source definition overrides them.
-- **[JDK]** `Class.getResourceAsStream(path)` — resolves `index.txt` and documents from the classpath; null when absent → `StubIndexNotFoundException`.
+- **[commons-phpmodels]** `DocumentSetLoader.load(open, context, mapping)` — public set loader; the result preserves manifest document order; `VocabularyMappingLoader.load(InputStream)` reads a total mapping.
+- **[commons-phpmodels]** `ModelEntry(subject, condition, signature, body)` — the single Model representation; `ArgPattern.matches(actual: List<IPrimitiveVal?>): Boolean?` returns null when undecidable and patterns have value equality.
+- **[commons-phpmodels]** `ModelSubject.name` — identity fields are read through concrete subject types; creators remove one leading `\` and apply the dependency’s [identity rules](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/model-declarations.md#subject-kinds).
+- **[commons-phpmodels]** `MethodSubject(owner, name)` and `ClassConstantSubject(owner, name)` — owner names fold ASCII case; method names fold, class-constant names retain case.
+- **[commons-phpmodels]** `SignatureInfo` — callable, class, typed and property shapes and their validation are defined by [declaration types](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/design-declarations.md#signatureinfo-sealed); declared unions are retained.
+- **[commons-phpmodels]** `DocumentSet.provenance?.verification` — GENERATED or MANUAL when provenance exists; `Precedence.DEFAULT.rank` is zero for MANUAL and one for GENERATED.
+- **[commons-phpmodels]** `ModelBody.throws` — absent means no assertion; the empty set asserts no exceptions within the format’s boundary; this library’s incompleteness remains in [extraction gaps](design-extraction.md#open-gaps).
+- **[commons-phpmodels]** `ModelBody.characters` and `valueUnit()` — the character bound belongs to the exhaustive Value unit; its definition and constraints are the [format model](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/model.md).
+- **[commons-phpmodels]** `ArgumentCheck(argument, accepts, within, types)` — binds a result test to an accepted argument; translation retains an explicit type/character check even when all its vulnerability names are discarded.
+- **[commons-phpmodels]** `DocumentSetException(path, detail, cause)` — a listed document load failure retains its path; an unlisted mapping name raises `VocabularyException` rather than being discarded.
+- **[Kotlin]** `companion object : BuiltinLookup by bundled` — delegation covers interface members; class construction helpers forward explicitly. The top-level bundled value must not access the companion during its initialization, and its constructor is internal.
+- **[JDK]** `Class.getResourceAsStream(path)` — an absent classpath resource returns null; the mount reader records absences to classify failures.
+- **[SnakeYAML]** `Yaml(SafeConstructor(LoaderOptions()))` — the library catalog reader rejects duplicate and unexpected fields through its typed decoder; Model decoding remains in commons-phpmodels.
 
 ## Libraries
 
-- com.github.jhu-seclab-cobra:commons-phpmodels:0.11.0 — model format, decoder, validation, condition match; `api` scope (its types are the record surface); commons-value 0.1.1 arrives transitively as its `api` dependency, so `ArgPattern` values are readable here without a direct declaration (the catalog alias `cobra-commons-value` is kept at 0.1.1 for the test that builds argument lists); alias `cobra-commons-phpmodels` in `gradle/libs.versions.toml`; resolved from JitPack (`https://jitpack.io`, artifact verified present) standalone, substituted by the enclosing composite build when one includes this repository.
-- Jackson stays transitive and hidden: commons-phpmodels declares it `implementation`; no YAML library is declared here.
+- `com.github.jhu-seclab-cobra:commons-phpmodels:56feb9d33a3cf8445eb74f01eb22279ed71f5674` — API dependency for Models, Signatures, Conditions and decoding; alias `cobra-commons-phpmodels` in `gradle/libs.versions.toml`.
+- `org.yaml:snakeyaml:2.7` — implementation dependency for catalog decoding; alias `snakeyaml`.
+- `com.github.jhu-seclab-cobra:commons-value` — transitive API dependency supplying Condition values; this module does not declare it directly.
 
-## Developer Instructions
+## Developer instructions
 
-- `index.txt` under `models/`, `taint/`, `taint-rules/`, `value-rules/` and `models-test/` is written by Gradle `processResources` / `processTestResources`; `vocabulary/index.txt` and every other test fixture directory keep a hand-written manifest.
-- Generated documents (`models/**` except `models/language/` and `models/manual/`) are never hand-edited; a correction belongs in `value-rules/`, `taint-rules/`, or a consumer set.
-- Handler source mapping and validation: [Effective Handler Extraction](spec-extraction-handlers.md); generated records are checked by the existing commons-phpmodels decoder, with no copied request whitelist.
-- Run `python3 -B -m unittest discover -s tools -p "test_*.py"`, then the three extractors with `--php-src <pinned-source-root> --models <isolated-models-copy>`, in hierarchy, signatures, throws order; repeat that sequence and require byte identity, unchanged source hashes and protected inputs, complete source-site dispositions, and strict decoding.
-- Run the composite `:commons-phpmodels:jhu-seclab-cobra-commons-phpmodels:test`, `:commons-phpmodels:jhu-seclab-cobra-commons-phpmodels:detekt`, `:externs-phpstubs:jhu-seclab-cobra-externs-phpstubs:test` and `:externs-phpstubs:jhu-seclab-cobra-externs-phpstubs:detekt` tasks to check model decoding, bundled handler facts and lint.
-- Generated documents carry no language-construct subject: the keyword document owns `echo`, `empty`, `eval`, `isset`, `print`, `unset`, and the loader's duplicate rule rejects a second declaration. The extraction pipeline excludes those names on its next run.
-- `shell_exec` is a `standard` function, not a language construct; the former hardcoded keyword set listed it and the keyword document does not.
-- Performance tests are excluded by default: `./gradlew test -Pperformance`.
-- The enclosing composite build is the integration check against a consumer; the standalone build (`./gradlew build` in this repository) is the check against the released commons-phpmodels tag.
-- Until the commons-phpmodels tag is published, the standalone build resolves the pin from the sibling checkout through an init script, run as `./gradlew -I <script> build`:
-  `gradle.settingsEvaluated { includeBuild("../commons-phpmodels") { dependencySubstitution { substitute(module("com.github.jhu-seclab-cobra:commons-phpmodels")).using(project(":jhu-seclab-cobra-commons-phpmodels")) } } }`.
-- The pin (v0.11.0) carries the one entry form, `ArgPattern`, the internal single-document loaders, the `(subject, condition)` duplicate rule, the throws section, the characters section, the value unit, and the sanitizers check; the standalone JitPack build exercises the same guarantees as the root composite once the tag is published.
-- Canonical vocabulary resources live under `src/main/resources/vocabulary/`; `provenance.yaml` names the producer `externs-phpstubs canonical vocabulary`.
+- Gradle resource tasks generate manifests for `models/`, `taint/`, `taint-rules/`, `value-rules/`, `models-test/` and selectable Library Set roots; set-level vocabulary, policy, provenance and mapping files are not model-manifest entries.
+- Edit manual rules; regenerate generated documents through their producer. `models/language/` and `models/manual/` remain hand-declared.
+- Run `python3 -B -m unittest discover -s tools -p "test_*.py"` for producer changes.
+- Run hierarchy, signature and throws extractors in that order with `--php-src <source-root> --models <isolated-models-copy>`; a second sequence must preserve byte identity, protected inputs and source hashes.
+- Verify complete source-site dispositions and strict decoding after regeneration; [handler extraction](spec-extraction-handlers.md) owns source mapping.
+- Run standalone `./gradlew build` against the catalog’s dependency pin; a composite build substitutes its checked-out dependencies and is a distinct integration check.
+- Run composite model/stubs test and detekt tasks when changing extraction or decoding; include the named-extra and one-opcode tests specified in [signature extraction design](design-extraction-signatures.md).
+- Run `./gradlew test -Pperformance` for tagged performance measurements; the default test task excludes them.
+- Run `python3 -I tools/import_library.py --upstreams <directory> --check` to compare regenerated library resources, notices and rejection data.
 
-## Design-Specific
+## Design-specific
 
-### PHP extension placement
+### Source extraction
 
-- Derived at load from the document file name: `standard_3.yaml` → `standard`; `language/keyword.yaml` → `keyword`. The model format carries no extension field.
-- Former synthetic extension spellings `Scalar` and `Core` (for class `exit`) become `scalar` and `keyword`, following the document names.
+- [Signature extraction](spec-extraction-signatures.md) owns compiler body admission, native argument reception, scalar defaults, frameless/special arities and named-extra policies.
+- [Handler design](design-extraction-handlers.md) owns shared C reading, lexical bindings, memory effects, continuation checkpoints and source-established call-context APIs.
+- `models/language/keyword.yaml` owns `echo`, `empty`, `eval`, `isset`, `print`, and `unset`; generated extraction excludes those subjects. `shell_exec` belongs to `standard`.
 
-### Subject name spelling
+### Taint and Value units
 
-- Subject names separate namespace parts with `\`; the subject creators treat `/` as an ordinary name character, so a consumer converts its own spelling before every facade lookup.
-
-### Variadic tails in generated data
-
-- The upstream tag data never stated variadic parameters; the generator marked the last parameter variadic when a declared flow index reached past the parameter list (`sprintf`, `array_merge`, `compact`). Without the mark, commons-phpmodels HEAD rejects the entry for arity.
-
-### Taint document set
-- Source release: vimeo/psalm 5.6.0 (`vendor/vimeo/psalm` of a dataset checkout; version from `vendor/composer/installed.json`). Psalm declares 15 taint kinds; the `ALL_INPUT` group enables 13 (not `user_secret`, `system_secret`).
-- Psalm's sources are code, not data: only `$_GET`, `$_POST`, `$_COOKIE`, `$_REQUEST` are tainted (`VariableFetchAnalyzer::taintVariable`); `$_SERVER` and `$_FILES` are not. `@psalm-taint-source input` appears on `Throwable`, `Exception`, and `Error` `getTraceAsString`/`__toString` only.
-- `@psalm-taint-specialize` has no model counterpart and is dropped. The five conditional sanitizer facts on `filter_var` become conditional entries `when: [_, 257]` … `[_, 520]`.
-- Method subjects in the set (`mysqli::query`, `mysqli_stmt::prepare`, ...) are psalm's data verbatim, not a projection onto the generated set; a subject the generated set lacks is merged all the same.
-- **[taint rules set]** Sinks follow `sinks.json` of the Argus artifact (411 sinks, 12 vulnerability types); `SinkPoint` accepts argument ports only, so the receiver-triggered deserialization getters (Phar, SplFileInfo, DirectoryIterator families) are omitted. The set also leaves out the Argus points PHP 8.5.11 contradicts: `unserialize` on file functions, and `eval` on `preg_replace`, `assert`, `mb_ereg_replace` and `mb_eregi_replace`. `TaintPolicy` unions rows sharing a source kind, so the set's `input → [xpath]` row extends psalm's row at load.
-- **[commons-phpmodels 0.2.1]** `DocumentSetException(path, detail, cause?)` now wraps a malformed listed document; `VocabularyException` names the document on an undeclared reference. `MountSequence` maps absence to `StubIndexNotFoundException` by recording which path the opener could not resolve.
-
-### Set provenance
-
-- Every shipped set carries `provenance.yaml`; the index task lists no set-level document (`vocabulary.yaml`, `policy.yaml`, `provenance.yaml`). `models/` and `taint/` are `generated`; `taint-rules/` and `value-rules/` are `manual`.
-
-### Value rules set
-
-- The generated units of `crypt` (the salt is a prefix of the hash), `str_word_count` (array or int by format), and `setlocale` (echoes the locale set) need no value-rule override; a retained override carries its reason comment.
-- Corrected against the manual: `parse_str` and `header` return void (the flow into the result is removed; `parse_str` writes its by-reference result argument), `echo` has no result, `print` always returns 1, `mysqli_multi_query`, `mysqli_real_query`, `proc_nice`, `proc_terminate`, `register_tick_function` return bool, `proc_close` returns int.
-- Generated-set gaps hand-declared under `models/manual/`: `hebrevc`, `convert_cyr_string`, `money_format`, `each`, `mysql_query`, `create_function` (removed before php-src 8.5.11). Their reviewed unit is the declaration's signature and propagation; `create_function` declares no propagation because the format rejects an empty flow set.
-- php-src 8.5.11 declares the former manual entries `str_decrement`, `str_increment`, `mysqli::query`, `mysqli::multi_query`, `mysqli::real_query`, `PDO::query`, `PDO::exec`, `SQLite3::query`, `SQLite3::exec`, `Exception::__construct`, `Error::__construct`, and `Error::getMessage`, so the signature extraction generates them and a manual entry would duplicate a generated subject. Each reviewed flow moved to the value rules set with the result kind of the PHP manual: query methods `any`, `mysqli::multi_query`, `mysqli::real_query`, `SQLite3::exec` `bool`, `str_decrement` and `str_increment` `str` (argument into result), `Error::getMessage` `str` (receiver into result), the constructors the message argument into the receiver.
-- The set ships 172 entries in fifteen documents.
+- The generated taint input declares Psalm’s own kinds and its input policy; the manual taint set supplies its explicit vocabulary additions and assertions. Translation and resource ownership are specified in [taint design](design-taint.md) and [manual taint design](design-taint-rules.md).
+- `filter_var` has five conditional sanitizer Facts and no unconditional one; a Condition is matched by the caller, never by the record.
+- Receiver-triggered metadata deserialization is excluded from argument-port sink data; the resource header and [rationale](concept-taint-rules.md#rationale-and-rejected-alternatives) retain the reason.
+- Removed language functions declared manually are `hebrevc`, `convert_cyr_string`, `money_format`, `each`, `mysql_query` and `create_function`; `create_function` declares no propagation when the format cannot state an empty set.
+- A reviewed Value unit replaces the generated unit whole. Layout and subject/shape checks are specified in [value rules](design-value-rules.md).
+- PHP extension derivation and platform-dependent constants are specified in [resource design](design.md); callers do not synthesize a constant value from the host running the analyzer.

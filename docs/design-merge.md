@@ -5,7 +5,7 @@ Software structure of the mount and merge machinery behind
 threads the vocabulary and classifies failures, and how `SetMerge` folds the
 mounts into records. Every type here is internal; the public surface is
 [design-lookup.md](design-lookup.md). Fold algorithm:
-[spec-merge.md](spec-merge.md). Mount Order and generated-set rules:
+[spec-merge.md](spec-merge.md). mount order and generated-set rules:
 [design.md](design.md).
 
 ## Design Overview
@@ -29,11 +29,10 @@ mounts into records. Every type here is internal; the public surface is
 
 ### Mount (internal data class)
 
-**Responsibility:** One set as mounted: its position in Mount Order, its
+**Responsibility:** One set as mounted: its position in mount order, its
 verification, the vocabulary and policy rows it declares, and its entries,
 each paired with the extension its document path yields (`.yaml` removed,
-trailing `_<digits>` removed) for the generated set and `null` for every
-other set.
+trailing `_<digits>` removed) for every mount validated as generated and `null` for other mounts.
 
 **State/Fields:** `position: Int`, `verification: Verification`,
 `vocabulary: Vocabulary`, `policy: List<PolicyRow>`,
@@ -56,36 +55,23 @@ returned `null` for is `StubIndexNotFoundException`; any other is
 **Responsibility:** The fold of [spec-merge.md](spec-merge.md) and the
 records built from its result. Built once per set sequence, immutable.
 
-**State/Fields:** `vocabulary`, `policy`, one `LinkedHashMap<Subject, BuiltinRecord>`
-per declaration kind in Mount Order of each subject's first mounted entry,
+**State/Fields:** `vocabulary`, `policy`, one insertion-ordered map from a concrete `ModelSubject` subtype to its `BuiltinRecord` per declaration kind in mount order of each subject's first mounted entry,
 whatever its rank, and the seven fact lists in record order. The class map
 also holds the alias keys that the alias-key step of
 [spec-merge.md](spec-merge.md#steps) adds.
 
-**Construction (`SetMerge.of(mounts: List<Mount>)`):** for each mount in
-position order and each entry: key = (subject, condition); per unit the
-entry declares, the entry in force is replaced when the new entry's
-verification ranks at least equal under `Precedence.DEFAULT` (equal rank,
-later position wins; lower rank never replaces). The extension of a record
-is the extension of the entry in force for its signature unit. A
-conditional entry declaring a signature is `StubIndexInvalidException`.
-Each final function/class record with an effective signature is inserted into its kind's ordinary canonical-name trie before aliases are expanded. Terminals reference that record; exact maps remain separate. `SetMerge.of` completes record construction with the alias-key step of
-[spec-merge.md](spec-merge.md#steps).
-
-**Record assembly:** per subject, the signature is that of the unconditional
-entry in force for the signature unit, or `null`; the facts are every
-element of every entry in force under every condition of that subject, each
-tagged with its condition. Within a subject, facts follow conditions in
-Mount Order of their first entry, then Override Unit order, then document
-order.
+**Construction:** `SetMerge.of(mounts: List<Mount>, precedence: Precedence = Precedence.DEFAULT)` returns the immutable merge. Conditional Signatures raise `StubIndexInvalidException`; alias collisions raise the same error. Record assembly, ordering and alias keys implement [Set Merge](spec-merge.md); canonical tries are populated only from final records with an effective Signature.
 
 ## Validation Rules
 
 - Every mount's position equals its index in the sequence.
 - A bundled set without `provenance.yaml` never mounts; a consumer set
   without one mounts as `MANUAL`.
-- The generated-set rules and PHP extension derivation apply to exactly the mount
-  flagged as the generated set.
+- The generated-set rules and PHP extension derivation apply independently to every mount flagged generated, including selected Library Sets.
 - `SetMerge.records` holds every declaration subject any mount states, and
   each subject appears in exactly one kind map; class-map key relations
   follow [model-lookup.md](model-lookup.md#relations).
+
+## Exception / Error Types
+
+`MountSequence` classifies load failures as [resource errors](design.md#exception--error-types); `SetMerge.of` propagates those errors.

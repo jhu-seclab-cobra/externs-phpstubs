@@ -2,7 +2,7 @@
 
 The handler concern of [Hierarchy Extraction](design-extraction.md).
 Algorithm: [Effective Handler Extraction](spec-extraction-handlers.md).
-Format: [handler types](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/717fd5024ce1f8b2792b4ca4a952b58450db6706/docs/design-declarations-handlers.md).
+Format: [handler types](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/design-declarations-handlers.md).
 
 ## Design Overview
 
@@ -16,8 +16,7 @@ Format: [handler types](https://github.com/jhu-seclab-cobra/commons-phpmodels/bl
   and `handler_render` (write-site dispositions, table alternatives, the
   rendered field), and `handler_facts` (the driver).
 - **Relationships:** tools import the shared `php_src` surface, which imports
-  no producer. The C source/macro/definition/registration reader moves from
-  `extract_throws` to `php_src_c`; it is not copied. The handler modules extend
+  no producer. The shared C source/macro/definition/registration reader is `php_src_c`. The handler modules extend
   the existing procedure-summary mechanism for this extraction concern, and
   only `handler_facts` and `extract_hierarchy` are entry points of other tools.
 - **Dependency roles:** shared source identity, parsing and registrations belong
@@ -35,14 +34,18 @@ Format: [handler types](https://github.com/jhu-seclab-cobra/commons-phpmodels/bl
 - Each definition retains its enclosing conditional-compilation provenance.
   A handler target summarizes every matching definition; all of their normal
   exits contribute, and an incomplete alternative leaves the request unknown.
-- `Compiler` retains each declaration as a distinct `Local` and each
+
+### Lexical bindings
+
+`Compiler` retains each declaration as a distinct `Local` and each
   instruction's visible bindings and enclosing block scopes in `Instruction`.
   A declarator becomes visible before its initializer; earlier references use
   the binding visible at their source position. Blocks and for scopes retain
   hidden ancestors and end their locals' lifetime on every outgoing path,
   including break, continue and goto. Jumping past an initializer leaves that
   declaration unread, rather than selecting an enclosing homonym.
-  Conditional-compilation alternatives start with the same enclosing visibility.
+
+Conditional-compilation alternatives start with the same enclosing visibility.
   Equal `Local` bindings omit their configuration only when the compiler proves
   identical configuration-independent branch effects: matching parsed statements
   without input reads, calls, indirect memory access, nested source groups or unread code.
@@ -50,22 +53,27 @@ Format: [handler types](https://github.com/jhu-seclab-cobra/commons-phpmodels/bl
   one `Local`, preserving initialized-value correlation through later reads and
   retries. A non-exhaustive group includes its enclosing alternative in this
   comparison. The configuration rules belong to
-  [signature extraction](design-extraction-signatures.md).
-  `Configuration` stores the source choice in a region of its owning scope.
+  [signature extraction](spec-extraction-signatures.md).
+
+`Configuration` stores the source choice in a region of its owning scope.
   The state carries that choice through subsequent instructions and checkpoints;
   an alternative choice is narrowed in the same region before the instruction
   runs. Declarations of the same name in the same block share that block's binding.
   Instructions resolve only the conditional bindings their expressions reference,
   including sizeof operands and nested statement expressions. A group whose
   bindings are never referenced after it retains no configuration region.
-  `Frame` selects these bindings over its parameters or enclosing statement
+
+`Frame` selects these bindings over its parameters or enclosing statement
   expression's bindings, using the existing regions, arrays and type lookup.
   Leaving a scope drops its local regions; assignments through surviving
   aliases and aggregate copies retain their own identities. A return reads
   its value before releasing locals. Statement expressions restore the enclosing
   bindings on normal and interrupted exits. Instruction checkpoints include
   those same bindings and created regions; no producer owns another name map.
-- Handler summaries extend the existing summary mechanism with the finite
+
+### Shared summaries
+
+Handler summaries use the existing summary mechanism with the finite
   data named by the extraction specification; they are offline working data,
   never a second runtime handler store. `php_src_c.definitions.ProcedureSummaries`
   owns the callee-first SCC iteration and completed-result table for both
@@ -73,22 +81,29 @@ Format: [handler types](https://github.com/jhu-seclab-cobra/commons-phpmodels/bl
   compare by type name. The throws evaluator supplies its existing domain; the handler
   evaluator supplies guarded return/memory-effect alternatives. `Summarizer`
   classifies request exits and has no separate summary cache.
-  New direct-call inputs use the shared driver's explicit continuation stack.
-  The caller suspends at its current instruction while a new callee settles;
+
+Direct-call inputs use the shared driver's explicit continuation stack.
+  The caller suspends at its current instruction while a callee completes;
   retry restores that instruction's state and lexical bindings, without
-  rerunning completed instructions. An acyclic input with settled callees is
+  rerunning completed instructions. An acyclic input with completed callees is
   completed immediately; recursive inputs retain the current outcome set
   until component iteration stabilizes. A permanently incomplete
   outcome releases its dependencies, and unfinished unreachable inputs are
   discarded rather than cached as completed results.
-- Handler procedure inputs retain globals and the memory reachable from their
+
+### Summary inputs and effects
+
+Handler procedure inputs retain globals and the memory reachable from their
   arguments. Reachable local and allocated regions are renamed by argument
   position, preserving aliases. Effects are renamed back onto the current
   caller; unrelated caller locals are never read from a cached summary.
   Sizes and aggregate values have value identity. Conditional aggregate
   copies join each member with its source guards. Unknown calls invalidate
   canonical argument locations just as they invalidate caller locations.
-- The machine bounds its working states without dropping an outcome. States
+
+### Working-state bounds
+
+The machine bounds its working states without dropping an outcome. States
   that reach one join point with the same event history, pending exception and
   lexical configuration are joined into one whose differing cells are alternatives; outcomes of one
   expression whose states are equal become one outcome whose value is the
@@ -104,9 +119,8 @@ Format: [handler types](https://github.com/jhu-seclab-cobra/commons-phpmodels/bl
 
 ## Function Specifications
 
-- `read_handler_tables(program, declarations)` — produces table groups through
-  the extraction specification, preserving every admitted unknown alternative.
-- `Entry.with_signature(block, owned_fields)` — replaces only the explicitly
+- `read_handler_tables(program, declarations)` — reads the shared C program and class declarations, returns the per-class effective table data under [the extraction specification](spec-extraction-handlers.md), and propagates `ExtractionFailure` for mandatory unread source.
+- `Entry.with_signature(block, owned_fields)` — takes a complete rendered Signature block and owned field names, returns rewritten entry text, and raises `ValueError` for a supplied field outside that set. It replaces only the explicitly
   owned keys and inserts a missing signature; preserves every unowned field
   and every other entry byte, including comments, nested values and EOF.
   Signature-level comments and blank lines between fields are unowned spans;

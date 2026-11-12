@@ -1,7 +1,7 @@
 # PHP Stubs — Design
 
 The data side of the library: the resource roots, the five bundled sets and
-their fixed Mount Order, the generated-set rules, and the
+their fixed mount order, the generated-set rules, and the
 error types. The lookup surface — merge, records, facts, `PhpStubs` — is in
 [design-lookup.md](design-lookup.md). Concepts: [concept.md](concept.md),
 [concept-lookup.md](concept-lookup.md). Domain semantics:
@@ -14,11 +14,11 @@ error types. The lookup surface — merge, records, facts, `PhpStubs` — is in
   the php-src producers ([design-extraction.md](design-extraction.md))
 - **External types (commons-phpmodels):** `DocumentSetLoader`,
   `DocumentSet`, `Document`, `ResourceOpener`, `VocabularyMappingLoader`,
-  `VocabularyMapping`, `ModelEntry`, `ModelSubject` and its seven subtypes,
+  `VocabularyMapping`, `ModelEntry`, `ModelSubject` and its eight subtypes,
   `ArgPattern`, `SignatureInfo` and its four subtypes, `Vocabulary`,
   `TaintPolicy`, `Precedence`, `Verification`
 - **Relationships:** `StubResources` names the roots and opens them;
-  `PhpStubs` mounts the bundled roots in Mount Order through
+  `PhpStubs` mounts the bundled roots in mount order through
   `DocumentSetLoader` (the psalm mapping decoded once by
   `VocabularyMappingLoader` and applied to the two psalm-named sets) and
   folds them in `SetMerge`. One-way: facade → `SetMerge` → format library.
@@ -30,8 +30,7 @@ error types. The lookup surface — merge, records, facts, `PhpStubs` — is in
 
 Package `edu.jhu.cobra.externs.phpstubs`, one module, `explicitApi()`.
 commons-phpmodels is an `api` dependency: its subject, signature, section,
-and condition types are the record surface. No YAML library is a direct
-dependency.
+and condition types are the record surface. SnakeYAML is a direct implementation dependency for the library catalog; commons-phpmodels owns Model decoding.
 
 ## Class / Type Specifications
 
@@ -51,7 +50,7 @@ this repository's build.
   `Class.getResourceAsStream`; returns `null` for an absent resource.
   `MountSequence` records absences to raise `StubIndexNotFoundException`.
 
-### Mount Order (private `bundledMounts()` of `PhpStubs.kt`)
+### mount order (private `bundledMounts()` of `PhpStubs.kt`)
 
 The bundled mounts, in this order, each with its mapping:
 
@@ -74,7 +73,7 @@ packaging fault, not a default.
 - Every entry declares a `signature` and no condition.
 - No two documents declare the same subject; the message names both.
 
-Constant subjects fold nothing, so `TRUE` and `true` are distinct entries.
+Constant names retain case except the root keyword constants `TRUE`, `FALSE`, and `NULL`, whose ASCII case variants identify one Matching Subject; [the dependency owns this identity rule](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/model-declarations.md#subject-kinds).
 The extension of each generated entry is data tier: derived from the
 document's placement, never a constant in code.
 
@@ -101,7 +100,7 @@ models/
 vocabulary/
 ├── index.txt              # comment only: the set ships no model document
 ├── provenance.yaml        # producer externs-phpstubs canonical vocabulary; verification manual
-├── vocabulary.yaml        # twelve vulnerability types, two source kinds, with descriptions
+├── vocabulary.yaml        # fifteen vulnerability types, two source kinds, with descriptions
 ├── policy.yaml            # both source kinds enable every vulnerability type
 └── psalm-mapping.yaml     # psalm kinds → canonical names; has_quotes, cookie, user_secret, system_secret → ignore
 ```
@@ -157,8 +156,7 @@ extension-set error surfaces from the `with` call that mounts it.
   and is not repeated here.
 - The generated-set rules run over the generated set before the fold; a violation
   fails the whole load.
-- Duplicate detection compares subjects, so `Exception` and `exception`
-  collide (folded kind) while `TRUE` and `true` do not (sensitive kind).
+- Duplicate detection compares subjects, so `Exception` and `exception` collide; root keyword constants follow the dependency-owned identity exception above.
 - `index.txt` lists relative document paths, one per line, sorted; blank
   lines and `#` comments are skipped; a path listed twice fails the load
   (commons-phpmodels rule).
@@ -168,28 +166,4 @@ extension-set error surfaces from the `with` call that mounts it.
 
 ## Open Gaps
 
-- `E_ALL`, `T_ABSTRACT`, `T_STRING`, `T_VARIABLE`, `T_LNUMBER`, `T_DNUMBER`,
-  `FILTER_VALIDATE_MAC` and `OPENSSL_ALGO_MD5` are declared with values that
-  differ from PHP 8.5.12 (`E_ALL` 32767 against 30719, `FILTER_VALIDATE_MAC`
-  281 against 276, `OPENSSL_ALGO_MD5` 4 against 2); the cause (PHP version or
-  declaration error) is not established.
-- The models declare 242 of the 3025 constants PHP 8.5.12 defines (extension constants such as `FILEINFO_*`,
-  `LIBXML_*` and `SOAP_*` among the missing ones; `CURLOPT_URL`, `SEEK_SET` and `LOCK_EX` are declared). A call
-  with an undeclared constant as an argument is reported by no sink, so `new finfo(FILEINFO_NONE, $_GET['m'])` and
-  `new SimpleXMLElement($_GET['u'], LIBXML_NOENT, true)` report nothing while the same calls with the literal flag
-  report their constructor sink.
-- Builtins that send a request for the URL in an argument on PHP 8.5.12 and carry no `ssrf` in `sinks.yaml`, so a
-  program passing a request value to them reports nothing: `Dom\XMLDocument::createFromFile`,
-  `Dom\Document::schemaValidate` and `Dom\Document::relaxNgValidate` (the PHP manual documents no method of
-  `Dom\Document` or `Dom\XMLDocument`, so the second source is missing). Not run, because the extension
-  is absent or the call needs a service:
-  `yaml_parse_file`, `yaml_parse_url`, `ldap_connect`, the `http_*` and `swoole` request functions and the other
-  builtins of `models/` whose `filename`, `uri` or `url` parameter reads or fetches.
-- `PHP_FLOAT_INF`, `PHP_FLOAT_NAN`, `ARRAY_UNIQUE_REGULAR` and the
-  `PDO_FETCH_*` constants are declared, but PHP 8.5.12 defines none of them.
-- The constant entries of `core.yaml` come from `tools/convert_stubs.py` over
-  phpstorm-stubs, a tool this repository no longer holds (the three php-src
-  tools write no constant), so the 24 value-less constants were removed from
-  `core.yaml` by hand and a regeneration with that tool would write them back.
-  The producer has no exclusion of the subjects `manual/core.yaml` declares;
-  the load failure and the test named above are the only guard.
+[Resource and extraction coverage gaps](design-gaps.md) preserve the known constant, endpoint and producer limitations.
