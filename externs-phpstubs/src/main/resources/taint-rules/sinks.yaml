@@ -12,6 +12,8 @@
 # Builtins that read a schema or WSDL (DOMDocument::schemaValidate and relaxNGValidate, XMLReader::setSchema and
 # setRelaxNGSchema, SoapServer::__construct) send the request for the URL in argument 0 but return the content only as a
 # validation result or an error text; they carry ssrf alone.
+# File readers that accept a URL through stream wrappers carry both ssrf and file on the read path, including
+# metadata and digest readers; this does not depend on whether raw bytes return. Existing sink points are retained.
 # Receiver-triggered sinks (methods with no path argument) are not expressible and are omitted.
 # The set leaves out the Argus points PHP 8.5.11 contradicts: unserialize on file functions (phar metadata
 # is read lazily) and eval on preg_replace, assert, mb_ereg_replace and mb_eregi_replace.
@@ -43,6 +45,8 @@
 - subject:
     function: bzopen
   sinks:
+    - port: argument(0)
+      vulnType: ssrf
     - port: argument(0)
       vulnType: file
 - subject:
@@ -87,6 +91,15 @@
   sinks:
     - port: argument(1)
       vulnType: html
+- subject:
+    function: copy
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+    - port: argument(0)
+      vulnType: file
+    - port: argument(1)
+      vulnType: file
 - subject:
     function: cubrid_execute
   sinks:
@@ -184,6 +197,27 @@
     - port: argument(0)
       vulnType: eval
 - subject:
+    function: exif_imagetype
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+    - port: argument(0)
+      vulnType: file
+- subject:
+    function: exif_read_data
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+    - port: argument(0)
+      vulnType: file
+- subject:
+    function: exif_thumbnail
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+    - port: argument(0)
+      vulnType: file
+- subject:
     function: exit
   sinks:
     - port: argument(0)
@@ -193,6 +227,20 @@
   sinks:
     - port: argument(0)
       vulnType: sql
+- subject:
+    function: file
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+    - port: argument(0)
+      vulnType: file
+- subject:
+    function: file_get_contents
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+    - port: argument(0)
+      vulnType: file
 - subject:
     function: fileperms
   sinks:
@@ -207,6 +255,27 @@
     method: finfo::__construct
   sinks:
     - port: argument(1)
+      vulnType: file
+- subject:
+    method: finfo::file
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+    - port: argument(0)
+      vulnType: file
+- subject:
+    function: finfo_file
+  sinks:
+    - port: argument(1)
+      vulnType: ssrf
+    - port: argument(1)
+      vulnType: file
+- subject:
+    function: fopen
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+    - port: argument(0)
       vulnType: file
 - subject:
     function: forward_static_call
@@ -229,13 +298,36 @@
     - port: argument(0)
       vulnType: ssrf
 - subject:
+    function: get_meta_tags
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+    - port: argument(0)
+      vulnType: file
+- subject:
+    function: getimagesize
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+    - port: argument(0)
+      vulnType: file
+- subject:
     function: glob
   sinks:
     - port: argument(0)
       vulnType: file
 - subject:
+    function: gzfile
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+    - port: argument(0)
+      vulnType: file
+- subject:
     function: gzopen
   sinks:
+    - port: argument(0)
+      vulnType: ssrf
     - port: argument(0)
       vulnType: file
 - subject:
@@ -243,6 +335,34 @@
   sinks:
     - port: argument(0)
       vulnType: html
+- subject:
+    function: hash_file
+  sinks:
+    - port: argument(1)
+      vulnType: ssrf
+    - port: argument(1)
+      vulnType: file
+- subject:
+    function: hash_hmac_file
+  sinks:
+    - port: argument(1)
+      vulnType: ssrf
+    - port: argument(1)
+      vulnType: file
+- subject:
+    function: hash_update_file
+  sinks:
+    - port: argument(1)
+      vulnType: ssrf
+    - port: argument(1)
+      vulnType: file
+- subject:
+    function: highlight_file
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+    - port: argument(0)
+      vulnType: file
 - subject:
     function: http_get
   sinks:
@@ -263,6 +383,104 @@
   sinks:
     - port: argument(1)
       vulnType: sql
+- subject:
+    function: imagecreatefromavif
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+    - port: argument(0)
+      vulnType: file
+- subject:
+    function: imagecreatefrombmp
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+    - port: argument(0)
+      vulnType: file
+- subject:
+    function: imagecreatefromgd
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+    - port: argument(0)
+      vulnType: file
+- subject:
+    function: imagecreatefromgd2
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+    - port: argument(0)
+      vulnType: file
+- subject:
+    function: imagecreatefromgd2part
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+    - port: argument(0)
+      vulnType: file
+- subject:
+    function: imagecreatefromgif
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+    - port: argument(0)
+      vulnType: file
+- subject:
+    function: imagecreatefromjpeg
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+    - port: argument(0)
+      vulnType: file
+- subject:
+    function: imagecreatefrompng
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+    - port: argument(0)
+      vulnType: file
+- subject:
+    function: imagecreatefromtga
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+    - port: argument(0)
+      vulnType: file
+- subject:
+    function: imagecreatefromwbmp
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+    - port: argument(0)
+      vulnType: file
+- subject:
+    function: imagecreatefromwebp
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+    - port: argument(0)
+      vulnType: file
+- subject:
+    function: imagecreatefromxbm
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+    - port: argument(0)
+      vulnType: file
+- subject:
+    function: imagecreatefromxpm
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+    - port: argument(0)
+      vulnType: file
+- subject:
+    function: imageloadfont
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+    - port: argument(0)
+      vulnType: file
 - subject:
     function: include
   sinks:
@@ -391,6 +609,20 @@
     - port: argument(4)
       vulnType: shell
 - subject:
+    function: md5_file
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+    - port: argument(0)
+      vulnType: file
+- subject:
+    function: mime_content_type
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+    - port: argument(0)
+      vulnType: file
+- subject:
     function: msql_query
   sinks:
     - port: argument(0)
@@ -446,6 +678,13 @@
     - port: argument(0)
       vulnType: file
 - subject:
+    function: parse_ini_file
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+    - port: argument(0)
+      vulnType: file
+- subject:
     function: pfsockopen
   sinks:
     - port: argument(0)
@@ -460,6 +699,13 @@
   sinks:
     - port: argument(0)
       vulnType: html
+- subject:
+    function: php_strip_whitespace
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+    - port: argument(0)
+      vulnType: file
 - subject:
     function: preg_replace_callback
   sinks:
@@ -489,6 +735,10 @@
   sinks:
     - port: argument(0)
       vulnType: html
+    - port: argument(0)
+      vulnType: ssrf
+    - port: argument(0)
+      vulnType: file
 - subject:
     function: realpath
   sinks:
@@ -562,6 +812,20 @@
     - port: argument(1)
       vulnType: cookie
 - subject:
+    function: sha1_file
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+    - port: argument(0)
+      vulnType: file
+- subject:
+    function: show_source
+  sinks:
+    - port: argument(0)
+      vulnType: ssrf
+    - port: argument(0)
+      vulnType: file
+- subject:
     function: simplexml_load_file
   sinks:
     - port: argument(0)
@@ -604,6 +868,8 @@
 - subject:
     method: SplFileObject::__construct
   sinks:
+    - port: argument(0)
+      vulnType: ssrf
     - port: argument(0)
       vulnType: file
 - subject:

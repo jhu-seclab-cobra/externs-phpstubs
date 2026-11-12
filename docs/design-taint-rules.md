@@ -29,7 +29,7 @@ taint-rules/
 ├── provenance.yaml    # producer externs-phpstubs review of the Argus sink lists, the PHP manual and the Synacktiv sec4dev 2020 slides; verification manual
 ├── vocabulary.yaml    # additions only: kind `xpath`, source kind `external`
 ├── policy.yaml        # input enables xpath; external enables every input kind and xpath
-├── sinks.yaml         # Argus sink facts the format expresses, plus the constructor, document loader and schema-reading sinks; an entry for a psalm subject restates psalm's points and adds its own
+├── sinks.yaml         # Argus sink facts the format expresses, plus the constructor, document loader, schema-reading and stream-wrapper reader sinks; an entry for a psalm subject restates psalm's points and adds its own
 ├── sanitizers.yaml    # sanitizer facts psalm lacks: shell, html, sql, file, value-typing sanitizer facts for every kind; checks
 └── sources.yaml       # `input` for request data psalm does not taint; `external` for environment and stored data
 ```
@@ -40,9 +40,32 @@ conditional entry, a sinks entry (`SimpleXMLElement::__construct`, `when: [_, _,
 
 | Document | Subject kinds | Content |
 |----------|---------------|---------|
-| sinks.yaml | function, method, operation | one entry per subject with every kind it sinks, ports ascending, kinds in psalm order; receiver-triggered sinks omitted; the invocation operation consumes `callee`; a builtin that opens the path or URL in an argument carries the sink fact of what PHP does with it: `ssrf` is defined by the request PHP sends to the URL in the argument, whether or not the content returns to the caller, and `file` is added only when a run shows the content of a local file reaching the caller; an entry is added when a run on PHP sends a request to a loopback listener for the argument (and, for `file`, returns the content of a local file to the caller) and the PHP manual page names the argument as a path or URI; the entries are constructors that fetch or read at construction (`finfo` `argument(1)` `file`, `SoapClient` `argument(0)` `ssrf`, `SimpleXMLElement` `argument(0)` `ssrf` and `file` when `dataIsURL` is `true`), document loaders, which parse the document and return its content, with `ssrf` and `file` on `argument(0)` (`simplexml_load_file`, `tidy_parse_file`, `tidy_repair_file`, `Dom\HTMLDocument::createFromFile`, `DOMDocument::load`, `DOMDocument::loadHTMLFile`, `XMLReader::fromUri`, `XMLReader::open`, `tidy::__construct`, `tidy::parseFile`, `tidy::repairFile`), and builtins that read a schema or WSDL, which return the content only as a validation result or an error text, with `ssrf` alone on `argument(0)` (`DOMDocument::schemaValidate`, `DOMDocument::relaxNGValidate`, `XMLReader::setSchema`, `XMLReader::setRelaxNGSchema`, `SoapServer::__construct`) |
+| sinks.yaml | function, method, operation | one entry per subject with every kind it sinks, ports ascending, kinds in psalm order; receiver-triggered sinks omitted; the invocation operation consumes `callee`; a builtin that opens the path or URL in an argument carries the sink fact of what PHP does with it: `ssrf` is defined by the request PHP sends to the URL in the argument, whether or not the content returns to the caller; file builtins that can read a URL carry both `ssrf` and `file` on the read path, including metadata and digest readers regardless of whether raw bytes return (see Stream-Wrapper Readers); write-only builtins gain no request sink; the entries are constructors that fetch or read at construction (`finfo` `argument(1)` `file`, `SoapClient` `argument(0)` `ssrf`, `SimpleXMLElement` `argument(0)` `ssrf` and `file` when `dataIsURL` is `true`), document loaders, which parse the document and return its content, with `ssrf` and `file` on `argument(0)` (`simplexml_load_file`, `tidy_parse_file`, `tidy_repair_file`, `Dom\HTMLDocument::createFromFile`, `DOMDocument::load`, `DOMDocument::loadHTMLFile`, `XMLReader::fromUri`, `XMLReader::open`, `tidy::__construct`, `tidy::parseFile`, `tidy::repairFile`), and builtins that read a schema or WSDL, which return the content only as a validation result or an error text, with `ssrf` alone on `argument(0)` (`DOMDocument::schemaValidate`, `DOMDocument::relaxNGValidate`, `XMLReader::setSchema`, `XMLReader::setRelaxNGSchema`, `SoapServer::__construct`) |
 | sanitizers.yaml | function | one declaration per subject; a value-typing sanitizer fact (`intval`, `md5`, ...) names every kind; a check names `argument(0)` and `accepts: true` with the `types` of a type predicate (`is_int`, `is_scalar`, ...) or the `within` class of a character check (`ctype_digit`, `is_numeric`, ...) with the kinds its class cannot carry |
 | sources.yaml | variable, function, method | one declaration per subject producing `input` or `external` |
+
+## Stream-Wrapper Readers
+
+These file builtins read the path through stream wrappers. Their hand-maintained
+entries keep all existing sink points and add `ssrf` and `file` on the port below.
+Kinds use the taint set's spelling; the mapping exposes `file` as `pathtrav`.
+
+| Builtins | Read port |
+|----------|-----------|
+| `exif_imagetype`, `exif_read_data`, `exif_thumbnail` | `argument(0)` |
+| `hash_file`, `hash_hmac_file`, `hash_update_file` | `argument(1)` |
+| `md5_file`, `sha1_file` | `argument(0)` |
+| `gzfile`, `gzopen`, `bzopen`, `readgzfile` | `argument(0)` |
+| `mime_content_type`, `finfo::file` | `argument(0)` |
+| `finfo_file` | `argument(1)` |
+| `imagecreatefromavif`, `imagecreatefrombmp`, `imagecreatefromgd`, `imagecreatefromgd2`, `imagecreatefromgd2part`, `imagecreatefromgif`, `imagecreatefromjpeg`, `imagecreatefrompng`, `imagecreatefromtga`, `imagecreatefromwbmp`, `imagecreatefromwebp`, `imagecreatefromxbm`, `imagecreatefromxpm`, `imageloadfont` | `argument(0)` |
+| `file_get_contents`, `fopen`, `file`, `copy` | `argument(0)` |
+| `get_meta_tags`, `getimagesize`, `highlight_file`, `show_source`, `parse_ini_file`, `php_strip_whitespace` | `argument(0)` |
+| `SplFileObject::__construct` | `argument(0)` |
+
+The write destination of `copy` retains `file` on `argument(1)`; it gains no `ssrf`.
+`readgzfile` retains its `html` sink. `imagecreatefromstring` consumes bytes rather
+than a path and is outside this rule. `readfile` already carries both path sinks.
 
 ## Validation Rules
 

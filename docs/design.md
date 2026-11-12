@@ -181,10 +181,8 @@ extension-set error surfaces from the `with` call that mounts it.
 - Builtins that send a request for the URL in an argument on PHP 8.5.12 and carry no `ssrf` in `sinks.yaml`, so a
   program passing a request value to them reports nothing: `Dom\XMLDocument::createFromFile`,
   `Dom\Document::schemaValidate` and `Dom\Document::relaxNgValidate` (the PHP manual documents no method of
-  `Dom\Document` or `Dom\XMLDocument`, so the second source is missing); `exif_imagetype`, `hash_file`,
-  `hash_hmac_file`, `hash_update_file`, `md5_file`, `sha1_file`, `gzfile`, `mime_content_type`, `finfo::file`,
-  `finfo_file`, `imageloadfont` and the `imagecreatefrom*` functions of gd (`file_get_contents`, `fopen`, `file` and
-  `copy` hold psalm's `file` alone). Not run, because the extension is absent or the call needs a service:
+  `Dom\Document` or `Dom\XMLDocument`, so the second source is missing). Not run, because the extension
+  is absent or the call needs a service:
   `yaml_parse_file`, `yaml_parse_url`, `ldap_connect`, the `http_*` and `swoole` request functions and the other
   builtins of `models/` whose `filename`, `uri` or `url` parameter reads or fetches.
 - `PHP_FLOAT_INF`, `PHP_FLOAT_NAN`, `ARRAY_UNIQUE_REGULAR` and the

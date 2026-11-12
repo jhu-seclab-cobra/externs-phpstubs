@@ -221,7 +221,7 @@ internal class TaintRulesSetTest {
 
     @Test
     fun `a deleted sink entry leaves psalm's points in the merged record`() {
-        for (name in listOf("file_get_contents", "copy", "unlink")) {
+        for (name in listOf("unlink")) {
             val sinks = assertNotNull(PhpStubs.function(name), name).sinkFacts
             assertEquals(setOf(VulnType.PATHTRAV.id), sinks.map { it.vulnType }.toSet(), name)
         }
