@@ -6,15 +6,15 @@
 PHP static analyses must recognise builtin declarations they never see the
 body of: whether a name is a builtin function, class, method, or constant,
 which PHP extension provides it, what its signature looks like, what a
-constant's value is, and which builtins psalm declares source facts, sink
-facts, and sanitizer facts for. This knowledge is extracted from upstream
+constant's value is, and which builtins psalm declares source Facts, sink
+Facts, and sanitizer Facts for. This knowledge is extracted from upstream
 sources and is independent of any analysis technique. The model format for stating it
 exists in commons-phpmodels; what remains is the data, its merge into one
-body of facts, and a lookup that answers by PHP name in one vocabulary.
+body of Facts, and a lookup that answers by PHP name in one vocabulary.
 
 **System Role**
 This library is the data layer and the lookup surface of the Cobra PHP
-model stack: the generated model documents for PHP builtins, two taint
+model library: the generated model documents for PHP builtins, two taint
 sets ([concept-taint.md](concept-taint.md), [concept-taint-rules.md](concept-taint-rules.md)),
 a value rules set ([concept-value-rules.md](concept-value-rules.md)), and the
 vocabulary, merge, and lookup by PHP name over them ([concept-lookup.md](concept-lookup.md)).
@@ -24,8 +24,7 @@ The format, its decoding, and its validation belong to commons-phpmodels.
 - **Inputs:** upstream stub sources, psalm's taint data, and the Argus
   lists (offline); five bundled document sets.
 - **Outputs:** one `BuiltinRecord` per PHP name: extension, signature, flows,
-  source facts, sink facts, sanitizer facts, and throws in the canonical
-  vocabulary; the same facts enumerable by kind.
+  source Facts, sink Facts, sanitizer Facts, and throws in the Canonical Vocabulary; the same Facts enumerable by kind.
 - **Connections:** upstream stubs → extraction → model documents; psalm
   taint data → extraction, Argus lists → review → document sets; all sets
   → [commons-phpmodels decode] → merge → `BuiltinLookup` → consumers.
@@ -63,86 +62,15 @@ Runtime:
 
 **Core Concepts**
 
-- **Name:** Model Entry
-- **Definition:** One declarative statement about one PHP declaration in
-  the commons-phpmodels format: a subject naming the declaration and a
-  signature section describing it, with a propagation section when the
-  upstream data states a flow. The entry is this library's unit of data;
-  no parallel record type exists.
-- **Scope:** every builtin function, class, method, constant, class
-  constant, and property the upstream sources declare.
-- **Relationships:** decoded by commons-phpmodels; mounted as the
-  generated set; identified by its Subject.
+- **Name:** [Model](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/glossary/glossary-models.md#model).
+- **Role:** Models carry the declaration and assertion data imported from upstream sources.
+- **Scope:** Builtin declarations and assertion-only Models.
+- **Relationships:** The format loader decodes Models; Set Merge selects their units in force.
 
-- **Name:** Subject
-- **Definition:** The identity of a PHP declaration as defined by
-  commons-phpmodels: a kind plus a PHP-native spelling, case-folded per
-  kind. The merge keys every entry by its subject, so identity and
-  folding are decided once in the format library and never re-derived here.
-- **Scope:** the six declaration kinds the generated set carries; predefined
-  variables appear only in the taint set.
-- **Relationships:** identifies exactly one Model Entry; the target of
-  every lookup.
-
-- **Name:** Generated Layer
-- **Definition:** The lowest set of this library's merge: documents emitted
-  by an extraction producer, whose set provenance declares them generated,
-  never hand-edited. A correction belongs in one of this library's
-  hand-maintained sets, not in these files.
-- **Scope:** every generated document under the models tree (not the
-  hand-declared `language/` and `manual/` documents), and the taint set.
-- **Relationships:** produced by the Extraction Pipeline; the models tree
-  is mounted whole as the first set of the merge and carries the extension
-  each `BuiltinRecord` reports.
-
-- **Name:** PHP Extension
-- **Definition:** The PHP extension that provides a declaration
-  (`standard`, `mysqli`, `core`). The model format does not carry it: it
-  is a property of where a declaration comes from, not a statement about
-  the declaration. It is encoded by document placement — the document's
-  file name, with any numeric split suffix removed — and attached to every
-  entry of that document at load.
-- **Scope:** every entry, including language constructs, which carry the
-  extension name of their own document.
-- **Relationships:** derived from the Document Manifest layout; served
-  beside each Model Entry.
-
-- **Name:** Language Construct Entry
-- **Definition:** An entry for a PHP language construct that analyses
-  treat as callable or class-like although no extension declares it:
-  keyword constructs (`echo`, `isset`, `empty`, `include`, ...) and scalar
-  type names used in class position (`int`, `string`, ...), declared as
-  data in the models tree so one load path serves every lookup. The
-  `manual/` documents declare, the same way, builtins the Extraction
-  Pipeline cannot produce: functions php-src no longer declares.
-- **Scope:** the closed keyword and scalar-type sets the generated set declares
-  today.
-- **Relationships:** a Model Entry like any other; distinguished only by
-  its PHP Extension.
-
-- **Name:** Lookup Surface
-- **Definition:** The Canonical Vocabulary, Set Merge, `BuiltinRecord`, and
-  `BuiltinLookup` ([concept-lookup.md](concept-lookup.md)): how the sets
-  merge and how a consumer reads them.
-- **Relationships:** built over the bundled document sets.
-
-- **Name:** Document Manifest
-- **Definition:** The build-generated list of every model document in the
-  resource tree. Discovery reads the manifest, never the classpath
-  directory, so packaging in a jar and in a directory behave identically.
-- **Scope:** one manifest per resource tree.
-- **Relationships:** enumerates the documents of one set;
-  its layout defines each entry's PHP Extension.
-
-- **Name:** Extraction Pipeline
-- **Definition:** The offline producer: parses upstream sources and emits
-  documents directly in the commons-phpmodels format, verified against the
-  same decoder consumers use. Runs once per upstream release; committed.
-- **Scope:** development tooling, not a runtime dependency; only one
-  representation of the generated set exists. The taint extraction is one script
-  in this repository ([concept-taint.md](concept-taint.md)); the php-src
-  producers are in [concept-extraction.md](concept-extraction.md).
-- **Relationships:** produces the Generated Layer.
+- **Name:** [Generated Layer](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/glossary/glossary-sets.md#generated-layer).
+- **Role:** Reproducible generated data supplies the default declaration and taint assertions.
+- **Scope:** Generated declarations and generated taint Models.
+- **Relationships:** The extraction tools supply the Generated Layer; manual sets supply corrections.
 
 ## 3. Contracts & Flow
 
@@ -154,38 +82,20 @@ Runtime:
   the format.
 - **With a consumer:** a name lookup returns one `BuiltinRecord` or
   nothing. Signature fields and constant values are read as
-  commons-phpmodels types; flows, source facts, sink facts, sanitizer facts,
+  commons-phpmodels types; flows, source Facts, sink Facts, sanitizer Facts,
   and throws are read from the record in the Canonical Vocabulary,
-  conditions attached. The consumer holds no merge state: no loaded
-  set, mapping, or precedence; which set stated a fact is answered on
-  request, never required.
-- **With the Extraction Pipeline:** generated documents are reproducible
+  conditions attached. The consumer holds no merge state: no loaded set, mapping, or precedence.
+- **With the extraction tools:** generated documents are reproducible
   from the same upstream versions; a re-run yields identical files.
 
-**Internal Processing Flow**
-1. Discover — read the Document Manifest.
-2. Decode — pass each document to the commons-phpmodels loader; a decode
-   failure names the document.
-3. Attribute — derive the PHP Extension from the document's
-   placement and attach it to each entry.
-4. Register — insert entries into per-kind maps keyed by subject; two
-   documents declaring the same subject is a generated-set defect and fails the
-   load naming both documents.
-5. Fold — fold the generated set, then the value rules
-   set, the Canonical Vocabulary, and the two translated taint sets, into
-   the entry in force per subject, condition, and unit.
-6. Answer — resolve a PHP name to a subject and read its record from the
-   Set Merge; enumerate a declaration kind or a fact kind across it.
+**Internal Processing Flow:** Upstream data becomes Document Sets, which the lookup loads for callers; the owning [procedure and software mapping](design.md) specifies this concern’s processing.
 
 ## 4. Scenarios
 
 - **Typical:** an analysis meets `substr($s, 1)`. `BuiltinLookup`
   answers the record with extension `standard`, its signature, and the
   flow from the first argument to the result.
-- **Boundary:** a generated document carries a union return type. The
-  format rejects it at decode, the load fails naming the document, and the
-  fix is in the Extraction Pipeline, which simplifies the upstream type
-  before emitting — never a hand edit of the generated file.
+- **Boundary:** A generated Signature may retain a declared union type; a malformed declared type fails loading and must be corrected in its producer.
 - **Interaction:** a consumer asks the record of `mysqli::query` for
   its sinks and receives one sink of the canonical SQL injection vulnerability type
   at the first argument, translated from psalm's `sql`. It asks `strlen`
@@ -194,4 +104,4 @@ Runtime:
   and unit in this library's merge, never in the consumer.
 
 Lookup: [concept-lookup.md](concept-lookup.md). Sets: [concept-taint.md](concept-taint.md), [concept-taint-rules.md](concept-taint-rules.md), [concept-value-rules.md](concept-value-rules.md).
-Software structure: [design.md](design.md). Format semantics: commons-phpmodels `docs/model-declarations.md`.
+Software structure: [design.md](design.md). Format semantics: commons-phpmodels [model-declarations.md](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/model-declarations.md).

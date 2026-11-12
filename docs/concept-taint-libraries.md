@@ -7,7 +7,7 @@ Applications can call third-party libraries whose implementation is absent from 
 This module supplies selectable Document Sets to the existing lookup.
 
 - **Inputs:** Signatures and endpoint annotations [@psalm-plugin-laravel; @psalm-plugin-doctrine; @psalm7], named-parameter endpoint lists [@phpstan-security], and class-qualified endpoint rows [@codeql-php].
-- **Outputs:** Signed records in the Canonical Vocabulary.
+- **Outputs:** Records with a Signature in the Canonical Vocabulary.
 - **Connections:** Upstream declarations and Facts → Library Set → Set Merge → builtin lookup.
 - **Owned:** Importing, package selection, attribution, notices and explicit rejection of unsupported input.
 - **Not Owned:** Executing library bodies, resolving application facades, or selecting a version from application dependencies.
@@ -41,7 +41,7 @@ The [design](design-taint-libraries.md) owns catalog selection, the importer and
 
 ## Scenarios
 
-- **Typical:** An application selects a database library, and a raw-query call resolves to a signed method with a SQL injection sink on its SQL argument.
+- **Typical:** An application selects a database library, and a raw-query call resolves to a method record with a Signature and a SQL injection sink on its SQL argument.
 - **Boundary:** An upstream lists a method absent from the supplied declarations. Its row remains in the rejection list and contributes no active Fact.
 - **Interaction:** A consumer mounts manual corrections after library selection; Set Merge retains the manual unit in force.
 

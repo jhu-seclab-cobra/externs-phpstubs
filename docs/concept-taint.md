@@ -1,15 +1,11 @@
-# PHP Stubs — Taint Document Set Concept
-
-Extends [concept.md](concept.md) with the one concern it does not cover:
-the generated taint assertions. Context, generated-set concepts, and the
-extraction pipeline are defined there and used here unchanged.
+# PHP Stubs — generated taint Document Set Concept
 
 ## 1. Context
 
 **Problem Statement**
-psalm states which PHP builtins consume a value dangerously (sink facts),
-which neutralize a value for one vulnerability type (sanitizer facts), and
-which produce attacker-controlled data (source facts). That knowledge is spread over a
+psalm states which PHP builtins consume a value dangerously (sink Facts),
+which neutralize a value for one vulnerability type (sanitizer Facts), and
+which produce attacker-controlled data (source Facts). That knowledge is spread over a
 dictionary, docblock annotations in psalm's stubs, and psalm's own analyzer
 code, all keyed by psalm's kind names. This library needs it as one
 document set in the commons-phpmodels format, kept in psalm's names so the
@@ -55,47 +51,15 @@ merge: set loader(taint/, canonical vocabulary, mapping) ─► entries in canon
 
 **Core Concepts**
 
-- **Name:** Taint Document Set
-- **Definition:** The bundled document set holding psalm's taint
-  assertions in the commons-phpmodels format: a manifest, a vocabulary
-  declaring psalm's kind names, a policy stating psalm's rule that input
-  reaches every kind, and three documents split by section kind.
-- **Scope:** every sink fact psalm's dictionary lists, every sink, escape,
-  and source annotation in psalm's stubs, and the superglobals psalm's analyzer
-  taints. Nothing hand-added.
-- **Relationships:** a Generated Layer artifact; produced by the Taint
-  Extraction; loaded by the merge, never as the generated set.
+- **Name:** [Document Set](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/glossary/glossary-sets.md#document-set).
+- **Role:** A generated set keeps upstream assertions reproducible independently of consumer naming.
+- **Scope:** The taint vocabulary, policy and source/sink/sanitizer Models.
+- **Relationships:** The format loader decodes each Document Set before Set Merge consumes it.
 
-- **Name:** Psalm Kind
-- **Definition:** One of psalm's taint kind names (`sql`, `html`, `shell`,
-  `eval`, `file`, `ssrf`, ...), used verbatim as a vulnerability type in the
-  set's vocabulary and every sink and sanitizer. Psalm's single source
-  `input` is the set's one source kind.
-- **Scope:** the closed list psalm's kind enumeration declares for one
-  release; a kind the set declares but no document names stays declared.
-- **Relationships:** referenced by every taint entry; translated by the
-  library's mapping at the merge; never renamed in the set.
-
-- **Name:** Taint Entry
-- **Definition:** A model entry with no signature whose body holds exactly
-  one taint section: sink facts with one argument port per dangerous
-  argument, sanitizer facts with the neutralized kinds, or source facts
-  producing `input`. A conditional sanitizer fact (one that holds only
-  under one argument value) is an entry whose condition states that value at its position.
-- **Scope:** function, method, and predefined-variable subjects.
-  A variadic dangerous parameter is stated at the variadic's position.
-- **Relationships:** a Model Entry; its Subject may or may not exist in
-  the generated set — the set states psalm's data, not the generated set's.
-
-- **Name:** Taint Extraction
-- **Definition:** The offline producer for the set: one script in this
-  repository that reads a psalm checkout and emits every file of the set
-  deterministically. Re-running on the same release yields identical
-  files; a psalm upgrade is a re-run plus a review of the diff.
-- **Scope:** development tooling. Verification of the output is the
-  library's decode in this repository's tests.
-- **Relationships:** an Extraction Pipeline; produces the Taint Document
-  Set.
+- **Name:** [Vocabulary Mapping](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/glossary/glossary-sets.md#vocabulary-mapping).
+- **Role:** Translation exposes the Canonical Vocabulary without rewriting the generated inputs.
+- **Scope:** Every name used by the generated and manual taint Models.
+- **Relationships:** Mapped Models use Canonical Vocabulary names; explicit discards remove assertions without a remaining name.
 
 ## 3. Contracts & Flow
 
@@ -108,18 +72,9 @@ merge: set loader(taint/, canonical vocabulary, mapping) ─► entries in canon
 - **With the merge:** this library opens the set at its root constant and
   loads it through the set loader with the Canonical Vocabulary as context
   and a vocabulary mapping that lists every psalm kind and the source kind
-  `input`. Names the mapping omits are dropped by the format library;
-  nothing is dropped here.
+  `input`. An unlisted name fails loading; only a name explicitly mapped to discard is dropped.
 
-**Internal Processing Flow**
-1. Extract — read psalm's dictionary, stub annotations, and source rule.
-2. Normalize — spell subjects in PHP identity form, resolve parameter
-   names to argument positions from the stub signature, merge duplicate
-   assertions.
-3. Emit — write the vocabulary, the policy, the three documents, sorted
-   by subject, each with a producer header naming the psalm release.
-4. Verify — the repository test loads the set through the set loader
-   with the set's own vocabulary and asserts the expected entries.
+**Internal Processing Flow:** Upstream data becomes Document Sets, which the lookup loads for callers; the owning [procedure and software mapping](design-taint.md) specifies this concern’s processing.
 
 ## 4. Scenarios
 
@@ -130,10 +85,10 @@ merge: set loader(taint/, canonical vocabulary, mapping) ─► entries in canon
 - **Boundary:** psalm neutralizes `html` in `filter_var` only when the
   filter argument equals one of five sanitize-filter values. The set states
   five conditional entries, one per value; a call matching none keeps no
-  sanitizer fact.
+  sanitizer Fact.
 - **Interaction:** the mapping discards psalm's `has_quotes`. The
   `urlencode` entry, which neutralizes `html` and `has_quotes`, arrives with
   `html` alone; an entry whose every kind is discarded arrives not at all.
-  Both decisions are the format library's, driven by the mapping.
+  The format library applies these explicit mapping entries.
 
 Software structure: [design-taint.md](design-taint.md).

@@ -3,38 +3,34 @@
 ## 1. Context
 
 **Problem Statement**
-The generated set states facts about PHP builtins that only
+The generated set states Facts about PHP builtins that only
 the interpreter's own source decides: which class a builtin class extends,
 which parameters a builtin function declares, and which exception classes
-its implementation may throw. The upstream stub conversion that seeded the
-set covers an older release, omits most methods, and states no throw at
-all. php-src at the pinned release states all three: its stub files are the
+its implementation may throw. A stub-only declaration does not establish the exception classes thrown by its native implementation. php-src at the pinned release states all three: its stub files are the
 declarations the interpreter's argument metadata is generated from, and its
 C sources are the implementations.
 
 **System Role**
 The offline producers that rewrite the generated set from one
 php-src release, beside the upstream stub conversion
-([concept.md](concept.md), Extraction Pipeline).
+([concept.md](concept.md), extraction tools).
 
 **Data Flow**
 - **Inputs:** one php-src checkout at the pinned release tag: its stub
   files, its function entry tables, and its C sources, including native
   object-handler declarations and implementations.
 - **Outputs:** class hierarchies, final-class status, effective object-handler
-  facts, callable signatures, and throws sections
-  of the generated entries; entries for every php-src declaration the set
-  lacked.
+  Facts, callable signatures, and throws sections
+  of the generated entries; entries for every php-src declaration absent from the generated set.
 - **Connections:** php-src → hierarchy extraction → signature extraction
   → throws extraction → `models/**` → the merge ([concept-lookup.md](concept-lookup.md)).
 
 **Scope Boundaries**
-- **Owned:** reading php-src, placing the entry of every php-src
-  Declaration in the document of its extension, rewriting its declaration
-  fields and established effective object-handler facts,
+- **Owned:** reading php-src, placing the entry of every php-src declaration in the document of its extension, rewriting its declaration
+  fields and established effective object-handler Facts,
   signature, and throws of a generated entry.
 - **Not Owned:** the format of a throws section and what it asserts
-  (commons-phpmodels `docs/model.md`); value units, which the value
+  ([commons-phpmodels model](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/model.md)); value units, which the value
   rules set states; the hand-declared `language/` and `manual/` documents.
 
 ## 2. Concepts
@@ -52,44 +48,20 @@ php-src (release tag)
 
 **Core Concepts**
 
-- **Name:** php-src Declaration
-- **Definition:** One class-like, function, or method declaration of a
-  php-src stub file, with names resolved by PHP's name resolution rules.
-  The stub is the declaration the interpreter registers: its argument
-  metadata is generated from it, so it agrees with reflection by
-  construction.
-- **Scope:** every stub outside test directories and the extension
-  skeleton.
-- **Relationships:** read by the Hierarchy and Signature Extractions;
-  placed by its PHP Extension ([concept.md](concept.md)).
+- **Name:** [Handler](glossary/glossary-extraction.md#handler).
+- **Role:** Registered callable implementations provide roots for exception extraction.
+- **Scope:** Ordinary and frameless implementations; abstract methods have none.
+- **Relationships:** A Handler is a root of the Procedure Summary computation.
 
-- **Name:** Handler
-- **Definition:** The C function the interpreter calls for one builtin,
-  named by the builtin's function entry table; a builtin with a
-  specialized form (frameless call) has one Handler per form.
-- **Scope:** every function and method entry php-src registers; an
-  abstract method has none.
-- **Relationships:** the roots of the Throws Extraction.
+- **Name:** [Procedure Summary](glossary/glossary-extraction.md#procedure-summary).
+- **Role:** Shared callee effects let extraction propagate throws through direct C calls.
+- **Scope:** Reachable C functions and function-like macros in the throws analysis.
+- **Relationships:** A caller instantiates callee effects at its argument expressions.
 
-- **Name:** Procedure Summary
-- **Definition:** What one C function may contribute to a builtin's
-  throws section: the exception classes it may throw, each with the
-  parameter tests it is guarded by, plus the classes it creates into a
-  parameter and the class entries it returns, so a caller resolves a class
-  passed down to it.
-- **Scope:** every C function and function-like macro reachable from a
-  Handler; computed by [spec-throws.md](spec-throws.md).
-- **Relationships:** a Handler's throws section is the union of the
-  classes its Procedure Summary names.
-
-- **Name:** Boundary Call
-- **Definition:** A call whose exceptions the throws section excludes by the
-  format's definition: argument binding, a call into user code, a
-  diagnostic, and a value conversion. The analysis does not enter it; a
-  binding specifier that checks a value beyond its declared type still
-  contributes the class it throws.
-- **Relationships:** cuts the call graph the Procedure Summary is computed
-  over.
+- **Name:** [Boundary Call](glossary/glossary-extraction.md#boundary-call).
+- **Role:** Exclusions match the meaning of the dependency-owned throws Section.
+- **Scope:** Argument binding, user-code calls, diagnostics and value conversion.
+- **Relationships:** Boundary Calls restrict the call graph used for throws extraction.
 
 ## 3. Contracts & Flow
 
@@ -102,14 +74,7 @@ php-src (release tag)
 - **With php-src:** one release tag per run; the same tag over the same
   documents yields identical files, and a second run changes nothing.
 
-**Internal Processing Flow**
-1. Hierarchy — every php-src class-like declaration gets its declaration
-   fields (including class name and class aliases) and established handler facts; one the set lacks is added.
-2. Signatures — every php-src function and method gets its declared
-   parameters and return type; one the set lacks is added.
-3. Throws — every implemented function and method gets the classes its
-   Handlers may throw, or no throws section when a Handler throws an
-   object the caller supplies.
+**Internal Processing Flow:** Upstream data becomes Document Sets, which the lookup loads for callers; the owning [procedure and software mapping](spec-throws.md) specifies this concern’s processing.
 
 ## 4. Scenarios
 
@@ -119,11 +84,7 @@ php-src (release tag)
 - **Boundary:** `Generator::throw` rethrows the exception object its
   caller passes. No class set bounds it, so the entry keeps no throws
   section and asserts nothing.
-- **Interaction:** `mysqli::query` was a hand-declared manual method. Once
-  the Signature Extraction adds it from php-src, the manual entry would
-  duplicate a generated subject, so its reviewed flow moves to the value
-  rules set ([concept-value-rules.md](concept-value-rules.md)) and the
-  generated entry carries the signature and the throws section.
+- **Interaction:** `mysqli::query` receives its Signature and throws Section from php-src extraction and its reviewed Value unit from the manual rules set.
 
 ## 5. Rationale and Rejected Alternatives
 

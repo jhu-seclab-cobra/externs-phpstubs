@@ -1,16 +1,11 @@
-# PHP Stubs — Taint Rules Document Set Concept
-
-Extends [concept-taint.md](concept-taint.md) with the one concern it does
-not cover: the hand-maintained taint assertions that go beyond psalm's.
-The taint document set, psalm kinds, and taint entries are defined there
-and used here unchanged.
+# PHP Stubs — manual taint Document Set Concept
 
 ## 1. Context
 
 **Problem Statement**
-psalm's taint data misses sink facts, sanitizer facts, and source facts
+psalm's taint data misses sink Facts, sanitizer Facts, and source Facts
 that published PHP analyses treat as standard: the Argus sink lists
-(Jahanshahi and Egele, USENIX Security 2024), output builtins such as `echo`, callback-taking
+from the Argus artifact, output builtins such as `echo`, callback-taking
 builtins, LDAP and XPath queries, and data read from the environment,
 files, sockets, and stored records. This library states them as one more
 document set in the same format and the same names, so that the psalm
@@ -56,43 +51,21 @@ merge: set loader(taint/, …) then set loader(taint-rules/, taint vocabulary, m
 
 **Core Concepts**
 
-- **Name:** Taint Rules Document Set
-- **Definition:** The bundled hand-maintained document set holding taint
-  assertions psalm does not state, in the commons-phpmodels format and in
-  psalm's kind names plus two additions of its own.
-- **Scope:** sink facts from the Argus lists that the format can express,
-  the sanitizer facts and source facts those lists and the builtin name
-  list imply, the checks of the type predicates and character checks psalm
-  lacks, and nothing psalm already states identically.
-- **Relationships:** loaded over the Taint Document Set's vocabulary;
-  mounted by the merge above it.
+- **Name:** [Document Set](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/glossary/glossary-sets.md#document-set).
+- **Role:** Hand-maintained assertions cover endpoints and argument positions absent from the generated taint data.
+- **Scope:** The taint vocabulary, policy and source/sink/sanitizer Models.
+- **Relationships:** The format loader decodes each Document Set before Set Merge consumes it.
 
-- **Name:** Vocabulary Addition
-- **Definition:** A vulnerability type or source kind the set declares
-  because psalm has no name for it: the kind `xpath` (XPath injection)
-  and the source kind `external` (data read from the environment, files,
-  sockets, mail, LDAP, or stored records).
-- **Scope:** the two names; every other name in the set is a Psalm Kind.
-- **Relationships:** declared in the set's vocabulary, enabled by its
-  policy rows, translated by the library's mapping like a Psalm Kind.
-
-- **Name:** Receiver-triggered Sink
-- **Definition:** A dangerous operation the Argus lists attribute to the
-  object a method is called on rather than to an argument, such as the
-  Phar and SPL getters that deserialize on access. `Phar::getMetadata` and
-  `PharFileInfo::getMetadata` are such sinks: PHP 8 reads phar metadata
-  lazily, so only these getters deserialize it.
-- **Scope:** excluded; the format admits argument ports only for sinks. The
-  `unserialize` sink point of the file functions is dropped for the same
-  reason, because opening a phar path runs no `__wakeup`.
-- **Relationships:** documented in the sinks document header; a format
-  extension would readmit them.
+- **Name:** [Vocabulary Mapping](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/glossary/glossary-sets.md#vocabulary-mapping).
+- **Role:** One translation serves generated and hand-maintained taint Models.
+- **Scope:** Every name used by the generated and manual taint Models.
+- **Relationships:** Mapped Models use Canonical Vocabulary names; explicit discards remove assertions without a remaining name.
 
 ## 3. Contracts & Flow
 
 **Data Contracts**
 - **With the taint document set:** the taint rules set decodes only over the
-  taint set's vocabulary; every Psalm Kind it names is declared there. No
+  taint set's vocabulary; every Psalm kind it names is declared there. No
   entry equals the taint set's entry for the same subject, condition, and
   section. A taint rules entry for a subject and section the taint set
   also states restates every point of psalm's section and adds its own:
@@ -104,14 +77,7 @@ merge: set loader(taint/, …) then set loader(taint-rules/, taint vocabulary, m
   Mounting it after the taint set makes each taint rules section override
   psalm's for that subject.
 
-**Internal Processing Flow**
-1. Select — take each Argus sink the format can express, drop those
-   psalm already states with the same ports and kinds.
-2. Restate — for a subject psalm also states, copy psalm's points first.
-3. Emit — write the vocabulary additions, the policy rows, and the three
-   documents sorted by subject.
-4. Verify — the repository test loads the set over the taint vocabulary
-   and asserts the shape, non-repetition, and superset rules.
+**Internal Processing Flow:** Upstream data becomes Document Sets, which the lookup loads for callers; the owning [procedure and software mapping](design-taint-rules.md) specifies this concern’s processing.
 
 ## 4. Scenarios
 
@@ -128,3 +94,8 @@ merge: set loader(taint/, …) then set loader(taint-rules/, taint vocabulary, m
   `external` policy row in canonical names.
 
 Software structure: [design-taint-rules.md](design-taint-rules.md).
+
+## Rationale and Rejected Alternatives
+
+- **Choice:** Keep receiver-triggered deserialization outside the argument-port sink data. PHP 8 reads Phar metadata lazily; `Phar::getMetadata` and `PharFileInfo::getMetadata` deserialize when called, while merely opening a Phar path does not run `__wakeup`.
+- **Rejected:** Treating the receiver as an argument would state a different input location. The sink format’s supported locations remain defined by commons-phpmodels; the exclusion is explicit in the resource’s provenance header.

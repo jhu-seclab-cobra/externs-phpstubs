@@ -1,11 +1,4 @@
-# PHP Stubs — Value Rules Document Set Concept
-
-Extends [concept.md](concept.md) with the one concern it does not cover:
-hand-maintained value units that the generated set lacks or
-states wrongly. Model entries, subjects, and the generated layer are
-defined there and used here unchanged; the taint counterpart is
-[concept-taint-rules.md](concept-taint-rules.md). Set provenance and
-precedence are defined in commons-phpmodels `docs/concept-provenance.md`.
+# PHP Stubs — manual Value unit Document Set Concept
 
 ## 1. Context
 
@@ -15,7 +8,7 @@ propagation and optionally characters) only where psalm annotates a flow. For mo
 annotation exists, so a consumer falls back to its conservative default:
 an unknown value of any type that every argument influences. Where an annotation
 exists it is sometimes wider or narrower than the flow the PHP manual
-supports. The corrections are consumer-independent facts about PHP
+supports. The corrections are consumer-independent Facts about PHP
 builtins, so they belong beside the generated set, where every
 consumer reads them, not inside one analyzer's configuration.
 
@@ -56,47 +49,10 @@ merge: models/ (generated) ◄──ranked below── value-rules/ (manual), pe
 
 **Core Concepts**
 
-- **Name:** Value Rules Document Set
-- **Definition:** The bundled hand-maintained document set whose every
-  entry is a signature-less model asserting exactly one value
-  unit: a return kind, the exhaustive flow set into the
-  result, and optionally the bytes the result may hold. Its provenance declares it manually verified.
-- **Scope:** builtins whose generated entry has no unit, whose generated
-  unit the PHP manual contradicts, and mode-switching builtins that need
-  a conditional entry. Nothing a generated entry already states correctly.
-- **Relationships:** outranks the Generated Layer under the default
-  precedence; sibling of the Taint Rules Document Set.
-
-- **Name:** Value Rule
-- **Definition:** One entry of the set. Under the format's coupling rule,
-  a hand-written entry without a signature asserts the unit exhaustively:
-  the return kind and every argument-to-result flow, with an
-  absent flow set meaning the result is unrelated to the arguments.
-- **Scope:** function and method subjects; an optional condition on the
-  argument values states the mode of a mode-switching builtin.
-- **Relationships:** a Model Entry; its Subject must exist in the
-  generated set (the set's own rule, checked by the repository
-  test: a value unit for an undeclared subject would produce a
-  signature-less record).
-
-- **Name:** Review Reason
-- **Definition:** The PHP manual statement that justifies a Value Rule
-  whose unit differs from the generated unit, or that corrected a migrated
-  rule. Recorded as a comment above the entry, since the format rejects
-  any key it does not define.
-- **Scope:** every differing or corrected entry; an entry that only adds a
-  unit the generated entry lacks carries none.
-- **Relationships:** documents a Value Rule; a rule the manual confirms as
-  already generated correctly is dropped, not annotated.
-
-- **Name:** Generated-Set Gap
-- **Definition:** A builtin an analysis meets that the generated
-  declarations do not carry: a function the pinned php-src release no
-  longer declares.
-- **Scope:** excluded from the set; declared in a hand-maintained document
-  under `models/manual/` with its PHP-manual signature and flow.
-- **Relationships:** resolved in the models tree (the Extraction Pipeline
-  or a manual declaration document), never by a Value Rule.
+- **Name:** [Value unit](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/glossary/glossary-models.md#value-unit).
+- **Role:** A reviewed unit states a return classification and exhaustive flows together so replacement preserves their coupling.
+- **Scope:** Function and method Models whose generated declaration exists.
+- **Relationships:** A reviewed Value unit replaces its generated counterpart whole under Set Merge.
 
 ## 3. Contracts & Flow
 
@@ -109,17 +65,7 @@ merge: models/ (generated) ◄──ranked below── value-rules/ (manual), pe
   so under the default precedence its units outrank the generated ones
   whatever the mount order.
 
-**Internal Processing Flow**
-1. Classify — compare each migrated rule with the generated entry: no
-   generated unit, differing unit, conditional entry, or Generated-Set Gap.
-2. Review — check every differing rule and every rule with a wider
-   type against the PHP manual: keep it with a Review Reason, correct it
-   with a Review Reason, or drop it when the manual confirms the generated
-   unit. A Generated-Set Gap becomes a declaration under `models/manual/`.
-3. Emit — write the provenance and one document per PHP manual area,
-   subjects sorted, conditional entries before the unconditional one.
-4. Verify — the repository test loads the set beside the declarations and
-   asserts provenance, existence, shape, and non-repetition.
+**Internal Processing Flow:** Upstream data becomes Document Sets, which the lookup loads for callers; the owning [procedure and software mapping](design-value-rules.md) specifies this concern’s processing.
 
 ## 4. Scenarios
 
