@@ -13,12 +13,7 @@ exists in commons-phpmodels; what remains is the data, its merge into one
 body of Facts, and a lookup that answers by PHP name in one vocabulary.
 
 **System Role**
-This library is the data layer and the lookup surface of the Cobra PHP
-model library: the generated model documents for PHP builtins, two taint
-sets ([concept-taint.md](concept-taint.md), [concept-taint-rules.md](concept-taint-rules.md)),
-a value rules set ([concept-value-rules.md](concept-value-rules.md)), and the
-vocabulary, merge, and lookup by PHP name over them ([concept-lookup.md](concept-lookup.md)).
-The format, its decoding, and its validation belong to commons-phpmodels.
+This library supplies generated and manual Document Sets and the lookup over their Set Merge; commons-phpmodels owns the format, decoding and validation.
 
 **Data Flow**
 - **Inputs:** upstream stub sources, psalm's taint data, and the Argus
