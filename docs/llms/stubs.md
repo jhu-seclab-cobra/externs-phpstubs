@@ -69,8 +69,8 @@ println(record?.sinkFacts)
 | `ReturnsFact` | `kind: ReturnKind` |
 | `ThrowsFact` | `classes: Set<ClassSubject>` |
 
-- `VulnType` enumerates `sqli`, `cmdi`, `codei`, `xss`, `headeri`, `ssrf`, `pathtrav`, `fileinc`, `deser`, `callablei`, `ldapi`, `xpathi`, `openredirect`, `nosqli`, `templatei`; `id: VulnTypeId` is its typed name.
-- `SourceKind` enumerates `user-input` and `external-input`; `id: SourceKindId` is its typed name.
+- `VulnType` enumerates `sqli`, `cmdi`, `codei`, `xss`, `headeri`, `ssrf`, `pathtrav`, `fileinc`, `deser`, `callablei`, `ldapi`, `xpathi`, `schemei`, `openredirect`, `nosqli`, `templatei`; `id: VulnTypeId` is its typed name.
+- `SourceKind` enumerates `user-input`, `external-input` and `server-path`; `id: SourceKindId` is its typed name.
 - A consumer-added name can be compared by its typed identifier without a library enum constant.
 
 ### Resource API and errors

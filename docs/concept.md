@@ -57,12 +57,12 @@ Runtime:
 
 **Core Concepts**
 
-- **Name:** [Model](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/glossary/glossary-models.md#model).
+- **Name:** [Model](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/d356ff45becb5983fc66ac544a00df6618ac224b/docs/glossary/glossary-models.md#model).
 - **Role:** Models carry the declaration and assertion data imported from upstream sources.
 - **Scope:** Builtin declarations and assertion-only Models.
 - **Relationships:** The format loader decodes Models; Set Merge selects their units in force.
 
-- **Name:** [Generated Layer](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/glossary/glossary-sets.md#generated-layer).
+- **Name:** [Generated Layer](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/d356ff45becb5983fc66ac544a00df6618ac224b/docs/glossary/glossary-sets.md#generated-layer).
 - **Role:** Reproducible generated data supplies the default declaration and taint assertions.
 - **Scope:** Generated declarations and generated taint Models.
 - **Relationships:** The extraction tools supply the Generated Layer; manual sets supply corrections.
@@ -99,4 +99,4 @@ Runtime:
   and unit in this library's merge, never in the consumer.
 
 Lookup: [concept-lookup.md](concept-lookup.md). Sets: [concept-taint.md](concept-taint.md), [concept-taint-rules.md](concept-taint-rules.md), [concept-value-rules.md](concept-value-rules.md).
-Software structure: [design.md](design.md). Format semantics: commons-phpmodels [model-declarations.md](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/model-declarations.md).
+Software structure: [design.md](design.md). Format semantics: commons-phpmodels [model-declarations.md](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/d356ff45becb5983fc66ac544a00df6618ac224b/docs/model-declarations.md).

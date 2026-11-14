@@ -49,7 +49,7 @@ merge: models/ (generated) ◄──ranked below── value-rules/ (manual), pe
 
 **Core Concepts**
 
-- **Name:** [Value unit](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/glossary/glossary-models.md#value-unit).
+- **Name:** [Value unit](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/d356ff45becb5983fc66ac544a00df6618ac224b/docs/glossary/glossary-models.md#value-unit).
 - **Role:** A reviewed unit states a return classification and exhaustive flows together so replacement preserves their coupling.
 - **Scope:** Function and method Models whose generated declaration exists.
 - **Relationships:** A reviewed Value unit replaces its generated counterpart whole under Set Merge.

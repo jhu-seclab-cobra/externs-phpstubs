@@ -25,23 +25,32 @@ Source assertions: [@argus-artifact; @modern-php-security].
 ```
 taint-rules/
 ├── index.txt          # build-generated manifest: sanitizers.yaml, sinks.yaml, sources.yaml
-├── provenance.yaml    # producer externs-phpstubs review of the Argus sink lists, the PHP manual and the Synacktiv sec4dev 2020 slides; verification manual
-├── vocabulary.yaml    # resource constants only: kind `xpath`, source kind `external`
-├── policy.yaml        # input enables xpath; external enables every input kind and xpath
-├── sinks.yaml         # Argus sink facts the format expresses, plus the constructor, document loader, schema-reading and stream-wrapper reader sinks; an entry for a psalm subject restates psalm's points and adds its own
+├── provenance.yaml    # producer externs-phpstubs review of Argus, the PHP manual and Synacktiv sec4dev 2020; verification manual
+├── vocabulary.yaml    # kinds xpath, scheme; source kinds external, path
+├── policy.yaml        # input gains xpath, scheme; external every input kind; path every external kind but scheme
+├── sinks.yaml         # Argus, constructor, loader and stream-wrapper sinks; existing ports and kinds
 ├── sanitizers.yaml    # sanitizer facts psalm lacks: shell, html, sql, file, value-typing sanitizer facts for every kind; checks
-└── sources.yaml       # `input` for request data psalm does not taint; `external` for environment and stored data
+└── sources.yaml       # `input` for request data psalm does not taint, `$_SERVER` split by key into `path` and `input`; `external` for environment and stored data
 ```
 
+The canonical `schemei` declaration owns the HTML Tokenizer language. Its six
+target states cover the leading URL position before a bare value or inside either
+quote form, including an unfinished ASCII scheme name. The recognized attributes
+are `href`, `src`, `action`, `formaction` and `xlink:href`. Only the format's byte
+transition function is provided. The bundled sets declare no `scheme` sinks:
+a consumer must read output context before those sinks can distinguish a leading
+URL position from another use of the same bytes. Nested script, style and raw-text languages are outside this declaration.
+
 Every document carries a header naming its provenance. Entry forms match
-the taint set's table in [design-taint.md](design-taint.md). The set adds one
-conditional entry, a sinks entry (`SimpleXMLElement::__construct`, `when: [_, _, true]`). Entries are sorted by subject spelling.
+the taint set's table in [design-taint.md](design-taint.md). The conditional sink entry is `SimpleXMLElement::__construct`, `when: [_, _, true]`.
+Digest sanitizers for `md5`, `sha1`, `hash` and `hash_hmac` require `binary` to be false,
+including its omitted default. Entries are sorted by subject spelling.
 
 | Document | Subject kinds | Content |
 |----------|---------------|---------|
 | sinks.yaml | function, method, operation | Argument sinks and the invocation selector, specified below |
 | sanitizers.yaml | function | one declaration per subject; a value-typing sanitizer fact (`intval`, `md5`, ...) names every kind; a check names `argument(0)` and `accepts: true` with the `types` of a type predicate (`is_int`, `is_scalar`, ...) or the `within` class of a character check (`ctype_digit`, `is_numeric`, ...) with the kinds its class cannot carry |
-| sources.yaml | variable, function, method | one declaration per subject producing `input` or `external` |
+| sources.yaml | variable, function, method | one declaration per subject producing `input`, `external` or `path`; `$_SERVER` holds two declarations split by `keys` |
 
 ## Sink declarations
 
@@ -91,8 +100,8 @@ than a path and is outside this rule. `readfile` already carries both path sinks
   and condition.
 - A sinks entry whose subject the taint set also sinks contains every one
   of the taint set's sink points.
-- A consumer's mapping lists every psalm kind, `xpath`, `input`, and
-  `external`; an unlisted name is the format library's `VocabularyException`.
+- A consumer's mapping lists every psalm kind, `xpath`, `scheme`, `input`,
+  `external`, and `path`; an unlisted name is the format library's `VocabularyException`.
 - The repository tests, not the consumer, prove the set decodes.
 
 ## Maintenance

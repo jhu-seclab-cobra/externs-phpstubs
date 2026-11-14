@@ -51,12 +51,12 @@ merge: set loader(taint/, canonical vocabulary, mapping) ─► entries in canon
 
 **Core Concepts**
 
-- **Name:** [Document Set](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/glossary/glossary-sets.md#document-set).
+- **Name:** [Document Set](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/d356ff45becb5983fc66ac544a00df6618ac224b/docs/glossary/glossary-sets.md#document-set).
 - **Role:** A generated set keeps upstream assertions reproducible independently of consumer naming.
 - **Scope:** The taint vocabulary, policy and source/sink/sanitizer Models.
 - **Relationships:** The format loader decodes each Document Set before Set Merge consumes it.
 
-- **Name:** [Vocabulary Mapping](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/glossary/glossary-sets.md#vocabulary-mapping).
+- **Name:** [Vocabulary Mapping](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/d356ff45becb5983fc66ac544a00df6618ac224b/docs/glossary/glossary-sets.md#vocabulary-mapping).
 - **Role:** Translation exposes the Canonical Vocabulary without rewriting the generated inputs.
 - **Scope:** Every name used by the generated and manual taint Models.
 - **Relationships:** Mapped Models use Canonical Vocabulary names; explicit discards remove assertions without a remaining name.

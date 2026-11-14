@@ -4,7 +4,7 @@ Computing the throws section of every implemented builtin from the php-src
 C sources. Concepts: [concept-extraction.md](concept-extraction.md)
 (Handler, Procedure Summary, Boundary Call). Tool structure and tables:
 [design-extraction.md](design-extraction.md). What a throws section
-asserts: [commons-phpmodels model.md](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/model.md).
+asserts: [commons-phpmodels model.md](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/d356ff45becb5983fc66ac544a00df6618ac224b/docs/model.md).
 
 ## Algorithm: Procedure Summary Fixpoint
 

@@ -4,8 +4,8 @@ Domain semantics of `BuiltinLookup`: the sets this library merges, the
 vocabulary they end in, the Set Merge, and the records a consumer reads by PHP
 name. The format entities — Model, Matching Subject, Signature, Section,
 replacement unit, Condition, conditional Model, unconditional Model, Source kind, Vulnerability type, Document Set, Set Provenance, Precedence — are the
-format library's: [format model](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/model.md),
-[model-conditions.md](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/model-conditions.md), [model-sets.md](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/model-sets.md).
+format library's: [format model](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/d356ff45becb5983fc66ac544a00df6618ac224b/docs/model.md),
+[model-conditions.md](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/d356ff45becb5983fc66ac544a00df6618ac224b/docs/model-conditions.md), [model-sets.md](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/d356ff45becb5983fc66ac544a00df6618ac224b/docs/model-sets.md).
 
 ## Entities
 
@@ -15,10 +15,12 @@ format library's: [format model](https://github.com/jhu-seclab-cobra/commons-php
   resource root. Each carries a Set Provenance; generated for the
   declaration set and the taint set, manual for the others.
 - **Canonical Vocabulary** — The vulnerability types and source kinds every
-  record speaks: fifteen Vulnerability type names (`sqli`, `cmdi`, `codei`, `xss`,
+  record speaks: sixteen Vulnerability type names (`sqli`, `cmdi`, `codei`, `xss`,
   `headeri`, `ssrf`, `pathtrav`, `fileinc`, `deser`, `callablei`, `ldapi`,
-  `xpathi`, `openredirect`, `nosqli`, `templatei`) and two Source kind names (`user-input`, `external-input`), with the policy
-  enabling every vulnerability type under both source kinds. A hand-written
+  `xpathi`, `schemei`, `openredirect`, `nosqli`, `templatei`) and three Source kind names (`user-input`, `external-input`, `server-path`).
+  The first two enable every Vulnerability type; `server-path` enables every type
+  except `schemei`. Only `schemei` declares a Tokenizer language; its
+  transitions recognize the leading position of a URL attribute value in HTML. A hand-written
   set of this library, mounted before any set that names a vulnerability
   type or source kind.
   Existence condition: declared in the vocabulary document; adding a name

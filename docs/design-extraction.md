@@ -77,7 +77,7 @@ algorithm is in [Effective Handler Extraction](spec-extraction-handlers.md).
   tag selects the alias. The selected value must be a class spelling; one
   leading `\` is dropped and the rest is folded.
 - Class signature field definitions:
-  [commons-phpmodels declaration types](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/design-declarations.md#signatureinfo-sealed).
+  [commons-phpmodels declaration types](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/d356ff45becb5983fc66ac544a00df6618ac224b/docs/design-declarations.md#signatureinfo-sealed).
 - Conflicting source hierarchies, class names or class aliases, or
   incompatible declared final modifiers, fail. Registered flags establish finality independently of classifier;
   source-defined enum restrictions are not rewritten as a FINAL flag.
@@ -161,7 +161,7 @@ Read the rewritten model documents and extractor diagnostics after each command.
 ## Open Gaps
 
 - **Indirect calls.** How should the extractor cover native indirect calls while preserving the format’s exhaustive assertion? The model asserts that a class outside an entry's
-  throws section is never thrown by it ([commons-phpmodels model.md](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/model.md),
+  throws section is never thrown by it ([commons-phpmodels model.md](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/d356ff45becb5983fc66ac544a00df6618ac224b/docs/model.md),
   Relations). `extract_throws.py` follows calls by name only; a call
   through a struct member or a function pointer (object handler tables,
   class entry hooks such as `get_iterator`, stream wrapper operations,

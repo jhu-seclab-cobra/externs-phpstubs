@@ -8,18 +8,19 @@ import kotlin.test.assertEquals
 /**
  * Tests for the [SourceKind] enum: the compile-time names of the canonical source kinds.
  *
- * - `two constants carry the documented ids` — verifies the constants and their interned identifiers
+ * - `three constants carry the documented ids` — verifies the constants and their interned identifiers
  * - `the bundled vocabulary declares exactly the enum names` — verifies the vocabulary document against the enum
  */
 internal class SourceKindTest {
     @Test
-    fun `two constants carry the documented ids`() {
+    fun `three constants carry the documented ids`() {
         assertEquals(
-            listOf("user-input", "external-input"),
+            listOf("user-input", "external-input", "server-path"),
             SourceKind.entries.map { it.id.id },
         )
         assertEquals(SourceKindId("user-input"), SourceKind.USER_INPUT.id)
         assertEquals(SourceKindId("external-input"), SourceKind.EXTERNAL_INPUT.id)
+        assertEquals(SourceKindId("server-path"), SourceKind.SERVER_PATH.id)
     }
 
     @Test

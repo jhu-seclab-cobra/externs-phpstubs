@@ -73,7 +73,7 @@ packaging fault, not a default.
 - Every entry declares a `signature` and no condition.
 - No two documents declare the same subject; the message names both.
 
-Constant names retain case except the root keyword constants `TRUE`, `FALSE`, and `NULL`, whose ASCII case variants identify one Matching Subject; [the dependency owns this identity rule](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/model-declarations.md#subject-kinds).
+Constant names retain case except the root keyword constants `TRUE`, `FALSE`, and `NULL`, whose ASCII case variants identify one Matching Subject; [the dependency owns this identity rule](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/d356ff45becb5983fc66ac544a00df6618ac224b/docs/model-declarations.md#subject-kinds).
 The extension of each generated entry is data tier: derived from the
 document's placement, never a constant in code.
 
@@ -100,8 +100,8 @@ models/
 vocabulary/
 ├── index.txt              # comment only: the set ships no model document
 ├── provenance.yaml        # producer externs-phpstubs canonical vocabulary; verification manual
-├── vocabulary.yaml        # fifteen vulnerability types, two source kinds, with descriptions
-├── policy.yaml            # both source kinds enable every vulnerability type
+├── vocabulary.yaml        # sixteen vulnerability types (schemei with a tokenizer language), three source kinds
+├── policy.yaml            # user-input and external-input enable every type; server-path all but schemei
 └── psalm-mapping.yaml     # psalm kinds → canonical names; has_quotes, cookie, user_secret, system_secret → ignore
 ```
 

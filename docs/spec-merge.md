@@ -2,8 +2,8 @@
 
 Folding the bundled sets, and any consumer sets, into the Set Merge
 the `BuiltinLookup` reads. Entity vocabulary: [model-lookup.md](model-lookup.md);
-format entities: [commons-phpmodels model.md](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/model.md), [model-conditions.md](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/model-conditions.md),
-[model-sets.md](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/model-sets.md).
+format entities: [commons-phpmodels model.md](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/d356ff45becb5983fc66ac544a00df6618ac224b/docs/model.md), [model-conditions.md](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/d356ff45becb5983fc66ac544a00df6618ac224b/docs/model-conditions.md),
+[model-sets.md](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/d356ff45becb5983fc66ac544a00df6618ac224b/docs/model-sets.md).
 
 ## Algorithm: Merge Sets
 
@@ -69,11 +69,11 @@ The alias-key step inserts keys into the existing class map and adds no
 record: a record keeps its declaration subject and its position. Its
 aliases are those of the signature in force, so a replacing signature that
 omits them removes their keys (a replacing signature replaces the whole
-signature: [commons-phpmodels model-declarations.md](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/model-declarations.md), Invariants). `key(a)` is the class subject the alias
+signature: [commons-phpmodels model-declarations.md](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/d356ff45becb5983fc66ac544a00df6618ac224b/docs/model-declarations.md), Invariants). `key(a)` is the class subject the alias
 spelling parses to.
 
 `accumulate` and the verification of every reference against the
-vocabulary accumulated so far are the set loader's ([model-sets.md](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/model-sets.md) of
+vocabulary accumulated so far are the set loader's ([model-sets.md](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/d356ff45becb5983fc66ac544a00df6618ac224b/docs/model-sets.md) of
 the format library): the loader is invoked once per set with the
 vocabulary the previous sets produced, so an undeclared name fails at that
 set's load. Every format rule — subject spellings, ports, sections,

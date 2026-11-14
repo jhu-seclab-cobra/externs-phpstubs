@@ -12,4 +12,5 @@ public enum class SourceKind(
 ) {
     USER_INPUT(SourceKindId("user-input")),
     EXTERNAL_INPUT(SourceKindId("external-input")),
+    SERVER_PATH(SourceKindId("server-path")),
 }

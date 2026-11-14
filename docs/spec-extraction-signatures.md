@@ -13,11 +13,11 @@ Read php-src stub declarations, compiler dispatch and native argument-reception 
   integer, a decimal, or a quoted string with no escape or interpolation) also
   carries that literal as `default`, spelled as in the stub; any other default
   (a constant, an array, an expression) leaves `default` absent. Format and
-  meaning: [parameter facts](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/design-declarations.md#namedextras).
+  meaning: [parameter facts](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/d356ff45becb5983fc66ac544a00df6618ac224b/docs/design-declarations.md#namedextras).
 3. After selecting stub signature variants, `with_named_extras` reads one shared
   C program and attaches a source-established policy only to each callable's
   variadic parameter. Format and meaning:
-  [parameter facts](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/design-declarations.md#namedextras).
+  [parameter facts](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/d356ff45becb5983fc66ac544a00df6618ac224b/docs/design-declarations.md#namedextras).
 4. `named_extras.read_policies(program, keys)` resolves each subject through the
   shared registration tables, including aliases. Every ordinary handler and
   every definition must agree. Frameless handlers do not receive named calls.

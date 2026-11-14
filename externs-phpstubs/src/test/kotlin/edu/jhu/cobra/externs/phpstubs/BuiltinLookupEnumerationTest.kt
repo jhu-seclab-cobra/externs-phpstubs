@@ -17,7 +17,7 @@ import kotlin.test.assertTrue
  * - `every enumerated record is reachable by exact lookup of its subject` — verifies the kind maps and the shared map agree
  * - `every enumerated fact belongs to the record that owns it` — verifies fact lists are built over the records
  * - `no psalm name survives the merge` — verifies the accumulated vocabulary holds only canonical names
- * - `the policy makes every vulnerability type dangerous under both source kinds` — verifies the accumulated matrix
+ * - `the policy makes every vulnerability type dangerous under the two input source kinds` — verifies their accumulated rows
  */
 internal class BuiltinLookupEnumerationTest {
     @Test
@@ -76,8 +76,8 @@ internal class BuiltinLookupEnumerationTest {
     }
 
     @Test
-    fun `the policy makes every vulnerability type dangerous under both source kinds`() {
-        for (sourceKind in SourceKind.entries) {
+    fun `the policy makes every vulnerability type dangerous under the two input source kinds`() {
+        for (sourceKind in SourceKind.entries - SourceKind.SERVER_PATH) {
             for (vulnType in VulnType.entries) {
                 assertTrue(PhpStubs.policy.isDangerous(sourceKind.id, vulnType.id), "${sourceKind.id.id} -> ${vulnType.id.id}")
             }

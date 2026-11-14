@@ -4,12 +4,12 @@
 
 - **[commons-phpmodels]** `DocumentSetLoader.load(open, context, mapping)` — public set loader; the result preserves manifest document order; `VocabularyMappingLoader.load(InputStream)` reads a total mapping.
 - **[commons-phpmodels]** `ModelEntry(subject, condition, signature, body)` — the single Model representation; `ArgPattern.matches(actual: List<IPrimitiveVal?>): Boolean?` returns null when undecidable and patterns have value equality.
-- **[commons-phpmodels]** `ModelSubject.name` — identity fields are read through concrete subject types; creators remove one leading `\` and apply the dependency’s [identity rules](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/model-declarations.md#subject-kinds).
+- **[commons-phpmodels]** `ModelSubject.name` — identity fields are read through concrete subject types; creators remove one leading `\` and apply the dependency’s [identity rules](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/d356ff45becb5983fc66ac544a00df6618ac224b/docs/model-declarations.md#subject-kinds).
 - **[commons-phpmodels]** `MethodSubject(owner, name)` and `ClassConstantSubject(owner, name)` — owner names fold ASCII case; method names fold, class-constant names retain case.
-- **[commons-phpmodels]** `SignatureInfo` — callable, class, typed and property shapes and their validation are defined by [declaration types](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/design-declarations.md#signatureinfo-sealed); declared unions are retained.
+- **[commons-phpmodels]** `SignatureInfo` — callable, class, typed and property shapes and their validation are defined by [declaration types](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/d356ff45becb5983fc66ac544a00df6618ac224b/docs/design-declarations.md#signatureinfo-sealed); declared unions are retained.
 - **[commons-phpmodels]** `DocumentSet.provenance?.verification` — GENERATED or MANUAL when provenance exists; `Precedence.DEFAULT.rank` is zero for MANUAL and one for GENERATED.
 - **[commons-phpmodels]** `ModelBody.throws` — absent means no assertion; the empty set asserts no exceptions within the format’s boundary; this library’s incompleteness remains in [extraction gaps](design-extraction.md#open-gaps).
-- **[commons-phpmodels]** `ModelBody.characters` and `valueUnit()` — the character bound belongs to the exhaustive Value unit; its definition and constraints are the [format model](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/model.md).
+- **[commons-phpmodels]** `ModelBody.characters` and `valueUnit()` — the character bound belongs to the exhaustive Value unit; its definition and constraints are the [format model](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/d356ff45becb5983fc66ac544a00df6618ac224b/docs/model.md).
 - **[commons-phpmodels]** `ArgumentCheck(argument, accepts, within, types)` — binds a result test to an accepted argument; translation retains an explicit type/character check even when all its vulnerability names are discarded.
 - **[commons-phpmodels]** `DocumentSetException(path, detail, cause)` — a listed document load failure retains its path; an unlisted mapping name raises `VocabularyException` rather than being discarded.
 - **[Kotlin]** `companion object : BuiltinLookup by bundled` — delegation covers interface members; class construction helpers forward explicitly. The top-level bundled value must not access the companion during its initialization, and its constructor is internal.
@@ -18,7 +18,7 @@
 
 ## Libraries
 
-- `com.github.jhu-seclab-cobra:commons-phpmodels:56feb9d33a3cf8445eb74f01eb22279ed71f5674` — API dependency for Models, Signatures, Conditions and decoding; alias `cobra-commons-phpmodels` in `gradle/libs.versions.toml`.
+- `com.github.jhu-seclab-cobra:commons-phpmodels:d356ff45becb5983fc66ac544a00df6618ac224b` — API dependency for Models, Signatures, Conditions and decoding; alias `cobra-commons-phpmodels` in `gradle/libs.versions.toml`.
 - `org.yaml:snakeyaml:2.7` — implementation dependency for catalog decoding; alias `snakeyaml`.
 - `com.github.jhu-seclab-cobra:commons-value` — transitive API dependency supplying Condition values; this module does not declare it directly.
 

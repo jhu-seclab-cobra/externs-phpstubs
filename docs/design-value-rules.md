@@ -56,7 +56,7 @@ directly above the entry it justifies.
   same subject.
 - A callback port names a parameter of the subject's merged signature whose
   type admits `callable`; what a callback port means is defined in
-  [commons-phpmodels model.md](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/model.md) Port.
+  [commons-phpmodels model.md](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/d356ff45becb5983fc66ac544a00df6618ac224b/docs/model.md) Port.
 - The repository tests, not the consumer, prove the set decodes.
 
 ## Maintenance

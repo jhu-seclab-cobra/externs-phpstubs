@@ -2,7 +2,7 @@
 
 The handler concern of [Hierarchy Extraction](design-extraction.md).
 Algorithm: [Effective Handler Extraction](spec-extraction-handlers.md).
-Format: [handler types](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/design-declarations-handlers.md).
+Format: [handler types](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/d356ff45becb5983fc66ac544a00df6618ac224b/docs/design-declarations-handlers.md).
 
 ## Design Overview
 

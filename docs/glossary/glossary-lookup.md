@@ -28,3 +28,17 @@ Builtin lookup: the vocabulary every shipped set is translated into, the merge o
 - **Definition:** A generated Document Set containing a Composer package's Signatures and Facts in the Canonical Vocabulary, selectable by its package name.
 - **Example:** `laravel/framework` → the generated declarations and Facts mounted by `PhpStubs.withLibraries`.
 - **Source:** `LibrarySet.kt` `LibrarySet`; `PhpStubs.kt` `withLibraries`; `docs/design-taint-libraries.md` LibrarySet
+
+## Taint data
+
+### Scheme injection
+- **Is a:** Vulnerability type
+- **Definition:** The Vulnerability type in which untrusted text at the leading position of a URL attribute value can choose an executable URL scheme.
+- **Example:** `<a href="javascript:alert(1)">x</a>` → `schemei` at the start of `href`.
+- **Source:** `VulnType.kt` `SCHEMEI`; `externs-phpstubs/src/main/resources/vocabulary/vocabulary.yaml`; `docs/design-taint-rules.md` Resource Layout
+
+### Server path
+- **Is a:** Source kind
+- **Definition:** The Source kind assigned to the server superglobal keys `PHP_SELF`, `REQUEST_URI`, `SCRIPT_NAME` and `PATH_INFO`, with every canonical Vulnerability type enabled except Scheme injection.
+- **Example:** `$_SERVER['REQUEST_URI']` → `server-path` in the source Facts.
+- **Source:** `SourceKind.kt` `SERVER_PATH`; `externs-phpstubs/src/main/resources/taint-rules/sources.yaml`; `externs-phpstubs/src/main/resources/vocabulary/policy.yaml`

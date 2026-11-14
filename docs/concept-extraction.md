@@ -30,7 +30,7 @@ php-src release, beside the upstream stub conversion
   fields and established effective object-handler Facts,
   signature, and throws of a generated entry.
 - **Not Owned:** the format of a throws section and what it asserts
-  ([commons-phpmodels model](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/56feb9d33a3cf8445eb74f01eb22279ed71f5674/docs/model.md)); value units, which the value
+  ([commons-phpmodels model](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/d356ff45becb5983fc66ac544a00df6618ac224b/docs/model.md)); value units, which the value
   rules set states; the hand-declared `language/` and `manual/` documents.
 
 ## 2. Concepts

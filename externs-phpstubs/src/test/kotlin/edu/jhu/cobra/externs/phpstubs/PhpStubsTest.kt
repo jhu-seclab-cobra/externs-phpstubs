@@ -83,7 +83,7 @@ internal class PhpStubsTest {
     fun `taint rules outrank taint for the same key`() {
         val readfile = assertNotNull(PhpStubs.function("readfile"))
         assertEquals(
-            setOf(VulnType.XSS.id, VulnType.SSRF.id, VulnType.PATHTRAV.id),
+            setOf(VulnType.XSS.id, VulnType.SSRF.id, VulnType.PATHTRAV.id, VulnType.SCHEMEI.id),
             readfile.sinkFacts.map { it.vulnType }.toSet(),
         )
         assertTrue(readfile.sinkFacts.all { it.condition == null && it.port == Port.Argument(0) })
