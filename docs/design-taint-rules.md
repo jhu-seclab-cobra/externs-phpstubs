@@ -37,9 +37,8 @@ The canonical `schemei` declaration owns the HTML Tokenizer language. Its six
 target states cover the leading URL position before a bare value or inside either
 quote form, including an unfinished ASCII scheme name. The recognized attributes
 are `href`, `src`, `action`, `formaction` and `xlink:href`. Only the format's byte
-transition function is provided. The bundled sets declare no `scheme` sinks:
-a consumer must read output context before those sinks can distinguish a leading
-URL position from another use of the same bytes. Nested script, style and raw-text languages are outside this declaration.
+transition function is provided. Nested script, style and raw-text languages are
+outside this declaration. The absent sink declarations are listed in [Open Gaps](#open-gaps).
 
 Every document carries a header naming its provenance. Entry forms match
 the taint set's table in [design-taint.md](design-taint.md). The conditional sink entry is `SimpleXMLElement::__construct`, `when: [_, _, true]`.
@@ -114,3 +113,15 @@ in `policy.yaml` before any document names it.
 ## Exception / Error Types
 
 Set loading raises the errors specified in [the resource design](design.md#exception--error-types).
+
+## Open Gaps
+
+- Scheme injection: the canonical `schemei` declaration, its Tokenizer language,
+  sanitizer coverage and policy rows load, but the bundled sets declare no
+  `scheme` sink (`schemei` after mapping). A consumer must determine the leading
+  position of an HTML URL attribute before those sink Facts can distinguish it
+  from another use of the bytes. A scheme sink at `readgzfile` argument 0 would
+  treat its read path as that output position: `@readgzfile($_GET['u']);` would
+  gain `schemei` beside the existing `pathtrav`, `ssrf` and `xss`. Such scheme
+  sinks are withheld; the data neither supplies nor substitutes a consumer's
+  tokenizer-state query.
