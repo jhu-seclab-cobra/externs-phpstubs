@@ -23,6 +23,26 @@
 - subject: {function: htmlspecialchars}
   returns: str
   propagation: [{from: argument(0), to: return}]
+# Immediate invocation; retains the ordinary result inputs of the existing summary or its default.
+- subject: {function: preg_replace_callback}
+  returns: any
+  callbacks:
+    - callable: {kind: argument, position: 1}
+      supply: {kind: array-value, position: 2}
+  propagation:
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+# Immediate invocation; retains the ordinary result inputs of the existing summary or its default.
+- subject: {function: preg_replace_callback_array}
+  returns: any
+  callbacks:
+    - callable: {kind: elements, position: 0}
+      supply: {kind: array-value, position: 1}
+  propagation:
+  - from: argument(1)
+    to: return
 # PHP manual: returns the string decremented by one in its alphanumeric sequence.
 - subject: {function: str_decrement}
   returns: str

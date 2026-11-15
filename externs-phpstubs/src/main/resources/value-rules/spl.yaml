@@ -2,6 +2,16 @@
 # SPL containers (PHP manual: SPL Data Structures): receiver stores and element reads.
 # An entry whose unit differs from the generated one carries the PHP manual reason above it.
 
+# Immediate invocation; retains the ordinary result inputs of the existing summary or its default.
+- subject: {function: iterator_apply}
+  returns: any
+  callbacks:
+    - callable: {kind: argument, position: 1}
+      supply: {kind: unpacked, position: 2}
+  propagation:
+    - {from: argument(0), to: return}
+    - {from: argument(1), to: return}
+    - {from: argument(2), to: return}
 # PHP manual: stores the value argument in the container.
 - subject: {method: ArrayIterator::__construct}
   returns: any
@@ -26,6 +36,24 @@
 - subject: {method: ArrayIterator::offsetSet}
   returns: any
   propagation: [{from: argument(1), to: this}]
+# Immediate invocation; retains the ordinary result inputs of the existing summary or its default.
+- subject: {method: ArrayIterator::uasort}
+  returns: any
+  callbacks:
+    - callable: {kind: argument, position: 0}
+      supply: {kind: joined-inputs, count: 2}
+  propagation:
+    - {from: argument(0), to: return}
+    - {from: this, to: return}
+# Immediate invocation; retains the ordinary result inputs of the existing summary or its default.
+- subject: {method: ArrayIterator::uksort}
+  returns: any
+  callbacks:
+    - callable: {kind: argument, position: 0}
+      supply: {kind: joined-inputs, count: 2}
+  propagation:
+    - {from: argument(0), to: return}
+    - {from: this, to: return}
 # PHP manual: stores the value argument in the container.
 - subject: {method: ArrayObject::__construct}
   returns: any
@@ -54,6 +82,24 @@
 - subject: {method: ArrayObject::offsetSet}
   returns: any
   propagation: [{from: argument(1), to: this}]
+# Immediate invocation; retains the ordinary result inputs of the existing summary or its default.
+- subject: {method: ArrayObject::uasort}
+  returns: any
+  callbacks:
+    - callable: {kind: argument, position: 0}
+      supply: {kind: joined-inputs, count: 2}
+  propagation:
+    - {from: argument(0), to: return}
+    - {from: this, to: return}
+# Immediate invocation; retains the ordinary result inputs of the existing summary or its default.
+- subject: {method: ArrayObject::uksort}
+  returns: any
+  callbacks:
+    - callable: {kind: argument, position: 0}
+      supply: {kind: joined-inputs, count: 2}
+  propagation:
+    - {from: argument(0), to: return}
+    - {from: this, to: return}
 # PHP manual: stores the value argument in the container.
 - subject: {method: SplDoublyLinkedList::add}
   returns: any

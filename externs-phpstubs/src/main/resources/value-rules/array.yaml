@@ -2,14 +2,97 @@
 # Arrays (PHP manual: Arrays).
 # An entry whose unit differs from the generated one carries the PHP manual reason above it.
 
+# Immediate invocation; retains the ordinary result inputs of the existing summary or its default.
+- subject: {function: array_all}
+  returns: any
+  callbacks:
+    - callable: {kind: argument, position: 1}
+      supply: {kind: joined-inputs, count: 2}
+  propagation:
+    - {from: argument(0), to: return}
+    - {from: argument(1), to: return}
+# Immediate invocation; retains the ordinary result inputs of the existing summary or its default.
+- subject: {function: array_any}
+  returns: any
+  callbacks:
+    - callable: {kind: argument, position: 1}
+      supply: {kind: joined-inputs, count: 2}
+  propagation:
+    - {from: argument(0), to: return}
+    - {from: argument(1), to: return}
+# Immediate invocation; retains the ordinary result inputs of the existing summary or its default.
+- subject: {function: array_diff_uassoc}
+  returns: any
+  callbacks:
+    - callable: {kind: trailing, distance: 1}
+      supply: {kind: joined-inputs, count: 2}
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+# Immediate invocation; retains the ordinary result inputs of the existing summary or its default.
+- subject: {function: array_diff_ukey}
+  returns: any
+  callbacks:
+    - callable: {kind: trailing, distance: 1}
+      supply: {kind: joined-inputs, count: 2}
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
 # PHP manual: the result keeps the elements the callback accepts; the callback receives each element
 # and, under the key modes, each key.
 - subject: {function: array_filter}
   returns: any
+  callbacks:
+    - callable: {kind: argument, position: 1}
+      supply: {kind: joined-inputs, count: 2}
   propagation:
     - {from: argument(0), to: return}
     - {from: argument(0), to: callback(argument(1)).parameter(0)}
     - {from: argument(0), to: callback(argument(1)).parameter(1)}
+# Immediate invocation; retains the ordinary result inputs of the existing summary or its default.
+- subject: {function: array_find}
+  returns: any
+  callbacks:
+    - callable: {kind: argument, position: 1}
+      supply: {kind: joined-inputs, count: 2}
+  propagation:
+    - {from: argument(0), to: return}
+    - {from: argument(1), to: return}
+# Immediate invocation; retains the ordinary result inputs of the existing summary or its default.
+- subject: {function: array_find_key}
+  returns: any
+  callbacks:
+    - callable: {kind: argument, position: 1}
+      supply: {kind: joined-inputs, count: 2}
+  propagation:
+    - {from: argument(0), to: return}
+    - {from: argument(1), to: return}
+# Immediate invocation; retains the ordinary result inputs of the existing summary or its default.
+- subject: {function: array_intersect_uassoc}
+  returns: any
+  callbacks:
+    - callable: {kind: trailing, distance: 1}
+      supply: {kind: joined-inputs, count: 2}
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+# Immediate invocation; retains the ordinary result inputs of the existing summary or its default.
+- subject: {function: array_intersect_ukey}
+  returns: any
+  callbacks:
+    - callable: {kind: trailing, distance: 1}
+      supply: {kind: joined-inputs, count: 2}
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
 - subject: {function: array_key_exists}
   returns: bool
   propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]
@@ -29,6 +112,9 @@
 # carry and, after the last element, the result.
 - subject: {function: array_reduce}
   returns: any
+  callbacks:
+    - callable: {kind: argument, position: 1}
+      supply: {kind: joined-inputs, count: 2}
   propagation:
     - {from: argument(0), to: return}
     - {from: argument(1), to: return}
@@ -37,22 +123,134 @@
     - {from: callback(argument(1)).return, to: callback(argument(1)).parameter(0)}
     - {from: argument(0), to: callback(argument(1)).parameter(1)}
     - {from: callback(argument(1)).return, to: return}
+# Immediate invocation; retains the ordinary result inputs of the existing summary or its default.
+- subject: {function: array_udiff}
+  returns: any
+  callbacks:
+    - callable: {kind: trailing, distance: 1}
+      supply: {kind: joined-inputs, count: 2}
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+# Immediate invocation; retains the ordinary result inputs of the existing summary or its default.
+- subject: {function: array_udiff_assoc}
+  returns: any
+  callbacks:
+    - callable: {kind: trailing, distance: 1}
+      supply: {kind: joined-inputs, count: 2}
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+# Immediate invocation; retains the ordinary result inputs of the existing summary or its default.
+- subject: {function: array_udiff_uassoc}
+  returns: any
+  callbacks:
+    - callable: {kind: trailing, distance: 2}
+      supply: {kind: joined-inputs, count: 2}
+    - callable: {kind: trailing, distance: 1}
+      supply: {kind: joined-inputs, count: 2}
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
+# Immediate invocation; retains the ordinary result inputs of the existing summary or its default.
+- subject: {function: array_uintersect}
+  returns: any
+  callbacks:
+    - callable: {kind: trailing, distance: 1}
+      supply: {kind: joined-inputs, count: 2}
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+# Immediate invocation; retains the ordinary result inputs of the existing summary or its default.
+- subject: {function: array_uintersect_assoc}
+  returns: any
+  callbacks:
+    - callable: {kind: trailing, distance: 1}
+      supply: {kind: joined-inputs, count: 2}
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+# Immediate invocation; retains the ordinary result inputs of the existing summary or its default.
+- subject: {function: array_uintersect_uassoc}
+  returns: any
+  callbacks:
+    - callable: {kind: trailing, distance: 2}
+      supply: {kind: joined-inputs, count: 2}
+    - callable: {kind: trailing, distance: 1}
+      supply: {kind: joined-inputs, count: 2}
+  propagation:
+  - from: argument(0)
+    to: return
+  - from: argument(1)
+    to: return
+  - from: argument(2)
+    to: return
+  - from: argument(3)
+    to: return
 # PHP manual: the callback receives each value, its key, and the extra argument.
 - subject: {function: array_walk}
   returns: bool
+  callbacks:
+    - callable: {kind: argument, position: 1}
+      supply: {kind: joined-inputs, count: 3}
   propagation:
     - {from: argument(0), to: callback(argument(1)).parameter(0)}
     - {from: argument(0), to: callback(argument(1)).parameter(1)}
     - {from: argument(2), to: callback(argument(1)).parameter(2)}
+# Immediate invocation; retains the ordinary result inputs of the existing summary or its default.
+- subject: {function: array_walk_recursive}
+  returns: any
+  callbacks:
+    - callable: {kind: argument, position: 1}
+      supply: {kind: joined-inputs, count: 3}
+  propagation:
+    - {from: argument(0), to: return}
+    - {from: argument(1), to: return}
+    - {from: argument(2), to: return}
 - subject: {function: count}
   returns: num
   propagation: [{from: argument(0), to: return}]
 - subject: {function: in_array}
   returns: bool
   propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]
+# Immediate invocation; retains the ordinary result inputs of the existing summary or its default.
+- subject: {function: uasort}
+  returns: any
+  callbacks:
+    - callable: {kind: argument, position: 1}
+      supply: {kind: joined-inputs, count: 2}
+  propagation:
+    - {from: argument(0), to: return}
+    - {from: argument(1), to: return}
+# Immediate invocation; retains the ordinary result inputs of the existing summary or its default.
+- subject: {function: uksort}
+  returns: any
+  callbacks:
+    - callable: {kind: argument, position: 1}
+      supply: {kind: joined-inputs, count: 2}
+  propagation:
+    - {from: argument(0), to: return}
+    - {from: argument(1), to: return}
 # PHP manual: the callback compares two elements of the array.
 - subject: {function: usort}
   returns: bool
+  callbacks:
+    - callable: {kind: argument, position: 1}
+      supply: {kind: joined-inputs, count: 2}
   propagation:
     - {from: argument(0), to: callback(argument(1)).parameter(0)}
     - {from: argument(0), to: callback(argument(1)).parameter(1)}

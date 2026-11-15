@@ -28,6 +28,7 @@ import kotlin.test.assertTrue
  * Tests for the hand-maintained value rules set rooted at [StubResources.VALUE_RULES].
  *
  * - `an invocation declaration survives the selected value unit` — the merged record retains its input supply
+ * - `immediate invocation declarations cover the callback families` — every family has data and stored callables do not
  * - `value rules set loads without a vocabulary` — verifies the set names no vulnerability type or source kind
  * - `value rules set is manually verified` — verifies the set's provenance
  * - `every value rules entry is an unsigned entry asserting only the value unit` — verifies the shape rule
@@ -62,6 +63,26 @@ import kotlin.test.assertTrue
  *   a declared parameter whose type admits `callable`
  */
 internal class ValueRulesSetTest {
+    @Test
+    fun `immediate invocation declarations cover the callback families`() {
+        val functions = listOf("array_map", "array_filter", "array_reduce", "array_walk", "array_walk_recursive",
+            "array_all", "array_any", "array_find", "array_find_key", "uasort", "uksort", "usort",
+            "array_diff_uassoc", "array_diff_ukey", "array_intersect_uassoc", "array_intersect_ukey",
+            "array_udiff", "array_udiff_assoc", "array_uintersect", "array_uintersect_assoc",
+            "array_udiff_uassoc", "array_uintersect_uassoc", "iterator_apply",
+            "preg_replace_callback", "preg_replace_callback_array")
+        val methods = listOf("ArrayIterator::uasort", "ArrayIterator::uksort",
+            "ArrayObject::uasort", "ArrayObject::uksort")
+        val expected: Set<ModelSubject> = functions.map(::FunctionSubject).toSet() + methods.map(MethodSubject::parse)
+        val records = PhpStubs.functions + PhpStubs.methods
+        val actual = records.filter { record -> record.returns.any { it.callbacks.isNotEmpty() } }
+        assertEquals(expected, actual.map { it.subject }.toSet())
+        for (owner in listOf("CallbackFilterIterator", "RecursiveCallbackFilterIterator")) {
+            assertEquals(emptyList(), assertNotNull(PhpStubs.method(owner, "__construct"))
+                .returns.flatMap { it.callbacks })
+        }
+    }
+
     @Test
     fun `an invocation declaration survives the selected value unit`() {
         val expected = CallbackInvocation(
