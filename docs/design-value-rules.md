@@ -32,7 +32,7 @@ value-rules/
 
 Every document carries a header naming the set and its PHP manual area.
 Entries are flat: `subject`, optional `when`, `returns`, optional
-`propagation`, optional `characters`. Entries are sorted by subject spelling; a conditional entry
+`propagation`, optional `characters`, optional `callbacks`. Callback declarations belong to the existing whole value unit and describe immediate invocation and its inputs; callable inspection or storage declares no immediate invocation. Entries are sorted by subject spelling; a conditional entry
 precedes the unconditional entry of its subject. A review reason is a `#` comment line
 directly above the entry it justifies.
 

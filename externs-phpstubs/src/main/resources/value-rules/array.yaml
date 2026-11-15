@@ -17,6 +17,9 @@
 # the callback receives each element of the array.
 - subject: {function: array_map}
   returns: any
+  callbacks:
+    - callable: {kind: argument, position: 0}
+      supply: {kind: array-elements, start: 1}
   propagation:
     - {from: argument(0), to: return}
     - {from: argument(1), to: return}

@@ -159,7 +159,7 @@ internal class SetMerge private constructor(
                 }
 
                 OverrideUnit.VALUE -> {
-                    returns += ReturnsFact(owner, condition, body.returns!!)
+                    returns += ReturnsFact(owner, condition, body.returns!!, body.callbacks.orEmpty())
                     body.propagation.orEmpty().mapTo(flows) { FlowFact(owner, condition, it.from, it.to) }
                     body.characters?.let { characters += CharactersFact(owner, condition, it) }
                 }

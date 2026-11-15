@@ -75,3 +75,5 @@ also holds the alias keys that the alias-key step of
 ## Exception / Error Types
 
 `MountSequence` classifies load failures as [resource errors](design.md#exception--error-types); `SetMerge.of` propagates those errors.
+
+The returns fact carries the selected value unit’s callback declarations. They are materialized with its return classification and replaced with that whole unit, never looked up by a second subject registry.

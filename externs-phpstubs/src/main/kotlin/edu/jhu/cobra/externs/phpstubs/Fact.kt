@@ -2,6 +2,7 @@ package edu.jhu.cobra.externs.phpstubs
 
 import edu.jhu.cobra.commons.phpmodels.ArgPattern
 import edu.jhu.cobra.commons.phpmodels.ArgumentCheck
+import edu.jhu.cobra.commons.phpmodels.CallbackInvocation
 import edu.jhu.cobra.commons.phpmodels.CharacterBound
 import edu.jhu.cobra.commons.phpmodels.ClassSubject
 import edu.jhu.cobra.commons.phpmodels.KeyPattern
@@ -60,11 +61,12 @@ public data class FlowFact(
     val to: Port,
 ) : Fact
 
-/** The return kind of a call's result. */
+/** The return kind and declared callable invocations of a call's selected value unit. */
 public data class ReturnsFact(
     override val owner: ModelSubject,
     override val condition: ArgPattern?,
     val kind: ReturnKind,
+    val callbacks: List<CallbackInvocation> = emptyList(),
 ) : Fact
 
 /**

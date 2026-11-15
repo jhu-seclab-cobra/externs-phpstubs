@@ -130,7 +130,7 @@ for an unconditional entry).
 | `SanitizerFact` | `vulnTypes: Set<VulnTypeId>`, `check: ArgumentCheck?` | one `SanitizerDecl` |
 | `FlowFact` | `from: Port.Input`, `to: Port` | one `Propagation` |
 | `CharactersFact` | `bound: CharacterBound` | the `characters` section, whole: the bytes the result may hold; the bound keeps its at-least-one-field invariant |
-| `ReturnsFact` | `kind: ReturnKind` | the `returns` section |
+| `ReturnsFact` | `kind: ReturnKind`, `callbacks: List<CallbackInvocation>` | the return classification and invocation declarations of the value unit |
 | `ThrowsFact` | `classes: Set<ClassSubject>` | the `throws` section, whole: the empty set states the subject throws none |
 
 ### VulnType, SourceKind (enums)
