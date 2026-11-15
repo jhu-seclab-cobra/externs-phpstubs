@@ -62,6 +62,9 @@ also holds the alias keys that the alias-key step of
 
 **Construction:** `SetMerge.of(mounts: List<Mount>, precedence: Precedence = Precedence.DEFAULT)` returns the immutable merge. Conditional Signatures raise `StubIndexInvalidException`; alias collisions raise the same error. Record assembly, ordering and alias keys implement [Set Merge](spec-merge.md); canonical tries are populated only from final records with an effective Signature.
 
+
+The returns fact carries the selected value unit’s callback declarations. They are materialized with its return classification and replaced with that whole unit, never looked up by a second subject registry.
+
 ## Validation Rules
 
 - Every mount's position equals its index in the sequence.
@@ -75,5 +78,3 @@ also holds the alias keys that the alias-key step of
 ## Exception / Error Types
 
 `MountSequence` classifies load failures as [resource errors](design.md#exception--error-types); `SetMerge.of` propagates those errors.
-
-The returns fact carries the selected value unit’s callback declarations. They are materialized with its return classification and replaced with that whole unit, never looked up by a second subject registry.

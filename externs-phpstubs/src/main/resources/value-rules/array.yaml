@@ -48,6 +48,8 @@
   returns: any
   callbacks:
     - callable: {kind: argument, position: 1}
+      supply: {kind: joined-inputs, count: 1}
+    - callable: {kind: argument, position: 1}
       supply: {kind: joined-inputs, count: 2}
   propagation:
     - {from: argument(0), to: return}
@@ -206,6 +208,8 @@
   returns: bool
   callbacks:
     - callable: {kind: argument, position: 1}
+      supply: {kind: joined-inputs, count: 2}
+    - callable: {kind: argument, position: 1}
       supply: {kind: joined-inputs, count: 3}
   propagation:
     - {from: argument(0), to: callback(argument(1)).parameter(0)}
@@ -215,6 +219,8 @@
 - subject: {function: array_walk_recursive}
   returns: any
   callbacks:
+    - callable: {kind: argument, position: 1}
+      supply: {kind: joined-inputs, count: 2}
     - callable: {kind: argument, position: 1}
       supply: {kind: joined-inputs, count: 3}
   propagation:
