@@ -66,7 +66,7 @@ println(record?.sinkFacts)
 | `matchingClasses(pattern: NamePattern)` | `Sequence<BuiltinRecord<ClassSubject>>` | Canonical complete-name pattern, excluding alias keys |
 
 - Exact lookup returns null when absent and propagates the subject creator’s `IllegalArgumentException` on validation failure.
-- `NamePattern(parts: List<NamePattern.Part>)` accepts `Part.Literal(text: String)` and `Part.Gap`; callers supply PHP ASCII-folded literal text. Each gap accepts any string, including empty, independently.
+- `NamePattern(parts: List<NamePattern.Part>)` accepts `Part.Literal(text: String)` and `Part.Gap`; callers supply PHP ASCII-folded literal text. The matcher compares characters: a caller that matches PHP bytes supplies one character per byte in each literal and in each name it passes to `matches`, and the trie matches the characters of each record name, which are its bytes because every bundled name is ASCII. Each gap accepts any string, including empty, independently.
 - `NamePattern.matches(canonicalName: String): Boolean` accepts only the complete spelling, with one optional leading root separator.
 
 ### Enumeration and records
