@@ -90,7 +90,7 @@ println(record?.sinkFacts)
 | `SanitizerFact` | `vulnTypes: Set<VulnTypeId>`, `check: ArgumentCheck?` |
 | `FlowFact` | `from: Port.Input`, `to: Port` |
 | `CharactersFact` | `bound: CharacterBound` |
-| `ReturnsFact` | `kind: ReturnKind` |
+| `ReturnsFact` | `kind: ReturnKind`, `callbacks: List<CallbackInvocation>`, `effects: List<Nothing>?` (the empty list only when the winning entry states `effects: []` and its set's `provenance.yaml` states `manual`) |
 | `ThrowsFact` | `classes: Set<ClassSubject>` |
 
 - `VulnType` enumerates `sqli`, `cmdi`, `codei`, `xss`, `headeri`, `ssrf`, `pathtrav`, `fileinc`, `deser`, `callablei`, `ldapi`, `xpathi`, `schemei`, `openredirect`, `nosqli`, `templatei`; `id: VulnTypeId` is its typed name.

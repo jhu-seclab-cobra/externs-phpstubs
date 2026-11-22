@@ -16,7 +16,7 @@ mounts into records. Every type here is internal; the public surface is
 - **External types (commons-phpmodels):** `DocumentSetLoader`,
   `DocumentSet`, `Document`, `ResourceOpener`, `VocabularyMapping`,
   `ModelEntry`, `PolicyRow`, `Vocabulary`, `TaintPolicy`, `Precedence`,
-  `Verification`, `DocumentSetException`
+  `Verification`, `SetProvenance`, `DocumentSetException`
 - **Relationships:** `MountSequence` produces `Mount`s in position order;
   `SetMerge.of` consumes them and builds one `BuiltinRecord` per subject.
   `PhpStubs` owns one mount list and one `SetMerge`.
@@ -30,12 +30,15 @@ mounts into records. Every type here is internal; the public surface is
 ### Mount (internal data class)
 
 **Responsibility:** One set as mounted: its position in mount order, its
-verification, the vocabulary and policy rows it declares, and its entries,
+verification, the Set Provenance its `provenance.yaml` states, the
+vocabulary and policy rows it declares, and its entries,
 each paired with the extension its document path yields (`.yaml` removed,
 trailing `_<digits>` removed) for every mount validated as generated and `null` for other mounts.
 
-**State/Fields:** `position: Int`, `verification: Verification`,
-`vocabulary: Vocabulary`, `policy: List<PolicyRow>`,
+**State/Fields:** `position: Int`, `verification: Verification` (the rank
+input: the stated verification, or the fallback for a set without
+`provenance.yaml`), `provenance: SetProvenance?` (null for a set without
+`provenance.yaml`), `vocabulary: Vocabulary`, `policy: List<PolicyRow>`,
 `entries: List<Pair<ModelEntry, String?>>`.
 
 ### MountSequence (internal class)
@@ -63,7 +66,7 @@ also holds the alias keys that the alias-key step of
 **Construction:** `SetMerge.of(mounts: List<Mount>, precedence: Precedence = Precedence.DEFAULT)` returns the immutable merge. Conditional Signatures raise `StubIndexInvalidException`; alias collisions raise the same error. Record assembly, ordering and alias keys implement [Set Merge](spec-merge.md); canonical tries are populated only from final records with an effective Signature.
 
 
-The returns fact carries the selected value unit’s callback declarations. They are materialized with its return classification and replaced with that whole unit, never looked up by a second subject registry.
+The returns fact carries the selected value unit’s callback declarations and effects assertion. They are materialized with its return classification and replaced with that whole unit, never looked up by a second subject registry. Each mounted entry keeps its mount's `provenance`; the returns fact carries the effects assertion only when the provenance of the entry in force has Verification `MANUAL` ([spec-merge.md](spec-merge.md#steps)).
 
 ## Validation Rules
 

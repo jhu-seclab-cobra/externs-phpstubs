@@ -32,7 +32,7 @@ value-rules/
 
 Every document carries a header naming the set and its PHP manual area.
 Entries are flat: `subject`, optional `when`, `returns`, optional
-`propagation`, optional `characters`, optional `callbacks`. Callback declarations belong to the existing whole value unit and describe immediate invocation and its inputs; callable inspection or storage declares no immediate invocation. Entries are sorted by subject spelling; a conditional entry
+`propagation`, optional `characters`, optional `callbacks`, optional `effects`. Callback declarations belong to the existing whole value unit and describe immediate invocation and its inputs; callable inspection or storage declares no immediate invocation. A hand-written entry can state `effects: []` for native behavior verified over its entire applicable domain; its review reason identifies the implementation and the domain covered. The assertion for `strlen` (`strings-inspect.yaml`) concerns the native length in bytes of the received PHP string; no other entry of the set states `effects`. Entries are sorted by subject spelling; a conditional entry
 precedes the unconditional entry of its subject. A review reason is a `#` comment line
 directly above the entry it justifies.
 
@@ -51,6 +51,8 @@ directly above the entry it justifies.
 - `provenance.yaml` decodes to verification `manual`.
 - Every entry declares no signature, a `returns` section,
   and no taint section.
+- Every entry stating `effects: []` carries a review reason naming the
+  implementation and the domain covered; `strlen` is the one such entry.
 - Every subject is a function or method the generated set declares.
 - No unconditional entry's unit equals the generated entry's unit for the
   same subject.

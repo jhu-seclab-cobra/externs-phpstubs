@@ -58,7 +58,9 @@ format library's: [format model](https://github.com/jhu-seclab-cobra/commons-php
   *sink* (port, vulnerability type), a *source* (produced source kinds,
   site, key patterns), a *sanitizer* (neutralized vulnerability types), a *flow* (one
   propagation pair), a *characters* (the bytes the result may hold, the
-  whole section in one Fact), a *returns* (the return kind), a *throws* (the
+  whole section in one Fact), a *returns* (the return kind, the callback
+  declarations and the effects assertion of the Value unit, the assertion
+  kept only from a set whose provenance states `manual`), a *throws* (the
   exception classes the subject's own implementation may throw, the whole
   section in one Fact, so the empty set states it throws none). Every Fact of every
   entry is present; the record ranks none of them against a call.

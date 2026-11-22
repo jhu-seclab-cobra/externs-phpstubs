@@ -96,7 +96,9 @@ members only.
 - **Behavior:** every consumer set decodes through
   `DocumentSetLoader.load(opener, vocabulary, mapping = null)` against the
   vocabulary accumulated so far; a set without `provenance.yaml` mounts as
-  `Verification.MANUAL`. The receiver is unchanged.
+  `Verification.MANUAL` for rank and states no provenance, so its Value
+  units project no effects assertion (`ReturnsFact` below). The receiver
+  is unchanged.
 - **Errors:** `StubIndexNotFoundException` (absent manifest or document),
   `StubIndexInvalidException` (any other set-load failure, cause attached).
 
@@ -130,7 +132,7 @@ for an unconditional entry).
 | `SanitizerFact` | `vulnTypes: Set<VulnTypeId>`, `check: ArgumentCheck?` | one `SanitizerDecl` |
 | `FlowFact` | `from: Port.Input`, `to: Port` | one `Propagation` |
 | `CharactersFact` | `bound: CharacterBound` | the `characters` section, whole: the bytes the result may hold; the bound keeps its at-least-one-field invariant |
-| `ReturnsFact` | `kind: ReturnKind`, `callbacks: List<CallbackInvocation>` | the return classification and invocation declarations of the value unit |
+| `ReturnsFact` | `kind: ReturnKind`, `callbacks: List<CallbackInvocation>`, `effects: List<Nothing>?` | the return classification, invocation declarations and effects assertion of the winning value unit; `effects` is the empty list only when that unit's entry states `effects: []` and its set's `provenance.yaml` states Verification `manual`, and null otherwise, including for a set without `provenance.yaml` |
 | `ThrowsFact` | `classes: Set<ClassSubject>` | the `throws` section, whole: the empty set states the subject throws none |
 
 ### VulnType, SourceKind (enums)

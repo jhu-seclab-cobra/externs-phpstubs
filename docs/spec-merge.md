@@ -15,9 +15,9 @@ policy, set provenance; a mapped set arrives translated into the Canonical
 Vocabulary), and the default Precedence over verification kinds. Output:
 the accumulated vocabulary, the policy matrix, and the entry in force for
 each (subject, condition, unit) key stated by any set — six units:
-signature, value (returns with propagation and characters), sources,
-sinks, sanitizers, throws — each with the rank and position of the set
-that stated it, keys ordered by the mount order of their subject's and
+signature, value (returns with propagation, characters, callbacks and
+effects), sources, sinks, sanitizers, throws — each with the rank,
+position and stated provenance of the set that stated it, keys ordered by the mount order of their subject's and
 condition's first entry. Correctness: per key the highest-ranked set's
 entry is in force and, among equal ranks, the later mounted; an entry is
 in force only for the keys it states; the result is immutable and equal
@@ -33,24 +33,24 @@ merge(sets, precedence):
         rows += set.policy
         rank = rank(precedence, set.provenance.verification or precedence.default)
         for entry in set.entries:
-            mounted.append((position, rank, entry))
+            mounted.append((position, rank, set.provenance, entry))   # set.provenance: none without provenance.yaml
     inForce = fold(mounted)
     return read_only(vocab, matrix(rows), inForce, keyClassAliases(inForce))
 
 fold(mounted):
-    inForce = {}                                       # subject → condition → unit → (e, rank, position)
-    for (position, rank, e) in mounted, in order:      # slots in mount order of the first entry
+    inForce = {}                                       # subject → condition → unit → (e, rank, position, provenance)
+    for (position, rank, provenance, e) in mounted, in order:   # slots in mount order of the first entry
         require e.condition = none or e.signature = none   # conditional signature → failure
         add slot inForce[e.subject][e.condition] if absent
-    for (position, rank, e) in mounted
+    for (position, rank, provenance, e) in mounted
             sorted by numeric rank descending, then position ascending, stable:
         for unit in declaredUnits(e):
-            inForce[e.subject][e.condition][unit] = (e, rank, position)
+            inForce[e.subject][e.condition][unit] = (e, rank, position, provenance)
     return inForce                                     # the last write per key is in force
 
 declaredUnits(e):
     { signature  if e.signature declared
-      value      if e.body.returns declared            # returns + propagation + characters
+      value      if e.body.returns declared            # returns + propagation + characters + callbacks + effects
       sources    if e.body.sources declared
       sinks      if e.body.sinks declared
       sanitizers if e.body.sanitizers declared
@@ -86,6 +86,9 @@ force for `(s, none, signature)`, or none; its Facts are the elements of
 every entry in force for a key that starts with `s`, each carrying that
 key's condition, in condition order, then unit order (signature, value,
 sources, sinks, sanitizers, throws), then document order.
+
+Replacement of the Value unit replaces its effects assertion under the existing subject, condition and unit key: the value entry in force supplies the returns, flows, characters, callback declarations and effects assertion together, and a replacing entry without `effects` leaves the key with no assertion.
+The existing `ReturnsFact` of the winning unit carries the assertion with the return classification and callback declarations, and only when the provenance in force for that key is a Set Provenance with Verification `manual`. A set without `provenance.yaml`, which ranks as manual, and a set stating `generated` withhold the assertion: rank orders entries, while the assertion requires a set reviewed by hand.
 
 ### Edge Cases
 
