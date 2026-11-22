@@ -8,6 +8,7 @@ import edu.jhu.cobra.commons.phpmodels.ModelEntry
 import edu.jhu.cobra.commons.phpmodels.ModelSubject
 import edu.jhu.cobra.commons.phpmodels.PolicyRow
 import edu.jhu.cobra.commons.phpmodels.ResourceOpener
+import edu.jhu.cobra.commons.phpmodels.SetProvenance
 import edu.jhu.cobra.commons.phpmodels.VariableSubject
 import edu.jhu.cobra.commons.phpmodels.Verification
 import edu.jhu.cobra.commons.phpmodels.Vocabulary
@@ -15,13 +16,15 @@ import edu.jhu.cobra.commons.phpmodels.VocabularyMapping
 import java.io.InputStream
 
 /**
- * One document set as mounted: its position in mount order, its verification kind, the vocabulary and
- * policy rows it declares, and its entries, each paired with the PHP extension its document path yields
- * for the generated set and null for every other set.
+ * One document set as mounted: its position in mount order, its verification kind, the set provenance its
+ * `provenance.yaml` states, the vocabulary and policy rows it declares, and its entries, each paired with the
+ * PHP extension its document path yields for the generated set and null for every other set. [verification]
+ * is the rank input, the fallback for a set without `provenance.yaml`; [provenance] is null for such a set.
  */
 internal data class Mount(
     val position: Int,
     val verification: Verification,
+    val provenance: SetProvenance?,
     val vocabulary: Vocabulary,
     val policy: List<PolicyRow>,
     val entries: List<Pair<ModelEntry, String?>>,
@@ -62,7 +65,7 @@ internal class MountSequence(
             set.provenance?.verification ?: fallback
                 ?: throw StubIndexInvalidException("$root: bundled set declares no provenance")
         val entries = if (generated) generatedEntries(root, set.documents) else set.entries.map { it to null }
-        mounts += Mount(mounts.size, verification, set.vocabulary, set.policy, entries)
+        mounts += Mount(mounts.size, verification, set.provenance, set.vocabulary, set.policy, entries)
         vocabulary = vocabulary.merge(set.vocabulary)
         return this
     }

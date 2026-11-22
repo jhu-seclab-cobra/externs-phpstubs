@@ -12,18 +12,24 @@ import edu.jhu.cobra.commons.phpmodels.OperationSubject
 import edu.jhu.cobra.commons.phpmodels.PolicyRow
 import edu.jhu.cobra.commons.phpmodels.Precedence
 import edu.jhu.cobra.commons.phpmodels.PropertySubject
+import edu.jhu.cobra.commons.phpmodels.SetProvenance
 import edu.jhu.cobra.commons.phpmodels.TaintPolicy
 import edu.jhu.cobra.commons.phpmodels.VariableSubject
+import edu.jhu.cobra.commons.phpmodels.Verification
 import edu.jhu.cobra.commons.phpmodels.Vocabulary
 import java.util.EnumMap
 
 /** The six override units one entry can state; an entry's unit is replaced whole. */
 internal enum class OverrideUnit { SIGNATURE, VALUE, SOURCES, SINKS, SANITIZERS, THROWS }
 
-/** One entry as mounted: its set's position and verification rank, and its extension when derived. */
+/**
+ * One entry as mounted: its set's position, verification rank and stated provenance, and its extension when
+ * derived.
+ */
 private data class Mounted(
     val position: Int,
     val rank: Int,
+    val provenance: SetProvenance?,
     val entry: ModelEntry,
     val extension: String?,
 )
@@ -106,7 +112,7 @@ internal class SetMerge private constructor(
         val signed = slots[null]?.get(OverrideUnit.SIGNATURE)
         val facts = FactLists()
         for ((condition, units) in slots) {
-            for ((unit, item) in units) facts.add(subject, condition, unit, item.entry)
+            for ((unit, item) in units) facts.add(subject, condition, unit, item)
         }
         val record =
             BuiltinRecord(
@@ -150,16 +156,18 @@ internal class SetMerge private constructor(
             owner: ModelSubject,
             condition: ArgPattern?,
             unit: OverrideUnit,
-            entry: ModelEntry,
+            item: Mounted,
         ) {
-            val body = entry.body
+            val body = item.entry.body
             when (unit) {
                 OverrideUnit.SIGNATURE -> {
                     Unit
                 }
 
                 OverrideUnit.VALUE -> {
-                    returns += ReturnsFact(owner, condition, body.returns!!, body.callbacks.orEmpty())
+                    // The assertion requires a set reviewed by hand; a set without provenance ranks as manual only.
+                    val effects = body.effects?.takeIf { item.provenance?.verification == Verification.MANUAL }
+                    returns += ReturnsFact(owner, condition, body.returns!!, body.callbacks.orEmpty(), effects)
                     body.propagation.orEmpty().mapTo(flows) { FlowFact(owner, condition, it.from, it.to) }
                     body.characters?.let { characters += CharactersFact(owner, condition, it) }
                 }
@@ -202,7 +210,9 @@ internal class SetMerge private constructor(
                 vocabulary = vocabulary.merge(mount.vocabulary)
                 rows += mount.policy
                 val rank = precedence.rank(mount.verification)
-                mount.entries.mapTo(mounted) { (entry, extension) -> Mounted(mount.position, rank, entry, extension) }
+                mount.entries.mapTo(mounted) { (entry, extension) ->
+                    Mounted(mount.position, rank, mount.provenance, entry, extension)
+                }
             }
             val merge = SetMerge(vocabulary, TaintPolicy(rows))
             for ((subject, slots) in fold(mounted)) merge.add(subject, slots)

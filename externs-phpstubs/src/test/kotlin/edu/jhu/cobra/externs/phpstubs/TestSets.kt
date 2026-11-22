@@ -3,6 +3,7 @@ package edu.jhu.cobra.externs.phpstubs
 import edu.jhu.cobra.commons.phpmodels.DocumentSet
 import edu.jhu.cobra.commons.phpmodels.DocumentSetLoader
 import edu.jhu.cobra.commons.phpmodels.ResourceOpener
+import edu.jhu.cobra.commons.phpmodels.SetProvenance
 import edu.jhu.cobra.commons.phpmodels.Verification
 import edu.jhu.cobra.commons.phpmodels.Vocabulary
 import edu.jhu.cobra.commons.phpmodels.VocabularyMapping
@@ -39,8 +40,9 @@ sourceKinds:
         vocabulary: String? = VOCABULARY,
         context: Vocabulary = Vocabulary.EMPTY,
         extension: String? = null,
+        provenance: SetProvenance? = SetProvenance("test", verification),
     ): Mount {
         val set = set(document, vocabulary, context)
-        return Mount(position, verification, set.vocabulary, set.policy, set.entries.map { it to extension })
+        return Mount(position, verification, provenance, set.vocabulary, set.policy, set.entries.map { it to extension })
     }
 }

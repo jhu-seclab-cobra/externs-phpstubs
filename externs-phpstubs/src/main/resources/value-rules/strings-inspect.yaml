@@ -1,6 +1,7 @@
 # Hand-maintained value rules set: value units the generated set lacks or states wrongly.
 # String inspection (PHP manual: Strings): measurement, comparison, search, hashing.
-# An entry whose unit differs from the generated one carries the PHP manual reason above it.
+# An entry whose unit differs from the generated one carries the PHP manual reason above it;
+# an entry stating effects: [] carries the php-src implementation and the input domain the assertion covers.
 
 - subject: {function: chr}
   returns: str
@@ -59,9 +60,12 @@
 - subject: {function: stripos}
   returns: any
   propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]
+# php-src (Zend/zend_builtin_functions.c strlen; the ZEND_STRLEN opcode) reads the byte length of the received PHP string
+# and writes no state outside its result, over every PHP string: effects: [].
 - subject: {function: strlen}
   returns: num
   propagation: [{from: argument(0), to: return}]
+  effects: []
 - subject: {function: strnatcasecmp}
   returns: num
   propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]

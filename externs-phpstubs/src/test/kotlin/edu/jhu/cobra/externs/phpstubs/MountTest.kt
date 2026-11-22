@@ -8,6 +8,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertNotNull
+import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 /**
@@ -19,8 +20,10 @@ import kotlin.test.assertTrue
  * - `the generated set rejects an entry without a signature` — verifies the second generated-set rule
  * - `the generated set rejects a conditional entry` — verifies the second generated-set rule's condition half
  * - `the generated set rejects a subject declared by two documents` — verifies the third rule names both documents
- * - `a set without provenance mounts as the fallback or fails` — verifies bundled versus extension handling
- * - `a set with provenance mounts under its declared verification` — verifies the fallback is not applied
+ * - `a set without provenance mounts as the fallback or fails` — verifies bundled versus extension handling and that
+ *   the mount carries no provenance
+ * - `a set with provenance mounts under its declared verification` — verifies the fallback is not applied and the
+ *   mount carries the stated provenance
  * - `an absent manifest or document is not found` — verifies absence classification
  * - `a malformed document is invalid with its cause` — verifies invalidity classification
  * - `a manifest listing a document twice is invalid` — verifies the set's duplicate rule surfaces
@@ -84,6 +87,7 @@ internal class MountTest {
     fun `a set without provenance mounts as the fallback or fails`() {
         val manual = MountSequence().mount("/models-test/", StubResources.opener("/models-test/")).toList().single()
         assertEquals(Verification.MANUAL, manual.verification)
+        assertNull(manual.provenance)
         assertTrue(manual.entries.all { it.second == null })
         val failure =
             assertFailsWith<StubIndexInvalidException> {
@@ -97,6 +101,7 @@ internal class MountTest {
         val root = "/consumer-generated/"
         val mount = MountSequence().mount(root, StubResources.opener(root)).toList().single()
         assertEquals(Verification.GENERATED, mount.verification)
+        assertEquals(Verification.GENERATED, mount.provenance?.verification)
     }
 
     @Test

@@ -34,6 +34,10 @@ import kotlin.test.assertTrue
  * - `every value rules entry is an unsigned entry asserting only the value unit` — verifies the shape rule
  * - `every value rules subject is a generated entry` — verifies existence in the generated set
  * - `no value rules unit repeats the generated unit` — verifies each unconditional unit differs from the generated one
+ * - `strlen is the one bundled record carrying the effects assertion` — verifies no other function or method of the
+ *   bundled merge carries `effects`
+ * - `the strlen returns fact carries the effects assertion at lookup` — verifies the manual provenance of the value
+ *   rules set lets the assertion through, and that session_id, hex2bin, cli_get_process_title and gc_enabled carry none
  * - `mode-switching subjects carry a conditional entry and an unconditional one` — verifies print_r and var_export
  * - `representative units follow the PHP manual` — verifies typed results and flow sets
  * - `character bounds follow the PHP manual` — verifies the copied ports of strtr, str_replace, and substr and
@@ -139,6 +143,21 @@ internal class ValueRulesSetTest {
     }
 
     @Test
+    fun `strlen is the one bundled record carrying the effects assertion`() {
+        val stating = (PhpStubs.functions + PhpStubs.methods).filter { record -> record.returns.any { it.effects != null } }
+        assertEquals(listOf<ModelSubject>(FunctionSubject("strlen")), stating.map { it.subject })
+    }
+
+    @Test
+    fun `the strlen returns fact carries the effects assertion at lookup`() {
+        assertEquals(emptyList(), assertNotNull(PhpStubs.function("strlen")).returns.single().effects)
+        for (name in listOf("session_id", "hex2bin", "cli_get_process_title", "gc_enabled")) {
+            val returns = assertNotNull(PhpStubs.function(name), name).returns
+            assertTrue(returns.all { it.effects == null }, name)
+        }
+    }
+
+    @Test
     fun `mode-switching subjects carry a conditional entry and an unconditional one`() {
         for (name in listOf("print_r", "var_export")) {
             val branches = rules.entries.filter { it.subject == FunctionSubject(name) }
@@ -152,7 +171,7 @@ internal class ValueRulesSetTest {
 
     @Test
     fun `representative units follow the PHP manual`() {
-        assertEquals(ValueUnit(ReturnKind.NUM, listOf(argumentToReturn(0))), unitOf("strlen"))
+        assertEquals(ValueUnit(ReturnKind.NUM, listOf(argumentToReturn(0)), effects = emptyList()), unitOf("strlen"))
         assertEquals(ValueUnit(ReturnKind.STR, emptyList()), unitOf("getenv"))
         assertEquals(ValueUnit(ReturnKind.STR, listOf(argumentToReturn(0))), unitOf("strstr"))
         assertEquals(ValueUnit(ReturnKind.NUM, emptyList()), unitOf("print"))

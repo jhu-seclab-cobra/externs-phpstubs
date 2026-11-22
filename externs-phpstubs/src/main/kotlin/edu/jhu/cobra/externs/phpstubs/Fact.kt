@@ -61,13 +61,22 @@ public data class FlowFact(
     val to: Port,
 ) : Fact
 
-/** The return kind and declared callable invocations of a call's selected value unit. */
+/**
+ * The return kind, declared callable invocations and effects assertion of a call's selected value unit.
+ * [effects] is the empty list only when the winning entry states `effects: []` and its set's provenance states
+ * verification `manual`; it is null otherwise, including for a set without `provenance.yaml`.
+ */
 public data class ReturnsFact(
     override val owner: ModelSubject,
     override val condition: ArgPattern?,
     val kind: ReturnKind,
     val callbacks: List<CallbackInvocation> = emptyList(),
-) : Fact
+    val effects: List<Nothing>? = null,
+) : Fact {
+    init {
+        require(effects.isNullOrEmpty()) { "An effects assertion is the empty list" }
+    }
+}
 
 /**
  * The bytes a call's result may hold: every result byte is a byte of a [CharacterBound.of] port's value and a

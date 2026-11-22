@@ -42,6 +42,12 @@ import kotlin.test.assertTrue
  * - `fact lists follow record order then condition order` — verifies enumeration determinism
  * - `equal mount lists merge into equal records` — verifies the fold is a function of its input
  *
+ * The effects assertion of the value unit (spec-merge.md):
+ * - `the effects assertion is replaced with its value unit and other units stay in force` — an unasserted value
+ *   entry of a later mount drops the assertion; the sinks, throws and signature units keep their entries
+ * - `the effects assertion requires a set provenance stating manual` — a set without provenance and a set whose
+ *   provenance states generated withhold it
+ *
  * Class signatures with handler tables (design-extraction-handlers.md, Override Unit):
  * - `a class signature passes through the merge with every handler table` — complete, partial and unavailable tables
  * - `a manual signature replaces the generated one whole` — classifier, parent, interfaces, finality and tables
@@ -271,6 +277,39 @@ internal class SetMergeTest {
             )
         }
         assertEquals(SetMerge.of(mounts()).records, SetMerge.of(mounts()).records)
+    }
+
+    // ========== the effects assertion of the value unit ==========
+
+    private val asserted = "- subject: {function: f}\n  returns: num\n  effects: []\n"
+
+    @Test
+    fun `the effects assertion is replaced with its value unit and other units stay in force`() {
+        val base = TestSets.mount(0, Verification.GENERATED, "$generated\n  throws: []\n", extension = "standard")
+        val stating = TestSets.mount(1, Verification.MANUAL, asserted)
+        val kept = SetMerge.of(listOf(base, stating)).functions.getValue(f)
+        assertEquals(emptyList(), kept.returns.single().effects)
+        assertEquals(VulnTypeId("sqli"), kept.sinkFacts.single().vulnType)
+        assertEquals(emptySet(), kept.throws.single().classes)
+        assertEquals("standard", kept.extension)
+        val unasserted = TestSets.mount(2, Verification.MANUAL, "- subject: {function: f}\n  returns: str\n")
+        val replaced = SetMerge.of(listOf(base, stating, unasserted)).functions.getValue(f)
+        assertNull(replaced.returns.single().effects)
+        assertEquals(ReturnKind.STR, replaced.returns.single().kind)
+        assertEquals(VulnTypeId("sqli"), replaced.sinkFacts.single().vulnType)
+        assertEquals(emptySet(), replaced.throws.single().classes)
+    }
+
+    @Test
+    fun `the effects assertion requires a set provenance stating manual`() {
+        val withoutProvenance = TestSets.mount(0, Verification.MANUAL, asserted, provenance = null)
+        val generatedSet = TestSets.mount(0, Verification.GENERATED, asserted)
+        listOf(withoutProvenance, generatedSet).forEach { mount ->
+            val record = SetMerge.of(listOf(mount)).functions.getValue(f)
+            val returns = record.returns.single()
+            assertEquals(ReturnKind.NUM, returns.kind)
+            assertNull(returns.effects)
+        }
     }
 
     // ========== class signatures with handler tables ==========
