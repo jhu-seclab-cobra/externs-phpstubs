@@ -10,7 +10,7 @@ plugins {
 }
 
 group = "edu.jhu.cobra"
-version = "0.13.0"
+version = libs.versions.projectVersion.get()
 
 val minJavaProperty = providers.gradleProperty("minJava").get()
 val minJava =
@@ -45,6 +45,17 @@ kotlin {
     }
 }
 
+java {
+    sourceCompatibility = targetJavaVersion
+    targetCompatibility = targetJavaVersion
+    withSourcesJar()
+    withJavadocJar()
+}
+
+tasks.withType<JavaCompile>().configureEach {
+    options.release.set(minJava)
+}
+
 tasks.test {
     useJUnitPlatform {
         if (!project.hasProperty("performance")) {
@@ -56,6 +67,31 @@ tasks.test {
         testLogging {
             showStandardStreams = true
         }
+    }
+}
+
+ktlint {
+    version.set(libs.versions.ktlintEngine.get())
+    verbose.set(true)
+    android.set(false)
+    outputToConsole.set(true)
+    filter {
+        exclude("**/generated/**")
+        exclude("**/build/**")
+    }
+}
+
+detekt {
+    // Resolve the repository's own config even when this module is embedded
+    // as a subproject of an enclosing build.
+    config.setFrom(files("${projectDir.parentFile}/config/detekt/detekt.yml"))
+    buildUponDefaultConfig = true
+    parallel = true
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") { from(components["java"]) }
     }
 }
 
@@ -94,38 +130,4 @@ tasks.withType<ProcessResources>().configureEach {
             setDir.resolve("index.txt").writeText(yamlFiles.joinToString("\n") + "\n")
         }
     }
-}
-
-java {
-    sourceCompatibility = targetJavaVersion
-    targetCompatibility = targetJavaVersion
-    withSourcesJar()
-    withJavadocJar()
-}
-
-tasks.withType<JavaCompile>().configureEach {
-    options.release.set(minJava)
-}
-
-publishing {
-    publications { create<MavenPublication>("maven") { from(components["java"]) } }
-}
-
-ktlint {
-    version.set("1.8.0")
-    verbose.set(true)
-    android.set(false)
-    outputToConsole.set(true)
-    filter {
-        exclude("**/generated/**")
-        exclude("**/build/**")
-    }
-}
-
-detekt {
-    // Resolve the repository's own config even when this module is embedded
-    // as a subproject of an enclosing build.
-    config.setFrom(files("${projectDir.parentFile}/config/detekt/detekt.yml"))
-    buildUponDefaultConfig = true
-    parallel = true
 }
