@@ -11,7 +11,7 @@ import kotlin.test.assertTrue
 /**
  * Tests for the data of scheme injection in the merged bundled sets.
  *
- * - `scheme injection declares no sinks before context reading is available` — preserves existing Finding types
+ * - `scheme injection declares the HTML output ports` — both language output constructs
  * - `a value transform covers scheme injection when it covers every other type` — verifies the all-types transforms
  * - `escapes cover scheme injection exactly when they encode the characters that fix a scheme` — verifies the named lists
  * - `the server superglobal splits on the keys that hold the request path` — verifies the two source facts
@@ -24,8 +24,13 @@ internal class SchemeDataTest {
         PhpStubs.sanitizerFacts.filter { it.owner == FunctionSubject(name) }.map { it.vulnTypes }
 
     @Test
-    fun `scheme injection declares no sinks before context reading is available`() {
-        assertTrue(PhpStubs.sinkFacts.none { it.vulnType == scheme })
+    fun `scheme injection declares the HTML output ports`() {
+        val owners =
+            PhpStubs.sinkFacts
+                .filter { it.vulnType == scheme }
+                .map { it.owner }
+                .toSet()
+        assertEquals(setOf(FunctionSubject("echo"), FunctionSubject("print")), owners)
         assertTrue(PhpStubs.sinkFacts.any { it.vulnType == VulnType.XSS.id })
     }
 

@@ -191,6 +191,8 @@
   sinks:
     - port: argument(0)
       vulnType: html
+    - port: argument(0)
+      vulnType: scheme
 - subject:
     function: eval
   sinks:
@@ -721,6 +723,8 @@
   sinks:
     - port: argument(0)
       vulnType: html
+    - port: argument(0)
+      vulnType: scheme
 - subject:
     function: readfile
   sinks:

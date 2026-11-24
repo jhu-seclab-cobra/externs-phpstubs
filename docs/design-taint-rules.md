@@ -38,7 +38,7 @@ target states cover the leading URL position before a bare value or inside eithe
 quote form, including an unfinished ASCII scheme name. The recognized attributes
 are `href`, `src`, `action`, `formaction` and `xlink:href`. Only the format's byte
 transition function is provided. Nested script, style and raw-text languages are
-outside this declaration. The absent sink declarations are listed in [Open Gaps](#open-gaps).
+outside this declaration.
 
 Every document carries a header naming its provenance. Entry forms match
 the taint set's table in [design-taint.md](design-taint.md). The conditional sink entry is `SimpleXMLElement::__construct`, `when: [_, _, true]`.
@@ -57,6 +57,7 @@ Each row below states the dangerous input consumed by the builtin. Receiver-trig
 
 | Builtins | Port | Kinds and condition |
 |----------|------|---------------------|
+| `echo`, `print` | `argument(0)` | `scheme` at a URL-start Tokenizer state |
 | `finfo::__construct` | `argument(1)` | `file` |
 | `SoapClient::__construct` | `argument(0)` | `ssrf` |
 | `SimpleXMLElement::__construct` | `argument(0)` | `ssrf`, `file` when `dataIsURL` is true |
@@ -116,12 +117,5 @@ Set loading raises the errors specified in [the resource design](design.md#excep
 
 ## Open Gaps
 
-- Scheme injection: the canonical `schemei` declaration, its Tokenizer language,
-  sanitizer coverage and policy rows load, but the bundled sets declare no
-  `scheme` sink (`schemei` after mapping). A consumer must determine the leading
-  position of an HTML URL attribute before those sink Facts can distinguish it
-  from another use of the bytes. A scheme sink at `readgzfile` argument 0 would
-  treat its read path as that output position: `@readgzfile($_GET['u']);` would
-  gain `schemei` beside the existing `pathtrav`, `ssrf` and `xss`. Such scheme
-  sinks are withheld; the data neither supplies nor substitutes a consumer's
-  tokenizer-state query.
+- Scheme injection: `readgzfile` consumes a read path at argument 0.
+  Its HTML output has no argument port giving the position of a URL value.

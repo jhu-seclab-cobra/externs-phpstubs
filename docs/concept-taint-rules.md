@@ -74,8 +74,8 @@ merge: set loader(taint/, …) then set loader(taint-rules/, taint vocabulary, m
   entries among its sinks and sanitizers.
 - **With the merge:** this library loads the set with the same psalm
   mapping as the taint set, extended by the four names declared by the manual set.
-  The type and Tokenizer language load without `scheme` sink assertions;
-  the [resource design](design-taint-rules.md#resource-layout) states this boundary.
+  The [sink declarations](design-taint-rules.md#sink-declarations) pair the
+  `echo` and `print` ports with the Tokenizer language for `scheme`.
   The sanitizers that encode the characters that fix a scheme
   (`urlencode`, `rawurlencode`, `curl_escape`) and the value-typing
   sanitizers cover `scheme`; the HTML escapes do not.
