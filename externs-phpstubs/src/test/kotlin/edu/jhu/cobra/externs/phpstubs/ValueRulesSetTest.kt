@@ -48,6 +48,8 @@ import kotlin.test.assertTrue
  *   a result-covering sanitizer fact declares a returns fact, and that `hash` carries each of its four arguments to the result
  * - `an escaper or encoder of the sanitizer facts carries its argument to the result` — verifies the flow into the
  *   result and the kept sanitizer fact of rawurlencode, the pg_escape functions and the escape methods
+ * - `a BSON decoder carries its document argument to the result` — verifies the merged record of `mongodb\bson\tophp`
+ *   takes the flow from argument 0 alone, so its type map argument passes nothing
  * - `str position functions admit false beside the integer` — verifies the return bound of strpos, stripos, strrpos,
  *   and strripos, and that strspn and strcspn keep the integer bound
  * - `a num returns bound admits no false or null` — verifies each num rule against the reflected return type
@@ -515,5 +517,12 @@ internal class ValueRulesSetTest {
             (0..3).map(Port::Argument),
             hash.flows.filter { it.to == Port.Return }.map { it.from },
         )
+    }
+
+    // The type map of toPHP only selects the container class of the result.
+    @Test
+    fun `a BSON decoder carries its document argument to the result`() {
+        val record = assertNotNull(PhpStubs.function("mongodb\\bson\\tophp"))
+        assertEquals(listOf(Port.Argument(0) to Port.Return), record.flows.map { it.from to it.to })
     }
 }
