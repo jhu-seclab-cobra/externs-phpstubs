@@ -21,8 +21,10 @@ internal class MemberSignaturesTest {
         val file = assertNotNull(PhpStubs.property("Exception", "file")?.propertySignature)
         assertEquals("string", file.type.raw)
         assertEquals(Visibility.PROTECTED, file.visibility)
-        assertEquals("int", assertNotNull(PhpStubs.property("Exception::\$line")?.propertySignature).type.raw)
-        assertEquals("?DateTimeInterface", assertNotNull(PhpStubs.property("DatePeriod", "start")?.propertySignature).type.raw)
+        val line = assertNotNull(PhpStubs.property("Exception::\$line")?.propertySignature)
+        assertEquals("int", line.type.raw)
+        val start = assertNotNull(PhpStubs.property("DatePeriod", "start")?.propertySignature)
+        assertEquals("?DateTimeInterface", start.type.raw)
     }
 
     @Test
@@ -32,8 +34,10 @@ internal class MemberSignaturesTest {
 
     @Test
     fun `a typed class constant declares its type`() {
-        assertEquals("string", assertNotNull(PhpStubs.classConstant("DateTimeInterface", "ATOM")?.typedSignature).type.raw)
-        assertEquals("int", assertNotNull(PhpStubs.classConstant("ArrayObject::STD_PROP_LIST")?.typedSignature).type.raw)
+        val atom = assertNotNull(PhpStubs.classConstant("DateTimeInterface", "ATOM")?.typedSignature)
+        assertEquals("string", atom.type.raw)
+        val list = assertNotNull(PhpStubs.classConstant("ArrayObject::STD_PROP_LIST")?.typedSignature)
+        assertEquals("int", list.type.raw)
     }
 
     @Test
