@@ -747,3 +747,8 @@
       optional: true
     returnType: void
   throws: []
+- subject:
+    property: Random\Randomizer::$engine
+  signature:
+    type: Random\Engine
+    visibility: public

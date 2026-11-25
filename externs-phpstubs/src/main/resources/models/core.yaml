@@ -3894,3 +3894,119 @@
       default: '0'
     returnType: never
   throws: []
+- subject:
+    class_constant: Attribute::IS_REPEATABLE
+  signature:
+    type: int
+- subject:
+    class_constant: Attribute::TARGET_ALL
+  signature:
+    type: int
+- subject:
+    class_constant: Attribute::TARGET_CLASS
+  signature:
+    type: int
+- subject:
+    class_constant: Attribute::TARGET_CLASS_CONSTANT
+  signature:
+    type: int
+- subject:
+    class_constant: Attribute::TARGET_CONSTANT
+  signature:
+    type: int
+- subject:
+    class_constant: Attribute::TARGET_FUNCTION
+  signature:
+    type: int
+- subject:
+    class_constant: Attribute::TARGET_METHOD
+  signature:
+    type: int
+- subject:
+    class_constant: Attribute::TARGET_PARAMETER
+  signature:
+    type: int
+- subject:
+    class_constant: Attribute::TARGET_PROPERTY
+  signature:
+    type: int
+- subject:
+    property: Attribute::$flags
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: Deprecated::$message
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: Deprecated::$since
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: Error::$file
+  signature:
+    type: string
+    visibility: protected
+- subject:
+    property: Error::$line
+  signature:
+    type: int
+    visibility: protected
+- subject:
+    property: Error::$previous
+  signature:
+    type: ?Throwable
+    visibility: private
+- subject:
+    property: Error::$string
+  signature:
+    type: string
+    visibility: private
+- subject:
+    property: Error::$trace
+  signature:
+    type: array
+    visibility: private
+- subject:
+    property: ErrorException::$severity
+  signature:
+    type: int
+    visibility: protected
+- subject:
+    property: Exception::$file
+  signature:
+    type: string
+    visibility: protected
+- subject:
+    property: Exception::$line
+  signature:
+    type: int
+    visibility: protected
+- subject:
+    property: Exception::$previous
+  signature:
+    type: ?Throwable
+    visibility: private
+- subject:
+    property: Exception::$string
+  signature:
+    type: string
+    visibility: private
+- subject:
+    property: Exception::$trace
+  signature:
+    type: array
+    visibility: private
+- subject:
+    property: NoDiscard::$message
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: SensitiveParameterValue::$value
+  signature:
+    type: mixed
+    visibility: private

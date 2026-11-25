@@ -2294,3 +2294,208 @@
   signature:
     returnType: bool
   throws: [error, mysqli_sql_exception]
+- subject:
+    property: mysqli::$affected_rows
+  signature:
+    type: int|string
+    visibility: public
+- subject:
+    property: mysqli::$client_info
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: mysqli::$client_version
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: mysqli::$connect_errno
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: mysqli::$connect_error
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: mysqli::$errno
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: mysqli::$error
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: mysqli::$error_list
+  signature:
+    type: array
+    visibility: public
+- subject:
+    property: mysqli::$field_count
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: mysqli::$host_info
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: mysqli::$info
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: mysqli::$insert_id
+  signature:
+    type: int|string
+    visibility: public
+- subject:
+    property: mysqli::$protocol_version
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: mysqli::$server_info
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: mysqli::$server_version
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: mysqli::$sqlstate
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: mysqli::$thread_id
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: mysqli::$warning_count
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: mysqli_driver::$client_info
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: mysqli_driver::$client_version
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: mysqli_driver::$driver_version
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: mysqli_driver::$report_mode
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: mysqli_result::$current_field
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: mysqli_result::$field_count
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: mysqli_result::$lengths
+  signature:
+    type: ?array
+    visibility: public
+- subject:
+    property: mysqli_result::$num_rows
+  signature:
+    type: int|string
+    visibility: public
+- subject:
+    property: mysqli_result::$type
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: mysqli_sql_exception::$sqlstate
+  signature:
+    type: string
+    visibility: protected
+- subject:
+    property: mysqli_stmt::$affected_rows
+  signature:
+    type: int|string
+    visibility: public
+- subject:
+    property: mysqli_stmt::$errno
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: mysqli_stmt::$error
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: mysqli_stmt::$error_list
+  signature:
+    type: array
+    visibility: public
+- subject:
+    property: mysqli_stmt::$field_count
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: mysqli_stmt::$id
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: mysqli_stmt::$insert_id
+  signature:
+    type: int|string
+    visibility: public
+- subject:
+    property: mysqli_stmt::$num_rows
+  signature:
+    type: int|string
+    visibility: public
+- subject:
+    property: mysqli_stmt::$param_count
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: mysqli_stmt::$sqlstate
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: mysqli_warning::$errno
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: mysqli_warning::$message
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: mysqli_warning::$sqlstate
+  signature:
+    type: string
+    visibility: public

@@ -747,3 +747,473 @@
       type: string
     returnType: bool
   throws: [valueerror]
+- subject:
+    class_constant: ZipArchive::AFL_CREATE_OR_KEEP_FILE_FOR_EMPTY_ARCHIVE
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::AFL_IS_TORRENTZIP
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::AFL_RDONLY
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::AFL_WANT_TORRENTZIP
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::CHECKCONS
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::CM_BZIP2
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::CM_DEFAULT
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::CM_DEFLATE
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::CM_DEFLATE64
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::CM_IMPLODE
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::CM_LZ77
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::CM_LZMA
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::CM_LZMA2
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::CM_PKWARE_IMPLODE
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::CM_PPMD
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::CM_REDUCE_1
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::CM_REDUCE_2
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::CM_REDUCE_3
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::CM_REDUCE_4
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::CM_SHRINK
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::CM_STORE
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::CM_TERSE
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::CM_WAVPACK
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::CM_XZ
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::CM_ZSTD
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::CREATE
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::EM_AES_128
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::EM_AES_192
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::EM_AES_256
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::EM_NONE
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::EM_TRAD_PKWARE
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::EM_UNKNOWN
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::ER_CANCELLED
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::ER_CHANGED
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::ER_CLOSE
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::ER_COMPNOTSUPP
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::ER_COMPRESSED_DATA
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::ER_CRC
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::ER_DATA_LENGTH
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::ER_DELETED
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::ER_ENCRNOTSUPP
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::ER_EOF
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::ER_EXISTS
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::ER_INCONS
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::ER_INTERNAL
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::ER_INUSE
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::ER_INVAL
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::ER_MEMORY
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::ER_MULTIDISK
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::ER_NOENT
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::ER_NOPASSWD
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::ER_NOT_ALLOWED
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::ER_NOZIP
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::ER_OK
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::ER_OPEN
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::ER_OPNOTSUPP
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::ER_RDONLY
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::ER_READ
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::ER_REMOVE
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::ER_RENAME
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::ER_SEEK
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::ER_TELL
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::ER_TMPOPEN
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::ER_TRUNCATED_ZIP
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::ER_WRITE
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::ER_WRONGPASSWD
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::ER_ZIPCLOSED
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::ER_ZLIB
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::EXCL
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::FL_CENTRAL
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::FL_COMPRESSED
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::FL_ENCRYPTED
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::FL_ENC_CP437
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::FL_ENC_GUESS
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::FL_ENC_RAW
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::FL_ENC_STRICT
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::FL_ENC_UTF_8
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::FL_LOCAL
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::FL_NOCASE
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::FL_NODIR
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::FL_OPEN_FILE_NOW
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::FL_OVERWRITE
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::FL_RECOMPRESS
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::FL_UNCHANGED
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::LENGTH_TO_END
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::LENGTH_UNCHECKED
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::LIBZIP_VERSION
+  signature:
+    type: string
+- subject:
+    class_constant: ZipArchive::OPSYS_ACORN_RISC
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::OPSYS_ALTERNATE_MVS
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::OPSYS_AMIGA
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::OPSYS_ATARI_ST
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::OPSYS_BEOS
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::OPSYS_CPM
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::OPSYS_DEFAULT
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::OPSYS_DOS
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::OPSYS_MACINTOSH
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::OPSYS_MVS
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::OPSYS_OPENVMS
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::OPSYS_OS_2
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::OPSYS_OS_400
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::OPSYS_OS_X
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::OPSYS_TANDEM
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::OPSYS_UNIX
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::OPSYS_VFAT
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::OPSYS_VM_CMS
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::OPSYS_VSE
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::OPSYS_WINDOWS_NTFS
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::OPSYS_Z_SYSTEM
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::OVERWRITE
+  signature:
+    type: int
+- subject:
+    class_constant: ZipArchive::RDONLY
+  signature:
+    type: int
+- subject:
+    property: ZipArchive::$comment
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: ZipArchive::$filename
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: ZipArchive::$lastId
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: ZipArchive::$numFiles
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: ZipArchive::$status
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: ZipArchive::$statusSys
+  signature:
+    type: int
+    visibility: public

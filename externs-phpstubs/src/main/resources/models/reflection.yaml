@@ -2985,3 +2985,175 @@
   signature:
     returnType: array
   throws: [error]
+- subject:
+    class_constant: ReflectionAttribute::IS_INSTANCEOF
+  signature:
+    type: int
+- subject:
+    class_constant: ReflectionClass::IS_EXPLICIT_ABSTRACT
+  signature:
+    type: int
+- subject:
+    class_constant: ReflectionClass::IS_FINAL
+  signature:
+    type: int
+- subject:
+    class_constant: ReflectionClass::IS_IMPLICIT_ABSTRACT
+  signature:
+    type: int
+- subject:
+    class_constant: ReflectionClass::IS_READONLY
+  signature:
+    type: int
+- subject:
+    class_constant: ReflectionClass::SKIP_DESTRUCTOR
+  signature:
+    type: int
+- subject:
+    class_constant: ReflectionClass::SKIP_INITIALIZATION_ON_SERIALIZE
+  signature:
+    type: int
+- subject:
+    class_constant: ReflectionClassConstant::IS_FINAL
+  signature:
+    type: int
+- subject:
+    class_constant: ReflectionClassConstant::IS_PRIVATE
+  signature:
+    type: int
+- subject:
+    class_constant: ReflectionClassConstant::IS_PROTECTED
+  signature:
+    type: int
+- subject:
+    class_constant: ReflectionClassConstant::IS_PUBLIC
+  signature:
+    type: int
+- subject:
+    class_constant: ReflectionFunction::IS_DEPRECATED
+  signature:
+    type: int
+- subject:
+    class_constant: ReflectionMethod::IS_ABSTRACT
+  signature:
+    type: int
+- subject:
+    class_constant: ReflectionMethod::IS_FINAL
+  signature:
+    type: int
+- subject:
+    class_constant: ReflectionMethod::IS_PRIVATE
+  signature:
+    type: int
+- subject:
+    class_constant: ReflectionMethod::IS_PROTECTED
+  signature:
+    type: int
+- subject:
+    class_constant: ReflectionMethod::IS_PUBLIC
+  signature:
+    type: int
+- subject:
+    class_constant: ReflectionMethod::IS_STATIC
+  signature:
+    type: int
+- subject:
+    class_constant: ReflectionProperty::IS_ABSTRACT
+  signature:
+    type: int
+- subject:
+    class_constant: ReflectionProperty::IS_FINAL
+  signature:
+    type: int
+- subject:
+    class_constant: ReflectionProperty::IS_PRIVATE
+  signature:
+    type: int
+- subject:
+    class_constant: ReflectionProperty::IS_PRIVATE_SET
+  signature:
+    type: int
+- subject:
+    class_constant: ReflectionProperty::IS_PROTECTED
+  signature:
+    type: int
+- subject:
+    class_constant: ReflectionProperty::IS_PROTECTED_SET
+  signature:
+    type: int
+- subject:
+    class_constant: ReflectionProperty::IS_PUBLIC
+  signature:
+    type: int
+- subject:
+    class_constant: ReflectionProperty::IS_READONLY
+  signature:
+    type: int
+- subject:
+    class_constant: ReflectionProperty::IS_STATIC
+  signature:
+    type: int
+- subject:
+    class_constant: ReflectionProperty::IS_VIRTUAL
+  signature:
+    type: int
+- subject:
+    property: ReflectionAttribute::$name
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: ReflectionClass::$name
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: ReflectionClassConstant::$class
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: ReflectionClassConstant::$name
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: ReflectionConstant::$name
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: ReflectionExtension::$name
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: ReflectionFunctionAbstract::$name
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: ReflectionMethod::$class
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: ReflectionParameter::$name
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: ReflectionProperty::$class
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: ReflectionProperty::$name
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: ReflectionZendExtension::$name
+  signature:
+    type: string
+    visibility: public

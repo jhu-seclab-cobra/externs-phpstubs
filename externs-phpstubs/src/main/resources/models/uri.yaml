@@ -815,3 +815,23 @@
       type: bool
     returnType: mixed
   throws: []
+- subject:
+    property: Uri\WhatWg\InvalidUrlException::$errors
+  signature:
+    type: array
+    visibility: public
+- subject:
+    property: Uri\WhatWg\UrlValidationError::$context
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: Uri\WhatWg\UrlValidationError::$failure
+  signature:
+    type: bool
+    visibility: public
+- subject:
+    property: Uri\WhatWg\UrlValidationError::$type
+  signature:
+    type: Uri\WhatWg\UrlValidationErrorType
+    visibility: public

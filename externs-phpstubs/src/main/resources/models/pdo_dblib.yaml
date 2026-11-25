@@ -52,3 +52,31 @@
                 results: [num]
           - slot: operation
             absent: true
+- subject:
+    class_constant: Pdo\Dblib::ATTR_CONNECTION_TIMEOUT
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Dblib::ATTR_DATETIME_CONVERT
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Dblib::ATTR_QUERY_TIMEOUT
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Dblib::ATTR_SKIP_EMPTY_ROWSETS
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Dblib::ATTR_STRINGIFY_UNIQUEIDENTIFIER
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Dblib::ATTR_TDS_VERSION
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Dblib::ATTR_VERSION
+  signature:
+    type: int

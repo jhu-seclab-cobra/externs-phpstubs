@@ -3164,3 +3164,38 @@
       type: string
     returnType: bool
   throws: []
+- subject:
+    property: Directory::$handle
+  signature:
+    type: mixed
+    visibility: public
+- subject:
+    property: Directory::$path
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: php_user_filter::$filtername
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: php_user_filter::$params
+  signature:
+    type: mixed
+    visibility: public
+- subject:
+    property: StreamBucket::$data
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: StreamBucket::$dataLength
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: StreamBucket::$datalen
+  signature:
+    type: int
+    visibility: public

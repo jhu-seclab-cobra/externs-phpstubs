@@ -690,3 +690,159 @@
       type: string
     returnType: FFI\CType
   throws: [ffi\exception]
+- subject:
+    class_constant: FFI::__BIGGEST_ALIGNMENT__
+  signature:
+    type: int
+- subject:
+    class_constant: FFI\CType::ABI_CDECL
+  signature:
+    type: int
+- subject:
+    class_constant: FFI\CType::ABI_DEFAULT
+  signature:
+    type: int
+- subject:
+    class_constant: FFI\CType::ABI_FASTCALL
+  signature:
+    type: int
+- subject:
+    class_constant: FFI\CType::ABI_MS
+  signature:
+    type: int
+- subject:
+    class_constant: FFI\CType::ABI_PASCAL
+  signature:
+    type: int
+- subject:
+    class_constant: FFI\CType::ABI_REGISTER
+  signature:
+    type: int
+- subject:
+    class_constant: FFI\CType::ABI_STDCALL
+  signature:
+    type: int
+- subject:
+    class_constant: FFI\CType::ABI_SYSV
+  signature:
+    type: int
+- subject:
+    class_constant: FFI\CType::ABI_THISCALL
+  signature:
+    type: int
+- subject:
+    class_constant: FFI\CType::ABI_VECTORCALL
+  signature:
+    type: int
+- subject:
+    class_constant: FFI\CType::ATTR_CONST
+  signature:
+    type: int
+- subject:
+    class_constant: FFI\CType::ATTR_GCC_STRUCT
+  signature:
+    type: int
+- subject:
+    class_constant: FFI\CType::ATTR_INCOMPLETE_ARRAY
+  signature:
+    type: int
+- subject:
+    class_constant: FFI\CType::ATTR_INCOMPLETE_TAG
+  signature:
+    type: int
+- subject:
+    class_constant: FFI\CType::ATTR_MS_STRUCT
+  signature:
+    type: int
+- subject:
+    class_constant: FFI\CType::ATTR_PACKED
+  signature:
+    type: int
+- subject:
+    class_constant: FFI\CType::ATTR_UNION
+  signature:
+    type: int
+- subject:
+    class_constant: FFI\CType::ATTR_VARIADIC
+  signature:
+    type: int
+- subject:
+    class_constant: FFI\CType::ATTR_VLA
+  signature:
+    type: int
+- subject:
+    class_constant: FFI\CType::TYPE_ARRAY
+  signature:
+    type: int
+- subject:
+    class_constant: FFI\CType::TYPE_BOOL
+  signature:
+    type: int
+- subject:
+    class_constant: FFI\CType::TYPE_CHAR
+  signature:
+    type: int
+- subject:
+    class_constant: FFI\CType::TYPE_DOUBLE
+  signature:
+    type: int
+- subject:
+    class_constant: FFI\CType::TYPE_ENUM
+  signature:
+    type: int
+- subject:
+    class_constant: FFI\CType::TYPE_FLOAT
+  signature:
+    type: int
+- subject:
+    class_constant: FFI\CType::TYPE_FUNC
+  signature:
+    type: int
+- subject:
+    class_constant: FFI\CType::TYPE_LONGDOUBLE
+  signature:
+    type: int
+- subject:
+    class_constant: FFI\CType::TYPE_POINTER
+  signature:
+    type: int
+- subject:
+    class_constant: FFI\CType::TYPE_SINT16
+  signature:
+    type: int
+- subject:
+    class_constant: FFI\CType::TYPE_SINT32
+  signature:
+    type: int
+- subject:
+    class_constant: FFI\CType::TYPE_SINT64
+  signature:
+    type: int
+- subject:
+    class_constant: FFI\CType::TYPE_SINT8
+  signature:
+    type: int
+- subject:
+    class_constant: FFI\CType::TYPE_STRUCT
+  signature:
+    type: int
+- subject:
+    class_constant: FFI\CType::TYPE_UINT16
+  signature:
+    type: int
+- subject:
+    class_constant: FFI\CType::TYPE_UINT32
+  signature:
+    type: int
+- subject:
+    class_constant: FFI\CType::TYPE_UINT64
+  signature:
+    type: int
+- subject:
+    class_constant: FFI\CType::TYPE_UINT8
+  signature:
+    type: int
+- subject:
+    class_constant: FFI\CType::TYPE_VOID
+  signature:
+    type: int

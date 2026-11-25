@@ -125,3 +125,23 @@
       type: int
     returnType: string
   throws: []
+- subject:
+    property: PhpToken::$id
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: PhpToken::$line
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: PhpToken::$pos
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: PhpToken::$text
+  signature:
+    type: string
+    visibility: public

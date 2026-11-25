@@ -9,7 +9,7 @@ rules: [design.md](design.md).
 
 - **Modules:** `tools/php_src.py` (shared reading, placement, and
   writing), `tools/extract_hierarchy.py`, `tools/extract_signatures.py`,
-  `tools/compile_facts.py` (the call compiler's facts, read by
+  `tools/extract_members.py`, `tools/compile_facts.py` (the call compiler's facts, read by
   `extract_signatures.py`), `tools/named_extras.py` (argument reception),
   `tools/extract_throws.py`; Python 3 standard
   library only. The test
@@ -45,7 +45,7 @@ nothing.
 | `relocate(models, extensions, tool)` | Model root, subject-key/extension map, producer name | Moves entries to extension paths, removes empty documents, returns moved-entry count | I/O errors propagate |
 | `entries(text)` | One document’s text | List of entry spans from one subject header to the next | No domain error |
 
-`append` owns creation of a destination document and its generated header; `placement` only chooses the path. The declaration readers and writers remain shared by hierarchy, signature and throws extraction.
+`append` owns creation of a destination document and its generated header; `placement` only chooses the path. The declaration readers and writers remain shared by hierarchy, signature, member and throws extraction.
 
 ### extract_hierarchy.py
 
@@ -87,6 +87,12 @@ algorithm is in [Effective Handler Extraction](spec-extraction-handlers.md).
 Reads every function and method declaration of the stubs and the call
 compiler and builtin argument parsing of php-src, and rewrites each generated entry's signature. Inputs,
 outputs and rules: [design-extraction-signatures.md](design-extraction-signatures.md).
+
+### extract_members.py
+
+Reads every class-like body of the stubs and adds the typed property and typed class constant entries of
+php-src to the generated documents. Inputs, outputs and rules:
+[design-extraction-signatures.md](design-extraction-signatures.md#member-producer).
 
 ### extract_throws.py
 
@@ -138,10 +144,10 @@ sorted tab-separated line per internal declaration the build reflects.
 
 | Failure | When |
 |---------|------|
-| Unreadable declaration | A stub header, parameter, or return type no rule reads |
+| Unreadable declaration | A stub header, parameter, return type, or property declaration no rule reads |
 | Invalid class alias | An `@alias` tag has no value, or the selected value is outside the class-spelling grammar |
-| Conflicting declarations | Two stubs, or two variants, declare one subject and neither subsumes the other |
-| Undeclared class | A method's class or a throws element is declared by no generated document |
+| Conflicting declarations | Two stubs, or two variants, declare one subject and neither subsumes the other, or declare one property or class constant with different types |
+| Undeclared class | A method's or a member's class, or a throws element, is declared by no generated document |
 | Unresolved class | A class expression no rule resolves reaches an entry's throws |
 | Unknown entry macro | A function entry table uses a macro outside the known set |
 | Undefined Handler | An entry names a Handler no C source defines |
@@ -153,6 +159,7 @@ sorted tab-separated line per internal declaration the build reflects.
 ```text
 python3 tools/extract_hierarchy.py --php-src /path/to/php-src --models /path/to/models-copy
 python3 tools/extract_signatures.py --php-src /path/to/php-src --models /path/to/models-copy
+python3 tools/extract_members.py --php-src /path/to/php-src --models /path/to/models-copy
 python3 tools/extract_throws.py --php-src /path/to/php-src --models /path/to/models-copy
 ```
 

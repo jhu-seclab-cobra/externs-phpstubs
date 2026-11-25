@@ -586,3 +586,163 @@
       type: int
     returnType: bool
   throws: [error, valueerror]
+- subject:
+    class_constant: SQLite3::ALTER_TABLE
+  signature:
+    type: int
+- subject:
+    class_constant: SQLite3::ANALYZE
+  signature:
+    type: int
+- subject:
+    class_constant: SQLite3::ATTACH
+  signature:
+    type: int
+- subject:
+    class_constant: SQLite3::COPY
+  signature:
+    type: int
+- subject:
+    class_constant: SQLite3::CREATE_INDEX
+  signature:
+    type: int
+- subject:
+    class_constant: SQLite3::CREATE_TABLE
+  signature:
+    type: int
+- subject:
+    class_constant: SQLite3::CREATE_TEMP_INDEX
+  signature:
+    type: int
+- subject:
+    class_constant: SQLite3::CREATE_TEMP_TABLE
+  signature:
+    type: int
+- subject:
+    class_constant: SQLite3::CREATE_TEMP_TRIGGER
+  signature:
+    type: int
+- subject:
+    class_constant: SQLite3::CREATE_TEMP_VIEW
+  signature:
+    type: int
+- subject:
+    class_constant: SQLite3::CREATE_TRIGGER
+  signature:
+    type: int
+- subject:
+    class_constant: SQLite3::CREATE_VIEW
+  signature:
+    type: int
+- subject:
+    class_constant: SQLite3::CREATE_VTABLE
+  signature:
+    type: int
+- subject:
+    class_constant: SQLite3::DELETE
+  signature:
+    type: int
+- subject:
+    class_constant: SQLite3::DENY
+  signature:
+    type: int
+- subject:
+    class_constant: SQLite3::DETACH
+  signature:
+    type: int
+- subject:
+    class_constant: SQLite3::DROP_INDEX
+  signature:
+    type: int
+- subject:
+    class_constant: SQLite3::DROP_TABLE
+  signature:
+    type: int
+- subject:
+    class_constant: SQLite3::DROP_TEMP_INDEX
+  signature:
+    type: int
+- subject:
+    class_constant: SQLite3::DROP_TEMP_TABLE
+  signature:
+    type: int
+- subject:
+    class_constant: SQLite3::DROP_TEMP_TRIGGER
+  signature:
+    type: int
+- subject:
+    class_constant: SQLite3::DROP_TEMP_VIEW
+  signature:
+    type: int
+- subject:
+    class_constant: SQLite3::DROP_TRIGGER
+  signature:
+    type: int
+- subject:
+    class_constant: SQLite3::DROP_VIEW
+  signature:
+    type: int
+- subject:
+    class_constant: SQLite3::DROP_VTABLE
+  signature:
+    type: int
+- subject:
+    class_constant: SQLite3::FUNCTION
+  signature:
+    type: int
+- subject:
+    class_constant: SQLite3::IGNORE
+  signature:
+    type: int
+- subject:
+    class_constant: SQLite3::INSERT
+  signature:
+    type: int
+- subject:
+    class_constant: SQLite3::OK
+  signature:
+    type: int
+- subject:
+    class_constant: SQLite3::PRAGMA
+  signature:
+    type: int
+- subject:
+    class_constant: SQLite3::READ
+  signature:
+    type: int
+- subject:
+    class_constant: SQLite3::RECURSIVE
+  signature:
+    type: int
+- subject:
+    class_constant: SQLite3::REINDEX
+  signature:
+    type: int
+- subject:
+    class_constant: SQLite3::SAVEPOINT
+  signature:
+    type: int
+- subject:
+    class_constant: SQLite3::SELECT
+  signature:
+    type: int
+- subject:
+    class_constant: SQLite3::TRANSACTION
+  signature:
+    type: int
+- subject:
+    class_constant: SQLite3::UPDATE
+  signature:
+    type: int
+- subject:
+    class_constant: SQLite3Stmt::EXPLAIN_MODE_EXPLAIN
+  signature:
+    type: int
+- subject:
+    class_constant: SQLite3Stmt::EXPLAIN_MODE_EXPLAIN_QUERY_PLAN
+  signature:
+    type: int
+- subject:
+    class_constant: SQLite3Stmt::EXPLAIN_MODE_PREPARED
+  signature:
+    type: int

@@ -733,3 +733,91 @@
   - from: argument(2)
     to: return
   throws: [error, snmpexception, typeerror, valueerror]
+- subject:
+    class_constant: SNMP::ERRNO_ANY
+  signature:
+    type: int
+- subject:
+    class_constant: SNMP::ERRNO_ERROR_IN_REPLY
+  signature:
+    type: int
+- subject:
+    class_constant: SNMP::ERRNO_GENERIC
+  signature:
+    type: int
+- subject:
+    class_constant: SNMP::ERRNO_MULTIPLE_SET_QUERIES
+  signature:
+    type: int
+- subject:
+    class_constant: SNMP::ERRNO_NOERROR
+  signature:
+    type: int
+- subject:
+    class_constant: SNMP::ERRNO_OID_NOT_INCREASING
+  signature:
+    type: int
+- subject:
+    class_constant: SNMP::ERRNO_OID_PARSING_ERROR
+  signature:
+    type: int
+- subject:
+    class_constant: SNMP::ERRNO_TIMEOUT
+  signature:
+    type: int
+- subject:
+    class_constant: SNMP::VERSION_1
+  signature:
+    type: int
+- subject:
+    class_constant: SNMP::VERSION_2C
+  signature:
+    type: int
+- subject:
+    class_constant: SNMP::VERSION_2c
+  signature:
+    type: int
+- subject:
+    class_constant: SNMP::VERSION_3
+  signature:
+    type: int
+- subject:
+    property: SNMP::$enum_print
+  signature:
+    type: bool
+    visibility: public
+- subject:
+    property: SNMP::$exceptions_enabled
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: SNMP::$info
+  signature:
+    type: array
+    visibility: public
+- subject:
+    property: SNMP::$max_oids
+  signature:
+    type: ?int
+    visibility: public
+- subject:
+    property: SNMP::$oid_increasing_check
+  signature:
+    type: bool
+    visibility: public
+- subject:
+    property: SNMP::$oid_output_format
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: SNMP::$quick_print
+  signature:
+    type: bool
+    visibility: public
+- subject:
+    property: SNMP::$valueretrieval
+  signature:
+    type: int
+    visibility: public

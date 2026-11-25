@@ -171,3 +171,23 @@
       type: object
     returnType: string|null|false
   throws: [error, typeerror]
+- subject:
+    property: XSLTProcessor::$cloneDocument
+  signature:
+    type: bool
+    visibility: public
+- subject:
+    property: XSLTProcessor::$doXInclude
+  signature:
+    type: bool
+    visibility: public
+- subject:
+    property: XSLTProcessor::$maxTemplateDepth
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: XSLTProcessor::$maxTemplateVars
+  signature:
+    type: int
+    visibility: public

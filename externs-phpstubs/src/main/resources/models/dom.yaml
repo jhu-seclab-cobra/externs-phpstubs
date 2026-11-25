@@ -5288,3 +5288,956 @@
       type: int
     returnType: mixed
   throws: [domexception, error, valueerror]
+- subject:
+    class_constant: Dom\Node::DOCUMENT_POSITION_CONTAINED_BY
+  signature:
+    type: int
+- subject:
+    class_constant: Dom\Node::DOCUMENT_POSITION_CONTAINS
+  signature:
+    type: int
+- subject:
+    class_constant: Dom\Node::DOCUMENT_POSITION_DISCONNECTED
+  signature:
+    type: int
+- subject:
+    class_constant: Dom\Node::DOCUMENT_POSITION_FOLLOWING
+  signature:
+    type: int
+- subject:
+    class_constant: Dom\Node::DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC
+  signature:
+    type: int
+- subject:
+    class_constant: Dom\Node::DOCUMENT_POSITION_PRECEDING
+  signature:
+    type: int
+- subject:
+    class_constant: DOMNode::DOCUMENT_POSITION_CONTAINED_BY
+  signature:
+    type: int
+- subject:
+    class_constant: DOMNode::DOCUMENT_POSITION_CONTAINS
+  signature:
+    type: int
+- subject:
+    class_constant: DOMNode::DOCUMENT_POSITION_DISCONNECTED
+  signature:
+    type: int
+- subject:
+    class_constant: DOMNode::DOCUMENT_POSITION_FOLLOWING
+  signature:
+    type: int
+- subject:
+    class_constant: DOMNode::DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC
+  signature:
+    type: int
+- subject:
+    class_constant: DOMNode::DOCUMENT_POSITION_PRECEDING
+  signature:
+    type: int
+- subject:
+    property: Dom\Attr::$localName
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: Dom\Attr::$name
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: Dom\Attr::$namespaceURI
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: Dom\Attr::$ownerElement
+  signature:
+    type: ?Dom\Element
+    visibility: public
+- subject:
+    property: Dom\Attr::$prefix
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: Dom\Attr::$specified
+  signature:
+    type: bool
+    visibility: public
+- subject:
+    property: Dom\Attr::$value
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: Dom\CharacterData::$data
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: Dom\CharacterData::$length
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: Dom\CharacterData::$nextElementSibling
+  signature:
+    type: ?Dom\Element
+    visibility: public
+- subject:
+    property: Dom\CharacterData::$previousElementSibling
+  signature:
+    type: ?Dom\Element
+    visibility: public
+- subject:
+    property: Dom\Document::$URL
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: Dom\Document::$body
+  signature:
+    type: ?Dom\HTMLElement
+    visibility: public
+- subject:
+    property: Dom\Document::$characterSet
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: Dom\Document::$charset
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: Dom\Document::$childElementCount
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: Dom\Document::$children
+  signature:
+    type: Dom\HTMLCollection
+    visibility: public
+- subject:
+    property: Dom\Document::$doctype
+  signature:
+    type: ?Dom\DocumentType
+    visibility: public
+- subject:
+    property: Dom\Document::$documentElement
+  signature:
+    type: ?Dom\Element
+    visibility: public
+- subject:
+    property: Dom\Document::$documentURI
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: Dom\Document::$firstElementChild
+  signature:
+    type: ?Dom\Element
+    visibility: public
+- subject:
+    property: Dom\Document::$head
+  signature:
+    type: ?Dom\HTMLElement
+    visibility: public
+- subject:
+    property: Dom\Document::$implementation
+  signature:
+    type: Dom\Implementation
+    visibility: public
+- subject:
+    property: Dom\Document::$inputEncoding
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: Dom\Document::$lastElementChild
+  signature:
+    type: ?Dom\Element
+    visibility: public
+- subject:
+    property: Dom\Document::$title
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: Dom\DocumentFragment::$childElementCount
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: Dom\DocumentFragment::$children
+  signature:
+    type: Dom\HTMLCollection
+    visibility: public
+- subject:
+    property: Dom\DocumentFragment::$firstElementChild
+  signature:
+    type: ?Dom\Element
+    visibility: public
+- subject:
+    property: Dom\DocumentFragment::$lastElementChild
+  signature:
+    type: ?Dom\Element
+    visibility: public
+- subject:
+    property: Dom\DocumentType::$entities
+  signature:
+    type: Dom\DtdNamedNodeMap
+    visibility: public
+- subject:
+    property: Dom\DocumentType::$internalSubset
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: Dom\DocumentType::$name
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: Dom\DocumentType::$notations
+  signature:
+    type: Dom\DtdNamedNodeMap
+    visibility: public
+- subject:
+    property: Dom\DocumentType::$publicId
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: Dom\DocumentType::$systemId
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: Dom\DtdNamedNodeMap::$length
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: Dom\Element::$attributes
+  signature:
+    type: Dom\NamedNodeMap
+    visibility: public
+- subject:
+    property: Dom\Element::$childElementCount
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: Dom\Element::$children
+  signature:
+    type: Dom\HTMLCollection
+    visibility: public
+- subject:
+    property: Dom\Element::$classList
+  signature:
+    type: Dom\TokenList
+    visibility: public
+- subject:
+    property: Dom\Element::$className
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: Dom\Element::$firstElementChild
+  signature:
+    type: ?Dom\Element
+    visibility: public
+- subject:
+    property: Dom\Element::$id
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: Dom\Element::$innerHTML
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: Dom\Element::$lastElementChild
+  signature:
+    type: ?Dom\Element
+    visibility: public
+- subject:
+    property: Dom\Element::$localName
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: Dom\Element::$namespaceURI
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: Dom\Element::$nextElementSibling
+  signature:
+    type: ?Dom\Element
+    visibility: public
+- subject:
+    property: Dom\Element::$outerHTML
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: Dom\Element::$prefix
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: Dom\Element::$previousElementSibling
+  signature:
+    type: ?Dom\Element
+    visibility: public
+- subject:
+    property: Dom\Element::$substitutedNodeValue
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: Dom\Element::$tagName
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: Dom\Entity::$notationName
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: Dom\Entity::$publicId
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: Dom\Entity::$systemId
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: Dom\HTMLCollection::$length
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: Dom\NamedNodeMap::$length
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: Dom\NamespaceInfo::$element
+  signature:
+    type: Dom\Element
+    visibility: public
+- subject:
+    property: Dom\NamespaceInfo::$namespaceURI
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: Dom\NamespaceInfo::$prefix
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: Dom\Node::$baseURI
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: Dom\Node::$childNodes
+  signature:
+    type: Dom\NodeList
+    visibility: public
+- subject:
+    property: Dom\Node::$firstChild
+  signature:
+    type: ?Dom\Node
+    visibility: public
+- subject:
+    property: Dom\Node::$isConnected
+  signature:
+    type: bool
+    visibility: public
+- subject:
+    property: Dom\Node::$lastChild
+  signature:
+    type: ?Dom\Node
+    visibility: public
+- subject:
+    property: Dom\Node::$nextSibling
+  signature:
+    type: ?Dom\Node
+    visibility: public
+- subject:
+    property: Dom\Node::$nodeName
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: Dom\Node::$nodeType
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: Dom\Node::$nodeValue
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: Dom\Node::$ownerDocument
+  signature:
+    type: ?Dom\Document
+    visibility: public
+- subject:
+    property: Dom\Node::$parentElement
+  signature:
+    type: ?Dom\Element
+    visibility: public
+- subject:
+    property: Dom\Node::$parentNode
+  signature:
+    type: ?Dom\Node
+    visibility: public
+- subject:
+    property: Dom\Node::$previousSibling
+  signature:
+    type: ?Dom\Node
+    visibility: public
+- subject:
+    property: Dom\Node::$textContent
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: Dom\NodeList::$length
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: Dom\Notation::$publicId
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: Dom\Notation::$systemId
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: Dom\ProcessingInstruction::$target
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: Dom\Text::$wholeText
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: Dom\TokenList::$length
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: Dom\TokenList::$value
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: Dom\XMLDocument::$formatOutput
+  signature:
+    type: bool
+    visibility: public
+- subject:
+    property: Dom\XMLDocument::$xmlEncoding
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: Dom\XMLDocument::$xmlStandalone
+  signature:
+    type: bool
+    visibility: public
+- subject:
+    property: Dom\XMLDocument::$xmlVersion
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: Dom\XPath::$document
+  signature:
+    type: Dom\Document
+    visibility: public
+- subject:
+    property: Dom\XPath::$registerNodeNamespaces
+  signature:
+    type: bool
+    visibility: public
+- subject:
+    property: DOMAttr::$name
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: DOMAttr::$ownerElement
+  signature:
+    type: ?DOMElement
+    visibility: public
+- subject:
+    property: DOMAttr::$schemaTypeInfo
+  signature:
+    type: mixed
+    visibility: public
+- subject:
+    property: DOMAttr::$specified
+  signature:
+    type: bool
+    visibility: public
+- subject:
+    property: DOMAttr::$value
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: DOMCharacterData::$data
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: DOMCharacterData::$length
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: DOMCharacterData::$nextElementSibling
+  signature:
+    type: ?DOMElement
+    visibility: public
+- subject:
+    property: DOMCharacterData::$previousElementSibling
+  signature:
+    type: ?DOMElement
+    visibility: public
+- subject:
+    property: DOMDocument::$actualEncoding
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: DOMDocument::$childElementCount
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: DOMDocument::$config
+  signature:
+    type: mixed
+    visibility: public
+- subject:
+    property: DOMDocument::$doctype
+  signature:
+    type: ?DOMDocumentType
+    visibility: public
+- subject:
+    property: DOMDocument::$documentElement
+  signature:
+    type: ?DOMElement
+    visibility: public
+- subject:
+    property: DOMDocument::$documentURI
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: DOMDocument::$encoding
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: DOMDocument::$firstElementChild
+  signature:
+    type: ?DOMElement
+    visibility: public
+- subject:
+    property: DOMDocument::$formatOutput
+  signature:
+    type: bool
+    visibility: public
+- subject:
+    property: DOMDocument::$implementation
+  signature:
+    type: DOMImplementation
+    visibility: public
+- subject:
+    property: DOMDocument::$lastElementChild
+  signature:
+    type: ?DOMElement
+    visibility: public
+- subject:
+    property: DOMDocument::$preserveWhiteSpace
+  signature:
+    type: bool
+    visibility: public
+- subject:
+    property: DOMDocument::$recover
+  signature:
+    type: bool
+    visibility: public
+- subject:
+    property: DOMDocument::$resolveExternals
+  signature:
+    type: bool
+    visibility: public
+- subject:
+    property: DOMDocument::$standalone
+  signature:
+    type: bool
+    visibility: public
+- subject:
+    property: DOMDocument::$strictErrorChecking
+  signature:
+    type: bool
+    visibility: public
+- subject:
+    property: DOMDocument::$substituteEntities
+  signature:
+    type: bool
+    visibility: public
+- subject:
+    property: DOMDocument::$validateOnParse
+  signature:
+    type: bool
+    visibility: public
+- subject:
+    property: DOMDocument::$version
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: DOMDocument::$xmlEncoding
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: DOMDocument::$xmlStandalone
+  signature:
+    type: bool
+    visibility: public
+- subject:
+    property: DOMDocument::$xmlVersion
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: DOMDocumentFragment::$childElementCount
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: DOMDocumentFragment::$firstElementChild
+  signature:
+    type: ?DOMElement
+    visibility: public
+- subject:
+    property: DOMDocumentFragment::$lastElementChild
+  signature:
+    type: ?DOMElement
+    visibility: public
+- subject:
+    property: DOMDocumentType::$entities
+  signature:
+    type: DOMNamedNodeMap
+    visibility: public
+- subject:
+    property: DOMDocumentType::$internalSubset
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: DOMDocumentType::$name
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: DOMDocumentType::$notations
+  signature:
+    type: DOMNamedNodeMap
+    visibility: public
+- subject:
+    property: DOMDocumentType::$publicId
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: DOMDocumentType::$systemId
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: DOMElement::$childElementCount
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: DOMElement::$className
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: DOMElement::$firstElementChild
+  signature:
+    type: ?DOMElement
+    visibility: public
+- subject:
+    property: DOMElement::$id
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: DOMElement::$lastElementChild
+  signature:
+    type: ?DOMElement
+    visibility: public
+- subject:
+    property: DOMElement::$nextElementSibling
+  signature:
+    type: ?DOMElement
+    visibility: public
+- subject:
+    property: DOMElement::$previousElementSibling
+  signature:
+    type: ?DOMElement
+    visibility: public
+- subject:
+    property: DOMElement::$schemaTypeInfo
+  signature:
+    type: mixed
+    visibility: public
+- subject:
+    property: DOMElement::$tagName
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: DOMEntity::$actualEncoding
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: DOMEntity::$encoding
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: DOMEntity::$notationName
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: DOMEntity::$publicId
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: DOMEntity::$systemId
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: DOMEntity::$version
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: DOMNamedNodeMap::$length
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: DOMNameSpaceNode::$isConnected
+  signature:
+    type: bool
+    visibility: public
+- subject:
+    property: DOMNameSpaceNode::$localName
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: DOMNameSpaceNode::$namespaceURI
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: DOMNameSpaceNode::$nodeName
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: DOMNameSpaceNode::$nodeType
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: DOMNameSpaceNode::$nodeValue
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: DOMNameSpaceNode::$ownerDocument
+  signature:
+    type: ?DOMDocument
+    visibility: public
+- subject:
+    property: DOMNameSpaceNode::$parentElement
+  signature:
+    type: ?DOMElement
+    visibility: public
+- subject:
+    property: DOMNameSpaceNode::$parentNode
+  signature:
+    type: ?DOMNode
+    visibility: public
+- subject:
+    property: DOMNameSpaceNode::$prefix
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: DOMNode::$attributes
+  signature:
+    type: ?DOMNamedNodeMap
+    visibility: public
+- subject:
+    property: DOMNode::$baseURI
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: DOMNode::$childNodes
+  signature:
+    type: DOMNodeList
+    visibility: public
+- subject:
+    property: DOMNode::$firstChild
+  signature:
+    type: ?DOMNode
+    visibility: public
+- subject:
+    property: DOMNode::$isConnected
+  signature:
+    type: bool
+    visibility: public
+- subject:
+    property: DOMNode::$lastChild
+  signature:
+    type: ?DOMNode
+    visibility: public
+- subject:
+    property: DOMNode::$localName
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: DOMNode::$namespaceURI
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: DOMNode::$nextSibling
+  signature:
+    type: ?DOMNode
+    visibility: public
+- subject:
+    property: DOMNode::$nodeName
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: DOMNode::$nodeType
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: DOMNode::$nodeValue
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: DOMNode::$ownerDocument
+  signature:
+    type: ?DOMDocument
+    visibility: public
+- subject:
+    property: DOMNode::$parentElement
+  signature:
+    type: ?DOMElement
+    visibility: public
+- subject:
+    property: DOMNode::$parentNode
+  signature:
+    type: ?DOMNode
+    visibility: public
+- subject:
+    property: DOMNode::$prefix
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: DOMNode::$previousSibling
+  signature:
+    type: ?DOMNode
+    visibility: public
+- subject:
+    property: DOMNode::$textContent
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: DOMNodeList::$length
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: DOMNotation::$publicId
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: DOMNotation::$systemId
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: DOMProcessingInstruction::$data
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: DOMProcessingInstruction::$target
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: DOMText::$wholeText
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: DOMXPath::$document
+  signature:
+    type: DOMDocument
+    visibility: public
+- subject:
+    property: DOMXPath::$registerNodeNamespaces
+  signature:
+    type: bool
+    visibility: public

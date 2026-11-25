@@ -5290,3 +5290,236 @@
       type: mixed
     returnType: void
   throws: []
+- subject:
+    class_constant: ArrayIterator::ARRAY_AS_PROPS
+  signature:
+    type: int
+- subject:
+    class_constant: ArrayIterator::STD_PROP_LIST
+  signature:
+    type: int
+- subject:
+    class_constant: ArrayObject::ARRAY_AS_PROPS
+  signature:
+    type: int
+- subject:
+    class_constant: ArrayObject::STD_PROP_LIST
+  signature:
+    type: int
+- subject:
+    class_constant: CachingIterator::CALL_TOSTRING
+  signature:
+    type: int
+- subject:
+    class_constant: CachingIterator::CATCH_GET_CHILD
+  signature:
+    type: int
+- subject:
+    class_constant: CachingIterator::FULL_CACHE
+  signature:
+    type: int
+- subject:
+    class_constant: CachingIterator::TOSTRING_USE_CURRENT
+  signature:
+    type: int
+- subject:
+    class_constant: CachingIterator::TOSTRING_USE_INNER
+  signature:
+    type: int
+- subject:
+    class_constant: CachingIterator::TOSTRING_USE_KEY
+  signature:
+    type: int
+- subject:
+    class_constant: FilesystemIterator::CURRENT_AS_FILEINFO
+  signature:
+    type: int
+- subject:
+    class_constant: FilesystemIterator::CURRENT_AS_PATHNAME
+  signature:
+    type: int
+- subject:
+    class_constant: FilesystemIterator::CURRENT_AS_SELF
+  signature:
+    type: int
+- subject:
+    class_constant: FilesystemIterator::CURRENT_MODE_MASK
+  signature:
+    type: int
+- subject:
+    class_constant: FilesystemIterator::FOLLOW_SYMLINKS
+  signature:
+    type: int
+- subject:
+    class_constant: FilesystemIterator::KEY_AS_FILENAME
+  signature:
+    type: int
+- subject:
+    class_constant: FilesystemIterator::KEY_AS_PATHNAME
+  signature:
+    type: int
+- subject:
+    class_constant: FilesystemIterator::KEY_MODE_MASK
+  signature:
+    type: int
+- subject:
+    class_constant: FilesystemIterator::NEW_CURRENT_AND_KEY
+  signature:
+    type: int
+- subject:
+    class_constant: FilesystemIterator::OTHER_MODE_MASK
+  signature:
+    type: int
+- subject:
+    class_constant: FilesystemIterator::SKIP_DOTS
+  signature:
+    type: int
+- subject:
+    class_constant: FilesystemIterator::UNIX_PATHS
+  signature:
+    type: int
+- subject:
+    class_constant: MultipleIterator::MIT_KEYS_ASSOC
+  signature:
+    type: int
+- subject:
+    class_constant: MultipleIterator::MIT_KEYS_NUMERIC
+  signature:
+    type: int
+- subject:
+    class_constant: MultipleIterator::MIT_NEED_ALL
+  signature:
+    type: int
+- subject:
+    class_constant: MultipleIterator::MIT_NEED_ANY
+  signature:
+    type: int
+- subject:
+    class_constant: RecursiveArrayIterator::CHILD_ARRAYS_ONLY
+  signature:
+    type: int
+- subject:
+    class_constant: RecursiveIteratorIterator::CATCH_GET_CHILD
+  signature:
+    type: int
+- subject:
+    class_constant: RecursiveIteratorIterator::CHILD_FIRST
+  signature:
+    type: int
+- subject:
+    class_constant: RecursiveIteratorIterator::LEAVES_ONLY
+  signature:
+    type: int
+- subject:
+    class_constant: RecursiveIteratorIterator::SELF_FIRST
+  signature:
+    type: int
+- subject:
+    class_constant: RecursiveTreeIterator::BYPASS_CURRENT
+  signature:
+    type: int
+- subject:
+    class_constant: RecursiveTreeIterator::BYPASS_KEY
+  signature:
+    type: int
+- subject:
+    class_constant: RecursiveTreeIterator::PREFIX_END_HAS_NEXT
+  signature:
+    type: int
+- subject:
+    class_constant: RecursiveTreeIterator::PREFIX_END_LAST
+  signature:
+    type: int
+- subject:
+    class_constant: RecursiveTreeIterator::PREFIX_LEFT
+  signature:
+    type: int
+- subject:
+    class_constant: RecursiveTreeIterator::PREFIX_MID_HAS_NEXT
+  signature:
+    type: int
+- subject:
+    class_constant: RecursiveTreeIterator::PREFIX_MID_LAST
+  signature:
+    type: int
+- subject:
+    class_constant: RecursiveTreeIterator::PREFIX_RIGHT
+  signature:
+    type: int
+- subject:
+    class_constant: RegexIterator::ALL_MATCHES
+  signature:
+    type: int
+- subject:
+    class_constant: RegexIterator::GET_MATCH
+  signature:
+    type: int
+- subject:
+    class_constant: RegexIterator::INVERT_MATCH
+  signature:
+    type: int
+- subject:
+    class_constant: RegexIterator::MATCH
+  signature:
+    type: int
+- subject:
+    class_constant: RegexIterator::REPLACE
+  signature:
+    type: int
+- subject:
+    class_constant: RegexIterator::SPLIT
+  signature:
+    type: int
+- subject:
+    class_constant: RegexIterator::USE_KEY
+  signature:
+    type: int
+- subject:
+    class_constant: SplDoublyLinkedList::IT_MODE_DELETE
+  signature:
+    type: int
+- subject:
+    class_constant: SplDoublyLinkedList::IT_MODE_FIFO
+  signature:
+    type: int
+- subject:
+    class_constant: SplDoublyLinkedList::IT_MODE_KEEP
+  signature:
+    type: int
+- subject:
+    class_constant: SplDoublyLinkedList::IT_MODE_LIFO
+  signature:
+    type: int
+- subject:
+    class_constant: SplFileObject::DROP_NEW_LINE
+  signature:
+    type: int
+- subject:
+    class_constant: SplFileObject::READ_AHEAD
+  signature:
+    type: int
+- subject:
+    class_constant: SplFileObject::READ_CSV
+  signature:
+    type: int
+- subject:
+    class_constant: SplFileObject::SKIP_EMPTY
+  signature:
+    type: int
+- subject:
+    class_constant: SplPriorityQueue::EXTR_BOTH
+  signature:
+    type: int
+- subject:
+    class_constant: SplPriorityQueue::EXTR_DATA
+  signature:
+    type: int
+- subject:
+    class_constant: SplPriorityQueue::EXTR_PRIORITY
+  signature:
+    type: int
+- subject:
+    property: RegexIterator::$replacement
+  signature:
+    type: ?string
+    visibility: public

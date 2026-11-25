@@ -87,7 +87,7 @@ duplicate rule per (subject, condition) within one document.
 ```
 models/
 ├── index.txt              # build-generated manifest, sorted relative paths
-├── provenance.yaml        # producers tools/convert_stubs.py v2, then the three php-src tools; verification generated
+├── provenance.yaml        # producers tools/convert_stubs.py v2, then the four php-src tools; verification generated
 ├── core.yaml              # extension "core"
 ├── language/              # hand-declared language constructs
 │   ├── keyword.yaml       # 11 keyword functions + class exit, extension "keyword"

@@ -52,3 +52,23 @@
                 results: [num]
           - slot: operation
             absent: true
+- subject:
+    class_constant: Pdo\Odbc::ATTR_ASSUME_UTF8
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Odbc::ATTR_USE_CURSOR_LIBRARY
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Odbc::SQL_USE_DRIVER
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Odbc::SQL_USE_IF_NEEDED
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Odbc::SQL_USE_ODBC
+  signature:
+    type: int

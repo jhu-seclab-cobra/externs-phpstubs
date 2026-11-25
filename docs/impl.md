@@ -27,7 +27,7 @@
 - Gradle resource tasks generate manifests for `models/`, `taint/`, `taint-rules/`, `value-rules/`, `models-test/` and selectable Library Set roots; set-level vocabulary, policy, provenance and mapping files are not model-manifest entries.
 - Edit manual rules; regenerate generated documents through their producer. `models/language/` and `models/manual/` remain hand-declared.
 - Run `python3 -B -m unittest discover -s tools -p "test_*.py"` for producer changes.
-- Run hierarchy, signature and throws extractors in that order with `--php-src <source-root> --models <isolated-models-copy>`; a second sequence must preserve byte identity, protected inputs and source hashes.
+- Run the hierarchy, signature, member and throws extractors in that order with `--php-src <source-root> --models <isolated-models-copy>`; a second sequence must preserve byte identity, protected inputs and source hashes.
 - Verify complete source-site dispositions and strict decoding after regeneration; [handler extraction](spec-extraction-handlers.md) owns source mapping.
 - Run standalone `./gradlew build` against the catalog’s dependency pin; a composite build substitutes its checked-out dependencies and is a distinct integration check.
 - Run composite model/stubs test and detekt tasks when changing extraction or decoding; include the named-extra and one-opcode tests specified in [signature extraction design](design-extraction-signatures.md).

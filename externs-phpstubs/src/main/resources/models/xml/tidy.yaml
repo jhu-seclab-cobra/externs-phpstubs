@@ -653,3 +653,58 @@
   signature:
     returnType: bool
   throws: []
+- subject:
+    property: tidy::$errorBuffer
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: tidy::$value
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: tidyNode::$attribute
+  signature:
+    type: ?array
+    visibility: public
+- subject:
+    property: tidyNode::$child
+  signature:
+    type: ?array
+    visibility: public
+- subject:
+    property: tidyNode::$column
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: tidyNode::$id
+  signature:
+    type: ?int
+    visibility: public
+- subject:
+    property: tidyNode::$line
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: tidyNode::$name
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: tidyNode::$proprietary
+  signature:
+    type: bool
+    visibility: public
+- subject:
+    property: tidyNode::$type
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: tidyNode::$value
+  signature:
+    type: string
+    visibility: public

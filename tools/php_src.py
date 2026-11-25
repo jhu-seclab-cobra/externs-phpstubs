@@ -11,6 +11,8 @@ from pathlib import Path
 
 HAND_DECLARED = ("language", "manual")
 SET_DOCUMENTS = ("provenance.yaml",)
+# The subject kinds spelled `class::name` whose name PHP compares case-sensitively.
+CASE_SENSITIVE_MEMBERS = ("class_constant", "property")
 SKIPPED_SOURCE_PARTS = ("tests", "zend_test", "dl_test", "skeleton")
 # The extension a php-src directory outside ext/ registers its declarations under (PHP reflection).
 EXTENSION_OF_DIRECTORY = {"Zend": "core", "main": "standard", "sapi": "standard"}
@@ -40,7 +42,7 @@ class Entry:
         self.header_length = len(header.group(0))
 
     def key(self):
-        return self.kind, self.subject.lower()
+        return identity(self.kind, self.subject)
 
     def with_signature(self, block, owned_fields):
         """The entry text with the owned fields of its signature taken from block, every other byte kept.
@@ -104,6 +106,14 @@ class Entry:
     def without_signature(self):
         """The entry's sections after the subject lines, its signature block removed."""
         return SIGNATURE_BLOCK.sub("", self.text[self.header_length :], count=1)
+
+
+def identity(kind, subject):
+    """The (kind, folded subject) key of a declaration: a member whose name is case-sensitive folds only its class."""
+    if kind in CASE_SENSITIVE_MEMBERS:
+        owner, separator, name = subject.partition("::")
+        return kind, owner.lower() + separator + name
+    return kind, subject.lower()
 
 
 def signature_fields(body):

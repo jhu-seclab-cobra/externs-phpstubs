@@ -40,7 +40,7 @@ This library supplies generated and manual Document Sets and the lookup over the
 ```
 Offline (per upstream release):
     phpstorm-stubs, psalm stubs ──extraction──► models/<category>/<extension>.yaml
-    php-src stubs, C sources ───php-src tools► hierarchies, signatures, throws of models/** (concept-extraction.md)
+    php-src stubs, C sources ───php-src tools► hierarchies, signatures, member types, throws of models/** (concept-extraction.md)
                                                 models/{language,manual}/*.yaml (hand-declared)
     psalm taint data ───────────extraction──► taint/** (document set)
     Argus sink lists ───────────review──────► taint-rules/** (document set)

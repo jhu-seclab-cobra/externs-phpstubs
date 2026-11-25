@@ -1320,3 +1320,67 @@
       type: mixed
     returnType: void
   throws: [badmethodcallexception, error, exception, pharexception, typeerror, valueerror]
+- subject:
+    class_constant: Phar::BZ2
+  signature:
+    type: int
+- subject:
+    class_constant: Phar::COMPRESSED
+  signature:
+    type: int
+- subject:
+    class_constant: Phar::GZ
+  signature:
+    type: int
+- subject:
+    class_constant: Phar::MD5
+  signature:
+    type: int
+- subject:
+    class_constant: Phar::NONE
+  signature:
+    type: int
+- subject:
+    class_constant: Phar::OPENSSL
+  signature:
+    type: int
+- subject:
+    class_constant: Phar::OPENSSL_SHA256
+  signature:
+    type: int
+- subject:
+    class_constant: Phar::OPENSSL_SHA512
+  signature:
+    type: int
+- subject:
+    class_constant: Phar::PHAR
+  signature:
+    type: int
+- subject:
+    class_constant: Phar::PHP
+  signature:
+    type: int
+- subject:
+    class_constant: Phar::PHPS
+  signature:
+    type: int
+- subject:
+    class_constant: Phar::SHA1
+  signature:
+    type: int
+- subject:
+    class_constant: Phar::SHA256
+  signature:
+    type: int
+- subject:
+    class_constant: Phar::SHA512
+  signature:
+    type: int
+- subject:
+    class_constant: Phar::TAR
+  signature:
+    type: int
+- subject:
+    class_constant: Phar::ZIP
+  signature:
+    type: int

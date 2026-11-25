@@ -515,3 +515,13 @@
       default: 'null'
     returnType: BcMath\Number
   throws: [divisionbyzeroerror, typeerror, valueerror]
+- subject:
+    property: BcMath\Number::$scale
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: BcMath\Number::$value
+  signature:
+    type: string
+    visibility: public

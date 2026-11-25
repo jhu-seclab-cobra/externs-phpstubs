@@ -8,6 +8,7 @@ Run: python3 -B -m unittest discover -s tools -p "test_*.py" (from the externs-p
 - adjacent entries and the document bytes outside the rewritten entries stay as they are
 - relocation and rewrite leave the hand-declared directories and the set documents untouched, byte for byte
 - an entry the transform does not name (an external class) keeps every byte; an old generated value is not evidence
+- identity: a class constant or property folds its class and keeps its name; every other kind folds the whole subject
 """
 
 import sys
@@ -37,6 +38,16 @@ def write(root, name, text):
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(text, encoding="utf-8")
     return path
+
+
+class IdentityTest(unittest.TestCase):
+    def test_member_name_of_a_class_constant_and_a_property_stays_case_sensitive(self):
+        self.assertEqual(("class_constant", "demo\\holder::Flag"), php_src.identity("class_constant", "Demo\\Holder::Flag"))
+        self.assertNotEqual(php_src.identity("property", "A::$id"), php_src.identity("property", "A::$ID"))
+
+    def test_other_kinds_fold_the_whole_subject(self):
+        self.assertEqual(("method", "a::run"), php_src.identity("method", "A::Run"))
+        self.assertEqual(("function", "strlen"), php_src.identity("function", "StrLen"))
 
 
 class OwnedFieldsTest(unittest.TestCase):

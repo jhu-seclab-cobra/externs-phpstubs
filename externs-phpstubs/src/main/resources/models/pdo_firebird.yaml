@@ -57,3 +57,35 @@
   signature:
     returnType: int
   throws: []
+- subject:
+    class_constant: Pdo\Firebird::ATTR_DATE_FORMAT
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Firebird::ATTR_TIMESTAMP_FORMAT
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Firebird::ATTR_TIME_FORMAT
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Firebird::READ_COMMITTED
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Firebird::REPEATABLE_READ
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Firebird::SERIALIZABLE
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Firebird::TRANSACTION_ISOLATION_LEVEL
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Firebird::WRITABLE_TRANSACTION
+  signature:
+    type: int

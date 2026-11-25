@@ -302,3 +302,161 @@
       default: '0'
     returnType: mixed
   throws: [error, typeerror, valueerror]
+- subject:
+    class_constant: XMLReader::ATTRIBUTE
+  signature:
+    type: int
+- subject:
+    class_constant: XMLReader::CDATA
+  signature:
+    type: int
+- subject:
+    class_constant: XMLReader::COMMENT
+  signature:
+    type: int
+- subject:
+    class_constant: XMLReader::DEFAULTATTRS
+  signature:
+    type: int
+- subject:
+    class_constant: XMLReader::DOC
+  signature:
+    type: int
+- subject:
+    class_constant: XMLReader::DOC_FRAGMENT
+  signature:
+    type: int
+- subject:
+    class_constant: XMLReader::DOC_TYPE
+  signature:
+    type: int
+- subject:
+    class_constant: XMLReader::ELEMENT
+  signature:
+    type: int
+- subject:
+    class_constant: XMLReader::END_ELEMENT
+  signature:
+    type: int
+- subject:
+    class_constant: XMLReader::END_ENTITY
+  signature:
+    type: int
+- subject:
+    class_constant: XMLReader::ENTITY
+  signature:
+    type: int
+- subject:
+    class_constant: XMLReader::ENTITY_REF
+  signature:
+    type: int
+- subject:
+    class_constant: XMLReader::LOADDTD
+  signature:
+    type: int
+- subject:
+    class_constant: XMLReader::NONE
+  signature:
+    type: int
+- subject:
+    class_constant: XMLReader::NOTATION
+  signature:
+    type: int
+- subject:
+    class_constant: XMLReader::PI
+  signature:
+    type: int
+- subject:
+    class_constant: XMLReader::SIGNIFICANT_WHITESPACE
+  signature:
+    type: int
+- subject:
+    class_constant: XMLReader::SUBST_ENTITIES
+  signature:
+    type: int
+- subject:
+    class_constant: XMLReader::TEXT
+  signature:
+    type: int
+- subject:
+    class_constant: XMLReader::VALIDATE
+  signature:
+    type: int
+- subject:
+    class_constant: XMLReader::WHITESPACE
+  signature:
+    type: int
+- subject:
+    class_constant: XMLReader::XML_DECLARATION
+  signature:
+    type: int
+- subject:
+    property: XMLReader::$attributeCount
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: XMLReader::$baseURI
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: XMLReader::$depth
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: XMLReader::$hasAttributes
+  signature:
+    type: bool
+    visibility: public
+- subject:
+    property: XMLReader::$hasValue
+  signature:
+    type: bool
+    visibility: public
+- subject:
+    property: XMLReader::$isDefault
+  signature:
+    type: bool
+    visibility: public
+- subject:
+    property: XMLReader::$isEmptyElement
+  signature:
+    type: bool
+    visibility: public
+- subject:
+    property: XMLReader::$localName
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: XMLReader::$name
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: XMLReader::$namespaceURI
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: XMLReader::$nodeType
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: XMLReader::$prefix
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: XMLReader::$value
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: XMLReader::$xmlLang
+  signature:
+    type: string
+    visibility: public

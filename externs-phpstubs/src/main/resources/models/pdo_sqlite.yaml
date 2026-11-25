@@ -177,3 +177,79 @@
       optional: true
       default: '0'
     returnType: bool
+- subject:
+    class_constant: Pdo\Sqlite::ATTR_BUSY_STATEMENT
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Sqlite::ATTR_EXPLAIN_STATEMENT
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Sqlite::ATTR_EXTENDED_RESULT_CODES
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Sqlite::ATTR_OPEN_FLAGS
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Sqlite::ATTR_READONLY_STATEMENT
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Sqlite::ATTR_TRANSACTION_MODE
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Sqlite::DENY
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Sqlite::DETERMINISTIC
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Sqlite::EXPLAIN_MODE_EXPLAIN
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Sqlite::EXPLAIN_MODE_EXPLAIN_QUERY_PLAN
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Sqlite::EXPLAIN_MODE_PREPARED
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Sqlite::IGNORE
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Sqlite::OK
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Sqlite::OPEN_CREATE
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Sqlite::OPEN_READONLY
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Sqlite::OPEN_READWRITE
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Sqlite::TRANSACTION_MODE_DEFERRED
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Sqlite::TRANSACTION_MODE_EXCLUSIVE
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Sqlite::TRANSACTION_MODE_IMMEDIATE
+  signature:
+    type: int

@@ -20,15 +20,15 @@ php-src release, beside the upstream stub conversion
   files, its function entry tables, and its C sources, including native
   object-handler declarations and implementations.
 - **Outputs:** class hierarchies, final-class status, effective object-handler
-  Facts, callable signatures, and throws sections
-  of the generated entries; entries for every php-src declaration absent from the generated set.
+  Facts, callable signatures, property and class constant types,
+  and throws sections of the generated entries; entries for every php-src declaration absent from the generated set.
 - **Connections:** php-src → hierarchy extraction → signature extraction
-  → throws extraction → `models/**` → the merge ([concept-lookup.md](concept-lookup.md)).
+  → member extraction → throws extraction → `models/**` → the merge ([concept-lookup.md](concept-lookup.md)).
 
 **Scope Boundaries**
 - **Owned:** reading php-src, placing the entry of every php-src declaration in the document of its extension, rewriting its declaration
   fields and established effective object-handler Facts,
-  signature, and throws of a generated entry.
+  signature, member types, and throws of a generated entry.
 - **Not Owned:** the format of a throws section and what it asserts
   ([commons-phpmodels model](https://github.com/jhu-seclab-cobra/commons-phpmodels/blob/d356ff45becb5983fc66ac544a00df6618ac224b/docs/model.md)); value units, which the value
   rules set states; the hand-declared `language/` and `manual/` documents.

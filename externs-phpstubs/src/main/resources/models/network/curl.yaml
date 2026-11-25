@@ -722,3 +722,38 @@
                 results: [num]
           - slot: operation
             absent: true
+- subject:
+    property: CURLFile::$mime
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: CURLFile::$name
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: CURLFile::$postname
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: CurlSharePersistentHandle::$options
+  signature:
+    type: array
+    visibility: public
+- subject:
+    property: CURLStringFile::$data
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: CURLStringFile::$mime
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: CURLStringFile::$postname
+  signature:
+    type: string
+    visibility: public

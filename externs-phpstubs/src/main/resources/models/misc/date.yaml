@@ -2127,3 +2127,158 @@
       default: 'null'
     returnType: array
   throws: [valueerror]
+- subject:
+    class_constant: DatePeriod::EXCLUDE_START_DATE
+  signature:
+    type: int
+- subject:
+    class_constant: DatePeriod::INCLUDE_END_DATE
+  signature:
+    type: int
+- subject:
+    class_constant: DateTimeInterface::ATOM
+  signature:
+    type: string
+- subject:
+    class_constant: DateTimeInterface::COOKIE
+  signature:
+    type: string
+- subject:
+    class_constant: DateTimeInterface::ISO8601
+  signature:
+    type: string
+- subject:
+    class_constant: DateTimeInterface::ISO8601_EXPANDED
+  signature:
+    type: string
+- subject:
+    class_constant: DateTimeInterface::RFC1036
+  signature:
+    type: string
+- subject:
+    class_constant: DateTimeInterface::RFC1123
+  signature:
+    type: string
+- subject:
+    class_constant: DateTimeInterface::RFC2822
+  signature:
+    type: string
+- subject:
+    class_constant: DateTimeInterface::RFC3339
+  signature:
+    type: string
+- subject:
+    class_constant: DateTimeInterface::RFC3339_EXTENDED
+  signature:
+    type: string
+- subject:
+    class_constant: DateTimeInterface::RFC7231
+  signature:
+    type: string
+- subject:
+    class_constant: DateTimeInterface::RFC822
+  signature:
+    type: string
+- subject:
+    class_constant: DateTimeInterface::RFC850
+  signature:
+    type: string
+- subject:
+    class_constant: DateTimeInterface::RSS
+  signature:
+    type: string
+- subject:
+    class_constant: DateTimeInterface::W3C
+  signature:
+    type: string
+- subject:
+    class_constant: DateTimeZone::AFRICA
+  signature:
+    type: int
+- subject:
+    class_constant: DateTimeZone::ALL
+  signature:
+    type: int
+- subject:
+    class_constant: DateTimeZone::ALL_WITH_BC
+  signature:
+    type: int
+- subject:
+    class_constant: DateTimeZone::AMERICA
+  signature:
+    type: int
+- subject:
+    class_constant: DateTimeZone::ANTARCTICA
+  signature:
+    type: int
+- subject:
+    class_constant: DateTimeZone::ARCTIC
+  signature:
+    type: int
+- subject:
+    class_constant: DateTimeZone::ASIA
+  signature:
+    type: int
+- subject:
+    class_constant: DateTimeZone::ATLANTIC
+  signature:
+    type: int
+- subject:
+    class_constant: DateTimeZone::AUSTRALIA
+  signature:
+    type: int
+- subject:
+    class_constant: DateTimeZone::EUROPE
+  signature:
+    type: int
+- subject:
+    class_constant: DateTimeZone::INDIAN
+  signature:
+    type: int
+- subject:
+    class_constant: DateTimeZone::PACIFIC
+  signature:
+    type: int
+- subject:
+    class_constant: DateTimeZone::PER_COUNTRY
+  signature:
+    type: int
+- subject:
+    class_constant: DateTimeZone::UTC
+  signature:
+    type: int
+- subject:
+    property: DatePeriod::$current
+  signature:
+    type: ?DateTimeInterface
+    visibility: public
+- subject:
+    property: DatePeriod::$end
+  signature:
+    type: ?DateTimeInterface
+    visibility: public
+- subject:
+    property: DatePeriod::$include_end_date
+  signature:
+    type: bool
+    visibility: public
+- subject:
+    property: DatePeriod::$include_start_date
+  signature:
+    type: bool
+    visibility: public
+- subject:
+    property: DatePeriod::$interval
+  signature:
+    type: ?DateInterval
+    visibility: public
+- subject:
+    property: DatePeriod::$recurrences
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: DatePeriod::$start
+  signature:
+    type: ?DateTimeInterface
+    visibility: public

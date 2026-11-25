@@ -306,3 +306,31 @@
     - name: oid
       type: string
     returnType: bool
+- subject:
+    class_constant: Pdo\Pgsql::ATTR_DISABLE_PREPARES
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Pgsql::ATTR_RESULT_MEMORY_SIZE
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Pgsql::TRANSACTION_ACTIVE
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Pgsql::TRANSACTION_IDLE
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Pgsql::TRANSACTION_INERROR
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Pgsql::TRANSACTION_INTRANS
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Pgsql::TRANSACTION_UNKNOWN
+  signature:
+    type: int

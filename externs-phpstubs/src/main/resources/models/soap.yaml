@@ -753,3 +753,283 @@
       type: int
     returnType: void
   throws: [error, valueerror]
+- subject:
+    property: SoapClient::$__default_headers
+  signature:
+    type: ?array
+    visibility: private
+- subject:
+    property: SoapClient::$__last_request
+  signature:
+    type: ?string
+    visibility: private
+- subject:
+    property: SoapClient::$__last_request_headers
+  signature:
+    type: ?string
+    visibility: private
+- subject:
+    property: SoapClient::$__last_response
+  signature:
+    type: ?string
+    visibility: private
+- subject:
+    property: SoapClient::$__last_response_headers
+  signature:
+    type: ?string
+    visibility: private
+- subject:
+    property: SoapClient::$__soap_fault
+  signature:
+    type: ?SoapFault
+    visibility: private
+- subject:
+    property: SoapClient::$_classmap
+  signature:
+    type: ?array
+    visibility: private
+- subject:
+    property: SoapClient::$_connection_timeout
+  signature:
+    type: int
+    visibility: private
+- subject:
+    property: SoapClient::$_cookies
+  signature:
+    type: array
+    visibility: private
+- subject:
+    property: SoapClient::$_digest
+  signature:
+    type: ?string
+    visibility: private
+- subject:
+    property: SoapClient::$_encoding
+  signature:
+    type: ?string
+    visibility: private
+- subject:
+    property: SoapClient::$_exceptions
+  signature:
+    type: bool
+    visibility: private
+- subject:
+    property: SoapClient::$_features
+  signature:
+    type: ?int
+    visibility: private
+- subject:
+    property: SoapClient::$_keep_alive
+  signature:
+    type: bool
+    visibility: private
+- subject:
+    property: SoapClient::$_login
+  signature:
+    type: ?string
+    visibility: private
+- subject:
+    property: SoapClient::$_password
+  signature:
+    type: ?string
+    visibility: private
+- subject:
+    property: SoapClient::$_proxy_host
+  signature:
+    type: ?string
+    visibility: private
+- subject:
+    property: SoapClient::$_proxy_login
+  signature:
+    type: ?string
+    visibility: private
+- subject:
+    property: SoapClient::$_proxy_password
+  signature:
+    type: ?string
+    visibility: private
+- subject:
+    property: SoapClient::$_proxy_port
+  signature:
+    type: ?int
+    visibility: private
+- subject:
+    property: SoapClient::$_soap_version
+  signature:
+    type: int
+    visibility: private
+- subject:
+    property: SoapClient::$_ssl_method
+  signature:
+    type: ?int
+    visibility: private
+- subject:
+    property: SoapClient::$_use_digest
+  signature:
+    type: bool
+    visibility: private
+- subject:
+    property: SoapClient::$_use_proxy
+  signature:
+    type: ?int
+    visibility: private
+- subject:
+    property: SoapClient::$_user_agent
+  signature:
+    type: ?string
+    visibility: private
+- subject:
+    property: SoapClient::$compression
+  signature:
+    type: ?int
+    visibility: private
+- subject:
+    property: SoapClient::$httpurl
+  signature:
+    type: ?Soap\Url
+    visibility: private
+- subject:
+    property: SoapClient::$location
+  signature:
+    type: ?string
+    visibility: private
+- subject:
+    property: SoapClient::$sdl
+  signature:
+    type: ?Soap\Sdl
+    visibility: private
+- subject:
+    property: SoapClient::$style
+  signature:
+    type: ?int
+    visibility: private
+- subject:
+    property: SoapClient::$trace
+  signature:
+    type: bool
+    visibility: private
+- subject:
+    property: SoapClient::$typemap
+  signature:
+    type: ?array
+    visibility: private
+- subject:
+    property: SoapClient::$uri
+  signature:
+    type: ?string
+    visibility: private
+- subject:
+    property: SoapClient::$use
+  signature:
+    type: ?int
+    visibility: private
+- subject:
+    property: SoapFault::$_name
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: SoapFault::$detail
+  signature:
+    type: mixed
+    visibility: public
+- subject:
+    property: SoapFault::$faultactor
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: SoapFault::$faultcode
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: SoapFault::$faultcodens
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: SoapFault::$faultstring
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: SoapFault::$headerfault
+  signature:
+    type: mixed
+    visibility: public
+- subject:
+    property: SoapFault::$lang
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: SoapHeader::$actor
+  signature:
+    type: string|int|null
+    visibility: public
+- subject:
+    property: SoapHeader::$data
+  signature:
+    type: mixed
+    visibility: public
+- subject:
+    property: SoapHeader::$mustUnderstand
+  signature:
+    type: bool
+    visibility: public
+- subject:
+    property: SoapHeader::$name
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: SoapHeader::$namespace
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: SoapParam::$param_data
+  signature:
+    type: mixed
+    visibility: public
+- subject:
+    property: SoapParam::$param_name
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: SoapServer::$__soap_fault
+  signature:
+    type: ?SoapFault
+    visibility: private
+- subject:
+    property: SoapVar::$enc_name
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: SoapVar::$enc_namens
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: SoapVar::$enc_ns
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: SoapVar::$enc_stype
+  signature:
+    type: ?string
+    visibility: public
+- subject:
+    property: SoapVar::$enc_type
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: SoapVar::$enc_value
+  signature:
+    type: mixed
+    visibility: public

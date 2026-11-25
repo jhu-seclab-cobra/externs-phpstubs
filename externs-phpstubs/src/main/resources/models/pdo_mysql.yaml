@@ -57,3 +57,79 @@
   signature:
     returnType: int
   throws: []
+- subject:
+    class_constant: Pdo\Mysql::ATTR_COMPRESS
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Mysql::ATTR_DIRECT_QUERY
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Mysql::ATTR_FOUND_ROWS
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Mysql::ATTR_IGNORE_SPACE
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Mysql::ATTR_INIT_COMMAND
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Mysql::ATTR_LOCAL_INFILE
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Mysql::ATTR_LOCAL_INFILE_DIRECTORY
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Mysql::ATTR_MAX_BUFFER_SIZE
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Mysql::ATTR_MULTI_STATEMENTS
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Mysql::ATTR_READ_DEFAULT_FILE
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Mysql::ATTR_READ_DEFAULT_GROUP
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Mysql::ATTR_SERVER_PUBLIC_KEY
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Mysql::ATTR_SSL_CA
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Mysql::ATTR_SSL_CAPATH
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Mysql::ATTR_SSL_CERT
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Mysql::ATTR_SSL_CIPHER
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Mysql::ATTR_SSL_KEY
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Mysql::ATTR_SSL_VERIFY_SERVER_CERT
+  signature:
+    type: int
+- subject:
+    class_constant: Pdo\Mysql::ATTR_USE_BUFFERED_QUERY
+  signature:
+    type: int

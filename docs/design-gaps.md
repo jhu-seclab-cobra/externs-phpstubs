@@ -21,4 +21,4 @@
   builtins of `models/` whose `filename`, `uri` or `url` parameter reads or fetches.
 - Should declarations absent from the target PHP release be removed? `PHP_FLOAT_INF`, `PHP_FLOAT_NAN`, `ARRAY_UNIQUE_REGULAR` and the
   `PDO_FETCH_*` constants are declared, but PHP 8.5.12 defines none of them.
-- How can constant regeneration preserve the manual declaration exclusion? The three php-src tools write no constant entries, and `tools/convert_stubs.py`, named by `models/provenance.yaml`, is absent. The producer has no available exclusion mechanism for the subjects declared in `manual/core.yaml`; duplicate detection and `ManualDeclarationsTest` are the checks that detect overlap.
+- How can constant regeneration preserve the manual declaration exclusion? The four php-src tools write no global constant entries, and `tools/convert_stubs.py`, named by `models/provenance.yaml`, is absent. The producer has no available exclusion mechanism for the subjects declared in `manual/core.yaml`; duplicate detection and `ManualDeclarationsTest` are the checks that detect overlap.

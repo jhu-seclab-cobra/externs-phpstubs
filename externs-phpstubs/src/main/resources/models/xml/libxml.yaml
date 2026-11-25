@@ -107,3 +107,33 @@
   signature:
     returnType: ?callable
   throws: []
+- subject:
+    property: LibXMLError::$code
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: LibXMLError::$column
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: LibXMLError::$file
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: LibXMLError::$level
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: LibXMLError::$line
+  signature:
+    type: int
+    visibility: public
+- subject:
+    property: LibXMLError::$message
+  signature:
+    type: string
+    visibility: public

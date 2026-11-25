@@ -557,3 +557,314 @@
       variadic: true
     returnType: 'true'
   throws: [argumentcounterror, error, typeerror, valueerror]
+- subject:
+    class_constant: PDO::ATTR_AUTOCOMMIT
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::ATTR_CASE
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::ATTR_CLIENT_VERSION
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::ATTR_CONNECTION_STATUS
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::ATTR_CURSOR
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::ATTR_CURSOR_NAME
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::ATTR_DEFAULT_FETCH_MODE
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::ATTR_DEFAULT_STR_PARAM
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::ATTR_DRIVER_NAME
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::ATTR_EMULATE_PREPARES
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::ATTR_ERRMODE
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::ATTR_FETCH_CATALOG_NAMES
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::ATTR_FETCH_TABLE_NAMES
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::ATTR_MAX_COLUMN_LEN
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::ATTR_ORACLE_NULLS
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::ATTR_PERSISTENT
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::ATTR_PREFETCH
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::ATTR_SERVER_INFO
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::ATTR_SERVER_VERSION
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::ATTR_STATEMENT_CLASS
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::ATTR_STRINGIFY_FETCHES
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::ATTR_TIMEOUT
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::CASE_LOWER
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::CASE_NATURAL
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::CASE_UPPER
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::CURSOR_FWDONLY
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::CURSOR_SCROLL
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::ERRMODE_EXCEPTION
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::ERRMODE_SILENT
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::ERRMODE_WARNING
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::ERR_NONE
+  signature:
+    type: string
+- subject:
+    class_constant: PDO::FETCH_ASSOC
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::FETCH_BOTH
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::FETCH_BOUND
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::FETCH_CLASS
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::FETCH_CLASSTYPE
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::FETCH_COLUMN
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::FETCH_DEFAULT
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::FETCH_FUNC
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::FETCH_GROUP
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::FETCH_INTO
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::FETCH_KEY_PAIR
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::FETCH_LAZY
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::FETCH_NAMED
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::FETCH_NUM
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::FETCH_OBJ
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::FETCH_ORI_ABS
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::FETCH_ORI_FIRST
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::FETCH_ORI_LAST
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::FETCH_ORI_NEXT
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::FETCH_ORI_PRIOR
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::FETCH_ORI_REL
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::FETCH_PROPS_LATE
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::FETCH_SERIALIZE
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::FETCH_UNIQUE
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::NULL_EMPTY_STRING
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::NULL_NATURAL
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::NULL_TO_STRING
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::PARAM_BOOL
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::PARAM_EVT_ALLOC
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::PARAM_EVT_EXEC_POST
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::PARAM_EVT_EXEC_PRE
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::PARAM_EVT_FETCH_POST
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::PARAM_EVT_FETCH_PRE
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::PARAM_EVT_FREE
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::PARAM_EVT_NORMALIZE
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::PARAM_INPUT_OUTPUT
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::PARAM_INT
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::PARAM_LOB
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::PARAM_NULL
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::PARAM_STMT
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::PARAM_STR
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::PARAM_STR_CHAR
+  signature:
+    type: int
+- subject:
+    class_constant: PDO::PARAM_STR_NATL
+  signature:
+    type: int
+- subject:
+    property: PDOException::$errorInfo
+  signature:
+    type: ?array
+    visibility: public
+- subject:
+    property: PDORow::$queryString
+  signature:
+    type: string
+    visibility: public
+- subject:
+    property: PDOStatement::$queryString
+  signature:
+    type: string
+    visibility: public
