@@ -116,7 +116,8 @@ internal class TaintRulesSetTest {
     @Test
     fun `sinks follow the Argus lists`() {
         assertEquals(setOf(Port.Argument(4) to "shell"), sinksOf(FunctionSubject("mail")))
-        assertEquals(setOf(Port.Argument(0) to "html"), sinksOf(FunctionSubject("echo")))
+        assertEquals(setOf(Port.Argument(0) to "html", Port.Argument(0) to "scheme"), sinksOf(FunctionSubject("echo")))
+        assertEquals(setOf(Port.Argument(0) to "html", Port.Argument(0) to "scheme"), sinksOf(FunctionSubject("print")))
         assertEquals(setOf(Port.Argument(0) to "html", Port.Argument(1) to "html"), sinksOf(FunctionSubject("class_alias")))
         assertEquals(setOf(Port.Argument(0) to "eval"), sinksOf(FunctionSubject("eval")))
         assertEquals(setOf(Port.Argument(0) to "include"), sinksOf(FunctionSubject("require_once")))
@@ -297,7 +298,14 @@ internal class TaintRulesSetTest {
         val mapped = DocumentSetLoader.load(StubResources.opener(StubResources.TAINT_RULES), context, mapping)
         val bySubject = mapped.entries.filter { it.condition == null }.associateBy { it.subject }
         assertEquals(setOf(Port.Argument(0) to "xpathi"), sinksOf(bySubject.getValue(MethodSubject("DOMXPath", "query"))))
-        assertEquals(setOf(Port.Argument(0) to "xss"), sinksOf(bySubject.getValue(FunctionSubject("echo"))))
+        assertEquals(
+            setOf(Port.Argument(0) to "xss", Port.Argument(0) to "schemei"),
+            sinksOf(bySubject.getValue(FunctionSubject("echo"))),
+        )
+        assertEquals(
+            setOf(Port.Argument(0) to "xss", Port.Argument(0) to "schemei"),
+            sinksOf(bySubject.getValue(FunctionSubject("print"))),
+        )
         assertEquals(setOf(Port.Argument(4) to "cmdi"), sinksOf(bySubject.getValue(FunctionSubject("mail"))))
         val getenv =
             bySubject
