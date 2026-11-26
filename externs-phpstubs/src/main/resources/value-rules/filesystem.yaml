@@ -1,18 +1,58 @@
 # Hand-maintained value rules set: value units the generated set lacks or states wrongly.
 # Filesystem (PHP manual: Filesystem).
 # An entry whose unit differs from the generated one carries the PHP manual reason above it.
+#
+# Stream content: a stream is one object whose content is the data written to it. A writer sends the data it takes into
+# its stream argument, `to: argument(n)` on a parameter that is not by-reference, and a reader sends the stream into its
+# result. A by-reference `to:` port writes the caller's variable instead.
 
 # PHP manual: the result is the trailing name component of path, which holds no `/`.
 - subject: {function: basename}
   returns: str
   propagation: [{from: argument(0), to: return}]
   characters: {of: [argument(0)], within: "[^/]"}
+# PHP manual: reads one character from the stream.
+- subject: {function: fgetc}
+  returns: any
+  propagation: [{from: argument(0), to: return}]
+# PHP manual: reads one line from the stream and parses it as CSV fields.
+- subject: {function: fgetcsv}
+  returns: any
+  propagation: [{from: argument(0), to: return}]
+# PHP manual: reads one line from the stream.
 - subject: {function: fgets}
   returns: str
+  propagation: [{from: argument(0), to: return}]
 - subject: {function: file_exists}
   returns: bool
   propagation: [{from: argument(0), to: return}]
 - subject: {function: file_get_contents}
   returns: str
+# PHP manual: writes the fields to the stream as one CSV line; returns the length written or false.
+- subject: {function: fputcsv}
+  returns: any
+  propagation: [{from: argument(1), to: argument(0)}]
+# PHP manual: alias of fwrite.
+- subject: {function: fputs}
+  returns: any
+  propagation: [{from: argument(1), to: argument(0)}]
+# PHP manual: reads up to length bytes from the stream.
 - subject: {function: fread}
   returns: str
+  propagation: [{from: argument(0), to: return}]
+# PHP manual: writes data to the stream; returns the number of bytes written or false.
+- subject: {function: fwrite}
+  returns: any
+  propagation: [{from: argument(1), to: argument(0)}]
+# PHP manual: copies the content of the first stream into the second; returns the byte count or false.
+- subject: {function: stream_copy_to_stream}
+  returns: any
+  propagation: [{from: argument(0), to: argument(1)}]
+# PHP manual: reads the rest of the stream.
+- subject: {function: stream_get_contents}
+  returns: any
+  propagation: [{from: argument(0), to: return}]
+# PHP manual: reads a line of the stream up to the ending delimiter, which stays out of the result.
+- subject: {function: stream_get_line}
+  returns: any
+  propagation: [{from: argument(0), to: return}]

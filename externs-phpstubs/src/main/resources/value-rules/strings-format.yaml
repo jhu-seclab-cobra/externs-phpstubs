@@ -5,8 +5,14 @@
 # PHP manual: echo has no return value.
 - subject: {function: echo}
   returns: any
+# PHP manual: writes the formatted string, the format beside the values, to the stream; returns its length.
 - subject: {function: fprintf}
   returns: num
+  propagation:
+    - {from: argument(1), to: argument(0)}
+    - {from: argument(2), to: argument(0)}
+    - {from: argument(3), to: argument(0)}
+    - {from: argument(4), to: argument(0)}
 - subject: {function: get_html_translation_table}
   returns: any
 - subject: {function: localeconv}
@@ -24,8 +30,12 @@
 - subject: {function: sscanf}
   returns: any
   propagation: [{from: argument(0), to: return}, {from: argument(1), to: return}]
+# PHP manual: writes the formatted string, the format beside the values array, to the stream; returns its length.
 - subject: {function: vfprintf}
   returns: num
+  propagation:
+    - {from: argument(1), to: argument(0)}
+    - {from: argument(2), to: argument(0)}
 - subject: {function: vprintf}
   returns: num
 # PHP manual: the values are formatted into the result beside format.
