@@ -34,6 +34,8 @@
     to: return
   - from: argument(2)
     to: return
+  - from: callback(argument(1)).return
+    to: return
 # Immediate invocation; retains the ordinary result inputs of the existing summary or its default.
 - subject: {function: preg_replace_callback_array}
   returns: any
@@ -42,6 +44,8 @@
       supply: {kind: array-value, position: 1}
   propagation:
   - from: argument(1)
+    to: return
+  - from: callback(argument(0)).return
     to: return
 # PHP manual: returns the string decremented by one in its alphanumeric sequence.
 - subject: {function: str_decrement}

@@ -65,8 +65,10 @@ import kotlin.test.assertTrue
  * - `callable-taking builtins declare the flows into and out of their callback` — verifies the callback flows of
  *   `array_map`, `array_filter`, `array_reduce`, `array_walk`, `usort`, `call_user_func`, `call_user_func_array`
  *   and `register_tick_function`, and that the flows around the callback are kept
+ * - `preg_replace_callback rules return the callback result` — verifies the flow sets of `preg_replace_callback` and
+ *   `preg_replace_callback_array`: the callback return flows into the result beside the subject flows
  * - `every callback port names a callable parameter` — verifies each callback port of every merged function names
- *   a declared parameter whose type admits `callable`
+ *   a declared parameter whose type admits `callable`, or whose elements the unit declares as callables
  */
 internal class ValueRulesSetTest {
     @Test
@@ -443,6 +445,18 @@ internal class ValueRulesSetTest {
     }
 
     @Test
+    fun `preg_replace_callback rules return the callback result`() {
+        assertEquals(
+            listOf(argumentToReturn(1), argumentToReturn(2), Propagation(from = Port.CallbackReturn(1), to = Port.Return)),
+            unitOf("preg_replace_callback").propagation,
+        )
+        assertEquals(
+            listOf(argumentToReturn(1), Propagation(from = Port.CallbackReturn(0), to = Port.Return)),
+            unitOf("preg_replace_callback_array").propagation,
+        )
+    }
+
+    @Test
     fun `every callback port names a callable parameter`() {
         for (record in PhpStubs.functions) {
             val callable = record.callableSignature ?: continue
@@ -453,9 +467,14 @@ internal class ValueRulesSetTest {
                         (fact.to as? Port.CallbackParameter)?.callable,
                     )
                 }
+            val elementCallables =
+                record.returns.flatMap { it.callbacks }.mapNotNull { (it.callable as? CallbackSelector.Elements)?.position }
             for (position in positions) {
                 val type = callable.params.getOrNull(position)?.type
-                assertTrue(type != null && type.alternatives.any { "callable" in it }, "${record.subject} argument($position)")
+                assertTrue(
+                    position in elementCallables || (type != null && type.alternatives.any { "callable" in it }),
+                    "${record.subject} argument($position)",
+                )
             }
         }
     }
