@@ -40,6 +40,9 @@ import kotlin.test.assertTrue
  *   rules set lets the assertion through, and that session_id, hex2bin, cli_get_process_title and gc_enabled carry none
  * - `mode-switching subjects carry a conditional entry and an unconditional one` — verifies print_r and var_export
  * - `representative units follow the PHP manual` — verifies typed results and flow sets
+ * - `builtins that return an argument or the receiver declare the flow unchanged` — verifies the one unchanged flow of
+ *   `strval`, `array_reduce`, the date object functions and methods and `DirectoryIterator::current`, and that the
+ *   other flows into the result stay plain
  * - `character bounds follow the PHP manual` — verifies the copied ports of strtr, str_replace, and substr and
  *   the `/`-free result of basename
  * - `a character bound beside the generated flows repeats them exactly` — verifies str_replace, strtr, and substr
@@ -189,6 +192,29 @@ internal class ValueRulesSetTest {
         )
         assertNull(unconditional[FunctionSubject("crypt")])
         assertEquals(ValueUnit(ReturnKind.STR, listOf(argumentToReturn(0))), unitOf("str_increment"))
+    }
+
+    @Test
+    fun `builtins that return an argument or the receiver declare the flow unchanged`() {
+        fun unchangedOf(unit: ValueUnit) = unit.propagation.filter { it.unchanged }.map { it.from to it.to }
+        val toReturn = Port.Return
+        assertEquals(listOf(Port.Argument(0) to toReturn), unchangedOf(unitOf("strval")))
+        assertEquals(listOf(Port.Argument(2) to toReturn), unchangedOf(unitOf("array_reduce")))
+        assertEquals(listOf(Port.Receiver to toReturn), unchangedOf(methodUnit("DateTime::setTime")))
+        assertEquals(listOf(Port.Receiver to toReturn), unchangedOf(methodUnit("DirectoryIterator::current")))
+        for (name in listOf("date_add", "date_modify", "date_time_set", "date_timezone_set")) {
+            assertEquals(listOf(Port.Argument(0) to toReturn), unchangedOf(unitOf(name)), name)
+        }
+        for (spelling in listOf("DateTime::modify", "DateTime::setTime", "DateTime::setTimezone")) {
+            assertEquals(listOf(Port.Receiver to toReturn), unchangedOf(methodUnit(spelling)), spelling)
+        }
+        // The arguments that set the fields of the date object still influence the result.
+        assertEquals(
+            listOf(Port.Receiver, Port.Argument(0), Port.Argument(1), Port.Argument(2), Port.Argument(3)),
+            methodUnit("DateTime::setTime").propagation.map { it.from },
+        )
+        // The generated declaration keeps the plain flow of every other conversion.
+        assertTrue(unitOf("intval").propagation.none { it.unchanged })
     }
 
     @Test

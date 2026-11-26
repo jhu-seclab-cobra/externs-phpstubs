@@ -100,6 +100,10 @@
   propagation:
     - {from: argument(0), to: return}
     - {from: this, to: return}
+# PHP manual: returns the current file entry, which is the iterator itself.
+- subject: {method: DirectoryIterator::current}
+  returns: any
+  propagation: [{from: this, to: return, unchanged: true}]
 # PHP manual: stores the value argument in the container.
 - subject: {method: SplDoublyLinkedList::add}
   returns: any

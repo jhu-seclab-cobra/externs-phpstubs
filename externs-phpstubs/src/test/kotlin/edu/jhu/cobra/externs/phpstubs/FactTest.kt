@@ -25,6 +25,7 @@ import kotlin.test.assertNull
  * - `a source fact keeps its site and key patterns` — verifies the by-reference source shape
  * - `a source fact at the result has no site` — verifies the result-site source shape
  * - `a returns fact and its flow facts come from one value unit` — verifies the classification and the ports
+ * - `a flow fact keeps the unchanged statement` — verifies the flag of a flow that returns its input itself
  * - `a characters fact comes from the value unit` — verifies the bound is read with returns and flows
  * - `a throws fact holds the whole class set` — verifies one fact per throws unit
  * - `an empty throws section is a fact` — verifies the assertion that a call throws none
@@ -90,6 +91,15 @@ internal class FactTest {
         assertEquals(ReturnsFact(f, null, ReturnKind.STR), record.returns.single())
         assertEquals(listOf(Port.Argument(0), Port.Argument(1)), record.flows.map { it.from })
         assertEquals(listOf<Port>(Port.Return, Port.Return), record.flows.map { it.to })
+    }
+
+    @Test
+    fun `a flow fact keeps the unchanged statement`() {
+        val document =
+            "- subject: {function: f}\n  returns: any\n" +
+                "  propagation: [{from: argument(0), to: return, unchanged: true}, {from: argument(1), to: return}]\n"
+        val record = SetMerge.of(listOf(TestSets.mount(0, Verification.MANUAL, document))).records.getValue(f)
+        assertEquals(listOf(true, false), record.flows.map { it.unchanged })
     }
 
     @Test

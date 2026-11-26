@@ -53,12 +53,16 @@ public data class SanitizerFact(
     val check: ArgumentCheck?,
 ) : Fact
 
-/** One declared flow from an input port to another port of the same call. */
+/**
+ * One declared flow from an input port to another port of the same call. An [unchanged] flow states that the call
+ * returns the value at its from-port itself.
+ */
 public data class FlowFact(
     override val owner: ModelSubject,
     override val condition: ArgPattern?,
     val from: Port.Input,
     val to: Port,
+    val unchanged: Boolean = false,
 ) : Fact
 
 /**

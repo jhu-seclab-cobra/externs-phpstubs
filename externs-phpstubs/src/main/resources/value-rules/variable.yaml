@@ -41,6 +41,10 @@
 # PHP manual: prints and returns true unless return is true, in which case the rendering of value is returned.
 - subject: {function: print_r}
   returns: bool
+# PHP manual: a string value is returned as it is.
+- subject: {function: strval}
+  returns: str
+  propagation: [{from: argument(0), to: return, unchanged: true}]
 - subject: {function: var_dump}
   returns: any
 # PHP manual: outputs and returns null unless return is true, in which case the representation of value is returned.

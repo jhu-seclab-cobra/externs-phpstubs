@@ -88,7 +88,7 @@ println(record?.sinkFacts)
 | `SinkFact` | `port: Port.Sink`, `vulnType: VulnTypeId` |
 | `SourceFact` | `sourceKinds: Set<SourceKindId>`, `at: Port.Argument?`, `keys: List<KeyPattern>?` |
 | `SanitizerFact` | `vulnTypes: Set<VulnTypeId>`, `check: ArgumentCheck?` |
-| `FlowFact` | `from: Port.Input`, `to: Port` |
+| `FlowFact` | `from: Port.Input`, `to: Port`, `unchanged: Boolean` (true: the call returns the value at `from` itself) |
 | `CharactersFact` | `bound: CharacterBound` |
 | `ReturnsFact` | `kind: ReturnKind`, `callbacks: List<CallbackInvocation>`, `effects: List<Nothing>?` (the empty list only when the winning entry states `effects: []` and its set's `provenance.yaml` states `manual`) |
 | `ThrowsFact` | `classes: Set<ClassSubject>` |

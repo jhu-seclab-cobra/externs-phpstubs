@@ -130,7 +130,7 @@ for an unconditional entry).
 | `SinkFact` | `port: Port.Sink`, `vulnType: VulnTypeId` | one `SinkDecl` |
 | `SourceFact` | `sourceKinds: Set<SourceKindId>`, `at: Port.Argument?`, `keys: List<KeyPattern>?` | one `SourceDecl` |
 | `SanitizerFact` | `vulnTypes: Set<VulnTypeId>`, `check: ArgumentCheck?` | one `SanitizerDecl` |
-| `FlowFact` | `from: Port.Input`, `to: Port` | one `Propagation` |
+| `FlowFact` | `from: Port.Input`, `to: Port`, `unchanged: Boolean` | one `Propagation` |
 | `CharactersFact` | `bound: CharacterBound` | the `characters` section, whole: the bytes the result may hold; the bound keeps its at-least-one-field invariant |
 | `ReturnsFact` | `kind: ReturnKind`, `callbacks: List<CallbackInvocation>`, `effects: List<Nothing>?` | the return classification, invocation declarations and effects assertion of the winning value unit; `effects` is the empty list only when that unit's entry states `effects: []` and its set's `provenance.yaml` states Verification `manual`, and null otherwise, including for a set without `provenance.yaml` |
 | `ThrowsFact` | `classes: Set<ClassSubject>` | the `throws` section, whole: the empty set states the subject throws none |

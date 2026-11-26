@@ -168,7 +168,7 @@ internal class SetMerge private constructor(
                     // The assertion requires a set reviewed by hand; a set without provenance ranks as manual only.
                     val effects = body.effects?.takeIf { item.provenance?.verification == Verification.MANUAL }
                     returns += ReturnsFact(owner, condition, body.returns!!, body.callbacks.orEmpty(), effects)
-                    body.propagation.orEmpty().mapTo(flows) { FlowFact(owner, condition, it.from, it.to) }
+                    body.propagation.orEmpty().mapTo(flows) { FlowFact(owner, condition, it.from, it.to, it.unchanged) }
                     body.characters?.let { characters += CharactersFact(owner, condition, it) }
                 }
 

@@ -4,5 +4,121 @@
 
 - subject: {function: date}
   returns: str
+# PHP manual: the date object is modified and returned itself; the other arguments set its fields.
+- subject: {function: date_add}
+  returns: any
+  propagation:
+    - {from: argument(0), to: return, unchanged: true}
+    - {from: argument(1), to: return}
+# PHP manual: the date object is modified and returned itself; the other arguments set its fields.
+- subject: {function: date_date_set}
+  returns: any
+  propagation:
+    - {from: argument(0), to: return, unchanged: true}
+    - {from: argument(1), to: return}
+    - {from: argument(2), to: return}
+    - {from: argument(3), to: return}
+# PHP manual: the date object is modified and returned itself; the other arguments set its fields.
+- subject: {function: date_isodate_set}
+  returns: any
+  propagation:
+    - {from: argument(0), to: return, unchanged: true}
+    - {from: argument(1), to: return}
+    - {from: argument(2), to: return}
+    - {from: argument(3), to: return}
+# PHP manual: the date object is modified and returned itself; the other arguments set its fields.
+- subject: {function: date_modify}
+  returns: any
+  propagation:
+    - {from: argument(0), to: return, unchanged: true}
+    - {from: argument(1), to: return}
+# PHP manual: the date object is modified and returned itself; the other arguments set its fields.
+- subject: {function: date_sub}
+  returns: any
+  propagation:
+    - {from: argument(0), to: return, unchanged: true}
+    - {from: argument(1), to: return}
+# PHP manual: the date object is modified and returned itself; the other arguments set its fields.
+- subject: {function: date_time_set}
+  returns: any
+  propagation:
+    - {from: argument(0), to: return, unchanged: true}
+    - {from: argument(1), to: return}
+    - {from: argument(2), to: return}
+    - {from: argument(3), to: return}
+    - {from: argument(4), to: return}
+# PHP manual: the date object is modified and returned itself; the other arguments set its fields.
+- subject: {function: date_timestamp_set}
+  returns: any
+  propagation:
+    - {from: argument(0), to: return, unchanged: true}
+    - {from: argument(1), to: return}
+# PHP manual: the date object is modified and returned itself; the other arguments set its fields.
+- subject: {function: date_timezone_set}
+  returns: any
+  propagation:
+    - {from: argument(0), to: return, unchanged: true}
+    - {from: argument(1), to: return}
 - subject: {function: time}
   returns: num
+# PHP manual: the date object is modified and returned itself; the arguments set its fields.
+- subject: {method: DateTime::add}
+  returns: any
+  propagation:
+    - {from: this, to: return, unchanged: true}
+    - {from: argument(0), to: return}
+# PHP manual: the date object is modified and returned itself; the arguments set its fields.
+- subject: {method: DateTime::modify}
+  returns: any
+  propagation:
+    - {from: this, to: return, unchanged: true}
+    - {from: argument(0), to: return}
+# PHP manual: the date object is modified and returned itself; the arguments set its fields.
+- subject: {method: DateTime::setDate}
+  returns: any
+  propagation:
+    - {from: this, to: return, unchanged: true}
+    - {from: argument(0), to: return}
+    - {from: argument(1), to: return}
+    - {from: argument(2), to: return}
+# PHP manual: the date object is modified and returned itself; the arguments set its fields.
+- subject: {method: DateTime::setISODate}
+  returns: any
+  propagation:
+    - {from: this, to: return, unchanged: true}
+    - {from: argument(0), to: return}
+    - {from: argument(1), to: return}
+    - {from: argument(2), to: return}
+# PHP manual: the date object is modified and returned itself; the arguments set its fields.
+- subject: {method: DateTime::setMicrosecond}
+  returns: any
+  propagation:
+    - {from: this, to: return, unchanged: true}
+    - {from: argument(0), to: return}
+# PHP manual: the date object is modified and returned itself; the arguments set its fields.
+- subject: {method: DateTime::setTime}
+  returns: any
+  propagation:
+    - {from: this, to: return, unchanged: true}
+    - {from: argument(0), to: return}
+    - {from: argument(1), to: return}
+    - {from: argument(2), to: return}
+    - {from: argument(3), to: return}
+# PHP manual: the date object is modified and returned itself; the arguments set its fields.
+- subject: {method: DateTime::setTimestamp}
+  returns: any
+  propagation:
+    - {from: this, to: return, unchanged: true}
+    - {from: argument(0), to: return}
+# PHP manual: the date object is modified and returned itself; the arguments set its fields.
+- subject: {method: DateTime::setTimezone}
+  returns: any
+  propagation:
+    - {from: this, to: return, unchanged: true}
+    - {from: argument(0), to: return}
+# PHP manual: the date object is modified and returned itself; the arguments set its fields.
+- subject: {method: DateTime::sub}
+  returns: any
+  propagation:
+    - {from: this, to: return, unchanged: true}
+    - {from: argument(0), to: return}
